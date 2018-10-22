@@ -1,0 +1,7 @@
+%li.nav-item.dropdown
+  %a#navbarDropdown.nav-link.dropdown-toggle{'aria-expanded' => 'false', 'aria-haspopup' => 'true', 'data-toggle' => 'dropdown', :href => '#', :role => 'button'}
+    = icon('fas', 'cog', 'Admin')
+  .dropdown-menu{'aria-labelledby' => 'navbarDropdown'}
+    = link_to 'Landoj', admin_countries_url, class: 'dropdown-item'
+    .dropdown-divider
+    = link_to 'Uzantoj', admin_users_url, class: 'dropdown-item'

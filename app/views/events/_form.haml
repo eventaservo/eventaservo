@@ -1,0 +1,41 @@
+.row
+  .col-lg-8.offset-lg-2
+    .box-white
+      = form_with(model: event, local: true) do |form|
+        - if event.errors.any?
+          #error_explanation
+            %h2
+              = pluralize(event.errors.count, "error")
+              prohibited this event from being saved:
+            %ul
+              - event.errors.full_messages.each do |message|
+                %li= message
+
+        .form-group
+          = label_tag :title, 'Titolo'
+          = text_field_tag :title, nil, class: 'form-control'
+
+        .form-group
+          = label_tag :description, 'Priskribo'
+          = text_field_tag :description, nil, class: 'form-control'
+
+        .row
+          .col-lg-6
+            .form-group
+              = label_tag :city, 'Urbo'
+              = text_field_tag :city, nil, class: 'form-control'
+          .col-lg-6
+            .form-group
+              = label_tag :country, 'Lando'
+              = select_tag(:country, options_from_collection_for_select(Country.all, 'id', 'name'), class: 'form-control')
+
+        .field
+          = form.label :date_start
+          = form.datetime_select :date_start
+        .field
+          = form.label :date_end
+          = form.datetime_select :date_end
+
+        .buttons-footer
+          = link_to 'Nuligi', events_url, class: 'btn btn-sm btn-outline-danger'
+          = form.submit 'Registri', class: 'btn btn-sm btn-primary'

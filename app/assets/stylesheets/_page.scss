@@ -1,0 +1,58 @@
+body {
+  background-color : $grayLighter;
+  min-height       : 100vh;
+  position         : relative;
+  margin           : 0;
+}
+
+.page-header {
+  @extend .row;
+  background-color : #7ABD45;
+  color            : white;
+  border-bottom    : 1px solid gray;
+  padding-top      : 8px;
+  margin-bottom    : 10px;
+
+  h3 { padding-left : 20px; }
+
+  small { padding-left : 20px; }
+}
+
+.buttons-footer {
+  vertical-align : middle;
+  padding-top    : 5px;
+  border-top     : 1px solid gray;
+  margin-top     : 20px;
+  text-align     : right;
+}
+
+.footer {
+  position         : absolute;
+  bottom           : 0;
+  width            : 100%;
+  height           : 30px; /* Set the fixed height of the footer here */
+  line-height      : 30px; /* Vertically center the text there */
+  padding-left     : 15px;
+  background-color : #1E7E340F;
+  font-size        : small;
+}
+
+.flash-alert-box {
+  z-index        : 100;
+  width          : 25%;
+  font-size      : 1em;
+  font-weight    : bold;
+  border         : 1px solid;
+  border-radius  : 3px;
+  position       : absolute;
+  bottom         : 50px;
+  margin-left    : 20px;
+  margin-right   : auto;
+  padding-top    : auto;
+  padding-bottom : auto;
+}
+
+.turbolinks-progress-bar {
+  height           : 10px;
+  background-color : green;
+}

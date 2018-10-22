@@ -1,16 +1,12 @@
-%nav.navbar.navbar-expand-lg.navbar-light.bg-light
+%nav.navbar.navbar-expand-lg.navbar-dark.bg-success
   %a.navbar-brand{href: root_url} Eventa Servo
   %button.navbar-toggler{'aria-controls' => 'navbarSupportedContent', 'aria-expanded' => 'false', 'aria-label' => 'Toggle navigation', 'data-target' => '#navbarSupportedContent', 'data-toggle' => 'collapse', :type => 'button'}
     %span.navbar-toggler-icon
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.navbar-nav.mr-auto
-      %li.nav-item.active
-        %a.nav-link{href: '#'}
-          Home
-          %span.sr-only (current)
-      %li.nav-item
-        = link_to 'Eventoj', eventoj_index_url, class: 'nav-link'
-      %li.nav-item.dropdown
+      %li.nav-item= link_to 'Ĉefpaĝo', root_url, class: 'nav-link'
+      %li.nav-item= link_to 'Eventoj', events_url, class: 'nav-link'
+      -#%li.nav-item.dropdown
         %a#navbarDropdown.nav-link.dropdown-toggle{'aria-expanded' => 'false', 'aria-haspopup' => 'true', 'data-toggle' => 'dropdown', :href => '#', :role => 'button'}
           Dropdown
         .dropdown-menu{'aria-labelledby' => 'navbarDropdown'}
@@ -18,6 +14,7 @@
           %a.dropdown-item{href: '#'} Another action
           .dropdown-divider
           %a.dropdown-item{href: '#'} Something else here
-      %li.nav-item
+      -#%li.nav-item
         %a.nav-link.disabled{href: '#'} Disabled
+      = render partial: 'layouts/admin' if user_signed_in? && current_user.admin?
     = render partial: 'layouts/uzanto'

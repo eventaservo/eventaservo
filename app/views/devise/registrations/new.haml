@@ -1,0 +1,20 @@
+.col-lg-6.offset-lg-3
+  .box-white
+    .lead Registri
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      = devise_error_messages!
+      .form-group
+        = f.label :name, 'Nomo'
+        = f.text_field :name, autocomplete: 'name', class: 'form-control', autofocus: true
+      .form-group
+        = f.label :email, 'Retadreso'
+        = f.email_field :email, autocomplete: 'email', class: 'form-control'
+      .form-group
+        = f.label :password, 'Pasvorto'
+        = f.password_field :password, autocomplete: 'new-password', class: 'form-control'
+        %small.form-text.text-muted Minimumo 6 karakteoj
+      .form-group
+        = f.label :password_confirmation, 'Pasvorto konfirma'
+        = f.password_field :password, autocomplete: 'new-password', class: 'form-control'
+      .buttons-footer
+        = f.submit 'Registri', class: 'btn btn-success'

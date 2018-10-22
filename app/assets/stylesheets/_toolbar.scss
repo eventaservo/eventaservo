@@ -1,0 +1,136 @@
+.toolbar {
+  background-color: $white;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding-left: 15px;
+  padding-top: 8px;
+  height: 50px;
+  border-bottom: 1px solid $gray;
+
+  .btn-default, .btn-group {
+    background-color: $grayLighter;
+  }
+
+  .toolbar-button-group {
+    a {
+      background-color: $gray;
+      font-size: 8pt;
+      color: $black;
+      line-height: 8pt;
+      height: 41px;
+      border: 2px solid transparent;
+      padding: 5px 5px 5px 5px;
+      float: left;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-box-pack: center;
+      display: -moz-box;
+      -moz-box-orient: vertical;
+      -moz-box-pack: center;
+      display: box;
+      box-orient: vertical;
+      box-pack: center;
+
+      &:hover {
+        border: 2px solid $black;
+        text-decoration: none;
+      }
+
+      i {
+        font-size: 18px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 10px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-box-pack: center;
+        display: -moz-box;
+        -moz-box-orient: vertical;
+        -moz-box-pack: center;
+        display: box;
+        box-orient: vertical;
+        box-pack: center;
+      }
+
+      &.active {
+        background-color: $blue;
+        color: $white;
+      }
+    }
+  }
+
+  .toolbar-select {
+    float: left;
+
+    .select-rails {
+      font-size: 8pt;
+      color: $grayLight;
+      font-weight: bolder;
+      text-align: center;
+      width: 120px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+    }
+
+    select {
+      background-color: $gray;
+      color: $black;
+      padding: 0px;
+      font-size: 8pt;
+      line-height: 1;
+      border: 0;
+      border-radius: 0;
+      height: 20px;
+      width: 120px;
+    }
+  }
+
+  & > a {
+    @extend .btn;
+    @extend .btn-sm;
+  }
+
+  & > button {
+    @extend .btn;
+    @extend .btn-sm;
+  }
+
+  .btn-group > button {
+    @extend .btn;
+    @extend .btn-sm;
+  }
+
+  .toolbar-divider {
+    background-color: $black;
+    height: 28px;
+    padding-right: 0px;
+    padding-left: 1px;
+    border-right-width: 0px;
+    border-left-width: 0px;
+    width: 1px;
+    margin: 0px 15px 0px 15px;
+  }
+
+  .toolbar-divider-text {
+    color: $grayLight;
+    font-weight: bolder;
+    margin-left: -10px;
+    margin-top: 40px;
+    writing-mode: tb-rl;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    height: 15px;
+    float: left;
+    width: 15px;
+  }
+
+  & > a {
+    text-decoration: none;
+  }
+
+  .toolbar-right {
+    float: right;
+  }
+
+}

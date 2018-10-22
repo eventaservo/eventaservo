@@ -1,0 +1,82 @@
+.box-white {
+  border           : 1px solid lightgray;
+  background-color : white;
+  margin           : 10px 10px 10px 10px;
+  padding          : 10px 10px 10px 10px;
+  border-radius    : 2px;
+
+  .lead {
+    font-weight   : bold;
+    border-bottom : 1px solid lightgray;
+    margin-bottom : 10px;
+  }
+
+  .chevron-right {
+    @extend .fas;
+    content : fa-content($fa-var-chevron-right);
+    float   : right;
+    color   : black;
+  }
+
+  .item-row {
+    display       : flex !important;
+    margin-left   : 0 !important;
+    padding-right : 0 !important;
+    padding-left  : 0 !important;
+    div:last-child::after { @extend .chevron-right; }
+
+    &:nth-of-type(odd) {
+      background : $grayLightRow;
+    }
+  }
+
+  .item-row-no-chevron {
+    //@extend .row;
+    display       : flex !important;
+    margin-left   : 0 !important;
+    padding-right : 0 !important;
+    padding-left  : 0 !important;
+
+    &:nth-of-type(odd) {
+      background : $grayLightRow;
+    }
+  }
+
+  .item-row-header {
+    //@extend .small-text;
+    @extend .row;
+    background-color : $blueDark;
+    color            : white;
+    margin           : 0;
+    padding          : 0;
+    border-bottom    : 2px solid grey;
+  }
+
+  .single-item {
+    &::after { @extend .chevron-right; }
+  }
+
+  .single-item, .item-row, .item-row-no-chevron {
+    padding         : 5px 5px 5px 5px;
+    margin-left     : -5px;
+    margin-right    : 0;
+    text-decoration : none;
+    color           : black;
+    display         : block;
+
+    &:hover { background-color : $grayLight; }
+  }
+
+  .item-row-selected {
+    @extend .fg-color-white;
+    @extend .bg-color-green;
+  }
+
+  .footer {
+    background-color : $grayLight;
+    font-size        : x-small;
+    padding          : 2px 5px 2px 5px;
+    margin           : 0 -10px -10px -10px;
+    border-top       : 1px solid #D1D1D1;
+  }
+}

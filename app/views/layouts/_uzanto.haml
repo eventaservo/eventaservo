@@ -2,12 +2,11 @@
   - if user_signed_in?
     %li.nav-item.dropdown.active
       %a#uzantoDropdown.nav-link.dropdown-toggle{'aria-expanded' => 'false', 'aria-haspopup' => 'true', 'data-toggle' => 'dropdown', :href => '#', :role => 'button'}
-        = icon('fas', 'user', 'Uzanto nomo')
+        = icon('fas', 'user', (current_user.name.nil? ? 'Uzanto sennoma' : current_user.name))
       .dropdown-menu.dropdown-menu-right{'aria-labelledby' => 'uzantoDropdown'}
-        %a.dropdown-item{:href => '#'} Action
-        %a.dropdown-item{:href => '#'} Another action
+        = link_to 'Pri mi', edit_user_registration_path, class: 'dropdown-item'
         .dropdown-divider
         = link_to icon('fas', 'sign-out-alt', 'Elsaluti'), destroy_user_session_path, class: 'dropdown-item', method: :delete
   - else
     %li.nav-item
-      = link_to icon('fas', 'sign-in-alt', 'Ensaluti'), new_user_session_path, class: 'nav-link'
+      = link_to icon('fas', 'sign-in-alt', 'Ensaluti / Registri'), new_user_session_path, class: 'nav-link'

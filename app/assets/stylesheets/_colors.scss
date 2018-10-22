@@ -1,0 +1,161 @@
+// Color vars
+$white : #FFFFFF;
+$black : #000000;
+$blue : #2D89EF;
+$blueLight : #44A3AA;
+$blueLighter : #9CB4FF;
+$blueDark : #2B5797;
+$blueInfo : #BEE5EB;
+$green : #00A300;
+$greenLight : #99B433;
+$greenDark : #1E7145;
+$greenLightSuccess: #c3e6cb;
+$red : #B91D47;
+$redLight : #E7C6CF;
+$yellow : #FFC40D;
+$yellowLight: #ffeeba;
+$orange : #E3A21A;
+$orangeDark : #DA532C;
+$pinkDark : #7E3878;
+$pink : #9F00A7;
+$purple : #603CBA;
+$darken : #1D1D1D;
+$grayDark : #525252;
+$gray : #C0C0C0;
+$grayDarker : #707070;
+$grayLight : #F5F5F5;
+$grayLightRow : #FCFCFC;
+$grayLighter : #F7F7F7;
+$select2-results-color : #F5F5FF;
+
+$criTTeriaDarkBlue : #3D5C90;
+$criTTeriaLightBlue : #92B1E1;
+$criTTeriaPurple : #270085;
+
+// Foregraund colors classes
+.fg-color-blue { color : $blue !important; }
+
+.fg-color-blueLight { color : $blueLight !important; }
+
+.fg-color-blueDark { color : $blueDark !important; }
+
+.fg-color-green { color : $green !important; }
+
+.fg-color-greenLight { color : $greenLight !important; }
+
+.fg-color-greenDark { color : $greenDark !important; }
+
+.fg-color-red { color : $red !important; }
+
+.fg-color-yellow { color : $yellow !important; }
+
+.fg-color-orange { color : $orange !important; }
+
+.fg-color-orangeDark { color : $orangeDark !important; }
+
+.fg-color-pink { color : $pink !important; }
+
+.fg-color-pinkDark { color : $pinkDark !important; }
+
+.fg-color-purple { color : $purple !important; }
+
+.fg-color-darken { color : $darken !important; }
+
+.fg-color-white { color : $white !important; }
+
+.fg-color-grayDark { color : $grayDark !important; }
+
+.fg-color-gray { color : $gray !important; }
+
+.fg-color-grayDarker { color : $grayDarker !important; }
+
+.fg-color-black { color : $black !important; }
+
+// Background colors classes
+.bg-color-blue { background-color : $blue !important; }
+
+.bg-color-blueLight { background-color : $blueLight !important; }
+
+.bg-color-blueDark { background-color : $blueDark !important; }
+
+.bg-color-blueInfo { background-color : $blueInfo !important; }
+
+.bg-color-green { background-color : $green !important; }
+
+.bg-color-greenLight { background-color : $greenLight !important; }
+
+.bg-color-greenDark { background-color : $greenDark !important; }
+
+.bg-color-greenLightSuccess { background-color : $greenLightSuccess !important; }
+
+.bg-color-red { background-color : $red !important; }
+
+.bg-color-redLight { background-color : $redLight !important; }
+
+.bg-color-yellow { background-color : $yellow !important; }
+
+.bg-color-yellowLight { background-color : $yellowLight !important; }
+
+.bg-color-orange { background-color : $orange !important; }
+
+.bg-color-orangeDark { background-color : $orangeDark !important; }
+
+.bg-color-pink { background-color : $pink !important; }
+
+.bg-color-pinkDark { background-color : $pinkDark !important; }
+
+.bg-color-purple { background-color : $purple !important; }
+
+.bg-color-darken { background-color : $darken !important; }
+
+.bg-color-white { background-color : $white !important; }
+
+.bg-color-grayDark { background-color : $grayDark !important; }
+
+.bg-color-gray { background-color : $gray !important; }
+
+.bg-color-info { background-color : #D9EDF7 !important; }
+
+.bg-color-warning { background-color : #FCF8E3 !important; }
+
+.gray {
+  color : gray !important;
+}
+
+// Border colors classes
+
+[class*=border-color] {
+  border : 2px solid;
+}
+
+.border-color-blue { border-color : $blue !important; }
+
+.border-color-blueLight { border-color : $blueLight !important; }
+
+.border-color-blueDark { border-color : $blueDark !important; }
+
+.border-color-green { border-color : $green !important; }
+
+.border-color-greenLight { border-color : $greenLight !important; }
+
+.border-color-greenDark { border-color : $greenDark !important; }
+
+.border-color-red { border-color : $red !important; }
+
+.border-color-yellow { border-color : $yellow !important; }
+
+.border-color-orange { border-color : $orange !important; }
+
+.border-color-orangeDark { border-color : $orangeDark !important; }
+
+.border-color-pink { border-color : $pink !important; }
+
+.border-color-pinkDark { border-color : $pinkDark !important; }
+
+.border-color-purple { border-color : $purple !important; }
+
+.border-color-darken { border-color : $darken !important; }
+
+.border-color-white { border-color : $white !important; }
+
+.border-color-grayDark { border-color : $grayDark !important; }

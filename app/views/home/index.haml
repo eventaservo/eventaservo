@@ -1,1 +1,4 @@
-Estu bonvena!
+%h1 Venontaj eventoj
+
+- @eventoj.each do |evento|
+  = render partial: 'events/event', locals: { evento: evento }

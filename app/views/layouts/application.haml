@@ -1,9 +1,9 @@
 !!!
-%html{:lang => "en"}
+%html{:lang => 'en'}
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %meta{:charset => "utf-8"}/
-    %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
+    %meta{:content => 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type'}/
+    %meta{:charset => 'utf-8'}/
+    %meta{:content => 'width=device-width, initial-scale=1, shrink-to-fit=no', :name => 'viewport'}/
     %title Eventa Servo
     = csrf_meta_tags
     = csp_meta_tag
@@ -12,7 +12,17 @@
   %body
     = render partial: 'layouts/navbar'
     .container-fluid
-      .alert-box
-        %p.notice= notice
-        %p.alert= alert
+      -#.alert-box
+        -#%p.notice= notice
+        -#%p.alert= alert
       = yield
+      .row
+      - flash.each do |key, value|
+        #flash{class: "flash-alert-box #{flash_class(key.to_sym)}", role: 'alert', style: ''}
+          %button.close{'data-dismiss' => 'alert', type: 'button'}
+            %span{'aria-hidden' => 'true'} ×
+            %span.sr-only Close
+          = value
+    %br
+    = render partial: 'layouts/footer'
+

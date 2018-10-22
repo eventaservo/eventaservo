@@ -1,0 +1,6 @@
+.box-white
+  .lead Uzantoj
+  - @uzantoj.each do |uzanto|
+    = link_to root_path, class: 'item-row' do
+      .col-6= uzanto.name
+      .col-6= uzanto.email

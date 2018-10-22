@@ -1,0 +1,11 @@
+.box-white
+  .lead= evento.title
+  .row
+    .col-lg-8
+      %p= evento.description
+    .col-lg-4
+      %p
+        Dato: #{evento.date_start} ĝis #{evento.date_end}
+        -#Urbo: #{evento.city}
+        -#Lando: #{evento.country.name}
+      %p Kreinto: #{evento.user.name}
