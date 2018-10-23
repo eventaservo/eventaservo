@@ -37,21 +37,6 @@ body {
   font-size        : small;
 }
 
-.flash-alert-box {
-  z-index        : 100;
-  width          : 25%;
-  font-size      : 1em;
-  font-weight    : bold;
-  border         : 1px solid;
-  border-radius  : 3px;
-  position       : absolute;
-  bottom         : 50px;
-  margin-left    : 20px;
-  margin-right   : auto;
-  padding-top    : auto;
-  padding-bottom : auto;
-}
-
 .turbolinks-progress-bar {
   height           : 10px;
   background-color : green;

@@ -1,5 +1,5 @@
 $(document).on "turbolinks:load", ->
-  # Dismiss Flash after 7 seconds
+  # Malaperigu Flash post 5 sekundoj
   delay (->
     $('#flash').fadeOut
       duration: 1000

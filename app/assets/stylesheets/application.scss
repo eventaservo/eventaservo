@@ -12,12 +12,18 @@
  *
  *= require jquery-ui
  */
+
+// Bazaj CSS
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "bootstrap";
-@import "colors";
-@import "page";
-@import "boxwhite";
-@import "toolbar";
 
+@import "partials/colors";
 
+@import "partials/boxwhite";
+@import "partials/buttons";
+@import "partials/flash";
+@import "partials/page";
+@import "partials/toolbar";
+@import "partials/profile";
+@import "partials/toolbar";

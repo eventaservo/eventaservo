@@ -1,0 +1,21 @@
+%button-standard {
+  @extend .btn;
+  @extend .btn-sm;
+}
+
+.facebook-button {
+  @extend %button-standard;
+  @extend .btn-light;
+  background-color : #4260B4;
+  color            : white;
+  &:before {
+    @extend .fab;
+    content       : fa-content($fa-var-facebook);
+    padding-right : 5px;
+  }
+}
+
+.button-submit {
+  @extend %button-standard;
+  @extend .btn-primary;
+}

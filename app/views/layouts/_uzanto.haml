@@ -2,7 +2,8 @@
   - if user_signed_in?
     %li.nav-item.dropdown.active
       %a#uzantoDropdown.nav-link.dropdown-toggle{'aria-expanded' => 'false', 'aria-haspopup' => 'true', 'data-toggle' => 'dropdown', :href => '#', :role => 'button'}
-        = icon('fas', 'user', (current_user.name.nil? ? 'Uzanto sennoma' : current_user.name))
+        = image_tag(current_user.image, size: 20, class: 'profile-picture') if current_user.image?
+        = current_user.name
       .dropdown-menu.dropdown-menu-right{'aria-labelledby' => 'uzantoDropdown'}
         = link_to 'Pri mi', edit_user_registration_path, class: 'dropdown-item'
         .dropdown-divider

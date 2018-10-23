@@ -9,7 +9,7 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
   # config.secret_key = '69576f82792e3b4b47a2857228855250f24b4812132dc28a4ade682b4255f274cf476211301d6365fb8430cf910927a8050e64f0989dca201bd401dcf9e0fef1'
-  
+
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
@@ -257,7 +257,13 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  config.omniauth :facebook, "APP_ID", "APP_SECRET"
+  config.omniauth :facebook, "243701312975059", "e68d86942416dc69b9b3bf710e6a1d49",
+                  scope:            'email,public_profile',
+                  secure_image_url: true,
+                  client_options:   {
+                  site:          'https://graph.facebook.com/v3.1',
+                  authorize_url: "https://www.facebook.com/v3.1/dialog/oauth"
+                  }
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
