@@ -41,3 +41,8 @@ body {
   height           : 10px;
   background-color : green;
 }
+
+.error-handling {
+  @extend .alert;
+  @extend .alert-warning;
+}

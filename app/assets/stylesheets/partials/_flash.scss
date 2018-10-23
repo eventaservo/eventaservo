@@ -1,11 +1,15 @@
 .flash-alert-box {
   @extend .col-lg-4;
   @extend .col-10;
+  @extend .mx-auto;
   z-index       : 100;
   font-size     : 1em;
-  font-weight   : bold;
-  border        : 1px solid;
-  border-radius : 3px;
+  border        : 1px solid gray;
+  border-radius : 0;
   position      : absolute;
-  top           : 80px;
+  top           : 40px;
+  left          : 0;
+  right         : 0;
+  box-shadow    : 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align    : center;
 }

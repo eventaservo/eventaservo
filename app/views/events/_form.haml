@@ -1,40 +1,36 @@
 .row
   .col-lg-8.offset-lg-2
     .box-white
-      = form_with(model: event, local: true) do |form|
-        - if event.errors.any?
-          #error_explanation
-            %h2
-              = pluralize(event.errors.count, "error")
-              prohibited this event from being saved:
-            %ul
-              - event.errors.full_messages.each do |message|
-                %li= message
+      = form_for(@event) do |form|
+        = error_handling(@event)
 
         .form-group
-          = label_tag :title, 'Titolo'
-          = text_field_tag :title, nil, class: 'form-control'
+          = form.label :title, 'Titolo'
+          = form.text_field :title, class: 'form-control'
 
         .form-group
-          = label_tag :description, 'Priskribo'
-          = text_field_tag :description, nil, class: 'form-control'
+          = form.label :description, 'Priskribo'
+          = form.text_field :description, class: 'form-control'
 
         .row
           .col-lg-6
             .form-group
-              = label_tag :city, 'Urbo'
-              = text_field_tag :city, nil, class: 'form-control'
+              = form.label :city, 'Urbo'
+              = form.text_field :city, class: 'form-control'
           .col-lg-6
             .form-group
-              = label_tag :country, 'Lando'
-              = select_tag(:country, options_from_collection_for_select(Country.all, 'id', 'name'), class: 'form-control')
+              = form.label :country_id, 'Lando'
+              = form.select(:country_id, options_from_collection_for_select(Country.all, 'id', 'name'), {}, class: 'form-control')
 
-        .field
-          = form.label :date_start
-          = form.datetime_select :date_start
-        .field
-          = form.label :date_end
-          = form.datetime_select :date_end
+        .row
+          .col-lg-6
+            .form-group
+              = form.label :date_start, 'Komenca dato'
+              = form.text_field :date_start, value: Date.today.strftime("%e/%-m/%Y"), class: 'datepicker form-control'
+          .col-lg-6
+            .form-group
+              = form.label :date_end, 'Fina dato'
+              = form.text_field :date_end, value: Date.today.strftime("%e/%-m/%Y"), class: 'datepicker form-control'
 
         .buttons-footer
           = link_to 'Nuligi', events_url, class: 'btn btn-sm btn-outline-danger'

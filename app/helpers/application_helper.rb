@@ -25,4 +25,20 @@ module ApplicationHelper
       'alert alert-info alert-dismissible'
     end
   end
+
+  def error_handling(record)
+    return false unless record.errors.any?
+    return_html = "<div class='error-handling'>"
+    return_html += "<h4>Erros foram encontrados neste formulário</h4>"
+    return_html += '<ul>'
+
+    record.errors.full_messages.each do |msg|
+      return_html += "<li>#{msg}</li>"
+    end
+
+    return_html += '</ul></div>'
+
+    raw return_html
+  end
+
 end
