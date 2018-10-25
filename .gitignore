@@ -31,3 +31,5 @@
 /config/master.key
 localhost.crt
 localhost.key
+
+public/uploads
