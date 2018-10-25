@@ -1,4 +1,6 @@
 %h1 Venontaj eventoj
 
-- @eventoj.each do |evento|
-  = render partial: 'events/event', locals: { evento: evento }
+.row
+  - @events.each do |event|
+    .col-12.col-sm-4
+      = render partial: 'events/card', locals: { event: event }

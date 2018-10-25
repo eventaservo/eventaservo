@@ -1,0 +1,14 @@
+.card.mb-3
+  = image_tag('default_event.png', height: '150', alt: "Card image cap", class: 'card-img-top')
+
+  .card-body
+    %h5.card-title= event.title
+    %p.card-text.text-muted
+      = event.date_start.strftime("%e de %B de %Y")
+    %p.card-text
+      = event.description
+    %p= link_to 'Pli detaloj', '#', class: 'card-link'
+
+  .card-footer
+    Likes: 10
+    Confirmados: 20
