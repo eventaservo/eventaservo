@@ -32,6 +32,10 @@
               = form.label :date_end, 'Fina dato'
               = form.text_field :date_end, value: Date.today.strftime("%e/%-m/%Y"), class: 'datepicker form-control'
 
+        .row
+          .form-group
+            = form.file_field :attachments, multiple: true
+
         .buttons-footer
           = link_to 'Nuligi', events_url, class: 'btn btn-sm btn-outline-danger'
           = form.submit 'Registri', class: 'btn btn-sm btn-primary'

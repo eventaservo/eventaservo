@@ -20,9 +20,11 @@ gem 'haml', '~> 5.0', '>= 5.0.4'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
 
+gem 'carrierwave', '~> 1.0'
 gem 'devise', '~> 4.2'
 gem 'omniauth-facebook'
 gem 'pg', '~> 1.1', '>= 1.1.3'
+gem 'rmagick'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
@@ -59,6 +61,10 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request' # RailsPanel Chrome Extension
 end
 
 group :test do
