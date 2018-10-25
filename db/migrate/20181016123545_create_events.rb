@@ -9,6 +9,7 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.integer :user_id
       t.datetime :date_start
       t.datetime :date_end
+      t.string :code, null: false
 
       t.timestamps
     end

@@ -7,7 +7,7 @@
       = event.date_start.strftime("%e de %B de %Y")
     %p.card-text
       = event.description
-    %p= link_to 'Pli detaloj', '#', class: 'card-link'
+    %p= link_to 'Pli detaloj', event_path(event.code), class: 'card-link'
 
   .card-footer
     Likes: 10

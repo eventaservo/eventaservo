@@ -9,7 +9,7 @@
 .box-white
   .lead Miaj eventoj
   - @eventoj.each do |evento|
-    = link_to root_path, class: 'item-row' do
+    = link_to event_path(evento.code), class: 'item-row' do
       .col-12= evento.title
 
 -#

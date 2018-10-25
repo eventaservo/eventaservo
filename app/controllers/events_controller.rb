@@ -1,12 +1,12 @@
+# frozen_string_literal: true
+
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: %i[show edit update destroy]
 
   def index
     @eventoj = Event.all
   end
 
-  # GET /events/1
-  # GET /events/1.json
   def show
   end
 
@@ -54,13 +54,15 @@ class EventsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def event_params
-      params.require(:event).permit(:title, :description, :date_start, :date_end)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @event = params[:code].present? ? Event.find_by(code: params[:code]) : Event.find(params[:id])
+    redirect_to root_path, flash: { error: 'Evento ne ekzistas' } if @event.nil?
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def event_params
+    params.require(:event).permit(:title, :description, :date_start, :date_end, :city, :country_id, { attachments: [] })
+  end
 end
