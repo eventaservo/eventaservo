@@ -4,9 +4,7 @@
   .col-lg-8
     .box-white
       .lead= @event.title
-
       %p= @event.description
-
       %p= format_date(@event.date_start)
 
       - unless @event.attachments.empty?
@@ -19,17 +17,16 @@
                 .card-body
                   .card-text
                     = icon('fas', 'star')
-                    = icon('far', 'trash-alt')
-
+                    = link_to icon('far', 'trash-alt', class: 'fg-color-red'), attachment_destroy_path(attachment), method: :delete, data: { confirm: 'Ĉu vi certas?' }, class: 'float-right'
 
   .col-lg-4
     .box-white
       .lead Aldonilo
       = form_tag(attachment_upload_path(@event), multipart: true) do
         .form-group
-          = label_tag('Aldoni fotojn', nil, for: 'attachment_upload_field')
+          = label_tag('Alŝultu fotojn', nil, for: 'attachment_upload_field')
           = file_field_tag(:file, name: 'file', id: 'attachment_upload_field', class: 'form-control-file')
           = hidden_field_tag(:record_type, @event.class)
 
         .buttons-footer
-          = submit_tag 'Aldoni',  class: 'button-submit'
+          = submit_tag 'Alŝultu',  class: 'button-submit'

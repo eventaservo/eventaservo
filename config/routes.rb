@@ -15,5 +15,7 @@ Rails.application.routes.draw do
     get 'countries', controller: 'countries', action: :index
   end
 
+  # Aldonaĵoj
   match 'upload/:record_id' => 'attachments#upload', as: 'attachment_upload', via: :post
+  match 'dosiero/:id/forighu' => 'attachments#destroy', as: 'attachment_destroy', via: :delete
 end

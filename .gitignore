@@ -33,3 +33,4 @@ localhost.crt
 localhost.key
 
 public/uploads
+/uploads

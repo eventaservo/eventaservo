@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2018_10_25_205922) do
 
   create_table "attachments", force: :cascade do |t|
     t.string "title"
-    t.string "file", null: false
+    t.string "file"
     t.jsonb "metadata"
     t.string "attachable_type", null: false
     t.bigint "attachable_id", null: false
