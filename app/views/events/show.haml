@@ -1,0 +1,35 @@
+.toolbar
+  = toolbar_back(:back)
+.row
+  .col-lg-8
+    .box-white
+      .lead= @event.title
+
+      %p= @event.description
+
+      %p= format_date(@event.date_start)
+
+      - unless @event.attachments.empty?
+        .lead Fotoj
+        .row
+          - @event.attachments.each do |attachment|
+            .col-12.col-sm-3.mb-3
+              .card
+                = image_tag attachment.file.thumb.url, class: 'card-img-top', size: '128'
+                .card-body
+                  .card-text
+                    = icon('fas', 'star')
+                    = icon('far', 'trash-alt')
+
+
+  .col-lg-4
+    .box-white
+      .lead Aldonilo
+      = form_tag(attachment_upload_path(@event), multipart: true) do
+        .form-group
+          = label_tag('Aldoni fotojn', nil, for: 'attachment_upload_field')
+          = file_field_tag(:file, name: 'file', id: 'attachment_upload_field', class: 'form-control-file')
+          = hidden_field_tag(:record_type, @event.class)
+
+        .buttons-footer
+          = submit_tag 'Aldoni',  class: 'button-submit'

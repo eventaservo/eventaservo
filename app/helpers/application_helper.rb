@@ -4,7 +4,7 @@ module ApplicationHelper
   end
 
   def toolbar_back(url)
-    link_to raw("<i class='fa fa-arrow-left'></i> Voltar"), url, class: 'btn btn-outline-secondary pull-right'
+    link_to 'Malantaŭen', url, class: 'button-back float-right mr-3'
   end
 
   def page_title(title, subtext = nil)
@@ -39,6 +39,10 @@ module ApplicationHelper
     return_html += '</ul></div>'
 
     raw return_html
+  end
+
+  def format_date(date)
+    l(date, format: "%e de %B de %Y")
   end
 
 end

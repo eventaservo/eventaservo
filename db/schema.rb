@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_25_123134) do
+ActiveRecord::Schema.define(version: 2018_10_25_205922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attachments", force: :cascade do |t|
+    t.string "title"
+    t.string "file", null: false
+    t.jsonb "metadata"
+    t.string "attachable_type", null: false
+    t.bigint "attachable_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["attachable_type", "attachable_id"], name: "index_attachments_on_attachable_type_and_attachable_id"
+    t.index ["file"], name: "index_attachments_on_file"
+    t.index ["title"], name: "index_attachments_on_title"
+    t.index ["user_id"], name: "index_attachments_on_user_id"
+  end
 
   create_table "countries", force: :cascade do |t|
     t.string "name"
@@ -34,7 +49,6 @@ ActiveRecord::Schema.define(version: 2018_10_25_123134) do
     t.string "code", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.jsonb "attachments"
     t.index ["address"], name: "index_events_on_address"
     t.index ["city"], name: "index_events_on_city"
     t.index ["date_end"], name: "index_events_on_date_end"

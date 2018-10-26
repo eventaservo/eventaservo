@@ -14,4 +14,6 @@ Rails.application.routes.draw do
     get 'users', controller: 'users', action: :index
     get 'countries', controller: 'countries', action: :index
   end
+
+  match 'upload/:record_id' => 'attachments#upload', as: 'attachment_upload', via: :post
 end

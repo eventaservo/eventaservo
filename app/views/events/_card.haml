@@ -4,7 +4,7 @@
   .card-body
     %h5.card-title= event.title
     %p.card-text.text-muted
-      = event.date_start.strftime("%e de %B de %Y")
+      = format_date event.date_start
     %p.card-text
       = event.description
     %p= link_to 'Pli detaloj', event_path(event.code), class: 'card-link'

@@ -24,7 +24,9 @@ gem 'carrierwave', '~> 1.0'
 gem 'devise', '~> 4.2'
 gem 'omniauth-facebook'
 gem 'pg', '~> 1.1', '>= 1.1.3'
-gem 'rmagick'
+gem 'mini_magick'
+# gem 'rmagick'
+
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

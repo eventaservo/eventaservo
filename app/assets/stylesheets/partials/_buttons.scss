@@ -19,3 +19,14 @@
   @extend %button-standard;
   @extend .btn-primary;
 }
+
+.button-back {
+  @extend  %button-standard;
+  @extend .btn-outline-secondary;
+
+  &:before {
+    @extend .fas;
+    content       : fa-content($fa-var-arrow-left);
+    padding-right : 5px;
+  }
+}

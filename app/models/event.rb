@@ -3,10 +3,10 @@
 # Eventaj rikordoj
 class Event < ApplicationRecord
 
-  mount_uploaders :attachments, AttachmentUploader
-
   before_validation :set_code
+
   belongs_to :user
+  has_many :attachments, as: :attachable
 
   validates_presence_of :title, :description, :city, :country_id, :date_start, :date_end, :code
   validates_uniqueness_of :code
