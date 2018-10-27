@@ -3,12 +3,14 @@
 
   .card-body
     %h5.card-title= event.title
-    %p.card-text.text-muted
-      = format_date event.date_start
+    .card-text.text-muted
+      %p= format_date event.date_start
+      %p
+        #{event.city} - #{event.country.name}
     %p.card-text
       = event.description
-    %p= link_to 'Pli detaloj', event_path(event.code), class: 'card-link'
 
   .card-footer
-    Likes: 10
-    Confirmados: 20
+    = icon('fas', 'heart', '10')
+    = icon('fas', 'users', '20')
+    = link_to 'Pli detaloj', event_path(event.code), class: 'card-link button-outline-blue float-right'

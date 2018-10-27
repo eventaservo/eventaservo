@@ -48,18 +48,18 @@ epo:
       short: "%e %b"
     month_names:
       -
-      - januaro
-      - februaro
-      - marto
-      - aprilo
-      - majo
-      - junio
-      - julio
-      - aŭgusto
-      - septembro
-      - oktobro
-      - novembro
-      - decembro
+      - Januaro
+      - Februaro
+      - Marto
+      - Aprilo
+      - Majo
+      - Junio
+      - Julio
+      - Aŭgusto
+      - Septembro
+      - Oktobro
+      - Novembro
+      - Decembro
     order:
       - :day
       - :month

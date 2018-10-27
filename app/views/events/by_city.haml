@@ -1,0 +1,8 @@
+%h1
+  = link_to 'Mondo', root_path
+  \/
+  = link_to @country.name, events_by_country_path(@country.name)
+  \/
+  = params[:city_name]
+
+= render partial: 'events/event_cards', locals: { events: @events}

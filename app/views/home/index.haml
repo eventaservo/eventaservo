@@ -1,6 +1,10 @@
 %h1 Venontaj eventoj
 
-.row
-  - @events.each do |event|
-    .col-12.col-sm-4
-      = render partial: 'events/card', locals: { event: event }
+.box-white
+  .lead Eventoj laŭ landoj
+  - @countries.each do |country|
+    = link_to events_by_country_path(country.name), class: 'button-event-count' do
+      = country.name
+      %span.badge.badge-info= country.count
+
+= render partial: 'events/event_cards', locals: { events: @events}

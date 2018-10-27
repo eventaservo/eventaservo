@@ -1,0 +1,7 @@
+- events.map do |date, events|
+  %h3= l(date, format: "%B %Y")
+  %hr
+  .row
+    - events.each do |event|
+      .col-12.col-sm-4
+        = render partial: 'events/card', locals: { event: event }

@@ -20,4 +20,7 @@ class User < ApplicationRecord
     end
   end
 
+  def is_owner_of(record)
+    record.user_id == id
+  end
 end

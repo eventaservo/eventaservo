@@ -38,19 +38,21 @@ ActiveRecord::Schema.define(version: 2018_10_25_205922) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
+    t.string "title", null: false
+    t.string "description", limit: 400
+    t.text "content"
     t.string "address"
     t.text "city"
-    t.integer "country_id"
-    t.integer "user_id"
-    t.datetime "date_start"
+    t.integer "country_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "date_start", null: false
     t.datetime "date_end"
     t.string "code", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["address"], name: "index_events_on_address"
     t.index ["city"], name: "index_events_on_city"
+    t.index ["content"], name: "index_events_on_content"
     t.index ["date_end"], name: "index_events_on_date_end"
     t.index ["date_start"], name: "index_events_on_date_start"
     t.index ["description"], name: "index_events_on_description"

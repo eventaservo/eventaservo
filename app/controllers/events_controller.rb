@@ -53,6 +53,18 @@ class EventsController < ApplicationController
     end
   end
 
+  def by_country
+    @country = Country.find_by(name: params[:country_name])
+    redirect_to root_path, flash: { error: 'Lando ne ekzistas en la datumbazo' } and return if @country.nil?
+    @events = Event.by_country_id(@country.id).venontaj.grouped_by_months
+    @cities = Event.by_country_id(@country.id).venontaj.count_by_cities
+  end
+
+  def by_city
+    @country = Country.find_by(name: params[:country_name])
+    @events = Event.by_city(params[:city_name]).venontaj.grouped_by_months
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
