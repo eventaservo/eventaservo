@@ -23,6 +23,7 @@
   .col-lg-4
     .box-white
       Kreinto: #{display_user(@event.user)}
+      = display_user(@event.user)
     - if user_signed_in? && current_user.is_owner_of(@event)
       .box-white
         .lead Aldonilo

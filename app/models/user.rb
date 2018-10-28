@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :confirmable, :lockable, :timeoutable, :trackable,
          :omniauthable, omniauth_providers: %i[facebook]
 
+  mount_uploader :avatar, AvatarUploader
   validates_presence_of :name
 
   def self.from_omniauth(auth)

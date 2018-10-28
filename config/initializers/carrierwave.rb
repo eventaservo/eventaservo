@@ -1,3 +1,3 @@
 CarrierWave.configure do |config|
-  config.root = Rails.root
+  # config.root = Rails.root
 end
