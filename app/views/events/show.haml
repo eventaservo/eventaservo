@@ -1,4 +1,6 @@
 .toolbar
+  - if user_signed_in? && current_user.is_owner_of(@event)
+    = link_to 'Redakti eventon', edit_event_path(@event.code), class: 'btn btn-sm btn-outline-primary'
   = toolbar_back(:back)
 .row
   .col-lg-8
@@ -22,7 +24,17 @@
 
   .col-lg-4
     .box-white
-      Kreinto: #{display_user(@event.user)}
+      .lead Informoj
+      %p
+        <strong>Adreso:</strong> #{@event.address}
+        %br
+        <strong>Urbo:</strong> #{@event.city} - #{@event.country.name}
+        %br
+        <strong>Dato:</strong> #{format_date @event.date_start}
+        - if @event.date_end > @event.date_start
+          (ĝis #{format_date @event.date_end})
+        %br
+      .lead Kreinto
       = display_user(@event.user)
     - if user_signed_in? && current_user.is_owner_of(@event)
       .box-white

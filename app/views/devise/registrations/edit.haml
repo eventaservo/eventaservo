@@ -9,20 +9,31 @@
       .form-group
         = f.label :email, 'Retadreso'
         = f.email_field :email, autocomplete: 'email', class: 'form-control'
+      .row
+        .col-md-6
+          .form-group
+            = f.label :password, 'Pasvorto'
+            = f.password_field :password, autocomplete: 'new-password', class: 'form-control'
+            %small.form-text.text-muted Lasu ĝin blanka por ne ŝanĝi ĝin
+        .col-md-6
+          .form-group
+            = f.label :password_confirmation, 'Pasvorto konfirma'
+            = f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control'
+
       .form-group
-        = f.label :password, 'Pasvorto'
-        = f.password_field :password, autocomplete: 'new-password', class: 'form-control'
-        %small.form-text.text-muted Lasu ĝin blanka por ne ŝanĝi ĝin
-      .form-group
-        = f.label :password_confirmation, 'Pasvorto konfirma'
-        = f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control'
+        = f.label :avatar, 'Profilbildo'
+        %br
+        = display_user_image(@user)
+        = f.file_field :avatar, class: 'form-control-file'
+
       .form-group
         = f.label :current_password, 'Aktuala pasvorto'
         = f.password_field :current_password, autocomplete: "current-password", class: 'form-control'
         %small.form-text.text-muted Ĝi estas necesa por registri la ŝanĝojn
       .buttons-footer
         = f.submit 'Ĝisdatigi', class: 'btn btn-success'
-    .lead Forigi vian konton?
-    %p
-      Ĉu vi volas forigi vian konton?
-    = link_to 'Jes, forigu mian konton', registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-sm btn-outline-danger'
+    -# TODO:
+      -#.lead Forigi vian konton?
+      -#%p
+      -#  Ĉu vi volas forigi vian konton?
+      -#= link_to 'Jes, forigu mian konton', registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-sm btn-outline-danger'

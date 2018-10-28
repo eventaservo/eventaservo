@@ -1,13 +1,10 @@
-%h1
-  = link_to 'Mondo', root_path
-  \/
-  = @country.name
-
 .box-white
+  = render partial: 'layouts/breadcrumb'
+
   .lead Eventoj laŭ urboj
   - @cities.each do |city|
     = link_to events_by_city_path(@country.name, city.name), class: 'button-event-count' do
       = city.name
       %span.badge.badge-info= city.count
 
-= render partial: 'events/event_cards', locals: { events: @events}
+  = render partial: 'events/event_cards', locals: { events: @events}

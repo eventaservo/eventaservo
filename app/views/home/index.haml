@@ -1,10 +1,9 @@
-%h1 Venontaj eventoj
-
 .box-white
-  .lead Eventoj laŭ landoj
+  = page_title 'Venontaj eventoj'
+  .lead Laŭ lando
   - @countries.each do |country|
     = link_to events_by_country_path(country.name), class: 'button-event-count' do
       = country.name
       %span.badge.badge-info= country.count
 
-= render partial: 'events/event_cards', locals: { events: @events}
+  = render partial: 'events/event_cards', locals: { events: @events}

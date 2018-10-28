@@ -5,16 +5,6 @@
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.navbar-nav.mr-auto
       %li.nav-item= link_to 'Ĉefpaĝo', root_url, class: 'nav-link'
-      %li.nav-item= link_to 'Eventoj', events_url, class: 'nav-link'
-      -#%li.nav-item.dropdown
-        %a#navbarDropdown.nav-link.dropdown-toggle{'aria-expanded' => 'false', 'aria-haspopup' => 'true', 'data-toggle' => 'dropdown', :href => '#', :role => 'button'}
-          Dropdown
-        .dropdown-menu{'aria-labelledby' => 'navbarDropdown'}
-          %a.dropdown-item{href: '#'} Action
-          %a.dropdown-item{href: '#'} Another action
-          .dropdown-divider
-          %a.dropdown-item{href: '#'} Something else here
-      -#%li.nav-item
-        %a.nav-link.disabled{href: '#'} Disabled
+      %li.nav-item= link_to 'Krei eventon', new_event_path, class: 'nav-link'
       = render partial: 'layouts/admin' if user_signed_in? && current_user.admin?
     = render partial: 'layouts/uzanto'

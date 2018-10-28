@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 class EventsController < ApplicationController
+  before_action :authenticate_user!, only: %i[new create edit update destroy]
   before_action :set_event, only: %i[show edit update destroy]
 
   def index
-    @eventoj = Event.all
+    redirect_to root_path
+    # @eventoj = Event.all
   end
 
   def show
@@ -14,7 +16,6 @@ class EventsController < ApplicationController
     @event = Event.new
   end
 
-  # GET /events/1/edit
   def edit
   end
 
@@ -29,28 +30,19 @@ class EventsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /events/1
-  # PATCH/PUT /events/1.json
   def update
-    respond_to do |format|
-      if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
-        format.json { render :show, status: :ok, location: @event }
-      else
-        format.html { render :edit }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
+    if @event.update(event_params)
+      redirect_to event_path(@event.code), notice: 'Evento sukcese ĝisdatigita'
+    else
+      render :edit
     end
   end
 
-  # DELETE /events/1
-  # DELETE /events/1.json
   def destroy
+    redirect_to event_path(@event.code), flash: { error: 'Vi ne estas la kreinto, do vi ne rajtas forigi ĝin' } and return unless current_user.is_owner_of(@event)
+
     @event.destroy
-    respond_to do |format|
-      format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to root_url, flash: { error: 'Evento skcese forigita' }
   end
 
   def by_country
@@ -69,7 +61,7 @@ class EventsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_event
-    @event = params[:code].present? ? Event.find_by(code: params[:code]) : Event.find(params[:id])
+    @event = Event.find_by(code: params[:code])
     redirect_to root_path, flash: { error: 'Evento ne ekzistas' } if @event.nil?
   end
 

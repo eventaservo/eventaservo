@@ -7,6 +7,9 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i[facebook]
 
   mount_uploader :avatar, AvatarUploader
+
+  has_many :events, dependent: :destroy
+
   validates_presence_of :name
 
   def self.from_omniauth(auth)

@@ -14,7 +14,7 @@ epo:
       last_attempt: "You have one more attempt before your account is locked."
       not_found_in_database: "Nevalida %{authentication_keys} aŭ pasvorto."
       timeout: "Your session expired. Please sign in again to continue."
-      unauthenticated: "You need to sign in or sign up before continuing."
+      unauthenticated: "Vi bezonas ensaluti por krei novan eventon"
       unconfirmed: "You have to confirm your email address before continuing."
     mailer:
       confirmation_instructions:
@@ -43,7 +43,7 @@ epo:
       signed_up_but_locked: "You have signed up successfully. However, we could not sign you in because your account is locked."
       signed_up_but_unconfirmed: "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account."
       update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and follow the confirm link to confirm your new email address."
-      updated: "Your account has been updated successfully."
+      updated: "Via konto ĝisdatiĝis sukcese."
     sessions:
       signed_in: "Signed in successfully."
       signed_out: "Sukcesa elsaluto."
@@ -60,5 +60,11 @@ epo:
       not_found: "not found"
       not_locked: "was not locked"
       not_saved:
-        one: "1 error prohibited this %{resource} from being saved:"
+        one: "1 eraro malpersis savi la rikordon"
         other: "%{count} errors prohibited this %{resource} from being saved:"
+  activerecord:
+    attributes:
+      user:
+        password: "Pasvorto"
+        email: "Retadreso"
+        password_confirmation: "Pasvorto konfirmo"

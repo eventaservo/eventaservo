@@ -12,8 +12,10 @@ Rails.application.routes.draw do
                                     registrations:      'users/registrations',
                                     omniauth_callbacks: 'users/omniauth_callbacks' }
 
-  resources :events, except: ['show'], path: 'eventoj'
-  get '/eventoj/:code', to: 'events#show'
+  resources :events, path: 'eventoj', param: 'code'
+  # get '/eventoj/:code', to: 'events#show'
+  # get '/eventoj/:code/edit', to: 'events#edit', as: 'edit_event'
+  # delete '/eventoj/:code', to: 'events#destroy'
 
   namespace :admin do
     get 'users', controller: 'users', action: :index

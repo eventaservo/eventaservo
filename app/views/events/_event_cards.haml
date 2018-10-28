@@ -1,5 +1,7 @@
 - events.map do |date, events|
-  %h3= l(date, format: "%B %Y")
+  %br
+  %br
+  %h3.text-right= l(date, format: "%B %Y")
   %hr
   .row
     - events.each do |event|

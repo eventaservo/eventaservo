@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def page_title(title, subtext = nil)
-    content_tag(:div, raw("<h3>#{title} <small>#{subtext}</small></h3>"), class: 'page-header')
+    content_tag(:h1, raw("#{title} <small>#{subtext}</small>"), class: 'display-4')
   end
 
   def flash_class(level)
@@ -27,7 +27,7 @@ module ApplicationHelper
   end
 
   def error_handling(record)
-    return false unless record.errors.any?
+    return unless record.errors.any?
     return_html = "<div class='error-handling'>"
     return_html += "<h4>Erros foram encontrados neste formulário</h4>"
     return_html += '<ul>'

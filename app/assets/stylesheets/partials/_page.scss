@@ -5,27 +5,6 @@ body {
   margin           : 0;
 }
 
-.page-header {
-  @extend .row;
-  background-color : #7ABD45;
-  color            : white;
-  border-bottom    : 1px solid gray;
-  padding-top      : 8px;
-  margin-bottom    : 10px;
-
-  h3 { padding-left : 20px; }
-
-  small { padding-left : 20px; }
-}
-
-.buttons-footer {
-  vertical-align : middle;
-  padding-top    : 5px;
-  border-top     : 1px solid gray;
-  margin-top     : 20px;
-  text-align     : right;
-}
-
 .footer {
   position         : absolute;
   bottom           : 0;

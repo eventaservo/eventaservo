@@ -5,7 +5,7 @@ module Admin
     before_action :authenticate_user!
 
     def index
-      @uzantoj = User.order(:name)
+      @users = User.order(:name)
     end
   end
 end

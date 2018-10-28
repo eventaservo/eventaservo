@@ -6,31 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create(name: 'Fernando Shayani', password: '123456', password_confirmation: '123456', admin: true, email: 'shayani@gmail.com', confirmed_at: Date.today, confirmation_sent_at: Date.today)
-
-Event.create!(title: 'Evento 1', description: 'Priskribo del la evento 1', user_id: 1, address: 'Adreso de la evento 1', city: 'Urbo 1', country_id: 30, date_start: Date.today + 7.days, date_end: Date.today + 7.days)
-Event.create!(title: 'Evento 2', description: 'Priskribo del la evento 2', user_id: 1, address: 'Adreso de la evento 2', city: 'Urbo 2', country_id: 40, date_start: Date.today + 90.days, date_end: Date.today + 90.days)
-Event.create!(title: 'Evento 3 (pasinta)', description: 'Priskribo del la evento 3', user_id: 1, address: 'Adreso de la evento 3', city: 'Urbo 3', country_id: 50, date_start: Date.today - 7.days, date_end: Date.today - 7.days)
-Event.create!(title: 'VIII Simpozio Pernambukana de Esperanto', description: 'La plej grava renkontiĝo de Esperantujo Nordorienta okazonta en Recifo.', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus leo libero, suscipit non bibendum a, consectetur eget turpis. Sed in iaculis sem. Phasellus eleifend posuere tortor sit amet ullamcorper. Donec tempor ultrices finibus. Vestibulum a mauris ligula. Nunc in leo efficitur ante feugiat rhoncus. Pellentesque cursus metus vel quam luctus, vel cursus leo rutrum. Cras luctus lorem risus, id consectetur velit porta placerat. Integer at pretium dui, non vulputate libero. Sed eget faucibus est, eget imperdiet orci. Fusce vehicula nisi nec quam consectetur faucibus. Ut tempor ultricies hendrerit. Integer blandit leo id elit suscipit sagittis. Phasellus sem leo, lacinia ac porttitor id, aliquet nec ligula. In et nibh congue, aliquet velit vitae, luctus ex. Donec sem diam, vulputate ut facilisis sit amet, ornare a tortor. Nam eleifend, tellus ut euismod cursus, enim lectus mollis mauris, a vestibulum urna risus nec enim. Etiam volutpat purus massa, sed lobortis sem vestibulum vitae. Etiam gravida, est eget finibus dictum, ante dolor vestibulum urna, vitae sodales erat dolor eu nunc. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam et augue cursus, molestie ipsum vel, facilisis est. Cras posuere turpis sit amet tempor dignissim. Donec porta semper tristique. Phasellus congue vestibulum eros, mollis finibus ligula. Fusce tortor erat, varius eu ante sed, rhoncus volutpat mi. Nullam a pharetra augue, vulputate vulputate nunc.', user_id: 1, address: 'Adreso de la evento 3', city: 'Recifo', country_id: 31, date_start: Date.new(2018,11,17), date_end: Date.new(2018,11,17))
-
-30.times do
-  num = SecureRandom.rand(100)
-  year = SecureRandom.rand(2018..2021)
-  month = SecureRandom.rand(1..12)
-  day = SecureRandom.rand(1..30)
-  Event.create!(
-       title: "Evento #{num}",
-       description: "Vivamus leo libero, suscipit non bibendum a, consectetur eget turpis. Sed in iaculis sem.",
-       content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Vivamus leo libero, suscipit non bibendum a, consectetur eget turpis.Sed in iaculis sem.Phasellus eleifend posuere tortor sit amet ullamcorper.Donec tempor ultrices finibus.Vestibulum a mauris ligula.Nunc in leo efficitur ante feugiat rhoncus.Pellentesque cursus metus vel quam luctus, vel cursus leo rutrum.Cras luctus lorem risus, id consectetur velit porta placerat.Integer at pretium dui, non vulputate libero.Sed eget faucibus est, eget imperdiet orci.Fusce vehicula nisi nec quam consectetur faucibus.Ut tempor ultricies hendrerit.Integer blandit leo id elit suscipit sagittis.Phasellus sem leo, lacinia ac porttitor id, aliquet nec ligula.In et nibh congue, aliquet velit vitae, luctus ex.Donec sem diam, vulputate ut facilisis sit amet, ornare a tortor.Nam eleifend, tellus ut euismod cursus, enim lectus mollis mauris, a vestibulum urna risus nec enim.Etiam volutpat purus massa, sed lobortis sem vestibulum vitae.Etiam gravida, est eget finibus dictum, ante dolor vestibulum urna, vitae sodales erat dolor eu nunc.Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.Nullam et augue cursus, molestie ipsum vel, facilisis est.Cras posuere turpis sit amet tempor dignissim.Donec porta semper tristique.Phasellus congue vestibulum eros, mollis finibus ligula.Fusce tortor erat, varius eu ante sed, rhoncus volutpat mi.Nullam a pharetra augue, vulputate vulputate nunc.',
-       user_id: 1,
-       address: "Adreso de la evento #{num}",
-       city: "Urbo #{num}",
-       country_id: num,
-       date_start: Date.new(year,month,day),
-       date_end: Date.new(year,month,day)
-  )
-end
-
 # Listo de landoj
 ['Afganio',
  'Alando',

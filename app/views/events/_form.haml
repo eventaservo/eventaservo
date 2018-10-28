@@ -1,7 +1,7 @@
 .row
   .col-lg-8.offset-lg-2
     .box-white
-      = form_for(@event) do |form|
+      = form_for(@event, url: event_path(@event.code)) do |form|
         = error_handling(@event)
 
         .form-group
@@ -11,6 +11,12 @@
         .form-group
           = form.label :description, 'Priskribo'
           = form.text_field :description, class: 'form-control'
+          %small.form-text.text-muted Maximume 400 karakteroj
+
+        .form-group
+          = form.label :content, 'Enhavo'
+          = form.text_area :content, rows: 5, class: 'form-control'
+          %small.form-text.text-muted Markdown permesata
 
         .row
           .col-lg-6
@@ -20,7 +26,7 @@
           .col-lg-6
             .form-group
               = form.label :country_id, 'Lando'
-              = form.select(:country_id, options_from_collection_for_select(Country.all, 'id', 'name'), {}, class: 'form-control')
+              = form.select(:country_id, options_from_collection_for_select(Country.all, 'id', 'name', @event.country_id), {}, class: 'form-control')
 
         .row
           .col-lg-6
@@ -33,5 +39,10 @@
               = form.text_field :date_end, value: Date.today.strftime("%e/%-m/%Y"), class: 'datepicker form-control'
 
         .buttons-footer
-          = link_to 'Nuligi', events_url, class: 'btn btn-sm btn-outline-danger'
-          = form.submit 'Registri', class: 'btn btn-sm btn-primary'
+          - if params[:action] == 'edit'
+            = link_to 'Nuligi', :back, class: 'button-cancel'
+            = link_to 'Forigu eventon', event_path(@event.code), class: 'button-outline-red float-left', method: :delete, data: { confirm: 'Ĉu vi certas?' }
+          - if params[:action] == 'new'
+            = link_to 'Nuligi', root_path, class: 'button-cancel'
+          = form.submit 'Registri', class: 'button-submit'
+
