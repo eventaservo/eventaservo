@@ -19,6 +19,7 @@ gem 'font-awesome-sass', '~> 5'
 gem 'haml', '~> 5.0', '>= 5.0.4'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
+gem 'mini_racer'
 
 gem 'carrierwave', '~> 1.0'
 gem 'devise', '~> 4.2'
@@ -42,9 +43,6 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
@@ -67,6 +65,12 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request' # RailsPanel Chrome Extension
+
+  gem 'capistrano', '~> 3.10', require: false
+  gem 'capistrano-rails', '~> 1.4', require: false
+  gem 'capistrano-passenger', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rvm', require: false
 end
 
 group :test do
