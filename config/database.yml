@@ -15,8 +15,17 @@ development:
   pool: 5
   timeout: 5000
   host: localhost
-  username: snsa
-  password: snsa
+  username: <%= Rails.application.credentials.dig(:database, :development, :username) %>
+  password: <%= Rails.application.credentials.dig(:database, :development, :password) %>
+
+production:
+  adapter: postgresql
+  database: eventaservo
+  pool: 5
+  timeout: 5000
+  host: localhost
+  username: <%= Rails.application.credentials.dig(:database, :production, :username) %>
+  password: <%= Rails.application.credentials.dig(:database, :production, :password) %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

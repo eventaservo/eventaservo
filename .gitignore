@@ -33,5 +33,3 @@ localhost.crt
 localhost.key
 
 public/uploads
-config/database.yml
-config/secrets.yml
