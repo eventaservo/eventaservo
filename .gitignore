@@ -33,3 +33,8 @@ localhost.crt
 localhost.key
 
 public/uploads
+
+# Capistrano
+Capfile
+config/deploy.rb
+config/deploy
