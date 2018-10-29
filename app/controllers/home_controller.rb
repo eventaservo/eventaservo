@@ -3,4 +3,8 @@ class HomeController < ApplicationController
     @events = Event.venontaj.grouped_by_months
     @countries = Event.venontaj.count_by_country
   end
+
+  def privateco
+
+  end
 end
