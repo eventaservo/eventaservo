@@ -8,6 +8,7 @@
   @extend .btn-light;
   background-color : #4260B4;
   color            : white;
+
   &:before {
     @extend .fab;
     content       : fa-content($fa-var-facebook);
@@ -21,7 +22,7 @@
 }
 
 .button-back {
-  @extend  %button-standard;
+  @extend %button-standard;
   @extend .btn-outline-secondary;
 
   &:before {
@@ -58,3 +59,57 @@ form {
   }
 }
 
+.button-like {
+  @extend %button-standard;
+  @extend .btn-outline-primary;
+  &:before {
+    @extend .far;
+    content       : fa-content($fa-var-heart);
+    padding-right : 5px;
+  }
+}
+
+.button-like-pressed {
+  @extend %button-standard;
+  @extend .btn-primary;
+  &:before {
+    @extend .fas;
+    content       : fa-content($fa-var-heart);
+    padding-right : 5px;
+  }
+}
+
+.button-participant {
+  @extend %button-standard;
+  @extend .btn-outline-success;
+  &:before {
+    @extend .fas;
+    content       : fa-content($fa-var-user);
+    padding-right : 5px;
+  }
+}
+
+.button-participant-pressed {
+  @extend %button-standard;
+  @extend .btn-success;
+  &:before {
+    @extend .fas;
+    content       : fa-content($fa-var-user-check);
+    padding-right : 5px;
+  }
+}
+
+.button-informed {
+  @extend %button-standard;
+  @extend .btn-outline-info;
+}
+
+.button-informed-pressed {
+  @extend %button-standard;
+  @extend .btn-info;
+  &:before {
+    @extend .fas;
+    content       : fa-content($fa-var-check);
+    padding-right : 5px;
+  }
+}

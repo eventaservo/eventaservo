@@ -27,4 +27,16 @@ class User < ApplicationRecord
   def is_owner_of(record)
     record.user_id == id
   end
+
+  def liked?(record)
+    !record.likes.find_by_user_id(self).nil?
+  end
+
+  def participant?(record)
+    !record.participants.find_by_user_id(self).nil?
+  end
+
+  def follower?(record)
+    !record.followers.find_by_user_id(self).nil?
+  end
 end

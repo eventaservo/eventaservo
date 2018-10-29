@@ -34,6 +34,10 @@
         - if @event.date_end > @event.date_start
           (ĝis #{format_date @event.date_end})
         %br
+      = event_like_button(@event)
+      = event_participant_button(@event)
+      = event_keep_me_informed_button(@event)
+
       .lead Kreinto
       = display_user(@event.user)
     - if user_signed_in? && current_user.is_owner_of(@event)

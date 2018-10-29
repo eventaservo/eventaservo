@@ -24,6 +24,8 @@ class EventsController < ApplicationController
     @event.user_id = current_user.id
 
     if @event.save
+      @event.participants.create!(user: current_user)
+      @event.likes.create!(user: current_user)
       redirect_to event_path(@event.code), flash: { notice: 'Evento sukcese kreita.' }
     else
       render :new

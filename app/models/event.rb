@@ -3,11 +3,14 @@
 # Eventaj rikordoj
 class Event < ApplicationRecord
 
-  before_validation :set_code
+  after_initialize :set_code, if: :new_record?
 
   belongs_to :user
   belongs_to :country
+  has_many :participants, dependent: :destroy
   has_many :attachments, as: :attachable, dependent: :destroy
+  has_many :followers, as: :followable, dependent: :destroy
+  has_many :likes, as: :likeable, dependent: :destroy
 
   validates_presence_of :title, :description, :city, :country_id, :date_start, :date_end, :code
   validates_uniqueness_of :code
@@ -32,6 +35,6 @@ class Event < ApplicationRecord
   private
 
   def set_code
-    self.code = SecureRandom.urlsafe_base64(8)
+    self.code = SecureRandom.urlsafe_base64(12)
   end
 end

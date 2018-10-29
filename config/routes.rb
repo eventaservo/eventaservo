@@ -13,10 +13,12 @@ Rails.application.routes.draw do
                                     registrations:      'users/registrations',
                                     omniauth_callbacks: 'users/omniauth_callbacks' }
 
-  resources :events, path: 'eventoj', param: 'code'
-  # get '/eventoj/:code', to: 'events#show'
-  # get '/eventoj/:code/edit', to: 'events#edit', as: 'edit_event'
-  # delete '/eventoj/:code', to: 'events#destroy'
+  resources :events, path: 'eventoj', param: 'code' do
+    get 'like', to: 'likes#event', as: 'toggle_like'
+    get 'participate', to: 'participants#event', as: 'toggle_participant'
+    get 'follow', to: 'followers#event', as: 'toggle_follow'
+  end
+
 
   namespace :admin do
     get 'users', controller: 'users', action: :index

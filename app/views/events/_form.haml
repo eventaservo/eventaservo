@@ -1,7 +1,8 @@
 .row
   .col-lg-8.offset-lg-2
     .box-white
-      = form_for(@event, url: event_path(@event.code)) do |form|
+      = form_for(@event, url: (event_path(@event.code) if params[:action] == 'edit') ) do |form|
+
         = error_handling(@event)
 
         .form-group
