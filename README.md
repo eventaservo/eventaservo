@@ -1,24 +1,17 @@
-# README
+# Legu min
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Tiu projekto estas senpaga kaj la programkodo estas libera.
 
-Things you may want to cover:
+Eventa Servo estas sistemo por ordigi kaj diskonigi eventojn esperantajn 
+por la tuta mondo.
 
-* Ruby version
+Evoluiga Plano
+-
 
-* System dependencies
+- Aldoni mapojn por pli bone vidi la eventojn
 
-* Configuration
+Kunlaboro
+-
+Se vi volas kunlabori en tiu projekto, kontaktu min per Telegramo (@fernando.shayani).
 
-* Database creation
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
