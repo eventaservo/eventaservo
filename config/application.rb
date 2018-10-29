@@ -17,5 +17,9 @@ module Eventaservo
     # the framework and any gems in your application.
 
     config.i18n.default_locale = :epo
+
+    # PostmarkApp
+    config.action_mailer.delivery_method   = :postmark
+    config.action_mailer.postmark_settings = { :api_token => "dbdfb191-7d93-4706-88dc-4ca12fad9278" }
   end
 end

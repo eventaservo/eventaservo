@@ -4,6 +4,7 @@
 class Event < ApplicationRecord
 
   after_initialize :set_code, if: :new_record?
+  after_update :send_updates_to_followers
 
   belongs_to :user
   belongs_to :country
@@ -36,5 +37,9 @@ class Event < ApplicationRecord
 
   def set_code
     self.code = SecureRandom.urlsafe_base64(12)
+  end
+
+  def send_updates_to_followers
+    EventMailer.send_updates_to_followers(self).deliver unless self.followers.empty?
   end
 end

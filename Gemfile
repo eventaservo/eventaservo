@@ -47,6 +47,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'hirb'
+gem 'postmark-rails'
 gem 'sentry-raven'
 
 group :development, :test do
