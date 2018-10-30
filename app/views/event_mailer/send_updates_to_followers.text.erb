@@ -9,5 +9,5 @@ Dato:<%= format_date @event.date_start %>
 
 <%= @event.description %>
 
-<%= @event.content %>
+<%= @markdown.render(@event.content) %>
 

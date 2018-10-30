@@ -48,6 +48,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'hirb'
 gem 'postmark-rails'
+gem 'redcarpet'
 gem 'sentry-raven'
 
 group :development, :test do
