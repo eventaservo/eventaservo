@@ -1,0 +1,10 @@
+.col-lg-6.offset-lg-3
+  .box-white
+    .lead Resendu konfirminstrukciojn
+    = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+      = devise_error_messages!
+      .form-group
+        = f.label :email, 'Retadreso'
+        = f.email_field :email, autocomplete: 'email', class: 'form-control', autofocus: true
+      .buttons-footer
+        = f.submit 'Sendi', class: 'button-submit'

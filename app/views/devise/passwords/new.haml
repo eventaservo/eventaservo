@@ -1,0 +1,12 @@
+.col-lg-6.offset-lg-3
+  .box-white
+    .lead Ĉu vi forgesis vian pasvorton?
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+      = devise_error_messages!
+      .form-group
+        = f.label :email, 'Retadreso'
+        = f.email_field :email, autocomplete: 'email', class: 'form-control', autofocus: true
+      .buttons-footer
+        = f.submit 'Sendi instrukciojn', class: 'button-submit'
+    %hr
+    = link_to 'Ĉu ni ankoraŭ ne ricevis instrukciojn por konfirmi vian konton?', new_confirmation_path(resource_name)

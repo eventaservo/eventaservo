@@ -1,0 +1,17 @@
+.col-lg-6.offset-lg-3
+  .box-white
+    .lead Ŝanĝu vian pasvorton
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+      = devise_error_messages!
+      = f.hidden_field :reset_password_token
+
+      .form-group
+        = f.label :password, 'Nova pasvorto'
+        = f.password_field :password, autofocus: true, autocomplete: 'new-password', class: 'form-control'
+        %small.form-text.text-muted Minimumo 6 karakteoj
+      .form-group
+        = f.label :password_confirmation, 'Pasvorto konfirma'
+        = f.password_field :password, autocomplete: 'off', class: 'form-control'
+
+      .buttons-footer
+        = f.submit 'Ŝanĝu ĝin', class: 'button-submit'
