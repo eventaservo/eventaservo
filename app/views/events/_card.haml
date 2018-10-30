@@ -15,4 +15,4 @@
   .card-footer
     = event_like_button(event) if user_signed_in?
     = event_participant_button(event)
-    = link_to 'Pli detaloj', event_path(event.code), class: 'card-link button-outline-blue float-right'
+    = link_to 'Pli da detaloj', event_path(event.code), class: 'card-link button-outline-blue float-right'
