@@ -1,53 +1,28 @@
-.toolbar
-  - if user_signed_in? && current_user.is_owner_of(@event)
-    = link_to 'Redakti eventon', edit_event_path(@event.code), class: 'btn btn-sm btn-outline-primary'
-  = toolbar_back(:back)
-.row
-  .col-lg-8
-    .box-white
-      .lead= @event.title
-      %p.text-right= format_date(@event.date_start)
-      %p= @event.description
-      %p= markdown(@event.content)
-
-      - unless @event.attachments.empty?
-        .lead Fotoj
-        .row
-          - @event.attachments.each do |attachment|
-            .col-12.col-sm-3.mb-3
-              .card
-                = image_tag attachment.file.thumb.url, class: 'card-img-top', size: '128'
-                .card-body
-                  .card-text
-                    = icon('fas', 'star')
-                    = link_to icon('far', 'trash-alt', class: 'fg-color-red'), attachment_destroy_path(attachment), method: :delete, data: { confirm: 'Ĉu vi certas?' }, class: 'float-right'
-
-  .col-lg-4
-    .box-white
-      .lead Informoj
-      %p
-        <strong>Adreso:</strong> #{@event.address}
-        %br
-        <strong>Urbo:</strong> #{@event.city} - #{@event.country.name}
-        %br
-        <strong>Dato:</strong> #{format_date @event.date_start}
-        - if @event.date_end > @event.date_start
-          (ĝis #{format_date @event.date_end})
-        %br
-      = event_like_button(@event)
-      = event_participant_button(@event)
-      = event_keep_me_informed_button(@event)
-
-      .lead Kreinto
-      = display_user(@event.user)
-    - if user_signed_in? && current_user.is_owner_of(@event)
+.box-white
+  = render partial: 'layouts/breadcrumb'
+  .row
+    .col-lg-8
       .box-white
-        .lead Aldonilo
-        = form_tag(attachment_upload_path(@event), multipart: true) do
-          .form-group
-            = label_tag('Alŝultu fotojn', nil, for: 'attachment_upload_field')
-            = file_field_tag(:file, name: 'file', id: 'attachment_upload_field', class: 'form-control-file')
-            = hidden_field_tag(:record_type, @event.class)
+        .lead= @event.title
+        %p.text-right= format_date(@event.date_start)
+        %p= @event.description
+        %p= markdown(@event.content)
 
+        = render partial: 'fotoj'
+        - if user_signed_in? && current_user.is_owner_of(@event)
           .buttons-footer
-            = submit_tag 'Alŝultu',  class: 'button-submit'
+            = link_to 'Redakti eventon', edit_event_path(@event.code), class: 'btn btn-sm btn-outline-primary'
+
+    .col-lg-4
+      = render partial: 'informoj'
+      - if user_signed_in? && current_user.is_owner_of(@event)
+        .box-white
+          .lead Aldonilo
+          = form_tag(attachment_upload_path(@event), multipart: true) do
+            .form-group
+              = label_tag('Alŝultu fotojn', nil, for: 'attachment_upload_field')
+              = file_field_tag(:file, name: 'file', id: 'attachment_upload_field', class: 'form-control-file')
+              = hidden_field_tag(:record_type, @event.class)
+
+            .buttons-footer
+              = submit_tag 'Alŝultu',  class: 'button-submit'

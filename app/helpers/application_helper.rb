@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def page_title(title, subtext = nil)
-    content_tag(:h1, raw("#{title} <small>#{subtext}</small>"), class: 'display-4')
+    content_tag(:h3, raw("#{title} <small>#{subtext}</small>"), class: 'display-4 text-center')
   end
 
   def flash_class(level)

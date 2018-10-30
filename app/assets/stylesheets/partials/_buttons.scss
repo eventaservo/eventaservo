@@ -49,14 +49,12 @@
   @extend .btn-outline-danger;
 }
 
-form {
-  .buttons-footer {
-    vertical-align : middle;
-    padding-top    : 5px;
-    border-top     : 1px solid gray;
-    margin-top     : 20px;
-    text-align     : right;
-  }
+.buttons-footer {
+  vertical-align : middle;
+  padding-top    : 5px;
+  border-top     : 1px solid gray;
+  margin-top     : 20px;
+  text-align     : right;
 }
 
 .button-like {
@@ -83,8 +81,8 @@ form {
   @extend %button-standard;
   @extend .btn-outline-success;
   &:before {
-    @extend .fas;
-    content       : fa-content($fa-var-user);
+    @extend .far;
+    content       : '\f007';
     padding-right : 5px;
   }
 }
@@ -94,7 +92,7 @@ form {
   @extend .btn-success;
   &:before {
     @extend .fas;
-    content       : fa-content($fa-var-user-check);
+    content       : '\f4fc';
     padding-right : 5px;
   }
 }

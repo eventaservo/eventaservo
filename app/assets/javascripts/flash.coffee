@@ -8,3 +8,8 @@ $(document).on "turbolinks:load", ->
   $ ->
     $('.datepicker').datepicker dateFormat: 'dd/mm/yy'
     return
+
+  $ ->
+    $('[data-toggle="tooltip"]').tooltip()
+    return
+

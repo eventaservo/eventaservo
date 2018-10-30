@@ -1,0 +1,12 @@
+- unless @event.attachments.empty?
+  .lead Fotoj
+  .row
+    - @event.attachments.each do |attachment|
+      .col-12.col-sm-3.mb-3
+        .card
+          = link_to attachment.file.url do
+            = image_tag attachment.file.thumb.url, class: 'card-img-top', size: '128'
+          - if user_signed_in? && current_user.is_owner_of(@event)
+            .card-body
+              .card-text
+                = link_to icon('far', 'trash-alt', class: 'fg-color-red'), attachment_destroy_path(attachment), method: :delete, data: { confirm: 'Ĉu vi certas?' }, class: 'float-right'

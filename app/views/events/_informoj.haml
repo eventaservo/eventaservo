@@ -1,0 +1,17 @@
+.box-white
+  .lead Informoj
+  %p
+    <strong>Adreso:</strong> #{@event.address}
+    %br
+    <strong>Urbo:</strong> #{@event.city} - #{@event.country.name}
+    %br
+    <strong>Dato:</strong> #{format_date @event.date_start}
+    - if @event.date_end > @event.date_start
+      (ĝis #{format_date @event.date_end})
+    %br
+  = event_like_button(@event)
+  = event_participant_button(@event)
+  = event_keep_me_informed_button(@event)
+
+  .lead Kreinto
+  = display_user(@event.user)

@@ -13,6 +13,6 @@
       = event.description
 
   .card-footer
-    = icon('fas', 'heart', event.likes.count)
-    = icon('fas', 'user-check', event.participants.count)
+    = event_like_button(event) if user_signed_in?
+    = event_participant_button(event)
     = link_to 'Pli detaloj', event_path(event.code), class: 'card-link button-outline-blue float-right'
