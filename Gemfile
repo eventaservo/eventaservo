@@ -65,6 +65,7 @@ group :development do
 
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'bullet'
   gem 'meta_request' # RailsPanel Chrome Extension
 
   gem 'capistrano', '~> 3.10', require: false
