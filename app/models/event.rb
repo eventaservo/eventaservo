@@ -41,6 +41,7 @@ class Event < ApplicationRecord
   end
 
   def send_updates_to_followers
+    return false
     EventMailer.send_updates_to_followers(self).deliver unless self.followers.empty?
   end
 end

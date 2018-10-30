@@ -8,7 +8,9 @@ class User < ApplicationRecord
 
   mount_uploader :avatar, AvatarUploader
 
-  has_many :events, dependent: :destroy
+  has_many :events
+  has_many :likes, dependent: :destroy
+  has_many :participants, dependent: :destroy
 
   validates_presence_of :name
 
