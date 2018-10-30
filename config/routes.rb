@@ -21,7 +21,8 @@ Rails.application.routes.draw do
 
 
   namespace :admin do
-    get 'users', controller: 'users', action: :index
+    resources :users, only: %i[index show]
+    # get 'users', controller: 'users', action: :index
     get 'countries', controller: 'countries', action: :index
   end
 

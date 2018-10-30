@@ -1,6 +1,16 @@
 .box-white
   .lead Uzantoj
+  .item-row-header
+    .col-4 Nomo
+    .col-4 Retadreso
+    .col-2 Eventoj
+
   - @users.each do |user|
-    = link_to root_path, class: 'item-row' do
-      .col-6= user.name
-      .col-6= user.email
+    = link_to admin_user_path(user), class: 'item-row' do
+      .col-4= user.name
+      .col-4= user.email
+      .col-4
+        .badge.badge-primary Eventoj: #{user.events.count}
+        .badge.badge-info= icon('fas','heart', user.likes.count)
+        .badge.badge-success= icon('fas','user-check', user.participants.count)
+        
