@@ -18,9 +18,5 @@ module Eventaservo
 
     config.i18n.default_locale = :epo
     config.exceptions_app = self.routes
-    
-    # PostmarkApp
-    config.action_mailer.delivery_method   = :postmark
-    config.action_mailer.postmark_settings = { :api_token => "dbdfb191-7d93-4706-88dc-4ca12fad9278" }
   end
 end
