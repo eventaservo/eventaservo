@@ -1,7 +1,7 @@
 class EventMailer < ApplicationMailer
   add_template_helper ApplicationHelper
   require 'redcarpet/render_strip'
-  
+
   def send_updates_to_followers(event)
     @event    = event
     @markdown = Redcarpet::Markdown.new(Redcarpet::Render::StripDown)

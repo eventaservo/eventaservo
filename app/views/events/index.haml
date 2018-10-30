@@ -1,0 +1,13 @@
+.box-white
+  = page_title current_user.name
+  .lead Eventoj
+  .item-row-header
+    .col-lg-4 Nomo
+    .col-lg-4 Dato
+    .col-lg-4 Loko
+  - @events.each do |event|
+    = link_to event_path(event.code), class: 'item-row' do
+      .col-lg-4= event.title
+      .col-lg-4= format_date event.date_start
+      .col-lg-4 #{event.city} (#{event.country.name})
+

@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create edit update destroy]
+  before_action :authenticate_user!, only: %i[index new create edit update destroy]
   before_action :set_event, only: %i[show edit update destroy]
 
+  # Montras la uzantajn eventojn
   def index
-    redirect_to root_path
-    # @eventoj = Event.all
+    @events = Event.includes(:country).by_user(current_user).order(date_start: :desc)
   end
 
   def show

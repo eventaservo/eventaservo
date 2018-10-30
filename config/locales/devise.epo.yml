@@ -61,7 +61,7 @@ epo:
       not_locked: "was not locked"
       not_saved:
         one: "1 eraro malpersis savi la rikordon"
-        other: "%{count} errors prohibited this %{resource} from being saved:"
+        other: "%{count} eraroj malpersis save la rikordon"
   activerecord:
     attributes:
       user:

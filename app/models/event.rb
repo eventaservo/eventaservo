@@ -20,6 +20,7 @@ class Event < ApplicationRecord
   scope :pasintaj, -> { where('date_start < ?', Date.today) }
   scope :by_country_id, ->(id) { where(country_id: id) }
   scope :by_city, ->(city) { where(city: city) }
+  scope :by_user, ->(user) { where(user: user) }
 
   def self.grouped_by_months
     order(:date_start).group_by { |m| m.date_start.beginning_of_month }
