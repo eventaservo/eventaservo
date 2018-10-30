@@ -1,3 +1,3 @@
 module Constants
-  VERSIO = '0.1'
+  VERSIO = '0.1.1 Beta'
 end
