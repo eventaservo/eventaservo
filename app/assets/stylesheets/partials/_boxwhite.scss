@@ -1,7 +1,7 @@
 .box-white {
   border           : 1px solid lightgray;
   background-color : white;
-  margin           : 10px 10px 10px 10px;
+  margin           : 10px 0 10px 0;
   padding          : 10px 10px 10px 10px;
   border-radius    : 2px;
 
@@ -23,6 +23,7 @@
     margin-left   : 0 !important;
     padding-right : 0 !important;
     padding-left  : 0 !important;
+
     div:last-child::after { @extend .chevron-right; }
 
     &:nth-of-type(odd) {
