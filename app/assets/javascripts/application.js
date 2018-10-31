@@ -17,5 +17,6 @@
 //= require jquery-ui
 //= require popper
 //= require bootstrap-sprockets
+//= require jquery.mask
 //= require_tree .
 

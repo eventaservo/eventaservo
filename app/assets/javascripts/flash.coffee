@@ -4,12 +4,3 @@ $(document).on "turbolinks:load", ->
     $('#flash').fadeOut
       duration: 1000
   ), 5000
-
-  $ ->
-    $('.datepicker').datepicker dateFormat: 'dd/mm/yy'
-    return
-
-  $ ->
-    $('[data-toggle="tooltip"]').tooltip()
-    return
-
