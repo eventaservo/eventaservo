@@ -6,4 +6,7 @@ class HomeController < ApplicationController
 
   def privateco
   end
+
+  def prie
+  end
 end

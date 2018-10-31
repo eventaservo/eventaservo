@@ -3,17 +3,19 @@ body {
   min-height       : 100vh;
   position         : relative;
   margin           : 0;
+  padding-bottom   : 20px;
 }
 
 .footer {
   position         : absolute;
   bottom           : 0;
   width            : 100%;
-  height           : 30px; /* Set the fixed height of the footer here */
-  line-height      : 30px; /* Vertically center the text there */
-  padding-left     : 15px;
-  background-color : #1E7E340F;
-  font-size        : small;
+  height           : 40px; /* Set the fixed height of the footer here */
+  line-height      : 40px; /* Vertically center the text there */
+  background-color : #37EC6112;
+  border-top       : 1px solid lightgray;
+  @extend .text-center;
+  @extend .small;
 }
 
 .turbolinks-progress-bar {

@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get "/422", to: "errors#unacceptable"
   get "/500", to: "errors#internal_error"
   get "/privateco", to: 'home#privateco'
+  get '/license', to: 'home#privateco'
+  get '/prie', to: 'home#prie'
 
   root to: 'home#index'
 

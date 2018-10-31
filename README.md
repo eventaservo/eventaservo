@@ -7,13 +7,31 @@ Tiu projekto estas senpaga kaj la programkodo estas libera.
 Eventa Servo estas sistemo por ordigi kaj diskonigi eventojn esperantajn 
 por la tuta mondo.
 
-Evoluiga Plano
--
+# Evoluiga Plano
 
 - Aldoni mapojn por pli bone vidi la eventojn
+- Aŭtomate sciigu la uzantojn pri:
+  - ŝanĝoj en elektitaj eventoj
+  - novaj eventoj en elektitaj urboj aŭ landoj
+  - novaj eventoj de aliaj uzantoj
+- Krei ripetaj eventoj
+- Virtuala eventoj
+- Eventa diskoniĝo per Facebook
+- Sendi mesaĝojn al la partoprenantoj antaŭ la eventa data
+- multaj aliaj interesaj aferoj!
+ 
 
-Kunlaboro
--
-Se vi volas kunlabori en tiu projekto, kontaktu min per Telegramo (@fernando.shayani).
+# Kunlaboro
+
+Se vi volas helpi la projekton, estu bonvena. Ĉiaj helpoj estas utila. Mi listigas sube kelkajn temojn: 
+
+Kion mi serĉas?
+
+- Homoj kiuj amas Espearantoj kaj volas helpi
+- Programisto de Ruby on Rails por helpi programi la sistemon
+- CSS sperta programisto por plibeligi la sistemon
+- MiniTest/RSpec programisto por krei aŭtomatajn provkodojn
+
+Se vi volas kunlabori en tiu projekto, kontaktu min per Telegramo [(@fernando.shayani)](https://t.me/fernandoshayani) aŭ retmesaĝo [(kontakto@eventaservo.org)](mailto:kontakto@eventaservo.org).
 
 
