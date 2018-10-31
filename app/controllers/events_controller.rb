@@ -72,7 +72,8 @@ class EventsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def event_params
-    params.require(:event).permit(:title, :description, :content, :date_start, :date_end, :city, :country_id, { attachments: [] })
+    params.require(:event).permit(:title, :description, :content, :address, :date_start, :date_end, :city, :country_id,
+                                  { attachments: [] })
   end
 
   # Nur la permesataj uzantoj povas redakti, ĝisdatiĝi kaj foriĝi la eventon
