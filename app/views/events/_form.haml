@@ -37,11 +37,11 @@
           .col-lg-6
             .form-group
               = form.label :date_start, 'Komenca dato'
-              = form.text_field :date_start, value: Date.today.strftime("%e/%-m/%Y"), class: 'datepicker form-control'
+              = form.text_field :date_start, value: @event.date_start.strftime("%d/%m/%Y"), class: 'datepicker form-control'
           .col-lg-6
             .form-group
               = form.label :date_end, 'Fina dato'
-              = form.text_field :date_end, value: Date.today.strftime("%e/%-m/%Y"), class: 'datepicker form-control'
+              = form.text_field :date_end, value: @event.date_end.strftime("%d/%m/%Y"), class: 'datepicker form-control'
 
         .buttons-footer
           - if params[:action] == 'edit'

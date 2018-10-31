@@ -3,6 +3,7 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, only: %i[index new create edit update destroy]
   before_action :set_event, only: %i[show edit update destroy]
+  before_action :authorize_user, only: %i[edit update destroy]
 
   # Montras la uzantajn eventojn
   def index
@@ -14,6 +15,8 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+    @event.date_start = Date.today
+    @event.date_end = Date.today
   end
 
   def edit
@@ -70,5 +73,12 @@ class EventsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def event_params
     params.require(:event).permit(:title, :description, :content, :date_start, :date_end, :city, :country_id, { attachments: [] })
+  end
+
+  # Nur la permesataj uzantoj povas redakti, ĝisdatiĝi kaj foriĝi la eventon
+  def authorize_user
+    unless current_user.is_owner_of(@event) || current_user.admin?
+      redirect_to root_url, flash: { error: 'Vi ne rajtas'}
+    end
   end
 end

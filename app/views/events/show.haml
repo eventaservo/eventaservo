@@ -9,7 +9,7 @@
         %p= markdown(@event.content)
 
         = render partial: 'fotoj'
-        - if user_signed_in? && current_user.is_owner_of(@event)
+        - if user_signed_in? && (current_user.is_owner_of(@event) || current_user.admin?)
           .buttons-footer
             = link_to 'Redakti eventon', edit_event_path(@event.code), class: 'btn btn-sm btn-outline-primary'
 
