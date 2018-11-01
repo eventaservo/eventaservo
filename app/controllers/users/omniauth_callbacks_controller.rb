@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  include Devise::Controllers::Rememberable
+
   def facebook
     # You need to implement the method below in your model (e.g. app/models/user.rb)
     puts request.env["omniauth.auth"]
     @user = User.from_omniauth(request.env["omniauth.auth"])
+    remember_me(@user)
 
     if @user.persisted?
       sign_in_and_redirect @user, event: :authentication #this will throw if @user is not activated
