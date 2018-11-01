@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Eventaj rikordoj
+# Eventaj dateno
 class Event < ApplicationRecord
 
   after_initialize :set_code, if: :new_record?

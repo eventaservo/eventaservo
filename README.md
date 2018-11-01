@@ -7,20 +7,6 @@ Tiu projekto estas senpaga kaj la programkodo estas libera.
 Eventa Servo estas sistemo por ordigi kaj diskonigi eventojn esperantajn 
 por la tuta mondo.
 
-# Evoluiga Plano
-
-- Aldoni mapojn por pli bone vidi la eventojn
-- Aŭtomate sciigu la uzantojn pri:
-  - ŝanĝoj en elektitaj eventoj
-  - novaj eventoj en elektitaj urboj aŭ landoj
-  - novaj eventoj de aliaj uzantoj
-- Krei ripetaj eventoj
-- Virtuala eventoj
-- Eventa diskoniĝo per Facebook
-- Sendi mesaĝojn al la partoprenantoj antaŭ la eventa data
-- multaj aliaj interesaj aferoj!
- 
-
 # Kunlaboro
 
 Se vi volas helpi la projekton, estu bonvena. Ĉiaj helpoj estas utila. Mi listigas sube kelkajn temojn: 

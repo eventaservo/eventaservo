@@ -20,9 +20,9 @@
           .lead Aldonilo
           = form_tag(attachment_upload_path(@event), multipart: true) do
             .form-group
-              = label_tag('Alŝultu fotojn', nil, for: 'attachment_upload_field')
+              = label_tag('Alŝutu fotojn', nil, for: 'attachment_upload_field')
               = file_field_tag(:file, name: 'file', id: 'attachment_upload_field', class: 'form-control-file')
               = hidden_field_tag(:record_type, @event.class)
 
             .buttons-footer
-              = submit_tag 'Alŝultu',  class: 'button-submit'
+              = submit_tag 'Alŝutu',  class: 'button-submit'
