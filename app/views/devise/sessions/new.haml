@@ -1,22 +1,24 @@
-.col-lg-6.offset-lg-3
+.col-12.col-lg-6.offset-lg-3
   .box-white
     .lead Ensaluti
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-      .form-group
-        = f.label :email, 'Retadreso'
-        = f.email_field :email, autocomplete: 'email', class: 'form-control', autofocus: true
-      .form-group
-        = f.label :password, 'Pasvorto'
-        = f.password_field :password, autocomplete: 'current-password', class: 'form-control'
-        %small.form-text.text-right
-          = link_to 'Mi forgesis mian pasvorton', new_password_path(resource_name)
+      .row
+        .col-md-6
+          .form-group
+            = f.label :email, 'Retadreso'
+            = f.email_field :email, autocomplete: 'email', class: 'form-control', autofocus: true
+        .col-md-6
+          .form-group
+            = f.label :password, 'Pasvorto'
+            = f.password_field :password, autocomplete: 'current-password', class: 'form-control'
+            %small.form-text.text-right
+              = link_to 'Mi forgesis mian pasvorton', new_password_path(resource_name)
 
       .form-group.form-check
         = f.check_box :remember_me, class: 'form-check-input'
         = f.label :remember_me, 'Memoru min', class: 'form-check-label'
       .buttons-footer
         = f.submit 'Ensaluti', class: 'button-submit'
+        = link_to "Uzi Facebook-konto", user_facebook_omniauth_authorize_path, class: 'facebook-button float-left'
 
-    %hr
-    = link_to "Uzi Facebook-konto", user_facebook_omniauth_authorize_path, class: 'facebook-button'
-    = link_to 'Krei novan konton', new_registration_path(resource_name), class: 'btn btn-sm btn-success'
+    = render partial: 'devise/shared/links'

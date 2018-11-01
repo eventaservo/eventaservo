@@ -8,3 +8,5 @@
         = f.email_field :email, autocomplete: 'email', class: 'form-control', autofocus: true
       .buttons-footer
         = f.submit 'Sendi', class: 'button-submit'
+
+    = render partial: 'devise/shared/links'
