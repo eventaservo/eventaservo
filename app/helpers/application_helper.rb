@@ -46,8 +46,8 @@ module ApplicationHelper
   end
 
   def markdown(text)
-    options = Hash.new(hard_wrap: true, filter_html: true, autolink: true)
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, options)
+    options = { hard_wrap: true, filter_html: true, autolink: true }
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::XHTML, options)
     raw markdown.render(text)
   end
 
