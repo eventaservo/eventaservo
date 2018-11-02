@@ -18,9 +18,18 @@ development:
   username: <%= Rails.application.credentials.dig(:database, :development, :username) %>
   password: <%= Rails.application.credentials.dig(:database, :development, :password) %>
 
+staging:
+  adapter: postgresql
+  database: <%= Rails.application.credentials.dig(:database, :staging, :database) %>
+  pool: 5
+  timeout: 5000
+  host: localhost
+  username: <%= Rails.application.credentials.dig(:database, :staging, :username) %>
+  password: <%= Rails.application.credentials.dig(:database, :staging, :password) %>
+
 production:
   adapter: postgresql
-  database: eventaservo
+  database: <%= Rails.application.credentials.dig(:database, :production, :database) %>
   pool: 5
   timeout: 5000
   host: localhost
@@ -33,7 +42,3 @@ production:
 #test:
 #  <<: *default
 #  database: db/test.sqlite3
-
-#production:
-#  <<: *default
-#  database: db/production.sqlite3
