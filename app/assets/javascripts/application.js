@@ -18,5 +18,6 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require jquery.mask.min
+//= require select2
 //= require_tree .
 

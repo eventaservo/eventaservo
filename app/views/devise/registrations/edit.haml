@@ -9,16 +9,16 @@
       .form-group
         = f.label :email, 'Retadreso'
         = f.email_field :email, autocomplete: 'email', class: 'form-control'
+
       .row
-        .col-md-6
+        .col-lg-6
           .form-group
-            = f.label :password, 'Pasvorto'
-            = f.password_field :password, autocomplete: 'new-password', class: 'form-control'
-            %small.form-text.text-muted Lasu ĝin blanka por ne ŝanĝi ĝin
-        .col-md-6
+            = f.label :city, 'Urbo'
+            = f.text_field :city, autocomplete: 'city', class: 'form-control'
+        .col-lg-6
           .form-group
-            = f.label :password_confirmation, 'Pasvorto konfirma'
-            = f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control'
+            = f.label :email, 'Lando'
+            = f.select(:country_id, options_from_collection_for_select(Country.all, 'id', 'name'), {}, class: 'form-control select2')
 
       .form-group
         = f.label :avatar, 'Profilbildo'
@@ -26,14 +26,6 @@
         = display_user_image(@user)
         = f.file_field :avatar, class: 'form-control-file'
 
-      .form-group
-        = f.label :current_password, 'Aktuala pasvorto'
-        = f.password_field :current_password, autocomplete: "current-password", class: 'form-control'
-        %small.form-text.text-muted Ĝi estas necesa por registri la ŝanĝojn
       .buttons-footer
-        = f.submit 'Ĝisdatigi', class: 'btn btn-success'
-    -# TODO:
-      -#.lead Forigi vian konton?
-      -#%p
-      -#  Ĉu vi volas forigi vian konton?
-      -#= link_to 'Jes, forigu mian konton', registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-sm btn-outline-danger'
+        = link_to 'Nuligi', root_path, class: 'button-cancel'
+        = f.submit 'Ĝisdatigi', class: 'button-submit'

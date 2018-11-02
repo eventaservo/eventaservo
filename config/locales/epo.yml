@@ -11,6 +11,8 @@ epo:
         description: Priskribo
         city: Urbo
         country_id: Lando
+        date_start: Komenca dato
+        date_end: Fina dato
   date:
     abbr_day_names:
       - dim

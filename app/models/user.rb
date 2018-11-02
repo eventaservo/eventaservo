@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :events
   has_many :likes, dependent: :destroy
   has_many :participants, dependent: :destroy
+  belongs_to :country, inverse_of: :users
 
   validates_presence_of :name
 

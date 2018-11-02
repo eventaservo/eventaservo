@@ -2,10 +2,16 @@
 %html{:lang => 'en'}
   %head
     = render partial: 'layouts/google_analytics' if Rails.env.production?
-    = render partial: 'layouts/facebook' # Ĉu vere necesas?
     %meta{:content => 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type'}/
     %meta{:charset => 'utf-8'}/
     %meta{:content => 'width=device-width, initial-scale=1, shrink-to-fit=no', :name => 'viewport'}/
+
+    -# Facebook informoj
+    = render partial: 'layouts/facebook' # Ĉu vere necesas?
+    %meta{content: 'Eventa Servo', property: 'og:site_name'}
+    %meta{content: '243701312975059', property: 'fb:app_id'}
+    = yield(:head) if content_for?(:head)
+
     %title Eventa Servo
     = csrf_meta_tags
     = csp_meta_tag

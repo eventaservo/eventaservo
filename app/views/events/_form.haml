@@ -16,8 +16,7 @@
 
         .form-group
           = form.label :content, 'Enhavo'
-          = form.text_area :content, rows: 5, class: 'form-control'
-          %small.form-text.text-muted Markdown permesata
+          = form.text_area :content, rows: 8, class: 'form-control'
 
         .form-group
           = form.label :address, 'Adreso'
@@ -31,7 +30,7 @@
           .col-lg-6
             .form-group
               = form.label :country_id, 'Lando'
-              = form.select(:country_id, options_from_collection_for_select(Country.all, 'id', 'name', @event.country_id), {}, class: 'form-control')
+              = form.select(:country_id, options_from_collection_for_select(Country.all, 'id', 'name', @event.country_id), {}, class: 'form-control select2')
 
         .row
           .col-lg-6
@@ -51,3 +50,6 @@
             = link_to 'Nuligi', root_path, class: 'button-cancel'
           = form.submit 'Registri', class: 'button-submit'
 
+:coffee
+  $('#event_date_start').change ->
+    $('#event_date_end').val($('#event_date_start').val())

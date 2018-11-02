@@ -19,5 +19,3 @@ Kion mi serĉas?
 - MiniTest/RSpec programisto por krei aŭtomatajn provkodojn
 
 Se vi volas kunlabori en tiu projekto, kontaktu min per Telegramo [(@fernando.shayani)](https://t.me/fernandoshayani) aŭ retmesaĝo [(kontakto@eventaservo.org)](mailto:kontakto@eventaservo.org).
-
-

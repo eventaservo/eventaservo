@@ -7,3 +7,7 @@ $(document).on "turbolinks:load", ->
 
   $ ->
     $('[data-toggle="tooltip"]').tooltip()
+
+  $ ->
+    $('.select2').select2
+      theme: 'bootstrap'

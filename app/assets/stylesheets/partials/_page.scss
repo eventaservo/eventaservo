@@ -27,3 +27,15 @@ body {
   @extend .alert;
   @extend .alert-warning;
 }
+
+.front-page-title {
+  @extend .text-center;
+  background-color : #28A745;
+  line-height      : 30px;
+  margin-left      : -15px;
+  margin-right     : -15px;
+  padding-bottom   : 10px;
+  padding-left     : 15px;
+  padding-right    : 15px;
+  color            : white;
+}

@@ -17,6 +17,8 @@ class EventsController < ApplicationController
     @event = Event.new
     @event.date_start = Date.today
     @event.date_end = Date.today
+    @event.city = current_user.city if current_user.city?
+    @event.country_id = current_user.country_id if current_user.country_id?
   end
 
   def edit

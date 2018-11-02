@@ -15,6 +15,7 @@ class Event < ApplicationRecord
 
   validates_presence_of :title, :description, :city, :country_id, :date_start, :date_end, :code
   validates_uniqueness_of :code
+  validate :end_after_start
 
   scope :venontaj, -> { where('date_start >= ?', Date.today) }
   scope :pasintaj, -> { where('date_start < ?', Date.today) }
@@ -43,5 +44,12 @@ class Event < ApplicationRecord
   def send_updates_to_followers
     return false
     EventMailer.send_updates_to_followers(self).deliver unless self.followers.empty?
+  end
+
+  def end_after_start
+    return if date_start.blank? || date_end.blank?
+    if date_end < date_start
+      errors.add(:date_end, 'ne povas okazi antaŭ la komenca dato')
+    end
   end
 end
