@@ -1,0 +1,28 @@
+.text-divider {
+  position   : relative;
+  font-size  : 1.2em;
+  z-index    : 1;
+  overflow   : hidden;
+  text-align : center;
+
+  &:before, &:after {
+    position         : absolute;
+    top              : 51%;
+    overflow         : hidden;
+    width            : 50%;
+    height           : 1px;
+    content          : '\a0';
+    background-color : lightgray;
+  }
+
+  &:before {
+    margin-left : -52%;
+    text-align  : right;
+  }
+
+  &:after { margin-left : 2%; }
+
+  .color {
+    background-color : #CCCCCC;
+  }
+}

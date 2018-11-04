@@ -1,5 +1,6 @@
 .box-white
   = render partial: 'layouts/breadcrumb'
+  = display_event_list_style_chooser
 
   .lead Eventoj laŭ urboj
   - @cities.each do |city|
@@ -7,4 +8,7 @@
       = city.name
       %span.badge.badge-info= city.count
 
-  = render partial: 'events/event_cards', locals: { events: @events}
+  - if session[:event_list_style] == 'kartoj'
+    = render partial: 'events/event_cards', locals: { events: @events}
+  - else
+    = render partial: 'events/event_list', locals: { events: @events}

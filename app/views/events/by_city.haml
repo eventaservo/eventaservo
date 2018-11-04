@@ -1,3 +1,7 @@
 .box-white
   = render partial: 'layouts/breadcrumb'
-  = render partial: 'events/event_cards', locals: { events: @events}
+  = display_event_list_style_chooser
+  - if session[:event_list_style] == 'kartoj'
+    = render partial: 'events/event_cards', locals: { events: @events}
+  - else
+    = render partial: 'events/event_list', locals: { events: @events}

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "/500", to: "errors#internal_error"
   get "/privateco", to: 'home#privateco'
   get '/license', to: 'home#privateco'
+  get '/vidmaniero/:view_style', to: 'home#view_style', as: 'view_style'
   get '/prie', to: 'home#prie'
 
   root to: 'home#index'

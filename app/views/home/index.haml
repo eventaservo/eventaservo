@@ -2,10 +2,16 @@
   Estu bonvena al <strong>Eventa Servo</strong>, la nova sistemo por dikonigi esperantajn eventojn tutmonde!
 .box-white
   = page_title 'Venontaj eventoj'
+  = display_event_list_style_chooser
+
   .lead Laŭ lando
   - @countries.each do |country|
     = link_to events_by_country_path(country.name), class: 'button-event-count' do
       = country.name
       %span.badge.badge-info= country.count
 
-  = render partial: 'events/event_cards', locals: { events: @events}
+
+  - if session[:event_list_style] == 'kartoj'
+    = render partial: 'events/event_cards', locals: { events: @events}
+  - else
+    = render partial: 'events/event_list', locals: { events: @events}

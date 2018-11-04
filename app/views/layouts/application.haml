@@ -9,6 +9,7 @@
     -# Facebook informoj
     = render partial: 'layouts/facebook' # Ĉu vere necesas?
     %meta{content: 'Eventa Servo', property: 'og:site_name'}
+    %meta{content: image_url('eventa_servo_logo.png'), property: 'og:image'}
     %meta{content: '243701312975059', property: 'fb:app_id'}
     = yield(:head) if content_for?(:head)
 

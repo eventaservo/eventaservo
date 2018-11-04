@@ -4,6 +4,4 @@
   = link_to 'Programkodo (Github)', 'https://github.com/shayani/eventaservo', target: :_blank
   |
   = link_to 'Pri la projekto', prie_path
-
-
-
+  = "(#{Rails.env})" unless Rails.env == 'production'
