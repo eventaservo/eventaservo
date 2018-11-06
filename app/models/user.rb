@@ -49,7 +49,7 @@ class User < ApplicationRecord
 
   def generate_username(random: false)
     return false if username.present?
-    username = ActiveSupport::Inflector.transliterate(name).tr(' ', '_').downcase
+    username = ActiveSupport::Inflector.transliterate(name).tr(' ', '_').tr('.', '_').downcase
     username += SecureRandom.rand(100).to_s if random
 
     if User.find_by(username: username)
