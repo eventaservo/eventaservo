@@ -19,5 +19,6 @@
 //= require bootstrap-sprockets
 //= require jquery.mask.min
 //= require select2
+//= require moment
+//= require fullcalendar
 //= require_tree .
-

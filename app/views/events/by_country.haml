@@ -8,7 +8,4 @@
       = city.name
       %span.badge.badge-info= city.count
 
-  - if session[:event_list_style] == 'kartoj'
-    = render partial: 'events/event_cards', locals: { events: @events}
-  - else
-    = render partial: 'events/event_list', locals: { events: @events}
+  = display_events_by_style

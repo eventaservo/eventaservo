@@ -8,12 +8,16 @@ class User < ApplicationRecord
 
   mount_uploader :avatar, AvatarUploader
 
+  before_save :generate_username, if: :new_record?
+
   has_many :events
   has_many :likes, dependent: :destroy
   has_many :participants, dependent: :destroy
   belongs_to :country, inverse_of: :users
 
   validates_presence_of :name
+  validates_uniqueness_of :username
+
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -41,5 +45,17 @@ class User < ApplicationRecord
 
   def follower?(record)
     !record.followers.find_by_user_id(self).nil?
+  end
+
+  def generate_username(random: false)
+    return false if username.present?
+    username = ActiveSupport::Inflector.transliterate(name).tr(' ', '_').downcase
+    username += SecureRandom.rand(100).to_s if random
+
+    if User.find_by(username: username)
+      generate_username(random: true)
+    else
+      update_attribute(:username, username)
+    end
   end
 end

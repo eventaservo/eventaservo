@@ -1,9 +1,9 @@
 - content_for :head do
   -# Facebook OpenGraph informoj
   %meta{content: request.original_url, property: 'og:url'}
+  %meta{content: 'article', property: 'og:type'}
   %meta{content: @event.title, property: 'og:title'}
   %meta{content: @event.description, property: 'og:description'}
-  %meta{content: 'website', property: 'og:type'}
 
 .box-white
   = render partial: 'layouts/breadcrumb'
@@ -15,21 +15,17 @@
         %p= @event.description
         %p= markdown(@event.content)
 
+        - if @event.site.present?
+          %p <strong>Retpaĝo: </strong> #{link_to @event.site, @event.site, target: :_blank}
+        - if @event.email.present?
+          %p <strong>Kontakto: </strong> #{mail_to @event.email, @event.email, subject: "Informoj pri la evento #{@event.title}" }
+
         = render partial: 'fotoj'
+        = render partial: 'dokumentoj'
         - if user_signed_in? && (current_user.is_owner_of(@event) || current_user.admin?)
           .buttons-footer
             = link_to 'Redakti eventon', edit_event_path(@event.code), class: 'btn btn-sm btn-outline-primary'
 
     .col-lg-4
       = render partial: 'informoj'
-      - if user_signed_in? && current_user.is_owner_of(@event)
-        .box-white
-          .lead Aldonilo
-          = form_tag(attachment_upload_path(@event), multipart: true) do
-            .form-group
-              = label_tag('Alŝutu fotojn', nil, for: 'attachment_upload_field')
-              = file_field_tag(:file, name: 'file', id: 'attachment_upload_field', class: 'form-control-file')
-              = hidden_field_tag(:record_type, @event.class)
-
-            .buttons-footer
-              = submit_tag 'Alŝutu',  class: 'button-submit'
+      = render partial: 'aldonilo'

@@ -1,5 +1,6 @@
 .front-page-title
   Estu bonvena al <strong>Eventa Servo</strong>, la nova sistemo por dikonigi esperantajn eventojn tutmonde!
+
 .box-white
   = page_title 'Venontaj eventoj'
   = display_event_list_style_chooser
@@ -10,8 +11,4 @@
       = country.name
       %span.badge.badge-info= country.count
 
-
-  - if session[:event_list_style] == 'kartoj'
-    = render partial: 'events/event_cards', locals: { events: @events}
-  - else
-    = render partial: 'events/event_list', locals: { events: @events}
+  = display_events_by_style

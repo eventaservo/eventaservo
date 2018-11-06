@@ -42,7 +42,7 @@ module ApplicationHelper
   end
 
   def format_date(date)
-    l(date, format: "%e de %B de %Y")
+    l(date, format: "%e de %B %Y")
   end
 
   def markdown(text)

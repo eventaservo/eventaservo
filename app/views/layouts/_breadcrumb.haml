@@ -1,16 +1,18 @@
-:ruby
-  if params[:code].present? && params[:controller] == 'events'
-    event = Event.joins(:country).find_by_code(params[:code])
-    country = event.country.name
-    city = event.city
-  else
-    country = @country.name
-    city = params[:city_name]
-  end
-
 %nav{"aria-label" => "breadcrumb"}
   %ol.breadcrumb
     %li.breadcrumb-item= link_to 'Mondo', root_path
-    %li.breadcrumb-item= link_to country, events_by_country_path(country)
-    - unless city.nil?
-      %li.breadcrumb-item= link_to city, events_by_city_url(country, city)
+
+    - if params[:code].present? && params[:controller] == 'events'
+      - event = Event.joins(:country).find_by_code(params[:code])
+      %li.breadcrumb-item= link_to event.country.name, events_by_country_path(event.country.name)
+      %li.breadcrumb-item= link_to event.city, events_by_city_url(event.country.name, event.city)
+
+    - elsif params[:action] == 'by_username'
+      - user = User.find_by(username: params[:username])
+      %li.breadcrumb-item= link_to user.name, events_by_username_path(params[:username])
+
+    - else
+      %li.breadcrumb-item= link_to @country.name, events_by_country_path(@country.name)
+      - if params[:city_name].present?
+        %li.breadcrumb-item= link_to params[:city_name], events_by_city_url(@country.name, params[:city_name])
+

@@ -1,4 +1,6 @@
 = link_to event_path(event.code), class: 'item-row-no-chevron' do
+
+  -# Malgrandaj ekranoj
   .d-block.d-md-none.col-12
     %p
       .text-center.font-weight-bold= event.title
@@ -6,12 +8,11 @@
       .text-center.small= format_date event.date_start
     %p.small= event.description
     %hr
+
+  -# Grandaj ekranoj
   .d-none.d-md-block.col-md-12
-    .row
-      .col-md-6
-        .font-weight-bold= event.title
-      .col-md-6.small.text-right
-        (#{event.city} - #{event.country.name}) #{format_date event.date_start}
+    .font-weight-bold= event.title
+    .small (#{event.city} - #{event.country.name}) - #{format_date event.date_start}
     .row.col-md-12
       %p.small= event.description
 

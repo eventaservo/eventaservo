@@ -9,9 +9,13 @@
     - if @event.date_end > @event.date_start
       (ĝis #{format_date @event.date_end})
     %br
-  = event_like_button(@event)
-  = event_participant_button(@event)
-  -#= event_keep_me_informed_button(@event)
+  %p
+    = event_like_button(@event)
+    = event_participant_button(@event)
+    -#= event_keep_me_informed_button(@event)
+    = link_to 'Diskonigi', "https://www.facebook.com/sharer/sharer.php?u=#{event_url(@event.code)}", class: 'facebook-button float-right', target: :_blank
 
+  %p
   .lead Kreinto
-  = display_user(@event.user)
+  = link_to display_user(@event.user), events_by_username_path(@event.user.username), class: 'btn btn-sm btn-outline-link',
+    data: { toggle: 'tooltip', placement: 'top' }, title: 'Vidu la eventojn de tiu uzanto'

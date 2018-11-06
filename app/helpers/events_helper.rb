@@ -26,11 +26,22 @@ module EventsHelper
 
   def display_event_list_style_chooser
     content_tag(:div, class: 'text-center small') do
-      if session[:event_list_style] == 'kartoj'
-        link_to 'Vidu kiel listo', view_style_path('listo')
-      else
-         link_to 'Vidu kiel kartoj', view_style_path('kartoj')
-      end
+      concat link_to_unless session[:event_list_style] == 'listo', 'listo', view_style_path('listo')
+      concat ' | '
+      concat link_to_unless session[:event_list_style] == 'kartoj', 'kartoj', view_style_path('kartoj')
+      concat ' | '
+      concat link_to_unless session[:event_list_style] == 'kalendaro', 'kalendaro', view_style_path('kalendaro')
+    end
+  end
+
+  def display_events_by_style
+    case session[:event_list_style]
+    when 'kartoj'
+      render partial: 'events/events_as_cards', locals: { events: @events }
+    when 'kalendaro'
+      render partial: 'events/events_as_calendar', locals: { events: @events }
+    else
+      render partial: 'events/events_as_list', locals: { events: @events }
     end
   end
 end

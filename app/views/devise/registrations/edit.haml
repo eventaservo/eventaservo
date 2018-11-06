@@ -17,8 +17,8 @@
             = f.text_field :city, autocomplete: 'city', class: 'form-control'
         .col-lg-6
           .form-group
-            = f.label :email, 'Lando'
-            = f.select(:country_id, options_from_collection_for_select(Country.all, 'id', 'name'), {}, class: 'form-control select2')
+            = f.label :country_id, 'Lando'
+            = f.select(:country_id, options_from_collection_for_select(Country.all, 'id', 'name', @user.country_id), {}, class: 'form-control select2')
 
       .form-group
         = f.label :avatar, 'Profilbildo'

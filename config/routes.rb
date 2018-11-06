@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/license', to: 'home#privateco'
   get '/vidmaniero/:view_style', to: 'home#view_style', as: 'view_style'
   get '/prie', to: 'home#prie'
+  get '/events.json', to: 'home#events'
 
   root to: 'home#index'
 
@@ -36,4 +37,7 @@ Rails.application.routes.draw do
   # Landoj kaj urboj
   get '/lando/:country_name', controller: 'events', action: 'by_country', as: 'events_by_country'
   get '/lando/:country_name/:city_name', controller: 'events', action: 'by_city', as: 'events_by_city'
+
+  # Eventoj de uzantoj
+  get '/uzanto/:username', controller: 'events', action: 'by_username', as: 'events_by_username'
 end

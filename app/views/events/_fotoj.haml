@@ -1,12 +1,12 @@
-- unless @event.attachments.empty?
+- if @event.attachments.present? && @event.attachments.images.present?
   .lead Fotoj
   .row
-    - @event.attachments.each do |attachment|
+    - @event.attachments.images.each do |image_file|
       .col-12.col-sm-3.mb-3
-        .card
-          = link_to attachment.file.url do
-            = image_tag attachment.file.thumb.url, class: 'card-img-top', size: '128'
-          - if user_signed_in? && current_user.is_owner_of(@event)
-            .card-body
-              .card-text
-                = link_to icon('far', 'trash-alt', class: 'fg-color-red'), attachment_destroy_path(attachment), method: :delete, data: { confirm: 'Ĉu vi certas?' }, class: 'float-right'
+        .card.bg-dark.text-white
+          = link_to image_file.file.url do
+            = image_tag image_file.file.thumb.url, class: 'card-img-top', size: '128'
+
+        - if user_signed_in? && current_user.is_owner_of(@event)
+          .text-center
+            = link_to icon('far', 'trash-alt', 'Forigi'), attachment_destroy_path(image_file), method: :delete, data: { confirm: 'Ĉu vi certas?' }, class: 'btn btn-sm btn-outline-link'

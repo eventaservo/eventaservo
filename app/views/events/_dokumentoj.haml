@@ -1,0 +1,8 @@
+- if @event.attachments.present? && @event.attachments.documents.present?
+  .lead Dokumentoj
+  - @event.attachments.documents.each do |document|
+    .item-row-no-chevron
+      - if user_signed_in? && current_user.is_owner_of(@event)
+        = link_to icon('far', 'trash-alt'), attachment_destroy_path(document), method: :delete, data: { confirm: 'Ĉu vi certas?' }, class: 'btn btn-sm btn-outline-link'
+      = link_to document.file_name, document.file.url, class: 'btn btn-sm btn-outline-link'
+

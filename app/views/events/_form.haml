@@ -18,8 +18,18 @@
           = form.label :content, 'Enhavo'
           = form.text_area :content, rows: 8, class: 'form-control'
 
+        .row
+          .col-lg-6
+            .form-group
+              = form.label :site, 'Retpaĝo'
+              = form.text_field :site, class: 'form-control'
+          .col-lg-6
+            .form-group
+              = form.label :email, 'Retadreso por kontakto'
+              = form.email_field :email, class: 'form-control'
+
         .form-group
-          = form.label :address, 'Adreso'
+          = form.label :address, 'Adreso de la evento'
           = form.text_field :address, class: 'form-control'
 
         .row

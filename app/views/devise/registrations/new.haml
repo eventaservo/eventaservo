@@ -9,6 +9,18 @@
       .form-group
         = f.label :email, 'Retadreso'
         = f.email_field :email, autocomplete: 'email', class: 'form-control'
+
+      .row
+        .col-lg-6.col-12
+          .form-group
+            = f.label :city, 'Urbo'
+            = f.text_field :city, autocomplete: 'city', class: 'form-control'
+        .col-lg-6
+          .form-group
+            = f.label :country_id, 'Lando'
+            = f.select(:country_id, options_from_collection_for_select(Country.all, 'id', 'name'), {}, class: 'form-control select2')
+
+
       .row
         .col-md-6
           .form-group

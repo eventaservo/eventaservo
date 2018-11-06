@@ -55,13 +55,17 @@ class EventsController < ApplicationController
   def by_country
     @country = Country.find_by(name: params[:country_name])
     redirect_to root_path, flash: { error: 'Lando ne ekzistas en la datumbazo' } and return if @country.nil?
-    @events = Event.by_country_id(@country.id).venontaj.grouped_by_months
+    @events = Event.includes(:country).by_country_id(@country.id).venontaj.grouped_by_months
     @cities = Event.by_country_id(@country.id).venontaj.count_by_cities
   end
 
   def by_city
     @country = Country.find_by(name: params[:country_name])
     @events = Event.by_city(params[:city_name]).venontaj.grouped_by_months
+  end
+
+  def by_username
+    @events = Event.by_username(params[:username]).venontaj.grouped_by_months
   end
 
   private
@@ -74,7 +78,8 @@ class EventsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def event_params
-    params.require(:event).permit(:title, :description, :content, :address, :date_start, :date_end, :city, :country_id,
+    params.require(:event).permit(:title, :description, :content, :site, :email, :date_start, :date_end,
+                                  :address, :city, :country_id,
                                   { attachments: [] })
   end
 

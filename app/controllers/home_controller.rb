@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    session[:event_list_style] == 'kartoj' unless session[:event_list_style] == 'listo' # Normala vidmaniero kiel kartoj
+    session[:event_list_style] ||= 'listo' # Normala vidmaniero
     @events = Event.includes(:country).venontaj.grouped_by_months
     @countries = Event.venontaj.count_by_country
   end
@@ -9,6 +9,13 @@ class HomeController < ApplicationController
   end
 
   def prie
+  end
+
+  def events
+    @events = Event.includes(:country)
+    @events = @events.by_country_name(params[:country]) if params[:country].present?
+    @events = @events.by_city(params[:city]) if params[:city].present?
+    @events = Event.includes(:country).by_username(params[:username]) if params[:username].present?
   end
 
   def view_style
