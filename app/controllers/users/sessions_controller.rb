@@ -9,9 +9,10 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    params[:user].merge!(remember_me: 1) # Ĉiam memoras la uzanton
+    super
+  end
 
   # DELETE /resource/sign_out
   # def destroy

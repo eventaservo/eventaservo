@@ -1,16 +1,23 @@
 .row
   .col-lg-8.offset-lg-2
-    .box-white
-      = form_for(@event, url: (event_path(@event.code) if params[:action] == 'edit') ) do |form|
 
+
+    .box-white
+      .lead
+        = params[:action] == 'new' ? 'Nova evento' : 'Redakti eventon'
+
+      .alert.alert-info.small
+        Skribu esperante (almenaŭ la titolon kaj la priskribon). Permesu ĉiuj scii kion okazas en la esperantujo monde!
+
+      = form_for(@event, url: (event_path(@event.code) if params[:action] == 'edit') ) do |form|
         = error_handling(@event)
 
         .form-group
-          = form.label :title, 'Titolo'
+          = form.label :title, 'Titolo *'
           = form.text_field :title, class: 'form-control'
 
         .form-group
-          = form.label :description, 'Priskribo'
+          = form.label :description, 'Priskribo *'
           = form.text_field :description, class: 'form-control'
           %small.form-text.text-muted Maximume 400 karakteroj
 
@@ -29,7 +36,7 @@
               = form.email_field :email, class: 'form-control'
 
         .form-group
-          = form.label :address, 'Adreso de la evento'
+          = form.label :address, 'Loka adreso de la evento'
           = form.text_field :address, class: 'form-control'
 
         .row

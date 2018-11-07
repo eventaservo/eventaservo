@@ -65,6 +65,7 @@ epo:
   activerecord:
     attributes:
       user:
+        name: "Plena nomo"
         password: "Pasvorto"
         email: "Retadreso"
         password_confirmation: "Pasvorto konfirmo"

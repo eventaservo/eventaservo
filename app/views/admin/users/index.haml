@@ -1,16 +1,21 @@
-.box-white
+.box-white.small
   .lead Uzantoj
   .item-row-header
-    .col-4 Nomo
-    .col-4 Retadreso
-    .col-2 Eventoj
+    .col Nomo
+    .col Retadreso
+    .col Uzantnomo
+    .col Eventoj
 
   - @users.each do |user|
     = link_to admin_user_path(user), class: 'item-row' do
-      .col-4= user.name
-      .col-4= user.email
-      .col-4
-        .badge.badge-primary Eventoj: #{user.events.count}
-        .badge.badge-info= icon('fas','heart', user.likes.count)
-        .badge.badge-success= icon('fas','user-check', user.participants.count)
-        
+      .col
+        = user.name
+        = icon('fab', 'facebook') if user.provider == 'facebook'
+      .col= user.email
+      .col
+        %object= link_to user.username, events_by_username_path(user.username)
+      .col
+        Eventoj: #{user.events.count}
+        = icon('fas','heart', user.likes.count)
+        = icon('fas','user-check', user.participants.count)
+
