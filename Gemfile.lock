@@ -272,6 +272,8 @@ GEM
       rubyzip (~> 1.2, >= 1.2.2)
     sentry-raven (2.7.4)
       faraday (>= 0.7.6, < 1.0)
+    sitemap_generator (6.0.1)
+      builder (~> 3.0)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -354,6 +356,7 @@ DEPENDENCIES
   select2-rails
   selenium-webdriver
   sentry-raven
+  sitemap_generator
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3
