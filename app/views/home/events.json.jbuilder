@@ -4,4 +4,5 @@ json.array!(@events) do |event|
   json.start event.date_start.beginning_of_day
   json.end event.date_end.end_of_day
   json.url event_url(event.code)
+  json.color color_event(event)
 end

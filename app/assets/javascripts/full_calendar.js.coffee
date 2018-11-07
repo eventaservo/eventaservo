@@ -23,17 +23,9 @@ eventCalendar = ->
       list: 'listo'
     monthNames: ['Januaro', 'Februaro', 'Marto', 'Aprilo', 'Majo', 'Junio', 'Julio', 'Aŭgusto', 'Septembro', 'Oktobro', 'Novembro', 'Decembro']
     dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Ĵaŭ', 'Ven', 'Sab']
-    eventRender: (eventObj, $el) ->
-      $el.popover
-        title: eventObj.title
-        content: eventObj.description
-        trigger: 'hover'
-        placement: 'top'
-        container: 'body'
   }
 
 clearCalendar = ->
-  $('#full_calendar').fullCalendar 'delete' # In case delete doesn't work.
   $('#full_calendar').html ''
 
 # Por Turbolinks

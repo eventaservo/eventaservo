@@ -45,6 +45,16 @@ module ApplicationHelper
     l(date, format: "%e-a de %B %Y")
   end
 
+  # Elektas la eventkoloron
+  def color_event(event)
+    if event.date_end < Date.today # pasintaj eventoj estas grizaj
+      'gray'
+    else
+      'green' # Venontaj eventoj estas verdaj
+    end
+  end
+
+
   def markdown(text)
     options = { hard_wrap: true, filter_html: true, autolink: true }
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::XHTML, options)

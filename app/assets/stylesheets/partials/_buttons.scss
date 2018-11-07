@@ -3,6 +3,11 @@
   @extend .btn-sm;
 }
 
+%button-link {
+  @extend %button-standard;
+  @extend .btn-link;
+}
+
 .facebook-button {
   @extend %button-standard;
   @extend .btn-light;
@@ -58,8 +63,8 @@
 }
 
 .button-like {
-  @extend %button-standard;
-  @extend .btn-outline-primary;
+  @extend %button-link;
+  color: $gray;
   &:before {
     @extend .far;
     content       : fa-content($fa-var-heart);
@@ -68,8 +73,8 @@
 }
 
 .button-like-pressed {
-  @extend %button-standard;
-  @extend .btn-primary;
+  @extend %button-link;
+  color: $blue;
   &:before {
     @extend .fas;
     content       : fa-content($fa-var-heart);
@@ -78,8 +83,8 @@
 }
 
 .button-participant {
-  @extend %button-standard;
-  @extend .btn-outline-success;
+  @extend %button-link;
+  color : $gray;
   &:before {
     @extend .far;
     content       : '\f007';
@@ -89,7 +94,7 @@
 
 .button-participant-pressed {
   @extend %button-standard;
-  @extend .btn-success;
+  color: $greenDark;
   &:before {
     @extend .fas;
     content       : '\f4fc';
