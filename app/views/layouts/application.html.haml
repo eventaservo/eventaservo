@@ -9,7 +9,10 @@
     = yield(:head) if content_for?(:head)
     = render partial: 'layouts/facebook' # Facebook informoj
 
-    %title Eventa Servo
+    %title
+      = "#{yield(:title)} | " if content_for?(:title)
+      Eventa Servo
+
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'

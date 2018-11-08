@@ -1,3 +1,6 @@
+- content_for :title do
+  = "#{params[:city_name]} (#{params[:country_name]})"
+
 .box-white
   = render partial: 'layouts/breadcrumb'
   = display_event_list_style_chooser

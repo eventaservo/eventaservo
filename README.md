@@ -9,7 +9,7 @@ por la tuta mondo.
 
 # Kunlaboro
 
-Se vi volas helpi la projekton, estu bonvena. Ĉiaj helpoj estas utila. Mi listigas sube kelkajn temojn: 
+Se vi estas voluntulo kaj volas helpi la projekton, estu bonvena. 
 
 Kion mi serĉas?
 

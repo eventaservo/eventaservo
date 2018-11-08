@@ -1,3 +1,6 @@
+- content_for :title do
+  = @event.title
+
 - content_for :head do
   -# Facebook OpenGraph informoj
   %meta{content: request.original_url, property: 'og:url'}

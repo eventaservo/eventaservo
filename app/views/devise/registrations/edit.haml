@@ -4,24 +4,24 @@
     = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
       = devise_error_messages!
       .form-group
-        = f.label :name, 'Nomo'
+        = f.label :name
         = f.text_field :name, autocomplete: 'name', class: 'form-control', autofocus: true
       .form-group
-        = f.label :email, 'Retadreso'
+        = f.label :email
         = f.email_field :email, autocomplete: 'email', class: 'form-control'
 
       .row
         .col-lg-6
           .form-group
-            = f.label :city, 'Urbo'
+            = f.label :city
             = f.text_field :city, autocomplete: 'city', class: 'form-control'
         .col-lg-6
           .form-group
-            = f.label :country_id, 'Lando'
+            = f.label :country_id
             = f.select(:country_id, options_from_collection_for_select(Country.all, 'id', 'name', @user.country_id), {}, class: 'form-control select2')
 
       .form-group
-        = f.label :avatar, 'Profilbildo'
+        = f.label :avatar
         %br
         = display_user_image(@user)
         = f.file_field :avatar, class: 'form-control-file'

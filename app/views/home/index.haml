@@ -9,6 +9,6 @@
   - @countries.each do |country|
     = link_to events_by_country_path(country.name), class: 'button-event-count' do
       = country.name
-      %span.badge.badge-info= country.count
+      %span.badge.badge-primary= country.count
 
   = display_events_by_style

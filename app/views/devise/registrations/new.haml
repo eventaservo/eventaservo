@@ -5,7 +5,7 @@
       %p.fg-color-grayDark.font-weight-bold
         Registriĝu por krei novajn eventojn.
         %br
-        Estas senpaga!
+        Estas senpage!
 
     = link_to "Registri per Facebook", user_facebook_omniauth_authorize_path, class: 'facebook-button col-12'
     %br
@@ -18,7 +18,7 @@
       .form-group
         = f.text_field :name, autocomplete: 'name', class: 'form-control', autofocus: true, placeholder: 'Plena nomo'
       .form-group
-        = f.email_field :email, autocomplete: 'email', class: 'form-control', placeholder: 'Retadreso'
+        = f.email_field :email, autocomplete: 'email', class: 'form-control', placeholder: 'Retpoŝt-adreso'
       .form-group
         = f.text_field :city, autocomplete: 'city', class: 'form-control', placeholder: 'Urbo'
       .form-group
@@ -26,7 +26,7 @@
       .form-group
         = f.password_field :password, autocomplete: 'new-password', class: 'form-control', placeholder: 'Pasvorto'
       .form-group
-        = f.password_field :password, autocomplete: 'new-password', class: 'form-control', placeholder: 'Pasvorto konfirma'
+        = f.password_field :password, autocomplete: 'new-password', class: 'form-control', placeholder: 'Pasvorto-konfirmado'
 
       = f.submit 'Registri', class: 'btn btn-sm btn-success col-12'
 
