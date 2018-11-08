@@ -28,7 +28,18 @@ SitemapGenerator::Sitemap.create do
   #     add article_path(article), :lastmod => article.updated_at
   #   end
 
+  # Eventoj
   Event.find_each do |event|
-      add event_path(event.code), lastmod: event.updated_at
+    add event_path(event.code), lastmod: event.updated_at, priority: 1.0, changefreq: 'daily'
+  end
+
+  # Landoj
+  Country.find_each do |country|
+    add events_by_country_path(country.name), changefreq: 'daily'
+  end
+
+  # Urboj
+  Event.joins(:country).select(:city, 'countries.name').distinct(:city).order('countries.name, city').each do |city|
+    add events_by_city_path(city.name, city.city), changefreq: 'daily'
   end
 end
