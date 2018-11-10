@@ -4,6 +4,6 @@
     - @event.attachments.images.each do |image_file|
       .col-6.col-sm-4.col-md-2.mb-3.text-center
         = link_to (image_tag image_file.file.thumb.url, class: 'img-thumbnail'), image_file.file.url
-        - if user_signed_in? && current_user.is_owner_of(@event)
+        - if user_is_owner_or_admin(@event)
           %p= link_to icon('far', 'trash-alt', 'Forigi'), attachment_destroy_path(image_file), method: :delete,
             data: { confirm: 'Ĉu vi certas?' }, class: 'btn btn-sm btn-outline-link'

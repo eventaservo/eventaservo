@@ -5,6 +5,11 @@ class ApplicationController < ActionController::Base
 
   before_action :set_raven_context
 
+  def user_is_owner_or_admin(event)
+    user_signed_in? && (current_user.is_owner_of(event) || current_user.admin?)
+  end
+  helper_method :user_is_owner_or_admin
+
   private
 
     def set_raven_context

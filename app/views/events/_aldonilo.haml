@@ -1,6 +1,7 @@
-- if user_signed_in? && current_user.is_owner_of(@event)
+- if user_is_owner_or_admin(@event)
   .box-white
     .lead Alŝutilo
+    .small Aldonu fotoj aŭ dokumentoj al la evento
     = form_tag(attachment_upload_path(@event), multipart: true, id: 'uploader_form') do
       = hidden_field_tag(:record_type, @event.class)
 
