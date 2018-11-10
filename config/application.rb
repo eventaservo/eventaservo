@@ -18,5 +18,7 @@ module Eventaservo
 
     config.i18n.default_locale = :epo
     config.exceptions_app = self.routes
+
+    config.active_job.queue_adapter = :delayed_job
   end
 end

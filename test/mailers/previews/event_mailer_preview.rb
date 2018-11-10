@@ -8,4 +8,9 @@ class EventMailerPreview < ActionMailer::Preview
 
     EventMailer.send_updates_to_followers(event)
   end
+
+  def send_event_to_admin
+    event = Event.last
+    EventMailer.send_event_to_admin(event)
+  end
 end

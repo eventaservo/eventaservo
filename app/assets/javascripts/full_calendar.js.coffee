@@ -9,6 +9,7 @@ eventCalendar = ->
     eventColor: 'green'
     height: 'auto'
     fixedWeekCount: false
+    firstDay: 1
     displayEventTime: false
     header:
       left: 'today'

@@ -12,6 +12,14 @@ class EventMailer < ApplicationMailer
          bcc:      addresses,
          subject:  "Evento \"#{@event.title}\" ŝanĝita",
          reply_to: @event.user.email,
-         format:   :text)
+         content_type: :text)
+  end
+
+  def send_event_to_admin(event_id, update: false)
+    @event = Event.find(event_id)
+    event_action = update ? 'Ĝistadigita' : 'Nova'
+    mail(to:      'kontakto@eventaservo.org',
+         subject: "#{event_action} evento: #{@event.title}",
+         content_type: :text)
   end
 end

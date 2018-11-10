@@ -1,0 +1,14 @@
+= @event.title
+\------------------
+#{@event.city} (#{@event.country.name})
+=format_date(@event.date_start)
+- if @event.date_end > @event.date_start
+  ĝis #{format_date(@event.date_end)}
+\
+= @event.description
+\
+= @event.content
+\
+Kretinto: #{@event.user.name}
+\
+= event_url @event.code
