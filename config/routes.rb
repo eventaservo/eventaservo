@@ -26,8 +26,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users, only: %i[index show]
-    # get 'users', controller: 'users', action: :index
     get 'countries', controller: 'countries', action: :index
+    get 'forigitaj_eventoj', controller: 'events', action: :index
+    patch 'forigitaj_eventoj/restauri/:event_code', controller: 'events', action: :recover, as: 'recover_event'
   end
 
   # Aldonaĵoj

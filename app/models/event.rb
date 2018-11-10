@@ -17,6 +17,8 @@ class Event < ApplicationRecord
   validates_uniqueness_of :code
   validate :end_after_start
 
+  default_scope { where(deleted: false) }
+  scope :deleted, -> { unscoped.where(deleted: true) }
   scope :venontaj, -> { where('date_start >= ?', Date.today) }
   scope :pasintaj, -> { where('date_start < ?', Date.today) }
   scope :by_country_id, ->(id) { where(country_id: id) }
@@ -35,6 +37,16 @@ class Event < ApplicationRecord
 
   def self.count_by_cities
     select('city as name', 'count(id)').group(:city).order(:city)
+  end
+
+  # Malapareigu la eventon, sed ne forviŝu ĝin
+  def delete!
+    update_attribute(:deleted, true)
+  end
+
+  # Reapegiru la eventon
+  def undelete!
+    update_attribute(:deleted, false)
   end
 
   private
