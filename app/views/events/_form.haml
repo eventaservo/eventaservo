@@ -7,7 +7,7 @@
         = params[:action] == 'new' ? 'Nova evento' : 'Redakti eventon'
 
       .alert.alert-info.small
-        Skribu esperante (almenaŭ la titolon kaj la priskribon). Permesu ĉiuj scii kion okazas en la esperantujo monde!
+        Skribu esperante (almenaŭ la titolon kaj la priskribon). Permesu al ĉiuj scii, kio okazas en Esperantio tutmonde!
 
       = form_for(@event, url: (event_path(@event.code) if params[:action] == 'edit') ) do |form|
         = error_handling(@event)
