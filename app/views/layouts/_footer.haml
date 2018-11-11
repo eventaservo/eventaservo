@@ -1,7 +1,7 @@
 .footer
   Versio #{ApplicationController::VERSIO}
   |
-  = link_to 'Programkodo (Github)', 'https://github.com/shayani/eventaservo', target: :_blank
+  = mail_to 'kontakto@eventaservo.org', 'Kontaktu nin', subject: 'Pri Eventa Servo'
   |
   = link_to 'Pri la projekto', prie_path
   = "(#{Rails.env})" unless Rails.env == 'production'
