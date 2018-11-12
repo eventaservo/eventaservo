@@ -1,7 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: First country
 
 two:
-  name: MyString
+  name: Second country
+
+brazilo:
+  name: Brazilo
+
+hungario:
+  name: Hungario

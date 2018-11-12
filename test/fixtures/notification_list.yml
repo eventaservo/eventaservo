@@ -1,0 +1,9 @@
+one:
+  country_id: 1
+  email: test@example.com
+  code: 1fi28_uek28f
+
+two:
+  country_id: 2
+  email: test2@example.com
+  code: 2osi8882kdjs

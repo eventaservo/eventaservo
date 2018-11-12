@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users, only: %i[index show]
+    get 'sciiga_listo', controller: 'notifications', action: :index, as: 'notification_list'
     get 'countries', controller: 'countries', action: :index
     get 'forigitaj_eventoj', controller: 'events', action: :index
     patch 'forigitaj_eventoj/restauri/:event_code', controller: 'events', action: :recover, as: 'recover_event'
@@ -41,4 +42,8 @@ Rails.application.routes.draw do
 
   # Eventoj de uzantoj
   get '/uzanto/:username', controller: 'events', action: 'by_username', as: 'events_by_username'
+
+  # Sciigo
+  get '/sciigo/:recipient_code/forigu', controller: 'notification_list', action: :delete, as: 'delete_recipient'
+  post '/sciigo', controller: 'notification_list', action: :create, as: 'new_recipient'
 end

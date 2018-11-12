@@ -49,6 +49,16 @@
   @extend .mb-1;
 }
 
+.button-notify-me {
+  @extend .button-event-count;
+  @extend .btn-outline-success;
+  &:before {
+    @extend .fas;
+    content       : fa-content($fa-var-info-circle);
+    padding-right : 5px;
+  }
+}
+
 .button-outline-red, .button-cancel {
   @extend %button-standard;
   @extend .btn-outline-danger;
@@ -98,21 +108,6 @@
   &:before {
     @extend .fas;
     content       : '\f4fc';
-    padding-right : 5px;
-  }
-}
-
-.button-informed {
-  @extend %button-standard;
-  @extend .btn-outline-info;
-}
-
-.button-informed-pressed {
-  @extend %button-standard;
-  @extend .btn-info;
-  &:before {
-    @extend .fas;
-    content       : fa-content($fa-var-check);
     padding-right : 5px;
   }
 }

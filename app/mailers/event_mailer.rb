@@ -2,6 +2,8 @@ class EventMailer < ApplicationMailer
   add_template_helper ApplicationHelper
   require 'redcarpet/render_strip'
 
+  after_action :sendmail_delivery, only: %i[send_notification_to_users notify_user] unless Rails.env == 'development'
+
   def send_updates_to_followers(event)
     @event    = event
     @markdown = Redcarpet::Markdown.new(Redcarpet::Render::StripDown)
@@ -21,5 +23,23 @@ class EventMailer < ApplicationMailer
     mail(to:      'kontakto@eventaservo.org',
          subject: "#{event_action} evento: #{@event.title}",
          content_type: :text)
+  end
+
+  def self.send_notification_to_users(event_id:)
+    return false unless Event.exists?(event_id)
+
+    event      = Event.includes(:country).find(event_id)
+    recipients = event.country.recipients
+    return false if recipients.empty?
+
+    recipients.each do |recipient|
+      notify_user(event_id, recipient.id).deliver_later
+    end
+  end
+
+  def notify_user(event_id, recipient_id)
+    @recipient = NotificationList.find(recipient_id)
+    @event     = Event.includes(:country).find(event_id)
+    mail(to: @recipient.email, subject: "Nova evento: #{@event.title}", content_type: :text)
   end
 end

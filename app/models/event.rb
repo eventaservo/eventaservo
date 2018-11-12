@@ -2,8 +2,8 @@
 
 # Eventaj dateno
 class Event < ApplicationRecord
+  include Code
 
-  after_initialize :set_code, if: :new_record?
   after_update :send_updates_to_followers
 
   belongs_to :user
@@ -50,10 +50,6 @@ class Event < ApplicationRecord
   end
 
   private
-
-  def set_code
-    self.code = SecureRandom.urlsafe_base64(12)
-  end
 
   def send_updates_to_followers
     return false

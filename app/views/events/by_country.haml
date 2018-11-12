@@ -6,6 +6,7 @@
   = display_event_list_style_chooser
 
   .lead Eventoj laŭ urboj
+  = render partial: 'notification_list/notify_me'
   - @cities.each do |city|
     = link_to events_by_city_path(@country.name, city.name), class: 'button-event-count' do
       = city.name

@@ -13,4 +13,8 @@ class EventMailerPreview < ActionMailer::Preview
     event = Event.last
     EventMailer.send_event_to_admin(event)
   end
+
+  def notify_users
+    EventMailer.notify_user(Event.where(country_id: 31).order('RANDOM()').first.id, NotificationList.order('RANDOM()').first.id)
+  end
 end

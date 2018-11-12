@@ -40,3 +40,4 @@ config/deploy.rb
 config/deploy
 
 public/sitemap.xml.gz
+coverage/

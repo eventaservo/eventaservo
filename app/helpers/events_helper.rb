@@ -12,13 +12,6 @@ module EventsHelper
     link_to event.participants.count, event_toggle_participant_path(event.code), class: button_class
   end
 
-  def event_keep_me_informed_button(event)
-    return unless user_signed_in?
-    button_class = current_user.follower?(event) ? 'button-informed-pressed' : 'button-informed'
-    link_to 'Sciigu min', event_toggle_follow_path(event.code), class: button_class,
-            data: { toggle: 'tooltip', placement: 'top' }, title: 'Sendu informojn al mi pri tiu evento'
-  end
-
   def display_event_list_style_chooser
     content_tag(:div, class: 'text-center small') do
       concat link_to_unless session[:event_list_style] == 'listo', 'listo', view_style_path('listo')
