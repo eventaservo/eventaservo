@@ -1,4 +1,8 @@
-.box-white.col-6.mx-auto
-  %h1 Ocorreu um erro
-  %p O sistema passou por um erro inesperado e uma notificação foi enviada aos administradores.
-  = link_to 'Voltar à página principal', root_url, class: 'btn btn-sm btn-primary'
+.box-white.col-12.col-md-6.mx-auto
+  %h1 Oh! Eraro okazis!
+  %p
+    Ni pardonpetas. Ni korektos tiun eraron baldaŭ.
+    = mail_to 'kontakto@eventaservo.org', 'Kontaktu nin'
+    se vi bezonas helpon.
+  %p
+    = link_to 'Iru al la ĉefpaĝo', root_url, class: 'button-submit col-12'
