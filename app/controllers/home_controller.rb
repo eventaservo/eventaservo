@@ -6,6 +6,7 @@ class HomeController < ApplicationController
   end
 
   def privateco
+    render formats: :text
   end
 
   def prie
