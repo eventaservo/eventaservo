@@ -1,16 +1,6 @@
 require "application_system_test_case"
 
 class EventsTest < ApplicationSystemTestCase
-  setup do
-    @event = events(:one)
-  end
-
-  test "visit existing event" do
-    visit event_path(@event.code)
-    assert_selector 'div', @event.title
-  end
-
-
   # test "visiting the index" do
   #   visit events_url
   #   assert_selector "h1", text: "Events"

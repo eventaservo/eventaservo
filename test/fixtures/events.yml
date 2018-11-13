@@ -1,22 +1,32 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+DEFAULTS: &DEFAULTS
   title: Prova evento
   description: Prova evento priskribo
   content: Prov-informoj pri la prova evento
   user_id: users(:one)
   deleted: false
   city: Eventa urbo
-  country_id: countries(:one).id
+  country: countries(:one)
   email: provemail@ekzamplo.org
   site: http://provo.ekzamplo.org
   date_start: <%= Date.today %>
   date_end: <%= Date.today %>
   code: <%= SecureRandom.urlsafe_base64(12) %>
 
-#two:
-#  title: MyString
-#  description: MyText
-#  user_id: 1
-#  date_start: 2018-10-16 09:35:45
-#  date_end: 2018-10-16 09:35:45
+one:
+  <<: *DEFAULTS
+
+pasinta:
+  <<: *DEFAULTS
+  date_start: <%= Date.today-1.day %>
+  date_end: <%= Date.today-1.day %>
+
+venonta:
+  <<: *DEFAULTS
+  date_start: <%= Date.today+1.day %>
+  date_end: <%= Date.today+1.day %>
+
+deleted:
+  <<: *DEFAULTS
+  deleted: true

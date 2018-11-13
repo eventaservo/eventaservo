@@ -4,13 +4,10 @@
 class Event < ApplicationRecord
   include Code
 
-  after_update :send_updates_to_followers
-
   belongs_to :user
   belongs_to :country
   has_many :participants, dependent: :destroy
   has_many :attachments, as: :attachable, dependent: :destroy
-  has_many :followers, as: :followable, dependent: :destroy
   has_many :likes, as: :likeable, dependent: :destroy
 
   validates_presence_of :title, :description, :city, :country_id, :date_start, :date_end, :code
@@ -50,11 +47,6 @@ class Event < ApplicationRecord
   end
 
   private
-
-  def send_updates_to_followers
-    return false
-    EventMailer.send_updates_to_followers(self).deliver unless self.followers.empty?
-  end
 
   def end_after_start
     return if date_start.blank? || date_end.blank?
