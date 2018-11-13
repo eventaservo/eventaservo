@@ -1,12 +1,4 @@
 module ApplicationHelper
-  def toolbar_item(url, text, icon, color, html_options = {})
-    link_to icon('fas', icon, text), url, html_options.merge(class: color)
-  end
-
-  def toolbar_back(url)
-    link_to 'Malantaŭen', url, class: 'button-back float-right mr-3'
-  end
-
   def page_title(title, subtext = nil)
     content_tag(:h2, raw("#{title} <small>#{subtext}</small>"), class: 'text-center')
   end

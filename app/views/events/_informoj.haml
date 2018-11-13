@@ -1,20 +1,19 @@
 .box-white
-  .lead Informoj
-  %p
-    <strong>Adreso:</strong> #{@event.address}
-    %br
-    <strong>Urbo:</strong> #{@event.city} - #{@event.country.name}
-    %br
-    <strong>Dato:</strong> #{format_date @event.date_start}
-    - if @event.date_end > @event.date_start
-      (ĝis #{format_date @event.date_end})
-    %br
-  %p
-    = event_like_button(@event)
-    = event_participant_button(@event)
-    -#= event_keep_me_informed_button(@event)
-    = link_to 'Diskonigi', "https://www.facebook.com/sharer/sharer.php?u=#{event_url(@event.code)}", class: 'facebook-button float-right', target: :_blank
+  .box-header Informoj
+  .box-body
+    %p
+      <strong>Adreso:</strong> #{@event.address}
+      %br
+      <strong>Urbo:</strong> #{@event.city} - #{@event.country.name}
+      %br
+    %p
+      = event_like_button(@event)
+      = event_participant_button(@event)
+      -#= event_keep_me_informed_button(@event)
+      = link_to 'Diskonigi', "https://www.facebook.com/sharer/sharer.php?u=#{event_url(@event.code)}", class: 'facebook-button float-right', target: :_blank
 
-  %p
-  .lead Kreinto
-  = link_to display_user(@event.user), events_by_username_path(@event.user.username), class: 'btn btn-sm btn-outline-link'
+    %p
+    .text-divider Kreinto
+    = link_to display_user(@event.user), events_by_username_path(@event.user.username), class: 'btn btn-sm btn-outline-link'
+    = render partial: 'aldonilo'
+

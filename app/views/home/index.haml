@@ -2,11 +2,11 @@
   Estu bonvena al <strong>Eventa Servo</strong>, la nova sistemo por diskonigi esperantajn eventojn tutmonde!
 
 .box-white
+  = render partial: 'home/shortcuts'
   = page_title 'Venontaj eventoj'
-  = display_event_list_style_chooser
+  = render partial: 'home/view_style_chooser'
 
   .lead Laŭ lando
-  = render partial: 'notification_list/notify_me'
   - @countries.each do |country|
     = link_to events_by_country_path(country.name), class: 'button-event-count' do
       = country.name

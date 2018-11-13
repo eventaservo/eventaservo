@@ -2,7 +2,8 @@
   -#= image_tag('default_event.png', height: '150', alt: "Card image cap", class: 'card-img-top')
 
   .card-body
-    %h5.card-title= event.title
+    %h5.card-title.text-center
+      = link_to event.title, event_path(event.code)
     .card-text.text-muted
       %p
         = format_date event.date_start
@@ -15,4 +16,3 @@
   .card-footer
     = event_like_button(event) if user_signed_in?
     = event_participant_button(event)
-    = link_to 'Pli da detaloj', event_path(event.code), class: 'card-link button-outline-blue float-right'

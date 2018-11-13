@@ -1,6 +1,8 @@
--#%button.button-notify-me{data: { target: '#notifyMeModal', toggle: 'modal' }, type: 'button'} Sciigu min
+.text-center
+  = link_to 'Aldoni eventoj', new_event_path, class: 'small'
+  |
+  = link_to 'Sciigu min pri novaj eventoj', '#notifyMeModal', data: { toggle: 'modal' }, class: 'small'
 
-%p.text-center= link_to 'Sciigu min pri novaj eventoj', '#notifyMeModal', data: { toggle: 'modal' }, class: 'small'
 
 / Modal
 #notifyMeModal.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'notifyMeModalLabel', role: 'dialog', tabindex: '-1'}

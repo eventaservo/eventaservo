@@ -1,9 +1,12 @@
 .box-white {
   border           : 1px solid lightgray;
   background-color : white;
-  margin           : 10px 0 10px 0;
-  padding          : 10px 10px 10px 10px;
+  margin           : 5px 0 5px 0;
+  padding          : 10px;
   border-radius    : 2px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+
 
   .lead {
     font-weight   : bold;
@@ -73,6 +76,24 @@
     @extend .bg-color-green;
   }
 
+  .box-header {
+    background-color        : green;
+    color                   : white;
+    font-weight             : bold;
+    margin                  : -11px -11px 5px -11px;
+    padding                 : 8px 8px 8px 12px;
+    font-size               : 10px;
+    letter-spacing          : 0.5px;
+    line-height             : 12px;
+    text-transform          : uppercase;
+    font-family             : "Lucida Grande", "Lucida Sans", Helvetica, Arial, sans-serif;
+    border-top-left-radius  : 5px;
+    border-top-right-radius : 5px;
+  }
+
+  .box-body {
+    font-size: 12px;
+  }
   .footer {
     background-color : $grayLight;
     font-size        : x-small;

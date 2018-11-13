@@ -1,5 +1,5 @@
 - if @event.attachments.present? && @event.attachments.documents.present?
-  .lead Dokumentoj
+  .text-divider Dokumentoj
   - @event.attachments.documents.each do |document|
     .item-row-no-chevron
       - if user_is_owner_or_admin(@event)

@@ -12,16 +12,6 @@ module EventsHelper
     link_to event.participants.count, event_toggle_participant_path(event.code), class: button_class
   end
 
-  def display_event_list_style_chooser
-    content_tag(:div, class: 'text-center small') do
-      concat link_to_unless session[:event_list_style] == 'listo', 'listo', view_style_path('listo')
-      concat ' | '
-      concat link_to_unless session[:event_list_style] == 'kartoj', 'kartoj', view_style_path('kartoj')
-      concat ' | '
-      concat link_to_unless session[:event_list_style] == 'kalendaro', 'kalendaro', view_style_path('kalendaro')
-    end
-  end
-
   def display_events_by_style
     case session[:event_list_style]
     when 'kartoj'
