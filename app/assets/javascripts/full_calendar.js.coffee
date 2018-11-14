@@ -7,7 +7,7 @@ eventCalendar = ->
         city: $('#full_calendar').data('city')
         username: $('#full_calendar').data('username')
     eventColor: 'green'
-    height: 'auto'
+    contentHeight: 500
     fixedWeekCount: false
     firstDay: 1
     displayEventTime: false
@@ -24,6 +24,11 @@ eventCalendar = ->
       list: 'listo'
     monthNames: ['Januaro', 'Februaro', 'Marto', 'Aprilo', 'Majo', 'Junio', 'Julio', 'Aŭgusto', 'Septembro', 'Oktobro', 'Novembro', 'Decembro']
     dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Ĵaŭ', 'Ven', 'Sab']
+    dayNames: ['Dimanĉo', 'Lundo', 'Mardo', 'Merkredo', 'Ĵaŭdo', 'Vendredo', 'Sabato']
+    views:
+      month:
+        eventLimit: 4
+        eventLimitText: 'pli'
   }
 
 clearCalendar = ->
