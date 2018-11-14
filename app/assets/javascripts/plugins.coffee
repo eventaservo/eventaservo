@@ -11,3 +11,4 @@ $(document).on "turbolinks:load", ->
   $ ->
     $('.select2').select2
       theme: 'bootstrap'
+    $('.js-smartPhoto').SmartPhoto()

@@ -21,6 +21,7 @@
 //= require select2
 //= require moment
 //= require fullcalendar
+//= require jquery-smartphoto
 //= require_tree .
 
 // Tiu kono korektas la problemon de Select2 kiam ĝi estas ene de 'Modal'
