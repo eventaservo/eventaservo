@@ -2,14 +2,38 @@
   Estu bonvena al <strong>Eventa Servo</strong>, la nova sistemo por diskonigi esperantajn eventojn tutmonde!
 
 .box-white
-  = render partial: 'home/shortcuts'
+  .d-flex.justify-content-between.flex-wrap
+    .flex-fill
+    .flex-fill= render partial: 'home/shortcuts'
+    .flex-fill
+      #search_container
+        = form_tag search_path, id: 'search_form', remote: true do
+          = search_field_tag :query, nil, placeholder: 'Serĉi...', class: 'form-control'
+    #search_icon.ml-auto.pl-3
+      = button_tag icon('fas', 'search'), class: 'btn btn-sm btn-outline-link'
+
   = page_title 'Venontaj eventoj'
-  = render partial: 'home/view_style_chooser'
 
-  .lead Laŭ lando
-  - @countries.each do |country|
-    = link_to events_by_country_path(country.name), class: 'button-event-count' do
-      = country.name
-      %span.badge.badge-primary= country.count
+  #events_container
+    = render partial: 'home/view_style_chooser'
+    .lead Laŭ lando
+    - @countries.each do |country|
+      = link_to events_by_country_path(country.name), class: 'button-event-count' do
+        = country.name
+        %span.badge.badge-primary= country.count
+    = display_events_by_style
 
-  = display_events_by_style
+  #search_results
+
+:coffee
+  $('#search_container').hide();
+
+  $('#search_icon').click ->
+    if $('#search_container').is(':hidden')
+      $('#search_container').show()
+      $('#search_container input').focus()
+    else
+      $('#search_container input').val('')
+      $.get $('#search_form').attr('action'), $('#search_form').serialize(), null, 'script'
+      $('#search_container').hide()
+

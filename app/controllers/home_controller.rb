@@ -23,4 +23,9 @@ class HomeController < ApplicationController
     session[:event_list_style] = params[:view_style]
     redirect_back fallback_location: root_url
   end
+
+  def search
+    respond_to :js
+    @events = Event.includes(:country).search(params[:query]).venontaj.grouped_by_months
+  end
 end

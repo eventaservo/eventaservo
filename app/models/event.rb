@@ -46,6 +46,18 @@ class Event < ApplicationRecord
     update_attribute(:deleted, false)
   end
 
+  def self.search(search)
+    all unless search.present?
+
+    joins(:country)
+      .where('unaccent(events.title) ilike unaccent(:search) OR
+              unaccent(events.description) ilike unaccent(:search) OR
+              unaccent(events.content) ilike unaccent(:search) OR
+              unaccent(events.city) ilike unaccent(:search) OR
+              unaccent(countries.name) ilike unaccent(:search)',
+             search: "%#{search.tr(' ', '%').downcase}%").order('events.date_start')
+  end
+
   private
 
   def end_after_start

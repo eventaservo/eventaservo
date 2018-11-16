@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CountryTest < ActiveSupport::TestCase
 
-  test 'devas fiski se ne havas land-nomo' do
+  test 'devas fiaski se ne havas land-nomo' do
     country = Country.new
     assert_not country.valid?
   end

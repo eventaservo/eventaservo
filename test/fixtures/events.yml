@@ -7,7 +7,7 @@ DEFAULTS: &DEFAULTS
   user_id: users(:one)
   deleted: false
   city: Eventa urbo
-  country: countries(:one)
+  country: one
   email: provemail@ekzamplo.org
   site: http://provo.ekzamplo.org
   date_start: <%= Date.today %>
@@ -30,3 +30,7 @@ venonta:
 deleted:
   <<: *DEFAULTS
   deleted: true
+
+brazilo:
+  <<: *DEFAULTS
+  country: brazilo

@@ -1,4 +1,4 @@
 module Constants
-  VERSIO = '0.8.2 Beta'
+  VERSIO = '1.0'
   FILE_EXTENSIONS = ['gif', 'png', 'jpg', 'jpeg', 'pdf', 'doc', 'docx', 'odt', 'ppt', 'pptx', 'xls', 'xlsx']
 end

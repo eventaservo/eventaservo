@@ -1,0 +1,14 @@
+<% if params[:query].present? %>
+
+  $('#events_container').hide();
+  <% if @events.empty? %>
+      $('#search_results').html("<div class='text-center'><strong>Evento ne trovita</strong></div>")
+    <% else %>
+      $('#search_results').html("<%= j render partial: 'search_results', locals: { events: @events } %>")
+  <% end %>
+
+<% else %>
+
+  $('#events_container').show();
+
+<% end %>

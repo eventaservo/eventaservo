@@ -77,4 +77,15 @@ class EventTest < ActiveSupport::TestCase
     @event.undelete!
     assert_equal @event.deleted, false
   end
+
+  test 'serĉado' do
+    event = events(:brazilo)
+    assert Event.search('brazilo').exists?(id: event.id)
+  end
+
+  test 'priskribo ne povas esti pli ol 400 karakteroj' do
+    new_event = events(:one)
+    new_event.description = SecureRandom.hex(201) # Pli ol 400 karakteroj
+    assert new_event.invalid?
+  end
 end

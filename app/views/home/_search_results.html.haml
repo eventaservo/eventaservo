@@ -1,0 +1,13 @@
+- events.map do |date, events|
+  %br
+  %br
+  %h3.text-divider= l(date, format: "%B %Y")
+  - events.each do |event|
+    .item-row-no-chevron
+      .col-12
+        %p
+          .text-center.font-weight-bold= link_to (highlight event.title, params[:query].split), event_path(event.code)
+          .text-center.small (#{highlight event.city, params[:query].split} - #{highlight event.country.name, params[:query].split}) - #{format_date event.date_start}
+        .row.col-md-12
+          %p.small= highlight event.description, params[:query].split
+          %p.small= highlight event.content.truncate_words(50), params[:query].split
