@@ -6,8 +6,23 @@
     %meta{:charset => 'utf-8'}/
     %meta{:content => 'width=device-width, initial-scale=1, shrink-to-fit=no', :name => 'viewport'}/
 
-    = yield(:head) if content_for?(:head)
-    = render partial: 'layouts/facebook' # Facebook informoj
+    - if content_for?(:fb_meta)
+      = yield(:fb_meta)
+    - else
+      %meta{content: 'website', property: 'og:type'}
+      %meta{content: request.original_url, property: 'og:url'}
+      %meta{content: 'Eventa Servo', property: 'og:title'}
+      %meta{content: 'La sistemo por diskonigi esperantajn eventojn tutmonde!', property: 'og:description'}
+      %meta{content: image_url('eventa_servo_facebook.jpg'), property: 'og:image'}
+      %meta{content: image_url('eventa_servo_facebook.jpg'), property: 'og:image:secure_url'}
+      %meta{content: 'Eventa Servo', property: 'og:image:alt'}
+      %meta{content: '600', property: 'og:image:height'}
+      %meta{content: '600', property: 'og:image:width'}
+
+    -# Komunaj Facebook Open Graph informoj
+    %meta{content: 'Eventa Servo', property: 'og:site_name'}
+    %meta{content: '243701312975059', property: 'fb:app_id'}
+    = render partial: 'layouts/facebook_sdk'
 
     %title
       = "#{yield(:title)} | " if content_for?(:title)
