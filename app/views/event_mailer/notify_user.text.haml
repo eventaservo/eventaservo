@@ -1,4 +1,4 @@
-Nova evento en #{@event.country.name} algoniĝis ĉe Eventa Servo. Jen pli da detaloj:
+Nova evento en #{@event.country.name} aldoniĝis ĉe Eventa Servo. Jen pliaj detaloj:
 \
 \
 = @event.title.upcase
@@ -12,11 +12,11 @@ Nova evento en #{@event.country.name} algoniĝis ĉe Eventa Servo. Jen pli da de
 \
 = @event.content
 \
-Kretinto: #{@event.user.name}
+Kreinto: #{@event.user.name}
 \
 Vidu la eventon rekte en la paĝo:
 = event_url @event.code
 \
 \
-Ne plu volas ricevi informojn pri novaj eventoj en #{@event.country.name}? Malabonitu per tiu ligilo:
+Se vi ne plu volas ricevi informojn pri novaj eventoj en #{@event.country.name}, alabonigu per tiu ligilo:
 = delete_recipient_url @recipient.code
