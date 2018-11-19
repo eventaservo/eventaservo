@@ -6,7 +6,7 @@
   %meta{content: request.original_url, property: 'og:url'}
   %meta{content: 'article', property: 'og:type'}
   %meta{content: @event.title, property: 'og:title'}
-  %meta{content: "#{format_date(@event.date_start)} | #{@event.description}", property: 'og:description'}
+  %meta{content: "#{format_date(@event.date_start)} (#{@event.city} - #{@event.country.name}) | #{@event.description}", property: 'og:description'}
   - if @event.attachments.present? && @event.attachments.images.present?
     - @event.attachments.images.each do |image_file|
       %meta{content: ActionDispatch::Http::URL.url_for(ActionMailer::Base.default_url_options) + image_file.file.url, property: 'og:image'}
