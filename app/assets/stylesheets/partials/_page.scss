@@ -41,15 +41,15 @@ body {
 }
 
 .breadcrumb {
-  margin-top: 1rem;
+  margin-top : 1rem;
 }
 
-input[type=search] {
+.search-field {
   outline            : none;
   border             : none !important;
   -webkit-box-shadow : none !important;
   -moz-box-shadow    : none !important;
   box-shadow         : none !important;
-  border-bottom: 1px solid gray !important;
-  border-radius: 0;
+  border-bottom      : 1px solid gray !important;
+  border-radius      : 0;
 }

@@ -8,7 +8,7 @@
     .flex-fill
       #search_container
         = form_tag search_path, id: 'search_form', remote: true do
-          = search_field_tag :query, nil, placeholder: 'Serĉi...', class: 'form-control'
+          = search_field_tag :query, nil, placeholder: 'Serĉi...', class: 'form-control search-field'
     #search_icon.ml-auto.pl-3
       = button_tag icon('fas', 'search'), class: 'btn btn-sm btn-outline-link'
 
