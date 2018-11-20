@@ -23,6 +23,8 @@ class AttachmentUploader < CarrierWave::Uploader::Base
 
   # Process files as they are uploaded:
   process resize_to_fit: [1000, 1000], :if => :image?
+  process :store_dimensions, :if => :image?
+
   #
   # def scale(width, height)
   #   # do something
@@ -53,6 +55,12 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   def filename
     ActiveSupport::Inflector.transliterate(original_filename).gsub(' ', '_') if original_filename
   end
+
+  private
+
+    def store_dimensions
+      model.width, model.height = ::MiniMagick::Image.open(file.file)[:dimensions]
+    end
 
   protected
 

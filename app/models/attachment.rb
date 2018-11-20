@@ -3,7 +3,7 @@ class Attachment < ApplicationRecord
 
   before_save :insert_file_details
 
-  store_accessor :metadata, :content_type, :file_name, :file_size
+  store_accessor :metadata, :content_type, :file_name, :file_size, :width, :height
 
   belongs_to :attachable, polymorphic: true
   belongs_to :user

@@ -10,6 +10,10 @@
   - if @event.attachments.present? && @event.attachments.images.present?
     - @event.attachments.images.each do |image_file|
       %meta{content: ActionDispatch::Http::URL.url_for(ActionMailer::Base.default_url_options) + image_file.file.url, property: 'og:image'}
+      %meta{content: ActionDispatch::Http::URL.url_for(ActionMailer::Base.default_url_options) + image_file.file.url, property: 'og:image:secure_url'}
+      %meta{content: image_file.content_type, property: 'og:image:type' }
+      %meta{content: image_file.width, property: 'og:image:width' }
+      %meta{content: image_file.height, property: 'og:image:height' }
   - else
     %meta{content: image_url('eventa_servo_logo.png'), property: 'og:image'}
     %meta{content: image_url('eventa_servo_logo.png'), property: 'og:image:secure_url'}
