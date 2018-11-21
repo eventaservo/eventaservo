@@ -2,6 +2,8 @@
 
 # Eventaj dateno
 class Event < ApplicationRecord
+  is_impressionable # Por kalkuli la paĝvizitojn
+
   include Code
 
   belongs_to :user

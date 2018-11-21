@@ -55,6 +55,7 @@ gem 'daemons'
 gem 'delayed_job_active_record'
 
 gem 'hirb'
+gem 'impressionist'
 gem 'redcarpet'
 gem 'sentry-raven'
 gem 'sitemap_generator'

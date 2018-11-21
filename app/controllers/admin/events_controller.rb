@@ -6,6 +6,10 @@ module Admin
     before_action :authenticate_admin!
 
     def index
+      @events = Event.includes(:user).order(date_start: :desc)
+    end
+
+    def deleted
       @events = Event.deleted
     end
 

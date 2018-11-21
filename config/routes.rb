@@ -29,7 +29,8 @@ Rails.application.routes.draw do
     resources :users, only: %i[index show]
     get 'sciiga_listo', controller: 'notifications', action: :index, as: 'notification_list'
     get 'countries', controller: 'countries', action: :index
-    get 'forigitaj_eventoj', controller: 'events', action: :index
+    get 'eventoj', controller: 'events', action: :index
+    get 'forigitaj_eventoj', controller: 'events', action: :deleted
     patch 'forigitaj_eventoj/restauri/:event_code', controller: 'events', action: :recover, as: 'recover_event'
   end
 

@@ -1,5 +1,5 @@
 .box-white.small
-  .lead Forigitaj eventoj
+  .lead Ĉiuj eventoj
   .item-row-header
     .col Titolo
     .col Loko
@@ -8,12 +8,14 @@
     .col Lasta informo
 
   - @events.each do |event|
-    .item-row-no-chevron
-      .col= event.title
+    - bg_color = (event.date_start < Date.today) ? 'bg-color-gray' : nil
+    = link_to event_path(event.code), class: "item-row #{bg_color}" do
+      .col
+        (#{icon('far', 'eye', event.impressionist_count)})
+
+        = event.title
       .col= event.city
       .col= format_date event.date_start
       .col= event.user.name
-      .col
-        = format_date event.updated_at
-        = link_to icon('fas', 'plus-circle'), admin_recover_event_path(event.code), method: :patch, class: 'fg-color-green'
+      .col= format_date event.updated_at
 

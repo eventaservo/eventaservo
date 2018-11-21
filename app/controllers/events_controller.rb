@@ -11,6 +11,7 @@ class EventsController < ApplicationController
   end
 
   def show
+    impressionist(@event, nil, unique: [:session_hash])
   end
 
   def new
