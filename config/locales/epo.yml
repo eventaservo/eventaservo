@@ -131,9 +131,9 @@ epo:
       not_an_integer: devas esti entjero
       odd: devas esti nepara
       taken: ne estas disponebla
-      too_long: estas tro longa (maksimume %{count} karekteroj)
-      too_short: estas tro mallonga (minimume %{count} karakteroj)
-      wrong_length: ne estas je ĝusta longo (devas enhavi %{count} karakterojn)
+      too_long: estas tro longa (maksimume %{count} signoj)
+      too_short: estas tro mallonga (minimume %{count} signoj)
+      wrong_length: ne estas je ĝusta longo (devas enhavi %{count} signojn)
     template:
       body: 'Kontrolu la jenajn kampojn: '
       header:
@@ -183,10 +183,10 @@ epo:
           byte:
             one: bitoko
             other: bitokoj
-          gb: Gb
-          kb: kb
-          mb: Mb
-          tb: Tb
+          gb: GB
+          kb: kB
+          mb: MB
+          tb: TB
     percentage:
       format:
         delimiter: ''
