@@ -63,7 +63,7 @@ class EventTest < ActiveSupport::TestCase
     assert event.invalid?
   end
 
-  test 'fina dato devas esti poste komenca dato' do
+  test 'fina dato devas esti post komenca dato' do
     event            = events(:one)
     event.date_start = Date.today
     event.date_end   = Date.today - 1.day
@@ -83,9 +83,9 @@ class EventTest < ActiveSupport::TestCase
     assert Event.search('brazilo').exists?(id: event.id)
   end
 
-  test 'priskribo ne povas esti pli ol 400 karakteroj' do
+  test 'priskribo ne povas esti pli ol 400 signoj' do
     new_event = events(:one)
-    new_event.description = SecureRandom.hex(201) # Pli ol 400 karakteroj
+    new_event.description = SecureRandom.hex(201) # Pli ol 400 signoj
     assert new_event.invalid?
   end
 end
