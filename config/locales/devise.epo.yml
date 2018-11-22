@@ -4,7 +4,7 @@ epo:
   devise:
     confirmations:
       confirmed: "Via retpoŝt-adreso konfirmas. Vi nun povas ensaluti."
-      send_instructions: "Vi ricevos baldaŭe retmesaĝon kun instrukcioj por konfirmi vian konton"
+      send_instructions: "Vi ricevos baldaŭ retmesaĝon kun instrukcioj por konfirmi vian konton"
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
     failure:
       already_authenticated: "You are already signed in."
@@ -18,7 +18,7 @@ epo:
       unconfirmed: "Vi bezonas konfirmi vian retpoŝt-adreson por ensaluti"
     mailer:
       confirmation_instructions:
-        subject: "Konfirma instrukcioj"
+        subject: "Konfirminstrukcioj"
       reset_password_instructions:
         subject: "Krei novan pasvorton"
       unlock_instructions:
@@ -60,8 +60,8 @@ epo:
       not_found: "ne trovita"
       not_locked: "was not locked"
       not_saved:
-        one: "1 eraro malpersis daŭrigi"
-        other: "%{count} eraroj malpersis daŭrigi"
+        one: "1 eraro malpermesis daŭrigi"
+        other: "%{count} eraroj malpermesis daŭrigi"
   activerecord:
     attributes:
       user:
