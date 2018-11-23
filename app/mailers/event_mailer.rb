@@ -38,6 +38,6 @@ class EventMailer < ApplicationMailer
   def notify_user(event_id, recipient_id)
     @recipient = NotificationList.find(recipient_id)
     @event     = Event.includes(:country).find(event_id)
-    mail(to: @recipient.email, subject: "Nova evento: #{@event.title}", content_type: :text)
+    mail(to: @recipient.email, subject: "Nova evento: #{@event.title}")
   end
 end

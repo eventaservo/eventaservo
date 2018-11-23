@@ -31,7 +31,7 @@
         - if @event.date_end > @event.date_start
           ĝis #{format_date @event.date_end}
       %p= @event.description
-      %p= markdown(@event.content)
+      %p= raw @event.content
 
       - if @event.site.present?
         %p <strong>Retpaĝo: </strong> #{link_to @event.site, @event.site, target: :_blank}

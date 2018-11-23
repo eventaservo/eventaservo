@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_21_210855) do
+ActiveRecord::Schema.define(version: 2018_11_23_121150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,9 +69,9 @@ ActiveRecord::Schema.define(version: 2018_11_21_210855) do
     t.string "site"
     t.string "email"
     t.boolean "deleted", default: false, null: false
+    t.index "md5(content)", name: "index_events_on_content"
     t.index ["address"], name: "index_events_on_address"
     t.index ["city"], name: "index_events_on_city"
-    t.index ["content"], name: "index_events_on_content"
     t.index ["date_end"], name: "index_events_on_date_end"
     t.index ["date_start"], name: "index_events_on_date_start"
     t.index ["deleted"], name: "index_events_on_deleted"

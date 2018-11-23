@@ -9,7 +9,7 @@ $(document).on "turbolinks:load", ->
     $('[data-toggle="tooltip"]').tooltip()
 
   $ ->
-    $('.select2').select2
+    $('.select2-input').select2
       theme: 'bootstrap'
     $('.js-smartPhoto').SmartPhoto()
 
@@ -20,3 +20,16 @@ $(document).on "turbolinks:load", ->
         delay (->
           $.get $('#search_form').attr('action'), $('#search_form').serialize(), null, 'script'
         ), 500
+
+    # Summernote
+    $('[data-provider="summernote"]').summernote
+      height: 300
+      toolbar: [
+        ['para', ['style']],
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['fontsize', ['fontsize']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['insert', ['link', 'table', 'hr']],
+        ['misc', ['undo', 'redo', 'codeview', 'help']]
+      ]

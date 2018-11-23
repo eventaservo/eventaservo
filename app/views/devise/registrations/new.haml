@@ -22,7 +22,7 @@
       .form-group
         = f.text_field :city, autocomplete: 'city', class: 'form-control', placeholder: 'Urbo'
       .form-group
-        = f.select(:country_id, options_from_collection_for_select(Country.all, 'id', 'name'), {}, class: 'form-control select2')
+        = f.select(:country_id, options_from_collection_for_select(Country.all, 'id', 'name'), {}, class: 'form-control select2-input')
       .form-group
         = f.password_field :password, autocomplete: 'new-password', class: 'form-control', placeholder: 'Pasvorto'
       .form-group

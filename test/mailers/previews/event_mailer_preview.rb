@@ -15,6 +15,6 @@ class EventMailerPreview < ActionMailer::Preview
   end
 
   def notify_users
-    EventMailer.notify_user(Event.where(country_id: 31).order('RANDOM()').first.id, NotificationList.order('RANDOM()').first.id)
+    EventMailer.notify_user(Event.find_by_code('6xlDaJ_nGiKJ27LD').id, NotificationList.order('RANDOM()').first.id)
   end
 end

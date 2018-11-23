@@ -23,7 +23,7 @@
 
         .form-group
           = form.label :content, 'Enhavo'
-          = form.text_area :content, rows: 8, class: 'form-control'
+          = form.text_area :content, rows: 8, class: 'form-control', 'data-provider': 'summernote'
 
         .row
           .col-lg-6
@@ -47,7 +47,7 @@
           .col-lg-6
             .form-group
               = form.label :country_id, 'Lando'
-              = form.select(:country_id, options_from_collection_for_select(Country.all, 'id', 'name', @event.country_id), {}, class: 'form-control select2')
+              = form.select(:country_id, options_from_collection_for_select(Country.all, 'id', 'name', @event.country_id), {}, class: 'form-control select2-input')
 
         .row
           .col-lg-6

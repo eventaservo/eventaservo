@@ -20,5 +20,7 @@ module Eventaservo
     config.exceptions_app = self.routes
 
     config.active_job.queue_adapter = :delayed_job
+
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
   end
 end

@@ -56,6 +56,7 @@ gem 'delayed_job_active_record'
 
 gem 'hirb'
 gem 'impressionist'
+gem 'premailer-rails'
 gem 'redcarpet'
 gem 'sentry-raven'
 gem 'sitemap_generator'

@@ -7,7 +7,7 @@
 \
 = @event.description
 \
-= @event.content
+= ActionView::Base.full_sanitizer.sanitize(@event.content)
 \
 Kreinto: #{@event.user.name}
 \
