@@ -1,9 +1,0 @@
-- if @event.attachments.present? && @event.attachments.images.present?
-  .text-divider Fotoj
-  #lightgallery.fotoj-container.d-flex.justify-content-center.flex-wrap.align-content-around
-    - @event.attachments.images.each do |image_file|
-      .foto.flex-fill.m-1
-        = link_to (image_tag image_file.file.thumb.url, class: 'img-thumbnail'), image_file.file.url, class: 'js-smartPhoto', data: { group: @event.code }
-        - if user_is_owner_or_admin(@event)
-          %p= link_to icon('far', 'trash-alt', 'Forigi'), attachment_destroy_path(image_file), method: :delete,
-            data: { confirm: 'Ĉu vi certas?' }, class: 'btn btn-sm btn-outline-link'

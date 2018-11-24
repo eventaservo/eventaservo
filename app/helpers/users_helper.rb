@@ -7,8 +7,8 @@ module UsersHelper
   end
 
   def display_user_image(user)
-    image = if user.avatar.try(:url)
-              user.avatar.try(:url)
+    image = if user.picture.attached?
+              url_for(user.picture)
             elsif user.image?
               user.image
             else

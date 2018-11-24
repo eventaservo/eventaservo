@@ -1,27 +1,8 @@
 - content_for :title do
   = @event.title
-
-- content_for :fb_meta do
-  -# Facebook OpenGraph informoj
-  %meta{content: request.original_url, property: 'og:url'}
-  %meta{content: 'article', property: 'og:type'}
-  %meta{content: @event.title, property: 'og:title'}
-  %meta{content: "#{format_date(@event.date_start)} (#{@event.city} - #{@event.country.name}) | #{@event.description}", property: 'og:description'}
-  - if @event.attachments.present? && @event.attachments.images.present?
-    - @event.attachments.images.each do |image_file|
-      %meta{content: ActionDispatch::Http::URL.url_for(ActionMailer::Base.default_url_options) + image_file.file.url, property: 'og:image'}
-      %meta{content: ActionDispatch::Http::URL.url_for(ActionMailer::Base.default_url_options) + image_file.file.url, property: 'og:image:secure_url'}
-      %meta{content: image_file.content_type, property: 'og:image:type' }
-      %meta{content: image_file.width, property: 'og:image:width' }
-      %meta{content: image_file.height, property: 'og:image:height' }
-  - else
-    %meta{content: image_url('eventa_servo_logo.png'), property: 'og:image'}
-    %meta{content: image_url('eventa_servo_logo.png'), property: 'og:image:secure_url'}
-    %meta{content: 'Eventa Servo', property: 'og:image:alt'}
-    %meta{content: '600', property: 'og:image:height'}
-    %meta{content: '600', property: 'og:image:width'}
-
+= render partial: 'fb_meta'
 = render partial: 'layouts/breadcrumb'
+
 .row
   .col-lg-8
     .box-white
@@ -38,8 +19,7 @@
       - if @event.email.present?
         %p <strong>Kontakto: </strong> #{mail_to @event.email, @event.email, subject: "Informoj pri la evento #{@event.title}" }
 
-      = render partial: 'fotoj'
-      = render partial: 'dokumentoj'
+      = render partial: 'uploads'
       - if user_signed_in? && (current_user.is_owner_of(@event) || current_user.admin?)
         .buttons-footer
           = link_to 'Redakti eventon', edit_event_path(@event.code), class: 'btn btn-sm btn-outline-primary'

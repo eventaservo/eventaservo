@@ -4,6 +4,8 @@
 class Event < ApplicationRecord
   is_impressionable # Por kalkuli la paĝvizitojn
 
+  has_many_attached :uploads
+
   include Code
 
   belongs_to :user

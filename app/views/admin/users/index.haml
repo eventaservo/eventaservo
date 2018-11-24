@@ -9,7 +9,7 @@
   - @users.each do |user|
     = link_to admin_user_path(user), class: 'item-row' do
       .col
-        = user.name
+        = display_user(user)
         = icon('fab', 'facebook') if user.provider == 'facebook'
       .col= user.email
       .col

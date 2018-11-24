@@ -43,7 +43,7 @@ class EventsController < ApplicationController
       EventMailer.send_event_to_admin(@event.id, update: true).deliver_later
       redirect_to event_path(@event.code), notice: 'Evento sukcese ĝisdatigita'
     else
-      render :edit
+      redirect_to event_path(@event.code), flash: { warning: 'Evento malsukcese ĝisdatigita' }
     end
   end
 
@@ -52,6 +52,12 @@ class EventsController < ApplicationController
 
     @event.delete! # Ne forviŝas la eventon el la datumbaso nun. Ĝi estos forviŝita post kelkaj tagoj
     redirect_to root_url, flash: { error: 'Evento sukcese forigita' }
+  end
+
+  def delete_file
+    event = Event.find_by(code: params[:event_code])
+    event.uploads.find(params[:file_id]).purge_later
+    redirect_to event_path(event.code), flash: { success: 'Dosiero sukcese forigita' }
   end
 
   def by_country
@@ -81,8 +87,7 @@ class EventsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def event_params
     params.require(:event).permit(:title, :description, :content, :site, :email, :date_start, :date_end,
-                                  :address, :city, :country_id,
-                                  { attachments: [] })
+                                  :address, :city, :country_id, uploads: [])
   end
 
   # Nur la permesataj uzantoj povas redakti, ĝisdatiĝi kaj foriĝi la eventon

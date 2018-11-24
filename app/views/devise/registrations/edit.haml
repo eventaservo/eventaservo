@@ -24,7 +24,7 @@
         = f.label :avatar
         %br
         = display_user_image(@user)
-        = f.file_field :avatar, class: 'form-control-file'
+        = f.file_field :picture, class: 'form-control-file', accept: 'image/*'
 
       .buttons-footer
         = link_to 'Nuligi', root_path, class: 'button-cancel'
