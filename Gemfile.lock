@@ -1,9 +1,8 @@
 GIT
-  remote: https://github.com/decabeza/social-share-button
-  revision: f1b1275d6ea99a6f9845eab153c58467454b2ae4
-  branch: social-share-button-whatsapp
+  remote: https://github.com/shayani/social-share-button
+  revision: 6f34d6e1649f1fb4fa7297adac9a734bc8702b01
   specs:
-    social-share-button (1.1.0)
+    social-share-button (1.1.1)
       coffee-rails
 
 GEM

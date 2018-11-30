@@ -30,7 +30,7 @@ gem 'carrierwave', '~> 1.0'
 gem 'devise', '~> 4.2'
 gem 'omniauth-facebook'
 gem 'pg', '~> 1.1', '>= 1.1.3'
-gem 'social-share-button', git: 'https://github.com/decabeza/social-share-button', branch: 'social-share-button-whatsapp'
+gem 'social-share-button', git: 'https://github.com/shayani/social-share-button'
 gem 'mini_magick'
 # gem 'rmagick'
 

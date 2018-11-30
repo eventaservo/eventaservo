@@ -36,3 +36,14 @@
 @import "partials/profile";
 @import "partials/toolbar";
 @import "partials/typography";
+
+
+// Social Share Buttons icon size
+$size : 28px;
+.social-share-button {
+  .ssb-icon {
+    background-size : $size $size;
+    height          : $size;
+    width           : $size;
+  }
+}
