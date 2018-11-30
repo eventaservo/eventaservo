@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/decabeza/social-share-button
+  revision: f1b1275d6ea99a6f9845eab153c58467454b2ae4
+  branch: social-share-button-whatsapp
+  specs:
+    social-share-button (1.1.0)
+      coffee-rails
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -379,6 +387,7 @@ DEPENDENCIES
   sentry-raven
   simplecov
   sitemap_generator
+  social-share-button!
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3

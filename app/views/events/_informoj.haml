@@ -11,7 +11,8 @@
       = event_participant_button(@event)
       %span.d-inline-block{'data-toggle': 'tooltip', tabindex: '0', title: 'Vizitoj'}
         %button.btn.btn-sm.btn-link{disabled: 'disabled'}=  icon('far', 'eye', @event.impressionist_count)
-      = link_to 'Diskonigi', "https://www.facebook.com/sharer/sharer.php?u=#{event_url(@event.code)}", class: 'facebook-button float-right', target: :_blank
+    .text-center
+      = social_share_button_tag("#{@event.title} | #{@event.description}", desc: "#{@event.title} | #{@event.description}")
 
     %p
     .text-divider Kreinto
