@@ -88,4 +88,22 @@ class EventTest < ActiveSupport::TestCase
     new_event.description = SecureRandom.hex(201) # Pli ol 400 signoj
     assert new_event.invalid?
   end
+
+  test 'titolo devas estive Titleize-ita' do
+    title = "GRANDA TITOLO"
+    @event.update_attribute(:title, title)
+    assert_equal title.titleize, @event.title
+  end
+
+  test 'retejo devas enhavi http se ankoraŭ ne havas ĝin' do
+    site = 'google.com'
+    @event.update_attribute(:site, site)
+    assert_equal "http://#{site}", @event.site
+  end
+
+  test 'ne aldonu http se retejo jam havas ĝin' do
+    site = 'https://google.com'
+    @event.update_attribute(:site, site)
+    assert_equal site, @event.site
+  end
 end

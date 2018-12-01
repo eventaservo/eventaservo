@@ -17,6 +17,7 @@ class Event < ApplicationRecord
   validates_presence_of :title, :description, :city, :country_id, :date_start, :date_end, :code
   validates_uniqueness_of :code
   validate :end_after_start
+  before_save :format_event_data
 
   default_scope { where(deleted: false) }
   scope :deleted, -> { unscoped.where(deleted: true) }
@@ -66,8 +67,12 @@ class Event < ApplicationRecord
 
   def end_after_start
     return if date_start.blank? || date_end.blank?
-    if date_end < date_start
-      errors.add(:date_end, 'ne povas okazi antaŭ la komenca dato')
-    end
+    errors.add(:date_end, 'ne povas okazi antaŭ la komenca dato') if date_end < date_start
+  end
+
+  # Formatas la eventon laŭ normala formato
+  def format_event_data
+    self.title = title.titleize
+    self.site = "http://#{site}" unless site[%r{\Ahttp:\/\/}] || site[%r{\Ahttps:\/\/}]
   end
 end
