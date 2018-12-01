@@ -1,4 +1,5 @@
 [![Kontaktu nin en Telegramo https://t.me/fernandoshayani](https://img.shields.io/badge/babili%20en-Telegramo-179CDE.svg)](https://t.me/fernandoshayani)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/930483e8d7de4ac496709f396d7c8a10)](https://www.codacy.com/app/shayani/eventaservo?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=shayani/eventaservo&amp;utm_campaign=Badge_Grade)
 
 Eventa Servo
 ===
