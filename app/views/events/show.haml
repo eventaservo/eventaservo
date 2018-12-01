@@ -6,7 +6,9 @@
 .row
   .col-lg-8
     .box-white
-      .lead= @event.title
+      .lead
+        = flag_icon(:br)
+        = @event.title
       %p.text-right.small
         = format_date @event.date_start
         - if @event.date_end > @event.date_start

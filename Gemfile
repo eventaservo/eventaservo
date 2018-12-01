@@ -30,10 +30,12 @@ gem 'carrierwave', '~> 1.0'
 gem 'devise', '~> 4.2'
 gem 'omniauth-facebook'
 gem 'pg', '~> 1.1', '>= 1.1.3'
-gem 'social-share-button', git: 'https://github.com/shayani/social-share-button'
 gem 'mini_magick'
 # gem 'rmagick'
 
+# CSS kaj fasonado
+gem 'flag-icons-rails'
+gem 'social-share-button', git: 'https://github.com/shayani/social-share-button'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
@@ -97,6 +99,3 @@ group :test do
   gem 'chromedriver-helper'
   gem 'simplecov'
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

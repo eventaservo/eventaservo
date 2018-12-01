@@ -22,4 +22,10 @@ module EventsHelper
       render partial: 'events/events_as_list', locals: { events: @events }
     end
   end
+
+  def event_flag(event)
+    return unless event.country.code
+
+    flag_icon(event.country.code)
+  end
 end

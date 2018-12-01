@@ -33,7 +33,7 @@ class Event < ApplicationRecord
   end
 
   def self.count_by_country
-    joins(:country).select('countries.name', 'count(events.id)').group('countries.name').order('countries.name')
+    joins(:country).select('countries.name', 'countries.code', 'count(events.id)').group('countries.name, countries.code').order('countries.name')
   end
 
   def self.count_by_cities

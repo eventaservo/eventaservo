@@ -1,8 +1,7 @@
 .card.mb-3
-  -#= image_tag('default_event.png', height: '150', alt: "Card image cap", class: 'card-img-top')
-
   .card-body
-    %h5.card-title.text-center
+    %h5.card-title
+      = event_flag(event)
       = link_to event.title, event_path(event.code)
     .card-text.text-muted
       %p
