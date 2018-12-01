@@ -111,6 +111,8 @@ GEM
     chromedriver-helper (2.1.0)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
+    codacy-coverage (2.1.0)
+      simplecov
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -360,6 +362,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   carrierwave (~> 1.0)
   chromedriver-helper
+  codacy-coverage
   coffee-rails (~> 4.2)
   daemons
   delayed_job_active_record

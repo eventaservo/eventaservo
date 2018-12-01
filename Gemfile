@@ -90,6 +90,7 @@ group :development do
 end
 
 group :test do
+  gem 'codacy-coverage', :require => false # Codacy.com coverage
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
   # Adds support for Capybara system testing and selenium driver
