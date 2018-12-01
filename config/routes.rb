@@ -2,10 +2,10 @@
 
 Rails.application.routes.draw do
   # Dynamic error pages
-  get "/404", to: "errors#not_found"
-  get "/422", to: "errors#unacceptable"
-  get "/500", to: "errors#internal_error"
-  get "/privateco", to: 'home#privateco'
+  get '/404', to: 'errors#not_found'
+  get '/422', to: 'errors#unacceptable'
+  get '/500', to: 'errors#internal_error'
+  get '/privateco', to: 'home#privateco'
   get '/license', to: 'home#privateco'
   get '/vidmaniero/:view_style', to: 'home#view_style', as: 'view_style'
   get '/prie', to: 'home#prie'
@@ -18,6 +18,7 @@ Rails.application.routes.draw do
                                     registrations:      'users/registrations',
                                     omniauth_callbacks: 'users/omniauth_callbacks' }
 
+  # Eventoj
   resources :events, path: 'eventoj', param: 'code' do
     get 'like', to: 'likes#event', as: 'toggle_like'
     get 'participate', to: 'participants#event', as: 'toggle_participant'
@@ -25,7 +26,7 @@ Rails.application.routes.draw do
     delete 'delete_file/:file_id', to: 'events#delete_file', as: 'delete_file'
   end
 
-
+  # Admin
   namespace :admin do
     resources :users, only: %i[index show]
     get 'sciiga_listo', controller: 'notifications', action: :index, as: 'notification_list'
