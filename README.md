@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1d35ff065fb6464baa3a20a74cfd1921)](https://app.codacy.com/app/shayani/eventaservo?utm_source=github.com&utm_medium=referral&utm_content=shayani/eventaservo&utm_campaign=Badge_Grade_Settings)
 [![Kontaktu nin en Telegramo https://t.me/fernandoshayani](https://img.shields.io/badge/babili%20en-Telegramo-179CDE.svg)](https://t.me/fernandoshayani)
 
 Eventa Servo
