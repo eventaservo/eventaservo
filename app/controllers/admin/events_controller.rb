@@ -14,7 +14,7 @@ module Admin
     end
 
     def recover
-      event = Event.deleted.find_by_code(params[:event_code])
+      event = Event.deleted.find_by(code: params[:event_code])
       event.undelete!
       redirect_to event_path(event.code), flash: { success: 'Evento sukcesi restaŭrata' }
     end

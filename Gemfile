@@ -82,7 +82,8 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'bullet'
-  gem 'meta_request' # RailsPanel Chrome Extension
+  # RailsPanel Chrome Extension
+  gem 'meta_request'
 
   gem 'capistrano', '~> 3.10', require: false
   gem 'capistrano-bundler', require: false
@@ -92,7 +93,8 @@ group :development do
 end
 
 group :test do
-  gem 'codacy-coverage', require: false # Codacy.com coverage
+  # Codacy.com coverage
+  gem 'codacy-coverage', require: false
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
   # Adds support for Capybara system testing and selenium driver

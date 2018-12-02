@@ -5,6 +5,6 @@ class NotificationList < ApplicationRecord
 
   belongs_to :country, inverse_of: :recipients
 
-  validates_presence_of :code, :email, :country_id
-  validates_uniqueness_of :email, scope: :country_id
+  validates :code, :email, :country_id, presence: true
+  validates :email, uniqueness: { scope: :country_id }
 end

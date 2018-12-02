@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def page_title(title, subtext = nil)
     content_tag(:h2, raw("#{title} <small>#{subtext}</small>"), class: 'text-center')
@@ -20,8 +22,9 @@ module ApplicationHelper
 
   def error_handling(record)
     return unless record.errors.any?
+
     return_html = "<div class='error-handling'>"
-    return_html += "<h4>Erros foram encontrados neste formulário</h4>"
+    return_html += '<h4>Erros foram encontrados neste formulário</h4>'
     return_html += '<ul>'
 
     record.errors.full_messages.each do |msg|
@@ -34,7 +37,7 @@ module ApplicationHelper
   end
 
   def format_date(date)
-    l(date, format: "%e-a de %B %Y")
+    l(date, format: '%e-a de %B %Y')
   end
 
   # Elektas la eventkoloron
@@ -46,11 +49,9 @@ module ApplicationHelper
     end
   end
 
-
   def markdown(text)
     options = { hard_wrap: true, filter_html: true, autolink: true }
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::XHTML, options)
     raw markdown.render(text)
   end
-
 end

@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 class LikesController < ApplicationController
-
   def event
-    event = Event.find_by_code(params[:event_code])
+    event = Event.find_by(code: params[:event_code])
 
-    like = event.likes.find_by_user_id(current_user.id)
+    like = event.likes.find_by(user_id: current_user.id)
     if like
       like.destroy
     else

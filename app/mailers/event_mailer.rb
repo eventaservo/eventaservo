@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EventMailer < ApplicationMailer
   add_template_helper ApplicationHelper
   require 'redcarpet/render_strip'
@@ -8,19 +10,23 @@ class EventMailer < ApplicationMailer
 
     addresses = @event.followers.joins(:user).select('users.name, users.email').pluck(:email)
 
-    mail(to:       'kontakto@eventaservo.org',
-         bcc:      addresses,
-         subject:  "Evento \"#{@event.title}\" ŝanĝita",
-         reply_to: @event.user.email,
-         content_type: :text)
+    mail(
+      to: 'kontakto@eventaservo.org',
+      bcc: addresses,
+      subject: "Evento \"#{@event.title}\" ŝanĝita",
+      reply_to: @event.user.email,
+      content_type: :text
+    )
   end
 
   def send_event_to_admin(event_id, update: false)
     @event = Event.find(event_id)
     event_action = update ? 'Ĝistadigita' : 'Nova'
-    mail(to:      'kontakto@eventaservo.org',
-         subject: "#{event_action} evento: #{@event.title}",
-         content_type: :text)
+    mail(
+      to: 'kontakto@eventaservo.org',
+      subject: "#{event_action} evento: #{@event.title}",
+      content_type: :text
+    )
   end
 
   def self.send_notification_to_users(event_id:)

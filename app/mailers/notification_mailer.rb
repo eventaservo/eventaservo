@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NotificationMailer < ApplicationMailer
   add_template_helper ApplicationHelper
 
@@ -5,8 +7,10 @@ class NotificationMailer < ApplicationMailer
     @recipient = NotificationList.find(recipient_id)
     @country   = Country.find(@recipient.country_id)
 
-    mail(to:           @recipient.email,
-         subject:      "Informoj pri novaj eventoj en #{@country.name}",
-         content_type: :text)
+    mail(
+      to: @recipient.email,
+      subject: "Informoj pri novaj eventoj en #{@country.name}",
+      content_type: :text
+    )
   end
 end

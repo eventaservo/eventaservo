@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -15,9 +17,8 @@ class User < ApplicationRecord
   has_many :participants, dependent: :destroy
   belongs_to :country, inverse_of: :users
 
-  validates_presence_of :name
-  validates_uniqueness_of :username
-
+  validates :name, presence: true
+  validates :username, uniqueness: true
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -36,19 +37,20 @@ class User < ApplicationRecord
   end
 
   def liked?(record)
-    !record.likes.find_by_user_id(self).nil?
+    !record.likes.find_by(user_id: self).nil?
   end
 
   def participant?(record)
-    !record.participants.find_by_user_id(self).nil?
+    !record.participants.find_by(user_id: self).nil?
   end
 
   def follower?(record)
-    !record.followers.find_by_user_id(self).nil?
+    !record.followers.find_by(user_id: self).nil?
   end
 
   def generate_username(random: false)
     return false if username.present?
+
     username = ActiveSupport::Inflector.transliterate(name).tr(' ', '_').tr('.', '_').downcase
     username += SecureRandom.rand(100).to_s if random
 

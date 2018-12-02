@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class CountryTest < ActiveSupport::TestCase
-
   test 'devas fiaski se ne havas land-nomo' do
     country = Country.new
     assert_not country.valid?
@@ -14,7 +15,7 @@ class CountryTest < ActiveSupport::TestCase
 
   test 'fiaskas se lando jam ekzistas' do
     landnomo = 'Prov-lando'
-    Country.create(name: landnomo)
+    Country.create!(name: landnomo)
     new_country = Country.new(name: landnomo)
     assert_not new_country.valid?
   end
@@ -26,7 +27,7 @@ class CountryTest < ActiveSupport::TestCase
     country = countries(:one)
     recipient.update_attribute(:country_id, country.id)
 
-    assert country.recipients.find_by_id(recipient.id).present?
+    assert country.recipients.find_by(id: recipient.id).present?
   end
 
   test 'lando havas uzantoj' do
@@ -36,7 +37,6 @@ class CountryTest < ActiveSupport::TestCase
     country = countries(:one)
     user.update_attribute(:country_id, country.id)
 
-    assert country.users.find_by_id(user.id).present?
+    assert country.users.find_by(id: user.id).present?
   end
-
 end

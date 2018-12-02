@@ -40,28 +40,28 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  # If you have extra params to permit, append them to the sanitizer.
-  def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :city, :country_id])
-  end
+    # If you have extra params to permit, append them to the sanitizer.
+    def configure_sign_up_params
+      devise_parameter_sanitizer.permit(:sign_up, keys: %i[name city country_id])
+    end
 
-  # If you have extra params to permit, append them to the sanitizer.
-  def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :picture, :city, :country_id])
-  end
+    # If you have extra params to permit, append them to the sanitizer.
+    def configure_account_update_params
+      devise_parameter_sanitizer.permit(:account_update, keys: %i[name picture city country_id])
+    end
 
-  # The path used after sign up.
-  def after_sign_up_path_for(resource)
-    super(resource)
-  end
+    # The path used after sign up.
+    def after_sign_up_path_for(resource)
+      super(resource)
+    end
 
-  # The path used after sign up for inactive accounts.
-  def after_inactive_sign_up_path_for(resource)
-    super(resource)
-  end
+    # The path used after sign up for inactive accounts.
+    def after_inactive_sign_up_path_for(resource)
+      super(resource)
+    end
 
-  # Ĝi estas necesa por ke la uzanto povas ŝanĝi viajn informojn senpasvorte.
-  def update_resource(resource, params)
-    resource.update_without_password(params)
-  end
+    # Ĝi estas necesa por ke la uzanto povas ŝanĝi viajn informojn senpasvorte.
+    def update_resource(resource, params)
+      resource.update_without_password(params)
+    end
 end

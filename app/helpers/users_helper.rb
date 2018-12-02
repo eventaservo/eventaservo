@@ -9,13 +9,14 @@ module UsersHelper
   end
 
   def display_user_image(user)
-    image = if user.picture.attached?
-              url_for(user.picture.variant(resize: '42x42'))
-            elsif user.image?
-              user.image
-            else
-              'nekonata.jpg'
-            end
+    image =
+      if user.picture.attached?
+        url_for(user.picture.variant(resize: '42x42'))
+      elsif user.image?
+        user.image
+      else
+        'nekonata.jpg'
+      end
     image_tag image, size: 40, class: 'profile-picture' if image
   end
 end

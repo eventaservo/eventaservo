@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class ApplicationHelperTest < ActionView::TestCase
-  test "skribu la daton plene" do
-    date = Date.new(1978,7,17)
-    assert_equal "17-a de Julio 1978", format_date(date)
+  test 'skribu la daton plene' do
+    date = Date.new(1978, 7, 17)
+    assert_equal '17-a de Julio 1978', format_date(date)
   end
 
   test 'colorigas la eventojn pasintajn grizaj' do
@@ -19,7 +21,7 @@ class ApplicationHelperTest < ActionView::TestCase
   end
 
   test 'paĝ-titolo' do
-    assert_equal "<h2 class=\"text-center\">Titolo <small>sub-titolo</small></h2>", page_title('Titolo','sub-titolo')
+    assert_equal '<h2 class="text-center">Titolo <small>sub-titolo</small></h2>', page_title('Titolo', 'sub-titolo')
   end
 
   test 'flash classes' do

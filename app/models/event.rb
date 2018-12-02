@@ -13,8 +13,8 @@ class Event < ApplicationRecord
   has_many :participants, dependent: :destroy
   has_many :likes, as: :likeable, dependent: :destroy
 
-  validates_presence_of :title, :description, :city, :country_id, :date_start, :date_end, :code
-  validates_uniqueness_of :code
+  validates :title, :description, :city, :country_id, :date_start, :date_end, :code, presence: true
+  validates :code, uniqueness: true
   validate :end_after_start
   before_save :format_event_data
 
@@ -26,7 +26,7 @@ class Event < ApplicationRecord
   scope :by_country_name, ->(name) { joins(:country).where(countries: { name: name }) }
   scope :by_city, ->(city) { where(city: city) }
   scope :by_user, ->(user) { where(user: user) }
-  scope :by_username, ->(username) { joins(:user).where(users: { username: username}) }
+  scope :by_username, ->(username) { joins(:user).where(users: { username: username }) }
 
   def self.grouped_by_months
     order(:date_start).group_by { |m| m.date_start.beginning_of_month }
@@ -51,7 +51,7 @@ class Event < ApplicationRecord
   end
 
   def self.search(search)
-    all unless search.present?
+    all if search.blank?
 
     joins(:country)
       .where('unaccent(events.title) ilike unaccent(:search) OR
@@ -64,24 +64,24 @@ class Event < ApplicationRecord
 
   private
 
-  def end_after_start
-    return if date_start.blank? || date_end.blank?
+    def end_after_start
+      return if date_start.blank? || date_end.blank?
 
-    errors.add(:date_end, 'ne povas okazi antaŭ la komenca dato') if date_end < date_start
-  end
-
-  # Formatas la eventon laŭ normala formato
-  def format_event_data
-    self.title = fix_title(title)
-    self.city = city.tr('/', '')
-    self.site = "http://#{site}" unless site[%r{\Ahttp:\/\/}] || site[%r{\Ahttps:\/\/}]
-  end
-
-  def fix_title(title)
-    if [title.downcase, title.upcase].include?(title)
-      title.titleize
-    else
-      title
+      errors.add(:date_end, 'ne povas okazi antaŭ la komenca dato') if date_end < date_start
     end
-  end
+
+    # Formatas la eventon laŭ normala formato
+    def format_event_data
+      self.title = fix_title(title)
+      self.city = city.tr('/', '')
+      self.site = "http://#{site}" unless site[%r{\Ahttp:\/\/}] || site[%r{\Ahttps:\/\/}]
+    end
+
+    def fix_title(title)
+      if [title.downcase, title.upcase].include?(title)
+        title.titleize
+      else
+        title
+      end
+    end
 end

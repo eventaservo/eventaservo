@@ -1,14 +1,18 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   def setup
     country = countries(:one)
-    @user   = User.new(name:       'Prov-uzanto',
-                       email:      'provo123@uzanto.org',
-                       password:   '123456',
-                       city:       'Mia urbo',
-                       country_id: country.id,
-                       admin:      false)
+    @user   = User.new(
+      name: 'Prov-uzanto',
+      email: 'provo123@uzanto.org',
+      password: '123456',
+      city: 'Mia urbo',
+      country_id: country.id,
+      admin: false
+    )
   end
 
   test 'uzanto validas' do
@@ -35,5 +39,4 @@ class UserTest < ActiveSupport::TestCase
     @user.email = existing_user.email
     assert @user.invalid?
   end
-
 end

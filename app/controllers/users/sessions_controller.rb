@@ -10,7 +10,7 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
-    params[:user].merge!(remember_me: 1) # Ĉiam memoras la uzanton
+    params[:user][:remember_me] = 1 # Ĉiam memoras la uzanton
     super
   end
 

@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 class ParticipantsController < ApplicationController
-
   def event
-    event = Event.find_by_code(params[:event_code])
+    event = Event.find_by(code: params[:event_code])
 
-    participant = event.participants.find_by_user_id(current_user.id)
+    participant = event.participants.find_by(user_id: current_user.id)
     if participant
       participant.destroy
     else

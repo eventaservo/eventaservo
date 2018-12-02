@@ -48,9 +48,10 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    redirect_to event_path(@event.code), flash: { error: 'Vi ne estas la kreinto, do vi ne rajtas forigi ĝin' } and return unless current_user.is_owner_of(@event) || current_user.admin?
+    redirect_to(event_path(@event.code), flash: { error: 'Vi ne estas la kreinto, do vi ne rajtas forigi ĝin' }) && return unless current_user.is_owner_of(@event) || current_user.admin?
 
-    @event.delete! # Ne forviŝas la eventon el la datumbaso nun. Ĝi estos forviŝita post kelkaj tagoj
+    # Ne forviŝas la eventon el la datumbaso nun. Ĝi estos forviŝita post kelkaj tagoj
+    @event.delete!
     redirect_to root_url, flash: { error: 'Evento sukcese forigita' }
   end
 
@@ -62,11 +63,12 @@ class EventsController < ApplicationController
 
   def by_country
     @country = Country.find_by(name: params[:country_name])
-    redirect_to root_path, flash: { error: 'Lando ne ekzistas en la datumbazo' } and return if @country.nil?
+    redirect_to(root_path, flash: { error: 'Lando ne ekzistas en la datumbazo' }) && return if @country.nil?
     @events = Event.includes(:country).by_country_id(@country.id).venontaj.grouped_by_months
     @cities = Event.by_country_id(@country.id).venontaj.count_by_cities
   end
 
+  # Listigas la eventoj laŭ urboj
   def by_city
     @country = Country.find_by(name: params[:country_name])
     @events = Event.by_city(params[:city_name]).venontaj.grouped_by_months
@@ -78,22 +80,24 @@ class EventsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_event
-    @event = Event.find_by(code: params[:code])
-    redirect_to root_path, flash: { error: 'Evento ne ekzistas' } if @event.nil?
-  end
-
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def event_params
-    params.require(:event).permit(:title, :description, :content, :site, :email, :date_start, :date_end,
-                                  :address, :city, :country_id, uploads: [])
-  end
-
-  # Nur la permesataj uzantoj povas redakti, ĝisdatiĝi kaj foriĝi la eventon
-  def authorize_user
-    unless current_user.is_owner_of(@event) || current_user.admin?
-      redirect_to root_url, flash: { error: 'Vi ne rajtas'}
+    # Use callbacks to share common setup or constraints between actions.
+    def set_event
+      @event = Event.find_by(code: params[:code])
+      redirect_to root_path, flash: { error: 'Evento ne ekzistas' } if @event.nil?
     end
-  end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def event_params
+      params.require(:event).permit(
+        :title, :description, :content, :site, :email, :date_start, :date_end,
+        :address, :city, :country_id, uploads: []
+      )
+    end
+
+    # Nur la permesataj uzantoj povas redakti, ĝisdatiĝi kaj foriĝi la eventon
+    def authorize_user
+      unless current_user.is_owner_of(@event) || current_user.admin?
+        redirect_to root_url, flash: { error: 'Vi ne rajtas' }
+      end
+    end
 end

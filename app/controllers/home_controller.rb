@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HomeController < ApplicationController
   def index
     session[:event_list_style] ||= 'kalendaro' # Normala vidmaniero

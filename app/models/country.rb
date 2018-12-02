@@ -1,10 +1,11 @@
-class Country < ApplicationRecord
+# frozen_string_literal: true
 
+class Country < ApplicationRecord
   has_many :users, inverse_of: :country
   has_many :recipients, class_name: 'NotificationList'
 
-  validates_presence_of :name
-  validates_uniqueness_of :name
+  validates :name, presence: true
+  validates :name, uniqueness: true
 
   default_scope { order(:name) }
 end

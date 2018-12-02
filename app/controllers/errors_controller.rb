@@ -1,5 +1,6 @@
-class ErrorsController < ApplicationController
+# frozen_string_literal: true
 
+class ErrorsController < ApplicationController
   def not_found
     render status: 404
   end
@@ -11,5 +12,4 @@ class ErrorsController < ApplicationController
   def internal_error
     render status: 500
   end
-
 end

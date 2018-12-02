@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class EventTest < ActiveSupport::TestCase
@@ -34,31 +36,31 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test 'urbo necesas' do
-    event       = events(:one)
+    event = events(:one)
     event.city = nil
     assert event.invalid?
   end
 
   test 'lando necesas' do
-    event       = events(:one)
+    event = events(:one)
     event.country_id = nil
     assert event.invalid?
   end
 
   test 'komenca dato necesas' do
-    event       = events(:one)
+    event = events(:one)
     event.date_start = nil
     assert event.invalid?
   end
 
   test 'fina dato necesas' do
-    event       = events(:one)
+    event = events(:one)
     event.date_end = nil
     assert event.invalid?
   end
 
   test 'kodo necesas' do
-    event       = events(:one)
+    event = events(:one)
     event.code = nil
     assert event.invalid?
   end
