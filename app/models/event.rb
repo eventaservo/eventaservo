@@ -72,7 +72,15 @@ class Event < ApplicationRecord
 
   # Formatas la eventon laŭ normala formato
   def format_event_data
-    self.title = title.titleize
+    self.title = fix_title(title)
     self.site = "http://#{site}" unless site[%r{\Ahttp:\/\/}] || site[%r{\Ahttps:\/\/}]
+  end
+
+  def fix_title(title)
+    if title == title.downcase || title == title.upcase
+      title.titleize
+    else
+      title
+    end
   end
 end

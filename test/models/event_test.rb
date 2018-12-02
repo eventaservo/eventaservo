@@ -89,10 +89,15 @@ class EventTest < ActiveSupport::TestCase
     assert new_event.invalid?
   end
 
-  test 'titolo devas estive Titleize-ita' do
-    title = "GRANDA TITOLO"
-    @event.update_attribute(:title, title)
-    assert_equal title.titleize, @event.title
+  test 'korektas la titolan skribmanieron' do
+    @event.update_attribute(:title, 'GRANDA TITOLO')
+    assert_equal 'Granda Titolo', @event.title
+
+    @event.update_attribute(:title, 'malgranda titolo')
+    assert_equal 'Malgranda Titolo', @event.title
+
+    @event.update_attribute(:title, 'BONA Skribita Titolo')
+    assert_equal 'BONA Skribita Titolo', @event.title
   end
 
   test 'retejo devas enhavi http se ankoraŭ ne havas ĝin' do
