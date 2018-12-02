@@ -1,8 +1,14 @@
+AllCops:
+  EnabledByDefault: true
+
 Style/EmptyMethod:
   EnforcedStyle: expanded
+
 Style/AsciiComments:
   Enabled: false
+
 Metrics/LineLength:
   Max: 120
+
 Layout/IndentationConsistency:
   EnforcedStyle: rails

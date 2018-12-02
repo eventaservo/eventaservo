@@ -66,6 +66,7 @@ class Event < ApplicationRecord
 
   def end_after_start
     return if date_start.blank? || date_end.blank?
+
     errors.add(:date_end, 'ne povas okazi antaŭ la komenca dato') if date_end < date_start
   end
 
@@ -77,7 +78,7 @@ class Event < ApplicationRecord
   end
 
   def fix_title(title)
-    if title == title.downcase || title == title.upcase
+    if [title.downcase, title.upcase].include?(title)
       title.titleize
     else
       title
