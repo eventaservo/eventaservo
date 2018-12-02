@@ -41,3 +41,5 @@ config/deploy
 
 public/sitemap.xml.gz
 coverage/
+brakeman.html
+codacy_test.sh
