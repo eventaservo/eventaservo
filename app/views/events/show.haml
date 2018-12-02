@@ -7,7 +7,7 @@
   .col-lg-8
     .box-white
       .lead
-        = flag_icon(:br)
+        = event_flag(@event)
         = @event.title
       %p.text-right.small
         = format_date @event.date_start
