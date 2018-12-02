@@ -11,7 +11,6 @@ class Event < ApplicationRecord
   belongs_to :user
   belongs_to :country
   has_many :participants, dependent: :destroy
-  has_many :attachments, as: :attachable, dependent: :destroy
   has_many :likes, as: :likeable, dependent: :destroy
 
   validates_presence_of :title, :description, :city, :country_id, :date_start, :date_end, :code
@@ -73,6 +72,7 @@ class Event < ApplicationRecord
   # Formatas la eventon laŭ normala formato
   def format_event_data
     self.title = fix_title(title)
+    self.city = city.tr('/', '')
     self.site = "http://#{site}" unless site[%r{\Ahttp:\/\/}] || site[%r{\Ahttps:\/\/}]
   end
 

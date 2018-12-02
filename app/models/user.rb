@@ -6,7 +6,6 @@ class User < ApplicationRecord
          :confirmable, :lockable, :timeoutable, :trackable,
          :omniauthable, omniauth_providers: %i[facebook]
 
-  mount_uploader :avatar, AvatarUploader
   has_one_attached :picture
 
   before_save :generate_username, if: :new_record?

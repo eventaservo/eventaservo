@@ -111,4 +111,9 @@ class EventTest < ActiveSupport::TestCase
     @event.update_attribute(:site, site)
     assert_equal site, @event.site
   end
+
+  test 'forigas malpermesatajn signojn el urbonomo' do
+    @event.update_attribute(:city, 'urbo / alia urbo')
+    assert_equal 'urbo  alia urbo', @event.city
+  end
 end
