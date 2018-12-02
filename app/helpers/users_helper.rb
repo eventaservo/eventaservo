@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UsersHelper
   def display_user(user)
     content_tag(:span) do
@@ -8,7 +10,7 @@ module UsersHelper
 
   def display_user_image(user)
     image = if user.picture.attached?
-              url_for(user.picture)
+              url_for(user.picture.variant(resize: '42x42'))
             elsif user.image?
               user.image
             else
