@@ -158,6 +158,8 @@ GEM
       temple (>= 0.8.0)
       tilt
     hashie (3.5.7)
+    highcharts-rails (6.0.3)
+      railties (>= 3.1)
     hirb (0.7.3)
     htmlentities (4.3.4)
     i18n (1.1.1)
@@ -371,6 +373,7 @@ DEPENDENCIES
   font-awesome-sass (~> 5)
   fullcalendar-rails
   haml (~> 5.0, >= 5.0.4)
+  highcharts-rails (~> 6.0)
   hirb
   impressionist
   jbuilder (~> 2.5)

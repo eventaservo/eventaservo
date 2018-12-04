@@ -30,4 +30,7 @@ class HomeController < ApplicationController
     respond_to :js
     @events = Event.includes(:country).search(params[:query]).venontaj.grouped_by_months
   end
+
+  def statistics
+  end
 end

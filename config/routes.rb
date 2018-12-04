@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/prie', to: 'home#prie'
   get '/events.json', to: 'home#events'
   get '/search', to: 'home#search'
+  get '/statistikoj', to: 'home#statistics'
 
   root to: 'home#index'
 

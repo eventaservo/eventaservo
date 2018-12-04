@@ -1,0 +1,36 @@
+#registered_events
+
+- countries = []
+- quantity = []
+- Event.joins(:country).group('countries.name').order('count_id DESC, countries.name ASC').count(:id).map do |country, qtd|
+  - countries << country
+  - quantity << qtd
+
+:coffee
+  Highcharts.chart 'registered_events',
+  colors: ['#28a745']
+  chart: type: 'column'
+  title: text: 'Registritaj eventoj laŭ landoj'
+  subtitle: text: 'Okazitaj kaj ojazontaj'
+  legend: enabled: false
+  xAxis:
+    categories: #{raw countries}
+    crosshair: true
+  yAxis:
+    min: 0
+    title: text: 'Eventoj'
+  tooltip:
+    headerFormat: '<span style="font-size:10px">{point.key}</span><table>'
+    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' + '<td style="padding:0"><b>{point.y} eventoj</b></td></tr>'
+    footerFormat: '</table>'
+    shared: true
+    useHTML: true
+  plotOptions: column:
+    pointPadding: 0
+    borderWidth: 0
+  series: [
+    {
+      name: 'Kvanto'
+      data: #{raw quantity}
+    }
+  ]

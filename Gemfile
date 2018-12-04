@@ -59,6 +59,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'daemons'
 gem 'delayed_job_active_record'
 
+gem 'highcharts-rails', '~> 6.0'
 gem 'hirb'
 gem 'impressionist'
 gem 'premailer-rails'
