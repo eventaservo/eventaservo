@@ -14,7 +14,8 @@ class Event < ApplicationRecord
   has_many :likes, as: :likeable, dependent: :destroy
 
   validates :title, :description, :city, :country_id, :date_start, :date_end, :code, presence: true
-  validates :code, uniqueness: true
+  validates_length_of :description, maximum: 400
+  validates :code, uniqueness: true, on: :create
   validate :end_after_start
   before_save :format_event_data
 
@@ -74,7 +75,7 @@ class Event < ApplicationRecord
     def format_event_data
       self.title = fix_title(title)
       self.city = city.tr('/', '')
-      self.site = "http://#{site}" unless site[%r{\Ahttp:\/\/}] || site[%r{\Ahttps:\/\/}]
+      self.site = fix_site(site)
     end
 
     def fix_title(title)
@@ -82,6 +83,18 @@ class Event < ApplicationRecord
         title.titleize
       else
         title
+      end
+    end
+
+    def fix_site(site)
+      return if site.nil?
+
+      if site[%r{\Ahttp:\/\/}] || site[%r{\Ahttps:\/\/}]
+        site.strip
+      elsif site.strip.empty?
+        nil
+      else
+        "http://#{site.strip}"
       end
     end
 end

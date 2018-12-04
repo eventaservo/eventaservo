@@ -3,6 +3,11 @@ epo:
     errors:
       messages:
         record_invalid: 'Validado malsukcesis: %{errors}'
+      models:
+        event:
+          attributes:
+            user:
+              required: necesas
     models:
       event: Eventoj
     attributes:

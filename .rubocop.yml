@@ -21,6 +21,9 @@ Style/DocumentationMethod:
 Style/EmptyMethod:
   EnforcedStyle: expanded
 
+Style/InlineComment:
+  Enabled: false
+
 Style/MethodCallWithArgsParentheses:
   Enabled: false
 

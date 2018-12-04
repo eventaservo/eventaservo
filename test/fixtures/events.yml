@@ -4,7 +4,7 @@ DEFAULTS: &DEFAULTS
   title: Prova evento
   description: Prova evento priskribo
   content: Prov-informoj pri la prova evento
-  user_id: users(:one)
+  user: one
   deleted: false
   city: Eventa urbo
   country: one

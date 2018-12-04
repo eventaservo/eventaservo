@@ -86,9 +86,8 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test 'priskribo ne povas esti pli ol 400 signoj' do
-    new_event = events(:one)
-    new_event.description = SecureRandom.hex(201) # Pli ol 400 signoj
-    assert new_event.invalid?
+    @event.description = SecureRandom.hex(201) # Pli ol 400 signoj
+    assert @event.invalid?
   end
 
   test 'korektas la titolan skribmanieron' do
@@ -112,6 +111,20 @@ class EventTest < ActiveSupport::TestCase
     site = 'https://google.com'
     @event.update_attribute(:site, site)
     assert_equal site, @event.site
+  end
+
+  test 'ne aldonu http se ne estas retejo' do
+    @event.update!(site: nil)
+    assert_nil @event.site
+
+    @event.update!(site: '')
+    assert_nil @event.site
+
+    @event.update!(site: ' ')
+    assert_nil @event.site
+
+    @event.update!(site: 'google.com')
+    assert_equal 'http://google.com', @event.site
   end
 
   test 'forigas malpermesatajn signojn el urbonomo' do
