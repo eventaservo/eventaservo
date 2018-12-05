@@ -20,7 +20,7 @@ class NotificationListController < ApplicationController
     redirect_to(root_url, flash: { info: 'Retpoŝt-adreso jam forigita' }) && return if recipient.nil?
 
     recipient.destroy
-    redirect_to admin_notification_list_path, flash: { success: "Retpoŝt-adreso #{recipient.email} forigita"}
+    redirect_to root_path, flash: { success: "Retpoŝt-adreso #{recipient.email} forigita"}
   end
 
   private
