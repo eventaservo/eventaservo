@@ -15,6 +15,7 @@
             %span{'aria-hidden' => 'true'} ×
         .modal-body
           %p Elektu la landon pri kiu vi volas ricevi informojn pri novaj eventoj:
+          = invisible_captcha :name
           .form-group
             = label_tag :country_id, 'Lando'
             = select_tag(:country_id, options_from_collection_for_select(Country.all, 'id', 'name'), id: 'country_select', class: 'form-control select2-input')

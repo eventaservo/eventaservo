@@ -210,3 +210,7 @@ epo:
       long: "%A %d %B %Y %H:%M"
       short: "%d %b %H:%M"
     pm: pm
+
+  invisible_captcha:
+    sentence_for_humans: Se vi estas homo, ne plenumu tiun kampon
+    timestamp_error_message: Tro rapide! Refaru ĝin

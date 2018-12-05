@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class NotificationListController < ApplicationController
+  invisible_captcha only: :create, honeypot: :name, on_spam: :spam_detected
+
   def create
     redirect_to(root_url, flash: { error: 'Retpoŝt-adreso necesas' }) && return if params[:email].blank?
 
@@ -18,6 +20,12 @@ class NotificationListController < ApplicationController
     redirect_to(root_url, flash: { info: 'Retpoŝt-adreso jam forigita' }) && return if recipient.nil?
 
     recipient.destroy
-    redirect_to root_url, flash: { success: "Retpoŝt-adreso #{recipient.email} forigita"}
+    redirect_to admin_notification_list_path, flash: { success: "Retpoŝt-adreso #{recipient.email} forigita"}
   end
+
+  private
+
+    def spam_detected
+      redirect_to root_path
+    end
 end
