@@ -3,6 +3,7 @@ eventCalendar = ->
     events:
       url: '/events.json'
       data:
+        continent: $('#full_calendar').data('continent')
         country: $('#full_calendar').data('country')
         city: $('#full_calendar').data('city')
         username: $('#full_calendar').data('username')

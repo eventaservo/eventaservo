@@ -5,6 +5,7 @@ class HomeController < ApplicationController
     session[:event_list_style] ||= 'kalendaro' # Normala vidmaniero
     @events = Event.includes(:country).venontaj.grouped_by_months
     @countries = Event.venontaj.count_by_country
+    @continents = Event.venontaj.count_by_continents
   end
 
   def privateco
@@ -16,6 +17,7 @@ class HomeController < ApplicationController
 
   def events
     @events = Event.includes(:country)
+    @events = @events.by_continent(params[:continent]) if params[:continent].present?
     @events = @events.by_country_name(params[:country]) if params[:country].present?
     @events = @events.by_city(params[:city]) if params[:city].present?
     @events = Event.includes(:country).by_username(params[:username]) if params[:username].present?

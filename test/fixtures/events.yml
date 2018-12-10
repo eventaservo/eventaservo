@@ -34,3 +34,9 @@ deleted:
 brazilo:
   <<: *DEFAULTS
   country: brazilo
+
+togolando:
+  <<: *DEFAULTS
+  country: togolango
+  city: Lomeo
+

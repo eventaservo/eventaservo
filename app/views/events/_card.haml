@@ -7,11 +7,7 @@
       %p
         = format_date event.date_start
         %br
-        = link_to event.city, events_by_city_path(event.country.name, event.city), class: 'card-link'
-        = link_to "(#{event.country.name})", events_by_country_path(event.country.name), class: 'card-link'
+        = link_to event.city, events_by_city_path(event.country.continent, event.country.name, event.city), class: 'card-link'
+        = link_to "(#{event.country.name})", events_by_country_path(event.country.continent, event.country.name), class: 'card-link'
     %p.card-text
       = event.description
-
-  .card-footer
-    = event_like_button(event) if user_signed_in?
-    = event_participant_button(event)

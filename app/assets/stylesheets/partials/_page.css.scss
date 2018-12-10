@@ -30,14 +30,12 @@ body {
 
 .front-page-title {
   @extend .text-center;
-  background-color : #28A745;
-  line-height      : 30px;
-  margin-left      : -15px;
-  margin-right     : -15px;
-  padding-bottom   : 10px;
-  padding-left     : 15px;
-  padding-right    : 15px;
-  color            : white;
+  background-color: $esperantoGreen;
+  font-weight: bold;
+  color: white;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 
 .breadcrumb {

@@ -23,6 +23,7 @@ class Event < ApplicationRecord
   scope :deleted, -> { unscoped.where(deleted: true) }
   scope :venontaj, -> { where('date_start >= ?', Date.today) }
   scope :pasintaj, -> { where('date_start < ?', Date.today) }
+  scope :by_continent, ->(name) { joins(:country).where(countries: { continent: name }) }
   scope :by_country_id, ->(id) { where(country_id: id) }
   scope :by_country_name, ->(name) { joins(:country).where(countries: { name: name }) }
   scope :by_city, ->(city) { where(city: city) }
@@ -33,8 +34,18 @@ class Event < ApplicationRecord
     order(:date_start).group_by { |m| m.date_start.beginning_of_month }
   end
 
+  def self.count_by_continents
+    joins(:country)
+      .select('countries.continent as name', 'count(events.id)')
+      .group('countries.continent')
+      .order('countries.continent')
+  end
+
   def self.count_by_country
-    joins(:country).select('countries.name', 'countries.code', 'count(events.id)').group('countries.name, countries.code').order('countries.name')
+    joins(:country)
+      .select('countries.name', 'countries.code', 'countries.continent', 'count(events.id)')
+      .group('countries.name, countries.code', 'countries.continent')
+      .order('countries.name')
   end
 
   def self.count_by_cities

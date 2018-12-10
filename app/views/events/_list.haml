@@ -4,5 +4,5 @@
       .text-center.font-weight-bold
         = event_flag(event)
         = link_to event.title, event_path(event.code)
-      .text-center.small (#{event.city} - #{event.country.name}) - #{format_date event.date_start}
-    %p.text-center.small= event.description
+      .text-center (#{event.city} - #{event.country.name}) - #{format_date event.date_start}
+    %p.text-center= event.description

@@ -1,0 +1,16 @@
+.event {
+  display: flex !important;
+  background-color: white;
+
+  &--list {
+    border-bottom: 2px solid $esperantoGreen;
+
+    &:hover {
+      background-color: $grayLight;
+    }
+
+    &:nth-of-type(odd) {
+      background: $grayLightRow;
+    }
+  }
+}

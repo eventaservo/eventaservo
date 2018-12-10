@@ -4,5 +4,5 @@
   %h3.text-divider= l(date, format: "%B %Y")
   .row
     - events.each do |event|
-      .col-12.col-sm-4
+      .col-12.col-md-4
         = render partial: 'events/card', locals: { event: event }

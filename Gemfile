@@ -8,9 +8,10 @@ ruby '2.5.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.1'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
+# gem 'puma', '~> 3.11'
+gem 'puma', git: 'https://github.com/eric-norcross/puma.git', branch: 'chrome_70_ssl_curve_compatiblity'
 # Use SCSS for stylesheets
-# gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -87,11 +88,14 @@ group :development do
   # RailsPanel Chrome Extension
   gem 'meta_request'
 
+  # Capistrano gems
+  gem 'bcrypt_pbkdf'
   gem 'capistrano', '~> 3.10', require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano-passenger', require: false
   gem 'capistrano-rails', '~> 1.4', require: false
   gem 'capistrano-rvm', require: false
+  gem 'ed25519'
 end
 
 group :test do

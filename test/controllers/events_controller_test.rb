@@ -3,6 +3,22 @@
 require 'test_helper'
 
 class EventsControllerTest < ActionDispatch::IntegrationTest
+
+  def setup
+    @brazila_evento = events(:brazilo)
+  end
+
+  test 'devas listigi la validajn kontinentajn eventojn' do
+    get '/Ameriko'
+    assert_response :success
+  end
+
+  test 'devas montri la ĉefpaĝon se la kontinento ne ekzistas' do
+    get '/NevalidaKontinento'
+    assert_redirected_to root_path
+    assert_equal 'Ne estas eventoj en tiu kontinento', flash[:notice]
+  end
+
   # setup do
   #   @event = events(:one)
   # end

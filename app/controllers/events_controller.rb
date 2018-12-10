@@ -61,6 +61,13 @@ class EventsController < ApplicationController
     redirect_to event_path(event.code), flash: { success: 'Dosiero sukcese forigita' }
   end
 
+  def by_continent
+    validate_continent params[:continent]
+
+    @events = Event.by_continent(params[:continent]).venontaj.grouped_by_months
+    @countries = Event.by_continent(params[:continent]).venontaj.count_by_country
+  end
+
   def by_country
     @country = Country.find_by(name: params[:country_name])
     redirect_to(root_path, flash: { error: 'Lando ne ekzistas en la datumbazo' }) && return if @country.nil?
@@ -99,5 +106,10 @@ class EventsController < ApplicationController
       unless current_user.is_owner_of(@event) || current_user.admin?
         redirect_to root_url, flash: { error: 'Vi ne rajtas' }
       end
+    end
+
+    def validate_continent(continent_name)
+      redirect_to root_url, flash: { notice: 'Ne estas eventoj en tiu kontinento' } unless
+          Event.by_continent(continent_name).any?
     end
 end

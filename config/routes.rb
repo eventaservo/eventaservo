@@ -41,14 +41,18 @@ Rails.application.routes.draw do
   match 'upload/:record_id' => 'attachments#upload', as: 'attachment_upload', via: :post
   match 'dosiero/:id/forighu' => 'attachments#destroy', as: 'attachment_destroy', via: :delete
 
-  # Landoj kaj urboj
-  get '/lando/:country_name', controller: 'events', action: 'by_country', as: 'events_by_country'
-  get '/lando/:country_name/:city_name', controller: 'events', action: 'by_city', as: 'events_by_city'
-
   # Eventoj de uzantoj
   get '/uzanto/:username', controller: 'events', action: 'by_username', as: 'events_by_username'
 
   # Sciigo
   get '/sciigo/:recipient_code/forigu', controller: 'notification_list', action: :delete, as: 'delete_recipient'
   post '/sciigo', controller: 'notification_list', action: :create, as: 'new_recipient'
+
+  # Landoj kaj urboj
+  get '/:continent', to: 'events#by_continent', as: 'events_by_continent'
+  get '/:continent/:country_name', controller: 'events', action: 'by_country', as: 'events_by_country'
+  # get '/lando/:country_name', controller: 'events', action: 'by_country', as: 'events_by_country'
+  get '/:continent/:country_name/:city_name', controller: 'events', action: 'by_city', as: 'events_by_city'
+  # get '/lando/:country_name/:city_name', controller: 'events', action: 'by_city', as: 'events_by_city'
+
 end

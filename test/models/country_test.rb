@@ -3,20 +3,20 @@
 require 'test_helper'
 
 class CountryTest < ActiveSupport::TestCase
-  test 'devas fiaski se ne havas land-nomo' do
+  test 'devas fiaski se havas nek land-nomon nek kontinenton' do
     country = Country.new
     assert_not country.valid?
   end
 
-  test 'devas sukcesi se havas nomon' do
-    country = Country.new(name: 'Prov-lando')
+  test 'devas sukcesi se havas nomon kaj kontinento' do
+    country = Country.new(name: 'Prov-lando', continent: 'Ameriko')
     assert country.valid?
   end
 
   test 'fiaskas se lando jam ekzistas' do
     landnomo = 'Prov-lando'
-    Country.create!(name: landnomo)
-    new_country = Country.new(name: landnomo)
+    Country.create!(name: landnomo, continent: 'Afriko')
+    new_country = Country.new(name: landnomo, continent: 'Afriko')
     assert_not new_country.valid?
   end
 

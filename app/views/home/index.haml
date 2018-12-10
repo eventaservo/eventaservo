@@ -1,7 +1,6 @@
-.front-page-title
-  Estu bonvena al <strong>Eventa Servo</strong>, la nova sistemo por diskonigi esperantajn eventojn tutmonde!
-
 .box-white
+  .front-page-title Diskonigu esperantajn eventojn tutmonde!
+
   .d-flex.justify-content-between.flex-wrap
     .flex-fill
     .flex-fill= render partial: 'home/shortcuts'
@@ -16,12 +15,13 @@
 
   #events_container
     = render partial: 'home/view_style_chooser'
-    .lead Laŭ lando
-    - @countries.each do |country|
-      = link_to events_by_country_path(country.name), class: 'button-event-count' do
-        = flag_icon(country.code, squared: true)
-        = country.name
-        %span.badge.badge-primary= country.count
+
+    .lead Laŭ kontinentoj
+    - @continents.each do |continent|
+      = link_to events_by_continent_path(continent.name), class: 'button-event-count' do
+        = continent.name
+        %span.badge.badge-primary= continent.count
+
     = display_events_by_style
 
   #search_results

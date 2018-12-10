@@ -8,7 +8,7 @@
 
   .lead Eventoj laŭ urboj
   - @cities.each do |city|
-    = link_to events_by_city_path(@country.name, city.name), class: 'button-event-count' do
+    = link_to events_by_city_path(@country.continent, @country.name, city.name), class: 'button-event-count' do
       = city.name
       %span.badge.badge-primary= city.count
 

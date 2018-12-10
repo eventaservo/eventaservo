@@ -2,12 +2,20 @@
 
 one:
   name: First country
+  continent: Azio
 
 two:
   name: Second country
+  continent: Afriko
 
 brazilo:
   name: Brazilo
+  continent: Ameriko
 
 hungario:
   name: Hungario
+  continent: Eŭropo
+
+togolando:
+  name: Togolando
+  continent: Afriko
