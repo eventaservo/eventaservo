@@ -31,6 +31,7 @@ class EventMailer < ApplicationMailer
 
   def self.send_notification_to_users(event_id:)
     return false unless Event.exists?(event_id)
+    return false unless Rails.env.production? # Ne sendas retmesaĝon dum provo
 
     event      = Event.includes(:country).find(event_id)
     recipients = event.country.recipients
