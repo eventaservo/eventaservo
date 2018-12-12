@@ -68,6 +68,7 @@ gem 'invisible_captcha'
 gem 'leaflet-rails'
 gem 'premailer-rails'
 gem 'redcarpet'
+gem 'redis'
 gem 'sentry-raven'
 gem 'sitemap_generator'
 
