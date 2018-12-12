@@ -18,5 +18,9 @@ module Admin
       event.undelete!
       redirect_to event_path(event.code), flash: { success: 'Evento sukcesi restaŭrata' }
     end
+
+    def senlokaj_eventoj
+      @events = Event.without_location
+    end
   end
 end

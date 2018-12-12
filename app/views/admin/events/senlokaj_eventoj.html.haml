@@ -1,0 +1,18 @@
+.box-white.small
+  .lead Ĉiuj eventoj
+  .item-row-header
+    .col Titolo
+    .col Adreso
+    .col Urbo
+    .col Lando
+    .col Tuta adreso
+
+  - @events.each do |event|
+    - bg_color = (event.date_start < Date.today) ? 'bg-color-gray' : nil
+    = link_to event_path(event.code), class: "item-row #{bg_color}" do
+      .col= event.title
+      .col= event.address
+      .col= event.city
+      .col= event.country.name
+      .col= event.full_address
+

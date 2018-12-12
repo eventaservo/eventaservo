@@ -32,6 +32,7 @@ class Event < ApplicationRecord
   scope :by_city, ->(city) { where(city: city) }
   scope :by_user, ->(user) { where(user: user) }
   scope :by_username, ->(username) { joins(:user).where(users: { username: username }) }
+  scope :without_location, -> { where(latitude: nil) }
 
   def self.grouped_by_months
     order(:date_start).group_by { |m| m.date_start.beginning_of_month }

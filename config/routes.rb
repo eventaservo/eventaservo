@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     get 'countries', controller: 'countries', action: :index
     get 'eventoj', controller: 'events', action: :index
     get 'forigitaj_eventoj', controller: 'events', action: :deleted
+    get 'senlokaj_eventoj', to: 'events#senlokaj_eventoj'
     patch 'forigitaj_eventoj/restauri/:event_code', controller: 'events', action: :recover, as: 'recover_event'
   end
 
