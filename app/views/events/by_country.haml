@@ -6,10 +6,11 @@
   = render partial: 'layouts/breadcrumb'
   = render partial: 'home/view_style_chooser'
 
-  .lead Eventoj laŭ urboj
-  - @cities.each do |city|
-    = link_to events_by_city_path(@country.continent, @country.name, city.name), class: 'button-event-count' do
-      = city.name
-      %span.badge.badge-primary= city.count
+  - unless session[:event_list_style] == 'mapo'
+    .lead Eventoj laŭ urboj
+    - @cities.each do |city|
+      = link_to events_by_city_path(@country.continent, @country.name, city.name), class: 'button-event-count' do
+        = city.name
+        %span.badge.badge-primary= city.count
 
   = display_events_by_style

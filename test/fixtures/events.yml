@@ -40,3 +40,9 @@ togolando:
   country: togolango
   city: Lomeo
 
+
+usono:
+  <<: *DEFAULTS
+  country: usono
+  city: New York
+  address: 31 Ocean Parkway

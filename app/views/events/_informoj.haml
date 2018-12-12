@@ -2,10 +2,12 @@
   .box-header Informoj
   .box-body
     %p
-      <strong>Adreso:</strong> #{@event.address}
+      <strong>Adreso:</strong> #{link_to @event.address, event_map_url(@event), target: :_blank}
       %br
       <strong>Urbo:</strong> #{@event.city} - #{@event.country.name}
       %br
+    = render partial: 'event_map'
+
     %p
       = event_like_button(@event)
       = event_participant_button(@event)

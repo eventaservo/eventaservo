@@ -26,6 +26,7 @@
 //= require direct_uploads
 //= require social-share-button
 //= require highcharts
+//= require leaflet
 //= require_tree .
 
 // Tiu kono korektas la problemon de Select2 kiam ĝi estas ene de 'Modal'

@@ -19,6 +19,9 @@ class Event < ApplicationRecord
   validate :end_after_start
   before_save :format_event_data
 
+  geocoded_by :full_address
+  after_validation :geocode, if: :full_address_changed?
+
   default_scope { where(deleted: false) }
   scope :deleted, -> { unscoped.where(deleted: true) }
   scope :venontaj, -> { where('date_start >= ?', Date.today) }
@@ -72,6 +75,18 @@ class Event < ApplicationRecord
               unaccent(events.city) ilike unaccent(:search) OR
               unaccent(countries.name) ilike unaccent(:search)',
              search: "%#{search.tr(' ', '%').downcase}%").order('events.date_start')
+  end
+
+  def full_address
+    [address, city, country.try(:code).try(:upcase)].compact.join(', ')
+  end
+
+  def full_address_changed?
+    address_changed? || city_changed? || country_id_changed?
+  end
+
+  def location_defined?
+    latitude.present? && longitude.present?
   end
 
   private

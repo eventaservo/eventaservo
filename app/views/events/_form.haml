@@ -1,7 +1,5 @@
 .row
   .col-lg-8.offset-lg-2
-
-
     .box-white
       .lead
         = params[:action] == 'new' ? 'Nova evento' : 'Redakti eventon'
@@ -21,6 +19,16 @@
           = form.text_field :description, class: 'form-control'
           %small.form-text.text-muted Maksimume 400 signoj
 
+        .row
+          .col-lg-6
+            .form-group
+              = form.label :date_start, 'Komenca dato'
+              = form.text_field :date_start, value: @event.date_start.strftime("%d/%m/%Y"), class: 'datepicker form-control'
+          .col-lg-6
+            .form-group
+              = form.label :date_end, 'Fina dato'
+              = form.text_field :date_end, value: @event.date_end.strftime("%d/%m/%Y"), class: 'datepicker form-control'
+
         .form-group
           = form.label :content, 'Enhavo'
           = form.text_area :content, rows: 8, class: 'form-control', 'data-provider': 'summernote'
@@ -38,6 +46,7 @@
         .form-group
           = form.label :address, 'Loka adreso de la evento'
           = form.text_field :address, class: 'form-control'
+          %small.form-text.text-muted Aldonu la strat-nomon por precizigi la eventlokon en la mapo
 
         .row
           .col-lg-6
@@ -48,16 +57,6 @@
             .form-group
               = form.label :country_id, 'Lando'
               = form.select(:country_id, options_from_collection_for_select(Country.all, 'id', 'name', @event.country_id), {}, class: 'form-control select2-input')
-
-        .row
-          .col-lg-6
-            .form-group
-              = form.label :date_start, 'Komenca dato'
-              = form.text_field :date_start, value: @event.date_start.strftime("%d/%m/%Y"), class: 'datepicker form-control'
-          .col-lg-6
-            .form-group
-              = form.label :date_end, 'Fina dato'
-              = form.text_field :date_end, value: @event.date_end.strftime("%d/%m/%Y"), class: 'datepicker form-control'
 
         .buttons-footer
           - if params[:action] == 'edit'

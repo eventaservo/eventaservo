@@ -41,7 +41,7 @@ class EventTest < ActiveSupport::TestCase
     assert event.invalid?
   end
 
-  test 'lando necesas' do
+  test 'evento sen lando devas fiaski' do
     event = events(:one)
     event.country_id = nil
     assert event.invalid?
@@ -130,5 +130,13 @@ class EventTest < ActiveSupport::TestCase
   test 'forigas malpermesatajn signojn el urbonomo' do
     @event.update_attribute(:city, 'urbo / alia urbo')
     assert_equal 'urbo  alia urbo', @event.city
+  end
+
+  test 'geocoder, dum provoj, devas informi la NY adreson' do
+    event = events(:usono)
+    event.geocode
+    event.save
+    assert_equal (40.7143528), event.latitude
+    assert_equal (-74.0059731), event.longitude
   end
 end

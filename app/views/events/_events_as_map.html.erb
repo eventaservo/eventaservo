@@ -1,0 +1,17 @@
+<div id="map" class="full-map">
+  <script language="JavaScript">
+    var map = L.map('map').setView([0, 0], 1);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    <% events.map do |date, events| %>
+      <% events.each do |event| %>
+        <% if event.location_defined?  %>
+          L.marker([<%= event.latitude %>, <%= event.longitude %>]).addTo(map)
+              .bindPopup('<strong><%= link_to event.title, event_url(event.code) %></strong><br><%= format_date(event.date_start) %><br><br><%= event.description %>');
+        <% end %>
+      <% end %>
+    <% end %>
+  </script>
+</div>
