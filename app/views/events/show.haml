@@ -6,9 +6,13 @@
 .row
   .col-lg-8
     .box-white
-      .lead
-        = event_flag(@event)
-        = @event.title
+      .lead.d-flex
+        %div
+          #{event_flag(@event)} #{@event.title}
+        .ml-auto
+          = render partial: 'share_button'
+
+
       %p.text-right.small
         = format_date @event.date_start
         - if @event.date_end > @event.date_start

@@ -1,0 +1,19 @@
+= link_to icon('fas', 'share-alt'), '#', data: { target: '#shareModal', toggle: 'modal' }
+
+#shareModal.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'shareModalCenterTitle', role: 'dialog', tabindex: '-1'}
+  .modal-dialog.modal-dialog-centered{role: 'document'}
+    .modal-content
+
+      .modal-header
+        %h5#shareModalCenterTitle.modal-title Diskonigilo
+        %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
+          %span{'aria-hidden' => 'true'} ×
+
+      .modal-body
+        .text-center
+          %p Elektu la manieron por diskonigi la eventon
+          - sharing_text = "#{@event.title} | #{@event.description}"
+          = social_share_button_tag(sharing_text, desc: sharing_text, 'data-twitter-title' => sharing_text[0..200] + " #eventaservo")
+
+      .modal-footer
+        %button.btn.btn-sm.btn-outline-secondary{'data-dismiss' => 'modal', type: 'button'} Fermi
