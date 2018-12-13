@@ -20,11 +20,7 @@
       %p= @event.description
       %p= raw @event.content
 
-      - if @event.site.present?
-        %p <strong>Retpaĝo: </strong> #{link_to @event.site, @event.site, target: :_blank}
-      - if @event.email.present?
-        %p <strong>Kontakto: </strong> #{mail_to @event.email, @event.email, subject: "Informoj pri la evento #{@event.title}" }
-
+      = render partial: 'event_contact'
       = render partial: 'uploads'
       - if user_signed_in? && (current_user.is_owner_of(@event) || current_user.admin?)
         .buttons-footer

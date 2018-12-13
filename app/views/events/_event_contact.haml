@@ -1,0 +1,6 @@
+.d-flex
+  - if @event.site.present?
+    = link_to icon('fas', 'globe', 'retpaĝo'), @event.site, target: :_blank, class: 'button-contact'
+
+  - if @event.email.present?
+    = mail_to @event.email, icon('fas', 'envelope', 'email'), subject: "Informoj pri la evento #{@event.title}", class: 'button-contact'
