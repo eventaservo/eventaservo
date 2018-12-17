@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/license', to: 'home#privateco'
   get '/vidmaniero/:view_style', to: 'home#view_style', as: 'view_style'
   get '/prie', to: 'home#prie'
+  get '/changelog', to: 'home#changelog'
   get '/events.json', to: 'home#events'
   get '/search', to: 'home#search'
   get '/statistikoj', to: 'home#statistics'

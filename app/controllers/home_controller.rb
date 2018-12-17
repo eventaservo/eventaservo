@@ -8,6 +8,9 @@ class HomeController < ApplicationController
     @continents = Event.venontaj.count_by_continents
   end
 
+  def changelog
+  end
+
   def privateco
     render formats: :text
   end
