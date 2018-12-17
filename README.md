@@ -1,6 +1,7 @@
-[![Kontaktu nin en Telegramo https://t.me/fernandoshayani](https://img.shields.io/badge/babili%20en-Telegramo-179CDE.svg)](https://t.me/fernandoshayani)
+[![Build Status](https://travis-ci.org/shayani/eventaservo.svg?branch=master)](https://travis-ci.org/shayani/eventaservo)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/29cba20555574324a42b5fa7f19ab1d9)](https://www.codacy.com/app/shayani/eventaservo?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=shayani/eventaservo&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/29cba20555574324a42b5fa7f19ab1d9)](https://www.codacy.com/app/shayani/eventaservo?utm_source=github.com&utm_medium=referral&utm_content=shayani/eventaservo&utm_campaign=Badge_Coverage)
+[![Kontaktu nin en Telegramo https://t.me/fernandoshayani](https://img.shields.io/badge/babili%20en-Telegramo-179CDE.svg)](https://t.me/fernandoshayani)
 
 Eventa Servo
 ===
