@@ -1,8 +1,8 @@
 <div id="map" class="full-map">
   <script language="JavaScript">
-    var map = L.map('map').setView([0, 0], 1);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    var map = L.map('map').setView([25, 30], 2);
+    L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png?lang=eo', {
+      attribution: '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
     <% events.map do |date, events| %>
