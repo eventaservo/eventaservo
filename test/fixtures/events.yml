@@ -37,9 +37,8 @@ brazilo:
 
 togolando:
   <<: *DEFAULTS
-  country: togolango
+  country: togolando
   city: Lomeo
-
 
 usono:
   <<: *DEFAULTS

@@ -13,7 +13,7 @@ epo:
       locked: "Your account is locked."
       last_attempt: "You have one more attempt before your account is locked."
       not_found_in_database: "Nevalida %{authentication_keys} aŭ pasvorto."
-      timeout: "Your session expired. Please sign in again to continue."
+      timeout: "Via sesio finiĝis. Bonvolu ensaluti denove."
       unauthenticated: "Vi bezonas ensaluti por fari tion"
       unconfirmed: "Vi bezonas konfirmi vian retpoŝt-adreson por ensaluti"
     mailer:
