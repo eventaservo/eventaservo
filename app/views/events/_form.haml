@@ -31,7 +31,8 @@
 
         .form-group
           = form.label :content, 'Enhavo'
-          = form.text_area :content, rows: 8, class: 'form-control', 'data-provider': 'summernote'
+          = form.hidden_field :content
+          %trix-editor{input: 'event_content', class: 'trix-content'}
 
         .row
           .col-lg-6

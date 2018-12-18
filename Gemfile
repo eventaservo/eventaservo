@@ -71,6 +71,7 @@ gem 'redcarpet'
 gem 'redis'
 gem 'sentry-raven'
 gem 'sitemap_generator'
+gem 'trix-rails', require: 'trix'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

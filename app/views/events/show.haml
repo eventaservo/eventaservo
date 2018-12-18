@@ -18,7 +18,7 @@
         - if @event.date_end > @event.date_start
           ĝis #{format_date @event.date_end}
       %p= @event.description
-      %p= raw @event.content
+      .trix-content= sanitize @event.content
 
       = render partial: 'event_contact'
       = render partial: 'uploads'
