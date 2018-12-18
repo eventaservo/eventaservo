@@ -11,6 +11,8 @@ Program-kodo: https://github.com/shayani/eventaservo
 
 Ĉi tiu projekto estas senpaga kaj la programkodo estas libera.
 
+La kodo estas eldonita laŭ versio 3 aŭ pli nova de la permesilo Affero General Public License. (AGPLv3+)
+
 Eventa Servo estas sistemo por ordigi kaj diskonigi eventojn esperantajn por la tuta mondo.
 
 # Kunlaboro
