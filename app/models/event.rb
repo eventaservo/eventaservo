@@ -24,8 +24,8 @@ class Event < ApplicationRecord
 
   default_scope { where(deleted: false) }
   scope :deleted, -> { unscoped.where(deleted: true) }
-  scope :venontaj, -> { where('date_start >= ?', Date.today) }
-  scope :pasintaj, -> { where('date_start < ?', Date.today) }
+  scope :venontaj, -> { where('date_start >= :date OR date_end >= :date', date: Date.today) }
+  scope :pasintaj, -> { where('end_date < ?', Date.today) }
   scope :by_continent, ->(name) { joins(:country).where(countries: { continent: name }) }
   scope :by_country_id, ->(id) { where(country_id: id) }
   scope :by_country_name, ->(name) { joins(:country).where(countries: { name: name }) }

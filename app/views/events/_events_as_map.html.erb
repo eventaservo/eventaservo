@@ -8,10 +8,28 @@
     <% events.map do |date, events| %>
       <% events.each do |event| %>
         <% if event.location_defined?  %>
-          L.marker([<%= event.latitude %>, <%= event.longitude %>]).addTo(map)
+          L.marker([<%= event.latitude %>, <%= event.longitude %>], { icon: <%= event_map_pin_color(event) %> }).addTo(map)
               .bindPopup('<strong><%= link_to event.title, event_url(event.code) %></strong><br><%= format_date(event.date_start) %><br><br><%= event.description %>');
         <% end %>
       <% end %>
     <% end %>
   </script>
+</div>
+<div class="d-flex justify-content-center small">
+  <div class="m-2 text-center">
+    <%= image_tag('leaflet_icons/marker-icon-green.png', height: 24, alt: 'verda pinglo') %>
+    Okazas hodiaŭ
+  </div>
+  <div class="m-2 text-center">
+    <%= image_tag('leaflet_icons/marker-icon-yellow.png', height: 24, alt: 'flava pinglo') %>
+    Proksimajn 7 tagojn
+  </div>
+  <div class="m-2 text-center">
+    <%= image_tag('leaflet_icons/marker-icon-orange.png', height: 24, alt: 'oranga pinglo') %>
+    Proksimajn 30 tagojn
+  </div>
+  <div class="m-2 text-center">
+    <%= image_tag('leaflet_icons/marker-icon-blue.png', height: 24, alt: 'blue pinglo') %>
+    Estonteco
+  </div>
 </div>

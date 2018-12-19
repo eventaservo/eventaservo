@@ -37,4 +37,17 @@ module EventsHelper
   def event_map_url(event)
     "https://www.google.com/maps/search/?api=1&query=#{event.full_address}"
   end
+
+  def days_to_event(event)
+    Integer(event.date_start.to_date - Date.today)
+  end
+
+  def event_map_pin_color(event)
+    case days_to_event(event)
+    when -30..0 then 'greenIcon'
+    when 1..7 then 'yellowIcon'
+    when 8..30 then 'orangeIcon'
+    else 'blueIcon'
+    end
+  end
 end
