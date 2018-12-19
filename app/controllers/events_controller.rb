@@ -30,7 +30,6 @@ class EventsController < ApplicationController
     @event.user_id = current_user.id
 
     if @event.save
-      EventMailer.send_event_to_admin(@event.id).deliver_later
       EventMailer.send_notification_to_users(event_id: @event.id)
       redirect_to event_path(@event.code), flash: { notice: 'Evento sukcese kreita.' }
     else
@@ -40,7 +39,6 @@ class EventsController < ApplicationController
 
   def update
     if @event.update(event_params)
-      EventMailer.send_event_to_admin(@event.id, update: true).deliver_later
       redirect_to event_path(@event.code), notice: 'Evento sukcese ĝisdatigita'
     else
       redirect_to event_path(@event.code), flash: { warning: 'Evento malsukcese ĝisdatigita' }

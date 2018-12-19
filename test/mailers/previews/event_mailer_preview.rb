@@ -8,11 +8,6 @@ class EventMailerPreview < ActionMailer::Preview
     EventMailer.send_updates_to_followers(event)
   end
 
-  def send_event_to_admin
-    event = Event.last
-    EventMailer.send_event_to_admin(event)
-  end
-
   def notify_users
     EventMailer.notify_user(Event.find_by(code: '6xlDaJ_nGiKJ27LD').id, NotificationList.order('RANDOM()').first.id)
   end

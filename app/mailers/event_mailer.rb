@@ -19,22 +19,13 @@ class EventMailer < ApplicationMailer
     )
   end
 
-  def send_event_to_admin(event_id, update: false)
-    @event = Event.find(event_id)
-    event_action = update ? 'Ĝistadigita' : 'Nova'
-    mail(
-      to: 'kontakto@eventaservo.org',
-      subject: "#{event_action} evento: #{@event.title}",
-      content_type: :text
-    )
-  end
-
   def self.send_notification_to_users(event_id:)
     return false unless Event.exists?(event_id)
     return false unless Rails.env.production? # Ne sendas retmesaĝon dum provo
 
     event      = Event.includes(:country).find(event_id)
     recipients = event.country.recipients
+    recipients += NotificationList.admins
     return false if recipients.empty?
 
     recipients.each do |recipient|
