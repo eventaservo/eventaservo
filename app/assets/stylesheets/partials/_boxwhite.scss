@@ -1,12 +1,13 @@
 .box-white {
-  border           : 1px solid lightgray;
+  @include media-breakpoint-up(sm) {
+    border           : 1px solid lightgray;
+  }
+  margin: 5px 0 5px 0;
   background-color : white;
-  margin           : 5px 0 5px 0;
   padding          : 10px;
   border-radius    : 2px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-
 
   .lead {
     font-weight   : bold;
