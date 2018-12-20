@@ -4,12 +4,14 @@
 La teksto-formato estas inspirita de [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 kaj ĉi tiu projeto kongruas kun [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.2
+## [1.2]
 ### Aldonoj
 - Koloraj pingloj en mapo laŭ eventaj proksimecoj
 
 ### Ŝanĝoj
 - Uzo de Trix Editor por redakti eventajn enhavojn
+
+--- 
 
 ## 1.1.1 - 2018-12-17
 ### Ŝanĝoj
@@ -17,3 +19,5 @@ kaj ĉi tiu projeto kongruas kun [Semantic Versioning](https://semver.org/spec/v
 
 ### Riparoj
 - Forigis la mesaĝon "true" kiam la uzantsesio-tempo finiĝas
+
+[1.2]: https://github.com/shayani/eventaservo/releases/tag/v1.2
