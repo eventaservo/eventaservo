@@ -44,20 +44,25 @@
               = form.label :email, 'Retpoŝt-adreso por kontakto'
               = form.email_field :email, class: 'form-control'
 
-        .form-group
-          = form.label :address, 'Loka adreso de la evento'
-          = form.text_field :address, class: 'form-control'
-          %small.form-text.text-muted Aldonu la strat-nomon por precizigi la eventlokon en la mapo
+        .form-group.form-check
+          = form.check_box :online, class: 'form-check-input'
+          = form.label :online, 'Reta evento?', class: 'form-check-label'
 
-        .row
-          .col-lg-6
-            .form-group
-              = form.label :city, 'Urbo'
-              = form.text_field :city, class: 'form-control'
-          .col-lg-6
-            .form-group
-              = form.label :country_id, 'Lando'
-              = form.select(:country_id, options_from_collection_for_select(Country.all, 'id', 'name', @event.country_id), {}, class: 'form-control select2-input')
+        #malretaj_informoj
+          .form-group
+            = form.label :address, 'Loka adreso de la evento'
+            = form.text_field :address, class: 'form-control'
+            %small.form-text.text-muted Aldonu la strat-nomon por precizigi la eventlokon en la mapo
+
+          .row
+            .col-lg-6
+              .form-group
+                = form.label :city, 'Urbo'
+                = form.text_field :city, class: 'form-control'
+            .col-lg-6
+              .form-group
+                = form.label :country_id, 'Lando'
+                = form.select(:country_id, options_from_collection_for_select(Country.all, 'id', 'name', @event.country_id), {}, class: 'form-control select2-input')
 
         .buttons-footer
           - if params[:action] == 'edit'
@@ -70,3 +75,12 @@
 :coffee
   $('#event_date_start').change ->
     $('#event_date_end').val($('#event_date_start').val())
+
+  if $('#event_online').is(':checked') == true
+    $('#malretaj_informoj').hide()
+
+  $('#event_online').change ->
+    if this.checked
+      $('#malretaj_informoj').hide()
+    else
+      $('#malretaj_informoj').show()

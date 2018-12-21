@@ -6,7 +6,7 @@
   = render partial: 'layouts/breadcrumb'
   = render partial: 'home/view_style_chooser'
 
-  - unless session[:event_list_style] == 'mapo'
+  - unless params[:continent] == 'Reta'
     .lead Laŭ lando
     - @countries.each do |country|
       = link_to events_by_country_path(country.continent, country.name), class: 'button-event-count' do

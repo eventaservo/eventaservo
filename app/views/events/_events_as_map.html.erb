@@ -5,12 +5,10 @@
       attribution: '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
-    <% events.map do |date, events| %>
-      <% events.each do |event| %>
-        <% if event.location_defined?  %>
-          L.marker([<%= event.latitude %>, <%= event.longitude %>], { icon: <%= event_map_pin_color(event) %> }).addTo(map)
-              .bindPopup('<strong><%= link_to event.title, event_url(event.code) %></strong><br><%= format_date(event.date_start) %><br><br><%= event.description %>');
-        <% end %>
+    <% events.each do |event| %>
+      <% if event.location_defined?  %>
+        L.marker([<%= event.latitude %>, <%= event.longitude %>], { icon: <%= event_map_pin_color(event) %> }).addTo(map)
+            .bindPopup('<strong><%= link_to event.title, event_url(event.code) %></strong><br><%= format_date(event.date_start) %><br><br><%= event.description %>');
       <% end %>
     <% end %>
   </script>

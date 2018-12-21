@@ -19,12 +19,11 @@
   #events_container
     = render partial: 'home/view_style_chooser'
 
-    - unless session[:event_list_style] == 'mapo'
-      .lead Laŭ kontinentoj
-      - @continents.each do |continent|
-        = link_to events_by_continent_path(continent.name), class: 'button-event-count' do
-          = continent.name
-          %span.badge.badge-primary= continent.count
+    .lead Laŭ kontinentoj aŭ retaj eventoj
+    - @continents.each do |continent|
+      = link_to events_by_continent_path(continent.name), class: 'button-event-count' do
+        = continent.name
+        %span.badge.badge-primary= continent.count
 
     = display_events_by_style
 

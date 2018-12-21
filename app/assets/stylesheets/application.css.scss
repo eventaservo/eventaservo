@@ -40,3 +40,11 @@ $size : 28px;
     width           : $size;
   }
 }
+
+// Reta eventa flago
+.flag-icon-ol { // ol estas la 'lando-kodo' por 'online'
+  background-image: image-url("online_flag.svg");
+  &.flag-icon-squared {
+    background-image: image-url("online_flag.svg");
+  }
+}

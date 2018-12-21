@@ -20,7 +20,7 @@ class Event < ApplicationRecord
   before_save :format_event_data
 
   geocoded_by :full_address
-  after_validation :geocode, if: :full_address_changed?
+  after_validation :geocode, if: :require_geocode?
 
   default_scope { where(deleted: false) }
   scope :deleted, -> { unscoped.where(deleted: true) }
@@ -33,6 +33,8 @@ class Event < ApplicationRecord
   scope :by_user, ->(user) { where(user: user) }
   scope :by_username, ->(username) { joins(:user).where(users: { username: username }) }
   scope :without_location, -> { where(latitude: nil) }
+  scope :online, -> { where(online: true) }
+  scope :not_online, -> { where(online: false) }
 
   def self.grouped_by_months
     order(:date_start).group_by { |m| m.date_start.beginning_of_month }
@@ -82,7 +84,9 @@ class Event < ApplicationRecord
     [address, city, country.try(:code).try(:upcase)].compact.join(', ')
   end
 
-  def full_address_changed?
+  def require_geocode?
+    return false if online
+
     address_changed? || city_changed? || country_id_changed?
   end
 
@@ -103,6 +107,13 @@ class Event < ApplicationRecord
       self.title = fix_title(title)
       self.city = city.tr('/', '')
       self.site = fix_site(site)
+
+      if self.online
+        self.city = 'Reta urbo'
+        self.country_id = 99999
+        self.latitude = nil
+        self.longitude = nil
+      end
     end
 
     def fix_title(title)

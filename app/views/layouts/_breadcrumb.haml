@@ -5,8 +5,9 @@
     - if params[:code].present? && params[:controller] == 'events'
       - event = Event.joins(:country).find_by_code(params[:code])
       %li.breadcrumb-item= link_to event.country.continent, events_by_continent_path(event.country.continent)
-      %li.breadcrumb-item= link_to event.country.name, events_by_country_path(event.country.continent, event.country.name)
-      %li.breadcrumb-item= link_to event.city, events_by_city_url(event.country.continent, event.country.name, event.city)
+      - unless event.online
+        %li.breadcrumb-item= link_to event.country.name, events_by_country_path(event.country.continent, event.country.name)
+        %li.breadcrumb-item= link_to event.city, events_by_city_url(event.country.continent, event.country.name, event.city)
 
     - elsif params[:action] == 'by_username'
       - user = User.find_by(username: params[:username])

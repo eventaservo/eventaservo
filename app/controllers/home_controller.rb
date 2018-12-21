@@ -3,7 +3,7 @@
 class HomeController < ApplicationController
   def index
     session[:event_list_style] ||= 'listo' # Normala vidmaniero
-    @events = Event.includes(:country).venontaj.grouped_by_months
+    @events = Event.includes(:country).venontaj
     @countries = Event.venontaj.count_by_country
     @continents = Event.venontaj.count_by_continents
   end

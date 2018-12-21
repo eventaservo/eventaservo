@@ -27,6 +27,9 @@ Style/InlineComment:
 Style/MethodCallWithArgsParentheses:
   Enabled: false
 
+Style/MissingElse:
+  Enabled: false
+
 Metrics/LineLength:
   Max: 120
 

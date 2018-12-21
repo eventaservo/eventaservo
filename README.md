@@ -31,5 +31,6 @@ Se vi volas kunlabori en ĉi tiu projekto, kontaktu min per Telegramo [(@fernand
 # Dankoj
 
 Mi dankas al ĉiuj kiuj helpas min plibonigi la projekton, speciale:
+
 - Paŭla kaj Didje pro iliaj komentoj kaj provuzado
 - [Robin van der Vliet](https://t.me/robin) pro interesaj sugestoj 

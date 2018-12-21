@@ -61,22 +61,26 @@ class EventsController < ApplicationController
 
   def by_continent
     validate_continent params[:continent]
+    if params[:continent] == 'Reta' && session[:event_list_style] == 'mapo'
+      session[:event_list_style] = 'listo'
+      redirect_to events_by_continent_path('Reta')
+    end
 
-    @events = Event.by_continent(params[:continent]).venontaj.grouped_by_months
+    @events = Event.by_continent(params[:continent]).venontaj
     @countries = Event.by_continent(params[:continent]).venontaj.count_by_country
   end
 
   def by_country
     @country = Country.find_by(name: params[:country_name])
     redirect_to(root_path, flash: { error: 'Lando ne ekzistas en la datumbazo' }) && return if @country.nil?
-    @events = Event.includes(:country).by_country_id(@country.id).venontaj.grouped_by_months
+    @events = Event.includes(:country).by_country_id(@country.id).venontaj
     @cities = Event.by_country_id(@country.id).venontaj.count_by_cities
   end
 
   # Listigas la eventoj laŭ urboj
   def by_city
     @country = Country.find_by(name: params[:country_name])
-    @events = Event.by_city(params[:city_name]).venontaj.grouped_by_months
+    @events = Event.by_city(params[:city_name]).venontaj
   end
 
   def by_username
@@ -95,7 +99,7 @@ class EventsController < ApplicationController
     def event_params
       params.require(:event).permit(
         :title, :description, :content, :site, :email, :date_start, :date_end,
-        :address, :city, :country_id, uploads: []
+        :address, :city, :country_id, :online,  uploads: []
       )
     end
 

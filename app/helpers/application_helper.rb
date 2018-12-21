@@ -42,6 +42,8 @@ module ApplicationHelper
 
   # Elektas la eventkoloron
   def color_event(event)
+    return 'purple' if event.online
+
     if event.date_end < Date.today # pasintaj eventoj estas grizaj
       'gray'
     else
