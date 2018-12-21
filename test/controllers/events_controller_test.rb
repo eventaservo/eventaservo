@@ -19,6 +19,12 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 'Ne estas eventoj en tiu kontinento', flash[:notice]
   end
 
+  test 'direktas la uzanton al ĉefapaĝo se uzantnomo ne ekzistas' do
+    get '/uzanto/ne_valida_uzantnomo'
+    assert_redirected_to root_path
+    assert_equal 'Uzantnomo ne ekzistas', flash[:error]
+  end
+
   # setup do
   #   @event = events(:one)
   # end

@@ -84,7 +84,9 @@ class EventsController < ApplicationController
   end
 
   def by_username
-    @events = Event.by_username(params[:username]).venontaj.grouped_by_months
+    redirect_to root_path, flash: { error: 'Uzantnomo ne ekzistas' } if User.find_by(username: params[:username]).nil?
+
+    @events = Event.by_username(params[:username]).venontaj
   end
 
   private
