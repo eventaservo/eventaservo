@@ -12,6 +12,9 @@ kaj ĉi tiu projeto kongruas kun [Semantic Versioning](https://semver.org/spec/v
 ### Ŝanĝoj
 - Uzo de Trix Editor por redakti eventajn enhavojn
 
+### Riparoj
+- Diversaj cimriparoj
+
 --- 
 
 ## 1.1.1 - 2018-12-17

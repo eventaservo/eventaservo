@@ -62,7 +62,7 @@
             .col-lg-6
               .form-group
                 = form.label :country_id, 'Lando'
-                = form.select(:country_id, options_from_collection_for_select(Country.all, 'id', 'name', @event.country_id), {}, class: 'form-control select2-input')
+                = form.select(:country_id, options_from_collection_for_select(Country.not_online, 'id', 'name', @event.country_id), {}, class: 'form-control select2-input')
 
         .buttons-footer
           - if params[:action] == 'edit'
