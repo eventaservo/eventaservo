@@ -5,7 +5,7 @@
         = params[:action] == 'new' ? 'Nova evento' : 'Redakti eventon'
 
       .alert.alert-info.small
-        Skribu esperante (almenaŭ la titolon kaj la priskribon). Permesu al ĉiuj scii, kio okazas en Esperantio tutmonde!
+        Skribu esperante. Permesu al ĉiuj scii, kio okazas en Esperantio tutmonde!
 
       = form_for(@event, url: (event_path(@event.code) if params[:action] == 'edit') ) do |form|
         = error_handling(@event)
@@ -32,7 +32,7 @@
         .form-group
           = form.label :content, 'Enhavo'
           = form.hidden_field :content
-          %trix-editor{input: 'event_content', class: 'trix-content', style: 'height: 20em;'}
+          %trix-editor{input: 'event_content', class: 'trix-content', style: 'height: 15em; overflow-y: auto;'}
 
         .row
           .col-lg-6
