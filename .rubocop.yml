@@ -15,6 +15,9 @@ Style/AsciiComments:
 Style/Copyright:
   Enabled: false
 
+Style/Documentation:
+  Enabled: false
+
 Style/DocumentationMethod:
   Enabled: false
 

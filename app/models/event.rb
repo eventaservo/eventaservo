@@ -110,7 +110,7 @@ class Event < ApplicationRecord
 
       if self.online
         self.city = 'Reta urbo'
-        self.country_id = 99999
+        self.country_id = 99_999
         self.latitude = nil
         self.longitude = nil
       end

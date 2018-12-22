@@ -5,9 +5,10 @@
 
 Eventa Servo
 ===
-Program-kodo: https://github.com/shayani/eventaservo
+Program-kodo: [Github](https://github.com/shayani/eventaservo)
 
-# Legu min
+Legu min
+---
 
 Ĉi tiu projekto estas senpaga kaj la programkodo estas libera.
 
@@ -15,22 +16,24 @@ La kodo estas eldonita laŭ versio 3 aŭ pli nova de la permesilo Affero General
 
 Eventa Servo estas sistemo por ordigi kaj diskonigi eventojn esperantajn por la tuta mondo.
 
-# Kunlaboro
+Kunlaboro
+---
 
 Se vi estas volontulo kaj volas helpi la projekton, estu bonvena.
 
 Kion mi serĉas?
 
-- Homojn kiuj amas Esperanton kaj volas helpi
-- Programiston de Ruby on Rails por helpi programi la sistemon
-- CSS-spertan programiston por plibeligi la sistemon
-- MiniTest/RSpec-programiston por krei aŭtomatajn provkodojn
+  - Homojn kiuj amas Esperanton kaj volas helpi
+  - Programiston de Ruby on Rails por helpi programi la sistemon
+  - CSS-spertan programiston por plibeligi la sistemon
+  - MiniTest/RSpec-programiston por krei aŭtomatajn provkodojn
 
 Se vi volas kunlabori en ĉi tiu projekto, kontaktu min per Telegramo [(@fernando.shayani)](https://t.me/fernandoshayani) aŭ retmesaĝo [(kontakto@eventaservo.org)](mailto:kontakto@eventaservo.org).
 
-# Dankoj
+Dankoj
+---
 
 Mi dankas al ĉiuj kiuj helpas min plibonigi la projekton, speciale:
 
-- Paŭla kaj Didje pro iliaj komentoj kaj provuzado
-- [Robin van der Vliet](https://t.me/robin) pro interesaj sugestoj 
+  - Paŭla kaj Didje pro iliaj komentoj kaj provuzado
+  - [Robin van der Vliet](https://t.me/robin) pro interesaj sugestoj 
