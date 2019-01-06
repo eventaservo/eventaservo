@@ -1,10 +1,11 @@
 !!!
-%html{:lang => 'en'}
+%html{:lang => 'eo'}
   %head
     = render partial: 'layouts/google_analytics' if Rails.env.production?
     %meta{:content => 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type'}/
     %meta{:charset => 'utf-8'}/
     %meta{:content => 'width=device-width, initial-scale=1, shrink-to-fit=no', :name => 'viewport'}/
+    %meta{:content => '#28a745', :name => 'theme-color'}/
 
     - if content_for?(:fb_meta)
       = yield(:fb_meta)
