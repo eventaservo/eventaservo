@@ -33,7 +33,7 @@ epo:
       - feb.
       - mar.
       - apr.
-      - majo
+      - maj.
       - jun.
       - jul.
       - aŭg.
@@ -55,18 +55,18 @@ epo:
       short: "%e %b"
     month_names:
       -
-      - Januaro
-      - Februaro
-      - Marto
-      - Aprilo
-      - Majo
-      - Junio
-      - Julio
-      - Aŭgusto
-      - Septembro
-      - Oktobro
-      - Novembro
-      - Decembro
+      - januaro
+      - februaro
+      - marto
+      - aprilo
+      - majo
+      - junio
+      - julio
+      - aŭgusto
+      - septembro
+      - oktobro
+      - novembro
+      - decembro
     order:
       - :day
       - :month
@@ -80,7 +80,7 @@ epo:
         one: ĉirkaŭ unu monato
         other: ĉirkaŭ %{count} monatoj
       about_x_years:
-        one: ĉirkaŭ uno jaro
+        one: ĉirkaŭ unu jaro
         other: ĉirkaŭ %{count} jaroj
       almost_x_years:
         one: preskaŭ unu jaro
