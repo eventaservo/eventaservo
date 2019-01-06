@@ -7,7 +7,7 @@
     = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
       = devise_error_messages!
       .form-group
-        = f.email_field :email, autocomplete: 'email', class: 'form-control', autofocus: true, placeholder: 'Retpoŝt-adreso'
+        = f.email_field :email, autocomplete: 'email', class: 'form-control', autofocus: true, placeholder: 'Retpoŝtadreso'
       = f.submit 'Resendi', class: 'button-submit col-12'
 
   = render partial: 'devise/shared/links'

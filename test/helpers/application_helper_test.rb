@@ -5,7 +5,7 @@ require 'test_helper'
 class ApplicationHelperTest < ActionView::TestCase
   test 'skribu la daton plene' do
     date = Date.new(1978, 7, 17)
-    assert_equal '17-a de Julio 1978', format_date(date)
+    assert_equal '17-a de julio 1978', format_date(date)
   end
 
   test 'colorigas la eventojn pasintajn grizaj' do

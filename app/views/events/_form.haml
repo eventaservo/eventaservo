@@ -5,7 +5,7 @@
         = params[:action] == 'new' ? 'Nova evento' : 'Redakti eventon'
 
       .alert.alert-info.small
-        Skribu esperante. Permesu al ĉiuj scii, kio okazas en Esperantio tutmonde!
+        Skribu esperante. Permesu al ĉiuj scii, kio okazas en Esperantujo tutmonde!
 
       = form_for(@event, url: (event_path(@event.code) if params[:action] == 'edit') ) do |form|
         = error_handling(@event)
@@ -41,7 +41,7 @@
               = form.text_field :site, class: 'form-control'
           .col-lg-6
             .form-group
-              = form.label :email, 'Retpoŝt-adreso por kontakto'
+              = form.label :email, 'Retpoŝtadreso por kontakto'
               = form.email_field :email, class: 'form-control'
 
         .form-group.form-check

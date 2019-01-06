@@ -7,7 +7,7 @@
         %br
         Estas senpage!
 
-    = link_to "Registri per Facebook", user_facebook_omniauth_authorize_path, class: 'facebook-button col-12'
+    = link_to "Registriĝi per Facebook", user_facebook_omniauth_authorize_path, class: 'facebook-button col-12'
     %br
     %br
     .text-divider.font-weight-bold.fg-color-grayDark AŬ
@@ -18,7 +18,7 @@
       .form-group
         = f.text_field :name, autocomplete: 'name', class: 'form-control', autofocus: true, placeholder: 'Plena nomo'
       .form-group
-        = f.email_field :email, autocomplete: 'email', class: 'form-control', placeholder: 'Retpoŝt-adreso'
+        = f.email_field :email, autocomplete: 'email', class: 'form-control', placeholder: 'Retpoŝtadreso'
       .form-group
         = f.text_field :city, autocomplete: 'city', class: 'form-control', placeholder: 'Urbo'
       .form-group
@@ -28,6 +28,6 @@
       .form-group
         = f.password_field :password, autocomplete: 'new-password', class: 'form-control', placeholder: 'Pasvorto-konfirmado'
 
-      = f.submit 'Registri', class: 'btn btn-sm btn-success col-12'
+      = f.submit 'Registriĝi', class: 'btn btn-sm btn-success col-12'
 
   = render partial: 'devise/shared/links'

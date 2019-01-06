@@ -20,9 +20,9 @@
             = label_tag :country_id, 'Lando'
             = select_tag(:country_id, options_from_collection_for_select(Country.not_online, 'id', 'name'), id: 'country_select', class: 'form-control select2-input')
           .form-group
-            = label_tag :email, 'Via retpoŝt-adreso'
+            = label_tag :email, 'Via retpoŝtadreso'
             - email = user_signed_in? ? current_user.email : nil
-            = email_field_tag :email, email, autocomplete: 'email', class: 'form-control', placeholder: 'Retpoŝt-adreso'
+            = email_field_tag :email, email, autocomplete: 'email', class: 'form-control', placeholder: 'Retpoŝtadreso'
         .modal-footer
           %button.button-cancel{'data-dismiss' => 'modal', type: 'button'} Nuligi
           = submit_tag 'Registri', class: 'button-submit'
