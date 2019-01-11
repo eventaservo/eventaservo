@@ -5,7 +5,7 @@
       = link_to event.title, event_path(event.code)
     .card-text.text-muted
       %p
-        = format_date event.date_start
+        = event_date(event)
         %br
         - if event.online
           (Reta evento)

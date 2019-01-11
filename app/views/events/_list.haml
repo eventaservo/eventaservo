@@ -6,5 +6,5 @@
         = link_to event.title, event_path(event.code)
       .text-center
         = event.online ? "(Reta evento)" : "(#{event.city} - #{event.country.name})"
-        = format_date event.date_start
+        = event_date(event)
     %p.text-center= event.description

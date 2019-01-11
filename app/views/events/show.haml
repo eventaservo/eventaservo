@@ -13,10 +13,7 @@
           = render partial: 'share_button'
 
 
-      %p.text-right.small
-        = format_date @event.date_start
-        - if @event.date_end > @event.date_start
-          ĝis #{format_date @event.date_end}
+      %p.text-right.small= event_date(@event)
       %p= @event.description
       .trix-content= sanitize @event.content
 

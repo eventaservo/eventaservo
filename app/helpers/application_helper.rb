@@ -37,7 +37,25 @@ module ApplicationHelper
   end
 
   def format_date(date)
-    l(date, format: '%e-a de %B %Y')
+    l(date, format: '%e-a de %B %Y').strip
+  end
+
+  # Montras la eventan daton simple
+  # Ekz: 17-21 de julio 2018
+  def event_date(event)
+    ds = event.date_start
+    de = event.date_end
+    return format_date(ds) if ds == de # Samtaga
+
+    if de.year == ds.year # Samjara
+      if de.month == ds.month # Sammonata
+        "#{ds.day}-#{de.day} #{l(de, format: 'de %B %Y')}"
+      else # malsammonata
+        "#{l(ds, format: '%e-a de %B')} - #{l(de, format: '%e-a de %B %Y')}"
+      end
+    else # malsamjara
+      "#{format_date(ds)} - #{format_date(de)}"
+    end
   end
 
   # Elektas la eventkoloron

@@ -8,6 +8,42 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_equal '17-a de julio 1978', format_date(date)
   end
 
+  test 'Simpligi la eventan daton - samtaga evento' do
+    event = events(:one).dup
+    event.date_start = Date.new(2018,7,17)
+    event.date_end = Date.new(2018,7,17)
+    event.save
+
+    assert_equal '17-a de julio 2018', event_date(event)
+  end
+
+  test 'Simpligi la eventan daton - sammonata evento' do
+    event = events(:one).dup
+    event.date_start = Date.new(2018,7,17)
+    event.date_end = Date.new(2018,7,21)
+    event.save
+
+    assert_equal '17-21 de julio 2018', event_date(event)
+  end
+
+  test 'Simpligi la eventan daton - malsammonata evento' do
+    event = events(:one).dup
+    event.date_start = Date.new(2018,7,17)
+    event.date_end = Date.new(2018,8,21)
+    event.save
+
+    assert_equal '17-a de julio - 21-a de aŭgusto 2018', event_date(event)
+  end
+
+  test 'Simpligi la eventan daton - malsamjara evento' do
+    event = events(:one).dup
+    event.date_start = Date.new(2018,12,30)
+    event.date_end = Date.new(2019,1,6)
+    event.save
+
+    assert_equal '30-a de decembro 2018 - 6-a de januaro 2019', event_date(event)
+  end
+
   test 'colorigas la eventojn pasintajn grizaj' do
     assert_equal 'gray', color_event(events(:pasinta))
   end

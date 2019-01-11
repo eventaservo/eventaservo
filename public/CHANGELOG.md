@@ -6,10 +6,11 @@
 La teksto-formato estas inspirita de [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 kaj ĉi tiu projeto kongruas kun [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-[1.2.1] - 2019-01-06
+[1.2.x] - 2019-01-11
 ---
 ### Ŝanĝoj
-- Monatnomoj minusklaj 
+- 1.2.2 - Eventa data tekstaranĝo 
+- 1.2.1 - Monatnomoj minusklaj
 
 ### Riparoj
 - Kelkaj tajperaroj
