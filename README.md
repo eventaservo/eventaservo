@@ -30,6 +30,15 @@ Kion mi serĉas?
 
 Se vi volas kunlabori en ĉi tiu projekto, kontaktu min per Telegramo [(@fernando.shayani)](https://t.me/fernandoshayani) aŭ retmesaĝo [(kontakto@eventaservo.org)](mailto:kontakto@eventaservo.org).
 
+Instali
+---
+
+Se vi volas labori je via lokale servata versio de eventaservo, en linux instalu `ruby 2.5.1` (prefere per rvm aŭ rbenv) kaj `postgresql` unue.
+
+Poste kreu en 'postgresql' datumbazo kun uzanto kiu havas superuzantaj permesoj kaj adaptu viaj opcioj en `config/database.yml` por `development` je `database`, `username` kaj `password` laŭ viaj lokaj elektoj.
+
+Poste uzu `bin/setup` por pretigi la datumbazo kaj `bin/rails server` por servi lokale al `localhost:3000`.
+
 Dankoj
 ---
 
