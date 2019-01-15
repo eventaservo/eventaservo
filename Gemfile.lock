@@ -311,6 +311,9 @@ GEM
     sassc (2.0.0)
       ffi (~> 1.9.6)
       rake
+    seed_dump (3.3.1)
+      activerecord (>= 4)
+      activesupport (>= 4)
     select2-rails (4.0.3)
       thor (~> 0.14)
     selenium-webdriver (3.141.0)
@@ -419,6 +422,7 @@ DEPENDENCIES
   redcarpet
   redis
   sass-rails (~> 5.0)
+  seed_dump
   select2-rails
   selenium-webdriver
   sentry-raven

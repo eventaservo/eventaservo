@@ -91,6 +91,7 @@ group :development do
   gem 'bullet'
   # RailsPanel Chrome Extension
   gem 'meta_request'
+  gem 'seed_dump' # Por rekrei la seeds.db dosieron
 
   # Capistrano gems
   gem 'bcrypt_pbkdf'

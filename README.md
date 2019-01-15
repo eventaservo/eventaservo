@@ -30,6 +30,11 @@ Kion mi serĉas?
 
 Se vi volas kunlabori en ĉi tiu projekto, kontaktu min per Telegramo [(@fernando.shayani)](https://t.me/fernandoshayani) aŭ retmesaĝo [(kontakto@eventaservo.org)](mailto:kontakto@eventaservo.org).
 
+Instali
+---
+
+Se vi volas labori je via lokale servata versio de Eventa Servo, [legu tiun paĝon](https://github.com/shayani/eventaservo/wiki/Instali).
+
 Dankoj
 ---
 
