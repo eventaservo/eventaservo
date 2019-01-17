@@ -2,6 +2,8 @@
 
 class EventMailer < ApplicationMailer
   add_template_helper ApplicationHelper
+  add_template_helper EventsHelper
+
   require 'redcarpet/render_strip'
 
   def send_updates_to_followers(event)
@@ -37,5 +39,17 @@ class EventMailer < ApplicationMailer
     @recipient = NotificationList.find(recipient_id)
     @event     = Event.includes(:country).find(event_id)
     mail(to: @recipient.email, subject: "Nova evento: #{@event.title}")
+  end
+
+  def self.send_weekly_summary_to_users
+    User.receives_weekly_summary.each do |user|
+      EventMailer.weekly_summary(user).deliver_later
+    end
+  end
+
+  def weekly_summary(user)
+    @events = Event.by_dates(from: Date.today, to: Date.today + 7.days)
+    @user = user
+    mail(to: "#{user.name} <#{user.email}>", subject: 'Tutmonda semajna resumo de eventoj')
   end
 end

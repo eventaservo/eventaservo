@@ -6,6 +6,11 @@
 La teksto-formato estas inspirita de [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 kaj ĉi tiu projeto kongruas kun [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+[1.3] - 2019-01-17
+---
+### Aldonoj
+- Semajna resumo
+
 [1.2.x] - 2019-01-11
 ---
 ### Ŝanĝoj
@@ -38,3 +43,4 @@ kaj ĉi tiu projeto kongruas kun [Semantic Versioning](https://semver.org/spec/v
 - Forigis la mesaĝon "true" kiam la uzantsesio-tempo finiĝas
 
 [1.2]: https://github.com/shayani/eventaservo/releases/tag/v1.2
+[1.3]: https://github.com/shayani/eventaservo/releases/tag/v1.3

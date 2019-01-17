@@ -3,5 +3,8 @@ language: ruby
 services:
   - postgresql
 
+addons:
+  postgresql: "9.6"
+
 before_script:
   - psql -c 'create database eventaservo_test;' -U postgres

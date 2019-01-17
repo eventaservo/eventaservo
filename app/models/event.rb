@@ -40,6 +40,14 @@ class Event < ApplicationRecord
     order(:date_start).group_by { |m| m.date_start.beginning_of_month }
   end
 
+  def self.grouped_by_countries
+    not_online.joins(:country).order('countries.name, events.date_start').group_by { |c| c.country.name }
+  end
+
+  def self.by_dates(from:, to:)
+    where('(date_start >= :from AND date_start <= :to) OR (date_start <= :from AND date_end >= :from)', from: from, to: to)
+  end
+
   def self.count_by_continents
     joins(:country)
       .select('countries.continent as name', 'count(events.id)')

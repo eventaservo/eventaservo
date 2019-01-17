@@ -1,0 +1,70 @@
+$esperantoGreen: #28a745
+
+body
+  background-color: white
+  margin: 10px
+  font-family: Helvetica, Arial, sans-serif
+
+.header
+  text-decoration: none
+  background-color: $esperantoGreen
+  border-radius: 5px
+  text-align: center
+  margin: 0 10px 0 10px
+  padding: 1px
+  color: white
+
+  .links
+    text-decoration: none
+    color: white
+
+.bold
+  font-weight: bold
+
+.small
+  font-size: small
+
+.text-center
+  text-align: center
+
+table
+  width: 98%
+  margin-left: auto
+  margin-right: auto
+  border-collapse: collapse
+
+  &.stripped
+    tr:nth-child(odd)
+      background-color: #f2f2f2
+
+  &.bordered
+    border: 1px solid lightgrey
+
+  tbody
+    tr
+      border-bottom: 1px solid lightgrey
+      td
+        padding: 5px
+
+      &.row-header
+        background-color: lightgray !important
+        font-weight: bold
+
+      &.row-title
+        background-color: darkgreen !important
+        color: white
+        font-weight: bold
+
+.table-footer
+  text-align: center
+
+.event
+
+  .date-and-city
+    font-weight: bold
+    margin-bottom: 5px
+
+  .title
+    margin-bottom: 5px
+
+  .description

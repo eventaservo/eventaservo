@@ -26,6 +26,12 @@
         = display_user_image(@user)
         = f.file_field :picture, class: 'form-control-file', accept: 'image/*'
 
+      .text-divider Retlistoj
+
+      .form-check
+        = f.check_box :weekly_summary, class: 'form-check-input'
+        = f.label :weekly_summary, 'Semajna resumo', class: 'form-check-label'
+
       .buttons-footer
         = link_to 'Nuligi', root_path, class: 'button-cancel'
         = f.submit 'Ĝisdatigi', class: 'button-submit'

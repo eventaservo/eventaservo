@@ -22,6 +22,7 @@
           = link_to event_url(@event.code), event_url(@event.code)
 
     %tr
-      %td.table-footer
+      %td.table-footer.small
         Se vi ne plu volas ricevi informojn pri novaj eventoj en #{@event.country.name},
-        = link_to 'malabonigu per tiu ligilo.', delete_recipient_url(@recipient.code)
+        %br
+        eblas #{link_to 'malaboni', delete_recipient_url(@recipient.code)} per ĉi tiu ligilo.

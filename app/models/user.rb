@@ -9,8 +9,10 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i[facebook]
 
   has_one_attached :picture
+  store_accessor :mailings, :weekly_summary
 
   before_save :generate_username, if: :new_record?
+  before_save :subscribe_mailings, if: :new_record?
 
   has_many :events
   has_many :likes, dependent: :destroy
@@ -19,6 +21,8 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :username, uniqueness: true
+
+  scope :receives_weekly_summary, -> { where('mailings @> ?', {weekly_summary: '1'}.to_json) }
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -59,5 +63,11 @@ class User < ApplicationRecord
     else
       update_attribute(:username, username)
     end
+  end
+
+  private
+
+  def subscribe_mailings
+    self.weekly_summary = '1'
   end
 end

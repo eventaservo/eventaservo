@@ -36,8 +36,14 @@ module ApplicationHelper
     raw return_html
   end
 
-  def format_date(date)
-    l(date, format: '%e-a de %B %Y').strip
+  # Stiloj:
+  #   default   = 1-a de Januaru de 2019
+  #   :short    = 01/Jan/19
+  def format_date(date, style: nil, accusative: true)
+    case style
+    when :short then l(date, format: '%e/%b/%y').strip
+    else l(date, format: "La %e-a#{'n' if accusative} de %B %Y").strip
+    end
   end
 
   # Montras la eventan daton simple
@@ -49,12 +55,12 @@ module ApplicationHelper
 
     if de.year == ds.year # Samjara
       if de.month == ds.month # Sammonata
-        "#{ds.day}-#{de.day} #{l(de, format: 'de %B %Y')}"
+        "De la #{ds.day}-a ĝis la #{de.day}-a #{l(de, format: 'de %B %Y')}"
       else # malsammonata
-        "#{l(ds, format: '%e-a de %B')} - #{l(de, format: '%e-a de %B %Y')}"
+        "De la #{l(ds, format: '%e-a de %B')} ĝis la #{l(de, format: '%e-a de %B %Y')}"
       end
     else # malsamjara
-      "#{format_date(ds)} - #{format_date(de)}"
+      "De la #{l(ds, format: '%e-a de %B %Y').strip} ĝis la #{l(de, format: '%e-a de %B %Y').strip}"
     end
   end
 

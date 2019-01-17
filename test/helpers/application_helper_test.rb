@@ -5,43 +5,28 @@ require 'test_helper'
 class ApplicationHelperTest < ActionView::TestCase
   test 'skribu la daton plene' do
     date = Date.new(1978, 7, 17)
-    assert_equal '17-a de julio 1978', format_date(date)
+    assert_equal 'La 17-an de julio 1978', format_date(date)
+    assert_equal 'La 17-a de julio 1978', format_date(date, accusative: false)
   end
 
-  test 'Simpligi la eventan daton - samtaga evento' do
-    event = events(:one).dup
-    event.date_start = Date.new(2018,7,17)
-    event.date_end = Date.new(2018,7,17)
-    event.save
+  test 'simpligas la eventajn datojn' do
+    event = events(:one).clone
 
-    assert_equal '17-a de julio 2018', event_date(event)
-  end
+    # Samtaga evento
+    event.update!(date_start: Date.new(2018, 7, 17), date_end: Date.new(2018, 7, 17))
+    assert_equal 'La 17-an de julio 2018', event_date(event)
 
-  test 'Simpligi la eventan daton - sammonata evento' do
-    event = events(:one).dup
-    event.date_start = Date.new(2018,7,17)
-    event.date_end = Date.new(2018,7,21)
-    event.save
+    # sammonata evento
+    event.update!(date_end: Date.new(2018, 7, 21))
+    assert_equal 'De la 17-a ĝis la 21-a de julio 2018', event_date(event)
 
-    assert_equal '17-21 de julio 2018', event_date(event)
-  end
+    # malsammonata evento
+    event.update!(date_end: Date.new(2018, 8, 21))
+    assert_equal 'De la 17-a de julio ĝis la 21-a de aŭgusto 2018', event_date(event)
 
-  test 'Simpligi la eventan daton - malsammonata evento' do
-    event = events(:one).dup
-    event.date_start = Date.new(2018,7,17)
-    event.date_end = Date.new(2018,8,21)
-    event.save
-
-    assert_equal '17-a de julio - 21-a de aŭgusto 2018', event_date(event)
-  end
-
-  test 'Simpligi la eventan daton - malsamjara evento' do
-    event = events(:one).dup
-    event.date_start = Date.new(2018,12,30)
-    event.date_end = Date.new(2019,1,6)
-    event.save
-
-    assert_equal '30-a de decembro 2018 - 6-a de januaro 2019', event_date(event)
+    # malsamjara evento
+    event.update!(date_end: Date.new(2019, 1, 6))
+    assert_equal 'De la 17-a de julio 2018 ĝis la 6-a de januaro 2019', event_date(event)
   end
 
   test 'colorigas la eventojn pasintajn grizaj' do
