@@ -1,10 +1,8 @@
 - if @event.location_defined?
-  %div
-    - options = 'zoom=15'
-    - options += "&size=400x300"
-    - options += "&center=#{@event.latitude},#{@event.longitude}"
-    - options += "&key=#{Rails.application.credentials.google_maps_key}"
-    - options += "&markers=color:red%7C#{@event.latitude},#{@event.longitude}"
-
-  = link_to event_map_url(@event), target: :_blonk do
-    = image_tag "https://maps.googleapis.com/maps/api/staticmap?#{options}", alt: "Map", class: 'event-map'
+  #map.event-map
+    :javascript
+      var map = L.map('map').setView([#{@event.latitude}, #{@event.longitude}], 15);
+      L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png?lang=eo', {
+        attribution: '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a>'
+      }).addTo(map);
+      L.marker([#{@event.latitude}, #{@event.longitude}]).addTo(map);
