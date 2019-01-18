@@ -50,4 +50,13 @@ module EventsHelper
     else 'blueIcon'
     end
   end
+
+  # Protektas la retadreson kontaŭ spamoj
+  def display_event_email(event)
+    if user_signed_in?
+      mail_to(event.email, event.email, subject: "Informoj pri la evento #{event.title}", class: 'button-contact')
+    else
+      event.email.gsub('@',' <ĉe> ').gsub('.', ' <punkto> ')
+    end
+  end
 end
