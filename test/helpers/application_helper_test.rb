@@ -5,8 +5,7 @@ require 'test_helper'
 class ApplicationHelperTest < ActionView::TestCase
   test 'skribu la daton plene' do
     date = Date.new(1978, 7, 17)
-    assert_equal 'La 17-an de julio 1978', format_date(date)
-    assert_equal 'La 17-a de julio 1978', format_date(date, accusative: false)
+    assert_equal '17 julio 1978', format_date(date)
   end
 
   test 'simpligas la eventajn datojn' do
@@ -14,19 +13,19 @@ class ApplicationHelperTest < ActionView::TestCase
 
     # Samtaga evento
     event.update!(date_start: Date.new(2018, 7, 17), date_end: Date.new(2018, 7, 17))
-    assert_equal 'La 17-an de julio 2018', event_date(event)
+    assert_equal '17 julio 2018', event_date(event)
 
     # sammonata evento
     event.update!(date_end: Date.new(2018, 7, 21))
-    assert_equal 'De la 17-a ĝis la 21-a de julio 2018', event_date(event)
+    assert_equal '17 - 21 julio 2018', event_date(event)
 
     # malsammonata evento
     event.update!(date_end: Date.new(2018, 8, 21))
-    assert_equal 'De la 17-a de julio ĝis la 21-a de aŭgusto 2018', event_date(event)
+    assert_equal '17 julio - 21 aŭgusto 2018', event_date(event)
 
     # malsamjara evento
     event.update!(date_end: Date.new(2019, 1, 6))
-    assert_equal 'De la 17-a de julio 2018 ĝis la 6-a de januaro 2019', event_date(event)
+    assert_equal '17 julio 2018 - 6 januaro 2019', event_date(event)
   end
 
   test 'colorigas la eventojn pasintajn grizaj' do

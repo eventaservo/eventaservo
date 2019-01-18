@@ -5,7 +5,7 @@
 %h3.text-center
   Eventoj kiuj okazos inter
   %br
-  = event_date(Event.new(date_start: Date.today, date_end: Date.today + 7.days)).gsub('De ', '')
+  = event_date(Event.new(date_start: Date.today, date_end: Date.today + 7.days))
 
 - if @events.online.exists?
   %table.stripped.bordered
