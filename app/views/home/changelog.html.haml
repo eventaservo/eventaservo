@@ -1,2 +1,43 @@
 .box-white
-  = markdown(File.read('public/CHANGELOG.md'))
+  %h1 Ŝanĝoprotokolo
+
+  Ĉiuj gravaj ŝanĝoj estas dokumentita en ĉi tiu teksto.
+
+  La teksto-formato estas inspirita de #{link_to 'Keep a Changelog', 'https://keepachangelog.com/en/1.0.0/'},
+  kaj ĉi tiu projeto kongruas kun #{link_to 'Semantic Versioning', 'https://semver.org/spec/v2.0.0.html'}.
+
+  %hr
+  %h3 v1.3 - 2019-01-17
+  .monospace
+    .font-weight-bold ALDONOJ
+    %li Semajna resumo
+
+    .font-weight-bold ŜANĜOJ
+    %li Anstataŭas Google Maps per OpenStreetMaps en eventa paĝo
+    %li Simpligas la eventajn datojn
+    %li Protektas la retpoŝtadresojn kontraŭ spamoj
+
+  %br
+  %h3 v1.2 - 2019-01-11
+  .monospace
+    .font-weight-bold ALDONOJ
+    %li Kreado de retaj eventoj
+    %li Koloraj pingloj en mapo laŭ eventaj proksimecoj
+
+    .font-weight-bold ŜANĜOJ
+    %li Eventa data tekstaranĝo
+    %li Monatnomoj minusklaj
+    %li Uzo de Trix Editor por redakti eventajn enhavojn
+
+    .font-weight-bold RIPAROJ
+    %li Kelkaj tajperaroj
+    %li Diversaj cimriparoj
+
+  %br
+  %h3 v1.1 - 2018-12-17
+  .monospace
+    .font-weight-bold ŜANĜOJ
+    %li Uzo de Wikimedia mapoj en Esperanto
+
+    .font-weight-bold RIPAROJ
+    %li Forigis la mesaĝon "true" kiam la uzantsesio-tempo finiĝas
