@@ -3,7 +3,7 @@
   .box-body
     - unless @event.online
       %p
-        <strong>Adreso:</strong> #{link_to @event.address, event_map_url(@event), target: :_blank}
+        <strong>Adreso:</strong> #{link_to icon('fas', 'map-marker-alt') + ' ' + @event.address, event_map_url(@event), target: :_blank}
         %br
         <strong>Urbo:</strong> #{@event.city} - #{@event.country.name}
         %br
