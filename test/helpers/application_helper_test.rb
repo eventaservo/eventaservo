@@ -5,7 +5,7 @@ require 'test_helper'
 class ApplicationHelperTest < ActionView::TestCase
   test 'skribu la daton plene' do
     date = Date.new(1978, 7, 17)
-    assert_equal '17 julio 1978', format_date(date)
+    assert_equal 'lundo, 17 julio 1978', format_date(date)
   end
 
   test 'simpligas la eventajn datojn' do
@@ -13,7 +13,7 @@ class ApplicationHelperTest < ActionView::TestCase
 
     # Samtaga evento
     event.update!(date_start: Date.new(2018, 7, 17), date_end: Date.new(2018, 7, 17))
-    assert_equal '17 julio 2018', event_date(event)
+    assert_equal 'mardo, 17 julio 2018', event_date(event)
 
     # sammonata evento
     event.update!(date_end: Date.new(2018, 7, 21))
