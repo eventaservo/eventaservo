@@ -35,7 +35,7 @@ module EventsHelper
   end
 
   def event_map_url(event)
-    "https://www.google.com/maps/search/?api=1&query=#{event.full_address}"
+    "https://www.openstreetmap.org/search?query=#{event.full_address}"
   end
 
   def days_to_event(event)
