@@ -40,9 +40,9 @@ class HomeController < ApplicationController
 
   def accept_cookies
     if params[:akceptas_ga] == 'jes'
-      cookies[:akceptas_ga] = 'jes'
+      cookies[:akceptas_ga] = { value: 'jes', expires: 1.year }
     else
-      cookies[:akceptas_ga] = 'ne'
+      cookies[:akceptas_ga] = { value: 'ne', expires: 1.year }
       delete_ga_cookies
     end
   end
