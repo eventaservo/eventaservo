@@ -18,6 +18,13 @@ body {
   @extend .small;
 }
 
+.cookies-bar {
+  @extend .small;
+  text-align: center;
+  background-color: black;
+  color: white;
+}
+
 .turbolinks-progress-bar {
   height           : 10px;
   background-color : white;

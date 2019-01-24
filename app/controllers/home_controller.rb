@@ -12,7 +12,6 @@ class HomeController < ApplicationController
   end
 
   def privateco
-    render formats: :text
   end
 
   def prie
@@ -37,5 +36,28 @@ class HomeController < ApplicationController
   end
 
   def statistics
+  end
+
+  def accept_cookies
+    if params[:akceptas_ga] == 'jes'
+      cookies[:akceptas_ga] = 'jes'
+    else
+      cookies[:akceptas_ga] = 'ne'
+      delete_ga_cookies
+    end
+  end
+
+  def reset_cookies
+    delete_ga_cookies
+    cookies.delete :akceptas_ga
+    redirect_to root_url
+  end
+
+  private
+
+  # Forigas Google Analytics cookies
+  def delete_ga_cookies
+    cookies.delete :_ga, path: '/', domain: '.eventaservo.org'
+    cookies.delete :_gid, path: '/', domain: '.eventaservo.org'
   end
 end

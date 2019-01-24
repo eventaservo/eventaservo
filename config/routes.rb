@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get '/events.json', to: 'home#events'
   get '/search', to: 'home#search'
   get '/statistikoj', to: 'home#statistics'
+  get '/akcepti_kuketojn', to: 'home#accept_cookies'
+  get '/forigas_kuketojn', to: 'home#reset_cookies'
 
   root to: 'home#index'
 

@@ -1,0 +1,7 @@
+.cookies-bar.navbar.fixed-bottom
+  .col-sm-7.col-12
+    Eventa Servo uzas la servon Google Analyctics por esplori kiel uzantoj uzas la retejon.
+    Por legi kiel ĉi tio influas vian privatecon, bonvolu legi <u>#{link_to 'nian privatecopolitikon', privateco_url, class: 'text-white'}</u>.
+  .col-sm-5.col-12
+    = link_to icon('fas', 'check', 'Mi akceptas', class: 'fg-color-green'), akcepti_kuketojn_url(akceptas_ga: 'jes'), remote: true, class: 'btn btn-sm btn-outline-light col-5'
+    = link_to icon('fas', 'times', 'Mi malakceptas', class: 'fg-color-red'), akcepti_kuketojn_url(akceptas_ga: 'ne'), remote: true, class: 'btn btn-sm btn-outline-light col-5'
