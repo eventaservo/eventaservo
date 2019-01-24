@@ -15,11 +15,16 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = Event.new
+    if params[:from_event].present?
+      attributes = Event.find(params[:from_event]).attributes.except('code', 'date_start', 'date_end', 'user_id')
+      @event = Event.new(attributes)
+    else
+      @event = Event.new
+      @event.city = current_user.city if current_user.city?
+      @event.country_id = current_user.country_id if current_user.country_id?
+    end
     @event.date_start = Date.today
     @event.date_end = Date.today
-    @event.city = current_user.city if current_user.city?
-    @event.country_id = current_user.country_id if current_user.country_id?
   end
 
   def edit

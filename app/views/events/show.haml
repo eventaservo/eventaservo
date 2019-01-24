@@ -21,7 +21,8 @@
       = render partial: 'uploads'
       - if user_signed_in? && (current_user.is_owner_of(@event) || current_user.admin?)
         .buttons-footer
-          = link_to 'Redakti eventon', edit_event_path(@event.code), class: 'btn btn-sm btn-outline-primary'
+          = link_to icon('far', 'copy', 'Duobligi eventon'), new_event_url(from_event: @event), class: 'btn btn-sm btn-outline-success'
+          = link_to icon('far', 'edit', 'Redakti eventon'), edit_event_url(@event.code), class: 'btn btn-sm btn-outline-primary'
 
   .col-lg-4
     = render partial: 'informoj'
