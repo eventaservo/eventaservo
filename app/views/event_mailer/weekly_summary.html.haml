@@ -37,7 +37,10 @@
               .title= link_to event.title, event_url(event.code), class: 'bold'
               .date-and-city= event_date(event)
               .description= event.description
-
+%br
+.text-center
+  .button-blue= link_to 'Diskonigi mian eventon', new_event_url
+%br
 .text-center.small
   %br
   Se vi ne plu volas ricevi la Semajnan Resumon, eblas #{link_to 'malaboni', edit_user_registration_url}.

@@ -6,7 +6,8 @@
   %body
     = yield
 
-    %hr
-    .small
-      Mesaĝo aŭtomate sendita de Eventa Servo (#{link_to 'https://eventaservo.org', 'https://eventaservo.org'}).
+    %br
+    .email-footer
+      Mesaĝo aŭtomate sendita de #{link_to 'Eventa Servo', 'https://eventaservo.org'}.
+      %br
       Kontaktu nin per #{mail_to 'kontakto@eventaservo.org'}.
