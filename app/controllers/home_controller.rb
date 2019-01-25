@@ -25,6 +25,11 @@ class HomeController < ApplicationController
     @events = Event.includes(:country).by_username(params[:username]) if params[:username].present?
   end
 
+  def feed
+    @events = Event.includes(:country).includes(:user).venontaj.order(:date_start)
+    render layout: false
+  end
+
   def view_style
     session[:event_list_style] = params[:view_style]
     redirect_back fallback_location: root_url

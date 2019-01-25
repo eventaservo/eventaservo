@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/vidmaniero/:view_style', to: 'home#view_style', as: 'view_style'
   get '/prie', to: 'home#prie'
   get '/changelog', to: 'home#changelog'
+  get '/events.rss', to: 'home#feed', as: 'events_rss'
   get '/events.json', to: 'home#events'
   get '/search', to: 'home#search'
   get '/statistikoj', to: 'home#statistics'

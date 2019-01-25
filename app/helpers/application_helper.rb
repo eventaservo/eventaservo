@@ -79,4 +79,11 @@ module ApplicationHelper
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::XHTML, options)
     markdown.render(text).html_safe
   end
+
+  def event_full_description(event)
+    text = "#{event.description} | "
+    text += event.online ? '(Reta evento) ' : "(#{event.country.name} - #{event.city}) "
+    text += event_date(event)
+    return text
+  end
 end
