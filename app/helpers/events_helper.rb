@@ -44,7 +44,7 @@ module EventsHelper
 
   def event_map_pin_color(event)
     case days_to_event(event)
-    when -30..0 then 'redIcon'
+    when -30..0 then 'greenIcon'
     when 1..7 then 'orangeIcon'
     when 8..30 then 'yellowIcon'
     else 'blueIcon'
