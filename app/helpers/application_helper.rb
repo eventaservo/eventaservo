@@ -81,9 +81,19 @@ module ApplicationHelper
   end
 
   def event_full_description(event)
-    text = "#{event.description} | "
-    text += event.online ? '(Reta evento) ' : "(#{event.country.name} - #{event.city}) "
-    text += event_date(event)
-    return text
+    text = event_date(event)
+    text += event.online ? ' (Reta evento)' : " (#{event.country.name} - #{event.city})"
+    text += "<br/>#{event.description}"
+    text
+  end
+
+  def rss_enclosure(xml, event)
+    return unless event.uploads.attached?
+
+    upload = event.uploads.first
+    return unless upload.blob.image?
+
+    thumb = upload.variant(resize: '150x150').processed
+    xml.enclosure url: rails_representation_url(thumb), length: upload.byte_size / 10, type: upload.content_type
   end
 end

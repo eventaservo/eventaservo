@@ -5,6 +5,6 @@
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.navbar-nav.mr-auto
       %li.nav-item= link_to 'Ĉefpaĝo', root_url, class: 'nav-link'
-      %li.nav-item= link_to 'Krei eventon', new_event_path, class: 'nav-link'
+      %li.nav-item= link_to 'Aldoni eventon', new_event_path, class: 'nav-link'
       = render partial: 'layouts/admin' if user_signed_in? && current_user.admin?
     = render partial: 'layouts/uzanto'
