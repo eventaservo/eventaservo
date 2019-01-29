@@ -18,6 +18,8 @@ class HomeController < ApplicationController
   end
 
   def events
+    redirect_to root_url unless access_from_server
+
     @events = Event.includes(:country)
     @events = @events.by_continent(params[:continent]) if params[:continent].present?
     @events = @events.by_country_name(params[:country]) if params[:country].present?
@@ -64,5 +66,9 @@ class HomeController < ApplicationController
   def delete_ga_cookies
     cookies.delete :_ga, path: '/', domain: '.eventaservo.org'
     cookies.delete :_gid, path: '/', domain: '.eventaservo.org'
+  end
+
+  def access_from_server
+    request.headers['SERVER_NAME'].in? ['devel.eventaservo.org', 'staging.eventaservo.org', 'eventaservo.org']
   end
 end
