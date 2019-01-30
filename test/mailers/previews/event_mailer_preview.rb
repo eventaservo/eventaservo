@@ -13,6 +13,6 @@ class EventMailerPreview < ActionMailer::Preview
   end
 
   def weekly_summary
-    EventMailer.weekly_summary(User.receives_weekly_summary.first)
+    EventMailer.weekly_summary(User.receives_weekly_summary.sample(1).first)
   end
 end

@@ -1,0 +1,30 @@
+- if @events.online.exists?
+  %table.stripped.bordered
+    %tbody
+      %tr.row-title
+        %td.text-center Retaj eventoj
+      - @events.online.each do |event|
+        %tr
+          %td.text-center
+            .event
+              .title= link_to event.title, event_url(event.code), class: 'bold'
+              .date-and-city= event_date(event)
+              .description= event.description
+  %br
+  %br
+
+  %table.bordered
+    %tbody
+      %tr.row-title
+        %td.text-center Ĉeestaj eventoj
+      - @events.grouped_by_countries.each do |country_name, events|
+        %tr.row-header
+          %td= country_name
+
+        - events.each do |event|
+          %tr
+            %td.text-center
+              .event
+                .title= link_to event.title, event_url(event.code), class: 'bold'
+                .date-and-city= event_date(event)
+                .description= event.description

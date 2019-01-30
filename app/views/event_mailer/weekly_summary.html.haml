@@ -7,36 +7,11 @@
   %br
   = event_date(Event.new(date_start: Date.today, date_end: Date.today + 7.days)).gsub(' - ',' kaj ')
 
-- if @events.online.exists?
-  %table.stripped.bordered
-    %tbody
-      %tr.row-title
-        %td.text-center Retaj eventoj
-      - @events.online.each do |event|
-        %tr
-          %td.text-center
-            .event
-              .title= link_to event.title, event_url(event.code), class: 'bold'
-              .date-and-city= event_date(event)
-              .description= event.description
-  %br
-  %br
+- if @events.empty?
+  = render partial: 'no_events'
+- else
+  = render partial: 'event_list'
 
-%table.bordered
-  %tbody
-    %tr.row-title
-      %td.text-center Ĉeestaj eventoj
-    - @events.grouped_by_countries.each do |country_name, events|
-      %tr.row-header
-        %td= country_name
-
-      - events.each do |event|
-        %tr
-          %td.text-center
-            .event
-              .title= link_to event.title, event_url(event.code), class: 'bold'
-              .date-and-city= event_date(event)
-              .description= event.description
 %br
 .text-center
   .button-blue= link_to 'Diskonigi mian eventon', new_event_url
