@@ -8,7 +8,7 @@
     .col Lasta informo
 
   - @events.each do |event|
-    - bg_color = (event.date_start < Date.today) ? 'bg-color-gray' : nil
+    - bg_color = (event.date_start < Time.zone.today) ? 'bg-color-gray' : nil
     = link_to event_path(event.code), class: "item-row #{bg_color}" do
       .col
         (#{icon('far', 'eye', event.impressionist_count)})

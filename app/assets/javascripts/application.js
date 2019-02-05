@@ -26,6 +26,7 @@
 //= require social-share-button
 //= require highcharts
 //= require leaflet
+//= require leaflet.markercluster
 //= require trix
 //= require_tree .
 

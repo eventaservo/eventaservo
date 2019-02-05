@@ -41,7 +41,7 @@ class ApplicationHelperTest < ActionView::TestCase
   end
 
   test 'paĝ-titolo' do
-    assert_equal '<h2 class="text-center">Titolo <small>sub-titolo</small></h2>', page_title('Titolo', 'sub-titolo')
+    assert_equal '<h2 class="text-center">Titolo<small> sub-titolo</small></h2>', page_title('Titolo', 'sub-titolo')
   end
 
   test 'flash classes' do

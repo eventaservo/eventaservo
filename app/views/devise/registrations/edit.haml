@@ -26,6 +26,10 @@
         = display_user_image(@user)
         = f.file_field :picture, class: 'form-control-file', accept: 'image/*'
 
+      .form-group
+        = f.label :authentication_token
+        = f.text_field :authentication_token, readonly: true, class: 'form-control'
+
       .text-divider Retlistoj
 
       .form-check

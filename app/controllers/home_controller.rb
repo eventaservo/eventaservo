@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 class HomeController < ApplicationController
+  before_action :filter_by_period, only: :index
+
   def index
     session[:event_list_style] ||= 'listo' # Normala vidmaniero
-    @events = Event.includes(:country).venontaj
-    @countries = Event.venontaj.count_by_country
-    @continents = Event.venontaj.count_by_continents
+
+    @future_events = Event.venontaj
+    @continents    = @events.count_by_continents
   end
 
   def changelog

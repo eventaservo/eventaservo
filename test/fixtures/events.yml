@@ -10,8 +10,8 @@ DEFAULTS: &DEFAULTS
   country: one
   email: provemail@ekzamplo.org
   site: http://provo.ekzamplo.org
-  date_start: <%= Date.today %>
-  date_end: <%= Date.today %>
+  date_start: <%= Time.zone.today %>
+  date_end: <%= Time.zone.today %>
   code: <%= SecureRandom.urlsafe_base64(12) %>
 
 one:
@@ -19,13 +19,13 @@ one:
 
 pasinta:
   <<: *DEFAULTS
-  date_start: <%= Date.today-1.day %>
-  date_end: <%= Date.today-1.day %>
+  date_start: <%= Time.zone.today-1.day %>
+  date_end: <%= Time.zone.today-1.day %>
 
 venonta:
   <<: *DEFAULTS
-  date_start: <%= Date.today+1.day %>
-  date_end: <%= Date.today+1.day %>
+  date_start: <%= Time.zone.today+1.day %>
+  date_end: <%= Time.zone.today+1.day %>
 
 deleted:
   <<: *DEFAULTS

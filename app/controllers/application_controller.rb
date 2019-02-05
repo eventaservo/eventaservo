@@ -1,14 +1,27 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  protect_from_forgery with: :exception
+
   include Constants
 
   before_action :set_raven_context
 
   def user_is_owner_or_admin(event)
-    user_signed_in? && (current_user.is_owner_of(event) || current_user.admin?)
+    user_signed_in? && (current_user.owner_of(event) || current_user.admin?)
   end
   helper_method :user_is_owner_or_admin
+
+  def filter_by_period
+    @events =
+      case params[:periodo]
+      when 'hodiau' then Event.today
+      when 'p7_tagojn' then Event.in_7days
+      when 'p30_tagojn' then Event.in_30days
+      when 'estontece' then Event.after_30days
+      else Event.venontaj
+      end
+  end
 
   private
 

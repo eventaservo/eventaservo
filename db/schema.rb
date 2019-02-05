@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_15_131206) do
+ActiveRecord::Schema.define(version: 2019_01_30_195458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
+  enable_extension "uuid-ossp"
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -82,6 +83,7 @@ ActiveRecord::Schema.define(version: 2019_01_15_131206) do
     t.float "latitude"
     t.float "longitude"
     t.boolean "online", default: false
+    t.uuid "uuid", default: -> { "uuid_generate_v4()" }
     t.index "md5(content)", name: "index_events_on_content"
     t.index ["address"], name: "index_events_on_address"
     t.index ["city"], name: "index_events_on_city"
@@ -189,6 +191,8 @@ ActiveRecord::Schema.define(version: 2019_01_15_131206) do
     t.integer "country_id"
     t.string "username"
     t.jsonb "mailings"
+    t.string "authentication_token", limit: 30
+    t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

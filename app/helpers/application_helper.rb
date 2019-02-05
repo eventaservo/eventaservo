@@ -2,7 +2,10 @@
 
 module ApplicationHelper
   def page_title(title, subtext = nil)
-    content_tag(:h2, raw("#{title} <small>#{subtext}</small>"), class: 'text-center')
+    content_tag(:h2, class: 'text-center') do
+      concat title
+      concat content_tag(:small, ' ' + subtext) if subtext
+    end
   end
 
   def flash_class(level)
@@ -42,7 +45,7 @@ module ApplicationHelper
   def format_date(date, style: nil)
     case style
     when :short then l(date, format: '%e/%b/%y').strip
-    else l(date, format: "%A, %e %B %Y").strip
+    else l(date, format: '%A, %e %B %Y').strip
     end
   end
 
@@ -67,7 +70,7 @@ module ApplicationHelper
   def color_event(event)
     return 'purple' if event.online
 
-    if event.date_end < Date.today # pasintaj eventoj estas grizaj
+    if event.date_end < Time.zone.today # pasintaj eventoj estas grizaj
       'gray'
     else
       'green' # Venontaj eventoj estas verdaj

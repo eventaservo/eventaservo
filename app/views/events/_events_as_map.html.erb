@@ -1,18 +1,26 @@
 <div id="map" class="full-map">
   <script language="JavaScript">
-    var map = L.map('map').setView([25, 30], 2);
+    var map = L.map('map');
     L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png?lang=eo', {
       attribution: '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
+    var bounds = [];
+    var markers = L.markerClusterGroup({ maxClusterRadius: 20 });
 
     <% events.each do |event| %>
       <% if event.location_defined?  %>
-        L.marker([<%= event.latitude %>, <%= event.longitude %>], { icon: <%= event_map_pin_color(event) %> }).addTo(map)
-            .bindPopup('<strong><%= link_to event.title, event_url(event.code) %></strong><br><%= event_date(event) %><br><br><%= event.description %>');
+        markers.addLayer(L.marker([<%= event.latitude %>, <%= event.longitude %>], { icon: <%= event_map_pin_color(event) %> })
+            .bindPopup('<strong><%= link_to event.title, event_url(event.code) %></strong><br><%= event_date(event) %><br><br><%= event.description %>'));
+
+        bounds.push([<%= event.latitude %>, <%= event.longitude %>]);
       <% end %>
     <% end %>
+
+    map.addLayer(markers);
+    map.fitBounds(bounds, { padding: [50, 50], maxZoom: 16 });
   </script>
 </div>
+
 <div class="d-flex justify-content-center small">
   <div class="m-2 text-center">
     <%= image_tag('leaflet_icons/pin_green.svg', height: 24, alt: 'verda pinglo') %>

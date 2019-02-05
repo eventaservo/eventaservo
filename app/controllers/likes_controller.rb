@@ -2,7 +2,7 @@
 
 class LikesController < ApplicationController
   def event
-    event = Event.find_by(code: params[:event_code])
+    event = Event.by_code(params[:event_code])
 
     like = event.likes.find_by(user_id: current_user.id)
     if like

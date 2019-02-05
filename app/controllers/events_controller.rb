@@ -4,6 +4,7 @@ class EventsController < ApplicationController
   before_action :authenticate_user!, only: %i[index new create edit update destroy]
   before_action :set_event, only: %i[show edit update destroy]
   before_action :authorize_user, only: %i[edit update destroy]
+  before_action :filter_by_period, only: %i[by_continent by_country by_city]
 
   # Montras la uzantajn eventojn
   def index
@@ -23,8 +24,8 @@ class EventsController < ApplicationController
       @event.city = current_user.city if current_user.city?
       @event.country_id = current_user.country_id if current_user.country_id?
     end
-    @event.date_start = Date.today
-    @event.date_end = Date.today
+    @event.date_start = Time.zone.today
+    @event.date_end = Time.zone.today
   end
 
   def edit
@@ -51,7 +52,7 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    redirect_to(event_path(@event.code), flash: { error: 'Vi ne estas la kreinto, do vi ne rajtas forigi ĝin' }) && return unless current_user.is_owner_of(@event) || current_user.admin?
+    redirect_to(event_path(@event.code), flash: { error: 'Vi ne estas la kreinto, do vi ne rajtas forigi ĝin' }) && return unless current_user.owner_of(@event) || current_user.admin?
 
     # Ne forviŝas la eventon el la datumbaso nun. Ĝi estos forviŝita post kelkaj tagoj
     @event.delete!
@@ -59,7 +60,7 @@ class EventsController < ApplicationController
   end
 
   def delete_file
-    event = Event.find_by(code: params[:event_code])
+    event = Event.by_code(params[:event_code])
     event.uploads.find(params[:file_id]).purge_later
     redirect_to event_path(event.code), flash: { success: 'Dosiero sukcese forigita' }
   end
@@ -71,21 +72,25 @@ class EventsController < ApplicationController
       redirect_to events_by_continent_path('Reta')
     end
 
-    @events = Event.by_continent(params[:continent]).venontaj
-    @countries = Event.by_continent(params[:continent]).venontaj.count_by_country
+    @future_events = Event.by_continent(params[:continent]).venontaj
+    @events        = @events.by_continent(params[:continent])
+    @countries     = @events.count_by_country
   end
 
   def by_country
     @country = Country.find_by(name: params[:country_name])
     redirect_to(root_path, flash: { error: 'Lando ne ekzistas en la datumbazo' }) && return if @country.nil?
-    @events = Event.includes(:country).by_country_id(@country.id).venontaj
-    @cities = Event.by_country_id(@country.id).venontaj.count_by_cities
+
+    @future_events = Event.includes(:country).by_country_id(@country.id).venontaj
+    @cities        = @events.by_country_id(@country.id).count_by_cities
+    @events        = @events.includes(:country).by_country_id(@country.id)
   end
 
   # Listigas la eventoj laŭ urboj
   def by_city
-    @country = Country.find_by(name: params[:country_name])
-    @events = Event.by_city(params[:city_name]).venontaj
+    @country       = Country.find_by(name: params[:country_name])
+    @future_events = Event.by_city(params[:city_name]).venontaj
+    @events        = @events.by_city(params[:city_name])
   end
 
   def by_username
@@ -98,7 +103,7 @@ class EventsController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_event
-      @event = Event.find_by(code: params[:code])
+      @event = Event.by_code(params[:code])
       redirect_to root_path, flash: { error: 'Evento ne ekzistas' } if @event.nil?
     end
 
@@ -112,7 +117,7 @@ class EventsController < ApplicationController
 
     # Nur la permesataj uzantoj povas redakti, ĝisdatiĝi kaj foriĝi la eventon
     def authorize_user
-      unless current_user.is_owner_of(@event) || current_user.admin?
+      unless current_user.owner_of(@event) || current_user.admin?
         redirect_to root_url, flash: { error: 'Vi ne rajtas' }
       end
     end

@@ -1,0 +1,42 @@
+#registered_events_last_12_months
+
+- quantity = []
+- quantity << Event.where('created_at <= ?', (Time.zone.today - 5.months).end_of_month).count
+- quantity << Event.where('created_at <= ?', (Time.zone.today - 4.months).end_of_month).count
+- quantity << Event.where('created_at <= ?', (Time.zone.today - 3.months).end_of_month).count
+- quantity << Event.where('created_at <= ?', (Time.zone.today - 2.months).end_of_month).count
+- quantity << Event.where('created_at <= ?', (Time.zone.today - 1.month).end_of_month).count
+- quantity << Event.where('created_at <= ?', Time.zone.today.end_of_month).count
+
+:coffee
+  Highcharts.chart 'registered_events_last_12_months',
+  colors: ['#28a745']
+  chart: type: 'spline'
+  title: text: 'Registritaj eventoj'
+  legend: enabled: false
+  xAxis:
+    categories: [
+      '#{(Time.zone.today - 5.months).end_of_month.strftime('%b-%y')}',
+      '#{(Time.zone.today - 4.months).end_of_month.strftime('%b-%y')}',
+      '#{(Time.zone.today - 3.months).end_of_month.strftime('%b-%y')}',
+      '#{(Time.zone.today - 2.months).end_of_month.strftime('%b-%y')}',
+      '#{(Time.zone.today - 1.month).end_of_month.strftime('%b-%y')}',
+      '#{Time.zone.today.end_of_month.strftime('%b-%y')}'
+    ]
+    crosshair: true
+  yAxis:
+    min: 0
+    title: text: 'Eventoj'
+  plotOptions: spline: dataLabels: enabled: true
+  tooltip:
+    headerFormat: '<span style="font-size:10px">{point.key}</span><table>'
+    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' + '<td style="padding:0"><b>{point.y} eventoj</b></td></tr>'
+    footerFormat: '</table>'
+    shared: true
+    useHTML: true
+  series: [
+    {
+      name: 'Kvanto'
+      data: #{raw quantity}
+    }
+  ]

@@ -5,7 +5,7 @@
 
 .row
   .col-lg-8
-    .box-white
+    .box-white{class: event_color_class(@event)}
       .lead.d-flex
         %div
           #{event_flag(@event)} #{@event.title}
@@ -19,7 +19,7 @@
 
       = render partial: 'event_contact'
       = render partial: 'uploads'
-      - if user_signed_in? && (current_user.is_owner_of(@event) || current_user.admin?)
+      - if user_signed_in? && (current_user.owner_of(@event) || current_user.admin?)
         .buttons-footer
           = link_to icon('far', 'copy', 'Duobligi eventon'), new_event_url(from_event: @event), class: 'btn btn-sm btn-outline-success'
           = link_to icon('far', 'edit', 'Redakti eventon'), edit_event_url(@event.code), class: 'btn btn-sm btn-outline-primary'

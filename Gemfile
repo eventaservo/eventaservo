@@ -34,6 +34,7 @@ gem 'devise', '~> 4.2'
 gem 'mini_magick'
 gem 'omniauth-facebook'
 gem 'pg', '~> 1.1', '>= 1.1.3'
+gem 'simple_token_authentication', '~> 1.0'
 # gem 'rmagick'
 
 # CSS kaj fasonado
@@ -59,6 +60,9 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'daemons'
 gem 'delayed_job_active_record'
+
+gem 'rack-attack'
+gem 'rack-cors', require: 'rack/cors'
 
 gem 'geocoder'
 gem 'highcharts-rails', '~> 6.0'

@@ -67,8 +67,8 @@ class EventTest < ActiveSupport::TestCase
 
   test 'fina dato devas esti post komenca dato' do
     event            = events(:one)
-    event.date_start = Date.today
-    event.date_end   = Date.today - 1.day
+    event.date_start = Time.zone.today
+    event.date_end   = Time.zone.today - 1.day
     assert_not event.save
   end
 
@@ -91,26 +91,24 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test 'korektas la titolan skribmanieron' do
-    @event.update_attribute(:title, 'GRANDA TITOLO')
+    @event.update!(title: 'GRANDA TITOLO')
     assert_equal 'Granda Titolo', @event.title
 
-    @event.update_attribute(:title, 'malgranda titolo')
+    @event.update!(title: 'malgranda titolo')
     assert_equal 'Malgranda Titolo', @event.title
 
-    @event.update_attribute(:title, 'BONA Skribita Titolo')
+    @event.update!(title: 'BONA Skribita Titolo')
     assert_equal 'BONA Skribita Titolo', @event.title
   end
 
   test 'retejo devas enhavi http se ankoraŭ ne havas ĝin' do
-    site = 'google.com'
-    @event.update_attribute(:site, site)
-    assert_equal "http://#{site}", @event.site
+    @event.update!(site: 'google.com')
+    assert_equal 'http://google.com', @event.site
   end
 
   test 'ne aldonu http se retejo jam havas ĝin' do
-    site = 'https://google.com'
-    @event.update_attribute(:site, site)
-    assert_equal site, @event.site
+    @event.update!(site: 'https://google.com')
+    assert_equal 'https://google.com', @event.site
   end
 
   test 'ne aldonu http se ne estas retejo' do
@@ -128,15 +126,15 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test 'forigas malpermesatajn signojn el urbonomo' do
-    @event.update_attribute(:city, 'urbo / alia urbo')
+    @event.update!(city: 'urbo / alia urbo')
     assert_equal 'urbo  alia urbo', @event.city
   end
 
   test 'geocoder, dum provoj, devas informi la NY adreson' do
     event = events(:usono)
     event.geocode
-    event.save
-    assert_equal (40.7143528), event.latitude
-    assert_equal (-74.0059731), event.longitude
+    event.save!
+    assert_equal 40.7143528, event.latitude
+    assert_equal(-74.0059731, event.longitude)
   end
 end

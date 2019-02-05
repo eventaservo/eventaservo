@@ -19,8 +19,8 @@ class NotificationListController < ApplicationController
     recipient = NotificationList.find_by(code: params[:recipient_code])
     redirect_to(root_url, flash: { info: 'Retpoŝtadreso jam forigita' }) && return if recipient.nil?
 
-    recipient.destroy
-    redirect_to root_path, flash: { success: "Retpoŝtadreso #{recipient.email} forigita"}
+    recipient.destroy!
+    redirect_to root_path, flash: { success: "Retpoŝtadreso #{recipient.email} forigita" }
   end
 
   private

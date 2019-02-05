@@ -5,12 +5,12 @@
   = render partial: 'home/shortcuts'
   = render partial: 'layouts/breadcrumb'
   = render partial: 'home/view_style_chooser'
+  = render partial: 'events/events_count'
 
-  - unless session[:event_list_style] == 'mapo'
-    .lead Eventoj laŭ urboj
-    - @cities.each do |city|
-      = link_to events_by_city_path(@country.continent, @country.name, city.name), class: 'button-event-count' do
-        = city.name
-        %span.badge.badge-primary= city.count
+  .lead Eventoj laŭ urboj
+  - @cities.each do |city|
+    = link_to events_by_city_path(@country.continent, @country.name, city.name, periodo: params[:periodo].presence), class: 'button-event-count' do
+      = city.name
+      %span.badge.badge-primary= city.count
 
   = display_events_by_style

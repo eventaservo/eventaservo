@@ -5,7 +5,7 @@
 %h3.text-center
   Eventoj kiuj okazos inter
   %br
-  = event_date(Event.new(date_start: Date.today, date_end: Date.today + 7.days)).gsub(' - ',' kaj ')
+  = event_date(Event.new(date_start: Time.zone.today, date_end: Time.zone.today + 7.days)).gsub(' - ',' kaj ')
 
 - if @events.empty?
   = render partial: 'no_events'

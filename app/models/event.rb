@@ -14,7 +14,7 @@ class Event < ApplicationRecord
   has_many :likes, as: :likeable, dependent: :destroy
 
   validates :title, :description, :city, :country_id, :date_start, :date_end, :code, presence: true
-  validates_length_of :description, maximum: 400
+  validates :description, length: { maximum: 400 }
   validates :code, uniqueness: true, on: :create
   validate :end_after_start
   before_save :format_event_data
@@ -24,17 +24,27 @@ class Event < ApplicationRecord
 
   default_scope { where(deleted: false) }
   scope :deleted, -> { unscoped.where(deleted: true) }
-  scope :venontaj, -> { where('date_start >= :date OR date_end >= :date', date: Date.today) }
-  scope :pasintaj, -> { where('end_date < ?', Date.today) }
+  scope :venontaj, -> { where('date_start >= :date OR date_end >= :date', date: Time.zone.today) }
+  scope :pasintaj, -> { where('date_end < ?', Time.zone.today) }
+  scope :today, -> { by_dates(from: Time.zone.today, to: Time.zone.today) }
+  scope :in_7days, -> { where('date_start BETWEEN ? and ?', Time.zone.today + 1.day, Time.zone.today + 7.days) }
+  scope :in_30days, -> { where('date_start BETWEEN ? and ?', Time.zone.today + 8.days, Time.zone.today + 30.days) }
+  scope :after_30days, -> { where('date_start > ?', Time.zone.today + 30.days) }
   scope :by_continent, ->(name) { joins(:country).where(countries: { continent: name }) }
   scope :by_country_id, ->(id) { where(country_id: id) }
   scope :by_country_name, ->(name) { joins(:country).where(countries: { name: name }) }
+  scope :by_country_code, ->(code) { joins(:country).where(countries: { code: code }) }
   scope :by_city, ->(city) { where(city: city) }
   scope :by_user, ->(user) { where(user: user) }
   scope :by_username, ->(username) { joins(:user).where(users: { username: username }) }
+  scope :by_uuid, ->(uuid) { unscoped.where(uuid: uuid) }
   scope :without_location, -> { where(latitude: nil) }
   scope :online, -> { where(online: true) }
   scope :not_online, -> { where(online: false) }
+
+  def self.by_code(code)
+    find_by(code: code)
+  end
 
   def self.grouped_by_months
     order(:date_start).group_by { |m| m.date_start.beginning_of_month }
@@ -45,7 +55,7 @@ class Event < ApplicationRecord
   end
 
   def self.by_dates(from:, to:)
-    where('(date_start >= :from AND date_start <= :to) OR (date_start <= :from AND date_end >= :from)', from: from, to: to)
+    where('(date_start>=:from AND date_start<=:to) OR (date_start<=:from AND date_end>=:from)', from: from, to: to)
   end
 
   def self.count_by_continents
@@ -68,12 +78,12 @@ class Event < ApplicationRecord
 
   # Malapareigu la eventon, sed ne forviŝu ĝin
   def delete!
-    update_attribute(:deleted, true)
+    update!(deleted: true)
   end
 
   # Reapegiru la eventon
   def undelete!
-    update_attribute(:deleted, false)
+    update!(deleted: false)
   end
 
   def self.search(search)
@@ -116,7 +126,7 @@ class Event < ApplicationRecord
       self.city = city.tr('/', '')
       self.site = fix_site(site)
 
-      if self.online
+      if online
         self.city = 'Reta urbo'
         self.country_id = 99_999
         self.latitude = nil

@@ -9,7 +9,9 @@ module EventsHelper
   end
 
   def event_participant_button(event)
-    return icon('fas', 'user-check', pluralize(event.participants.count, 'partoprenanto', 'partoprenantoj')) unless user_signed_in?
+    unless user_signed_in?
+      return icon('fas', 'user-check', pluralize(event.participants.count, 'partoprenanto', 'partoprenantoj'))
+    end
 
     button_class = current_user.participant?(event) ? 'button-participant-pressed' : 'button-participant'
     link_to event.participants.count, event_toggle_participant_path(event.code), class: button_class
@@ -22,7 +24,7 @@ module EventsHelper
     when 'kalendaro'
       render partial: 'events/events_as_calendar', locals: { events: @events }
     when 'mapo'
-      render partial: 'events/events_as_map', locals: {events: @events }
+      render partial: 'events/events_as_map', locals: { events: @events }
     else
       render partial: 'events/events_as_list', locals: { events: @events }
     end
@@ -39,7 +41,11 @@ module EventsHelper
   end
 
   def days_to_event(event)
-    Integer(event.date_start.to_date - Date.today)
+    if event.date_start < Time.zone.today && event.date_end >= Time.zone.today
+      0
+    else
+      Integer(event.date_start.to_date - Time.zone.today)
+    end
   end
 
   def event_map_pin_color(event)
@@ -51,12 +57,34 @@ module EventsHelper
     end
   end
 
+  def event_color_class(event)
+    case days_to_event(event)
+    when 0 then 'event-color-today'
+    when 1..7 then 'event-color-7days'
+    when 8..30 then 'event-color-30days'
+    when 31..Float::INFINITY then 'event-color-future'
+    else 'event-color-past'
+    end
+  end
+
   # Protektas la retadreson kontaŭ spamoj
   def display_event_email(event)
     if user_signed_in?
       mail_to(event.email, event.email, subject: "Informoj pri la evento #{event.title}", class: 'button-contact')
     else
-      event.email.gsub('@',' <ĉe> ').gsub('.', ' <punkto> ')
+      event.email.gsub('@', ' <ĉe> ').gsub('.', ' <punkto> ')
+    end
+  end
+
+  def link_to_event_count(periodo, &_block)
+    active_class =
+      if params[:periodo].present?
+        params[:periodo] == periodo ? 'ec-active' : 'ec-inactive'
+      end
+
+    link_to url_for(periodo: (periodo unless params[:periodo] == periodo)),
+            class: "event-count #{periodo} #{active_class}" do
+      yield
     end
   end
 end

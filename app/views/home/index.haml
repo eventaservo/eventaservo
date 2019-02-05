@@ -15,10 +15,11 @@
 
   #events_container
     = render partial: 'home/view_style_chooser'
+    = render partial: 'events/events_count'
 
     .lead Laŭ kontinentoj aŭ retaj eventoj
     - @continents.each do |continent|
-      = link_to events_by_continent_path(continent.name), class: 'button-event-count' do
+      = link_to events_by_continent_path(continent.name, periodo: params[:periodo].presence), class: 'button-event-count' do
         = continent.name
         %span.badge.badge-primary= continent.count
 

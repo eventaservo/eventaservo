@@ -23,6 +23,13 @@ Rails.application.routes.draw do
                                     registrations:      'users/registrations',
                                     omniauth_callbacks: 'users/omniauth_callbacks' }
 
+  # API
+  namespace :api do
+    namespace :v1 do
+      get 'events', to: 'events#index'
+    end
+  end
+
   # Eventoj
   resources :events, path: 'eventoj', param: 'code' do
     get 'like', to: 'likes#event', as: 'toggle_like'

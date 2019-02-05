@@ -9,7 +9,7 @@ class EventMailerPreview < ActionMailer::Preview
   end
 
   def notify_users
-    EventMailer.notify_user(Event.find_by(code: '6xlDaJ_nGiKJ27LD').id, NotificationList.order('RANDOM()').first.id)
+    EventMailer.notify_user(Event.by_code('6xlDaJ_nGiKJ27LD').id, NotificationList.order('RANDOM()').first.id)
   end
 
   def weekly_summary
