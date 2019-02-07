@@ -31,6 +31,7 @@ class Event < ApplicationRecord
   scope :in_30days, -> { where('date_start BETWEEN ? and ?', Time.zone.today + 8.days, Time.zone.today + 30.days) }
   scope :after_30days, -> { where('date_start > ?', Time.zone.today + 30.days) }
   scope :by_continent, ->(name) { joins(:country).where(countries: { continent: name }) }
+  scope :lau_lando, ->(lando) { joins(:country).where(country: lando) }
   scope :by_country_id, ->(id) { where(country_id: id) }
   scope :by_country_name, ->(name) { joins(:country).where(countries: { name: name }) }
   scope :by_country_code, ->(code) { joins(:country).where(countries: { code: code }) }
@@ -41,6 +42,7 @@ class Event < ApplicationRecord
   scope :without_location, -> { where(latitude: nil) }
   scope :online, -> { where(online: true) }
   scope :not_online, -> { where(online: false) }
+  scope :for_webcal, -> { where('date_start >= ? OR date_end >= ?', Time.zone.today - 6.months, Time.zone.today) }
 
   def self.by_code(code)
     find_by(code: code)
@@ -99,6 +101,7 @@ class Event < ApplicationRecord
   end
 
   def full_address
+    # TODO: Forviŝu la komon kiam ne estas adreso
     [address, city, country.try(:code).try(:upcase)].compact.join(', ')
   end
 

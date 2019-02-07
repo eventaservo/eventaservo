@@ -1,6 +1,6 @@
 .text-center
   .btn-group.btn-group{role:"group", "aria-label": "grupo2"}
-    = link_to icon('fas', 'list'), view_style_path('listo'), class: "btn #{session[:event_list_style] == 'listo' ? 'btn-primary' : 'btn-outline-primary' }"
-    = link_to icon('far', 'square'), view_style_path('kartoj'),  class: "btn #{session[:event_list_style] == 'kartoj' ? 'btn-primary' : 'btn-outline-primary' }"
-    = link_to icon('far', 'calendar'),view_style_path('kalendaro'), class: "btn #{session[:event_list_style] == 'kalendaro' ? 'btn-primary' : 'btn-outline-primary' }"
-    = link_to icon('fas', 'map-marked-alt'),view_style_path('mapo'), class: "btn #{session[:event_list_style] == 'mapo' ? 'btn-success' : 'btn-outline-success' }"
+    = link_to icon('fas', 'list'), view_style_path('listo'), class: "btn #{cookies[:event_list_style] == 'listo' ? 'btn-primary' : 'btn-outline-primary' }"
+    = link_to icon('far', 'square'), view_style_path('kartoj'),  class: "btn #{cookies[:event_list_style] == 'kartoj' ? 'btn-primary' : 'btn-outline-primary' }"
+    = link_to icon('far', 'calendar'),view_style_path('kalendaro'), class: "btn #{cookies[:event_list_style] == 'kalendaro' ? 'btn-primary' : 'btn-outline-primary' }"
+    = link_to icon('fas', 'map-marked-alt'),view_style_path('mapo'), class: "btn #{cookies[:event_list_style] == 'mapo' ? 'btn-success' : 'btn-outline-success' }"

@@ -12,7 +12,28 @@ class EventsController < ApplicationController
   end
 
   def show
-    impressionist(@event, nil, unique: [:session_hash])
+    respond_to do |format|
+      format.html { impressionist(@event, nil, unique: [:session_hash]) }
+      format.ics {
+        cal              = Icalendar::Calendar.new
+        cal.event do |e|
+          e.dtstart = Icalendar::Values::DateOrDateTime.new(@event.date_start.strftime('%Y%m%d')).call
+          e.dtend   = if @event.date_end > @event.date_start
+                        Icalendar::Values::DateOrDateTime.new((@event.date_end + 1.day).strftime('%Y%m%d')).call
+                      else
+                        Icalendar::Values::DateOrDateTime.new(@event.date_end.strftime('%Y%m%d')).call
+                      end
+
+          e.summary     = @event.title
+          e.description = @event.description + '\n\n' + event_url(@event.code)
+          e.location    = @event.full_address
+        end
+
+        cal.publish
+        render plain: cal.to_ical
+      }
+    end
+
   end
 
   def new
@@ -67,8 +88,8 @@ class EventsController < ApplicationController
 
   def by_continent
     validate_continent params[:continent]
-    if params[:continent] == 'Reta' && session[:event_list_style] == 'mapo'
-      session[:event_list_style] = 'listo'
+    if params[:continent] == 'Reta' && cookies[:event_list_style] == 'mapo'
+      cookies[:event_list_style] = 'listo'
       redirect_to events_by_continent_path('Reta')
     end
 

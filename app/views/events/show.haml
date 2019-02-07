@@ -10,11 +10,18 @@
         %div
           #{event_flag(@event)} #{@event.title}
         .ml-auto
+          = link_to icon('far', 'calendar-alt'), event_url(@event.code, format: :ics),
+            data: { toggle: 'tooltip', placement: 'top', title: 'Alklaku por aldoni ĝin al via kalendaro' }
           = render partial: 'share_button'
 
+      #div
+        .d-flex.ml-2.float-right
+          .div= calendar_icon(@event.date_start)
+          - if @event.date_end > @event.date_start
+            .p-2= icon('fas', 'arrow-right')
+            .div= calendar_icon(@event.date_end)
+        %h5.text-left= @event.description
 
-      %p.text-right.small= event_date(@event)
-      %p= @event.description
       .trix-content= sanitize @event.content
 
       = render partial: 'event_contact'

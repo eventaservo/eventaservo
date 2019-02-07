@@ -25,8 +25,9 @@ gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
 gem 'mini_racer'
 gem 'select2-rails'
 
-# FullCalendar
+# Kalendaroj
 gem 'fullcalendar-rails'
+gem 'icalendar'
 gem 'momentjs-rails'
 
 gem 'carrierwave', '~> 1.0'

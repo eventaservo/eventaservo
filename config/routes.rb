@@ -30,6 +30,11 @@ Rails.application.routes.draw do
     end
   end
 
+  # Webcal
+  namespace :webcal do
+    get 'lando/:landa_kodo', to: 'webcal#lando'
+  end
+
   # Eventoj
   resources :events, path: 'eventoj', param: 'code' do
     get 'like', to: 'likes#event', as: 'toggle_like'
