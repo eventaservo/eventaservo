@@ -88,8 +88,8 @@ class EventsController < ApplicationController
 
   def by_continent
     validate_continent params[:continent]
-    if params[:continent] == 'Reta' && cookies[:event_list_style] == 'mapo'
-      cookies[:event_list_style] = 'listo'
+    if params[:continent] == 'Reta' && cookies[:vidmaniero] == 'mapo'
+      cookies[:vidmaniero] = 'listo'
       redirect_to events_by_continent_path('Reta')
     end
 

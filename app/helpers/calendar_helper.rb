@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CalendarHelper
   def calendar_icon(date)
     content_tag(:time, class: 'icon', datetime: date.strftime('%Y-%m-%d')) do

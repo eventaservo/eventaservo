@@ -4,7 +4,7 @@ class HomeController < ApplicationController
   before_action :filter_by_period, only: :index
 
   def index
-    cookies[:event_list_style] ||= 'listo' # Normala vidmaniero
+    cookies[:vidmaniero] ||= { value: 'listo', expires: 1.year } # Normala vidmaniero
 
     @future_events = Event.venontaj
     @continents    = @events.count_by_continents
@@ -35,7 +35,7 @@ class HomeController < ApplicationController
   end
 
   def view_style
-    cookies[:event_list_style] = params[:view_style]
+    cookies[:vidmaniero] = params[:view_style]
     redirect_back fallback_location: root_url
   end
 

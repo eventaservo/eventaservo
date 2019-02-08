@@ -18,7 +18,7 @@ module EventsHelper
   end
 
   def display_events_by_style
-    case cookies[:event_list_style]
+    case cookies[:vidmaniero]
     when 'kartoj'
       render partial: 'events/events_as_cards', locals: { events: @events }
     when 'kalendaro'
