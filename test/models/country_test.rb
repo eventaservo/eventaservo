@@ -25,7 +25,7 @@ class CountryTest < ActiveSupport::TestCase
 
     recipient = notification_list(:one)
     country = countries(:one)
-    recipient.update_attribute(:country_id, country.id)
+    recipient.update!(country_id: country.id)
 
     assert country.recipients.find_by(id: recipient.id).present?
   end
@@ -35,7 +35,7 @@ class CountryTest < ActiveSupport::TestCase
 
     user    = users(:one)
     country = countries(:one)
-    user.update_attribute(:country_id, country.id)
+    user.update!(country_id: country.id)
 
     assert country.users.find_by(id: user.id).present?
   end

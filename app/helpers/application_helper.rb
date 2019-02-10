@@ -10,16 +10,11 @@ module ApplicationHelper
 
   def flash_class(level)
     case level
-    when :notice then
-      'alert alert-primary alert-dismissible'
-    when :success then
-      'alert alert-success alert-dismissible'
-    when :error then
-      'alert alert-danger alert-dismissible'
-    when :alert then
-      'alert alert-warning alert-dismissible'
-    else
-      'alert alert-info alert-dismissible'
+    when :notice then 'alert alert-primary alert-dismissible'
+    when :success then 'alert alert-success alert-dismissible'
+    when :error then 'alert alert-danger alert-dismissible'
+    when :alert then 'alert alert-warning alert-dismissible'
+    else 'alert alert-info alert-dismissible'
     end
   end
 
@@ -27,7 +22,7 @@ module ApplicationHelper
     return unless record.errors.any?
 
     return_html = "<div class='error-handling'>"
-    return_html += '<h4>Erros foram encontrados neste formulário</h4>'
+    return_html += '<h4>Troviĝas eraro en la formularo</h4>'
     return_html += '<ul>'
 
     record.errors.full_messages.each do |msg|
