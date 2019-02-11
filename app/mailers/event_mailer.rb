@@ -49,7 +49,8 @@ class EventMailer < ApplicationMailer
 
   def weekly_summary(user)
     @events = Event.by_dates(from: Time.zone.today, to: Time.zone.today + 7.days)
-    @user = user
+    # @user = user
+    @user = User.find(1) # Nur por provoj
     mail(to: "#{user.name.delete(',')} <#{user.email}>", subject: 'Tutmonda semajna resumo de eventoj')
   end
 end
