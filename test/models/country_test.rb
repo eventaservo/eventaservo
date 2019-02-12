@@ -39,4 +39,9 @@ class CountryTest < ActiveSupport::TestCase
 
     assert country.users.find_by(id: user.id).present?
   end
+
+  test 'serĉas la landon, ne gravas la ortografio' do
+    assert_equal 'Brazilo', Country.by_name('brazilo').name
+    assert_equal 'Ĉeĥio', Country.by_name('cxehxio').name
+  end
 end

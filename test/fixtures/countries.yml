@@ -24,3 +24,18 @@ usono:
   name: Usono
   continent: Ameriko
   code: us
+
+australio:
+  name: Australio
+  continent: Oceanio
+  code: au
+
+ĉeĥio:
+  name: Ĉeĥio
+  continent: Eŭropo
+  code: cz
+
+online:
+  name: Reta Evento
+  continent: Reta
+  code: ol

@@ -5,6 +5,8 @@ class EventsController < ApplicationController
   before_action :set_event, only: %i[show edit update destroy]
   before_action :authorize_user, only: %i[edit update destroy]
   before_action :filter_by_period, only: %i[by_continent by_country by_city]
+  before_action :validate_continent, only: %i[by_continent by_country by_city]
+  before_action :set_country, only: %i[by_country by_city]
 
   # Montras la uzantajn eventojn
   def index
@@ -87,7 +89,6 @@ class EventsController < ApplicationController
   end
 
   def by_continent
-    validate_continent params[:continent]
     if params[:continent] == 'Reta' && cookies[:vidmaniero] == 'mapo'
       cookies[:vidmaniero] = 'listo'
       redirect_to events_by_continent_path('Reta')
@@ -99,7 +100,6 @@ class EventsController < ApplicationController
   end
 
   def by_country
-    @country = Country.find_by(name: params[:country_name])
     redirect_to(root_path, flash: { error: 'Lando ne ekzistas en la datumbazo' }) && return if @country.nil?
 
     @future_events = Event.includes(:country).by_country_id(@country.id).venontaj
@@ -109,7 +109,6 @@ class EventsController < ApplicationController
 
   # Listigas la eventoj laŭ urboj
   def by_city
-    @country       = Country.find_by(name: params[:country_name])
     @future_events = Event.by_city(params[:city_name]).venontaj
     @events        = @events.by_city(params[:city_name])
   end
@@ -128,6 +127,10 @@ class EventsController < ApplicationController
       redirect_to root_path, flash: { error: 'Evento ne ekzistas' } if @event.nil?
     end
 
+    def set_country
+      @country = Country.by_name(params[:country_name])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
       params.require(:event).permit(
@@ -143,8 +146,13 @@ class EventsController < ApplicationController
       end
     end
 
-    def validate_continent(continent_name)
-      redirect_to root_url, flash: { notice: 'Ne estas eventoj en tiu kontinento' } unless
-          Event.by_continent(continent_name).any?
+    def validate_continent
+      continent_names = Country.pluck(:continent).uniq
+
+      if params[:continent].normalized.in? continent_names.map(&:normalized)
+        @continent = Country.continent_name(params[:continent])
+      else
+        redirect_to root_url, flash: { notice: 'Ne estas eventoj en tiu kontinento' }
+      end
     end
 end

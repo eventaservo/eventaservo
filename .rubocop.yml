@@ -9,6 +9,9 @@ AllCops:
 Bundler/GemComment:
   Enabled: false
 
+Rails/UniqBeforePluck:
+  Enabled: false
+
 Style/AsciiComments:
   Enabled: false
 

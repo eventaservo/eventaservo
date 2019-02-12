@@ -11,4 +11,16 @@ class Country < ApplicationRecord
   default_scope { order(:name) }
 
   scope :not_online, -> { where.not(name: 'Online') }
+
+  # Ĝusta nomo de la kontinento, ne gravas la ortografion
+  def self.continent_name(name)
+    record = where('unaccent(lower(countries.continent)) = ?', name.normalized)
+    record.first.continent if record.any?
+  end
+
+  # Ĝusta nomo de la lando, ne gravas la ortografion
+  def self.by_name(name)
+    record = where('unaccent(lower(countries.name)) = ?', name.normalized)
+    record.first if record.any?
+  end
 end
