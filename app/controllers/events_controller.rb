@@ -58,6 +58,8 @@ class EventsController < ApplicationController
     @event         = Event.new(event_params)
     @event.user_id = current_user.id
 
+    params[:event].each { |_key, value| value.strip! }
+
     if @event.save
       EventMailer.send_notification_to_users(event_id: @event.id)
       redirect_to event_path(@event.code), flash: { notice: 'Evento sukcese kreita.' }
