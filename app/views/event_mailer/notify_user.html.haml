@@ -5,7 +5,7 @@
   %tbody
     %tr
       %td
-        %h2.text-center= link_to @event.title.upcase, event_url(@event.code)
+        %h2.text-center= link_to @event.title, event_url(@event.code)
         .lead.text-center
           %p
             #{@event.city} (#{@event.country.name})
