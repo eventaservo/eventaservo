@@ -30,7 +30,6 @@ gem 'fullcalendar-rails'
 gem 'icalendar'
 gem 'momentjs-rails'
 
-gem 'carrierwave', '~> 1.0'
 gem 'devise', '~> 4.2'
 gem 'mini_magick'
 gem 'omniauth-facebook'
@@ -48,6 +47,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
+gem 'yard'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
@@ -111,8 +111,6 @@ end
 group :test do
   # Codacy.com coverage
   gem 'codacy-coverage', require: false
-  # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'factory_bot_rails'
