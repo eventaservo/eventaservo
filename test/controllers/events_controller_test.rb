@@ -4,6 +4,7 @@ require 'test_helper'
 
 class EventsControllerTest < ActionDispatch::IntegrationTest
   def setup
+    host! 'devel.eventaservo.org:3000'
     @brazila_evento = events(:brazilo)
   end
 

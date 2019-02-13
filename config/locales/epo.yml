@@ -8,6 +8,12 @@ epo:
           attributes:
             user:
               required: necesas
+            country:
+              required: necesas
+        user:
+          attributes:
+            country:
+              required: necesas
     models:
       event: Eventoj
     attributes:
