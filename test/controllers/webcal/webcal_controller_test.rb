@@ -9,6 +9,7 @@ class WebcalControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'Valida landa kono devas montri eventojn' do
+    create(:lando, :brazilo)
     get webcal_url(landa_kodo: 'br', format: :ics)
     assert_response :success
   end

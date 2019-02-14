@@ -9,7 +9,7 @@ class ApplicationHelperTest < ActionView::TestCase
   end
 
   test 'simpligas la eventajn datojn' do
-    event = events(:one).clone
+    event = create(:evento)
 
     # Samtaga evento
     event.update!(date_start: Date.new(2018, 7, 17), date_end: Date.new(2018, 7, 17))
@@ -29,11 +29,11 @@ class ApplicationHelperTest < ActionView::TestCase
   end
 
   test 'colorigas la eventojn pasintajn grizaj' do
-    assert_equal 'gray', color_event(events(:pasinta))
+    assert_equal 'gray', color_event(build_stubbed(:evento, :pasinta))
   end
 
   test 'colorigas la eventojn venontajn verdaj' do
-    assert_equal 'green', color_event(events(:venonta))
+    assert_equal 'green', color_event(build_stubbed(:evento, :venonta))
   end
 
   test 'markdown funkcias' do
@@ -53,7 +53,7 @@ class ApplicationHelperTest < ActionView::TestCase
   end
 
   test 'error_handling - ne estas eraroj' do
-    assert_nil error_handling(events(:one))
+    assert_nil error_handling(build_stubbed(:evento))
   end
 
   test 'error_handling - estas eraroj' do

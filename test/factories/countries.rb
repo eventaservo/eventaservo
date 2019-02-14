@@ -1,51 +1,63 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :lando_brazilo, class: Country do
-    name { 'Brazilo' }
+  factory :lando, class: Country do
+    name { Faker::Address.unique.country }
     continent { 'Ameriko' }
-    code { 'br' }
-  end
+    code { Faker::Address.unique.country_code }
 
-  factory :lando_argentino, class: Country do
-    name { 'Argentino' }
-    continent { 'Ameriko' }
-    code { 'ar' }
-  end
+    trait :brazilo do
+      name { 'Brazilo' }
+      continent { 'Ameriko' }
+      code { 'br' }
+    end
 
-  factory :lando_hungario, class: Country do
-    name { 'Hungario' }
-    continent { 'Eŭropo' }
-    code { 'hu' }
-  end
+    trait :argentino do
+      name { 'Argentino' }
+      continent { 'Ameriko' }
+      code { 'ar' }
+    end
 
-  factory :lando_togolando, class: Country do
-    name { 'Togolando' }
-    continent { 'Afriko' }
-    code { 'tg' }
-  end
+    trait :hungario do
+      name { 'Hungario' }
+      continent { 'Eŭropo' }
+      code { 'hu' }
+    end
 
-  factory :lando_usono, class: Country do
-    name { 'Usono' }
-    continent { 'Ameriko' }
-    code { 'us' }
-  end
+    trait :togolando do
+      name { 'Togolando' }
+      continent { 'Afriko' }
+      code { 'tg' }
+    end
 
-  factory :lando_australio, class: Country do
-    name { 'Australio' }
-    continent { 'Oceanio' }
-    code { 'au' }
-  end
+    trait :usono do
+      name { 'Usono' }
+      continent { 'Ameriko' }
+      code { 'us' }
+    end
 
-  factory :lando_cehio, class: Country do
-    name { 'Ĉeĥio' }
-    continent { 'Eŭropo' }
-    code { 'cz' }
-  end
+    trait :australio do
+      name { 'Australio' }
+      continent { 'Oceanio' }
+      code { 'au' }
+    end
 
-  factory :lando_reta, class: Country do
-    name { 'Reta Evento' }
-    continent { 'Reta' }
-    code { 'ol' }
+    trait :cehio do
+      name { 'Ĉeĥio' }
+      continent { 'Eŭropo' }
+      code { 'cz' }
+    end
+
+    trait :japanio do
+      name { 'Japanio' }
+      continent { 'Azio' }
+      code { 'jp' }
+    end
+
+    trait :reta do
+      name { 'Reta Evento' }
+      continent { 'Reta' }
+      code { 'ol' }
+    end
   end
 end

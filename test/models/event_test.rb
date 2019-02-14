@@ -4,7 +4,7 @@ require 'test_helper'
 
 class EventTest < ActiveSupport::TestCase
   setup do
-    @event = events(:one)
+    @event = create(:evento)
   end
 
   test 'evento havas kreinton' do
@@ -24,52 +24,45 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test 'titolo necesas' do
-    event       = events(:one)
-    event.title = nil
-    assert event.invalid?
+    evento = build(:evento, title: nil)
+    assert evento.invalid?
   end
 
   test 'priskribo necesas' do
-    event             = events(:one)
-    event.description = nil
-    assert event.invalid?
+    evento = build(:evento, description: nil)
+    assert evento.invalid?
   end
 
   test 'urbo necesas' do
-    event = events(:one)
-    event.city = nil
-    assert event.invalid?
+    evento = build(:evento, city: nil)
+    assert evento.invalid?
   end
 
   test 'evento sen lando devas fiaski' do
-    event = events(:one)
-    event.country_id = nil
-    assert event.invalid?
+    evento = build(:evento, country_id: nil)
+    assert evento.invalid?
   end
 
   test 'komenca dato necesas' do
-    event = events(:one)
-    event.date_start = nil
-    assert event.invalid?
+    evento = build(:evento, date_start: nil)
+    assert evento.invalid?
   end
 
   test 'fina dato necesas' do
-    event = events(:one)
-    event.date_end = nil
-    assert event.invalid?
+    evento = build(:evento, date_end: nil)
+    assert evento.invalid?
   end
 
   test 'kodo necesas' do
-    event = events(:one)
-    event.code = nil
-    assert event.invalid?
+    evento = build(:evento, code: nil)
+    assert evento.invalid?
   end
 
   test 'fina dato devas esti post komenca dato' do
-    event            = events(:one)
-    event.date_start = Time.zone.today
-    event.date_end   = Time.zone.today - 1.day
-    assert_not event.save
+    evento            = build(:evento)
+    evento.date_start = Time.zone.today
+    evento.date_end   = Time.zone.today - 1.day
+    assert_not evento.save
   end
 
   test 'forigas kaj malforigas la eventon, sed ne el la datumbazo' do
@@ -81,8 +74,8 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test 'serĉado' do
-    event = events(:brazilo)
-    assert Event.search('brazilo').exists?(id: event.id)
+    evento = create(:evento, :brazila)
+    assert Event.search('brazilo').exists?(id: evento.id)
   end
 
   test 'priskribo ne povas esti pli ol 400 signoj' do
@@ -131,7 +124,7 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test 'geocoder, dum provoj, devas informi la NY adreson' do
-    event = events(:usono)
+    event = create(:evento, :usona)
     event.geocode
     event.save!
     assert_equal 40.7143528, event.latitude

@@ -111,8 +111,6 @@ end
 group :test do
   # Codacy.com coverage
   gem 'codacy-coverage', require: false
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'selenium-webdriver'

@@ -23,8 +23,8 @@ class CountryTest < ActiveSupport::TestCase
   test 'lando havas recipients' do
     assert_not_nil Country.reflect_on_association(:recipients)
 
-    recipient = notification_list(:one)
-    country = countries(:one)
+    recipient = create(:notification_user)
+    country = create(:lando)
     recipient.update!(country_id: country.id)
 
     assert country.recipients.find_by(id: recipient.id).present?
@@ -32,16 +32,15 @@ class CountryTest < ActiveSupport::TestCase
 
   test 'lando havas uzantoj' do
     assert_not_nil Country.reflect_on_association(:users)
-
-    user    = users(:one)
-    country = countries(:one)
-    user.update!(country_id: country.id)
-
-    assert country.users.find_by(id: user.id).present?
+    user = create(:uzanto, :brazila)
+    assert Country.find_by(name: 'Brazilo').users.find_by(id: user.id).present?
   end
 
   test 'serĉas la landon, ne gravas la ortografio' do
+    create(:lando, :brazilo)
     assert_equal 'Brazilo', Country.by_name('brazilo').name
+
+    create(:lando, :cehio)
     assert_equal 'Ĉeĥio', Country.by_name('cxehxio').name
   end
 end

@@ -11,12 +11,12 @@ class NotificationListTest < ActiveSupport::TestCase
   test 'should not be valid without country' do
     recipient = NotificationList.new(email: 'example@example.com')
     assert_not recipient.valid?
-    recipient.country_id = countries(:one).id
+    recipient.country_id = create(:lando).id
     assert recipient.valid?
   end
 
   test 'should not be valid without email' do
-    recipient = NotificationList.new(country_id: countries(:one).id)
+    recipient = NotificationList.new(country_id: create(:lando, :brazilo).id)
     assert_not recipient.valid?
     recipient.email = 'example@example.com'
     assert recipient.valid?
@@ -24,17 +24,18 @@ class NotificationListTest < ActiveSupport::TestCase
 
   test 'one email can subscribe to many countries' do
     email = 'example@example.com'
-    NotificationList.create!(email: email, country_id: countries(:brazilo).id)
+    NotificationList.create!(email: email, country_id: create(:lando, :brazilo).id)
 
-    new_recipient = NotificationList.new(email: email, country_id: countries(:hungario).id)
+    new_recipient = NotificationList.new(email: email, country_id: create(:lando, :hungario).id)
     assert new_recipient.valid?
   end
 
   test 'email cannot subscribe twice to same country' do
     email = 'example@example.com'
-    NotificationList.create!(email: email, country_id: countries(:brazilo).id)
+    lando = create(:lando, :brazilo)
+    NotificationList.create!(email: email, country_id: lando.id)
 
-    new_recipient = NotificationList.new(email: email, country_id: countries(:brazilo).id)
+    new_recipient = NotificationList.new(email: email, country_id: lando.id)
     assert_not new_recipient.valid?
   end
 end
