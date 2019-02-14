@@ -7,7 +7,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :confirmable, :lockable, :timeoutable, :trackable,
+         :confirmable, :lockable, :trackable,
          :omniauthable, omniauth_providers: %i[facebook]
 
   has_one_attached :picture
