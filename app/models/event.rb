@@ -17,6 +17,8 @@ class Event < ApplicationRecord
   validates :description, length: { maximum: 400 }
   validates :code, uniqueness: true, on: :create
   validate :end_after_start
+  validate :url_or_email
+
   before_save :format_event_data
 
   geocoded_by :full_address
@@ -127,6 +129,10 @@ class Event < ApplicationRecord
       return if date_start.blank? || date_end.blank?
 
       errors.add(:date_end, 'ne povas okazi antaŭ la komenca dato') if date_end < date_start
+    end
+
+    def url_or_email
+      errors.add('Eventa', 'retadreso aŭ retpoŝtadreso necesas') unless site.present? || email.present?
     end
 
     # Formatas la eventon laŭ normala formato

@@ -35,7 +35,6 @@ class EventsController < ApplicationController
         render plain: cal.to_ical
       }
     end
-
   end
 
   def new
@@ -72,7 +71,7 @@ class EventsController < ApplicationController
     if @event.update(event_params)
       redirect_to event_path(@event.code), notice: 'Evento sukcese ĝisdatigita'
     else
-      redirect_to event_path(@event.code), flash: { warning: 'Evento malsukcese ĝisdatigita' }
+      render :edit
     end
   end
 

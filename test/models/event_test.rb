@@ -130,4 +130,20 @@ class EventTest < ActiveSupport::TestCase
     assert_equal 40.7143528, event.latitude
     assert_equal(-74.0059731, event.longitude)
   end
+
+  test 'endas plenumi retadreson au retposhtadreson' do
+    evento = build_stubbed(:evento)
+    assert evento.valid?
+
+    evento.site  = nil
+    evento.email = nil
+    assert evento.invalid?
+
+    evento.site = Faker::Internet.url
+    assert evento.valid?
+
+    evento.site = nil
+    evento.email = Faker::Internet.email
+    assert evento.valid?
+  end
 end

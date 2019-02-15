@@ -6,11 +6,11 @@ FactoryBot.define do
     description { 'Prova evento priskribo' }
     content { 'Prov-informoj pri la prova evento' }
     association :user, factory: :uzanto
-    deleted { 'false' }
-    city { 'Eventa urbo' }
+    deleted { false }
+    city { Faker::Address.city }
     association :country, factory: :lando
-    email { 'provemail@ekzamplo.org' }
-    site { 'http://provo.ekzamplo.org' }
+    email { Faker::Internet.email }
+    site { Faker::Internet.url }
     date_start { Time.zone.today }
     date_end { Time.zone.today }
     code { SecureRandom.urlsafe_base64(12) }
