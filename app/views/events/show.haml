@@ -26,10 +26,11 @@
 
       = render partial: 'event_contact'
       = render partial: 'uploads'
-      - if user_signed_in? && (current_user.owner_of(@event) || current_user.admin?)
+      - if user_signed_in?
         .buttons-footer
           = link_to icon('far', 'copy', 'Duobligi eventon'), new_event_url(from_event: @event), class: 'btn btn-sm btn-outline-success'
-          = link_to icon('far', 'edit', 'Redakti eventon'), edit_event_url(@event.code), class: 'btn btn-sm btn-outline-primary'
+          - if current_user.owner_of(@event) || current_user.admin?
+            = link_to icon('far', 'edit', 'Redakti eventon'), edit_event_url(@event.code), class: 'btn btn-sm btn-outline-primary'
 
   .col-lg-4
     = render partial: 'informoj'
