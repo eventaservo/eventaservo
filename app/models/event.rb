@@ -14,7 +14,7 @@ class Event < ApplicationRecord
   has_many :likes, as: :likeable, dependent: :destroy
 
   validates :title, :description, :city, :country_id, :date_start, :date_end, :code, presence: true
-  validates :description, length: { maximum: 400 }
+  validates :description, length: { maximum: 140 }
   validates :code, uniqueness: true, on: :create
   validate :end_after_start
   validate :url_or_email
