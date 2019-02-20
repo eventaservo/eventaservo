@@ -118,8 +118,10 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params[:event][:date_start] = merge_date_time(params[:event][:date_start], params[:time_start])
-      params[:event][:date_end] = merge_date_time(params[:event][:date_end], params[:time_end])
+      if params[:event][:date_start].present?
+        params[:event][:date_start] = merge_date_time(params[:event][:date_start], params[:time_start])
+        params[:event][:date_end] = merge_date_time(params[:event][:date_end], params[:time_end])
+      end
       params.require(:event).permit(
         :title, :description, :content, :site, :email, :date_start, :date_end,
         :address, :city, :country_id, :online, uploads: []
