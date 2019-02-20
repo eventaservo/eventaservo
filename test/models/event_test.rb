@@ -33,6 +33,14 @@ class EventTest < ActiveSupport::TestCase
     assert evento.invalid?
   end
 
+  test 'limigas la priskribon al 140 karakteroj' do
+    description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                   et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                   aliquip ex ea commodo consequat.'
+    evento = build(:evento, description: description)
+    assert evento.invalid?
+  end
+
   test 'urbo necesas' do
     evento = build(:evento, city: nil)
     assert evento.invalid?

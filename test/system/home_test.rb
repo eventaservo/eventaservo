@@ -9,9 +9,10 @@ class HomeTest < ApplicationSystemTestCase
     assert_selector 'div', text: 'Laŭ kontinentoj'
   end
 
-  test 'vizitas la afrikan kontinentan paĝon' do
+  test 'vizitas la japanan kontinentan paĝon' do
+    create(:evento, :japana)
     visit '/Azio'
-    assert_selector 'h2', text: 'Venontaj eventoj'
-    assert_selector 'div', text: 'Laŭ lando'
+    assert_selector 'div.lead', text: 'Laŭ lando'
+    assert_selector 'a.button-event-count', text: 'Japanio'
   end
 end

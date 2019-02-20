@@ -25,6 +25,11 @@ FactoryBot.define do
       address { '31 Ocean Parkway' }
     end
 
+    trait :japana do
+      association :country, factory: [:lando, :japanio]
+      city { 'Tokyo' }
+    end
+
     trait :venonta do
       date_start { Time.zone.today + 1.day }
       date_end { Time.zone.today + 1.day }
