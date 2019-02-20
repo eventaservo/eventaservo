@@ -2,6 +2,7 @@
 
 module CalendarHelper
   def calendar_icon(date)
+    date = Date.strptime(date, '%d/%m/%Y')
     content_tag(:time, class: 'icon', datetime: date.strftime('%Y-%m-%d')) do
       concat content_tag(:h2, l(date, format: '%Y'))
       concat content_tag(:em, l(date, format: '%A'))

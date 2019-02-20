@@ -11,7 +11,7 @@ module Api
         if params[:uuid].present?
           @events = @events.by_uuid(params[:uuid])
         else
-          @events = @events.by_dates(from: validate_date(params[:komenca_dato]), to: validate_date(params[:fina_dato]))
+          @events = @events.by_dates(from: validate_date(params[:komenca_tago]), to: validate_date(params[:fina_tago]))
           @events = @events.by_country_code(params[:landa_kodo]) if params[:landa_kodo].present?
         end
       end

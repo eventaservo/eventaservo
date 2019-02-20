@@ -12,22 +12,27 @@
 
         .form-group
           = form.label :title, 'Titolo *'
-          = form.text_field :title, class: 'form-control'
+          = form.text_field :title, class: 'form-control', autofocus: true
 
         .form-group
           = form.label :description, 'Priskribo *'
           = form.text_field :description, class: 'form-control'
           %small.form-text.text-muted Maksimume 400 signoj
 
-        .row
+        .form-row
           .col-lg-6
             .form-group
               = form.label :date_start, 'Komenca dato'
-              = form.text_field :date_start, value: @event.date_start.strftime("%d/%m/%Y"), class: 'datepicker form-control'
+              .form-row
+                .col-8= form.text_field :date_start, value: @event.komenca_tago, class: 'datepicker form-control'
+                .col-4= text_field_tag(:time_start, @event.komenca_horo, class: 'timemask form-control', required: true)
+
           .col-lg-6
             .form-group
               = form.label :date_end, 'Fina dato'
-              = form.text_field :date_end, value: @event.date_end.strftime("%d/%m/%Y"), class: 'datepicker form-control'
+              .form-row
+                .col-8= form.text_field :date_end, value: @event.fina_tago, class: 'datepicker form-control'
+                .col-4= text_field_tag(:time_end, @event.fina_horo, class: 'timemask form-control', required: true)
 
         .form-group
           = form.label :content, 'Enhavo'
@@ -75,6 +80,10 @@
 :coffee
   $('#event_date_start').change ->
     $('#event_date_end').val($('#event_date_start').val())
+    $('#time_start').focus()
+
+  $('#event_date_end').change ->
+    $('#time_end').focus()
 
   if $('#event_online').is(':checked') == true
     $('#malretaj_informoj').hide()

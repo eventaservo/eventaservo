@@ -15,16 +15,16 @@
           = render partial: 'share_button'
 
       #div
-        .d-flex.ml-2.float-right
-          .div= calendar_icon(@event.date_start)
-          - if @event.date_end > @event.date_start
-            .p-2= icon('fas', 'arrow-right')
-            .div= calendar_icon(@event.date_end)
+        .ml-2.float-right
+          = render partial: 'kalendareto', locals: { event: @event }
+          .small.text-right.mt-1.font-weight-bold
+            %div Komenco: #{@event.komenca_horo}
+            %div Fino: #{@event.fina_horo}
         %h5.text-left= @event.description
 
       .trix-content= sanitize @event.content
 
-      = render partial: 'event_contact'
+      = render partial: 'kontaktoj'
       = render partial: 'uploads'
       - if user_signed_in?
         .buttons-footer

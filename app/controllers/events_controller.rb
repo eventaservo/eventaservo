@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class EventsController < ApplicationController
+  include Webcal
   before_action :authenticate_user!, only: %i[index new create edit update destroy]
   before_action :set_event, only: %i[show edit update destroy]
   before_action :authorize_user, only: %i[edit update destroy]
@@ -16,24 +17,7 @@ class EventsController < ApplicationController
   def show
     respond_to do |format|
       format.html { impressionist(@event, nil, unique: [:session_hash]) }
-      format.ics {
-        cal              = Icalendar::Calendar.new
-        cal.event do |e|
-          e.dtstart = Icalendar::Values::DateOrDateTime.new(@event.date_start.strftime('%Y%m%d')).call
-          e.dtend   = if @event.date_end > @event.date_start
-                        Icalendar::Values::DateOrDateTime.new((@event.date_end + 1.day).strftime('%Y%m%d')).call
-                      else
-                        Icalendar::Values::DateOrDateTime.new(@event.date_end.strftime('%Y%m%d')).call
-                      end
-
-          e.summary     = @event.title
-          e.description = @event.description + '\n\n' + event_url(@event.code)
-          e.location    = @event.full_address
-        end
-
-        cal.publish
-        render plain: cal.to_ical
-      }
+      format.ics { kreas_webcal(@event) }
     end
   end
 
@@ -57,7 +41,7 @@ class EventsController < ApplicationController
     @event         = Event.new(event_params)
     @event.user_id = current_user.id
 
-    params[:event].each { |_key, value| value.strip! }
+    params[:event].each { |_key, value| value.strip! if value.class == 'String' }
 
     if @event.save
       EventMailer.send_notification_to_users(event_id: @event.id)
@@ -134,6 +118,8 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
+      params[:event][:date_start] = merge_date_time(params[:event][:date_start], params[:time_start])
+      params[:event][:date_end] = merge_date_time(params[:event][:date_end], params[:time_end])
       params.require(:event).permit(
         :title, :description, :content, :site, :email, :date_start, :date_end,
         :address, :city, :country_id, :online, uploads: []
@@ -155,5 +141,9 @@ class EventsController < ApplicationController
       else
         redirect_to root_url, flash: { notice: 'Ne estas eventoj en tiu kontinento' }
       end
+    end
+
+    def merge_date_time(date, time)
+      DateTime.strptime("#{date} #{time}", '%d/%m/%Y %H:%M')
     end
 end

@@ -1,7 +1,0 @@
-%br
-- if @event.site.present?
-  <strong>Retpaĝo:</strong> #{link_to @event.site[0..40], @event.site, target: :_blank, class: 'button-contact'}
-
-- if @event.email.present?
-  %p
-    <strong>Retpoŝtadreso:</strong> #{display_event_email(@event)}

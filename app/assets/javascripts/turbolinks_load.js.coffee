@@ -6,6 +6,9 @@ $(document).on "turbolinks:load", ->
       $.datepicker.regional['eo']
 
     $('.datepicker').mask '00/00/0000', placeholder: "__/__/____"
+    $('.timemask').mask '00:00', placeholder: "__:__"
+    $('.timemask').on 'focus click touchend', ->
+      $(this)[0].setSelectionRange 0, 5
 
     $('[data-toggle="tooltip"]').tooltip()
 

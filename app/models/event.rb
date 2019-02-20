@@ -123,6 +123,26 @@ class Event < ApplicationRecord
     latitude.present? && longitude.present?
   end
 
+  def komenca_tago
+    date_start.strftime('%d/%m/%Y')
+  end
+
+  def fina_tago
+    date_end.strftime('%d/%m/%Y')
+  end
+
+  def komenca_horo
+    date_start.strftime('%H:%M')
+  end
+
+  def fina_horo
+    date_end.strftime('%H:%M')
+  end
+
+  def multtaga?
+    fina_tago > komenca_tago
+  end
+
   private
 
     def end_after_start

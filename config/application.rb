@@ -16,6 +16,7 @@ module Eventaservo
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
+    config.time_zone = 'UTC'
     config.middleware.use Rack::Attack
     config.middleware.insert_before 0, Rack::Cors do
       allow do
