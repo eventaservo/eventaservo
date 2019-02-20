@@ -7,7 +7,7 @@ epo:
       send_instructions: "Vi ricevos baldaŭ retmesaĝon kun instrukcioj por konfirmi vian konton"
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
     failure:
-      already_authenticated: "You are already signed in."
+      already_authenticated: "Vi jam ensalutis antaŭe"
       inactive: "Via konto ankoraŭ ne estas aktiva"
       invalid: "Nevalida %{authentication_keys} aŭ pasvorto"
       locked: "Your account is locked."
