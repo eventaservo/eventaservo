@@ -48,7 +48,7 @@ module ApplicationHelper
   def event_date(event)
     ds = event.date_start
     de = event.date_end
-    return format_date(ds) if ds == de # Samtaga
+    return format_date(ds) if event.samtaga?
 
     if de.year == ds.year # Samjara
       if de.month == ds.month # Sammonata

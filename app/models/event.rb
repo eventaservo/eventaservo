@@ -140,7 +140,11 @@ class Event < ApplicationRecord
   end
 
   def multtaga?
-    fina_tago > komenca_tago
+    fina_tago.to_date > komenca_tago.to_date
+  end
+
+  def samtaga?
+    !multtaga?
   end
 
   private

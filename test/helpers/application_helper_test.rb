@@ -24,7 +24,7 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_equal '17 julio - 21 aŭgusto 2018', event_date(event)
 
     # malsamjara evento
-    event.update!(date_end: Date.new(2019, 1, 6))
+    event.update!(date_end: DateTime.new(2019, 1, 6))
     assert_equal '17 julio 2018 - 6 januaro 2019', event_date(event)
   end
 
