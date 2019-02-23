@@ -9,6 +9,8 @@ class EventsController < ApplicationController
   before_action :validate_continent, only: %i[by_continent by_country by_city]
   before_action :set_country, only: %i[by_country by_city]
 
+  invisible_captcha only: :kontakti_organizanton, honeypot: :tiel, on_spam: :spam_detected
+
   # Montras la uzantajn eventojn
   def index
     @events = Event.includes(:country).by_user(current_user).order(date_start: :desc)
@@ -104,6 +106,12 @@ class EventsController < ApplicationController
     @events = Event.by_username(params[:username]).venontaj
   end
 
+  def kontakti_organizanton
+    informoj = { name: params[:name], email: params[:email], message: params[:message] }
+    EventMailer.kontakti_organizanton(params[:event_code], informoj).deliver_later
+    redirect_to event_url(params[:event_code]), flash: { info: 'Mesaĝo sendita' }
+  end
+
   private
 
     # Use callbacks to share common setup or constraints between actions.
@@ -150,5 +158,8 @@ class EventsController < ApplicationController
       # "#{date} #{time}".in_time_zone(time_zone)
       "#{date} #{time}"
     end
+
+    def spam_detected
+      redirect_to root_path
     end
 end

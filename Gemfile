@@ -17,7 +17,7 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
-gem 'bootstrap', '~> 4.1', '>= 4.1.3'
+gem 'bootstrap', '>= 4.3.1'
 gem 'font-awesome-sass', '~> 5'
 gem 'haml', '~> 5.0', '>= 5.0.4'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
@@ -76,11 +76,13 @@ gem 'redcarpet'
 gem 'redis'
 gem 'sentry-raven'
 gem 'sitemap_generator'
+gem 'timezone', '~> 1.0'
 gem 'trix-rails', require: 'trix'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'faker'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
@@ -113,7 +115,6 @@ group :test do
   # Codacy.com coverage
   gem 'codacy-coverage', require: false
   gem 'factory_bot_rails'
-  gem 'faker'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'

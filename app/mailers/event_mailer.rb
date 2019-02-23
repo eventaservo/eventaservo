@@ -53,4 +53,10 @@ class EventMailer < ApplicationMailer
     @user = User.find(1) # Nur por provoj
     mail(to: "#{user.name.delete(',')} <#{user.email}>", subject: 'Tutmonda semajna resumo de eventoj')
   end
+
+  def kontakti_organizanton(eventa_kodo, informoj = {})
+    @evento = Event.by_code(eventa_kodo)
+    @informoj = informoj
+    mail(to: 'Eventa Servo <kontakto@eventaservo.org>, Yves Nevelsteen <yves.nevelsteen@gmail.com>', subject: 'Informo pri via evento en Eventa Servo')
+  end
 end

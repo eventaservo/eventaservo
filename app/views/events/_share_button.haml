@@ -11,7 +11,7 @@
 
       .modal-body
         .text-center
-          %p Elektu la manieron por diskonigi la eventon
+          %p Elektu kiel diskonigi la eventon
           - sharing_text = "#{@event.title} | #{@event.description}"
           = social_share_button_tag(sharing_text, desc: sharing_text, 'data-twitter-title' => sharing_text[0..200] + " #eventaservo")
 

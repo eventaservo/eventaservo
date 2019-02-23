@@ -1,0 +1,37 @@
+= link_to icon('fas', 'exclamation-triangle', 'Raporti malĝustan informon'), '#', class: 'small fg-color-orange', data: { target: '#problemoModal', toggle: 'modal' }
+
+#problemoModal.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'problemoModalCenterTitle', role: 'dialog', tabindex: '-1'}
+  .modal-dialog.modal-dialog-centered{role: 'document'}
+    .modal-content.text-left
+
+      .modal-header
+        %h5#problemoModalCenterTitle.modal-title Ĉu vi trovis problemon?
+        %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
+          %span{'aria-hidden' => 'true'} ×
+
+      = form_tag event_kontakti_organizanton_url(@event.code) do
+        .modal-body{style: 'font-weight: normal; font-size: 1rem;'}
+          %p Se vi opinias ke estas problemo pri tiu ĉi evento, informu pri tio ĝiajn organizanton kaj eniginton.
+          .form-group
+            .label Nomo
+            = text_field_tag :name, current_user.try(:name).presence, autocomplete: 'name', class: 'form-control', required: true
+            = invisible_captcha :title
+
+          .form-group
+            .label Retpoŝtadreso
+            = text_field_tag :email, current_user.try(:email).presence, autocomplete: 'email', class: 'form-control', required: true
+
+          .form-group
+            .label Mesaĝo
+            = text_area_tag :message, nil, class: 'form-control', required: true
+
+        .modal-footer
+          %button.btn.btn-sm.btn-outline-secondary{'data-dismiss' => 'modal', type: 'button'} Nuligi
+          = submit_tag 'Sendi', class: 'button-submit'
+
+:coffee
+  $('#problemoModal').on 'shown.bs.modal', ->
+    if $('#name').val() == ""
+      $('#name').focus()
+    else
+      $('#message').focus()

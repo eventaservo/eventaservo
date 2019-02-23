@@ -26,6 +26,7 @@
 
       = render partial: 'kontaktoj'
       = render partial: 'uploads'
+      .text-right= render partial: 'informi_pri_problemo'
       - if user_signed_in?
         .buttons-footer
           = link_to icon('far', 'copy', 'Duobligi eventon'), new_event_url(from_event: @event), class: 'btn btn-sm btn-outline-success'

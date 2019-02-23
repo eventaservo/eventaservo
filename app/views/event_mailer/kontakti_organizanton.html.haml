@@ -1,0 +1,25 @@
+%p
+  Saluton.
+
+  Iu opinias ke estas problemo pri la evento "#{link_to @evento.title, event_url(@evento.code)}", kiun vi aldonis al
+  Eventa Servo. Ĉu vi povas kontroli tion kaj korekti, se necese?
+
+%p Jen la mesaĝo:
+
+%p
+  <strong>Nomo:</strong> #{@informoj[:name]}
+  %br
+  <strong>Retpoŝtadreso:</strong> #{@informoj[:email]}
+  %br
+  <strong>Mesaĝo:</strong> #{@informoj[:message]}
+
+%p Dankon
+
+%hr
+.bold Informoj al administrantoj dum provperiodo:
+%p
+  Kreinto: #{@evento.user.name} (#{@evento.user.email})
+  %br
+  Retpaĝo: #{@evento.site}
+  %br
+  Kontakto: #{@evento.email}

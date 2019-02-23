@@ -15,4 +15,9 @@ class EventMailerPreview < ActionMailer::Preview
   def weekly_summary
     EventMailer.weekly_summary(User.receives_weekly_summary.sample(1).first)
   end
+
+  def informi_pri_problemo_en_evento
+    params = { name: Faker::Name.name, email: Faker::Internet.email, message: Faker::Lorem.paragraph(6) }
+    EventMailer.kontakti_organizanton(Event.first.code, params)
+  end
 end
