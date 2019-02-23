@@ -53,6 +53,11 @@
           = form.check_box :online, class: 'form-check-input'
           = form.label :online, 'Reta evento?', class: 'form-check-label'
 
+        #retaj_informoj
+          .form-group
+            = form.label :time_zone, 'Horzono'
+            = form.select(:time_zone, options_for_select(TZInfo::Timezone.all_country_zone_identifiers, @event.time_zone), {}, class: 'select2-input form-control')
+
         #malretaj_informoj
           .form-group
             = form.label :address, 'Loka adreso de la evento'
@@ -87,9 +92,14 @@
 
   if $('#event_online').is(':checked') == true
     $('#malretaj_informoj').hide()
+    $('#retaj_informoj').show()
+  else
+    $('#retaj_informoj').hide()
 
   $('#event_online').change ->
     if this.checked
       $('#malretaj_informoj').hide()
+      $('#retaj_informoj').show()
     else
       $('#malretaj_informoj').show()
+      $('#retaj_informoj').hide()

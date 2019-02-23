@@ -20,6 +20,7 @@ class Event < ApplicationRecord
   validate :url_or_email
 
   before_save :format_event_data
+  # before_update :format_event_data
 
   geocoded_by :full_address
   after_validation :geocode, if: :require_geocode?
@@ -30,7 +31,7 @@ class Event < ApplicationRecord
   scope :pasintaj, -> { where('date_end < ?', Time.zone.today) }
   scope :today, -> { by_dates(from: Time.zone.today, to: Time.zone.today) }
   scope :in_7days, -> { where('date_start BETWEEN ? and ?', Time.zone.today + 1.day, Time.zone.today + 7.days) }
-  scope :in_30days, -> { where('date_start BETWEEN ? and ?', Time.zone.today + 8.days, Time.zone.today + 30.days) }
+  scope :in_30days, -> { where('date_start BETWEEN ? and ?', Time.zone.today + 7.days, Time.zone.today + 30.days) }
   scope :after_30days, -> { where('date_start > ?', Time.zone.today + 30.days) }
   scope :lau_lando, ->(lando) { joins(:country).where(country: lando) }
   scope :by_country_id, ->(id) { where(country_id: id) }
@@ -124,19 +125,19 @@ class Event < ApplicationRecord
   end
 
   def komenca_tago
-    date_start.strftime('%d/%m/%Y')
+    date_start.in_time_zone(time_zone).strftime('%d/%m/%Y')
   end
 
   def fina_tago
-    date_end.strftime('%d/%m/%Y')
+    date_end.in_time_zone(time_zone).strftime('%d/%m/%Y')
   end
 
   def komenca_horo
-    date_start.strftime('%H:%M')
+    date_start.in_time_zone(time_zone).strftime('%H:%M')
   end
 
   def fina_horo
-    date_end.strftime('%H:%M')
+    date_end.in_time_zone(time_zone).strftime('%H:%M')
   end
 
   def multtaga?
@@ -170,7 +171,16 @@ class Event < ApplicationRecord
         self.country_id = 99_999
         self.latitude = nil
         self.longitude = nil
+      else
+        if self.latitude.present? || self.longitude.present?
+          self.time_zone = Timezone.lookup(self.latitude, self.longitude).name
+        else
+          self.time_zone = 'Etc/UTC'
+        end
       end
+
+      self.date_start = DateTime.strptime(self.date_start.strftime("%d/%m/%Y %H:%M") + " #{TZInfo::Timezone.get(self.time_zone).strftime('%z')}", '%d/%m/%Y %H:%M %z')
+      self.date_end = DateTime.strptime(self.date_end.strftime("%d/%m/%Y %H:%M") + " #{TZInfo::Timezone.get(self.time_zone).strftime('%z')}", '%d/%m/%Y %H:%M %z')
     end
 
     def fix_title(title)

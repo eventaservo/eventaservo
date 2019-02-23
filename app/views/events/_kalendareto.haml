@@ -1,5 +1,5 @@
-.d-flex.kalendareto-grupo
+.d-flex.kalendareto-grupo.justify-content-end
   %div= calendar_icon(event.komenca_tago)
-  - if event.fina_tago > event.komenca_tago
+  - if event.multtaga?
     .p-2= icon('fas', 'arrow-right')
     %div= calendar_icon(event.fina_tago)

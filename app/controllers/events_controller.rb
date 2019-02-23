@@ -118,12 +118,12 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      if params[:event][:date_start].present?
-        params[:event][:date_start] = merge_date_time(params[:event][:date_start], params[:time_start])
-        params[:event][:date_end] = merge_date_time(params[:event][:date_end], params[:time_end])
+      if params[:event][:date_start].present? # TODO: Arrumar - por conta do envio de arquivos
+        params[:event][:date_start] = merge_date_time(params[:event][:date_start], params[:time_start], params[:event][:time_zone])
+        params[:event][:date_end] = merge_date_time(params[:event][:date_end], params[:time_end], params[:event][:time_zone])
       end
       params.require(:event).permit(
-        :title, :description, :content, :site, :email, :date_start, :date_end,
+        :title, :description, :content, :site, :email, :date_start, :date_end, :time_zone,
         :address, :city, :country_id, :online, uploads: []
       )
     end
@@ -145,7 +145,10 @@ class EventsController < ApplicationController
       end
     end
 
-    def merge_date_time(date, time)
-      DateTime.strptime("#{date} #{time}", '%d/%m/%Y %H:%M')
+    def merge_date_time(date, time, time_zone)
+      # DateTime.strptime("#{date} #{time}", '%d/%m/%Y %H:%M')
+      # "#{date} #{time}".in_time_zone(time_zone)
+      "#{date} #{time}"
+    end
     end
 end

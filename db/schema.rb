@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_30_195458) do
+ActiveRecord::Schema.define(version: 2019_02_20_111054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 2019_01_30_195458) do
     t.float "longitude"
     t.boolean "online", default: false
     t.uuid "uuid", default: -> { "uuid_generate_v4()" }
+    t.string "time_zone", default: "Etc/UTC", null: false
     t.index "md5(content)", name: "index_events_on_content"
     t.index ["address"], name: "index_events_on_address"
     t.index ["city"], name: "index_events_on_city"
