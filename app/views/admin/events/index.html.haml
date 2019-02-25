@@ -3,7 +3,8 @@
   .item-row-header
     .col Titolo
     .col Loko
-    .col Dato
+    .col Horzono
+    .col Komenca tago
     .col Uzanto
     .col Lasta informo
 
@@ -15,7 +16,8 @@
 
         = event.title
       .col= event.city
-      .col= format_date event.date_start
+      .col= event.time_zone
+      .col= event.komenca_tago
       .col= event.user.name
       .col= format_date event.updated_at
 
