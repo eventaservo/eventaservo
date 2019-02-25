@@ -19,7 +19,9 @@
           = render partial: 'kalendareto', locals: { event: @event }
           .small.text-right.mt-1.font-weight-bold
             %div= icon('far', 'clock', "#{@event.komenca_horo} - #{@event.fina_horo}")
-            %div= @event.time_zone
+            %div
+              = @event.time_zone
+              = icon('fas', 'sun', data: { toggle: 'tooltip', placement: 'top', title: 'Somera/Vintra tempo' }) if @event.dst?
         %h5.text-left= @event.description
 
       .trix-content= sanitize @event.content

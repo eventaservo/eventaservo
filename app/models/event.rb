@@ -124,6 +124,14 @@ class Event < ApplicationRecord
     latitude.present? && longitude.present?
   end
 
+  def komenca_dato
+    date_start.in_time_zone(time_zone)
+  end
+
+  def fina_dato
+    date_end.in_time_zone(time_zone)
+  end
+
   def komenca_tago
     date_start.in_time_zone(time_zone).strftime('%d/%m/%Y')
   end
@@ -146,6 +154,10 @@ class Event < ApplicationRecord
 
   def samtaga?
     !multtaga?
+  end
+
+  def dst?
+    date_start.in_time_zone(time_zone).dst?
   end
 
   private
@@ -179,8 +191,9 @@ class Event < ApplicationRecord
         end
       end
 
-      self.date_start = DateTime.strptime(self.date_start.strftime("%d/%m/%Y %H:%M") + " #{TZInfo::Timezone.get(self.time_zone).strftime('%z')}", '%d/%m/%Y %H:%M %z')
-      self.date_end = DateTime.strptime(self.date_end.strftime("%d/%m/%Y %H:%M") + " #{TZInfo::Timezone.get(self.time_zone).strftime('%z')}", '%d/%m/%Y %H:%M %z')
+      tz = TZInfo::Timezone.get(self.time_zone)
+      self.date_start = tz.local_to_utc(Time.new(date_start.year, date_start.month, date_start.day, date_start.hour, date_start.min)).in_time_zone(self.time_zone)
+      self.date_end = tz.local_to_utc(Time.new(date_end.year, date_end.month, date_end.day, date_end.hour, date_end.min)).in_time_zone(self.time_zone)
     end
 
     def fix_title(title)
