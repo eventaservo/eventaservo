@@ -49,6 +49,7 @@ class EventsController < ApplicationController
 
     if @event.save
       EventMailer.send_notification_to_users(event_id: @event.id)
+      EventMailer.notify_admins(@event.id).deliver_later
       redirect_to event_path(@event.code), flash: { notice: 'Evento sukcese kreita.' }
     else
       render :new

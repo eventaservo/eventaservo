@@ -6,7 +6,7 @@ class NotificationListControllerTest < ActionDispatch::IntegrationTest
   test 'should add new recipient' do
     lando = create(:lando)
     assert_difference('NotificationList.count', 1) do
-      assert_difference 'ActionMailer::Base.deliveries.size', +1 do
+      assert_enqueued_emails 1 do
         post new_recipient_url, params: { country_id: lando.id, email: 'test@example.com' }
       end
     end
@@ -39,14 +39,9 @@ class NotificationListControllerTest < ActionDispatch::IntegrationTest
   test 'devas sendi repoŝtmesaĝon al la nova abonanto de sciiga listo' do
     country = create(:lando)
     email   = Faker::Internet.email
-    assert_difference 'ActionMailer::Base.deliveries.size', +1 do
+    assert_enqueued_emails 1 do
       post new_recipient_url, params: { country_id: country.id, email: email }
     end
-
-    sent_email = ActionMailer::Base.deliveries.last
-
-    assert_equal "Informoj pri novaj eventoj en #{country.name}", sent_email.subject
-    assert_equal email, sent_email.to[0]
   end
 
   test 'ne sendas retpoŝtmesaĝon se jam abonas la liston' do

@@ -27,7 +27,6 @@ class EventMailer < ApplicationMailer
 
     event      = Event.includes(:country).find(event_id)
     recipients = event.country.recipients
-    recipients += NotificationList.admins
     return false if recipients.empty?
 
     recipients.each do |recipient|
@@ -39,6 +38,11 @@ class EventMailer < ApplicationMailer
     @recipient = NotificationList.find(recipient_id)
     @event     = Event.includes(:country).find(event_id)
     mail(to: @recipient.email, subject: "Nova evento: #{@event.title}")
+  end
+
+  def notify_admins(event_id)
+    @event = Event.find(event_id)
+    mail(to: User.admins.pluck(:email), subject: "Nova evento: #{@event.title}")
   end
 
   def self.send_weekly_summary_to_users
@@ -57,6 +61,9 @@ class EventMailer < ApplicationMailer
   def kontakti_organizanton(eventa_kodo, informoj = {})
     @evento = Event.by_code(eventa_kodo)
     @informoj = informoj
-    mail(to: 'Eventa Servo <kontakto@eventaservo.org>, Yves Nevelsteen <yves.nevelsteen@gmail.com>', subject: 'Informo pri via evento en Eventa Servo')
+    mail(
+      to: 'Eventa Servo <kontakto@eventaservo.org>, Yves Nevelsteen <yves.nevelsteen@gmail.com>',
+      subject: 'Informo pri via evento en Eventa Servo'
+    )
   end
 end

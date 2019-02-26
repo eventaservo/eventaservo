@@ -25,6 +25,7 @@ class User < ApplicationRecord
   validates :username, uniqueness: true
 
   scope :receives_weekly_summary, -> { where('mailings @> ?', {weekly_summary: '1'}.to_json) }
+  scope :admins, -> { where(admin: true) }
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

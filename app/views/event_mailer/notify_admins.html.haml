@@ -1,0 +1,22 @@
+%p
+  #{@event.user.name} kreis eventon en #{@event.country.name} ĉe Eventa Servo. Jen pliaj detaloj:
+
+%table
+  %tbody
+    %tr
+      %td
+        %h2.text-center= link_to @event.title, event_url(@event.code)
+        .lead.text-center
+          %p
+            #{@event.city} (#{@event.country.name})
+            %br
+            =format_date(@event.date_start)
+            - if @event.date_end > @event.date_start
+              ĝis #{format_date(@event.date_end)}
+
+        %p= @event.description
+        %p= raw @event.content
+        %p.small
+          Vidu la eventon rekte en la paĝo:
+          %br
+          = link_to event_url(@event.code), event_url(@event.code)

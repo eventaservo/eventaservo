@@ -7,6 +7,4 @@ class NotificationList < ApplicationRecord
 
   validates :code, :email, :country_id, presence: true
   validates :email, uniqueness: { scope: :country_id }
-
-  scope :admins, -> { where(email: 'shayani@gmail.com') }
 end

@@ -13,5 +13,9 @@ FactoryBot.define do
     trait :brazila do
       association :country, factory: [:lando, :brazilo]
     end
+
+    trait :admin do
+      admin { true }
+    end
   end
 end
