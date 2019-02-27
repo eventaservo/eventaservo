@@ -67,7 +67,7 @@ class EventsController < ApplicationController
   def destroy
     redirect_to(event_path(@event.code), flash: { error: 'Vi ne estas la kreinto, do vi ne rajtas forigi ĝin' }) && return unless current_user.owner_of(@event) || current_user.admin?
 
-    # Ne forviŝas la eventon el la datumbaso nun. Ĝi estos forviŝita post kelkaj tagoj
+    # Ne vere forviŝas la eventon el la datumbazo, sed kaŝas ĝin
     @event.delete!
     redirect_to root_url, flash: { error: 'Evento sukcese forigita' }
   end

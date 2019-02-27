@@ -1,9 +1,13 @@
 $esperantoGreen: #28a745
 
 body
-  background-color: white
-  margin: 10px
   font-family: Helvetica, Arial, sans-serif
+  background-color: whitesmoke
+
+  a
+    text-decoration: none
+    &:visited
+      color: blue
 
 .header
   text-decoration: none
@@ -28,10 +32,15 @@ body
   text-align: center
 
 table
-  width: 98%
+  max-width: 800px
+  width: 95%
+
   margin-left: auto
   margin-right: auto
   border-collapse: collapse
+  border-top: 8px solid green
+  background-color: white
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .15)
 
   &.stripped
     tr:nth-child(odd)
@@ -43,20 +52,35 @@ table
   tbody
     tr
       border-bottom: 1px solid lightgrey
+
       td
-        padding: 5px
+        padding: 20px
+
+        &.title
+          font-weight: bold
+          font-size: 1.5em
+          text-align: center
+
+          span.sub-title
+            font-size: small
+            font-weight: normal
+
+
+
+      &.footer
+        text-align: center
+        font-size: small
+        color: gray
+        img
+          float: left
+          border-radius: 50%
+
 
       &.row-header
         background-color: lightgray !important
         font-weight: bold
 
-      &.row-title
-        background-color: darkgreen !important
-        color: white
-        font-weight: bold
 
-.table-footer
-  text-align: center
 
 .event
 
@@ -67,25 +91,23 @@ table
   .title
     margin-bottom: 5px
 
-  .description
-
 .email-footer
   @extend .text-center
-  @extend .small
-  background-color: whitesmoke
+  font-size: small
+  color: gray
   padding: 5px
   border-radius: 3px
 
 .button-blue
   a
-    background-color: steelblue
+    background-color: blue
     padding: 10px
     display: inline-block
     border-radius: 3px
     color: white
-    text-decoration: none
 
     &:visited
       color: white
+
     &:hover
-      background-color: cornflowerblue !important
+      background-color: steelblue !important

@@ -56,11 +56,14 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_nil error_handling(build_stubbed(:evento))
   end
 
-  test 'error_handling - estas eraroj' do
-    event = Event.new
-    event.save
-    error_string = error_handling(event)
+  test 'tuta eventa adreso por RSS' do
+    event = create(:evento, :brazila)
+    event.date_start = Date.new(1978, 7, 17)
+    event.date_end = Date.new(1978, 7, 17)
+    event.description = 'Grava tago'
+    event.city = 'San-Paŭlo'
+    event.save!
 
-    assert error_string.include?("<div class='error-handling'>")
+    assert_equal 'lundo, 17 julio 1978 (Brazilo - San-Paŭlo)<br/>Grava tago', event_full_description(event)
   end
 end

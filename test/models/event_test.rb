@@ -135,8 +135,8 @@ class EventTest < ActiveSupport::TestCase
     event = create(:evento, :usona)
     event.geocode
     event.save!
-    assert_equal 40.7143528, event.latitude
-    assert_equal(-74.0059731, event.longitude)
+    assert_equal 40.71, event.latitude
+    assert_equal(-74.00, event.longitude)
   end
 
   test 'endas plenumi retadreson au retposhtadreson' do

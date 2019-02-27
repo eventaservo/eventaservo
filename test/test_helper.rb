@@ -7,6 +7,9 @@ require 'rails/test_help'
 require 'codacy-coverage'
 Codacy::Reporter.start
 
+require 'minitest/reporters'
+Minitest::Reporters.use!
+
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
@@ -15,10 +18,22 @@ class ActiveSupport::TestCase
 
   # Geocoder test configuration
   Geocoder.configure(lookup: :test, ip_lookup: :test)
+  Geocoder::Lookup::Test.add_stub(
+    'Sao Paŭlo, BR', [
+      {
+        coordinates: [-23.55, -46.63],
+        address: 'Sao Paŭlo urbocentro',
+        state: 'Sao Paŭlo',
+        state_code: 'SP',
+        country: 'Brazil',
+        country_code: 'BR'
+      }
+    ]
+  )
   Geocoder::Lookup::Test.set_default_stub(
     [
       {
-        coordinates: [40.7143528, -74.0059731],
+        coordinates: [40.71, -74.00],
         address: 'New York, NY, USA',
         state: 'New York',
         state_code: 'NY',
@@ -27,4 +42,10 @@ class ActiveSupport::TestCase
       }
     ]
   )
+
+  # Timezone agordoj por provkodoj
+  ::Timezone::Lookup.config(:test)
+  ::Timezone::Lookup.lookup.stub(40.71, -74.00, 'America/New_York')
+  ::Timezone::Lookup.lookup.stub(-23.55, -46.63, 'America/Sao_Paulo')
+  ::Timezone::Lookup.lookup.default('Etc/UTC')
 end

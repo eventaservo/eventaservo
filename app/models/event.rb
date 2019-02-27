@@ -20,7 +20,6 @@ class Event < ApplicationRecord
   validate :url_or_email
 
   before_save :format_event_data
-  # before_update :format_event_data
 
   geocoded_by :full_address
   after_validation :geocode, if: :require_geocode?
@@ -184,10 +183,10 @@ class Event < ApplicationRecord
         self.latitude = nil
         self.longitude = nil
       else
-        if self.latitude.present? || self.longitude.present?
+        if self.latitude_changed? || self.longitude_changed?
           self.time_zone = Timezone.lookup(self.latitude, self.longitude).name
         else
-          self.time_zone = 'Etc/UTC'
+          self.time_zone = 'Etc/UTC' if self.time_zone.empty?
         end
       end
 

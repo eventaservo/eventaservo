@@ -82,7 +82,6 @@ module ApplicationHelper
     text = event_date(event)
     text += event.online ? ' (Reta evento)' : " (#{event.country.name} - #{event.city})"
     text += "<br/>#{event.description}"
-    text
   end
 
   def rss_enclosure(xml, event)

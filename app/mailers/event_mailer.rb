@@ -42,7 +42,7 @@ class EventMailer < ApplicationMailer
 
   def notify_admins(event_id)
     @event = Event.find(event_id)
-    mail(to: User.admins.pluck(:email), subject: "Nova evento: #{@event.title}")
+    mail(to: User.admins.pluck(:email), subject: "[ES estraro] Nova evento: #{@event.title}")
   end
 
   def self.send_weekly_summary_to_users
