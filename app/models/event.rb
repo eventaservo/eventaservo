@@ -26,12 +26,12 @@ class Event < ApplicationRecord
 
   default_scope { where(deleted: false) }
   scope :deleted, -> { unscoped.where(deleted: true) }
-  scope :venontaj, -> { where('date_start >= :date OR date_end >= :date', date: Time.zone.today) }
-  scope :pasintaj, -> { where('date_end < ?', Time.zone.today) }
-  scope :today, -> { by_dates(from: Time.zone.today, to: Time.zone.today) }
-  scope :in_7days, -> { where('date_start BETWEEN ? and ?', Time.zone.today + 1.day, Time.zone.today + 7.days) }
-  scope :in_30days, -> { where('date_start BETWEEN ? and ?', Time.zone.today + 7.days, Time.zone.today + 30.days) }
-  scope :after_30days, -> { where('date_start > ?', Time.zone.today + 30.days) }
+  scope :venontaj, -> { where('date_start >= :date OR date_end >= :date', date: Time.zone.today.beginning_of_day) }
+  scope :pasintaj, -> { where('date_end < ?', Time.zone.yesterday.end_of_day) }
+  scope :today, -> { by_dates(from: Time.zone.today.beginning_of_day, to: Time.zone.today.end_of_day) }
+  scope :in_7days, -> { where('date_start BETWEEN ? and ?', (Time.zone.today + 1.day).beginning_of_day, (Time.zone.today + 7.days).end_of_day) }
+  scope :in_30days, -> { where('date_start BETWEEN ? and ?', (Time.zone.today + 7.days).beginning_of_day , (Time.zone.today + 30.days).end_of_day) }
+  scope :after_30days, -> { where('date_start > ?', (Time.zone.today + 30.days).end_of_day) }
   scope :lau_lando, ->(lando) { joins(:country).where(country: lando) }
   scope :by_country_id, ->(id) { where(country_id: id) }
   scope :by_country_name, ->(name) { joins(:country).where(countries: { name: name }) }
