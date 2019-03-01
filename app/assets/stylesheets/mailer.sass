@@ -1,4 +1,5 @@
 $esperantoGreen: #28a745
+$blue: #4285F4
 
 body
   font-family: Helvetica, Arial, sans-serif
@@ -40,7 +41,7 @@ table
   border-collapse: collapse
   border: 1px solid whitesmoke
   border-top: 8px solid green
-  background-color: #FDFDFD
+  background-color: #FAFAFA
   box-shadow: 0 1px 3px rgba(0, 0, 0, .15)
 
   &.stripped
@@ -66,6 +67,10 @@ table
             font-size: small
             font-weight: normal
 
+        &.content
+          img
+            max-width: 100%
+            height: auto
 
       &.footer
         text-align: center
@@ -100,14 +105,16 @@ table
 
 .button-blue
   a
-    background-color: blue
+    background-color: $blue
     padding: 10px
     display: inline-block
     border-radius: 3px
     color: white
+    font-weight: bold
+    min-width: 9em
 
     &:visited
       color: white
 
     &:hover
-      background-color: steelblue !important
+      background-color: lighten($blue, 10%) !important

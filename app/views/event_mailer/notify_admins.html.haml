@@ -1,30 +1,6 @@
-%br
-%br
-%table
-  %tbody
-    %tr
-      %td.title{colspan: 2}
-        = link_to @event.title, event_url(@event.code)
-        %br
-        %span.sub-title
-          #{@event.city} (#{@event.country.name})
-          %br
-          #{format_date(@event.date_start)}
+= content_for :event_footer do
+  Tiu ĉi informo estas nur por la administrantoj:
+  %br
+  Evento kreita de #{@event.user.name} en #{format_date(@event.created_at)}.
 
-    %tr
-      %td{colspan: 2}
-
-
-        %p= @event.description
-        %p= raw @event.content
-        %br
-        %p.button-blue.text-center
-          = link_to 'Vidu la eventon rekte', event_url(@event.code)
-
-    %tr.footer
-      %td
-        = link_to image_tag('https://eventaservo.org/eventa_servo_logo.png', size: 48), 'https://eventaservo.org'
-      %td
-        Tiu ĉi informo estas nur por la administrantoj:
-        %br
-        Evento kreita de #{@event.user.name} en #{format_date(@event.created_at)}.
+= render 'event_summary'
