@@ -30,7 +30,7 @@ class EventMailer < ApplicationMailer
     return false if recipients.empty?
 
     recipients.each do |recipient|
-      notify_user(event_id, recipient.id).deliver_later
+      notify_user(event_id, recipient.id).deliver_later(wait: 1.hour)
     end
   end
 
