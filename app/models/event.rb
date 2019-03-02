@@ -57,7 +57,7 @@ class Event < ApplicationRecord
   end
 
   def self.by_city(city_name)
-    where('unaccent(lower(city)) = ?', city_name.normalized)
+    where('unaccent(lower(city)) in (?, ?)', city_name.normalized, city_name.downcase)
   end
 
   def self.grouped_by_countries
@@ -184,8 +184,10 @@ class Event < ApplicationRecord
         self.longitude = nil
       else
         if self.latitude_changed? || self.longitude_changed?
+          logger.info 'Latitudo aŭ longitudo ŝanĝiĝis'
           self.time_zone = Timezone.lookup(self.latitude, self.longitude).name
         else
+          logger.info 'Latitudo aŭ longitudo NE ŝanĝiĝis'
           self.time_zone = 'Etc/UTC' if self.time_zone.empty?
         end
       end
