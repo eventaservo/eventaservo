@@ -43,11 +43,11 @@
           .col-lg-6
             .form-group
               = form.label :site, 'Retpaĝo'
-              = form.text_field :site, class: 'form-control', required: true
+              = form.text_field :site, class: 'form-control', required: @event.email.blank?
           .col-lg-6
             .form-group
               = form.label :email, 'Retpoŝtadreso por kontakto'
-              = form.email_field :email, class: 'form-control', required: true
+              = form.email_field :email, class: 'form-control', required: @event.site.blank?
 
         .form-group.form-check
           = form.check_box :online, class: 'form-check-input'
