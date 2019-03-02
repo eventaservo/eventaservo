@@ -12,11 +12,11 @@
 
         .form-group
           = form.label :title, 'Titolo *'
-          = form.text_field :title, class: 'form-control', autofocus: true
+          = form.text_field :title, class: 'form-control', autofocus: true, required: true
 
         .form-group
           = form.label :description, 'Priskribo *'
-          = form.text_field :description, class: 'form-control'
+          = form.text_field :description, class: 'form-control', required: true
           %small.form-text.text-muted Maksimume 140 signoj
 
         .form-row
@@ -43,11 +43,11 @@
           .col-lg-6
             .form-group
               = form.label :site, 'Retpaĝo'
-              = form.text_field :site, class: 'form-control'
+              = form.text_field :site, class: 'form-control', required: true
           .col-lg-6
             .form-group
               = form.label :email, 'Retpoŝtadreso por kontakto'
-              = form.email_field :email, class: 'form-control'
+              = form.email_field :email, class: 'form-control', required: true
 
         .form-group.form-check
           = form.check_box :online, class: 'form-check-input'
@@ -68,7 +68,7 @@
             .col-lg-6
               .form-group
                 = form.label :city, 'Urbo'
-                = form.text_field :city, class: 'form-control'
+                = form.text_field :city, class: 'form-control', required: true
             .col-lg-6
               .form-group
                 = form.label :country_id, 'Lando'
@@ -112,3 +112,8 @@
   # Movas la fokuson al Registri butono post la landelekto
   $('#event_country_id').on "select2:close", (e) ->
     $('.button-submit').focus()
+
+  # Devigas plenumi retpaĝon aŭ retpoŝtadreson
+  $inputs = $('#event_site, #event_email')
+  $inputs.on 'input', ->
+    $inputs.not(this).prop 'required', !$(this).val().length
