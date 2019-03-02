@@ -103,3 +103,12 @@
     else
       $('#malretaj_informoj').show()
       $('#retaj_informoj').hide()
+
+  # Malfermas la elektilon aŭtomate je fokuso
+  $(document).on 'focus', '.select2', (e) ->
+    if e.originalEvent
+      $(this).siblings('select').select2 'open'
+
+  # Movas la fokuson al Registri butono post la landelekto
+  $('#event_country_id').on "select2:close", (e) ->
+    $('.button-submit').focus()
