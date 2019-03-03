@@ -25,10 +25,10 @@ Se vi estas volontulo kaj volas helpi la projekton, estu bonvena.
 
 Kion mi serĉas?
 
-- Homojn kiuj amas Esperanton kaj volas helpi
-- Programiston de Ruby on Rails por helpi programi la sistemon
-- CSS-spertan programiston por plibeligi la sistemon
-- MiniTest/RSpec-programiston por krei aŭtomatajn provkodojn
+  - Homojn kiuj amas Esperanton kaj volas helpi
+  - Programiston de Ruby on Rails por helpi programi la sistemon
+  - CSS-spertan programiston por plibeligi la sistemon
+  - MiniTest/RSpec-programiston por krei aŭtomatajn provkodojn
 
 Se vi volas kunlabori en ĉi tiu projekto, kontaktu min per Telegramo [(@fernando.shayani)](https://t.me/fernandoshayani)
 aŭ retmesaĝo [(kontakto@eventaservo.org)](mailto:kontakto@eventaservo.org).
@@ -44,8 +44,8 @@ Dankoj
 
 Mi dankas al ĉiuj kiuj helpas min plibonigi la projekton, speciale:
 
-- Paŭla kaj Didje pro iliaj komentoj kaj provuzado
-- Pro interesaj sugestoj:
-  - [Robin van der Vliet](https://t.me/robin)
-  - [Yves Nevelsteen](https://t.me/yvesnev)
-  - [Vulpo](https://t.me/iu_vulpo)
+  - Paŭla kaj Didje pro iliaj komentoj kaj provuzado
+  - [Yves Nevelsteen](https://t.me/yvesnev) pro provado de sistemo kaj sugestoj
+  - Pro interesaj sugestoj:
+    - [Robin van der Vliet](https://t.me/robin)
+    - [Vulpo](https://t.me/iu_vulpo)

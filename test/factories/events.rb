@@ -17,17 +17,17 @@ FactoryBot.define do
     time_zone { Faker::Address.time_zone }
 
     trait :brazila do
-      association :country, factory: [:lando, :brazilo]
+      association :country, factory: %i[lando brazilo]
     end
 
     trait :usona do
-      association :country, factory: [:lando, :usono]
+      association :country, factory: %i[lando usono]
       city { 'New York' }
       address { '31 Ocean Parkway' }
     end
 
     trait :japana do
-      association :country, factory: [:lando, :japanio]
+      association :country, factory: %i[lando japanio]
       city { 'Tokyo' }
     end
 

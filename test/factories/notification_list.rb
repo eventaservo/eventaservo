@@ -7,4 +7,3 @@ FactoryBot.define do
     code { Faker::Alphanumeric.alphanumeric 10 }
   end
 end
-

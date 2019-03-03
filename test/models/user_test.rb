@@ -3,7 +3,6 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-
   test 'uzanto validas' do
     assert build_stubbed(:uzanto).valid?
   end

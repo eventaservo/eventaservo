@@ -24,7 +24,7 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :username, uniqueness: true
 
-  scope :receives_weekly_summary, -> { where('mailings @> ?', {weekly_summary: '1'}.to_json) }
+  scope :receives_weekly_summary, -> { where('mailings @> ?', { weekly_summary: '1' }.to_json) }
   scope :admins, -> { where(admin: true) }
 
   def self.from_omniauth(auth)
@@ -70,7 +70,7 @@ class User < ApplicationRecord
 
   private
 
-  def subscribe_mailings
-    self.weekly_summary = '1'
-  end
+    def subscribe_mailings
+      self.weekly_summary = '1'
+    end
 end

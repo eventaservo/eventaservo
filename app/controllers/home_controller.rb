@@ -65,13 +65,13 @@ class HomeController < ApplicationController
 
   private
 
-  # Forigas Google Analytics cookies
-  def delete_ga_cookies
-    cookies.delete :_ga, path: '/', domain: '.eventaservo.org'
-    cookies.delete :_gid, path: '/', domain: '.eventaservo.org'
-  end
+    # Forigas Google Analytics cookies
+    def delete_ga_cookies
+      cookies.delete :_ga, path: '/', domain: '.eventaservo.org'
+      cookies.delete :_gid, path: '/', domain: '.eventaservo.org'
+    end
 
-  def access_from_server
-    request.headers['SERVER_NAME'].in? ['devel.eventaservo.org', 'staging.eventaservo.org', 'eventaservo.org']
-  end
+    def access_from_server
+      request.headers['SERVER_NAME'].in? ['devel.eventaservo.org', 'staging.eventaservo.org', 'eventaservo.org']
+    end
 end
