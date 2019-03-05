@@ -176,6 +176,7 @@ class Event < ApplicationRecord
       self.title = fix_title(title)
       self.city = city.tr('/', '')
       self.site = fix_site(site)
+      self.time_zone = 'Etc/UTC' if time_zone.empty?
 
       if online
         self.city = 'Reta urbo'
@@ -183,18 +184,12 @@ class Event < ApplicationRecord
         self.latitude = nil
         self.longitude = nil
       else
-        if self.latitude_changed? || self.longitude_changed?
-          logger.info 'Latitudo aŭ longitudo ŝanĝiĝis'
-          self.time_zone = Timezone.lookup(self.latitude, self.longitude).name
-        else
-          logger.info 'Latitudo aŭ longitudo NE ŝanĝiĝis'
-          self.time_zone = 'Etc/UTC' if self.time_zone.empty?
-        end
+        self.time_zone = Timezone.lookup(latitude, longitude).name if latitude_changed? || longitude_changed?
       end
 
-      tz = TZInfo::Timezone.get(self.time_zone)
-      self.date_start = tz.local_to_utc(Time.new(date_start.year, date_start.month, date_start.day, date_start.hour, date_start.min)).in_time_zone(self.time_zone)
-      self.date_end = tz.local_to_utc(Time.new(date_end.year, date_end.month, date_end.day, date_end.hour, date_end.min)).in_time_zone(self.time_zone)
+      tz = TZInfo::Timezone.get(time_zone)
+      self.date_start = tz.local_to_utc(Time.new(date_start.year, date_start.month, date_start.day, date_start.hour, date_start.min)).in_time_zone(time_zone)
+      self.date_end = tz.local_to_utc(Time.new(date_end.year, date_end.month, date_end.day, date_end.hour, date_end.min)).in_time_zone(time_zone)
     end
 
     def fix_title(title)
