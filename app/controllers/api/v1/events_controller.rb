@@ -26,12 +26,13 @@ module Api
           if (params[:komenca_dato].blank? || params[:fina_dato].blank?) && params[:uuid].blank?
             render json: { eraro: 'Mankas datoj aŭ eventa uuid' }
           end
+
+          date_string = /\d{4}-\d{2}-\d{2}/
+          render json: { eraro: 'Data formato malĝustas' } unless params[:komenca_dato] =~ date_string && params[:fina_dato] =~ date_string
         end
 
         def validate_date(date)
           Date.strptime(date, '%Y-%m-%d')
-        rescue ArgumentError
-          render json: { eraro: 'Data formato malĝustas' }
         end
     end
   end
