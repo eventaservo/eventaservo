@@ -55,6 +55,11 @@ class HomeController < ApplicationController
       cookies[:akceptas_ga] = { value: 'ne', expires: 1.year }
       delete_ga_cookies
     end
+
+    respond_to do |format|
+      format.js
+      format.html { redirect_to root_url }
+    end
   end
 
   def reset_cookies
