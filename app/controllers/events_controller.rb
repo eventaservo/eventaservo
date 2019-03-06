@@ -80,7 +80,7 @@ class EventsController < ApplicationController
 
   def by_continent
     if params[:continent] == 'Reta' && cookies[:vidmaniero] == 'mapo'
-      cookies[:vidmaniero] = 'listo'
+      cookies[:vidmaniero] = { value: 'listo', expires: 1.year }
       redirect_to events_by_continent_path('Reta')
     end
 

@@ -36,7 +36,7 @@ class HomeController < ApplicationController
   end
 
   def view_style
-    cookies[:vidmaniero] = params[:view_style]
+    cookies[:vidmaniero] = { value: params[:view_style], expires: 1.year }
     redirect_back fallback_location: root_url
   end
 
