@@ -183,13 +183,13 @@ class Event < ApplicationRecord
         self.country_id = 99_999
         self.latitude = nil
         self.longitude = nil
-      else
-        self.time_zone = Timezone.lookup(latitude, longitude).name if latitude_changed? || longitude_changed?
+      elsif latitude_changed? || longitude_changed?
+        self.time_zone = Timezone.lookup(latitude, longitude).name
+      elsif date_start_changed? || date_end_changed?
+        tz = TZInfo::Timezone.get(time_zone)
+        self.date_start = tz.local_to_utc(Time.new(date_start.year, date_start.month, date_start.day, date_start.hour, date_start.min)).in_time_zone(time_zone)
+        self.date_end = tz.local_to_utc(Time.new(date_end.year, date_end.month, date_end.day, date_end.hour, date_end.min)).in_time_zone(time_zone)
       end
-
-      tz = TZInfo::Timezone.get(time_zone)
-      self.date_start = tz.local_to_utc(Time.new(date_start.year, date_start.month, date_start.day, date_start.hour, date_start.min)).in_time_zone(time_zone)
-      self.date_end = tz.local_to_utc(Time.new(date_end.year, date_end.month, date_end.day, date_end.hour, date_end.min)).in_time_zone(time_zone)
     end
 
     def fix_title(title)
