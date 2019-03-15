@@ -30,11 +30,18 @@
         = f.label :authentication_token
         = f.text_field :authentication_token, readonly: true, class: 'form-control'
 
-      .text-divider Retlistoj
+      .text-divider Organizoj
+      - @user.organizoj.each do |organizo|
+        = link_to organizo.name, organization_url(organizo), class: 'btn btn-sm btn-outline-primary'
+      %p= link_to icon('fas', 'plus-circle', 'Krei novan organizon'), new_organization_url, class: 'small fg-color-green'
 
-      .form-check
-        = f.check_box :weekly_summary, class: 'form-check-input'
-        = f.label :weekly_summary, 'Semajna resumo', class: 'form-check-label'
+
+      -# Kaŝita ĉar nuntempe ES ne plu sendas retlistojn
+      -#
+      -#.text-divider Retlistoj
+      -#.form-check
+      -#  = f.check_box :weekly_summary, class: 'form-check-input'
+      -#  = f.label :weekly_summary, 'Semajna resumo', class: 'form-check-label'
 
       .buttons-footer
         = link_to 'Nuligi', root_path, class: 'button-cancel'

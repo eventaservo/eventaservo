@@ -20,6 +20,9 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :participants, dependent: :destroy
   belongs_to :country, inverse_of: :users
+  has_many :organization_users
+  has_many :organizations, through: :organization_users # TODO: Evitinda
+  has_many :organizoj, through: :organization_users, source: :organization
 
   validates :name, presence: true
   validates :username, uniqueness: true

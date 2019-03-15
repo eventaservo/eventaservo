@@ -24,6 +24,9 @@ epo:
         country_id: Lando
         date_start: Komenca dato
         date_end: Fina dato
+      organization:
+        name: nomo
+        short_name: mallonga nomo
   date:
     abbr_day_names:
       - dim

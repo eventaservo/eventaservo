@@ -1,0 +1,9 @@
+.box-white
+  %h1 Organizoj
+  - if user_signed_in?
+    %p= link_to icon('fas', 'plus-circle', 'Krei novan organizon'), new_organization_url, class: 'small fg-color-green'
+
+  .row
+    - @organizoj.each do |organizo|
+      .col-lg-4.col-md-6.col-12
+        = render partial: 'organization_card', locals: { organizo: organizo }

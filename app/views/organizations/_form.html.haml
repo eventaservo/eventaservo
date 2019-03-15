@@ -1,0 +1,28 @@
+.row
+  .col-lg-8.offset-lg-2
+    .box-white
+      .lead
+        = params[:action] == 'new' ? 'Nova organizo' : 'Redakti organizon'
+
+      .alert.alert-info.small
+        Skribu esperante. Povu ĉiuj scii, kio okazas en Esperantujo tutmonde!
+
+      = form_for(@organizo, url: (organization_url(@organizo.short_name) if params[:action].in? %w(edit update))) do |f|
+        = error_handling(@organizo)
+
+        .form-group
+          = f.label :name, 'Nomo'
+          = f.text_field :name, class: 'form-control', autofocus: true, required: true
+
+        .form-group
+          = f.label :short_name, 'Mallonga nomo'
+          = f.text_field :short_name, class: 'form-control', required: true
+          %small.form-text.text-muted Ne uzo spacojn aŭ specialajn signojn. Vi rajtas uzi _ kaj -
+
+        .form-group
+          = f.label :logo
+          = f.file_field :logo, class: 'form-control-file', accept: 'image/*'
+
+        .buttons-footer
+          = link_to 'Nuligi', organizations_url, class: 'button-cancel'
+          = f.submit 'Registri', class: 'button-submit'
