@@ -44,10 +44,10 @@ class EventsController < ApplicationController
   def create
     @event         = Event.new(event_params)
     @event.user_id = current_user.id
-
     params[:event].each { |_key, value| value.strip! if value.class == 'String' }
 
     if @event.save
+      @event.update_event_organizations(params[:organization_ids])
       # EventMailer.send_notification_to_users(event_id: @event.id)
       EventMailer.notify_admins(@event.id).deliver_later(wait: 5.minutes)
       redirect_to event_path(@event.code), flash: { notice: 'Evento sukcese kreita.' }
@@ -58,6 +58,7 @@ class EventsController < ApplicationController
 
   def update
     if @event.update(event_params)
+      @event.update_event_organizations(params[:organization_ids])
       redirect_to event_path(@event.code), notice: 'Evento sukcese ĝisdatigita'
     else
       render :edit

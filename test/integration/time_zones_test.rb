@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class PostEventTest < ActionDispatch::IntegrationTest
+class TimeZonesTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   test 'kontrolas ĝustan eventan horzonon' do

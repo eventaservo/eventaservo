@@ -7,12 +7,13 @@ class Event < ApplicationRecord
   has_many_attached :uploads
 
   include Code
+  include Events::Organizations
 
   belongs_to :user
   belongs_to :country
   has_many :participants, dependent: :destroy
   has_many :likes, as: :likeable, dependent: :destroy
-  has_many :organization_events
+  has_many :organization_events, dependent: :destroy
   has_many :organizations, through: :organization_events
 
   validates :title, :description, :city, :country_id, :date_start, :date_end, :code, presence: true

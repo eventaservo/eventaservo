@@ -39,11 +39,6 @@ class OrganizationsTest < ActiveSupport::TestCase
     assert organizo.invalid?
   end
 
-  test 'mallonga nomo devas esti minuskla' do
-    organizo = create(:organizo, short_name: 'Kun_Grandaj_Literoj')
-    assert_equal 'kun_grandaj_literoj', organizo.short_name
-  end
-
   test 'mallong nomo devas esti unika' do
     create(:organizo, short_name: 'tejo')
     o = build(:organizo, short_name: 'tejo')

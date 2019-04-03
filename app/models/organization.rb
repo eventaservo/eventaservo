@@ -2,9 +2,8 @@
 
 class Organization < ApplicationRecord
   has_one_attached :logo
-
-  has_many :organization_users
-  has_many :organization_events
+  has_many :organization_users, dependent: :destroy
+  has_many :organization_events, dependent: :destroy
   has_many :uzantoj, through: :organization_users, source: :user
   has_many :eventoj, through: :organization_events, source: :event
 
@@ -12,16 +11,10 @@ class Organization < ApplicationRecord
   validates :short_name, uniqueness: true
   validates :short_name, format: { with: /\A[a-zA-Z0-9_\-]*\z/, message: 'nevalidaj signoj' }
 
-  before_save :format_organization_data
+  scope :by_user, ->(user) { joins(:uzantoj).where(organization_users: { user_id: user.id }) }
 
   def administrantoj
     users_ids = organization_users.where(admin: true).pluck(:user_id)
-    User.where(id:  users_ids)
+    User.where(id: users_ids)
   end
-
-  private
-
-    def format_organization_data
-      short_name.downcase!
-    end
 end
