@@ -18,6 +18,12 @@ body {
   @extend .small;
 }
 
+.uea-logeto {
+  float: right;
+  width: 36px;
+  margin-top: 15px;
+}
+
 .cookies-bar {
   @extend .small;
   text-align: center;

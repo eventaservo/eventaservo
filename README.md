@@ -11,12 +11,13 @@ Program-kodo: [Github](https://github.com/shayani/eventaservo)
 Legu min
 ---
 
-Ĉi tiu projekto estas senpaga kaj la programkodo estas libera.
+Eventa Servo estas sistemo de [UEA](https://uea.org) por ordigi kaj diskonigi eventojn esperantajn por la tuta mondo.
+Ĝi estas senpaga kaj programkoda libera.
+
+<img alt="UEA logoo" src="https://eventaservo.org/uea_logo_longa.png" style="margin: 10px;" width="400px">
 
 La kodo estas eldonita laŭ versio 3 aŭ pli nova de la permesilo
 Affero General Public License. (AGPLv3+)
-
-Eventa Servo estas sistemo por ordigi kaj diskonigi eventojn esperantajn por la tuta mondo.
 
 Kunlaboro
 ---
