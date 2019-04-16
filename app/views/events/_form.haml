@@ -19,6 +19,13 @@
           = form.text_field :description, class: 'form-control', required: true
           %small.form-text.text-muted Maksimume 140 signoj
 
+        - if Organization.by_user(current_user).any?
+          .form-group
+            = label_tag :organization_id, 'Organizo'
+            = select_tag 'organization_ids[]',
+              options_from_collection_for_select(Organization.by_user(current_user), 'id', 'short_name', @event.organizations.pluck(:organization_id)),
+              multiple: true, class: 'form-control select2-input'
+
         .form-row
           .col-lg-6
             .form-group

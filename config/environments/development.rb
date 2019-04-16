@@ -48,6 +48,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   config.action_mailer.default_url_options = { host: 'devel.eventaservo.org', port: 3000, protocol: 'https' }
+  default_url_options = { host: 'devel.eventaservo.org', port: 3000, protocol: 'https' }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -76,10 +77,10 @@ Rails.application.configure do
   config.force_ssl = true
 
   config.after_initialize do
-    Bullet.enable              = false
+    Bullet.enable              = true
     Bullet.bullet_logger       = true
     Bullet.console             = false
-    Bullet.rails_logger        = true
+    Bullet.rails_logger        = false
     Bullet.add_footer          = false
   end
 end

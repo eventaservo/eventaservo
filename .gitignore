@@ -44,3 +44,4 @@ coverage/
 brakeman.html
 codacy_test.sh
 dump.rdb
+/doc

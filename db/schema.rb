@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_20_111054) do
+ActiveRecord::Schema.define(version: 2019_03_05_141056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -151,6 +151,37 @@ ActiveRecord::Schema.define(version: 2019_02_20_111054) do
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_notification_lists_on_code"
     t.index ["country_id", "email"], name: "index_notification_lists_on_country_id_and_email"
+  end
+
+  create_table "organization_events", force: :cascade do |t|
+    t.bigint "organization_id"
+    t.bigint "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_organization_events_on_event_id"
+    t.index ["organization_id"], name: "index_organization_events_on_organization_id"
+  end
+
+  create_table "organization_users", force: :cascade do |t|
+    t.bigint "organization_id"
+    t.bigint "user_id"
+    t.boolean "admin", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin"], name: "index_organization_users_on_admin"
+    t.index ["organization_id"], name: "index_organization_users_on_organization_id"
+    t.index ["user_id"], name: "index_organization_users_on_user_id"
+  end
+
+  create_table "organizations", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "short_name", null: false
+    t.boolean "official", default: false
+    t.string "logo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_organizations_on_name"
+    t.index ["short_name"], name: "index_organizations_on_short_name"
   end
 
   create_table "participants", force: :cascade do |t|

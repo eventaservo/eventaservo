@@ -35,6 +35,11 @@ Rails.application.routes.draw do
     get 'lando/:landa_kodo', to: 'webcal#lando'
   end
 
+  # Organizoj
+  resources :organizations, path: 'o', param: 'short_name' do
+
+  end
+
   # Eventoj
   resources :events, path: 'eventoj', param: 'code' do
     get 'like', to: 'likes#event', as: 'toggle_like'

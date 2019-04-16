@@ -1,0 +1,9 @@
+.card.mb-3
+  .card-body
+    %h5.card-title
+      = link_to organizo.name, organization_url(organizo.short_name)
+    .card-text.text-muted
+      %p
+        Uzantoj: #{organizo.uzantoj.count}
+      %p
+        Eventoj: #{organizo.eventoj.count}
