@@ -14,6 +14,9 @@ $(document).on "turbolinks:load", ->
 
     $('.select2-input').select2
       theme: 'bootstrap'
+      language:
+        noResults: ->
+          'Neniu trafo'
 
     $('.js-smartPhoto').SmartPhoto()
 
