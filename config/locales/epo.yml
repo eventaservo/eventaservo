@@ -27,6 +27,7 @@ epo:
       organization:
         name: nomo
         short_name: mallonga nomo
+        logo: Emblemo
   date:
     abbr_day_names:
       - dim
