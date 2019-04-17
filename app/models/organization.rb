@@ -8,8 +8,8 @@ class Organization < ApplicationRecord
   has_many :eventoj, through: :organization_events, source: :event
 
   validates :name, :short_name, presence: true
-  validates :short_name, uniqueness: true
-  validates :short_name, format: { with: /\A[a-zA-Z0-9_\-]*\z/, message: 'nevalidaj signoj' }
+  validates :short_name, uniqueness: { case_sensitive: false }
+  validates :short_name, format: { with: /\A[a-zA-Z0-9_\-]*\z/, message: 'enhavas espaco(j)n aŭ nevalida(j)n signo(j)n' }
 
   scope :by_user, ->(user) { joins(:uzantoj).where(organization_users: { user_id: user.id }) }
 

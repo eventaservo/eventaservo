@@ -31,7 +31,7 @@ class OrganizationsTest < ActiveSupport::TestCase
     assert_not_nil OrganizationEvent.reflect_on_association(:event)
   end
 
-  test 'valiads na mallongan nomon' do
+  test 'validas mallongan nomon' do
     organizo = build(:organizo, short_name: 'organizo kun spacoj')
     assert organizo.invalid?
 
@@ -43,5 +43,8 @@ class OrganizationsTest < ActiveSupport::TestCase
     create(:organizo, short_name: 'tejo')
     o = build(:organizo, short_name: 'tejo')
     assert o.invalid?
+
+    o2 = build(:organizo, short_name: 'TEJO')
+    assert o2.invalid?
   end
 end
