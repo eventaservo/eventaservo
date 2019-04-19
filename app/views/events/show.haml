@@ -21,8 +21,7 @@
         %h5.text-left= @event.description
 
       %p
-        - @event.organizations.each do |org|
-          .span.badge.badge-primary= org.short_name
+        = display_organizations_for_event(@event)
 
       .trix-content= sanitize @event.content
 

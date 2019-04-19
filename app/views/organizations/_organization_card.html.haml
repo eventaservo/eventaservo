@@ -1,6 +1,7 @@
 .card.mb-3
   .card-body
-    %h5.card-title
+    %h5.card-title.d-flex.align-items-center
+      = organization_logo(organizo, size: :medium)
       = link_to organizo.name, organization_url(organizo.short_name)
     .card-text.text-muted
       %p

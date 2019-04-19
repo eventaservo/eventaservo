@@ -80,6 +80,10 @@ class User < ApplicationRecord
     end
   end
 
+  def organizestro?(organizo)
+    (in? organizo.estroj) || admin
+  end
+
   private
 
     def subscribe_mailings

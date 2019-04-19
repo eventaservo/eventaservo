@@ -4,9 +4,6 @@
       .lead
         = params[:action] == 'new' ? 'Nova organizo' : 'Redakti organizon'
 
-      .alert.alert-info.small
-        Skribu esperante. Povu ĉiuj scii, kio okazas en Esperantujo tutmonde!
-
       = form_for(@organizo, url: (organization_url(@organizo.short_name) if params[:action].in? %w(edit update))) do |f|
         = error_handling(@organizo)
 

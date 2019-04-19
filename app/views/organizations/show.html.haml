@@ -1,21 +1,17 @@
 .row
   .col-lg-8
     .box-white
-      %h1
-        = @organizo.name
-      - if current_user.in? @organizo.administrantoj
-        %p= link_to 'Redakti organizon', edit_organization_url(@organizo.short_name), class: 'fg-color-blue'
+      .organization-header
+        = organization_logo(@organizo, size: :large)
+        %p= @organizo.name
 
-      - if @organizo.logo.attached?
-        = image_tag @organizo.logo.variant(resize: '128x128')
+      %p
+        = link_to root_url(o: @organizo.short_name) do
+          Venontaj eventoj: #{@organizo.eventoj.venontaj.count}
 
-      - @organizo.eventoj.each do |evento|
-        .col-12.col-md-4
-          = render partial: 'events/card', locals: { event: evento }
+      - if current_user.organizestro?(@organizo)
+        .buttons-footer
+          = link_to 'Redakti organizon', edit_organization_url(@organizo.short_name), class: 'btn btn-sm btn-outline-primary'
 
   .col-lg-4
-    .box-white
-      .box-header Uzantoj
-      .box-body
-        - @organizo.uzantoj.each do |u|
-          %p= u.name
+    = render partial: 'uzantoj'

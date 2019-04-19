@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class HomeController < ApplicationController
-  before_action :filter_by_period, only: :index
+  before_action :filter_events, only: :index
 
   def index
     cookies[:vidmaniero] ||= { value: 'listo', expires: 1.year, secure: true } # Normala vidmaniero

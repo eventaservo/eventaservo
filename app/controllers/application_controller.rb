@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
   helper_method :user_is_owner_or_admin
 
-  def filter_by_period
+  def filter_events
     @events =
       case params[:periodo]
       when 'hodiau' then Event.today
@@ -21,6 +21,10 @@ class ApplicationController < ActionController::Base
       when 'estontece' then Event.after_30days
       else Event.venontaj
       end
+
+    if params[:o].present?
+      @events = @events.joins(:organizations).where("organizations.short_name = '#{params[:o]}'")
+    end
   end
 
   private

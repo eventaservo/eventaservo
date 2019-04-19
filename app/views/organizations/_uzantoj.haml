@@ -1,0 +1,28 @@
+.box-white
+  .box-header Uzantoj
+  .box-body
+    .text-divider Estroj
+    - @organizo.estroj.order(:name).each do |u|
+      %br
+      = display_user(u)
+      - if current_user.organizestro?(@organizo)
+        = link_to icon('fas', 'star', class: 'fg-color-yellow'), organization_estrighu_url(@organizo.short_name, u.username)
+      - else
+        = icon('fas', 'star', class: 'fg-color-yellow')
+      %br
+
+    .text-divider Membroj
+    - @organizo.ne_estroj.order(:name).each do |u|
+      %br
+      = display_user(u)
+
+      - if current_user.organizestro?(@organizo)
+        = link_to icon('far', 'star', class: 'fg-color-gray'), organization_estrighu_url(@organizo.short_name, u.username)
+      %br
+
+    - if current_user.organizestro?(@organizo)
+      .text-divider Aldoni uzanton
+      = form_tag organization_aldoni_uzanton_url(@organizo.short_name), class: 'form-inline justify-content-center' do
+        .form-group
+          = text_field_tag 'email', nil, placeholder: 'retpoŝtadreso', class: 'form-control', autocomplete: false, required: true
+        = submit_tag 'Aldoni', class: 'button-submit ml-2'

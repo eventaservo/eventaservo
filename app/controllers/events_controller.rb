@@ -5,7 +5,7 @@ class EventsController < ApplicationController
   before_action :authenticate_user!, only: %i[index new create edit update destroy]
   before_action :set_event, only: %i[show edit update destroy]
   before_action :authorize_user, only: %i[edit update destroy]
-  before_action :filter_by_period, only: %i[by_continent by_country by_city]
+  before_action :filter_events, only: %i[by_continent by_country by_city]
   before_action :validate_continent, only: %i[by_continent by_country by_city]
   before_action :set_country, only: %i[by_country by_city]
 
