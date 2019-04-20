@@ -32,6 +32,7 @@ class OrganizationsController < ApplicationController
 
   def update
     if @organizo.update(organization_params)
+      @organizo.logo.purge if params[:delete_logo] == 'true'
       redirect_to organization_url(@organizo.short_name), notice: 'Organizo sukcese ĝisdatigita'
     else
       render :edit

@@ -17,7 +17,16 @@
           %small.form-text.text-muted Ne uzu spacojn aŭ specialajn signojn. Vi rajtas uzi _ kaj -
 
         .form-group
-          = f.label :logo
+          .text-divider Emblemo
+          %br
+          - if @organizo.logo.attached?
+            .d-flex.flex-column.align-items-center.justify-content-center
+              = organization_logo(@organizo, size: :large)
+              .form-check
+                = check_box_tag :delete_logo, true, false, class: 'form-check-input'
+                = label_tag 'delete_logo', 'Forviŝi emblemon', class: 'form-check-label'
+                %p (aŭ alŝutu novan)
+
           = f.file_field :logo, class: 'form-control-file', accept: 'image/*'
 
         .buttons-footer

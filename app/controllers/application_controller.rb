@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
       end
 
     if params[:o].present?
-      @events = @events.joins(:organizations).where("organizations.short_name = '#{params[:o]}'")
+      @events = @events.joins(:organizations).where('organizations.short_name = ?', params[:o])
     end
   end
 
