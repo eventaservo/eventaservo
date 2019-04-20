@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class OrganizationsController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create edit update destroy]
+  before_action :authenticate_user!, only: %i[new create edit update destroy estrighu aldoni_uzanton]
   before_action :set_organization, only: %i[show edit update destroy]
 
   # Listigas ĉiujn organizojn

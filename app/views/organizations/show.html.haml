@@ -9,7 +9,7 @@
         = link_to root_url(o: @organizo.short_name) do
           Venontaj eventoj: #{@organizo.eventoj.venontaj.count}
 
-      - if current_user.organizestro?(@organizo)
+      - if user_signed_in? && current_user.organizestro?(@organizo)
         .buttons-footer
           = link_to 'Redakti organizon', edit_organization_url(@organizo.short_name), class: 'btn btn-sm btn-outline-primary'
 
