@@ -45,3 +45,4 @@ brakeman.html
 codacy_test.sh
 dump.rdb
 /doc
+/certs
