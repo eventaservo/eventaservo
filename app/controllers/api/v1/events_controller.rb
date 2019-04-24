@@ -6,7 +6,7 @@ module Api
       before_action :validate_index_params, only: :index
 
       def index
-        @events = Event.includes(:country).includes(:user)
+        @events = Event.includes(:country).includes(:user).order(:date_start)
 
         if params[:uuid].present?
           @events = @events.by_uuid(params[:uuid])
