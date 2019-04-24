@@ -1,5 +1,4 @@
 %br
-%br
 %table
   %tbody
     %tr
@@ -9,7 +8,7 @@
         %span.sub-title
           #{@event.city} (#{@event.country.name})
           %br
-          #{format_date(@event.date_start)}
+          #{event_date(@event)}
 
     %tr
       %td.content{colspan: 2}
