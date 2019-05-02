@@ -5,5 +5,5 @@
       = link_to organizo.name, organization_url(organizo.short_name)
     .card-text.text-muted
       .d-flex.justify-content-around
-        %span= icon('far', 'calendar', organizo.eventoj.count)
+        %span= icon('far', 'calendar', organizo.eventoj.venontaj.count)
         %span= icon('fas', 'users', organizo.uzantoj.count)

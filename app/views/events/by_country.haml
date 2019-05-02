@@ -15,10 +15,11 @@
         data: { target: '#webcalModal', toggle: 'modal' }
 
   - @cities.each do |city|
-    = link_to events_by_city_path(@country.continent, @country.name, city.name, periodo: params[:periodo].presence), class: 'button-event-count' do
+    = link_to events_by_city_path(@country.continent, @country.name, city.name, periodo: params[:periodo].presence, o: params[:o].presence), class: 'button-event-count' do
       = city.name
       %span.badge.badge-primary= city.count
 
+  = render partial: 'home/filters'
   = display_events_by_style
 
 #webcalModal.modal.fade{ aria: { hidden: :true, labelledby: 'shareModalCenterTitle' } , role: 'dialog', tabindex: '-1' }

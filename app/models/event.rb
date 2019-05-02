@@ -86,7 +86,7 @@ class Event < ApplicationRecord
   end
 
   def self.count_by_cities
-    select('city as name', 'count(id)').group(:city).order(:city)
+    select('events.city as name', 'count(events.id)').group(:city).order(:city)
   end
 
   # Malapareigu la eventon, sed ne forviŝu ĝin

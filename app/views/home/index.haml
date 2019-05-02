@@ -20,7 +20,7 @@
 
     .lead Laŭ kontinentoj aŭ retaj eventoj
     - @continents.each do |continent|
-      = link_to events_by_continent_path(continent.name, periodo: params[:periodo].presence), class: 'button-event-count' do
+      = link_to events_by_continent_path(continent.name, periodo: params[:periodo].presence, o: params[:o].presence), class: 'button-event-count' do
         = continent.name
         %span.badge.badge-primary= continent.count
 

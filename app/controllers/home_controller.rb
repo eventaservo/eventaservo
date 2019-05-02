@@ -7,8 +7,12 @@ class HomeController < ApplicationController
     cookies[:vidmaniero] ||= { value: 'listo', expires: 1.year, secure: true } # Normala vidmaniero
 
     @future_events = Event.venontaj
+    if params[:o].present?
+      @future_events = @future_events.joins(:organizations).where('organizations.short_name = ?', params[:o])
+    end
+
     @continents    = @events.count_by_continents
-    @events        = @events.includes(:country).includes(organizations: :logo_attachment) # Antaŭŝarĝas la landojn
+    @events        = @events.includes(:country).includes(:organizations) # Antaŭŝarĝas la landojn
   end
 
   def changelog
