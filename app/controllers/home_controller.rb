@@ -8,7 +8,7 @@ class HomeController < ApplicationController
 
     @future_events = Event.venontaj
     @continents    = @events.count_by_continents
-    @events        = @events.includes(:country) # Antaŭŝarĝas la landojn
+    @events        = @events.includes(:country).includes(organizations: :logo_attachment) # Antaŭŝarĝas la landojn
   end
 
   def changelog

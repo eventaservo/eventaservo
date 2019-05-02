@@ -5,9 +5,10 @@
         = organization_logo(@organizo, size: :large)
         %p= @organizo.name
 
+      .d-flex.justify-content-around
+        %span= icon('far', 'calendar', @organizo.eventoj.count)
       %p
-        = link_to root_url(o: @organizo.short_name) do
-          Venontaj eventoj: #{@organizo.eventoj.venontaj.count}
+        = link_to "Listigi venontajn eventojn de #{@organizo.short_name}", root_url(o: @organizo.short_name)
 
       - if user_signed_in? && current_user.organizestro?(@organizo)
         .buttons-footer

@@ -24,8 +24,8 @@ module OrganizationsHelper
   def organization_tag(organization)
     link_to organization_url(organization.short_name), class: 'tag' do
       content_tag(:div) do
-        organization_logo(organization) +
-          organization.short_name.upcase
+        concat organization_logo(organization)
+        concat organization.short_name.upcase
       end
     end
   end

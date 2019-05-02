@@ -1,8 +1,8 @@
 .box-white
   .box-header Uzantoj
   .box-body
-    .text-divider Estroj
-    - @organizo.estroj.order(:name).each do |u|
+    .text-divider Administrantoj
+    - @organizo.administrantoj.order(:name).each do |u|
       %br
       = display_user(u)
       - if user_signed_in? && current_user.organizestro?(@organizo)

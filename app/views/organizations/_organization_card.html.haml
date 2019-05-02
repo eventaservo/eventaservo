@@ -4,7 +4,6 @@
       = organization_logo(organizo, size: :medium)
       = link_to organizo.name, organization_url(organizo.short_name)
     .card-text.text-muted
-      %p
-        Uzantoj: #{organizo.uzantoj.count}
-      %p
-        Eventoj: #{organizo.eventoj.count}
+      .d-flex.justify-content-around
+        %span= icon('far', 'calendar', organizo.eventoj.count)
+        %span= icon('fas', 'users', organizo.uzantoj.count)

@@ -137,7 +137,7 @@ class EventsController < ApplicationController
       end
       params.require(:event).permit(
         :title, :description, :content, :site, :email, :date_start, :date_end, :time_zone,
-        :address, :city, :country_id, :online, uploads: []
+        :address, :city, :country_id, :online, :user_id, uploads: []
       )
     end
 

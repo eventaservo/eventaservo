@@ -21,10 +21,11 @@
 
         - if Organization.by_user(current_user).any?
           .form-group
-            = label_tag :organization_id, 'Organizo'
+            = label_tag :organization_id, 'Organizoj'
             = select_tag 'organization_ids[]',
-              options_from_collection_for_select(Organization.by_user(current_user), 'id', 'short_name', @event.organizations.pluck(:organization_id)),
+              options_from_collection_for_select(Organization.by_user(current_user), 'id', 'name', @event.organizations.pluck(:organization_id)),
               multiple: true, class: 'form-control select2-input'
+            %small.form-text.text-muted Lasu malplena se la evento ne apartenas al organizoj
 
         .form-row
           .col-lg-6
@@ -80,6 +81,13 @@
               .form-group
                 = form.label :country_id, 'Lando'
                 = form.select(:country_id, options_from_collection_for_select(Country.not_online, 'id', 'name', @event.country_id), {}, class: 'form-control select2-input')
+
+        - if current_user.admin?
+          .text-divider Administrantoj
+          .form-group
+            = label_tag :user_id, 'Ŝanĝi kreinton'
+            = form.select(:user_id, options_from_collection_for_select(User.order(:name), 'id', 'name', @event.user_id || current_user.id), {}, class: 'form-control select2-input')
+
 
         .buttons-footer
           - if params[:action] == 'edit'

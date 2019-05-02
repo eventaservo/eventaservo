@@ -81,7 +81,7 @@ class User < ApplicationRecord
   end
 
   def organizestro?(organizo)
-    (in? organizo.estroj) || admin
+    (in? organizo.administrantoj) || admin
   end
 
   private

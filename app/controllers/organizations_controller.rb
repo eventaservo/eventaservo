@@ -6,7 +6,7 @@ class OrganizationsController < ApplicationController
 
   # Listigas ĉiujn organizojn
   def index
-    @organizoj = Organization.order(:name)
+    @organizoj = Organization.includes(:logo_attachment).order(:name)
   end
 
   # Montras organizajn eventojn kaj pliajn detalojn
