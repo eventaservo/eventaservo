@@ -5,7 +5,7 @@
     - @organizo.administrantoj.order(:name).each do |u|
       %br
       = display_user(u)
-      - if user_signed_in? && current_user.organizestro?(@organizo)
+      - if user_signed_in? && current_user.administranto?(@organizo)
         = link_to icon('fas', 'star', class: 'fg-color-yellow'), organization_estrighu_url(@organizo.short_name, u.username)
       - else
         = icon('fas', 'star', class: 'fg-color-yellow')
@@ -16,11 +16,11 @@
       %br
       = display_user(u)
 
-      - if user_signed_in? && current_user.organizestro?(@organizo)
+      - if user_signed_in? && current_user.administranto?(@organizo)
         = link_to icon('far', 'star', class: 'fg-color-gray'), organization_estrighu_url(@organizo.short_name, u.username)
       %br
 
-    - if user_signed_in? && current_user.organizestro?(@organizo)
+    - if user_signed_in? && current_user.administranto?(@organizo)
       .text-divider Aldoni uzanton
       = form_tag organization_aldoni_uzanton_url(@organizo.short_name), class: 'form-inline justify-content-center' do
         .form-group

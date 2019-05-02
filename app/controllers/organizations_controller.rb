@@ -50,7 +50,7 @@ class OrganizationsController < ApplicationController
 
   def estrighu
     organizo = Organization.find_by_short_name(params[:organization_short_name])
-    redirect_to organizations_url, flash: { error: 'Vi ne rajtas fari tion' } and return unless current_user.organizestro?(organizo)
+    redirect_to organizations_url, flash: { error: 'Vi ne rajtas fari tion' } and return unless current_user.administranto?(organizo)
 
     uzanto = User.find_by_username(params[:username])
     ou = OrganizationUser.find_by(organization_id: organizo.id, user_id: uzanto.id)

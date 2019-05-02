@@ -80,7 +80,7 @@ class User < ApplicationRecord
     end
   end
 
-  def organizestro?(organizo)
+  def administranto?(organizo)
     (in? organizo.administrantoj) || admin
   end
 

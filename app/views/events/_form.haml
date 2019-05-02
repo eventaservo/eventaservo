@@ -85,7 +85,7 @@
         - if current_user.admin?
           .text-divider Administrantoj
           .form-group
-            = label_tag :user_id, 'Ŝanĝi kreinton'
+            = label_tag :user_id, 'Elekti kreinton'
             = form.select(:user_id, options_from_collection_for_select(User.order(:name), 'id', 'name', @event.user_id || current_user.id), {}, class: 'form-control select2-input')
 
 

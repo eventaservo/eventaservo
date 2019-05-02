@@ -10,7 +10,7 @@
       %p
         = link_to "Listigi venontajn eventojn de #{@organizo.short_name}", root_url(o: @organizo.short_name)
 
-      - if user_signed_in? && current_user.organizestro?(@organizo)
+      - if user_signed_in? && current_user.administranto?(@organizo)
         .buttons-footer
           = link_to 'Redakti organizon', edit_organization_url(@organizo.short_name), class: 'btn btn-sm btn-outline-primary'
 
