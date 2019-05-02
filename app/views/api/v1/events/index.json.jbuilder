@@ -10,6 +10,7 @@ json.array!(@events) do |event|
   json.fina_dato event.date_end.strftime('%Y-%m-%d')
   json.retpaĝo event.site.presence
   json.retpoŝtadreso event.email.presence
+  json.organizoj event.organizations.pluck(:name) if event.organizations.any?
 
   if event.online
     json.reta true
