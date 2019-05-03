@@ -2,7 +2,7 @@
   .col-lg-8.offset-lg-2
     .box-white
       .lead
-        = params[:action] == 'new' ? 'Nova evento' : 'Redakti eventon'
+        = params[:action] == 'new' ? 'Nova evento, kunveno aŭ okazaĵo' : 'Redakti'
 
       .alert.alert-info.small
         Skribu esperante. Povu ĉiuj scii, kio okazas en Esperantujo tutmonde!
@@ -21,11 +21,11 @@
 
         - if Organization.by_user(current_user).any?
           .form-group
-            = label_tag :organization_id, 'Organizoj'
+            = label_tag :organization_id, 'Organizo(j)'
             = select_tag 'organization_ids[]',
               options_from_collection_for_select(Organization.by_user(current_user), 'id', 'name', @event.organizations.pluck(:organization_id)),
               multiple: true, class: 'form-control select2-input'
-            %small.form-text.text-muted Lasu malplena se la evento ne apartenas al organizoj
+            %small.form-text.text-muted Lasu malplena se la evento ne apartenas al organizo
 
         .form-row
           .col-lg-6
@@ -85,9 +85,8 @@
         - if current_user.admin?
           .text-divider Administrantoj
           .form-group
-            = label_tag :user_id, 'Elekti kreinton'
+            = label_tag :user_id, 'Eventa administranto'
             = form.select(:user_id, options_from_collection_for_select(User.order(:name), 'id', 'name', @event.user_id || current_user.id), {}, class: 'form-control select2-input')
-
 
         .buttons-footer
           - if params[:action] == 'edit'

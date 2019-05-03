@@ -11,7 +11,7 @@
 
       = form_tag event_kontakti_organizanton_url(@event.code) do
         .modal-body{style: 'font-weight: normal; font-size: 1rem;'}
-          %p Se vi opinias ke estas problemo pri tiu ĉi evento, informu pri tio ĝiajn organizanton kaj eniginton.
+          %p Se vi opinias ke estas problemo pri tiu ĉi evento, informu pri tio ĝian administranton.
           .form-group
             .label Nomo
             = text_field_tag :name, current_user.try(:name).presence, autocomplete: 'name', class: 'form-control', required: true

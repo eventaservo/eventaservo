@@ -46,7 +46,6 @@ Dankoj
 Mi dankas al ĉiuj kiuj helpas min plibonigi la projekton, speciale:
 
   - Paŭla kaj Didje pro iliaj komentoj kaj provuzado
-  - [Yves Nevelsteen](https://t.me/yvesnev) pro provado de sistemo kaj sugestoj
-  - Pro interesaj sugestoj:
+  - [Yves Nevelsteen](https://t.me/yvesnev) pro provado de sistemo kaj proponoj
+  - Pro interesaj proponoj:
     - [Robin van der Vliet](https://t.me/robin)
-    - [Vulpo](https://t.me/iu_vulpo)

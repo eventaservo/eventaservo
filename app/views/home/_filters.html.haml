@@ -1,7 +1,7 @@
 %br
 %br
 - if aktivaj_filtroj?
-  .lead Aktivaj filtroj
+  .lead Aktivaj filtriloj
 
   - if aktivaj_filtroj.include? 'periodo'
     = link_to icon('fas', 'times', traduki_periodon(params[:periodo])), aktivaj_filtroj.except(:periodo), class: 'button-filters'
