@@ -16,7 +16,7 @@
         %button.btn.btn-sm.btn-link{disabled: 'disabled'}=  icon('far', 'eye', @event.impressionist_count)
 
     %p
-    .text-divider Kreinto
+    .text-divider Administranto
     = link_to display_user(@event.user), events_by_username_path(@event.user.username), class: 'btn btn-sm btn-outline-link'
     = render partial: 'alshutilo'
 

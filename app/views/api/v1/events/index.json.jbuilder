@@ -27,5 +27,5 @@ json.array!(@events) do |event|
       loko.longitudo event.longitude
     end
   end
-  json.kreinto event.user.name
+  json.administranto event.user.name
 end

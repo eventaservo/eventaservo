@@ -7,7 +7,7 @@ class EventTest < ActiveSupport::TestCase
     @event = create(:evento)
   end
 
-  test 'evento havas kreinton' do
+  test 'evento havas administranto' do
     assert_not_nil Event.reflect_on_association(:user)
   end
 
