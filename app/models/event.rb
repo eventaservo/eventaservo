@@ -36,6 +36,7 @@ class Event < ApplicationRecord
   scope :in_30days, -> { where('date_start BETWEEN ? and ?', (Time.zone.today + 7.days).beginning_of_day, (Time.zone.today + 30.days).end_of_day) }
   scope :after_30days, -> { where('date_start > ?', (Time.zone.today + 30.days).end_of_day) }
   scope :lau_lando, ->(lando) { joins(:country).where(country: lando) }
+  scope :lau_organizo, ->(o) { joins(:organizations).where('LOWER(organizations.short_name) = ?', o.downcase) }
   scope :by_country_id, ->(id) { where(country_id: id) }
   scope :by_country_name, ->(name) { joins(:country).where(countries: { name: name }) }
   scope :by_country_code, ->(code) { joins(:country).where(countries: { code: code }) }
