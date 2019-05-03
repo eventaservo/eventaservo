@@ -24,4 +24,9 @@ class Organization < ApplicationRecord
     users_ids = organization_users.where(admin: false).pluck(:user_id)
     User.where(id: users_ids)
   end
+
+  # Listigas ĉiujn membrojn el organizo (administrantoj kaj ne-administrantoj)
+  def membroj
+    User.where(id: organization_users.pluck(:user_id))
+  end
 end

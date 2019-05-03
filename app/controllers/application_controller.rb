@@ -27,6 +27,20 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def user_can_edit_event?(user:, event:)
+    return true if user.admin?
+    return true if user.owner_of(event)
+
+    if event.organizations.any?
+      event.organizations.each do |o|
+        return true if user.in? o.membroj
+      end
+    end
+
+    false
+  end
+  helper_method :user_can_edit_event?
+
   private
 
     def set_raven_context

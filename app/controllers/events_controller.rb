@@ -143,7 +143,7 @@ class EventsController < ApplicationController
 
     # Nur la permesataj uzantoj povas redakti, ĝisdatiĝi kaj foriĝi la eventon
     def authorize_user
-      unless current_user.owner_of(@event) || current_user.admin?
+      unless user_can_edit_event?(user: current_user, event: @event)
         redirect_to root_url, flash: { error: 'Vi ne rajtas' }
       end
     end

@@ -84,6 +84,10 @@ class User < ApplicationRecord
     (in? organizo.administrantoj) || admin
   end
 
+  def membro?(organizo)
+    (in? organizo.membroj)
+  end
+
   private
 
     def subscribe_mailings
