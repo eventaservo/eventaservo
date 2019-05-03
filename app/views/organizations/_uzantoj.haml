@@ -18,6 +18,9 @@
 
       - if user_signed_in? && current_user.administranto?(@organizo)
         = link_to icon('far', 'star', class: 'fg-color-gray'), organization_estrighu_url(@organizo.short_name, u.username)
+        = link_to icon('fas', 'minus-circle', class: 'fg-color-red'),
+          organization_forighu_url(@organizo.short_name, u.username),
+          data: { confirm: 'Ĉu vi certas ke vi volas forigi la uzanton el la organizo?' }
       %br
 
     - if user_signed_in? && current_user.administranto?(@organizo)

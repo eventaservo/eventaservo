@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class OrganizationsController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create edit update destroy estrighu aldoni_uzanton]
+  before_action :authenticate_user!, only: %i[new create edit update destroy estrighu forighu aldoni_uzanton]
   before_action :set_organization, only: %i[show edit update destroy]
 
   # Listigas ĉiujn organizojn
@@ -55,6 +55,19 @@ class OrganizationsController < ApplicationController
     uzanto = User.find_by_username(params[:username])
     ou = OrganizationUser.find_by(organization_id: organizo.id, user_id: uzanto.id)
     ou.update(admin: !ou.admin)
+    redirect_to organization_url(organizo.short_name), flash: { success: 'Sukceso' }
+  end
+
+  # Forigas uzanton el organizo
+  # /o/:organization_short_name/forighu/:username
+  #
+  def forighu
+    organizo = Organization.find_by_short_name(params[:organization_short_name])
+    redirect_to organizations_url, flash: { error: 'Vi ne rajtas fari tion' } and return unless current_user.administranto?(organizo)
+
+    uzanto = User.find_by_username(params[:username])
+    ou = OrganizationUser.find_by(organization_id: organizo.id, user_id: uzanto.id)
+    ou.destroy
     redirect_to organization_url(organizo.short_name), flash: { success: 'Sukceso' }
   end
 
