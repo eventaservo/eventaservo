@@ -29,4 +29,8 @@ class Organization < ApplicationRecord
   def membroj
     User.where(id: organization_users.pluck(:user_id))
   end
+
+  def full_name
+    "#{name} (#{short_name})"
+  end
 end
