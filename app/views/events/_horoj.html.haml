@@ -2,5 +2,5 @@
   .small.text-right.mt-1.font-weight-bold
     %div= icon('far', 'clock', "#{@event.komenca_horo} - #{@event.fina_horo}")
     %div
-      = @event.time_zone
+      = I18n.t @event.time_zone, scope: :timezones
       = icon('fas', 'sun', data: { toggle: 'tooltip', placement: 'top', title: 'Somera/Vintra tempo' }) if @event.dst?
