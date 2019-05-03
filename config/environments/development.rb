@@ -77,7 +77,7 @@ Rails.application.configure do
   config.force_ssl = true
 
   config.after_initialize do
-    Bullet.enable              = true
+    Bullet.enable              = false
     Bullet.bullet_logger       = true
     Bullet.console             = false
     Bullet.rails_logger        = false
