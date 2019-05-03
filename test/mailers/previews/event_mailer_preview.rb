@@ -24,4 +24,8 @@ class EventMailerPreview < ActionMailer::Preview
   def sciigas_admins
     EventMailer.notify_admins(Event.order('RANDOM()').first.id)
   end
+
+  def nova_administranto
+    EventMailer.nova_administranto(Event.venontaj.sample)
+  end
 end

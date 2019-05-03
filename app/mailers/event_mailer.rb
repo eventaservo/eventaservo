@@ -66,4 +66,18 @@ class EventMailer < ApplicationMailer
       subject: 'Informo pri via evento en Eventa Servo'
     )
   end
+
+  def nova_administranto(evento)
+    @evento = evento
+
+    if Rails.env.production?
+      to = evento.user.email
+      bcc = Constants::ADMIN_EMAILS
+    else
+      to = Constants::ADMIN_EMAILS
+      bcc = nil
+    end
+
+    mail(to: to, bcc: bcc, subject: 'Vi estas nova eventa administranto')
+  end
 end

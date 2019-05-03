@@ -1,0 +1,24 @@
+%br
+%table
+  %tbody
+    %tr
+      %td.content{colspan: 2}
+        %p
+          Saluton #{@evento.user.name}.
+
+        %p
+          Vi nun estas la administranto de la evento #{link_to @evento.title, event_url(@evento.code)}
+          en Eventa Servo. Tio signifas ke vi povas ŝanĝi ĝian enhavon aŭ forigi ĝin.
+
+        %p
+          Ni invitas vin aldoni informojn pri eventoj, kunvenoj kaj okazaĵoj al Eventa Servo.
+          Tion vi povas fari ĉu aldonante novan eventon, ĉu duobligante ekzistantan.
+
+        %p Sukceson kun via agado!
+        %p.button-blue.text-center
+          = link_to 'VIDU LA EVENTAN PAĜON', event_url(@evento.code)
+
+    %tr.footer
+      %td
+        = link_to image_tag('https://eventaservo.org/eventa_servo_logo.png', size: 48), 'https://eventaservo.org'
+      %td
