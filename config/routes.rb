@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   # Webcal
   namespace :webcal do
     get 'lando/:landa_kodo', to: 'webcal#lando'
+    get 'o/:short_name', to: 'webcal#organizo', as: 'organizo'
   end
 
   # Organizoj

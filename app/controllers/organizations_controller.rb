@@ -9,7 +9,7 @@ class OrganizationsController < ApplicationController
     @organizoj = Organization.includes(:logo_attachment).order(:name)
   end
 
-  # Montras organizajn eventojn kaj pliajn detalojn
+  # Montras organizajn informojn
   def show
   end
 
