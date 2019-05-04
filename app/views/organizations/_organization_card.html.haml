@@ -1,7 +1,7 @@
 .card.mb-3
   .card-body
-    %h5.card-title.d-flex.align-items-center
-      = organization_logo(organizo, size: :medium)
+    %h5.card-title.d-flex.flex-column.align-items-center.text-center
+      = organization_logo(organizo, size: :large)
       = link_to organizo.name, organization_url(organizo.short_name)
     .card-text.text-muted
       .d-flex.justify-content-around
