@@ -24,6 +24,8 @@ class HomeController < ApplicationController
   def prie
   end
 
+  # Listigas la eventojn por montri per la kalendara vidmaniero
+  #
   def events
     redirect_to root_url unless access_from_server
 
@@ -31,6 +33,7 @@ class HomeController < ApplicationController
     @events = @events.by_continent(params[:continent]) if params[:continent].present?
     @events = @events.by_country_name(params[:country]) if params[:country].present?
     @events = @events.by_city(params[:city]) if params[:city].present?
+    @events = @events.lau_organizo(params[:o]) if params[:o].present?
     @events = Event.includes(:country).by_username(params[:username]) if params[:username].present?
   end
 

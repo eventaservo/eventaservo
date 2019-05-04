@@ -6,6 +6,7 @@ eventCalendar = ->
         continent: $('#full_calendar').data('continent')
         country: $('#full_calendar').data('country')
         city: $('#full_calendar').data('city')
+        o: $('#full_calendar').data('o')
         username: $('#full_calendar').data('username')
     eventColor: 'green'
     contentHeight: 500
