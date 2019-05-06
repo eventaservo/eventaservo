@@ -1,12 +1,18 @@
 .row
-  .col-lg-6.col-12
+  .col-12
     .box-white
       = render partial: 'registered_events_by_country_graph'
-  .col-lg-6.col-12
-    .box-white
-      = render partial: 'events_by_months'
+
 
 .row
   .col-lg-6.col-12
     .box-white
+      = render partial: 'registered_users_last_6_months'
+  .col-lg-6.col-12
+    .box-white
       = render partial: 'registered_events_last_6_months'
+
+.row
+  .col-12
+    .box-white
+      = render partial: 'events_by_months'
