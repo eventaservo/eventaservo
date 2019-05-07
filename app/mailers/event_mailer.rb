@@ -61,10 +61,17 @@ class EventMailer < ApplicationMailer
   def kontakti_organizanton(eventa_kodo, informoj = {})
     @evento = Event.by_code(eventa_kodo)
     @informoj = informoj
-    mail(
-      to: 'Eventa Servo <kontakto@eventaservo.org>, Yves Nevelsteen <yves.nevelsteen@gmail.com>',
-      subject: 'Informo pri via evento en Eventa Servo'
-    )
+
+    if Rails.env.production?
+      to = @evento.user.email
+      bcc = Constants::ADMIN_EMAILS
+    else
+      to = Constants::ADMIN_EMAILS
+      bcc = nil
+    end
+
+    mail(to: to, bcc: bcc, reply_to: informoj[:email],
+         subject: 'Informo pri via evento en Eventa Servo')
   end
 
   def nova_administranto(evento)
