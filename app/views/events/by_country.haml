@@ -41,10 +41,10 @@
           Uzu ĝin en programoj kiel Google Calendar, iCal aŭ similaj. Se vi bezonas klarigon kiel uzi la ligilon, legu
           #{link_to 'ĉi tiun artikolon', 'https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)', target: :'_blank'}.
 
-        .input-group
+        .input-group{contenteditable: true}
           .input-group-prepend
             .input-group-text#copy_button= link_to 'Kopii', 'javascript:;'
-          = text_field_tag nil, webcal_url(landa_kodo: @country.code, format: :ics), id: 'webcalurl', readonly: :true, class: 'form-control bg-color-white'
+          = text_field_tag nil, webcal_url(landa_kodo: @country.code, format: :ics), id: 'webcalurl', class: 'form-control bg-color-white'
 
         %br
         %p
