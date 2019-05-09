@@ -64,7 +64,9 @@
         #retaj_informoj
           .form-group
             = form.label :time_zone, 'Horzono'
-            = form.select(:time_zone, options_for_select(TZInfo::Timezone.all_country_zone_identifiers, @event.time_zone), {}, class: 'select2-input form-control')
+            - timezones = TZInfo::Timezone.all_country_zone_identifiers
+            - timezones << @event.time_zone
+            = form.select(:time_zone, options_for_select(timezones, @event.time_zone), {}, class: 'select2-input form-control')
 
         #malretaj_informoj
           .form-group
