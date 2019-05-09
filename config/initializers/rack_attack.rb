@@ -3,7 +3,7 @@ class Rack::Attack
     '127.0.0.1' == req.ip || '::1' == req.ip
   end
 
-  throttle('requets by IP', limit: 20, period: 5) do |req|
+  throttle('requets by IP', limit: 30, period: 5) do |req|
     req.ip
   end
 
