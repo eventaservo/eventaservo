@@ -6,21 +6,6 @@ class EventMailer < ApplicationMailer
 
   require 'redcarpet/render_strip'
 
-  def send_updates_to_followers(event)
-    @event    = event
-    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::StripDown)
-
-    addresses = @event.followers.joins(:user).select('users.name, users.email').pluck(:email)
-
-    mail(
-      to: 'kontakto@eventaservo.org',
-      bcc: addresses,
-      subject: "Evento \"#{@event.title}\" ŝanĝita",
-      reply_to: @event.user.email,
-      content_type: :text
-    )
-  end
-
   def self.send_notification_to_users(event_id:)
     return false unless Event.exists?(event_id)
     return false unless Rails.env.production? # Ne sendas retmesaĝon dum provo
@@ -40,9 +25,14 @@ class EventMailer < ApplicationMailer
     mail(to: @recipient.email, subject: "Nova evento: #{@event.title}")
   end
 
-  def notify_admins(event_id)
+  def notify_admins(event_id, ghisdatigho: false)
     @event = Event.find(event_id)
-    mail(to: User.admins.pluck(:email), subject: "[ES estraro] Nova evento: #{@event.title}")
+    subject = if ghisdatigho
+                "[ES estraro] Evento ĝisdatiĝita: #{@event.title}"
+              else
+                "[ES estraro] Nova evento: #{@event.title}"
+              end
+    mail(to: User.admins.pluck(:email), subject: subject)
   end
 
   def self.send_weekly_summary_to_users

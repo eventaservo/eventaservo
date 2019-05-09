@@ -59,6 +59,7 @@ class EventsController < ApplicationController
   def update
     if @event.update(event_params)
       EventMailer.nova_administranto(@event).deliver_later if @event.saved_change_to_user_id?
+      EventMailer.notify_admins(@event.id, ghisdatigho: true).deliver_later
       @event.update_event_organizations(params[:organization_ids])
       redirect_to event_path(@event.code), notice: 'Evento sukcese ĝisdatigita'
     else
