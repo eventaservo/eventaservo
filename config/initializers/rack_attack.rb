@@ -14,15 +14,7 @@ class Rack::Attack
   end
 end
 
-class NotificationsMailer < ApplicationMailer
-  def rack_mailer(payload)
-    mail(to: 'kontakto@eventaservo.org', subject: 'Rack attack log info') do
-      render plain: payload
-    end
-  end
-end
-
 ActiveSupport::Notifications.subscribe(/rack_attack/) do |name, start, finish, request_id, payload|
   Rails.logger.debug "RACK_ATTACK: #{payload}"
-  NotificationMailer.rack_mailer(payload).deliver_later
+  AdminMailer.rack_attack_payload(payload).deliver
 end
