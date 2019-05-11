@@ -6,11 +6,11 @@ module Admin
     before_action :authenticate_admin!
 
     def index
-      @users = User.order(:name)
+      @users = User.includes(:events).order(:name)
     end
 
     def show
-      @user = User.find_by(id: params[:id])
+      @user = User.includes(:events).find_by(id: params[:id])
     end
   end
 end

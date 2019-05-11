@@ -9,13 +9,10 @@
   - @users.each do |user|
     = link_to admin_user_path(user), class: 'item-row' do
       .col
-        = display_user(user)
+        = user.name
         = icon('fab', 'facebook') if user.provider == 'facebook'
       .col= user.email
       .col
         %object= link_to user.username, events_by_username_path(user.username)
       .col
         Eventoj: #{user.events.count}
-        = icon('fas','heart', user.likes.count)
-        = icon('fas','user-check', user.participants.count)
-

@@ -14,7 +14,7 @@ class Rack::Attack
   end
 end
 
-ActiveSupport::Notifications.subscribe(/rack_attack/) do |name, start, finish, request_id, payload|
+ActiveSupport::Notifications.subscribe('throttle.rack_attack') do |name, start, finish, request_id, payload|
   Rails.logger.info "RACK_ATTACK: #{payload}"
   # AdminMailer.rack_attack_payload(payload).deliver
 end
