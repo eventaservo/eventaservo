@@ -15,6 +15,6 @@ class Rack::Attack
 end
 
 ActiveSupport::Notifications.subscribe(/rack_attack/) do |name, start, finish, request_id, payload|
-  Rails.logger.debug "RACK_ATTACK: #{payload}"
-  AdminMailer.rack_attack_payload(payload).deliver
+  Rails.logger.info "RACK_ATTACK: #{payload}"
+  # AdminMailer.rack_attack_payload(payload).deliver
 end
