@@ -45,6 +45,7 @@ class HomeController < ApplicationController
 
   def view_style
     cookies[:vidmaniero] = { value: params[:view_style], expires: 1.year, secure: true }
+    redirect_to root_url and return if '/prie'.in? request.referer
     redirect_back fallback_location: root_url
   end
 
