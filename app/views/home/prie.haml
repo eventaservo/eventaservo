@@ -1,2 +1,78 @@
-.box-white
-  = markdown(File.read('public/README.md'))
+.text-center
+  %h1 Eventa Servo
+  %p La sistemo por diskonigi esperantajn eventojn tutmonde!
+
+.d-flex.justify-content-around.m-2
+  %div
+    %h3= User.all.size
+    registritaj uzantoj
+  %div
+    %h3= Event.all.size
+    registritaj eventoj
+
+.full_rectangle.bg-color-grayLighter
+  .content
+    %h3.title Facile listigi kaj trovi eventojn!
+    %p
+      Per Eventa Servo, oni povas vidi la eventojn ĉirkaŭ la tuta mondo
+      %br
+      kiel
+      #{link_to 'mapo', view_style_path('mapo')},
+      #{link_to 'listo', view_style_path('listo')} aŭ
+      #{link_to 'kalendaro', view_style_path('kalendaro')}.
+    %p
+      Ankaŭ eblas filtri la eventojn laŭ kontinentoj, landoj aŭ urboj.
+  = image_tag 'prie/mapo.png', class: 'screen-shot border'
+
+.full_rectangle.bg-color-white
+  .content.order-lg-2
+    %h3.title Aboni per via kalendara programo
+    %p
+      Oni povas aboni landan aŭ organizan eventan liston per
+      %br
+      kalendara programo kiel Google Calendar, Apple iCal aŭ simila.
+  = image_tag 'prie/kalendaro.png', class: 'screen-shot order-lg-1'
+
+.full_rectangle.bg-color-grayLighter
+  .content
+    %h3.title Uzebla per komputilo aŭ poŝtelefono
+    %p
+      Oni povas uzi Eventan Servon per tradicia komputilo, poŝtelefono
+      %br
+      aŭ tabulkomputilo. Instali aplikaĵon ne necesas.
+  = image_tag 'prie/mobile.png', class: 'screen-shot border'
+
+.full_rectangle.bg-color-white
+  = image_tag 'prie/uea.png', class: 'screen-shot'
+  .content
+    %h3.title UEA
+    %p
+      Eventa Servo apartenas al #{link_to 'Universala Esperanto Asocio (UEA)', 'https://uea.org'}.
+    %p
+      UEA instigas la uzado de Eventa Servo por informi Esperantujon
+      %br
+      pri internaciaj, landaj kaj lokaj eventoj, kongresoj, kunvenoj,
+      %br
+      renkontiĝoj, ktp.
+
+.full_rectangle.bg-color-grayLighter.text-center
+  .content.w-100
+    %h3.title Kaj multaj aliaj avantaĵoj
+  .content.p-3
+    .font-weight-bold Dosierujo
+    Aldonu fotojn kaj dosierojn al viaj eventoj.
+  .content.p-3
+    .font-weight-bold Sociaj komunikiloj
+    Facile diskonigu vian eventon per diversaj sociaj komunikiloj,
+    %br
+    kiel Facebook, Twitter, WhatsApp, retpoŝta mesaĝo, ktp.
+  .content.p-3
+    .font-weight-bold Senpaga kaj malfermitkoda
+    Estas tute senpaga. La programdoko estas libera en #{link_to 'Github', 'https://github.com/eventaservo/eventaservo'}.
+    %br
+    Se vi volas kontribui al la programado, #{mail_to 'kontakto@eventaservo.org', 'kontaktu nin', subject: 'Pri Eventa Servo'}.
+  .content.p-3
+    .font-weight-bold Teknologioj
+    Konektu la eventojn al aliaj sistemoj per API-teknologio.
+    %br
+    Abonu la eventan liston per RSS-teknologio.

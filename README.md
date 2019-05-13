@@ -45,7 +45,8 @@ Dankoj
 
 Mi dankas al ĉiuj kiuj helpas min plibonigi la projekton, speciale:
 
-  - Paŭla kaj Didje pro iliaj komentoj kaj provuzado
-  - [Yves Nevelsteen](https://t.me/yvesnev) pro provado de sistemo kaj proponoj
+  - Paŭla kaj Didje pro iliaj komentoj kaj provuzado.
+  - [Yves Nevelsteen](https://t.me/yvesnev) pro provado de sistemo kaj proponoj.
   - Pro interesaj proponoj:
     - [Robin van der Vliet](https://t.me/robin)
+  - [Eventoj.hu](http://eventoj.hu/2019.htm) pro la inspiro.

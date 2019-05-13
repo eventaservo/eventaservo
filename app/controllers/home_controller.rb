@@ -22,6 +22,7 @@ class HomeController < ApplicationController
   end
 
   def prie
+    render layout: 'full_size'
   end
 
   # Listigas la eventojn por montri per la kalendara vidmaniero
