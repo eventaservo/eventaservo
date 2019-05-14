@@ -1,5 +1,8 @@
 .box-white
-  .front-page-title Diskonigu esperantajn eventojn tutmonde!
+  .front-page-title.d-flex.justify-content-around
+    = link_to image_tag('uea_emblemeto.png', height: '36px', class: 'mr-1'), prie_url, target: :_blank
+    Diskonigu esperantajn eventojn tutmonde!
+    = link_to image_tag('tejo.svg', height: '28px', class: 'ml-1'), prie_url, target: :_blank
 
   .d-flex.justify-content-between.flex-wrap
     .flex-fill
@@ -11,7 +14,6 @@
     #search_icon.ml-auto.pl-3
       = button_tag icon('fas', 'search'), class: 'btn btn-sm btn-outline-link'
 
-  = link_to image_tag('uea_emblemeto.png', alt: 'Universala Esperanto Asocio', class: 'uea-emblemeto'), prie_url, target: :_blank
   = page_title 'Venontaj eventoj'
 
   #events_container

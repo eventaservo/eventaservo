@@ -18,12 +18,6 @@ body {
   @extend .small;
 }
 
-.uea-emblemeto {
-  float: right;
-  width: 36px;
-  margin-top: 15px;
-}
-
 .cookies-bar {
   @extend .small;
   text-align: center;
@@ -43,9 +37,8 @@ body {
 
 .front-page-title {
   @extend .text-center;
-  background-color: $esperantoGreen;
+  color: $esperantoGreen;
   font-weight: bold;
-  color: white;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
