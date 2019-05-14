@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 class AdminMailer < ApplicationMailer
-  # def rack_attack_payload(payload)
-  #   mail(to: 'kontakto@eventaservo.org', subject: 'Rack attack log info') do
-  #     render plain: payload
-  #   end
-  # end
+  def informas(teksto)
+    mail(to: Constants::ADMIN_EMAILS, subject: '[ES programistoj] Informo', body: teksto)
+  end
 end

@@ -3,6 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
+  after_action :sciigas_administrantoj, only: [:create]
 
   # GET /resource/sign_up
   def new
@@ -63,5 +64,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # Ĝi estas necesa por ke la uzanto povas ŝanĝi viajn informojn senpasvorte.
     def update_resource(resource, params)
       resource.update_without_password(params)
+    end
+
+  private
+
+    def sciigas_administrantoj
+      AdminMailer.informas("Nova uzanto registrita: #{resource.name}").deliver_later
     end
 end
