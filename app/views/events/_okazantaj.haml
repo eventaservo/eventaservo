@@ -1,0 +1,9 @@
+- if cookies[:vidmaniero] == 'listo' || cookies[:vidmaniero] == 'kartoj'
+  - if @today_events.any?
+    .box-white.okazantaj-eventoj
+      .lead Okazantaj eventoj
+      - @today_events.order(:date_start).each do |evento|
+        = link_to event_url(evento.code), class: 'text-decoration-none' do
+          .progress
+            .progress-bar{role: 'progressbar', style: "width: #{evento.tagoj[:percent].to_s}%", 'aria-valuenow': evento.tagoj[:percent], 'aria-valuemin': 0, 'aria-valuemax': 100 }
+              %span #{evento.title} (#{evento.city} - #{evento.country.name})

@@ -32,6 +32,7 @@ class Event < ApplicationRecord
   scope :venontaj, -> { where('date_start >= :date OR date_end >= :date', date: Time.zone.today.beginning_of_day) }
   scope :pasintaj, -> { where('date_end < ?', Time.zone.yesterday.end_of_day) }
   scope :today, -> { by_dates(from: Time.zone.today.beginning_of_day, to: Time.zone.today.end_of_day) }
+  scope :not_today, -> { by_not_dates(from: Time.zone.today.beginning_of_day, to: Time.zone.today.end_of_day) }
   scope :in_7days, -> { where('date_start BETWEEN ? and ?', (Time.zone.today + 1.day).beginning_of_day, (Time.zone.today + 7.days).end_of_day) }
   scope :in_30days, -> { where('date_start BETWEEN ? and ?', (Time.zone.today + 7.days).beginning_of_day, (Time.zone.today + 30.days).end_of_day) }
   scope :after_30days, -> { where('date_start > ?', (Time.zone.today + 30.days).end_of_day) }
@@ -70,6 +71,10 @@ class Event < ApplicationRecord
 
   def self.by_dates(from:, to:)
     where('(date_start>=:from AND date_start<=:to) OR (date_start<=:from AND date_end>=:from)', from: from, to: to)
+  end
+
+  def self.by_not_dates(from:, to:)
+    where.not('(date_start>=:from AND date_start<=:to) OR (date_start<=:from AND date_end>=:from)', from: from, to: to)
   end
 
   def self.count_by_continents
@@ -161,6 +166,18 @@ class Event < ApplicationRecord
 
   def dst?
     date_start.in_time_zone(time_zone).dst?
+  end
+
+  # total: Kvanto de tagoj de la evento
+  # parcial: Kvanto de tagoj kiu jam pasis de la evento
+  # percent: Procento de la evento kiu jam pasis
+  # @return [Hash]
+  def tagoj
+    total = (fina_tago.to_date - komenca_tago.to_date).to_i + 1
+    Time.zone = time_zone
+    parcial = (Time.zone.today - komenca_tago.to_date).to_i + 1
+    percent = (parcial.to_f / total.to_f).to_f * 100
+    {total: total, parcial: parcial, percent: percent.to_i}
   end
 
   private

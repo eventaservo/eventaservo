@@ -12,7 +12,8 @@ class HomeController < ApplicationController
     end
 
     @continents    = @events.count_by_continents
-    @events        = @events.includes(:country).includes(:organizations) # Antaŭŝarĝas la landojn
+    @today_events  = @events.today.includes(:country).includes(:organizations)
+    @events        = @events.not_today.includes(:country).includes(:organizations)
   end
 
   def changelog

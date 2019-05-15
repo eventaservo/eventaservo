@@ -90,7 +90,8 @@ class EventsController < ApplicationController
     @future_events = Event.by_continent(params[:continent]).venontaj
     @events        = @events.by_continent(params[:continent])
     @countries     = @events.count_by_country
-    @events        = @events.includes(:country)
+    @today_events  = @events.today.includes(:country)
+    @events        = @events.not_today.includes(:country)
   end
 
   def by_country
@@ -98,13 +99,15 @@ class EventsController < ApplicationController
 
     @future_events = Event.includes(:country).by_country_id(@country.id).venontaj
     @cities        = @events.by_country_id(@country.id).count_by_cities
-    @events        = @events.includes(:country).by_country_id(@country.id)
+    @today_events  = @events.today.includes(:country).by_country_id(@country.id)
+    @events        = @events.not_today.includes(:country).by_country_id(@country.id)
   end
 
   # Listigas la eventoj laŭ urboj
   def by_city
     @future_events = Event.by_city(params[:city_name]).venontaj
-    @events        = @events.by_city(params[:city_name])
+    @today_events  = @events.today.by_city(params[:city_name])
+    @events        = @events.not_today.by_city(params[:city_name])
   end
 
   def by_username
