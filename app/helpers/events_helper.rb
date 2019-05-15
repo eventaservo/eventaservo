@@ -19,14 +19,12 @@ module EventsHelper
 
   def display_events_by_style
     case cookies[:vidmaniero]
-    when 'kartoj'
-      render partial: 'events/events_as_cards', locals: { events: @events }
     when 'kalendaro'
       render partial: 'events/events_as_calendar', locals: { events: @events }
     when 'mapo'
       render partial: 'events/events_as_map', locals: { events: @events }
     else
-      render partial: 'events/events_as_list', locals: { events: @events }
+      render partial: 'events/events_as_cards', locals: { events: @events }
     end
   end
 

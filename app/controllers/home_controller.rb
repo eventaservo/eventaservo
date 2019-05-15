@@ -4,7 +4,7 @@ class HomeController < ApplicationController
   before_action :filter_events, only: :index
 
   def index
-    cookies[:vidmaniero] ||= { value: 'listo', expires: 1.year, secure: true } # Normala vidmaniero
+    cookies[:vidmaniero] ||= { value: 'kartoj', expires: 1.year, secure: true } # Normala vidmaniero
 
     @future_events = Event.venontaj
     if params[:o].present?
