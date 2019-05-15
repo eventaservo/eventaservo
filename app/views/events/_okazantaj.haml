@@ -1,7 +1,7 @@
 - if cookies[:vidmaniero] == 'kartoj'
   - if @today_events.any?
     .box-white.okazantaj-eventoj
-      .lead Okazantaj eventoj
+      .lead #{@today_events.length} okazantaj eventoj
       - @today_events.order(:date_start).each do |evento|
         = link_to event_url(evento.code), class: 'text-decoration-none' do
           .progress
