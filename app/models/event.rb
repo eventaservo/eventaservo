@@ -53,7 +53,7 @@ class Event < ApplicationRecord
   end
 
   def self.grouped_by_months
-    order(:date_start).group_by { |m| m.date_start.beginning_of_month }
+    order(:date_start).group_by { |m| m.date_start.in_time_zone(m.time_zone).beginning_of_month.to_date }
   end
 
   def self.by_continent(continent_name)
