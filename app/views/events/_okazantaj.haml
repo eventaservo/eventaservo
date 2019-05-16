@@ -1,9 +1,33 @@
+-#- if cookies[:vidmaniero] == 'kartoj'
+-#  - if @today_events.any?
+-#    .box-white.okazantaj-eventoj
+-#      .lead #{@today_events.length} okazantaj eventoj
+-#      - @today_events.order(:date_start).each do |evento|
+-#        = link_to event_url(evento.code), class: 'text-decoration-none' do
+-#          .progress
+-#            .progress-bar{role: 'progressbar', style: "width: #{evento.tagoj[:percent].to_s}%", 'aria-valuenow': evento.tagoj[:percent], 'aria-valuemin': 0, 'aria-valuemax': 100 }
+-#              %span #{evento.title} (#{evento.city} - #{evento.country.name})
+
+
 - if cookies[:vidmaniero] == 'kartoj'
   - if @today_events.any?
-    .box-white.okazantaj-eventoj
-      .lead #{@today_events.length} okazantaj eventoj
-      - @today_events.order(:date_start).each do |evento|
-        = link_to event_url(evento.code), class: 'text-decoration-none' do
-          .progress
-            .progress-bar{role: 'progressbar', style: "width: #{evento.tagoj[:percent].to_s}%", 'aria-valuenow': evento.tagoj[:percent], 'aria-valuemin': 0, 'aria-valuemax': 100 }
-              %span #{evento.title} (#{evento.city} - #{evento.country.name})
+    = page_title pluralize(@today_events.length, 'okazanta evento', 'okazantaj eventoj')
+    - @today_events.order(:date_start).each do |evento|
+
+      .okazantaj-eventoj
+        %h6
+          = event_flag(evento)
+          = link_to evento.title, event_path(evento.code)
+          %span.small
+            = evento.online ? 'Enreta' : "en #{evento.city} (#{evento.country.name})"
+            = display_organizations_for_event(evento)
+          -#.progress.mt-2
+          -#  .progress-bar{role: 'progressbar', style: "width: #{evento.tagoj[:percent].to_s}%", 'aria-valuenow': evento.tagoj[:percent], 'aria-valuemin': 0, 'aria-valuemax': 100 }
+          -#    = event_date(evento)
+
+      -#
+      -#= link_to event_url(evento.code), class: 'text-decoration-none' do
+      -#  .progress
+      -#    .progress-bar{role: 'progressbar', style: "width: #{evento.tagoj[:percent].to_s}%", 'aria-valuenow': evento.tagoj[:percent], 'aria-valuemin': 0, 'aria-valuemax': 100 }
+      -#      %span #{evento.title} (#{evento.city} - #{evento.country.name})
+%br
