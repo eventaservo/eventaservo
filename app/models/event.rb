@@ -3,6 +3,7 @@
 # Eventaj dateno
 class Event < ApplicationRecord
   is_impressionable # Por kalkuli la paĝvizitojn
+  has_paper_trail
 
   has_many_attached :uploads
 

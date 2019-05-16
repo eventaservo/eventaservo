@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Organization < ApplicationRecord
+  has_paper_trail
   has_one_attached :logo
   has_many :organization_users, dependent: :destroy
   has_many :organization_events, dependent: :destroy

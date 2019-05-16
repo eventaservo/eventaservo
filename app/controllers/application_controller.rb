@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   include Constants
 
+  before_action :set_paper_trail_whodunnit
   before_action :set_raven_context
 
   def user_is_owner_or_admin(event)
