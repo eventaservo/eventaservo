@@ -11,7 +11,7 @@
 
 - if cookies[:vidmaniero] == 'kartoj'
   - if @today_events.any?
-    = page_title pluralize(@today_events.length, 'okazanta evento', 'okazantaj eventoj')
+    = page_title "#{@today_events.length} okazas hodiaŭ"
     - @today_events.order(:date_start).each do |evento|
 
       .okazantaj-eventoj
