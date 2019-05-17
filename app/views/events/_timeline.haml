@@ -1,0 +1,11 @@
+.text-divider Timeline
+%p Versões: #{@event.versions.count}
+
+- @event.versions.each do |version|
+  %p em #{format_date version.changeset[:updated_at].first}
+  %p #{User.find(version.whodunnit).name} alterou:
+  - version.changeset.except(:updated_at).map do |item, changes|
+    %p= item
+    = Diffy::Diff.new(changes[1], changes[0], :diff => '-U1')
+  %hr
+
