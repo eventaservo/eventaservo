@@ -50,6 +50,7 @@ Rails.application.routes.draw do
     get 'follow', to: 'followers#event', as: 'toggle_follow'
     delete 'delete_file/:file_id', to: 'events#delete_file', as: 'delete_file'
     post 'kontakti_organizanton', to: 'events#kontakti_organizanton', as: 'kontakti_organizanton'
+    get 'kronologio', to: 'events#kronologio'
   end
 
   # Admin
