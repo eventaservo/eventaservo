@@ -122,6 +122,10 @@ class EventsController < ApplicationController
     redirect_to event_url(params[:event_code]), flash: { info: 'Mesaĝo sendita' }
   end
 
+  def kronologio
+    @evento = Event.by_code(params[:event_code])
+  end
+
   private
 
     # Use callbacks to share common setup or constraints between actions.

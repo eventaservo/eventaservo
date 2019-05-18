@@ -1,0 +1,24 @@
+.box-white
+  .lead.d-flex
+    %div
+      #{event_flag(@evento)} #{@evento.title}
+
+  .text-divider Timeline
+  %p Versões: #{@evento.versions.count}
+
+  - @evento.versions.each do |version|
+    -#%p em #{format_date version.changeset[:updated_at].first}
+    %p #{User.find(version.whodunnit).name} alterou:
+    - version.changeset.except(:updated_at).map do |item, changes|
+      %p= item
+      - diff = Diffy::SplitDiff.new(changes[0], changes[1], :format => :html, :include_plus_and_minus_in_html => true, :context => 1)
+      .row
+        .col-6
+          = raw diff.left
+        .col-6
+          = raw diff.right
+      %hr
+    %hr
+
+  %hr
+  = link_to 'Voltar ao evento', event_url(@evento.code)
