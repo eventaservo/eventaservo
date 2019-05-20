@@ -42,6 +42,18 @@
                 .col-8= form.text_field :date_end, value: @event.fina_tago, class: 'datepicker form-control'
                 .col-4= text_field_tag(:time_end, @event.fina_horo, class: 'timemask form-control', required: true)
 
+        -#.form-group
+        -#  = form.label :tag_list, 'Etikedoj'
+        -#  = form.select :tag_list,
+        -#              options_for_select(Constants::ETIKEDOJ),
+        -#              {}, { multiple: true , class: 'form-control select2-input' }
+        -#  %small.form-text.text-muted Lasu malplena se la evento ne apartenas al organizo
+
+        .form-group
+          = form.label :tag_list, 'Etikedoj'
+          = form.check
+
+
         .form-group
           = form.label :content, 'Enhavo'
           = form.hidden_field :content

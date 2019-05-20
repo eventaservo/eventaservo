@@ -1,6 +1,8 @@
 - content_for :title do
   = @event.title
 = render partial: 'fb_meta'
+-#<link rel="canonical" href="http://www.example.com/product.php?item=swedish-fish" />
+-#  %meta{content: request.original_url, property: 'og:url'}
 = render partial: 'layouts/breadcrumb'
 
 .row
@@ -22,6 +24,7 @@
 
       %p
         = display_organizations_for_event(@event)
+        = @event.tag_list
 
       .trix-content= sanitize @event.content
 

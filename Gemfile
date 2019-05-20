@@ -65,6 +65,7 @@ gem 'delayed_job_active_record'
 gem 'rack-attack'
 gem 'rack-cors', require: 'rack/cors'
 
+gem 'acts-as-taggable-on', '~> 6.0'
 gem 'diffy'
 gem 'geocoder'
 gem 'highcharts-rails', '~> 6.0'

@@ -4,6 +4,7 @@
 class Event < ApplicationRecord
   is_impressionable # Por kalkuli la paĝvizitojn
   has_paper_trail
+  acts_as_taggable
 
   has_many_attached :uploads
 

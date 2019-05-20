@@ -57,6 +57,7 @@ class EventsController < ApplicationController
   end
 
   def update
+    raise
     if @event.update(event_params)
       EventMailer.nova_administranto(@event).deliver_later if @event.saved_change_to_user_id?
       EventMailer.notify_admins(@event.id, ghisdatigho: true).deliver_later
@@ -144,9 +145,11 @@ class EventsController < ApplicationController
         params[:event][:date_start] = merge_date_time(params[:event][:date_start], params[:time_start], params[:event][:time_zone])
         params[:event][:date_end] = merge_date_time(params[:event][:date_end], params[:time_end], params[:event][:time_zone])
       end
+
+      # params[:event][:tag_list]
       params.require(:event).permit(
         :title, :description, :content, :site, :email, :date_start, :date_end, :time_zone,
-        :address, :city, :country_id, :online, :user_id, uploads: []
+        :address, :city, :country_id, :online, :user_id, tag_list: [], uploads: []
       )
     end
 
