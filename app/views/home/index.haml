@@ -16,7 +16,8 @@
 
   #events_container
     = render partial: 'home/view_style_chooser'
-    = render partial: 'events/events_count'
+    -#= render partial: 'events/events_count'
+    = render partial: 'home/filters'
 
     .lead Laŭ kontinentoj aŭ retaj eventoj
     - @continents.each do |continent|
@@ -24,7 +25,6 @@
         = continent.name
         %span.badge.badge-primary= continent.count
 
-    = render partial: 'home/filters'
     = render partial: 'events/okazantaj'
     = display_events_by_style
 

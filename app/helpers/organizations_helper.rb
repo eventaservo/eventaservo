@@ -32,7 +32,7 @@ module OrganizationsHelper
 
   def display_event_tags(event)
     content_tag(:div, class: 'event-tags') do
-      event.tag_list.each do |t|
+      event.tags.order(:name).each do |t|
        concat content_tag(:span, t, class: 'badge badge-pill badge-info mr-1')
       end
     end

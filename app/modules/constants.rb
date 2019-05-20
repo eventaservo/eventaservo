@@ -5,5 +5,5 @@ module Constants
 
   ADMIN_EMAILS = ['kontakto@eventaservo.org', 'yves.nevelsteen@gmail.com']
 
-  ETIKEDOJ = ['Kongreso', 'Kunveno', 'Kurso', 'Varbado']
+  TAGS = ['Kongreso', 'Kunveno', 'Kurso', 'Varbado', 'Alia']
 end

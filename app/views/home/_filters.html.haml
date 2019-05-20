@@ -1,12 +1,14 @@
-%br
-%br
-- if aktivaj_filtroj?
-  .lead Aktivaj filtriloj
+.lead Filtrilo
+- ActsAsTaggableOn::Tag.order(:name).pluck(:name).each do |t|
+  - if params[:s] == t
+    = link_to icon('fas', 'times', params[:s]), aktivaj_filtroj.except(:s), class: 'btn btn-sm btn-info'
+  - else
+    = link_to t, url_for(s: (t unless params[:s] == t), o: params[:o], periodo: params[:periodo]), class: 'btn btn-sm btn-outline-info'
 
+%p
+- if aktivaj_filtroj?
   - if aktivaj_filtroj.include? 'periodo'
     = link_to icon('fas', 'times', traduki_periodon(params[:periodo])), aktivaj_filtroj.except(:periodo), class: 'button-filters'
 
   - if aktivaj_filtroj.include? 'o'
     = link_to icon('fas', 'times', params[:o]), aktivaj_filtroj.except(:o), class: 'button-filters'
-
-

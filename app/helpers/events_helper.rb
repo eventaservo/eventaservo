@@ -74,13 +74,13 @@ module EventsHelper
     end
   end
 
-  def link_to_event_count(periodo, organizo, &_block)
+  def link_to_event_count(periodo, organizo, speco, &_block)
     active_class =
       if params[:periodo].present?
         params[:periodo] == periodo ? 'ec-active' : 'ec-inactive'
       end
 
-    link_to url_for(periodo: (periodo unless params[:periodo] == periodo), o: organizo),
+    link_to url_for(periodo: (periodo unless params[:periodo] == periodo), o: organizo, s: speco),
             class: "event-count #{periodo} #{active_class}" do
       yield
     end

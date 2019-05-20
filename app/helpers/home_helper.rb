@@ -2,11 +2,11 @@
 
 module HomeHelper
   def aktivaj_filtroj?
-    params[:periodo].present? || params[:o].present?
+    params[:periodo].present? || params[:o].present? || params[:s].present?
   end
 
   def aktivaj_filtroj
-    params.permit(:o, :periodo)
+    params.permit(:o, :periodo, :s)
   end
 
   def traduki_periodon(periodo)

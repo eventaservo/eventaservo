@@ -43,9 +43,9 @@
                 .col-4= text_field_tag(:time_end, @event.fina_horo, class: 'timemask form-control', required: true)
 
         .form-group
-          = form.label :tag_list, 'Etikedoj'
-          .text-center
-            - Constants::ETIKEDOJ.each do |etikedo|
+          = form.label :tag_list, 'Speco'
+          .text-center#event_tags
+            - Constants::TAGS.each do |etikedo|
               .btn-group.btn-group-toggle{'data-toggle': 'buttons'}
                 %label.btn.btn-sm.btn-outline-info{class: "#{'active' if etikedo.in?(@event.tag_list)}" }
                   = check_box_tag "tag_list[#{etikedo}]", 1, etikedo.in?(@event.tag_list)
@@ -142,3 +142,8 @@
   $inputs = $('#event_site, #event_email')
   $inputs.on 'input', ->
     $inputs.not(this).prop 'required', !$(this).val().length
+
+  $("form").on 'submit', ->
+    if($('#event_tags').find('.active').length == 0)
+      alert 'Vi devas elekti almenaŭ unu specon'
+      return false

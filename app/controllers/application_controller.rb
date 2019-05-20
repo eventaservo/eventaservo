@@ -26,6 +26,11 @@ class ApplicationController < ActionController::Base
     if params[:o].present?
       @events = @events.joins(:organizations).where('organizations.short_name = ?', params[:o])
     end
+
+    # Filtras per Speco
+    if params[:s].present?
+      @events = @events.tagged_with(params[:s])
+    end
   end
 
   def user_can_edit_event?(user:, event:)

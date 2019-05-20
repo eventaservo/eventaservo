@@ -5,7 +5,8 @@
   = render partial: 'home/shortcuts'
   = render partial: 'layouts/breadcrumb'
   = render partial: 'home/view_style_chooser'
-  = render partial: 'events/events_count'
+  -#= render partial: 'events/events_count'
+  = render partial: 'home/filters'
 
   - unless params[:continent] == 'Reta'
     .lead Laŭ lando
@@ -15,6 +16,5 @@
         = country.name
         %span.badge.badge-primary= country.count
 
-  = render partial: 'home/filters'
   = render partial: 'events/okazantaj'
   = display_events_by_style
