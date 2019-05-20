@@ -18,9 +18,12 @@
         %h6
           = event_flag(evento)
           = link_to evento.title, event_path(evento.code)
-          %span.small
+          = display_organizations_for_event(evento)
+          = display_event_tags(evento)
+          .small.pl-4
             = evento.online ? 'Enreta' : "en #{evento.city} (#{evento.country.name})"
-            = display_organizations_for_event(evento)
+            = display_event_days_left(evento)
+
           -#.progress.mt-2
           -#  .progress-bar{role: 'progressbar', style: "width: #{evento.tagoj[:percent].to_s}%", 'aria-valuenow': evento.tagoj[:percent], 'aria-valuemin': 0, 'aria-valuemax': 100 }
           -#    = event_date(evento)

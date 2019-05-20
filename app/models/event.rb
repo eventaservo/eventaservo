@@ -172,14 +172,16 @@ class Event < ApplicationRecord
 
   # total: Kvanto de tagoj de la evento
   # parcial: Kvanto de tagoj kiu jam pasis de la evento
+  # restanta: Kvanto de tagoj restantaj en la evento
   # percent: Procento de la evento kiu jam pasis
   # @return [Hash]
   def tagoj
     total = (fina_tago.to_date - komenca_tago.to_date).to_i + 1
     Time.zone = time_zone
     parcial = (Time.zone.today - komenca_tago.to_date).to_i + 1
+    restanta = total - parcial
     percent = (parcial.to_f / total.to_f).to_f * 100
-    {total: total, parcial: parcial, percent: percent.to_i}
+    {total: total, parcial: parcial, restanta: restanta, percent: percent.to_i}
   end
 
   private

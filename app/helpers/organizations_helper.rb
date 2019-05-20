@@ -29,4 +29,24 @@ module OrganizationsHelper
       end
     end
   end
+
+  def display_event_tags(event)
+    content_tag(:div, class: 'event-tags') do
+      event.tag_list.each do |t|
+       concat content_tag(:span, t, class: 'badge badge-pill badge-info mr-1')
+      end
+    end
+  end
+
+  def display_event_days_left(event)
+    days = event.tagoj[:restanta]
+    case days
+    when 0
+      "| finiĝos hodiaŭ"
+    when 1
+      "| finiĝos morgaŭ"
+    else
+      "| finiĝos en #{days} tagoj"
+    end
+  end
 end

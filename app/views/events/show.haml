@@ -24,7 +24,7 @@
 
       %p
         = display_organizations_for_event(@event)
-        = @event.tag_list
+        = display_event_tags(@event)
 
       .trix-content= sanitize @event.content
 
