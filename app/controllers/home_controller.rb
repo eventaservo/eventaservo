@@ -26,6 +26,15 @@ class HomeController < ApplicationController
     render layout: 'full_size'
   end
 
+  def robots
+    robots = if Rails.env.production?
+               File.read(Rails.root + "config/robots.production.txt")
+             else
+               File.read(Rails.root + "config/robots.staging.txt")
+             end
+    render plain: robots, layout: false, content_type: 'text/plain'
+  end
+
   # Listigas la eventojn por montri per la kalendara vidmaniero
   #
   def events
