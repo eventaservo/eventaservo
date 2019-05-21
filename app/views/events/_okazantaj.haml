@@ -2,14 +2,16 @@
   - if @today_events.any?
     %br
     %h5.text-center.font-weight-bold #{@today_events.length} okazas hodiaŭ
-    - @today_events.order(:date_start).each do |evento|
-      .okazantaj-eventoj
-        %h6
-          = event_flag(evento)
-          = link_to evento.title, event_path(evento.code)
-          = display_organizations_for_event(evento)
-          = display_event_tags(evento)
-          .small.pl-4
-            = evento.online ? 'Enreta' : "en #{evento.city} (#{evento.country.name})"
-            = display_event_days_left(evento)
+    .row
+      - @today_events.order(:date_start).each do |evento|
+        .col-12.col-md-6
+          .okazantaj-eventoj
+            %h6
+              = event_flag(evento)
+              = link_to evento.title, event_path(evento.code)
+              = display_organizations_for_event(evento)
+              = display_event_tags(evento)
+              .small.pl-4
+                = evento.online ? 'Enreta' : "en #{evento.city} (#{evento.country.name})"
+                = display_event_days_left(evento)
 %br
