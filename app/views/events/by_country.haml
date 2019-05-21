@@ -3,23 +3,19 @@
 
 .box-white
   = render partial: 'home/shortcuts'
+  = content_for :breadcrumb_right do
+    = link_to icon('far', 'calendar-alt'), webcal_url(landa_kodo: @country.code, protocol: :webcal, format: :ics), data: { target: '#webcalModal', toggle: 'modal' }
   = render partial: 'layouts/breadcrumb'
   = render partial: 'home/view_style_chooser'
   -#= render partial: 'events/events_count'
+
+  .text-center.m-2
+    - @cities.each do |city|
+      = link_to events_by_city_path(@country.continent, @country.name, city.name, periodo: params[:periodo].presence, o: params[:o].presence, s: params[:s].presence), class: 'button-event-count' do
+        = city.name
+        %span.badge.badge-primary= city.count
+
   = render partial: 'home/filters'
-
-  .lead
-    Eventoj laŭ urboj
-    %span.float-right
-      = link_to icon('far', 'calendar-alt'),
-        webcal_url(landa_kodo: @country.code, protocol: :webcal, format: :ics),
-        data: { target: '#webcalModal', toggle: 'modal' }
-
-  - @cities.each do |city|
-    = link_to events_by_city_path(@country.continent, @country.name, city.name, periodo: params[:periodo].presence, o: params[:o].presence), class: 'button-event-count' do
-      = city.name
-      %span.badge.badge-primary= city.count
-
   = render partial: 'events/okazantaj'
   = display_events_by_style
 

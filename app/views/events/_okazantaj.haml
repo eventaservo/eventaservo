@@ -1,19 +1,8 @@
--#- if cookies[:vidmaniero] == 'kartoj'
--#  - if @today_events.any?
--#    .box-white.okazantaj-eventoj
--#      .lead #{@today_events.length} okazantaj eventoj
--#      - @today_events.order(:date_start).each do |evento|
--#        = link_to event_url(evento.code), class: 'text-decoration-none' do
--#          .progress
--#            .progress-bar{role: 'progressbar', style: "width: #{evento.tagoj[:percent].to_s}%", 'aria-valuenow': evento.tagoj[:percent], 'aria-valuemin': 0, 'aria-valuemax': 100 }
--#              %span #{evento.title} (#{evento.city} - #{evento.country.name})
-
-
 - if cookies[:vidmaniero] == 'kartoj'
   - if @today_events.any?
-    = page_title "#{@today_events.length} okazas hodiaŭ"
+    %br
+    %h5.text-center.font-weight-bold #{@today_events.length} okazas hodiaŭ
     - @today_events.order(:date_start).each do |evento|
-
       .okazantaj-eventoj
         %h6
           = event_flag(evento)
@@ -23,14 +12,4 @@
           .small.pl-4
             = evento.online ? 'Enreta' : "en #{evento.city} (#{evento.country.name})"
             = display_event_days_left(evento)
-
-          -#.progress.mt-2
-          -#  .progress-bar{role: 'progressbar', style: "width: #{evento.tagoj[:percent].to_s}%", 'aria-valuenow': evento.tagoj[:percent], 'aria-valuemin': 0, 'aria-valuemax': 100 }
-          -#    = event_date(evento)
-
-      -#
-      -#= link_to event_url(evento.code), class: 'text-decoration-none' do
-      -#  .progress
-      -#    .progress-bar{role: 'progressbar', style: "width: #{evento.tagoj[:percent].to_s}%", 'aria-valuenow': evento.tagoj[:percent], 'aria-valuemin': 0, 'aria-valuemax': 100 }
-      -#      %span #{evento.title} (#{evento.city} - #{evento.country.name})
 %br

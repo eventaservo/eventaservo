@@ -1,6 +1,6 @@
 %nav{"aria-label" => "breadcrumb"}
   %ol.breadcrumb
-    %li.breadcrumb-item= link_to 'Mondo', root_path
+    %li.breadcrumb-item= link_to 'Mondo', root_path(s: params[:s].presence)
 
     - if params[:code].present? && params[:controller] == 'events'
       - event = Event.joins(:country).find_by_code(params[:code])
@@ -15,12 +15,15 @@
 
     -# Kontinento
     - if params[:continent].present?
-      %li.breadcrumb-item= link_to @continent, events_by_continent_path(params[:continent])
+      %li.breadcrumb-item= link_to @continent, events_by_continent_path(params[:continent], s: params[:s].presence)
 
     -# Lando
     - if params[:country_name].present?
-      %li.breadcrumb-item= link_to @country.name, events_by_country_path(params[:continent], params[:country_name])
+      %li.breadcrumb-item= link_to @country.name, events_by_country_path(params[:continent], params[:country_name], s: params[:s].presence)
 
     -# Urbo
     - if params[:city_name].present?
-      %li.breadcrumb-item= link_to params[:city_name].titleize, events_by_city_path(params[:continent], params[:country_name], params[:city_name])
+      %li.breadcrumb-item= link_to params[:city_name].titleize, events_by_city_path(params[:continent], params[:country_name], params[:city_name], s: params[:s].presence)
+
+    .ml-auto
+      = yield :breadcrumb_right

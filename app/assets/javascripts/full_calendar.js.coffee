@@ -7,6 +7,7 @@ eventCalendar = ->
         country: $('#full_calendar').data('country')
         city: $('#full_calendar').data('city')
         o: $('#full_calendar').data('o')
+        s: $('#full_calendar').data('s')
         username: $('#full_calendar').data('username')
     eventColor: 'green'
     contentHeight: 500

@@ -1,4 +1,4 @@
-= page_title "#{events.count} venontaj"
+%h5.text-center.font-weight-bold= pluralize(events.count, 'venonta', 'venontaj')
 
 - events.grouped_by_months.map do |date, events|
   %br

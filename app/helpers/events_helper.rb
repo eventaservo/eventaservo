@@ -20,9 +20,9 @@ module EventsHelper
   def display_events_by_style
     case cookies[:vidmaniero]
     when 'kalendaro'
-      render partial: 'events/events_as_calendar', locals: { events: @events }
+      render partial: 'events/events_as_calendar', locals: { events: @events + @today_events }
     when 'mapo'
-      render partial: 'events/events_as_map', locals: { events: @events }
+      render partial: 'events/events_as_map', locals: { events: @events + @today_events }
     else
       render partial: 'events/events_as_cards', locals: { events: @events }
     end

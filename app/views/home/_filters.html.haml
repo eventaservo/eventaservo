@@ -1,14 +1,18 @@
-.lead Filtrilo
-- ActsAsTaggableOn::Tag.order(:name).pluck(:name).each do |t|
-  - if params[:s] == t
-    = link_to icon('fas', 'times', params[:s]), aktivaj_filtroj.except(:s), class: 'btn btn-sm btn-info'
-  - else
-    = link_to t, url_for(s: (t unless params[:s] == t), o: params[:o], periodo: params[:periodo]), class: 'btn btn-sm btn-outline-info'
+.text-center.m-2
+  - ActsAsTaggableOn::Tag.order(:name).pluck(:name).each do |t|
+    - count = @today_events.tagged_with(t).count + @events.tagged_with(t).count
+    - if params[:s].present? && t.in?(params[:s].split(','))
+      = link_to url_for(s: (params[:s].split(',') - t.split(',')).join(',')), class: 'btn btn-sm btn-info mr-1 mb-1' do
+        = icon('fas', 'times', t)
+        %span.badge.badge-light= count
 
-%p
+    - else
+      - specoj = ([] << t << params[:s]).join(',')
+      = link_to url_for(s: specoj, o: params[:o], periodo: params[:periodo]), class: 'btn btn-sm btn-outline-info mr-1 mb-1' do
+        = t
+        %span.badge.badge-info= count
+
 - if aktivaj_filtroj?
-  - if aktivaj_filtroj.include? 'periodo'
-    = link_to icon('fas', 'times', traduki_periodon(params[:periodo])), aktivaj_filtroj.except(:periodo), class: 'button-filters'
-
   - if aktivaj_filtroj.include? 'o'
-    = link_to icon('fas', 'times', params[:o]), aktivaj_filtroj.except(:o), class: 'button-filters'
+    .text-center.m-2
+      = link_to icon('fas', 'times', params[:o]), aktivaj_filtroj.except(:o), class: 'button-filters'

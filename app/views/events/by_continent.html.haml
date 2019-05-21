@@ -6,15 +6,15 @@
   = render partial: 'layouts/breadcrumb'
   = render partial: 'home/view_style_chooser'
   -#= render partial: 'events/events_count'
-  = render partial: 'home/filters'
 
   - unless params[:continent] == 'Reta'
-    .lead Laŭ lando
-    - @countries.each do |country|
-      = link_to events_by_country_path(country.continent, country.name, periodo: params[:periodo].presence, o: params[:o].presence), class: 'button-event-count' do
-        = flag_icon(country.code, squared: true)
-        = country.name
-        %span.badge.badge-primary= country.count
+    .text-center.m-2
+      - @countries.each do |country|
+        = link_to events_by_country_path(country.continent, country.name, periodo: params[:periodo].presence, o: params[:o].presence, s: params[:s].presence), class: 'button-event-count' do
+          = flag_icon(country.code, squared: true)
+          = country.name
+          %span.badge.badge-primary= country.count
 
+  = render partial: 'home/filters'
   = render partial: 'events/okazantaj'
   = display_events_by_style
