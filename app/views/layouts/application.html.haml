@@ -47,6 +47,5 @@
             %span.sr-only Close
           = value
     %br
-    = render 'layouts/cookies_bar' unless cookies[:akceptas_ga].present?
+    -#= render 'layouts/cookies_bar' unless cookies[:akceptas_ga].present?
     = render partial: 'layouts/footer'
-
