@@ -4,7 +4,7 @@ epo:
   devise:
     confirmations:
       confirmed: "Via retpoŝtadreso estas konfirmita. Vi nun povas ensaluti."
-      send_instructions: "Vi ricevos baldaŭ retmesaĝon kun instrukcioj por konfirmi vian konton"
+      send_instructions: "Vi ricevos baldaŭ retmesaĝon kun instrukcioj por konfirmi vian registron"
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
     failure:
       already_authenticated: "Vi jam ensalutis antaŭe"
@@ -43,7 +43,7 @@ epo:
       signed_up_but_locked: "You have signed up successfully. However, we could not sign you in because your account is locked."
       signed_up_but_unconfirmed: "Ni sendis retmesaĝon al via retpoŝtadreso kun instruktcioj por konfirmi vian konton"
       update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and follow the confirm link to confirm your new email address."
-      updated: "Via konto ĝisdatiĝis sukcese."
+      updated: "Via sukcese ĝisdatiĝis viajn informojn."
     sessions:
       signed_in: "Sukcesa ensaluto"
       signed_out: "Sukcesa elsaluto"
