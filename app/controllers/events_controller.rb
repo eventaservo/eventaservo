@@ -105,6 +105,8 @@ class EventsController < ApplicationController
 
   # Listigas la eventoj laŭ urboj
   def by_city
+    redirect_to root_url, flash: { error: 'Lando ne ekzistas' } if Country.find_by(name: params[:country_name]).nil?
+
     @future_events = Event.by_city(params[:city_name]).venontaj
     @today_events  = @events.today.by_city(params[:city_name])
     @events        = @events.not_today.by_city(params[:city_name])
