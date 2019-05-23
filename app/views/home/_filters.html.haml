@@ -1,5 +1,5 @@
 .text-center.m-2
-  - ActsAsTaggableOn::Tag.order(:name).pluck(:name).each do |t|
+  - Constants::TAGS.each do |t|
     - count = @today_events.tagged_with(t).count + @events.tagged_with(t).count
     - if params[:s].present? && t.in?(params[:s].split(','))
       = link_to url_for(s: (params[:s].split(',') - t.split(',')).join(','), o: params[:o], t: params[:t], periodo: params[:periodo]), class: 'btn btn-sm btn-info mr-1 mb-1' do
