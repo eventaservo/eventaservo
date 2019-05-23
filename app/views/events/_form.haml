@@ -47,7 +47,7 @@
           .text-center#event_tags
             - Constants::TAGS.each do |etikedo|
               .btn-group.btn-group-toggle{'data-toggle': 'buttons'}
-                %label.btn.btn-sm.btn-outline-info{class: "#{'active' if etikedo.in?(@event.tag_list)}" }
+                %label.btn.button-checkbox{class: "#{'active' if etikedo.in?(@event.tag_list)}" }
                   = check_box_tag "tag_list[#{etikedo}]", 1, etikedo.in?(@event.tag_list)
                   = etikedo
 

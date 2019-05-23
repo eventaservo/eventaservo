@@ -122,3 +122,15 @@
 .button-contact {
   @extend %button-link;
 }
+
+.button-checkbox {
+  @extend .btn-sm;
+  background-color: white;
+  border: 1px solid #17a2b8;
+  color: #17a2b8;
+
+  &.active {
+    background-color: #17a2b8;
+    color: white;
+  }
+}
