@@ -7,7 +7,8 @@
       .col-12
         %p
           .text-center.font-weight-bold= link_to (highlight event.title, params[:query].split), event_path(event.code)
-          .text-center.small (#{highlight event.city, params[:query].split} - #{highlight event.country.name, params[:query].split}) - #{format_date event.date_start}
+          .text-center.small #{highlight event.city, params[:query].split} - #{highlight event.country.name, params[:query].split} | #{event_date(event)}
+          .text-center= display_event_tags(event)
         .row.col-md-12
           %p.small= highlight event.description, params[:query].split
           %p.small= highlight ActionView::Base.full_sanitizer.sanitize(event.content).truncate_words(50), params[:query].split
