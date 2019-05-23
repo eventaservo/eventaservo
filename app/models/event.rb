@@ -52,6 +52,8 @@ class Event < ApplicationRecord
   scope :online, -> { where(online: true) }
   scope :not_online, -> { where(online: false) }
   scope :for_webcal, -> { where('date_start >= ? OR date_end >= ?', Time.zone.today - 6.months, Time.zone.today) }
+  scope :unutagaj, -> { where("((to_timestamp(date_end::text, 'YYYY-MM-DD HH24:MI:SS')) AT TIME ZONE(time_zone))::timestamp::date = ((to_timestamp(date_start::text, 'YYYY-MM-DD HH24:MI:SS')) AT TIME ZONE(time_zone))::timestamp::date") }
+  scope :plurtagaj, -> { where("((to_timestamp(date_end::text, 'YYYY-MM-DD HH24:MI:SS')) AT TIME ZONE(time_zone))::timestamp::date > ((to_timestamp(date_start::text, 'YYYY-MM-DD HH24:MI:SS')) AT TIME ZONE(time_zone))::timestamp::date") }
 
   def self.by_code(code)
     find_by(code: code)
@@ -219,13 +221,6 @@ class Event < ApplicationRecord
       tz = TZInfo::Timezone.get(self.time_zone)
       self.date_start = tz.local_to_utc(Time.new(date_start.year, date_start.month, date_start.day, date_start.hour, date_start.min)).in_time_zone(time_zone)
       self.date_end = tz.local_to_utc(Time.new(date_end.year, date_end.month, date_end.day, date_end.hour, date_end.min)).in_time_zone(time_zone)
-
-      if self.multtaga?
-        self.tag_list.add('Plurtaga')
-      else
-        self.tag_list.remove('Plurtaga')
-      end
-
     end
 
     def fix_title(title)

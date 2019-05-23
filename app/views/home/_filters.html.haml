@@ -2,15 +2,39 @@
   - ActsAsTaggableOn::Tag.order(:name).pluck(:name).each do |t|
     - count = @today_events.tagged_with(t).count + @events.tagged_with(t).count
     - if params[:s].present? && t.in?(params[:s].split(','))
-      = link_to url_for(s: (params[:s].split(',') - t.split(',')).join(',')), class: 'btn btn-sm btn-info mr-1 mb-1' do
+      = link_to url_for(s: (params[:s].split(',') - t.split(',')).join(','), o: params[:o], t: params[:t], periodo: params[:periodo]), class: 'btn btn-sm btn-info mr-1 mb-1' do
         = icon('fas', 'times', t)
         %span.badge.badge-light= count
 
     - else
       - specoj = ([] << t << params[:s]).join(',')
-      = link_to url_for(s: specoj, o: params[:o], periodo: params[:periodo]), class: 'btn btn-sm btn-outline-info mr-1 mb-1' do
+      = link_to url_for(s: specoj, o: params[:o], t: params[:t], periodo: params[:periodo]), class: 'btn btn-sm btn-outline-info mr-1 mb-1' do
         = t
         %span.badge.badge-info= count
+
+
+  -# Unu/Plur-tagaj
+  - unutaga_kvanto = @events.unutagaj.count + @today_events.unutagaj.count
+  - plurtaga_kvanto = @events.plurtagaj.count + @today_events.plurtagaj.count
+  .btn-group.btn-group-toggle.ml-4
+    - if params[:t] == 'unutaga'
+      = link_to url_for(s: params[:s], o: params[:o], periodo: params[:periodo]), class: 'btn btn-sm btn-info mb-1' do
+        = icon('fas', 'times', 'Unutaga')
+        %span.badge.badge-light= unutaga_kvanto if unutaga_kvanto > 0
+    - else
+      = link_to url_for(t: 'unutaga', s: params[:s], o: params[:o], periodo: params[:periodo]), class: 'btn btn-sm btn-outline-info mb-1' do
+        Unutaga
+        %span.badge.badge-info= unutaga_kvanto if unutaga_kvanto > 0
+
+
+    - if params[:t] == 'plurtaga'
+      = link_to url_for(s: params[:s], o: params[:o], periodo: params[:periodo]), class: 'btn btn-sm btn-info mb-1' do
+        = icon('fas', 'times', 'Plurtaga')
+        %span.badge.badge-light= plurtaga_kvanto if plurtaga_kvanto > 0
+    - else
+      = link_to url_for(t: 'plurtaga', s: params[:s], o: params[:o], periodo: params[:periodo]), class: 'btn btn-sm btn-outline-info mb-1' do
+        Plurtaga
+        %span.badge.badge-info= plurtaga_kvanto if plurtaga_kvanto > 0
 
 - if aktivaj_filtroj?
   - if aktivaj_filtroj.include? 'o'

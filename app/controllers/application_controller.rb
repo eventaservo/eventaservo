@@ -31,6 +31,10 @@ class ApplicationController < ActionController::Base
     if params[:s].present?
       @events = @events.tagged_with(params[:s])
     end
+
+    # Filtras per Unutaga aŭ Plurtaga
+    @events = @events.unutagaj if params[:t] == 'unutaga'
+    @events = @events.plurtagaj if params[:t] == 'plurtaga'
   end
 
   def user_can_edit_event?(user:, event:)
