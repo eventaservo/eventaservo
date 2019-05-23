@@ -33,8 +33,8 @@ class EventsController < ApplicationController
       @event = Event.new
       @event.city = current_user.city if current_user.city?
       @event.country_id = current_user.country_id if current_user.country_id?
-      @event.date_start = Time.zone.today
-      @event.date_end = Time.zone.today
+      @event.date_start = DateTime.new(Date.today.year, Date.today.month, Date.today.day, 0, 0, 0 , '0')
+      @event.date_end = @event.date_start
     end
   end
 
