@@ -1,4 +1,4 @@
-%h5.text-center.font-weight-bold= pluralize(events.count, 'venonta', 'venontaj')
+%h5.text-center.font-weight-bold= pluralize(events.count, 'venonta', 'venontaj') if events.count > 0
 
 - events.grouped_by_months.map do |date, events|
   %br
