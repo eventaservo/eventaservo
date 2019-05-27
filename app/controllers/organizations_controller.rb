@@ -75,6 +75,8 @@ class OrganizationsController < ApplicationController
 
     def set_organization
       @organizo = Organization.find_by(short_name: params[:short_name])
+
+      redirect_to root_url, flash: { error: 'Organizo ne ekzistas' } if @organizo.nil?
     end
 
     def organization_params

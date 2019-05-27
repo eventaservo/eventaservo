@@ -32,7 +32,7 @@
 
       .text-divider Organizoj
       - @user.organizoj.each do |organizo|
-        = link_to organizo.short_name, organization_url(organizo), class: 'btn btn-sm btn-outline-primary'
+        = link_to organizo.short_name, organization_url(organizo.short_name), class: 'btn btn-sm btn-outline-primary'
 
       -# Kaŝita ĉar nuntempe ES ne plu sendas retlistojn
       -#
