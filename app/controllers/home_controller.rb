@@ -2,10 +2,9 @@
 
 class HomeController < ApplicationController
   before_action :filter_events, only: :index
+  before_action :definas_kuketojn, only: :index
 
   def index
-    cookies[:vidmaniero] ||= { value: 'kartoj', expires: 1.year, secure: true } # Normala vidmaniero
-
     @future_events = Event.venontaj
     if params[:o].present?
       @future_events = @future_events.joins(:organizations).where('organizations.short_name = ?', params[:o])
@@ -97,5 +96,11 @@ class HomeController < ApplicationController
 
     def access_from_server
       request.headers['SERVER_NAME'].in? ['devel.eventaservo.org', 'staging.eventaservo.org', 'eventaservo.org']
+    end
+
+    def definas_kuketojn
+      unless cookies[:vidmaniero].in? ['kartoj', 'kalendaro', 'mapo']
+        cookies[:vidmaniero] = { value: 'kartoj', expires: 1.year, secure: true } # Normala vidmaniero
+      end
     end
 end
