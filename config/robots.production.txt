@@ -6,5 +6,6 @@ Disallow: /eventoj/new
 Disallow: /eventoj/*/kronologio
 Disallow: /uzanto/
 Disallow: /rails/
+Disallow: /search
 Disallow: /*?*
 Allow: /
