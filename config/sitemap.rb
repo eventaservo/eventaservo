@@ -4,6 +4,9 @@ SitemapGenerator::Sitemap.default_host = "https://eventaservo.org" if Rails.env 
 SitemapGenerator::Sitemap.default_host = "https://staging.eventaservo.org" if Rails.env == 'staging'
 SitemapGenerator::Sitemap.default_host = "https://devel.eventaservo.org" if Rails.env == 'development'
 
+SitemapGenerator::Sitemap.search_engines[:yahoo] = "http://www.bing.com/webmaster/ping.aspx?siteMap=%s"
+SitemapGenerator::Sitemap.search_engines[:yandex] = "http://blogs.yandex.ru/pings/?status=success&url=%s"
+
 SitemapGenerator::Sitemap.create do
   # Put links creation logic here.
   #
