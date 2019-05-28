@@ -23,7 +23,7 @@
           .form-group
             = label_tag :organization_id, 'Organizo(j)'
             = select_tag 'organization_ids[]',
-              options_from_collection_for_select(Organization.by_user(current_user), 'id', 'full_name', @event.organizations.pluck(:organization_id)),
+              options_from_collection_for_select(Organization.by_user(current_user), 'id', 'full_name', @event_organization_ids),
               multiple: true, class: 'form-control select2-input'
             %small.form-text.text-muted Lasu malplena se la evento ne apartenas al organizo
 

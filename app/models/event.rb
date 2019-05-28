@@ -3,9 +3,9 @@
 # Eventaj dateno
 class Event < ApplicationRecord
   is_impressionable # Por kalkuli la paĝvizitojn
-  has_paper_trail versions: {
-    scope: -> { order("created_at desc") }
-  }
+  has_paper_trail versions: { scope: -> { order("created_at desc") } },
+                  ignore: [:id]
+
   acts_as_taggable
 
   has_many_attached :uploads

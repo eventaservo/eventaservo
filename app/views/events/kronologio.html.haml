@@ -6,13 +6,23 @@
   %p Versioj: #{@evento.versions.count}
 
   - @evento.versions.order(id: :desc).each do |version|
-    .box-white
+    .box-white.small
       %p
         = User.find(version.whodunnit).name if version.whodunnit
         en #{format_date version.created_at} ŝanĝis:
       - version.changeset.except(:updated_at).map do |item, changes|
-        %p
-          #{t item}:
-          = raw Diffy::Diff.new(changes[0], changes[1]).to_s(:html)
+        .row
+          .col-2 #{t item}:
+          .col-10
+            - old = changes[0]
+            - new = changes[1]
+            - if item == 'user_id'
+              - old = User.find(old).name if old
+              - new = User.find(new).name
+            - if item == 'country_id'
+              - old = Country.find(old).name if old
+              - new = Country.find(new).name
+
+            = raw Diffy::Diff.new(old, new).to_s(:html)
 
   = link_to 'Revidi la eventon', event_url(@evento.code)

@@ -25,10 +25,13 @@ class EventsController < ApplicationController
 
   def new
     if params[:from_event].present?
-      attributes = Event.find(params[:from_event]).attributes.except('code', 'user_id')
+      origin = Event.find(params[:from_event])
+      attributes = origin.attributes.except('code', 'user_id')
       @event = Event.new(attributes)
       @event.date_start = attributes['date_start'].in_time_zone(attributes['time_zone'])
       @event.date_end = attributes['date_end'].in_time_zone(attributes['time_zone'])
+      @event.tag_list = origin.tag_list
+      @event_organization_ids = origin.organizations.pluck(:id)
     else
       @event = Event.new
       @event.city = current_user.city if current_user.city?
@@ -39,6 +42,7 @@ class EventsController < ApplicationController
   end
 
   def edit
+    @event_organization_ids = @event.organizations.pluck(:organization_id)
   end
 
   def create
