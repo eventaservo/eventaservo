@@ -93,6 +93,16 @@
                 = form.label :country_id, 'Lando'
                 = form.select(:country_id, options_from_collection_for_select(Country.not_online, 'id', 'name', @event.country_id), {}, class: 'form-control select2-input')
 
+          .row
+            .col-lg-12
+              .form-group
+                = form.label :koordinatoj, 'Koordinatoj'
+                %span#maperaro
+                #elektomapo
+                %input.geoloc.form-control.geoloc
+                = form.text_field :latitude, id: 'koordinatoj_lat', class: 'form-control', required: true
+                = form.text_field :longitude, id: 'koordinatoj_lon', class: 'form-control', required: true
+
         - if current_user.admin?
           .text-divider Administrantoj
           .form-group
@@ -147,3 +157,47 @@
     if($('#event_tags').find('.active').length == 0)
       alert 'Vi devas elekti almenaŭ unu specon'
       return false
+
+:javascript
+
+  var locpicker = $('.geoloc').leafletLocationPicker({
+    alwaysOpen: true,
+    mapContainer: "#elektomapo",
+    height: 350,
+    optsMap : {
+      zoom: 11,
+      center: L.latLng([120,0]),
+    }
+  }).on('changeLocation', function(e){
+    $(this).siblings('#koordinatoj_lat').val( parseFloat($('.geoloc').val().split(",")[0]));
+    $(this).siblings('#koordinatoj_lon').val( parseFloat($('.geoloc').val().split(",")[1]));
+  });
+
+  geofields = $('#event_address, #event_city, #event_country_id')
+  geofields.on('change', function () {
+      var geoString = "";
+      if($('#event_address').val()) geoString += $('#event_address').val()+", ";
+      if($('#event_city').val()) geoString += $('#event_city').val()+", ";
+      if($('#select2-event_country_id-container').text()) geoString += $('#select2-event_country_id-container').text();
+      var geo_query = encodeURI(geoString);
+      $.getJSON("https://nominatim.openstreetmap.org/search/?format=json&q="+geo_query,
+          function(data){
+            console.log(data);
+            console.log(geo_query);
+            console.log(locpicker);
+            if (data.length >= 1 && data[0].lat && data[0].lon) {
+                $(".geoloc")[0].setLocation(L.latLng(data[0].lat,data[0].lon, 4));
+                $(".geoloc")[0].map.setView([data[0].lat,data[0].lon], 8);
+                $('#koordinatoj_lat').val(data[0].lat);
+                $('#koordinatoj_lon').val(data[0].lon);
+                $("#maperaro").text("")
+                $("#elektomapo").css("box-shadow","");
+            } else {
+                $("#maperaro").text("* Ne trovis la lokon aŭtomatike, bonvole mem elektu la ejon surmape.");
+                $("#maperaro").css("color","red");
+                $("#elektomapo").css("box-shadow","0 0 3px 3px rgba(255,0,0,.5)");
+            }
+          }
+      );
+  });
+  $('.geoloc, #koordinatoj_lat, #koordinatoj_lon').hide();

@@ -29,6 +29,7 @@
 //= require leaflet.markercluster
 //= require trix
 //= require_tree .
+//= require leaflet-locationpicker
 
 // Tiu kono korektas la problemon de Select2 kiam ĝi estas ene de 'Modal'
 $.fn.modal.Constructor.prototype._enforceFocus = function () {};
