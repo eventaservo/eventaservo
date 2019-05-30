@@ -27,12 +27,14 @@ class EventMailer < ApplicationMailer
 
   def notify_admins(event_id, ghisdatigho: false)
     @event = Event.find(event_id)
-    subject = if ghisdatigho
-                "[ES estraro] Evento ĝisdatiĝita: #{@event.title}"
-              else
-                "[ES estraro] Nova evento: #{@event.title}"
-              end
-    mail(to: User.admins.pluck(:email), subject: subject)
+    if ghisdatigho
+      subject = "[ES estraro] Ĝisdatiĝo: #{@event.title}"
+      to = 'yves.nevelsteen@gmail.com'
+    else
+      subject = "[ES estraro] Nova evento: #{@event.title}"
+      to = Constants::ADMIN_EMAILS
+    end
+    mail(to: to, subject: subject)
   end
 
   def self.send_weekly_summary_to_users

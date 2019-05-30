@@ -41,7 +41,7 @@ module OrganizationsHelper
   def display_event_days_left(event)
     days = event.tagoj[:restanta]
     case days
-    when 0
+    when (Float::INFINITY * -1)..0
       "| finiĝos hodiaŭ"
     when 1
       "| finiĝos morgaŭ"

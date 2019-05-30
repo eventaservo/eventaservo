@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Constants
-  VERSIO = '2.1.2 (beta)'
+  VERSIO = '2.1.3 (beta)'
 
   ADMIN_EMAILS = ['kontakto@eventaservo.org', 'yves.nevelsteen@gmail.com']
 

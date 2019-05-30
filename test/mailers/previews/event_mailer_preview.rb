@@ -21,7 +21,7 @@ class EventMailerPreview < ActionMailer::Preview
     EventMailer.kontakti_organizanton(Event.all.sample.code, params)
   end
 
-  def sciigas_admins
+  def informas_adm_pri_novaj_eventoj
     EventMailer.notify_admins(Event.order('RANDOM()').first.id)
   end
 
