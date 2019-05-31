@@ -3,7 +3,7 @@
 module Constants
   VERSIO = '2.1.4 (beta)'
 
-  ADMIN_EMAILS = ['kontakto@eventaservo.org', 'yves.nevelsteen@gmail.com']
+  ADMIN_EMAILS = %w(kontakto@eventaservo.org yves.nevelsteen@gmail.com)
 
-  TAGS = ['Kongreso', 'Kunveno', 'Kurso', 'Varbado', 'Alia']
+  TAGS = %w(Kongreso Kunveno Kurso Varbado Alia)
 end
