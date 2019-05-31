@@ -3,7 +3,7 @@
   %meta{content: request.original_url, property: 'og:url'}
   %meta{content: 'article', property: 'og:type'}
   %meta{content: @event.title, property: 'og:title'}
-  %meta{content: "#{format_date(@event.date_start)} (#{@event.city} - #{@event.country.name}) | #{@event.description}", property: 'og:description'}
+  %meta{content: "#{event_date(@event)} (#{@event.city} - #{@event.country.name}) | #{@event.description}", property: 'og:description'}
   - if @event.uploads.attached?
     - @event.uploads.each do |upload|
       - if upload.blob.image?
@@ -12,9 +12,3 @@
         %meta{content: upload.content_type, property: 'og:image:type' }
         %meta{content: upload.blob.metadata[:width], property: 'og:image:width' }
         %meta{content: upload.blob.metadata[:height], property: 'og:image:height' }
-  - else
-    %meta{content: image_url('eventa_servo_logo.png'), property: 'og:image'}
-    %meta{content: image_url('eventa_servo_logo.png'), property: 'og:image:secure_url'}
-    %meta{content: 'Eventa Servo', property: 'og:image:alt'}
-    %meta{content: '600', property: 'og:image:height'}
-    %meta{content: '600', property: 'og:image:width'}
