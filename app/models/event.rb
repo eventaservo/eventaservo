@@ -3,7 +3,7 @@
 # Eventaj dateno
 class Event < ApplicationRecord
   is_impressionable # Por kalkuli la paĝvizitojn
-  has_paper_trail versions: { scope: -> { order("created_at desc") } },
+  has_paper_trail versions: { scope: -> { order('created_at desc') } },
                   ignore: [:id]
 
   acts_as_taggable
@@ -37,8 +37,10 @@ class Event < ApplicationRecord
   scope :pasintaj, -> { where('date_end < ?', Time.zone.yesterday.end_of_day) }
   scope :today, -> { by_dates(from: Time.zone.today.beginning_of_day, to: Time.zone.today.end_of_day) }
   scope :not_today, -> { by_not_dates(from: Time.zone.today.beginning_of_day, to: Time.zone.today.end_of_day) }
-  scope :in_7days, -> { where('date_start BETWEEN ? and ?', (Time.zone.today + 1.day).beginning_of_day, (Time.zone.today + 7.days).end_of_day) }
-  scope :in_30days, -> { where('date_start BETWEEN ? and ?', (Time.zone.today + 7.days).beginning_of_day, (Time.zone.today + 30.days).end_of_day) }
+  scope :in_7days, -> { where('date_start BETWEEN ? and ?', (Time.zone.today + 1.day).beginning_of_day,
+                              (Time.zone.today + 7.days).end_of_day) }
+  scope :in_30days, -> { where('date_start BETWEEN ? and ?', (Time.zone.today + 7.days).beginning_of_day,
+                               (Time.zone.today + 30.days).end_of_day) }
   scope :after_30days, -> { where('date_start > ?', (Time.zone.today + 30.days).end_of_day) }
   scope :lau_lando, ->(lando) { joins(:country).where(country: lando) }
   scope :lau_organizo, ->(o) { joins(:organizations).where('LOWER(organizations.short_name) = ?', o.downcase) }
@@ -52,8 +54,8 @@ class Event < ApplicationRecord
   scope :online, -> { where(online: true) }
   scope :not_online, -> { where(online: false) }
   scope :for_webcal, -> { where('date_start >= ? OR date_end >= ?', Time.zone.today - 6.months, Time.zone.today) }
-  scope :unutagaj, -> { where("((to_timestamp(date_end::text, 'YYYY-MM-DD HH24:MI:SS')) AT TIME ZONE(time_zone))::timestamp::date = ((to_timestamp(date_start::text, 'YYYY-MM-DD HH24:MI:SS')) AT TIME ZONE(time_zone))::timestamp::date") }
-  scope :plurtagaj, -> { where("((to_timestamp(date_end::text, 'YYYY-MM-DD HH24:MI:SS')) AT TIME ZONE(time_zone))::timestamp::date > ((to_timestamp(date_start::text, 'YYYY-MM-DD HH24:MI:SS')) AT TIME ZONE(time_zone))::timestamp::date") }
+  scope :unutagaj, -> { where('((to_timestamp(date_end::text, \'YYYY-MM-DD HH24:MI:SS\')) AT TIME ZONE(time_zone))::timestamp::date = ((to_timestamp(date_start::text, \'YYYY-MM-DD HH24:MI:SS\')) AT TIME ZONE(time_zone))::timestamp::date') }
+  scope :plurtagaj, -> { where('((to_timestamp(date_end::text, \'YYYY-MM-DD HH24:MI:SS\')) AT TIME ZONE(time_zone))::timestamp::date > ((to_timestamp(date_start::text, \'YYYY-MM-DD HH24:MI:SS\')) AT TIME ZONE(time_zone))::timestamp::date') }
 
   def self.by_code(code)
     find_by(code: code)
@@ -185,7 +187,7 @@ class Event < ApplicationRecord
     parcial = (Time.zone.today - komenca_tago.to_date).to_i + 1
     restanta = total - parcial
     percent = (parcial.to_f / total.to_f).to_f * 100
-    {total: total, parcial: parcial, restanta: restanta, percent: percent.to_i}
+    { total: total, parcial: parcial, restanta: restanta, percent: percent.to_i }
   end
 
   private

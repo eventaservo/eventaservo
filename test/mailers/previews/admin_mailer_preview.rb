@@ -5,5 +5,4 @@ class AdminMailerPreview < ActionMailer::Preview
   def informas_admin_pri_teksto
     AdminMailer.informas('PROV-TEKSTO al Administratoj')
   end
-
 end

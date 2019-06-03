@@ -33,7 +33,7 @@ module OrganizationsHelper
   def display_event_tags(event)
     content_tag(:div, class: 'event-tags') do
       event.tags.order(:name).each do |t|
-       concat content_tag(:span, t, class: 'badge badge-pill badge-info mr-1')
+        concat content_tag(:span, t, class: 'badge badge-pill badge-info mr-1')
       end
     end
   end
@@ -42,9 +42,9 @@ module OrganizationsHelper
     days = event.tagoj[:restanta]
     case days
     when (Float::INFINITY * -1)..0
-      "| finiĝos hodiaŭ"
+      '| finiĝos hodiaŭ'
     when 1
-      "| finiĝos morgaŭ"
+      '| finiĝos morgaŭ'
     else
       "| finiĝos en #{days} tagoj"
     end

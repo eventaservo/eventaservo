@@ -33,12 +33,12 @@ class ActiveSupport::TestCase
   Geocoder::Lookup::Test.add_stub(
       'Ĵoan-Pesoo, BR', [
       {
-          coordinates: [-7.11, -34.86],
-          address: 'Centro',
-          state: 'Paraíba',
-          state_code: 'PB',
-          country: 'Brazil',
-          country_code: 'BR'
+        coordinates: [-7.11, -34.86],
+        address: 'Centro',
+        state: 'Paraíba',
+        state_code: 'PB',
+        country: 'Brazil',
+        country_code: 'BR'
       }
   ]
   )

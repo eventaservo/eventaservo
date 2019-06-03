@@ -121,6 +121,6 @@ group :test do
   gem 'factory_bot_rails'
   gem 'minitest-reporters'
   gem 'selenium-webdriver'
-  gem 'webdrivers'
   gem 'simplecov'
+  gem 'webdrivers'
 end
