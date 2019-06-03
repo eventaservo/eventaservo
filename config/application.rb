@@ -17,7 +17,7 @@ module Eventaservo
     # the framework and any gems in your application.
 
     config.time_zone = 'UTC'
-    config.middleware.use Rack::Attack
+    # config.middleware.use Rack::Attack
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
