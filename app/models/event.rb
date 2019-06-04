@@ -37,10 +37,22 @@ class Event < ApplicationRecord
   scope :pasintaj, -> { where('date_end < ?', Time.zone.yesterday.end_of_day) }
   scope :today, -> { by_dates(from: Time.zone.today.beginning_of_day, to: Time.zone.today.end_of_day) }
   scope :not_today, -> { by_not_dates(from: Time.zone.today.beginning_of_day, to: Time.zone.today.end_of_day) }
-  scope :in_7days, -> { where('date_start BETWEEN ? and ?', (Time.zone.today + 1.day).beginning_of_day,
-                              (Time.zone.today + 7.days).end_of_day) }
-  scope :in_30days, -> { where('date_start BETWEEN ? and ?', (Time.zone.today + 7.days).beginning_of_day,
-                               (Time.zone.today + 30.days).end_of_day) }
+  scope :in_7days,
+        lambda {
+          where(
+            'date_start BETWEEN ? and ?',
+            (Time.zone.today + 1.day).beginning_of_day,
+            (Time.zone.today + 7.days).end_of_day
+          )
+        }
+  scope :in_30days,
+        lambda {
+          where(
+            'date_start BETWEEN ? and ?',
+            (Time.zone.today + 7.days).beginning_of_day,
+            (Time.zone.today + 30.days).end_of_day
+          )
+        }
   scope :after_30days, -> { where('date_start > ?', (Time.zone.today + 30.days).end_of_day) }
   scope :lau_lando, ->(lando) { joins(:country).where(country: lando) }
   scope :lau_organizo, ->(o) { joins(:organizations).where('LOWER(organizations.short_name) = ?', o.downcase) }

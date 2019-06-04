@@ -12,7 +12,7 @@ class HomeController < ApplicationController
 
     @continents    = @events.count_by_continents
     @today_events  = @events.today.includes(:country).includes(:organizations).includes(:tags)
-    @events        = @events.not_today.includes([:country, :organizations])
+    @events        = @events.not_today.includes(%i[country organizations])
   end
 
   def changelog
@@ -96,12 +96,12 @@ class HomeController < ApplicationController
     end
 
     def access_from_server
-      request.headers['SERVER_NAME'].in? ['devel.eventaservo.org', 'staging.eventaservo.org', 'eventaservo.org']
+      request.headers['SERVER_NAME'].in? %w[devel.eventaservo.org staging.eventaservo.org eventaservo.org]
     end
 
     def definas_kuketojn
-      unless cookies[:vidmaniero].in? ['kartoj', 'kalendaro', 'mapo']
-        cookies[:vidmaniero] = { value: 'kartoj', expires: 1.year, secure: true } # Normala vidmaniero
-      end
+      return if cookies[:vidmaniero].in? %w[kartoj kalendaro mapo]
+
+      cookies[:vidmaniero] = { value: 'kartoj', expires: 1.year, secure: true } # Normala vidmaniero
     end
 end
