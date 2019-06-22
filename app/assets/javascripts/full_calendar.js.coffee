@@ -10,26 +10,35 @@ eventCalendar = ->
         s: $('#full_calendar').data('s')
         username: $('#full_calendar').data('username')
     eventColor: 'green'
-    contentHeight: 500
-    fixedWeekCount: false
-    firstDay: 1
-    displayEventTime: false
+    timeFormat: 'H:mm'
+    plugins: [ 'list' ]
+    defaultView: 'listo'
+    contentHeight: '100%'
+    displayEventTime: true
     header:
       left: 'today'
       center: 'title'
-      right: 'prev,next'
-    titleFormat: 'MMMM YYYY'
+      right: 'listo,monato prev,next'
     buttonText:
       today: 'hodiaŭ'
-      month: 'monato'
-      week: 'semajno'
-      day: 'tago'
-      list: 'listo'
-    monthNames: ['Januaro', 'Februaro', 'Marto', 'Aprilo', 'Majo', 'Junio', 'Julio', 'Aŭgusto', 'Septembro', 'Oktobro', 'Novembro', 'Decembro']
+    titleFormat: 'D MMMM YYYY'
+    listDayFormat: 'dddd, D MMMM YYYY'
+    listDayAltFormat: false
+    noEventsMessage: 'Eventoj ne okazas'
+    monthNames: ['januaro', 'februaro', 'marto', 'aprilo', 'majo', 'junio', 'julio', 'aŭgusto', 'septembro', 'oktobro', 'novembro', 'decembro']
     dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Ĵaŭ', 'Ven', 'Sab']
     dayNames: ['Dimanĉo', 'Lundo', 'Mardo', 'Merkredo', 'Ĵaŭdo', 'Vendredo', 'Sabato']
     views:
-      month:
+      today: 'hodiaŭ'
+      listo:
+        type: 'list'
+        duration:
+          days: 7
+        buttonText: 'Listo'
+        allDayText: 'tuttaga'
+      monato:
+        type: 'month'
+        buttonText: 'Monato'
         eventLimit: 4
         eventLimitText: 'pli'
   }
@@ -37,6 +46,6 @@ eventCalendar = ->
 clearCalendar = ->
   $('#full_calendar').html ''
 
-# Por Turbolinks
+# Rilate Turbolinks
 $(document).on 'turbolinks:load', eventCalendar
 $(document).on 'turbolinks:before-cache', clearCalendar
