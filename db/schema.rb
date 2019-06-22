@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_18_185135) do
+ActiveRecord::Schema.define(version: 2019_06_21_102820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,12 +38,25 @@ ActiveRecord::Schema.define(version: 2019_05_18_185135) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "analytics", force: :cascade do |t|
+    t.string "browser"
+    t.string "version"
+    t.string "platform"
+    t.string "ip"
+    t.string "country"
+    t.string "path"
+    t.string "vidmaniero"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "countries", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "code"
     t.string "continent"
+    t.index ["code"], name: "index_countries_on_code"
     t.index ["continent"], name: "index_countries_on_continent"
     t.index ["name", "continent"], name: "index_countries_on_name_and_continent"
     t.index ["name"], name: "index_countries_on_name"
