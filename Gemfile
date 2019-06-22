@@ -19,7 +19,7 @@ gem 'uglifier', '>= 1.3.0'
 
 gem 'bootstrap', '>= 4.3.1'
 gem 'font-awesome-sass', '~> 5'
-gem 'haml', '~> 5.0', '>= 5.0.4'
+gem 'haml', '~> 5'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
 gem 'mini_racer'
@@ -42,7 +42,7 @@ gem 'flag-icons-rails'
 gem 'social-share-button', git: 'https://github.com/shayani/social-share-button'
 
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.2'
+gem 'coffee-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -66,6 +66,7 @@ gem 'rack-attack'
 gem 'rack-cors', require: 'rack/cors'
 
 gem 'acts-as-taggable-on', '~> 6.0'
+gem 'browser'
 gem 'diffy'
 gem 'geocoder'
 gem 'highcharts-rails', '~> 6.0'
@@ -95,7 +96,7 @@ end
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'web-console', '>= 3.3.0'
+  gem 'web-console'
 
   gem 'better_errors'
   gem 'binding_of_caller'
