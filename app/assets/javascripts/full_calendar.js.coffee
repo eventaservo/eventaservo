@@ -13,7 +13,7 @@ eventCalendar = ->
     timeFormat: 'H:mm'
     plugins: [ 'list' ]
     defaultView: 'listo'
-    contentHeight: '100%'
+    contentHeight: 'auto'
     displayEventTime: true
     header:
       left: 'today'
