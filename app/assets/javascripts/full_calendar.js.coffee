@@ -1,4 +1,4 @@
-eventCalendar = ->
+$ ->
   $('#full_calendar').fullCalendar {
     events:
       url: '/events.json'
@@ -39,13 +39,6 @@ eventCalendar = ->
       monato:
         type: 'month'
         buttonText: 'Monato'
-        eventLimit: 4
+        eventLimit: 5
         eventLimitText: 'pli'
   }
-
-clearCalendar = ->
-  $('#full_calendar').html ''
-
-# Rilate Turbolinks
-$(document).on 'turbolinks:load', eventCalendar
-$(document).on 'turbolinks:before-cache', clearCalendar
