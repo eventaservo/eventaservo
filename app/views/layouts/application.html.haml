@@ -49,4 +49,5 @@
     %br
     -#= render 'layouts/cookies_bar' unless cookies[:akceptas_ga].present?
     = render partial: 'layouts/footer'
-- AnalyticsJob.perform_later(browser.name, browser.version, browser.platform.name, request.remote_ip, request.original_fullpath, cookies[:vidmaniero]) unless browser.bot?
+
+= render partial: 'layouts/analizo'
