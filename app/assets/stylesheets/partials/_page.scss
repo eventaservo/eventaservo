@@ -25,11 +25,6 @@ body {
   color: white;
 }
 
-.turbolinks-progress-bar {
-  height           : 10px;
-  background-color : white;
-}
-
 .error-handling {
   @extend .alert;
   @extend .alert-warning;
