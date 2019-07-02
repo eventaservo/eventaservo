@@ -29,7 +29,7 @@ epo:
         subject: "Password Changed"
     omniauth_callbacks:
       failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
-      success: "Sukecesa ensaluto per %{kind}."
+      success: "Sukcesa ensaluto per %{kind}."
     passwords:
       no_token: "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided."
       send_instructions: "Vi ricevos retmesaĝon kun instrukcioj por rekrei vian pasvorton"
