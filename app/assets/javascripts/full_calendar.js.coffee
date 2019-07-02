@@ -12,13 +12,13 @@ eventCalendar = ->
     eventColor: 'green'
     timeFormat: 'H:mm'
     plugins: [ 'list' ]
-    defaultView: 'listo'
+    defaultView: 'monato'
     contentHeight: 'auto'
     displayEventTime: true
     header:
       left: 'today'
       center: 'title'
-      right: 'listo,monato prev,next'
+      right: 'semajno,monato,listo prev,next'
     buttonText:
       today: 'hodiaŭ'
     titleFormat: 'D MMMM YYYY'
@@ -36,11 +36,19 @@ eventCalendar = ->
           days: 7
         buttonText: 'Listo'
         allDayText: 'tuttaga'
+      semajno:
+        buttonText: '7 tagoj'
+        type: 'agenda'
+        dayCount: 7
       monato:
         type: 'month'
         buttonText: 'Monato'
         eventLimit: 4
         eventLimitText: 'pli'
+    eventClick: (e) ->
+      if e.url
+        window.open e.url, '_blank'
+        return false
   }
 
 clearCalendar = ->
