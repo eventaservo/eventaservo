@@ -40,11 +40,12 @@ $ ->
         buttonText: '7 tagoj'
         type: 'agenda'
         dayCount: 7
+        scrollTime: '07:00'
       monato:
         type: 'month'
         buttonText: 'Monato'
         eventLimit: 5
-        eventLimitText: 'pli'
+        eventLimitText: 'pliaj'
     eventClick: (e) ->
       if e.url
         window.open e.url, '_blank'

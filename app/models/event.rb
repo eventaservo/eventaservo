@@ -184,6 +184,10 @@ class Event < ApplicationRecord
     !multtaga?
   end
 
+  def tuttaga?
+    (fina_dato == komenca_dato) || multtaga?
+  end
+
   def dst?
     date_start.in_time_zone(time_zone).dst?
   end

@@ -9,7 +9,8 @@ json.array!(@events) do |event|
       "[#{event.country.code.upcase} - #{event.city}] #{event.title}"
     end
   json.title title
-  json.allDay event.samtaga? ? false : true
+  # json.allDay event.samtaga? ? false : true
+  json.allDay event.tuttaga?
   json.description "(#{event.city} - #{event.country.name}) #{event.description}"
   json.start event.komenca_dato
   json.end event.fina_dato
