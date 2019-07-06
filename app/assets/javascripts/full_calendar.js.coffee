@@ -18,7 +18,7 @@ $ ->
     header:
       left: 'today'
       center: 'title'
-      right: 'semajno,monato,listo prev,next'
+      right: 'monato,listo prev,next'
     buttonText:
       today: 'hodiaŭ'
     titleFormat: 'D MMMM YYYY'
@@ -36,11 +36,6 @@ $ ->
           days: 7
         buttonText: 'Listo'
         allDayText: 'tuttaga'
-      semajno:
-        buttonText: '7 tagoj'
-        type: 'agenda'
-        dayCount: 7
-        scrollTime: '07:00'
       monato:
         type: 'month'
         buttonText: 'Monato'
