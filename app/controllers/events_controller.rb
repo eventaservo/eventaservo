@@ -97,6 +97,11 @@ class EventsController < ApplicationController
     @countries     = @events.count_by_country
     @today_events  = @events.today.includes(:country)
     @events        = @events.not_today.includes(:country)
+
+    if cookies[:vidmaniero] == 'kartoj' # Paghado
+      @kvanto_venontaj_eventoj = @events.count
+      @pagy, @events = pagy(@events.not_today.includes(%i[country organizations]))
+    end
   end
 
   def by_country
@@ -106,6 +111,11 @@ class EventsController < ApplicationController
     @cities        = @events.by_country_id(@country.id).count_by_cities
     @today_events  = @events.today.includes(:country).by_country_id(@country.id)
     @events        = @events.not_today.includes(:country).by_country_id(@country.id)
+
+    if cookies[:vidmaniero] == 'kartoj' # Paghado
+      @kvanto_venontaj_eventoj = @events.count
+      @pagy, @events = pagy(@events.not_today.includes(%i[country organizations]))
+    end
   end
 
   # Listigas la eventoj laŭ urboj
@@ -115,6 +125,11 @@ class EventsController < ApplicationController
     @future_events = Event.by_city(params[:city_name]).venontaj
     @today_events  = @events.today.by_city(params[:city_name])
     @events        = @events.not_today.by_city(params[:city_name])
+
+    if cookies[:vidmaniero] == 'kartoj' # Paghado
+      @kvanto_venontaj_eventoj = @events.count
+      @pagy, @events = pagy(@events.not_today.includes(%i[country organizations]))
+    end
   end
 
   def by_username

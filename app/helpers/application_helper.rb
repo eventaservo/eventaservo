@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  include Pagy::Frontend
+
   def page_title(title, subtext = nil)
     content_tag(:h2, class: 'text-center') do
       concat title
