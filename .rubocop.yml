@@ -41,3 +41,6 @@ Metrics/LineLength:
 
 Layout/IndentationConsistency:
   EnforcedStyle: indented_internal_methods
+
+Layout/MultilineMethodArgumentLineBreaks:
+  Enabled: false

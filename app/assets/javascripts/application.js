@@ -24,6 +24,7 @@
 //= require direct_uploads
 //= require social-share-button
 //= require highcharts
+//= require highcharts/modules/drilldown
 //= require leaflet
 //= require leaflet.markercluster
 //= require trix

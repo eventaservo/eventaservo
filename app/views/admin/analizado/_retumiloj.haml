@@ -1,0 +1,32 @@
+-# Laŭ retumilo
+- retumiloj = []
+- Analytic.select(:browser, 'count(id)').group(:browser).order('count DESC').each do |r|
+  - retumiloj << { name: r.browser, y: r.count, drilldown: r.browser }
+
+-# Laŭ retumila versio
+- versioj = []
+- Analytic.select(:browser, :version, 'count(id)').group(:browser, :version).order(:browser, :version).group_by(&:browser).each do |b, versions|
+  - data = []
+  - versions.each do |v|
+    - data << ["v#{v.version}", v.count]
+  - versioj << { name: b, id: b, data: data }
+
+#retumiloj
+
+:coffee
+  Highcharts.chart 'retumiloj',
+    chart: type: 'pie'
+    title: text: 'Laŭ retumiloj'
+    subtitle: text: 'Alklaku segmenton por vidi versiojn'
+    plotOptions: series: dataLabels:
+      enabled: true
+      format: '{point.name}: {point.y}'
+    tooltip:
+      headerFormat: '<span style="font-size:11px">{series.name}</span><br>'
+      pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b><br/>'
+    series: [ {
+      name: 'Browsers'
+      colorByPoint: true
+      data: #{raw retumiloj.to_json}
+    } ]
+    drilldown: series: #{raw versioj.to_json}
