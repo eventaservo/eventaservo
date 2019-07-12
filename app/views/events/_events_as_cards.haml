@@ -9,4 +9,4 @@
         = render partial: 'events/card', locals: { event: event }
 
 - if @pagy.pages > 1
-  .d-flex.justify-content-center= raw pagy_bootstrap_nav(@pagy)
+  .d-flex.justify-content-center.small= raw pagy_bootstrap_nav(@pagy)

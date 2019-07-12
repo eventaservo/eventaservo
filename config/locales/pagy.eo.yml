@@ -12,9 +12,9 @@ eo:
 
     info:
       no_items: "No %{item_name} found"
-      single_page: "Displaying <b>%{count}</b> %{item_name}"
-      multiple_pages: "Displaying %{item_name} <b>%{from}-%{to}</b> of <b>%{count}</b> in total"
+      single_page: "Montrante <b>%{count}</b> eventojn"
+      multiple_pages: "Montrante <b>%{from}-%{to}</b> el <b>%{count}</b> eventoj"
 
-    combo_nav_js: "Page %{page_input} of %{pages}"
+    combo_nav_js: "Paĝo %{page_input} de %{pages}"
 
     items_selector_js: "Show %{items_input} %{item_name} per page"

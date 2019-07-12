@@ -98,10 +98,7 @@ class EventsController < ApplicationController
     @today_events  = @events.today.includes(:country)
     @events        = @events.not_today.includes(:country)
 
-    if cookies[:vidmaniero] == 'kartoj' # Paghado
-      @kvanto_venontaj_eventoj = @events.count
-      @pagy, @events = pagy(@events.not_today.includes(%i[country organizations]))
-    end
+    kreas_paghadon_por_karta_vidmaniero
   end
 
   def by_country
@@ -112,10 +109,7 @@ class EventsController < ApplicationController
     @today_events  = @events.today.includes(:country).by_country_id(@country.id)
     @events        = @events.not_today.includes(:country).by_country_id(@country.id)
 
-    if cookies[:vidmaniero] == 'kartoj' # Paghado
-      @kvanto_venontaj_eventoj = @events.count
-      @pagy, @events = pagy(@events.not_today.includes(%i[country organizations]))
-    end
+    kreas_paghadon_por_karta_vidmaniero
   end
 
   # Listigas la eventoj laŭ urboj
@@ -126,10 +120,7 @@ class EventsController < ApplicationController
     @today_events  = @events.today.by_city(params[:city_name])
     @events        = @events.not_today.by_city(params[:city_name])
 
-    if cookies[:vidmaniero] == 'kartoj' # Paghado
-      @kvanto_venontaj_eventoj = @events.count
-      @pagy, @events = pagy(@events.not_today.includes(%i[country organizations]))
-    end
+    kreas_paghadon_por_karta_vidmaniero
   end
 
   def by_username
@@ -151,7 +142,17 @@ class EventsController < ApplicationController
 
   private
 
-    # Use callbacks to share common setup or constraints between actions.
+    # La karta vidmaniero uzas paĝadon. La aliaj ne. Tial necesas krei la variablojn
+    # +@kvanto_venontaj_eventoj+ kaj +@pagy+
+    #
+    def kreas_paghadon_por_karta_vidmaniero
+      if cookies[:vidmaniero] == 'kartoj' # Paghado
+        @kvanto_venontaj_eventoj = @events.count
+        @pagy, @events           = pagy(@events.not_today.includes(%i[country organizations]))
+      end
+    end
+
+  # Use callbacks to share common setup or constraints between actions.
     def set_event
       @event = Event.by_code(params[:code])
       redirect_to root_path, flash: { error: 'Evento ne ekzistas' } if @event.nil?
