@@ -1,0 +1,23 @@
+:ruby
+  # Laŭ tagoj
+  tagoj = Analytic.select('count(distinct ip), created_at::date as tago').group(:tago).order(:tago)
+
+#tagoj
+
+:coffee
+  Highcharts.chart 'tagoj',
+    chart: type: 'spline'
+    title: text: 'Laŭ tagoj'
+    xAxis:
+      categories: #{raw tagoj.map { |k, _v| k.tago.to_json }}
+      title: enabled: false
+    yAxis: title: text: 'Vizitantoj'
+    tooltip:
+      pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y:,.0f}</b><br/>'
+      shared: true
+    plotOptions: spline:
+      marker: enabled: false
+    series: [{
+      name: 'Vizitantoj',
+      data: #{raw tagoj.map { |k, _v| k.count }}
+    }]

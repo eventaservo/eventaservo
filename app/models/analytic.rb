@@ -2,6 +2,8 @@
 
 class Analytic < ApplicationRecord
 
+  scope :lau_tago, ->(tago) { where(created_at: tago.beginning_of_day..tago.end_of_day) }
+
   def self.main_paths
     where("path = '/' OR lower(path) SIMILAR TO '(/ameriko%|/azio%|/e%c5%adropo%|/afriko%|/oceanio%|/reta%)'")
   end
