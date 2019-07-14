@@ -10,15 +10,33 @@
 
       = organization_logo(@organizo, size: :large)
 
-      %p.text-center
-        = link_to "Listigi venontajn eventojn de #{@organizo.short_name}", root_url(o: @organizo.short_name)
-
       - if user_signed_in? && current_user.administranto?(@organizo)
         .buttons-footer
           = link_to 'Redakti organizon', edit_organization_url(@organizo.short_name), class: 'btn btn-sm btn-outline-primary'
 
+    .box-white
+      .lead Eventoj
+      %p.text-right.small
+        = link_to "Listigi venontajn eventojn de #{@organizo.short_name} en la ĉefa paĝo", root_url(o: @organizo.short_name)
+
+      - if @eventoj.venontaj.any?
+        .text-divider Venontaj eventoj
+        - @eventoj.venontaj.order(:date_start).each do |e|
+          = link_to event_path(e.code), class: 'item-row small' do
+            .col-2 #{event_flag e} #{e.city}
+            .col-3= event_date e
+            .col #{e.title}
+
+      %br
+
+      - if @eventoj.pasintaj.any?
+        .text-divider Pasintaj eventoj
+        - @eventoj.pasintaj.order(date_start: :desc).each do |e|
+          = link_to event_path(e.code), class: 'item-row small' do
+            .col-2 #{event_flag e} #{e.city}
+            .col-3= event_date e
+            .col #{e.title}
   .col-lg-4
-    = render partial: 'informoj'
     = render partial: 'uzantoj'
 
 

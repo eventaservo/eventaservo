@@ -11,6 +11,7 @@ class OrganizationsController < ApplicationController
 
   # Montras organizajn informojn
   def show
+    @eventoj = Event.lau_organizo(params[:short_name])
   end
 
   def new
