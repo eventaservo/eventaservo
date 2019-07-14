@@ -146,13 +146,13 @@ class EventsController < ApplicationController
     # +@kvanto_venontaj_eventoj+ kaj +@pagy+
     #
     def kreas_paghadon_por_karta_vidmaniero
-      if cookies[:vidmaniero] == 'kartoj' # Paghado
-        @kvanto_venontaj_eventoj = @events.count
-        @pagy, @events           = pagy(@events.not_today.includes(%i[country organizations]))
-      end
+      return unless cookies[:vidmaniero] == 'kartoj'
+
+      @kvanto_venontaj_eventoj = @events.count
+      @pagy, @events           = pagy(@events.not_today.includes(%i[country organizations]))
     end
 
-  # Use callbacks to share common setup or constraints between actions.
+    # Use callbacks to share common setup or constraints between actions.
     def set_event
       @event = Event.by_code(params[:code])
       redirect_to root_path, flash: { error: 'Evento ne ekzistas' } if @event.nil?
