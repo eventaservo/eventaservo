@@ -1,4 +1,4 @@
-%h5.text-center.font-weight-bold= pluralize(events.count, 'venonta', 'venontaj') if events.count > 0
+%h5.text-center.font-weight-bold= pluralize(@kvanto_venontaj_eventoj, 'venonta', 'venontaj') if events.count > 0
 
 - events.grouped_by_months.map do |date, events|
   %br
@@ -7,3 +7,6 @@
     - events.each do |event|
       .col-12.col-md-4
         = render partial: 'events/card', locals: { event: event }
+
+- if @pagy.pages > 1
+  .d-flex.justify-content-center.small= raw pagy_bootstrap_nav(@pagy)
