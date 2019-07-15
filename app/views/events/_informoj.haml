@@ -17,5 +17,9 @@
 
     %p
     .text-divider Administranto
-    = link_to display_user(@event.user), events_by_username_path(@event.user.username), class: 'btn btn-sm btn-outline-link'
+    - if @event.organizations.any?
+      .text-center{style: 'font-size: 1.3em;'}= display_organizations_for_event(@event)
+    - else
+      = link_to display_user(@event.user), events_by_username_path(@event.user.username), class: 'btn btn-sm btn-outline-link'
+
     = render partial: 'alshutilo'

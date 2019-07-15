@@ -5,7 +5,7 @@ module OrganizationsHelper
     return unless organization.logo.attached?
 
     size = case size
-           when :large then '128'
+           when :large then '128x128'
            when :medium then '48x48'
            else '20x20'
            end

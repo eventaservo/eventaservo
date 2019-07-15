@@ -22,9 +22,7 @@
           = render partial: 'horoj'
         %h5.text-left= @event.description
 
-      %p
-        = display_organizations_for_event(@event)
-        = display_event_tags(@event)
+      %p= display_event_tags(@event)
 
       .trix-content= sanitize @event.content
 

@@ -6,4 +6,5 @@
   .row
     - @organizoj.each do |organizo|
       .col-lg-4.col-md-6.col-12
-        = render partial: 'organization_card', locals: { organizo: organizo }
+        = link_to organization_url(organizo.short_name), class: 'card-link' do
+          = render partial: 'organization_card', locals: { organizo: organizo }

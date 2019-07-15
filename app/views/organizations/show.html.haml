@@ -16,11 +16,11 @@
 
     .box-white
       .lead Eventoj
-      %p.text-right.small
-        = link_to "Listigi venontajn eventojn de #{@organizo.short_name} en la ĉefa paĝo", root_url(o: @organizo.short_name)
 
       - if @eventoj.venontaj.any?
         .text-divider Venontaj eventoj
+        %p.text-right.small
+          = link_to "Listigi venontajn eventojn de #{@organizo.short_name} en la ĉefa paĝo", root_url(o: @organizo.short_name)
         - @eventoj.venontaj.order(:date_start).each do |e|
           = link_to event_path(e.code), class: 'item-row small' do
             .col-2 #{event_flag e} #{e.city}
