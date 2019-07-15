@@ -1,5 +1,5 @@
 :ruby
-  # Laŭ tagoj
+  # Laŭ tago
   tagoj = []
   Analytic.select('count(distinct ip), created_at::date as tago').group(:tago).order(:tago).each do |r|
     tagoj << ["Date.UTC(#{r[:tago].year}, #{r[:tago].month}, #{r[:tago].day})", r[:count]]
@@ -12,7 +12,7 @@
   Highcharts.chart 'tagoj',
     credits: enabled: false
     chart: type: 'spline'
-    title: text: 'Laŭ tagoj'
+    title: text: 'Laŭ tago'
     xAxis:
       type: 'datetime'
       dateTimeLabelFormats:
