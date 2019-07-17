@@ -23,4 +23,9 @@ class Country < ApplicationRecord
     record = where('unaccent(lower(countries.name)) = ?', name.normalized)
     record.first if record.any?
   end
+
+  def self.by_code(code)
+    record = where('unaccent(lower(countries.code)) = ?', code.normalized)
+    record.first if record.any?
+  end
 end

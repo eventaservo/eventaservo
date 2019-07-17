@@ -2,6 +2,7 @@
 
 # Eventaj dateno
 class Event < ApplicationRecord
+  attr_accessor :commit
   is_impressionable # Por kalkuli la paĝvizitojn
   has_paper_trail versions: { scope: -> { order('created_at desc') } },
                   ignore: [:id]
@@ -12,6 +13,7 @@ class Event < ApplicationRecord
 
   include Code
   include Events::Organizations
+  include Meetup
 
   belongs_to :user
   belongs_to :country
@@ -20,9 +22,12 @@ class Event < ApplicationRecord
   has_many :organization_events, dependent: :destroy
   has_many :organizations, through: :organization_events
 
+  before_validation :import_event, if: :importing?
+
   validates :title, :description, :city, :country_id, :date_start, :date_end, :code, presence: true
   validates :description, length: { maximum: 140 }
   validates :code, uniqueness: true, on: :create
+  validates :import_url, length: { maximum: 100 }
   validate :end_after_start
   validate :url_or_email
 
@@ -206,6 +211,18 @@ class Event < ApplicationRecord
     { total: total, parcial: parcial, restanta: restanta, percent: percent.to_i }
   end
 
+  def importing?
+    self.commit == "Importi"
+  end
+
+  def commit
+    @commit
+  end
+
+  def commit=(val)
+    @commit = val
+  end
+
   private
 
     def end_after_start
@@ -259,5 +276,29 @@ class Event < ApplicationRecord
       else
         "http://#{site.strip}"
       end
+    end
+
+    def import_event
+      evento, eraro = self.sercxas_evento(import_url)
+
+      if eraro != ""
+        errors.add('Eventa', eraro)
+        return
+      end
+
+      self.title = evento["title"]
+      self.city = evento["city"]
+      self.site = evento["site"]
+      self.time_zone = evento["time_zone"]
+      self.country_id = evento["country_id"]
+      self.latitude = evento["latitude"]
+      self.longitude = evento["longitude"]
+      self.address = evento["address"]
+      self.time_zone = evento["time_zone"]
+      self.date_start = evento["date_start"]
+      self.date_end = evento["date_end"]
+      self.content = evento["content"]
+      self.description = evento["description"]
+      self.site = evento["site"]
     end
 end
