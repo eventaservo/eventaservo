@@ -476,6 +476,7 @@ DEPENDENCIES
   mini_racer
   minitest-reporters
   momentjs-rails
+  nokogiri
   omniauth-facebook
   paper_trail
   paper_trail-association_tracking
