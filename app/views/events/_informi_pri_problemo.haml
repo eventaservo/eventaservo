@@ -11,7 +11,7 @@
 
       = form_tag event_kontakti_organizanton_url(@event.code) do
         .modal-body{style: 'font-weight: normal; font-size: 1rem;'}
-          %p Se vi opinias ke estas problemo pri tiu ĉi evento, informu pri tio ĝian administranton.
+          %p Se vi opinias ke estas problemo pri tiu ĉi evento, informu pri tio ĝian ĉefan administranton.
           .form-group
             .label Nomo
             = text_field_tag :name, current_user.try(:name).presence, autocomplete: 'name', class: 'form-control', required: true
@@ -23,7 +23,7 @@
 
           .form-group
             .label Mesaĝo
-            = text_area_tag :message, nil, class: 'form-control', required: true
+            = text_area_tag :message, nil, class: 'form-control', rows: 4, required: true
 
         .modal-footer
           %button.btn.btn-sm.btn-outline-secondary{'data-dismiss' => 'modal', type: 'button'} Nuligi
