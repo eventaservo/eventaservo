@@ -13,7 +13,7 @@ class Event < ApplicationRecord
 
   include Code
   include Events::Organizations
-  include Meetup
+  include EventImporter
 
   belongs_to :user
   belongs_to :country
@@ -25,9 +25,9 @@ class Event < ApplicationRecord
   before_validation :import_event, if: :importing?
 
   validates :title, :description, :city, :country_id, :date_start, :date_end, :code, presence: true
-  validates :description, length: { maximum: 140 }
+  validates :description, length: { maximum: 400 }
   validates :code, uniqueness: true, on: :create
-  validates :import_url, length: { maximum: 100 }
+  validates :import_url, length: { maximum: 200 }
   validate :end_after_start
   validate :url_or_email
 
@@ -279,7 +279,7 @@ class Event < ApplicationRecord
     end
 
     def import_event
-      evento, eraro = self.sercxas_evento(import_url)
+      evento, eraro = self.importas_eksteran_eventon(import_url)
 
       if eraro != ""
         errors.add('Eventa', eraro)
