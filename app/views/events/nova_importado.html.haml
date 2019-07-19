@@ -1,0 +1,18 @@
+.row
+  .col-lg-8.offset-lg-2
+    .box-white
+      .lead
+        Importi eventon
+
+      Eventa Servo kapablas importi eventojn de la jenaj retejoj:
+
+      .d-flex.justify-content-around.m-4
+        = link_to image_tag('meetup.svg', size: '128'), 'https://www.meetup.com', target: :_blank
+        = link_to image_tag('duolingo.png', size: '128'), 'https://events.duolingo.com', target: :_blank
+
+      Tajpu la eksteran URL kaj alklaku 'Importi'
+
+      = form_tag eventoj_importi_url do
+        .form-group
+          = text_field_tag :url, '', placeholder: 'https://', class: 'form-control'
+          = submit_tag 'Importi', class: 'button-submit mt-2'

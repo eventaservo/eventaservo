@@ -12,11 +12,11 @@
 
         .form-group
           = form.label :title, 'Titolo *'
-          = form.text_field :title, class: 'form-control required', autofocus: true, required: true
+          = form.text_field :title, class: 'form-control', autofocus: true, required: true
 
         .form-group
           = form.label :description, 'Priskribo *'
-          = form.text_field :description, class: 'form-control required', required: true
+          = form.text_field :description, class: 'form-control', required: true
           %small.form-text.text-muted Maksimume 140 signoj
 
         - if Organization.by_user(current_user).any?
@@ -33,14 +33,14 @@
               = form.label :date_start, 'Komenca dato'
               .form-row
                 .col-8= form.text_field :date_start, value: @event.komenca_tago, class: 'datepicker form-control'
-                .col-4= text_field_tag(:time_start, @event.komenca_horo, class: 'timemask form-control required', required: true)
+                .col-4= text_field_tag(:time_start, @event.komenca_horo, class: 'timemask form-control', required: true)
 
           .col-lg-6
             .form-group
               = form.label :date_end, 'Fina dato'
               .form-row
                 .col-8= form.text_field :date_end, value: @event.fina_tago, class: 'datepicker form-control'
-                .col-4= text_field_tag(:time_end, @event.fina_horo, class: 'timemask form-control required', required: true)
+                .col-4= text_field_tag(:time_end, @event.fina_horo, class: 'timemask form-control', required: true)
 
         .form-group
           = form.label :tag_list, 'Speco'
@@ -60,11 +60,11 @@
           .col-lg-6
             .form-group
               = form.label :site, 'Retpaĝo'
-              = form.text_field :site, class: 'form-control required', required: @event.email.blank?
+              = form.text_field :site, class: 'form-control', required: @event.email.blank?
           .col-lg-6
             .form-group
               = form.label :email, 'Retpoŝtadreso por kontakto'
-              = form.email_field :email, class: 'form-control required', required: @event.site.blank?
+              = form.email_field :email, class: 'form-control', required: @event.site.blank?
 
         .form-group.form-check
           = form.check_box :online, class: 'form-check-input'
@@ -87,7 +87,7 @@
             .col-lg-6
               .form-group
                 = form.label :city, 'Urbo (aŭ loko)'
-                = form.text_field :city, class: 'form-control required', required: true
+                = form.text_field :city, class: 'form-control', required: true
             .col-lg-6
               .form-group
                 = form.label :country_id, 'Lando'
@@ -98,11 +98,6 @@
           .form-group
             = label_tag :user_id, 'Eventa administranto'
             = form.select(:user_id, options_from_collection_for_select(User.order(:name), 'id', 'name', @event.user_id || current_user.id), {}, class: 'form-control select2-input')
-          .text-divider Importado
-          .form-group
-            = label_tag :import_url, 'Ekstera URL'
-            = form.text_field :import_url, class: 'form-control', id: "import_url"
-            = form.submit 'Importi', class: 'button-submit mt-2', id: 'import'
 
         .buttons-footer
           - if params[:action] == 'edit'
@@ -110,7 +105,7 @@
             = link_to 'Forigi eventon', event_path(@event.code), class: 'button-outline-red float-left', method: :delete, data: { confirm: 'Ĉu vi certas? Vi ne kapablos malfari tion.' }
           - if params[:action] == 'new'
             = link_to 'Nuligi', root_path, class: 'button-cancel'
-          = form.submit 'Registri', class: 'button-submit', id: 'register'
+          = form.submit 'Registri', class: 'button-submit'
 
 :coffee
   $('#event_date_start').change ->
@@ -148,15 +143,7 @@
   $inputs.on 'input', ->
     $inputs.not(this).prop 'required', !$(this).val().length
 
-  $('#register').click ->
-    $('#import_url').removeAttr('required')
-    $('.required').attr('required', '')
+  $("form").on 'submit', ->
     if($('#event_tags').find('.active').length == 0)
       alert 'Vi devas elekti almenaŭ unu specon'
-    else
-      $('form').submit()
-
-  $('#import').click ->
-    $('[required]').removeAttr('required')
-    $('#import_url').attr('required', '')
-    $('form').submit()
+      return false

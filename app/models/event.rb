@@ -2,7 +2,6 @@
 
 # Eventaj dateno
 class Event < ApplicationRecord
-  attr_accessor :commit
   is_impressionable # Por kalkuli la paĝvizitojn
   has_paper_trail versions: { scope: -> { order('created_at desc') } },
                   ignore: [:id]
@@ -21,8 +20,6 @@ class Event < ApplicationRecord
   has_many :likes, as: :likeable, dependent: :destroy
   has_many :organization_events, dependent: :destroy
   has_many :organizations, through: :organization_events
-
-  before_validation :import_event, if: :importing?
 
   validates :title, :description, :city, :country_id, :date_start, :date_end, :code, presence: true
   validates :description, length: { maximum: 400 }
@@ -209,18 +206,6 @@ class Event < ApplicationRecord
     restanta = total - parcial
     percent = (parcial.to_f / total.to_f).to_f * 100
     { total: total, parcial: parcial, restanta: restanta, percent: percent.to_i }
-  end
-
-  def importing?
-    self.commit == "Importi"
-  end
-
-  def commit
-    @commit
-  end
-
-  def commit=(val)
-    @commit = val
   end
 
   private

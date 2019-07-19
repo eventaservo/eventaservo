@@ -80,6 +80,25 @@ class EventsController < ApplicationController
     redirect_to root_url, flash: { error: 'Evento sukcese forigita' }
   end
 
+
+  def nova_importado
+  end
+
+  def importi
+    i = Event.new.importas_eksteran_eventon(params[:url])
+
+    if i[1].empty? # Signifas ke la importado sukcesi kolekti informojn kaj eraroj ne troviĝis
+      evento = Event.new(i[0])
+      evento.user_id = current_user.id
+      evento.tag_list = 'Alia'
+      evento.save!
+      redirect_to event_url(evento.code)
+    else
+      # Eraro okazis
+      redirect_to eventoj_importi_url, flash: { error: 'Importado malsukcesis' }
+    end
+  end
+
   def delete_file
     event = Event.by_code(params[:event_code])
     event.uploads.find(params[:file_id]).purge_later
@@ -181,7 +200,7 @@ class EventsController < ApplicationController
 
       params.require(:event).permit(
         :title, :description, :content, :site, :email, :date_start, :date_end, :time_zone,
-        :address, :city, :country_id, :online, :user_id, :tag_list, :import_url, :commit, uploads: []
+        :address, :city, :country_id, :online, :user_id, :tag_list, uploads: []
       )
     end
 
