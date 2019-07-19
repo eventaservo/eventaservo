@@ -1,0 +1,20 @@
+eo:
+  pagy:
+
+    item_name:
+      one: "item"
+      other: "items"
+
+    nav:
+      prev: "&lsaquo;&nbsp;Antaŭa"
+      next: "Sekva&nbsp;&rsaquo;"
+      gap: "&hellip;"
+
+    info:
+      no_items: "No %{item_name} found"
+      single_page: "Montrante <b>%{count}</b> eventojn"
+      multiple_pages: "Montrante <b>%{from}-%{to}</b> el <b>%{count}</b> eventoj"
+
+    combo_nav_js: "Paĝo %{page_input} de %{pages}"
+
+    items_selector_js: "Show %{items_input} %{item_name} per page"

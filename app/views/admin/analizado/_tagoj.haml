@@ -1,0 +1,31 @@
+:ruby
+  # Laŭ tago
+  tagoj = []
+  Analytic.select('count(distinct ip), created_at::date as tago').group(:tago).order(:tago).each do |r|
+    tagoj << ["Date.UTC(#{r[:tago].year}, #{r[:tago].month}, #{r[:tago].day})", r[:count]]
+  end
+  tagoj = tagoj.to_s.gsub('"', '')
+
+#tagoj
+
+:coffee
+  Highcharts.chart 'tagoj',
+    credits: enabled: false
+    chart: type: 'spline'
+    title: text: 'Laŭ tago'
+    xAxis:
+      type: 'datetime'
+      dateTimeLabelFormats:
+        month: '%e. %b'
+    yAxis: title: text: 'Vizitantoj'
+    legend: enabled: false
+    tooltip:
+      pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y:,.0f}</b><br/>'
+      shared: true
+    plotOptions:
+      spline:
+        marker: enabled: false
+    series: [{
+      name: 'Vizitantoj',
+      data: #{tagoj}
+    }]

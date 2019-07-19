@@ -97,6 +97,8 @@ class EventsController < ApplicationController
     @countries     = @events.count_by_country
     @today_events  = @events.today.includes(:country)
     @events        = @events.not_today.includes(:country)
+
+    kreas_paghadon_por_karta_vidmaniero
   end
 
   def by_country
@@ -106,6 +108,8 @@ class EventsController < ApplicationController
     @cities        = @events.by_country_id(@country.id).count_by_cities
     @today_events  = @events.today.includes(:country).by_country_id(@country.id)
     @events        = @events.not_today.includes(:country).by_country_id(@country.id)
+
+    kreas_paghadon_por_karta_vidmaniero
   end
 
   # Listigas la eventoj laŭ urboj
@@ -115,6 +119,8 @@ class EventsController < ApplicationController
     @future_events = Event.by_city(params[:city_name]).venontaj
     @today_events  = @events.today.by_city(params[:city_name])
     @events        = @events.not_today.by_city(params[:city_name])
+
+    kreas_paghadon_por_karta_vidmaniero
   end
 
   def by_username
@@ -135,6 +141,16 @@ class EventsController < ApplicationController
   end
 
   private
+
+    # La karta vidmaniero uzas paĝadon. La aliaj ne. Tial necesas krei la variablojn
+    # +@kvanto_venontaj_eventoj+ kaj +@pagy+
+    #
+    def kreas_paghadon_por_karta_vidmaniero
+      return unless cookies[:vidmaniero] == 'kartoj'
+
+      @kvanto_venontaj_eventoj = @events.count
+      @pagy, @events           = pagy(@events.not_today.includes(%i[country organizations]))
+    end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_event

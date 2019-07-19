@@ -1,14 +1,15 @@
 -# Laŭ plataformoj
-- plataformoj = []
+- sistemoj = []
 - Analytic.select(:platform, 'count(id)').group(:platform).order('count DESC').each do |r|
-  - plataformoj << { name: r.platform, y: r.count }
+  - sistemoj << { name: r.platform, y: r.count }
 
-#plataformoj
+#sistemoj
 
 :coffee
-  Highcharts.chart 'plataformoj',
+  Highcharts.chart 'sistemoj',
+    credits: enabled: false
     chart: type: 'pie'
-    title: text: 'Laŭ plataformoj'
+    title: text: 'Laŭ sistemo'
     plotOptions: series: dataLabels:
       enabled: true
       format: '{point.name}: {point.y}'
@@ -18,5 +19,5 @@
     series: [
       name: 'Plataformoj'
       colorByPoint: true
-      data: #{raw plataformoj.to_json}
+      data: #{raw sistemoj.to_json}
     ]

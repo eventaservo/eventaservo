@@ -6,7 +6,7 @@ class OrganizationsController < ApplicationController
 
   # Listigas ĉiujn organizojn
   def index
-    @organizoj = Organization.includes(:logo_attachment).order(:name)
+    @organizoj = Organization.includes(:logo_attachment).joins(:eventoj).select('count(organization_events.event_id), organizations.*').group(:id).order(count: :desc).order(:name)
   end
 
   # Montras organizajn informojn

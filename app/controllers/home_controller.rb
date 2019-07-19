@@ -12,7 +12,13 @@ class HomeController < ApplicationController
 
     @continents    = @events.count_by_continents
     @today_events  = @events.today.includes(:country).includes(:organizations).includes(:tags)
-    @events        = @events.not_today.includes(%i[country organizations])
+
+    @events = @events.not_today.includes(%i[country organizations])
+
+    if cookies[:vidmaniero] == 'kartoj' # Paghado
+      @kvanto_venontaj_eventoj = @events.count
+      @pagy, @events = pagy(@events.not_today.includes(%i[country organizations]))
+    end
   end
 
   def changelog
