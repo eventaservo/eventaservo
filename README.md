@@ -47,6 +47,8 @@ Mi dankas al ĉiuj kiuj helpas min plibonigi la projekton, speciale:
 
   - Paŭla kaj Didje pro iliaj komentoj kaj provuzado.
   - [Yves Nevelsteen](https://t.me/yvesnev) pro provado de sistemo kaj proponoj.
+  - [Alejandro Medina](https://t.me/alesame) pro kod-kunlaboro.
   - Pro interesaj proponoj:
+    - Paul Wuertz
     - [Robin van der Vliet](https://t.me/robin)
   - [Eventoj.hu](http://eventoj.hu/2019.htm) pro la inspiro.
