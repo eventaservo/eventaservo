@@ -14,5 +14,5 @@
 
       = form_tag eventoj_importi_url do
         .form-group
-          = text_field_tag :url, '', placeholder: 'https://', class: 'form-control'
+          = text_field_tag :url, '', placeholder: 'https://', autofocus: true, class: 'form-control'
           = submit_tag 'Importi', class: 'button-submit mt-2'

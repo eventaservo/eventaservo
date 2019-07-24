@@ -261,28 +261,4 @@ class Event < ApplicationRecord
         "http://#{site.strip}"
       end
     end
-
-    def import_event
-      evento, eraro = self.importas_eksteran_eventon(import_url)
-
-      if eraro != ""
-        errors.add('Eventa', eraro)
-        return
-      end
-
-      self.title = evento["title"]
-      self.city = evento["city"]
-      self.site = evento["site"]
-      self.time_zone = evento["time_zone"]
-      self.country_id = evento["country_id"]
-      self.latitude = evento["latitude"]
-      self.longitude = evento["longitude"]
-      self.address = evento["address"]
-      self.time_zone = evento["time_zone"]
-      self.date_start = evento["date_start"]
-      self.date_end = evento["date_end"]
-      self.content = evento["content"]
-      self.description = evento["description"]
-      self.site = evento["site"]
-    end
 end

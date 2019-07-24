@@ -60,15 +60,15 @@ class Importilo
       end
 
       evento['title']       = res['group']['name'] + ': ' + res['name']
-      evento['city']        = res['venue']['city']
+      evento['city']        = res['venue']['city'] ? res['venue']['city'] : 'Nekonata'
       evento['site']        = res['link']
       evento['country_id']  = Country.by_code(res['venue']['country']).id
       evento['latitude']    = res['venue']['lat']
       evento['longitude']   = res['venue']['lon']
       evento['address']     = "#{res['venue']['name']}, #{res['venue']['address_1']}"
       evento['time_zone']   = Timezone.lookup(evento['latitude'], evento['longitude']).name
-      evento['date_start']  = Time.at(res['time'].to_i / 1000).utc
-      evento['date_end']    = Time.at((res['time'].to_i + res['duration'].to_i) / 1000).utc
+      evento['date_start']  = Time.at(res['time'].to_i / 1000).in_time_zone(evento['time_zone']).strftime("%Y-%m-%d %H:%M:%S")
+      evento['date_end']    = Time.at((res['time'].to_i + res['duration'].to_i) / 1000).in_time_zone(evento['time_zone']).strftime("%Y-%m-%d %H:%M:%S")
       evento['content']     = res['description'] + res.fetch('how_to_find_us', '')
       evento['description'] = res['name']
       evento['site']        = res['link']
