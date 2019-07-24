@@ -2,7 +2,7 @@
 
 class EventsController < ApplicationController
   include Webcal
-  before_action :authenticate_user!, only: %i[index new create edit update destroy]
+  before_action :authenticate_user!, only: %i[index new create edit update destroy nova_importado importi]
   before_action :set_event, only: %i[show edit update destroy]
   before_action :authorize_user, only: %i[edit update destroy]
   before_action :filter_events, only: %i[by_continent by_country by_city]
@@ -85,12 +85,12 @@ class EventsController < ApplicationController
   end
 
   def importi
-    i = Event.new.importas_eksteran_eventon(params[:url])
-
-    if i[1].empty? # Signifas ke la importado sukcesi kolekti informojn kaj eraroj ne troviĝis
-      evento = Event.new(i[0])
-      evento.user_id = current_user.id
-      evento.tag_list = 'Alia'
+    datumoj = Importilo.new(params[:url]).datumoj
+    if datumoj # Signifas ke la importado sukcesi kolekti informojn kaj eraroj ne troviĝis
+      evento            = Event.new(datumoj)
+      evento.user_id    = current_user.id
+      evento.tag_list   = 'Alia'
+      evento.import_url = params[:url]
       evento.save!
       redirect_to event_url(evento.code)
     else

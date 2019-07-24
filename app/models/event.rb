@@ -12,7 +12,6 @@ class Event < ApplicationRecord
 
   include Code
   include Events::Organizations
-  include EventImporter
 
   belongs_to :user
   belongs_to :country
