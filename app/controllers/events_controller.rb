@@ -49,7 +49,6 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.user_id ||= current_user.id
-    params[:event].each { |_key, value| value.strip! if value.class == 'String' }
 
     if @event.save
       @event.update_event_organizations(params[:organization_ids])

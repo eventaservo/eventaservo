@@ -40,7 +40,8 @@ $ ->
         type: 'month'
         buttonText: 'Monato'
         eventLimit: 5
-        eventLimitText: 'pliaj'
+        eventLimitText: ''
+        dayPopoverFormat: 'dddd, D MMMM'
     eventClick: (e) ->
       if e.url
         window.open e.url, '_blank'

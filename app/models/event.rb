@@ -221,8 +221,8 @@ class Event < ApplicationRecord
 
     # Formatas la eventon laŭ normala formato
     def format_event_data
-      self.title = fix_title(title)
-      self.city = city.tr('/', '')
+      self.title = fix_title(title).strip
+      self.city = city.tr('/', '').strip
       self.site = fix_site(site)
       self.time_zone = 'Etc/UTC' if time_zone.empty?
 
