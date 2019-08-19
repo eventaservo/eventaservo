@@ -187,13 +187,13 @@ class EventsController < ApplicationController
                                                       params[:event][:time_zone])
         params[:event][:date_end] = merge_date_time(params[:event][:date_end], params[:time_end],
                                                     params[:event][:time_zone])
-      end
 
-      params[:event][:tag_list] = if params[:tag_list].present?
-                                    params[:tag_list].keys.collect { |k, _v| k }.join(', ')
-                                  else
-                                    ''
-                                  end
+        params[:event][:tag_list] = if params[:tag_list].present?
+                                      params[:tag_list].keys.collect { |k, _v| k }.join(', ')
+                                    else
+                                      ''
+                                    end
+      end
 
       params[:event][:commit] = params[:commit]
 
