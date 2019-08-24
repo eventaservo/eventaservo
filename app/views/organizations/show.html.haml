@@ -23,8 +23,7 @@
           = link_to "Listigi venontajn eventojn de #{@organizo.short_name} en la ĉefa paĝo", root_url(o: @organizo.short_name)
         - @eventoj.venontaj.order(:date_start).each do |e|
           = link_to event_path(e.code), class: 'item-row small' do
-            .col-2 #{event_flag e} #{e.city}
-            .col-3= event_date e
+            .col-5 #{event_flag e} #{e.city} - #{event_date e}
             .col #{e.title}
 
       %br
@@ -33,8 +32,7 @@
         .text-divider Pasintaj eventoj
         - @eventoj.pasintaj.order(date_start: :desc).each do |e|
           = link_to event_path(e.code), class: 'item-row small' do
-            .col-2 #{event_flag e} #{e.city}
-            .col-3= event_date e
+            .col-5 #{event_flag e} #{e.city} - #{event_date e}
             .col #{e.title}
   .col-lg-4
     = render partial: 'uzantoj'
