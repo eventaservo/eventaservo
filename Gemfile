@@ -125,5 +125,7 @@ group :test do
   gem 'minitest-reporters'
   gem 'selenium-webdriver'
   gem 'simplecov'
+  gem 'vcr'
   gem 'webdrivers'
+  gem 'webmock'
 end

@@ -59,5 +59,11 @@ FactoryBot.define do
       continent { 'Reta' }
       code { 'ol' }
     end
+
+    trait :kanado do
+      name { 'Kanado' }
+      continent { 'Ameriko' }
+      code { 'ca' }
+    end
   end
 end

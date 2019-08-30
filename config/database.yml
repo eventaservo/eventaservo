@@ -42,3 +42,8 @@ production:
 test:
   adapter: postgresql
   database: eventaservo_test
+  pool: 5
+  timeout: 5000
+  host: localhost
+  username: <%= Rails.application.credentials.dig(:database, :development, :username) %>
+  password: <%= Rails.application.credentials.dig(:database, :development, :password) %>
