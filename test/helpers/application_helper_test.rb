@@ -12,19 +12,22 @@ class ApplicationHelperTest < ActionView::TestCase
     event = create(:evento)
 
     # Samtaga evento
-    event.update!(date_start: Date.new(2018, 7, 17), date_end: Date.new(2018, 7, 17))
+    event.update!(
+    date_start: Time.new(2018, 7, 17, 12, 0, 0).in_time_zone(event.time_zone),
+    date_end: Time.new(2018, 7, 17, 12, 0, 0).in_time_zone(event.time_zone)
+    )
     assert_equal 'mardo, 17 julio 2018', event_date(event)
 
     # sammonata evento
-    event.update!(date_end: Date.new(2018, 7, 21))
+    event.update!(date_end: Time.new(2018, 7, 21, 12, 0, 0).in_time_zone(event.time_zone))
     assert_equal '17 - 21 julio 2018', event_date(event)
 
     # malsammonata evento
-    event.update!(date_end: Date.new(2018, 8, 21))
+    event.update!(date_end: Time.new(2018, 8, 21, 12, 0, 0).in_time_zone(event.time_zone))
     assert_equal '17 julio - 21 aŭgusto 2018', event_date(event)
 
     # malsamjara evento
-    event.update!(date_end: DateTime.new(2019, 1, 6))
+    event.update!(date_end: Time.new(2019, 1, 6, 12, 0, 0).in_time_zone(event.time_zone))
     assert_equal '17 julio 2018 - 6 januaro 2019', event_date(event)
   end
 
