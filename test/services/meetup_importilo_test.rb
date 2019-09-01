@@ -32,4 +32,18 @@ class EventTest < ActiveSupport::TestCase
         assert_equal expected, datumoj
     end
   end
+
+  test 'nesukcesa Meetup evento' do
+
+    tempozono = "America/Toronto"
+
+    VCR.use_cassette("meetup_no_success") do
+        url = 'https://www.meetup.com/Esperanto-Toronto/events/nbplfqyzmbfbs/'
+        datumoj = Importilo.new(url).datumoj
+
+        assert_nil datumoj
+    end
+  end
+
+
 end

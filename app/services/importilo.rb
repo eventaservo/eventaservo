@@ -56,7 +56,8 @@ class Importilo
           end
         end
 
-        return evento, "importado ne sukcesis: #{retrokuplo}"
+        Rails.logger.error "Meetup importado ne sukcesis: #{retrokuplo}"
+        return nil
       end
 
       evento['title']       = res['group']['name'] + ': ' + res['name']
