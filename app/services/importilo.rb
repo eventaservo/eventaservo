@@ -12,6 +12,8 @@ class Importilo
     case URI(@url).host
     when 'www.meetup.com'
       'Meetup'
+    when 'events.duolingo.com'
+      'Duolingo'
     else
       false
     end
@@ -20,14 +22,21 @@ class Importilo
   def datumoj
     return nil unless url_estas_valida
 
-    importas_el_meetup if retejo == 'Meetup'
+    return importas_el_meetup if retejo == 'Meetup'
+    return importas_el_duolingo if retejo == 'Duolingo'
   end
 
   private
 
     def url_estas_valida
-      # Bezonata formato estas 'https://www.meetup.com/:grupo/events/:id/'"
-      retejo == 'Meetup' && URI(@url).path.split('/').index('events') != nil
+      case retejo
+      when 'Meetup', 'Duolingo'
+        # Bezonata formato por Meetup estas 'https://www.meetup.com/:grupo/events/:id/'"
+        # Bezonata formato por Duolingo estas 'https://events.duolingo.com/events/details/:id/
+        URI(@url).path.split('/').index('events') != nil
+      else
+        false
+      end
     end
 
     def importas_el_meetup
@@ -75,78 +84,50 @@ class Importilo
       evento
     end
 
-    def importas_el_duolingo(url)
+    def importas_el_duolingo
       evento = {}
-      l      = url.scan(URI.regexp)[0]
-      idx    = l[6].split("/").index("events")
-      if idx == nil
-        return evento, "importa URL. Bezonata formato estas 'https://events.duolingo.com/events/details/:id/'"
-      end
 
       # Prenu adreson de la evento por serĉi koordinatojn
-      res = HTTParty.get(url)
-      if res.code != 200
-        code       = res["errors"][0]["code"]
-        message    = res["errors"][0]["message"]
-        retrokuplo = "[#{code}] #{message}"
+      pagxo  = Nokogiri::HTML(HTTParty.get(@url))
 
-        return evento, "importado ne sukcesis: #{retrokuplo}"
+      # Teksto kiam devus respondi kun 404
+      if pagxo.text == "Events - Duolingo"
+        Rails.logger.error "Duolingo importado ne sukcesis: malbona URL"
+        return nil
       end
 
-      pagxo  = Nokogiri::HTML(res)
-      adreso = pagxo.css(".address-info")[1]\
-              .content.split("\n")\
-              .map { |a| a.strip }\
-              .filter { |a| a if a != "" && a.downcase() != "where" }\
-              .join(", ")
-
-
-      geo_sercxo  = Geocoder.search(adreso).first
-      lando       = geo_sercxo.country == "Unuiĝinta Reĝlando" ? "Britio" : geo_sercxo.country
-      koordinatoj = geo_sercxo.coordinates
-
-      # Uzu kordinatoj por serĉi la eventon en la listo de eventoj
-      proksimeco = 100
-      sercxurl   = "https://events.duolingo.com/api/search/?result_types=upcoming_event&latitude=#{koordinatoj[0]}&longitude=#{koordinatoj[1]}&proximity=#{proksimeco}&event_type_slug=fireside-chat&event_type_slug=testing-recurring&event_type_slug=paid-event"
-      res        = HTTParty.get(sercxurl)
-      if res.code != 200
-        code       = res["errors"][0]["code"]
-        message    = res["errors"][0]["message"]
-        retrokuplo = "[#{code}] #{message}"
-
-        return evento, "importado ne sukcesis: #{retrokuplo}"
-      end
-
-      eventa_listo = res["results"].filter { |e| e if e["url"] == url }
-      if eventa_listo.length() == 0
-        return evento, "importado ne sukcesis: evento ne trovita"
-      end
+      eventa_id = pagxo.css('form')[0]["eventid"]
 
       # Uzu la eventoan id-n kun la eventa API
-      eventa_api_url = "https://events.duolingo.com/api/event/#{eventa_listo[0]["id"].to_s}"
+      eventa_api_url = "https://events.duolingo.com/api/event/#{eventa_id}"
       res            = HTTParty.get(eventa_api_url)
       if res.code != 200
         code       = res["errors"][0]["code"]
         message    = res["errors"][0]["message"]
         retrokuplo = "[#{code}] #{message}"
 
-        return evento, "importado ne sukcesis: #{retrokuplo}"
+        Rails.logger.error "Duolingo importado ne sukcesis: #{retrokuplo}"
+        return nil
       end
+
+      adreso = "#{res['venue_name']}, #{res['venue_address']}, #{res["venue_city"]}, #{res["venue_zip_code"]}"
+      geo_sercxo  = Geocoder.search(adreso).first
+      koordinatoj = geo_sercxo.coordinates
 
       evento["title"]       = res["chapter"]["title"] + res["title"]
       evento["city"]        = res["venue_city"]
       evento["site"]        = res["url"]
-      evento["country_id"]  = Country.by_name(lando).id
+      evento["country_id"]  = res["chapter"]["country"]
       evento["latitude"]    = koordinatoj[0]
       evento["longitude"]   = koordinatoj[1]
       evento["address"]     = adreso
       evento["time_zone"]   = Timezone.lookup(evento["latitude"], evento["longitude"]).name
-      evento["date_start"]  = Time.parse(res["start_date_naive"]).utc
-      evento["date_end"]    = Time.parse(res["end_date_naive"]).utc
+      evento["date_start"]  = Time.find_zone(evento["time_zone"]).parse(res["start_date_naive"]).in_time_zone(evento['time_zone']).strftime("%Y-%m-%d %H:%M:%S")
+      evento["date_end"]    = Time.find_zone(evento["time_zone"]).parse(res["end_date_naive"]).in_time_zone(evento['time_zone']).strftime("%Y-%m-%d %H:%M:%S")
       evento["content"]     = res["description"]
       evento["description"] = res["description_short"]
       evento["site"]        = res["url"]
 
-      return evento, ""
+      return evento
     end
 end
