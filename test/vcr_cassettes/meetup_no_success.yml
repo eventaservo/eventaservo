@@ -1,0 +1,66 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.meetup.com/Esperanto-Toronto/events/nbplfqyzmbfbs
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Server:
+      - Apache/2.4.25 (Unix) OpenSSL/1.0.2k
+      X-Meetup-Server:
+      - ip-10-192-13-177
+      X-Meetup-Request-Id:
+      - fbcf3e46-4e1c-42bc-affa-ab1a7605a79c
+      X-Oauth-Scopes:
+      - basic
+      X-Accepted-Oauth-Scopes:
+      - basic
+      X-Ratelimit-Limit:
+      - '30'
+      X-Ratelimit-Remaining:
+      - '29'
+      X-Ratelimit-Reset:
+      - '10'
+      Etag:
+      - '"248b46fd1b195eddbdd31cd2c3629bdd"'
+      Content-Length:
+      - '61'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 01 Sep 2019 16:03:08 GMT
+      Via:
+      - 1.1 varnish
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-mad22035-MAD
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1567353788.998504,VS0,VE117
+      Vary:
+      - User-Agent,Accept-Language
+    body:
+      encoding: UTF-8
+      string: '{"errors":[{"code":"event_error","message":"invalid event"}]}'
+    http_version: 
+  recorded_at: Sun, 01 Sep 2019 16:03:08 GMT
+recorded_with: VCR 5.0.0
