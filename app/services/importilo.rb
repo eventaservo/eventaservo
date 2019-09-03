@@ -26,7 +26,8 @@ class Importilo
   private
 
     def url_estas_valida
-      URI(@url).host == 'www.meetup.com'
+      # Bezonata formato estas 'https://www.meetup.com/:grupo/events/:id/'"
+      retejo == 'Meetup' && URI(@url).path.split('/').index('events') != nil
     end
 
     def importas_el_meetup
@@ -34,9 +35,6 @@ class Importilo
       path   = URI(@url).path
 
       idx = path.split('/').index('events')
-      # if idx == nil
-      #   return evento, "importa URL. Bezonata formato estas 'https://www.meetup.com/:grupo/events/:id/'"
-      # end
 
       grupo = path.split('/')[idx - 1]
       id    = path.split('/')[idx + 1]
@@ -56,7 +54,8 @@ class Importilo
           end
         end
 
-        return evento, "importado ne sukcesis: #{retrokuplo}"
+        Rails.logger.error "Meetup importado ne sukcesis: #{retrokuplo}"
+        return nil
       end
 
       evento['title']       = res['group']['name'] + ': ' + res['name']
