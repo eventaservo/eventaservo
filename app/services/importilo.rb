@@ -67,13 +67,28 @@ class Importilo
         return nil
       end
 
+      if res['venue']
+        evento['address']     = "#{res['venue']['name']}, #{res['venue']['address_1']}"
+        evento['latitude']    = res['venue']['lat']
+        evento['longitude']   = res['venue']['lon']
+        evento['country_id']  = Country.by_code(res['venue']['country']).id
+        evento['city']        = res['venue']['city'] ? res['venue']['city'] : 'Nekonata'
+      else
+        result = Geocoder.search([res['group']['lat'], res['group']['lon']]).first
+        evento['latitude']    = res['group']['lat']
+        evento['longitude']   = res['group']['lon']
+        evento['address']     = res['group']['localized_location']
+        evento['country_id']  = Country.by_code(result.country_code).id
+        evento['city']        = result.city
+      end
+
+      # Implicita eventa daŭro estas 3 horoj
+      if res['duration'] == nil
+        res['duration'] = 10800000
+      end
+
       evento['title']       = res['group']['name'] + ': ' + res['name']
-      evento['city']        = res['venue']['city'] ? res['venue']['city'] : 'Nekonata'
       evento['site']        = res['link']
-      evento['country_id']  = Country.by_code(res['venue']['country']).id
-      evento['latitude']    = res['venue']['lat']
-      evento['longitude']   = res['venue']['lon']
-      evento['address']     = "#{res['venue']['name']}, #{res['venue']['address_1']}"
       evento['time_zone']   = Timezone.lookup(evento['latitude'], evento['longitude']).name
       evento['date_start']  = Time.at(res['time'].to_i / 1000).in_time_zone(evento['time_zone']).strftime("%Y-%m-%d %H:%M:%S")
       evento['date_end']    = Time.at((res['time'].to_i + res['duration'].to_i) / 1000).in_time_zone(evento['time_zone']).strftime("%Y-%m-%d %H:%M:%S")

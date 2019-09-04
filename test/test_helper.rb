@@ -55,6 +55,19 @@ class ActiveSupport::TestCase
       }
     ]
   )
+  Geocoder::Lookup::Test.add_stub(
+    [-41.279998779296875, 174.77999877929688], [
+      {
+        coordinates: [-41.279998779296875, 174.77999877929688],
+        address: 'Velingtono urbocentro',
+        state: 'Greater Wellington',
+        state_code: 'GW',
+        country: 'New Zealand',
+        country_code: 'NZ',
+        city: "Wellington"
+      }
+    ]
+  )
   Geocoder::Lookup::Test.set_default_stub(
     [
       {
@@ -75,5 +88,6 @@ class ActiveSupport::TestCase
   ::Timezone::Lookup.lookup.stub(-23.55, -46.63, 'America/Sao_Paulo')
   ::Timezone::Lookup.lookup.stub(-7.11, -34.86, 'America/Fortaleza')
   ::Timezone::Lookup.lookup.stub(43.66590881347656, -79.38521575927734, 'America/Toronto')
+  ::Timezone::Lookup.lookup.stub(-41.279998779296875, 174.77999877929688, 'Pacific/Auckland')
   ::Timezone::Lookup.lookup.default('Etc/UTC')
 end

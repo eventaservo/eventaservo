@@ -65,5 +65,11 @@ FactoryBot.define do
       continent { 'Ameriko' }
       code { 'ca' }
     end
+
+    trait :novzelando do
+      name { 'Novzelando' }
+      continent { 'Oceanio' }
+      code { 'nz' }
+    end
   end
 end

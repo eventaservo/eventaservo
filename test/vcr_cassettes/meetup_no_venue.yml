@@ -1,0 +1,67 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.meetup.com/Esperanto-NZ/events/fdmpqyzmbpb
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Server:
+      - Apache/2.4.25 (Unix) OpenSSL/1.0.2k
+      X-Meetup-Server:
+      - ip-10-192-23-150
+      X-Meetup-Request-Id:
+      - b8e0006a-d9e5-4cd7-8e19-1fbca55eb7b3
+      X-Oauth-Scopes:
+      - basic
+      X-Accepted-Oauth-Scopes:
+      - basic
+      X-Ratelimit-Limit:
+      - '30'
+      X-Ratelimit-Remaining:
+      - '29'
+      X-Ratelimit-Reset:
+      - '10'
+      Etag:
+      - '"ed000b90e426e3a4140b1ac9f391f867-gzip"'
+      Content-Length:
+      - '565'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Wed, 04 Sep 2019 15:13:58 GMT
+      Via:
+      - 1.1 varnish
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-mad22036-MAD
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1567610038.779592,VS0,VE257
+      Vary:
+      - Accept-Encoding,User-Agent,Accept-Language
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJjcmVhdGVkIjoxMjk5MTM5ODE0MDAwLCJpZCI6ImZkbXBxeXptYnBiIiwibmFtZSI6IldlbGxpbmd0b24gRXNwZXJhbnRvIENsdWIgTWVldHVwIiwiZGF0ZV9pbl9zZXJpZXNfcGF0dGVybiI6ZmFsc2UsInN0YXR1cyI6InVwY29taW5nIiwidGltZSI6MTU2ODE4NTIwMDAwMCwibG9jYWxfZGF0ZSI6IjIwMTktMDktMTEiLCJsb2NhbF90aW1lIjoiMTk6MDAiLCJ1cGRhdGVkIjoxMjk5MTM5ODE0MDAwLCJ1dGNfb2Zmc2V0Ijo0MzIwMDAwMCwid2FpdGxpc3RfY291bnQiOjAsInllc19yc3ZwX2NvdW50IjoxLCJncm91cCI6eyJjcmVhdGVkIjoxMjk4OTQ5MTc4MDAwLCJuYW1lIjoiRXNwZXJhbnRvLU5aIiwiaWQiOjE3OTEyOTYsImpvaW5fbW9kZSI6Im9wZW4iLCJsYXQiOi00MS4yNzk5OTg3NzkyOTY4NzUsImxvbiI6MTc0Ljc3OTk5ODc3OTI5Njg4LCJ1cmxuYW1lIjoiRXNwZXJhbnRvLU5aIiwid2hvIjoiTWVtYmVycyIsImxvY2FsaXplZF9sb2NhdGlvbiI6IldlbGxpbmd0b24sIE5ldyBaZWFsYW5kIiwic3RhdGUiOiIiLCJjb3VudHJ5IjoibnoiLCJyZWdpb24iOiJlbl9VUyIsInRpbWV6b25lIjoiUGFjaWZpYy9BdWNrbGFuZCJ9LCJsaW5rIjoiaHR0cHM6Ly93d3cubWVldHVwLmNvbS9Fc3BlcmFudG8tTlovZXZlbnRzL2ZkbXBxeXptYnBiLyIsImRlc2NyaXB0aW9uIjoiPHA+VGhlIFdlbGxpbmd0b24gRXNwZXJhbnRvIENsdWIgbWVldHMgdGhlIHNlY29uZCBXZWRuZXNkYXkgZXZlcnkgbW9udGggYmV0d2VlbiBGZWJydWFyeSBhbmQgRGVjZW1iZXIuwqA8L3A+IDxwPsKgPC9wPiA8cD5MYSBSb25kbyBkZSBXZWxsaW5ndG9uIGt1bnZlbmFzIGludGVyIGZlYnJ1YXJvIGthaiBkZWNlbWJybywgbGEgZHVhbiBtZXJrcmVkb24gZGUgxIlpdSBtb25hdG8uwqA8L3A+IDxwPsKgPC9wPiAiLCJ2aXNpYmlsaXR5IjoicHVibGljIiwibWVtYmVyX3BheV9mZWUiOmZhbHNlfQ==
+    http_version: 
+  recorded_at: Wed, 04 Sep 2019 15:13:58 GMT
+recorded_with: VCR 5.0.0

@@ -49,4 +49,33 @@ class EventTest < ActiveSupport::TestCase
     assert_nil datumoj
   end
 
+  test 'Meetup evento sen eventejo' do
+    lando = create(:lando, :novzelando)
+    tempozono = "Pacific/Auckland"
+
+    VCR.use_cassette("meetup_no_venue") do
+        expected = {
+            "title"=>"Esperanto-NZ: Wellington Esperanto Club Meetup",
+            "city"=>"Wellington",
+            "site"=>"https://www.meetup.com/Esperanto-NZ/events/fdmpqyzmbpb/",
+            "country_id"=>lando.id,
+            "latitude"=>-41.279998779296875,
+            "longitude"=>174.77999877929688,
+            "address"=>"Wellington, New Zealand",
+            "time_zone"=>tempozono,
+            "date_start"=>Time.find_zone("UTC").parse("2019-09-11 07:00:00").in_time_zone(tempozono).strftime("%Y-%m-%d %H:%M:%S"),
+            "date_end"=>Time.find_zone("UTC").parse("2019-09-11 10:00:00").in_time_zone(tempozono).strftime("%Y-%m-%d %H:%M:%S"),
+            "content"=>"<p>The Wellington Esperanto Club meets the second Wednesday every month between February and December. </p> <p> </p> <p>La Rondo de Wellington kunvenas inter februaro kaj decembro, la duan merkredon de ĉiu monato. </p> <p> </p> ",
+            "description"=>"Wellington Esperanto Club Meetup"
+        }
+
+        url = 'https://www.meetup.com/Esperanto-NZ/events/fdmpqyzmbpb/'
+        datumoj = Importilo.new(url).datumoj
+
+        assert_not_nil datumoj
+
+        assert_equal expected, datumoj
+    end
+  end
+
 end
