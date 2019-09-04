@@ -1,0 +1,60 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://events.duolingo.com/events/details/duolingo-washington-dc-esperanto-presents-esperanto-meetup-in-washington-dcs/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/html
+      Content-Length:
+      - '542'
+      Connection:
+      - keep-alive
+      Last-Modified:
+      - Fri, 02 Aug 2019 15:13:38 GMT
+      Server:
+      - AmazonS3
+      Date:
+      - Mon, 02 Sep 2019 15:35:07 GMT
+      Etag:
+      - '"858a9194963a0382756e1bd086a60c2e"'
+      X-Cache:
+      - Error from cloudfront
+      Via:
+      - 1.1 0645caa18be2b3be5e4612d40f45a0ba.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - MAD50-C1
+      X-Amz-Cf-Id:
+      - g6rqcZMMMem3QrEIGXcJSg_mfBZqjugXZf_D_IyDsh-YuPY-oqazBg==
+      Age:
+      - '2940'
+    body:
+      encoding: ASCII-8BIT
+      string: <!DOCTYPE html><html><head><title>Events - Duolingo</title><meta property="description"
+        content="Meet other Duolingo learners at one of our upcoming events. Practice
+        your conversational skills and make new friends. Find an event near you."><meta
+        property="og:description" content="Meet other Duolingo learners at one of
+        our upcoming events. Practice your conversational skills and make new friends.
+        Find an event near you."><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"><noscript><meta
+        http-equiv="refresh" content="0; url=/nojs/splash"></noscript><meta name="apple-mobile-web-app-capable"
+        content="yes"><link rel="shortcut icon" type="image/x-icon" href="//d35aaqx5ub95lt.cloudfront.net/favicon.ico"><link
+        href="/css/ltr-f7ec318a.css" rel="stylesheet"><link rel="manifest" href="/gcm/manifest.json"><meta
+        name="google-site-verification" content="GjKxQR1HJGuT7guZUueElBU4OCX-lrXIgCHb2IyxHOE"></head><body><div
+        id="root"></div><script src="/js/app-8b3b7037.js"></script></body></html>
+    http_version: 
+  recorded_at: Mon, 02 Sep 2019 15:41:07 GMT
+recorded_with: VCR 5.0.0
