@@ -29,7 +29,7 @@ gem 'fullcalendar-rails'
 gem 'icalendar'
 gem 'momentjs-rails'
 
-gem 'devise', '~> 4.2'
+gem 'devise', '>= 4.7.1'
 gem 'mini_magick'
 gem 'omniauth-facebook'
 gem 'pg', '~> 1.1', '>= 1.1.3'
@@ -84,7 +84,7 @@ gem 'sitemap_generator'
 gem 'timezone', '~> 1.0'
 gem 'trix-rails', require: 'trix'
 gem 'httparty'
-gem 'nokogiri'
+gem 'nokogiri', ">= 1.10.4"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
