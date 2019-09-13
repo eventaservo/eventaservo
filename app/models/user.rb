@@ -55,6 +55,10 @@ class User < ApplicationRecord
     record.user_id == id
   end
 
+  def organiza_membro_de_evento(evento)
+    id.in? evento.organizations.joins(:uzantoj).pluck(:user_id)
+  end
+
   def liked?(record)
     !record.likes.find_by(user_id: self).nil?
   end

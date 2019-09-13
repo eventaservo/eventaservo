@@ -72,7 +72,7 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    redirect_to(event_path(@event.code), flash: { error: 'Vi ne rajtas forigi ĝin' }) && return unless current_user.owner_of(@event) || current_user.admin?
+    redirect_to(event_path(@event.code), flash: { error: 'Vi ne rajtas forigi ĝin' }) && return unless user_is_owner_or_admin(@event)
 
     # Ne vere forviŝas la eventon el la datumbazo, sed kaŝas ĝin
     @event.delete!
