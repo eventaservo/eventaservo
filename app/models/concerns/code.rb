@@ -9,7 +9,7 @@ module Code
     private
 
       def set_code
-        self.code = SecureRandom.urlsafe_base64(12)
+        self.code = SecureRandom.hex(3)
       end
   end
 end
