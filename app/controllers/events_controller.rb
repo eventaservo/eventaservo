@@ -26,11 +26,11 @@ class EventsController < ApplicationController
   def new
     if params[:from_event].present?
       origin = Event.find(params[:from_event])
-      attributes = origin.attributes.except('code', 'user_id')
+      attributes = origin.attributes.except('content', 'code', 'user_id')
       @event = Event.new(attributes)
       @event.date_start = attributes['date_start'].in_time_zone(attributes['time_zone'])
       @event.date_end = attributes['date_end'].in_time_zone(attributes['time_zone'])
-      @event.tag_list = origin.tag_list
+      @event.specolisto = origin.specolisto
       @event_organization_ids = origin.organizations.pluck(:id)
       @event.user_id = origin.user_id
     else
@@ -88,7 +88,7 @@ class EventsController < ApplicationController
     if datumoj # Signifas ke la importado sukcesi kolekti informojn kaj eraroj ne troviĝis
       evento            = Event.new(datumoj)
       evento.user_id    = current_user.id
-      evento.tag_list   = 'Alia'
+      evento.specolisto   = 'Alia'
       evento.import_url = params[:url]
       evento.save!
       redirect_to event_url(evento.code)
@@ -188,8 +188,8 @@ class EventsController < ApplicationController
         params[:event][:date_end] = merge_date_time(params[:event][:date_end], params[:time_end],
                                                     params[:event][:time_zone])
 
-        params[:event][:tag_list] = if params[:tag_list].present?
-                                      params[:tag_list].keys.collect { |k, _v| k }.join(', ')
+        params[:event][:specolisto] = if params[:specolisto].present?
+                                      params[:specolisto].keys.collect { |k, _v| k }.join(', ')
                                     else
                                       ''
                                     end
@@ -198,8 +198,8 @@ class EventsController < ApplicationController
       params[:event][:commit] = params[:commit]
 
       params.require(:event).permit(
-        :title, :description, :content, :site, :email, :date_start, :date_end, :time_zone,
-        :address, :city, :country_id, :online, :user_id, :tag_list, uploads: []
+        :title, :description, :enhavo, :site, :email, :date_start, :date_end, :time_zone,
+        :address, :city, :country_id, :online, :user_id, :specolisto, uploads: []
       )
     end
 

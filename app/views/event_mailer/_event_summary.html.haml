@@ -13,7 +13,7 @@
     %tr
       %td.content{colspan: 2}
         %p
-          - @event.tag_list.each do |tag|
+          - @event.specoj.each do |tag|
             .tag= tag
         %p= @event.description
         %p= raw @event.content

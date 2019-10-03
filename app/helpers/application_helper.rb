@@ -48,8 +48,8 @@ module ApplicationHelper
 
   # Simpligas la eventajn datojn
   def event_date(event)
-    ds = event.date_start.in_time_zone(event.time_zone)
-    de = event.date_end.in_time_zone(event.time_zone)
+    ds = event.komenca_dato
+    de = event.fina_dato
     return format_date(ds) if event.samtaga?
 
     if de.year == ds.year # Samjara

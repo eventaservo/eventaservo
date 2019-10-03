@@ -34,4 +34,10 @@ class Organization < ApplicationRecord
   def full_name
     "#{name} (#{short_name})"
   end
+
+  # Serĉas laŭ vorto la organizojn
+  #
+  def self.serchi(vorto)
+    where('unaccent(name) ilike unaccent(:v) OR unaccent(short_name) ilike unaccent(:v)', v: "%#{vorto.tr("''",'')}%")
+  end
 end

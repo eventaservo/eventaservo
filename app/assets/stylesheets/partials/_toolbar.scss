@@ -27,7 +27,7 @@
       display: -moz-box;
       -moz-box-orient: vertical;
       -moz-box-pack: center;
-      display: box;
+      display: flex;
       box-orient: vertical;
       box-pack: center;
 
@@ -47,7 +47,7 @@
         display: -moz-box;
         -moz-box-orient: vertical;
         -moz-box-pack: center;
-        display: box;
+        display: flex;
         box-orient: vertical;
         box-pack: center;
       }

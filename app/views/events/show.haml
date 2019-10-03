@@ -24,7 +24,7 @@
 
       %p= display_event_tags(@event)
 
-      .trix-content= sanitize @event.content
+      = @event.enhavo
 
       = render partial: 'kontaktoj'
       = render partial: 'uploads'

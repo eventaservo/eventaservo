@@ -10,7 +10,6 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require rails-ujs
 //= require activestorage
 //= require jquery3
 //= require jquery-ui
@@ -27,7 +26,6 @@
 //= require highcharts/modules/drilldown
 //= require leaflet
 //= require leaflet.markercluster
-//= require trix
 //= require_tree .
 
 // Tiu kono korektas la problemon de Select2 kiam ĝi estas ene de 'Modal'

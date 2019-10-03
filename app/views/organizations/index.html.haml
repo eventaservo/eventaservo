@@ -3,8 +3,25 @@
   - if user_signed_in?
     %p= link_to icon('fas', 'plus-circle', 'Krei novan organizon'), new_organization_url, class: 'small fg-color-green'
 
+  = form_tag organizations_url, method: :get, class: 'form-inline mb-3 flex-row-reverse' do
+    = button_tag icon('fas', 'search'), class: 'btn btn-sm btn-outline-link'
+    = text_field_tag :serchi, nil, class: 'search-field', placeholder: 'Serĉi'
+
+  - if params[:serchi].present?
+    .row.col-12
+      Serĉas:
+      = link_to icon('fas', 'times', params[:serchi]), organizations_url, class: 'btn btn-sm btn-link'
+
   .row
     - @organizoj.each do |organizo|
       .col-lg-4.col-md-6.col-12
         = link_to organization_url(organizo.short_name), class: 'card-link' do
           = render partial: 'organization_card', locals: { organizo: organizo }
+
+  - if @organizoj.size.zero?
+    .text-center
+      Neniu rezulto
+
+  - if defined? @pagy
+    - if @pagy.try(:pages) > 1
+      .d-flex.justify-content-center.small= raw pagy_bootstrap_nav(@pagy)

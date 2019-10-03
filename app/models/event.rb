@@ -8,6 +8,8 @@ class Event < ApplicationRecord
 
   acts_as_taggable
 
+  has_rich_text :enhavo
+
   has_many_attached :uploads
 
   include Code
@@ -205,6 +207,18 @@ class Event < ApplicationRecord
     restanta = total - parcial
     percent = (parcial.to_f / total.to_f).to_f * 100
     { total: total, parcial: parcial, restanta: restanta, percent: percent.to_i }
+  end
+
+  # Montras la specan liston kiel matrico
+  #
+  # @return [Array]
+  def specoj
+    return false if specolisto.nil?
+    specolisto.tr(' ', '').split(',')
+  end
+
+  def self.kun_speco(t)
+    where(specolisto: t)
   end
 
   private

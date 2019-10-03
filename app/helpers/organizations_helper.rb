@@ -32,7 +32,7 @@ module OrganizationsHelper
 
   def display_event_tags(event)
     content_tag(:div, class: 'event-tags') do
-      event.tags.order(:name).each do |t|
+      event.specoj.each do |t|
         concat content_tag(:span, t, class: 'badge badge-pill badge-info mr-1')
       end
     end
@@ -46,7 +46,7 @@ module OrganizationsHelper
     when 1
       '| finiĝos morgaŭ'
     else
-      "| finiĝos en #{days} tagoj"
+      "| finiĝos post #{days} tagoj"
     end
   end
 end

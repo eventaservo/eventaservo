@@ -2,20 +2,30 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `rails
+# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_19_071114) do
+ActiveRecord::Schema.define(version: 2019_09_25_123925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
   enable_extension "uuid-ossp"
+
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -100,6 +110,7 @@ ActiveRecord::Schema.define(version: 2019_07_19_071114) do
     t.uuid "uuid", default: -> { "uuid_generate_v4()" }
     t.string "time_zone", default: "Etc/UTC", null: false
     t.string "import_url", limit: 400
+    t.string "specolisto", default: "Kunveno"
     t.index "md5(content)", name: "index_events_on_content"
     t.index ["address"], name: "index_events_on_address"
     t.index ["city"], name: "index_events_on_city"
@@ -108,6 +119,7 @@ ActiveRecord::Schema.define(version: 2019_07_19_071114) do
     t.index ["deleted"], name: "index_events_on_deleted"
     t.index ["description"], name: "index_events_on_description"
     t.index ["online"], name: "index_events_on_online"
+    t.index ["specolisto"], name: "index_events_on_specolisto"
     t.index ["title"], name: "index_events_on_title"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
@@ -293,4 +305,5 @@ ActiveRecord::Schema.define(version: 2019_07_19_071114) do
     t.index ["transaction_id"], name: "index_versions_on_transaction_id"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
 end

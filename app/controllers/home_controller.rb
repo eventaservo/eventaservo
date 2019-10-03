@@ -11,7 +11,7 @@ class HomeController < ApplicationController
     end
 
     @continents    = @events.count_by_continents
-    @today_events  = @events.today.includes(:country).includes(:organizations).includes(:tags)
+    @today_events  = @events.today.includes(:country).includes(:organizations)
 
     @events = @events.not_today.includes(%i[country organizations])
 
@@ -51,7 +51,7 @@ class HomeController < ApplicationController
     @events = @events.by_country_name(params[:country]) if params[:country].present?
     @events = @events.by_city(params[:city]) if params[:city].present?
     @events = @events.lau_organizo(params[:o]) if params[:o].present?
-    @events = @events.tagged_with(params[:s]) if params[:s].present?
+    @events = @events.kun_speco(params[:s]) if params[:s].present?
     @events = Event.includes(:country).by_username(params[:username]) if params[:username].present?
   end
 

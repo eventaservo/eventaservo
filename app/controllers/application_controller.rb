@@ -24,14 +24,11 @@ class ApplicationController < ActionController::Base
       else Event.venontaj
       end
 
-    if params[:o].present?
-      @events = @events.joins(:organizations).where('organizations.short_name = ?', params[:o])
-    end
+    # Filtras laŭ organizo
+    @events = @events.joins(:organizations).where('organizations.short_name = ?', params[:o]) if params[:o].present?
 
     # Filtras per Speco
-    if params[:s].present?
-      @events = @events.tagged_with(params[:s])
-    end
+    @events = @events.kun_speco(params[:s]) if params[:s].present?
 
     # Filtras per Unutaga aŭ Plurtaga
     @events = @events.unutagaj if params[:t] == 'unutaga'

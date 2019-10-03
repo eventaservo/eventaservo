@@ -26,6 +26,8 @@ class EventMailer < ApplicationMailer
   end
 
   def notify_admins(event_id, ghisdatigho: false)
+    return false if Rails.env.development?
+
     @event = Event.find(event_id)
     if ghisdatigho
       subject = "[ES estraro] Ĝisdatiĝo: #{@event.title}"

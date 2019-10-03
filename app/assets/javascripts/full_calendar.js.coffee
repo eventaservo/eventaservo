@@ -24,6 +24,7 @@ $ ->
     titleFormat: 'D MMMM YYYY'
     listDayFormat: 'dddd, D MMMM YYYY'
     listDayAltFormat: false
+    firstDay: 1
     noEventsMessage: 'Eventoj ne okazas'
     monthNames: ['januaro', 'februaro', 'marto', 'aprilo', 'majo', 'junio', 'julio', 'aŭgusto', 'septembro', 'oktobro', 'novembro', 'decembro']
     dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Ĵaŭ', 'Ven', 'Sab']

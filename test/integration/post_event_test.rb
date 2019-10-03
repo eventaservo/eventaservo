@@ -22,7 +22,7 @@ class PostEventTest < ActionDispatch::IntegrationTest
         post '/eventoj',
              params: {
                event: {
-                 title: Faker::Book.title, description: Faker::Lorem.sentence(3), content: Faker::Lorem.paragraph(3),
+                 title: Faker::Book.title, description: Faker::Lorem.sentence, content: Faker::Lorem.paragraph,
                  city: 'Ĵoan-Pesoo', country_id: @brazilo.id, site: Faker::Internet.url,
                  date_start: '17/07/2019', date_end: '17/07/2019'
                },

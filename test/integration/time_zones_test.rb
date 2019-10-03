@@ -14,7 +14,7 @@ class TimeZonesTest < ActionDispatch::IntegrationTest
       post '/eventoj',
            params: {
              event: {
-               title: Faker::Book.title, description: Faker::Lorem.sentence(3), content: Faker::Lorem.paragraph(3),
+               title: Faker::Book.title, description: Faker::Lorem.sentence, content: Faker::Lorem.paragraph,
                city: 'Sao Paŭlo', country_id: brazilo.id, site: Faker::Internet.url,
                date_start: Time.zone.today.strftime('%d/%m/%Y'),
                date_end: Time.zone.today.strftime('%d/%m/%Y')

@@ -43,18 +43,20 @@
                 .col-4= text_field_tag(:time_end, @event.fina_horo, class: 'timemask form-control', required: true)
 
         .form-group
-          = form.label :tag_list, 'Speco'
+          = form.label :specolisto, 'Speco'
           .text-center#event_tags
             - Constants::TAGS.each do |etikedo|
               .btn-group.btn-group-toggle{'data-toggle': 'buttons'}
-                %label.btn.button-checkbox{class: "#{'active' if etikedo.in?(@event.tag_list)}" }
-                  = check_box_tag "tag_list[#{etikedo}]", 1, etikedo.in?(@event.tag_list)
+                %label.btn.button-checkbox{class: "#{'active' if (@event.specolisto.present? && etikedo.in?(@event.specoj))}" }
+                  - if @event.specolisto.present?
+                    = check_box_tag "specolisto[#{etikedo}]", 1, etikedo.in?(@event.specoj)
+                  - else
+                    = check_box_tag "specolisto[#{etikedo}]", 0
                   = etikedo
 
         .form-group
-          = form.label :content, 'Enhavo'
-          = form.hidden_field :content
-          %trix-editor{input: 'event_content', class: 'trix-content', style: 'height: 15em; overflow-y: auto;'}
+          = form.label :enhavo, 'Enhavo'
+          = form.rich_text_area :enhavo, style: 'height: 24em; overflow-y: auto;'
 
         .row
           .col-lg-6

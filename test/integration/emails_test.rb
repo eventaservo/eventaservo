@@ -9,7 +9,7 @@ class EmailsTest < ActionDispatch::IntegrationTest
   test 'informas pri problemo en evento' do
     evento = create(:evento)
     assert_enqueued_emails 1 do
-      params = { name: Faker::Name.name, email: Faker::Internet.email, message: Faker::Lorem.paragraph(6) }
+      params = { name: Faker::Name.name, email: Faker::Internet.email, message: Faker::Lorem.paragraph }
       post event_kontakti_organizanton_url(evento.code, params)
     end
 
