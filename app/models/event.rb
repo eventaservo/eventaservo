@@ -6,8 +6,6 @@ class Event < ApplicationRecord
   has_paper_trail versions: { scope: -> { order('created_at desc') } },
                   ignore: [:id]
 
-  acts_as_taggable
-
   has_rich_text :enhavo
 
   has_many_attached :uploads

@@ -1,40 +1,34 @@
 .text-center.m-2
   -# Specoj
-  .btn-group.btn-group-toggle.ml-4
+  .d-flex.justify-content-center.flex-wrap
     - Constants::TAGS.each do |tag|
       - count = @today_events.unscope(where: :specolisto).kun_speco(tag).count + @events.unscope(where: :specolisto).kun_speco(tag).count
 
       - if tag == params[:s] # Speco jam elektita
-        = link_to url_for(o: params[:o], t: params[:t], periodo: params[:periodo]), class: 'btn btn-sm mb-1 btn-info' do
-          = icon('fas', 'times', tag)
-          %span.badge.badge-light= count
+        = link_to url_for(o: params[:o], t: params[:t], periodo: params[:periodo]), class: 'badge badge-pill badge-info m-1' do
+          = icon('fas', 'times', "#{tag} (#{count})")
 
       - else # speco ne elektita
-        = link_to url_for(s: tag, o: params[:o], t: params[:t], periodo: params[:periodo]), class: 'btn btn-sm mb-1 btn-outline-info' do
-          = tag
-          %span.badge.badge-info= count
+        = link_to url_for(s: tag, o: params[:o], t: params[:t], periodo: params[:periodo]), class: 'badge badge-pill badge-light m-1' do
+          #{tag} (#{count})
 
   -# Unu/Plur-tagaj
   - unutaga_kvanto = @events.unutagaj.count + @today_events.unutagaj.count
   - plurtaga_kvanto = @events.plurtagaj.count + @today_events.plurtagaj.count
-  .btn-group.btn-group-toggle.ml-4
+  .d-flex.justify-content-center.flex-wrap
     - if params[:t] == 'unutaga'
-      = link_to url_for(s: params[:s], o: params[:o], periodo: params[:periodo]), class: 'btn btn-sm btn-info mb-1' do
+      = link_to url_for(s: params[:s], o: params[:o], periodo: params[:periodo]), class: 'badge badge-pill badge-info m-1' do
         = icon('fas', 'times', 'Unutaga')
-        %span.badge.badge-light= unutaga_kvanto if unutaga_kvanto > 0
     - else
-      = link_to url_for(t: 'unutaga', s: params[:s], o: params[:o], periodo: params[:periodo]), class: 'btn btn-sm btn-outline-info mb-1' do
+      = link_to url_for(t: 'unutaga', s: params[:s], o: params[:o], periodo: params[:periodo]), class: 'badge badge-pill badge-light m-1' do
         Unutaga
-        %span.badge.badge-info= unutaga_kvanto if unutaga_kvanto > 0
 
     - if params[:t] == 'plurtaga'
-      = link_to url_for(s: params[:s], o: params[:o], periodo: params[:periodo]), class: 'btn btn-sm btn-info mb-1' do
+      = link_to url_for(s: params[:s], o: params[:o], periodo: params[:periodo]), class: 'badge badge-pill badge-info m-1' do
         = icon('fas', 'times', 'Plurtaga')
-        %span.badge.badge-light= plurtaga_kvanto if plurtaga_kvanto > 0
     - else
-      = link_to url_for(t: 'plurtaga', s: params[:s], o: params[:o], periodo: params[:periodo]), class: 'btn btn-sm btn-outline-info mb-1' do
+      = link_to url_for(t: 'plurtaga', s: params[:s], o: params[:o], periodo: params[:periodo]), class: 'badge badge-pill badge-light m-1' do
         Plurtaga
-        %span.badge.badge-info= plurtaga_kvanto if plurtaga_kvanto > 0
 
 - if aktivaj_filtroj?
   - if aktivaj_filtroj.include? 'o'
