@@ -18,7 +18,7 @@ class EventsController < ApplicationController
 
   def show
     respond_to do |format|
-      format.html { impressionist(@event, nil, unique: [:session_hash]) }
+      format.html
       format.ics { kreas_webcal(@event) }
     end
   end

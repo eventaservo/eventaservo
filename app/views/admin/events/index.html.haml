@@ -11,10 +11,7 @@
   - @events.each do |event|
     - bg_color = (event.date_start < Time.zone.today) ? 'bg-color-gray' : nil
     = link_to event_path(event.code), class: "item-row #{bg_color}" do
-      .col
-        (#{icon('far', 'eye', event.impressionist_count)})
-
-        = event.title
+      .col= event.title
       .col= event.city
       .col= event.time_zone
       .col= event.komenca_tago
