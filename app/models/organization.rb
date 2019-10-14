@@ -12,7 +12,18 @@ class Organization < ApplicationRecord
   validates :short_name, uniqueness: { case_sensitive: false }
   validates :short_name, format: { with: /\A[a-zA-Z0-9_\-ĈĉĴĵĜĝĤĥŜŝĴĵŬŭ]*\z/, message: 'enhavas espaco(j)n aŭ nevalida(j)n signo(j)n' }
 
-  scope :by_user, ->(user) { joins(:uzantoj).where(organization_users: { user_id: user.id }) }
+  # Listas la organizatojn kiujn la uzanto rajtas aldoni al la eventoj
+  # Se la uzando estas admin, li rajtas aldoni iun ajnan organizojn
+  # @param [Model] user
+  # @return [ActiveRecordRelation]
+  #
+  def self.by_user(user)
+    if user.admin?
+      Organization.all.order(:name)
+    else
+      joins(:uzantoj).where(organization_users: { user_id: user.id })
+    end
+  end
 
   # Listigas la uzantojn kiu ESTAS administrantoj de la Organizo
   def administrantoj
