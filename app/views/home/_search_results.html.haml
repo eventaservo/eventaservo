@@ -11,4 +11,4 @@
           .text-center= display_event_tags(event)
         .row.col-md-12
           %p.small= highlight event.description, params[:query].split
-          %p.small= highlight ActionView::Base.full_sanitizer.sanitize(event.content).truncate_words(50), params[:query].split
+          %p.small= highlight ActionView::Base.full_sanitizer.sanitize(event.content), params[:query].split
