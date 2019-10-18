@@ -14,13 +14,9 @@ json.array!(@events) do |event|
   json.description "(#{event.city} - #{event.country.name}) #{event.description}"
   json.start event.komenca_dato
 
-  end_date =
-    if event.multtaga?
-      event.fina_dato + 1.day
-    else
-      event.fina_dato
-    end
-  json.end end_date
+  # FullCalendar montras la malĝustan finan tagon. Pro tio, ES aldonas unu pli tago al la fina dato
+  json.end event.multtaga? ? (event.fina_dato + 1.day) : event.fina_dato
+
   json.url event_url(event.code)
   json.color color_event(event)
 end
