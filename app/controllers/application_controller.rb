@@ -28,7 +28,10 @@ class ApplicationController < ActionController::Base
     @events = @events.joins(:organizations).where('organizations.short_name = ?', params[:o]) if params[:o].present?
 
     # Filtras per Speco
-    @events = @events.kun_speco(params[:s]) if params[:s].present?
+    if params[:s].present?
+      speco = params[:s].tr('%2C', '').tr(',', '')
+      @events = @events.kun_speco(speco)
+    end
 
     # Filtras per Unutaga aŭ Plurtaga
     @events = @events.unutagaj if params[:t] == 'unutaga'
