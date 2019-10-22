@@ -61,13 +61,20 @@ class EventsController < ApplicationController
   end
 
   def update
-    if @event.update(event_params)
-      EventMailer.nova_administranto(@event).deliver_later if @event.saved_change_to_user_id?
-      EventMailer.notify_admins(@event.id, ghisdatigho: true).deliver_later
-      @event.update_event_organizations(params[:organization_ids])
-      redirect_to event_path(@event.code), notice: 'Evento sukcese ĝisdatigita'
+    if dosier_alshutado
+      redirect_to(event_url(@event.code), flash: { error: 'Vi devas unue elekti dosieron' }) && return if params[:event].nil?
+      @event.update(params.require(:event).permit(uploads: []))
+      redirect_to event_path(@event.code)
     else
-      render :edit
+      if @event.update(event_params)
+        EventMailer.nova_administranto(@event).deliver_later if @event.saved_change_to_user_id?
+        EventMailer.notify_admins(@event.id, ghisdatigho: true).deliver_later
+        @event.update_event_organizations(params[:organization_ids])
+
+        redirect_to event_path(@event.code), notice: 'Evento sukcese ĝisdatigita'
+      else
+        render :edit
+      end
     end
   end
 
@@ -228,5 +235,9 @@ class EventsController < ApplicationController
 
     def spam_detected
       redirect_to root_path
+    end
+
+    def dosier_alshutado
+      params[:commit] == 'Sendi'
     end
 end
