@@ -2,15 +2,11 @@
   -# Specoj
   .d-flex.justify-content-center.flex-wrap
     - Constants::TAGS.each do |tag|
-      - count = @today_events.unscope(where: :specolisto).kun_speco(tag).count + @events.unscope(where: :specolisto).kun_speco(tag).count
-
       - if tag == params[:s] # Speco jam elektita
-        = link_to url_for(o: params[:o], t: params[:t], periodo: params[:periodo]), class: 'badge badge-pill badge-info m-1' do
-          = icon('fas', 'times', "#{tag} (#{count})")
+        = link_to icon('fas', 'times', tag), url_for(o: params[:o], t: params[:t], periodo: params[:periodo]), class: 'badge badge-pill badge-info m-1'
 
       - else # speco ne elektita
-        = link_to url_for(s: tag, o: params[:o], t: params[:t], periodo: params[:periodo]), class: 'badge badge-pill badge-light m-1' do
-          #{tag} (#{count})
+        = link_to tag, url_for(s: tag, o: params[:o], t: params[:t], periodo: params[:periodo]), class: 'badge badge-pill badge-light m-1'
 
   -# Unu/Plur-tagaj
   - unutaga_kvanto = @events.unutagaj.count + @today_events.unutagaj.count

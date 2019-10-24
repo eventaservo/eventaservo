@@ -215,7 +215,7 @@ class Event < ApplicationRecord
   end
 
   def self.kun_speco(t)
-    where(specolisto: t)
+    where("specolisto ilike '%#{t}%'")
   end
 
   private
