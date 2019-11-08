@@ -3,9 +3,9 @@
   - if user_signed_in?
     %p= link_to icon('fas', 'plus-circle', 'Krei novan organizon'), new_organization_url, class: 'small fg-color-green'
 
-  = form_tag organizations_url, method: :get, class: 'form-inline mb-3 flex-row-reverse' do
-    = button_tag icon('fas', 'search'), class: 'btn btn-sm btn-outline-link'
-    = text_field_tag :serchi, nil, class: 'search-field', placeholder: 'Serĉi'
+  = form_tag organizations_url, method: :get, class: 'mb-3' do
+    = text_field_tag :serchi, nil, class: 'form-control col-12', autofocus: true, placeholder: 'Serĉi'
+    -#.col-1= button_tag icon('fas', 'search'), class: 'btn btn-sm btn-outline-link'
 
   - if params[:serchi].present?
     .row.col-12
