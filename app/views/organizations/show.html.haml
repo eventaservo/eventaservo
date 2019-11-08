@@ -8,17 +8,14 @@
           = link_to icon('far', 'calendar-alt'),
             webcal_organizo_url(short_name: @organizo.short_name, protocol: :webcal, format: :ics),
             data: { target: '#webcalModal', toggle: 'modal' }
-      .d-flex.justify-content-between.small
-        %p
-          = montras_retpaghon(@organizo.url)
-          = montras_retposhtadreson(@organizo.email)
 
-        - if @organizo.country.present?
-          = link_to icon('fas', 'map-marker-alt') + ' ' + @organizo.full_address, "https://www.google.com/maps/search/?api=1&query=#{@organizo.full_address}", target: :_blank
-
-      .clearfix
+      .clearfix.mb-2
         = organization_logo(@organizo, size: :large, html_class: 'float-left mr-2')
         = @organizo.description
+      %p.small
+        = montras_retpaghon(@organizo.url) + raw('<br/>') if @organizo.url.present?
+        = montras_retposhtadreson(@organizo.email) + raw('<br/>') if @organizo.email.present?
+        = link_to icon('fas', 'map-marker-alt') + ' ' + @organizo.full_address, "https://www.google.com/maps/search/?api=1&query=#{@organizo.full_address}", target: :_blank if @organizo.country.present?
 
       .lead.mt-3 Eventoj
 

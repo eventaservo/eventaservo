@@ -59,7 +59,7 @@ class Organization < ApplicationRecord
   def full_address
     adr = []
     adr << address unless address.blank?
-    adr << city unless address.blank?
+    adr << city unless city.blank?
     adr << country.code.upcase unless country.nil?
     adr.compact.join(', ')
   end

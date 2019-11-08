@@ -30,13 +30,11 @@
 
         .row
           .form-group.col-12.col-md-6
-            = f.label :country_id, 'Lando'
-            = f.select(:country_id, options_from_collection_for_select(Country.not_online, 'id', 'name', @organizo.country_id), {}, class: 'form-control select2-input')
-
-          .form-group.col-12.col-md-6
             = f.label :city, 'Urbo (aŭ loko)'
             = f.text_field :city, class: 'form-control'
-
+          .form-group.col-12.col-md-6
+            = f.label :country_id, 'Lando'
+            = f.select(:country_id, options_from_collection_for_select(Country.not_online, 'id', 'name', @organizo.country_id), {}, class: 'form-control select2-input')
 
         .form-group
           = f.label :description, 'Priskribo'
