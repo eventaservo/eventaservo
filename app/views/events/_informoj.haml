@@ -1,13 +1,12 @@
 .box-white
   .box-header Informoj
   .box-body
-    - unless @event.online
-      %p
-        <strong>Adreso:</strong> #{link_to icon('fas', 'map-marker-alt') + ' ' + @event.address, event_map_url(@event), target: :_blank}
-        %br
-        <strong>Urbo (aŭ loko):</strong> #{@event.city} - #{@event.country.name}
-        %br
-      = render partial: 'event_map'
+    %p{style: 'line-height: 1.8em;'}
+      = montras_retpaghon(@event.site) + raw('<br/>') if @event.site.present?
+      = montras_retposhtadreson(@event.email) + raw('<br/>') if @event.email.present?
+      - unless @event.online
+        = link_to(icon('fas', 'map-marker-alt') + ' ' + @event.address, event_map_url(@event), target: :_blank) + raw('<br/>') unless @event.address.blank?
+        = render partial: 'event_map'
 
     %p.text-center
       = event_like_button(@event)

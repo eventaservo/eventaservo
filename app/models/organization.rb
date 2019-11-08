@@ -3,10 +3,14 @@
 class Organization < ApplicationRecord
   has_paper_trail
   has_one_attached :logo
+  has_rich_text :description
   has_many :organization_users, dependent: :destroy
   has_many :organization_events, dependent: :destroy
   has_many :uzantoj, through: :organization_users, source: :user
   has_many :eventoj, through: :organization_events, source: :event
+  belongs_to :country
+
+  before_validation :fix_site
 
   validates :name, :short_name, presence: true
   validates :short_name, uniqueness: { case_sensitive: false }
@@ -49,6 +53,28 @@ class Organization < ApplicationRecord
   # Serĉas laŭ vorto la organizojn
   #
   def self.serchi(vorto)
-    where('unaccent(name) ilike unaccent(:v) OR unaccent(short_name) ilike unaccent(:v)', v: "%#{vorto.tr("''",'')}%")
+    where('unaccent(name) ilike unaccent(:v) OR unaccent(short_name) ilike unaccent(:v)', v: "%#{vorto.tr("''", '')}%")
+  end
+
+  def full_address
+    adr = []
+    adr << address unless address.blank?
+    adr << city unless address.blank?
+    adr << country.code.upcase unless country.nil?
+    adr.compact.join(', ')
+  end
+
+  def fix_site
+    site = self.url
+    return if site.nil?
+
+    self.url =
+      if site[%r{\Ahttp:\/\/}] || site[%r{\Ahttps:\/\/}]
+        site.strip
+      elsif site.strip.empty?
+        nil
+      else
+        "http://#{site.strip}"
+      end
   end
 end

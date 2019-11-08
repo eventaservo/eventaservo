@@ -16,6 +16,32 @@
           = f.text_field :short_name, class: 'form-control', required: true
           %small.form-text.text-muted Ne uzu spacojn aŭ specialajn signojn. Vi rajtas uzi _ kaj -
 
+        .row
+          .form-group.col-12.col-md-6
+            = f.label :url, 'Reteja adreso (URL)'
+            = f.text_field :url, class: 'form-control'
+          .form-group.col-12.col-md-6
+            = f.label :email, 'Retpoŝtadreso'
+            = f.text_field :email, class: 'form-control', type: 'email'
+
+        .form-group
+          = f.label :address, 'Adreso'
+          = f.text_field :address, class: 'form-control'
+
+        .row
+          .form-group.col-12.col-md-6
+            = f.label :country_id, 'Lando'
+            = f.select(:country_id, options_from_collection_for_select(Country.not_online, 'id', 'name', @organizo.country_id), {}, class: 'form-control select2-input')
+
+          .form-group.col-12.col-md-6
+            = f.label :city, 'Urbo (aŭ loko)'
+            = f.text_field :city, class: 'form-control'
+
+
+        .form-group
+          = f.label :description, 'Priskribo'
+          = f.rich_text_area :description, class: 'form-control', style: 'height: 8em; overflow-y: auto;'
+
         .form-group
           .text-divider Emblemo
           %br

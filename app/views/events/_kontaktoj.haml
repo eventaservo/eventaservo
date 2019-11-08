@@ -1,7 +1,0 @@
-%br
-- if @event.email.present?
-  %p
-    <strong>Retpoŝtadreso:</strong> #{display_event_email(@event)}
-
-- if @event.site.present?
-  = link_to icon('fas', 'globe', 'Viziti la retpaĝon'), @event.site, target: :_blank, class: 'button-outline-blue'

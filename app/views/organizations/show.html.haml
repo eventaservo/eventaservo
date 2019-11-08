@@ -2,24 +2,29 @@
   .col-lg-8
     .box-white
       .lead
+        = montras_flagon(@organizo.country) unless @organizo.country.nil?
         = @organizo.name
         %span.float-right
           = link_to icon('far', 'calendar-alt'),
             webcal_organizo_url(short_name: @organizo.short_name, protocol: :webcal, format: :ics),
             data: { target: '#webcalModal', toggle: 'modal' }
+      .d-flex.justify-content-between.small
+        %p
+          = montras_retpaghon(@organizo.url)
+          = montras_retposhtadreson(@organizo.email)
 
-      = organization_logo(@organizo, size: :large)
+        - if @organizo.country.present?
+          = link_to icon('fas', 'map-marker-alt') + ' ' + @organizo.full_address, "https://www.google.com/maps/search/?api=1&query=#{@organizo.full_address}", target: :_blank
 
-      - if user_signed_in? && current_user.administranto?(@organizo)
-        .buttons-footer
-          = link_to 'Redakti organizon', edit_organization_url(@organizo.short_name), class: 'btn btn-sm btn-outline-primary'
+      .clearfix
+        = organization_logo(@organizo, size: :large, html_class: 'float-left mr-2')
+        = @organizo.description
 
-    .box-white
-      .lead Eventoj
+      .lead.mt-3 Eventoj
 
       - if @eventoj.venontaj.any?
         .text-divider Venontaj eventoj
-        %p.text-right.small
+        %p.small
           = link_to "Listigi venontajn eventojn de #{@organizo.short_name} en la ĉefa paĝo", root_url(o: @organizo.short_name)
         - @eventoj.venontaj.order(:date_start).each do |e|
           = link_to event_path(e.code), class: 'item-row small' do
@@ -34,6 +39,11 @@
           = link_to event_path(e.code), class: 'item-row small' do
             .col-5 #{event_flag e} #{e.city} - #{event_date e}
             .col #{e.title}
+
+      - if user_signed_in? && current_user.administranto?(@organizo)
+        .buttons-footer
+          = link_to 'Redakti organizon', edit_organization_url(@organizo.short_name), class: 'btn btn-sm btn-outline-primary'
+
   .col-lg-4
     = render partial: 'uzantoj'
 

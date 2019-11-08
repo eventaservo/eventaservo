@@ -95,4 +95,28 @@ module ApplicationHelper
     thumb = upload.variant(resize: '150x150').processed
     xml.enclosure url: rails_representation_url(thumb), length: upload.byte_size / 10, type: upload.content_type
   end
+
+  def montras_flagon(lando)
+    flag_icon(lando.code)
+  end
+
+  # Protektas la retadreson kontaŭ spamoj
+  def montras_retposhtadreson(retposhtadreso)
+    return if retposhtadreso.blank?
+    if user_signed_in?
+      mail_to retposhtadreso, icon('fas', 'at', retposhtadreso), subject: 'Informoj - Eventa Servo'
+    else
+      icon('fas', 'at', retposhtadreso.gsub('@', '(ĉe)'))
+    end
+  end
+
+  def montras_retpaghon(url)
+    return if url.blank?
+    text = if url.length > 40
+             url[0..40] + '...'
+           else
+             url
+           end
+    link_to icon('fas', 'globe', text), url, target: :_blank
+  end
 end

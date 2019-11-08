@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module OrganizationsHelper
-  def organization_logo(organization, size: :small)
+  def organization_logo(organization, size: :small, html_class: nil)
     return unless organization.logo.attached?
 
     size = case size
@@ -10,7 +10,7 @@ module OrganizationsHelper
            else '20x20'
            end
 
-    image_tag organization.logo.variant(resize: size), width: size
+    image_tag organization.logo.variant(resize: size), width: size, class: html_class
   end
 
   def display_organizations_for_event(event)

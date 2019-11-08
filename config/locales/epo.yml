@@ -28,6 +28,9 @@ epo:
         name: nomo
         short_name: mallonga nomo
         logo: Emblemo
+        email: retpoŝtadreso
+        country_id: lando
+        city: urbo
   date:
     abbr_day_names:
       - dim
