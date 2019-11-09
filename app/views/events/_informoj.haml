@@ -5,7 +5,7 @@
       = montras_retpaghon(@event.site) + raw('<br/>') if @event.site.present?
       = montras_retposhtadreson(@event.email) + raw('<br/>') if @event.email.present?
       - unless @event.online
-        = link_to(icon('fas', 'map-marker-alt') + ' ' + @event.address, event_map_url(@event), target: :_blank) + raw('<br/>') unless @event.address.blank?
+        = icon('fas', 'map-marker-alt', class: 'fg-color-link mr-1') + link_to(@event.address, event_map_url(@event), target: :_blank) + raw('<br/>') unless @event.address.blank?
         = render partial: 'event_map'
 
     %p.text-center

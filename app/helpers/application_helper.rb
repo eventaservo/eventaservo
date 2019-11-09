@@ -104,7 +104,7 @@ module ApplicationHelper
   def montras_retposhtadreson(retposhtadreso)
     return if retposhtadreso.blank?
     if user_signed_in?
-      mail_to retposhtadreso, icon('fas', 'at', retposhtadreso), subject: 'Informoj - Eventa Servo'
+      icon('fas', 'at', class: 'fg-color-link mr-1') + mail_to(retposhtadreso, retposhtadreso, subject: 'Informoj - Eventa Servo')
     else
       icon('fas', 'at', retposhtadreso.gsub('@', '(ĉe)'))
     end
@@ -117,6 +117,6 @@ module ApplicationHelper
            else
              url
            end
-    link_to icon('fas', 'globe', text), url, target: :_blank
+    icon('fas', 'globe', class: 'fg-color-link mr-1') + link_to(text, url, target: :_blank)
   end
 end

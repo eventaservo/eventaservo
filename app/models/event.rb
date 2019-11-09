@@ -82,7 +82,7 @@ class Event < ApplicationRecord
   end
 
   def self.by_city(city_name)
-    where('unaccent(lower(city)) in (?, ?)', city_name.normalized, city_name.downcase)
+    where('unaccent(lower(events.city)) in (?, ?)', city_name.normalized, city_name.downcase)
   end
 
   def self.grouped_by_countries

@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
     @events = @events.joins(:organizations).where('organizations.short_name = ?', params[:o]) if params[:o].present?
 
     # Filtras per Speco
-    if params[:s].present?
+    if params[:s].present? && params[:s].in?(Constants::TAGS)
       speco = params[:s].tr('%2C', '').tr(',', '')
       @events = @events.kun_speco(speco)
     end

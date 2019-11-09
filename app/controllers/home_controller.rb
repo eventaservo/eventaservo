@@ -17,7 +17,11 @@ class HomeController < ApplicationController
 
     if cookies[:vidmaniero] == 'kartoj' # Paghado
       @kvanto_venontaj_eventoj = @events.count
-      @pagy, @events = pagy(@events.not_today.includes(%i[country organizations]))
+      begin
+        @pagy, @events = pagy(@events.not_today.includes(%i[country organizations]))
+      rescue Pagy::OverflowError
+        redirect_to root_url
+      end
     end
   end
 

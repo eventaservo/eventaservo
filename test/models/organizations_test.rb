@@ -39,7 +39,7 @@ class OrganizationsTest < ActiveSupport::TestCase
     assert organizo.invalid?
   end
 
-  test 'mallong nomo devas esti unika' do
+  test 'mallonga nomo devas esti unika' do
     create(:organizo, short_name: 'tejo')
     o = build(:organizo, short_name: 'tejo')
     assert o.invalid?
