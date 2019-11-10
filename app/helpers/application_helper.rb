@@ -117,6 +117,11 @@ module ApplicationHelper
            else
              url
            end
+    text = text.tr('http[s]?://', '')
     icon('fas', 'globe', class: 'fg-color-link mr-1') + link_to(text, url, target: :_blank)
+  end
+
+  def montras_adreson(adreso, text: adreso)
+    icon('fas', 'map-marker-alt fg-color-link mr-1') + link_to(text, "https://www.google.com/maps/search/?api=1&query=#{adreso}", target: :_blank)
   end
 end

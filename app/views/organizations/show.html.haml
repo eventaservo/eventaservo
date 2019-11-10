@@ -15,7 +15,8 @@
       %p.small
         = montras_retpaghon(@organizo.url) + raw('<br/>') if @organizo.url.present?
         = montras_retposhtadreson(@organizo.email) + raw('<br/>') if @organizo.email.present?
-        = icon('fas', 'map-marker-alt fg-color-link mr-1') + link_to(@organizo.full_address, "https://www.google.com/maps/search/?api=1&query=#{@organizo.full_address}", target: :_blank) if @organizo.country.present?
+        - if @organizo.country.present? && (@organizo.country_id != 99999)
+          = montras_adreson(@organizo.full_address)
 
       .lead.mt-3 Eventoj
 
