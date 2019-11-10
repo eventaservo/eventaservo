@@ -112,12 +112,12 @@ module ApplicationHelper
 
   def montras_retpaghon(url)
     return if url.blank?
-    text = if url.length > 40
-             url[0..40] + '...'
+    text = if url.length > 50
+             url[0..50] + '...'
            else
              url
            end
-    text = text.tr('http[s]?://', '')
+    text.gsub!(/http[s]?:\/\//, '')
     icon('fas', 'globe', class: 'fg-color-link mr-1') + link_to(text, url, target: :_blank)
   end
 
