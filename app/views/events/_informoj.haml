@@ -5,7 +5,7 @@
       = montras_retpaghon(@event.site) + raw('<br/>') if @event.site.present?
       = montras_retposhtadreson(@event.email) + raw('<br/>') if @event.email.present?
       - unless @event.online
-        = montras_adreson(@event.full_address, text: @event.address)
+        = montras_adreson(@event.full_address, text: @event.address) unless @event.address.blank?
         = render partial: 'event_map'
 
     %p.text-center

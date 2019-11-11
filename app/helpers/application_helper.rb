@@ -103,8 +103,10 @@ module ApplicationHelper
   # Protektas la retadreson kontaŭ spamoj
   def montras_retposhtadreson(retposhtadreso)
     return if retposhtadreso.blank?
+
     if user_signed_in?
-      icon('fas', 'at', class: 'fg-color-link mr-1') + mail_to(retposhtadreso, retposhtadreso, subject: 'Informoj - Eventa Servo')
+      icon('fas', 'at', class: 'fg-color-link mr-1') +
+        mail_to(retposhtadreso, retposhtadreso, subject: 'Informoj - Eventa Servo')
     else
       icon('fas', 'at', retposhtadreso.gsub('@', '(ĉe)'))
     end
@@ -112,16 +114,14 @@ module ApplicationHelper
 
   def montras_retpaghon(url)
     return if url.blank?
-    text = if url.length > 50
-             url[0..50] + '...'
-           else
-             url
-           end
-    text.gsub!(/http[s]?:\/\//, '')
+
+    text = url.length > 40 ? url[0..40] + '...' : url
+    text = text.gsub(%r{http[s]?://}, '')
     icon('fas', 'globe', class: 'fg-color-link mr-1') + link_to(text, url, target: :_blank)
   end
 
   def montras_adreson(adreso, text: adreso)
-    icon('fas', 'map-marker-alt fg-color-link mr-1') + link_to(text, "https://www.google.com/maps/search/?api=1&query=#{adreso}", target: :_blank)
+    icon('fas', 'map-marker-alt fg-color-link mr-1') +
+      link_to(text, "https://www.google.com/maps/search/?api=1&query=#{adreso}", target: :_blank)
   end
 end
