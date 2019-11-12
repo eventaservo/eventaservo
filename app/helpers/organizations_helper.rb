@@ -4,11 +4,12 @@ module OrganizationsHelper
   def organization_logo(organization, size: :small, html_class: nil)
     return unless organization.logo.attached?
 
-    size = case size
-           when :large then '128x128'
-           when :medium then '48x48'
-           else '20x20'
-           end
+    size =
+      case size
+      when :large then '128x128'
+      when :medium then '48x48'
+      else '20x20'
+      end
 
     image_tag organization.logo.variant(resize: size), width: size, class: html_class
   end
@@ -42,7 +43,7 @@ module OrganizationsHelper
     days = event.tagoj[:restanta]
     case days
     when (Float::INFINITY * -1)..0
-      '| finiĝos hodiaŭ'
+      ''
     when 1
       '| finiĝos morgaŭ'
     else
