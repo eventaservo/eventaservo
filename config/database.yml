@@ -11,12 +11,12 @@
 
 development:
   adapter: postgresql
-  database: eventaservo
+  database: <%= ENV['POSTGRES_DB'] %>
   pool: 5
   timeout: 5000
-  host: localhost
-  username: <%= Rails.application.credentials.dig(:database, :development, :username) %>
-  password: <%= Rails.application.credentials.dig(:database, :development, :password) %>
+  host: <%= ENV['POSTGRES_HOST'] %>
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
 
 staging:
   adapter: postgresql

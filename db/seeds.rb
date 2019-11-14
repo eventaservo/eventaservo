@@ -259,3 +259,6 @@ Country.create!([
   { name: 'Ĉilio', code: 'cl', continent: 'Ameriko' },
   { name: 'Ĉinio', code: 'cn', continent: 'Azio' }
 ])
+
+# Kreas la administranton
+User.create(email: 'admin@eventaservo.org', password: 'administranto', country_id: Country.first.id, name: 'Administranto', username: 'admin', confirmed_at: DateTime.now)

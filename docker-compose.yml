@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+  db: 
+    image: postgres:12.0-alpine
+    env_file:
+      - .env
+    ports: 
+      - 5432:5432
+    volumes: 
+      - ./tmp/db:/var/lib/postgresql/data
+
+  redis:
+    image: redis:5.0-alpine
+    env_file: 
+      - .env
+    ports:
+      - 6379:6379
+
+  app:
+    build: .
+    env_file:
+      - .env
+    command: bundle exec rails server -b 0.0.0.0 -b 'ssl://0.0.0.0:3000?key=certs/private.key&cert=certs/certificate.crt'
+    volumes:
+      - .:/eventaservo
+    ports: 
+      - 3000:3000
+    depends_on: 
+      - db
+      - redis
+
+  worker:
+    build: .
+    env_file: 
+      - .env
+    command: bash -c "bundle exec rails jobs:work"
+    volumes:
+      - .:/eventaservo
+    depends_on:
+      - db
+      - redis
