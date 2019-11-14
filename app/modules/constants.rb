@@ -4,7 +4,7 @@ module Constants
   VERSIO = '2.3.4 (beta)'
   public_constant :VERSIO
 
-  ADMIN_EMAILS = %w[yves.nevelsteen@gmail.com].freeze
+  ADMIN_EMAILS = %w[shayani@gmail.com yves.nevelsteen@gmail.com].freeze
   public_constant :ADMIN_EMAILS
 
   TAGS = %w[Kongreso Kunveno Kurso Varbado Alia].freeze
