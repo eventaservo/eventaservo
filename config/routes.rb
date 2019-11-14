@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get '/500', to: 'errors#internal_error'
   get '/privateco', to: 'home#privateco'
   get '/license', to: 'home#privateco'
-  get '/vidmaniero/:view_style', to: 'home#view_style', as: 'view_style'
+  get '/v/:view_style', to: 'home#view_style', as: 'view_style'
   get '/prie', to: 'home#prie'
   get '/changelog', to: 'home#changelog'
   get '/rss.xml', to: 'home#feed', as: 'events_rss'
@@ -23,6 +23,11 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { sessions:           'users/sessions',
                                     registrations:      'users/registrations',
                                     omniauth_callbacks: 'users/omniauth_callbacks' }
+
+  # Mallongigoj kaj alidirektoj
+  get '/r', to: redirect('/users/sign_up')
+  get '/eventoj/:code', to: redirect('/e/%{code}')
+  get '/vidmaniero/:view_style', to: redirect('/v/%{view_style}')
 
   # API
   namespace :api do
@@ -47,7 +52,7 @@ Rails.application.routes.draw do
   # Eventoj
   get '/eventoj/importi', to: 'events#nova_importado', as: 'importi_eventon'
   post '/eventoj/importi', to: 'events#importi'
-  resources :events, path: 'eventoj', param: 'code' do
+  resources :events, path: 'e', param: 'code' do
     get 'like', to: 'likes#event', as: 'toggle_like'
     get 'participate', to: 'participants#event', as: 'toggle_participant'
     get 'follow', to: 'followers#event', as: 'toggle_follow'
