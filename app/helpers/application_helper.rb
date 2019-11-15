@@ -112,6 +112,12 @@ module ApplicationHelper
     end
   end
 
+  def montras_telefonnumeron(phone)
+    return if phone.blank?
+
+    icon('fas', 'phone', class: 'fg-color-link mr-1') + link_to(phone, "tel:#{phone}")
+  end
+
   def montras_retpaghon(url)
     return if url.blank?
 

@@ -13,6 +13,7 @@
         = organization_logo(@organizo, size: :large, html_class: 'float-left mr-2')
         = @organizo.description
       %p.small
+        = montras_telefonnumeron(@organizo.phone) + raw('<br/>') if @organizo.phone.present?
         = montras_retpaghon(@organizo.url) + raw('<br/>') if @organizo.url.present?
         = montras_retposhtadreson(@organizo.email) + raw('<br/>') if @organizo.email.present?
         - if @organizo.country.present? && (@organizo.country_id != 99999)

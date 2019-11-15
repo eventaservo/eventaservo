@@ -31,7 +31,7 @@ class EventMailer < ApplicationMailer
     @event = Event.find(event_id)
     if ghisdatigho
       subject = "[ES estraro] Ĝisdatiĝo: #{@event.title}"
-      to = 'shayani@gmail.com, yves.nevelsteen@gmail.com'
+      to = 'yves.nevelsteen@gmail.com'
     else
       subject = "[ES estraro] Nova evento: #{@event.title}"
       to = Constants::ADMIN_EMAILS
