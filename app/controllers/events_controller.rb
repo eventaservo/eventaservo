@@ -142,7 +142,7 @@ class EventsController < ApplicationController
     redirect_to root_url, flash: { error: 'Lando ne ekzistas' } if Country.find_by(name: params[:country_name]).nil?
 
     @future_events = Event.by_city(params[:city_name]).venontaj
-    @today_events  = @events.today.by_city(params[:city_name])
+    @today_events  = @events.includes(:country).today.by_city(params[:city_name])
     @events        = @events.not_today.by_city(params[:city_name])
 
     kreas_paghadon_por_karta_vidmaniero
@@ -151,7 +151,7 @@ class EventsController < ApplicationController
   def by_username
     redirect_to root_path, flash: { error: 'Uzantnomo ne ekzistas' } if User.find_by(username: params[:username]).nil?
 
-    @today_events = Event.by_username(params[:username]).today
+    @today_events = Event.includes(:country).by_username(params[:username]).today
     @events = Event.by_username(params[:username]).venontaj.not_today
   end
 
