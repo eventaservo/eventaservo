@@ -149,17 +149,17 @@ Devise.setup do |config|
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
-  config.remember_for = 1.year
+  config.remember_for = 6.months
 
   # Invalidates all the remember me tokens when the user signs out.
-  config.expire_all_remember_me_on_sign_out = true
+  config.expire_all_remember_me_on_sign_out = false
 
   # If true, extends the user's remember period when remembered via cookie.
   config.extend_remember_period = true
 
   # Options to be passed to the created cookie. For instance, you can set
   # secure: true in order to force SSL only cookies.
-  # config.rememberable_options = {}
+  config.rememberable_options = { secure: true }
 
   # ==> Configuration for :validatable
   # Range for password length.
