@@ -86,5 +86,6 @@ Rails.application.configure do
   end
 
   config.hosts << "devel.eventaservo.org"
+  config.active_job.default_url_options = { host: "devel.eventaservo.org", port: 3000, protocol: :https }
 end
 

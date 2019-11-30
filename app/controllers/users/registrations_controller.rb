@@ -69,6 +69,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private
 
     def sciigas_administrantoj
+      NovaUzantoSciigoJob.perform_now(resource)
       AdminMailer.informas("Nova uzanto registrita: #{resource.name}").deliver_later
     end
 end

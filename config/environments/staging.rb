@@ -93,4 +93,6 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.active_job.default_url_options = { host: "staging.eventaservo.org", protocol: :https }
 end
