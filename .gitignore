@@ -49,8 +49,9 @@ dump.rdb
 
 /public/packs
 /public/packs-test
-/node_modules
-/yarn-error.log
 yarn-debug.log*
 .yarn-integrity
 .env
+
+# Telegramo-agordoj
+config/es_admin_channel.conf
