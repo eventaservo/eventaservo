@@ -2,7 +2,7 @@
 
 - countries = []
 - quantity = []
-- Event.joins(:country).group('countries.name').order('count_id DESC, countries.name ASC').count(:id).map do |country, qtd|
+- Event.joins(:country).group('countries.name').order('count_id DESC, countries.name ASC').limit(15).count(:id).map do |country, qtd|
   - countries << country
   - quantity << qtd
 
@@ -10,7 +10,7 @@
   Highcharts.chart 'registered_events',
   colors: ['#28a745']
   chart: type: 'column'
-  title: text: 'Registritaj eventoj laŭ landoj'
+  title: text: 'Registritaj eventoj - 15 plej popularaj landoj'
   subtitle: text: 'Okazintaj kaj okazontaj'
   legend: enabled: false
   xAxis:
