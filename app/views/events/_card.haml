@@ -4,7 +4,7 @@
       = event_flag(event)
       = link_to event.title, event_path(event.code)
     .card-text.text-muted
-      = display_organizations_for_event(event)
+      = display_organizations_for_event(event, limited: true)
       = display_event_tags(event)
       %p
         = event_date(event)

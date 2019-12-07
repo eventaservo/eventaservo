@@ -14,10 +14,17 @@ module OrganizationsHelper
     image_tag organization.logo.variant(resize: size), width: size, class: html_class
   end
 
-  def display_organizations_for_event(event)
+  # Montras la organizojn pri la evento
+  # @param [Object] event
+  # @param [FalseClass] limited
+  def display_organizations_for_event(event, limited: false)
     content_tag(:div, class: 'organization-tags') do
-      event.organizations.each do |organization|
-        concat organization_tag(organization)
+      if limited && event.organizations.count > 1
+        concat organization_tag(event.organizations.first) + " +#{event.organizations.count - 1}"
+      else
+        event.organizations.each do |organization|
+          concat organization_tag(organization)
+        end
       end
     end
   end
