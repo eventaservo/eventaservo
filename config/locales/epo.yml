@@ -42,18 +42,18 @@ epo:
       - sab
     abbr_month_names:
       -
-      - jan.
-      - feb.
-      - mar.
-      - apr.
-      - maj.
-      - jun.
-      - jul.
-      - aŭg.
-      - sep.
-      - okt.
-      - nov.
-      - dec.
+      - jan
+      - feb
+      - mar
+      - apr
+      - maj
+      - jun
+      - jul
+      - aŭg
+      - sep
+      - okt
+      - nov
+      - dec
     day_names:
       - dimanĉo
       - lundo
