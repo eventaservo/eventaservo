@@ -50,8 +50,8 @@ Rails.application.routes.draw do
   end
 
   # Eventoj
-  get '/eventoj/importi', to: 'events#nova_importado', as: 'importi_eventon'
-  post '/eventoj/importi', to: 'events#importi'
+  get '/importi', to: 'events#nova_importado', as: 'importi_eventon'
+  post '/importi', to: 'events#importi'
   resources :events, path: 'e', param: 'code' do
     get 'like', to: 'likes#event', as: 'toggle_like'
     get 'participate', to: 'participants#event', as: 'toggle_participant'

@@ -103,7 +103,7 @@ class EventsController < ApplicationController
       redirect_to event_url(evento.code)
     else
       # Eraro okazis
-      redirect_to eventoj_importi_url, flash: { error: 'Importado malsukcesis' }
+      redirect_to importi_url, flash: { error: 'Importado malsukcesis' }
     end
   end
 

@@ -232,7 +232,7 @@ class Event < ApplicationRecord
 
     # Formatas la eventon laŭ normala formato
     def format_event_data
-      self.title = fix_title(title).strip
+      self.title = title.strip
       self.city = city.tr('/', '').strip
       self.site = fix_site(site)
       self.time_zone = 'Etc/UTC' if time_zone.empty?
@@ -245,21 +245,13 @@ class Event < ApplicationRecord
       end
 
       if latitude_changed? || longitude_changed?
-        self.time_zone = Timezone.lookup(latitude, longitude).name
+        self.time_zone = Timezone.lookup(latitude, longitude).name unless latitude.nil?
       end
 
       if date_start_changed?
         tz = TZInfo::Timezone.get(self.time_zone)
         self.date_start = tz.local_to_utc(Time.new(date_start.year, date_start.month, date_start.day, date_start.hour, date_start.min)).in_time_zone(time_zone)
         self.date_end = tz.local_to_utc(Time.new(date_end.year, date_end.month, date_end.day, date_end.hour, date_end.min)).in_time_zone(time_zone)
-      end
-    end
-
-    def fix_title(title)
-      if [title.downcase, title.upcase].include?(title)
-        title.titleize
-      else
-        title
       end
     end
 
