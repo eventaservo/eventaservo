@@ -34,6 +34,7 @@ default: &default
     - .woff2
 
   extensions:
+    - .vue
     - .mjs
     - .js
     - .sass
@@ -57,7 +58,7 @@ development:
 
   # Reference: https://webpack.js.org/configuration/dev-server/
   dev_server:
-    https: false
+    https: true
     host: localhost
     port: 3035
     public: localhost:3035
