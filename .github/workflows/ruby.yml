@@ -1,0 +1,33 @@
+name: Ruby
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Instalas Ruby 2.6
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.6.x
+
+    - name: Instalas PostgreSQL
+      run: |
+        sudo apt-get -y install postgresql postgresql-server-dev-all
+        sudo -i -u postgres psql -c 'create database es;' -U postgres
+        sudo -i -u postgres psql -c "create role es with LOGIN SUPERUSER INHERIT CREATEDB CREATEROLE REPLICATION PASSWORD 'es';"
+        sudo -i -u postgres psql -c "ALTER DATABASE es OWNER TO es;"
+        sudo -i -u postgres psql -c "grant all privileges on database es to es;"
+        cp config/database.github_ci config/database.yml
+
+    - name: Build and test with Rake
+      run: |
+        export RAILS_ENV=test
+        yarn install
+        gem install bundler
+        bundle install --jobs 4 --retry 3
+        bin/rails db:migrate
+        bundle exec rake test

@@ -91,17 +91,6 @@ class EventTest < ActiveSupport::TestCase
     assert @event.invalid?
   end
 
-  test 'korektas la titolan skribmanieron' do
-    @event.update!(title: 'GRANDA TITOLO')
-    assert_equal 'Granda Titolo', @event.title
-
-    @event.update!(title: 'malgranda titolo')
-    assert_equal 'Malgranda Titolo', @event.title
-
-    @event.update!(title: 'BONA Skribita Titolo')
-    assert_equal 'BONA Skribita Titolo', @event.title
-  end
-
   test 'retejo devas enhavi http se ankoraŭ ne havas ĝin' do
     @event.update!(site: 'google.com')
     assert_equal 'http://google.com', @event.site

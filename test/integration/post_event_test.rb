@@ -14,7 +14,7 @@ class PostEventTest < ActionDispatch::IntegrationTest
   end
 
   test 'kreas novan eventon' do
-    get '/eventoj/new'
+    get '/e/new'
     assert_response :success
 
     assert_enqueued_emails 1 do

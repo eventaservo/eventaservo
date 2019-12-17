@@ -9,9 +9,9 @@ class TimeZonesTest < ActionDispatch::IntegrationTest
     sign_in create(:uzanto)
     brazilo = create(:lando, :brazilo)
 
-    get '/eventoj/new'
+    get '/e/new'
     assert_difference('Event.count', 1) do
-      post '/eventoj',
+      post '/e',
            params: {
              event: {
                title: Faker::Book.title, description: Faker::Lorem.sentence, content: Faker::Lorem.paragraph,

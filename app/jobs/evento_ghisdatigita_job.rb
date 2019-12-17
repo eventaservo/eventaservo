@@ -2,6 +2,8 @@ class EventoGhisdatigitaJob < ApplicationJob
   queue_as :default
 
   def perform(evento)
+    return true if Rails.env == 'test'
+
     mesagho = "Evento ĝisdatigita:\n\n"
     mesagho += "<b>#{evento.title}</b>\n\n"
     mesagho += event_url(evento.code) + '/kronologio'
