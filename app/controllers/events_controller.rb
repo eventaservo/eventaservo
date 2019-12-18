@@ -26,7 +26,7 @@ class EventsController < ApplicationController
   def new
     if params[:from_event].present?
       origin = Event.find(params[:from_event])
-      attributes = origin.attributes.except('content', 'code', 'user_id')
+      attributes = origin.attributes.except('content', 'code', 'user_id', 'short_url')
       @event = Event.new(attributes)
       @event.date_start = attributes['date_start'].in_time_zone(attributes['time_zone'])
       @event.date_end = attributes['date_end'].in_time_zone(attributes['time_zone'])
