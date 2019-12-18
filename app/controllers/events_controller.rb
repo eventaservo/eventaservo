@@ -55,7 +55,7 @@ class EventsController < ApplicationController
       # EventMailer.send_notification_to_users(event_id: @event.id)
       # EventMailer.notify_admins(@event.id).deliver_later(wait: 5.minutes)
       NovaEventaSciigoJob.perform_now(@event)
-      redirect_to event_path(@event.code), flash: { notice: 'Evento sukcese kreita.' }
+      redirect_to event_path(@event.ligilo), flash: { notice: 'Evento sukcese kreita.' }
     else
       render :new
     end
@@ -63,9 +63,9 @@ class EventsController < ApplicationController
 
   def update
     if dosier_alshutado
-      redirect_to(event_url(@event.code), flash: { error: 'Vi devas unue elekti dosieron' }) && return if params[:event].nil?
+      redirect_to(event_url(@event.ligilo), flash: { error: 'Vi devas unue elekti dosieron' }) && return if params[:event].nil?
       @event.update(params.require(:event).permit(uploads: []))
-      redirect_to event_path(@event.code)
+      redirect_to event_path(@event.ligilo)
     else
       if @event.update(event_params)
         EventoGhisdatigitaJob.perform_now(@event)
@@ -73,7 +73,7 @@ class EventsController < ApplicationController
         #EventMailer.notify_admins(@event.id, ghisdatigho: true).deliver_later
         @event.update_event_organizations(params[:organization_ids])
 
-        redirect_to event_path(@event.code), notice: 'Evento sukcese ĝisdatigita'
+        redirect_to event_path(@event.ligilo), notice: 'Evento sukcese ĝisdatigita'
       else
         render :edit
       end
@@ -81,7 +81,7 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    redirect_to(event_path(@event.code), flash: { error: 'Vi ne rajtas forigi ĝin' }) && return unless user_is_owner_or_admin(@event)
+    redirect_to(event_path(@event.ligilo), flash: { error: 'Vi ne rajtas forigi ĝin' }) && return unless user_is_owner_or_admin(@event)
 
     # Ne vere forviŝas la eventon el la datumbazo, sed kaŝas ĝin
     @event.delete!
@@ -110,7 +110,7 @@ class EventsController < ApplicationController
   def delete_file
     event = Event.by_code(params[:event_code])
     event.uploads.find(params[:file_id]).purge_later
-    redirect_to event_path(event.code), flash: { success: 'Dosiero sukcese forigita' }
+    redirect_to event_path(event.ligilo), flash: { success: 'Dosiero sukcese forigita' }
   end
 
   def by_continent
@@ -164,7 +164,7 @@ class EventsController < ApplicationController
   end
 
   def kronologio
-    @evento = Event.by_code(params[:event_code])
+    @evento = Event.lau_ligilo(params[:event_code])
   end
 
   private
@@ -181,7 +181,7 @@ class EventsController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_event
-      @event = Event.by_code(params[:code])
+      @event = Event.lau_ligilo(params[:code])
       redirect_to root_path, flash: { error: 'Evento ne ekzistas' } if @event.nil?
     end
 
@@ -208,7 +208,7 @@ class EventsController < ApplicationController
 
       params.require(:event).permit(
         :title, :description, :enhavo, :site, :email, :date_start, :date_end, :time_zone,
-        :address, :city, :country_id, :online, :user_id, :specolisto, uploads: []
+        :address, :city, :country_id, :online, :user_id, :specolisto, :short_url, uploads: []
       )
     end
 

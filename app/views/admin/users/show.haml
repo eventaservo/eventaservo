@@ -3,6 +3,6 @@
 
   .lead Eventoj
   - @user.events.each do |event|
-    = link_to event_path(event.code), class: 'item-row' do
+    = link_to event_path(event.ligilo), class: 'item-row' do
       .col-6= event.title
       .col-6= format_date event.date_start

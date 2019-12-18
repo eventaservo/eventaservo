@@ -8,7 +8,7 @@
           .okazantaj-eventoj
             %h6.text-truncate
               = event_flag(evento)
-              = link_to evento.title, event_path(evento.code)
+              = link_to evento.title, event_path(evento.ligilo)
               -#= display_organizations_for_event(evento)
               -#= display_event_tags(evento)
               .small.pl-4

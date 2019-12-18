@@ -3,7 +3,7 @@
     %li.breadcrumb-item= link_to 'Mondo', root_path(s: params[:s].presence, t: params[:t].presence)
 
     - if params[:code].present? && params[:controller] == 'events'
-      - event = Event.joins(:country).find_by_code(params[:code])
+      - event = Event.joins(:country).lau_ligilo(params[:code])
       %li.breadcrumb-item= link_to event.country.continent, events_by_continent_path(event.country.continent)
       - unless event.online
         %li.breadcrumb-item= link_to event.country.name, events_by_country_path(event.country.continent, event.country.name)

@@ -25,6 +25,7 @@ class Event < ApplicationRecord
   validates :import_url, length: { maximum: 200 }
   validate :end_after_start
   validate :url_or_email
+  validates_uniqueness_of :short_url, case_sensitive: false, allow_blank: true, allow_nil: true
 
   before_save :format_event_data
 
@@ -218,6 +219,17 @@ class Event < ApplicationRecord
     where("specolisto ilike '%#{t}%'")
   end
 
+  # Liveras +short_url+ se ĝi ekzistas. Se ne, liveras +code+
+  def ligilo
+    short_url || code
+  end
+
+  # Liveras la eventon laŭ +short_url+ aŭ +code+
+  def self.lau_ligilo(dato)
+    #find_by(short_url: dato) || find_by(code: dato)
+    where("lower(short_url) = ?", dato.downcase).first || find_by(code: dato)
+  end
+
   private
 
     def end_after_start
@@ -236,6 +248,7 @@ class Event < ApplicationRecord
       self.city = city.tr('/', '').strip
       self.site = fix_site(site)
       self.time_zone = 'Etc/UTC' if time_zone.empty?
+      self.short_url = nil if self.short_url == self.code
 
       if online
         self.city = 'Reta urbo'

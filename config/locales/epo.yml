@@ -24,6 +24,7 @@ epo:
         country_id: Lando
         date_start: Komenca dato
         date_end: Fina dato
+        short_url: mallonga ligilo
       organization:
         name: nomo
         short_name: mallonga nomo

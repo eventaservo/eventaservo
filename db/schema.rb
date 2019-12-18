@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_15_141437) do
+ActiveRecord::Schema.define(version: 2019_12_11_120730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(version: 2019_11_15_141437) do
     t.string "time_zone", default: "Etc/UTC", null: false
     t.string "import_url", limit: 400
     t.string "specolisto", default: "Kunveno"
+    t.string "short_url"
     t.index "md5(content)", name: "index_events_on_content"
     t.index ["address"], name: "index_events_on_address"
     t.index ["city"], name: "index_events_on_city"

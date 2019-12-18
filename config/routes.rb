@@ -36,6 +36,11 @@ Rails.application.routes.draw do
     end
   end
 
+  # iloj
+  namespace :iloj do
+    get 'mallongilo_disponeblas', to: 'mallongilo#disponeblas'
+  end
+
   # Webcal
   namespace :webcal do
     get 'lando/:landa_kodo', to: 'webcal#lando'

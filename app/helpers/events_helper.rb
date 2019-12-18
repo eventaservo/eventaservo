@@ -5,7 +5,7 @@ module EventsHelper
     return icon('fas', 'heart', event.likes.count) unless user_signed_in?
 
     button_class = current_user.liked?(event) ? 'button-like-pressed' : 'button-like'
-    link_to event.likes.count, event_toggle_like_path(event.code), class: button_class
+    link_to event.likes.count, event_toggle_like_path(event.ligilo), class: button_class
   end
 
   def event_participant_button(event)
@@ -14,7 +14,7 @@ module EventsHelper
     end
 
     button_class = current_user.participant?(event) ? 'button-participant-pressed' : 'button-participant'
-    link_to event.participants.count, event_toggle_participant_path(event.code), class: button_class
+    link_to event.participants.count, event_toggle_participant_path(event.ligilo), class: button_class
   end
 
   def display_events_by_style

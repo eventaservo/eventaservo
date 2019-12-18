@@ -6,7 +6,7 @@
     .col-lg-4 Dato
     .col-lg-4 Loko
   - @events.each do |event|
-    = link_to event_path(event.code), class: 'item-row' do
+    = link_to event_path(event.ligilo), class: 'item-row' do
       .col-lg-4= event.title
       .col-lg-4= event_date(event)
       .col-lg-4 #{event.city} (#{event.country.name})

@@ -17,3 +17,6 @@ require("channels")
 
 require("trix")
 require("@rails/actiontext")
+
+// VueJS
+require("../src/eventoj/mallongilo")

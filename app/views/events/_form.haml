@@ -68,6 +68,9 @@
               = form.label :email, 'Retpoŝtadreso por kontakto'
               = form.email_field :email, class: 'form-control', required: @event.site.blank?
 
+        #mallongilo
+          %mallongilo{evento_rails: @event.to_json}
+
         .form-group.form-check
           = form.check_box :online, class: 'form-check-input'
           = form.label :online, 'Reta evento?', class: 'form-check-label'
@@ -104,7 +107,7 @@
         .buttons-footer
           - if params[:action] == 'edit'
             = link_to 'Nuligi', :back, class: 'button-cancel'
-            = link_to 'Forigi eventon', event_path(@event.code), class: 'button-outline-red float-left', method: :delete, data: { confirm: 'Ĉu vi certas? Vi ne kapablos malfari tion.' }
+            = link_to 'Forigi eventon', event_path(@event.ligilo), class: 'button-outline-red float-left', method: :delete, data: { confirm: 'Ĉu vi certas? Vi ne kapablos malfari tion.' }
           - if params[:action] == 'new'
             = link_to 'Nuligi', root_path, class: 'button-cancel'
           = form.submit 'Registri', class: 'button-submit'

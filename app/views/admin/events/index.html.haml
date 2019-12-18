@@ -10,7 +10,7 @@
 
   - @events.each do |event|
     - bg_color = (event.date_start < Time.zone.today) ? 'bg-color-gray' : nil
-    = link_to event_path(event.code), class: "item-row #{bg_color}" do
+    = link_to event_path(event.ligilo), class: "item-row #{bg_color}" do
       .col= event.title
       .col= event.city
       .col= event.time_zone

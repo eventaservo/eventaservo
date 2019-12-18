@@ -28,7 +28,7 @@ module Webcal
             tzid: evento.time_zone
           ).call
           e.summary     = evento.title
-          e.description = evento.description + '\n\n' + event_url(evento.code)
+          e.description = evento.description + '\n\n' + event_url(evento.ligilo)
           e.location    = evento.full_address
         end
       end
@@ -45,7 +45,7 @@ module Webcal
           tzid: evento.time_zone
         ).call
         e.summary     = evento.title
-        e.description = evento.description + '\n\n' + event_url(evento.code)
+        e.description = evento.description + '\n\n' + event_url(evento.ligilo)
         e.location    = evento.full_address
       end
 
@@ -59,7 +59,7 @@ module Webcal
           tzid: evento.time_zone
         ).call
         e.summary     = "Komenco: #{evento.title}"
-        e.description = evento.description + '\n\n' + event_url(evento.code)
+        e.description = evento.description + '\n\n' + event_url(evento.ligilo)
         e.location    = evento.full_address
       end
 
@@ -73,7 +73,7 @@ module Webcal
           tzid: evento.time_zone
         ).call
         e.summary     = "Fino: #{evento.title}"
-        e.description = evento.description + '\n\n' + event_url(evento.code)
+        e.description = evento.description + '\n\n' + event_url(evento.ligilo)
         e.location    = evento.full_address
       end
     end

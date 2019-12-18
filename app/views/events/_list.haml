@@ -3,7 +3,7 @@
     %p
       .text-center.font-weight-bold
         = event_flag(event)
-        = link_to event.title, event_path(event.code)
+        = link_to event.title, event_path(event.ligilo)
       .text-center
         = display_organizations_for_event(event)
         %br

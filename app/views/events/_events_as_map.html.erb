@@ -10,7 +10,7 @@
     <% events.each do |event| %>
       <% if event.location_defined?  %>
         markers.addLayer(L.marker([<%= event.latitude %>, <%= event.longitude %>], { icon: <%= event_map_pin_color(event) %> })
-            .bindPopup('<strong><%= link_to event.title, event_url(event.code) %></strong><br><%= event_date(event) %><br><br><%= event.description %>'));
+            .bindPopup('<strong><%= link_to event.title, event_url(event.ligilo) %></strong><br><%= event_date(event) %><br><br><%= event.description %>'));
 
         bounds.push([<%= event.latitude %>, <%= event.longitude %>]);
       <% end %>
