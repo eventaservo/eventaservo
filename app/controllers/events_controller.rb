@@ -53,7 +53,7 @@ class EventsController < ApplicationController
     if @event.save
       @event.update_event_organizations(params[:organization_ids])
       # EventMailer.send_notification_to_users(event_id: @event.id)
-      # EventMailer.notify_admins(@event.id).deliver_later(wait: 5.minutes)
+      #EventMailer.notify_admins(@event.id).deliver_later(wait: 5.minutes)
       NovaEventaSciigoJob.perform_now(@event)
       redirect_to event_path(@event.ligilo), flash: { notice: 'Evento sukcese kreita.' }
     else
@@ -69,7 +69,7 @@ class EventsController < ApplicationController
     else
       if @event.update(event_params)
         EventoGhisdatigitaJob.perform_now(@event)
-        #EventMailer.nova_administranto(@event).deliver_later if @event.saved_change_to_user_id?
+        EventMailer.nova_administranto(@event).deliver_later if @event.saved_change_to_user_id?
         #EventMailer.notify_admins(@event.id, ghisdatigho: true).deliver_later
         @event.update_event_organizations(params[:organization_ids])
 
