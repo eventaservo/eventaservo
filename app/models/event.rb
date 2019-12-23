@@ -258,7 +258,11 @@ class Event < ApplicationRecord
       end
 
       if latitude_changed? || longitude_changed?
-        self.time_zone = Timezone.lookup(latitude, longitude).name unless latitude.nil?
+        begin
+          self.time_zone = Timezone.lookup(latitude, longitude).name unless latitude.nil?
+        rescue StandardError
+          self.time_zone = 'Etc/UTC'
+        end
       end
 
       if date_start_changed?
