@@ -58,8 +58,6 @@ Rails.application.routes.draw do
   get '/importi', to: 'events#nova_importado', as: 'importi_eventon'
   post '/importi', to: 'events#importi'
   resources :events, path: 'e', param: 'code' do
-    get 'like', to: 'likes#event', as: 'toggle_like'
-    get 'participate', to: 'participants#event', as: 'toggle_participant'
     get 'follow', to: 'followers#event', as: 'toggle_follow'
     delete 'delete_file/:file_id', to: 'events#delete_file', as: 'delete_file'
     post 'kontakti_organizanton', to: 'events#kontakti_organizanton', as: 'kontakti_organizanton'

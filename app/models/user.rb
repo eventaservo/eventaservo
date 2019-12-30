@@ -17,8 +17,6 @@ class User < ApplicationRecord
   before_save :subscribe_mailings, if: :new_record?
 
   has_many :events
-  has_many :likes, dependent: :destroy
-  has_many :participants, dependent: :destroy
   belongs_to :country, inverse_of: :users
   has_many :organization_users
   has_many :organizations, through: :organization_users # TODO: Evitinda
@@ -57,14 +55,6 @@ class User < ApplicationRecord
 
   def organiza_membro_de_evento(evento)
     id.in? evento.organizations.joins(:uzantoj).pluck(:user_id)
-  end
-
-  def liked?(record)
-    !record.likes.find_by(user_id: self).nil?
-  end
-
-  def participant?(record)
-    !record.participants.find_by(user_id: self).nil?
   end
 
   def follower?(record)

@@ -79,46 +79,6 @@
   text-align     : right;
 }
 
-.button-like {
-  @extend %button-link;
-  color: $gray;
-  &:before {
-    @extend .far;
-    content       : fa-content($fa-var-heart);
-    padding-right : 5px;
-  }
-}
-
-.button-like-pressed {
-  @extend %button-link;
-  color: $blue;
-  &:before {
-    @extend .fas;
-    content       : fa-content($fa-var-heart);
-    padding-right : 5px;
-  }
-}
-
-.button-participant {
-  @extend %button-link;
-  color : $gray;
-  &:before {
-    @extend .far;
-    content       : '\f007';
-    padding-right : 5px;
-  }
-}
-
-.button-participant-pressed {
-  @extend %button-standard;
-  color: $greenDark;
-  &:before {
-    @extend .fas;
-    content       : '\f4fc';
-    padding-right : 5px;
-  }
-}
-
 .button-contact {
   @extend %button-link;
 }

@@ -14,8 +14,6 @@ class Event < ApplicationRecord
 
   belongs_to :user
   belongs_to :country
-  has_many :participants, dependent: :destroy
-  has_many :likes, as: :likeable, dependent: :destroy
   has_many :organization_events, dependent: :destroy
   has_many :organizations, through: :organization_events
 

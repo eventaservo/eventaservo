@@ -19,7 +19,7 @@ class PostEventTest < ActionDispatch::IntegrationTest
 
     assert_enqueued_emails 1 do
       assert_difference('Event.count', 1) do
-        post '/eventoj',
+        post '/e',
              params: {
                event: {
                  title: Faker::Book.title, description: Faker::Lorem.sentence, content: Faker::Lorem.paragraph,

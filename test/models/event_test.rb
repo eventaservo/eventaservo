@@ -15,14 +15,6 @@ class EventTest < ActiveSupport::TestCase
     assert_not_nil Event.reflect_on_association(:country)
   end
 
-  test 'evento havas ŝatatojn' do
-    assert_not_nil Event.reflect_on_association(:country)
-  end
-
-  test 'evento havas partoprenantojn' do
-    assert_not_nil Event.reflect_on_association(:participants)
-  end
-
   test 'titolo necesas' do
     evento = build(:evento, title: nil)
     assert evento.invalid?

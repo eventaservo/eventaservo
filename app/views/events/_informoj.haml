@@ -8,10 +8,6 @@
         = montras_adreson(@event.full_address, text: @event.address) unless @event.address.blank?
         = render partial: 'event_map'
 
-    %p.text-center
-      = event_like_button(@event)
-      = event_participant_button(@event)
-
     %p
     .text-divider Administranto
     - if @event.organizations.any?
