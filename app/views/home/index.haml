@@ -6,7 +6,7 @@
 
   .d-flex.justify-content-between.flex-wrap
     .flex-fill
-    .flex-fill= render partial: 'home/shortcuts'
+    -#.flex-fill= render partial: 'home/shortcuts'
     .flex-fill
       #search_container
         = form_tag search_path, id: 'search_form', remote: true do
