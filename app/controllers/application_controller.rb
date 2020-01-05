@@ -52,6 +52,15 @@ class ApplicationController < ActionController::Base
   end
   helper_method :user_can_edit_event?
 
+  def last_6_months_label
+    array = []
+    5.downto(0) do |m|
+      array << (Time.zone.today - m.months).end_of_month.strftime('%b-%y')
+    end
+    array
+  end
+  helper_method :last_6_months_label
+
   private
 
     def set_raven_context

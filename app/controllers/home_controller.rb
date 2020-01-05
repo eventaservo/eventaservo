@@ -75,6 +75,23 @@ class HomeController < ApplicationController
   end
 
   def statistics
+    respond_to do |format|
+      format.html
+      format.json do
+        case params[:q]
+        when 'registritaj_eventoj'
+          render json: kalkulas_registritajn_eventojn
+        when 'kvanto_registritaj_uzantoj'
+          render json: kalkulas_kvanton_registritaj_uzantoj
+        when 'kvanto_registritaj_eventoj'
+          render json: kalkulas_kvanton_registritaj_eventoj
+        when 'eventoj_lau_monatoj'
+          render json: kalkulas_eventojn_lau_monatoj
+        else
+          render json: { eraro: 'Ne valida diagramo' }
+        end
+      end
+    end
   end
 
   def accept_cookies
@@ -113,5 +130,63 @@ class HomeController < ApplicationController
       return if cookies[:vidmaniero].in? %w[kartoj kalendaro mapo]
 
       cookies[:vidmaniero] = { value: 'kartoj', expires: 1.year, secure: true } # Normala vidmaniero
+    end
+
+    def kalkulas_registritajn_eventojn
+      countries = []
+      quantity = []
+      Event.joins(:country).group('countries.name').order('count_id DESC, countries.name ASC').limit(15).count(:id).map do |country, qtd|
+        countries << country
+        quantity << qtd
+      end
+      { landoj: countries, kvantoj: quantity }
+    end
+
+    def kalkulas_kvanton_registritaj_uzantoj
+      quantity = []
+      quantity << User.where('created_at <= ?', (Time.zone.today - 5.months).end_of_month).count
+      quantity << User.where('created_at <= ?', (Time.zone.today - 4.months).end_of_month).count
+      quantity << User.where('created_at <= ?', (Time.zone.today - 3.months).end_of_month).count
+      quantity << User.where('created_at <= ?', (Time.zone.today - 2.months).end_of_month).count
+      quantity << User.where('created_at <= ?', (Time.zone.today - 1.month).end_of_month).count
+      quantity << User.where('created_at <= ?', Time.zone.today.end_of_month).count
+
+      { monatoj: last_6_months_label, kvantoj: quantity }
+    end
+
+    def kalkulas_kvanton_registritaj_eventoj
+      quantity = []
+      quantity << Event.where('created_at <= ?', (Time.zone.today - 5.months).end_of_month).count
+      quantity << Event.where('created_at <= ?', (Time.zone.today - 4.months).end_of_month).count
+      quantity << Event.where('created_at <= ?', (Time.zone.today - 3.months).end_of_month).count
+      quantity << Event.where('created_at <= ?', (Time.zone.today - 2.months).end_of_month).count
+      quantity << Event.where('created_at <= ?', (Time.zone.today - 1.month).end_of_month).count
+      quantity << Event.where('created_at <= ?', Time.zone.today.end_of_month).count
+
+      { monatoj: last_6_months_label, kvantoj: quantity }
+    end
+
+    def kalkulas_eventojn_lau_monatoj
+      monatoj = [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'Maj',
+        'Jun',
+        'Jul',
+        'Aŭg',
+        'Sep',
+        'Okt',
+        'Nov',
+        'Dec'
+      ]
+
+      quantity = []
+      (1..12).each do |month|
+        quantity << Event.where('extract(month from date_start) = :month OR extract(month from date_end) = :month', month: month).count
+      end
+
+      { monatoj: monatoj, kvantoj: quantity }
     end
 end
