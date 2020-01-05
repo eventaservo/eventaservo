@@ -43,8 +43,9 @@
         .buttons-footer
           = link_to 'Redakti organizon', edit_organization_url(@organizo.short_name), class: 'btn btn-sm btn-outline-primary'
 
-  .col-lg-4
-    = render partial: 'uzantoj'
+  - unless params['iframe']
+    .col-lg-4
+      = render partial: 'uzantoj'
 
 
 #webcalModal.modal.fade{ aria: { hidden: :true, labelledby: 'shareModalCenterTitle' } , role: 'dialog', tabindex: '-1' }

@@ -29,5 +29,7 @@ module Eventaservo
     config.exceptions_app = self.routes
 
     config.active_job.queue_adapter = :delayed_job
+
+    config.action_dispatch.default_headers = { 'X-Frame-Options' => 'ALLOWALL' }
   end
 end

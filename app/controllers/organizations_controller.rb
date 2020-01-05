@@ -16,6 +16,12 @@ class OrganizationsController < ApplicationController
   # Montras organizajn informojn
   def show
     @eventoj = Event.lau_organizo(params[:short_name])
+
+    if params['iframe'].present?
+      render :show, layout: 'iframe'
+    else
+      render :show
+    end
   end
 
   def new
