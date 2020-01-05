@@ -1,8 +1,0 @@
-- if @event.location_defined?
-  #map.event-map
-    :javascript
-      var map = L.map('map').setView([#{@event.latitude}, #{@event.longitude}], 15);
-      L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png?lang=eo', {
-        attribution: '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a>'
-      }).addTo(map);
-      L.marker([#{@event.latitude}, #{@event.longitude}]).addTo(map);

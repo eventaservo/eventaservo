@@ -1,4 +1,5 @@
 import Vue from "vue/dist/vue.esm"
+import EventaMapo from "../components/eventoj/EventaMapo"
 
 // import Loading from "vue-loading-overlay"
 // import "vue-loading-overlay/dist/vue-loading.css"
@@ -8,13 +9,14 @@ import Vue from "vue/dist/vue.esm"
 // })
 
 document.addEventListener("DOMContentLoaded", () => {
+  Vue.component("eventa-mapo", EventaMapo)
+
   const app = new Vue({
     el: "#app",
     name: "app",
     data: {
       texto: "APP data"
     },
-    components: {
-    }
+    components: {}
   })
 })
