@@ -28,10 +28,3 @@
         .modal-footer
           %button.btn.btn-sm.btn-outline-secondary{'data-dismiss' => 'modal', type: 'button'} Nuligi
           = submit_tag 'Sendi', class: 'button-submit'
-
-:coffee
-  $('#problemoModal').on 'shown.bs.modal', ->
-    if $('#name').val() == ""
-      $('#name').focus()
-    else
-      $('#message').focus()
