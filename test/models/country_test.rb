@@ -43,4 +43,9 @@ class CountryTest < ActiveSupport::TestCase
     create(:lando, :cehio)
     assert_equal 'Ĉeĥio', Country.by_name('cxehxio').name
   end
+
+  test 'serĉas landon Ĉeĥio (kaj similaj) per unaccent' do
+    create(:lando, :cehio)
+    assert_not_nil Country.by_name('Ĉeĥio')
+  end
 end

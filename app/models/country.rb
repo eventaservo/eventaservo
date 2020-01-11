@@ -20,7 +20,7 @@ class Country < ApplicationRecord
 
   # Ĝusta nomo de la lando, ne gravas la ortografion
   def self.by_name(name)
-    record = where('unaccent(lower(countries.name)) = ?', name.normalized)
+    record = where('lower(unaccent(countries.name)) = ?', name.normalized)
     record.first if record.any?
   end
 

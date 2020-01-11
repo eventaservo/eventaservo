@@ -144,7 +144,7 @@ class EventsController < ApplicationController
     redirect_to root_url, flash: { error: 'Lando ne ekzistas' } if Country.find_by(name: params[:country_name]).nil?
 
     @future_events = Event.by_city(params[:city_name]).venontaj
-    @today_events  = @events.includes(:country).today.by_city(params[:city_name])
+    @today_events  = @events.today.includes(:country).by_city(params[:city_name])
     @events        = @events.not_today.by_city(params[:city_name])
 
     kreas_paghadon_por_karta_vidmaniero

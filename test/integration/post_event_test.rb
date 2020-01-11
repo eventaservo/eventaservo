@@ -17,22 +17,20 @@ class PostEventTest < ActionDispatch::IntegrationTest
     get '/e/new'
     assert_response :success
 
-    assert_enqueued_emails 1 do
-      assert_difference('Event.count', 1) do
-        post '/e',
-             params: {
-               event: {
-                 title: Faker::Book.title, description: Faker::Lorem.sentence, content: Faker::Lorem.paragraph,
-                 city: 'Ĵoan-Pesoo', country_id: @brazilo.id, site: Faker::Internet.url,
-                 date_start: '17/07/2019', date_end: '17/07/2019'
-               },
-               time_start: '14:00', time_end: '16:00'
-             }
-        assert_response :redirect
-        follow_redirect!
-        assert_response :success
-        assert_select 'div.flash-alert-box', /Evento sukcese kreita/
-      end
+    assert_difference('Event.count', 1) do
+      post '/e',
+           params: {
+             event: {
+               title: Faker::Book.title, description: Faker::Lorem.sentence, content: Faker::Lorem.paragraph,
+               city: 'Ĵoan-Pesoo', country_id: @brazilo.id, site: Faker::Internet.url,
+               date_start: '17/07/2019', date_end: '17/07/2019'
+             },
+             time_start: '14:00', time_end: '16:00'
+           }
+      assert_response :redirect
+      follow_redirect!
+      assert_response :success
+      assert_select 'div.flash-alert-box', /Evento sukcese kreita/
     end
 
     evento = Event.last
