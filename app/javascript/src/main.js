@@ -1,5 +1,6 @@
 import Vue from "vue/dist/vue.esm"
 import EventaMapo from "../components/eventoj/EventaMapo"
+import MapoVidmaniero from "../components/MapoVidmaniero"
 
 // import Loading from "vue-loading-overlay"
 // import "vue-loading-overlay/dist/vue-loading.css"
@@ -17,6 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
     data: {
       texto: "APP data"
     },
-    components: {}
+    components: {
+      MapoVidmaniero
+    }
   })
 })
