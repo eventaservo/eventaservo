@@ -74,6 +74,10 @@ Rails.application.routes.draw do
     get 'senlokaj_eventoj', to: 'events#senlokaj_eventoj'
     patch 'forigitaj_eventoj/restauri/:event_code', controller: 'events', action: :recover, as: 'recover_event'
     get 'analizado', to: 'analizado#index'
+    get 'analizado_lau_retumiloj', to: 'analizado#lau_retumiloj'
+    get 'analizado_lau_sistemoj', to: 'analizado#lau_sistemoj'
+    get 'analizado_lau_vidmaniero', to: 'analizado#lau_vidmaniero'
+    get 'analizado_lau_tago', to: 'analizado#lau_tago'
   end
 
   # Aldonaĵoj

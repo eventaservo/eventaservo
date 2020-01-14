@@ -1,5 +1,9 @@
 import Vue from "vue/dist/vue.esm"
 import EventaMapo from "../components/eventoj/EventaMapo"
+import LauRetumilo from "../components/analizado/LauRetumilo"
+import LauSistemo from "../components/analizado/LauSistemo"
+import LauVidmaniero from "../components/analizado/LauVidmaniero"
+import LauTago from "../components/analizado/LauTago"
 import MapoVidmaniero from "../components/MapoVidmaniero"
 
 // import Loading from "vue-loading-overlay"
@@ -19,7 +23,11 @@ document.addEventListener("DOMContentLoaded", () => {
       texto: "APP data"
     },
     components: {
-      MapoVidmaniero
+      MapoVidmaniero,
+      LauRetumilo,
+      LauSistemo,
+      LauVidmaniero,
+      LauTago
     }
   })
 })
