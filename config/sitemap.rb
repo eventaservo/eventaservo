@@ -31,18 +31,23 @@ SitemapGenerator::Sitemap.create do
   #     add article_path(article), :lastmod => article.updated_at
   #   end
 
-  # Eventoj
-  Event.find_each do |event|
-    add event_path(event.code), lastmod: event.updated_at, priority: 1.0, changefreq: 'daily'
+  # Venontaj eventoj
+  Event.venontaj.find_each do |event|
+    add event_path(event.ligilo), lastmod: event.updated_at, priority: 1.0, changefreq: 'daily'
+  end
+
+  # Pasintaj Eventoj
+  Event.pasintaj.find_each do |event|
+    add event_path(event.ligilo), lastmod: event.updated_at, priority: 0.2, changefreq: 'weekly', expires: event.updated_at + 2.weeks
   end
 
   # Landoj
   Country.find_each do |country|
-    add events_by_country_path(country.continent, country.name), changefreq: 'daily'
+    add events_by_country_path(country.continent, country.name), priority: 0.7, changefreq: 'daily'
   end
 
   # Urboj
   Event.joins(:country).select(:city, 'countries.name as lando, countries.continent').distinct(:city).order('countries.name, city').each do |city|
-    add events_by_city_path(city.continent, city.lando, city.city), changefreq: 'daily'
+    add events_by_city_path(city.continent, city.lando, city.city), priority: 0.7, changefreq: 'daily'
   end
 end
