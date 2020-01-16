@@ -37,7 +37,7 @@
 
     = auto_discovery_link_tag :rss, events_rss_url
 
-  %body
+  %body{class: "#{controller_name} #{action_name}"}
     #app
       = render partial: 'layouts/navbar'
       .container

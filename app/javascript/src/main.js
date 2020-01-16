@@ -5,6 +5,7 @@ import LauSistemo from "../components/analizado/LauSistemo"
 import LauVidmaniero from "../components/analizado/LauVidmaniero"
 import LauTago from "../components/analizado/LauTago"
 import MapoVidmaniero from "../components/MapoVidmaniero"
+import Mallongilo from "../components/eventoj/Mallongilo"
 
 // import Loading from "vue-loading-overlay"
 // import "vue-loading-overlay/dist/vue-loading.css"
@@ -27,7 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
       LauRetumilo,
       LauSistemo,
       LauVidmaniero,
-      LauTago
+      LauTago,
+      Mallongilo
     }
   })
 })
