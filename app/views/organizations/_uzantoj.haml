@@ -31,5 +31,5 @@
       .text-divider Aldoni uzanton
       = form_tag organization_aldoni_uzanton_url(@organizo.short_name) do
         .form-group
-          = select_tag(:email, options_from_collection_for_select(User.all.order(:name), :email, :name), class: 'form-control select2-input', required: true)
+          = select_tag(:id, options_from_collection_for_select(User.all.order(:name), :id, :name), class: 'form-control select2-input', required: true)
         = submit_tag 'Aldoni', class: 'button-submit col-12'

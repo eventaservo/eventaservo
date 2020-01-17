@@ -51,7 +51,7 @@ class OrganizationsController < ApplicationController
   end
 
   def aldoni_uzanton
-    uzanto = User.find_by_email(params[:email])
+    uzanto = User.find(params[:id])
     organizo = Organization.find_by_short_name(params[:organization_short_name])
     redirect_to organization_url(organizo.short_name), flash: { error: 'Uzanto ne trovita' } and return if uzanto.nil?
 
