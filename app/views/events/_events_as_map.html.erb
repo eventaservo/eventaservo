@@ -1,8 +1,12 @@
 <%
   @eventoj = []
+  dup = [] # Por trovi duoblitajn eventojn (sama titolo, sama priskribo, sama urbo, tamen malsamaj datoj)
   events.each do |e|
     next unless e.location_defined?
 
+    next if [e.title, e.description, e.city].in? dup
+
+    dup << [e.title, e.description, e.city]
     @eventoj << { title: e.title, description: e.description, latitude: e.latitude, longitude: e.longitude, ligilo: event_url(e.ligilo), date: event_date(e), pinColor: event_map_pin_color(e) }
   end
 %>
@@ -25,4 +29,8 @@
     <%= image_tag('leaflet_icons/pin_blue.svg', height: 24, alt: 'blua pinglo') %>
     Estontece
   </div>
+</div>
+
+<div class="d-flex justify-content-center small">
+* La mapo aperigas nur la unuan venontan eventon, se temas pri evento en la sama loko kun la sama titolo
 </div>
