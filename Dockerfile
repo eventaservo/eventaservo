@@ -1,6 +1,6 @@
 FROM ruby:2.6.5
 
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
@@ -18,6 +18,7 @@ RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
 
 WORKDIR /eventaservo
 
+RUN gem install bundler
 COPY Gemfile Gemfile.lock ./
 RUN bundle install --jobs 2 --retry 3
 COPY . .
