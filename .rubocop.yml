@@ -9,9 +9,6 @@ AllCops:
 Bundler/GemComment:
   Enabled: false
 
-Rails/UniqBeforePluck:
-  Enabled: false
-
 Style/AsciiComments:
   Enabled: false
 
@@ -36,7 +33,7 @@ Style/MethodCallWithArgsParentheses:
 Style/MissingElse:
   Enabled: false
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 120
 
 Layout/IndentationConsistency:
