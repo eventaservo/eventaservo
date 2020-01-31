@@ -1,0 +1,22 @@
+.box-white
+  .text-center
+    %h1 Internacia kalendaro #{@jaro}
+    .d-flex.justify-content-around
+      = link_to("< #{@jaro - 1}", internacia_kalendaro_url(jaro: @jaro - 1), class: 'btn btn-outline-primary btn-sm')
+      %span Eventoj: #{@eventoj.count}
+      = link_to("#{@jaro + 1} >", internacia_kalendaro_url(jaro: @jaro + 1), class: 'btn btn-outline-primary btn-sm')
+
+  - @eventoj.grouped_by_months.map do |dato, eventoj|
+    %br
+    %h3.text-divider= l(dato, format: '%B').upcase
+    .row
+      - eventoj.each do |e|
+        .col-12
+          = event_flag(e)
+          %strong= link_to(e.title, event_url(e.ligilo))
+          = display_organizations_for_event(e)
+          %p.small
+            %strong #{event_date(e)} en #{e.city}
+            %br
+            = e.description
+          %hr

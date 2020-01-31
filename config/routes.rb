@@ -47,6 +47,10 @@ Rails.application.routes.draw do
     get 'o/:short_name', to: 'webcal#organizo', as: 'organizo'
   end
 
+  # Internacia kalendaro
+  get 'j/:jaro', to: 'internacia#jaro', as: 'internacia_kalendaro'
+  get '/jaro/:jaro', to: redirect('/j/%{jaro}')
+
   # Organizoj
   resources :organizations, path: 'o', param: 'short_name' do
     post 'aldoni_uzanton', to: 'organizations#aldoni_uzanton'

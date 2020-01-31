@@ -1,7 +1,10 @@
 .box-white
   .front-page-title.d-flex.justify-content-around
     = link_to image_tag('uea_emblemeto.png', height: '36px', class: 'mr-1'), prie_url, target: :_blank
-    Diskonigu esperantajn eventojn tutmonde!
+    .div
+      Diskonigu esperantajn eventojn tutmonde!
+      %br
+      = link_to "Listo de internaciaj eventoj en #{Date.today.year} →",internacia_kalendaro_url(jaro: Date.today.year), class: 'btn btn-sm btn-link'
     = link_to image_tag('tejo.svg', height: '28px', class: 'ml-1'), prie_url, target: :_blank
 
   .d-flex.justify-content-between.flex-wrap
