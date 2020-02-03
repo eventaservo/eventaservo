@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   get '/r', to: redirect('/users/sign_up')
   get '/eventoj/:code', to: redirect('/e/%{code}')
   get '/vidmaniero/:view_style', to: redirect('/v/%{view_style}')
+  get '/e/nova', to: redirect('/e/new')
 
   # API
   namespace :api do
