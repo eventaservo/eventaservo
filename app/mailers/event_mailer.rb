@@ -56,13 +56,13 @@ class EventMailer < ApplicationMailer
     @evento = Event.by_code(eventa_kodo)
     @informoj = informoj
 
-    if Rails.env.production?
-      to = @evento.user.email
-      bcc = Constants::ADMIN_EMAILS
-    else
+    # if Rails.env.production?
+    #   to = @evento.user.email
+    #   bcc = Constants::ADMIN_EMAILS
+    # else
       to = Constants::ADMIN_EMAILS
       bcc = nil
-    end
+    # end
 
     mail(to: to, bcc: bcc, reply_to: informoj[:email],
          subject: 'Informo pri via evento en Eventa Servo')
