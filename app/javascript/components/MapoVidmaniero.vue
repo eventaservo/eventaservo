@@ -11,8 +11,10 @@ export default {
   props: ["eventoj"],
   mounted () {
     const map = L.map("map")
-    L.tileLayer("https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png?lang=eo", {
-      attribution: '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a>'
+    L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXZlbnRhc2Vydm8iLCJhIjoiY2s2OGcxaWU5MDRtYzNucWZqdXRicnFpMyJ9.HRdmn4ful40N4svL9ix8vA", {
+      attribution: '<a href="http://www.mapbox.com">Mapbox</a>',
+      id: "mapbox/streets-v11",
+      access_toke: "pk.eyJ1IjoiZXZlbnRhc2Vydm8iLCJhIjoiY2s2OGcxaWU5MDRtYzNucWZqdXRicnFpMyJ9.HRdmn4ful40N4svL9ix8vA"
     }).addTo(map)
     const bounds = []
     const markers = L.markerClusterGroup({ maxClusterRadius: 20 })
