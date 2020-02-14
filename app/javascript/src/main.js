@@ -1,9 +1,5 @@
 import Vue from "vue/dist/vue.esm"
 import EventaMapo from "../components/eventoj/EventaMapo"
-import LauRetumilo from "../components/analizado/LauRetumilo"
-import LauSistemo from "../components/analizado/LauSistemo"
-import LauVidmaniero from "../components/analizado/LauVidmaniero"
-import LauTago from "../components/analizado/LauTago"
 import MapoVidmaniero from "../components/MapoVidmaniero"
 import Mallongilo from "../components/eventoj/Mallongilo"
 
@@ -15,21 +11,33 @@ import Mallongilo from "../components/eventoj/Mallongilo"
 // })
 
 document.addEventListener("DOMContentLoaded", () => {
-  Vue.component("eventa-mapo", EventaMapo)
+  if (document.getElementById("vue-eventa-mapo")) {
+    const eventaMapo = new Vue({
+      el: "#vue-eventa-mapo",
+      name: "Eventa mapo",
+      components: {
+        EventaMapo
+      }
+    })
+  }
 
-  const app = new Vue({
-    el: "#app",
-    name: "app",
-    data: {
-      texto: "APP data"
-    },
-    components: {
-      MapoVidmaniero,
-      LauRetumilo,
-      LauSistemo,
-      LauVidmaniero,
-      LauTago,
-      Mallongilo
-    }
-  })
+  if (document.getElementById("vue-mapo-vidmaniero")) {
+    const mapoVidManiero = new Vue({
+      el: "#vue-mapo-vidmaniero",
+      name: "Mapo vidmaniero",
+      components: {
+        MapoVidmaniero
+      }
+    })
+  }
+
+  if (document.getElementById("vue-mallongilo")) {
+    const mallongilo = new Vue({
+      el: "#vue-mallongilo",
+      name: "Mallongilo",
+      components: {
+        Mallongilo
+      }
+    })
+  }
 })

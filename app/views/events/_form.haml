@@ -68,7 +68,7 @@
               = form.label :email, 'Retpoŝtadreso por kontakto'
               = form.email_field :email, class: 'form-control', required: @event.site.blank?
 
-        #mallongilo
+        #vue-mallongilo
           %mallongilo{evento_rails: @event.to_json}
 
         .form-group.form-check

@@ -37,20 +37,19 @@
     = auto_discovery_link_tag :rss, events_rss_url
 
   %body{class: "#{controller_name} #{action_name}"}
-    #app
-      = render partial: 'layouts/navbar'
-      .container
-        = yield
-        .row
-        - flash.each do |key, value|
-          - next unless value.is_a? String
+    = render partial: 'layouts/navbar'
+    .container
+      = yield
+      .row
+      - flash.each do |key, value|
+        - next unless value.is_a? String
 
-          #flash{class: "flash-alert-box alert #{flash_class(key.to_sym)}", role: 'alert', style: ''}
-            %button.close{'data-dismiss' => 'alert', type: 'button'}
-              %span{'aria-hidden' => 'true'} ×
-              %span.sr-only Close
-            = value
-      %br
-      -#= render 'layouts/cookies_bar' unless cookies[:akceptas_ga].present?
-      = render partial: 'layouts/footer'
-      = render partial: 'layouts/analizo'
+        #flash{class: "flash-alert-box alert #{flash_class(key.to_sym)}", role: 'alert', style: ''}
+          %button.close{'data-dismiss' => 'alert', type: 'button'}
+            %span{'aria-hidden' => 'true'} ×
+            %span.sr-only Close
+          = value
+    %br
+    -#= render 'layouts/cookies_bar' unless cookies[:akceptas_ga].present?
+    = render partial: 'layouts/footer'
+    = render partial: 'layouts/analizo'
