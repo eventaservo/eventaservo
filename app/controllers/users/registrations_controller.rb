@@ -12,7 +12,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    super
+    redirect_to root_url
+    # super
   end
 
   # GET /resource/edit
