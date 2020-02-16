@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   # Internacia kalendaro
   get 'j/:jaro', to: 'internacia#jaro', as: 'internacia_kalendaro'
   get '/jaro/:jaro', to: redirect('/j/%{jaro}')
+  get '/eventoj-hu', to: redirect('/j/2020?eventoj=hu')
 
   # Organizoj
   resources :organizations, path: 'o', param: 'short_name' do

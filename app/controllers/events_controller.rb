@@ -158,6 +158,11 @@ class EventsController < ApplicationController
   end
 
   def kontakti_organizanton
+    unless params[:sekurfrazo].strip.downcase == 'esperanto'
+      ligilo = Event.by_code(params[:event_code]).ligilo
+      redirect_to(event_url(ligilo), flash: { error: 'Sekurfrazo ne valida' }) and return
+    end
+
     informoj = { name: params[:name], email: params[:email], message: params[:message] }
     EventMailer.kontakti_organizanton(params[:event_code], informoj).deliver_later
     redirect_to event_url(params[:event_code]), flash: { info: 'Mesaĝo sendita' }
