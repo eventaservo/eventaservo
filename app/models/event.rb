@@ -247,7 +247,7 @@ class Event < ApplicationRecord
       self.city = city.tr('/', '').strip
       self.site = fix_site(site)
       self.time_zone = 'Etc/UTC' if time_zone.empty?
-      self.short_url = nil if self.short_url == self.code
+      self.short_url = nil if self.short_url == self.code || self.short_url.strip.empty?
 
       if online
         self.city = 'Reta urbo'
