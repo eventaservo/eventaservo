@@ -106,8 +106,8 @@
 
         .buttons-footer
           - if params[:action] == 'edit'
-            = link_to 'Nuligi', :back, class: 'button-cancel'
-            = link_to 'Forigi eventon', event_path(@event.ligilo), class: 'button-outline-red float-left', method: :delete, data: { confirm: 'Ĉu vi certas? Vi ne kapablos malfari tion.' }
+            = link_to 'Ne registri', :back, class: 'button-cancel'
+            = link_to 'Forigi', event_path(@event.ligilo), class: 'button-outline-red float-left', method: :delete, data: { confirm: 'Ĉu vi certas? Vi ne kapablos malfari tion.' }
           - if params[:action] == 'new'
-            = link_to 'Nuligi', root_path, class: 'button-cancel'
+            = link_to 'Ne registri', root_path, class: 'button-cancel'
           = form.submit 'Registri', class: 'button-submit'

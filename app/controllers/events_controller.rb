@@ -88,6 +88,17 @@ class EventsController < ApplicationController
     redirect_to root_url, flash: { error: 'Evento sukcese forigita' }
   end
 
+  def nuligi
+    e = Event.lau_ligilo(params[:event_code])
+    e.update(cancelled: true, cancel_reason: params[:cancel_reason])
+    redirect_to event_url(params[:event_code])
+  end
+
+  def malnuligi
+    e = Event.lau_ligilo(params[:event_code])
+    e.update(cancelled: false, cancel_reason: nil)
+    redirect_to event_url(params[:event_code])
+  end
 
   def nova_importado
   end

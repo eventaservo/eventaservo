@@ -39,6 +39,7 @@ class ApplicationController < ActionController::Base
   end
 
   def user_can_edit_event?(user:, event:)
+    return false unless current_user
     return true if user.admin?
     return true if user.owner_of(event)
 

@@ -66,9 +66,19 @@
   }
 }
 
-.button-outline-red, .button-cancel {
+.button-outline-red {
   @extend %button-standard;
   @extend .btn-outline-danger;
+}
+
+.button-cancel {
+  @extend %button-standard;
+  @extend .btn-link;
+  @extend .fg-color-gray;
+
+  &:hover {
+    @extend .fg-color-red;
+  }
 }
 
 .buttons-footer {

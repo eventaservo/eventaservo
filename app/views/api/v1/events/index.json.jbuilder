@@ -12,6 +12,8 @@ json.array!(@events) do |event|
   json.retpoŝtadreso event.email.presence
   json.organizoj event.organizations.pluck(:name) if event.organizations.any?
   json.specoj event.specoj
+  json.nuligita event.cancelled
+  json.nuligkialo event.cancel_reason
 
   if event.online
     json.reta true

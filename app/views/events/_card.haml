@@ -2,7 +2,7 @@
   .card-body
     %h5.card-title
       = event_flag(event)
-      = link_to event.title, event_path(event.ligilo)
+      = link_to event.title, event_path(event.ligilo), class: ("cancelled" if event.cancelled)
     .card-text.text-muted
       = display_organizations_for_event(event, limited: true)
       = display_event_tags(event)

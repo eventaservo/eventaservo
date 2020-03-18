@@ -65,6 +65,7 @@ module ApplicationHelper
 
   # Elektas la eventkoloron
   def color_event(event)
+    return 'red' if event.cancelled
     return 'purple' if event.online
 
     if event.date_end < Time.zone.today # pasintaj eventoj estas grizaj

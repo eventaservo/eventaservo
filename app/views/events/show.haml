@@ -10,12 +10,16 @@
     .box-white{class: event_color_class(@event)}
       .lead.d-flex
         %div
-          #{event_flag(@event)} #{@event.title}
+          #{event_flag(@event)} <span class="#{'cancelled' if @event.cancelled}">#{@event.title}</span>
         .ml-auto
           = link_to icon('far', 'calendar-alt'), event_url(@event.code, format: :ics),
             data: { toggle: 'tooltip', placement: 'top', title: 'Alklaku por aldoni ĝin al via kalendaro' }
           = render partial: 'share_button'
 
+      - if @event.cancelled
+        .alert.alert-danger
+          %b NULIGITA
+          = @event.cancel_reason
       #div
         .ml-2.float-right
           = render partial: 'kalendareto', locals: { event: @event }
@@ -27,12 +31,18 @@
       = @event.enhavo
 
       = render partial: 'uploads'
-      .text-right= render partial: 'informi_pri_problemo'
-      - if user_signed_in?
-        .buttons-footer
-          = link_to icon('far', 'copy', 'Duobligi eventon'), new_event_url(from_event: @event), class: 'btn btn-sm btn-outline-success'
-          - if user_can_edit_event?(user: current_user, event: @event)
-            = link_to icon('far', 'edit', 'Redakti eventon'), edit_event_url(@event.ligilo), class: 'btn btn-sm btn-outline-primary'
+
+      .buttons-footer.d-flex
+        .mr-auto
+          = render partial: 'informi_pri_problemo'
+          - if user_signed_in? && user_can_edit_event?(user: current_user, event: @event)
+            = render partial: 'nuligilo_modal'
+
+        .ml-auto
+          - if user_signed_in?
+            = link_to icon('far', 'copy', 'Duobligi'), new_event_url(from_event: @event), class: 'btn btn-sm btn-outline-success'
+            - if user_can_edit_event?(user: current_user, event: @event)
+              = link_to icon('far', 'edit', 'Redakti'), edit_event_url(@event.ligilo), class: 'btn btn-sm btn-outline-primary'
 
   .col-lg-4
     = render partial: 'informoj'

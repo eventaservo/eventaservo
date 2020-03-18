@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_11_120730) do
+ActiveRecord::Schema.define(version: 2020_03_15_132748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,8 +112,11 @@ ActiveRecord::Schema.define(version: 2019_12_11_120730) do
     t.string "import_url", limit: 400
     t.string "specolisto", default: "Kunveno"
     t.string "short_url"
+    t.boolean "cancelled", default: false
+    t.text "cancel_reason"
     t.index "md5(content)", name: "index_events_on_content"
     t.index ["address"], name: "index_events_on_address"
+    t.index ["cancelled"], name: "index_events_on_cancelled"
     t.index ["city"], name: "index_events_on_city"
     t.index ["date_end"], name: "index_events_on_date_end"
     t.index ["date_start"], name: "index_events_on_date_start"

@@ -8,9 +8,7 @@
           .okazantaj-eventoj
             %h6.text-truncate
               = event_flag(evento)
-              = link_to evento.title, event_path(evento.ligilo)
-              -#= display_organizations_for_event(evento)
-              -#= display_event_tags(evento)
+              = link_to evento.title, event_path(evento.ligilo), class: ("cancelled" if evento.cancelled)
               .small.pl-4
                 = evento.online ? 'Enreta' : "#{evento.city} (#{evento.country.code.upcase})"
                 = display_event_days_left(evento)

@@ -31,6 +31,8 @@ module EventsHelper
   end
 
   def event_map_pin_color(event)
+    return 'redIcon' if event.cancelled
+
     case days_to_event(event)
     when -30..0 then 'greenIcon'
     when 1..7 then 'orangeIcon'
