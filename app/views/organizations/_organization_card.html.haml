@@ -1,11 +1,9 @@
-.card.mb-3
-  .card-header.text-truncate.text-center
+= link_to organization_url(organizo.short_name), class: "es-list__row" do
+  .col-lg-1.col-2
+    = organization_logo(organizo, size: :medium)
+  .col-lg-9.col-6.align-self-center
     = organizo.name
-  .card-body.pb-1
-    .d-flex.justify-content-center.align-items-center{style: 'height: 128px'}
-      = organization_logo(organizo, size: :large)
-
-    .text-muted.small
-      .d-flex.justify-content-around
-        %span= icon('far', 'calendar', organizo.eventoj.count)
-        %span= icon('fas', 'users', organizo.uzantoj.count)
+  .col-lg-1.col-2.text-center.align-self-center
+    = organizo.eventoj.count
+  .col-lg-1.col-2.text-center.align-self-center
+    = organizo.uzantoj.count

@@ -54,6 +54,9 @@ Rails.application.routes.draw do
   get '/eventoj-hu', to: redirect('/j/2020?eventoj=hu')
 
   # Organizoj
+  defaults format: :json do
+    get '/o/partneroj.json', to: 'organizations#partneroj'
+  end
   resources :organizations, path: 'o', param: 'short_name' do
     post 'aldoni_uzanton', to: 'organizations#aldoni_uzanton'
     get 'estrighu/:username', to: 'organizations#estrighu', as: 'estrighu'
