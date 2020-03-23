@@ -26,3 +26,9 @@ $ ->
       delay (->
         $.get $('#search_form').attr('action'), $('#search_form').serialize(), null, 'script'
       ), 500
+
+  # Organiza serĉilo
+  $('#o_search_form input').keyup (event)->
+    delay (->
+      $.get $('#o_search_form').attr('action'), $('#o_search_form').serialize(), null, 'script'
+    ), 500

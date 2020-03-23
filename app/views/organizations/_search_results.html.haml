@@ -1,0 +1,16 @@
+.es-list__headers.align-items-center
+  .col-8.col-lg-10 Nomo
+  .col-2.col-lg-1 Eventoj
+  .col-2.col-lg-1 Membroj
+
+- @organizoj.each do |organizo|
+  = render partial: 'organization_card', locals: { organizo: organizo }
+
+- if @organizoj.size.zero?
+  .text-center
+    Neniu rezulto
+
+- if defined? @pagy
+  - if @pagy.try(:pages) > 1
+    .d-flex.justify-content-center.small.pt-3
+      = raw pagy_bootstrap_nav(@pagy)

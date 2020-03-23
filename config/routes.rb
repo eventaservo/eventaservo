@@ -57,6 +57,7 @@ Rails.application.routes.draw do
   defaults format: :json do
     get '/o/partneroj.json', to: 'organizations#partneroj'
   end
+  get '/o/search', to: 'organizations#search', as: 'organization_search'
   resources :organizations, path: 'o', param: 'short_name' do
     post 'aldoni_uzanton', to: 'organizations#aldoni_uzanton'
     get 'estrighu/:username', to: 'organizations#estrighu', as: 'estrighu'

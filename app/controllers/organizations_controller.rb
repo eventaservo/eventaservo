@@ -13,6 +13,13 @@ class OrganizationsController < ApplicationController
     @pagy, @organizoj = pagy(@organizoj)
   end
 
+  def search
+    respond_to :js
+    @organizoj = Organization.includes(:logo_attachment).order(:name)
+    @organizoj = @organizoj.serchi(params[:serchi])
+    @pagy, @organizoj = pagy(@organizoj)
+  end
+
   # Montras organizajn informojn
   def show
     @eventoj = Event.lau_organizo(params[:short_name])

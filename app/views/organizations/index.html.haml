@@ -8,9 +8,11 @@
     %hr
 
   .es-list
-    %h4.text-center ORGANIZOJ
+    %h4.text-center
+      %i.fas.fa-users.fg-color-info
+      ORGANIZOJ
 
-    = form_tag organizations_url, method: :get, class: 'mb-3' do
+    = form_tag organization_search_url, method: :get, id: 'o_search_form', remote: true, class: 'mb-3' do
       = text_field_tag :serchi, nil, class: 'form-control col-12', autofocus: true, placeholder: 'Serĉi organizon'
 
     - if params[:serchi].present?
@@ -18,18 +20,6 @@
         Serĉas:
         = link_to icon('fas', 'times', params[:serchi]), organizations_url, class: 'btn btn-sm btn-link'
 
-    .es-list__headers.align-items-center
-      .col-8.col-lg-10 Nomo
-      .col-2.col-lg-1 Eventoj
-      .col-2.col-lg-1 Membroj
+    #o_search_results
+      = render partial: "organizations/search_results"
 
-    - @organizoj.each do |organizo|
-      = render partial: 'organization_card', locals: { organizo: organizo }
-
-  - if @organizoj.size.zero?
-    .text-center
-      Neniu rezulto
-
-  - if defined? @pagy
-    - if @pagy.try(:pages) > 1
-      .d-flex.justify-content-center.small= raw pagy_bootstrap_nav(@pagy)
