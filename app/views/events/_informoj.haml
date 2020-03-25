@@ -13,7 +13,11 @@
     %p
     .text-divider Administranto
     - if @event.organizations.any?
-      .text-center{style: 'font-size: 1.3em;'}= display_organizations_for_event(@event, full_name: true)
+      .text-center{style: 'font-size: 1.3em;'}
+        - @event.organizations.each do |o|
+          .organization-tags
+            = link_to o.name, organization_url(o.short_name), class: 'tag text-truncate'
+          %br
     - else
       = link_to display_user(@event.user), events_by_username_path(@event.user.username), class: 'btn btn-sm btn-outline-link'
 
