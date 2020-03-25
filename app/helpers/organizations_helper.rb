@@ -17,21 +17,25 @@ module OrganizationsHelper
   # Montras la organizojn pri la evento
   # @param [Object] event
   # @param [FalseClass] limited
-  def display_organizations_for_event(event, limited: false)
+  def display_organizations_for_event(event, limited: false, full_name: false)
     content_tag(:div, class: 'organization-tags') do
       if limited && event.organizations.count > 1
-        concat organization_tag(event.organizations.first) + " +#{event.organizations.count - 1}"
+        concat organization_tag(event.organizations.first, full_name: full_name) + " +#{event.organizations.count - 1}"
       else
         event.organizations.each do |organization|
-          concat organization_tag(organization)
+          concat organization_tag(organization, full_name: full_name)
         end
       end
     end
   end
 
-  def organization_tag(organization)
+  def organization_tag(organization, full_name: false)
     link_to organization_url(organization.short_name), class: 'tag' do
-      content_tag(:div, organization.short_name)
+      if full_name
+        content_tag(:div, organization.name)
+      else
+        content_tag(:div, organization.short_name)
+      end
     end
   end
 

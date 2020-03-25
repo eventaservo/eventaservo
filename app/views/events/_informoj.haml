@@ -13,7 +13,7 @@
     %p
     .text-divider Administranto
     - if @event.organizations.any?
-      .text-center{style: 'font-size: 1.3em;'}= display_organizations_for_event(@event)
+      .text-center{style: 'font-size: 1.3em;'}= display_organizations_for_event(@event, full_name: true)
     - else
       = link_to display_user(@event.user), events_by_username_path(@event.user.username), class: 'btn btn-sm btn-outline-link'
 
