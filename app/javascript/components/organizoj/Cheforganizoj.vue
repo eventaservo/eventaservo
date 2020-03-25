@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4 class="text-center"><i class="fas fa-handshake fg-color-info"></i> PARTNERAJ ORGANIZOJ</h4>
+    <h4 class="text-center"><i class="fas fa-building fg-color-info"></i> ĈEFORGANIZOJ</h4>
     <div class="row">
       <div v-for="o in organizoj" class="col-12 col-md-6 mb-2">
         <a v-bind:href="o.url" class="card-link">
@@ -24,14 +24,14 @@
 import axios from "axios"
 
 export default {
-  name: "Partneroj",
+  name: "Ĉeforganizoj",
   data () {
     return {
       organizoj: null
     }
   },
   mounted () {
-    axios.get("/o/partneroj.json").then(response => {
+    axios.get("/o/cheforganizoj.json").then(response => {
       this.organizoj = response.data
     })
   }

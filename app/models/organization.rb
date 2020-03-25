@@ -16,9 +16,9 @@ class Organization < ApplicationRecord
   validates :short_name, uniqueness: { case_sensitive: false }
   validates :short_name, format: { with: /\A[a-zA-Z0-9_\-ĈĉĴĵĜĝĤĥŜŝĴĵŬŭÜüÀàÁáÂâÄäÅåÈèÉéÊêĘęėëÍíÎîìïÇçĆćČčŁłÓóÔôÖöØøòõōŚśŠšßÚúÜüùûÝýŹźŻżŽž]*\z/, message: 'enhavas spaco(j)n aŭ nevalida(j)n signo(j)n' }
 
-  # Partneroj estas UEA kaj TEJO
+  # Ĉeforganizoj estas UEA kaj TEJO
   # Informoj pri ili aperas ĉiam je la supra parto de Organizaj paĝo
-  scope :partneroj, -> { where(partner: true) }
+  scope :cheforganizoj, -> { where(major: true) }
 
   # Listas la organizatojn kiujn la uzanto rajtas aldoni al la eventoj
   # Se la uzando estas admin, li rajtas aldoni iun ajnan organizojn

@@ -55,7 +55,7 @@ Rails.application.routes.draw do
 
   # Organizoj
   defaults format: :json do
-    get '/o/partneroj.json', to: 'organizations#partneroj'
+    get '/o/cheforganizoj.json', to: 'organizations#cheforganizoj'
   end
   get '/o/search', to: 'organizations#search', as: 'organization_search'
   resources :organizations, path: 'o', param: 'short_name' do
