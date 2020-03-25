@@ -1,7 +1,7 @@
 - if cookies[:vidmaniero] == 'kartoj'
   - if @today_events.any?
     %br
-    %h5.text-center.font-weight-bold #{@today_events.length} okazas hodiaŭ
+    %h5.text-center.font-weight-bold #{@today_events.ne_nuligitaj.length} okazas hodiaŭ
     .row
       - @today_events.order('countries.code').each do |evento|
         .col-12.col-md-6

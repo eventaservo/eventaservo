@@ -68,6 +68,8 @@ class Event < ApplicationRecord
   scope :for_webcal, -> { where('date_start >= ? OR date_end >= ?', Time.zone.today - 6.months, Time.zone.today) }
   scope :unutagaj, -> { where('((to_timestamp(date_end::text, \'YYYY-MM-DD HH24:MI:SS\')) AT TIME ZONE(time_zone))::timestamp::date = ((to_timestamp(date_start::text, \'YYYY-MM-DD HH24:MI:SS\')) AT TIME ZONE(time_zone))::timestamp::date') }
   scope :plurtagaj, -> { where('((to_timestamp(date_end::text, \'YYYY-MM-DD HH24:MI:SS\')) AT TIME ZONE(time_zone))::timestamp::date > ((to_timestamp(date_start::text, \'YYYY-MM-DD HH24:MI:SS\')) AT TIME ZONE(time_zone))::timestamp::date') }
+  scope :nuligitaj, -> { where(cancelled: true) }
+  scope :ne_nuligitaj, -> { where(cancelled: false) }
 
   def self.by_code(code)
     find_by(code: code)
