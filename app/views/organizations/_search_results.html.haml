@@ -1,7 +1,9 @@
 .es-list__headers.align-items-center
   .col-8.col-lg-10 Nomo
-  .col-2.col-lg-1 Eventoj
-  .col-2.col-lg-1 Membroj
+  .col-2.col-lg-1
+    <i class="far fa-calendar" data-toggle="tooltip" data-placement="top" title="Eventoj"></i>
+  .col-2.col-lg-1
+    <i class="fas fa-users" data-toggle="tooltip" data-placement="top" title="Administrantoj kaj helpantoj"></i>
 
 - @organizoj.each do |organizo|
   = render partial: 'organization_card', locals: { organizo: organizo }

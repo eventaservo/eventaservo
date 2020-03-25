@@ -13,7 +13,7 @@
 
     %br
     %br
-    .text-divider Membroj
+    .text-divider Helpantoj
     - @organizo.ne_estroj.order(:name).each do |u|
       %br
       = display_user(u)
@@ -28,7 +28,7 @@
     - if user_signed_in? && current_user.administranto?(@organizo)
       %br
       %br
-      .text-divider Aldoni uzanton
+      .text-divider Aldoni
       = form_tag organization_aldoni_uzanton_url(@organizo.short_name) do
         .form-group
           = select_tag(:id, options_from_collection_for_select(User.all.order(:name), :id, :name), class: 'form-control select2-input', required: true)
