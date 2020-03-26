@@ -61,3 +61,11 @@ body {
 .monospace {
   font-family: monospace;
 }
+
+.nav-link {
+  color: white !important;
+
+  &:hover {
+    color: whitesmoke !important;
+  }
+}
