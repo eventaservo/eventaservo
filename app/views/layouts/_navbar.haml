@@ -4,10 +4,8 @@
     %span.navbar-toggler-icon
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.navbar-nav.mr-auto
-      %li.nav-item= link_to 'Ĉefpaĝo', root_url, class: 'nav-link'
+      %li.nav-item= link_to icon('fas', 'calendar-plus', 'Aldoni eventon'), new_event_path, class: 'nav-link'
 
-      %li.nav-item= link_to 'Aldoni eventon', new_event_path, class: 'nav-link'
-
-      %li.nav-item= link_to 'Organizoj', organizations_url, class: 'nav-link'
+      %li.nav-item= link_to icon('fas', 'building', 'Organizoj'), organizations_url, class: 'nav-link'
       = render partial: 'layouts/admin' if user_signed_in? && current_user.admin?
     = render partial: 'layouts/uzanto'
