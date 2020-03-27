@@ -6,6 +6,14 @@
 
 <script>
 /* global L */
+
+import PinBlue from "./../src/images/leaflet_icons/pin_blue.svg"
+import PinGreen from "./../src/images/leaflet_icons/pin_green.svg"
+import PinOrange from "./../src/images/leaflet_icons/pin_orange.svg"
+import PinRed from "./../src/images/leaflet_icons/pin_red.svg"
+import PinYellow from "./../src/images/leaflet_icons/pin_yellow.svg"
+import MarkerShadow from "./../src/images/leaflet_icons/marker-shadow.png"
+
 export default {
   name: "MapoVidmaniero",
   props: ["eventoj"],
@@ -31,8 +39,8 @@ export default {
   methods: {
     eventoPinColor: (epc) => {
       const blueIcon = new L.Icon({
-        iconUrl: require("../src/images/leaflet_icons/pin_blue.svg"),
-        shadowUrl: require("../src/images/leaflet_icons/marker-shadow.png"),
+        iconUrl: PinBlue,
+        shadowUrl: MarkerShadow,
         iconSize: [25, 41],
         iconAnchor: [12, 41],
         popupAnchor: [1, -34],
@@ -40,8 +48,8 @@ export default {
       })
 
       const greenIcon = new L.Icon({
-        iconUrl: require("../src/images/leaflet_icons/pin_green.svg"),
-        shadowUrl: require("../src/images/leaflet_icons/marker-shadow.png"),
+        iconUrl: PinGreen,
+        shadowUrl: MarkerShadow,
         iconSize: [25, 41],
         iconAnchor: [12, 41],
         popupAnchor: [1, -34],
@@ -49,8 +57,8 @@ export default {
       })
 
       const redIcon = new L.Icon({
-        iconUrl: require("../src/images/leaflet_icons/pin_red.svg"),
-        shadowUrl: require("../src/images/leaflet_icons/marker-shadow.png"),
+        iconUrl:PinRed,
+        shadowUrl: MarkerShadow,
         iconSize: [25, 41],
         iconAnchor: [12, 41],
         popupAnchor: [1, -34],
@@ -58,8 +66,8 @@ export default {
       })
 
       const orangeIcon = new L.Icon({
-        iconUrl: require("../src/images/leaflet_icons/pin_orange.svg"),
-        shadowUrl: require("../src/images/leaflet_icons/marker-shadow.png"),
+        iconUrl: PinOrange,
+        shadowUrl: MarkerShadow,
         iconSize: [25, 41],
         iconAnchor: [12, 41],
         popupAnchor: [1, -34],
@@ -67,8 +75,8 @@ export default {
       })
 
       const yellowIcon = new L.Icon({
-        iconUrl: require("../src/images/leaflet_icons/pin_yellow.svg"),
-        shadowUrl: require("../src/images/leaflet_icons/marker-shadow.png"),
+        iconUrl: PinYellow,
+        shadowUrl: MarkerShadow,
         iconSize: [25, 41],
         iconAnchor: [12, 41],
         popupAnchor: [1, -34],
