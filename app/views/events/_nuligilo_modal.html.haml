@@ -9,13 +9,13 @@
       .modal-content.text-left
 
         .modal-header
-          %h5#problemoModalCenterTitle.modal-title Nuligi eventon
-          %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
+          %h5#problemoModalCenterTitle.modal-title Nuligi la eventon
+          %button.close{'aria-label' => 'Fermi', 'data-dismiss' => 'modal', type: 'button'}
             %span{'aria-hidden' => 'true'} ×
 
         = form_tag event_nuligi_url(@event.code) do
           .modal-body{style: 'font-weight: normal; font-size: 1rem;'}
-            %p Nuligi eventon ne forigas ĝin el la listo, tamen aperigas ĝin kiel nuligita. Tiel, homoj informiĝos ke la evento ne okazos.
+            %p Nuligi la eventon ne forigas ĝin de la listo, sed aperigas ĝin kiel nuligitan. Tiel homoj informiĝos, ke la evento ne okazos.
             .form-group
               = text_field_tag :cancel_reason, '', class: 'form-control', required: true, placeholder: 'Entajpu la kialon'
 
