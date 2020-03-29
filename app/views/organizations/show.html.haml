@@ -28,7 +28,7 @@
         - @eventoj.venontaj.order(:date_start).each do |e|
           = link_to event_path(e.code), class: 'item-row small' do
             .col-5 #{event_flag e} #{e.city} - #{format_date(e.komenca_dato, style: :short)}
-            .col #{e.title}
+            .col{class: ("cancelled" if e.cancelled)} #{e.title}
 
       %br
 
@@ -37,7 +37,7 @@
         - @eventoj.pasintaj.order(date_start: :desc).each do |e|
           = link_to event_path(e.code), class: 'item-row small' do
             .col-5 #{event_flag e} #{e.city} - #{format_date(e.date_start, style: :short)}
-            .col #{e.title}
+            .col{class: ("cancelled" if e.cancelled)} #{e.title}
 
       - if user_signed_in? && current_user.administranto?(@organizo)
         .buttons-footer
