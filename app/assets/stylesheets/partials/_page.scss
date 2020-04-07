@@ -69,3 +69,21 @@ body {
     color: whitesmoke !important;
   }
 }
+
+.link-blue {
+  color: #007bff;
+
+  &:hover {
+    color: #0056b3 !important;
+    text-decoration: none;
+  }
+}
+
+.link-black {
+  color: black;
+
+  &:hover {
+    color: dimgray !important;
+    text-decoration: none;
+  }
+}

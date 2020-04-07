@@ -17,6 +17,10 @@ class EventsController < ApplicationController
   end
 
   def show
+    agordas_tempozonan_kuketon
+
+    @tempozono = cookies[:tempozono] || params[:tempozono] || @event.time_zone
+
     respond_to do |format|
       format.html
       format.ics { kreas_webcal(@event) }
@@ -185,7 +189,18 @@ class EventsController < ApplicationController
 
   private
 
-    # La karta vidmaniero uzas paĝadon. La aliaj ne. Tial necesas krei la variablojn
+    def agordas_tempozonan_kuketon
+      if params[:tempozono_por_aliaj] == 'jes'
+        cookies[:tempozono] = { value: params[:tempozono], expires: 1.year, secure: true }
+        redirect_to event_url(@event.ligilo) and return
+      end
+
+      if params[:tempozono_por_aliaj] == 'ne'
+        cookies.delete :tempozono
+      end
+    end
+
+  # La karta vidmaniero uzas paĝadon. La aliaj ne. Tial necesas krei la variablojn
     # +@kvanto_venontaj_eventoj+ kaj +@pagy+
     #
     def kreas_paghadon_por_karta_vidmaniero

@@ -1,5 +1,5 @@
 .d-flex.kalendareto-grupo.justify-content-end
-  %div= calendar_icon(event.komenca_tago)
-  - if event.multtaga?
+  %div= calendar_icon(event.komenca_tago(tempozono: tz))
+  - if event.multtaga?(tempozono: tz)
     .p-2= icon('fas', 'arrow-right')
-    %div= calendar_icon(event.fina_tago)
+    %div= calendar_icon(event.fina_tago(tempozono: tz))

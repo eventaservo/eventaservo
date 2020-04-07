@@ -1,0 +1,10 @@
+= render partial: 'timezone_modal'
+= render partial: 'share_button_modal'
+
+.dropdown
+  %a#eventMenu.fas.fa-ellipsis-v.link-black{'aria-expanded' => 'false', 'aria-haspopup' => 'true', 'data-toggle' => 'dropdown', :href => '#'}
+  .dropdown-menu.dropdown-menu-right{'aria-labelledby' => 'eventMenu'}
+    = link_to 'Aldoni al via kalendaro', event_url(@event.code, format: :ics), class: 'dropdown-item'
+    = link_to 'Diskonigi', '#', class: 'dropdown-item', data: { target: '#shareModal', toggle: 'modal' }
+    = link_to 'Ŝanĝi tempozonon', '#', class: 'dropdown-item', data: { target: '#timezoneModal', toggle: 'modal'}
+

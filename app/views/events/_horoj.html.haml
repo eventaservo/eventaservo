@@ -3,7 +3,7 @@
     - if @event.komenca_horo == '00:00' && @event.fina_horo == '00:00'
       Komenca horo ne konata
     - else
-      = icon('far', 'clock', "#{@event.komenca_horo} - #{@event.fina_horo}")
+      = icon('far', 'clock', "#{@event.komenca_horo(tempozono: tz)} - #{@event.fina_horo(tempozono: tz)}")
   %div
-    = I18n.t @event.time_zone, scope: :timezones
+    = I18n.t tz, scope: :timezones
     = icon('fas', 'sun', data: { toggle: 'tooltip', placement: 'top', title: 'Somera/Vintra tempo' }) if @event.dst?

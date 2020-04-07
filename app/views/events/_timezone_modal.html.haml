@@ -1,0 +1,32 @@
+#timezoneModal.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'timezoneModalCenterTitle', role: 'dialog', tabindex: '-1'}
+  .modal-dialog.modal-dialog-centered{role: 'document'}
+    .modal-content
+      = form_tag(event_url(@event.ligilo), method: :get) do
+        .modal-header
+          %h5#timezoneModalCenterTitle.modal-title Tempozono
+          %button.close{'aria-label' => 'Fermi', 'data-dismiss' => 'modal', type: 'button'}
+            %span{'aria-hidden' => 'true'} ×
+
+        .modal-body{style: 'font-size: 1rem; font-weight: normal;'}
+
+          - if cookies[:tempozono]
+            .alert.alert-info
+              %p Nuntempe vi vidas ĉiujn eventojn laŭ #{cookies[:tempozono]}
+
+          %p Elektu alian tempozonon
+          .form-group
+            = select_tag(:tempozono, options_for_select(TZInfo::Timezone.all_country_zone_identifiers, @event.time_zone), class: 'select2-input form-control')
+
+          %p
+            Ĉu vi volas uzi tiun tempozonon por aliaj eventoj?
+            .form-check.form-check-inline
+              = radio_button_tag 'tempozono_por_aliaj', 'jes', true, class: 'form-check-input', id: 'jes'
+              = label_tag 'jes', 'Jes', class: 'form-check-label'
+            .form-check.form-check-inline
+              = radio_button_tag 'tempozono_por_aliaj', 'ne', false, class: 'form-check-input', id: 'ne'
+              = label_tag 'ne', 'Ne', class: 'form-check-label'
+
+        .modal-footer
+          %button.button-cancel{'data-dismiss' => 'modal', type: 'button'} Fermi
+          = submit_tag 'Ŝanĝi', class: 'button-submit'
+

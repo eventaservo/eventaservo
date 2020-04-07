@@ -12,9 +12,7 @@
         %div
           #{event_flag(@event)} <span class="#{'cancelled' if @event.cancelled}">#{@event.title}</span>
         .ml-auto
-          = link_to icon('far', 'calendar-alt'), event_url(@event.code, format: :ics),
-            data: { toggle: 'tooltip', placement: 'top', title: 'Alklaku por aldoni ĝin al via kalendaro' }
-          = render partial: 'share_button'
+          = render partial: 'options'
 
       - if @event.cancelled
         .alert.alert-danger
@@ -22,8 +20,10 @@
           = @event.cancel_reason
       #div
         .ml-2.float-right
-          = render partial: 'kalendareto', locals: { event: @event }
-          = render partial: 'horoj'
+          = render partial: 'kalendareto', locals: { event: @event, tz: @event.time_zone }
+          = render partial: 'horoj', locals: { tz: @event.time_zone }
+          = render partial: 'tempozono'
+
         %h5.text-left= @event.description
 
       %p= display_event_tags(@event)
