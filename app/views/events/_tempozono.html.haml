@@ -1,6 +1,6 @@
 - if @tempozono == @event.time_zone
   .small.text-right
-    = link_to 'Ŝanĝi tempozonon', '#', data: { target: '#timezoneModal', toggle: 'modal'}
+    = link_to 'Ŝanĝi horzonon', '#', data: { target: '#timezoneModal', toggle: 'modal'}
 - else
   = link_to '#', data: { target: '#timezoneModal', toggle: 'modal'} do
     - if @event.komenca_tago(tempozono: @event.time_zone) != @event.komenca_tago(tempozono: @tempozono)
