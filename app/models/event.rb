@@ -266,7 +266,7 @@ class Event < ApplicationRecord
       self.short_url = nil if self.short_url == self.code || self.short_url.try(:strip).try(:empty?)
 
       if online
-        self.city = 'Reta urbo'
+        self.city = 'Reta'
         self.country_id = 99_999
         self.latitude = nil
         self.longitude = nil
