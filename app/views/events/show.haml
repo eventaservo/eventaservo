@@ -22,7 +22,7 @@
         .ml-2.float-right
           = render partial: 'kalendareto', locals: { event: @event, tz: @event.time_zone }
           = render partial: 'horoj', locals: { tz: @event.time_zone }
-          = render partial: 'tempozono'
+          = render partial: 'horzono'
 
         %h5.text-left= @event.description
 
