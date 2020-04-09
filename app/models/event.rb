@@ -173,12 +173,22 @@ class Event < ApplicationRecord
   end
 
   def komenca_horo(tempozono: nil)
-    time_zone = tempozono if tempozono
+    time_zone =
+      if tempozono
+        tempozono
+      else
+        self.time_zone
+      end
     date_start.in_time_zone(time_zone).strftime('%H:%M')
   end
 
   def fina_horo(tempozono: nil)
-    time_zone = tempozono if tempozono
+    time_zone =
+      if tempozono
+        tempozono
+      else
+        self.time_zone
+      end
     date_end.in_time_zone(time_zone).strftime('%H:%M')
   end
 
