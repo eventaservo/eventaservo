@@ -162,38 +162,38 @@ class Event < ApplicationRecord
     date_end.in_time_zone(time_zone)
   end
 
-  def komenca_tago(tempozono: nil)
-    time_zone = tempozono if tempozono
+  def komenca_tago(horzono: nil)
+    time_zone = horzono if horzono
     date_start.in_time_zone(time_zone).strftime('%d/%m/%Y')
   end
 
-  def fina_tago(tempozono: nil)
-    time_zone = tempozono if tempozono
+  def fina_tago(horzono: nil)
+    time_zone = horzono if horzono
     date_end.in_time_zone(time_zone).strftime('%d/%m/%Y')
   end
 
-  def komenca_horo(tempozono: nil)
+  def komenca_horo(horzono: nil)
     time_zone =
-      if tempozono
-        tempozono
+      if horzono
+        horzono
       else
         self.time_zone
       end
     date_start.in_time_zone(time_zone).strftime('%H:%M')
   end
 
-  def fina_horo(tempozono: nil)
+  def fina_horo(horzono: nil)
     time_zone =
-      if tempozono
-        tempozono
+      if horzono
+        horzono
       else
         self.time_zone
       end
     date_end.in_time_zone(time_zone).strftime('%H:%M')
   end
 
-  def multtaga?(tempozono: nil)
-    fina_tago(tempozono: tempozono).to_date > komenca_tago(tempozono: tempozono).to_date
+  def multtaga?(horzono: nil)
+    fina_tago(horzono: horzono).to_date > komenca_tago(horzono: horzono).to_date
   end
 
   def samtaga?

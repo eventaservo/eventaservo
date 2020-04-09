@@ -17,9 +17,9 @@ class EventsController < ApplicationController
   end
 
   def show
-    agordas_tempozonan_kuketon
+    agordas_horzonan_kuketon
 
-    @tempozono = cookies[:tempozono] || params[:tempozono] || @event.time_zone
+    @horzono = cookies[:horzono] || params[:horzono] || @event.time_zone
 
     respond_to do |format|
       format.html
@@ -189,14 +189,14 @@ class EventsController < ApplicationController
 
   private
 
-    def agordas_tempozonan_kuketon
-      if params[:tempozono_por_aliaj] == 'jes'
-        cookies[:tempozono] = { value: params[:tempozono], expires: 1.year, secure: true }
+    def agordas_horzonan_kuketon
+      if params[:horzono_por_aliaj] == 'jes'
+        cookies[:horzono] = { value: params[:horzono], expires: 1.year, secure: true }
         redirect_to event_url(@event.ligilo) and return
       end
 
-      if params[:tempozono_por_aliaj] == 'ne'
-        cookies.delete :tempozono
+      if params[:horzono_por_aliaj] == 'ne'
+        cookies.delete :horzono
       end
     end
 

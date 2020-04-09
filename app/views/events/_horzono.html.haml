@@ -1,0 +1,10 @@
+- if @horzono == @event.time_zone
+  .small.text-right
+    = link_to 'Ŝanĝi horzonon', '#', data: { target: '#timezoneModal', toggle: 'modal'}
+- else
+  = link_to '#', data: { target: '#timezoneModal', toggle: 'modal'} do
+    - if @event.komenca_tago(horzono: @event.time_zone) != @event.komenca_tago(horzono: @tempozono)
+      %hr
+      = render partial: 'kalendareto', locals: { event: @event, tz: @horzono }
+    = render partial: 'horoj', locals: { tz: @horzono }
+
