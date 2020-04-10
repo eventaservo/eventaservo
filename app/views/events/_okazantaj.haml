@@ -10,6 +10,6 @@
               = event_flag(evento)
               = link_to evento.title, event_path(evento.ligilo), class: ("cancelled" if evento.cancelled)
               .small.pl-4
-                = evento.online ? 'Enreta' : "#{evento.city} (#{evento.country.code.upcase})"
+                = evento.online ? 'Reta' : "#{evento.city} (#{evento.country.code.upcase})"
                 = display_event_days_left(evento)
 %br
