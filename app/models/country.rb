@@ -10,7 +10,7 @@ class Country < ApplicationRecord
 
   default_scope { order(:name) }
 
-  scope :not_online, -> { where.not(name: 'Online') }
+  scope :not_online, -> { where.not(name: 'Enreta') }
 
   # Ĝusta nomo de la kontinento, ne gravas la ortografion
   def self.continent_name(name)
