@@ -193,7 +193,11 @@ class Event < ApplicationRecord
   end
 
   def multtaga?(horzono: nil)
-    fina_tago(horzono: horzono).to_date > komenca_tago(horzono: horzono).to_date
+    if horzono
+      fina_tago(horzono: horzono).to_date > komenca_tago(horzono: horzono).to_date
+    else
+      fina_tago(horzono: time_zone).to_date > komenca_tago(horzono: time_zone).to_date
+    end
   end
 
   def samtaga?
