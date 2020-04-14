@@ -32,14 +32,14 @@
             .form-group
               = form.label :date_start, 'Komenca dato'
               .form-row
-                .col-8= form.text_field :date_start, value: @event.komenca_tago, class: 'datepicker form-control'
+                .col-8= form.text_field :date_start, value: @event.komenca_tago(horzono: @event.time_zone), class: 'datepicker form-control'
                 .col-4= text_field_tag(:time_start, @event.komenca_horo, class: 'timemask form-control', required: true)
 
           .col-lg-6
             .form-group
               = form.label :date_end, 'Fina dato'
               .form-row
-                .col-8= form.text_field :date_end, value: @event.fina_tago, class: 'datepicker form-control'
+                .col-8= form.text_field :date_end, value: @event.fina_tago(horzono: @event.time_zone), class: 'datepicker form-control'
                 .col-4= text_field_tag(:time_end, @event.fina_horo, class: 'timemask form-control', required: true)
 
         .form-group
