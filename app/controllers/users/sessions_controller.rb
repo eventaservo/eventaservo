@@ -3,6 +3,10 @@
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
 
+  include Devise::Controllers::Rememberable
+
+  after_action :remember_logged_in_user, only: :create
+
   # GET /resource/sign_in
   # def new
   #   super
@@ -25,4 +29,11 @@ class Users::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+  #
+
+  private
+
+    def remember_logged_in_user
+      remember_me(self.resource)
+    end
 end
