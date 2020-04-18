@@ -87,6 +87,8 @@ class HomeController < ApplicationController
           render json: kalkulas_kvanton_registritaj_eventoj
         when 'eventoj_lau_monatoj'
           render json: kalkulas_eventojn_lau_monatoj
+        when 'eventoj_retaj_kaj_fizikaj'
+          render json: kalkulas_eventojn_retajn_kaj_fizikajn
         else
           render json: { eraro: 'Ne valida diagramo' }
         end
@@ -188,5 +190,37 @@ class HomeController < ApplicationController
       end
 
       { monatoj: monatoj, kvantoj: quantity }
+    end
+
+    def kalkulas_eventojn_retajn_kaj_fizikajn
+      monatoj = [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'Maj',
+        'Jun',
+        'Jul',
+        'Aŭg',
+        'Sep',
+        'Okt',
+        'Nov',
+        'Dec'
+      ]
+
+      eventoj = []
+      retaj = []
+      fizikaj = []
+
+
+      5.downto(0) do |m|
+        retaj << Event.online.where(created_at: (Date.today - m.month).beginning_of_month..(Date.today - m.month).end_of_month).count
+        fizikaj << Event.not_online.where(created_at: (Date.today - m.month).beginning_of_month..(Date.today - m.month).end_of_month).count
+      end
+
+      eventoj << { name: 'Fizikaj', data: fizikaj }
+      eventoj << { name: 'Retaj', data: retaj }
+
+      { eventoj: eventoj,  x_axis: last_6_months_label }
     end
 end

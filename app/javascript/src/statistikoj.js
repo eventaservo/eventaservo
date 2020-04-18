@@ -3,6 +3,7 @@ import RegistritajEventoj from "../components/statistikoj/RegistritajEventoj"
 import KvantoRegistritajUzantoj from "../components/statistikoj/KvantoRegistritajUzantoj"
 import KvantoRegistritajEventoj from "../components/statistikoj/KvantoRegistritajEventoj"
 import EventojLauMonatoj from "../components/statistikoj/EventojLauMonatoj"
+import EventojRetajKajFizikaj from "../components/statistikoj/EventojRetajKajFizikaj"
 
 document.addEventListener("DOMContentLoaded", () => {
   if (document.getElementById("statistikoj")) {
@@ -12,7 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
         RegistritajEventoj,
         KvantoRegistritajUzantoj,
         KvantoRegistritajEventoj,
-        EventojLauMonatoj
+        EventojLauMonatoj,
+        EventojRetajKajFizikaj
       }
     })
   }
