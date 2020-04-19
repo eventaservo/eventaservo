@@ -2,7 +2,7 @@ class NovaEventaSciigoJob < ApplicationJob
   queue_as :default
 
   def perform(evento)
-    return true if Rails.env == 'test'
+    return true if Rails.env == 'test' || Rails.env.development?
 
     mesagho = "Nova evento kreita de #{evento.user.name}:\n\n"
     mesagho += "<b>#{evento.title}</b>\n"

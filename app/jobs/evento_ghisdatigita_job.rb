@@ -2,7 +2,7 @@ class EventoGhisdatigitaJob < ApplicationJob
   queue_as :default
 
   def perform(evento)
-    return true if Rails.env == 'test'
+    return true if Rails.env == 'test' || Rails.env.development?
 
     mesagho = "Evento ĝisdatigita:\n\n"
     mesagho += "<b>#{evento.title}</b>\n\n"
