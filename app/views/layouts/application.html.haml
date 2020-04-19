@@ -8,6 +8,8 @@
 
     - if content_for?(:fb_meta)
       = yield(:fb_meta)
+    - elsif content_for?(:organization_meta)
+      = yield(:organization_meta)
     - else
       %meta{content: 'website', property: 'og:type'}
       %meta{content: request.original_url, property: 'og:url'}
