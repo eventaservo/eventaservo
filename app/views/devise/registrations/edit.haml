@@ -29,6 +29,7 @@
       .form-group
         = f.label :authentication_token
         = f.text_field :authentication_token, readonly: true, class: 'form-control'
+        .small= link_to "Krei novan API kodon", api_v1_rekrei_api_kodon_url(current_user.id), class: 'form-text', data: { confirm: 'Ĉu vi certas? Ne eblas malfari tiun agon.' }
 
       .text-divider Organizoj
       - @user.organizoj.each do |organizo|
