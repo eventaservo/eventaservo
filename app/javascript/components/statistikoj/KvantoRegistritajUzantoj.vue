@@ -36,7 +36,7 @@ export default {
         yAxis: {
           min: 0,
           title: {
-            text: "Eventoj"
+            text: "Uzantoj"
           }
         },
         plotOptions: {
