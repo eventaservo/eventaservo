@@ -12,7 +12,7 @@ $ ->
     eventColor: 'green'
     timeFormat: 'H:mm'
     plugins: [ 'list' ]
-    defaultView: 'monato'
+    defaultView: 'listo'
     contentHeight: 'auto'
     displayEventTime: true
     header:
@@ -35,7 +35,7 @@ $ ->
         type: 'list'
         duration:
           days: 7
-        buttonText: 'Listo'
+        buttonText: 'Semajno'
         allDayText: 'tuttaga'
       monato:
         type: 'month'
