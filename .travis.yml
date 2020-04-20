@@ -11,4 +11,4 @@ addons:
 before_script:
   - psql -c 'create database eventaservo_test;' -U postgres
 
-bundler_args: --without production
+bundler_args: --without production --jobs=3 --retry=3
