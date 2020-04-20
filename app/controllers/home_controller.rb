@@ -50,8 +50,8 @@ class HomeController < ApplicationController
   def events
     redirect_to root_url unless access_from_server
 
-    @events = Event.includes(:country)
     @horzono = cookies[:horzono]
+    @events = Event.ne_nuligitaj.includes(:country)
     @events = @events.by_continent(params[:continent]) if params[:continent].present?
     @events = @events.by_country_name(params[:country]) if params[:country].present?
     @events = @events.by_city(params[:city]) if params[:city].present?
