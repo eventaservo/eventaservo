@@ -154,12 +154,20 @@ class Event < ApplicationRecord
     latitude.present? && longitude.present?
   end
 
-  def komenca_dato
-    date_start.in_time_zone(time_zone)
+  def komenca_dato(horzono: nil)
+    if horzono
+      date_start.in_time_zone(horzono)
+    else
+      date_start.in_time_zone(time_zone)
+    end
   end
 
-  def fina_dato
-    date_end.in_time_zone(time_zone)
+  def fina_dato(horzono: nil)
+    if horzono
+      date_end.in_time_zone(horzono)
+    else
+      date_end.in_time_zone(time_zone)
+    end
   end
 
   def komenca_tago(horzono: nil)

@@ -1,2 +1,5 @@
 %hr
+- if cookies[:horzono]
+  %p.small
+    Vi vidas la eventojn laŭ #{cookies[:horzono]} horzono.
 #full_calendar{data: { continent: params[:continent], country: params[:country_name], city: params[:city_name], o: params[:o], s: params[:s], username: params[:username] } }
