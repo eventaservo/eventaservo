@@ -475,6 +475,7 @@ DEPENDENCIES
   rack-attack
   rack-cors
   rails (~> 6.0)
+  rake
   redcarpet
   redis
   sass-rails (~> 6)
