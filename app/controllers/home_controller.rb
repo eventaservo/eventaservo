@@ -52,6 +52,7 @@ class HomeController < ApplicationController
 
     @horzono = cookies[:horzono]
     @events = Event.ne_nuligitaj.includes(:country)
+    @events = @events.by_dates(from: params[:start], to: params[:end])
     @events = @events.by_continent(params[:continent]) if params[:continent].present?
     @events = @events.by_country_name(params[:country]) if params[:country].present?
     @events = @events.by_city(params[:city]) if params[:city].present?
