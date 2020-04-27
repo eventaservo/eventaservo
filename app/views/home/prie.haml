@@ -2,7 +2,7 @@
   %h1 Eventa Servo
   %p La sistemo por diskonigi esperantajn eventojn tutmonde!
 
-.d-flex.justify-content-around.m-2
+.d-flex.justify-content-around.text-center.m-2
   %div
     %h3= User.all.size
     registritaj uzantoj
@@ -10,7 +10,64 @@
     %h3= Event.all.size
     registritaj eventoj
 
-.full_rectangle.bg-color-grayLighter
+.full_rectangle.bg-color-grayLighter{style: "min-height: 0px;"}
+  .col-6
+    %h3.title Historio
+    %div{style: "text-align: justify;"}
+      %p
+        = link_to "Fernando Ŝajani", 'https://t.me/fernandoshayani'
+        kreis la retejon Eventa Servo en 2017.
+        En lia urbo troviĝas malmultaj esperantistoj, tial maloftas la renkontiĝoj.
+        Li certis, ke esperantistoj agas en aliaj urboj kaj landoj, sed kiujn
+        eventojn ili organizas? Kie? Kiam? Li kreis Eventan Servon por ordigi tiajn informojn.
+      %p
+        En aprilo 2019, Fernando donacis la sistemon al Universala Esperanto-Asocio.
+        UEA kaj TEJO ekde tiam instigas al la uza­do de Eventa Servo por informi Espe­rantujon pri in­ternaciaj, lan­daj kaj lokaj eventoj, kon­gresoj, kun­venoj, renkontiĝoj k.s.
+
+  .col-6
+    %h3.title Helpantoj
+    %div{style: "text-align: justify;"}
+      %p
+        = link_to "Yves Nevelsteen", 'https://t.me/yvesnev'
+        eksciis pri Eventa Servo en 2018.
+        Li tuj komprenis ĝian potencialon kaj tial multe ekhelpis varbi por la retejo. Hodiaŭ li daŭre estas 'ĉefhelpanto': konsilanto, testanto de novaj funkcioj kaj komunikanto (kun uzantoj kaj gazetaro).
+        %br
+        = link_to "Robin van der Vliet", 'https://t.me/robin'
+        ekde 2020 ankaŭ helpas pri konsilado kaj programado.
+      %p
+        Ni aparte dankas
+        = link_to "Fernando Maia,", 'https://t.me/fmaiajr'
+        vic-prezidanton de UEA, pro liaj apogo kaj helpo disvastigi Eventan Servon.
+      %p
+        Se ankaŭ vi volas helpi, aliĝu al ĉi tiu
+        = link_to "Telegram-grupo.", 'https://eventaservo.telegramo.org', target: "_blank"
+
+.full_rectangle.bg-color-white{style: "min-height: 0px;"}
+  .col-12
+    %h3.title Artikoloj pri Eventa Servo kiuj aperis en gazetaro
+    %div{style: "text-align: justify;"}
+      %p
+        %a{href: "https://uea.org/l/?prenu=kto6_18"}
+          Eventa Servo – La nova sistemo por diskonigi Esperantajn eventojn
+        %span.small (Artikolo de Fernando kiu aperis en Kontakto 6-2018)
+      %p
+        %a{href: "https://revuoesperanto.org/eventa_servo"}
+          Ĉu viaj eventoj estas diskonigindaj?
+        %span.small (Artikolo de Yves Nevelsteen kiu aperis en la februara numero de 2020 de Revuo Esperanto)
+      %p
+        %a{href: "https://uea.org/aktuale/komunikoj/2020/Virtualaj-eventoj-anstataux-la-Malferma-Tago-kaj-la-UK-en-2020"}
+          Virtualaj eventoj anstataŭ la Malferma Tago kaj la UK en 2020
+        %span.small (Gazetara komuniko de UEA kiu plurfoje mencias Eventan Servon)
+      %p
+        %a{href: "https://www.liberafolio.org/2020/04/23/eventa-servo-helpas-trovi-retajn-renkontigojn/"}
+          Eventa Servo helpas trovi retajn renkontiĝojn
+        %span.small (Intervjuo kun Yves Nevelsteen kiu aperis en Libera Folio en aprilo 2020)
+      %p
+        Vidu pli da informoj
+        %a{href: "https://eo.wikipedia.org/wiki/Eventa_Servo"}
+          en Vikipedio.
+
+.full_rectangle.bg-color-grayLighter.align-items-center
   .col-12.col-md-6
     %h3.title Facile listigi kaj trovi eventojn!
     %p Per Eventa Servo oni povas vidi eventojn ĉirkaŭ la tuta mondo laŭ mapo, listo, kartaro kaj kalendaro.
@@ -18,21 +75,21 @@
   .col-12.col-md-6
     = image_tag 'prie/mapo.png', class: 'screen-shot border'
 
-.full_rectangle.bg-color-white
+.full_rectangle.bg-color-white.align-items-center
   .col-12.col-md-6.order-lg-2
     %h3.title Aboni per via kalendara programo
     %p Oni povas aboni landan aŭ organizan eventan liston per kalendara programo kiel Google Calendar, Apple iCal aŭ simila.
   .col-12.col-md-6.order-lg-1
     = image_tag 'prie/kalendaro.png', class: 'screen-shot'
 
-.full_rectangle.bg-color-grayLighter
+.full_rectangle.bg-color-grayLighter.align-items-center
   .col-12.col-md-6
     %h3.title Uzebla per komputilo aŭ poŝtelefono
     %p Oni povas uzi Eventan Servon per tradicia komputilo, poŝtelefono aŭ tabulkomputilo. Instali aplikaĵon ne necesas.
   .col-12.col-md-6
     = image_tag 'prie/mobile.png', class: 'screen-shot border'
 
-.full_rectangle.bg-color-white
+.full_rectangle.bg-color-white.align-items-center
   .row
     .col-12
       %h3.title UEA kaj TEJO
@@ -46,7 +103,7 @@
     .col-6= link_to image_tag('prie/uea.png', class: 'screen-shot'), 'https://uea.org', target: :_blank
     .col-6= link_to image_tag('tejo.svg', class: 'screen-shot', width: '75%'), 'https://www.tejo.org', target: :_blank
 
-.full_rectangle.bg-color-grayLighter
+.full_rectangle.bg-color-grayLighter.align-items-center
   .row
     .col-12.mb-5
       %h3.title Kaj multaj aliaj avantaĝoj
