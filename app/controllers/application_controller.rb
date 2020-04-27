@@ -24,11 +24,14 @@ class ApplicationController < ActionController::Base
       else Event.venontaj
       end
 
+    # Filtras la anoncojn kaj konkursojn, kiuj devas aperi nur en ilia specifa paĝo
+    @events = @events.chefaj
+
     # Filtras laŭ organizo
     @events = @events.joins(:organizations).where('organizations.short_name = ?', params[:o]) if params[:o].present?
 
     # Filtras per Speco
-    if params[:s].present? && params[:s].in?(Constants::TAGS)
+    if params[:s].present? && params[:s].in?(Constants::TAGS[0])
       speco = params[:s].tr('%2C', '').tr(',', '')
       @events = @events.kun_speco(speco)
     end

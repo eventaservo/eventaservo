@@ -54,6 +54,9 @@ Rails.application.routes.draw do
   get '/jaro/:jaro', to: redirect('/j/%{jaro}')
   get '/eventoj-hu', to: redirect('/j/2020?eventoj=hu')
 
+  # Anoncoj kaj Konkursoj
+  get '/anoncoj', to: 'home#anoncoj', as: 'anoncoj'
+
   # Organizoj
   defaults format: :json do
     get '/o/cheforganizoj.json', to: 'organizations#cheforganizoj'

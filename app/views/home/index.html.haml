@@ -4,7 +4,9 @@
     .div
       Diskonigu esperantajn eventojn tutmonde!
       %br
-      = link_to "Listo de internaciaj eventoj en #{Date.today.year} →",internacia_kalendaro_url(jaro: Date.today.year), class: 'btn btn-sm btn-link'
+      = link_to "Anoncoj kaj konkursoj", anoncoj_url, class: 'btn btn-sm btn-link'
+      |
+      = link_to "Internaciaj eventoj en #{Date.today.year}",internacia_kalendaro_url(jaro: Date.today.year), class: 'btn btn-sm btn-link'
     = link_to image_tag('tejo.svg', height: '28px', class: 'ml-1'), prie_url, target: :_blank
 
   .d-flex.justify-content-between.flex-wrap

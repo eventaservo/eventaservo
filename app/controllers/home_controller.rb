@@ -25,6 +25,10 @@ class HomeController < ApplicationController
     end
   end
 
+  def anoncoj
+    @eventoj = Event.anoncoj_kaj_konkursoj
+  end
+
   def changelog
   end
 
@@ -51,7 +55,7 @@ class HomeController < ApplicationController
     redirect_to root_url unless access_from_server
 
     @horzono = cookies[:horzono]
-    @events = Event.ne_nuligitaj.includes(:country)
+    @events = Event.ne_nuligitaj.chefaj.includes(:country)
     @events = @events.by_dates(from: params[:start], to: params[:end])
     @events = @events.by_continent(params[:continent]) if params[:continent].present?
     @events = @events.by_country_name(params[:country]) if params[:country].present?

@@ -70,6 +70,12 @@ class Event < ApplicationRecord
   scope :plurtagaj, -> { where('((to_timestamp(date_end::text, \'YYYY-MM-DD HH24:MI:SS\')) AT TIME ZONE(time_zone))::timestamp::date > ((to_timestamp(date_start::text, \'YYYY-MM-DD HH24:MI:SS\')) AT TIME ZONE(time_zone))::timestamp::date') }
   scope :nuligitaj, -> { where(cancelled: true) }
   scope :ne_nuligitaj, -> { where(cancelled: false) }
+  scope :konkursoj, -> { kun_speco('Konkurso') }
+  scope :ne_konkursoj, -> { sen_speco('Konkurso') }
+  scope :anoncoj, -> { kun_speco('Anonco') }
+  scope :ne_anoncoj, -> { sen_speco('Anonco') }
+  scope :chefaj, -> { ne_konkursoj.ne_anoncoj }
+  scope :anoncoj_kaj_konkursoj, -> { anoncoj.or(konkursoj) }
 
   def self.by_code(code)
     find_by(code: code)
@@ -244,6 +250,10 @@ class Event < ApplicationRecord
 
   def self.kun_speco(t)
     where("specolisto ilike '%#{t}%'")
+  end
+
+  def self.sen_speco(t)
+    where("specolisto not ilike '%#{t}%'")
   end
 
   # Liveras +short_url+ se ĝi ekzistas. Se ne, liveras +code+
