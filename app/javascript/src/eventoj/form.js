@@ -20,10 +20,12 @@ $(document).ready(function () {
 
     $("#event_online").change(function () {
       if (this.checked) {
+        document.getElementById("event_city").value = "Reta"
         $("#malretaj_informoj").hide()
         return $("#retaj_informoj").show()
       } else {
         $("#malretaj_informoj").show()
+        document.getElementById("event_city").value = ""
         return $("#retaj_informoj").hide()
       }
     })
