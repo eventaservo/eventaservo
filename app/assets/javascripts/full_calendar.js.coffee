@@ -16,8 +16,8 @@ $ ->
     contentHeight: 'auto'
     displayEventTime: true
     header:
-      left: 'today'
-      center: 'title'
+      left: 'title'
+      center: ''
       right: 'monato,listo prev,next'
     buttonText:
       today: 'hodiaŭ'
