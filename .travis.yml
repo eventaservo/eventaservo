@@ -1,7 +1,7 @@
 language: ruby
 dist: trusty
 
-cache: bundler
+#cache: bundler
 
 services:
   - postgresql
