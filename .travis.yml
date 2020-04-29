@@ -1,7 +1,7 @@
 language: ruby
 dist: trusty
 
-#cache: bundler
+cache: bundler
 
 services:
   - postgresql
@@ -17,5 +17,6 @@ bundler_args: --without production --jobs=3 --retry=3
 
 script:
   - gem install bundler
+  - bundle update --bundler
   - bundle exec rails db:migrate RAILS_ENV=test
   - bundle exec rake
