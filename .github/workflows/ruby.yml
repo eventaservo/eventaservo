@@ -37,6 +37,7 @@ jobs:
         export RAILS_ENV=test
         yarn install
         gem install bundler
-        bundle install --jobs 4 --retry 3 --without production
+        bundle config set without 'production'
+        bundle install --jobs 4 --retry 3
         bin/rails db:migrate
         bundle exec rake test
