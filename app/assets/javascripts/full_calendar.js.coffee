@@ -8,6 +8,7 @@ $ ->
         city: $('#full_calendar').data('city')
         o: $('#full_calendar').data('o')
         s: $('#full_calendar').data('s')
+        t: $('#full_calendar').data('t')
         username: $('#full_calendar').data('username')
     eventColor: 'green'
     timeFormat: 'H:mm'

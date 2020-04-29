@@ -62,6 +62,8 @@ class HomeController < ApplicationController
     @events = @events.by_city(params[:city]) if params[:city].present?
     @events = @events.lau_organizo(params[:o]) if params[:o].present?
     @events = @events.kun_speco(params[:s]) if params[:s].present?
+    @events = @events.unutagaj if params[:t] == 'unutaga'
+    @events = @events.plurtagaj if params[:t] == 'plurtaga'
     @events = Event.includes(:country).by_username(params[:username]) if params[:username].present?
   end
 
