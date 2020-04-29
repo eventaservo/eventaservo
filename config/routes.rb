@@ -41,6 +41,8 @@ Rails.application.routes.draw do
   # iloj
   namespace :iloj do
     get 'mallongilo_disponeblas', to: 'mallongilo#disponeblas'
+    post 'elektas_horzonon', to: 'horzono#elektas'
+    get 'forvishas_horzonon', to: 'horzono#forvishas'
   end
 
   # Webcal

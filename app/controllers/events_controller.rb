@@ -17,8 +17,6 @@ class EventsController < ApplicationController
   end
 
   def show
-    agordas_horzonan_kuketon
-
     @horzono = cookies[:horzono] || params[:horzono] || @event.time_zone
 
     respond_to do |format|
@@ -188,17 +186,6 @@ class EventsController < ApplicationController
   end
 
   private
-
-    def agordas_horzonan_kuketon
-      if params[:horzono_por_aliaj] == 'jes'
-        cookies[:horzono] = { value: params[:horzono], expires: 1.year, secure: true }
-        redirect_to event_url(@event.ligilo) and return
-      end
-
-      if params[:horzono_por_aliaj] == 'ne'
-        cookies.delete :horzono
-      end
-    end
 
   # La karta vidmaniero uzas paĝadon. La aliaj ne. Tial necesas krei la variablojn
     # +@kvanto_venontaj_eventoj+ kaj +@pagy+

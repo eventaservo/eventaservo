@@ -1,32 +1,25 @@
-#timezoneModal.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'timezoneModalCenterTitle', role: 'dialog', tabindex: '-1'}
+.modal.text-left.fade#timezoneModal{'aria-hidden' => 'true', 'aria-labelledby' => 'timezoneModalCenterTitle', role: 'dialog', tabindex: '-1'}
   .modal-dialog.modal-dialog-centered{role: 'document'}
     .modal-content
-      = form_tag(event_url(@event.ligilo), method: :get) do
+      = form_tag(iloj_elektas_horzonon_url, method: :posts) do
         .modal-header
-          %h5#timezoneModalCenterTitle.modal-title Horzono
-          %button.close{'aria-label' => 'Fermi', 'data-dismiss' => 'modal', type: 'button'}
-            %span{'aria-hidden' => 'true'} ×
-
+          %h5.modal-title#timezoneModalCenterTitle Horzono
+          %button.close{'aria-label': 'Fermi', 'data-dismiss': 'modal', type: 'button'}
+            %span{'aria-hidden': 'true'} ×
         .modal-body{style: 'font-size: 1rem; font-weight: normal;'}
-
           - if cookies[:horzono]
-            .alert.alert-info
-              %p Nuntempe vi vidas ĉiujn eventojn laŭ #{cookies[:horzono]}
-
-          %p Elektu alian horzonon
+            %p
+              Nuntempe vi vidas ĉiujn eventojn laŭ
+              %b= cookies[:horzono] + "."
+            .small
+              Por vidi la eventojn laŭ iliaj originalaj horzonojn,
+              = link_to "alklaku ĉi tie.", iloj_forvishas_horzonon_url
+            %hr
+          %p Elektu horzonon:
           .form-group
-            = select_tag(:horzono, options_for_select(TZInfo::Timezone.all_country_zone_identifiers, @event.time_zone), class: 'select2-input form-control')
-
-          %p
-            Ĉu vi volas uzi tiun horzonon por aliaj eventoj?
-            .form-check.form-check-inline
-              = radio_button_tag 'horzono_por_aliaj', 'jes', true, class: 'form-check-input', id: 'jes'
-              = label_tag 'jes', 'Jes', class: 'form-check-label'
-            .form-check.form-check-inline
-              = radio_button_tag 'horzono_por_aliaj', 'ne', false, class: 'form-check-input', id: 'ne'
-              = label_tag 'ne', 'Ne', class: 'form-check-label'
+            - selected = @event.nil? ? (cookies[:horzono] || nil) : @event.time_zone
+            = select_tag(:horzono, options_for_select(TZInfo::Timezone.all_country_zone_identifiers, selected), class: 'select2-input form-control')
 
         .modal-footer
           %button.button-cancel{'data-dismiss' => 'modal', type: 'button'} Fermi
-          = submit_tag 'Ŝanĝi', class: 'button-submit'
-
+          = submit_tag 'Elekti', class: 'button-submit'
