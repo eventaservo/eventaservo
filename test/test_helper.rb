@@ -5,11 +5,19 @@ require_relative '../config/environment'
 require 'rails/test_help'
 require 'minitest/autorun'
 
-require 'codacy-coverage'
-Codacy::Reporter.start
-
 require 'minitest/reporters'
 Minitest::Reporters.use!
+
+# SimpleCov
+require 'simplecov'
+require 'simplecov-cobertura'
+SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
+SimpleCov.start 'rails' do
+  add_filter '/bin/'
+  add_filter '/db/'
+  add_filter '/spec/' # for rspec
+  add_filter '/test/' # for minitest
+end
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.

@@ -1,0 +1,63 @@
+name: ProvKodo
+
+on: [push, pull_request]
+
+jobs:
+  rails:
+
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Cache
+        uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+
+      - name: Instalas Ruby 2.6
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.x
+
+      - name: Instalas PostgreSQL
+        run: |
+          sudo apt-get -y install postgresql postgresql-server-dev-all
+          sudo -i -u postgres psql -c 'create database es;' -U postgres
+          sudo -i -u postgres psql -c "create role es with LOGIN SUPERUSER INHERIT CREATEDB CREATEROLE REPLICATION PASSWORD 'es';"
+          sudo -i -u postgres psql -c "ALTER DATABASE es OWNER TO es;"
+          sudo -i -u postgres psql -c "grant all privileges on database es to es;"
+          cp config/database.github_ci config/database.yml
+
+
+      - name: Agordas RAILS_ENV
+        run: export RAILS_ENV=test
+      - name: Yarn install
+        run: yarn install
+      - name: Bundler
+        run: |
+          mkdir vendor/bundle
+          gem install bundler
+          bundle config set without 'production'
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+      - name: DB Migrate
+        run: RAILS_ENV=test bin/rails db:migrate
+      - name: Rails Tests
+        run: RAILS_ENV=test bundle exec rake test
+      - name: Sendas Coverage al Codacy
+        run: |
+          export CODACY_PROJECT_TOKEN=${{ secrets.CODACY_PROJECT_TOKEN }}
+          bash <(curl -Ls https://coverage.codacy.com/get.sh) -- -r coverage/coverage.xml
+
+  docker:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)

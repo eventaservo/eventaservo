@@ -25,6 +25,7 @@ gem 'haml', '~> 5'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
 gem 'mini_racer'
+
 gem 'select2-rails'
 
 # Kalendaroj
@@ -32,15 +33,15 @@ gem 'fullcalendar-rails'
 gem 'icalendar'
 gem 'momentjs-rails'
 
-gem 'devise', '>= 4.7.1'
 gem 'mini_magick'
 gem 'omniauth-facebook'
-gem 'pg', '~> 1.1', '>= 1.1.3'
-gem 'simple_token_authentication', '~> 1.0'
-# gem 'rmagick'
 
 # CSS kaj fasonado
 gem 'flag-icons-rails'
+
+gem 'devise', '>= 4.7.1'
+gem 'pg', '~> 1.1', '>= 1.1.3'
+gem 'simple_token_authentication', '~> 1.0'
 gem 'social-share-button', git: 'https://github.com/shayani/social-share-button'
 
 # Use CoffeeScript for .coffee assets and views
@@ -86,7 +87,7 @@ gem 'sitemap_generator'
 gem 'timezone', '~> 1.0'
 # gem 'trix-rails', require: 'trix'
 gem 'httparty'
-gem 'nokogiri', ">= 1.10.4"
+gem 'nokogiri', '>= 1.10.4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -122,12 +123,11 @@ end
 
 group :test do
   gem 'capybara'
-  # Codacy.com coverage
-  gem 'codacy-coverage', require: false
   gem 'factory_bot_rails'
   gem 'minitest-reporters'
   gem 'selenium-webdriver'
   gem 'simplecov'
+  gem 'simplecov-cobertura'
   gem 'vcr'
   gem 'webdrivers'
   gem 'webmock'
