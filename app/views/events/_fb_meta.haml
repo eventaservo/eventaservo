@@ -3,7 +3,8 @@
   %meta{content: request.original_url, property: 'og:url'}
   %meta{content: 'article', property: 'og:type'}
   %meta{content: @event.title, property: 'og:title'}
-  %meta{content: "#{event_date(@event)} (#{@event.city} - #{@event.country.name}) | #{@event.description}", property: 'og:description'}
+  - city_and_country = @event.online? ? "Reta" : "#{@event.city} - #{@event.country.name}"
+  %meta{content: "#{event_date(@event)} (#{city_and_country}) | #{@event.description}", property: 'og:description'}
   - if @event.uploads.attached?
     - @event.uploads.each do |upload|
       - if upload.blob.image?
