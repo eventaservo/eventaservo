@@ -139,7 +139,7 @@ class HomeController < ApplicationController
     def definas_kuketojn
       return if cookies[:vidmaniero].in? %w[kartoj kalendaro mapo]
 
-      cookies[:vidmaniero] = { value: 'kartoj', expires: 1.year, secure: true } # Normala vidmaniero
+      cookies[:vidmaniero] = { value: 'kalendaro', expires: 2.weeks, secure: true } # Normala vidmaniero
     end
 
     def kalkulas_registritajn_eventojn
