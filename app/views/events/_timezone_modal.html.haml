@@ -22,4 +22,4 @@
 
         .modal-footer
           %button.button-cancel{'data-dismiss' => 'modal', type: 'button'} Fermi
-          = submit_tag 'Elekti', class: 'button-submit'
+          = submit_tag "#{cookies[:horzono] ? 'Ŝanĝi' : 'Elekti'} ", class: 'button-submit'
