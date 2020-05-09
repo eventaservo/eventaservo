@@ -1,5 +1,6 @@
-- unless @event.komenca_horo == '00:00' && @event.fina_horo == '00:00'
-  - if @event.komenca_tago(horzono: @event.time_zone) != @event.komenca_tago(horzono: @horzono)
-    %hr/
-    = render partial: 'kalendareto', locals: { event: @event, tz: @horzono }
-  = render partial: 'horoj', locals: { tz: @horzono }
+- unless @event.time_zone == @horzono
+  - unless @event.komenca_horo == '00:00' && @event.fina_horo == '00:00'
+    - if @event.komenca_tago(horzono: @event.time_zone) != @event.komenca_tago(horzono: @horzono)
+      %hr/
+      = render partial: 'kalendareto', locals: { event: @event, tz: @horzono }
+    = render partial: 'horoj', locals: { tz: @horzono }
