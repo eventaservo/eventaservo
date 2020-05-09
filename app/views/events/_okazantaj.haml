@@ -1,9 +1,9 @@
-- if cookies[:vidmaniero] == 'kartoj'
+- if cookies[:vidmaniero] == 'kartoj' && params[:pagho].nil?
   - if @today_events.any?
     %br
     %h5.text-center.font-weight-bold #{@today_events.ne_nuligitaj.length} okazas hodiaŭ
     .row
-      - @today_events.order('countries.code').each do |evento|
+      - @today_events.order(:date_start).each do |evento|
         .col-12.col-md-6
           .okazantaj-eventoj
             %h6.text-truncate

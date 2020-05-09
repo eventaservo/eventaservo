@@ -31,7 +31,7 @@
 
     .d-flex.justify-content-center
       = render "home/uzanta_horzono"
-    = render partial: 'events/okazantaj' unless params[:pagho].present?
+    = render partial: 'events/okazantaj'
     = display_events_by_style
 
   #search_results
