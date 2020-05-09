@@ -1,0 +1,7 @@
+.d-flex
+  %p.small
+    - if cookies[:horzono]
+      Vi vidas la eventojn laŭ la horzono #{I18n.t cookies[:horzono], scope: :timezones}.
+    - else
+      Vi vidas la eventojn laŭ ilia loka horzono.
+  = render partial: 'events/horzono_elektilo'

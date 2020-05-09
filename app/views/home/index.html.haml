@@ -29,6 +29,8 @@
           %span.badge.badge-primary= continent.count
     = render partial: 'home/filters'
 
+    .d-flex.justify-content-center
+      = render "home/uzanta_horzono"
     = render partial: 'events/okazantaj' unless params[:pagho].present?
     = display_events_by_style
 
