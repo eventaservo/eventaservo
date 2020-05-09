@@ -74,7 +74,7 @@ class HomeController < ApplicationController
 
   def view_style
     cookies[:vidmaniero] = { value: params[:view_style], expires: 1.year, secure: true }
-    redirect_back fallback_location: root_url
+    redirect_to root_url
   end
 
   def search
