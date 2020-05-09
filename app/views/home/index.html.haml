@@ -29,7 +29,7 @@
           %span.badge.badge-primary= continent.count
     = render partial: 'home/filters'
 
-    = render partial: 'events/okazantaj'
+    = render partial: 'events/okazantaj' unless params[:pagho].present?
     = display_events_by_style
 
   #search_results
