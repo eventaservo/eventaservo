@@ -83,9 +83,14 @@
 
         .form-group.form-check
           = form.check_box :online, class: 'form-check-input'
-          = form.label :online, 'Reta evento?', class: 'form-check-label'
+          = form.label :online, 'Reta evento', class: 'form-check-label'
 
         #retaj_informoj
+          .form-group
+            = check_box_tag 'universala', "1", @event.universala?
+            = label_tag 'universala', 'Elekti horzonon anstataŭ adreson/landon', class: 'form-check-label'
+
+        #horzono
           .form-group
             = form.label :time_zone, 'Horzono'
             - timezones = TZInfo::Timezone.all_country_zone_identifiers
@@ -97,7 +102,6 @@
             = form.label :address, 'Loka adreso de la evento'
             = form.text_field :address, class: 'form-control'
             %small.form-text.text-muted Aldonu la strat-nomon por precizigi la eventlokon en la mapo
-
           .row
             .col-lg-6
               .form-group

@@ -15,7 +15,13 @@ module EventsHelper
   def event_flag(event)
     return unless event.country.code
 
-    flag_icon(event.country.code)
+    if event.universala?
+      "🖥 "
+    elsif  event.online
+      flag_icon(event.country.code) + " 🖥 "
+    else
+      flag_icon(event.country.code)
+    end
   end
 
   def event_map_url(event)

@@ -86,7 +86,11 @@ class Event < ApplicationRecord
   end
 
   def self.by_continent(continent_name)
-    joins(:country).where('unaccent(lower(countries.continent)) = ?', continent_name.normalized)
+    if continent_name == 'Reta'
+      joins(:country).online
+    else
+      joins(:country).where('unaccent(lower(countries.continent)) = ?', continent_name.normalized)
+    end
   end
 
   def self.by_city(city_name)
@@ -151,7 +155,7 @@ class Event < ApplicationRecord
   end
 
   def require_geocode?
-    return false if online
+    return false if online && city == 'Reta'
 
     address_changed? || city_changed? || country_id_changed?
   end
@@ -267,6 +271,12 @@ class Event < ApplicationRecord
     where("lower(short_url) = ?", dato.downcase).first || find_by(code: dato)
   end
 
+  # Universala evento estas retaj eventoj kiuj ne taŭgas elekti landon aŭ urbon
+  # Ĝiaj urbo estas ĉiam "Reta" kaj land-kodo estas "99999"
+  def universala?
+    online && city == 'Reta'
+  end
+
   private
 
     def end_after_start
@@ -287,7 +297,7 @@ class Event < ApplicationRecord
       self.time_zone = 'Etc/UTC' if time_zone.empty?
       self.short_url = nil if self.short_url == self.code || self.short_url.try(:strip).try(:empty?)
 
-      if online
+      if online && self.city == 'Reta'
         self.city = 'Reta'
         self.country_id = 99_999
         self.latitude = nil

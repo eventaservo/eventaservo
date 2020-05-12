@@ -5,7 +5,7 @@
     - if params[:code].present? && params[:controller] == 'events'
       - event = Event.joins(:country).lau_ligilo(params[:code])
       %li.breadcrumb-item= link_to event.country.continent, events_by_continent_path(event.country.continent)
-      - unless event.online
+      - unless event.universala?
         %li.breadcrumb-item= link_to event.country.name, events_by_country_path(event.country.continent, event.country.name)
         %li.breadcrumb-item= link_to event.city, events_by_city_url(event.country.continent, event.country.name, event.city)
 

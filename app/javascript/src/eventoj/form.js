@@ -11,24 +11,47 @@ $(document).ready(function () {
       $("#time_end").focus()
     })
 
+    // RETAJ EVENTOJ -->
     if ($("#event_online").is(":checked") === true) {
-      $("#malretaj_informoj").hide()
-      $("#retaj_informoj").show()
+      $("#retaj_informoj").show();
+
+      if ($("#universala").is(":checked") === true) {
+        $("#horzono").show()
+        $("#malretaj_informoj").hide()
+      } else {
+        $("#horzono").hide()
+      }
+
     } else {
+      $("#horzono").hide()
       $("#retaj_informoj").hide()
+      $("#malretaj_informoj").show()
     }
 
     $("#event_online").change(function () {
       if (this.checked) {
-        document.getElementById("event_city").value = "Reta"
-        $("#malretaj_informoj").hide()
         return $("#retaj_informoj").show()
       } else {
+        $("#universala").prop("checked", false)
         $("#malretaj_informoj").show()
         document.getElementById("event_city").value = ""
+        $("#horzono").hide()
         return $("#retaj_informoj").hide()
       }
     })
+
+    $("#universala").change(function () {
+      if (this.checked) {
+        $("#malretaj_informoj").hide()
+        document.getElementById("event_city").value = "Reta"
+        return $("#horzono").show()
+      } else {
+        $("#malretaj_informoj").show()
+        document.getElementById("event_city").value = ""
+        return $("#horzono").hide()
+      }
+    })
+    // <-- RETAJ EVENTOJ
 
     $("#event_country_id").on("select2:close", function () {
       return $(".button-submit").focus()

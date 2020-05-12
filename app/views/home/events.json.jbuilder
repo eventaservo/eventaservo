@@ -3,8 +3,10 @@
 json.array!(@events) do |event|
   json.id event.id
   title =
-    if event.online?
-      "[Reta] #{event.title}"
+    if event.universala?
+      "🖥 #{event.title}"
+    elsif event.online?
+      "🖥 [#{event.country.code.upcase} - #{event.city}] #{event.title}"
     else
       "[#{event.country.code.upcase} - #{event.city}] #{event.title}"
     end

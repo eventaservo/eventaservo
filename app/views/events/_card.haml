@@ -11,7 +11,7 @@
 
         = event_date(event)
         %br
-        - if event.online
+        - if event.universala?
           (Reta evento)
         - else
           = link_to event.city, events_by_city_path(event.country.continent, event.country.name, event.city), class: 'card-link'
