@@ -166,8 +166,11 @@ class EventsController < ApplicationController
   def by_username
     redirect_to root_path, flash: { error: 'Uzantnomo ne ekzistas' } if User.find_by(username: params[:username]).nil?
 
-    @today_events = Event.includes(:country).by_username(params[:username]).today
-    @events = Event.by_username(params[:username]).venontaj.not_today
+    @uzanto = User.find_by(username: params[:username])
+    @venontaj = Event.joins(:country).by_username(params[:username]).venontaj
+
+    @pasintaj = Event.joins(:country).by_username(params[:username]).pasintaj
+    @pagy, @pasintaj = pagy(@pasintaj)
   end
 
   def kontakti_organizanton

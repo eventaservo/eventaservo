@@ -98,6 +98,7 @@ module ApplicationHelper
   end
 
   def montras_flagon(lando)
+    return if lando.nil?
     flag_icon(lando.code)
   end
 
