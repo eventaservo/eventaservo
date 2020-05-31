@@ -5,7 +5,8 @@ class NovaUzantoSciigoJob < ApplicationJob
     return true if Rails.env == 'test' || Rails.env.development?
 
     mesagho = "Nova uzanto registrita:\n\n"
-    mesagho += "#{uzanto.name} el #{uzanto.city} (#{uzanto.country.code.upcase})"
+    mesagho += "#{uzanto.name} el #{uzanto.city} (#{uzanto.country.code.upcase})\n\n"
+    mesagho += events_by_username_path(uzanto.username)
     system "telegram-send --config config/es_admin_channel.conf \"#{mesagho}\""
   end
 end
