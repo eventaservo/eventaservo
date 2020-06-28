@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   get '/eventoj/:code', to: redirect('/e/%{code}')
   get '/vidmaniero/:view_style', to: redirect('/v/%{view_style}')
   get '/e/nova', to: redirect('/e/new')
+  get '/reta', to: redirect('/Reta')
 
   # API
   namespace :api do
