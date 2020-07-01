@@ -97,6 +97,7 @@ Rails.application.routes.draw do
     get 'analizado_lau_sistemoj', to: 'analizado#lau_sistemoj'
     get 'analizado_lau_vidmaniero', to: 'analizado#lau_vidmaniero'
     get 'analizado_lau_tago', to: 'analizado#lau_tago'
+    resources :reklamoj
   end
 
   # Aldonaĵoj
