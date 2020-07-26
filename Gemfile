@@ -88,6 +88,7 @@ gem 'timezone', '~> 1.0'
 # gem 'trix-rails', require: 'trix'
 gem 'httparty', '~> 0.18'
 gem 'nokogiri', '>= 1.10.4'
+gem 'yard'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
