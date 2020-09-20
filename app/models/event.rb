@@ -16,6 +16,8 @@ class Event < ApplicationRecord
   belongs_to :country
   has_many :organization_events, dependent: :destroy
   has_many :organizations, through: :organization_events
+  has_many :participants, dependent: :destroy
+  has_many :participants_names, through: :participants, source: :user
 
   validates :title, :description, :city, :country_id, :date_start, :date_end, :code, presence: true
   validates :description, length: { maximum: 400 }
@@ -275,6 +277,16 @@ class Event < ApplicationRecord
   # Ĝiaj urbo estas ĉiam "Reta" kaj land-kodo estas "99999"
   def universala?
     online && city == 'Reta'
+  end
+
+  # aldonas +user+ kiel partoprenanto de la evento
+  def add_participant(user, public: false)
+    Participant.create(event_id: id, user_id: user.id, public: public)
+  end
+
+  # Forviŝas la +user+ el la evento
+  def remove_participant(user)
+    Participant.find_by(event_id: id, user_id: user.id).destroy
   end
 
   private
