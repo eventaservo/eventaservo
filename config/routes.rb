@@ -18,6 +18,10 @@ Rails.application.routes.draw do
   get '/akcepti_kuketojn', to: 'home#accept_cookies'
   get '/forigas_kuketojn', to: 'home#reset_cookies'
 
+  authenticated :user, -> user { user.admin? }  do
+    mount DelayedJobWeb, at: "/delayed_job"
+  end
+
   root to: 'home#index'
 
   devise_for :users, controllers: { sessions:           'users/sessions',

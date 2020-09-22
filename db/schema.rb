@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_18_194553) do
+ActiveRecord::Schema.define(version: 2020_09_21_122112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,6 +122,7 @@ ActiveRecord::Schema.define(version: 2020_09_18_194553) do
     t.string "short_url"
     t.boolean "cancelled", default: false
     t.text "cancel_reason"
+    t.integer "delayed_job_id"
     t.index "md5(content)", name: "index_events_on_content"
     t.index ["address"], name: "index_events_on_address"
     t.index ["cancelled"], name: "index_events_on_cancelled"

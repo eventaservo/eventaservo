@@ -17,7 +17,7 @@ class Event < ApplicationRecord
   has_many :organization_events, dependent: :destroy
   has_many :organizations, through: :organization_events
   has_many :participants, dependent: :destroy
-  has_many :participants_names, through: :participants, source: :user
+  has_many :participants_records, through: :participants, source: :user
 
   validates :title, :description, :city, :country_id, :date_start, :date_end, :code, presence: true
   validates :description, length: { maximum: 400 }
@@ -28,6 +28,7 @@ class Event < ApplicationRecord
   validates_uniqueness_of :short_url, case_sensitive: false, allow_blank: true, allow_nil: true
 
   before_save :format_event_data
+  before_save :schedule_notify_users_job
 
   geocoded_by :full_address
   after_validation :geocode, if: :require_geocode?
@@ -341,5 +342,16 @@ class Event < ApplicationRecord
       else
         "http://#{site.strip}"
       end
+    end
+
+    # Registra DELAYED JOB por ĉiuj eventoj
+    def schedule_notify_users_job
+      if self.delayed_job_id
+        old_job = Delayed::Job.find_by(id: self.delayed_job_id)
+        old_job.destroy if old_job
+      end
+
+      new_job = ::SciigasUzantojnAntauEventoJob.set(wait_until: self.date_start - 2.hours).perform_later(self.id)
+      self.delayed_job_id = new_job.provider_job_id
     end
 end
