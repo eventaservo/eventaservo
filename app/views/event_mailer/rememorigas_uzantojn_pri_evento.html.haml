@@ -16,7 +16,10 @@
         %p
           Admin: Partoprenontaj adresoj:
           %br
-          = @evento.participants_records.pluck(:email)
+          - if @evento.participants.any?
+            = @evento.participants_records.pluck(:email)
+          - else
+            Neniu... :(
     %tr.footer
       %td
         = link_to image_tag('https://eventaservo.org/eventa_servo_logo.png', size: 48), 'https://eventaservo.org'
