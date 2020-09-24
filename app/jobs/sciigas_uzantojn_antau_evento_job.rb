@@ -5,6 +5,6 @@ class SciigasUzantojnAntauEventoJob < ApplicationJob
     e = Event.find(evento_id)
     # return unless e.participants.any?
 
-    EventMailer.rememorigas_uzantojn_pri_evento(evento_id)
+    EventMailer.rememorigas_uzantojn_pri_evento(evento_id).deliver_later_mail
   end
 end
