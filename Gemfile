@@ -125,7 +125,6 @@ end
 group :test do
   gem 'capybara'
   gem 'factory_bot_rails'
-  gem 'minitest-reporters'
   gem 'selenium-webdriver'
   gem 'simplecov'
   gem 'vcr'
