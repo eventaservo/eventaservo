@@ -1,16 +1,18 @@
 %nav.navbar.navbar-expand-lg.navbar-dark.bg-success
-  %a.navbar-brand{href: root_url} Eventa Servo
-  %button.navbar-toggler{'aria-controls' => 'navbarSupportedContent', 'aria-expanded' => 'false', 'aria-label' => 'Toggle navigation', 'data-target' => '#navbarSupportedContent', 'data-toggle' => 'collapse', :type => 'button'}
-    %span.navbar-toggler-icon
-  #navbarSupportedContent.collapse.navbar-collapse
-    %ul.navbar-nav.mr-auto
-      %li.nav-item= link_to icon('fas', 'calendar-plus', 'Aldoni eventon'), new_event_path, class: 'nav-link'
+  .navbar.container
+    .navbar.menu
+      %a.navbar-brand{href: root_url} Eventa Servo
+      %button.navbar-toggler{'aria-controls' => 'navbarSupportedContent', 'aria-expanded' => 'false', 'aria-label' => 'Toggle navigation', 'data-target' => '#navbarSupportedContent', 'data-toggle' => 'collapse', :type => 'button'}
+        %span.navbar-toggler-icon
+      #navbarSupportedContent.collapse.navbar-collapse
+        %ul.navbar-nav.mr-auto
+          %li.nav-item= link_to icon('fas', 'calendar-plus', 'Aldoni eventon'), new_event_path, class: 'nav-link'
 
-      %li.nav-item= link_to icon('fas', 'building', 'Organizoj'), organizations_url, class: 'nav-link'
+          %li.nav-item= link_to icon('fas', 'building', 'Organizoj'), organizations_url, class: 'nav-link'
 
-      %li.nav-item= link_to icon('fas', 'heart', 'Subteni'), "https://liberapay.com/instigo", target: "_blank", class: 'nav-link'
-      %li.nav-item= link_to icon('fas', 'user-friends', 'Pri ni'), prie_url, class: 'nav-link'
+          %li.nav-item= link_to icon('fas', 'heart', 'Subteni'), "https://liberapay.com/instigo", target: "_blank", class: 'nav-link'
+          %li.nav-item= link_to icon('fas', 'user-friends', 'Pri ni'), prie_url, class: 'nav-link'
 
-      = render partial: 'layouts/admin' if user_signed_in? && current_user.admin?
+          = render partial: 'layouts/admin' if user_signed_in? && current_user.admin?
 
-    = render partial: 'layouts/uzanto'
+        = render partial: 'layouts/uzanto'
