@@ -32,6 +32,7 @@ class User < ApplicationRecord
   scope :receives_weekly_summary, -> { where('mailings @> ?', { weekly_summary: '1' }.to_json) }
   scope :admins, -> { where(admin: true) }
   scope :instruistoj, -> { where("instruo ->> 'instruisto' = 'true'") }
+  scope :prelegantoj, -> { where("prelego ->> 'preleganto' = 'true'") }
 
   def self.from_omniauth(auth)
     if where(email: auth.info.email).exists?

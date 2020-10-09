@@ -1,0 +1,28 @@
+.box-white
+  .text-center
+    %h1
+      Instruistoj kaj preleganatoj
+
+    %p
+      Jen alfabeta listo de instruistoj kaj prelegantoj kiujn vi povas kontakti por via evento. Iuj homoj pretas senpage
+      instrui kaj/aŭ prelegi, aliaj petas repagon de vojaĝkostoj aŭ etan financan rekompencon. Foje eblos veni surloke;
+      aliuloj pretas aŭ povos pro praktikaj kialoj nur rete agi. En la ĉi-suba listo vi trovos nomojn de homoj kiuj
+      estas pretaj vin helpi. Detalojn vi trovos ĉe la respektivaj uzantoprofiloj.
+
+  .text-divider Instuistoj
+
+  -#.row
+  -#  .col-8.font-weight-bold Nomo
+  -#  .col-4.font-weight-bold Nivelo
+
+  .row
+    - @instruistoj.each do |instruisto|
+      .col-12.col-md-4
+        = render partial: 'instruisto_karto', locals: { instruisto: instruisto }
+
+  .mt-5
+  .text-divider Prelegantoj
+  .row
+    - @prelegantoj.each do |preleganto|
+      .col-12.col-md-4
+        = render partial: 'preleganto_karto', locals: { preleganto: preleganto }

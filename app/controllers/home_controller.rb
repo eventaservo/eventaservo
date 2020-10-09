@@ -30,6 +30,11 @@ class HomeController < ApplicationController
     @eventoj = Event.anoncoj_kaj_konkursoj
   end
 
+  def instruistoj_kaj_prelegantoj
+    @instruistoj = User.instruistoj.order(:name)
+    @prelegantoj = User.prelegantoj.order(:name)
+  end
+
   def changelog
   end
 

@@ -64,6 +64,9 @@ Rails.application.routes.draw do
   # Anoncoj kaj Konkursoj
   get '/anoncoj', to: 'home#anoncoj', as: 'anoncoj'
 
+  # Instruistoj kaj prelegantoj
+  get '/instruistoj_kaj_prelegantoj', to: 'home#instruistoj_kaj_prelegantoj', as: 'instruistoj_kaj_prelegantoj'
+
   # Organizoj
   defaults format: :json do
     get '/o/cheforganizoj.json', to: 'organizations#cheforganizoj'

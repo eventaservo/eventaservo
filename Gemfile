@@ -19,7 +19,7 @@ gem 'webpacker', '~> 5.0'
 
 gem 'acts-as-taggable-on', '~> 6.5'
 
-gem 'bootstrap', '~> 4.3.1'
+gem 'bootstrap', '~> 4.3'
 gem 'font-awesome-sass', '~> 5'
 gem 'haml', '~> 5'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
@@ -68,14 +68,14 @@ gem 'delayed_job_web'
 gem 'rack-attack', '~> 6.2'
 gem 'rack-cors', '~> 1.1', require: 'rack/cors'
 
-gem 'browser', '~> 4.0'
+gem 'browser', '~> 5.0'
 gem 'diffy', '~> 3.3'
 gem 'geocoder', '~> 1.6'
 gem 'highcharts-rails', '~> 6.0'
 gem 'hirb'
 gem 'image_processing', '~> 1.2'
 gem 'invisible_captcha', '~> 1.0'
-gem 'leaflet-rails', '~> 1.6.0'
+gem 'leaflet-rails', '~> 1.7.0'
 gem 'pagy', '~> 3.7.5'
 gem 'paper_trail', '~> 10.3'
 gem 'paper_trail-association_tracking', '~> 2.0'
@@ -114,7 +114,7 @@ group :development do
 
   # Capistrano gems
   gem 'bcrypt_pbkdf'
-  gem 'capistrano', '= 3.12.1', require: false
+  gem 'capistrano', '~> 3.14.1', require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano-passenger', require: false
   gem 'capistrano-rails', '~> 1.4', require: false
