@@ -55,7 +55,7 @@
                 = label_tag 'delete_logo', 'Forviŝi emblemon', class: 'form-check-label'
                 %p (aŭ alŝutu novan por anstataŭigi ĝin)
 
-          = f.file_field :logo, class: 'form-control-file', accept: 'image/*'
+          = f.file_field :logo, class: 'form-control-file', accept: 'image/gif,image/jpeg,image/png'
 
         .buttons-footer
           = link_to 'Nuligi', organizations_url, class: 'button-cancel'
