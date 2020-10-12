@@ -142,6 +142,7 @@ class Event < ApplicationRecord
 
   def self.search(search)
     all if search.blank?
+    all unless defined?(search)
 
     joins(:country)
       .where('unaccent(events.title) ilike unaccent(:search) OR
