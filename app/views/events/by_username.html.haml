@@ -16,7 +16,7 @@
       = render partial: 'uzantaj_ligiloj'
       %br
       = render partial: 'uzantaj_organizoj'
-      = render partial: 'informoj_por_administrantoj'
+      = render partial: 'informoj_por_administrantoj' if current_user && current_user.admin?
 
     .col-lg-9.col-md-12
       .row
