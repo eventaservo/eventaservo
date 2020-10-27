@@ -13,7 +13,7 @@ module Constants
   IGNORENDAJ_IP = %w[127.0.0.1 207.180.227.223 2a02:c207:2022:6445::1].freeze
   public_constant :IGNORENDAJ_IP
 
-  # Kvanto de partoprenantoj por fairigi eventon
-  FAJRA_EVENTO_PARTOPRENANTOJ = 7
-  public_constant :FAJRA_EVENTO_PARTOPRENANTOJ
+  # Kvanto de partoprenontoj por fairigi eventon
+  FAJRA_EVENTO_PARTOPRENONTOJ = 5
+  public_constant :FAJRA_EVENTO_PARTOPRENONTOJ
 end
