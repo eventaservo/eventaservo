@@ -4,7 +4,7 @@
     %tr
       %td.content{colspan: 2}
         %p
-          Saluton!
+          Saluton.
         %p
           Vi intencas partopreni la eventon #{link_to @evento.title, event_url(@evento.ligilo)}.
         %p
@@ -13,13 +13,6 @@
         %p.button-blue.text-center
           = link_to 'VIDI LA EVENTAN PAĜON', event_url(@evento.ligilo)
 
-        %p
-          Admin: Partoprenontaj adresoj:
-          %br
-          - if @evento.participants.any?
-            = @evento.participants_records.pluck(:email)
-          - else
-            Neniu... :(
     %tr.footer
       %td
         = link_to image_tag('https://eventaservo.org/eventa_servo_logo.png', size: 48), 'https://eventaservo.org'
