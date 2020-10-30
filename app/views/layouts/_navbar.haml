@@ -11,6 +11,7 @@
           %li.nav-item= link_to icon('fas', 'building', 'Organizoj'), organizations_url, class: 'nav-link'
 
           %li.nav-item= link_to icon('fas', 'heart', 'Subteni'), "https://liberapay.com/instigo", target: "_blank", class: 'nav-link'
+          %li.nav-item= link_to icon('fas', 'newspaper', 'Novaĵoj'), "https://t.me/s/eventaservo", target: "_blank", class: 'nav-link'
           %li.nav-item= link_to icon('fas', 'user-friends', 'Pri ni'), prie_url, class: 'nav-link'
 
           = render partial: 'layouts/admin' if user_signed_in? && current_user.admin?
