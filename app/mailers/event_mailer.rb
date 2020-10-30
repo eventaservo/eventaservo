@@ -86,10 +86,10 @@ class EventMailer < ApplicationMailer
     @evento = Event.find(evento_id)
 
     emails = @evento.participants_records.pluck(:email)
-    bcc = 'shayani@gmail.com'
+    bcc = 'shayani@icloud.com'
 
     emails.each do |to|
-      mail(to: to, subject: "[ES] #{@evento.title} baldaŭ komenciĝos")
+      mail(to: to, bcc: bcc, subject: "[ES] #{@evento.title} baldaŭ komenciĝos")
     end
   end
 end
