@@ -352,7 +352,7 @@ class Event < ApplicationRecord
         old_job.destroy if old_job
       end
 
-      new_job = ::SciigasUzantojnAntauEventoJob.set(wait_until: self.date_start - 2.hours).perform_later(self.id)
+      new_job = ::SciigasUzantojnAntauEventoJob.set(wait_until: self.date_start - 2.hours).perform_later(self.code)
       self.delayed_job_id = new_job.provider_job_id
     end
 end
