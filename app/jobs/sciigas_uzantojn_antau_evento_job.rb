@@ -5,6 +5,9 @@ class SciigasUzantojnAntauEventoJob < ApplicationJob
     e = Event.find(evento_id)
     return unless e.participants.any?
 
-    EventMailer.rememorigas_uzantojn_pri_evento(evento_id).deliver_later
+    emails = e.participants_records.pluck(:email)
+    emails.each do |retadreso|
+      EventMailer.rememorigas_uzantojn_pri_evento(evento_id, retadreso).deliver_later
+    end
   end
 end

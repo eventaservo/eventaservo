@@ -82,14 +82,10 @@ class EventMailer < ApplicationMailer
     mail(to: to, bcc: bcc, subject: 'Vi estas nova eventa administranto')
   end
 
-  def rememorigas_uzantojn_pri_evento(evento_id)
+  def rememorigas_uzantojn_pri_evento(evento_id, retadreso)
     @evento = Event.find(evento_id)
 
-    emails = @evento.participants_records.pluck(:email)
-    bcc = 'shayani@gmail.com'
-
-    emails.each do |to|
-      mail(to: to, subject: "[ES] #{@evento.title} baldaŭ komenciĝos")
-    end
+    bcc = 'shayani@icloud.com'
+    mail(to: retadreso, bcc: bcc , subject: "[ES] #{@evento.title} baldaŭ komenciĝos")
   end
 end
