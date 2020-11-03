@@ -1,6 +1,8 @@
 .box-white
   .text-center
     %h1 Anoncoj kaj konkursoj
+    .caption
+      Listo de aktivaj kaj venontaj anoncoj aŭ konkursoj
   - @eventoj.grouped_by_months.map do |dato, eventoj|
     %br/
     %h3.text-divider= l(dato, format: '%B').upcase

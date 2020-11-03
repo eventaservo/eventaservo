@@ -27,7 +27,7 @@ class HomeController < ApplicationController
   end
 
   def anoncoj
-    @eventoj = Event.anoncoj_kaj_konkursoj
+    @eventoj = Event.anoncoj_kaj_konkursoj.venontaj
   end
 
   def instruistoj_kaj_prelegantoj
