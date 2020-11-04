@@ -12,15 +12,8 @@
 
         %p Jen la mesaĝo:
 
-        %p
-          <strong>Nomo:</strong> #{@informoj[:name]}
-          %br
-          <strong>Retpoŝtadreso:</strong> #{@informoj[:email]}
-          %br
-          <strong>Mesaĝo:</strong> #{@informoj[:message]}
-
-        %p Dankon
-
+        %p.block-quote
+          "#{@informoj[:message]}" - <i>#{@informoj[:name]}</i>
 
     %tr.footer
       %td
