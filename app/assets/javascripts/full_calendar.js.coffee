@@ -26,7 +26,7 @@ $ ->
     listDayFormat: 'dddd, D MMMM YYYY'
     listDayAltFormat: false
     firstDay: 1
-    noEventsMessage: 'Eventoj ne okazas'
+    noEventsMessage: 'Eventoj ne okazas dum ĉi tiu semajno. Elektu alian semajnon aŭ monaton.'
     monthNames: ['januaro', 'februaro', 'marto', 'aprilo', 'majo', 'junio', 'julio', 'aŭgusto', 'septembro', 'oktobro', 'novembro', 'decembro']
     dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Ĵaŭ', 'Ven', 'Sab']
     dayNames: ['Dimanĉo', 'Lundo', 'Mardo', 'Merkredo', 'Ĵaŭdo', 'Vendredo', 'Sabato']
