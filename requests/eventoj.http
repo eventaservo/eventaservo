@@ -1,3 +1,3 @@
-GET https://devel.eventaservo.org:3000/api/v3/eventoj
+GET {{ base_url}} /eventoj
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.KCRZPudp9uEZn-iJEqc4YOxr82v7B_Axhy_1oMQt91c
+Authorization: {{ token}}
