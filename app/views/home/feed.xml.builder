@@ -8,7 +8,7 @@ xml.rss version: '2.0', 'xmlns:atom':  "http://www.w3.org/2005/Atom" do
     xml.pubDate @events.order(updated_at: :desc).last.updated_at.strftime('%a, %d %b %Y %T %z')
     xml.lastBuildDate @events.order(updated_at: :desc).last.updated_at.strftime('%a, %d %b %Y %T %z')
     xml.docs 'http://blogs.law.harvard.edu/tech/rss'
-    xml.generator 'Ruby on Rails 5.2'
+    xml.generator 'Ruby on Rails 6.0'
     xml.managingEditor 'kontakto@eventaservo.org (Eventa Servo)'
     xml.webMaster 'kontakto@eventaservo.org (Eventa Servo)'
     xml.tag! 'atom:link', rel: 'self', type: 'application/rss+xml', href: events_rss_url

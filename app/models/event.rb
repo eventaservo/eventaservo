@@ -3,7 +3,7 @@
 # Eventaj dateno
 class Event < ApplicationRecord
   has_paper_trail versions: { scope: -> { order('created_at desc') } },
-                  ignore: [:id]
+                  ignore: [:id, :delayed_job_id]
 
   has_rich_text :enhavo
 

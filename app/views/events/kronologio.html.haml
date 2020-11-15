@@ -2,27 +2,55 @@
   .lead.d-flex
     %div #{event_flag(@evento)} #{@evento.title}
 
-  .text-divider Kronologio
-  %p Versioj: #{@evento.versions.count}
+  %h4.text-center Kronologio
 
-  - @evento.versions.order(id: :desc).each do |version|
-    .box-white.small
-      %p
-        = User.find(version.whodunnit).name if version.whodunnit
-        en #{format_date version.created_at} ŝanĝis:
-      - version.changeset.except(:updated_at).map do |item, changes|
-        .row
-          .col-2 #{t item}:
-          .col-10
-            - old = changes[0]
-            - new = changes[1]
-            - if item == 'user_id'
-              - old = User.find(old).name if old
-              - new = User.find(new).name
-            - if item == 'country_id'
-              - old = Country.find(old).name if old
-              - new = Country.find(new).name
+  .row
+    .col-6
+      .text-divider Datumoj
+      - @evento.versions.order(id: :desc).each do |version|
+        - next if version.changeset.empty?
 
-            = raw Diffy::Diff.new(old, new).to_s(:html)
+        .box-white.small
+          %p
+            = User.find(version.whodunnit).name if version.whodunnit
+            en #{format_date version.created_at} ŝanĝis:
+          - version.changeset.except(:updated_at).map do |item, changes|
+            .row
+              .col-2 #{t item}:
+              .col-10
+                - old = changes[0]
+                - new = changes[1]
+                - if item == 'user_id'
+                  - old = User.find(old).name if old
+                  - new = User.find(new).name
+                - if item == 'country_id'
+                  - old = Country.find(old).name if old
+                  - new = Country.find(new).name
 
-  = link_to 'Revidi la eventon', event_url(@evento.ligilo)
+                = raw Diffy::Diff.new(old, new).to_s(:html)
+
+    .col-6
+      .text-divider Enhavo
+      - @evento.enhavo.versions.order(id: :desc).each do |version|
+        - next if version.changeset.empty?
+
+        .box-white.small
+          %p
+            = User.find(version.whodunnit).name if version.whodunnit
+            en #{format_date version.created_at} ŝanĝis:
+          - version.changeset.except(:updated_at).map do |item, changes|
+            .row
+              .col-2 #{t item}:
+              .col-10
+                - old = changes[0]
+                - new = changes[1]
+                - if item == 'user_id'
+                  - old = User.find(old).name if old
+                  - new = User.find(new).name
+                - if item == 'country_id'
+                  - old = Country.find(old).name if old
+                  - new = Country.find(new).name
+
+                = raw Diffy::Diff.new(old, new).to_s(:html)
+
+  = link_to 'Revidi la eventon', event_url(@evento.ligilo), class: 'btn btn-outline-primary btn-sm'
