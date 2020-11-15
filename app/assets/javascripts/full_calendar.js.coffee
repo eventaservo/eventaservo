@@ -37,7 +37,7 @@ $ ->
         duration:
           days: 7
         buttonText: 'Semajno'
-        allDayText: 'tuttaga'
+        allDayText: 'multtaga'
       monato:
         type: 'month'
         buttonText: 'Monato'

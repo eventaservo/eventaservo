@@ -154,6 +154,8 @@ class Event < ApplicationRecord
   end
 
   def full_address
+    return '' if online
+
     # TODO: Forviŝu la komon kiam ne estas adreso
     [address, city, country.try(:code).try(:upcase)].compact.join(', ')
   end
