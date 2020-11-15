@@ -3,11 +3,13 @@
   |
   = mail_to 'kontakto@eventaservo.org', 'Kontaktu nin', subject: 'Pri Eventa Servo'
   |
-  = link_to 'Privateco', privateco_url
-  |
-  = link_to 'Ŝanĝoprotokolo', changelog_url
-  |
-  = link_to icon('fas', 'rss', 'RSS'), events_rss_url
-  |
   = link_to 'Prie', prie_path
-  = "(#{Rails.env})" unless Rails.env == 'production'
+  |
+  %span.dropdown
+    %a#footerMenu{'aria-expanded' => 'false', 'aria-haspopup' => 'true', 'data-toggle' => 'dropdown', :href => '#'} Pli...
+    .dropdown-menu.dropdown-menu-right{'aria-labelledby' => 'footerMenu'}
+      = link_to 'Privateco', privateco_url, class: 'dropdown-item'
+      = link_to 'Ŝanĝoprotokolo', changelog_url, class: 'dropdown-item'
+      = link_to icon('fas', 'rss', 'RSS'), events_rss_url, class: 'dropdown-item'
+  = "(#{Rails.env})" unless Rails.env.production?
+
