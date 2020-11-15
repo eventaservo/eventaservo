@@ -6,7 +6,7 @@ module Webcal
     before_action :definas_landon, only: :lando
 
     def lando
-      eventoj = Event.lau_lando(@lando).for_webcal
+      eventoj = Event.lau_lando(@lando).for_webcal.ne_nuligitaj.ne_anoncoj
 
       respond_to do |format|
         format.ics { kreas_webcal(eventoj.includes(:country), title: "#{@lando.code.upcase} Esperantaj eventoj") }

@@ -74,7 +74,12 @@ class HomeController < ApplicationController
   end
 
   def feed
-    @events = Event.includes(:country).includes(:user).venontaj.order(:date_start)
+    @events = Event.includes(:country).includes(:user)
+                .venontaj
+                .ne_nuligitaj
+                .ne_anoncoj
+                .where(cancelled: false)
+                .order(:date_start)
     render layout: false
   end
 
