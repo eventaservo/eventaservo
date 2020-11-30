@@ -21,6 +21,7 @@ class EventsController < ApplicationController
 
   def show
     @horzono = cookies[:horzono] || params[:horzono] || @event.time_zone
+    @partoprenontoj = @event.participants
 
     respond_to do |format|
       format.html

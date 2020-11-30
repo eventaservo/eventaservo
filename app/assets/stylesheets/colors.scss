@@ -8,6 +8,7 @@ $blueDark : #2B5797;
 $blueInfo : #BEE5EB;
 $green : #00A300;
 $greenLight : #99B433;
+$greenLighter : #eaffe7;
 $greenDark : #1E7145;
 $greenLightSuccess: #c3e6cb;
 $red : #B91D47;
@@ -91,6 +92,8 @@ $evento-pasinta: #C0C0C0;
 .bg-color-green { background-color : $green !important; }
 
 .bg-color-greenLight { background-color : $greenLight !important; }
+
+.bg-color-greenLighter { background-color : $greenLighter !important; }
 
 .bg-color-greenDark { background-color : $greenDark !important; }
 

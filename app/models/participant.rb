@@ -5,4 +5,5 @@ class Participant < ApplicationRecord
   belongs_to :user
 
   scope :publikaj, -> { where(public: true) }
+  scope :ne_publikaj, -> { where(public: false) }
 end
