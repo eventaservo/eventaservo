@@ -165,6 +165,12 @@ class HomeController < ApplicationController
 
     def kalkulas_kvanton_registritaj_uzantoj
       quantity = []
+      quantity << User.where('created_at <= ?', (Time.zone.today - 11.months).end_of_month).count
+      quantity << User.where('created_at <= ?', (Time.zone.today - 10.months).end_of_month).count
+      quantity << User.where('created_at <= ?', (Time.zone.today - 9.months).end_of_month).count
+      quantity << User.where('created_at <= ?', (Time.zone.today - 8.months).end_of_month).count
+      quantity << User.where('created_at <= ?', (Time.zone.today - 7.months).end_of_month).count
+      quantity << User.where('created_at <= ?', (Time.zone.today - 6.months).end_of_month).count
       quantity << User.where('created_at <= ?', (Time.zone.today - 5.months).end_of_month).count
       quantity << User.where('created_at <= ?', (Time.zone.today - 4.months).end_of_month).count
       quantity << User.where('created_at <= ?', (Time.zone.today - 3.months).end_of_month).count
@@ -172,11 +178,17 @@ class HomeController < ApplicationController
       quantity << User.where('created_at <= ?', (Time.zone.today - 1.month).end_of_month).count
       quantity << User.where('created_at <= ?', Time.zone.today.end_of_month).count
 
-      { monatoj: last_6_months_label, kvantoj: quantity }
+      { monatoj: last_12_months_label, kvantoj: quantity }
     end
 
     def kalkulas_kvanton_registritaj_eventoj
       quantity = []
+      quantity << Event.where('created_at <= ?', (Time.zone.today - 11.months).end_of_month).count
+      quantity << Event.where('created_at <= ?', (Time.zone.today - 10.months).end_of_month).count
+      quantity << Event.where('created_at <= ?', (Time.zone.today - 9.months).end_of_month).count
+      quantity << Event.where('created_at <= ?', (Time.zone.today - 8.months).end_of_month).count
+      quantity << Event.where('created_at <= ?', (Time.zone.today - 7.months).end_of_month).count
+      quantity << Event.where('created_at <= ?', (Time.zone.today - 6.months).end_of_month).count
       quantity << Event.where('created_at <= ?', (Time.zone.today - 5.months).end_of_month).count
       quantity << Event.where('created_at <= ?', (Time.zone.today - 4.months).end_of_month).count
       quantity << Event.where('created_at <= ?', (Time.zone.today - 3.months).end_of_month).count
@@ -184,7 +196,7 @@ class HomeController < ApplicationController
       quantity << Event.where('created_at <= ?', (Time.zone.today - 1.month).end_of_month).count
       quantity << Event.where('created_at <= ?', Time.zone.today.end_of_month).count
 
-      { monatoj: last_6_months_label, kvantoj: quantity }
+      { monatoj: last_12_months_label, kvantoj: quantity }
     end
 
     def kalkulas_eventojn_lau_monatoj
@@ -231,8 +243,7 @@ class HomeController < ApplicationController
       retaj = []
       fizikaj = []
 
-
-      5.downto(0) do |m|
+      11.downto(0) do |m|
         retaj << Event.online.where(created_at: (Date.today - m.month).beginning_of_month..(Date.today - m.month).end_of_month).count
         fizikaj << Event.not_online.where(created_at: (Date.today - m.month).beginning_of_month..(Date.today - m.month).end_of_month).count
       end
@@ -240,6 +251,6 @@ class HomeController < ApplicationController
       eventoj << { name: 'Fizikaj', data: fizikaj }
       eventoj << { name: 'Retaj', data: retaj }
 
-      { eventoj: eventoj,  x_axis: last_6_months_label }
+      { eventoj: eventoj,  x_axis: last_12_months_label }
     end
 end

@@ -79,6 +79,16 @@ body {
   }
 }
 
+.link-green {
+  color: #00A300;
+  text-decoration: none;
+
+  &:hover {
+    color: #028102 !important;
+    text-decoration: none;
+  }
+}
+
 .link-black {
   color: black;
 

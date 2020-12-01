@@ -3,14 +3,13 @@
     <div v-if="logged">
       <div
         v-if="participant === 'false' && !elektilo"
+        class="link-blue"
         @click="elektilo = !elektilo"
       >
         <h1>
-          <i class="fas fa-user-check fg-color-gray"></i>
+          <i class="fas fa-user-check" />
         </h1>
-        <span class="fg-color-gray text-decoration-none"
-          >Mi volas partopreni</span
-        >
+        <span> Mi volas partopreni </span>
       </div>
       <div v-if="elektilo">
         Ĉu aperigi vian nomon en la listo de partoprenantoj?
@@ -26,12 +25,12 @@
       <a
         :href="ligilo"
         v-if="participant === 'true'"
-        class="text-decoration-none"
+        class="link-green"
       >
         <h1>
-          <i class="fas fa-user-check fg-color-green"></i>
+          <i class="fas fa-user-check" />
         </h1>
-        <span class="fg-color-green">Mi partoprenos!</span>
+        <span>Mi partoprenos!</span>
       </a>
     </div>
     <div v-else>

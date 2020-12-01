@@ -24,7 +24,7 @@ export default {
           enabled: false
         },
         chart: {
-          type: "areaspline"
+          type: "column"
         },
         title: {
           text: "Novaj eventoj laŭ monatoj"
@@ -48,9 +48,17 @@ export default {
           shared: true
         },
         plotOptions: {
+          column: {
+            stacking: 'normal',
+            dataLabels: {
+              enabled: true
+            }
+          },
           area: {
+            stacking: "normal",
             lineWidth: 1,
             marker: {
+              enabled: false,
               hover: { enabled: false }
             }
           }
