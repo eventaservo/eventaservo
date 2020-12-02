@@ -7,7 +7,7 @@
         @click="elektilo = !elektilo"
       >
         <h1>
-          <i class="fas fa-user-check" />
+          <i class="fas fa-user" />
         </h1>
         <span> Mi volas partopreni </span>
       </div>
