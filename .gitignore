@@ -57,3 +57,6 @@ yarn-debug.log*
 # Telegramo-agordoj
 config/es_admin_channel.conf
 /requests/http-client.private.env.json
+
+.generators
+.rakeTasks

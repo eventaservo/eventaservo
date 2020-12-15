@@ -8,7 +8,7 @@ ruby '~> 2.6'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0'
 # Use Puma as the app server
-gem 'puma', '~> 5.0.0.beta1'
+gem 'puma', '~> 5.0.4'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 6'
 # Use Uglifier as compressor for JavaScript assets
@@ -72,7 +72,7 @@ gem 'browser', '~> 5.0'
 gem 'diffy', '~> 3.3'
 gem 'geocoder', '~> 1.6'
 gem 'highcharts-rails', '~> 6.0'
-gem 'hirb'
+gem 'hirb', '= 0.7.2'
 gem 'image_processing', '~> 1.2'
 gem 'invisible_captcha', '~> 1.0'
 gem 'leaflet-rails', '~> 1.7.0'
@@ -95,9 +95,6 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'faker'
   gem 'rake'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  # gem 'spring'
-  # gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 group :development do
