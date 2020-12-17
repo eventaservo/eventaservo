@@ -351,7 +351,7 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     semantic_range (2.3.0)
-    sentry-raven (3.1.1)
+    sentry-raven (3.0.4)
       faraday (>= 1.0)
     simple_token_authentication (1.17.0)
       actionmailer (>= 3.2.6, < 7)
@@ -481,7 +481,7 @@ DEPENDENCIES
   seed_dump
   select2-rails (~> 4.0)
   selenium-webdriver
-  sentry-raven (~> 3.0)
+  sentry-raven (= 3.0.4)
   simple_token_authentication (~> 1.0)
   simplecov
   sitemap_generator (~> 6.1)
