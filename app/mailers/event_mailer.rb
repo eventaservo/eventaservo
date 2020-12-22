@@ -90,7 +90,10 @@ class EventMailer < ApplicationMailer
     emails = ['shayani@gmail.com'] unless Rails.env.production?
 
     emails.each do |to|
-      mail(to: to, bcc: 'shayani@icloud.com', from: 'kontakto@eventaservo.org', subject: "[ES] #{@evento.title} baldaŭ komenciĝos")
+      mail(to: to,
+           bcc: 'shayani@icloud.com',
+           from: 'Eventa Servo <kontakto@eventaservo.org>',
+           subject: "[ES] #{@evento.title} baldaŭ komenciĝos")
     end
   end
 end
