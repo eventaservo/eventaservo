@@ -142,6 +142,7 @@ class Event < ApplicationRecord
 
   def self.search(search)
     all if search.blank?
+    all if search.nil?
     all unless defined?(search)
 
     joins(:country)
@@ -150,7 +151,7 @@ class Event < ApplicationRecord
               unaccent(events.content) ilike unaccent(:search) OR
               unaccent(events.city) ilike unaccent(:search) OR
               unaccent(countries.name) ilike unaccent(:search)',
-             search: "%#{search.tr(' ', '%').downcase}%").order('events.date_start')
+             search: "%#{search.strip.tr(' ', '%').downcase}%").order('events.date_start')
   end
 
   def full_address
