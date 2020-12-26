@@ -39,6 +39,12 @@ class HomeController < ApplicationController
   end
 
   def privateco
+    respond_to do |format|
+      format.html
+      format.text {
+        render "privateco.txt", layout: false
+      }
+    end
   end
 
   def prie
