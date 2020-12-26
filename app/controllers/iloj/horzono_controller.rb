@@ -12,8 +12,12 @@ module Iloj
     def forvishas
       cookies.delete :horzono
 
-      redirect_to request.referrer,
-                  flash: { success: 'Horzona informo forviŝita sukcese' }
+      if request.referrer
+        redirect_to request.referrer,
+                    flash: { success: 'Horzona informo forviŝita sukcese' }
+      else
+        redirect_to root_url
+      end
     end
   end
 end
