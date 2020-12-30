@@ -87,11 +87,10 @@ class EventMailer < ApplicationMailer
 
     emails = @evento.participants_records.pluck(:email)
 
-    emails = ['shayani@gmail.com'] unless Rails.env.production?
+    emails = ['fernando@eventaservo.org'] unless Rails.env.production?
 
     emails.each do |to|
       mail(to: to,
-           bcc: 'shayani@icloud.com',
            from: 'Eventa Servo <kontakto@eventaservo.org>',
            subject: "[ES] #{@evento.title} baldaŭ komenciĝos")
     end
