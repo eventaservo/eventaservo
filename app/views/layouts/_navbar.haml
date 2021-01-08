@@ -2,18 +2,31 @@
   .navbar.container
     .navbar.menu
       %a.navbar-brand{href: root_url} Eventa Servo
+      #serchilo_navbar
+        %serchilo-navbar
       %button.navbar-toggler{'aria-controls' => 'navbarSupportedContent', 'aria-expanded' => 'false', 'aria-label' => 'Toggle navigation', 'data-target' => '#navbarSupportedContent', 'data-toggle' => 'collapse', :type => 'button'}
         %span.navbar-toggler-icon
-      #navbarSupportedContent.collapse.navbar-collapse
-        %ul.navbar-nav.mr-auto
+      #navbarSupportedContent.collapse.navbar-collapse.justify-content-between
+        %ul.navbar-nav
           %li.nav-item= link_to icon('fas', 'calendar-plus', 'Aldoni eventon'), new_event_path, class: 'nav-link'
-
           %li.nav-item= link_to icon('fas', 'building', 'Organizoj'), organizations_url, class: 'nav-link'
 
-          %li.nav-item= link_to icon('fas', 'heart', 'Subteni'), "https://liberapay.com/instigo", target: "_blank", class: 'nav-link'
-          %li.nav-item= link_to icon('fas', 'newspaper', 'Novaĵoj'), "https://t.me/s/eventaservo", target: "_blank", class: 'nav-link'
-          %li.nav-item= link_to icon('fas', 'user-friends', 'Pri ni'), prie_url, class: 'nav-link'
-
+        %ul.navbar-nav
           = render partial: 'layouts/admin' if user_signed_in? && current_user.admin?
+
+          %li.nav-item.d-none.d-lg-block
+            = link_to "https://liberapay.com/instigo", target: "_blank", class: 'nav-link' do
+              %i.fas.fa-heart{'data-toggle': "tooltip", 'data-placement': "bottom", 'title': "Subteni"}
+          %li.nav-item.d-md-block.d-lg-none= link_to icon('fas', 'heart', 'Subteni'), "https://liberapay.com/instigo", target: "_blank", class: 'nav-link'
+
+          %li.nav-item.d-none.d-lg-block
+            = link_to "https://t.me/s/eventaservo", target: "_blank", class: 'nav-link' do
+              %i.fas.fa-newspaper{'data-toggle': "tooltip", 'data-placement': "bottom", 'title': "Novaĵoj"}
+          %li.nav-item.d-md-block.d-lg-none= link_to icon('fas', 'newspaper', 'Novaĵoj'), "https://t.me/s/eventaservo", target: "_blank", class: 'nav-link'
+
+          %li.nav-item.d-none.d-lg-block
+            = link_to prie_url, class: 'nav-link' do
+              %i.fas.fa-user-friends{'data-toggle': "tooltip", 'data-placement': "bottom", 'title': "Pri ni"}
+          %li.nav-item.d-md-block.d-lg-none= link_to icon('fas', 'user-friends', 'Pri ni'), prie_url, class: 'nav-link'
 
         = render partial: 'layouts/uzanto'

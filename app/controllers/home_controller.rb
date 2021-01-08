@@ -94,9 +94,16 @@ class HomeController < ApplicationController
     redirect_to root_url
   end
 
+  def serchilo
+  end
+
   def search
-    respond_to :js
-    @events = Event.includes(:country).search(params[:query]).venontaj.grouped_by_months
+    respond_to :json
+    @eventoj = Event.includes([:country, :participants]).search(params[:query])
+    @organizoj = Organization.serchi(params[:query]).order(:name)
+
+    @eventoj = @eventoj.venontaj if params[:pasintaj] == 'false'
+    @eventoj = @eventoj.order(:date_start)
   end
 
   def statistics

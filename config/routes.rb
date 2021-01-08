@@ -13,10 +13,11 @@ Rails.application.routes.draw do
   get '/changelog', to: 'home#changelog'
   get '/rss.xml', to: 'home#feed', as: 'events_rss'
   get '/events.json', to: 'home#events'
-  get '/search', to: 'home#search'
   get '/statistikoj', to: 'home#statistics'
   get '/akcepti_kuketojn', to: 'home#accept_cookies'
   get '/forigas_kuketojn', to: 'home#reset_cookies'
+  get '/serchilo', to: 'home#serchilo'
+  get '/search.json', to: 'home#search', format: :json
 
   authenticated :user, -> user { user.admin? }  do
     mount DelayedJobWeb, at: "/delayed_job"
