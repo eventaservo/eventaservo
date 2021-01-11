@@ -49,7 +49,7 @@
                   @change="serchas"
                 />
                 <label class="custom-control-label" for="pasintaj"
-                  >Pasintajn</label
+                  >Pasintaj</label
                 >
               </div>
               <div class="custom-control custom-switch">
