@@ -103,6 +103,8 @@ class HomeController < ApplicationController
     @organizoj = Organization.serchi(params[:query]).order(:name)
 
     @eventoj = @eventoj.venontaj if params[:pasintaj] == 'false'
+    @eventoj = @eventoj.ne_nuligitaj if params[:nuligitaj] == 'false'
+
     @eventoj = @eventoj.order(:date_start)
   end
 

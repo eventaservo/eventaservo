@@ -11,6 +11,7 @@ json.eventoj do
     json.ligilo evento.ligilo
     json.priskribo evento.description
     json.dato event_date(evento)
+    json.nuligita evento.cancelled
   end
 end
 

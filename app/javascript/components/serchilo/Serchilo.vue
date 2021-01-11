@@ -14,38 +14,59 @@
       </div>
 
       <form>
-        <div class="input-group">
-          <input
-            v-model.trim="serchteksto"
-            autofocus
-            class="form-control"
-            placeholder="Serĉi eventojn aŭ organizojn... (minimume 3 signoj)"
-            type="text"
-            @keyup="serchas"
-            @keydown.enter.prevent="serchas"
-          />
-          <div class="input-group-append">
-            <button
-              class="btn btn-primary"
-              type="button"
-              @click.prevent="serchas"
-            >
-              <i class="fas fa-search"></i>
-            </button>
+        <div class="row">
+          <div class="col-12 col-md-9">
+            <div class="input-group">
+              <input
+                v-model.trim="serchteksto"
+                autofocus
+                class="form-control"
+                placeholder="Serĉi eventojn aŭ organizojn... (minimume 3 signoj)"
+                type="text"
+                @keyup="serchas"
+                @keydown.enter.prevent="serchas"
+              />
+              <div class="input-group-append">
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  @click.prevent="serchas"
+                >
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div class="custom-control custom-switch">
-          <input
-            id="pasintaj"
-            v-model="pasintaj"
-            class="custom-control-input"
-            type="checkbox"
-            @change="serchas"
-          />
-          <label class="custom-control-label" for="pasintaj"
-            >Pasintajn eventojn</label
-          >
+          <div class="col-12 col-md-3">
+            <div class="d-sm-flex justify-content-around flex-md-column">
+              <div class="custom-control custom-switch">
+                <input
+                  id="pasintaj"
+                  v-model="pasintaj"
+                  autocomplete="off"
+                  class="custom-control-input"
+                  type="checkbox"
+                  @change="serchas"
+                />
+                <label class="custom-control-label" for="pasintaj"
+                  >Pasintajn</label
+                >
+              </div>
+              <div class="custom-control custom-switch">
+                <input
+                  id="nuligitaj"
+                  v-model="nuligitaj"
+                  autocomplete="off"
+                  class="custom-control-input"
+                  type="checkbox"
+                  @change="serchas"
+                />
+                <label class="custom-control-label" for="nuligitaj"
+                  >Nuligitaj</label
+                >
+              </div>
+            </div>
+          </div>
         </div>
       </form>
     </div>
@@ -105,8 +126,13 @@
                 class="small pointer"
                 @click="vidiEventon(evento.ligilo)"
               >
-                <td v-html="evento.titolo"></td>
-                <td>{{ evento.dato }}</td>
+                <td
+                  :class="{ nuligita: evento.nuligita }"
+                  v-html="evento.titolo"
+                ></td>
+                <td :class="{ nuligita: evento.nuligita }">
+                  {{ evento.dato }}
+                </td>
               </tr>
             </tbody>
           </table>
@@ -126,6 +152,7 @@ export default {
     return {
       serchteksto: '',
       pasintaj: false,
+      nuligitaj: false,
       loading: false,
       timer: null,
       rezulto: {},
@@ -157,10 +184,10 @@ export default {
             params: {
               query: this.serchteksto,
               pasintaj: this.pasintaj,
+              nuligitaj: this.nuligitaj,
             },
           })
           .then((response) => {
-            console.log(response.data)
             this.rezulto = response.data
             this.loading = false
           })
@@ -179,5 +206,10 @@ export default {
 <style scoped>
 .pointer {
   cursor: pointer;
+}
+
+.nuligita {
+  color: red;
+  text-decoration: line-through;
 }
 </style>
