@@ -1,6 +1,11 @@
 # frozen_string_literal: true
-
+#
 # Eventaj dateno
+#
+# Kiam oni kreas novan eventon:
+#
+# 1) Kolektas, per Geocode, la koordinatojn, se +require_geocode+ validas.
+# 2) Formatas la datumojn per +format_event_data+.
 class Event < ApplicationRecord
   has_paper_trail versions: { scope: -> { order('created_at desc') } },
                   ignore: [:id, :delayed_job_id]
@@ -155,7 +160,7 @@ class Event < ApplicationRecord
   end
 
   def full_address
-    return '' if online
+    return '' if online && city == 'Reta'
 
     # TODO: Forviŝu la komon kiam ne estas adreso
     [address, city, country.try(:code).try(:upcase)].compact.join(', ')

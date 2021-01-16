@@ -159,7 +159,7 @@ class HomeController < ApplicationController
     end
 
     def access_from_server
-      request.headers['SERVER_NAME'].in? %w[devel.eventaservo.org staging.eventaservo.org eventaservo.org localhost]
+      request.headers['SERVER_NAME'].in? %w[devel.eventaservo.org staging.eventaservo.org eventaservo.org localhost 127.0.0.1]
     end
 
     def definas_kuketojn
