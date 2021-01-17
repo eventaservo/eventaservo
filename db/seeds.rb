@@ -54,7 +54,6 @@ Country.create!([
   { name: 'Ebur-Bordo', code: 'ci', continent: 'Afriko' },
   { name: 'Egiptio', code: 'eg', continent: 'Afriko' },
   { name: 'Ekvadoro', code: 'ec', continent: 'Ameriko' },
-  { name: 'Enreta', code: 'ol', continent: 'Reta' },
   { name: 'Eritreo', code: 'er', continent: 'Afriko' },
   { name: 'Estonio', code: 'ee', continent: 'Eŭropo' },
   { name: 'Etiopio', code: 'et', continent: 'Afriko' },
@@ -257,8 +256,16 @@ Country.create!([
   { name: 'Ĝibraltaro', code: 'gi', continent: 'Eŭropo' },
   { name: 'Ĝibutio', code: 'dj', continent: 'Afriko' },
   { name: 'Ĉilio', code: 'cl', continent: 'Ameriko' },
-  { name: 'Ĉinio', code: 'cn', continent: 'Azio' }
+  { name: 'Ĉinio', code: 'cn', continent: 'Azio' },
+  { name: 'Enreta', code: 'ol', continent: 'Reta', id: 99999 }
 ])
 
 # Kreas la administranton
-User.create(email: 'admin@eventaservo.org', password: 'administranto', country_id: Country.first.id, name: 'Administranto', username: 'admin', confirmed_at: DateTime.now)
+User.create(email: 'admin@eventaservo.org',
+            name: 'Administranto',
+            password: 'administranto',
+            username: 'admin',
+            country_id: Country.find_by(code: 'br').id,
+            city: 'Rio de Janeiro',
+            admin: true,
+            confirmed_at: DateTime.now)
