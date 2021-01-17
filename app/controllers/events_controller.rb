@@ -265,6 +265,6 @@ class EventsController < ApplicationController
     end
 
     def dosier_alshutado
-      params[:commit] == 'Sendi'
+      params[:commit] == 'Alŝuti'
     end
 end
