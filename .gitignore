@@ -60,3 +60,5 @@ config/es_admin_channel.conf
 
 .generators
 .rakeTasks
+
+reseta_base_devel.sh
