@@ -30,6 +30,7 @@ class Event < ApplicationRecord
   validates :import_url, length: { maximum: 200 }
   validate :end_after_start
   validate :url_or_email
+  validates_length_of :short_url, maximum: 32
   validates_uniqueness_of :short_url, case_sensitive: false, allow_blank: true, allow_nil: true
 
   before_save :format_event_data
