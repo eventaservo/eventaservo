@@ -1,8 +1,18 @@
 .box-white
-  = page_title @user.name
+  .alert.alert-danger.text-center
+    UZANT-PAĜO POR EVENTASERVO-ADMINISTRATOJ
+  .lead= @user.name
 
-  .lead Eventoj
-  - @user.events.each do |event|
-    = link_to event_path(event.ligilo), class: 'item-row' do
-      .col-6= event.title
-      .col-6= format_date event.date_start
+  = form_for(@user, url: admin_user_path(@user), method: :patch, class: 'form-horizontal') do |f|
+    .form-group.row
+      = f.label :city, class: 'col-3 col-form-label text-right'
+      .col-9
+        = f.text_field :city, class: 'form-control'
+
+    .form-group.row
+      = f.label :country_id, class: 'col-3 col-form-label text-right'
+      .col-9
+        = f.select(:country_id, options_from_collection_for_select(Country.not_online, 'id', 'name', @user.country_id), {}, class: 'form-control select2-input')
+
+    .buttons-footer
+      = f.submit 'Registri', class: 'btn btn-sm btn-primary'
