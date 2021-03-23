@@ -1,8 +1,8 @@
 - if @event.cancelled
-  = link_to icon('fas', 'ban', 'Malnuligi'), event_malnuligi_url(@event.code), class: 'btn btn-sm btn-outline-danger'
+  = link_to icon('fas', 'ban', 'Malnuligi'), event_malnuligi_url(@event.code), class: 'btn btn-sm btn-outline-danger no-border'
 
 - else
-  = link_to icon('fas', 'ban', 'Nuligi'), '#', class: 'btn btn-sm btn-outline-danger', data: { target: '#nuligiloModal', toggle: 'modal' }
+  = link_to icon('fas', 'ban', 'Nuligi'), '#', class: 'btn btn-sm btn-outline-danger no-border', data: { target: '#nuligiloModal', toggle: 'modal' }
 
   #nuligiloModal.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'nuligiloModalCenterTitle', role: 'dialog', tabindex: '-1'}
     .modal-dialog.modal-dialog-centered{role: 'document'}

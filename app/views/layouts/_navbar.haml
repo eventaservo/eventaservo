@@ -1,7 +1,8 @@
 %nav.navbar.navbar-expand-lg.navbar-dark.bg-success
   .navbar.container
     .navbar.menu
-      %a.navbar-brand{href: root_url} Eventa Servo
+      %a.navbar-brand{href: root_url}
+        = Rails.env.production? ? 'Eventa Servo' : 'TESTSERVILO'
       #serchilo_navbar
         %serchilo-navbar
       %button.navbar-toggler{'aria-controls' => 'navbarSupportedContent', 'aria-expanded' => 'false', 'aria-label' => 'Toggle navigation', 'data-target' => '#navbarSupportedContent', 'data-toggle' => 'collapse', :type => 'button'}

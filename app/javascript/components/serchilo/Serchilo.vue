@@ -140,6 +140,77 @@
       </div>
       <div v-else>Neniu evento trovita</div>
     </div>
+
+    <div v-if="serchteksto.length > 2" id="uzantRezultoj" class="box-white">
+      <div class="box-header">Uzantoj</div>
+      <div v-if="rezulto.uzantoj && rezulto.uzantoj.length > 0">
+        <h5>
+          {{ rezulto.uzantoj.length }}
+          <span v-if="rezulto.uzantoj.length === 1">uzanto trovita</span>
+          <span v-else>uzantoj trovitaj</span>
+        </h5>
+        <div class="table-responsive">
+          <table class="table table-sm table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Nomo</th>
+                <th scope="col">Lando</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="uzanto in rezulto.uzantoj"
+                :key="uzanto.uzantnomo"
+                class="small pointer"
+                @click="vidiUzanton(uzanto.uzantnomo)"
+              >
+                <td v-html="uzanto.nomo"></td>
+                <td>
+                  {{ uzanto.lando }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div v-else>Neniu uzanto trovita</div>
+    </div>
+
+    <div v-if="serchteksto.length > 2" id="videoRezultoj" class="box-white">
+      <div class="box-header">Registritaj registraĵoj</div>
+      <div v-if="rezulto.videoj && rezulto.videoj.length > 0">
+        <h5>
+          {{ rezulto.videoj.length }}
+          <span v-if="rezulto.videoj.length === 1">registrita registraĵo trovita</span>
+          <span v-else>registritaj registraĵoj trovitaj</span>
+        </h5>
+        <div class="table-responsive">
+          <table class="table table-sm table-hover">
+            <thead>
+            <tr>
+              <th scope="col">Titolo</th>
+              <th scope="col">Evento</th>
+              <th scope="col">Dato</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+              v-for="video in rezulto.videoj"
+              :key="video.id"
+              class="small pointer"
+              @click="vidiVideon(video.url)"
+            >
+              <td v-html="video.titolo"></td>
+              <td v-html="video.evento"></td>
+              <td v-html="video.dato"></td>
+
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div v-else>Neniu registrita registraĵo trovita</div>
+    </div>
   </div>
 </template>
 
@@ -189,6 +260,7 @@ export default {
           })
           .then((response) => {
             this.rezulto = response.data
+            console.log(response.data)
             this.loading = false
           })
       }, 800)
@@ -198,6 +270,12 @@ export default {
     },
     vidiOrganizon(mallongilo) {
       window.location.href = `/o/${mallongilo}`
+    },
+    vidiUzanton(uzantnomo) {
+      window.location.href = `/uzanto/${uzantnomo}`
+    },
+    vidiVideon(url) {
+      window.location.href = `${url}`
     },
   },
 }

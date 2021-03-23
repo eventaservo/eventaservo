@@ -105,6 +105,9 @@ class HomeController < ApplicationController
     @eventoj = @eventoj.venontaj if params[:pasintaj] == 'false'
     @eventoj = @eventoj.ne_nuligitaj if params[:nuligitaj] == 'false'
 
+    @uzantoj = User.serchi(params[:query])
+    @videoj = Video.serchi(params[:query])
+
     @eventoj = @eventoj.order(:date_start)
   end
 
@@ -159,7 +162,7 @@ class HomeController < ApplicationController
     end
 
     def access_from_server
-      request.headers['SERVER_NAME'].in? %w[devel.eventaservo.org staging.eventaservo.org eventaservo.org localhost 127.0.0.1]
+      request.headers['SERVER_NAME'].in? %w[devel.eventaservo.org testservilo.eventaservo.org staging.eventaservo.org eventaservo.org localhost 127.0.0.1]
     end
 
     def definas_kuketojn

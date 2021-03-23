@@ -106,6 +106,13 @@ class User < ApplicationRecord
     youtube.present? or telegram.present? or instagram.present?
   end
 
+  # Serĉas uzanton laŭ teksto
+  def self.serchi(teksto)
+    User.where('unaccent(users.name) ilike unaccent(:search) OR
+              unaccent(users.username) ilike unaccent(:search)',
+           search: "%#{teksto.strip.tr(' ', '%').downcase}%").order('users.name')
+  end
+
   private
 
     def subscribe_mailings

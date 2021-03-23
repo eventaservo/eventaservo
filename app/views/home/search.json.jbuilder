@@ -25,3 +25,22 @@ json.organizoj do
     json.mallongilo organizo.short_name
   end
 end
+
+json.uzantoj do
+  json.array! @uzantoj do |uzanto|
+    json.nomo uzanto.name
+    json.uzantnomo uzanto.username
+    json.lando uzanto.country.name
+  end
+end
+
+json.videoj do
+  json.array! @videoj do |video|
+    json.id video.id
+    json.titolo video.title
+    json.priskribo video.description
+    json.evento video.evento.title
+    json.dato format_date(video.evento.komenca_dato, style: :month_year).downcase
+    json.url video.url
+  end
+end

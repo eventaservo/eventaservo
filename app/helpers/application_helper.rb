@@ -42,6 +42,7 @@ module ApplicationHelper
   def format_date(date, style: nil)
     case style
     when :short then l(date, format: '%e/%b/%y').strip
+    when :month_year then l(date, format: '%B %Y').strip
     else l(date, format: '%A, %e %B %Y').strip
     end
   end

@@ -68,6 +68,10 @@ Rails.application.routes.draw do
   # Instruistoj kaj prelegantoj
   get '/instruistoj_kaj_prelegantoj', to: 'home#instruistoj_kaj_prelegantoj', as: 'instruistoj_kaj_prelegantoj'
 
+  # Video - Registritaj prezentaĵoj
+  get '/video', to: 'video#index'
+  get '/video/:id/forigi', to: 'video#destroy'
+
   # Organizoj
   defaults format: :json do
     get '/o/cheforganizoj.json', to: 'organizations#cheforganizoj'
@@ -90,6 +94,8 @@ Rails.application.routes.draw do
     post 'nuligi', to: 'events#nuligi', as: 'nuligi'
     get 'malnuligi', to: 'events#malnuligi', as: 'malnuligi'
     get 'kronologio', to: 'events#kronologio'
+    post 'nova_video', to: 'video#create'
+    get 'nova_video', to: 'video#new'
   end
 
   # Admin
