@@ -177,12 +177,12 @@
     </div>
 
     <div v-if="serchteksto.length > 2" id="videoRezultoj" class="box-white">
-      <div class="box-header">Registritaj registraĵoj</div>
+      <div class="box-header">Registritaj prezentoj</div>
       <div v-if="rezulto.videoj && rezulto.videoj.length > 0">
         <h5>
           {{ rezulto.videoj.length }}
-          <span v-if="rezulto.videoj.length === 1">registrita registraĵo trovita</span>
-          <span v-else>registritaj registraĵoj trovitaj</span>
+          <span v-if="rezulto.videoj.length === 1">registrita prezento trovita</span>
+          <span v-else>registritaj prezentoj trovitaj</span>
         </h5>
         <div class="table-responsive">
           <table class="table table-sm table-hover">
