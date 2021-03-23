@@ -4,6 +4,8 @@ class EventMailer < ApplicationMailer
   add_template_helper ApplicationHelper
   add_template_helper EventsHelper
 
+  default from: 'kontakto@eventaservo.org'
+
   require 'redcarpet/render_strip'
 
   def self.send_notification_to_users(event_id:)
@@ -58,7 +60,7 @@ class EventMailer < ApplicationMailer
 
     if Rails.env.production?
       to = @evento.user.email
-      bcc = Constants::ADMIN_EMAILS
+      bcc = 'yves.nevelsteen@gmail.com'
     else
       to = Constants::ADMIN_EMAILS
       bcc = nil
