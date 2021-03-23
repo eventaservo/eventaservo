@@ -209,7 +209,7 @@
           </table>
         </div>
       </div>
-      <div v-else>Neniu registrita registraĵo trovita</div>
+      <div v-else>Neniu registrita prezento trovita</div>
     </div>
   </div>
 </template>

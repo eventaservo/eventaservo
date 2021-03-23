@@ -7,7 +7,7 @@
           enctype="multipart/form-data"
           method="post"
         >
-          <div class="lead">Ligi egistritan prezenton</div>
+          <div class="lead">Ligi registritan prezenton</div>
           <input :value="csrf" name="authenticity_token" type="hidden" />
           <div class="form-group">
             <label for="video_link">Adreso (URL) de la video</label>

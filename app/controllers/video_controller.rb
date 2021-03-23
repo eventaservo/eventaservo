@@ -3,7 +3,7 @@
 class VideoController < ApplicationController
 
   def index
-    @videoj = Video.all.order(created_at: :desc)
+    @videoj = Video.joins(:evento).order("events.date_start DESC")
   end
 
   def new
