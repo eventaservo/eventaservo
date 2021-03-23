@@ -96,7 +96,7 @@ class EventMailer < ApplicationMailer
            from: 'Eventa Servo <kontakto@eventaservo.org>',
            subject: "[ES] #{@evento.title} baldaŭ komenciĝos",
            track_opens: 'true',
-           message_stream: 'rememorigoj')
+           message_stream: 'event-rememorigoj')
     end
   end
 end
