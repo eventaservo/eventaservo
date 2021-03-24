@@ -96,9 +96,7 @@ class EventMailer < ApplicationMailer
     emails.each do |to|
       mail(to: to,
            from: 'Eventa Servo <kontakto@eventaservo.org>',
-           subject: "[ES] #{@evento.title} baldaŭ komenciĝos",
-           track_opens: 'true',
-           message_stream: 'event-rememorigoj')
+           subject: "[ES] #{@evento.title} baldaŭ komenciĝos")
     end
   end
 end
