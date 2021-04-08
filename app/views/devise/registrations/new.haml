@@ -22,7 +22,7 @@
       .form-group
         = f.text_field :city, required: true, class: 'form-control', placeholder: 'Urbo'
       .form-group
-        = f.select(:country_id, options_from_collection_for_select(Country.all, 'id', 'name'), {}, class: 'form-control select2-input')
+        = f.select(:country_id, options_from_collection_for_select(Country.all, 'id', 'name'), { include_blank: '--- Elektu landon ---' }, class: 'form-control select2-input', required: true)
       .form-group
         = f.text_field :birthday, class: 'birthday form-control'
       .form-group

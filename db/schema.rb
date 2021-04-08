@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_28_213233) do
+ActiveRecord::Schema.define(version: 2021_04_08_190120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -269,7 +269,7 @@ ActiveRecord::Schema.define(version: 2021_01_28_213233) do
     t.string "uid"
     t.string "avatar"
     t.string "city"
-    t.integer "country_id"
+    t.integer "country_id", default: 99999
     t.string "username"
     t.jsonb "mailings"
     t.string "authentication_token", limit: 30
