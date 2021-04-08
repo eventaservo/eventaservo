@@ -11,7 +11,11 @@ module UsersHelper
   def display_user_image(user)
     image =
       if user.picture.attached?
-        url_for(user.picture.variant(resize: '42x42'))
+        if user.picture.variable?
+          url_for(user.picture.variant(resize: '42x42'))
+        else
+          url_for(user.picture)
+        end
       elsif user.image?
         user.image
       else
