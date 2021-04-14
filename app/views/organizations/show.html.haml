@@ -21,7 +21,7 @@
         = montras_retpaghon(@organizo.url) + raw('<br/>') if @organizo.url.present?
         = montras_retposhtadreson(@organizo.email) + raw('<br/>') if @organizo.email.present?
         - if @organizo.youtube.present?
-          = link_to icon('fab', 'youtube', 'YouTuba kanalo'), @organizo.youtube, target: :_blank, class: 'fg-color-link mr-1'
+          = link_to icon('fab', 'youtube', 'YouTube-kanalo'), @organizo.youtube, target: :_blank, class: 'fg-color-link mr-1'
           %br
         - if @organizo.country.present? && (@organizo.country_id != 99999)
           = montras_adreson(@organizo.full_address)
