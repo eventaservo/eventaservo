@@ -8,7 +8,7 @@ ruby '~> 2.6'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0'
 # Use Puma as the app server
-gem 'puma', '~> 5.0.4'
+gem 'puma', '~> 5'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 6'
 # Use Uglifier as compressor for JavaScript assets
@@ -35,6 +35,7 @@ gem 'momentjs-rails', '~> 2.20'
 
 gem 'mini_magick', '~> 4.10'
 gem 'omniauth-facebook', '~> 6.0'
+gem 'omniauth', '~> 1.9'
 
 # CSS kaj fasonado
 gem 'flag-icons-rails', '~> 3.4'

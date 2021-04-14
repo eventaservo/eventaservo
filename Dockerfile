@@ -1,6 +1,6 @@
-FROM ruby:2.6.5
+FROM ruby:2.7-buster
 
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - \
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 

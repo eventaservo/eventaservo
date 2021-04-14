@@ -16,9 +16,13 @@
           = f.text_field :short_name, class: 'form-control', required: true
           %small.form-text.text-muted Ne uzu spacojn aŭ specialajn signojn. Vi rajtas uzi _ kaj -
 
-        .form-group
-          = f.label :url, 'Reteja adreso (URL)'
-          = f.text_field :url, class: 'form-control'
+        .row
+          .form-group.col-12.col-md-6
+            = f.label :url, 'Reteja adreso (URL)'
+            = f.text_field :url, class: 'form-control'
+          .form-group.col-12.col-md-6
+            = f.label :youtube, 'YouTuba adreso (URL)'
+            = f.text_field :youtube, class: 'form-control'
 
         .row
           .form-group.col-12.col-md-6

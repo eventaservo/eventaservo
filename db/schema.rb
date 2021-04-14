@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_08_190120) do
+ActiveRecord::Schema.define(version: 2021_04_14_095938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -202,6 +202,7 @@ ActiveRecord::Schema.define(version: 2021_04_08_190120) do
     t.string "phone"
     t.boolean "partner", default: false
     t.boolean "major", default: false
+    t.string "youtube"
     t.index ["name"], name: "index_organizations_on_name"
     t.index ["short_name"], name: "index_organizations_on_short_name"
   end
