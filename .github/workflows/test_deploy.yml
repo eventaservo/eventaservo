@@ -1,0 +1,69 @@
+name: Testado
+
+on: [push, pull_request]
+
+jobs:
+  Test:
+
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_DB: test
+          POSTGRES_USER: eventaservo
+          POSTGRES_PASSWORD: eventaservo
+        ports: ['5432:5432']
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Instalas Ruby 2.7 kaj Bundler
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+          bundler-cache: true
+
+      - name: Node 15
+        uses: actions/setup-node@v1
+        with:
+          node-version: 15.x
+
+      - name: Identifica diretorio do cache do Yarn
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache yarn
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: |
+            **/node_modules
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Yarn
+        run: yarn install --frozen-lockfile
+
+      - name: Komencas la testojn
+        env:
+          DB_NAME: test
+          DB_HOST: localhost
+          DB_USERNAME: eventaservo
+          DB_PASSWORD: eventaservo
+          RAILS_ENV: test
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+        run: |
+          bin/rails db:migrate
+          bin/rails test
+
+  Docker:
+    needs: Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
