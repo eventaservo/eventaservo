@@ -1,42 +1,78 @@
-FROM ruby:2.7-buster
+ARG RUBY_MAJOR=2.7
+ARG AMBIENTE=production
 
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+FROM ruby:${RUBY_MAJOR}-alpine as build
 
-RUN apt-get update \
-  && apt-get install -y \
-  locales \ 
-  postgresql-client \
-  postgresql-server-dev-all \
-  nodejs \
-  nano \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+WORKDIR /eventaservo 
 
-RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
-  && locale-gen en_US.UTF-8
+RUN apk update \
+  && apk upgrade \
+  && apk add --update --no-cache \
+      alpine-sdk \
+      shared-mime-info \
+      imagemagick6-dev \
+      postgresql-dev \
+      nodejs \
+      yarn \
+      sqlite-dev \
+      tzdata \
+  && rm -rf /var/cache/apk/*
 
-RUN gem install bundler
-RUN npm install -g yarn
+# Instala o Bundler e as Gems
+RUN gem install bundler:2.1.4
+RUN bundle config set without development test
+RUN bundle config set deployment true
+RUN bundle config set frozen true
+COPY Gemfile Gemfile.lock ./
+RUN bundle install --jobs=3 --retry=3
+
+# YARN
+COPY package.json yarn.lock ./
+RUN yarn install --check-files
+
+# Define as variaveis de ambiente
+ENV RAILS_ENV=${AMBIENTE}
+ENV RAILS_LOG_TO_STDOUT=true
+ENV RAILS_SERVE_STATIC_FILES=true
+
+COPY . .
+
+RUN bundle exec rails assets:precompile
+
+# Apaga todos os arquivos desnecessários
+
+RUN rm -rf node_modules \
+  && rm -rf tmp/* \
+  && rm -rf vendor/bundle/ruby/${RUBY_MAJOR}.0/cache/* \
+  && find vendor/bundle/ruby/${RUBY_MAJOR}.0/gems/ -name "*.c" -delete \
+  && find vendor/bundle/ruby/${RUBY_MAJOR}.0/gems/ -name "*.o" -delete 
+
+FROM ruby:${RUBY_MAJOR}-alpine
+
+RUN apk update \
+  && apk upgrade \
+  && apk add --update --no-cache \
+      alpine-sdk \
+      shared-mime-info \
+      imagemagick \
+      imagemagick6-dev \
+      postgresql-dev \
+      tzdata \
+  && rm -rf /var/cache/apk/*
 
 WORKDIR /eventaservo
 
-RUN bundle config set --local without 'development'
-RUN bundle config set --local without 'test'
-COPY Gemfile Gemfile.lock ./
-RUN bundle install --jobs 2 --retry 3
+ENV RAILS_ENV=${AMBIENTE}
+ENV RAILS_LOG_TO_STDOUT=true
+ENV RAILS_SERVE_STATIC_FILES=true
 
-COPY yarn.lock ./
-RUN yarn
-COPY . .
+RUN bundle config set without development test
+RUN bundle config set deployment true
+RUN bundle config set frozen true
+RUN bundle config path vendor/bundle
 
-# Executa toda vez que o container inicia
-COPY entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
+COPY --from=build /eventaservo /eventaservo
 
 EXPOSE 3000
 
-# Inicia do Rails Server
-CMD ["bundle", "exec", "rails", "server", "-b", "ssl://0.0.0.0:3000?key=/eventaservo/certs/private.key&cert=/eventaservo/certs/certificate.crt"]
+CMD ["bundle", "exec", "rails", "server", "-b", "ssl://0.0.0.0:3000?key=certs/localhost.key&cert=certs/localhost.crt"]

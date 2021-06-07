@@ -1,25 +1,24 @@
-name: Testado
+name: Test kaj Deploy
 
 on: [push, pull_request]
 
 jobs:
   Test:
-
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:12
+        image: postgres:13
         env:
           POSTGRES_DB: test
           POSTGRES_USER: eventaservo
           POSTGRES_PASSWORD: eventaservo
-        ports: ['5432:5432']
+        ports: [ '5432:5432' ]
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: Instalas Ruby 2.7 kaj Bundler
-        uses: actions/setup-ruby@v1
+      - name: Ruby 2.7 e Bundler
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.7
           bundler-cache: true
@@ -29,11 +28,11 @@ jobs:
         with:
           node-version: 15.x
 
-      - name: Identifica diretorio do cache do Yarn
+      - name: Locate Yarns cache directory
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - name: Cache yarn
+      - name: Cache Yarn
         uses: actions/cache@v2
         id: yarn-cache
         with:
@@ -47,7 +46,7 @@ jobs:
       - name: Yarn
         run: yarn install --frozen-lockfile
 
-      - name: Komencas la testojn
+      - name: Run tests
         env:
           DB_NAME: test
           DB_HOST: localhost
@@ -59,11 +58,61 @@ jobs:
           bin/rails db:migrate
           bin/rails test
 
-  Docker:
+  Deploy:
     needs: Test
+    if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/staging' }}
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
-      - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@master
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-single-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-single-buildx
+
+      - name: Build and push (Production)
+        if: ${{ github.ref == 'refs/heads/master' }}
+        uses: docker/build-push-action@v2
+        with:
+          builder: ${{ steps.buildx.outputs.name }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
+          push: true
+          tags: eventaservo/backend:latest
+          build-args: |
+            AMBIENTE=production
+
+      - name: Build and push (Staging)
+        if: ${{ github.ref == 'refs/heads/staging' }}
+        uses: docker/build-push-action@v2
+        with:
+          builder: ${{ steps.buildx.outputs.name }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
+          push: true
+          tags: eventaservo/backend:staging
+          build-args: |
+            AMBIENTE=staging
+
+      # Temp fix
+      # https://github.com/docker/build-push-action/issues/252
+      # https://github.com/moby/buildkit/issues/1896
+      - name: Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache

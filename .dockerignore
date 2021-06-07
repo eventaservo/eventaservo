@@ -1,31 +1,21 @@
-
-
-# Ignore all logfiles and tempfiles.
-log/
-tmp/
-public/packs/
-public/packs-test/
-storage/
 !log/.keep
 !tmp/.keep
-.DS_Store
-.idea
+.byebug_history
+.cache
+.dockerignore
 .env.development
 .env.staging
-.yardoc/
-
-# Ignore node_modules
-node_modules/
-
-# Ignore bundler config.
-/.bundle
-
-# Ignore the tags file used by VIM
-tags
-
-# Ignore Byebug command history file.
-.byebug_history
-
-# Ignore .git as it's not needed with the docker built.
 .git
-.cache
+.idea
+.yardoc/
+/.bundle
+DS_Store
+Dockerfile
+deploy.sh
+log/
+node_modules/
+public/packs-test/
+public/packs/
+storage/
+tags
+tmp/

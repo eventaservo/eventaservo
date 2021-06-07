@@ -92,6 +92,8 @@ gem 'httparty', '~> 0.18'
 gem 'nokogiri', '>= 1.10.4'
 gem 'yard'
 
+gem 'listen'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -101,14 +103,10 @@ end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'listen'
   gem 'web-console'
 
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'bullet'
-  # RailsPanel Chrome Extension
-  gem 'meta_request'
   gem 'seed_dump' # Por rekrei la seeds.db dosieron
 
   # Capistrano gems

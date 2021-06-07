@@ -77,14 +77,6 @@ Rails.application.configure do
 
   config.force_ssl = true
 
-  config.after_initialize do
-    Bullet.enable              = false
-    Bullet.bullet_logger       = true
-    Bullet.console             = false
-    Bullet.rails_logger        = false
-    Bullet.add_footer          = false
-  end
-
   config.hosts << "devel.eventaservo.org"
   config.active_job.default_url_options = { host: "devel.eventaservo.org", port: 3000, protocol: :https }
 end
