@@ -41,6 +41,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       get 'events', to: 'events#index'
       get 'uzanto/:id/rekrei_api_kodon', to: 'users#rekrei_api_kodon', as: 'rekrei_api_kodon'
+
+      # Statistikoj
+      get 'statistikoj', to: 'statistics#index'
     end
   end
 

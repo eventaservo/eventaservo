@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Constants
-  VERSIO = '2.21.4'
+  VERSIO = '2.21.5'
   public_constant :VERSIO
 
   ADMIN_EMAILS = %w[yves.nevelsteen@gmail.com fernando@eventaservo.org].freeze

@@ -1,3 +1,8 @@
 GET {{ base_url}} /eventoj
 Accept: application/json
 Authorization: {{ token}}
+
+###
+GET {{ base_url }} /statistikoj
+Accept: application/json
+Authorization: none
