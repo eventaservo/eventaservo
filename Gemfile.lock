@@ -1,10 +1,3 @@
-GIT
-  remote: https://github.com/shayani/social-share-button
-  revision: 6f34d6e1649f1fb4fa7297adac9a734bc8702b01
-  specs:
-    social-share-button (1.1.1)
-      coffee-rails
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -375,6 +368,8 @@ GEM
       tilt (~> 2.0)
     sitemap_generator (6.1.2)
       builder (~> 3.0)
+    social-share-button (1.2.4)
+      coffee-rails
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -492,7 +487,7 @@ DEPENDENCIES
   simple_token_authentication (~> 1.0)
   simplecov
   sitemap_generator (~> 6.1)
-  social-share-button!
+  social-share-button
   timezone (~> 1.0)
   vcr
   web-console

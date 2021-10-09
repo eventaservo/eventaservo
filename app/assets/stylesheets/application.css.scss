@@ -16,7 +16,6 @@
  *= require fullcalendar
  *= require smartphoto
  *= require direct_uploads
- *= require social-share-button
  *= require flag-icon
  *= require leaflet
  *= require MarkerCluster.css
@@ -30,11 +29,12 @@
 @import "font-awesome";
 @import "bootstrap";
 @import "colors";
+@import "social-share-button";
 
 @import "partials/*";
 
 // Social Share Buttons icon size
-$size : 48px;
+$size : 32px;
 .social-share-button {
   .ssb-icon {
     background-size : $size $size;

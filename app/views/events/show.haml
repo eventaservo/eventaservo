@@ -5,6 +5,10 @@
 -#  %meta{content: request.original_url, property: 'og:url'}
 = render partial: 'layouts/breadcrumb'
 
+- if user_signed_in? && user_can_edit_event?(user: current_user, event: @event) && !@event.cancelled
+  = render partial: 'nuligilo_modal'
+= render partial: 'share_button_modal'
+
 .row#evento
   .col-lg-8
     .box-white{class: event_color_class(@event)}
@@ -40,8 +44,7 @@
 
       .buttons-footer.d-flex.justify-content-between
         = render partial: 'informi_pri_problemo'
-        - if user_signed_in? && user_can_edit_event?(user: current_user, event: @event)
-          = render partial: 'nuligilo_modal'
+        = link_to icon('fas', 'share-alt', 'Diskonigi'), '#', class: 'btn btn-sm btn-outline-info no-border', data: { target: '#shareModal', toggle: 'modal' }
 
         - if user_signed_in?
           = link_to icon('far', 'copy', 'Duobligi'), new_event_url(from_event: @event), class: 'btn btn-sm btn-outline-success no-border'
