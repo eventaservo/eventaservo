@@ -18,7 +18,7 @@
           %p Elektu horzonon:
           .form-group
             - selected = @event.nil? ? (cookies[:horzono] || nil) : @event.time_zone
-            = select_tag(:horzono, options_for_select(TZInfo::Timezone.all_country_zone_identifiers, selected), class: 'select2-input form-control')
+            = select_tag(:horzono, options_for_select(Horzono.all.map { |h| [h.eo, h.en] }, selected), class: 'select2-input form-control')
 
         .modal-footer
           %button.button-cancel{'data-dismiss' => 'modal', type: 'button'} Fermi
