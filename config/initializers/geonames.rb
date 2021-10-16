@@ -7,6 +7,6 @@ if Rails.env.test?
   }
 else
   Timezone::Lookup.config(:google) { |c|
-    c.api_key = Rails.application.credentials.google_maps_key
+    c.api_key = Rails.application.credentials.google_maps_key || ENV["GOOGLE_MAPS_KEY"]
   }
 end
