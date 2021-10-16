@@ -2,11 +2,11 @@ name: Test kaj Deploy
 
 on:
   push:
-    branches: [ main, staging ]
+    branches: [ main, master, staging ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, master ]
   workflow_dispatch:
-    branches: [ main, staging ]
+    branches: [ main, master, staging ]
 
 jobs:
   Test:
