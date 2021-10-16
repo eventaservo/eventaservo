@@ -57,6 +57,7 @@ RUN apk update \
       imagemagick \
       imagemagick6-dev \
       postgresql-dev \
+      poppler-utils \
       tzdata \
   && rm -rf /var/cache/apk/*
 
