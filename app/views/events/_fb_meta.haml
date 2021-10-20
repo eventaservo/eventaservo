@@ -5,14 +5,13 @@
   %meta{content: @event.title, property: 'og:title'}
   - city_and_country = @event.online? ? "Reta" : "#{@event.city} - #{@event.country.name}"
   %meta{content: "#{event_date(@event)} (#{city_and_country}) | #{@event.description}", property: 'og:description'}
-  - if @event.uploads.attached?
-    - @event.uploads.each do |upload|
-      - if upload.blob.image?
-        %meta{content: ActionDispatch::Http::URL.url_for(ActionMailer::Base.default_url_options) + url_for(upload), property: 'og:image'}
-        %meta{content: ActionDispatch::Http::URL.url_for(ActionMailer::Base.default_url_options) + url_for(upload), property: 'og:image:secure_url'}
-        %meta{content: upload.content_type, property: 'og:image:type' }
-        %meta{content: upload.blob.metadata[:width], property: 'og:image:width' }
-        %meta{content: upload.blob.metadata[:height], property: 'og:image:height' }
+  - if @event.organizations.any? && @event.organizations.first.logo.attached?
+    - logo = @event.organizations.first.logo
+    %meta{content: ActionDispatch::Http::URL.url_for(ActionMailer::Base.default_url_options) + url_for(logo), property: 'og:image'}
+    %meta{content: ActionDispatch::Http::URL.url_for(ActionMailer::Base.default_url_options) + url_for(logo), property: 'og:image:secure_url'}
+    %meta{content: logo.content_type, property: 'og:image:type' }
+    %meta{content: logo.blob.metadata[:width], property: 'og:image:width' }
+    %meta{content: logo.blob.metadata[:height], property: 'og:image:height' }
   - else
     %meta{content: image_url('eventa_servo_facebook.jpg'), property: 'og:image'}
     %meta{content: image_url('eventa_servo_facebook.jpg'), property: 'og:image:secure_url'}
