@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module Constants
-  VERSIO = '2.22.1'
+  VERSIO = '2.22.2'
   public_constant :VERSIO
 
-  ADMIN_EMAILS = %w[yves.nevelsteen@gmail.com fernando@eventaservo.org].freeze
+  ADMIN_EMAILS = %w[yves.nevelsteen@gmail.com shayani@gmail.com].freeze
   public_constant :ADMIN_EMAILS
 
   TAGS = [%w[Internacia Loka Kurso Alia], %w[Anonco Konkurso]].freeze

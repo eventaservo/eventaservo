@@ -77,7 +77,6 @@ class EventMailer < ApplicationMailer
 
     if Rails.env.production?
       to = evento.user.email
-      bcc = Constants::ADMIN_EMAILS
     else
       to = Constants::ADMIN_EMAILS
       bcc = nil
