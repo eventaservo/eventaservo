@@ -1,5 +1,8 @@
 .text-center
   .btn-group.btn-group.mb-1{role:"group", "aria-label": "grupo2"}
-    = link_to icon('fas', 'th', 'Kartaro'), view_style_path('kartoj'),  class: "btn btn-sm #{cookies[:vidmaniero] == 'kartoj' ? 'btn-primary' : 'btn-outline-primary' }"
-    = link_to icon('far', 'calendar', 'Kalendaro'),view_style_path('kalendaro'), class: "btn btn-sm #{cookies[:vidmaniero] == 'kalendaro' ? 'btn-primary' : 'btn-outline-primary' }"
-    = link_to icon('fas', 'map-marked-alt', 'Mapo'),view_style_path('mapo'), class: "btn btn-sm #{cookies[:vidmaniero] == 'mapo' ? 'btn-primary' : 'btn-outline-primary' }"
+    - if kartaro
+      = link_to icon('fas', 'th', 'Kartaro'), view_style_path('kartoj'),  class: "btn btn-sm #{cookies[:vidmaniero].in?(%w[kartoj kartaro]) ? 'btn-primary' : 'btn-outline-primary' }"
+    - if kalendaro
+      = link_to icon('far', 'calendar', 'Kalendaro'),view_style_path('kalendaro'), class: "btn btn-sm #{cookies[:vidmaniero] == 'kalendaro' ? 'btn-primary' : 'btn-outline-primary' }"
+    - if mapo
+      = link_to icon('fas', 'map-marked-alt', 'Mapo'),view_style_path('mapo'), class: "btn btn-sm #{cookies[:vidmaniero] == 'mapo' ? 'btn-primary' : 'btn-outline-primary' }"

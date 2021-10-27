@@ -4,7 +4,7 @@
 .box-white
   -# = render partial: 'home/shortcuts'
   = render partial: 'layouts/breadcrumb'
-  = render partial: 'home/view_style_chooser'
+  = render partial: 'home/view_style_chooser', locals: { kartaro: true, kalendaro: false, mapo: true }
   -#= render partial: 'events/events_count'
   = render partial: 'home/filters'
   = render partial: 'events/okazantaj'

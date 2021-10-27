@@ -131,9 +131,14 @@ class EventsController < ApplicationController
   end
 
   def by_continent
-    if params[:continent] == 'Reta' && cookies[:vidmaniero] == 'mapo'
-      cookies[:vidmaniero] = { value: 'kalendaro', expires: 2.weeks, secure: true }
-      redirect_to events_by_continent_path('Reta')
+    # if params[:continent] == 'Reta' && cookies[:vidmaniero] == 'mapo'
+    #   cookies[:vidmaniero] = { value: 'kalendaro', expires: 2.weeks, secure: true }
+    #   redirect_to events_by_continent_path('Reta')
+    # end
+
+    unless cookies[:vidmaniero].in? %w[kartaro mapo]
+      cookies[:vidmaniero] = { value: 'kartaro', expires: 2.weeks, secure: true }
+      redirect_to events_by_continent_path(params[:continent])
     end
 
     @future_events = Event.by_continent(params[:continent]).venontaj
@@ -148,6 +153,11 @@ class EventsController < ApplicationController
   def by_country
     redirect_to(root_path, flash: { error: 'Lando ne ekzistas en la datumbazo' }) && return if @country.nil?
 
+    unless cookies[:vidmaniero].in? %w[kartaro mapo]
+      cookies[:vidmaniero] = { value: 'kartaro', expires: 2.weeks, secure: true }
+      redirect_to events_by_country_url(params[:country])
+    end
+
     @future_events = Event.includes(:country).by_country_id(@country.id).venontaj
     @cities        = @events.by_country_id(@country.id).count_by_cities
     @today_events  = @events.today.includes(:country).by_country_id(@country.id)
@@ -159,6 +169,11 @@ class EventsController < ApplicationController
   # Listigas la eventoj laŭ urboj
   def by_city
     redirect_to root_url, flash: { error: 'Lando ne ekzistas' } if Country.find_by(name: params[:country_name]).nil?
+
+    unless cookies[:vidmaniero].in? %w[kartaro mapo]
+      cookies[:vidmaniero] = { value: 'kartaro', expires: 2.weeks, secure: true }
+      redirect_to events_by_city_url(params[:city])
+    end
 
     @future_events = Event.by_city(params[:city_name]).venontaj
     @today_events  = @events.today.includes(:country).by_city(params[:city_name])

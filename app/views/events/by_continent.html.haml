@@ -10,8 +10,7 @@
       = link_to icon('far', 'calendar-alt'), webcal_url(landa_kodo: 'ol', protocol: :webcal, format: :ics), data: { target: '#webcalModal', toggle: 'modal' }
 
   = render partial: 'layouts/breadcrumb'
-  = render partial: 'home/view_style_chooser'
-  -#= render partial: 'events/events_count'
+  = render partial: 'home/view_style_chooser', locals: { kartaro: true, kalendaro: false, mapo: true }
 
   - unless params[:continent] == 'Reta'
     .text-center.m-2

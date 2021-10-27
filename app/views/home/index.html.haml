@@ -17,7 +17,7 @@
 
   <br>
   #events_container
-    = render partial: 'home/view_style_chooser'
+    = render partial: 'home/view_style_chooser', locals: { kartaro: false, kalendaro: true, mapo: true }
 
     .text-center.m-2
       - @continents.each do |continent|

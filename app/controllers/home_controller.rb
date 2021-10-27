@@ -16,13 +16,17 @@ class HomeController < ApplicationController
     @events = @events.not_today.includes(%i[country organizations])
     @reklamoj = Ad.all.sample(4)
 
-    if cookies[:vidmaniero] == 'kartoj' # Paghado
-      @kvanto_venontaj_eventoj = @events.count
-      begin
-        @pagy, @events = pagy(@events.not_today.includes(%i[country organizations]))
-      rescue Pagy::OverflowError
-        redirect_to root_url
-      end
+    # if cookies[:vidmaniero] == 'kartoj' # Paghado
+    #   @kvanto_venontaj_eventoj = @events.count
+    #   begin
+    #     @pagy, @events = pagy(@events.not_today.includes(%i[country organizations]))
+    #   rescue Pagy::OverflowError
+    #     redirect_to root_url
+    #   end
+    # end
+    unless cookies[:vidmaniero].in? %w[kalendaro mapo]
+      cookies[:vidmaniero] = { value: 'kalendaro', expires: 2.weeks, secure: true }
+      redirect_to root_url
     end
   end
 

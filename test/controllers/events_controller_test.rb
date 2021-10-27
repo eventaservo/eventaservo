@@ -5,7 +5,7 @@ require 'test_helper'
 class EventsControllerTest < ActionDispatch::IntegrationTest
   def setup
     host! 'devel.eventaservo.org:3000'
-    cookies[:vidmaniero] = 'kartoj'
+    cookies[:vidmaniero] = 'kartaro'
   end
 
   test 'devas listigi la validajn kontinentajn eventojn' do
