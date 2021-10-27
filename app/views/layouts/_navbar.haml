@@ -14,7 +14,7 @@
 
         %ul.navbar-nav
 
-          %li.nav-item.d-none.d-lg-block.mr-5
+          %li.nav-item.d-none.d-lg-block.mr-2
             - if cookies[:vidmaniero] == 'mapo'
               = link_to view_style_url('kalendaro'), class: 'nav-link' do
                 %i.fas.fa-map-marker-alt.fg-color-yellow{'data-toggle': "tooltip", 'data-placement': "bottom", 'title': "Fermi la mapon"}
