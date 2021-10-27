@@ -1,4 +1,4 @@
-- if cookies[:vidmaniero] == 'kartoj' && params[:pagho].nil?
+- if cookies[:vidmaniero].in?(%w[kartoj kartaro]) && params[:pagho].nil?
   - if @today_events.any?
     %br
     %h5.text-center.font-weight-bold #{@today_events.ne_nuligitaj.length} okazas hodiaŭ

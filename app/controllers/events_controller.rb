@@ -155,7 +155,7 @@ class EventsController < ApplicationController
 
     unless cookies[:vidmaniero].in? %w[kartaro mapo]
       cookies[:vidmaniero] = { value: 'kartaro', expires: 2.weeks, secure: true }
-      redirect_to events_by_country_url(params[:country])
+      redirect_to events_by_country_url(@country.name)
     end
 
     @future_events = Event.includes(:country).by_country_id(@country.id).venontaj
@@ -172,7 +172,7 @@ class EventsController < ApplicationController
 
     unless cookies[:vidmaniero].in? %w[kartaro mapo]
       cookies[:vidmaniero] = { value: 'kartaro', expires: 2.weeks, secure: true }
-      redirect_to events_by_city_url(params[:city])
+      redirect_to events_by_city_url(params[:city_name])
     end
 
     @future_events = Event.by_city(params[:city_name]).venontaj
@@ -213,7 +213,7 @@ class EventsController < ApplicationController
     # +@kvanto_venontaj_eventoj+ kaj +@pagy+
     #
     def kreas_paghadon_por_karta_vidmaniero
-      return unless cookies[:vidmaniero] == 'kartoj'
+      return unless cookies[:vidmaniero].in?(%w[kartoj kartaro])
 
       @kvanto_venontaj_eventoj = @events.count
       @pagy, @events           = pagy(@events.not_today.includes(%i[country organizations]))
