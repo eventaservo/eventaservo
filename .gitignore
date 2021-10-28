@@ -29,8 +29,6 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-localhost.crt
-localhost.key
 
 public/uploads
 
@@ -45,7 +43,6 @@ brakeman.html
 codacy_test.sh
 dump.rdb
 /doc
-/certs
 
 /public/packs
 /public/packs-test
