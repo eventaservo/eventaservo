@@ -24,7 +24,7 @@ RUN bundle config set without development test
 RUN bundle config set deployment true
 RUN bundle config set frozen true
 COPY Gemfile Gemfile.lock ./
-RUN bundle install --jobs=3 --retry=3
+RUN bundle install --jobs=1 --retry=1
 
 # YARN
 COPY package.json yarn.lock ./
