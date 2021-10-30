@@ -158,7 +158,7 @@ class HomeController < ApplicationController
   end
 
   def versio
-    render json: { versio: Constants::VERSIO }
+    render plain: Constants::VERSIO
   end
 
   private
