@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get '/forigas_kuketojn', to: 'home#reset_cookies'
   get '/serchilo', to: 'home#serchilo'
   get '/search.json', to: 'home#search', format: :json
+  get '/versio', to: 'home#versio', format: :json
 
   authenticated :user, -> user { user.admin? }  do
     mount DelayedJobWeb, at: "/delayed_job"

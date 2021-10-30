@@ -157,6 +157,10 @@ class HomeController < ApplicationController
     redirect_to root_url
   end
 
+  def versio
+    render json: { versio: Constants::VERSIO }
+  end
+
   private
 
     # Forigas Google Analytics cookies
