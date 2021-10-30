@@ -94,8 +94,12 @@ module ApplicationHelper
     upload = event.uploads.first
     return unless upload.blob.image?
 
-    thumb = upload.variant(resize: '150x150').processed
-    xml.enclosure url: rails_representation_url(thumb), length: upload.byte_size / 10, type: upload.content_type
+    begin
+      thumb = upload.variant(resize: '150x150').processed
+      xml.enclosure url: rails_representation_url(thumb), length: upload.byte_size / 10, type: upload.content_type
+    rescue ActiveStorage::FileNotFoundError
+      return
+    end
   end
 
   def montras_flagon(lando)
