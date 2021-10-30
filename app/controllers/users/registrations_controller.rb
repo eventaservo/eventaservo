@@ -16,7 +16,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     super
-    NovaUzantoSciigoJob.perform_now(resource)
+    NovaUzantoSciigoJob.perform_later(resource)
   end
 
   # GET /resource/edit

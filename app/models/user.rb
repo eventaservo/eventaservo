@@ -51,7 +51,7 @@ class User < ApplicationRecord
           user.country_id = 99999
           user.skip_confirmation!
         end
-      NovaUzantoSciigoJob.perform_now(return_user)
+      NovaUzantoSciigoJob.perform_later(return_user)
     end
     return_user
   end

@@ -1,5 +1,5 @@
 class NovaEventaSciigoJob < ApplicationJob
-  queue_as :default
+  queue_as :telegram
 
   def perform(evento)
     return true if Rails.env == 'test' || Rails.env.development?
@@ -10,6 +10,6 @@ class NovaEventaSciigoJob < ApplicationJob
     mesagho += "#{evento.city} (#{evento.country.code.upcase})\n\n"
     mesagho += "#{evento.description}\n\n"
     mesagho += event_url(evento.ligilo)
-    system "telegram-send --config config/es_admin_channel.conf --format html --disable-web-page-preview \"#{mesagho}\""
+    Telegram.send_message(mesagho)
   end
 end
