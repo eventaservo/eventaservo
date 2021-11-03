@@ -84,13 +84,16 @@ gem 'postmark-rails', '~> 0.21.0'
 gem 'premailer-rails', '~> 1.11'
 gem 'redcarpet', '~> 3.5'
 gem 'redis', '~> 4.1'
-gem 'sentry-raven', '= 3.0.4'
 gem 'sitemap_generator', '~> 6.1'
 gem 'timezone', '~> 1.0'
 # gem 'trix-rails', require: 'trix'
 gem 'httparty', '~> 0.18'
 gem 'nokogiri', '>= 1.10.4'
 gem 'yard'
+
+# Sentry.io
+gem 'sentry-rails'
+gem 'sentry-ruby'
 
 gem 'listen'
 
