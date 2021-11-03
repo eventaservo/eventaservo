@@ -349,6 +349,9 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     semantic_range (3.0.0)
+    sentry-delayed_job (4.7.3)
+      delayed_job (>= 4.0)
+      sentry-ruby-core (~> 4.7.0)
     sentry-rails (4.7.3)
       railties (>= 5.0)
       sentry-ruby-core (~> 4.7.0)
@@ -491,6 +494,7 @@ DEPENDENCIES
   seed_dump
   select2-rails (~> 4.0)
   selenium-webdriver
+  sentry-delayed_job
   sentry-rails
   sentry-ruby
   simple_token_authentication (~> 1.0)

@@ -94,6 +94,7 @@ gem 'yard'
 # Sentry.io
 gem 'sentry-rails'
 gem 'sentry-ruby'
+gem 'sentry-delayed_job'
 
 gem 'listen'
 
