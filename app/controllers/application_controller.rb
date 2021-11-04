@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   include Pagy::Backend
 
   before_action :set_paper_trail_whodunnit
-  before_action :set_raven_context
+  before_action :set_sentry_context
 
   def user_is_owner_or_admin(event)
     user_signed_in? && (current_user.owner_of(event) || current_user.organiza_membro_de_evento(event) || current_user.admin?)
@@ -76,9 +76,17 @@ class ApplicationController < ActionController::Base
 
   private
 
-    def set_raven_context
-      Raven.user_context(id: session[:current_user_id]) if user_signed_in?
-      Raven.extra_context(params: params.to_unsafe_h, url: request.url)
+    def set_sentry_context
+      return unless user_signed_in?
+
+      Sentry.configure_scope do |scope|
+        scope.set_context(
+          'uzanto',
+          {
+            id: session[:current_user_id]
+          }
+        )
+      end
     end
 
     def authenticate_admin!
