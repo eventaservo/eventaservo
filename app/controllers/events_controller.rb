@@ -131,14 +131,14 @@ class EventsController < ApplicationController
   end
 
   def by_continent
-    # if params[:continent] == 'Reta' && cookies[:vidmaniero] == 'mapo'
-    #   cookies[:vidmaniero] = { value: 'kalendaro', expires: 2.weeks, secure: true }
-    #   redirect_to events_by_continent_path('Reta')
-    # end
-
-    unless cookies[:vidmaniero].in? %w[kartaro mapo]
-      cookies[:vidmaniero] = { value: 'kartaro', expires: 2.weeks, secure: true }
-      redirect_to events_by_continent_path(params[:continent])
+    # Se la "kontinento" estas Reta, montru la eventojn per Kalendara vido
+    # Se estas aliaj kontinentoj, montru per Kartaro aŭ Map
+    if params[:continent] == 'Reta' && cookies[:vidmaniero] != 'kalendaro'
+      cookies[:vidmaniero] = { value: 'kalendaro', expires: 2.weeks, secure: true }
+    elsif params[:continent] != 'Reta'
+      unless cookies[:vidmaniero].in? %w[kartaro mapo]
+        cookies[:vidmaniero] = { value: 'kartaro', expires: 2.weeks, secure: true }
+      end
     end
 
     @future_events = Event.by_continent(params[:continent]).venontaj
@@ -147,7 +147,7 @@ class EventsController < ApplicationController
     @today_events  = @events.today.includes(:country)
     @events        = @events.not_today.includes(:country)
 
-    kreas_paghadon_por_karta_vidmaniero
+    kreas_paghadon_por_karta_vidmaniero if cookies[:vidmaniero] == 'kartaro'
   end
 
   def by_country
