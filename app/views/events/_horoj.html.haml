@@ -1,9 +1,7 @@
-.small.text-right.mt-1.font-weight-bold
-  %div
-    - if @event.komenca_horo == '00:00' && @event.fina_horo == '00:00'
-      Komenca horo ne konata
-    - else
+- unless @event.komenca_horo == '00:00' && @event.fina_horo == '00:00'
+  .small.text-right.mt-1.font-weight-bold
+    %div
       = icon('far', 'clock', "#{@event.komenca_horo(horzono: tz)} - #{@event.fina_horo(horzono: tz)}")
-  %div
-    = I18n.t tz, scope: :timezones
-    = icon('fas', 'sun', data: { toggle: 'tooltip', placement: 'top', title: 'Somera/Vintra tempo' }) if @event.dst?
+    %div
+      = I18n.t tz, scope: :timezones
+      = icon('fas', 'sun', data: { toggle: 'tooltip', placement: 'top', title: 'Somera/Vintra tempo' }) if @event.dst?
