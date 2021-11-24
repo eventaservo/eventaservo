@@ -65,7 +65,6 @@ class Event < ApplicationRecord
         }
   scope :after_30days, -> { where('date_start > ?', (Time.zone.today + 30.days).end_of_day) }
   scope :lau_lando, ->(lando) { joins(:country).where(country: lando) }
-  scope :lau_organizo, ->(o) { joins(:organizations).where('LOWER(organizations.short_name) = ?', o.downcase) }
   scope :by_country_id, ->(id) { where(country_id: id) }
   scope :by_country_name, ->(name) { joins(:country).where(countries: { name: name }) }
   scope :by_country_code, ->(code) { joins(:country).where(countries: { code: code }) }
@@ -135,6 +134,18 @@ class Event < ApplicationRecord
 
   def self.count_by_cities
     select('events.city as name', 'count(events.id)').group(:city).order(:city)
+  end
+
+  # Serĉas eventojn laŭ organizoj
+  #
+  # Ekzemplo:
+  #   .lau_organizo('uea')
+  #   .lau_organizo('uea,tejo')
+  #
+  # @since 2021-11
+  def self.lau_organizo(o)
+    organizoj = o.downcase.split(',')
+    joins(:organizations).where('LOWER(organizations.short_name) IN (?)', organizoj)
   end
 
   # Malapareigu la eventon, sed ne forviŝu ĝin
