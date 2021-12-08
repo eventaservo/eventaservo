@@ -112,15 +112,6 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'seed_dump' # Por rekrei la seeds.db dosieron
-
-  # Capistrano gems
-  gem 'bcrypt_pbkdf'
-  gem 'capistrano', '~> 3.14.1', require: false
-  gem 'capistrano-bundler', require: false
-  gem 'capistrano-passenger', require: false
-  gem 'capistrano-rails', '~> 1.4', require: false
-  gem 'capistrano-rvm', require: false
-  gem 'ed25519'
 end
 
 group :test do
