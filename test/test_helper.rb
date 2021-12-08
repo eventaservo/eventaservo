@@ -12,6 +12,7 @@ SimpleCov.start
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
+  parallelize(workers: 3)
   include FactoryBot::Syntax::Methods
   include ActionMailer::TestHelper
 

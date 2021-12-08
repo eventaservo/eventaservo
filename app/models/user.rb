@@ -20,6 +20,8 @@ class User < ApplicationRecord
   before_save :subscribe_mailings, if: :new_record?
   before_save :sanitize_links
 
+  before_destroy :check_for_related_records
+
   has_many :events
   belongs_to :country, inverse_of: :users
   has_many :organization_users
@@ -113,6 +115,16 @@ class User < ApplicationRecord
            search: "%#{teksto.strip.tr(' ', '%').downcase}%").order('users.name')
   end
 
+  # Kunigas la nunan konton kun alia konto-id
+  # @since 2.25
+  def merge_to(destination_user_id)
+    return false if destination_user_id == id
+
+    Event.where(user_id: id).update_all(user_id: destination_user_id)
+    OrganizationUser.where(user_id: id).update_all(user_id: destination_user_id)
+    destroy
+  end
+
   private
 
     def subscribe_mailings
@@ -135,4 +147,21 @@ class User < ApplicationRecord
         end
       end
     end
+
+  # Kontrolas ĉu la uzanto ankoraŭ havas iun registron en ES antaŭ forigi ĝin
+  # Se jes, ne permesu forigi la konton.
+  #
+  # @since 2.25
+  def check_for_related_records
+    if Event.where(user_id: id).any?
+      logger.error "*** Ne eblas forigi la konton (ID:#{id}) ĉar ĝi ankoraŭ havas eventojn rilatajn. ***"
+      throw :abort
+    end
+
+    if OrganizationUser.where(user_id: id).any?
+      logger.error "*** Ne eblas forigi la konton (ID:#{id} ĉar ĝi ankoraŭ estas membro de organizo. ***"
+      throw :abort
+    end
+
+  end
 end

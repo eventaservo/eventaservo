@@ -7,6 +7,7 @@ module Admin
 
     def index
       @users = User.includes([:events, :country]).order(:name)
+      @total_users = @users.count
     end
 
     def show
@@ -19,6 +20,17 @@ module Admin
         redirect_to events_by_username_path(@user.username), flash: { success: 'Sukceso'}
       else
         render :show, flash: { error: 'Eraro okazis' }
+      end
+    end
+
+    def kunigi
+      old_user_id = params[:user_id]
+      new_user_id = params[:id]
+
+      if User.find(old_user_id).merge_to(new_user_id)
+        redirect_to admin_users_path, flash: { success: 'Uzant-kontoj sukcese kunigitaj' }
+      else
+        redirect_to admin_users_path, flash: { error: 'Eraro okazis. Ne eblis kunigi kontojn' }
       end
     end
 

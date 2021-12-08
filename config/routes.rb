@@ -104,7 +104,9 @@ Rails.application.routes.draw do
 
   # Admin
   namespace :admin do
-    resources :users, only: %i[index show update]
+    resources :users, only: %i[index show update] do
+      post 'kunigi', action: :kunigi
+    end
     get 'sciiga_listo', controller: 'notifications', action: :index, as: 'notification_list'
     get 'countries', controller: 'countries', action: :index
     get 'eventoj', controller: 'events', action: :index

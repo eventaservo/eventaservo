@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :organizo, class: :organization do
     name { Faker::Company.name }
-    short_name { Faker::Company.name.downcase.tr(' ', '_')}
+    short_name { Faker::Internet.domain_word }
     city { Faker::Address.city }
     association :country, factory: :lando
     email { Faker::Internet.email }
