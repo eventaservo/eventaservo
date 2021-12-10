@@ -1,7 +1,7 @@
-ARG RUBY_MAJOR=2.7
+ARG IMAGE=2.7.5-alpine3.14
 ARG AMBIENTE=production
 
-FROM ruby:${RUBY_MAJOR}-alpine as build
+FROM ruby:${IMAGE} as build
 
 WORKDIR /eventaservo 
 
@@ -28,7 +28,7 @@ RUN bundle install --jobs=1 --retry=1
 
 # YARN
 COPY package.json yarn.lock ./
-RUN yarn install --check-files
+RUN yarn install
 
 # Define as variaveis de ambiente
 ENV RAILS_ENV=${AMBIENTE}
@@ -49,7 +49,7 @@ RUN rm -rf node_modules \
   && find vendor/bundle/ruby/${RUBY_MAJOR}.0/gems/ -name "*.c" -delete \
   && find vendor/bundle/ruby/${RUBY_MAJOR}.0/gems/ -name "*.o" -delete 
 
-FROM ruby:${RUBY_MAJOR}-alpine
+FROM ruby:${IMAGE}
 
 RUN apk update \
   && apk upgrade \

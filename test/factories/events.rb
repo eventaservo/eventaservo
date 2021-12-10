@@ -15,7 +15,7 @@ FactoryBot.define do
     date_end { Time.zone.today }
     code { SecureRandom.urlsafe_base64(12) }
     time_zone { Faker::Address.time_zone }
-    short_url { Faker::Food.fruits }
+    short_url { Faker::Food.fruits + '_' + rand(1000).to_s }
 
     trait :brazila do
       association :country, factory: %i[lando brazilo]

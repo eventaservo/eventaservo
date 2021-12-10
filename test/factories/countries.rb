@@ -2,9 +2,9 @@
 
 FactoryBot.define do
   factory :lando, class: Country do
-    name { Faker::Address.unique.country }
+    name { Faker::Address.country + '_' + rand(1000).to_s }
     continent { 'Ameriko' }
-    code { Faker::Address.unique.country_code }
+    code { Faker::Address.country_code + '_' + rand(1000).to_s }
 
     trait :brazilo do
       name { 'Brazilo' }
