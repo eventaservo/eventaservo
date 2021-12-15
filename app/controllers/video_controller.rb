@@ -3,7 +3,8 @@
 class VideoController < ApplicationController
 
   def index
-    @videoj = Video.joins(:evento).order("events.date_start DESC")
+    @videoj = ::Video.joins(:evento).order('events.date_start DESC')
+    @pagy, @videoj = pagy(@videoj, items: 6)
   end
 
   def new
