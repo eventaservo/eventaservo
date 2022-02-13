@@ -5,8 +5,12 @@
 
   = form_with(model: @event, url: event_path(@event.code), local: true, id: 'uploader_form', method: :patch) do |f|
     = f.file_field :uploads, multiple: true, direct_upload: true,
-      accept: 'application/pdf,image/*,
-      application/zip,application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      accept: 'application/pdf,
+      image/png,
+      image/jpg,
+      image/gif,
+      application/zip,
+      application/vnd.openxmlformats-officedocument.wordprocessingml.document'
     %br
     %br
     = f.submit 'Alŝuti', class: 'btn btn-outline-primary btn-sm col-12', id: 'submit_button'
