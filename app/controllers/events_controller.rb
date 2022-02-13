@@ -70,7 +70,11 @@ class EventsController < ApplicationController
   def update
     if dosier_alshutado
       redirect_to(event_url(@event.ligilo), flash: { error: 'Vi devas unue elekti dosieron' }) && return if params[:event].nil?
-      @event.update(params.require(:event).permit(uploads: []))
+      if @event.update(params.require(:event).permit(uploads: []))
+        flash[:notice] = 'Dokumento sukcese alŝutita'
+      else
+        flash[:error] = 'Dosier-formato ne valida'
+      end
       redirect_to event_path(@event.ligilo)
     else
       if @event.update(event_params)

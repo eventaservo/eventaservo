@@ -13,6 +13,7 @@ class Event < ApplicationRecord
   has_rich_text :enhavo
 
   has_many_attached :uploads
+  validate :verify_upload_content_type
 
   include Code
   include Events::Organizations
@@ -313,6 +314,24 @@ class Event < ApplicationRecord
   end
 
   private
+
+    def verify_upload_content_type
+      if uploads.any?
+        uploads.each do |upload|
+          unless upload.content_type.in?([
+                                           'application/pdf',
+                                           'image/png',
+                                           'image/jpg',
+                                           'image/gif',
+                                           'application/zip',
+                                           'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                                         ])
+            errors.add(:uploads, 'Dosier-formato ne valida')
+            return false
+          end
+        end
+      end
+    end
 
     def end_after_start
       return if date_start.blank? || date_end.blank?
