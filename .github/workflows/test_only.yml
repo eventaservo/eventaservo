@@ -1,0 +1,61 @@
+name: Test only
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_DB: test
+          POSTGRES_USER: eventaservo
+          POSTGRES_PASSWORD: eventaservo
+        ports: [ '5432:5432' ]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Ruby 2.7 e Bundler
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+          bundler-cache: true
+
+      - name: Node 15
+        uses: actions/setup-node@v1
+        with:
+          node-version: 15.x
+
+      - name: Locate Yarns cache directory
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache Yarn
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: |
+            **/node_modules
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Yarn
+        run: yarn install --frozen-lockfile
+
+      - name: Run tests
+        env:
+          DB_NAME: test
+          DB_HOST: localhost
+          DB_USERNAME: eventaservo
+          DB_PASSWORD: eventaservo
+          RAILS_ENV: test
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+        run: |
+          bin/rails db:migrate
+          bin/rails test

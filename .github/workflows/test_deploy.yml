@@ -3,8 +3,6 @@ name: Test kaj Deploy
 on:
   push:
     branches: [ main, staging ]
-  pull_request:
-    branches: [ main ]
   workflow_dispatch:
     branches: [ main, staging ]
 
