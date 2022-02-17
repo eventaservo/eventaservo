@@ -322,6 +322,7 @@ class Event < ApplicationRecord
                                            'application/pdf',
                                            'image/png',
                                            'image/jpg',
+                                           'image/jpeg',
                                            'image/gif',
                                            'application/zip',
                                            'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
