@@ -1,6 +1,10 @@
 - if @uzanto.havas_publikajn_kontaktojn?
   .lead Kontaktoj
   .list-group
+    - if @uzanto.persona_retejo.present?
+      = link_to @uzanto.persona_retejo, target: :_blank, class: 'list-group-item list-group-item-action' do
+        = image_tag('www.svg', size: 28)
+        Persona retejo
     - if @uzanto.youtube.present?
       = link_to @uzanto.youtube, target: :_blank, class: 'list-group-item list-group-item-action' do
         = image_tag('youtube-link.svg', size: 28)

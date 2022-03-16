@@ -44,6 +44,10 @@
         </prelego-form>
       .text-divider Ligiloj
       .form-group.row
+        = f.label :persona_retejo, image_tag('www.svg', size: 24) + ' Persona retejo', class: 'col-md-3 col-form-label'
+        .col-md-9
+          = f.text_field :persona_retejo, class: 'form-control'
+      .form-group.row
         = f.label :youtube, image_tag('youtube-link.svg', size: 24) + ' YouTube', class: 'col-md-3 col-form-label'
         .col-md-9
           = f.text_field :youtube, class: 'form-control'

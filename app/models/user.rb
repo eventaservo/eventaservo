@@ -14,7 +14,7 @@ class User < ApplicationRecord
   store_accessor :mailings, :weekly_summary
   store_accessor :instruo, :instruisto
   store_accessor :prelego, :preleganto
-  store_accessor :ligiloj, [:youtube, :telegram, :instagram, :facebook, :vk]
+  store_accessor :ligiloj, [:youtube, :telegram, :instagram, :facebook, :vk, :persona_retejo]
 
   before_save :generate_username, if: :new_record?
   before_save :subscribe_mailings, if: :new_record?
@@ -105,7 +105,7 @@ class User < ApplicationRecord
   # @return [Boolean]
   # @since 2.15
   def havas_publikajn_kontaktojn?
-    youtube.present? or telegram.present? or instagram.present?
+    youtube.present? or telegram.present? or instagram.present? or persona_retejo.present?
   end
 
   # Serĉas uzanton laŭ teksto
