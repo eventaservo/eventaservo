@@ -1,0 +1,59 @@
+# Docker-compose file for DEVELOPMENT containers
+version: '3.8'
+
+services:
+  rails:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.devel
+    environment:
+      - RAILS_ENV=development
+      - DB_HOST=db
+      - DB_NAME=es_devel
+      - REDIS_SERVER=redis
+    volumes:
+      - ./:/eventaservo
+    ports:
+      - 30000:3000
+    depends_on:
+      - webpack
+      - db
+      - redis
+
+  webpack:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.devel
+    environment:
+      - RAILS_ENV=development
+      - DB_HOST=db
+      - DB_NAME=es_devel
+      - REDIS_SERVER=redis
+    volumes:
+      - ./:/eventaservo
+    command: ./bin/webpack-dev-server
+
+  redis:
+    image: redis:6.2.6
+    # ports:
+      # - 6379:6379
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  db:
+    image: postgres:13.5
+    environment:
+      - POSTGRES_PASSWORD=eventaservo
+      - POSTGRES_USER=eventaservo
+      - POSTGRES_DB=es_devel
+    volumes:
+      - es_devel_db_data:/var/lib/postgresql/data
+      - /backup:/backup
+    # ports:
+    #   - 5432:5432
+
+volumes:
+  es_devel_db_data:
