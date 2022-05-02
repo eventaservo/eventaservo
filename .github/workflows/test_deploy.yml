@@ -3,8 +3,9 @@ name: Test kaj Deploy
 on:
   push:
     branches: [ main, staging ]
+    paths:
+      - "app/modules/constants.rb"
   workflow_dispatch:
-    branches: [ main, staging ]
 
 jobs:
   Test:
