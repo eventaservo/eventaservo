@@ -1,0 +1,31 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Rails Server",
+			"type": "shell",
+			"command": "bin/rails",
+			"args": [
+				"server",
+				"-b",
+				"'ssl://localhost:3000?key=certs/localhost.key&cert=certs/localhost.crt'"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "Rails Console",
+			"type": "shell",
+			"command": "bin/rails",
+			"args": [
+				"console"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "Webpack",
+			"command": "bin/webpack-dev-server",
+			"type": "shell",
+			"problemMatcher": []
+		}
+	]
+}

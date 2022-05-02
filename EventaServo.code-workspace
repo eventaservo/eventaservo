@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "./"
+		}
+	],
+	"settings": {
+		"rubyTestExplorer.testFramework": "minitest",
+		"rubyTestExplorer.minitestCommand": "./bin/rake"
+	}
+}
