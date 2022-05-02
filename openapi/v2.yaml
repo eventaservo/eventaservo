@@ -1,0 +1,145 @@
+openapi: 3.1.0
+info:
+  title: EventaServo API
+  version: '2.0'
+  contact:
+    name: Fernando
+    url: 'https://github.com/eventaservo'
+    email: fernando@eventaservo.org
+  termsOfService: 'https://eventaservo.org/LICENSE'
+  license:
+    name: AGPL-3
+    identifier: AGPL-3
+  summary: API to list and manage data in EventaServo
+servers:
+  - url: 'https://localhost:3000/api/v1'
+    description: Development
+  - url: 'https://eventaservo.org/api/v1'
+    description: Production
+paths:
+  /events.json:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    uuid:
+                      type: string
+                    kodo:
+                      type: string
+                    titolo:
+                      type: string
+                    priskribo:
+                      type: string
+                    enhavo:
+                      type: string
+                    komenca_dato:
+                      type: string
+                    fina_dato:
+                      type: string
+                    retpaĝo:
+                      type: string
+                    retpoŝtadreso:
+                      type: string
+                    organizoj:
+                      type: array
+                      items:
+                        type: string
+                    specoj:
+                      type: array
+                      items:
+                        type: string
+                    nuligita:
+                      type: boolean
+                    nuligkialo:
+                      type: string
+                    reta:
+                      type: string
+                    loko:
+                      type: object
+                      properties:
+                        adreso:
+                          type: string
+                        urbo:
+                          type: string
+                        lando:
+                          type: string
+                        landokodo:
+                          type: string
+                        latitudo:
+                          type: number
+                        longitudo:
+                          type: number
+                    administranto:
+                      type: string
+      operationId: get-events.json
+      parameters:
+        - schema:
+            type: string
+            example: '2022-01-01'
+            format: date
+          in: query
+          name: komenca_dato
+          required: true
+        - schema:
+            type: string
+            example: '2022-01-31'
+            format: date
+          in: query
+          name: fina_dato
+          required: true
+    parameters: []
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      description: ''
+      examples:
+        - id: 142
+          firstName: Alice
+          lastName: Smith
+          email: alice.smith@gmail.com
+          dateOfBirth: '1997-10-31'
+          emailVerified: true
+          signUpDate: '2019-08-24'
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the given user.
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        dateOfBirth:
+          type: string
+          format: date
+          example: '1997-10-31'
+        emailVerified:
+          type: boolean
+          description: Set to true if the user's email has been verified.
+        createDate:
+          type: string
+          format: date
+          description: The date that the user was created.
+      required:
+        - id
+        - firstName
+        - lastName
+        - email
+        - emailVerified
+  securitySchemes:
+    key:
+      type: apiKey
+      in: query
