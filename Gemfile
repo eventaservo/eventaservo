@@ -103,6 +103,8 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'faker'
   gem 'rake'
+  gem 'rubocop', '~> 1.28', require: false
+  gem 'rubocop-rails', '~> 2.14', require: false
 end
 
 group :development do
