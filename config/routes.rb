@@ -46,6 +46,12 @@ Rails.application.routes.draw do
       # Statistikoj
       get 'statistikoj', to: 'statistics#index'
     end
+
+    namespace :v2 do
+      scope 'eventoj' do
+        get '/', to: 'events#index'
+      end
+    end
   end
 
   # iloj

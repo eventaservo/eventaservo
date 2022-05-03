@@ -473,6 +473,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails (~> 4.3, >= 4.3.3)
   jquery-ui-rails (~> 6.0, >= 6.0.1)
+  jwt (~> 2.2.1)
   leaflet-rails (~> 1.7.0)
   listen
   mini_magick (~> 4.10)

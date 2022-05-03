@@ -1,8 +1,21 @@
+@base_url = https://localhost:3000/api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEifQ.S90D5A_10krDGDud8CuNZApa4qRyB5Rnjv4r2wbxYb8
+
 GET {{ base_url}} /eventoj
 Accept: application/json
 Authorization: {{ token}}
 
 ###
-GET {{ base_url }} /statistikoj
+GET {{ base_url }}/v1/statistikoj
 Accept: application/json
 Authorization: none
+
+###
+GET {{ base_url }}/v2/eventoj?komenca_dato=2022-01-01&fina_dato=2022-01-10
+Accept: application/json
+Authorization: Bearer {{ token }}
+
+###
+GET {{ base_url }}/v2/eventoj?uuid=206da237-65ee-4b86-96f6-5bd4cc3bd219
+Accept: application/json
+Authorization: Bearer {{ token }}

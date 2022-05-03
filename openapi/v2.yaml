@@ -19,8 +19,9 @@ servers:
 paths:
   /events.json:
     get:
-      summary: Your GET endpoint
-      tags: []
+      summary: Listigas eventojn
+      tags:
+        - Eventoj
       responses:
         '200':
           description: OK
@@ -45,10 +46,11 @@ paths:
                       type: string
                     fina_dato:
                       type: string
-                    retpaĝo:
+                    retpagho:
                       type: string
-                    retpoŝtadreso:
+                    retposhtadreso:
                       type: string
+                      example: kontakto@eventaservo.org
                     organizoj:
                       type: array
                       items:
@@ -96,50 +98,128 @@ paths:
           in: query
           name: fina_dato
           required: true
+        - schema:
+            type: string
+            format: uuid
+            example: e567bdc3-0ea2-46cc-8a83-3b11facbe16c
+          in: query
+          name: uuid
+          allowEmptyValue: true
+        - schema:
+            type: string
+            example: BR
+          in: query
+          name: landa_kodo
+        - schema:
+            type: string
+            example: UEA
+          in: query
+          name: o
+          description: Organiza mallonga nomo
     parameters: []
 components:
   schemas:
-    User:
-      title: User
+    Event:
+      description: Detalaj informoj pri la evento
       type: object
-      description: ''
-      examples:
-        - id: 142
-          firstName: Alice
-          lastName: Smith
-          email: alice.smith@gmail.com
-          dateOfBirth: '1997-10-31'
-          emailVerified: true
-          signUpDate: '2019-08-24'
+      title: Evento
+      x-internal: false
+      examples: []
       properties:
-        id:
-          type: integer
-          description: Unique identifier for the given user.
-        firstName:
+        uuid:
           type: string
-        lastName:
+          minLength: 1
+        kodo:
           type: string
-        email:
+          minLength: 1
+        titolo:
+          type: string
+          minLength: 1
+        priskribo:
+          type: string
+          minLength: 1
+        enhavo:
+          type: string
+          example: Pli detalaj informoj pri la evento
+        komenca_dato:
+          type: string
+          minLength: 1
+        fina_dato:
+          type: string
+          minLength: 1
+        retpaĝo:
+          type: string
+          minLength: 1
+        organizoj:
+          type: array
+          items:
+            type: string
+            example: Universala Esperanto-Asocio
+        specoj:
+          type: array
+          items:
+            type: string
+            example: Internacia
+        retpoŝtadreso:
           type: string
           format: email
-        dateOfBirth:
-          type: string
-          format: date
-          example: '1997-10-31'
-        emailVerified:
+          example: uea@uea.com
+        nuligita:
           type: boolean
-          description: Set to true if the user's email has been verified.
-        createDate:
+        nuligkialo:
           type: string
-          format: date
-          description: The date that the user was created.
+        reta:
+          type: boolean
+          description: Reta evento?
+        loko:
+          type: object
+          required:
+            - urbo
+            - lando
+            - landokodo
+            - kontinento
+            - latitudo
+            - longitudo
+          properties:
+            adreso:
+              type: string
+            urbo:
+              type: string
+              minLength: 1
+            lando:
+              type: string
+              minLength: 1
+            landokodo:
+              type: string
+              minLength: 1
+            kontinento:
+              type: string
+              minLength: 1
+            latitudo:
+              type: number
+            longitudo:
+              type: number
+        administranto:
+          type: string
+          minLength: 1
       required:
-        - id
-        - firstName
-        - lastName
-        - email
-        - emailVerified
+        - uuid
+        - kodo
+        - titolo
+        - priskribo
+        - komenca_dato
+        - fina_dato
+        - retpaĝo
+        - organizoj
+        - specoj
+        - nuligita
+        - reta
+        - loko
+        - administranto
   securitySchemes:
-    key:
-      type: apiKey
-      in: query
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - BearerAuth: []
