@@ -41,3 +41,6 @@ Layout/IndentationConsistency:
 
 Layout/MultilineMethodArgumentLineBreaks:
   Enabled: false
+
+Lint/ConstantResolution:
+  Enabled: false
