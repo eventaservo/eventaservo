@@ -43,7 +43,7 @@ COPY . .
 # Kreas API dokumentadon ĉe /public/docs/api/v2/
 RUN npm i -g redoc-cli
 RUN mkdir -p public/docs/api/v2/
-RUN redoc-cli build openapi/v2.yml -o public/docs/api/v2/index.html
+RUN redoc-cli build openapi/v2.yaml -o public/docs/api/v2/index.html
 
 RUN bundle exec rails assets:precompile
 
