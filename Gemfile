@@ -114,13 +114,16 @@ group :development do
 
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'debase', '~> 2.3.2'
+  gem 'ruby-debug-ide', '~> 2.3.3'
   gem 'seed_dump' # Por rekrei la seeds.db dosieron
+  gem 'spring'
 end
 
 group :test do
   gem 'capybara'
   gem 'factory_bot_rails'
-  gem 'minitest'
+  gem 'minitest', '~> 5.5'
   gem 'selenium-webdriver'
   gem 'simplecov'
   gem 'vcr'
