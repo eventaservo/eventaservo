@@ -114,8 +114,8 @@ group :development do
 
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'debase'
-  gem 'ruby-debug-ide'
+  gem 'debase', '~> 0.2.4.1'
+  gem 'ruby-debug-ide', '~> 0.7.3'
   gem 'seed_dump' # Por rekrei la seeds.db dosieron
   gem 'spring'
 end
