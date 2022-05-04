@@ -3,7 +3,7 @@ ARG AMBIENTE=production
 
 FROM ruby:${IMAGE} as build
 
-WORKDIR /eventaservo 
+WORKDIR /eventaservo
 
 RUN apk update \
   && apk upgrade \
@@ -39,6 +39,11 @@ ENV IPINFO_KEY=${IPINFO_KEY}
 
 COPY . .
 
+# Kreas API dokumentadon ĉe /public/docs/api/v2/
+RUN npm i -g redoc-cli
+RUN mkdir -p public/docs/api/v2/
+RUN redoc-cli build openapi/v2.yml -o public/docs/api/v2/index.html
+
 RUN bundle exec rails assets:precompile
 
 # Apaga todos os arquivos desnecessários
@@ -47,7 +52,7 @@ RUN rm -rf node_modules \
   && rm -rf tmp/* \
   && rm -rf vendor/bundle/ruby/${RUBY_MAJOR}.0/cache/* \
   && find vendor/bundle/ruby/${RUBY_MAJOR}.0/gems/ -name "*.c" -delete \
-  && find vendor/bundle/ruby/${RUBY_MAJOR}.0/gems/ -name "*.o" -delete 
+  && find vendor/bundle/ruby/${RUBY_MAJOR}.0/gems/ -name "*.o" -delete
 
 FROM ruby:${IMAGE}
 
