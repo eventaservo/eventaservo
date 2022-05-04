@@ -13,6 +13,7 @@ RUN apk update \
       imagemagick6-dev \
       postgresql-dev \
       nodejs \
+      npm \
       yarn \
       sqlite-dev \
       tzdata \
