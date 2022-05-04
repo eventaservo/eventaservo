@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '~> 2.6'
+ruby '~> 2.7.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.4'
@@ -114,8 +114,8 @@ group :development do
 
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'debase', '~> 2.3.2'
-  gem 'ruby-debug-ide', '~> 2.3.3'
+  gem 'debase'
+  gem 'ruby-debug-ide'
   gem 'seed_dump' # Por rekrei la seeds.db dosieron
   gem 'spring'
 end
