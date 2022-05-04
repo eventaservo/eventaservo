@@ -7,7 +7,7 @@ module Api
     include Devise::Test::IntegrationHelpers
 
     def setup
-      @token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEifQ.S90D5A_10krDGDud8CuNZApa4qRyB5Rnjv4r2wbxYb8'
+      @token = Rails.application.credentials.dig(:jwt, :test_user_token)
     end
 
     test 'Lists events' do

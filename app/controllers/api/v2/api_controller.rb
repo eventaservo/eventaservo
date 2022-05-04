@@ -17,7 +17,7 @@ module Api
           end
 
           begin
-            decoded = ::JWT.decode token, '12345'
+            decoded = ::JWT.decode token, Rails.application.credentials.dig(:jwt, :secret)
           rescue JWT::DecodeError
             render json: { eraro: 'Token ne validas' }, status: :unauthorized and return
           end
