@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :uzanto, class: :user do
+  factory :user, aliases: [:uzanto], class: :user do
     name { Faker::Name.unique.name }
     email { Faker::Internet.unique.email }
     city { Faker::Address.city }

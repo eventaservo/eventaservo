@@ -47,7 +47,7 @@ Rails.application.routes.draw do
       get 'statistikoj', to: 'statistics#index'
     end
 
-    namespace :v2 do
+    namespace :v2, defaults: { format: :json } do
       scope 'eventoj' do
         get '/', to: 'events#index'
       end

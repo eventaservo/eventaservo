@@ -16,6 +16,7 @@ FactoryBot.define do
     code { SecureRandom.urlsafe_base64(12) }
     time_zone { Faker::Address.time_zone }
     short_url { Faker::Food.fruits + '_' + rand(1000).to_s }
+    uuid { Faker::Internet.uuid }
 
     trait :brazila do
       association :country, factory: %i[lando brazilo]
