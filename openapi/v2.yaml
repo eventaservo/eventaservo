@@ -34,23 +34,31 @@ paths:
                   properties:
                     uuid:
                       type: string
+                      example: 206da237-65ee-4b86-96f6-5bd4cc3bd210
                     kodo:
                       type: string
+                      example: ab6712d
                     titolo:
                       type: string
+                      example: 1-a Universala Kongreso
                     priskribo:
                       type: string
+                      example: La unua Universala Kongreso de Esperanto!
                     enhavo:
                       type: string
+                      example: Detalaj informoj pri la evento
                     komenca_dato:
                       type: string
+                      example: '1905-08-05'
                     fina_dato:
                       type: string
+                      example: '1905-08-12'
                     retpagho:
                       type: string
+                      example: 'https://uea.org'
                     retposhtadreso:
                       type: string
-                      example: kontakto@eventaservo.org
+                      example: kontakto@uea.org
                     organizoj:
                       type: array
                       items:
@@ -59,29 +67,48 @@ paths:
                       type: array
                       items:
                         type: string
+                        example: Universala Esperanto-Asocio
                     nuligita:
                       type: boolean
                     nuligkialo:
                       type: string
                     reta:
-                      type: string
+                      type: boolean
                     loko:
                       type: object
                       properties:
                         adreso:
                           type: string
+                          example: Stratnomo
                         urbo:
                           type: string
+                          example: Bulonjo ĉe maro
                         lando:
                           type: string
+                          example: Francio
                         landokodo:
                           type: string
+                          example: FR
                         latitudo:
                           type: number
+                          example: 50.725231
                         longitudo:
                           type: number
+                          example: 1.613334
                     administranto:
                       type: string
+                      example: '["Universala Esperanto-Asocio"]'
+        '400':
+          description: UUID aŭ Komenca/Fina datoj mankas
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  eraro:
+                    type: string
+                    example: Mankas komenca_dato kaj fina_dato aŭ eventa UUID
+          headers: {}
       operationId: get-events.json
       parameters:
         - schema:
@@ -105,6 +132,7 @@ paths:
           in: query
           name: uuid
           allowEmptyValue: true
+          description: UUID de especifa evento
         - schema:
             type: string
             example: BR
@@ -116,6 +144,10 @@ paths:
           in: query
           name: o
           description: Organiza mallonga nomo
+      description: |-
+        Listigas eventojn. Oni devas elekti listigi unun specifan eventon laŭ UUID kodo aŭ informi na komencan kaj finan datojn.
+
+        Eblas filtri la rezultojn laŭ organizo aŭ landa kodo.
     parameters: []
 components:
   schemas:

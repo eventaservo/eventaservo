@@ -18,6 +18,7 @@ class User < ApplicationRecord
 
   before_save :generate_username, if: :new_record?
   before_save :subscribe_mailings, if: :new_record?
+  before_save :gererate_jwt_token, if: :new_record?
   before_save :sanitize_links
 
   before_destroy :check_for_related_records
@@ -126,6 +127,13 @@ class User < ApplicationRecord
   end
 
   private
+
+    # Generate JWT Token for API v2 before saving the user
+    def gererate_jwt_token
+      payload = { id: id }
+      jwt_token = JWT.encode(payload, Rails.application.credentials.dig(:jwt, :secret), 'HS256')
+      self.jwt_token = jwt_token
+    end
 
     def subscribe_mailings
       self.weekly_summary = '1'

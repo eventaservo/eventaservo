@@ -70,4 +70,12 @@ class UserTest < ActiveSupport::TestCase
     user = create(:uzanto)
     assert_not user.merge_to(user.id)
   end
+
+  test 'JWT Token must be created automatically for new users' do
+    user = FactoryBot.build(:user)
+
+    assert user.jwt_token.nil?
+    user.save
+    assert user.jwt_token.present?
+  end
 end

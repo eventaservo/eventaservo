@@ -75,11 +75,15 @@
           = display_user_image(@user)
           = f.file_field :picture, class: 'form-control-file', accept: 'image/gif,image/jpeg,image/png'
 
+      -# .form-group.row
+      -#   = f.label :authentication_token, class: 'col-form-label col-md-3'
+      -#   .col-md-9
+      -#     = f.text_field :authentication_token, readonly: true, class: 'form-control'
+      -#     .small= link_to "Krei novan API-ŝlosilon", api_v1_rekrei_api_kodon_url(current_user.id), class: 'form-text', data: { confirm: 'Ĉu vi certas? Ne eblas malfari tiun agon.' }
       .form-group.row
-        = f.label :authentication_token, class: 'col-form-label col-md-3'
+        = f.label :jwt_token, 'API v2 Token', class: 'col-form-label col-md-3'
         .col-md-9
-          = f.text_field :authentication_token, readonly: true, class: 'form-control'
-          .small= link_to "Krei novan API-ŝlosilon", api_v1_rekrei_api_kodon_url(current_user.id), class: 'form-text', data: { confirm: 'Ĉu vi certas? Ne eblas malfari tiun agon.' }
+          = f.text_field :jwt_token, readonly: true, class: 'form-control'
 
       .text-divider Organizoj
       - @user.organizoj.each do |organizo|
