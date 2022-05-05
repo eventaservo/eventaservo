@@ -1,4 +1,4 @@
-name: Test kaj Deploy
+name: Test and Deploy
 
 on:
   push:
@@ -28,10 +28,10 @@ jobs:
           ruby-version: 2.7
           bundler-cache: true
 
-      - name: Node 15
+      - name: Node 14
         uses: actions/setup-node@v1
         with:
-          node-version: 15.x
+          node-version: 14.x
 
       - name: Locate Yarns cache directory
         id: yarn-cache-dir-path
