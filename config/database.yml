@@ -33,6 +33,6 @@ test:
   database: test
   pool: 5
   timeout: 5000
-  host: localhost
+  host: <%= ENV['DB_HOST'] %>
   username: eventaservo
   password: eventaservo

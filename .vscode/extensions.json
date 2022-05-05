@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "njzy.stats-bar",
-    "misogi.ruby-rubocop"
+    "misogi.ruby-rubocop",
+    "ms-azuretools.vscode-docker"
   ]
 }
