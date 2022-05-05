@@ -24,7 +24,7 @@ gem 'font-awesome-sass', '~> 5'
 gem 'haml', '~> 5'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
-gem 'mini_racer', '~> 0.2'
+gem 'mini_racer', '~> 0.4.0'
 
 gem 'select2-rails', '~> 4.0'
 
