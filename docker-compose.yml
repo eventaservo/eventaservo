@@ -11,14 +11,16 @@ services:
       - DB_HOST=db
       - DB_NAME=es_devel
       - REDIS_SERVER=redis
+    labels:
+      com.centurylinklabs.watchtower.enable: false
     volumes:
       - ./:/eventaservo
     ports:
       - 30000:3000
-    depends_on:
-      - webpack
-      - db
-      - redis
+    # depends_on:
+    #   - webpack
+    #   - db
+    #   - redis
 
   webpack:
     build:

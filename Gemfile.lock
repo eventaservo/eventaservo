@@ -200,8 +200,16 @@ GEM
     jwt (2.2.2)
     leaflet-rails (1.7.0)
       rails (>= 4.2.0)
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
     libv8-node (15.14.0.1)
     libv8-node (15.14.0.1-x86_64-linux)
+=======
+    libv8-node (15.14.0.1-x86_64-linux-musl)
+>>>>>>> Stashed changes
+=======
+    libv8-node (15.14.0.1-x86_64-linux-musl)
+>>>>>>> Stashed changes
     listen (3.5.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)

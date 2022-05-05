@@ -1,39 +1,67 @@
 # Docker-compose file for DEVELOPMENT containers
-FROM ruby:2.7.5-alpine3.14
+FROM ruby:2.7-bullseye
 
 WORKDIR /eventaservo
 
-RUN apk update \
-  && apk upgrade \
-  && apk add --update --no-cache \
-      alpine-sdk \
-      busybox-extras \
-      shared-mime-info \
-      imagemagick6-dev \
-      postgresql-dev \
-      nodejs \
-      yarn \
-      sqlite-dev \
-      tzdata \
-  && rm -rf /var/cache/apk/*
+RUN apt-get update
+RUN apt-get install -y apt-utils
+RUN apt-get upgrade -y
 
-# Instala o Bundler e as Gems
+# Node 14
+RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt-get install -y nodejs
+
+RUN npm i -g yarn
+
+RUN apt-get install -y \
+  iputils-ping \
+  zsh
+
+RUN chsh -s ~/.zshrc
+
+# Bundler
 RUN gem install bundler:2.1.4
-# RUN bundle config set path vendor/bundler
-COPY Gemfile Gemfile.lock ./
+COPY Gemfile Gemfile.lock /eventaservo/
 RUN bundle install --jobs=3 --retry=3
 
 # YARN
 COPY package.json yarn.lock ./
 RUN yarn install
 
+# Oh-my-zsh
+RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
+
+# RUN apk update \
+#   && apk upgrade \
+#   && apk add --update --no-cache \
+#       alpine-sdk \
+#       busybox-extras \
+#       shared-mime-info \
+#       imagemagick6-dev \
+#       postgresql-dev \
+#       nodejs \
+#       yarn \
+#       sqlite-dev \
+#       tzdata \
+#   && rm -rf /var/cache/apk/*
+
+# # Instala o Bundler e as Gems
+# # RUN bundle config set path vendor/bundler
+# COPY Gemfile Gemfile.lock ./
+# RUN bundle install --jobs=3 --retry=3
+
+
+
 # Define as variaveis de ambiente
 ENV RAILS_ENV=development
 ENV RAILS_LOG_TO_STDOUT=true
-ENV GOOGLE_MAPS_KEY=${GOOGLE_MAPS_KEY}
-ENV IPINFO_KEY=${IPINFO_KEY}
+ENV GOOGLE_MAPS_KEY=GOOGLE_MAPS_KEY
+ENV IPINFO_KEY=IPINFO_KEY
 
-COPY . .
+# COPY . .
 
-EXPOSE 3000
-CMD ["bundle", "exec", "rails", "server", "-b", "ssl://0.0.0.0:3000?key=certs/localhost.key&cert=certs/localhost.crt"]
+# EXPOSE 3000
+# CMD ["bundle", "exec", "rails", "server", "-b", "ssl://0.0.0.0:3000?key=certs/localhost.key&cert=certs/localhost.crt"]
+
+
+CMD tail -f /dev/null
