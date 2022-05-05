@@ -21,7 +21,7 @@ RUN chsh -s ~/.zshrc
 
 # Bundler
 RUN gem install bundler:2.1.4
-COPY Gemfile Gemfile.lock /eventaservo/
+COPY Gemfile /eventaservo/
 RUN bundle install --jobs=3 --retry=3
 
 # YARN
