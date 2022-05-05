@@ -1,9 +1,9 @@
 development:
   adapter: postgresql
-  database: eventaservo
+  database: <%= ENV["DB_NAME"] %>
   pool: 5
   timeout: 5000
-  host: localhost
+  host: <%= ENV["DB_HOST"] %>
   username: eventaservo
   password: eventaservo
 

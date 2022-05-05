@@ -11,6 +11,9 @@ services:
       - DB_HOST=db
       - DB_NAME=es_devel
       - REDIS_SERVER=redis
+      - RAILS_LOG_TO_STDOUT=true
+      - GOOGLE_MAPS_KEY=GOOGLE_MAPS_KEY
+      - IPINFO_KEY=IPINFO_KEY
     labels:
       com.centurylinklabs.watchtower.enable: false
     volumes:
