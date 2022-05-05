@@ -1,4 +1,4 @@
-ARG IMAGE=2.7.5-alpine3.14
+ARG IMAGE=2.7.6-alpine3.14
 ARG AMBIENTE=production
 
 FROM ruby:${IMAGE} as build
@@ -25,7 +25,7 @@ RUN bundle config set without development test
 RUN bundle config set deployment true
 RUN bundle config set frozen true
 COPY Gemfile Gemfile.lock ./
-RUN bundle install --jobs=1 --retry=1
+RUN bundle install --jobs=3 --retry=3
 
 # YARN
 COPY package.json yarn.lock ./
