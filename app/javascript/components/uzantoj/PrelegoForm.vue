@@ -31,7 +31,7 @@
               name="preleg_temoj"
               class="form-control"
               rows="3"
-              placeholder="Sbriku pri la temoj kiuj vi pretas prelegi."
+              placeholder="Sbriku pri la temoj pri kiuj vi pretas prelegi."
               v-model="temoj"
             ></textarea>
           </div>
