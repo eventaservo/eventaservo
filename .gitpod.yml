@@ -3,7 +3,11 @@
 # and commit this file to your remote git repository to share the goodness with others.
 
 tasks:
-  - init: nvm install 14.15.0 && nvm use 14.15.0 && yarn install && bundle install && bin/setup
-    command: bin/rails server
-
-
+  - init: docker-compose up -d
+ports:
+  - port: 3000
+    visibility: private
+vscode:
+  extensions:
+    - ms-azuretools.vscode-docker
+    - rebornix.ruby
