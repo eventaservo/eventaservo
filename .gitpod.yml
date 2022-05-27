@@ -2,10 +2,15 @@
 # Please adjust to your needs (see https://www.gitpod.io/docs/config-gitpod-file)
 # and commit this file to your remote git repository to share the goodness with others.
 
-tasks:
-  - init: docker-compose up -d
+image:
+  file: .gitpod.Dockerfile
+
+# tasks:
+  # - init: 
 ports:
   - port: 3000
+    visibility: private
+  - port: 30000
     visibility: private
 vscode:
   extensions:

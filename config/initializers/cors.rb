@@ -2,6 +2,9 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins '*'
-    resource '/api/*', headers: :any, methods: %i[get post delete put patch options head]
+    resource '/api/*', 
+      headers: :any, 
+      methods: %i[get post delete put patch options head],
+      "Access-Control-Allow-Credentials": true
   end
 end
