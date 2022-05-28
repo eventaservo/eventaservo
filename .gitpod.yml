@@ -13,11 +13,11 @@ tasks:
       asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
       asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
       asdf install
-      docker-compose up -d db redis
       gem install bundler:2.1.4
       bundle install
       npm -g install yarn
       yarn install
+      docker-compose up -d db redis
 ports:
   - port: 3000
     visibility: private
