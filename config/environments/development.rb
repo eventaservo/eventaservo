@@ -75,8 +75,9 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  config.force_ssl = true
-
+  config.force_ssl = false
+  config.hosts << "3000-eventaservo-eventaservo-lbisapj41jr.ws-us46.gitpod.io"
+  config.hosts << "*.gitpod.io"
   config.hosts << "devel.eventaservo.org"
   config.active_job.default_url_options = { host: "devel.eventaservo.org", port: 3000, protocol: :https }
 end
