@@ -97,6 +97,9 @@ gem 'sentry-rails', '~> 4.8.0'
 gem 'sentry-ruby', '~> 4.8.0'
 gem 'sentry-delayed_job', '~> 4.8.0'
 
+# Airbrake
+gem 'airbrake', '~> 13'
+
 gem 'listen'
 
 group :development, :test do

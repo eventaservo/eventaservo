@@ -60,6 +60,10 @@ GEM
       activerecord (>= 5.0, < 6.1)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    airbrake (13.0.2)
+      airbrake-ruby (~> 6.0)
+    airbrake-ruby (6.1.0)
+      rbtree3 (~> 0.5)
     ast (2.4.2)
     autoprefixer-rails (10.4.7.0)
       execjs (~> 2)
@@ -328,6 +332,7 @@ GEM
     rb-fsevent (0.11.1)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    rbtree3 (0.7.0)
     redcarpet (3.5.1)
     redis (4.6.0)
     regexp_parser (2.3.1)
@@ -462,6 +467,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on (~> 6.5)
+  airbrake (~> 13)
   better_errors
   binding_of_caller
   bootsnap (>= 1.4.2)
