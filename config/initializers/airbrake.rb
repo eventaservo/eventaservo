@@ -9,7 +9,8 @@
 #
 # Configuration details:
 # https://github.com/airbrake/airbrake-ruby#configuration
-if (project_id = ENV['AIRBRAKE_PROJECT_ID']) &&
+if Rails.env.production? &&
+   (project_id = ENV['AIRBRAKE_PROJECT_ID']) &&
    project_key = (ENV['AIRBRAKE_PROJECT_KEY'] || ENV['AIRBRAKE_API_KEY'])
   Airbrake.configure do |c|
     # You must set both project_id & project_key. To find your project_id and
