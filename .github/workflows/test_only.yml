@@ -25,10 +25,10 @@ jobs:
           ruby-version: 2.7
           bundler-cache: true
 
-      - name: Node 15
+      - name: Node 14.15.0
         uses: actions/setup-node@v1
         with:
-          node-version: 15.x
+          node-version: 14.15.0
 
       - name: Locate Yarns cache directory
         id: yarn-cache-dir-path
