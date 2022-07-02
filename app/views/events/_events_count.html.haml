@@ -1,7 +1,7 @@
 .event-count-container
   = link_to_event_count('hodiau', params[:o], params[:s]) do
     %span.ec-count= @future_events.today.count
-    %span.ec-title okazas hodiaŭ
+    %span.ec-title okazas nuntempe
 
   = link_to_event_count('p7_tagojn', params[:o], params[:s]) do
     %span.ec-count= @future_events.in_7days.count
