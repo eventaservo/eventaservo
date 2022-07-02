@@ -71,7 +71,7 @@ gem 'rack-attack', '~> 6.2'
 gem 'rack-cors', '~> 1.1', require: 'rack/cors'
 
 gem 'browser', '~> 5.0'
-gem 'diffy', '~> 3.3'
+gem 'diffy', '~> 3.4'
 gem 'geocoder', '~> 1.6'
 gem 'highcharts-rails', '~> 6.0'
 gem 'hirb', '~> 0.7'
