@@ -11,7 +11,7 @@
 #
 #   test 'vizitas la ĉefpaĝon' do
 #     visit root_url
-#     assert_selector 'div', text: '1 okazas hodiaŭ'
+#     assert_selector 'div', text: '1 okazas nuntempe'
 #   end
 #
 #   test 'vizitas la japanan kontinentan paĝon' do
