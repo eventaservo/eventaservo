@@ -1,0 +1,5 @@
+rubocop:
+  config_file: .rubocop.yml
+
+haml:
+  enabled: true
