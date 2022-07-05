@@ -15,8 +15,8 @@ jobs:
         image: postgres:13
         env:
           POSTGRES_DB: eventaservo_test
-          POSTGRES_USER: eventaservo
-          POSTGRES_PASSWORD: eventaservo
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
         ports: [ '5432:5432' ]
 
     steps:
@@ -53,10 +53,8 @@ jobs:
 
       - name: Run tests
         env:
-          DB_NAME: eventaservo_test
-          DB_HOST: localhost
-          DB_USERNAME: eventaservo
-          DB_PASSWORD: eventaservo
+          DB_USER: postgres
+          DB_PASSWORD: postgres
           RAILS_ENV: test
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: |
