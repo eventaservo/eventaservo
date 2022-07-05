@@ -1,11 +1,20 @@
-development:
+default: &default
   adapter: postgresql
-  database: <%= ENV["DB_NAME"] %>
   pool: 5
   timeout: 5000
-  host: <%= ENV["DB_HOST"] %>
-  username: eventaservo
-  password: eventaservo
+  reconnect: true
+  port: 5432
+  host: <%= ENV["DB_HOST"] || "localhost" %>
+  username: <%= ENV["DB_USER"] || "postgres" %>
+  password: <%= ENV["DB_PASSWORD"] || "postgres" %>
+
+development:
+  <<: *default
+  database: <%= ENV["DB_NAME"] || "eventaservo_devel" %>
+
+test:
+  <<: *default
+  database: eventaservo_test
 
 staging:
   adapter: postgresql
@@ -22,17 +31,5 @@ production:
   pool: 5
   timeout: 5000
   host: <%= ENV["DB_HOST"] %>
-  username: eventaservo
-  password: eventaservo
-
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
-test:
-  adapter: postgresql
-  database: test
-  pool: 5
-  timeout: 5000
-  host: <%= ENV['DB_HOST'] || 'localhost' %>
   username: eventaservo
   password: eventaservo
