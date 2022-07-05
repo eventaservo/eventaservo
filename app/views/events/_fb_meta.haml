@@ -6,13 +6,12 @@
   - city_and_country = @event.online? ? "Reta" : "#{@event.city} - #{@event.country.name}"
   %meta{content: "#{event_date(@event)} (#{city_and_country}) | #{@event.description}", property: 'og:description'}
 
-  - header_image = @event.header_image
-  - if header_image
-    %meta{content: ActionDispatch::Http::URL.url_for(ActionMailer::Base.default_url_options) + url_for(header_image), property: 'og:image'}
-    %meta{content: ActionDispatch::Http::URL.url_for(ActionMailer::Base.default_url_options) + url_for(header_image), property: 'og:image:secure_url'}
-    %meta{content: header_image.content_type, property: 'og:image:type' }
-    %meta{content: header_image.blob.metadata[:width], property: 'og:image:width' }
-    %meta{content: header_image.blob.metadata[:height], property: 'og:image:height' }
+  - if @event.header_image
+    %meta{content: @event.header_image_url, property: 'og:image'}
+    %meta{content: @event.header_image_url, property: 'og:image:secure_url'}
+    %meta{content: @event.header_image.content_type, property: 'og:image:type' }
+    %meta{content: '200', property: 'og:image:width' }
+    %meta{content: '200', property: 'og:image:height' }
   - else # if there are no images on the event, use the default Eventa Servo image
     %meta{content: image_url('eventa_servo_facebook.jpg'), property: 'og:image'}
     %meta{content: image_url('eventa_servo_facebook.jpg'), property: 'og:image:secure_url'}

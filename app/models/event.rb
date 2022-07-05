@@ -319,6 +319,12 @@ class Event < ApplicationRecord
     first_uploaded_image || first_body_image || organization_logo
   end
 
+  def header_image_url
+    return unless header_image
+
+    Rails.application.routes.url_helpers.rails_representation_url(header_image.variant(resize: '200x200').processed)
+  end
+
   private
 
     def first_uploaded_image
