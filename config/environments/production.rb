@@ -122,4 +122,6 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
   config.active_job.default_url_options = { host: "eventaservo.org", protocol: :https }
+  Rails.application.routes.default_url_options[:host] = 'eventaservo.org'
+  Rails.application.routes.default_url_options[:protocol] = :https
 end
