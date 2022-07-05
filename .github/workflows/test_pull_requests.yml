@@ -11,7 +11,7 @@ jobs:
       postgres:
         image: postgres:13
         env:
-          POSTGRES_DB: test
+          POSTGRES_DB: eventaservo_test
           POSTGRES_USER: eventaservo
           POSTGRES_PASSWORD: eventaservo
         ports: [ '5432:5432' ]
@@ -50,7 +50,7 @@ jobs:
 
       - name: Run tests
         env:
-          DB_NAME: test
+          DB_NAME: eventaservo_test
           DB_HOST: localhost
           DB_USERNAME: eventaservo
           DB_PASSWORD: eventaservo
