@@ -313,7 +313,27 @@ class Event < ApplicationRecord
     Participant.find_by(event_id: id, user_id: user.id).destroy
   end
 
+  # Returns the image that will be used as header (for meta information)
+  # Returns +nil+ if there are none
+  def header_image
+    first_uploaded_image || first_body_image || organization_logo
+  end
+
   private
+
+    def first_uploaded_image
+      uploads.order(:created_at).find(&:image?)
+    end
+
+    def first_body_image
+      enhavo.body&.attachments&.find(&:image?)
+    end
+
+    def organization_logo
+      return unless organizations.any? && organizations.first.logo.attached?
+
+      organizations.first.logo
+    end
 
     def verify_upload_content_type
       if uploads.any?
