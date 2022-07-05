@@ -5,14 +5,15 @@
   %meta{content: @event.title, property: 'og:title'}
   - city_and_country = @event.online? ? "Reta" : "#{@event.city} - #{@event.country.name}"
   %meta{content: "#{event_date(@event)} (#{city_and_country}) | #{@event.description}", property: 'og:description'}
-  - if @event.organizations.any? && @event.organizations.first.logo.attached?
-    - logo = @event.organizations.first.logo
-    %meta{content: ActionDispatch::Http::URL.url_for(ActionMailer::Base.default_url_options) + url_for(logo), property: 'og:image'}
-    %meta{content: ActionDispatch::Http::URL.url_for(ActionMailer::Base.default_url_options) + url_for(logo), property: 'og:image:secure_url'}
-    %meta{content: logo.content_type, property: 'og:image:type' }
-    %meta{content: logo.blob.metadata[:width], property: 'og:image:width' }
-    %meta{content: logo.blob.metadata[:height], property: 'og:image:height' }
-  - else
+
+  - header_image = @event.header_image
+  - if header_image
+    %meta{content: ActionDispatch::Http::URL.url_for(ActionMailer::Base.default_url_options) + url_for(header_image), property: 'og:image'}
+    %meta{content: ActionDispatch::Http::URL.url_for(ActionMailer::Base.default_url_options) + url_for(header_image), property: 'og:image:secure_url'}
+    %meta{content: header_image.content_type, property: 'og:image:type' }
+    %meta{content: header_image.blob.metadata[:width], property: 'og:image:width' }
+    %meta{content: header_image.blob.metadata[:height], property: 'og:image:height' }
+  - else # if there are no images on the event, use the default Eventa Servo image
     %meta{content: image_url('eventa_servo_facebook.jpg'), property: 'og:image'}
     %meta{content: image_url('eventa_servo_facebook.jpg'), property: 'og:image:secure_url'}
     %meta{content: 'Eventa Servo', property: 'og:image:alt'}
