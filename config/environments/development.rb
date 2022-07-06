@@ -80,5 +80,8 @@ Rails.application.configure do
   config.hosts << "*.gitpod.io"
   config.hosts << "devel.eventaservo.org"
   config.active_job.default_url_options = { host: "devel.eventaservo.org", port: 3000, protocol: :https }
+  Rails.application.routes.default_url_options[:host] = "devel.eventaservo.org"
+  Rails.application.routes.default_url_options[:port] = 3000
+  Rails.application.routes.default_url_options[:protocol] = :https
 end
 

@@ -96,4 +96,6 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.active_job.default_url_options = { host: "testservilo.eventaservo.org", protocol: :https }
+  Rails.application.routes.default_url_options[:host] = 'testservilo.eventaservo.org'
+  Rails.application.routes.default_url_options[:protocol] = :https
 end
