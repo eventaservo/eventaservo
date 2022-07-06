@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class EventMailer < ApplicationMailer
-  add_template_helper ApplicationHelper
-  add_template_helper EventsHelper
+  helper ApplicationHelper
+  helper EventsHelper
 
   default from: 'kontakto@eventaservo.org'
 

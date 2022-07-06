@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '~> 2.7.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.4'
+gem 'rails', '~> 6.1.0'
 # Use Puma as the app server
 gem 'puma', '~> 5'
 # Use SCSS for stylesheets
@@ -17,7 +17,7 @@ gem 'sass-rails', '~> 6'
 # gem 'mini_racer', platforms: :ruby
 gem 'webpacker', '~> 5.0'
 
-gem 'acts-as-taggable-on', '~> 6.5'
+gem 'acts-as-taggable-on', '~> 9.0'
 
 gem 'bootstrap', '~> 4.3'
 gem 'font-awesome-sass', '~> 5'
@@ -79,8 +79,8 @@ gem 'image_processing', '~> 1.12'
 gem 'invisible_captcha', '~> 1.0'
 gem 'leaflet-rails', '~> 1.7.0'
 gem 'pagy', '~> 3.7.5'
-gem 'paper_trail', '~> 10.3'
-gem 'paper_trail-association_tracking', '~> 2.0'
+gem 'paper_trail', '~> 12.0'
+gem 'paper_trail-association_tracking', '~> 2.2'
 gem 'postmark-rails', '~> 0.21.0'
 gem 'premailer-rails', '~> 1.11'
 gem 'redcarpet', '~> 3.5'
@@ -121,7 +121,6 @@ group :development do
   gem 'pry-rails', '~> 0.3.4'
   gem 'ruby-debug-ide', '~> 0.7.3'
   gem 'seed_dump' # Por rekrei la seeds.db dosieron
-  gem 'spring'
 end
 
 group :test do

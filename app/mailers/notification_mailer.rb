@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class NotificationMailer < ApplicationMailer
-  add_template_helper ApplicationHelper
+  helper ApplicationHelper
 
   def new_email_subscribed(recipient_id:)
     @recipient = NotificationList.find(recipient_id)

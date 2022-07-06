@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module Eventaservo
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.0
+    config.load_defaults 6.1
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
@@ -24,5 +24,7 @@ module Eventaservo
     config.active_job.queue_adapter = :delayed_job
 
     config.action_dispatch.default_headers = { 'X-Frame-Options' => 'ALLOWALL' }
+
+    config.eager_load_paths << "#{Rails.root}/test/mailers/previews"
   end
 end
