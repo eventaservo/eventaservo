@@ -22,7 +22,6 @@
 !/storage/.keep
 
 /node_modules
-/yarn-error.log
 
 /public/assets
 .byebug_history
@@ -46,8 +45,6 @@ dump.rdb
 
 /public/packs
 /public/packs-test
-yarn-debug.log*
-.yarn-integrity
 .env
 /vendor
 
@@ -59,3 +56,15 @@ config/es_admin_channel.conf
 .rakeTasks
 
 reseta_base_devel.sh
+
+# YARN
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
