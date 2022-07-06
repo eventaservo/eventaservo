@@ -1,8 +1,14 @@
-name: Test PR
+name: Rails Minitest
 
 on:
+  push:
+    branches:
+      - main
+      - staging
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
+      - staging
 
 jobs:
   Test:
@@ -32,21 +38,19 @@ jobs:
 
       - name: Locate Yarns cache directory
         id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
 
       - name: Cache Yarn
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: yarn-cache
         with:
-          path: |
-            **/node_modules
-            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
 
       - name: Yarn
-        run: yarn install --frozen-lockfile
+        run: yarn install
 
       - name: Run tests
         env:
