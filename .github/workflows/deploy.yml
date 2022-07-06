@@ -1,69 +1,15 @@
-name: Test and Deploy
+name: Deploy
 
 on:
-  push:
-    branches: [ main, staging ]
-    paths:
-      - "app/modules/constants.rb"
-  workflow_dispatch:
+  workflow_run:
+    workflows: ["Rails Minitest"]
+    branches: [main, staging]
+    types:
+      - completed
 
 jobs:
-  Test:
-    runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:13
-        env:
-          POSTGRES_DB: eventaservo_test
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-        ports: [ '5432:5432' ]
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Ruby 2.7 e Bundler
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 2.7
-          bundler-cache: true
-
-      - name: Node 14
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-
-      - name: Locate Yarns cache directory
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Cache Yarn
-        uses: actions/cache@v2
-        id: yarn-cache
-        with:
-          path: |
-            **/node_modules
-            ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      - name: Yarn
-        run: yarn install --frozen-lockfile
-
-      - name: Run tests
-        env:
-          DB_USER: postgres
-          DB_PASSWORD: postgres
-          RAILS_ENV: test
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-        run: |
-          bin/rails db:migrate
-          bin/rails test
-
   Deploy:
-    needs: Test
-    if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/staging' }}
+    if: (${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/staging') && github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -115,3 +61,18 @@ jobs:
             AMBIENTE=staging
             GOOGLE_MAPS_KEY=${{ secrets.GOOGLE_MAPS_KEY }}
             IPINFO_KEY=${{ secrets.IPINFO_KEY }}
+
+  Telegram:
+    name: Telegram
+    needs: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: send telegram message on push
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            Docker Container ${{ github.repository }} created and uploaded.
+
+            Commit message: ${{ github.event.commits[0].message }}
