@@ -1,8 +1,6 @@
 - content_for :title do
   = @event.title
-= render partial: 'fb_meta'
--#<link rel="canonical" href="http://www.example.com/product.php?item=swedish-fish" />
--#  %meta{content: request.original_url, property: 'og:url'}
+= render partial: 'fb_meta', locals: { event: @event }
 = render partial: 'layouts/breadcrumb'
 
 - if user_signed_in? && user_can_edit_event?(user: current_user, event: @event) && !@event.cancelled

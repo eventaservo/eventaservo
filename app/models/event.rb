@@ -322,7 +322,7 @@ class Event < ApplicationRecord
   def header_image_url
     return unless header_image
 
-    Rails.application.routes.url_helpers.rails_representation_url(header_image.variant(resize: '200x200').processed)
+    Rails.application.routes.url_helpers.rails_representation_url(header_image.variant(resize: '400x400').processed)
   end
 
   private
