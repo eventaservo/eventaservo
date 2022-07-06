@@ -28,6 +28,9 @@ COPY Gemfile Gemfile.lock ./
 RUN bundle install --jobs=3 --retry=3
 
 # YARN
+RUN npm install -g yarn
+RUN yarn set version 3.2.1
+COPY .yarnrc.yml ./
 COPY package.json yarn.lock ./
 RUN yarn install
 
