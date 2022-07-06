@@ -316,7 +316,7 @@ class Event < ApplicationRecord
   # Returns the image that will be used as header (for meta information)
   # Returns +nil+ if there are none
   def header_image
-    first_uploaded_image || first_body_image || organization_logo
+    first_uploaded_image || organization_logo || first_body_image
   end
 
   def header_image_url
