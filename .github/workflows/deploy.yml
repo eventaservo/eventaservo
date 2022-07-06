@@ -9,7 +9,7 @@ on:
 
 jobs:
   Deploy:
-    if: (${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/staging') && github.event.workflow_run.conclusion == 'success' }}
+    if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/staging') && github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
 
     steps:
