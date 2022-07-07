@@ -1,0 +1,21 @@
+name: Rails Minitest
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+
+jobs:
+  minitest:
+    uses: eventaservo/eventaservo/.github/workflows/template_test.yml@main
+
+  docker_staging:
+    if: ${{ github.ref_name == 'staging' }}
+    uses: eventaservo/eventaservo/.github/workflows/template_docker.yml@main
+    with:
+      environment: staging
+      tag: staging
+    secrets:
+      dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
+      dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}

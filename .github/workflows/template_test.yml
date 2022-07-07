@@ -1,17 +1,10 @@
 name: Rails Minitest
 
 on:
-  push:
-    branches:
-      - main
-      - staging
-  pull_request:
-    branches:
-      - main
-      - staging
+  workflow_call:
 
 jobs:
-  Test:
+  minitest:
     runs-on: ubuntu-latest
     services:
       postgres:
