@@ -2,6 +2,9 @@ name: Rails Minitest
 
 on:
   workflow_call:
+    secrets:
+      RAILS_MASTER_KEY:
+        required: true
 
 jobs:
   minitest:
@@ -50,7 +53,7 @@ jobs:
           DB_USER: postgres
           DB_PASSWORD: postgres
           RAILS_ENV: test
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          RAILS_MASTER_KEY: ${{ secrets.rails_master_key }}
         run: |
           bin/rails db:migrate
           bin/rails test
