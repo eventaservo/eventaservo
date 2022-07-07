@@ -11,11 +11,23 @@ jobs:
     uses: eventaservo/eventaservo/.github/workflows/template_test.yml@main
 
   docker_staging:
+    needs: minitest
     if: ${{ github.ref_name == 'staging' }}
     uses: eventaservo/eventaservo/.github/workflows/template_docker.yml@main
     with:
       environment: staging
       tag: staging
+    secrets:
+      dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
+      dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  docker_production:
+    needs: minitest
+    if: ${{ github.ref_name == 'main' }}
+    uses: eventaservo/eventaservo/.github/workflows/template_docker.yml@main
+    with:
+      environment: production
+      tag: latest
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
