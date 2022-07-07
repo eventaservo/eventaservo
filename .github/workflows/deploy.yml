@@ -35,6 +35,7 @@ jobs:
             ${{ runner.os }}-single-buildx
 
       - name: Build and push (Production)
+        if: github.ref == 'refs/heads/main'
         uses: docker/build-push-action@v2
         with:
           builder: ${{ steps.buildx.outputs.name }}
@@ -48,6 +49,7 @@ jobs:
             IPINFO_KEY=${{ secrets.IPINFO_KEY }}
 
       - name: Build and push (Staging)
+        if: github.ref == 'refs/heads/staging'
         uses: docker/build-push-action@v2
         with:
           builder: ${{ steps.buildx.outputs.name }}
