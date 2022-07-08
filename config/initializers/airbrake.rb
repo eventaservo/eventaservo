@@ -9,7 +9,7 @@
 #
 # Configuration details:
 # https://github.com/airbrake/airbrake-ruby#configuration
-if Rails.env.production? &&
+if (Rails.env.production? || Rails.env.staging?) &&
    (project_id = ENV['AIRBRAKE_PROJECT_ID']) &&
    project_key = (ENV['AIRBRAKE_PROJECT_KEY'] || ENV['AIRBRAKE_API_KEY'])
   Airbrake.configure do |c|
