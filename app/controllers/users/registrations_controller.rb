@@ -12,7 +12,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     unless params[:sekurfrazo].strip.downcase == 'esperanto'
-      redirect_to(new_registration_path(resource_name), flash: { error: 'Sekurfrazo ne valida' }) and return
+      redirect_to(
+        new_registration_path(resource_name),
+        flash: { error: 'Malĝusta kontraŭspama sekurvorto. Entajpu la nomon de la internacia lingvo.' }
+      ) && return
     end
 
     super

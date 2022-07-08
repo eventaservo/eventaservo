@@ -199,7 +199,10 @@ class EventsController < ApplicationController
   def kontakti_organizanton
     unless params[:sekurfrazo].strip.downcase == 'esperanto'
       ligilo = Event.by_code(params[:event_code]).ligilo
-      redirect_to(event_url(ligilo), flash: { error: 'Sekurfrazo ne valida' }) and return
+      redirect_to(
+        event_url(ligilo),
+        flash: { error: 'Malĝusta kontraŭspama sekurvorto. Entajpu la nomon de la internacia lingvo.' }
+      ) && return
     end
 
     informoj = { name: params[:name], email: params[:email], message: params[:message] }

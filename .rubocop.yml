@@ -6,9 +6,6 @@ AllCops:
     - 'script/**/*'
     - 'bin/**/*'
 
-Bundler/GemComment:
-  Enabled: false
-
 Style/AsciiComments:
   Enabled: false
 
@@ -33,14 +30,5 @@ Style/MethodCallWithArgsParentheses:
 Style/MissingElse:
   Enabled: false
 
-Layout/LineLength:
+Metrics/LineLength:
   Max: 120
-
-Layout/IndentationConsistency:
-  EnforcedStyle: indented_internal_methods
-
-Layout/MultilineMethodArgumentLineBreaks:
-  Enabled: false
-
-Lint/ConstantResolution:
-  Enabled: false
