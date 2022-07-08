@@ -1,0 +1,11 @@
+name: Rails Minitest
+
+on:
+  pull_request:
+    branches: [ main, staging ]
+
+jobs:
+  minitest:
+    uses: eventaservo/eventaservo/.github/workflows/template_test.yml@main
+    secrets:
+      rails_master_key: ${{ secrets.RAILS_MASTER_KEY }}
