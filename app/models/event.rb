@@ -322,7 +322,13 @@ class Event < ApplicationRecord
   def header_image_url
     return unless header_image
 
-    Rails.application.routes.url_helpers.rails_representation_url(header_image.variant(resize: '400x400').processed)
+    if header_image.is_a? ActionText::Attachment
+      header_image.url
+    else
+      Rails.application.routes.url_helpers.rails_representation_url(
+        header_image.variant(resize_to_limit: [400, 400]).processed
+      )
+    end
   end
 
   private
@@ -332,7 +338,7 @@ class Event < ApplicationRecord
     end
 
     def first_body_image
-      enhavo.body&.attachments&.find(&:image?)
+      enhavo.body&.attachments&.find { |attachment| attachment.content_type == "image" }
     end
 
     def organization_logo
