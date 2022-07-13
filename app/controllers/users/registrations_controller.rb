@@ -19,7 +19,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     super
-    NovaUzantoSciigoJob.perform_later(resource)
+    NovaUzantoSciigoJob.perform_later(resource) if resource.valid?
   end
 
   # GET /resource/edit
