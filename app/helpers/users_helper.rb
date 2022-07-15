@@ -4,19 +4,19 @@ module UsersHelper
   def display_user(user)
     content_tag(:span) do
       concat display_user_image(user)
-      concat user.name
+      concat user&.name
     end
   end
 
   def display_user_image(user)
     image =
-      if user.picture.attached?
+      if user&.picture&.attached?
         if user.picture.variable?
           url_for(user.picture.variant(resize: '42x42'))
         else
           url_for(user.picture)
         end
-      elsif user.image?
+      elsif user&.image?
         user.image
       else
         'nekonata.jpg'

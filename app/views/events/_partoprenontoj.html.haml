@@ -15,8 +15,10 @@
 
     - # Listeto de partoprenontoj
     - @partoprenontoj.publikaj.sample(3).each do |participant|
+      - next unless participant.user
+
       %br/
-      = link_to display_user(participant.user), events_by_username_path(participant.user.username)
+      = link_to display_user(participant.user), events_by_username_path(participant.user&.username)
       %br/
       %br/
     - if @partoprenontoj.size > 3

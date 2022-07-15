@@ -11,8 +11,10 @@
 
       .modal-body{style: 'font-weight: normal; font-size: 1rem;'}
         - @partoprenontoj.publikaj.each do |participant|
+          - next unless participant.user
+          
           %br
-          = link_to display_user(participant.user), events_by_username_path(participant.user.username)
+          = link_to display_user(participant.user), events_by_username_path(participant.user&.username)
           %br
 
         - if @partoprenontoj.ne_publikaj.count > 0
