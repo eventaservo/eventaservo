@@ -2,6 +2,7 @@
   "recommendations": [
     "njzy.stats-bar",
     "misogi.ruby-rubocop",
-    "ms-azuretools.vscode-docker"
+    "ms-azuretools.vscode-docker",
+    "mhutchie.git-graph"
   ]
 }

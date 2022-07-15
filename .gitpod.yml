@@ -5,13 +5,11 @@
 tasks:
   - init: |
       docker-compose up -d
+      bundle install
+      yarn install
+      echo $RAILS_MASTER_KEY > config/master.key
+      bundle exec rails db:setup
+      bundle exec rails test
 ports:
   - port: 3000
     visibility: private
-  - port: 30000
-    visibility: private
-vscode:
-  extensions:
-    - ms-azuretools.vscode-docker
-    - rebornix.ruby
-    - eamodio.gitlens
