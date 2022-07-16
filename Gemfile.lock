@@ -391,19 +391,6 @@ GEM
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
     semantic_range (3.0.0)
-    sentry-delayed_job (4.8.3)
-      delayed_job (>= 4.0)
-      sentry-ruby-core (~> 4.8.3)
-    sentry-rails (4.8.3)
-      railties (>= 5.0)
-      sentry-ruby-core (~> 4.8.3)
-    sentry-ruby (4.8.3)
-      concurrent-ruby (~> 1.0, >= 1.0.2)
-      faraday (~> 1.0)
-      sentry-ruby-core (= 4.8.3)
-    sentry-ruby-core (4.8.3)
-      concurrent-ruby
-      faraday
     simple_token_authentication (1.17.0)
       actionmailer (>= 3.2.6, < 7)
       actionpack (>= 3.2.6, < 7)
@@ -537,9 +524,6 @@ DEPENDENCIES
   seed_dump
   select2-rails (~> 4.0)
   selenium-webdriver
-  sentry-delayed_job (~> 4.8.0)
-  sentry-rails (~> 4.8.0)
-  sentry-ruby (~> 4.8.0)
   simple_token_authentication (~> 1.0)
   simplecov
   sitemap_generator (~> 6.1)

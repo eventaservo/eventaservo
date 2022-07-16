@@ -92,11 +92,6 @@ gem 'httparty', '~> 0.18'
 gem 'nokogiri', '>= 1.10.4'
 gem 'yard'
 
-# Sentry.io
-gem 'sentry-rails', '~> 4.8.0'
-gem 'sentry-ruby', '~> 4.8.0'
-gem 'sentry-delayed_job', '~> 4.8.0'
-
 # Airbrake
 gem 'airbrake', '~> 13'
 
