@@ -33,3 +33,10 @@ jobs:
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  airbrake_deploy:
+    needs: docker_production
+    if: ${{ github.ref_name == 'main' }}
+    uses: eventaservo/eventaservo/.github/workflows/template_airbrake.yml@main
+    secrets:
+      airbrake_key: ${{ secrets.AIRBRAKE_KEY }}

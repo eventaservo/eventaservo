@@ -1,0 +1,24 @@
+name: Airbrake
+
+on:
+  workflow_call:
+    secrets:
+      AIRBRAKE_KEY:
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Read versio file
+        id: version
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./versio
+      - name: Deploy to Airbrake
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+            -d '{"environment":"production","username":"Github Actions","repository":"https://github.com/eventaservo/eventaservo","revision":"${{ steps.versio.outputs.content }}"}' \
+            "https://api.airbrake.io/api/v4/projects/423321/deploys?key=${{ secrets.airbrake_key }}"
