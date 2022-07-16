@@ -35,7 +35,7 @@ gem 'momentjs-rails', '~> 2.20'
 
 gem 'mini_magick', '~> 4.10'
 gem 'omniauth-facebook', '~> 6.0'
-gem 'omniauth', '~> 1.9'
+gem 'omniauth', '~> 2.0'
 
 # CSS kaj fasonado
 gem 'flag-icons-rails', '~> 3.4'
