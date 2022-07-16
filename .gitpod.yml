@@ -2,12 +2,13 @@
 # Please adjust to your needs (see https://www.gitpod.io/docs/config-gitpod-file)
 # and commit this file to your remote git repository to share the goodness with others.
 
+# image: ruby:2.7-bullseye
+
 tasks:
   - init: |
       docker-compose up -d
       bundle install
       yarn install
-      echo $RAILS_MASTER_KEY > config/master.key
       bundle exec rails db:setup
       bundle exec rails test
 ports:

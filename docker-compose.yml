@@ -9,6 +9,8 @@ services:
       interval: 10s
       timeout: 3s
       retries: 3
+    ports:
+      - 6379:6379
 
   db:
     image: postgres:13.5
@@ -16,8 +18,5 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_DB=eventaservo_devel
-    volumes:
-      - es_devel_db_data:/var/lib/postgresql/data
-
-volumes:
-  es_devel_db_data:
+    ports:
+      - 5432:5432
