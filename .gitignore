@@ -68,3 +68,6 @@ reseta_base_devel.sh
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# Gitpod related files
+core.*
