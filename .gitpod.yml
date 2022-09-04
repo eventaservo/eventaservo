@@ -5,8 +5,8 @@
 tasks:
   - before: |
       rvm install 2.7.6
-      rvm use 2.7.6
   - init: |
+      rvm install 2.7.6
       echo "rvm use 2.7.6" >> ~/.bashrc
       docker-compose up -d
       bundle install
@@ -24,3 +24,11 @@ ports:
     visibility: private
   - port: 5432
     visibility: private
+
+vscode:
+  extensions:
+    - rebornix.ruby
+    - LoranKloeze.ruby-rubocop-revived
+    - ms-azuretools.vscode-docker
+    - eamodio.gitlens
+    - mhutchie.git-graph
