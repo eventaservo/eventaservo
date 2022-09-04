@@ -9,10 +9,10 @@
         <h1>
           <i class="fas fa-user" />
         </h1>
-        <span> Mi volas partopreni </span>
+        <span> Mi interesiĝas </span>
       </div>
       <div v-if="elektilo">
-        Ĉu aperigi vian nomon en la listo de partoprenantoj?
+        Ĉu aperigi vian nomon en la listo de interesiĝantoj?
         <br />
         <a
           :href="ligilo + '?publika=jes'"
@@ -30,7 +30,7 @@
         <h1>
           <i class="fas fa-user-check" />
         </h1>
-        <span>Mi partoprenos!</span>
+        <span>Mi interesiĝas!</span>
       </a>
     </div>
     <div v-else>
