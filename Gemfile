@@ -100,6 +100,7 @@ gem 'listen'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'factory_bot_rails'
   gem 'faker'
   gem 'rake'
   gem 'rubocop', '~> 1.28', require: false
@@ -120,7 +121,6 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'factory_bot_rails'
   gem 'minitest', '~> 5.5'
   gem 'selenium-webdriver'
   gem 'simplecov'
