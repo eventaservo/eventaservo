@@ -5,14 +5,14 @@
     .modal-content.text-left
 
       .modal-header
-        %h5#titolo.modal-title #{@event.participants.count} partoprenontoj
+        %h5#titolo.modal-title #{@event.participants.count} interesiĝantoj
         %button.close{'aria-label': 'Fermi', 'data-dismiss': 'modal', type: 'button'}
           %span{'aria-hidden': 'true'} ×
 
       .modal-body{style: 'font-weight: normal; font-size: 1rem;'}
         - @partoprenontoj.publikaj.each do |participant|
           - next unless participant.user
-          
+
           %br
           = link_to display_user(participant.user), events_by_username_path(participant.user&.username)
           %br
