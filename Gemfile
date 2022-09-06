@@ -103,8 +103,8 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'rake'
-  gem 'rubocop', '~> 1.28', require: false
-  gem 'rubocop-rails', '~> 2.14', require: false
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
 end
 
 group :development do

@@ -1,10 +1,16 @@
 AllCops:
-  EnabledByDefault: true
+  NewCops: enable
   Exclude:
     - 'db/**/*'
     - 'config/**/*'
     - 'script/**/*'
     - 'bin/**/*'
+
+Layout/LineLength:
+  Max: 120
+
+Lint/ConstantResolution:
+  Enabled: false
 
 Style/AsciiComments:
   Enabled: false
@@ -29,6 +35,3 @@ Style/MethodCallWithArgsParentheses:
 
 Style/MissingElse:
   Enabled: false
-
-Metrics/LineLength:
-  Max: 120
