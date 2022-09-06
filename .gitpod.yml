@@ -3,17 +3,19 @@
 # and commit this file to your remote git repository to share the goodness with others.
 
 tasks:
-  - before: |
-      rvm install 2.7.6
-  - init: |
-      rvm install 2.7.6
-      echo "rvm use 2.7.6" >> ~/.bashrc
-      docker-compose up -d
-      bundle install
-      gem install foreman
-      yarn install
-      bundle exec rails db:setup
-      bundle exec rails test
+  - init: >
+      git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.2 &&
+      . $HOME/.asdf/asdf.sh &&
+      echo ". $HOME/.asdf/asdf.sh" >> ~/.bashrc &&
+      asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git &&
+      asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git &&
+      gem install bundler:2.3.18 &&
+      docker-compose up -d &&
+      bundle install &&
+      gem install foreman &&
+      yarn install &&
+      bundle exec rails db:setup &&
+      bundle exec rails test &&
 
 ports:
   - port: 3000
