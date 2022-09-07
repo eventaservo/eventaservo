@@ -20,3 +20,9 @@ services:
       - POSTGRES_DB=eventaservo_devel
     ports:
       - 5432:5432
+
+  mailcatcher:
+    image: schickling/mailcatcher:latest
+    ports:
+      - 1025:1025
+      - 1080:1080
