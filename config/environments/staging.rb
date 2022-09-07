@@ -67,7 +67,7 @@ Rails.application.configure do
 
   # Mailcatcher
   config.action_mailer.smtp_settings = {
-    address: "localhost",
+    address: "mailcatcher",
     port: "1025"
   }
 
