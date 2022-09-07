@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Listo de landoj
+Country.destroy_all
 Country.create!([
   { name: 'Afganio', code: 'af', continent: 'Azio' },
   { name: 'Alando', code: 'ax', continent: 'Eŭropo' },
@@ -261,6 +262,7 @@ Country.create!([
 ])
 
 # Kreas la administranton
+User.destroy_all
 User.create(email: 'admin@eventaservo.org',
             name: 'Administranto',
             password: 'administranto',
@@ -269,3 +271,6 @@ User.create(email: 'admin@eventaservo.org',
             city: 'Rio de Janeiro',
             admin: true,
             confirmed_at: DateTime.now)
+
+# Events
+3.times { FactoryBot.create(:evento, :venonta) }
