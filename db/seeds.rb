@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+puts "Running seeds.rb file"
+
 # Listo de landoj
 Country.destroy_all
 Country.create!([

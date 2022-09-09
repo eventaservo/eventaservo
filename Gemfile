@@ -72,6 +72,8 @@ gem 'rack-cors', '~> 1.1', require: 'rack/cors'
 
 gem 'browser', '~> 5.0'
 gem 'diffy', '~> 3.4'
+gem 'factory_bot_rails'
+gem 'faker'
 gem 'geocoder', '~> 1.6'
 gem 'highcharts-rails', '~> 6.0'
 gem 'hirb', '~> 0.7'
@@ -100,8 +102,6 @@ gem 'listen'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'factory_bot_rails'
-  gem 'faker'
   gem 'rake'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
