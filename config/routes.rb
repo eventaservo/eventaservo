@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   # Dynamic error pages
   get '/robots.txt', to: 'home#robots'
   get '/404', to: 'errors#not_found'
