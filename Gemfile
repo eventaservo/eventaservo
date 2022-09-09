@@ -70,6 +70,7 @@ gem 'delayed_job_web'
 gem 'rack-attack', '~> 6.2'
 gem 'rack-cors', '~> 1.1', require: 'rack/cors'
 
+gem 'activeadmin'
 gem 'browser', '~> 5.0'
 gem 'diffy', '~> 3.4'
 gem 'factory_bot_rails'

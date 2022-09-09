@@ -276,3 +276,6 @@ User.create(email: 'admin@eventaservo.org',
 
 # Events
 3.times { FactoryBot.create(:evento, :venonta) }
+
+# Create the default ActiveAdmin user
+AdminUser.create!(email: 'admin@eventaservo.org', password: 'administranto', password_confirmation: 'administranto') if Rails.env.development?
