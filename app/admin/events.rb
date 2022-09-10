@@ -6,11 +6,22 @@ ActiveAdmin.register Event do
   scope :venontaj, default: true
   scope :pasintaj
 
+  filter :user
+  filter :organizations
+  filter :title_cont, label: 'Title'
+  filter :description_cont, label: 'Description'
+  filter :city_cont, label: 'City'
+  filter :country, as: :select, collection: proc { Event.joins(:country).pluck("countries.name, countries.id").sort }
+  filter :short_url_eq, label: 'URL code'
+  filter :cancelled
+
   index do
     column :short_url
     column :title
     column :date_start
     column :date_end
+    column :city
+    column :country
     actions
   end
 end
