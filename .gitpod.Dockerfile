@@ -25,6 +25,8 @@ RUN asdf install
 
 # Gems
 RUN gem install \
+  bundler:2.3.18 \
   foreman \
   rubocop \
-  rubocop-rails
+  rubocop-rails \
+  sassc
