@@ -1,5 +1,7 @@
 ActiveAdmin.register User do
 
+  permit_params :name, :email
+
   actions :all, except: :destroy
 
   filter :name
@@ -16,5 +18,4 @@ ActiveAdmin.register User do
     column :username
     actions
   end
-
 end
