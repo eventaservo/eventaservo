@@ -13,7 +13,6 @@ DS_Store
 Dockerfile
 deploy.sh
 log/
-node_modules/
 public/packs-test/
 public/packs/
 storage/

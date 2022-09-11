@@ -4,7 +4,7 @@ FROM ruby:2.7-bullseye
 WORKDIR /app
 
 RUN apt-get update
-RUN apt-get install -y \ 
+RUN apt-get install -y \
   apt-utils \
   iputils-ping \
   telnet \
@@ -26,6 +26,7 @@ RUN bundle install --jobs=3 --retry=3
 
 # YARN
 COPY package.json yarn.lock ./
+RUN yarn set version 3.2.1
 RUN yarn install
 
 EXPOSE 3000

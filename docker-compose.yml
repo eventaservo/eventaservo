@@ -1,22 +1,40 @@
 # Docker-compose file for DEVELOPMENT containers
 version: '3.8'
 
-services:
-  backend:
+x-app: &default-app
     build:
       dockerfile: Dockerfile.devel
     environment:
       - RAILS_MASTER_KEY=87c1f6ae491db326d4187fed3ba77c11
       - DB_HOST=db
       - REDIS_SERVER=redis
-    ports:
-      - 3000:3000
     volumes:
       - ./:/app
+
+services:
+  backend:
+    <<: *default-app
+    ports:
+      - 3000:3000
     depends_on:
       - redis
       - db
       - mailcatcher
+
+  webpacker:
+    <<: *default-app
+    command: bundle exec bin/webpack-dev-server
+    ports:
+      - 3035:3050
+    depends_on:
+      - backend
+
+  worker:
+    <<: *default-app
+    command: bundle exec bin/rake jobs:work
+    depends_on:
+      - redis
+      - db
 
   redis:
     image: redis:6.2.6

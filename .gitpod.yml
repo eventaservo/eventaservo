@@ -2,6 +2,7 @@ tasks:
   - init: |
       docker-compose pull
       docker-compose build
+      docker-compose run --rm backend yarn install
       docker-compose run --rm backend bundle exec rails db:setup
   - command: docker-compose up -d
 
