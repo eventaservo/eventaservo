@@ -3,7 +3,9 @@ tasks:
       docker-compose build
       docker-compose run --rm backend yarn install
       docker-compose run --rm backend bundle exec rails db:setup
-  - command: docker-compose up -d
+  - command: |
+      docker-compose up -d
+      docker-compose logs -f
 
 ports:
   - port: 3000
