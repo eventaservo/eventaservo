@@ -4,18 +4,21 @@
 
 tasks:
   - init: >
+      gem install rubocop rubocop-rails &&
       git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.2 &&
-      . $HOME/.asdf/asdf.sh &&
+      . ~/.asdf/asdf.sh &&
       echo ". $HOME/.asdf/asdf.sh" >> ~/.bashrc &&
       asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git &&
       asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git &&
+      asdf install &&
       gem install bundler:2.3.18 &&
+      gem install foreman &&
       docker-compose up -d &&
       bundle install &&
       gem install foreman &&
       yarn install &&
       bundle exec rails db:setup &&
-      bundle exec rails test &&
+      bundle exec rails test
 
 ports:
   - port: 3000
