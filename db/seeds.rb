@@ -277,5 +277,25 @@ User.create(email: 'admin@eventaservo.org',
 # Events
 3.times { FactoryBot.create(:evento, :venonta) }
 
-# Create the default ActiveAdmin user
-AdminUser.create!(email: 'admin@eventaservo.org', password: 'administranto', password_confirmation: 'administranto') if Rails.env.development?
+# Create the ActiveAdmin users and staging users
+unless Rails.env.production?
+  AdminUser.destroy_all
+  AdminUser.create!(email: 'shayani@gmail.com', password: '123456', password_confirmation: '123456') 
+  AdminUser.create!(email: 'yves.nevelsteen@gmail.com', password: '123456', password_confirmation: '123456') 
+  User.create(email: 'shayani@gmail.com',
+            name: 'Fernando Ŝajani',
+            password: '123456',
+            username: '123456',
+            country_id: Country.find_by(code: 'br').id,
+            city: 'Rio de Janeiro',
+            admin: true,
+            confirmed_at: DateTime.now)
+  User.create(email: 'yves.nevelsteen@gmail.com',
+            name: 'Yves Nevelsteen',
+            password: '123456',
+            username: '123456',
+            country_id: Country.find_by(code: 'br').id,
+            city: 'Rio de Janeiro',
+            admin: true,
+            confirmed_at: DateTime.now)
+  
