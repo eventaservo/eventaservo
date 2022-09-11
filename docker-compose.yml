@@ -2,8 +2,6 @@
 version: '3.8'
 
 x-app: &default-app
-    build:
-      dockerfile: Dockerfile.devel
     environment:
       - RAILS_MASTER_KEY=87c1f6ae491db326d4187fed3ba77c11
       - DB_HOST=db
@@ -14,6 +12,9 @@ x-app: &default-app
 services:
   backend:
     <<: *default-app
+    image: eventaservo_devel
+    build:
+      dockerfile: Dockerfile.devel
     ports:
       - 3000:3000
     depends_on:
@@ -23,6 +24,7 @@ services:
 
   webpacker:
     <<: *default-app
+    image: eventaservo_devel
     command: bundle exec bin/webpack-dev-server
     ports:
       - 3035:3050
@@ -31,6 +33,7 @@ services:
 
   worker:
     <<: *default-app
+    image: eventaservo_devel
     command: bundle exec bin/rake jobs:work
     depends_on:
       - redis
