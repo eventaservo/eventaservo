@@ -1,7 +1,44 @@
 # Docker-compose file for DEVELOPMENT containers
 version: '3.8'
 
+x-app: &default-app
+    environment:
+      - RAILS_MASTER_KEY=87c1f6ae491db326d4187fed3ba77c11
+      - DB_HOST=db
+      - REDIS_SERVER=redis
+    volumes:
+      - ./:/app
+
 services:
+  backend:
+    <<: *default-app
+    image: eventaservo_devel
+    build:
+      dockerfile: Dockerfile.devel
+    ports:
+      - 3000:3000
+    depends_on:
+      - redis
+      - db
+      - mailcatcher
+
+  webpacker:
+    <<: *default-app
+    image: eventaservo_devel
+    command: bundle exec bin/webpack-dev-server
+    ports:
+      - 3035:3050
+    depends_on:
+      - backend
+
+  worker:
+    <<: *default-app
+    image: eventaservo_devel
+    command: bundle exec bin/rake jobs:work
+    depends_on:
+      - redis
+      - db
+
   redis:
     image: redis:6.2.6
     healthcheck:
@@ -20,9 +57,14 @@ services:
       - POSTGRES_DB=eventaservo_devel
     ports:
       - 5432:5432
+    volumes:
+      - postgres:/var/lib/postgresql/data
 
   mailcatcher:
     image: schickling/mailcatcher:latest
     ports:
       - 1025:1025
       - 1080:1080
+
+volumes:
+  postgres:

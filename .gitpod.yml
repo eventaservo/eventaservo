@@ -1,14 +1,11 @@
-image:
-  file: .gitpod.Dockerfile
-
 tasks:
-  - before: docker-compose up -d
-  - init: >
-      bundle install &&
-      yarn install &&
-      bundle exec rails db:setup &&
-      bundle exec rails test
-  - command: foreman start
+  - init: |
+      docker-compose build
+      docker-compose run --rm backend yarn install
+      docker-compose run --rm backend bundle exec rails db:setup
+  - command: |
+      docker-compose up -d
+      docker-compose logs -f
 
 ports:
   - port: 3000

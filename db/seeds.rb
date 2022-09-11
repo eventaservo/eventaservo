@@ -280,8 +280,8 @@ User.create(email: 'admin@eventaservo.org',
 # Create the ActiveAdmin users and staging users
 unless Rails.env.production?
   AdminUser.destroy_all
-  AdminUser.create!(email: 'shayani@gmail.com', password: '123456', password_confirmation: '123456') 
-  AdminUser.create!(email: 'yves.nevelsteen@gmail.com', password: '123456', password_confirmation: '123456') 
+  AdminUser.create!(email: 'shayani@gmail.com', password: '123456', password_confirmation: '123456')
+  AdminUser.create!(email: 'yves.nevelsteen@gmail.com', password: '123456', password_confirmation: '123456')
   User.create(email: 'shayani@gmail.com',
             name: 'Fernando Ŝajani',
             password: '123456',
@@ -298,4 +298,4 @@ unless Rails.env.production?
             city: 'Rio de Janeiro',
             admin: true,
             confirmed_at: DateTime.now)
-  
+end
