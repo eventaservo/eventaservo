@@ -1,10 +1,14 @@
 # Docker-compose file for DEVELOPMENT containers
 FROM ruby:2.7-bullseye
 
-WORKDIR /eventaservo
+WORKDIR /app
 
 RUN apt-get update
-RUN apt-get install -y apt-utils
+RUN apt-get install -y \ 
+  apt-utils \
+  iputils-ping \
+  telnet \
+  vim
 RUN apt-get upgrade -y
 
 # Node 14
@@ -13,36 +17,16 @@ RUN apt-get install -y nodejs
 
 RUN npm i -g yarn
 
-RUN apt-get install -y \
-  iputils-ping \
-  zsh
-
 # Bundler and gems
 RUN gem install sassc:2.4.0
 RUN gem install bundler:2.1.4
 
-COPY Gemfile Gemfile.lock /eventaservo/
+COPY Gemfile Gemfile.lock /app/
 RUN bundle install --jobs=3 --retry=3
 
 # YARN
 COPY package.json yarn.lock ./
 RUN yarn install
-
-# RUN apk update \
-#   && apk upgrade \
-#   && apk add --update --no-cache \
-#       alpine-sdk \
-#       busybox-extras \
-#       shared-mime-info \
-#       imagemagick6-dev \
-#       postgresql-dev \
-#       nodejs \
-#       yarn \
-#       sqlite-dev \
-#       tzdata \
-#   && rm -rf /var/cache/apk/*
-
-RUN apt-get install -y telnet vim
 
 EXPOSE 3000
 CMD ["bundle", "exec", "rails", "server", "-b", "ssl://0.0.0.0:3000?key=certs/localhost.key&cert=certs/localhost.crt"]

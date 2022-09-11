@@ -2,6 +2,22 @@
 version: '3.8'
 
 services:
+  backend:
+    build:
+      dockerfile: Dockerfile.devel
+    environment:
+      - RAILS_MASTER_KEY=87c1f6ae491db326d4187fed3ba77c11
+      - DB_HOST=db
+      - REDIS_SERVER=redis
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/app
+    depends_on:
+      - redis
+      - db
+      - mailcatcher
+
   redis:
     image: redis:6.2.6
     healthcheck:
@@ -20,9 +36,14 @@ services:
       - POSTGRES_DB=eventaservo_devel
     ports:
       - 5432:5432
+    volumes:
+      - postgres:/var/lib/postgresql/data
 
   mailcatcher:
     image: schickling/mailcatcher:latest
     ports:
       - 1025:1025
       - 1080:1080
+
+volumes:
+  postgres:
