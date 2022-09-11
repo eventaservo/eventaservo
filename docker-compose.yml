@@ -6,6 +6,7 @@ x-app: &default-app
       - RAILS_MASTER_KEY=87c1f6ae491db326d4187fed3ba77c11
       - DB_HOST=db
       - REDIS_SERVER=redis
+      - MAILCATCHER_HOST=mailcatcher
     volumes:
       - ./:/app
 
