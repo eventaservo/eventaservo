@@ -1,12 +1,15 @@
-FROM gitpod/workspace-base
+FROM gitpod/workspace-base:latest
 
-RUN sudo apt-get update
-RUN sudo apt-get install -y \
+USER root
+RUN apt-get update
+RUN apt-get install -y \
   apt-utils \
   curl \
   git \
   vim \
   telnet
+
+USER gitpod
 
 WORKDIR /workspace/eventaservo
 
@@ -14,8 +17,9 @@ WORKDIR /workspace/eventaservo
 RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.2
 RUN echo ". $HOME/.asdf/asdf.sh" >> ~/.bashrc
 ENV PATH="${PATH}:/home/gitpod/.asdf/shims:/home/gitpod/.asdf/bin"
-RUN bash -c "asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git"
+RUN asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 RUN asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
+RUN asdf plugin add yarn
 COPY .tool-versions .
 RUN asdf install
 
