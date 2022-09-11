@@ -3,18 +3,19 @@ FROM ruby:2.7-bullseye
 
 WORKDIR /app
 
-RUN apt-get update
-RUN apt-get install -y \
-  apt-utils \
-  iputils-ping \
-  telnet \
-  vim
-RUN apt-get upgrade -y
-
 # Node 14
 RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
-RUN apt-get install -y nodejs
 
+RUN apt-get update \
+  && apt-get install -y \
+      apt-utils \
+      iputils-ping \
+      nodejs \
+      telnet \
+      vim \
+  && rm -rf /var/lib/apt/lits
+
+# Install Yarn globally
 RUN npm i -g yarn
 
 # Bundler and gems
