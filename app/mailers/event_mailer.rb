@@ -68,8 +68,7 @@ class EventMailer < ApplicationMailer
 
     mail(to: to, bcc: bcc, reply_to: informoj[:email],
          subject: 'Informo pri via evento en Eventa Servo',
-         track_opens: 'true',
-         message_stream: 'raportoj')
+         track_opens: 'true')
   end
 
   def nova_administranto(evento)
@@ -97,8 +96,7 @@ class EventMailer < ApplicationMailer
       mail(to: to,
            from: 'Eventa Servo <kontakto@eventaservo.org>',
            subject: "[ES] #{@evento.title} baldaŭ komenciĝos",
-           track_opens: 'true',
-           message_stream: 'event-rememorigoj')
+           track_opens: 'true')
     end
   end
 end
