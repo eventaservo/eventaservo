@@ -45,3 +45,8 @@ vscode:
     - ms-azuretools.vscode-docker
     - eamodio.gitlens
     - mhutchie.git-graph
+
+github:
+  prebuilds:
+    master: true
+    branches: true
