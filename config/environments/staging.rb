@@ -1,4 +1,6 @@
-Rails.application.configure do
+# frozen_string_literal: true
+
+Rails.application.configure do # rubocop:disable Metrics/BlockLength
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -50,10 +52,10 @@ Rails.application.configure do
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
-  config.log_level = :warn
+  config.log_level = :debug
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -67,8 +69,8 @@ Rails.application.configure do
 
   # Mailcatcher
   config.action_mailer.smtp_settings = {
-    address: "mailcatcher",
-    port: "1025"
+    address: 'mailcatcher',
+    port: '1025'
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
@@ -91,8 +93,8 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  if ENV["RAILS_LOG_TO_STDOUT"].present?
-    logger           = ActiveSupport::Logger.new(STDOUT)
+  if ENV['RAILS_LOG_TO_STDOUT'].present?
+    logger           = ActiveSupport::Logger.new($stdout)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
@@ -100,7 +102,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.active_job.default_url_options = { host: "testservilo.eventaservo.org", protocol: :https }
+  config.active_job.default_url_options = { host: 'testservilo.eventaservo.org', protocol: :https }
   Rails.application.routes.default_url_options[:host] = 'testservilo.eventaservo.org'
   Rails.application.routes.default_url_options[:protocol] = :https
 end
