@@ -1,11 +1,33 @@
+image:
+  file: .gitpod.Dockerfile
+
 tasks:
-  - init: |
-      docker-compose build
-      docker-compose run --rm backend yarn install
-      docker-compose run --rm backend bundle exec rails db:setup
-  - command: |
-      docker-compose up -d
-      docker-compose logs -f
+  - name: Setup
+    before: docker-compose up -d
+    init: >
+      bundle install &&
+      yarn install &&
+      bundle exec rails db:setup &&
+      gp sync-done setup
+    command: >
+      docker-compose up -d &&
+      gp sync-done setup &&
+      exit
+
+  - name: Delayed Job
+    command: >
+      gp sync-await setup &&
+      bundle exec bin/rake jobs:work
+
+  - name: Webpacker
+    command: >
+      gp sync-await setup &&
+      bundle exec bin/webpack-dev-server
+
+  - name: Rails server
+    command: >
+      gp sync-await setup &&
+      bundle exec bin/rails server -b 0.0.0.0 -p 3000 -e development -b 'ssl://0.0.0.0:3000?key=./certs/localhost.key&cert=./certs/localhost.crt'
 
 ports:
   - port: 3000
