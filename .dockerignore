@@ -18,3 +18,4 @@ public/packs/
 storage/
 tags
 tmp/
+node_modules/
