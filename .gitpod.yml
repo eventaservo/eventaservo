@@ -5,6 +5,7 @@ tasks:
   - name: Setup
     before: docker-compose up -d
     init: >
+      gem install bundler:2.3.18 &&
       bundle install &&
       yarn install &&
       bundle exec rails db:setup &&
