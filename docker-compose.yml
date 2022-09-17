@@ -27,5 +27,14 @@ services:
       - 1025:1025
       - 1080:1080
 
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    ports:
+      - 8080:8080
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@eventaservo.org
+      - PGADMIN_DEFAULT_PASSWORD=administranto
+      - PGADMIN_LISTEN_PORT=8080
+
 volumes:
   postgres:
