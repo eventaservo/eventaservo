@@ -6,7 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-puts "Running seeds.rb file"
+puts 'Running seeds.rb file'
+
+puts '--> Carregando as Fixtures'
+Rake.application['db:fixtures:load'].invoke
 
 # Listo de landoj
 Country.destroy_all

@@ -1,0 +1,2149 @@
+timezone_1:
+  id: 1
+  en: Africa/Abidjan
+  eo: Afriko/Abiĝano
+
+timezone_2:
+  id: 2
+  en: Africa/Accra
+  eo: Afriko/Akrao
+
+timezone_3:
+  id: 3
+  en: Africa/Addis_Ababa
+  eo: Afriko/Adis-Abebo
+
+timezone_4:
+  id: 4
+  en: Africa/Algiers
+  eo: Afriko/Alĝero
+
+timezone_5:
+  id: 5
+  en: Africa/Asmara
+  eo: Afriko/Asmaro
+
+timezone_6:
+  id: 6
+  en: Africa/Bamako
+  eo: Afriko/Bamako
+
+timezone_7:
+  id: 7
+  en: Africa/Bangui
+  eo: Afriko/Bango
+
+timezone_8:
+  id: 8
+  en: Africa/Banjul
+  eo: Afriko/Banĵulo
+
+timezone_9:
+  id: 9
+  en: Africa/Bissau
+  eo: Afriko/Bisaŭo
+
+timezone_10:
+  id: 10
+  en: Africa/Blantyre
+  eo: Afriko/Blantiro
+
+timezone_11:
+  id: 11
+  en: Africa/Brazzaville
+  eo: Afriko/Brazavilo
+
+timezone_12:
+  id: 12
+  en: Africa/Bujumbura
+  eo: Afriko/Buĵumburo
+
+timezone_13:
+  id: 13
+  en: Africa/Cairo
+  eo: Afriko/Kairo
+
+timezone_14:
+  id: 14
+  en: Africa/Casablanca
+  eo: Afriko/Kasablanko
+
+timezone_15:
+  id: 15
+  en: Africa/Ceuta
+  eo: Afriko/Ceŭto
+
+timezone_16:
+  id: 16
+  en: Africa/Conakry
+  eo: Afriko/Konakrio
+
+timezone_17:
+  id: 17
+  en: Africa/Dakar
+  eo: Afriko/Dakaro
+
+timezone_18:
+  id: 18
+  en: Africa/Dar_es_Salaam
+  eo: Afriko/Daresalamo
+
+timezone_19:
+  id: 19
+  en: Africa/Djibouti
+  eo: Afriko/Ĝibutio
+
+timezone_20:
+  id: 20
+  en: Africa/Douala
+  eo: Afriko/Dualao
+
+timezone_21:
+  id: 21
+  en: Africa/El_Aaiun
+  eo: Afriko/Ajuno
+
+timezone_22:
+  id: 22
+  en: Africa/Freetown
+  eo: Afriko/Fritaŭno
+
+timezone_23:
+  id: 23
+  en: Africa/Gaborone
+  eo: Afriko/Gaberono
+
+timezone_24:
+  id: 24
+  en: Africa/Harare
+  eo: Afriko/Harareo
+
+timezone_25:
+  id: 25
+  en: Africa/Johannesburg
+  eo: Afriko/Johanesburgo
+
+timezone_26:
+  id: 26
+  en: Africa/Juba
+  eo: Afriko/Ĵubo
+
+timezone_27:
+  id: 27
+  en: Africa/Kampala
+  eo: Afriko/Kampalo
+
+timezone_28:
+  id: 28
+  en: Africa/Khartoum
+  eo: Afriko/Ĥartumo
+
+timezone_29:
+  id: 29
+  en: Africa/Kigali
+  eo: Afriko/Kigalo
+
+timezone_30:
+  id: 30
+  en: Africa/Kinshasa
+  eo: Afriko/Kinŝaso
+
+timezone_31:
+  id: 31
+  en: Africa/Lagos
+  eo: Afriko/Lagoso
+
+timezone_32:
+  id: 32
+  en: Africa/Libreville
+  eo: Afriko/Librevilo
+
+timezone_33:
+  id: 33
+  en: Africa/Lome
+  eo: Afriko/Lomeo
+
+timezone_34:
+  id: 34
+  en: Africa/Luanda
+  eo: Afriko/Luando
+
+timezone_35:
+  id: 35
+  en: Africa/Lubumbashi
+  eo: Afriko/Lubumbaŝo
+
+timezone_36:
+  id: 36
+  en: Africa/Lusaka
+  eo: Afriko/Lusako
+
+timezone_37:
+  id: 37
+  en: Africa/Malabo
+  eo: Afriko/Malabo
+
+timezone_38:
+  id: 38
+  en: Africa/Maputo
+  eo: Afriko/Maputo
+
+timezone_39:
+  id: 39
+  en: Africa/Maseru
+  eo: Afriko/Maseruo
+
+timezone_40:
+  id: 40
+  en: Africa/Mbabane
+  eo: Afriko/Mbabano
+
+timezone_41:
+  id: 41
+  en: Africa/Mogadishu
+  eo: Afriko/Mogadiŝo
+
+timezone_42:
+  id: 42
+  en: Africa/Monrovia
+  eo: Afriko/Monrovio
+
+timezone_43:
+  id: 43
+  en: Africa/Nairobi
+  eo: Afriko/Najrobo
+
+timezone_44:
+  id: 44
+  en: Africa/Ndjamena
+  eo: Afriko/Nĵameno
+
+timezone_45:
+  id: 45
+  en: Africa/Niamey
+  eo: Afriko/Niameo
+
+timezone_46:
+  id: 46
+  en: Africa/Nouakchott
+  eo: Afriko/Nuakŝoto
+
+timezone_47:
+  id: 47
+  en: Africa/Ouagadougou
+  eo: Afriko/Uagaduguo
+
+timezone_48:
+  id: 48
+  en: Africa/Porto-Novo
+  eo: Afriko/Porto-Novo
+
+timezone_49:
+  id: 49
+  en: Africa/Sao_Tome
+  eo: Afriko/Santomeo
+
+timezone_50:
+  id: 50
+  en: Africa/Tripoli
+  eo: Afriko/Tripolo
+
+timezone_51:
+  id: 51
+  en: Africa/Tunis
+  eo: Afriko/Tunizo
+
+timezone_52:
+  id: 52
+  en: Africa/Windhoek
+  eo: Afriko/Vindhuko
+
+timezone_53:
+  id: 53
+  en: America/Adak
+  eo: Ameriko/Adako
+
+timezone_54:
+  id: 54
+  en: America/Anchorage
+  eo: Ameriko/Ankoraĝo
+
+timezone_55:
+  id: 55
+  en: America/Anguilla
+  eo: Ameriko/Angvilo
+
+timezone_56:
+  id: 56
+  en: America/Antigua
+  eo: Ameriko/Antigvo
+
+timezone_57:
+  id: 57
+  en: America/Araguaina
+  eo: Ameriko/Araguajano
+
+timezone_58:
+  id: 58
+  en: America/Argentina/Buenos_Aires
+  eo: Ameriko/Argentino/Bonaero
+
+timezone_59:
+  id: 59
+  en: America/Argentina/Catamarca
+  eo: Ameriko/Argentino/Katamarko
+
+timezone_60:
+  id: 60
+  en: America/Argentina/Cordoba
+  eo: Ameriko/Argentino/Kordobo
+
+timezone_61:
+  id: 61
+  en: America/Argentina/Jujuy
+  eo: Ameriko/Argentino/Ĥuĥujo
+
+timezone_62:
+  id: 62
+  en: America/Argentina/La_Rioja
+  eo: Ameriko/Argentino/Rioĥo
+
+timezone_63:
+  id: 63
+  en: America/Argentina/Mendoza
+  eo: Ameriko/Argentino/Mendozo
+
+timezone_64:
+  id: 64
+  en: America/Argentina/Rio_Gallegos
+  eo: Ameriko/Argentino/Rio_Gallegos
+
+timezone_65:
+  id: 65
+  en: America/Argentina/Salta
+  eo: Ameriko/Argentino/Salta
+
+timezone_66:
+  id: 66
+  en: America/Argentina/San_Juan
+  eo: Ameriko/Argentino/San_Juan
+
+timezone_67:
+  id: 67
+  en: America/Argentina/San_Luis
+  eo: Ameriko/Argentino/San_Luis
+
+timezone_68:
+  id: 68
+  en: America/Argentina/Tucuman
+  eo: Ameriko/Argentino/Tucuman
+
+timezone_69:
+  id: 69
+  en: America/Argentina/Ushuaia
+  eo: Ameriko/Argentino/Ushuaia
+
+timezone_70:
+  id: 70
+  en: America/Aruba
+  eo: Ameriko/Arubo
+
+timezone_71:
+  id: 71
+  en: America/Asuncion
+  eo: Ameriko/Asuncion
+
+timezone_72:
+  id: 72
+  en: America/Atikokan
+  eo: Ameriko/Atikokan
+
+timezone_73:
+  id: 73
+  en: America/Bahia
+  eo: Ameriko/Bahio
+
+timezone_74:
+  id: 74
+  en: America/Bahia_Banderas
+  eo: Ameriko/Bahia_Banderas
+
+timezone_75:
+  id: 75
+  en: America/Barbados
+  eo: Ameriko/Barbados
+
+timezone_76:
+  id: 76
+  en: America/Belem
+  eo: Ameriko/Beleno
+
+timezone_77:
+  id: 77
+  en: America/Belize
+  eo: Ameriko/Belize
+
+timezone_78:
+  id: 78
+  en: America/Blanc-Sablon
+  eo: Ameriko/Blanc-Sablon
+
+timezone_79:
+  id: 79
+  en: America/Boa_Vista
+  eo: Ameriko/Boa-visto
+
+timezone_80:
+  id: 80
+  en: America/Bogota
+  eo: Ameriko/Bogota
+
+timezone_81:
+  id: 81
+  en: America/Boise
+  eo: Ameriko/Boise
+
+timezone_82:
+  id: 82
+  en: America/Buenos_Aires
+  eo: Ameriko/Bonaero
+
+timezone_83:
+  id: 83
+  en: America/Cambridge_Bay
+  eo: Ameriko/Cambridge_Bay
+
+timezone_84:
+  id: 84
+  en: America/Campo_Grande
+  eo: Ameriko/Kampo-grando
+
+timezone_85:
+  id: 85
+  en: America/Cancun
+  eo: Ameriko/Kankuno
+
+timezone_86:
+  id: 86
+  en: America/Caracas
+  eo: Ameriko/Karakaso
+
+timezone_87:
+  id: 87
+  en: America/Cayenne
+  eo: Ameriko/Cayenne
+
+timezone_88:
+  id: 88
+  en: America/Cayman
+  eo: Ameriko/Cayman
+
+timezone_89:
+  id: 89
+  en: America/Chicago
+  eo: Ameriko/Ĉikago
+
+timezone_90:
+  id: 90
+  en: America/Chihuahua
+  eo: Ameriko/Chihuahua
+
+timezone_91:
+  id: 91
+  en: America/Costa_Rica
+  eo: Ameriko/Costa_Rica
+
+timezone_92:
+  id: 92
+  en: America/Creston
+  eo: Ameriko/Creston
+
+timezone_93:
+  id: 93
+  en: America/Cuiaba
+  eo: Ameriko/Kujabao
+
+timezone_94:
+  id: 94
+  en: America/Curacao
+  eo: Ameriko/Curacao
+
+timezone_95:
+  id: 95
+  en: America/Danmarkshavn
+  eo: Ameriko/Danmarkshavn
+
+timezone_96:
+  id: 96
+  en: America/Dawson
+  eo: Ameriko/Dawson
+
+timezone_97:
+  id: 97
+  en: America/Dawson_Creek
+  eo: Ameriko/Dawson_Creek
+
+timezone_98:
+  id: 98
+  en: America/Denver
+  eo: Ameriko/Denvero
+
+timezone_99:
+  id: 99
+  en: America/Detroit
+  eo: Ameriko/Detrojto
+
+timezone_100:
+  id: 100
+  en: America/Dominica
+  eo: Ameriko/Dominica
+
+timezone_101:
+  id: 101
+  en: America/Edmonton
+  eo: Ameriko/Edmonton
+
+timezone_102:
+  id: 102
+  en: America/Eirunepe
+  eo: Ameriko/Eirunepe
+
+timezone_103:
+  id: 103
+  en: America/El_Salvador
+  eo: Ameriko/El_Salvador
+
+timezone_104:
+  id: 104
+  en: America/Fort_Nelson
+  eo: Ameriko/Fort_Nelson
+
+timezone_105:
+  id: 105
+  en: America/Fortaleza
+  eo: Ameriko/Fortalezo
+
+timezone_106:
+  id: 106
+  en: America/Glace_Bay
+  eo: Ameriko/Glace_Bay
+
+timezone_107:
+  id: 107
+  en: America/Godthab
+  eo: Ameriko/Godthab
+
+timezone_108:
+  id: 108
+  en: America/Goose_Bay
+  eo: Ameriko/Goose_Bay
+
+timezone_109:
+  id: 109
+  en: America/Grand_Turk
+  eo: Ameriko/Grand_Turk
+
+timezone_110:
+  id: 110
+  en: America/Grenada
+  eo: Ameriko/Grenada
+
+timezone_111:
+  id: 111
+  en: America/Guadeloupe
+  eo: Ameriko/Guadeloupe
+
+timezone_112:
+  id: 112
+  en: America/Guatemala
+  eo: Ameriko/Guatemala
+
+timezone_113:
+  id: 113
+  en: America/Guayaquil
+  eo: Ameriko/Guayaquil
+
+timezone_114:
+  id: 114
+  en: America/Guyana
+  eo: Ameriko/Guyana
+
+timezone_115:
+  id: 115
+  en: America/Halifax
+  eo: Ameriko/Halifax
+
+timezone_116:
+  id: 116
+  en: America/Havana
+  eo: Ameriko/Havana
+
+timezone_117:
+  id: 117
+  en: America/Hermosillo
+  eo: Ameriko/Hermosillo
+
+timezone_118:
+  id: 118
+  en: America/Indiana/Indianapolis
+  eo: Ameriko/Indianapolis
+
+timezone_119:
+  id: 119
+  en: America/Indiana/Knox
+  eo: Ameriko/Knox
+
+timezone_120:
+  id: 120
+  en: America/Indiana/Marengo
+  eo: Ameriko/Marengo
+
+timezone_121:
+  id: 121
+  en: America/Indiana/Petersburg
+  eo: Ameriko/Petersburg
+
+timezone_122:
+  id: 122
+  en: America/Indiana/Tell_City
+  eo: Ameriko/Tell_City
+
+timezone_123:
+  id: 123
+  en: America/Indiana/Vevay
+  eo: Ameriko/Vevay
+
+timezone_124:
+  id: 124
+  en: America/Indiana/Vincennes
+  eo: Ameriko/Vincennes
+
+timezone_125:
+  id: 125
+  en: America/Indiana/Winamac
+  eo: Ameriko/Winamac
+
+timezone_126:
+  id: 126
+  en: America/Inuvik
+  eo: Ameriko/Inuvik
+
+timezone_127:
+  id: 127
+  en: America/Iqaluit
+  eo: Ameriko/Iqaluit
+
+timezone_128:
+  id: 128
+  en: America/Jamaica
+  eo: Ameriko/Jamaica
+
+timezone_129:
+  id: 129
+  en: America/Juneau
+  eo: Ameriko/Juneau
+
+timezone_130:
+  id: 130
+  en: America/Kentucky/Louisville
+  eo: Ameriko/Kentucky/Louisville
+
+timezone_131:
+  id: 131
+  en: America/Kentucky/Monticello
+  eo: Ameriko/Kentucky/Monticello
+
+timezone_132:
+  id: 132
+  en: America/Kralendijk
+  eo: Ameriko/Kralendijk
+
+timezone_133:
+  id: 133
+  en: America/La_Paz
+  eo: Ameriko/La_Paz
+
+timezone_134:
+  id: 134
+  en: America/Lima
+  eo: Ameriko/Lima
+
+timezone_135:
+  id: 135
+  en: America/Los_Angeles
+  eo: Ameriko/Los_Angeles
+
+timezone_136:
+  id: 136
+  en: America/Lower_Princes
+  eo: Ameriko/Lower_Princes
+
+timezone_137:
+  id: 137
+  en: America/Maceio
+  eo: Ameriko/Masejoo
+
+timezone_138:
+  id: 138
+  en: America/Managua
+  eo: Ameriko/Managua
+
+timezone_139:
+  id: 139
+  en: America/Manaus
+  eo: Ameriko/Manaŭso
+
+timezone_140:
+  id: 140
+  en: America/Marigot
+  eo: Ameriko/Marigot
+
+timezone_141:
+  id: 141
+  en: America/Martinique
+  eo: Ameriko/Martinique
+
+timezone_142:
+  id: 142
+  en: America/Matamoros
+  eo: Ameriko/Matamoros
+
+timezone_143:
+  id: 143
+  en: America/Mazatlan
+  eo: Ameriko/Mazatlan
+
+timezone_144:
+  id: 144
+  en: America/Menominee
+  eo: Ameriko/Menominee
+
+timezone_145:
+  id: 145
+  en: America/Merida
+  eo: Ameriko/Merida
+
+timezone_146:
+  id: 146
+  en: America/Metlakatla
+  eo: Ameriko/Metlakatla
+
+timezone_147:
+  id: 147
+  en: America/Mexico_City
+  eo: Ameriko/Mexico_City
+
+timezone_148:
+  id: 148
+  en: America/Miquelon
+  eo: Ameriko/Miquelon
+
+timezone_149:
+  id: 149
+  en: America/Moncton
+  eo: Ameriko/Moncton
+
+timezone_150:
+  id: 150
+  en: America/Monterrey
+  eo: Ameriko/Monterrey
+
+timezone_151:
+  id: 151
+  en: America/Montevideo
+  eo: Ameriko/Montevideo
+
+timezone_152:
+  id: 152
+  en: America/Montserrat
+  eo: Ameriko/Montserrat
+
+timezone_153:
+  id: 153
+  en: America/Nassau
+  eo: Ameriko/Nasaŭo
+
+timezone_154:
+  id: 154
+  en: America/New_York
+  eo: Ameriko/Novjorko
+
+timezone_155:
+  id: 155
+  en: America/Nipigon
+  eo: Ameriko/Nipigon
+
+timezone_156:
+  id: 156
+  en: America/Nome
+  eo: Ameriko/Nome
+
+timezone_157:
+  id: 157
+  en: America/Noronha
+  eo: Ameriko/Noronjo
+
+timezone_158:
+  id: 158
+  en: America/North_Dakota/Beulah
+  eo: Ameriko/North_Dakota/Beulah
+
+timezone_159:
+  id: 159
+  en: America/North_Dakota/Center
+  eo: Ameriko/North_Dakota/Center
+
+timezone_160:
+  id: 160
+  en: America/North_Dakota/New_Salem
+  eo: Ameriko/North_Dakota/New_Salem
+
+timezone_161:
+  id: 161
+  en: America/Ojinaga
+  eo: Ameriko/Ojinaga
+
+timezone_162:
+  id: 162
+  en: America/Panama
+  eo: Ameriko/Panamao
+
+timezone_163:
+  id: 163
+  en: America/Pangnirtung
+  eo: Ameriko/Pangnirtung
+
+timezone_164:
+  id: 164
+  en: America/Paramaribo
+  eo: Ameriko/Paramaribo
+
+timezone_165:
+  id: 165
+  en: America/Phoenix
+  eo: Ameriko/Phoenix
+
+timezone_166:
+  id: 166
+  en: America/Port_of_Spain
+  eo: Ameriko/Port_of_Spain
+
+timezone_167:
+  id: 167
+  en: America/Port-au-Prince
+  eo: Ameriko/Port-au-Prince
+
+timezone_168:
+  id: 168
+  en: America/Porto_Velho
+  eo: Ameriko/Porto-veljo
+
+timezone_169:
+  id: 169
+  en: America/Puerto_Rico
+  eo: Ameriko/Puerto_Rico
+
+timezone_170:
+  id: 170
+  en: America/Punta_Arenas
+  eo: Ameriko/Punta_Arenas
+
+timezone_171:
+  id: 171
+  en: America/Rainy_River
+  eo: Ameriko/Rainy_River
+
+timezone_172:
+  id: 172
+  en: America/Rankin_Inlet
+  eo: Ameriko/Rankin_Inlet
+
+timezone_173:
+  id: 173
+  en: America/Recife
+  eo: Ameriko/Recifo
+
+timezone_174:
+  id: 174
+  en: America/Regina
+  eo: Ameriko/Regina
+
+timezone_175:
+  id: 175
+  en: America/Resolute
+  eo: Ameriko/Resolute
+
+timezone_176:
+  id: 176
+  en: America/Rio_Branco
+  eo: Ameriko/Rio-branko
+
+timezone_177:
+  id: 177
+  en: America/Santarem
+  eo: Ameriko/Santareno
+
+timezone_178:
+  id: 178
+  en: America/Santiago
+  eo: Ameriko/Santiago
+
+timezone_179:
+  id: 179
+  en: America/Santo_Domingo
+  eo: Ameriko/Santo_Domingo
+
+timezone_180:
+  id: 180
+  en: America/Sao_Paulo
+  eo: Ameriko/San_Paŭlo
+
+timezone_181:
+  id: 181
+  en: America/Scoresbysund
+  eo: Ameriko/Scoresbysund
+
+timezone_182:
+  id: 182
+  en: America/Sitka
+  eo: Ameriko/Sitka
+
+timezone_183:
+  id: 183
+  en: America/St_Barthelemy
+  eo: Ameriko/St_Barthelemy
+
+timezone_184:
+  id: 184
+  en: America/St_Johns
+  eo: Ameriko/St_Johns
+
+timezone_185:
+  id: 185
+  en: America/St_Kitts
+  eo: Ameriko/St_Kitts
+
+timezone_186:
+  id: 186
+  en: America/St_Lucia
+  eo: Ameriko/St_Lucia
+
+timezone_187:
+  id: 187
+  en: America/St_Thomas
+  eo: Ameriko/St_Thomas
+
+timezone_188:
+  id: 188
+  en: America/St_Vincent
+  eo: Ameriko/St_Vincent
+
+timezone_189:
+  id: 189
+  en: America/Swift_Current
+  eo: Ameriko/Swift_Current
+
+timezone_190:
+  id: 190
+  en: America/Tegucigalpa
+  eo: Ameriko/Tegucigalpa
+
+timezone_191:
+  id: 191
+  en: America/Thule
+  eo: Ameriko/Thule
+
+timezone_192:
+  id: 192
+  en: America/Thunder_Bay
+  eo: Ameriko/Thunder_Bay
+
+timezone_193:
+  id: 193
+  en: America/Tijuana
+  eo: Ameriko/Tijuana
+
+timezone_194:
+  id: 194
+  en: America/Toronto
+  eo: Ameriko/Toronto
+
+timezone_195:
+  id: 195
+  en: America/Tortola
+  eo: Ameriko/Tortola
+
+timezone_196:
+  id: 196
+  en: America/Vancouver
+  eo: Ameriko/Vankuvero
+
+timezone_197:
+  id: 197
+  en: America/Whitehorse
+  eo: Ameriko/Whitehorse
+
+timezone_198:
+  id: 198
+  en: America/Winnipeg
+  eo: Ameriko/Vinipego
+
+timezone_199:
+  id: 199
+  en: America/Yakutat
+  eo: Ameriko/Yakutat
+
+timezone_200:
+  id: 200
+  en: America/Yellowknife
+  eo: Ameriko/Yellowknife
+
+timezone_201:
+  id: 201
+  en: Antarctica/Casey
+  eo: Antarkto/Casey
+
+timezone_202:
+  id: 202
+  en: Antarctica/Davis
+  eo: Antarkto/Davis
+
+timezone_203:
+  id: 203
+  en: Antarctica/DumontDUrville
+  eo: Antarkto/DumontDUrville
+
+timezone_204:
+  id: 204
+  en: Antarctica/Macquarie
+  eo: Antarkto/Macquarie
+
+timezone_205:
+  id: 205
+  en: Antarctica/Mawson
+  eo: Antarkto/Mawson
+
+timezone_206:
+  id: 206
+  en: Antarctica/McMurdo
+  eo: Antarkto/McMurdo
+
+timezone_207:
+  id: 207
+  en: Antarctica/Palmer
+  eo: Antarkto/Palmer
+
+timezone_208:
+  id: 208
+  en: Antarctica/Rothera
+  eo: Antarkto/Rothera
+
+timezone_209:
+  id: 209
+  en: Antarctica/Syowa
+  eo: Antarkto/Syowa
+
+timezone_210:
+  id: 210
+  en: Antarctica/Troll
+  eo: Antarkto/Troll
+
+timezone_211:
+  id: 211
+  en: Antarctica/Vostok
+  eo: Antarkto/Vostok
+
+timezone_212:
+  id: 212
+  en: Arctic/Longyearbyen
+  eo: Arkto/Longjarurbo
+
+timezone_213:
+  id: 213
+  en: Asia/Aden
+  eo: Azio/Adeno
+
+timezone_214:
+  id: 214
+  en: Asia/Almaty
+  eo: Azio/Almato
+
+timezone_215:
+  id: 215
+  en: Asia/Amman
+  eo: Azio/Amano
+
+timezone_216:
+  id: 216
+  en: Asia/Anadyr
+  eo: Azio/Anadiro
+
+timezone_217:
+  id: 217
+  en: Asia/Aqtau
+  eo: Azio/Aktao
+
+timezone_218:
+  id: 218
+  en: Asia/Aqtobe
+  eo: Azio/Aktobeo
+
+timezone_219:
+  id: 219
+  en: Asia/Ashgabat
+  eo: Azio/Aŝgabato
+
+timezone_220:
+  id: 220
+  en: Asia/Atyrau
+  eo: Azio/Atirao
+
+timezone_221:
+  id: 221
+  en: Asia/Baghdad
+  eo: Azio/Bagdado
+
+timezone_222:
+  id: 222
+  en: Asia/Bahrain
+  eo: Azio/Barejno
+
+timezone_223:
+  id: 223
+  en: Asia/Baku
+  eo: Azio/Bakuo
+
+timezone_224:
+  id: 224
+  en: Asia/Bangkok
+  eo: Azio/Bankoko
+
+timezone_225:
+  id: 225
+  en: Asia/Barnaul
+  eo: Azio/Barnaulo
+
+timezone_226:
+  id: 226
+  en: Asia/Beirut
+  eo: Azio/Bejruto
+
+timezone_227:
+  id: 227
+  en: Asia/Bishkek
+  eo: Azio/Biŝkeko
+
+timezone_228:
+  id: 228
+  en: Asia/Brunei
+  eo: Azio/Brunejo
+
+timezone_229:
+  id: 229
+  en: Asia/Calcutta
+  eo: Azio/Kolkato
+
+timezone_230:
+  id: 230
+  en: Asia/Chita
+  eo: Azio/Ĉito
+
+timezone_231:
+  id: 231
+  en: Asia/Choibalsan
+  eo: Azio/Ĉoibalsano
+
+timezone_232:
+  id: 232
+  en: Asia/Colombo
+  eo: Azio/Kolombo
+
+timezone_233:
+  id: 233
+  en: Asia/Damascus
+  eo: Azio/Damasko
+
+timezone_234:
+  id: 234
+  en: Asia/Dhaka
+  eo: Azio/Dako
+
+timezone_235:
+  id: 235
+  en: Asia/Dili
+  eo: Azio/Dilo
+
+timezone_236:
+  id: 236
+  en: Asia/Dubai
+  eo: Azio/Dubajo
+
+timezone_237:
+  id: 237
+  en: Asia/Dushanbe
+  eo: Azio/Duŝanbeo
+
+timezone_238:
+  id: 238
+  en: Asia/Famagusta
+  eo: Azio/Famagusto
+
+timezone_239:
+  id: 239
+  en: Asia/Gaza
+  eo: Azio/Gazo
+
+timezone_240:
+  id: 240
+  en: Asia/Hebron
+  eo: Azio/Hebrono
+
+timezone_241:
+  id: 241
+  en: Asia/Ho_Chi_Minh
+  eo: Azio/Ho-Ĉi-Mino
+
+timezone_242:
+  id: 242
+  en: Asia/Hong_Kong
+  eo: Azio/Honkongo
+
+timezone_243:
+  id: 243
+  en: Asia/Hovd
+  eo: Azio/Ĥovdo
+
+timezone_244:
+  id: 244
+  en: Asia/Irkutsk
+  eo: Azio/Irkutsko
+
+timezone_245:
+  id: 245
+  en: Asia/Jakarta
+  eo: Azio/Ĝakarto
+
+timezone_246:
+  id: 246
+  en: Asia/Jayapura
+  eo: Azio/Ĝajapuro
+
+timezone_247:
+  id: 247
+  en: Asia/Jerusalem
+  eo: Azio/Jerusalemo
+
+timezone_248:
+  id: 248
+  en: Asia/Kabul
+  eo: Azio/Kabulo
+
+timezone_249:
+  id: 249
+  en: Asia/Kamchatka
+  eo: Azio/Kamĉatko
+
+timezone_250:
+  id: 250
+  en: Asia/Karachi
+  eo: Azio/Karaĉio
+
+timezone_251:
+  id: 251
+  en: Asia/Kathmandu
+  eo: Azio/Katmanduo
+
+timezone_252:
+  id: 252
+  en: Asia/Katmandu
+  eo: Azio/Katmanduo
+
+timezone_253:
+  id: 253
+  en: Asia/Khandyga
+  eo: Azio/Ĥandigo
+
+timezone_254:
+  id: 254
+  en: Asia/Kolkata
+  eo: Azio/Kolkato
+
+timezone_255:
+  id: 255
+  en: Asia/Krasnoyarsk
+  eo: Azio/Krasnojarsko
+
+timezone_256:
+  id: 256
+  en: Asia/Kuala_Lumpur
+  eo: Azio/Kuala-Lumpuro
+
+timezone_257:
+  id: 257
+  en: Asia/Kuching
+  eo: Azio/Kuĉingo
+
+timezone_258:
+  id: 258
+  en: Asia/Kuwait
+  eo: Azio/Kuvajto
+
+timezone_259:
+  id: 259
+  en: Asia/Macau
+  eo: Azio/Makao
+
+timezone_260:
+  id: 260
+  en: Asia/Magadan
+  eo: Azio/Magadano
+
+timezone_261:
+  id: 261
+  en: Asia/Makassar
+  eo: Azio/Makasaro
+
+timezone_262:
+  id: 262
+  en: Asia/Manila
+  eo: Azio/Manilo
+
+timezone_263:
+  id: 263
+  en: Asia/Muscat
+  eo: Azio/Maskato
+
+timezone_264:
+  id: 264
+  en: Asia/Nicosia
+  eo: Azio/Nikoziko
+
+timezone_265:
+  id: 265
+  en: Asia/Novokuznetsk
+  eo: Azio/Novokuznecko
+
+timezone_266:
+  id: 266
+  en: Asia/Novosibirsk
+  eo: Azio/Novosibirsko
+
+timezone_267:
+  id: 267
+  en: Asia/Omsk
+  eo: Azio/Omsko
+
+timezone_268:
+  id: 268
+  en: Asia/Oral
+  eo: Azio/Oralo
+
+timezone_269:
+  id: 269
+  en: Asia/Phnom_Penh
+  eo: Azio/Pnom-Peno
+
+timezone_270:
+  id: 270
+  en: Asia/Pontianak
+  eo: Azio/Pontianako
+
+timezone_271:
+  id: 271
+  en: Asia/Pyongyang
+  eo: Azio/Pjongjango
+
+timezone_272:
+  id: 272
+  en: Asia/Qatar
+  eo: Azio/Kataro
+
+timezone_273:
+  id: 273
+  en: Asia/Qostanay
+  eo: Azio/Kostanajo
+
+timezone_274:
+  id: 274
+  en: Asia/Qyzylorda
+  eo: Azio/Kizilordo
+
+timezone_275:
+  id: 275
+  en: Asia/Riyadh
+  eo: Azio/Riado
+
+timezone_276:
+  id: 276
+  en: Asia/Saigon
+  eo: Azio/Ho-Ĉi-Mino
+
+timezone_277:
+  id: 277
+  en: Asia/Sakhalin
+  eo: Azio/Saĥaleno
+
+timezone_278:
+  id: 278
+  en: Asia/Samarkand
+  eo: Azio/Samarkando
+
+timezone_279:
+  id: 279
+  en: Asia/Seoul
+  eo: Azio/Seulo
+
+timezone_280:
+  id: 280
+  en: Asia/Shanghai
+  eo: Azio/Ŝanhajo
+
+timezone_281:
+  id: 281
+  en: Asia/Singapore
+  eo: Azio/Singapuro
+
+timezone_282:
+  id: 282
+  en: Asia/Srednekolymsk
+  eo: Azio/Srednekolimsko
+
+timezone_283:
+  id: 283
+  en: Asia/Taipei
+  eo: Azio/Tajpeo
+
+timezone_284:
+  id: 284
+  en: Asia/Tashkent
+  eo: Azio/Taŝkento
+
+timezone_285:
+  id: 285
+  en: Asia/Tbilisi
+  eo: Azio/Tbiliso
+
+timezone_286:
+  id: 286
+  en: Asia/Tehran
+  eo: Azio/Teherano
+
+timezone_287:
+  id: 287
+  en: Asia/Thimphu
+  eo: Azio/Timbuo
+
+timezone_288:
+  id: 288
+  en: Asia/Tokyo
+  eo: Azio/Tokio
+
+timezone_289:
+  id: 289
+  en: Asia/Tomsk
+  eo: Azio/Tomsko
+
+timezone_290:
+  id: 290
+  en: Asia/Ulaanbaatar
+  eo: Azio/Ulanbataro
+
+timezone_291:
+  id: 291
+  en: Asia/Urumqi
+  eo: Azio/Urumĉio
+
+timezone_292:
+  id: 292
+  en: Asia/Ust-Nera
+  eo: Azio/Ustnero
+
+timezone_293:
+  id: 293
+  en: Asia/Vientiane
+  eo: Azio/Vientiano
+
+timezone_294:
+  id: 294
+  en: Asia/Vladivostok
+  eo: Azio/Vladivostoko
+
+timezone_295:
+  id: 295
+  en: Asia/Yakutsk
+  eo: Azio/Jakutsko
+
+timezone_296:
+  id: 296
+  en: Asia/Yangon
+  eo: Azio/Jangono
+
+timezone_297:
+  id: 297
+  en: Asia/Yekaterinburg
+  eo: Azio/Jekaterinburgo
+
+timezone_298:
+  id: 298
+  en: Asia/Yerevan
+  eo: Azio/Erevano
+
+timezone_299:
+  id: 299
+  en: Atlantic/Azores
+  eo: Atlantiko/Azoroj
+
+timezone_300:
+  id: 300
+  en: Atlantic/Bermuda
+  eo: Atlantiko/Bermudo
+
+timezone_301:
+  id: 301
+  en: Atlantic/Canary
+  eo: Atlantiko/Kanarioj
+
+timezone_302:
+  id: 302
+  en: Atlantic/Cape_Verde
+  eo: Atlantiko/Kaboverdo
+
+timezone_303:
+  id: 303
+  en: Atlantic/Faroe
+  eo: Atlantiko/Ferooj
+
+timezone_304:
+  id: 304
+  en: Atlantic/Madeira
+  eo: Atlantiko/Madejro
+
+timezone_305:
+  id: 305
+  en: Atlantic/Reykjavik
+  eo: Atlantiko/Rejkjaviko
+
+timezone_306:
+  id: 306
+  en: Atlantic/South_Georgia
+  eo: Atlantiko/Sud-Georgio
+
+timezone_307:
+  id: 307
+  en: Atlantic/St_Helena
+  eo: Atlantiko/Sankta_Heleno
+
+timezone_308:
+  id: 308
+  en: Atlantic/Stanley
+  eo: Atlantiko/Stanlejo
+
+timezone_309:
+  id: 309
+  en: Australia/Adelaide
+  eo: Aŭstralio/Adelajdo
+
+timezone_310:
+  id: 310
+  en: Australia/Brisbane
+  eo: Aŭstralio/Brisbano
+
+timezone_311:
+  id: 311
+  en: Australia/Broken_Hill
+  eo: Aŭstralio/Broken_Hill
+
+timezone_312:
+  id: 312
+  en: Australia/Currie
+  eo: Aŭstralio/Currie
+
+timezone_313:
+  id: 313
+  en: Australia/Darwin
+  eo: Aŭstralio/Darvino
+
+timezone_314:
+  id: 314
+  en: Australia/Eucla
+  eo: Aŭstralio/Eucla
+
+timezone_315:
+  id: 315
+  en: Australia/Hobart
+  eo: Aŭstralio/Hobarto
+
+timezone_316:
+  id: 316
+  en: Australia/Lindeman
+  eo: Aŭstralio/Lindemano
+
+timezone_317:
+  id: 317
+  en: Australia/Lord_Howe
+  eo: Aŭstralio/Lord_Howe
+
+timezone_318:
+  id: 318
+  en: Australia/Melbourne
+  eo: Aŭstralio/Melburno
+
+timezone_319:
+  id: 319
+  en: Australia/Perth
+  eo: Aŭstralio/Perto
+
+timezone_320:
+  id: 320
+  en: Australia/Sydney
+  eo: Aŭstralio/Sidnejo
+
+timezone_321:
+  id: 321
+  en: Europe/Amsterdam
+  eo: Eŭropo/Amsterdamo
+
+timezone_322:
+  id: 322
+  en: Europe/Andorra
+  eo: Eŭropo/Andoro
+
+timezone_323:
+  id: 323
+  en: Europe/Astrakhan
+  eo: Eŭropo/Astraĥano
+
+timezone_324:
+  id: 324
+  en: Europe/Athens
+  eo: Eŭropo/Ateno
+
+timezone_325:
+  id: 325
+  en: Europe/Belgrade
+  eo: Eŭropo/Beogrado
+
+timezone_326:
+  id: 326
+  en: Europe/Berlin
+  eo: Eŭropo/Berlino
+
+timezone_327:
+  id: 327
+  en: Europe/Bratislava
+  eo: Eŭropo/Bratislavo
+
+timezone_328:
+  id: 328
+  en: Europe/Brussels
+  eo: Eŭropo/Bruselo
+
+timezone_329:
+  id: 329
+  en: Europe/Bucharest
+  eo: Eŭropo/Bukareŝto
+
+timezone_330:
+  id: 330
+  en: Europe/Budapest
+  eo: Eŭropo/Budapeŝto
+
+timezone_331:
+  id: 331
+  en: Europe/Busingen
+  eo: Eŭropo/Busingeno
+
+timezone_332:
+  id: 332
+  en: Europe/Chisinau
+  eo: Eŭropo/Kiŝinevo
+
+timezone_333:
+  id: 333
+  en: Europe/Copenhagen
+  eo: Eŭropo/Kopenhago
+
+timezone_334:
+  id: 334
+  en: Europe/Dublin
+  eo: Eŭropo/Dublino
+
+timezone_335:
+  id: 335
+  en: Europe/Gibraltar
+  eo: Eŭropo/Ĝibraltaro
+
+timezone_336:
+  id: 336
+  en: Europe/Guernsey
+  eo: Eŭropo/Gernezejo
+
+timezone_337:
+  id: 337
+  en: Europe/Helsinki
+  eo: Eŭropo/Helsinko
+
+timezone_338:
+  id: 338
+  en: Europe/Isle_of_Man
+  eo: Eŭropo/Mankinsulo
+
+timezone_339:
+  id: 339
+  en: Europe/Istanbul
+  eo: Eŭropo/Istanbulo
+
+timezone_340:
+  id: 340
+  en: Europe/Jersey
+  eo: Eŭropo/Ĵerzejo
+
+timezone_341:
+  id: 341
+  en: Europe/Kaliningrad
+  eo: Eŭropo/Kaliningrado
+
+timezone_342:
+  id: 342
+  en: Europe/Kiev
+  eo: Eŭropo/Kievo
+
+timezone_343:
+  id: 343
+  en: Europe/Kirov
+  eo: Eŭropo/Kirovo
+
+timezone_344:
+  id: 344
+  en: Europe/Lisbon
+  eo: Eŭropo/Lisbono
+
+timezone_345:
+  id: 345
+  en: Europe/Ljubljana
+  eo: Eŭropo/Ljubljano
+
+timezone_346:
+  id: 346
+  en: Europe/London
+  eo: Eŭropo/Londono
+
+timezone_347:
+  id: 347
+  en: Europe/Luxembourg
+  eo: Eŭropo/Luksemburgo
+
+timezone_348:
+  id: 348
+  en: Europe/Madrid
+  eo: Eŭropo/Madrido
+
+timezone_349:
+  id: 349
+  en: Europe/Malta
+  eo: Eŭropo/Malto
+
+timezone_350:
+  id: 350
+  en: Europe/Mariehamn
+  eo: Eŭropo/Marihamno
+
+timezone_351:
+  id: 351
+  en: Europe/Minsk
+  eo: Eŭropo/Minsko
+
+timezone_352:
+  id: 352
+  en: Europe/Monaco
+  eo: Eŭropo/Monako
+
+timezone_353:
+  id: 353
+  en: Europe/Moscow
+  eo: Eŭropo/Moskvo
+
+timezone_354:
+  id: 354
+  en: Europe/Oslo
+  eo: Eŭropo/Oslo
+
+timezone_355:
+  id: 355
+  en: Europe/Paris
+  eo: Eŭropo/Parizo
+
+timezone_356:
+  id: 356
+  en: Europe/Podgorica
+  eo: Eŭropo/Podgorico
+
+timezone_357:
+  id: 357
+  en: Europe/Prague
+  eo: Eŭropo/Prago
+
+timezone_358:
+  id: 358
+  en: Europe/Riga
+  eo: Eŭropo/Rigo
+
+timezone_359:
+  id: 359
+  en: Europe/Rome
+  eo: Eŭropo/Romo
+
+timezone_360:
+  id: 360
+  en: Europe/Samara
+  eo: Eŭropo/Samaro
+
+timezone_361:
+  id: 361
+  en: Europe/San_Marino
+  eo: Eŭropo/San-Marino
+
+timezone_362:
+  id: 362
+  en: Europe/Sarajevo
+  eo: Eŭropo/Sarajevo
+
+timezone_363:
+  id: 363
+  en: Europe/Saratov
+  eo: Eŭropo/Saratovo
+
+timezone_364:
+  id: 364
+  en: Europe/Simferopol
+  eo: Eŭropo/Simferopolo
+
+timezone_365:
+  id: 365
+  en: Europe/Skopje
+  eo: Eŭropo/Skopjo
+
+timezone_366:
+  id: 366
+  en: Europe/Sofia
+  eo: Eŭropo/Sofio
+
+timezone_367:
+  id: 367
+  en: Europe/Stockholm
+  eo: Eŭropo/Stokholmo
+
+timezone_368:
+  id: 368
+  en: Europe/Tallinn
+  eo: Eŭropo/Talino
+
+timezone_369:
+  id: 369
+  en: Europe/Tirane
+  eo: Eŭropo/Tirano
+
+timezone_370:
+  id: 370
+  en: Europe/Ulyanovsk
+  eo: Eŭropo/Uljanovsko
+
+timezone_371:
+  id: 371
+  en: Europe/Uzhgorod
+  eo: Eŭropo/Uĵhorodo
+
+timezone_372:
+  id: 372
+  en: Europe/Vaduz
+  eo: Eŭropo/Vaduzo
+
+timezone_373:
+  id: 373
+  en: Europe/Vatican
+  eo: Eŭropo/Vatikano
+
+timezone_374:
+  id: 374
+  en: Europe/Vienna
+  eo: Eŭropo/Vieno
+
+timezone_375:
+  id: 375
+  en: Europe/Vilnius
+  eo: Eŭropo/Vilno
+
+timezone_376:
+  id: 376
+  en: Europe/Volgograd
+  eo: Eŭropo/Volgogrado
+
+timezone_377:
+  id: 377
+  en: Europe/Warsaw
+  eo: Eŭropo/Varsovio
+
+timezone_378:
+  id: 378
+  en: Europe/Zagreb
+  eo: Eŭropo/Zagrebo
+
+timezone_379:
+  id: 379
+  en: Europe/Zaporozhye
+  eo: Eŭropo/Zaporiĵo
+
+timezone_380:
+  id: 380
+  en: Europe/Zurich
+  eo: Eŭropo/Zuriko
+
+timezone_381:
+  id: 381
+  en: Etc/UTC
+  eo: Etc/UTC
+
+timezone_382:
+  id: 382
+  en: Indian/Antananarivo
+  eo: Hinda_oceano/Antananarivo
+
+timezone_383:
+  id: 383
+  en: Indian/Chagos
+  eo: Hinda_oceano/Ĉagosoj
+
+timezone_384:
+  id: 384
+  en: Indian/Christmas
+  eo: Hinda_oceano/Kristmaso
+
+timezone_385:
+  id: 385
+  en: Indian/Cocos
+  eo: Hinda_oceano/Kokosinsuloj
+
+timezone_386:
+  id: 386
+  en: Indian/Comoro
+  eo: Hinda_oceano/Komroj
+
+timezone_387:
+  id: 387
+  en: Indian/Kerguelen
+  eo: Hinda_oceano/Kergelenoj
+
+timezone_388:
+  id: 388
+  en: Indian/Mahe
+  eo: Hinda_oceano/Maheo
+
+timezone_389:
+  id: 389
+  en: Indian/Maldives
+  eo: Hinda_oceano/Maldivoj
+
+timezone_390:
+  id: 390
+  en: Indian/Mauritius
+  eo: Hinda_oceano/Maŭricio
+
+timezone_391:
+  id: 391
+  en: Indian/Mayotte
+  eo: Hinda_oceano/Majoto
+
+timezone_392:
+  id: 392
+  en: Indian/Reunion
+  eo: Hinda_oceano/Reunio
+
+timezone_393:
+  id: 393
+  en: Pacific/Apia
+  eo: Pacifiko/Apio
+
+timezone_394:
+  id: 394
+  en: Pacific/Auckland
+  eo: Pacifiko/Aŭklando
+
+timezone_395:
+  id: 395
+  en: Pacific/Bougainville
+  eo: Pacifiko/Bugenvilo
+
+timezone_396:
+  id: 396
+  en: Pacific/Chatham
+  eo: Pacifiko/Ĉathamo
+
+timezone_397:
+  id: 397
+  en: Pacific/Chuuk
+  eo: Pacifiko/Ĉuuko
+
+timezone_398:
+  id: 398
+  en: Pacific/Easter
+  eo: Pacifiko/Paskinsulo
+
+timezone_399:
+  id: 399
+  en: Pacific/Efate
+  eo: Pacifiko/Efateo
+
+timezone_400:
+  id: 400
+  en: Pacific/Enderbury
+  eo: Pacifiko/Enderburio
+
+timezone_401:
+  id: 401
+  en: Pacific/Fakaofo
+  eo: Pacifiko/Fakaofo
+
+timezone_402:
+  id: 402
+  en: Pacific/Fiji
+  eo: Pacifiko/Fiĝioj
+
+timezone_403:
+  id: 403
+  en: Pacific/Funafuti
+  eo: Pacifiko/Funafutio
+
+timezone_404:
+  id: 404
+  en: Pacific/Galapagos
+  eo: Pacifiko/Galapagoj
+
+timezone_405:
+  id: 405
+  en: Pacific/Gambier
+  eo: Pacifiko/Gambiero
+
+timezone_406:
+  id: 406
+  en: Pacific/Guadalcanal
+  eo: Pacifiko/Gvadalkanalo
+
+timezone_407:
+  id: 407
+  en: Pacific/Guam
+  eo: Pacifiko/Gvamo
+
+timezone_408:
+  id: 408
+  en: Pacific/Honolulu
+  eo: Pacifiko/Honoluluo
+
+timezone_409:
+  id: 409
+  en: Pacific/Kiritimati
+  eo: Pacifiko/Kiritimatio
+
+timezone_410:
+  id: 410
+  en: Pacific/Kosrae
+  eo: Pacifiko/Kosraeo
+
+timezone_411:
+  id: 411
+  en: Pacific/Kwajalein
+  eo: Pacifiko/Kvajalejno
+
+timezone_412:
+  id: 412
+  en: Pacific/Majuro
+  eo: Pacifiko/Majuro
+
+timezone_413:
+  id: 413
+  en: Pacific/Marquesas
+  eo: Pacifiko/Markizoj
+
+timezone_414:
+  id: 414
+  en: Pacific/Midway
+  eo: Pacifiko/Midvejo
+
+timezone_415:
+  id: 415
+  en: Pacific/Nauru
+  eo: Pacifiko/Nauro
+
+timezone_416:
+  id: 416
+  en: Pacific/Niue
+  eo: Pacifiko/Niuo
+
+timezone_417:
+  id: 417
+  en: Pacific/Norfolk
+  eo: Pacifiko/Norfolkinsulo
+
+timezone_418:
+  id: 418
+  en: Pacific/Noumea
+  eo: Pacifiko/Numeo
+
+timezone_419:
+  id: 419
+  en: Pacific/Pago_Pago
+  eo: Pacifiko/Pagopago
+
+timezone_420:
+  id: 420
+  en: Pacific/Palau
+  eo: Pacifiko/Palaŭo
+
+timezone_421:
+  id: 421
+  en: Pacific/Pitcairn
+  eo: Pacifiko/Pitkarno
+
+timezone_422:
+  id: 422
+  en: Pacific/Pohnpei
+  eo: Pacifiko/Ponapeo
+
+timezone_423:
+  id: 423
+  en: Pacific/Port_Moresby
+  eo: Pacifiko/Port-Moresbo
+
+timezone_424:
+  id: 424
+  en: Pacific/Rarotonga
+  eo: Pacifiko/Rarotongo
+
+timezone_425:
+  id: 425
+  en: Pacific/Saipan
+  eo: Pacifiko/Saipano
+
+timezone_426:
+  id: 426
+  en: Pacific/Tahiti
+  eo: Pacifiko/Tahitio
+
+timezone_427:
+  id: 427
+  en: Pacific/Tarawa
+  eo: Pacifiko/Bairikio
+
+timezone_428:
+  id: 428
+  en: Pacific/Tongatapu
+  eo: Pacifiko/Tongatapuo
+
+timezone_429:
+  id: 429
+  en: Pacific/Wake
+  eo: Pacifiko/Vejkinsulo
+
+timezone_430:
+  id: 430
+  en: Pacific/Wallis
+  eo: Pacifiko/Valiso
