@@ -1,0 +1,1535 @@
+country_1:
+  id: 1
+  name: Afganio
+  code: af
+  continent: Azio
+
+country_2:
+  id: 2
+  name: Alando
+  code: ax
+  continent: Eŭropo
+
+country_3:
+  id: 3
+  name: Albanio
+  code: al
+  continent: Eŭropo
+
+country_4:
+  id: 4
+  name: Alĝerio
+  code: dz
+  continent: Afriko
+
+country_5:
+  id: 5
+  name: Andoro
+  code: ad
+  continent: Eŭropo
+
+country_6:
+  id: 6
+  name: Angolo
+  code: ao
+  continent: Afriko
+
+country_7:
+  id: 7
+  name: Angvilo
+  code: ai
+  continent: Ameriko
+
+country_8:
+  id: 8
+  name: Antarktiko
+  code: at
+  continent: Eŭropo
+
+country_9:
+  id: 9
+  name: Antigvo-Barbudo
+  code: ag
+  continent: Ameriko
+
+country_10:
+  id: 10
+  name: Argentino
+  code: ar
+  continent: Ameriko
+
+country_11:
+  id: 11
+  name: Armenio
+  code: am
+  continent: Eŭropo
+
+country_12:
+  id: 12
+  name: Arubo
+  code: aw
+  continent: Ameriko
+
+country_14:
+  id: 14
+  name: Aŭstralio
+  code: au
+  continent: Oceanio
+
+country_15:
+  id: 15
+  name: Aŭstrio
+  code: at
+  continent: Eŭropo
+
+country_13:
+  id: 13
+  name: Azerbajĝano
+  code: az
+  continent: Azio
+
+country_16:
+  id: 16
+  name: Bahamoj
+  code: bs
+  continent: Ameriko
+
+country_17:
+  id: 17
+  name: Bangladeŝo
+  code: bd
+  continent: Azio
+
+country_18:
+  id: 18
+  name: Barato
+  code: in
+  continent: Azio
+
+country_19:
+  id: 19
+  name: Barbado
+  code: bb
+  continent: Ameriko
+
+country_20:
+  id: 20
+  name: Barejno
+  code: bh
+  continent: Azio
+
+country_21:
+  id: 21
+  name: Belgio
+  code: be
+  continent: Eŭropo
+
+country_22:
+  id: 22
+  name: Belizo
+  code: bz
+  continent: Ameriko
+
+country_23:
+  id: 23
+  name: Belorusio
+  code: by
+  continent: Eŭropo
+
+country_24:
+  id: 24
+  name: Benino
+  code: bj
+  continent: Afriko
+
+country_25:
+  id: 25
+  name: Bermudo
+  code: bm
+  continent: Ameriko
+
+country_26:
+  id: 26
+  name: Birmo
+  code: mm
+  continent: Azio
+
+country_27:
+  id: 27
+  name: Bocvano
+  code: bw
+  continent: Afriko
+
+country_28:
+  id: 28
+  name: Bolivio
+  code: bo
+  continent: Ameriko
+
+country_29:
+  id: 29
+  name: Bosnio kaj Hercegovino
+  code: ba
+  continent: Eŭropo
+
+country_30:
+  id: 30
+  name: Brazilo
+  code: br
+  continent: Ameriko
+
+country_31:
+  id: 31
+  name: Brita Hindoceana Teritorio
+  code: io
+  continent: Azio
+
+country_32:
+  id: 32
+  name: Britaj Virgulinsuloj
+  code: vg
+  continent: Ameriko
+
+country_33:
+  id: 33
+  name: Britio
+  code: gb
+  continent: Eŭropo
+
+country_34:
+  id: 34
+  name: Brunejo
+  code: bn
+  continent: Azio
+
+country_35:
+  id: 35
+  name: Bulgario
+  code: bg
+  continent: Eŭropo
+
+country_36:
+  id: 36
+  name: Burkino
+  code: bf
+  continent: Afriko
+
+country_37:
+  id: 37
+  name: Burundo
+  code: bi
+  continent: Afriko
+
+country_38:
+  id: 38
+  name: Butano
+  code: bt
+  continent: Azio
+
+country_39:
+  id: 39
+  name: Buvet-Insulo
+  code: bv
+  continent: Eŭropo
+
+country_243:
+  id: 243
+  name: Ĉado
+  code: td
+  continent: Afriko
+
+country_245:
+  id: 245
+  name: Ĉeĥio
+  code: cz
+  continent: Eŭropo
+
+country_40:
+  id: 40
+  name: Centr-Afrika Respubliko
+  code: cf
+  continent: Afriko
+
+country_248:
+  id: 248
+  name: Ĉilio
+  code: cl
+  continent: Ameriko
+
+country_249:
+  id: 249
+  name: Ĉinio
+  code: cn
+  continent: Azio
+
+country_253:
+  id: 253
+  name: Cuba_815
+  code: BS_574
+  continent: Ameriko
+
+country_41:
+  id: 41
+  name: Danio
+  code: dk
+  continent: Eŭropo
+
+country_42:
+  id: 42
+  name: Domingo
+  code: do
+  continent: Ameriko
+
+country_43:
+  id: 43
+  name: Dominiko
+  code: dm
+  continent: Ameriko
+
+country_44:
+  id: 44
+  name: Ebur-Bordo
+  code: ci
+  continent: Afriko
+
+country_45:
+  id: 45
+  name: Egiptio
+  code: eg
+  continent: Afriko
+
+country_46:
+  id: 46
+  name: Ekvadoro
+  code: ec
+  continent: Ameriko
+
+country_99999:
+  id: 99999
+  name: Enreta
+  code: ol
+  continent: Reta
+
+country_47:
+  id: 47
+  name: Eritreo
+  code: er
+  continent: Afriko
+
+country_48:
+  id: 48
+  name: Estonio
+  code: ee
+  continent: Eŭropo
+
+country_49:
+  id: 49
+  name: Etiopio
+  code: et
+  continent: Afriko
+
+country_50:
+  id: 50
+  name: Falklandaj Insuloj, Malvinoj
+  code: fk
+  continent: Ameriko
+
+country_51:
+  id: 51
+  name: Ferooj
+  code: fo
+  continent: Eŭropo
+
+country_54:
+  id: 54
+  name: Fiĝioj
+  code: fj
+  continent: Oceanio
+
+country_52:
+  id: 52
+  name: Filipinoj
+  code: ph
+  continent: Azio
+
+country_53:
+  id: 53
+  name: Finnlando
+  code: fi
+  continent: Eŭropo
+
+country_55:
+  id: 55
+  name: Franca Gujano
+  code: gf
+  continent: Ameriko
+
+country_57:
+  id: 57
+  name: Francaj Sudaj kaj Antarktaj Teritorioj
+  code: tf
+  continent: Eŭropo
+
+country_56:
+  id: 56
+  name: Franca Polinezio
+  code: pf
+  continent: Ameriko
+
+country_58:
+  id: 58
+  name: Francio
+  code: fr
+  continent: Eŭropo
+
+country_59:
+  id: 59
+  name: Gabono
+  code: ga
+  continent: Afriko
+
+country_60:
+  id: 60
+  name: Gambio
+  code: gm
+  continent: Afriko
+
+country_61:
+  id: 61
+  name: Ganao
+  code: gh
+  continent: Afriko
+
+country_62:
+  id: 62
+  name: Germanio
+  code: de
+  continent: Eŭropo
+
+country_246:
+  id: 246
+  name: Ĝibraltaro
+  code: gi
+  continent: Eŭropo
+
+country_247:
+  id: 247
+  name: Ĝibutio
+  code: dj
+  continent: Afriko
+
+country_63:
+  id: 63
+  name: Grekio
+  code: gr
+  continent: Eŭropo
+
+country_64:
+  id: 64
+  name: Grenado
+  code: gd
+  continent: Ameriko
+
+country_65:
+  id: 65
+  name: Gronlando
+  code: gl
+  continent: Eŭropo
+
+country_252:
+  id: 252
+  name: Guatemala_859
+  code: RW_73
+  continent: Ameriko
+
+country_66:
+  id: 66
+  name: Gujano
+  code: gy
+  continent: Ameriko
+
+country_67:
+  id: 67
+  name: Gvadelupo
+  code: gp
+  continent: Ameriko
+
+country_68:
+  id: 68
+  name: Gvamo
+  code: gu
+  continent: Oceanio
+
+country_69:
+  id: 69
+  name: Gvatemalo
+  code: gt
+  continent: Ameriko
+
+country_70:
+  id: 70
+  name: Gvernsejo
+  code: gg
+  continent: Eŭropo
+
+country_71:
+  id: 71
+  name: Gvineo
+  code: gn
+  continent: Afriko
+
+country_72:
+  id: 72
+  name: Gvineo Bisaŭa
+  code: gw
+  continent: Afriko
+
+country_73:
+  id: 73
+  name: Gvineo Ekvatora
+  code: gq
+  continent: Ameriko
+
+country_74:
+  id: 74
+  name: Haitio
+  code: ht
+  continent: Ameriko
+
+country_75:
+  id: 75
+  name: Herda kaj Makdonaldaj Insuloj
+  code: hm
+  continent: Oceanio
+
+country_76:
+  id: 76
+  name: Hispanio
+  code: es
+  continent: Eŭropo
+
+country_77:
+  id: 77
+  name: Honduro
+  code: hn
+  continent: Ameriko
+
+country_78:
+  id: 78
+  name: Honkongo
+  code: hk
+  continent: Azio
+
+country_79:
+  id: 79
+  name: Hungario
+  code: hu
+  continent: Eŭropo
+
+country_80:
+  id: 80
+  name: Indonezio
+  code: id
+  continent: Azio
+
+country_81:
+  id: 81
+  name: Irako
+  code: iq
+  continent: Azio
+
+country_82:
+  id: 82
+  name: Irano
+  code: ir
+  continent: Azio
+
+country_83:
+  id: 83
+  name: Irlando
+  code: ie
+  continent: Azio
+
+country_84:
+  id: 84
+  name: Islando
+  code: is
+  continent: Eŭropo
+
+country_85:
+  id: 85
+  name: Israelo
+  code: il
+  continent: Azio
+
+country_86:
+  id: 86
+  name: Italio
+  code: it
+  continent: Eŭropo
+
+country_87:
+  id: 87
+  name: Jamajko
+  code: jm
+  continent: Ameriko
+
+country_88:
+  id: 88
+  name: Japanio
+  code: jp
+  continent: Azio
+
+country_89:
+  id: 89
+  name: Jemeno
+  code: ye
+  continent: Azio
+
+country_244:
+  id: 244
+  name: Ĵersejo
+  code: je
+  continent: Eŭropo
+
+country_90:
+  id: 90
+  name: Jordanio
+  code: jo
+  continent: Azio
+
+country_91:
+  id: 91
+  name: Kaboverdo
+  code: cv
+  continent: Afriko
+
+country_92:
+  id: 92
+  name: Kajmaninsuloj
+  code: ky
+  continent: Ameriko
+
+country_93:
+  id: 93
+  name: Kamboĝo
+  code: kh
+  continent: Azio
+
+country_94:
+  id: 94
+  name: Kameruno
+  code: cm
+  continent: Afriko
+
+country_95:
+  id: 95
+  name: Kanado
+  code: ca
+  continent: Ameriko
+
+country_96:
+  id: 96
+  name: Kariba Nederlando
+  code: bq
+  continent: Ameriko
+
+country_97:
+  id: 97
+  name: Kartvelio
+  code: ge
+  continent: Eŭropo
+
+country_98:
+  id: 98
+  name: Kataro
+  code: qa
+  continent: Azio
+
+country_99:
+  id: 99
+  name: Kazaĥio
+  code: kz
+  continent: Azio
+
+country_100:
+  id: 100
+  name: Kenjo
+  code: ke
+  continent: Afriko
+
+country_101:
+  id: 101
+  name: Kipro
+  code: cy
+  continent: Eŭropo
+
+country_102:
+  id: 102
+  name: Kirgizio
+  code: kg
+  continent: Azio
+
+country_103:
+  id: 103
+  name: Kiribato
+  code: ki
+  continent: Oceanio
+
+country_104:
+  id: 104
+  name: Kokosinsuloj
+  code: cc
+  continent: Azio
+
+country_105:
+  id: 105
+  name: Kolombio
+  code: co
+  continent: Ameriko
+
+country_106:
+  id: 106
+  name: Komoroj
+  code: km
+  continent: Afriko
+
+country_107:
+  id: 107
+  name: Kongo Brazavila
+  code: cg
+  continent: Afriko
+
+country_108:
+  id: 108
+  name: Kongo Kinŝasa
+  code: cd
+  continent: Afriko
+
+country_109:
+  id: 109
+  name: Kostariko
+  code: cr
+  continent: Ameriko
+
+country_110:
+  id: 110
+  name: Kristnaskinsulo
+  code: cx
+  continent: Azio
+
+country_111:
+  id: 111
+  name: Kroatio
+  code: hr
+  continent: Eŭropo
+
+country_112:
+  id: 112
+  name: Kubo
+  code: cu
+  continent: Ameriko
+
+country_113:
+  id: 113
+  name: Kukinsuloj
+  code: ck
+  continent: Oceanio
+
+country_114:
+  id: 114
+  name: Kuracao
+  code: cw
+  continent: Ameriko
+
+country_115:
+  id: 115
+  name: Kuvajto
+  code: kw
+  continent: Azio
+
+country_116:
+  id: 116
+  name: Laoso
+  code: la
+  continent: Azio
+
+country_117:
+  id: 117
+  name: Latvio
+  code: lv
+  continent: Eŭropo
+
+country_118:
+  id: 118
+  name: Lesoto
+  code: ls
+  continent: Afriko
+
+country_119:
+  id: 119
+  name: Libano
+  code: lb
+  continent: Azio
+
+country_120:
+  id: 120
+  name: Liberio
+  code: lr
+  continent: Afriko
+
+country_121:
+  id: 121
+  name: Libio
+  code: ly
+  continent: Afriko
+
+country_123:
+  id: 123
+  name: Liĥtenŝtejno
+  code: li
+  continent: Eŭropo
+
+country_122:
+  id: 122
+  name: Litovio
+  code: lt
+  continent: Eŭropo
+
+country_124:
+  id: 124
+  name: Luksemburgo
+  code: lu
+  continent: Eŭropo
+
+country_125:
+  id: 125
+  name: Madagaskaro
+  code: mg
+  continent: Afriko
+
+country_126:
+  id: 126
+  name: Majoto
+  code: yt
+  continent: Afriko
+
+country_127:
+  id: 127
+  name: Makao
+  code: mo
+  continent: Azio
+
+country_128:
+  id: 128
+  name: Makedonio
+  code: mk
+  continent: Eŭropo
+
+country_129:
+  id: 129
+  name: Malajzio
+  code: my
+  continent: Azio
+
+country_130:
+  id: 130
+  name: Malavio
+  code: mw
+  continent: Afriko
+
+country_131:
+  id: 131
+  name: Maldivoj
+  code: mv
+  continent: Azio
+
+country_132:
+  id: 132
+  name: Malio
+  code: ml
+  continent: Afriko
+
+country_133:
+  id: 133
+  name: Malto
+  code: mt
+  continent: Eŭropo
+
+country_134:
+  id: 134
+  name: Manksinsulo
+  code: im
+  continent: Eŭropo
+
+country_135:
+  id: 135
+  name: Maroko
+  code: ma
+  continent: Afriko
+
+country_137:
+  id: 137
+  name: Marŝalaj Insuloj
+  code: mh
+  continent: Oceanio
+
+country_255:
+  id: 255
+  name: Marshall Islands_985
+  code: GT_261
+  continent: Ameriko
+
+country_136:
+  id: 136
+  name: Martiniko
+  code: mq
+  continent: Ameriko
+
+country_138:
+  id: 138
+  name: Maŭricio
+  code: mu
+  continent: Afriko
+
+country_139:
+  id: 139
+  name: Maŭritanio
+  code: mr
+  continent: Afriko
+
+country_140:
+  id: 140
+  name: Meksiko
+  code: mx
+  continent: Ameriko
+
+country_141:
+  id: 141
+  name: Mikronezio
+  code: fm
+  continent: Oceanio
+
+country_142:
+  id: 142
+  name: Moldavio
+  code: md
+  continent: Eŭropo
+
+country_143:
+  id: 143
+  name: Monako
+  code: mc
+  continent: Eŭropo
+
+country_144:
+  id: 144
+  name: Moncerato
+  code: ms
+  continent: Ameriko
+
+country_145:
+  id: 145
+  name: Mongolio
+  code: mn
+  continent: Azio
+
+country_146:
+  id: 146
+  name: Montenegro
+  code: me
+  continent: Eŭropo
+
+country_147:
+  id: 147
+  name: Mozambiko
+  code: mz
+  continent: Afriko
+
+country_148:
+  id: 148
+  name: Namibio
+  code: na
+  continent: Afriko
+
+country_149:
+  id: 149
+  name: Nauro
+  code: nr
+  continent: Oceanio
+
+country_150:
+  id: 150
+  name: Nederlando
+  code: nl
+  continent: Eŭropo
+
+country_151:
+  id: 151
+  name: Nepalo
+  code: np
+  continent: Azio
+
+country_154:
+  id: 154
+  name: Niĝerio
+  code: ng
+  continent: Afriko
+
+country_155:
+  id: 155
+  name: Niĝero
+  code: ne
+  continent: Afriko
+
+country_152:
+  id: 152
+  name: Nikaragvo
+  code: ni
+  continent: Ameriko
+
+country_153:
+  id: 153
+  name: Niuo
+  code: nu
+  continent: Oceanio
+
+country_156:
+  id: 156
+  name: Nord-Koreio
+  code: kp
+  continent: Azio
+
+country_157:
+  id: 157
+  name: Nord-Marianoj
+  code: mp
+  continent: Oceanio
+
+country_158:
+  id: 158
+  name: Norfolkinsulo
+  code: nf
+  continent: Oceanio
+
+country_159:
+  id: 159
+  name: Norvegio
+  code: 'no'
+  continent: Eŭropo
+
+country_160:
+  id: 160
+  name: Nov-Kaledonio
+  code: nc
+  continent: Oceanio
+
+country_161:
+  id: 161
+  name: Nov-Zelando
+  code: nz
+  continent: Oceanio
+
+country_162:
+  id: 162
+  name: Okcidenta Saharo
+  code: eh
+  continent: Afriko
+
+country_163:
+  id: 163
+  name: Omano
+  code: om
+  continent: Azio
+
+country_164:
+  id: 164
+  name: Orienta Timoro
+  code: tl
+  continent: Azio
+
+country_165:
+  id: 165
+  name: Pakistano
+  code: pk
+  continent: Azio
+
+country_166:
+  id: 166
+  name: Palaŭo
+  code: pw
+  continent: Oceanio
+
+country_167:
+  id: 167
+  name: Palestino
+  code: ps
+  continent: Azio
+
+country_250:
+  id: 250
+  name: Panama_925
+  code: CK_956
+  continent: Ameriko
+
+country_168:
+  id: 168
+  name: Panamo
+  code: pa
+  continent: Ameriko
+
+country_169:
+  id: 169
+  name: Papuo-Nov-Gvineo
+  code: pg
+  continent: Oceanio
+
+country_170:
+  id: 170
+  name: Paragvajo
+  code: py
+  continent: Ameriko
+
+country_171:
+  id: 171
+  name: Peruo
+  code: pe
+  continent: Ameriko
+
+country_172:
+  id: 172
+  name: Pitkarna Insularo
+  code: pn
+  continent: Oceanio
+
+country_173:
+  id: 173
+  name: Pollando
+  code: pl
+  continent: Eŭropo
+
+country_174:
+  id: 174
+  name: Portoriko
+  code: pr
+  continent: Ameriko
+
+country_175:
+  id: 175
+  name: Portugalio
+  code: pt
+  continent: Eŭropo
+
+country_176:
+  id: 176
+  name: Reunio
+  code: re
+  continent: Afriko
+
+country_177:
+  id: 177
+  name: Ruando
+  code: rw
+  continent: Afriko
+
+country_178:
+  id: 178
+  name: Rumanio
+  code: ro
+  continent: Eŭropo
+
+country_179:
+  id: 179
+  name: Rusio
+  code: ru
+  continent: Eŭropo
+
+country_254:
+  id: 254
+  name: Saint Barthelemy_191
+  code: DE_528
+  continent: Ameriko
+
+country_180:
+  id: 180
+  name: Salomonoj
+  code: sb
+  continent: Oceanio
+
+country_181:
+  id: 181
+  name: Salvadoro
+  code: sv
+  continent: Ameriko
+
+country_182:
+  id: 182
+  name: Samoo
+  code: ws
+  continent: Oceanio
+
+country_183:
+  id: 183
+  name: Sankta Bartolomeo
+  code: bl
+  continent: Ameriko
+
+country_184:
+  id: 184
+  name: Sankta Heleno
+  code: sh
+  continent: Ameriko
+
+country_185:
+  id: 185
+  name: Sankta Kristoforo kaj Neviso
+  code: kn
+  continent: Ameriko
+
+country_186:
+  id: 186
+  name: Sankta Lucio
+  code: lc
+  continent: Ameriko
+
+country_187:
+  id: 187
+  name: Sankta Marteno (franca)
+  code: pm
+  continent: Ameriko
+
+country_188:
+  id: 188
+  name: Sankta Marteno (nederlanda)
+  code: mf
+  continent: Ameriko
+
+country_189:
+  id: 189
+  name: Sankta Piero kaj Mikelono
+  code: pm
+  continent: Ameriko
+
+country_190:
+  id: 190
+  name: Sankta Vincento kaj Grenadinoj
+  code: vc
+  continent: Ameriko
+
+country_191:
+  id: 191
+  name: Sanmarino
+  code: sm
+  continent: Eŭropo
+
+country_192:
+  id: 192
+  name: Santomeo kaj Principeo
+  code: st
+  continent: Afriko
+
+country_193:
+  id: 193
+  name: Sauda Arabio
+  code: sa
+  continent: Azio
+
+country_194:
+  id: 194
+  name: Sejŝeloj
+  code: sc
+  continent: Afriko
+
+country_195:
+  id: 195
+  name: Senegalo
+  code: sn
+  continent: Afriko
+
+country_196:
+  id: 196
+  name: Serbio
+  code: rs
+  continent: Eŭropo
+
+country_197:
+  id: 197
+  name: Sieraleono
+  code: sl
+  continent: Afriko
+
+country_198:
+  id: 198
+  name: Singapuro
+  code: sg
+  continent: Azio
+
+country_199:
+  id: 199
+  name: Sirio
+  code: sy
+  continent: Azio
+
+country_200:
+  id: 200
+  name: Slovakio
+  code: sk
+  continent: Eŭropo
+
+country_201:
+  id: 201
+  name: Slovenio
+  code: si
+  continent: Eŭropo
+
+country_202:
+  id: 202
+  name: Somalio
+  code: so
+  continent: Afriko
+
+country_203:
+  id: 203
+  name: Srilanko
+  code: lk
+  continent: Azio
+
+country_204:
+  id: 204
+  name: Sud-Afriko
+  code: za
+  continent: Afriko
+
+country_208:
+  id: 208
+  name: Sudano
+  code: sd
+  continent: Afriko
+
+country_205:
+  id: 205
+  name: Sud-Georgio kaj Sud-Sandviĉinsuloj
+  code: gs
+  continent: Ameriko
+
+country_206:
+  id: 206
+  name: Sud-Koreio
+  code: kr
+  continent: Azio
+
+country_207:
+  id: 207
+  name: Sud-Sudano
+  code: ss
+  continent: Afriko
+
+country_209:
+  id: 209
+  name: Surinamo
+  code: sr
+  continent: Ameriko
+
+country_210:
+  id: 210
+  name: Svalbardo kaj Janmajeno
+  code: sj
+  continent: Eŭropo
+
+country_211:
+  id: 211
+  name: Svazilando
+  code: sz
+  continent: Afriko
+
+country_212:
+  id: 212
+  name: Svedio
+  code: se
+  continent: Eŭropo
+
+country_213:
+  id: 213
+  name: Svislando
+  code: ch
+  continent: Eŭropo
+
+country_217:
+  id: 217
+  name: Taĝikio
+  code: tj
+  continent: Azio
+
+country_214:
+  id: 214
+  name: Tajlando
+  code: th
+  continent: Azio
+
+country_215:
+  id: 215
+  name: Tajvano
+  code: tw
+  continent: Azio
+
+country_216:
+  id: 216
+  name: Tanzanio
+  code: tz
+  continent: Afriko
+
+country_218:
+  id: 218
+  name: Togolando
+  code: tg
+  continent: Afriko
+
+country_219:
+  id: 219
+  name: Tokelao
+  code: tk
+  continent: Oceanio
+
+country_220:
+  id: 220
+  name: Tongo
+  code: to
+  continent: Oceanio
+
+country_221:
+  id: 221
+  name: Trinidado kaj Tobago
+  code: tt
+  continent: Ameriko
+
+country_222:
+  id: 222
+  name: Tunizio
+  code: tn
+  continent: Afriko
+
+country_223:
+  id: 223
+  name: Turkio
+  code: tr
+  continent: Azio
+
+country_224:
+  id: 224
+  name: Turkmenio
+  code: tm
+  continent: Azio
+
+country_225:
+  id: 225
+  name: Turkoj kaj Kajkoj
+  code: tc
+  continent: Ameriko
+
+country_226:
+  id: 226
+  name: Tuvalo
+  code: tv
+  continent: Oceanio
+
+country_227:
+  id: 227
+  name: Ugando
+  code: ug
+  continent: Afriko
+
+country_228:
+  id: 228
+  name: Ukrainio
+  code: ua
+  continent: Eŭropo
+
+country_229:
+  id: 229
+  name: Unuiĝintaj Arabaj Emirlandoj
+  code: ae
+  continent: Azio
+
+country_230:
+  id: 230
+  name: Urugvajo
+  code: uy
+  continent: Ameriko
+
+country_232:
+  id: 232
+  name: Usonaj Malgrandaj Insuloj
+  code: um
+  continent: Oceanio
+
+country_233:
+  id: 233
+  name: Usonaj Virgulinsuloj
+  code: vi
+  continent: Ameriko
+
+country_231:
+  id: 231
+  name: Usona Samoo
+  code: as
+  continent: Oceanio
+
+country_234:
+  id: 234
+  name: Usono
+  code: us
+  continent: Ameriko
+
+country_235:
+  id: 235
+  name: Uzbekio
+  code: uz
+  continent: Azio
+
+country_236:
+  id: 236
+  name: Valiso kaj Futuno
+  code: wf
+  continent: Oceanio
+
+country_237:
+  id: 237
+  name: Vanuatuo
+  code: vu
+  continent: Oceanio
+
+country_238:
+  id: 238
+  name: Vatikano
+  code: va
+  continent: Eŭropo
+
+country_239:
+  id: 239
+  name: Venezuelo
+  code: ve
+  continent: Ameriko
+
+country_240:
+  id: 240
+  name: Vjetnamio
+  code: vn
+  continent: Azio
+
+country_241:
+  id: 241
+  name: Zambio
+  code: zm
+  continent: Afriko
+
+country_242:
+  id: 242
+  name: Zimbabvo
+  code: zw
+  continent: Afriko
+
+country_251:
+  id: 251
+  name: Zimbabwe_704
+  code: NR_330
+  continent: Ameriko
