@@ -2,6 +2,8 @@
   .lead.d-flex
     %div #{event_flag(@evento)} #{@evento.title}
 
+  = link_to "Revidi la eventon", event_url(@evento.ligilo), class: "btn btn-sm btn-outline-primary"
+
   %h4.text-center Kronologio
 
   .row
@@ -52,5 +54,3 @@
                   - new = Country.find(new).name
 
                 = raw Diffy::Diff.new(old, new).to_s(:html)
-
-  = link_to 'Revidi la eventon', event_url(@evento.ligilo), class: 'btn btn-outline-primary btn-sm'
