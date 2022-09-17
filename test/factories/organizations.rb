@@ -5,7 +5,7 @@ FactoryBot.define do
     name { Faker::Company.name }
     short_name { Faker::Internet.domain_word }
     city { Faker::Address.city }
-    association :country, factory: :lando
+    country { Country.all.sample }
     email { Faker::Internet.email }
   end
 
@@ -13,7 +13,7 @@ FactoryBot.define do
     name { 'Brazila Esperanta Junulara Organizo' }
     short_name { 'BEJO' }
     city { 'São Paulo' }
-    association :country, factory: :lando
+    country { Country.all.sample }
     email { 'bejo@bejo.org.br' }
   end
 
@@ -21,7 +21,7 @@ FactoryBot.define do
     name { 'Tutmonda Esperanta Junulara Organizo' }
     short_name { 'TEJO' }
     city { Faker::Address.city }
-    association :country, factory: :lando
+    country { Country.all.sample }
     email { Faker::Internet.email }
   end
 end

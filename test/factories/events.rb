@@ -8,7 +8,7 @@ FactoryBot.define do
     association :user, factory: :uzanto
     deleted { false }
     city { Faker::Address.city }
-    association :country, factory: :lando
+    country { Country.all.sample }
     email { Faker::Internet.email }
     site { Faker::Internet.url }
     date_start { Time.zone.today }
@@ -19,17 +19,17 @@ FactoryBot.define do
     uuid { Faker::Internet.uuid }
 
     trait :brazila do
-      association :country, factory: %i[lando brazilo]
+      country { Country.find_by(code: "br") }
     end
 
     trait :usona do
-      association :country, factory: %i[lando usono]
+      country { Country.find_by(code: "us") }
       city { 'New York' }
       address { '31 Ocean Parkway' }
     end
 
     trait :japana do
-      association :country, factory: %i[lando japanio]
+      country { Country.find_by(code: "jp") }
       city { 'Tokyo' }
     end
 

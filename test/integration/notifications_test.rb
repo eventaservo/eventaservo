@@ -7,7 +7,7 @@ class NotificationTest < ActionDispatch::IntegrationTest
 
   test 'malaboni ricevon de novaj eventoj' do
     uzanto    = create(:uzanto)
-    lando     = create(:lando, :brazilo)
+    lando     = Country.find_by(code: "br")
     nl_record = nil
 
     assert_difference('NotificationList.count', 1) do

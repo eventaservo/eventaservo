@@ -8,10 +8,10 @@ FactoryBot.define do
     admin { false }
     password { Faker::Internet.password }
     confirmed_at { Time.now }
-    association :country, factory: :lando
+    country { Country.all.sample }
 
     trait :brazila do
-      association :country, factory: [:lando, :brazilo]
+      country { Country.find_by(code: "br") }
     end
 
     trait :admin do

@@ -7,7 +7,7 @@ class TimeZonesTest < ActionDispatch::IntegrationTest
 
   test 'kontrolas ĝustan eventan horzonon' do
     sign_in create(:uzanto)
-    brazilo = create(:lando, :brazilo)
+    brazilo = Country.find_by(code: "br")
 
     get '/e/new'
     assert_difference('Event.count', 1) do

@@ -25,12 +25,6 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
       /Reta
     ]
 
-    create(:lando, :brazilo)
-    create(:lando, :togolando)
-    create(:lando, :australio)
-    create(:lando, :cehio)
-    create(:lando, :japanio)
-    create(:lando, :reta)
     valid_continents.each do |continent|
       get continent
       assert_response :success
@@ -38,7 +32,6 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'redirektas /reta al /Reta' do
-    create(:lando, :reta)
     get '/reta'
     assert_redirected_to '/Reta'
   end
@@ -50,11 +43,9 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'devas montri urban paĝon se urbo nomo validas' do
-    create :lando, :brazilo
     get '/ameriko/brazilo'
     assert_response :success
 
-    create :lando, :cehio
     get '/E%C5%ADropo/%C4%88e%C4%A5io'
     assert_response :success
 

@@ -7,7 +7,7 @@ class PostEventTest < ActionDispatch::IntegrationTest
 
   setup do
     sign_in create(:uzanto, :admin)
-    @brazilo = create(:lando, :brazilo)
+    @brazilo = Country.find_by(code: "br")
     @bejo    = create(:bejo)
     @tejo    = create(:tejo)
     @evento  = create(:evento)

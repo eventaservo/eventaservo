@@ -5,7 +5,7 @@ class EventTest < ActiveSupport::TestCase
 
   test 'sukcesa Meetup evento' do
 
-    lando = create(:lando, :kanado)
+    lando = Country.find_by(code: "ca")
     tempozono = "America/Toronto"
 
     VCR.use_cassette("meetup_success") do
