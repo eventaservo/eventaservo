@@ -10,16 +10,16 @@ FactoryBot.define do
   end
 
   factory :bejo, class: :organization do
-    name { 'Brazila Esperanta Junulara Organizo' }
-    short_name { 'BEJO' }
-    city { 'São Paulo' }
+    name { "Brazila Esperanta Junulara Organizo" }
+    short_name { "BEJO" }
+    city { "São Paulo" }
     country { Country.all.sample }
-    email { 'bejo@bejo.org.br' }
+    email { "bejo@bejo.org.br" }
   end
 
   factory :tejo, class: :organization do
-    name { 'Tutmonda Esperanta Junulara Organizo' }
-    short_name { 'TEJO' }
+    name { "Tutmonda Esperanta Junulara Organizo" }
+    short_name { "TEJO" }
     city { Faker::Address.city }
     country { Country.all.sample }
     email { Faker::Internet.email }
