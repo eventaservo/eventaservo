@@ -5,6 +5,7 @@ RUN sudo apt-get update \
     apt-utils \
     curl \
     git \
+    postgresql-client \
     vim \
     telnet
 
