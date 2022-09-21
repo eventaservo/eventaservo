@@ -6,17 +6,25 @@
         %p
           Saluton.
         %p
-          Vi indikis en la retejo, ke vi interesiĝas pri la evento #{link_to @evento.title, event_url(@evento.ligilo)}.
-        %p
-          Ĝi baldaŭ komenciĝos!
+          Vi indikis en la retejo de #{link_to "Eventa Servo", "eventaservo.org"},
+          ke la jena evento interesas vin: #{link_to @evento.title, event_url(@evento.ligilo)}.
+        %p= @reminder_message
 
         %p.button-blue.text-center
           = link_to 'VIDI LA EVENTAN PAĜON', event_url(@evento.ligilo)
+
+        %br
+        %p{ style: "font-size: small; color: gray;" }
+          Vi ricevas ĉi tiun mesaĝon, ĉar vi indikis en la retejo #{link_to "Eventa Servo", "eventaservo.org"} ke vi
+          interesiĝas pri specifa evento.
+          Por ne plu ricevi ĉi tiajn mesaĝojn, sufiĉas ne plu alklaki la butonon "Mi interesiĝas".
+        %br
 
     %tr.footer
       %td
         = link_to image_tag('https://eventaservo.org/eventa_servo_logo.png', size: 48), 'https://eventaservo.org'
       %td
         Eventa Servo estas senpaga servo de UEA kaj TEJO. Ĉu ĝi plaĉas al vi?
+        %br
         Subteni retajn agantojn, ekzemple per 1 EUR semajne, eblas per la
         fonduso #{link_to 'Instigo-Liberapay', 'https://liberapay.com/instigo'}.

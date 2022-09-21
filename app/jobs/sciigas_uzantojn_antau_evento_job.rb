@@ -1,7 +1,7 @@
 class SciigasUzantojnAntauEventoJob < ApplicationJob
   queue_as :rememoriga_mesagho
 
-  def perform(code)
+  def perform(code, reminder_date_string)
     e = Event.by_code(code)
 
     unless e.participants.any?
@@ -10,6 +10,6 @@ class SciigasUzantojnAntauEventoJob < ApplicationJob
     end
 
     logger.info "[INFO] Partoprenontoj de evento #{code} trovita. Sendante rememorigan mesaĝon."
-    EventMailer.rememorigas_uzantojn_pri_evento(e.id).deliver_later
+    EventMailer.rememorigas_uzantojn_pri_evento(e.id, reminder_date_string).deliver_later
   end
 end

@@ -6,11 +6,13 @@
 #
 # 1) Kolektas, per Geocode, la koordinatojn, se +require_geocode+ validas.
 # 2) Formatas la datumojn per +format_event_data+.
-class Event < ApplicationRecord
+class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   has_paper_trail versions: { scope: -> { order('created_at desc') } },
                   ignore: [:id, :delayed_job_id]
 
   has_rich_text :enhavo
+
+  store_accessor :metadata, :event_reminder_job_ids
 
   has_many_attached :uploads
   validate :verify_upload_content_type
@@ -36,7 +38,7 @@ class Event < ApplicationRecord
   validates_uniqueness_of :short_url, case_sensitive: false, allow_blank: true, allow_nil: true
 
   before_save :format_event_data
-  before_save :schedule_notify_users_job
+  before_save :schedule_users_reminders_jobs
 
   geocoded_by :full_address
   after_validation :geocode, if: :require_geocode?
@@ -418,14 +420,26 @@ class Event < ApplicationRecord
       end
     end
 
-    # Registra DELAYED JOB por ĉiuj eventoj
-    def schedule_notify_users_job
-      if self.delayed_job_id
-        old_job = Delayed::Job.find_by(id: self.delayed_job_id)
-        old_job.destroy if old_job
-      end
+  def schedule_users_reminders_jobs
+    # Destroy old delayed jobs enqueued
+    Delayed::Job.where(id: event_reminder_job_ids).destroy_all if event_reminder_job_ids.present?
 
-      new_job = ::SciigasUzantojnAntauEventoJob.set(wait_until: self.date_start - 2.hours).perform_later(self.code)
-      self.delayed_job_id = new_job.provider_job_id
-    end
+    delayed_job_ids = []
+
+    delayed_job_ids << create_reminder_job(self, 2.hours, "2.hours")
+    delayed_job_ids << create_reminder_job(self, 1.week, "1.week")
+    delayed_job_ids << create_reminder_job(self, 1.month, "1.month")
+
+    self.event_reminder_job_ids = delayed_job_ids
+  end
+
+  def create_reminder_job(event, reminder_date, reminder_date_string)
+    return unless event.date_start > (DateTime.now + reminder_date)
+
+    job = SciigasUzantojnAntauEventoJob
+          .set(wait_until: event.date_start - reminder_date)
+          .perform_later(event.code, reminder_date_string)
+
+    job.provider_job_id
+  end
 end

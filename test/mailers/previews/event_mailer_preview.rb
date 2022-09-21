@@ -30,6 +30,7 @@ class EventMailerPreview < ActionMailer::Preview
   end
 
   def rememorigas_uzantojn_pri_evento
-    EventMailer.rememorigas_uzantojn_pri_evento(Event.venontaj.sample.id)
+    reminder_date_string_options = ["2.hours", "1.week", "1.month"]
+    EventMailer.rememorigas_uzantojn_pri_evento(Event.venontaj.sample.id, reminder_date_string_options.sample)
   end
 end

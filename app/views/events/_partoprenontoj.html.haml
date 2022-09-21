@@ -8,10 +8,10 @@
         <partoprenanta-butono participant="#{@event.participants.pluck(:user_id).include?(current_user.id) if current_user}" :logged="#{current_user.present?}" ligilo="#{event_toggle_participant_url(@event.ligilo)}" />
     - if current_user && @event.participants.pluck(:user_id).include?(current_user.id)
       %p.bg-color-greenLighter.p-1.mt-2.text-center{style: 'border-radius: 5px;'}
-        Vi ricevos memorigan retmesaĝon du horojn antaŭ la komenco de la evento.
+        Vi ricevos memorigajn retmesaĝojn pri la evento.
     - else
       %p.bg-color-grayLighter.p-1.mt-2.text-center{style: 'border-radius: 5px;'}
-        Indiku ke vi interesiĝas kaj vi ricevos memorigan retmesaĝon du horojn antaŭ la komenco de la evento.
+        Indiku ke vi interesiĝas kaj vi ricevos memorigajn retmesaĝojn pri la evento.
 
     - # Listeto de partoprenontoj
     - @partoprenontoj.publikaj.sample(3).each do |participant|
