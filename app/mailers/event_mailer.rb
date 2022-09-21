@@ -85,18 +85,41 @@ class EventMailer < ApplicationMailer
     mail(to: to, bcc: bcc, subject: 'Vi estas nova eventa administranto')
   end
 
-  def rememorigas_uzantojn_pri_evento(evento_id)
+  def rememorigas_uzantojn_pri_evento(evento_id, reminder_date_string)
     @evento = Event.find(evento_id)
-
+    @reminder_message = event_reminder_message(reminder_date_string)
     emails = @evento.participants_records.pluck(:email)
-
-    emails = ['fernando@eventaservo.org'] unless Rails.env.production?
+    email_subject = reminder_email_subject(@evento.title, reminder_date_string)
 
     emails.each do |to|
       mail(to: to,
            from: 'Eventa Servo <kontakto@eventaservo.org>',
-           subject: "[ES] #{@evento.title} baldaŭ komenciĝos",
+           subject: email_subject,
            track_opens: 'true')
     end
+  end
+
+  private
+
+  def event_reminder_message(reminder_date_string)
+    hash = {
+      "2.hours": "Ĝi komenciĝos baldaŭ. Ni deziras al vi agrablan kaj sukcesan partoprenon.",
+      "1.week": "Ĝi komenciĝos post semajno. Pripensu aliĝi aŭ almenaŭ informi la organizanton de la evento pri via "\
+                "intenco ĝin ĉeesti.",
+      "1.month": "Ĝi komenciĝos post monato. Pripensu aliĝi aŭ almenaŭ informi la organizanton de la evento pri via "\
+                 "intenco ĝin ĉeesti."
+    }
+
+    hash[reminder_date_string.to_sym]
+  end
+
+  def reminder_email_subject(title, reminder_date_string)
+    hash = {
+      "2.hours": "[ES] #{title} baldaŭ komenciĝos",
+      "1.week": "[ES] #{title} komenciĝos post semajno",
+      "1.month": "[ES] #{title} komenciĝos post monato"
+    }
+
+    hash[reminder_date_string.to_sym]
   end
 end

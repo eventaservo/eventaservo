@@ -155,7 +155,7 @@ ActiveRecord::Schema.define(version: 2022_09_09_221403) do
     t.string "short_url"
     t.boolean "cancelled", default: false
     t.text "cancel_reason"
-    t.integer "delayed_job_id"
+    t.jsonb "metadata"
     t.index "md5(content)", name: "index_events_on_content"
     t.index ["address"], name: "index_events_on_address"
     t.index ["cancelled"], name: "index_events_on_cancelled"
