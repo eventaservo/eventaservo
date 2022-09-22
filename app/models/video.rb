@@ -21,9 +21,12 @@ class Video < ApplicationRecord
   end
 
   def self.serchi(teksto)
-    Video.where('unaccent(videos.title) ilike unaccent(:search) OR
-              unaccent(videos.description) ilike unaccent(:search)',
-               search: "%#{teksto.strip.tr(' ', '%').downcase}%").order('videos.title')
+    Video
+      .joins(:evento)
+      .where(
+        "unaccent(videos.title) ilike unaccent(:search) OR unaccent(videos.description) ilike unaccent(:search)",
+        search: "%#{teksto.strip.tr(' ', '%').downcase}%"
+      ).order("events.date_start DESC")
   end
 
   private
