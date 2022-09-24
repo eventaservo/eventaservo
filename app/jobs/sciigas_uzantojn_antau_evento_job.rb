@@ -1,7 +1,7 @@
 class SciigasUzantojnAntauEventoJob < ApplicationJob
   queue_as :rememoriga_mesagho
 
-  def perform(code, reminder_date_string)
+  def perform(code, reminder_date_string = "2.hours")
     e = Event.by_code(code)
 
     unless e.participants.any?
