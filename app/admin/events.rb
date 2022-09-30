@@ -13,6 +13,7 @@ ActiveAdmin.register Event do
   filter :city_cont, label: 'City'
   filter :country, as: :select, collection: proc { Event.joins(:country).pluck("countries.name, countries.id").sort }
   filter :short_url_eq, label: 'URL code'
+  filter :international_calendar
   filter :cancelled
 
   index do

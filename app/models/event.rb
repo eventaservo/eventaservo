@@ -88,6 +88,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :ne_anoncoj, -> { sen_speco('Anonco') }
   scope :chefaj, -> { ne_konkursoj.ne_anoncoj }
   scope :anoncoj_kaj_konkursoj, -> { anoncoj.or(konkursoj) }
+  scope :international_calendar, -> { where(international_calendar: true) }
 
   def self.by_code(code)
     find_by(code: code)
