@@ -114,10 +114,15 @@
                 = form.select(:country_id, options_from_collection_for_select(Country.not_online, 'id', 'name', @event.country_id), {}, class: 'form-control select2-input')
 
         - if current_user.admin?
-          .text-divider Administrantoj
-          .form-group
-            = label_tag :user_id, 'Eventa administranto'
-            = form.select(:user_id, options_from_collection_for_select(User.order(:name), 'id', 'name', @event.user_id || current_user.id), {}, class: 'form-control select2-input')
+          .box-white.bg-color-admin
+            .lead Administraj funkcioj
+            .form-group.form-check
+              = form.check_box :international_calendar, class: 'form-check-input'
+              = form.label :international_calendar, '📅 Aldoni al Internacia Kalendaro', class: 'form-check-label'
+
+            .form-group
+              = label_tag :user_id, 'Eventa administranto'
+              = form.select(:user_id, options_from_collection_for_select(User.order(:name), 'id', 'name', @event.user_id || current_user.id), {}, class: 'form-control select2-input')
 
         .buttons-footer
           - if params[:action] == 'edit'

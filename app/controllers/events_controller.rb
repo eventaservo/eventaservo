@@ -254,7 +254,7 @@ class EventsController < ApplicationController
       params[:event][:commit] = params[:commit]
 
       params.require(:event).permit(
-        :title, :description, :enhavo, :site, :email, :date_start, :date_end, :time_zone,
+        :title, :description, :enhavo, :site, :email, :date_start, :date_end, :time_zone, :international_calendar,
         :address, :city, :country_id, :online, :user_id, :specolisto, :short_url, uploads: []
       )
     end

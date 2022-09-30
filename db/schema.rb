@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_09_221403) do
+ActiveRecord::Schema.define(version: 2022_09_30_123226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -156,6 +156,7 @@ ActiveRecord::Schema.define(version: 2022_09_09_221403) do
     t.boolean "cancelled", default: false
     t.text "cancel_reason"
     t.jsonb "metadata"
+    t.boolean "international_calendar", default: false
     t.index "md5(content)", name: "index_events_on_content"
     t.index ["address"], name: "index_events_on_address"
     t.index ["cancelled"], name: "index_events_on_cancelled"
