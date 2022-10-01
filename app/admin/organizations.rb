@@ -14,5 +14,19 @@ ActiveAdmin.register Organization do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
+
+  actions :all, except: :destroy
+
+  filter :name_cont
+  filter :country
+
+  permit_params :name, :short_name, :official, :email, :url, :country_id, :city, :address, :phone
+
+  index do
+    column :id
+    column :name
+    column :short_name
+    column :country
+    column :city
+  end
 end
