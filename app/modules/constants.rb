@@ -16,4 +16,10 @@ module Constants
   # Kvanto de partoprenontoj por fairigi eventon
   FAJRA_EVENTO_PARTOPRENONTOJ = 5
   public_constant :FAJRA_EVENTO_PARTOPRENONTOJ
+
+  # Sentry.io
+  SENTRY_ORGANIZATION_SLUG = "esperanto"
+  public_constant :SENTRY_ORGANIZATION_SLUG
+  SENTRY_PROJECT_SLUG = "eventa-servo"
+  public_constant :SENTRY_PROJECT_SLUG
 end
