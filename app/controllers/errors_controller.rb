@@ -9,7 +9,14 @@ class ErrorsController < ApplicationController
     render 'errors/internal_error', status: 422
   end
 
+  # Error 500
   def internal_error
-    render status: 500
+    @sentry_id = request.env["sentry.error_event_id"]
+
+    render status: :internal_server_error
+  end
+
+  def error_form
+    raise
   end
 end
