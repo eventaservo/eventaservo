@@ -40,3 +40,17 @@ jobs:
     uses: eventaservo/eventaservo/.github/workflows/template_airbrake.yml@main
     secrets:
       airbrake_key: ${{ secrets.AIRBRAKE_KEY }}
+      
+  sentry_release_production:
+    needs: docker_production
+    if: ${{ github.ref_name == 'main' }}
+    uses: getsentry/action-release@v1
+    with:
+      environment: 'production'
+      
+  sentry_release_staging:
+    needs: docker_staging
+    if: ${{ github.ref_name == 'staging' }}
+    uses: getsentry/action-release@v1
+    with:
+      environment: 'staging'
