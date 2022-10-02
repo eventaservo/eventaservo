@@ -29,4 +29,20 @@ ActiveAdmin.register Event do
     column :country
     actions
   end
+
+  csv do
+    column :id
+    column :title
+    column :date_start
+    column :date_end
+    column :city
+    column(:country) { |event| event.country.name }
+    column :time_zone
+    column :cancelled
+    column :cancel_reason
+    column :online
+    column :international_calendar
+    column(:user) { |event| event.user.name }
+    column(:event_link) { |event| "https://#{Rails.application.routes.default_url_options[:host]}/#{event.short_url}" }
+  end
 end
