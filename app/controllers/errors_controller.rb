@@ -32,7 +32,9 @@ class ErrorsController < ApplicationController
       "Authorization" => "Bearer #{Rails.application.credentials.dig(:sentry, :auth_token)}"
     }
 
-    HTTParty.post(sentry_url, body: body, headers: headers)
+    response = HTTParty.post(sentry_url, body: body, headers: headers)
+
+    Sentry.capture_message "Sentry user feedback form response error" unless response.success?
 
     redirect_to root_path, notice: "Dankon!"
   end
