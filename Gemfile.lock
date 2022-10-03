@@ -430,6 +430,9 @@ GEM
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
     semantic_range (3.0.0)
+    sentry-delayed_job (5.4.2)
+      delayed_job (>= 4.0)
+      sentry-ruby (~> 5.4.2)
     sentry-rails (5.4.2)
       railties (>= 5.0)
       sentry-ruby (~> 5.4.2)
@@ -569,6 +572,7 @@ DEPENDENCIES
   seed_dump
   select2-rails (~> 4.0)
   selenium-webdriver
+  sentry-delayed_job (~> 5.4.2)
   sentry-rails (~> 5.4.2)
   sentry-ruby (~> 5.4.2)
   simple_token_authentication (~> 1.0)

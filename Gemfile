@@ -101,6 +101,7 @@ gem 'airbrake', '~> 13'
 # Sentry.io
 gem "sentry-ruby", "~> 5.4.2"
 gem "sentry-rails", "~> 5.4.2"
+gem "sentry-delayed_job", "~> 5.4.2"
 
 gem 'listen'
 
