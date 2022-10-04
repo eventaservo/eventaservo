@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "constants"
+
 Sentry.init do |config|
   config.dsn = "https://6b22c73cdd694a8b90f6b1d84ffa51df@o199541.ingest.sentry.io/1309834"
   config.breadcrumbs_logger = [:active_support_logger, :http_logger]
@@ -14,4 +16,5 @@ Sentry.init do |config|
   # end
 
   config.enabled_environments = %w[production staging]
+  config.release = Constants::VERSIO
 end
