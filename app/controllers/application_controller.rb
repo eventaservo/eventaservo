@@ -78,4 +78,10 @@ class ApplicationController < ActionController::Base
     def authenticate_admin!
       redirect_to root_path unless current_user.admin?
     end
+
+  def set_sentry_context
+    return unless user_signed_in?
+
+    Sentry.set_user({ id: current_user.id, username: current_user.username, email: current_user.email })
+  end
 end
