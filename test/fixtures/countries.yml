@@ -1527,9 +1527,3 @@ country_242:
   name: Zimbabvo
   code: zw
   continent: Afriko
-
-country_251:
-  id: 251
-  name: Zimbabwe_704
-  code: NR_330
-  continent: Ameriko

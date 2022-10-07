@@ -36,7 +36,7 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test "komenca dato necesas" do
-    evento = build(:evento, date_start: nil)
+    evento = build(:event, date_start: nil, date_end: nil)
     assert evento.invalid?
   end
 

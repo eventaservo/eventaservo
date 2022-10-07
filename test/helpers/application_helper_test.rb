@@ -32,7 +32,7 @@ class ApplicationHelperTest < ActionView::TestCase
   end
 
   test 'colorigas la eventojn pasintajn grizaj' do
-    assert_equal 'gray', color_event(build_stubbed(:evento, :pasinta))
+    assert_equal 'gray', color_event(build_stubbed(:evento, :past))
   end
 
   test 'colorigas la eventojn venontajn verdaj' do

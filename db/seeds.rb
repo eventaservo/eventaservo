@@ -8,9 +8,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-puts "Running seeds.rb file"
+puts "== Running seeds.rb file"
 
-puts "--> Carregando as Fixtures"
+puts "- Loading Fixtures"
 Rake.application["db:fixtures:load"].invoke
 
 # Kreas la administranton
@@ -25,9 +25,15 @@ User.create(email: "admin@eventaservo.org",
             confirmed_at: DateTime.now)
 
 # Events
-3.times { FactoryBot.create(:evento, :venonta) }
+puts "- Creating events"
+4.times { FactoryBot.create(:event) }
+3.times { FactoryBot.create(:event, :online) }
+3.times { FactoryBot.create(:event, :past) }
+puts "- Creating international calendar events"
+3.times { FactoryBot.create(:event, :international_calendar, date_start: DateTime.now + rand(1..3).months) }
 
 # Create the ActiveAdmin users and staging users
+puts "- Creating ActiveAdmin users"
 unless Rails.env.production?
   AdminUser.destroy_all
   AdminUser.create!(email: "shayani@gmail.com", password: "123456", password_confirmation: "123456")
@@ -49,3 +55,5 @@ unless Rails.env.production?
               admin: true,
               confirmed_at: DateTime.now)
 end
+
+puts "== FINISHED"
