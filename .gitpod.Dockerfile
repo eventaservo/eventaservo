@@ -1,4 +1,4 @@
-FROM gitpod/workspace-full
+FROM gitpod/workspace-full:2022-09-11-15-11-40
 
 RUN sudo apt-get update \
   && sudo apt-get install -y \
@@ -24,3 +24,4 @@ RUN bash -c 'VERSION="lts/fermium" \
   && source $HOME/.nvm/nvm.sh && nvm install $VERSION \
   && nvm use $VERSION && nvm alias default $VERSION'
 RUN echo "nvm use default &>/dev/null" >> ~/.bashrc.d/51-nvm-fix
+RUN bash -c "npm install -g npm@latest"

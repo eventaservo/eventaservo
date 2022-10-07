@@ -2,32 +2,48 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - name: Setup
-    before: docker-compose up -d
-    init: >
-      gem install bundler:2.3.18 &&
-      bundle install &&
-      yarn install &&
-      bundle exec rails db:setup &&
-      gp sync-done setup
-    command: >
-      docker-compose up -d &&
-      gp sync-done setup &&
+  - name: Containers
+    before: |
+      docker run -p 5432:5432 --rm -e POSTGRES_DB=eventaservo_devel -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -v postgres_db:/var/lib/postgresql/data -d --name postgres postgres:13.5
+      docker run -p 6379:6379 --rm -d --name redis redis:6.2.6
+      docker run -p 1025:1025 --rm -p 1080:1080 -d schickling/mailcatcher:latest
+      gp sync-done containers
+      exit
+
+  - name: Bundler
+    init: |
+      gp sync-await containers
+      gem install bundler:2.3.18
+      bundle install
+      bundle exec rails db:migrate
+      bundle exec rails db:seed
+    command:
+      gp sync-done bundler
+      exit
+
+  - name: Yarn
+    init: |
+      yarn install
+    command:
+      gp sync-done yarn
       exit
 
   - name: Delayed Job
-    command: >
-      gp sync-await setup &&
+    command: |
+      gp sync-await bundler
+      gp sync-await yarn
       bundle exec bin/rake jobs:work
 
   - name: Webpacker
-    command: >
-      gp sync-await setup &&
+    command: |
+      gp sync-await bundler
+      gp sync-await yarn
       bundle exec bin/webpack-dev-server
 
   - name: Rails server
-    command: >
-      gp sync-await setup &&
+    command: |
+      gp sync-await bundler
+      gp sync-await yarn
       bundle exec bin/rails server -b 0.0.0.0 -p 3000 -e development -b 'ssl://0.0.0.0:3000?key=./certs/localhost.key&cert=./certs/localhost.crt'
 
 ports:
@@ -42,14 +58,17 @@ ports:
 
 vscode:
   extensions:
-    - rebornix.ruby
     - ms-azuretools.vscode-docker
-    - eamodio.gitlens
     - mhutchie.git-graph
-    - makicamel.rails-routes-navigator
-    - noku.rails-run-spec-vscode
+    - PKief.material-icon-theme
+    - rebornix.ruby
+    - eamodio.gitlens
+    - kaiwood.endwise
 
 github:
   prebuilds:
     master: true
     branches: true
+    pullRequests: true
+    addCheck: true
+    addBadge: true
