@@ -46,6 +46,8 @@ vscode:
     - ms-azuretools.vscode-docker
     - eamodio.gitlens
     - mhutchie.git-graph
+    - makicamel.rails-routes-navigator
+    - noku.rails-run-spec-vscode
 
 github:
   prebuilds:
