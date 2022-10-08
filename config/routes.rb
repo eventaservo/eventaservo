@@ -74,6 +74,7 @@ Rails.application.routes.draw do
   get "ik", to: "international_calendar#index", as: "international_calendar"
   get "ik/jaroj", to: "international_calendar#year_list", as: "international_calendar_year_list"
   get "ik/:year", to: "international_calendar#year", as: "international_calendar_year"
+  get "kalendaro", to: redirect("/ik")
   get "j", to: redirect("/ik")
   get "j/:year", to: redirect("/ik/%{year}")
   get "/eventoj-hu", to: redirect("/ik/jaroj#eventoj-hu")
