@@ -6,7 +6,7 @@ class InternationalCalendarController < ApplicationController
   end
 
   def year_list
-    @events_by_year = Event.group("EXTRACT (YEAR FROM date_start)").count.sort.reverse.to_h
+    @events_by_year = Event.international_calendar.group("EXTRACT (YEAR FROM date_start)").count.sort.reverse.to_h
   end
 
   def year
