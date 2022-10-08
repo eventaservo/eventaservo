@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
-class InternaciaController < ApplicationController
+class InternationalCalendarController < ApplicationController
+  def index
+    @events = Event.international_calendar.order(:date_start)
+  end
+
   def jaro
     @jaro = params[:jaro].to_i
     redirect_to root_url, flash: { error: 'Jaro ne valida' } and return if (@jaro < 1887 || @jaro > 2100)
