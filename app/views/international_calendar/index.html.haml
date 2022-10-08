@@ -1,0 +1,19 @@
+.box-white
+  .text-center
+    %h1 Internacia Kalendaro
+    = link_to "Pasintaj internaciaj eventoj", international_calendar_year_list_path, class: 'btn btn-sm btn-link'
+
+  - @events.grouped_by_months.map do |date, events|
+    %br
+    %h3.text-divider= l(date, format: '%B %Y').upcase
+    .row
+      - events.each do |e|
+        .col-12
+          = event_flag(e)
+          %strong= link_to(e.title, event_url(e.ligilo), class: ("cancelled" if e.cancelled))
+          = display_organizations_for_event(e)
+          %p.small
+            %strong #{event_date(e)} en #{e.city}
+            %br
+            = e.description
+          %hr

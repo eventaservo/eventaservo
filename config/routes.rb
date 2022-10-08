@@ -70,10 +70,14 @@ Rails.application.routes.draw do
     get 'o/:short_name', to: 'webcal#organizo', as: 'organizo'
   end
 
-  # Internacia kalendaro
-  get 'j/:jaro', to: 'internacia#jaro', as: 'internacia_kalendaro'
-  get '/jaro/:jaro', to: redirect('/j/%{jaro}')
-  get '/eventoj-hu', to: redirect('/j/2020?eventoj=hu')
+  # International Calendar (Internacia kalendaro)
+  get "ik", to: "international_calendar#index", as: "international_calendar"
+  get "ik/jaroj", to: "international_calendar#year_list", as: "international_calendar_year_list"
+  get "ik/:year", to: "international_calendar#year", as: "international_calendar_year"
+  get "kalendaro", to: redirect("/ik")
+  get "j", to: redirect("/ik")
+  get "j/:year", to: redirect("/ik/%{year}")
+  get "/eventoj-hu", to: redirect("/ik/jaroj#eventoj-hu")
 
   # Anoncoj kaj Konkursoj
   get '/anoncoj', to: 'home#anoncoj', as: 'anoncoj'
