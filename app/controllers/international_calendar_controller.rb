@@ -2,13 +2,17 @@
 
 class InternationalCalendarController < ApplicationController
   def index
-    @events = Event.international_calendar.order(:date_start)
+    @events = Event.venontaj.international_calendar.order(:date_start)
   end
 
-  def jaro
-    @jaro = params[:jaro].to_i
-    redirect_to root_url, flash: { error: 'Jaro ne valida' } and return if (@jaro < 1887 || @jaro > 2100)
+  def year_list
+    @events_by_year = Event.group("EXTRACT (YEAR FROM date_start)").count.sort.reverse.to_h
+  end
 
-    @eventoj = Event.lau_jaro(@jaro).international_calendar.order(:date_start)
+  def year
+    @year = params[:year].to_i
+    redirect_to root_url, flash: { error: "Jaro ne validas" } and return if @year < 1887 || @year > 2100
+
+    @events = Event.lau_jaro(@year).international_calendar.order(:date_start)
   end
 end

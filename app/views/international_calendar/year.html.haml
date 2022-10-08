@@ -1,10 +1,7 @@
 .box-white
   .text-center
-    %h1 Internacia kalendaro
-    = link_to "Vidu internaciajn eventojn de aliaj jaroj", international_calendar_year_list_path, class: 'btn btn-sm btn-link'
-
-
-  = render partial: "eventoj_hu" if params[:eventoj] == 'hu'
+    %h1 Internacia kalendaro #{@year}
+    = link_to "Vidu la nunan Internacian Kalendaron", international_calendar_path, class: 'btn btn-sm btn-link'
 
   - @events.grouped_by_months.map do |date, events|
     %br
