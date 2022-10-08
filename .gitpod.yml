@@ -17,16 +17,12 @@ tasks:
       bundle install
       bundle exec rails db:migrate
       bundle exec rails db:seed
-    command:
       gp sync-done bundler
-      exit
 
   - name: Yarn
     init: |
       yarn install
-    command:
       gp sync-done yarn
-      exit
 
   - name: Delayed Job
     command: |
