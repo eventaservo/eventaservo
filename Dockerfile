@@ -1,5 +1,4 @@
 ARG IMAGE=2.7.6-alpine3.14
-ARG AMBIENTE=production
 
 FROM ruby:${IMAGE} as build
 
@@ -34,29 +33,33 @@ COPY .yarnrc.yml ./
 COPY package.json yarn.lock ./
 RUN yarn install
 
-# Define as variaveis de ambiente
-ENV RAILS_ENV=${AMBIENTE}
+# Kreas API dokumentadon ĉe /public/docs/api/v2/
+RUN npm i -g redoc-cli
+RUN mkdir -p public/docs/api/v2/
+COPY openapi/v2.yaml ./openapi/
+RUN redoc-cli build openapi/v2.yaml -o public/docs/api/v2/index.html
+
+COPY . .
+
+# Sets ambient variables
 ENV RAILS_LOG_TO_STDOUT=true
 ENV RAILS_SERVE_STATIC_FILES=true
 ENV GOOGLE_MAPS_KEY=${GOOGLE_MAPS_KEY}
 ENV IPINFO_KEY=${IPINFO_KEY}
 
-COPY . .
-
-# Kreas API dokumentadon ĉe /public/docs/api/v2/
-RUN npm i -g redoc-cli
-RUN mkdir -p public/docs/api/v2/
-RUN redoc-cli build openapi/v2.yaml -o public/docs/api/v2/index.html
+ARG AMBIENTE=production
+ENV RAILS_ENV=${AMBIENTE}
 
 RUN bundle exec rails assets:precompile
 
-# Apaga todos os arquivos desnecessários
-
+# Delete unecessary files from image
 RUN rm -rf node_modules \
   && rm -rf tmp/* \
   && rm -rf vendor/bundle/ruby/${RUBY_MAJOR}.0/cache/* \
   && find vendor/bundle/ruby/${RUBY_MAJOR}.0/gems/ -name "*.c" -delete \
   && find vendor/bundle/ruby/${RUBY_MAJOR}.0/gems/ -name "*.o" -delete
+
+###
 
 FROM ruby:${IMAGE}
 
@@ -74,14 +77,16 @@ RUN apk update \
 
 WORKDIR /eventaservo
 
-ENV RAILS_ENV=${AMBIENTE}
-ENV RAILS_LOG_TO_STDOUT=true
-ENV RAILS_SERVE_STATIC_FILES=true
-
 RUN bundle config set without development test
 RUN bundle config set deployment true
 RUN bundle config set frozen true
 RUN bundle config path vendor/bundle
+
+ENV RAILS_LOG_TO_STDOUT=true
+ENV RAILS_SERVE_STATIC_FILES=true
+
+ARG AMBIENTE=production
+ENV RAILS_ENV=${AMBIENTE}
 
 COPY --from=build /eventaservo /eventaservo
 
