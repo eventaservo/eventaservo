@@ -17,6 +17,9 @@ Lint/ConstantResolution:
 Metrics/BlockLength:
   Enabled: false
 
+Metrics/ClassLength:
+  Enabled: false
+
 Style/AsciiComments:
   Enabled: false
 
