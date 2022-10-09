@@ -105,6 +105,10 @@ gem "sentry-delayed_job", "~> 5.4.2"
 
 gem 'listen'
 
+# Bullet
+# @TODO: must be moved to development but must be checked the docker build process to work fine
+gem "bullet", "~> 7.0.3"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -119,7 +123,6 @@ group :development do
 
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem "bullet", "~> 7.0.3"
   gem 'debase', '~> 0.2.4.1'
   gem 'pry-rails', '~> 0.3.4'
   gem 'ruby-debug-ide', '~> 0.7.3'
