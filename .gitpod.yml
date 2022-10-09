@@ -19,12 +19,14 @@ tasks:
       bundle exec rails db:seed
     command: |
       gp sync-done bundler
+      exit
 
   - name: Yarn
     init: |
       yarn install
     command: |
       gp sync-done yarn
+      exit
 
   - name: Delayed Job
     command: |
@@ -44,6 +46,12 @@ tasks:
       gp sync-await yarn
       bundle exec bin/rails server -b 0.0.0.0 -p 3000 -e development -b 'ssl://0.0.0.0:3000?key=./certs/localhost.key&cert=./certs/localhost.crt'
 
+  - name: Rails console
+    command: |
+      gp sync-await bundler
+      gp sync-await yarn
+      bundle exec bin/rails console
+
 ports:
   - port: 3000
     visibility: public
@@ -62,6 +70,8 @@ vscode:
     - rebornix.ruby
     - eamodio.gitlens
     - kaiwood.endwise
+    - noku.rails-run-spec-vscode
+    - makicamel.rails-routes-navigator
 
 github:
   prebuilds:
