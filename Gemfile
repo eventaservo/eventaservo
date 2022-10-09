@@ -119,6 +119,7 @@ group :development do
 
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem "bullet", "~> 7.0.3"
   gem 'debase', '~> 0.2.4.1'
   gem 'pry-rails', '~> 0.3.4'
   gem 'ruby-debug-ide', '~> 0.7.3'
