@@ -81,4 +81,10 @@ class Organization < ApplicationRecord
         "http://#{site.strip}"
       end
   end
+
+  def remove_user(user)
+    return false if users.count == 1
+
+    OrganizationUser.find_by(user_id: user.id, organization_id: id).destroy
+  end
 end

@@ -1,6 +1,6 @@
 class MigrateCarrierwaveToActiveStorage < ActiveRecord::Migration[5.2]
   def up
-    User.where.not(avatar: nil).each do |user|
+    User.unscoped.where.not(avatar: nil).each do |user|
       user.picture.attach(io: File.open(user.avatar.path), filename: user.avatar.file.filename, content_type: user.avatar.file.content_type)
     end
 

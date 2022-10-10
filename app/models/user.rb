@@ -32,10 +32,14 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :username, uniqueness: true
 
+  default_scope { where(disabled: false) }
+
   scope :receives_weekly_summary, -> { where('mailings @> ?', { weekly_summary: '1' }.to_json) }
   scope :admins, -> { where(admin: true) }
   scope :instruistoj, -> { where("instruo ->> 'instruisto' = 'true'") }
   scope :prelegantoj, -> { where("prelego ->> 'preleganto' = 'true'") }
+  scope :enabled, -> { where(disabled: false) }
+  scope :disabled, -> { unscoped.where(disabled: true) }
 
   def self.from_omniauth(auth)
     if where(email: auth.info.email).exists?
@@ -125,6 +129,16 @@ class User < ApplicationRecord
     Event.where(user_id: id).update_all(user_id: destination_user_id)
     OrganizationUser.where(user_id: id).update_all(user_id: destination_user_id)
     destroy
+  end
+
+  # To be used when a user wants his account to be destroyed.
+  # It removes the user from any organization and change the name, username and email address.
+  def disable!
+    o = organizations.map { |organization| organization.remove_user(self) }
+    return false if o.count(false).positive?
+
+    new_email = "disabled-#{email}"
+    update_columns(disabled: true, email: new_email)
   end
 
   private
