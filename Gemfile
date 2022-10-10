@@ -115,6 +115,7 @@ group :development, :test do
   gem 'rake'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
+  gem "spring"
 end
 
 group :development do
@@ -132,6 +133,7 @@ end
 group :test do
   gem 'capybara'
   gem 'minitest', '~> 5.5'
+  gem "minitest-reporters"
   gem 'selenium-webdriver'
   gem 'simplecov'
   gem 'vcr'
