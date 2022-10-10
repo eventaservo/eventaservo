@@ -20,13 +20,34 @@ ActiveAdmin.register Organization do
   filter :name_cont
   filter :country
 
+  includes :country
+
   permit_params :name, :short_name, :official, :email, :url, :country_id, :city, :address, :phone
 
   index do
-    column :id
+    id_column
     column :name
     column :short_name
     column :country
     column :city
+    column("Users") { |o| o.users.count }
+  end
+
+  show do
+    columns do
+      column do
+        default_main_content
+      end
+
+      column do
+        panel "Users" do
+          table_for resource.users do
+            column("User") do |user|
+              link_to user.name, active_admin_user_path(user)
+            end
+          end
+        end
+      end
+    end
   end
 end

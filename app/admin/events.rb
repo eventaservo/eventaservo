@@ -8,6 +8,8 @@ ActiveAdmin.register Event do # rubocop:disable Metrics/BlockLength
   permit_params :title, :description, :content, :address, :city, :country_id, :user_id, :date_start, :date_end, :code,
                 :site, :email, :online, :specolisto, :short_url, :cancelled, :cancel_reason, :international_calendar
 
+  includes :country
+
   scope :venontaj, default: true
   scope :pasintaj
 

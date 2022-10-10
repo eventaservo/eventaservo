@@ -5,6 +5,10 @@ require_relative '../config/environment'
 require 'rails/test_help'
 require 'minitest/autorun'
 
+# Minitest reporters
+require "minitest/reporters"
+Minitest::Reporters.use! # Minitest::Reporters::SpecReporter.new
+
 # SimpleCov
 require 'simplecov'
 SimpleCov.start
