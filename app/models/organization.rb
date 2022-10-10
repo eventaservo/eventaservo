@@ -6,8 +6,10 @@ class Organization < ApplicationRecord
   has_rich_text :description
   has_many :organization_users, dependent: :destroy
   has_many :organization_events, dependent: :destroy
-  has_many :uzantoj, through: :organization_users, source: :user
-  has_many :eventoj, through: :organization_events, source: :event
+  has_many :users, through: :organization_users
+  has_many :uzantoj, through: :organization_users, source: :user # @deprecated use .users
+  has_many :events, through: :organization_events
+  has_many :eventoj, through: :organization_events, source: :event # @deprecated use .events
   belongs_to :country
 
   before_validation :fix_site
@@ -46,6 +48,7 @@ class Organization < ApplicationRecord
   end
 
   # Listigas ĉiujn membrojn el organizo (administrantoj kaj ne-administrantoj)
+  # @deprecated use .users
   def membroj
     User.where(id: organization_users.pluck(:user_id))
   end
