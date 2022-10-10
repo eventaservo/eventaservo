@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   acts_as_token_authenticatable
+  has_paper_trail
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -185,6 +186,5 @@ class User < ApplicationRecord
       logger.error "*** Ne eblas forigi la konton (ID:#{id} ĉar ĝi ankoraŭ estas membro de organizo. ***"
       throw :abort
     end
-
   end
 end
