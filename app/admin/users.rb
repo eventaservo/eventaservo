@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register User do
-
   permit_params :name, :email
 
   actions :all, except: :destroy
 
   scope :enabled, default: true
   scope :disabled
+
+  includes :country
 
   filter :name
   filter :email
@@ -27,6 +28,9 @@ ActiveAdmin.register User do
     column :city
     column :country
     column :username
+    column("Events") do |user|
+      user.events.count
+    end
     actions
   end
 
