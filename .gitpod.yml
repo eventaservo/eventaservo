@@ -13,6 +13,7 @@ tasks:
   - name: Bundler
     init: |
       gp sync-await containers
+      gem install solargraph
       gem install bundler:2.3.18
       bundle install
       bundle exec rails db:migrate
@@ -72,6 +73,8 @@ vscode:
     - kaiwood.endwise
     - noku.rails-run-spec-vscode
     - makicamel.rails-routes-navigator
+    - castwide.solargraph
+    - karunamurti.haml
 
 github:
   prebuilds:
