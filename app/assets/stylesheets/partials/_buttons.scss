@@ -117,6 +117,14 @@
   }
 }
 
+.button--bold--red {
+  font-weight: bold;
+  color: red;
+  &:hover {
+      @extend .fg-color-red;
+    }
+}
+
 .no-border {
   border: 0;
 }
