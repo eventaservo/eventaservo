@@ -289,6 +289,14 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     where("specolisto not ilike '%#{t}%'")
   end
 
+  # Returns the full URL for the event
+  #
+  # @return [String]
+  #
+  def url
+    Rails.application.routes.url_helpers.event_url(code)
+  end
+
   # Liveras +short_url+ se ĝi ekzistas. Se ne, liveras +code+
   def ligilo
     short_url || code
