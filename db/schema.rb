@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_09_020523) do
+ActiveRecord::Schema.define(version: 2022_10_13_123152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,11 +82,11 @@ ActiveRecord::Schema.define(version: 2022_10_09_020523) do
   end
 
   create_table "ads", force: :cascade do |t|
-    t.bigint "event_id"
     t.boolean "active", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["event_id"], name: "index_ads_on_event_id"
+    t.integer "event_id"
+    t.string "url"
   end
 
   create_table "analytics", force: :cascade do |t|
