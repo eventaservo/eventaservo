@@ -4,7 +4,7 @@ require 'test_helper'
 
 class EventsControllerTest < ActionDispatch::IntegrationTest
   def setup
-    host! 'devel.eventaservo.org:3000'
+    host! 'localhost:3000'
     cookies[:vidmaniero] = 'kartaro'
   end
 
