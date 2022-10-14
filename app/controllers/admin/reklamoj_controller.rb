@@ -15,7 +15,7 @@ module Admin
     end
 
     def create
-      ad = Ad.create(params.require(:ad).permit(:event_id))
+      ad = Ad.create(params.require(:ad).permit(:url, :image))
       ad.image.attach(params[:ad][:image])
       redirect_to admin_reklamoj_index_url
     end
