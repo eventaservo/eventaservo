@@ -17,6 +17,7 @@ tasks:
       gem install bundler:2.3.18
       bundle install
       bundle exec rails db:migrate
+      bundle exec rails db:test:prepare
       bundle exec rails db:seed
     command: |
       gp sync-done bundler
