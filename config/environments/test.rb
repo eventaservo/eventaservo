@@ -42,7 +42,8 @@ Rails.application.configure do
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
-  config.action_mailer.default_url_options = { host: 'devel.eventaservo.org', port: 3000, protocol: 'https' }
+  config.action_mailer.default_url_options = { host: "localhost", port: 3000, protocol: "https" }
+  default_url_options = { host: "localhost", port: 3000, protocol: "https" }
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
@@ -58,4 +59,9 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+
+  config.active_job.default_url_options = { host: "localhost", port: 3000, protocol: :https }
+  Rails.application.routes.default_url_options[:host] = "localhost"
+  Rails.application.routes.default_url_options[:port] = 3000
+  Rails.application.routes.default_url_options[:protocol] = :https
 end
