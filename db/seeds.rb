@@ -32,6 +32,10 @@ puts "- Creating events"
 puts "- Creating international calendar events"
 3.times { FactoryBot.create(:event, :international_calendar, date_start: DateTime.now + rand(1..3).months) }
 
+# Ads
+puts "- Creating ads"
+5.times { FactoryBot.create(:ad) }
+
 # Create the ActiveAdmin users and staging users
 puts "- Creating ActiveAdmin users"
 unless Rails.env.production?
