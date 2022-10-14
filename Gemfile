@@ -133,7 +133,6 @@ end
 group :test do
   gem 'capybara'
   gem 'minitest', '~> 5.5'
-  gem "minitest-reporters"
   gem 'selenium-webdriver'
   gem 'simplecov'
   gem 'vcr'
