@@ -7,8 +7,11 @@ ActiveAdmin.register Ad do
 
   index do
     id_column
-    column :active
+    column(:image) do |ad|
+      image_tag ad.image.variant(resize_to_fill: [200, 100])
+    end
     column :url
+    column :active
     actions
   end
 
@@ -16,9 +19,7 @@ ActiveAdmin.register Ad do
     attributes_table do
       row :id
       row :image do |ad|
-        div do
-          image_tag ad.image.variant(resize_to_fill: [200, 100])
-        end
+        image_tag ad.image.variant(resize_to_fill: [200, 100])
       end
       row :url
       row :active
