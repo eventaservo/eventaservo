@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class NovaUzantoSciigoJob < ApplicationJob
   queue_as :telegram
 
   def perform(uzanto)
-    return true if Rails.env == 'test' || Rails.env.development?
+    return true if Rails.env.test? || Rails.env.development?
 
     mesagho = "Nova uzanto registrita:\n\n"
     mesagho += "#{uzanto.name} el #{uzanto.city} (#{uzanto.country.code.upcase})\n\n"

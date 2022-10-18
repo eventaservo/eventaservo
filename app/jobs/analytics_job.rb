@@ -22,15 +22,15 @@ class AnalyticsJob < ApplicationJob
 
   private
 
-    def duplicate?(browser_name, browser_version, platform, ip, path, vidmaniero)
-      Analytic.where(
-        created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day,
-        browser: browser_name,
-        version: browser_version,
-        platform: platform,
-        ip: ip,
-        path: path,
-        vidmaniero: vidmaniero
-      ).any?
-    end
+  def duplicate?(browser_name, browser_version, platform, ip, path, vidmaniero)
+    Analytic.where(
+      created_at: Time.zone.now.all_day,
+      browser: browser_name,
+      version: browser_version,
+      platform: platform,
+      ip: ip,
+      path: path,
+      vidmaniero: vidmaniero
+    ).any?
+  end
 end

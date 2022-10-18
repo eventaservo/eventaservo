@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SciigasUzantojnAntauEventoJob < ApplicationJob
   queue_as :rememoriga_mesagho
 
@@ -6,7 +8,7 @@ class SciigasUzantojnAntauEventoJob < ApplicationJob
 
     begin
       return unless e.participants.any?
-    rescue => e
+    rescue StandardError => e
       Sentry.capture_exception(e)
     end
 
