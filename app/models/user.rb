@@ -133,13 +133,23 @@ class User < ApplicationRecord
   end
 
   # To be used when a user wants his account to be destroyed.
-  # It removes the user from any organization and change the name, username and email address.
+  # Removes the user from any organization, move all events to system account and disable the user.
   def disable!
     o = organizations.map { |organization| organization.remove_user(self) }
     return false if o.count(false).positive?
 
-    new_email = "disabled-#{email}"
-    update_columns(disabled: true, email: new_email)
+    move_events_to_system_account(events)
+
+    update(disabled: true)
+  end
+
+  #
+  # Return the system account
+  #
+  # @return [User]
+  #
+  def self.system_account
+    find_by(system_account: true)
   end
 
   private
@@ -185,6 +195,12 @@ class User < ApplicationRecord
     if OrganizationUser.where(user_id: id).any?
       logger.error "*** Ne eblas forigi la konton (ID:#{id} ĉar ĝi ankoraŭ estas membro de organizo. ***"
       throw :abort
+    end
+  end
+
+  def move_events_to_system_account(events)
+    events.each do |event|
+      event.update(user: User.system_account)
     end
   end
 end

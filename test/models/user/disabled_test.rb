@@ -15,12 +15,19 @@ class User::DisabledTest < ActiveSupport::TestCase
     assert_equal 1, User.count
   end
 
-  test "Email of disabled user must change" do
+  test "All user events must be transfered to the system account" do
+    FactoryBot.create(:user, system_account: true)
+
     user = FactoryBot.create(:user)
-    email = user.email
+    3.times { FactoryBot.create(:event, user: user) }
+
+    assert 0, User.system_account.events.count
+    assert 3, user.events.count
 
     user.disable!
-    assert_not_equal email, user.email
-    assert_equal "disabled-#{email}", user.email
+
+    assert true, user.disabled
+    assert 0, user.events.count
+    assert 3, User.system_account.events.count
   end
 end

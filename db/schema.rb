@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_18_112218) do
+ActiveRecord::Schema.define(version: 2022_10_18_234052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -325,6 +325,7 @@ ActiveRecord::Schema.define(version: 2022_10_18_112218) do
     t.jsonb "prelego", default: {}, null: false
     t.string "jwt_token"
     t.boolean "disabled", default: false
+    t.boolean "system_account", default: false
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["disabled"], name: "index_users_on_disabled"

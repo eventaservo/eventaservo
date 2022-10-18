@@ -24,9 +24,13 @@ User.create(email: "admin@eventaservo.org",
             admin: true,
             confirmed_at: DateTime.now)
 
+puts "Create System Account"
+FactoryBot.create(:user, name: "EventaServo Sistemo", email: "kontakto@eventaservo.org", system_account: true)
+
 # Events
 puts "- Creating events"
 4.times { FactoryBot.create(:event) }
+4.times { FactoryBot.create(:event, user: User.system_account) }
 3.times { FactoryBot.create(:event, :online) }
 3.times { FactoryBot.create(:event, :past) }
 puts "- Creating international calendar events"
