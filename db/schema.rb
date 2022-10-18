@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_13_123152) do
+ActiveRecord::Schema.define(version: 2022_10_18_112218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -157,6 +157,7 @@ ActiveRecord::Schema.define(version: 2022_10_13_123152) do
     t.text "cancel_reason"
     t.jsonb "metadata"
     t.boolean "international_calendar", default: false
+    t.integer "participants_count", default: 0
     t.index "md5(content)", name: "index_events_on_content"
     t.index ["address"], name: "index_events_on_address"
     t.index ["cancelled"], name: "index_events_on_cancelled"
@@ -166,6 +167,7 @@ ActiveRecord::Schema.define(version: 2022_10_13_123152) do
     t.index ["deleted"], name: "index_events_on_deleted"
     t.index ["description"], name: "index_events_on_description"
     t.index ["online"], name: "index_events_on_online"
+    t.index ["participants_count"], name: "index_events_on_participants_count"
     t.index ["specolisto"], name: "index_events_on_specolisto"
     t.index ["title"], name: "index_events_on_title"
     t.index ["user_id"], name: "index_events_on_user_id"
