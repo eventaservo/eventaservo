@@ -73,10 +73,6 @@ GEM
       activerecord (>= 6.0, < 7.1)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
-    airbrake (13.0.3)
-      airbrake-ruby (~> 6.0)
-    airbrake-ruby (6.2.0)
-      rbtree3 (~> 0.5)
     arbre (1.5.0)
       activesupport (>= 3.0.0, < 7.1)
       ruby2_keywords (>= 0.0.2, < 1.0)
@@ -380,7 +376,6 @@ GEM
     rb-fsevent (0.11.1)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    rbtree3 (0.7.0)
     redcarpet (3.5.1)
     redis (4.7.1)
     regexp_parser (2.5.0)
@@ -515,7 +510,6 @@ PLATFORMS
 DEPENDENCIES
   activeadmin
   acts-as-taggable-on (~> 9.0)
-  airbrake (~> 13)
   better_errors
   binding_of_caller
   bootsnap (>= 1.4.2)

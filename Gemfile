@@ -95,9 +95,6 @@ gem "httparty", "~> 0.18"
 gem "nokogiri", ">= 1.10.4"
 gem "yard"
 
-# Airbrake
-gem "airbrake", "~> 13"
-
 # Sentry.io
 gem "sentry-delayed_job", "~> 5.4.2"
 gem "sentry-rails", "~> 5.4.2"
