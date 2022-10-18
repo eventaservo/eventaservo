@@ -172,7 +172,7 @@ class EventsController < ApplicationController
 
   # Listigas la eventoj laŭ urboj
   def by_city
-    redirect_to root_url, flash: { error: 'Lando ne ekzistas' } if Country.find_by(name: params[:country_name]).nil?
+    redirect_to root_url, flash: { error: 'Lando ne ekzistas' } and return if @country.nil?
 
     unless cookies[:vidmaniero].in? %w[kartaro mapo]
       cookies[:vidmaniero] = { value: 'kartaro', expires: 2.weeks, secure: true }
