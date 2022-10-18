@@ -2,10 +2,6 @@
 
 [![Kontaktu nin en Telegramo https://t.me/fernandoshayani](https://img.shields.io/badge/babili%20en-Telegramo-179CDE.svg)](https://eventaservo.telegramo.org)
 
-![ProvKodo](https://github.com/eventaservo/eventaservo/workflows/ProvKodo/badge.svg)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/fa8d4d3f141f4e57beda334e733426a4)](https://www.codacy.com/app/shayani/EventaServo?utm_source=github.com&utm_medium=referral&utm_content=eventaservo/eventaservo&utm_campaign=Badge_Grade)
-[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/fa8d4d3f141f4e57beda334e733426a4)](https://www.codacy.com/app/shayani/EventaServo?utm_source=github.com&utm_medium=referral&utm_content=eventaservo/eventaservo&utm_campaign=Badge_Coverage)
-
 Program-kodo: [Github](https://github.com/shayani/eventaservo)
 
 ## Legu min
