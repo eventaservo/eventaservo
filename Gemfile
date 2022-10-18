@@ -96,9 +96,9 @@ gem "nokogiri", ">= 1.10.4"
 gem "yard"
 
 # Sentry.io
-gem "sentry-delayed_job", "~> 5.4.2"
-gem "sentry-rails", "~> 5.4.2"
-gem "sentry-ruby", "~> 5.4.2"
+gem "sentry-delayed_job", "~> 5"
+gem "sentry-rails", "~> 5"
+gem "sentry-ruby", "~> 5"
 
 gem "listen"
 
