@@ -11,6 +11,7 @@ class EventsController < ApplicationController
   before_action :filter_events, only: %i[by_continent by_country by_city]
   before_action :validate_continent, only: %i[by_continent by_country by_city]
   before_action :set_country, only: %i[by_country by_city]
+  before_action :sanitize_params
 
   invisible_captcha only: :kontakti_organizanton, honeypot: :tiel, on_spam: :spam_detected
 
@@ -236,6 +237,10 @@ class EventsController < ApplicationController
 
   def set_country
     @country = Country.by_name(params[:country_name])
+  end
+
+  def sanitize_params
+    params.delete(:pagho) if params[:pagho].to_i < 1
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
