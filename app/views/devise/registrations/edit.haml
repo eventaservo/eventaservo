@@ -25,12 +25,15 @@
       .form-gorup.row
         = f.label :country_id, class: 'col-form-label col-md-3'
         .col-md-9
-          = f.select(:country_id, options_from_collection_for_select(Country.not_online, 'id', 'name', @user.country_id), {}, class: 'form-control select2-input')
+          = f.select(:country_id,
+                     options_from_collection_for_select(Country.not_online, 'id', 'name', @user.country_id),
+                     {}, class: 'form-control select2-input')
 
       .form-group.row
         = f.label :birthday, 'Naskiĝdato', class: 'col-form-label col-md-3'
         .col-md-9
-          = f.text_field :birthday, value: (resource.birthday.strftime("%d/%m/%Y") if resource.birthday?) , class: 'birthday form-control'
+          = f.text_field :birthday, value: (resource.birthday.strftime("%d/%m/%Y") if resource.birthday?),
+                         class: 'birthday form-control'
       .form-group.row
         = f.label :ueacode, 'UEA-kodo',  class: 'col-form-label col-md-3'
         .col-md-9
@@ -75,11 +78,6 @@
           = display_user_image(@user)
           = f.file_field :picture, class: 'form-control-file', accept: 'image/gif,image/jpeg,image/png'
 
-      -# .form-group.row
-      -#   = f.label :authentication_token, class: 'col-form-label col-md-3'
-      -#   .col-md-9
-      -#     = f.text_field :authentication_token, readonly: true, class: 'form-control'
-      -#     .small= link_to "Krei novan API-ŝlosilon", api_v1_rekrei_api_kodon_url(current_user.id), class: 'form-text', data: { confirm: 'Ĉu vi certas? Ne eblas malfari tiun agon.' }
       .form-group.row
         = f.label :jwt_token, 'API v2 Token', class: 'col-form-label col-md-3'
         .col-md-9
@@ -88,13 +86,6 @@
       .text-divider Organizoj
       - @user.organizoj.each do |organizo|
         = link_to organizo.short_name, organization_url(organizo.short_name), class: 'btn btn-sm btn-outline-primary'
-
-      -# Kaŝita ĉar nuntempe ES ne plu sendas retlistojn
-      -#
-      -#.text-divider Retlistoj
-      -#.form-check
-      -#  = f.check_box :weekly_summary, class: 'form-check-input'
-      -#  = f.label :weekly_summary, 'Semajna resumo', class: 'form-check-label'
 
       .buttons-footer
         = link_to "Forviŝi konton",user_registration_url, method: :delete, class: "button-cancel float-left",
