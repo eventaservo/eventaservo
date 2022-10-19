@@ -21,13 +21,13 @@ class User::DisabledTest < ActiveSupport::TestCase
     user = FactoryBot.create(:user)
     3.times { FactoryBot.create(:event, user: user) }
 
-    assert 0, User.system_account.events.count
-    assert 3, user.events.count
+    assert_equal 0, User.system_account.events.count
+    assert_equal 3, user.events.count
 
     user.disable!
 
-    assert true, user.disabled
-    assert 0, user.events.count
-    assert 3, User.system_account.events.count
+    assert_equal true, user.disabled
+    assert_equal 0, user.events.count
+    assert_equal 3, User.system_account.events.count
   end
 end
