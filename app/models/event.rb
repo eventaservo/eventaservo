@@ -20,7 +20,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   include Code
   include Events::Organizations
 
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   belongs_to :country
   has_many :organization_events, dependent: :destroy
   has_many :organizations, through: :organization_events

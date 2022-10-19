@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_18_234052) do
+ActiveRecord::Schema.define(version: 2022_10_19_084813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -326,10 +326,12 @@ ActiveRecord::Schema.define(version: 2022_10_18_234052) do
     t.string "jwt_token"
     t.boolean "disabled", default: false
     t.boolean "system_account", default: false
+    t.integer "events_count", default: 0
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["disabled"], name: "index_users_on_disabled"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["events_count"], name: "index_users_on_events_count"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end

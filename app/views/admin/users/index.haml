@@ -19,4 +19,4 @@
       .col
         %object= link_to user.username, events_by_username_path(user.username)
       .col-1
-        #{user.events.count}
+        #{user.events.size}

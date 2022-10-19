@@ -6,7 +6,7 @@ module Admin
     before_action :authenticate_admin!
 
     def index
-      @users = User.includes([:events, :country]).order(:name)
+      @users = User.includes([:country]).order(:name)
       @total_users = @users.count
     end
 
