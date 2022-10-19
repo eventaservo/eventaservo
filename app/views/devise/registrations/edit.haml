@@ -97,5 +97,7 @@
       -#  = f.label :weekly_summary, 'Semajna resumo', class: 'form-check-label'
 
       .buttons-footer
+        = link_to "Forviŝi konton",user_registration_url, method: :delete, class: "button-cancel float-left",
+                  data: { confirm: "Ĉu vi certas? Oni NE POVOS mal-fari tion!" }
         = link_to 'Nuligi', root_path, class: 'button-cancel'
         = f.submit 'Ĝisdatigi', class: 'button-submit'
