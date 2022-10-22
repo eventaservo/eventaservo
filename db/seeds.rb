@@ -40,28 +40,4 @@ puts "- Creating international calendar events"
 puts "- Creating ads"
 5.times { FactoryBot.create(:ad) }
 
-# Create the ActiveAdmin users and staging users
-puts "- Creating ActiveAdmin users"
-unless Rails.env.production?
-  AdminUser.destroy_all
-  AdminUser.create!(email: "shayani@gmail.com", password: "123456", password_confirmation: "123456")
-  AdminUser.create!(email: "yves.nevelsteen@gmail.com", password: "123456", password_confirmation: "123456")
-  User.create(email: "shayani@gmail.com",
-              name: "Fernando Ŝajani",
-              password: "123456",
-              username: "123456",
-              country_id: Country.find_by(code: "br").id,
-              city: "Rio de Janeiro",
-              admin: true,
-              confirmed_at: DateTime.now)
-  User.create(email: "yves.nevelsteen@gmail.com",
-              name: "Yves Nevelsteen",
-              password: "123456",
-              username: "123456",
-              country_id: Country.find_by(code: "br").id,
-              city: "Rio de Janeiro",
-              admin: true,
-              confirmed_at: DateTime.now)
-end
-
 puts "== FINISHED"
