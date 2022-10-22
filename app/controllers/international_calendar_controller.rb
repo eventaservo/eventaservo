@@ -2,7 +2,7 @@
 
 class InternationalCalendarController < ApplicationController
   def index
-    @events = Event.venontaj.international_calendar.order(:date_start)
+    @events = Event.includes([:organizations, :country]).venontaj.international_calendar.order(:date_start)
   end
 
   def year_list
