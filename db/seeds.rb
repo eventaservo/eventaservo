@@ -27,6 +27,11 @@ User.create(email: "admin@eventaservo.org",
 puts "Create System Account"
 FactoryBot.create(:user, name: "EventaServo Sistemo", email: "kontakto@eventaservo.org", system_account: true)
 
+puts "- Creating organizations"
+FactoryBot.create(:organization, :uea)
+FactoryBot.create(:organization, :tejo)
+3.times { FactoryBot.create(:organization) }
+
 # Events
 puts "- Creating events"
 4.times { FactoryBot.create(:event) }

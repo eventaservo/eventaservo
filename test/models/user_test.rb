@@ -35,7 +35,7 @@ class UserTest < ActiveSupport::TestCase
   test "ne permesas forigi uzant-konton se ĝi ankoraŭ havas organizojn rilatajn" do
     user = create(:uzanto)
 
-    organization = create(:organizo)
+    organization = create(:organization)
     OrganizationUser.create(organization_id: organization.id, user_id: user.id)
 
     assert_not user.destroy

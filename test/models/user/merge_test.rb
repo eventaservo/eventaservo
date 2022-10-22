@@ -12,7 +12,7 @@ class User::MergeTest < ActiveSupport::TestCase
     assert user1.events.count, 1
 
     assert user1.organizoj.count, 0
-    organization = create(:organizo)
+    organization = create(:organization)
     OrganizationUser.create(organization_id: organization.id, user_id: user1.id)
     assert user1.organizoj.count, 1
 
