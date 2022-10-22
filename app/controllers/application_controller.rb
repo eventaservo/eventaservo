@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
       end
 
     # Filtras la anoncojn kaj konkursojn, kiuj devas aperi nur en ilia specifa paĝo
-    @events = @events.chefaj
+    @events = @events.includes([:organization_events]).chefaj
 
     # Filtras laŭ organizo
     @events = @events.joins(:organizations).where(organizations: { short_name: params[:o] }) if params[:o].present?
