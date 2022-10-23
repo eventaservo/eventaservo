@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   include Pagy::Backend
 
   before_action :set_paper_trail_whodunnit
+  before_action :set_sentry_user
 
   def user_is_owner_or_admin(event)
     user_signed_in? &&
@@ -80,9 +81,11 @@ class ApplicationController < ActionController::Base
     redirect_to root_path unless current_user.admin?
   end
 
-  def set_sentry_context
-    return unless user_signed_in?
-
-    Sentry.set_user({ id: current_user.id, username: current_user.username, email: current_user.email })
+  def set_sentry_user
+    if user_signed_in?
+      Sentry.set_user(id: current_user.id, username: current_user.username, email: current_user.email)
+    else
+      Sentry.set_user({})
+    end
   end
 end
