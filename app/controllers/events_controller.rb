@@ -215,6 +215,8 @@ class EventsController < ApplicationController
 
   def kronologio
     @evento = Event.lau_ligilo(params[:event_code])
+
+    redirect_to root_path, flash: { error: "Evento ne ekzistas" } unless @evento
   end
 
   private
