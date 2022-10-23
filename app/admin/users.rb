@@ -29,7 +29,7 @@ ActiveAdmin.register User do
     column :country
     column :username
     column("Events") do |user|
-      user.events.count
+      user.events.size
     end
     actions
   end

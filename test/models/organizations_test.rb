@@ -4,12 +4,12 @@ require "test_helper"
 
 class OrganizationsTest < ActiveSupport::TestCase
   test "nova organizo devas fiaski sen nomo" do
-    organizo = build(:organizo, name: nil)
+    organizo = build(:organization, name: nil)
     assert organizo.invalid?
   end
 
   test "nova organizo devas fiaski sen mallonga nomo" do
-    organizo = build(:organizo, short_name: nil)
+    organizo = build(:organization, short_name: nil)
     assert organizo.invalid?
   end
 
@@ -32,19 +32,19 @@ class OrganizationsTest < ActiveSupport::TestCase
   end
 
   test "validas mallongan nomon" do
-    organizo = build(:organizo, short_name: "organizo kun spacoj")
+    organizo = build(:organization, short_name: "organizo kun spacoj")
     assert organizo.invalid?
 
-    organizo = build(:organizo, short_name: "organizo,kun.signoj*divers@aj")
+    organizo = build(:organization, short_name: "organizo,kun.signoj*divers@aj")
     assert organizo.invalid?
   end
 
   test "mallonga nomo devas esti unika" do
-    create(:organizo, short_name: "tejo")
-    o = build(:organizo, short_name: "tejo")
+    create(:organization, short_name: "tejo")
+    o = build(:organization, short_name: "tejo")
     assert o.invalid?
 
-    o2 = build(:organizo, short_name: "TEJO")
+    o2 = build(:organization, short_name: "TEJO")
     assert o2.invalid?
   end
 end
