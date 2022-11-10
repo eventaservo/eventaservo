@@ -4,24 +4,12 @@ on:
   push:
     branches:
       - main
-      - staging
 
 jobs:
   minitest:
     uses: eventaservo/eventaservo/.github/workflows/template_test.yml@main
     secrets:
       rails_master_key: ${{ secrets.RAILS_MASTER_KEY }}
-
-  docker_staging:
-    needs: minitest
-    if: ${{ github.ref_name == 'staging' }}
-    uses: eventaservo/eventaservo/.github/workflows/template_docker.yml@main
-    with:
-      environment: staging
-      tag: staging
-    secrets:
-      dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
-      dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
 
   docker_production:
     needs: minitest
@@ -40,14 +28,5 @@ jobs:
     uses: eventaservo/eventaservo/.github/workflows/template_sentry.yml@main
     with:
       environment: 'production'
-    secrets:
-      sentry_auth_token: ${{ secrets.SENTRY_AUTH_TOKEN }}
-
-  sentry_release_staging:
-    needs: docker_staging
-    if: ${{ github.ref_name == 'staging' }}
-    uses: eventaservo/eventaservo/.github/workflows/template_sentry.yml@main
-    with:
-      environment: 'staging'
     secrets:
       sentry_auth_token: ${{ secrets.SENTRY_AUTH_TOKEN }}
