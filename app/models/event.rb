@@ -331,15 +331,16 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def header_image_url
-    return unless header_image
+    return unless header_image&.representable?
 
-    if header_image.is_a? ActionText::Attachment
-      header_image.url
-    else
-      Rails.application.routes.url_helpers.rails_representation_url(
-        header_image.variant(resize_to_limit: [400, 400]).processed
-      )
-    end
+    return header_image.url if header_image.is_a? ActionText::Attachment
+
+    Rails.application.routes.url_helpers.rails_representation_url(
+      header_image.variant(resize_to_limit: [400, 400]).processed
+    )
+  rescue MiniMagick::Error => e
+    Sentry.capture_exception(e)
+    false
   end
 
   private
