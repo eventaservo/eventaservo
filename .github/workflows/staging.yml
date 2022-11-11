@@ -1,0 +1,31 @@
+name: Staging deploy
+
+on:
+  push:
+    branches:
+      - staging
+
+jobs:
+  minitest:
+    uses: eventaservo/eventaservo/.github/workflows/template_test.yml@staging
+    secrets:
+      rails_master_key: ${{ secrets.RAILS_MASTER_KEY }}
+
+  docker:
+    needs: minitest
+    uses: eventaservo/eventaservo/.github/workflows/docker.yml@staging
+    with:
+      environment: staging
+      tag: staging
+    secrets:
+      dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
+      dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
+  sentry:
+    needs: docker
+    uses: eventaservo/eventaservo/.github/workflows/sentry.yml@staging
+    with:
+      environment: 'staging'
+    secrets:
+      sentry_auth_token: ${{ secrets.SENTRY_AUTH_TOKEN }}
