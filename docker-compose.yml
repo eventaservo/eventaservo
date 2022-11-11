@@ -1,5 +1,39 @@
 # Docker-compose file for DEVELOPMENT containers
+x-app: &backend-app
+  environment:
+      - RAILS_ENV=${RAILS_ENV:-development}
+      - RAILS_SERVE_STATIC_FILES=${RAILS_SERVE_STATIC_FILES:-false}
+      - DB_HOST=db
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - PORT=3000
+
 services:
+  backend:
+    <<: *backend-app
+    image: es-dev
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+      args:
+        AMBIENTE: "${RAILS_ENV:-development}"
+        RAILS_MASTER_KEY: "${RAILS_MASTER_KEY}"
+    tty: true
+    volumes:
+      - ./:/app
+      - /app/tmp
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+
+  worker:
+    <<: *backend-app
+    image: es-dev
+    entrypoint: ./entrypoint-worker.sh
+    depends_on:
+      - db
+
   redis:
     image: redis:6.2.6
     healthcheck:
@@ -35,6 +69,8 @@ services:
       - PGADMIN_DEFAULT_EMAIL=admin@eventaservo.org
       - PGADMIN_DEFAULT_PASSWORD=administranto
       - PGADMIN_LISTEN_PORT=8080
+    depends_on:
+      - db
 
 volumes:
   postgres:
