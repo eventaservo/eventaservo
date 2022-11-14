@@ -331,7 +331,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def header_image_url
-    return unless header_image&.representable?
+    return unless header_image
 
     return header_image.url if header_image.is_a? ActionText::Attachment
 
