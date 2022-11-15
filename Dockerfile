@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
   g++ \
   gcc \
   iputils-ping \
+  libavahi-compat-libdnssd-dev \
   libmagick++-dev \
   libssl-dev \
   make \
