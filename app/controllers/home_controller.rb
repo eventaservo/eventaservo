@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   before_action :definas_kuketojn, only: :index
 
   def index
-    ahoy.track "Visit index page"
+    ahoy.track "Homepage"
 
     @future_events = Event.venontaj
     if params[:o].present?
