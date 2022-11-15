@@ -8,10 +8,10 @@ class SciigasUzantojnAntauEventoJob < ApplicationJob
 
     begin
       return unless e.participants.any?
+
+      EventMailer.rememorigas_uzantojn_pri_evento(e.id, reminder_date_string).deliver_later
     rescue StandardError => e
       Sentry.capture_exception(e)
     end
-
-    EventMailer.rememorigas_uzantojn_pri_evento(e.id, reminder_date_string).deliver_later
   end
 end
