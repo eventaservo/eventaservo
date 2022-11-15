@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Ahoy::Visit do
   menu parent: "Ahoy"
 
@@ -11,7 +13,6 @@ ActiveAdmin.register Ahoy::Visit do
     column :ip
     column :user_agent
     column :referrer
-    column :landing_page
     column :browser
     column :os
     column :device_type
