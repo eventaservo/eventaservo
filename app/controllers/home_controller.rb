@@ -5,6 +5,8 @@ class HomeController < ApplicationController
   before_action :definas_kuketojn, only: :index
 
   def index
+    ahoy.track "Visit index page"
+
     @future_events = Event.venontaj
     if params[:o].present?
       @future_events = @future_events.joins(:organizations).where('organizations.short_name = ?', params[:o])
@@ -52,6 +54,7 @@ class HomeController < ApplicationController
   end
 
   def prie
+    ahoy.track "Visit Prie"
     render layout: 'full_size'
   end
 
@@ -84,6 +87,7 @@ class HomeController < ApplicationController
   end
 
   def feed
+    ahoy.track "Rendered feed"
     @events = Event.includes(:country).includes(:user)
                 .venontaj
                 .ne_nuligitaj

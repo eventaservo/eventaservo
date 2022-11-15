@@ -21,6 +21,8 @@ class EventsController < ApplicationController
   end
 
   def show
+    ahoy.track "Show event", event_id: @event.id
+
     @horzono = cookies[:horzono] || params[:horzono] || @event.time_zone
     @partoprenontoj = @event.participants
 
@@ -60,6 +62,7 @@ class EventsController < ApplicationController
     if @event.save
       @event.update_event_organizations(params[:organization_ids])
       NovaEventaSciigoJob.perform_later(@event)
+      ahoy.track "Create event", event_id: @event.id
       redirect_to event_path(@event.ligilo), flash: { notice: "Evento sukcese kreita." }
     else
       render :new
@@ -83,6 +86,7 @@ class EventsController < ApplicationController
       EventoGhisdatigitaJob.perform_later(@event)
       EventMailer.nova_administranto(@event).deliver_later if @event.saved_change_to_user_id?
       @event.update_event_organizations(params[:organization_ids])
+      ahoy.track "Update event", event_id: @event.id
 
       redirect_to event_path(@event.ligilo), notice: "Evento sukcese ĝisdatigita"
     else
