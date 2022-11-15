@@ -26,5 +26,7 @@ module Eventaservo
     config.action_dispatch.default_headers = { 'X-Frame-Options' => 'ALLOWALL' }
 
     config.eager_load_paths << "#{Rails.root}/test/mailers/previews"
+
+    Dotenv::Railtie.load if Rails.env.development? || Rails.env.test?
   end
 end
