@@ -5,6 +5,7 @@ class SciigasUzantojnAntauEventoJob < ApplicationJob
 
   def perform(code, reminder_date_string = "2.hours")
     e = Event.by_code(code)
+    return if e.blank?
 
     begin
       return unless e.participants.any?
