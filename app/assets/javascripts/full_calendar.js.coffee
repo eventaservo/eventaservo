@@ -44,8 +44,4 @@ $ ->
         eventLimit: 5
         eventLimitText: ''
         dayPopoverFormat: 'dddd, D MMMM'
-    eventClick: (e) ->
-      if e.url
-        window.open e.url, '_blank'
-        return false
   }
