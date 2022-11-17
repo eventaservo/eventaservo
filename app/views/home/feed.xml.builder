@@ -20,7 +20,6 @@ xml.rss version: "2.0", "xmlns:atom": "http://www.w3.org/2005/Atom" do
         xml.title event.title
         xml.link event_url(event.code)
         xml.description event_full_description(event)
-        xml.content event.enhavo.to_plain_text
         rss_enclosure(xml, event)
         xml.pubDate event.updated_at.strftime("%a, %d %b %Y %T %z")
         xml.guid event_url(event.code), isPermaLink: true
