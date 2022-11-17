@@ -4,9 +4,9 @@ class EventMailer < ApplicationMailer
   helper ApplicationHelper
   helper EventsHelper
 
-  default from: 'kontakto@eventaservo.org'
+  default from: "kontakto@eventaservo.org"
 
-  require 'redcarpet/render_strip'
+  require "redcarpet/render_strip"
 
   def self.send_notification_to_users(event_id:)
     return false unless Event.exists?(event_id)
@@ -33,7 +33,7 @@ class EventMailer < ApplicationMailer
     @event = Event.find(event_id)
     if ghisdatigho
       subject = "[ES estraro] Ĝisdatiĝo: #{@event.title}"
-      to = 'yves.nevelsteen@gmail.com'
+      to = "yves.nevelsteen@gmail.com"
     else
       subject = "[ES estraro] Nova evento: #{@event.title}"
       to = Constants::ADMIN_EMAILS
@@ -51,7 +51,7 @@ class EventMailer < ApplicationMailer
     @events = Event.by_dates(from: Time.zone.today, to: Time.zone.today + 7.days)
     # @user = user
     @user = User.find(1) # Nur por provoj
-    mail(to: "#{user.name.delete(',')} <#{user.email}>", subject: 'Tutmonda semajna resumo de eventoj')
+    mail(to: "#{user.name.delete(',')} <#{user.email}>", subject: "Tutmonda semajna resumo de eventoj")
   end
 
   def kontakti_organizanton(eventa_kodo, informoj = {})
@@ -60,15 +60,15 @@ class EventMailer < ApplicationMailer
 
     if Rails.env.production?
       to = @evento.user.email
-      bcc = 'yves.nevelsteen@gmail.com'
+      bcc = "yves.nevelsteen@gmail.com"
     else
       to = Constants::ADMIN_EMAILS
       bcc = nil
     end
 
     mail(to: to, bcc: bcc, reply_to: informoj[:email],
-         subject: 'Informo pri via evento en Eventa Servo',
-         track_opens: 'true')
+         subject: "Informo pri via evento en Eventa Servo",
+         track_opens: "true")
   end
 
   def nova_administranto(evento)
@@ -76,13 +76,13 @@ class EventMailer < ApplicationMailer
 
     if Rails.env.production?
       to = evento.user.email
-      bcc = 'yves.nevelsteen@gmail.com'
+      bcc = "yves.nevelsteen@gmail.com"
     else
       to = Constants::ADMIN_EMAILS
       bcc = nil
     end
 
-    mail(to: to, bcc: bcc, subject: 'Vi estas nova eventa administranto')
+    mail(to: to, bcc: bcc, subject: "Vi estas nova eventa administranto")
   end
 
   def rememorigas_uzantojn_pri_evento(evento_id, reminder_date_string)
@@ -97,9 +97,9 @@ class EventMailer < ApplicationMailer
 
     emails.each do |to|
       mail(to: to,
-           from: 'Eventa Servo <kontakto@eventaservo.org>',
+           from: "Eventa Servo <kontakto@eventaservo.org>",
            subject: email_subject,
-           track_opens: 'true')
+           track_opens: "true")
     end
   end
 
@@ -108,9 +108,9 @@ class EventMailer < ApplicationMailer
   def event_reminder_message(reminder_date_string)
     hash = {
       "2.hours": "Ĝi komenciĝos baldaŭ. Ni deziras al vi agrablan kaj sukcesan partoprenon.",
-      "1.week": "Ĝi komenciĝos post semajno. Pripensu aliĝi aŭ almenaŭ informi la organizanton de la evento pri via "\
+      "1.week": "Ĝi komenciĝos post semajno. Pripensu aliĝi aŭ almenaŭ informi la organizanton de la evento pri via " \
                 "intenco ĝin ĉeesti.",
-      "1.month": "Ĝi komenciĝos post monato. Pripensu aliĝi aŭ almenaŭ informi la organizanton de la evento pri via "\
+      "1.month": "Ĝi komenciĝos post monato. Pripensu aliĝi aŭ almenaŭ informi la organizanton de la evento pri via " \
                  "intenco ĝin ĉeesti."
     }
 
