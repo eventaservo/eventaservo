@@ -22,4 +22,17 @@ ActiveAdmin.register Ahoy::Visit do
 
     actions
   end
+
+  show do
+    default_main_content
+
+    panel "Events" do
+      table_for resource.events.order(time: :desc) do
+        column :id
+        column :time
+        column :name
+        column :properties
+      end
+    end
+  end
 end
