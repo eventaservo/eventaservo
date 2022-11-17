@@ -23,6 +23,9 @@ Metrics/BlockLength:
 Metrics/ClassLength:
   Enabled: false
 
+Rails/I18nLocaleTexts:
+  Enabled: false
+
 Style/AsciiComments:
   Enabled: false
 
