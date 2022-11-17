@@ -88,12 +88,13 @@ class HomeController < ApplicationController
 
   def feed
     ahoy.track "Rendered feed"
-    @events = Event.includes(:country).includes(:user)
-                .venontaj
-                .ne_nuligitaj
-                .ne_anoncoj
-                .where(cancelled: false)
-                .order(:date_start)
+    @events = Event.includes(%i[country uploads_attachments])
+                   .venontaj
+                   .ne_nuligitaj
+                   .ne_anoncoj
+                   .where(cancelled: false)
+                   .order(:date_start)
+
     render layout: false
   end
 
