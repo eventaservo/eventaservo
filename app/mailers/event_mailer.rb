@@ -86,7 +86,11 @@ class EventMailer < ApplicationMailer
   end
 
   def rememorigas_uzantojn_pri_evento(evento_id, reminder_date_string)
-    @evento = Event.find(evento_id)
+    @evento = Event.find_by(id: evento_id)
+    return if @evento.nil?
+    return if @evento.date_start < DateTime.now
+    return if @evento.participants.empty?
+
     @reminder_message = event_reminder_message(reminder_date_string)
     emails = @evento.participants_records.pluck(:email)
     email_subject = reminder_email_subject(@evento.title, reminder_date_string)
