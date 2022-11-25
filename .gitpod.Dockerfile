@@ -11,13 +11,13 @@ RUN sudo apt-get update \
 
 USER gitpod
 
-WORKDIR /workspace/eventaservo
-
 # Install Ruby version 2.7.6 and set it as default
 RUN echo "rvm_gems_path=/home/gitpod/.rvm" > ~/.rvmrc
 RUN bash -lc "rvm install ruby-2.7.6 && rvm use ruby-2.7.6 --default"
 RUN echo "rvm_gems_path=/workspace/.rvm" > ~/.rvmrc
-RUN echo "gem: --no-document" >> ~/.gemrc
+
+# Install Solargraph
+RUN bash -lc "gem install solargraph"
 
 # Install NodeJS 14 and set it as default
 RUN bash -c 'VERSION="lts/fermium" \
