@@ -17,6 +17,10 @@
       = link_to @uzanto.instagram, target: :_blank, class: 'list-group-item list-group-item-action' do
         = image_tag('instagram-link.svg', size: 28)
         Instagram
+    - if @uzanto.twitter.present?
+      = link_to @uzanto.twitter, target: :_blank, class: 'list-group-item list-group-item-action' do
+        = image_tag('twitter.svg', size: 28)
+        Twitter
     - if @uzanto.facebook.present?
       = link_to @uzanto.facebook, target: :_blank, class: 'list-group-item list-group-item-action' do
         = image_tag('facebook.svg', size: 28)

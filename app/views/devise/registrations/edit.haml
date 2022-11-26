@@ -63,6 +63,10 @@
         .col-md-9
           = f.text_field :instagram, class: 'form-control'
       .form-group.row
+        = f.label :twitter, image_tag('twitter.svg', size: 24) + ' Twitter', class: 'col-md-3 col-form-label'
+        .col-md-9
+          = f.text_field :twitter, class: 'form-control'
+      .form-group.row
         = f.label :facebook, image_tag('facebook.svg', size: 24) + ' Facebook', class: 'col-md-3 col-form-label'
         .col-md-9
           = f.text_field :facebook, class: 'form-control'
