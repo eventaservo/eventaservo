@@ -93,6 +93,7 @@ gem "timezone", "~> 1.0"
 # gem 'trix-rails', require: 'trix'
 gem "httparty", "~> 0.18"
 gem "nokogiri", ">= 1.10.4"
+gem "whenever", require: false
 gem "yard"
 
 # Sentry.io

@@ -53,6 +53,8 @@ RUN if [ "$RAILS_ENV" = "production" ] || [ "$RAILS_ENV" = "staging" ]; then \
   bundle exec rails assets:precompile ; \
   fi
 
+RUN bundle exec whenever --update-crontab
+
 # Kreas API dokumentadon ĉe /public/docs/api/v2/
 RUN if [ "$RAILS_ENV" = "production" ]; then \
   npm install -g redoc-cli && \
