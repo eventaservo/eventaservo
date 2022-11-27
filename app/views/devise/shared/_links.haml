@@ -12,7 +12,7 @@
     %br/
   - if devise_mapping.confirmable? && controller_name != 'confirmations' && controller_name != 'sessions'
     %br/
-    = link_to 'Ĉu vi ne ricevis konfirminstruciojn?', new_confirmation_path(resource_name)
+    = link_to 'Ĉu vi ne ricevis konfirminstrukciojn?', new_confirmation_path(resource_name)
     %br/
   -#- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks'
     = link_to 'Didn\'t receive unlock instructions?', new_unlock_path(resource_name)
