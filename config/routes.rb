@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   get '/license', to: 'home#privateco'
   get '/v/:view_style', to: 'home#view_style', as: 'view_style'
   get '/prie', to: 'home#prie'
-  get '/changelog', to: 'home#changelog'
   get '/rss.xml', to: 'home#feed', as: 'events_rss'
   get '/events.json', to: 'home#events'
   get '/statistikoj', to: 'home#statistics'

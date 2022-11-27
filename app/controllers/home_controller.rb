@@ -41,9 +41,6 @@ class HomeController < ApplicationController
     @prelegantoj = User.prelegantoj.order(:name)
   end
 
-  def changelog
-  end
-
   def privateco
     respond_to do |format|
       format.html
@@ -56,6 +53,10 @@ class HomeController < ApplicationController
   def prie
     ahoy.track "Visit Prie"
     render layout: 'full_size'
+  end
+
+  def changes
+    ahoy.track "Visit Novaĵoj"
   end
 
   def robots
