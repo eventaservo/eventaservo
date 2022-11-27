@@ -4,7 +4,7 @@ class WorkerHeartbeatJob < ApplicationJob
   queue_as :heartbeat
 
   def perform
-    return if Rais.env.development?
+    return if Rails.env.development?
 
     better_uptime_heartbeat_url =
       if Rails.env.production?
