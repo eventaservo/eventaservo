@@ -51,7 +51,7 @@ ARG RAILS_MASTER_KEY
 ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
 RUN if [ "$RAILS_ENV" = "production" ] || [ "$RAILS_ENV" = "staging" ]; then \
   bundle exec rails assets:precompile ; \
-  bundle exec whenever --update-crontab; \
+  bundle exec whenever --update-crontab --set environment=$RAILS_ENV; \
   fi
 
 # Kreas API dokumentadon ĉe /public/docs/api/v2/
