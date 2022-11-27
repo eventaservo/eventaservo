@@ -1,17 +1,13 @@
 # Changelog
 
-## [v.2.40](https://github.com/eventaservo/eventaservo/tree/v.2.40) (2022-11-26)
+## [v2.40](https://github.com/eventaservo/eventaservo/tree/v2.40) (2022-11-27)
 
-[Full Changelog](https://github.com/eventaservo/eventaservo/compare/v2.39.1...v.2.40)
+[Full Changelog](https://github.com/eventaservo/eventaservo/compare/v2.39.1...v2.40)
 
 **Closed issues:**
 
 - Dosierligilo aperas en diskonigilo [\#417](https://github.com/eventaservo/eventaservo/issues/417)
-
-**Merged pull requests:**
-
-- Add Twitter account for user profile \#322 [\#451](https://github.com/eventaservo/eventaservo/pull/451) ([shayani](https://github.com/shayani))
-- Bump loader-utils from 1.4.0 to 1.4.2 [\#447](https://github.com/eventaservo/eventaservo/pull/447) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Twitter-ligilo ĉe profiloj [\#322](https://github.com/eventaservo/eventaservo/issues/322)
 
 ## [v2.39.1](https://github.com/eventaservo/eventaservo/tree/v2.39.1) (2022-11-17)
 
