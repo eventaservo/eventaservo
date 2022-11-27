@@ -46,6 +46,7 @@ dump.rdb
 /public/packs
 /public/packs-test
 .env
+bookmarks.json
 
 # Telegramo-agordoj
 config/es_admin_channel.conf
