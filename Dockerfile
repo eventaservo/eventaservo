@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y \
   libmagick++-dev \
   libssl-dev \
   make \
+  nano \
   nodejs \
   poppler-utils \
   postgresql-server-dev-all \
