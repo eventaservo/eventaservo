@@ -6,6 +6,7 @@ WORKDIR /app
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
 
 RUN apt-get update && apt-get install -y \
+  cron \
   g++ \
   gcc \
   iputils-ping \
@@ -20,6 +21,8 @@ RUN apt-get update && apt-get install -y \
   vim \
   zlib1g-dev \
   && rm -rf /var/lib/apt/lists/*
+
+RUN service cron start
 
 ARG AMBIENTE=production
 # Sets environment variables
