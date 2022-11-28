@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y \
   poppler-utils \
   postgresql-server-dev-all \
   telnet \
+  vim \
   zlib1g-dev \
   && rm -rf /var/lib/apt/lists/*
 
