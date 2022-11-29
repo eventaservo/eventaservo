@@ -115,6 +115,7 @@
             <thead>
               <tr>
                 <th scope="col">Titolo</th>
+                <th scope="col">Urbo</th>
                 <th scope="col">Dato</th>
               </tr>
             </thead>
@@ -129,6 +130,10 @@
                 <td
                   :class="{ nuligita: evento.nuligita }"
                   v-html="evento.titolo"
+                ></td>
+                <td
+                  :class="{ nuligita: evento.nuligita }"
+                  v-html="evento.city"
                 ></td>
                 <td :class="{ nuligita: evento.nuligita }">
                   {{ evento.dato }}

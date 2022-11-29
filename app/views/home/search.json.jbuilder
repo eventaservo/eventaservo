@@ -7,6 +7,7 @@ json.eventoj do
     fajro = "🔥 " if evento.participants.size > Constants::FAJRA_EVENTO_PARTOPRENONTOJ
     json.titolo "#{fajro} #{event_flag(evento)} #{evento.title}"
 
+    json.city evento.city
     json.klass event_color_class(evento)
     json.ligilo evento.ligilo
     json.priskribo evento.description
