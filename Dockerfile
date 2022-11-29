@@ -1,29 +1,23 @@
-FROM ruby:2.7-bullseye
+FROM ruby:2.7-alpine3.16
 
 WORKDIR /app
 
-# NodeJS PPA Repository
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
-
-RUN apt-get update && apt-get install -y \
-  cron \
-  g++ \
-  gcc \
-  iputils-ping \
-  libavahi-compat-libdnssd-dev \
-  libmagick++-dev \
-  libssl-dev \
-  make \
-  nano \
+RUN apk update \
+  && apk upgrade \
+  && apk add --update --no-cache \
+  alpine-sdk \
+  bash \
+  imagemagick \
+  imagemagick6-dev \
   nodejs \
-  poppler-utils \
-  postgresql-server-dev-all \
-  telnet \
+  npm \
+  postgresql-dev \
+  shared-mime-info \
+  sqlite-dev \
+  tzdata \
   vim \
-  zlib1g-dev \
-  && rm -rf /var/lib/apt/lists/*
-
-RUN service cron start
+  yarn \
+  && rm -rf /var/cache/apk/*
 
 ARG AMBIENTE=production
 # Sets environment variables
@@ -58,6 +52,7 @@ RUN if [ "$RAILS_ENV" = "production" ] || [ "$RAILS_ENV" = "staging" ]; then \
   bundle exec rails assets:precompile ; \
   fi
 
+# Setup cron jobs
 RUN bundle exec whenever --update-crontab --set environment=$RAILS_ENV
 
 # Kreas API dokumentadon ĉe /public/docs/api/v2/
