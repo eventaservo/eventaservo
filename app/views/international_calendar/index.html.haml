@@ -3,9 +3,10 @@
     %h1 Internacia Kalendaro
     %p
       Jen listo de la ĉefaj Esperanto-eventoj tutmonde.
-      Se laŭ vi mankas evento aŭ estas eraro, #{mail_to("kontakto@eventaservo.org", "bonvolu informi nin per retmesaĝo")}.
-  .text-right
-    = link_to "Pasintaj internaciaj evento ➡️", international_calendar_year_list_path, class: 'btn btn-sm btn-link'
+      %br
+      Se laŭ vi mankas evento aŭ estas eraro, #{mail_to("kontakto@eventaservo.org", "informu nin per retmesaĝo")}.
+    %hr
+    = link_to "Pasintaj internaciaj evento", international_calendar_year_list_path, class: 'btn btn-sm btn-link'
 
   - @events.grouped_by_months.map do |date, events|
     %br
