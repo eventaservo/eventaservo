@@ -2,47 +2,41 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - name: Containers
+  - name: Setup
     init: |
       docker run -d -p 5432:5432 -e POSTGRES_DB=eventaservo_devel -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -v postgres_db:/var/lib/postgresql/data --name postgres postgres:13.5
       docker run -d -p 6379:6379 --name redis redis:6.2.6
       docker run -d -p 1025:1025 -p 1080:1080 --name mailcatcher schickling/mailcatcher:latest
-      gp sync-done containers
-    command: |
-      docker start postgres redis mailcatcher
-      gp sync-done containers
-      exit
-
-  - name: Rails server
-    init: |
-      gp sync-await containers
       gem install solargraph rubocop rubocop-rails
       gem install bundler:2.3.18
       bundle install
-      bundle exec rails db:migrate
-      bundle exec rails db:test:prepare > /dev/null
-      bundle exec rails db:seed
+      bundle exec rails db:setup
       solargraph download-core
       solargraph bundle
       yarn install
-      gp sync-done rails
+      gp sync-done setup
     command: |
-      gp sync-done rails
+      docker start postgres redis mailcatcher
+      gp sync-done setup
+
+  - name: Rails
+    command: |
+      gp sync-await setup
       bundle exec bin/rails server -b 0.0.0.0 -p 3000 -e development -b 'ssl://0.0.0.0:3000?key=./certs/localhost.key&cert=./certs/localhost.crt'
 
   - name: Delayed Job
     command: |
-      gp sync-await rails
+      gp sync-await setup
       bundle exec bin/rake jobs:work
 
   - name: Webpacker
     command: |
-      gp sync-await rails
+      gp sync-await setup
       bundle exec bin/webpack-dev-server
 
   - name: Rails console
     command: |
-      gp sync-await rails
+      gp sync-await setup
       bundle exec bin/rails console
 
 ports:
