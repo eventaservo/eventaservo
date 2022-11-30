@@ -33,15 +33,21 @@ class HomeController < ApplicationController
   end
 
   def anoncoj
+    ahoy.track "Visit Anoncoj"
+
     @eventoj = Event.anoncoj_kaj_konkursoj.venontaj
   end
 
   def instruistoj_kaj_prelegantoj
+    ahoy.track "Visit Instruistoj kaj prelegantoj"
+
     @instruistoj = User.instruistoj.order(:name)
     @prelegantoj = User.prelegantoj.order(:name)
   end
 
   def privateco
+    ahoy.track "Visit Privateco"
+
     respond_to do |format|
       format.html
       format.text {
@@ -60,6 +66,8 @@ class HomeController < ApplicationController
   end
 
   def robots
+    ahoy.track "Read /robots.txt"
+
     robots =
       if Rails.env.production?
         File.read(Rails.root + 'config/robots.production.txt')
@@ -89,6 +97,7 @@ class HomeController < ApplicationController
 
   def feed
     ahoy.track "Rendered feed"
+
     @events = Event.includes(%i[country uploads_attachments])
                    .venontaj
                    .ne_nuligitaj
@@ -122,6 +131,8 @@ class HomeController < ApplicationController
   end
 
   def statistics
+    ahoy.track "Visit Statistics"
+
     respond_to do |format|
       format.html
       format.json do
