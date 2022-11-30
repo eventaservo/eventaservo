@@ -6,7 +6,7 @@ Program-kodo: [Github](https://github.com/shayani/eventaservo)
 
 ## Legu min
 
-Eventa Servo estas sistemo de [UEA](https://uea.org) por ordigi kaj diskonigi eventojn esperantajn por la tuta mondo.
+Eventa Servo estas sistemo de [UEA](https://uea.org) por ordigi kaj diskonigi Esperanto-eventojn por la tuta mondo.
 Ĝi estas senpaga kaj programkoda libera.
 
 <img alt="UEA emblemo" src="https://eventaservo.org/uea_logo_longa.png" style="margin: 10px;" width="400px">
