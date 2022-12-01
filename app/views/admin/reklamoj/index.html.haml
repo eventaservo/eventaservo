@@ -5,11 +5,16 @@
   .row
     - @ads.each do |r|
       .col-12.col-md-6.col-lg-4
-        .card.m-2.align-items-center
+        .card.m-2.align-items-center{class: ("bg-color-gray" unless r.active?)}
           - if r.image.attached?
-            = image_tag r.image.variant(resize_to_fill: [400, 200]), class: 'card-img-top reklam-bildo mt-2'
+            = image_tag r.image.variant(resize_to_fill: [200, 100]), class: 'card-img-top reklam-bildo mt-2'
 
           .card-body
             %p.card-text= link_to r.url, r.url, target: :_blank
+            .d-flex.justify-content-between
+              - if r.active?
+                = link_to 'Malebligi', admin_reklamoj_toggle_active_path(r), class: 'fg-color-orange'
+              - else
+                = link_to 'Ebligi', admin_reklamoj_toggle_active_path(r), class: 'fg-color-green'
 
-            = link_to 'Forviŝi', admin_reklamoj_url(r), method: :delete, data: { confirm: 'Ĉu vi certas?' } , class: 'fg-color-red'
+              = link_to 'Forviŝi', admin_reklamoj_url(r), method: :delete, data: { confirm: 'Ĉu vi certas?' } , class: 'fg-color-red'

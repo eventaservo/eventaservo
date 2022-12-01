@@ -6,7 +6,7 @@ module Admin
     before_action :authenticate_admin!
 
     def index
-      @ads = Ad.all
+      @ads = Ad.order(id: :desc)
     end
 
     def new
@@ -23,6 +23,13 @@ module Admin
     def destroy
       Ad.find(params[:id]).image.purge
       Ad.find(params[:id]).destroy
+      redirect_to admin_reklamoj_index_url
+    end
+
+    def toggle_active
+      ad = Ad.find_by(id: params[:reklamoj_id])
+      ad.update(active: !ad.active)
+
       redirect_to admin_reklamoj_index_url
     end
   end
