@@ -5,4 +5,6 @@ class Ad < ApplicationRecord
 
   validates :url, presence: true
   validates :image, presence: true
+
+  scope :active, -> { where(active: true) }
 end
