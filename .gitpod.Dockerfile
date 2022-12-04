@@ -11,9 +11,9 @@ RUN sudo apt-get update \
 
 USER gitpod
 
-# Install Ruby version 2.7.6 and set it as default
+# Install Ruby version 3.0 and set it as default
 RUN echo "rvm_gems_path=/home/gitpod/.rvm" > ~/.rvmrc
-RUN bash -lc "rvm install ruby-2.7.6 && rvm use ruby-2.7.6 --default"
+RUN bash -lc "rvm install ruby-3.0 && rvm use ruby-3.0 --default"
 RUN echo "rvm_gems_path=/workspace/.rvm" > ~/.rvmrc
 
 # Install Solargraph
