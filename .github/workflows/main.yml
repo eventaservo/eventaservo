@@ -4,16 +4,19 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - ".github/**"
+      - ".gitpod*"
 
 jobs:
   minitest:
-    uses: eventaservo/eventaservo/.github/workflows/template_test.yml@main
+    uses: eventaservo/eventaservo/.github/workflows/template_test.yml
     secrets:
       rails_master_key: ${{ secrets.RAILS_MASTER_KEY }}
 
   docker:
     needs: minitest
-    uses: eventaservo/eventaservo/.github/workflows/docker.yml@main
+    uses: eventaservo/eventaservo/.github/workflows/docker.yml
     with:
       environment: production
       tag: latest
@@ -24,7 +27,7 @@ jobs:
 
   sentry:
     needs: docker
-    uses: eventaservo/eventaservo/.github/workflows/sentry.yml@main
+    uses: eventaservo/eventaservo/.github/workflows/sentry.yml
     with:
       environment: 'production'
     secrets:
