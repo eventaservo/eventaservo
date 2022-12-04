@@ -6,6 +6,6 @@ on:
 
 jobs:
   minitest:
-    uses: eventaservo/eventaservo/.github/workflows/template_test.yml@main
+    uses: eventaservo/eventaservo/.github/workflows/template_test.yml
     secrets:
       rails_master_key: ${{ secrets.RAILS_MASTER_KEY }}
