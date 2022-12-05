@@ -28,6 +28,7 @@ ENV GOOGLE_MAPS_KEY=${GOOGLE_MAPS_KEY}
 ENV IPINFO_KEY=${IPINFO_KEY}
 
 # Bundler
+RUN echo "gem: --no-document" >> ~/.gemrc
 RUN gem install bundler:2.3.18
 RUN if [ "$RAILS_ENV" = "production" ] || [ "$RAILS_ENV" = "staging" ]; then \
   bundle config set without development test && \
