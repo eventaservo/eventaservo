@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 VCR.configure do |config|
   config.cassette_library_dir = "test/vcr_cassettes"
