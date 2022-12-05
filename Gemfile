@@ -60,9 +60,6 @@ gem "jbuilder", "~> 2.5"
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
-# Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", ">= 1.4.2", require: false
-
 gem "daemons", "~> 1.3"
 gem "delayed_job_active_record", "~> 4.1"
 gem "delayed_job_web"
@@ -126,9 +123,7 @@ group :development do
 
   gem "better_errors"
   gem "binding_of_caller"
-  gem "debase", "~> 0.2.4.1"
   gem "pry-rails", "~> 0.3.4"
-  gem "ruby-debug-ide", "~> 0.7.3"
   gem "seed_dump" # Por rekrei la seeds.db dosieron
 end
 
