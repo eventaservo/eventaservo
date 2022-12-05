@@ -26,6 +26,7 @@ services:
       - 3000:3000
     depends_on:
       - db
+      - redis
 
   worker:
     <<: *backend-app
@@ -33,6 +34,7 @@ services:
     entrypoint: ./entrypoint-worker.sh
     depends_on:
       - db
+      - redis
 
   redis:
     image: redis:6.2.6
