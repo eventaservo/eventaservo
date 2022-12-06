@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 10.minutes do
+every 20.minutes do
   runner "Cron.worker_heartbeat"
 end
