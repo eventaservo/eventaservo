@@ -1,7 +1,11 @@
 .box-white
-  .box-header Uzantoj
+  .box-header Administrantoj
   .box-body
-    .text-divider Administrantoj
+    .text-divider Ĉefadministranto(j)
+
+    %p.bg-color-grayLighter.p-1.mt-2.text-center{style: 'border-radius: 5px;'}
+      Ĉefadministranto rajtas aldoni novan administranton
+
     - @organizo.administrantoj.order(:name).each do |u|
       %br
       = link_to display_user(u), events_by_username_path(u.username)
@@ -13,7 +17,7 @@
 
     %br
     %br
-    .text-divider Helpantoj
+    .text-divider Kunadministranto(j)
     - @organizo.ne_estroj.order(:name).each do |u|
       %br
       = link_to display_user(u), events_by_username_path(u.username)
