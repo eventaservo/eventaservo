@@ -22,7 +22,11 @@ class OrganizationsController < ApplicationController
 
   # Montras organizajn informojn
   def show
-    @eventoj = Event.includes([:country]).lau_organizo(params[:short_name])
+    eventoj = Event.includes([:country]).lau_organizo(params[:short_name])
+    @future_events = eventoj.venontaj
+    @past_events = eventoj.pasintaj.order(date_start: :desc)
+
+    @pagy, @past_events = pagy(@past_events, items: 10)
 
     if params['iframe'].present?
       render :show, layout: 'iframe'

@@ -26,29 +26,29 @@
         - if @organizo.country.present? && (@organizo.country_id != 99999)
           = montras_adreson(@organizo.full_address)
 
-      .lead.mt-3 Eventoj
+      - if user_signed_in? && current_user.administranto?(@organizo)
+        .buttons-footer
+          = link_to icon('far', 'edit', 'Redakti'), edit_organization_url(@organizo.short_name), class: 'btn btn-sm btn-outline-primary no-border'
 
-      - if @eventoj.venontaj.any?
-        .text-divider Venontaj eventoj
+    - if @future_events.any?
+      .box-white
+        .lead Venontaj eventoj
         %p.small
           = link_to "Listigi venontajn eventojn de #{@organizo.short_name} en la ĉefa paĝo", root_url(o: @organizo.short_name)
-        - @eventoj.venontaj.order(:date_start).each do |e|
+        - @future_events.order(:date_start).each do |e|
           = link_to event_path(e.ligilo), class: 'item-row small' do
             .col-5 #{event_flag e} #{e.city} - #{format_date(e.komenca_dato, style: :short)}
             .col{class: ("cancelled" if e.cancelled)} #{e.title}
 
-      %br
-
-      - if @eventoj.pasintaj.any?
-        .text-divider Pasintaj eventoj
-        - @eventoj.pasintaj.order(date_start: :desc).each do |e|
+    - if @past_events.any?
+      .box-white
+        .lead Pasintaj eventoj
+        - @past_events.each do |e|
           = link_to event_path(e.ligilo), class: 'item-row small' do
             .col-5 #{event_flag e} #{e.city} - #{format_date(e.date_start, style: :short)}
             .col{class: ("cancelled" if e.cancelled)} #{e.title}
-
-      - if user_signed_in? && current_user.administranto?(@organizo)
-        .buttons-footer
-          = link_to 'Redakti organizon', edit_organization_url(@organizo.short_name), class: 'btn btn-sm btn-outline-primary'
+        .d-flex.justify-content-center.small.pt-3
+          = raw pagy_bootstrap_nav(@pagy)
 
   - unless params['iframe']
     .col-lg-4
