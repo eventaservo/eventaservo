@@ -85,9 +85,21 @@ ActiveAdmin.register User do
     end
   end
 
+  member_action :merge, method: %i[get post] do
+    if request.get?
+      @page_title = "Merge users"
+      @user_list = User.where.not(id: resource.id).map { |u| [u.name_with_username, u.id] }.sort
+    elsif request.post?
+      resource.merge_to(params["merge_users"]["target_user_id"])
+      redirect_to active_admin_user_path(2)
+    end
+  end
+
   sidebar "Actions", only: :show do
     if resource.disabled == false
-      link_to "Disable user", deactivate_active_admin_user_path(resource), method: :put, data: { confirm: "Sure?" }
+      div link_to "Disable user", deactivate_active_admin_user_path(resource), method: :put, data: { confirm: "Sure?" }
     end
+
+    div link_to "Merge to another user", merge_active_admin_user_path(resource)
   end
 end
