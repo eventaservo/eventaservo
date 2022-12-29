@@ -122,7 +122,7 @@
 
             .form-group
               = label_tag :user_id, 'Eventa administranto'
-              = form.select(:user_id, options_from_collection_for_select(User.order(:name), 'id', 'name', @event.user_id || current_user.id), {}, class: 'form-control select2-input')
+              = form.select(:user_id, options_from_collection_for_select(User.order(:name), 'id', "name_with_username", @event.user_id || current_user.id), {}, class: 'form-control select2-input')
 
         .buttons-footer
           - if params[:action] == 'edit'

@@ -152,6 +152,13 @@ class User < ApplicationRecord
     find_by(system_account: true)
   end
 
+  # Returns the user's name with username
+  #
+  # @return [String]
+  def name_with_username
+    "#{name} (#{username})"
+  end
+
   private
 
     # Generate JWT Token for API v2 before saving the user
