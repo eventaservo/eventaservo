@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Ahoy::Visit do
-  menu parent: "Ahoy"
+  menu false
 
   filter :country
   filter :city

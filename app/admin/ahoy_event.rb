@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Ahoy::Event do
-  menu parent: "Ahoy"
+  menu false
 
   actions :index, :show, :destroy
 
