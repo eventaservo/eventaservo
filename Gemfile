@@ -88,7 +88,7 @@ gem "redis", "~> 4.1"
 gem "sitemap_generator", "~> 6.1"
 gem "timezone", "~> 1.0"
 # gem 'trix-rails', require: 'trix'
-gem "httparty", "~> 0.18"
+gem "httparty", "~> 0.21"
 gem "nokogiri", ">= 1.10.4"
 gem "whenever", require: false
 gem "yard"
