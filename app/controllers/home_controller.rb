@@ -31,7 +31,7 @@ class HomeController < ApplicationController
   end
 
   def instruistoj_kaj_prelegantoj
-    ahoy.track "Visit Instruistoj kaj prelegantoj"
+    ahoy.track "Visit Instruantoj kaj Prelegantoj"
 
     @instruistoj = User.instruistoj.order(:name)
     @prelegantoj = User.prelegantoj.order(:name)
