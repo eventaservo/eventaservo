@@ -137,4 +137,11 @@ module ApplicationHelper
     icon('fas', 'map-marker-alt fg-color-link mr-1') +
       link_to(text, "https://www.google.com/maps/search/?api=1&query=#{adreso}", target: :_blank)
   end
+
+  def article_link(text, link, description)
+    content_tag(:p) do
+      content_tag(:a, text, href: link, target: :_blank) +
+        content_tag(:span, " #{description}", class: "small")
+    end
+  end
 end
