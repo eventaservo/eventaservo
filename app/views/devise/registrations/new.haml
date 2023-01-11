@@ -14,9 +14,7 @@
     %br
 
     .alert.alert-info.small.mt-2.text-center
-      Se vi havas dubon,
-      = link_to "speku filmeton", "https://mallonge.net/es1", target: :_blank
-      por klarigi kiel registriĝi.
+      Se vi havas dubon, spektu #{link_to "Ĉi tiun filmeton", "https://mallonge.net/es1", target: :_blank}. Ĝi klarigas kiel registriĝi.
 
     = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
       = devise_error_messages!
