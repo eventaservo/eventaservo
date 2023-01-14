@@ -1383,37 +1383,37 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rails/actioncable@npm:^6.1.7":
-  version: 6.1.7
-  resolution: "@rails/actioncable@npm:6.1.7"
-  checksum: b9651d9991d6e5fffdadd64e392b8157463b63da48bc1b061541f23907b9c7d73d5d73ee1982c65c3e7d2879fe918bd7b2c776baba4fb21c8ca3c8da2dbec374
+"@rails/actioncable@npm:^7.0.4":
+  version: 7.0.4
+  resolution: "@rails/actioncable@npm:7.0.4"
+  checksum: b31cae40511a3df4d3048779255219b92f7dd89514f3c9f2da2b219b9b0635261b17b05031c7070756d319bf9165d4d6c021a820b110d53a3e6c441a062accdd
   languageName: node
   linkType: hard
 
-"@rails/actiontext@npm:^6.1.7":
-  version: 6.1.7
-  resolution: "@rails/actiontext@npm:6.1.7"
+"@rails/actiontext@npm:^7.0.4":
+  version: 7.0.4
+  resolution: "@rails/actiontext@npm:7.0.4"
   dependencies:
-    "@rails/activestorage": ^6.0.0
+    "@rails/activestorage": ">= 7.0.0-alpha1"
   peerDependencies:
-    trix: ^1.2.0
-  checksum: 74a8f068ef01154ddf51b9deeb84d625e6e5b007e7a5e9cc33492e5a2fd6ef123d30e1f85c38c588d7095df6a20be7d5f8c2abdc62d2324592454d9f79f6699d
+    trix: ^1.3.1
+  checksum: 028c877a4d859c5272f1f981a899ec3a8b74222a5f2e50b9b398c950680b8ee302bc0f6ab67428e7839e2d18a8557eb2c62f1e229654c29701393989bad9f9ed
   languageName: node
   linkType: hard
 
-"@rails/activestorage@npm:^6.0.0, @rails/activestorage@npm:^6.1.7":
-  version: 6.1.7
-  resolution: "@rails/activestorage@npm:6.1.7"
+"@rails/activestorage@npm:>= 7.0.0-alpha1, @rails/activestorage@npm:^7.0.4":
+  version: 7.0.4
+  resolution: "@rails/activestorage@npm:7.0.4"
   dependencies:
-    spark-md5: ^3.0.0
-  checksum: 7a47df6c1e031adb237184c3fb5b474f6df7c3e0a8fdc5a6d953c67dad326a80b23900bbb0ba42b5ad53b26c83e9c949dc28523f6e150529d41092ff16e8c4ee
+    spark-md5: ^3.0.1
+  checksum: f99eaf856782babbf54a79fdf22e797592ad2a90e83b35125cd2c546c56b9f1c2ee8fc9e9b73098356fbfbca05ea2ba832207d455d3ed6e57513ba33ccb74ea2
   languageName: node
   linkType: hard
 
-"@rails/ujs@npm:^6.1.7":
-  version: 6.1.7
-  resolution: "@rails/ujs@npm:6.1.7"
-  checksum: a597bdaee400f73d4a2b3b2de13433399166273b56e0655da1a4d3cd9e2406224c6506bfc205565e64a02068003647aa51c767bbc5a31d1bdfdc32048a86c618
+"@rails/ujs@npm:^7.0.4":
+  version: 7.0.4
+  resolution: "@rails/ujs@npm:7.0.4"
+  checksum: 26a05efb14fe09b792dcf8de067d5607d0fdafc0a6c5d73dd4d57a214d441b8cabbdb563b8f54e78932210de2b5236a466664edd53fc8bda71fa6d9835bd9266
   languageName: node
   linkType: hard
 
@@ -4231,10 +4231,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "eventaservo@workspace:."
   dependencies:
-    "@rails/actioncable": ^6.1.7
-    "@rails/actiontext": ^6.1.7
-    "@rails/activestorage": ^6.1.7
-    "@rails/ujs": ^6.1.7
+    "@rails/actioncable": ^7.0.4
+    "@rails/actiontext": ^7.0.4
+    "@rails/activestorage": ^7.0.4
+    "@rails/ujs": ^7.0.4
     "@rails/webpacker": ^5.4.3
     "@vue/compiler-sfc": ^3.2.45
     axios: ^0.21.4
@@ -9782,7 +9782,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"spark-md5@npm:^3.0.0":
+"spark-md5@npm:^3.0.1":
   version: 3.0.2
   resolution: "spark-md5@npm:3.0.2"
   checksum: 5feebff0bfabcecf56ba03af3e38fdb068272ed41fbf0a94ff9ef65b9bb9cb1dd69be3684db6542e62497b1eac3ae324c07ac4dcb606465dc36ca048177077bf
