@@ -1,5 +1,133 @@
 # Changelog
 
+## [v2.48](https://github.com/eventaservo/eventaservo/tree/v2.48) (2023-01-14)
+
+[Full Changelog](https://github.com/eventaservo/eventaservo/compare/v2.47...v2.48)
+
+## [v2.47](https://github.com/eventaservo/eventaservo/tree/v2.47) (2023-01-11)
+
+[Full Changelog](https://github.com/eventaservo/eventaservo/compare/v2.44...v2.47)
+
+**Closed issues:**
+
+- PES109 kompletigi eventaservo.org/prie [\#469](https://github.com/eventaservo/eventaservo/issues/469)
+- Add pagination to list of past events for Organization [\#450](https://github.com/eventaservo/eventaservo/issues/450)
+- Integrate WeatherAPI to events [\#415](https://github.com/eventaservo/eventaservo/issues/415)
+- 2 lingvaj informoj [\#374](https://github.com/eventaservo/eventaservo/issues/374)
+- retservo \(webservice\) [\#363](https://github.com/eventaservo/eventaservo/issues/363)
+- Aldoni informon pri "regiono/gubernio/..." por evento [\#362](https://github.com/eventaservo/eventaservo/issues/362)
+- Raporti - admin: elekti el listo de pretaj respondoj [\#351](https://github.com/eventaservo/eventaservo/issues/351)
+- Ĉu anoncecaj afiŝoj afiŝiĝu nur dum semajno kaj poste plu aperu nur sub /anoncoj? [\#349](https://github.com/eventaservo/eventaservo/issues/349)
+- Ĉu aldoni duan - regionan - flageton al ES? [\#344](https://github.com/eventaservo/eventaservo/issues/344)
+- Redakti la landon de ES-uzanto + statistikoj [\#343](https://github.com/eventaservo/eventaservo/issues/343)
+- Subdomajnoj [\#342](https://github.com/eventaservo/eventaservo/issues/342)
+- +Google Calendar-butono [\#337](https://github.com/eventaservo/eventaservo/issues/337)
+- Komuniki kun eniginto de evento: kunsendi bildon/dosieron [\#335](https://github.com/eventaservo/eventaservo/issues/335)
+- Aldoni detalan programon de evento al ES [\#331](https://github.com/eventaservo/eventaservo/issues/331)
+- Aldoni X-konvertilon por la enhavo [\#326](https://github.com/eventaservo/eventaservo/issues/326)
+- Ebligi aldoni dosierojn al organizo [\#314](https://github.com/eventaservo/eventaservo/issues/314)
+- Unuopaj eventoj - kalendaro: aldoni distingon inter retaj programoj kaj poŝtelefonoj [\#311](https://github.com/eventaservo/eventaservo/issues/311)
+- Registriĝi \(kaj ensaluti\) per kromaj servoj \(Google, Apple, Amikumu\) [\#306](https://github.com/eventaservo/eventaservo/issues/306)
+- Movi la butonon 'Redakti organizon' supren [\#304](https://github.com/eventaservo/eventaservo/issues/304)
+- Ĉu aldoni Esperantan flagon al ES por tutmondaj eventoj? [\#300](https://github.com/eventaservo/eventaservo/issues/300)
+- Twitter-konto [\#297](https://github.com/eventaservo/eventaservo/issues/297)
+- Se organiza nomo estas tre longa, ĉu vi povas aperigi ĝin sur du aŭ tri linioj? [\#296](https://github.com/eventaservo/eventaservo/issues/296)
+- Mi ne plu povas elekti landon per tab + sagoj. Ĉu vi povas korekti tion? [\#293](https://github.com/eventaservo/eventaservo/issues/293)
+- Ne ĉiam temas pri eraro aŭ korektindaĵo: ĉu aldoni administran butonon 'Atentigi'? [\#288](https://github.com/eventaservo/eventaservo/issues/288)
+- Ne eblas aldoni unuopan eventon al Google Calendar en Android 9-10 [\#279](https://github.com/eventaservo/eventaservo/issues/279)
+- Organizo: nomo foje tro longas + nacilingvaj nomoj [\#275](https://github.com/eventaservo/eventaservo/issues/275)
+- Semajna vido: eta problemo en poŝtelefono + uskleca unuecigo [\#270](https://github.com/eventaservo/eventaservo/issues/270)
+- Retaj eventoj: ĉu ligi rekte defaŭlte al la semajna kalendara vido? [\#267](https://github.com/eventaservo/eventaservo/issues/267)
+- Aldoni ligilon al listo de horzonoj [\#261](https://github.com/eventaservo/eventaservo/issues/261)
+- Matene aperas hieraŭaj eventoj sur ĉefpaĝo de ES, vespere morgaŭaj... [\#257](https://github.com/eventaservo/eventaservo/issues/257)
+- Horzono: ĉu ebligi indiki tion ĉe la profilo? [\#254](https://github.com/eventaservo/eventaservo/issues/254)
+- Eventoj kun elektita nombro de liberaj lokoj [\#238](https://github.com/eventaservo/eventaservo/issues/238)
+- Env-variablo por igi la retejon nurlega [\#234](https://github.com/eventaservo/eventaservo/issues/234)
+- Organizoj: ankaŭ kiam nova organizo estas kreita, pri tio aperu mesaĝo en ES Administraĵoj [\#230](https://github.com/eventaservo/eventaservo/issues/230)
+- Organizoj: aldoni butonon 'Mesaĝi' [\#228](https://github.com/eventaservo/eventaservo/issues/228)
+- Aldoni ES al Instigo-LiberaPay post aprobo de la estraro de UEA [\#224](https://github.com/eventaservo/eventaservo/issues/224)
+- Administraj kaj juraj detaloj [\#222](https://github.com/eventaservo/eventaservo/issues/222)
+- Ne aperis evento en ES Administraĵoj pro citiloj [\#220](https://github.com/eventaservo/eventaservo/issues/220)
+- Aŭtomata semajna/monata/trimonata dissendolisto [\#219](https://github.com/eventaservo/eventaservo/issues/219)
+- Ne eblas importi ĉi tiun Meetup-eventon: HTTP ERROR 500 [\#218](https://github.com/eventaservo/eventaservo/issues/218)
+- Ĉu montri pli da rezultoj en 1 paĝo ol nur 15? [\#217](https://github.com/eventaservo/eventaservo/issues/217)
+- ES Administraĵoj: ankau informi pri forigo de evento [\#215](https://github.com/eventaservo/eventaservo/issues/215)
+- Okazas hodiaŭ: foje aperas eventoj kiuj... okazis hieraŭ [\#211](https://github.com/eventaservo/eventaservo/issues/211)
+- Organizo - pasintaj eventoj: ĉu montri nur la lastajn dek? [\#208](https://github.com/eventaservo/eventaservo/issues/208)
+- Ĉu eblus aldoni minuskligi-butonojn ĉe la titolo kaj la priskribo? \(nur por administrantoj\) [\#206](https://github.com/eventaservo/eventaservo/issues/206)
+- Ĉu per skripto duobligi semajnajn eventojn? [\#204](https://github.com/eventaservo/eventaservo/issues/204)
+- Sciigoj pri nova evento de organizo [\#199](https://github.com/eventaservo/eventaservo/issues/199)
+- Organizoj: ĉu aldoni ligilojn al raportoj? [\#198](https://github.com/eventaservo/eventaservo/issues/198)
+- Admin: ellabori uzantopaĝon [\#194](https://github.com/eventaservo/eventaservo/issues/194)
+- Strangaj signoj aperas ĉe paĝokapoj de retumilo [\#190](https://github.com/eventaservo/eventaservo/issues/190)
+- Afiŝado de bildoj: foje ili ne aperas sur iPad [\#189](https://github.com/eventaservo/eventaservo/issues/189)
+- Organizoj - pasintaj eventoj [\#187](https://github.com/eventaservo/eventaservo/issues/187)
+- Ĉu alŝutilo ankaŭ ĉe organizoj? [\#186](https://github.com/eventaservo/eventaservo/issues/186)
+- URL de eventoj: ĉu defaŭlte sen diakritaj signoj? [\#177](https://github.com/eventaservo/eventaservo/issues/177)
+- Ĉu faciligi aldonadon de nacilingvaj titoloj? [\#175](https://github.com/eventaservo/eventaservo/issues/175)
+- Post ensalutado oni ne saltu al la ĉefpaĝo, sed al la \(antaŭ\)lasta loko en la retejo  [\#170](https://github.com/eventaservo/eventaservo/issues/170)
+- Tut-monata evento poluas kalenadaron [\#169](https://github.com/eventaservo/eventaservo/issues/169)
+- Pli efikigi la duobligon de eventoj [\#166](https://github.com/eventaservo/eventaservo/issues/166)
+- Ne eblas forigi organizon [\#162](https://github.com/eventaservo/eventaservo/issues/162)
+- Ne funkcias importado de Meetup-evento [\#158](https://github.com/eventaservo/eventaservo/issues/158)
+- Deziro: filtri eventojn laŭ tempoperiodo \(ekz. propraj ferioj\) [\#154](https://github.com/eventaservo/eventaservo/issues/154)
+- Nova evento: ĉu aldoni la eblon afiŝi klavareton kun nekutimaj literoj kaj simboloj? [\#145](https://github.com/eventaservo/eventaservo/issues/145)
+- Kampo kun informoj/ligiloj nur por eventa administranto [\#133](https://github.com/eventaservo/eventaservo/issues/133)
+- Kalendaro: nur 4 semajnoj estas montrataj [\#93](https://github.com/eventaservo/eventaservo/issues/93)
+- Post ensalutado reveni al la sama URL [\#78](https://github.com/eventaservo/eventaservo/issues/78)
+- Datumbazo pri nomoj de urboj en Esperanto kaj en gepatra lingvo [\#75](https://github.com/eventaservo/eventaservo/issues/75)
+- Kunigi la diversajn nomojn por la sama urbo [\#67](https://github.com/eventaservo/eventaservo/issues/67)
+- Grupigi eventojn laŭ regionoj [\#53](https://github.com/eventaservo/eventaservo/issues/53)
+- Afiŝado de horoj: ĉu permesi agordadon al preferata sistemo? [\#51](https://github.com/eventaservo/eventaservo/issues/51)
+- Ĉu proponi servojn per ES? \(Ŝablono por aliĝilo, pagoj,...\) [\#45](https://github.com/eventaservo/eventaservo/issues/45)
+- Aŭtomata diskonigo de eventoj per retpoŝto [\#25](https://github.com/eventaservo/eventaservo/issues/25)
+- Google Calendar-nomoj de landaj kalendaroj [\#19](https://github.com/eventaservo/eventaservo/issues/19)
+- Ebleco krei eventojn, kiuj ripetiĝas dum intertempo [\#17](https://github.com/eventaservo/eventaservo/issues/17)
+- Recenzoj por eventoj [\#13](https://github.com/eventaservo/eventaservo/issues/13)
+- Komentoj en eventoj [\#10](https://github.com/eventaservo/eventaservo/issues/10)
+
+**Merged pull requests:**
+
+- Bump rails-html-sanitizer from 1.4.3 to 1.4.4 [\#464](https://github.com/eventaservo/eventaservo/pull/464) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump loofah from 2.19.0 to 2.19.1 [\#463](https://github.com/eventaservo/eventaservo/pull/463) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump nokogiri from 1.13.9 to 1.13.10 [\#462](https://github.com/eventaservo/eventaservo/pull/462) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v2.44](https://github.com/eventaservo/eventaservo/tree/v2.44) (2022-12-04)
+
+[Full Changelog](https://github.com/eventaservo/eventaservo/compare/v2.42...v2.44)
+
+**Merged pull requests:**
+
+- Bump decode-uri-component from 0.2.0 to 0.2.2 [\#461](https://github.com/eventaservo/eventaservo/pull/461) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v2.42](https://github.com/eventaservo/eventaservo/tree/v2.42) (2022-12-04)
+
+[Full Changelog](https://github.com/eventaservo/eventaservo/compare/v2.41...v2.42)
+
+**Closed issues:**
+
+- Ebligi "malebligi" reklamon anstataŭ forviŝi ĝin [\#456](https://github.com/eventaservo/eventaservo/issues/456)
+- Whole-day events should not appear as Mult-day events [\#444](https://github.com/eventaservo/eventaservo/issues/444)
+- Deziro: Eksportebleco kiel KML/KMZ [\#153](https://github.com/eventaservo/eventaservo/issues/153)
+- Konvertilo de x-igita teksto [\#149](https://github.com/eventaservo/eventaservo/issues/149)
+- Ellabori la publikan uzanto-paĝon [\#147](https://github.com/eventaservo/eventaservo/issues/147)
+- Okazinta evento ne aperu en ES [\#127](https://github.com/eventaservo/eventaservo/issues/127)
+- Ĉu ekzistas bona malfermitkoda alternativo por GC [\#125](https://github.com/eventaservo/eventaservo/issues/125)
+- Ĉu aldoni priskribon al hodiaŭaj eventoj?  [\#124](https://github.com/eventaservo/eventaservo/issues/124)
+- Kalendara vido: se oni alklakas la reen-butono post kiam oni afiŝis eventon, ne aperas la antaŭa paĝo, sed la ĉefpaĝo [\#123](https://github.com/eventaservo/eventaservo/issues/123)
+- Aldoni malgarantian tekston al la retejo [\#44](https://github.com/eventaservo/eventaservo/issues/44)
+- Ĉu aldoni la eblon aldoni pliajn ligilojn al evento? [\#42](https://github.com/eventaservo/eventaservo/issues/42)
+- Multlingvaj informoj pri la eventoj [\#34](https://github.com/eventaservo/eventaservo/issues/34)
+- Eblas nur serĉi sur la ĉefpaĝo : kial? [\#33](https://github.com/eventaservo/eventaservo/issues/33)
+- Ĉu proponi helpon al kreantoj kaj administrantoj de retejoj afiŝi eventojn per iframe aŭ widget? [\#29](https://github.com/eventaservo/eventaservo/issues/29)
+- Aŭtomate anstataŭigi X per ĉapelitaj literoj dum tajpado [\#21](https://github.com/eventaservo/eventaservo/issues/21)
+
+**Merged pull requests:**
+
+- Upgrades Ruby 2.7 to 3.0 [\#460](https://github.com/eventaservo/eventaservo/pull/460) ([shayani](https://github.com/shayani))
+- Ebligi "malebligi" reklamon \#456 [\#458](https://github.com/eventaservo/eventaservo/pull/458) ([shayani](https://github.com/shayani))
+- Bump sinatra from 2.2.1 to 3.0.4 [\#455](https://github.com/eventaservo/eventaservo/pull/455) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v2.41](https://github.com/eventaservo/eventaservo/tree/v2.41) (2022-11-29)
 
 [Full Changelog](https://github.com/eventaservo/eventaservo/compare/v2.40...v2.41)
