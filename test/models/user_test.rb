@@ -48,4 +48,15 @@ class UserTest < ActiveSupport::TestCase
     user.save
     assert user.jwt_token.present?
   end
+
+  test ".active?" do
+    user = FactoryBot.create(:user)
+    assert_not user.active?
+
+    user.update(confirmed_at: Time.zone.today)
+    assert_not user.active?
+
+    user.update(last_sign_in_at: Time.zone.today)
+    assert user.active?
+  end
 end
