@@ -6,6 +6,7 @@ x-app: &backend-app
       - DB_HOST=db
       - DB_USERNAME=postgres
       - DB_PASSWORD=postgres
+      - REDIS_SERVER=redis
       - PORT=3000
 
 services:
@@ -43,8 +44,6 @@ services:
       interval: 10s
       timeout: 3s
       retries: 3
-    ports:
-      - 6379:6379
 
   db:
     image: postgres:13.5
@@ -62,17 +61,6 @@ services:
     ports:
       - 1025:1025
       - 1080:1080
-
-  pgadmin:
-    image: dpage/pgadmin4:latest
-    ports:
-      - 8080:8080
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@eventaservo.org
-      - PGADMIN_DEFAULT_PASSWORD=administranto
-      - PGADMIN_LISTEN_PORT=8080
-    depends_on:
-      - db
 
 volumes:
   postgres:
