@@ -56,4 +56,4 @@ jobs:
           RAILS_MASTER_KEY: ${{ secrets.rails_master_key }}
         run: |
           bin/rails db:migrate
-          bin/rails test
+          bin/rails test -v
