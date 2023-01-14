@@ -7,5 +7,9 @@
     UEA-Kodo: #{@uzanto.ueacode}
     %br
     Naskiĝdato: #{@uzanto.birthday.strftime("%d/%m/%Y") if @uzanto.birthday}
+    %hr
+    Aktiva: #{@uzanto.active? ? "JES" : "NE"}
     %br
     Kreita en: #{@uzanto.created_at.strftime("%d/%m/%Y")}
+    %br
+    Laste ensalutis: #{@uzanto.last_sign_in_at&.strftime("%d/%m/%Y") || "neniam" }

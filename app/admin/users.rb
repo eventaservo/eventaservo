@@ -31,6 +31,7 @@ ActiveAdmin.register User do
     column("Events") do |user|
       user.events.size
     end
+    column("Active?", :active?)
     actions
   end
 
@@ -71,6 +72,7 @@ ActiveAdmin.register User do
           row :admin
           row :confirmed_at
           row :disabled
+          row :active?
         end
       end
     end

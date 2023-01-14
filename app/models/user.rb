@@ -159,6 +159,14 @@ class User < ApplicationRecord
     "#{name} (#{username})"
   end
 
+  # Returns if the user is active
+  # Active means he confirmed the email address and logged in at least once
+  #
+  # @return [Boolean]
+  def active?
+    !!confirmed_at && !!last_sign_in_at
+  end
+
   private
 
     # Generate JWT Token for API v2 before saving the user
