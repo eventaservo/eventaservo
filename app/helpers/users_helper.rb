@@ -12,7 +12,7 @@ module UsersHelper
     image =
       if user&.picture&.attached?
         if user.picture.variable?
-          url_for(user.picture.variant(resize: '42x42'))
+          url_for(user.picture.variant(resize_to_limit: [42, 42]))
         else
           url_for(user.picture)
         end
@@ -27,7 +27,7 @@ module UsersHelper
   def display_user_image_profile(user)
     image =
       if user.picture.attached?
-        url_for(user.picture.variant(resize: '162x162'))
+        url_for(user.picture.variant(resize_to_limit: [162, 162]))
       elsif user.image?
         user.image
       else
