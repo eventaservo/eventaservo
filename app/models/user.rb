@@ -173,7 +173,6 @@ class User < ApplicationRecord
   # Regenerates the Webcal token
   #
   # @return [String] the new token
-  # TODO: TESTS
   def regenerate_webcal_token!
     token = Random.hex(4)
     update!(webcal_token: token)

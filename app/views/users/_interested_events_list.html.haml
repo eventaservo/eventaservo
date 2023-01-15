@@ -1,11 +1,7 @@
-- if @interested_events.any?
+- if @interested_events.venontaj.any?
   .mb-5
-    .lead
-      Venontaj eventoj kiuj mi interegiĝas
-      %span.float-right
-        = link_to icon('far', 'calendar-alt'),
-          webcal_user_url(webcal_token: @uzanto.webcal_token, protocol: :webcal, format: :ics),
-          data: { target: '#webcalModal', toggle: 'modal' }
+    .lead Venontaj eventoj kiuj mi interegiĝas
+
 
     - @interested_events.venontaj.order(:date_start).each do |event|
       = link_to event_path(event.ligilo), class: 'item-row small' do
@@ -13,36 +9,3 @@
           = event_flag event
           = "#{event.city} - #{format_date(event.komenca_dato, style: :short)}"
         .col{class: ("cancelled" if event.cancelled)}= "#{event.title}"
-
-  #webcalModal.modal.fade{ aria: { hidden: :true, labelledby: 'shareModalCenterTitle' } , role: 'dialog', tabindex: '-1' }
-    .modal-dialog.modal-lg.modal-dialog-centered{role: 'document'}
-      .modal-content
-
-        .modal-header
-          %h5#shareModalCenterTitle.modal-title
-            Aboni personan kalendaron
-          %button.close{'aria-label': 'Fermi', 'data-dismiss': 'modal', type: 'button'}
-            %span{'aria-hidden': :true} ×
-
-        .modal-body
-          %p
-            Kiam oni abonas personan kalendaron, ĉiuj eventoj estas aldonataj al la kalendaro kaj ajnaj eventaj ŝanĝoj
-            aŭtomate ĝisdatiĝas.
-
-          %p
-            Jen Webcal-ligilo por aboni la kalendaron.
-            Uzu ĝin en programoj kiel Google Calendar, iCal aŭ similaj. Se vi bezonas klarigon kiel uzi la ligilon, legu
-            #{link_to 'ĉi tiun artikolon', 'https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)', target: :'_blank'}.
-
-          .input-group
-            .input-group-prepend
-              .input-group-text#copy_button= link_to 'Kopii', 'javascript:;'
-            = text_field_tag nil, webcal_user_url(webcal_token: @uzanto.webcal_token, format: :ics), id: 'webcalurl', readonly: :true, class: 'form-control bg-color-white'
-
-          %br
-          %p
-            Kelkaj kalendaraj programoj ebligas aŭtomate aboni la kalendaron se oni alklakas specifan ligilon. Vi povas
-            provi tion per #{link_to 'ĉi tiu ligilo', webcal_user_url(webcal_token: @uzanto.webcal_token, protocol: :webcal, format: :ics)}.
-
-        .modal-footer
-          %button.btn.btn-sm.btn-outline-secondary{'data-dismiss': 'modal', type: 'button'} Fermi
