@@ -34,6 +34,21 @@ module Webcal
       end
     end
 
+    # Generates the user's calendar
+    #
+    # @return [ICS file]
+    # TODO: TESTS
+    def user
+      user = User.find_by(webcal_token: params[:webcal_token])
+      redirect_to root_url, flash: { error: "Uzanto ne ekzisstas" } and return if user.nil?
+
+      events = (user.events + user.interested_events).uniq
+
+      respond_to do |format|
+        format.ics { kreas_webcal(events, title: "Miaj eventoj") }
+      end
+    end
+
     private
 
       def definas_landon

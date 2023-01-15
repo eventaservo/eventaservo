@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_14_210855) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_15_093811) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -357,6 +357,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_14_210855) do
     t.boolean "disabled", default: false
     t.boolean "system_account", default: false
     t.integer "events_count", default: 0
+    t.string "webcal_token"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["disabled"], name: "index_users_on_disabled"

@@ -29,9 +29,12 @@ class User < ApplicationRecord
   has_many :organization_users
   has_many :organizations, through: :organization_users # TODO: Evitinda
   has_many :organizoj, through: :organization_users, source: :organization
+  has_many :interested_events_relation, class_name: "Participant", dependent: :destroy
+  has_many :interested_events, through: :interested_events_relation, source: :event
 
   validates :name, presence: true
   validates :username, uniqueness: true
+  validates :webcal_token, uniqueness: true
 
   default_scope { where(disabled: false) }
 
@@ -165,6 +168,17 @@ class User < ApplicationRecord
   # @return [Boolean]
   def active?
     !!confirmed_at && !!last_sign_in_at
+  end
+
+  # Regenerates the Webcal token
+  #
+  # @return [String] the new token
+  # TODO: TESTS
+  def regenerate_webcal_token!
+    token = Random.hex(4)
+    update!(webcal_token: token)
+
+    token
   end
 
   private
