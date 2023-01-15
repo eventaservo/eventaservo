@@ -41,7 +41,10 @@ module Webcal
       user = User.find_by(webcal_token: params[:webcal_token])
       redirect_to root_url, flash: { error: "Uzanto ne ekzisstas" } and return if user.nil?
 
-      events = (user.events + user.interested_events).uniq
+      events = (user.events.includes([:country]) + user.interested_events.includes([:country])).uniq
+
+      ahoy = Ahoy::Tracker.new(controller: self, user: user)
+      ahoy.track "Personal calendar"
 
       respond_to do |format|
         format.ics { kreas_webcal(events, title: "Miaj eventoj") }
