@@ -8,7 +8,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "uzanto validas" do
-    assert build_stubbed(:uzanto).valid?
+    assert build(:user).valid?
   end
 
   test "uzanto ne validas sen nomo" do
@@ -59,11 +59,11 @@ class UserTest < ActiveSupport::TestCase
     assert @user.active?
   end
 
-  test ".regenerate_webcal_token!" do
+  test ".generate_webcal_token!" do
     original_webcal_token = @user.webcal_token
     assert original_webcal_token.present?
 
-    @user.regenerate_webcal_token!
+    @user.generate_webcal_token!
     assert_not_equal @user.webcal_token, original_webcal_token
   end
 end

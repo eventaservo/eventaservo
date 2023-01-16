@@ -9,7 +9,6 @@ FactoryBot.define do
     password { Faker::Internet.password }
     confirmed_at { Time.now }
     country { Country.all.sample }
-    webcal_token { Random.hex(4) }
 
     trait :brazila do
       country { Country.find_by(code: "br") }
