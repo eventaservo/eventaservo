@@ -4,12 +4,16 @@
       .text-center
         = display_user_image_profile(@uzanto)
     .col-md-9
-      .ml-3
+      .d-flex.justify-content-between
         %h1.display-4= @uzanto.name
-        = montras_flagon(@uzanto.country)
-        = @uzanto.country.name if @uzanto.country
-        = "(#{@uzanto.city})"
-        %p.small= simple_format(@uzanto.about)
+        = link_to icon('far', 'calendar-alt'),
+          webcal_user_url(webcal_token: @uzanto.webcal_token, protocol: :webcal, format: :ics),
+          data: { target: '#webcalModal', toggle: 'modal' }
+
+      = montras_flagon(@uzanto.country)
+      = @uzanto.country.name if @uzanto.country
+      = "(#{@uzanto.city})"
+      %p.small= simple_format(@uzanto.about)
   %br
   .row
     .col-lg-3.col-md-12
@@ -24,23 +28,42 @@
           = render partial: 'users/instruist_profilo'
         .col-12.col-md-6.mb-5
           = render partial: 'users/prelegant_profilo'
-      - if @venontaj.any?
-        .mb-5
-          .lead Venontaj eventoj
-          - @venontaj.order(:date_start).each do |e|
-            = link_to event_path(e.ligilo), class: 'item-row small' do
-              .col-5
-                = event_flag e
-                = "#{e.city} - #{format_date(e.komenca_dato, style: :short)}"
-              .col{class: ("cancelled" if e.cancelled)}= "#{e.title}"
 
-      - if @pasintaj.any?
-        .lead Pasintaj eventoj
-        - @pasintaj.order(date_start: :desc).each do |e|
-          = link_to event_path(e.ligilo), class: 'item-row small' do
-            .col-5
-              = event_flag e
-              = "#{e.city} - #{format_date(e.komenca_dato, style: :short)}"
-            .col{class: ("cancelled" if e.cancelled)}= "#{e.title}"
-        .d-flex.justify-content-center.small.pt-3
-          = raw pagy_bootstrap_nav(@pagy)
+      = render partial: "users/interested_events_list"
+
+      = render partial: "users/my_events"
+
+#webcalModal.modal.fade{ aria: { hidden: :true, labelledby: 'shareModalCenterTitle' } , role: 'dialog', tabindex: '-1' }
+  .modal-dialog.modal-lg.modal-dialog-centered{ role: 'document' }
+    .modal-content
+
+      .modal-header
+        %h5#shareModalCenterTitle.modal-title
+          Aboni personan kalendaron
+        %button.close{ 'aria-label': 'Fermi', 'data-dismiss': 'modal', type: 'button' }
+          %span{ 'aria-hidden': :true } ×
+
+      .modal-body
+        %p
+          Kiam oni abonas personan kalendaron, ĉiuj propraj eventoj kaj tiuj pri kiu oni interesiĝas, estas aldonataj al
+          la kalendaro. Ajnaj eventaj ŝanĝoj aŭtomate ĝisdatiĝas.
+        .alert.alert-warning
+          Ne konigu la adreson de via persona kalendaro al alia homo. Ĝi estas privata.
+
+        %p
+          Jen Webcal-ligilo por aboni la kalendaron.
+          Uzu ĝin en programoj kiel Google Calendar, iCal aŭ similaj. Se vi bezonas klarigon kiel uzi la ligilon, legu
+          #{link_to 'ĉi tiun artikolon', 'https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)', target: :'_blank'}.
+
+        .input-group
+          .input-group-prepend
+            .input-group-text#copy_button= link_to 'Kopii', 'javascript:;'
+          = text_field_tag nil, webcal_user_url(webcal_token: @uzanto.webcal_token, format: :ics), id: 'webcalurl', readonly: :true, class: 'form-control bg-color-white'
+
+        %br
+        %p
+          Kelkaj kalendaraj programoj ebligas aŭtomate aboni la kalendaron se oni alklakas specifan ligilon. Vi povas
+          provi tion per #{link_to 'ĉi tiu ligilo', webcal_user_url(webcal_token: @uzanto.webcal_token, protocol: :webcal, format: :ics)}.
+
+      .modal-footer
+        %button.btn.btn-sm.btn-outline-secondary{ 'data-dismiss': 'modal', type: 'button' } Fermi

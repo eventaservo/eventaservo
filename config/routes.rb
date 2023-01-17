@@ -68,6 +68,7 @@ Rails.application.routes.draw do
   namespace :webcal do
     get 'lando/:landa_kodo', to: 'webcal#lando'
     get 'o/:short_name', to: 'webcal#organizo', as: 'organizo'
+    get "uzanto/:webcal_token", to: "webcal#user", as: "user"
   end
 
   # International Calendar (Internacia kalendaro)
