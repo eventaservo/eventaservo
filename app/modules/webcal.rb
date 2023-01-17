@@ -7,6 +7,7 @@ module Webcal
     eventoj          = Array.wrap(eventoj)
     cal              = Icalendar::Calendar.new
     cal.x_wr_calname = title
+    cal.x_wr_caldesc = title
     eventoj.each { |evento| kreas_eventon(cal, evento) }
     cal.publish
     render plain: cal.to_ical

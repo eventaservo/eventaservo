@@ -47,7 +47,7 @@ module Webcal
       ahoy.track "Personal calendar"
 
       respond_to do |format|
-        format.ics { kreas_webcal(events, title: "Miaj eventoj") }
+        format.ics { kreas_webcal(events, title: "Eventa Servo persona") }
       end
     end
 
