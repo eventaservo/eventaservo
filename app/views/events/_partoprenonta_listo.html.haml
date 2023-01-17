@@ -20,4 +20,5 @@
         - if @partoprenontoj.ne_publikaj.count > 0
           %p
             %br
-            Kaj aliaj #{@partoprenontoj.ne_publikaj.count} kiuj preferis ne aperigi sian nomon.
+            kaj #{pluralize(@partoprenontoj.ne_publikaj.count, 'aliaj kiuj', plural: "aliajn kiujn")}
+            preferis ne aperigi sian nomon
