@@ -6,12 +6,12 @@ module OrganizationsHelper
 
     size =
       case size
-      when :large then [128, 128]
-      when :medium then [48, 48]
-      else [20, 20]
+      when :large then '128x128'
+      when :medium then '48x48'
+      else '20x20'
       end
 
-    image_tag organization.logo.variant(resize_to_limit: size), width: size, class: html_class
+    image_tag organization.logo.variant(resize: size), width: size, class: html_class
   end
 
   # Montras la organizojn pri la evento

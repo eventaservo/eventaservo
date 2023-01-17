@@ -4,7 +4,7 @@
     - @event.uploads.each do |upload|
       - if upload.blob.image?
         .foto.flex-fill.m-1
-          = link_to (image_tag url_for(upload.variant(resize_to_limit: [150, 150])), class: 'img-thumbnail'), url_for(upload), class: 'js-smartPhoto', data: { group: @event.code }
+          = link_to (image_tag url_for(upload.variant(resize: "150x150")), class: 'img-thumbnail'), url_for(upload), class: 'js-smartPhoto', data: { group: @event.code }
           - if user_is_owner_or_admin(@event)
             %p= link_to icon('far', 'trash-alt', 'Forigi'), event_delete_file_path(@event.code, upload.id), method: :delete, data: { confirm: 'Ĉu vi certas?' }, class: 'btn btn-sm btn-outline-link'
 
