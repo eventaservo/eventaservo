@@ -51,34 +51,6 @@ module Webcal
         e.description = evento.description + '\n\n' + event_url(evento.ligilo)
         e.location    = evento.full_address
       end
-
-      icalendar.event do |e|
-        e.dtstart     = Icalendar::Values::DateOrDateTime.new(
-          evento.date_start.in_time_zone(evento.time_zone),
-          tzid: evento.time_zone
-        ).call
-        e.dtend = Icalendar::Values::DateOrDateTime.new(
-          evento.date_start.in_time_zone(evento.time_zone) + 1.hour,
-          tzid: evento.time_zone
-        ).call
-        e.summary     = "Komenco: #{evento.title}"
-        e.description = evento.description + '\n\n' + event_url(evento.ligilo)
-        e.location    = evento.full_address
-      end
-
-      icalendar.event do |e|
-        e.dtstart     = Icalendar::Values::DateOrDateTime.new(
-          evento.date_end.in_time_zone(evento.time_zone),
-          tzid: evento.time_zone
-        ).call
-        e.dtend = Icalendar::Values::DateOrDateTime.new(
-          evento.date_end.in_time_zone(evento.time_zone) + 1.hour,
-          tzid: evento.time_zone
-        ).call
-        e.summary     = "Fino: #{evento.title}"
-        e.description = evento.description + '\n\n' + event_url(evento.ligilo)
-        e.location    = evento.full_address
-      end
     end
 
     # Creates a whole-day event
