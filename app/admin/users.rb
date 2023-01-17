@@ -51,6 +51,7 @@ ActiveAdmin.register User do
           row :ligiloj
           row :instruo
           row :prelego
+          row :webcal_token
         end
       end
 

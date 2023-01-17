@@ -3,8 +3,12 @@
 require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
+  def setup
+    @user = FactoryBot.create(:user)
+  end
+
   test "uzanto validas" do
-    assert build_stubbed(:uzanto).valid?
+    assert build(:user).valid?
   end
 
   test "uzanto ne validas sen nomo" do
@@ -20,25 +24,21 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "retpostadreso devas esti ne uzata" do
-    create(:uzanto, email: "example@example.com")
-    new_user = build(:uzanto, email: "example@example.com")
+    new_user = build(:uzanto, email: @user.email)
     assert new_user.invalid?
   end
 
   test "ne permesas forigi uzant-konton se ĝi ankoraŭ havas eventojn rilatajn" do
-    user = create(:uzanto)
-    FactoryBot.create(:evento, user_id: user.id)
+    FactoryBot.create(:evento, user_id: @user.id)
 
-    assert_not user.destroy
+    assert_not @user.destroy
   end
 
   test "ne permesas forigi uzant-konton se ĝi ankoraŭ havas organizojn rilatajn" do
-    user = create(:uzanto)
-
     organization = create(:organization)
-    OrganizationUser.create(organization_id: organization.id, user_id: user.id)
+    OrganizationUser.create(organization_id: organization.id, user_id: @user.id)
 
-    assert_not user.destroy
+    assert_not @user.destroy
   end
 
   test "JWT Token must be created automatically for new users" do
@@ -50,13 +50,20 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test ".active?" do
-    user = FactoryBot.create(:user)
-    assert_not user.active?
+    assert_not @user.active?
 
-    user.update(confirmed_at: Time.zone.today)
-    assert_not user.active?
+    @user.update(confirmed_at: Time.zone.today)
+    assert_not @user.active?
 
-    user.update(last_sign_in_at: Time.zone.today)
-    assert user.active?
+    @user.update(last_sign_in_at: Time.zone.today)
+    assert @user.active?
+  end
+
+  test ".generate_webcal_token!" do
+    original_webcal_token = @user.webcal_token
+    assert original_webcal_token.present?
+
+    @user.generate_webcal_token!
+    assert_not_equal @user.webcal_token, original_webcal_token
   end
 end

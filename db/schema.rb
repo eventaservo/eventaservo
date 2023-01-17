@@ -358,6 +358,7 @@ ActiveRecord::Schema.define(version: 2022_11_14_191436) do
     t.boolean "disabled", default: false
     t.boolean "system_account", default: false
     t.integer "events_count", default: 0
+    t.string "webcal_token"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["disabled"], name: "index_users_on_disabled"

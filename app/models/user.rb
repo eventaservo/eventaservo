@@ -17,6 +17,7 @@ class User < ApplicationRecord
   store_accessor :prelego, :preleganto
   store_accessor :ligiloj, [:youtube, :telegram, :instagram, :facebook, :vk, :persona_retejo, :twitter]
 
+  before_validation :generate_webcal_token, if: :new_record?
   before_save :generate_username, if: :new_record?
   before_save :subscribe_mailings, if: :new_record?
   before_save :gererate_jwt_token, if: :new_record?
@@ -29,9 +30,12 @@ class User < ApplicationRecord
   has_many :organization_users
   has_many :organizations, through: :organization_users # TODO: Evitinda
   has_many :organizoj, through: :organization_users, source: :organization
+  has_many :interested_events_relation, class_name: "Participant", dependent: :destroy
+  has_many :interested_events, through: :interested_events_relation, source: :event
 
   validates :name, presence: true
   validates :username, uniqueness: true
+  validates :webcal_token, uniqueness: true
 
   default_scope { where(disabled: false) }
 
@@ -167,6 +171,20 @@ class User < ApplicationRecord
     !!confirmed_at && !!last_sign_in_at
   end
 
+  # Generates and updates the Webcal token
+  #
+  # @return [String] the new token
+  def generate_webcal_token!
+    token = create_webcal_token
+    update!(webcal_token: token)
+
+    token
+  end
+
+  def generate_webcal_token
+    self.webcal_token ||= create_webcal_token
+  end
+
   private
 
     # Generate JWT Token for API v2 before saving the user
@@ -217,5 +235,12 @@ class User < ApplicationRecord
     events.each do |event|
       event.update(user: User.system_account)
     end
+  end
+
+  # Creates (but not save) a new webcal token
+  #
+  # @return [String]
+  def create_webcal_token
+    Random.hex(4)
   end
 end
