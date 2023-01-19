@@ -179,7 +179,7 @@ GEM
       jquery-ui-rails (>= 5.0.2)
       momentjs-rails (>= 2.9.0)
     geocoder (1.8.1)
-    globalid (1.0.0)
+    globalid (1.0.1)
       activesupport (>= 5.0)
     haml (5.2.2)
       temple (>= 0.8.0)
