@@ -2,6 +2,7 @@
 
 class WorkerHeartbeatJob < ApplicationJob
   queue_as :heartbeat
+  retry_on SocketError, wait: 1.minute, attempts: 5
 
   def perform
     return if Rails.env.development?
