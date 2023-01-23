@@ -2,6 +2,7 @@
 
 class SciigasUzantojnAntauEventoJob < ApplicationJob
   queue_as :rememoriga_mesagho
+  retry_on Postmark::TimeoutError, Net::OpenTimeout, wait: 1.minute, attempts: 5
 
   def perform(code, reminder_date_string = "2.hours")
     e = Event.by_code(code)
