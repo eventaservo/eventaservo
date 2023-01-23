@@ -15,7 +15,7 @@ ActiveAdmin.register Organization do
   #   permitted
   # end
 
-  actions :all, except: :destroy
+  actions :all, except: %i[new destroy edit]
 
   filter :name_cont, label: "Name"
   filter :country
@@ -26,12 +26,13 @@ ActiveAdmin.register Organization do
 
   index do
     id_column
-    column("Name") { |o| link_to(o.name, "/o/#{o.short_name}", target: :_blank, rel: :noopener)}
+    column("Name") { |o| link_to(o.name, "/o/#{o.short_name}", target: :_blank, rel: :noopener) }
     column :short_name
     column :country
     column :city
     column("Users") { |o| o.users.count }
     column("Events") { |o| o.events.count }
+    actions
   end
 
   show do

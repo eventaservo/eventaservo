@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register User do
-  permit_params :name, :email
+  permit_params :name, :country_id
 
-  actions :all, except: :destroy
+  actions :all, except: %i[new destroy]
 
   scope :enabled, default: true
   scope :disabled
@@ -23,7 +23,9 @@ ActiveAdmin.register User do
 
   index do
     id_column
-    column :name
+    column("Nomo") do |user|
+      link_to user.name, "/uzanto/#{user.username}", target: "_blank", rel: "noopener"
+    end
     column :email
     column :city
     column :country
@@ -100,9 +102,24 @@ ActiveAdmin.register User do
 
   sidebar "Actions", only: :show do
     if resource.disabled == false
-      div link_to "Disable user", deactivate_active_admin_user_path(resource), method: :put, data: { confirm: "Sure?" }
+      div link_to "Disable user", \
+                  deactivate_active_admin_user_path(resource), \
+                  method: :put, \
+                  data: { \
+                    confirm: "To be used when a user wants his account to be destroyed. Removes the user from any " \
+                             "organization, move all events to system account and disable the user. Are your sure?" \
+                  }
     end
 
     div link_to "Merge to another user", merge_active_admin_user_path(resource)
+  end
+
+  form do |f|
+    f.inputs do
+      f.input :name
+      f.input :country
+    end
+
+    f.actions
   end
 end

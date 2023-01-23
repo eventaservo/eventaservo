@@ -84,7 +84,7 @@ class User < ApplicationRecord
     return false if username.present?
 
     username = ActiveSupport::Inflector.transliterate(name).tr(' ', '_').tr('.', '_').downcase
-    username.gsub!(/[^0-9A-Za-z-_]/, '')
+    username.gsub!(/[^0-9A-Za-z_-]/, "")
     username += SecureRandom.rand(100).to_s if random
 
     if User.find_by(username: username)

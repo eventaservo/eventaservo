@@ -5,6 +5,8 @@ ActiveAdmin.register Ad do
 
   filter :active
 
+  actions :all, except: %i[new]
+
   index do
     id_column
     column(:image) do |ad|

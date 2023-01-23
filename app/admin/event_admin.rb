@@ -3,7 +3,7 @@
 ActiveAdmin.register Event do # rubocop:disable Metrics/BlockLength
   config.sort_order = "date_start_asc"
 
-  actions :all, except: :destroy
+  actions :all, except: %i[new destroy]
 
   permit_params :title, :description, :content, :address, :city, :country_id, :user_id, :date_start, :date_end, :code,
                 :site, :email, :online, :specolisto, :short_url, :cancelled, :cancel_reason, :international_calendar
@@ -26,12 +26,23 @@ ActiveAdmin.register Event do # rubocop:disable Metrics/BlockLength
 
   index do
     column :short_url
-    column :title
+    column("Titolo") do |event|
+      link_to event.title, event.url, target: "_blank", rel: "noopener"
+    end
     column :date_start
     column :date_end
     column :city
     column :country
     actions
+  end
+
+  form do |f|
+    f.inputs do
+      f.input :user
+      f.input :short_url
+    end
+
+    f.actions
   end
 
   csv do
