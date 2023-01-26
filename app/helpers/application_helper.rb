@@ -112,8 +112,7 @@ module ApplicationHelper
     return if retposhtadreso.blank?
 
     if user_signed_in?
-      icon("fas", "at", class: "fg-color-link mr-1 copy-to-clipboard", data: { clipboard: retposhtadreso }) +
-        mail_to(retposhtadreso, retposhtadreso, subject: "Informoj - Eventa Servo")
+      icon("fas", "at", retposhtadreso, class: "copy-to-clipboard", data: { clipboard: retposhtadreso })
     else
       icon("fas", "at", retposhtadreso.gsub("@", "(ĉe)"))
     end
