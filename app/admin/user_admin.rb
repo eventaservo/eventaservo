@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register User do
-  permit_params :name, :country_id
+  permit_params :name, :country_id, :username
 
   actions :all, except: %i[new destroy]
 
@@ -118,6 +118,7 @@ ActiveAdmin.register User do
     f.inputs do
       f.input :name
       f.input :country
+      f.input :username
     end
 
     f.actions
