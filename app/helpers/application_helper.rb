@@ -95,7 +95,7 @@ module ApplicationHelper
     return unless upload.blob.image?
 
     begin
-      thumb = upload.variant(resize_to_limit: [150, 150]).processed
+      thumb = upload.variant(resize: '150x150').processed
       xml.enclosure url: rails_representation_url(thumb), length: upload.byte_size / 10, type: upload.content_type
     rescue ActiveStorage::FileNotFoundError => e
       Sentry.capture_exception(e)
