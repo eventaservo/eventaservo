@@ -30,7 +30,7 @@ ENV IPINFO_KEY=${IPINFO_KEY}
 
 # Bundler
 RUN echo "gem: --no-document" >> ~/.gemrc
-RUN gem install bundler:2.3.18
+RUN gem install bundler:2.4.6
 RUN if [ "$RAILS_ENV" = "production" ] || [ "$RAILS_ENV" = "staging" ]; then \
   bundle config set without development test && \
   bundle config set deployment true && \

@@ -241,7 +241,7 @@ GEM
     kaminari-core (1.2.2)
     leaflet-rails (1.7.0)
       rails (>= 4.2.0)
-    libv8-node (15.14.0.1)
+    libv8-node (15.14.0.1-x86_64-linux)
     listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -258,7 +258,6 @@ GEM
     method_source (1.0.0)
     mini_magick (4.12.0)
     mini_mime (1.1.2)
-    mini_portile2 (2.8.1)
     mini_racer (0.4.0)
       libv8-node (~> 15.14.0.0)
     minitest (5.17.0)
@@ -277,8 +276,7 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.8)
-    nokogiri (1.14.0)
-      mini_portile2 (~> 2.8.0)
+    nokogiri (1.14.0-x86_64-linux)
       racc (~> 1.4)
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
@@ -509,7 +507,7 @@ GEM
     zeitwerk (2.6.6)
 
 PLATFORMS
-  ruby
+  x86_64-linux
 
 DEPENDENCIES
   activeadmin
@@ -596,4 +594,4 @@ RUBY VERSION
    ruby 3.0.0p0
 
 BUNDLED WITH
-   2.3.18
+   2.4.6
