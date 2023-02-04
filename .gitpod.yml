@@ -8,7 +8,7 @@ tasks:
       docker run -d -p 6379:6379 --name redis redis:6.2.6
       docker run -d -p 1025:1025 -p 1080:1080 --name mailcatcher schickling/mailcatcher:latest
       gem install solargraph rubocop rubocop-rails
-      gem install bundler:2.3.18
+      gem install bundler:2.4.6
       bundle install
       bundle exec rails db:setup
       solargraph download-core
