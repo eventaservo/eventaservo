@@ -33,7 +33,10 @@
 
       %p= display_event_tags(@event)
 
-      = @event.enhavo
+      - begin
+        = @event.enhavo
+      - rescue => e
+        - Sentry.capture_exception(e)
 
       .clearfix
       = render partial: 'uploads'
