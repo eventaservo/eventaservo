@@ -11,10 +11,10 @@ module HomeHelper
 
   def traduki_periodon(periodo)
     case periodo
-    when 'hodiau' then 'Okazas nuntempe'
-    when 'p7_tagojn' then 'Proksimajn 7 tagojn'
-    when 'p30_tagojn' then 'Proksimajn 30 tagojn'
-    when 'estontece' then 'Estontece'
+    when "hodiau" then "Okazas nuntempe"
+    when "p7_tagojn" then "Proksimajn 7 tagojn"
+    when "p30_tagojn" then "Proksimajn 30 tagojn"
+    when "estontece" then "Estontece"
     else periodo
     end
   end

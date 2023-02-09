@@ -1,6 +1,6 @@
 class AddTagsToEvents < ActiveRecord::Migration[6.0]
   def up
-    add_column :events, :specolisto, :string, default: 'Kunveno'
+    add_column :events, :specolisto, :string, default: "Kunveno"
     add_index :events, :specolisto
 
     Event.all.each do |e|

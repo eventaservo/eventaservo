@@ -1,5 +1,5 @@
 class Participant < ApplicationRecord
-  self.table_name = 'participants'
+  self.table_name = "participants"
 
   belongs_to :event, counter_cache: true
   belongs_to :user

@@ -1,4 +1,4 @@
 class Horzono < ApplicationRecord
-  self.table_name = 'timezones'
+  self.table_name = "timezones"
 
 end

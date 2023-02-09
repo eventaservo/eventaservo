@@ -1,6 +1,6 @@
-require_relative 'boot'
+require_relative "boot"
 
-require 'rails/all'
+require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -16,14 +16,14 @@ module Eventaservo
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
-    config.time_zone = 'UTC'
+    config.time_zone = "UTC"
 
     config.i18n.default_locale = :epo
     config.exceptions_app = self.routes
 
     config.active_job.queue_adapter = :delayed_job
 
-    config.action_dispatch.default_headers = { 'X-Frame-Options' => 'ALLOWALL' }
+    config.action_dispatch.default_headers = { "X-Frame-Options" => "ALLOWALL" }
 
     config.eager_load_paths << "#{Rails.root}/test/mailers/previews"
 

@@ -6,7 +6,7 @@ module Webcal
     before_action :definas_landon, only: :lando
 
     def lando
-      eventoj = if @lando.code == 'ol' # Retaj eventoj
+      eventoj = if @lando.code == "ol" # Retaj eventoj
         Event.ne_nuligitaj.ne_anoncoj.venontaj.online
       else
         Event.ne_nuligitaj.ne_anoncoj.lau_lando(@lando).for_webcal
@@ -25,7 +25,7 @@ module Webcal
       redirect_to root_url if params[:short_name].blank?
 
       o = Organization.find_by(short_name: params[:short_name])
-      redirect_to root_url, flash: { error: 'Organizo ne ekzistas' } and return if o.nil?
+      redirect_to root_url, flash: { error: "Organizo ne ekzistas" } and return if o.nil?
 
       eventoj = Event.lau_organizo(o.short_name).for_webcal
 
@@ -57,7 +57,7 @@ module Webcal
         redirect_to root_url if params[:landa_kodo].blank?
 
         @lando = Country.find_by(code: params[:landa_kodo])
-        redirect_to root_url, flash: { notice: 'Landa kodo ne ekzistas' } if @lando.nil?
+        redirect_to root_url, flash: { notice: "Landa kodo ne ekzistas" } if @lando.nil?
       end
   end
 end

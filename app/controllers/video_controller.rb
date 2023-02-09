@@ -3,7 +3,7 @@
 class VideoController < ApplicationController
 
   def index
-    @videoj = ::Video.joins(:evento).order('events.date_start DESC')
+    @videoj = ::Video.joins(:evento).order("events.date_start DESC")
     @pagy, @videoj = pagy(@videoj, items: 6)
   end
 
@@ -28,9 +28,9 @@ class VideoController < ApplicationController
     video = Video.find(params[:id])
     if user_can_edit_event?(user: @current_user, event: video.evento)
       video.destroy
-      flash[:success] = 'Video forigita'
+      flash[:success] = "Video forigita"
     else
-      flash[:error] = 'Vi ne rajtas forigi tiun videon'
+      flash[:error] = "Vi ne rajtas forigi tiun videon"
     end
     redirect_back fallback_location: root_url
   end

@@ -22,7 +22,7 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
 
   # Compress JavaScripts and CSS.
   # config.assets.css_compressor = :sass
@@ -80,7 +80,7 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.default_url_options = { host: 'testservilo.eventaservo.org', protocol: 'https' }
+  config.action_mailer.default_url_options = { host: "testservilo.eventaservo.org", protocol: "https" }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
@@ -96,7 +96,7 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  if ENV['RAILS_LOG_TO_STDOUT'].present?
+  if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new($stdout)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
@@ -105,8 +105,8 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.active_job.default_url_options = { host: 'testservilo.eventaservo.org', protocol: :https }
-  Rails.application.routes.default_url_options[:host] = 'testservilo.eventaservo.org'
+  config.active_job.default_url_options = { host: "testservilo.eventaservo.org", protocol: :https }
+  Rails.application.routes.default_url_options[:host] = "testservilo.eventaservo.org"
   Rails.application.routes.default_url_options[:protocol] = :https
 
   # Email interceptor for Staging

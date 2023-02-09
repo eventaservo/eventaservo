@@ -16,7 +16,7 @@ class Organization < ApplicationRecord
 
   validates :name, :short_name, presence: true
   validates :short_name, uniqueness: { case_sensitive: false }
-  validates :short_name, format: { with: /\A[a-zA-Z0-9_\-ĈĉĴĵĜĝĤĥŜŝĴĵŬŭÜüÀàÁáÂâÄäÅåÈèÉéÊêĘęėëÍíÎîìïÇçĆćČčŁłÓóÔôÖöØøòõōŚśŠšßÚúÜüùûÝýŹźŻżŽž]*\z/, message: 'enhavas spaco(j)n aŭ nevalida(j)n signo(j)n' }
+  validates :short_name, format: { with: /\A[a-zA-Z0-9_\-ĈĉĴĵĜĝĤĥŜŝĴĵŬŭÜüÀàÁáÂâÄäÅåÈèÉéÊêĘęėëÍíÎîìïÇçĆćČčŁłÓóÔôÖöØøòõōŚśŠšßÚúÜüùûÝýŹźŻżŽž]*\z/, message: "enhavas spaco(j)n aŭ nevalida(j)n signo(j)n" }
 
   # Ĉeforganizoj estas UEA kaj TEJO
   # Informoj pri ili aperas ĉiam je la supra parto de Organizaj paĝo
@@ -60,7 +60,7 @@ class Organization < ApplicationRecord
   # Serĉas laŭ vorto la organizojn
   #
   def self.serchi(vorto)
-    where('unaccent(name) ilike unaccent(:v) OR unaccent(short_name) ilike unaccent(:v)', v: "%#{vorto.tr("''", '')}%")
+    where("unaccent(name) ilike unaccent(:v) OR unaccent(short_name) ilike unaccent(:v)", v: "%#{vorto.tr("''", '')}%")
   end
 
   def full_address
@@ -68,7 +68,7 @@ class Organization < ApplicationRecord
     adr << address unless address.blank?
     adr << city unless city.blank?
     adr << country.code.upcase unless country.nil?
-    adr.compact.join(', ')
+    adr.compact.join(", ")
   end
 
   def fix_site

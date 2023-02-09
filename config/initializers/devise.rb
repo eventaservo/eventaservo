@@ -18,7 +18,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'Eventa Servo <kontakto@eventaservo.org>'
+  config.mailer_sender = "Eventa Servo <kontakto@eventaservo.org>"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -30,7 +30,7 @@ Devise.setup do |config|
   # Load and configure the ORM. Supports :active_record (default) and
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
   # available as additional gems.
-  require 'devise/orm/active_record'
+  require "devise/orm/active_record"
 
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
@@ -258,10 +258,10 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   config.omniauth :facebook, "243701312975059", "e68d86942416dc69b9b3bf710e6a1d49",
-                  scope:            'email,public_profile',
+                  scope:            "email,public_profile",
                   secure_image_url: true,
                   client_options:   {
-                  site:          'https://graph.facebook.com/v3.1',
+                  site:          "https://graph.facebook.com/v3.1",
                   authorize_url: "https://www.facebook.com/v3.1/dialog/oauth"
                   }
 

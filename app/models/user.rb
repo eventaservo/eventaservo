@@ -39,7 +39,7 @@ class User < ApplicationRecord
 
   default_scope { where(disabled: false) }
 
-  scope :receives_weekly_summary, -> { where('mailings @> ?', { weekly_summary: '1' }.to_json) }
+  scope :receives_weekly_summary, -> { where("mailings @> ?", { weekly_summary: "1" }.to_json) }
   scope :admins, -> { where(admin: true) }
   scope :instruistoj, -> { where("instruo ->> 'instruisto' = 'true'") }
   scope :prelegantoj, -> { where("prelego ->> 'preleganto' = 'true'") }
@@ -83,7 +83,7 @@ class User < ApplicationRecord
   def generate_username(random: false)
     return false if username.present?
 
-    username = ActiveSupport::Inflector.transliterate(name).tr(' ', '_').tr('.', '_').downcase
+    username = ActiveSupport::Inflector.transliterate(name).tr(" ", "_").tr(".", "_").downcase
     username.gsub!(/[^0-9A-Za-z_-]/, "")
     username += SecureRandom.rand(100).to_s if random
 
@@ -123,7 +123,7 @@ class User < ApplicationRecord
   def self.serchi(teksto)
     User.where('unaccent(users.name) ilike unaccent(:search) OR
               unaccent(users.username) ilike unaccent(:search)',
-           search: "%#{teksto.strip.tr(' ', '%').downcase}%").order('users.name')
+           search: "%#{teksto.strip.tr(' ', '%').downcase}%").order("users.name")
   end
 
   # Kunigas la nunan konton kun alia konto-id
@@ -190,12 +190,12 @@ class User < ApplicationRecord
     # Generate JWT Token for API v2 before saving the user
     def gererate_jwt_token
       payload = { id: id }
-      jwt_token = JWT.encode(payload, Rails.application.credentials.dig(:jwt, :secret), 'HS256')
+      jwt_token = JWT.encode(payload, Rails.application.credentials.dig(:jwt, :secret), "HS256")
       self.jwt_token = jwt_token
     end
 
     def subscribe_mailings
-      self.weekly_summary = '1'
+      self.weekly_summary = "1"
     end
 
     def sanitize_links

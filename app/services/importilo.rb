@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Importilo
-  require 'httparty'
-  require 'nokogiri'
+  require "httparty"
+  require "nokogiri"
 
   def initialize(url)
     @url = url
@@ -10,8 +10,8 @@ class Importilo
 
   def retejo
     case URI(@url).host
-    when 'www.meetup.com'
-      'Meetup'
+    when "www.meetup.com"
+      "Meetup"
     else
       false
     end
@@ -20,38 +20,38 @@ class Importilo
   def datumoj
     return nil unless url_estas_valida
 
-    importas_el_meetup if retejo == 'Meetup'
+    importas_el_meetup if retejo == "Meetup"
   end
 
   private
 
     def url_estas_valida
-      URI(@url).host == 'www.meetup.com'
+      URI(@url).host == "www.meetup.com"
     end
 
     def importas_el_meetup
       evento = {}
       path   = URI(@url).path
 
-      idx = path.split('/').index('events')
+      idx = path.split("/").index("events")
       # if idx == nil
       #   return evento, "importa URL. Bezonata formato estas 'https://www.meetup.com/:grupo/events/:id/'"
       # end
 
-      grupo = path.split('/')[idx - 1]
-      id    = path.split('/')[idx + 1]
+      grupo = path.split("/")[idx - 1]
+      id    = path.split("/")[idx + 1]
 
       res = HTTParty.get("https://api.meetup.com/#{grupo}/events/#{id}")
 
       if res.code != 200
-        code       = res['errors'][0]['code']
-        message    = res['errors'][0]['message']
+        code       = res["errors"][0]["code"]
+        message    = res["errors"][0]["message"]
         retrokuplo = "[#{code}] #{message}"
 
         if res.code == 404
-          if code == 'event_error' && message == 'invalid event'
+          if code == "event_error" && message == "invalid event"
             retrokuplo = "evento '#{id}' ne ekzistas"
-          elsif code == 'group_error' && message.start_with?('Invalid group urlname')
+          elsif code == "group_error" && message.start_with?("Invalid group urlname")
             retrokuplo = "grupo '#{grupo}' ne ekzistas"
           end
         end
@@ -59,19 +59,19 @@ class Importilo
         return evento, "importado ne sukcesis: #{retrokuplo}"
       end
 
-      evento['title']       = res['group']['name'] + ': ' + res['name']
-      evento['city']        = res['venue']['city'] ? res['venue']['city'] : 'Nekonata'
-      evento['site']        = res['link']
-      evento['country_id']  = Country.by_code(res['venue']['country']).id
-      evento['latitude']    = res['venue']['lat']
-      evento['longitude']   = res['venue']['lon']
-      evento['address']     = "#{res['venue']['name']}, #{res['venue']['address_1']}"
-      evento['time_zone']   = Timezone.lookup(evento['latitude'], evento['longitude']).name
-      evento['date_start']  = Time.at(res['time'].to_i / 1000).in_time_zone(evento['time_zone']).strftime("%Y-%m-%d %H:%M:%S")
-      evento['date_end']    = Time.at((res['time'].to_i + res['duration'].to_i) / 1000).in_time_zone(evento['time_zone']).strftime("%Y-%m-%d %H:%M:%S")
-      evento['content']     = res['description'] + res.fetch('how_to_find_us', '')
-      evento['description'] = res['name']
-      evento['site']        = res['link']
+      evento["title"]       = res["group"]["name"] + ": " + res["name"]
+      evento["city"]        = res["venue"]["city"] ? res["venue"]["city"] : "Nekonata"
+      evento["site"]        = res["link"]
+      evento["country_id"]  = Country.by_code(res["venue"]["country"]).id
+      evento["latitude"]    = res["venue"]["lat"]
+      evento["longitude"]   = res["venue"]["lon"]
+      evento["address"]     = "#{res['venue']['name']}, #{res['venue']['address_1']}"
+      evento["time_zone"]   = Timezone.lookup(evento["latitude"], evento["longitude"]).name
+      evento["date_start"]  = Time.at(res["time"].to_i / 1000).in_time_zone(evento["time_zone"]).strftime("%Y-%m-%d %H:%M:%S")
+      evento["date_end"]    = Time.at((res["time"].to_i + res["duration"].to_i) / 1000).in_time_zone(evento["time_zone"]).strftime("%Y-%m-%d %H:%M:%S")
+      evento["content"]     = res["description"] + res.fetch("how_to_find_us", "")
+      evento["description"] = res["name"]
+      evento["site"]        = res["link"]
 
       evento
     end

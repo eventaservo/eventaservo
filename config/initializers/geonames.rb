@@ -2,7 +2,7 @@
 
 if Rails.env.test?
   Timezone::Lookup.config(:geonames) { |c|
-    c.username         = 'eventaservo'
+    c.username         = "eventaservo"
     c.offset_etc_zones = true
   }
 else

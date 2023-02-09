@@ -11,10 +11,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    unless params[:sekurfrazo].strip.downcase == 'esperanto'
+    unless params[:sekurfrazo].strip.downcase == "esperanto"
       redirect_to(
         new_registration_path(resource_name),
-        flash: { error: 'Malĝusta kontraŭspama sekurvorto. Entajpu la nomon de la internacia lingvo.' }
+        flash: { error: "Malĝusta kontraŭspama sekurvorto. Entajpu la nomon de la internacia lingvo." }
       ) && return
     end
 
@@ -88,12 +88,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
     def registras_instru_informojn
       if params[:user][:instruisto].present?
         resource.instruisto        = true
-        resource.instruo['nivelo'] = params[:nivelo].keys
-        resource.instruo['sperto'] = params[:instru_sperto]
+        resource.instruo["nivelo"] = params[:nivelo].keys
+        resource.instruo["sperto"] = params[:instru_sperto]
       else
-        resource.instruo.delete('instruisto')
-        resource.instruo.delete('nivelo')
-        resource.instruo.delete('sperto')
+        resource.instruo.delete("instruisto")
+        resource.instruo.delete("nivelo")
+        resource.instruo.delete("sperto")
       end
       resource.save
     end
@@ -101,10 +101,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     def registras_preleg_informojn
       if params[:user][:preleganto].present?
         resource.preleganto        = true
-        resource.prelego['temoj'] = params[:preleg_temoj]
+        resource.prelego["temoj"] = params[:preleg_temoj]
       else
-        resource.prelego.delete('preleganto')
-        resource.prelego.delete('temoj')
+        resource.prelego.delete("preleganto")
+        resource.prelego.delete("temoj")
       end
       resource.save
     end

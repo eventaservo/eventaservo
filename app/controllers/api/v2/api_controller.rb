@@ -10,19 +10,19 @@ module Api
       private
 
         def validas_token
-          token = request.headers['Authorization']&.gsub(/^Bearer /, '')
+          token = request.headers["Authorization"]&.gsub(/^Bearer /, "")
 
           if token.nil?
-            render json: { eraro: 'Token mankas' }, status: :unauthorized and return
+            render json: { eraro: "Token mankas" }, status: :unauthorized and return
           end
 
           begin
             decoded = ::JWT.decode token, Rails.application.credentials.dig(:jwt, :secret)
           rescue JWT::DecodeError
-            render json: { eraro: 'Token ne validas' }, status: :unauthorized and return
+            render json: { eraro: "Token ne validas" }, status: :unauthorized and return
           end
 
-          @user = ::User.find(decoded[0]['id'])
+          @user = ::User.find(decoded[0]["id"])
         end
     end
   end

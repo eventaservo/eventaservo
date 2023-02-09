@@ -28,8 +28,8 @@ class OrganizationsController < ApplicationController
 
     @pagy, @past_events = pagy(@past_events, items: 10)
 
-    if params['iframe'].present?
-      render :show, layout: 'iframe'
+    if params["iframe"].present?
+      render :show, layout: "iframe"
     else
       render :show
     end
@@ -46,7 +46,7 @@ class OrganizationsController < ApplicationController
     @organizo = Organization.new(organization_params)
     if @organizo.save
       @organizo.organization_users.create(user: current_user, admin: true)
-      redirect_to organization_url(@organizo.short_name), flash: { notice: 'Organizo sukcese kreita.' }
+      redirect_to organization_url(@organizo.short_name), flash: { notice: "Organizo sukcese kreita." }
     else
       render :new
     end
@@ -54,8 +54,8 @@ class OrganizationsController < ApplicationController
 
   def update
     if @organizo.update(organization_params)
-      @organizo.logo.purge if params[:delete_logo] == 'true'
-      redirect_to organization_url(@organizo.short_name), notice: 'Organizo sukcese ĝisdatigita'
+      @organizo.logo.purge if params[:delete_logo] == "true"
+      redirect_to organization_url(@organizo.short_name), notice: "Organizo sukcese ĝisdatigita"
     else
       render :edit
     end
@@ -64,20 +64,20 @@ class OrganizationsController < ApplicationController
   def aldoni_uzanton
     uzanto = User.find(params[:id])
     organizo = Organization.find_by_short_name(params[:organization_short_name])
-    redirect_to organization_url(organizo.short_name), flash: { error: 'Uzanto ne trovita' } and return if uzanto.nil?
+    redirect_to organization_url(organizo.short_name), flash: { error: "Uzanto ne trovita" } and return if uzanto.nil?
 
     OrganizationUser.create(organization_id: organizo.id, user_id: uzanto.id)
-    redirect_to organization_url(organizo.short_name), flash: { success: 'Uzanto aldonita al la organizo' }
+    redirect_to organization_url(organizo.short_name), flash: { success: "Uzanto aldonita al la organizo" }
   end
 
   def estrighu
     organizo = Organization.find_by_short_name(params[:organization_short_name])
-    redirect_to organizations_url, flash: { error: 'Vi ne rajtas fari tion' } and return unless current_user.administranto?(organizo)
+    redirect_to organizations_url, flash: { error: "Vi ne rajtas fari tion" } and return unless current_user.administranto?(organizo)
 
     uzanto = User.find_by_username(params[:username])
     ou = OrganizationUser.find_by(organization_id: organizo.id, user_id: uzanto.id)
     ou.update(admin: !ou.admin)
-    redirect_to organization_url(organizo.short_name), flash: { success: 'Sukceso' }
+    redirect_to organization_url(organizo.short_name), flash: { success: "Sukceso" }
   end
 
   # Forigas uzanton el organizo
@@ -85,12 +85,12 @@ class OrganizationsController < ApplicationController
   #
   def forighu
     organizo = Organization.find_by_short_name(params[:organization_short_name])
-    redirect_to organizations_url, flash: { error: 'Vi ne rajtas fari tion' } and return unless current_user.administranto?(organizo)
+    redirect_to organizations_url, flash: { error: "Vi ne rajtas fari tion" } and return unless current_user.administranto?(organizo)
 
     uzanto = User.find_by_username(params[:username])
     ou = OrganizationUser.find_by(organization_id: organizo.id, user_id: uzanto.id)
     ou.destroy
-    redirect_to organization_url(organizo.short_name), flash: { success: 'Sukceso' }
+    redirect_to organization_url(organizo.short_name), flash: { success: "Sukceso" }
   end
 
   # Produktas JSON rezulton kun listo de Ĉeforganizoj
@@ -104,7 +104,7 @@ class OrganizationsController < ApplicationController
     def set_organization
       @organizo = Organization.find_by(short_name: params[:short_name])
 
-      redirect_to root_url, flash: { error: 'Organizo ne ekzistas' } if @organizo.nil?
+      redirect_to root_url, flash: { error: "Organizo ne ekzistas" } if @organizo.nil?
     end
 
     def organization_params

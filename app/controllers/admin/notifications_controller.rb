@@ -6,7 +6,7 @@ module Admin
     before_action :authenticate_admin!
 
     def index
-      @recipients = NotificationList.includes(:country).order('countries.name, email').all
+      @recipients = NotificationList.includes(:country).order("countries.name, email").all
     end
   end
 end

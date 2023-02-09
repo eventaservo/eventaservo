@@ -18,7 +18,7 @@ module OrganizationsHelper
   # @param [Object] event
   # @param [FalseClass] limited
   def display_organizations_for_event(event, limited: false)
-    content_tag(:div, class: 'organization-tags') do
+    content_tag(:div, class: "organization-tags") do
       if limited && event.organizations.count > 1
         concat organization_tag(event.organizations.first) + " +#{event.organizations.count - 1}"
       else
@@ -30,15 +30,15 @@ module OrganizationsHelper
   end
 
   def organization_tag(organization)
-    link_to organization_url(organization.short_name), class: 'tag' do
+    link_to organization_url(organization.short_name), class: "tag" do
       content_tag(:div, organization.short_name)
     end
   end
 
   def display_event_tags(event)
-    content_tag(:div, class: 'event-tags') do
+    content_tag(:div, class: "event-tags") do
       event.specoj.each do |t|
-        concat content_tag(:span, t, class: 'badge badge-pill badge-info mr-1')
+        concat content_tag(:span, t, class: "badge badge-pill badge-info mr-1")
       end
     end
   end
@@ -47,9 +47,9 @@ module OrganizationsHelper
     days = event.tagoj[:restanta]
     case days
     when (Float::INFINITY * -1)..0
-      ''
+      ""
     when 1
-      '| finiĝos morgaŭ'
+      "| finiĝos morgaŭ"
     else
       "| finiĝos post #{days} tagoj"
     end

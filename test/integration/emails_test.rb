@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 class EmailsTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   include ActionMailer::TestHelper
 
-  test 'informas pri problemo en evento' do
+  test "informas pri problemo en evento" do
     evento = create(:evento)
     assert_enqueued_emails 1 do
-      params = { name: Faker::Name.name, email: Faker::Internet.email, message: Faker::Lorem.paragraph, sekurfrazo: 'esperanto' }
+      params = { name: Faker::Name.name, email: Faker::Internet.email, message: Faker::Lorem.paragraph, sekurfrazo: "esperanto" }
       post event_kontakti_organizanton_url(evento.code, params)
     end
 

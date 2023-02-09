@@ -17,9 +17,9 @@ module Admin
     def update
       @user = User.find_by(id: params[:id])
       if @user.update(user_params)
-        redirect_to events_by_username_path(@user.username), flash: { success: 'Sukceso'}
+        redirect_to events_by_username_path(@user.username), flash: { success: "Sukceso"}
       else
-        render :show, flash: { error: 'Eraro okazis' }
+        render :show, flash: { error: "Eraro okazis" }
       end
     end
 
@@ -28,9 +28,9 @@ module Admin
       new_user_id = params[:id]
 
       if User.find(old_user_id).merge_to(new_user_id)
-        redirect_to admin_users_path, flash: { success: 'Uzant-kontoj sukcese kunigitaj' }
+        redirect_to admin_users_path, flash: { success: "Uzant-kontoj sukcese kunigitaj" }
       else
-        redirect_to admin_users_path, flash: { error: 'Eraro okazis. Ne eblis kunigi kontojn' }
+        redirect_to admin_users_path, flash: { error: "Eraro okazis. Ne eblis kunigi kontojn" }
       end
     end
 

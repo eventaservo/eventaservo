@@ -1,8 +1,8 @@
 # Set the host name for URL creation
 
-SitemapGenerator::Sitemap.default_host = "https://eventaservo.org" if Rails.env == 'production'
-SitemapGenerator::Sitemap.default_host = "https://testservilo.eventaservo.org" if Rails.env == 'staging'
-SitemapGenerator::Sitemap.default_host = "https://devel.eventaservo.org" if Rails.env == 'development'
+SitemapGenerator::Sitemap.default_host = "https://eventaservo.org" if Rails.env == "production"
+SitemapGenerator::Sitemap.default_host = "https://testservilo.eventaservo.org" if Rails.env == "staging"
+SitemapGenerator::Sitemap.default_host = "https://devel.eventaservo.org" if Rails.env == "development"
 
 SitemapGenerator::Sitemap.search_engines[:yahoo] = "http://www.bing.com/webmaster/ping.aspx?siteMap=%s"
 SitemapGenerator::Sitemap.search_engines[:yandex] = "http://blogs.yandex.ru/pings/?status=success&url=%s"
@@ -33,21 +33,21 @@ SitemapGenerator::Sitemap.create do
 
   # Venontaj eventoj
   Event.venontaj.find_each do |event|
-    add event_path(event.ligilo), lastmod: event.updated_at, priority: 1.0, changefreq: 'daily'
+    add event_path(event.ligilo), lastmod: event.updated_at, priority: 1.0, changefreq: "daily"
   end
 
   # Pasintaj Eventoj
   Event.pasintaj.find_each do |event|
-    add event_path(event.ligilo), lastmod: event.updated_at, priority: 0.2, changefreq: 'weekly', expires: event.updated_at + 2.weeks
+    add event_path(event.ligilo), lastmod: event.updated_at, priority: 0.2, changefreq: "weekly", expires: event.updated_at + 2.weeks
   end
 
   # Landoj
   Country.find_each do |country|
-    add events_by_country_path(country.continent, country.name), priority: 0.7, changefreq: 'daily'
+    add events_by_country_path(country.continent, country.name), priority: 0.7, changefreq: "daily"
   end
 
   # Urboj
-  Event.joins(:country).select(:city, 'countries.name as lando, countries.continent').distinct(:city).order('countries.name, city').each do |city|
-    add events_by_city_path(city.continent, city.lando, city.city), priority: 0.7, changefreq: 'daily'
+  Event.joins(:country).select(:city, "countries.name as lando, countries.continent").distinct(:city).order("countries.name, city").each do |city|
+    add events_by_city_path(city.continent, city.lando, city.city), priority: 0.7, changefreq: "daily"
   end
 end

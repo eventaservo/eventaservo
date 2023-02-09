@@ -6,7 +6,7 @@ class ErrorsController < ApplicationController
   end
 
   def unacceptable
-    render 'errors/internal_error', status: 422
+    render "errors/internal_error", status: 422
   end
 
   # Error 500

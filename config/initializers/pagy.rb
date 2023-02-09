@@ -34,7 +34,7 @@
 
 # Bootstrap extra: Add nav, nav_js and combo_nav_js helpers and templates for Bootstrap pagination
 # See https://ddnexus.github.io/pagy/extras/bootstrap
-require 'pagy/extras/bootstrap'
+require "pagy/extras/bootstrap"
 
 # Bulma extra: Add nav, nav_js and combo_nav_js helpers and templates for Bulma pagination
 # See https://ddnexus.github.io/pagy/extras/bulma
@@ -87,7 +87,7 @@ require 'pagy/extras/bootstrap'
 
 # Trim extra: Remove the page=1 param from links
 # See https://ddnexus.github.io/pagy/extras/trim
-require 'pagy/extras/trim'
+require "pagy/extras/trim"
 
 
 
@@ -131,7 +131,7 @@ Pagy::VARS[:page_param] = :pagho                           # default
 # Pagy::I18n.load(locale: 'eo')
 #
 # load the "de" locale defined in the custom file at :filepath:
-Pagy::I18n.load(locale: 'eo', filepath: Rails.root + 'config/locales/pagy.eo.yml')
+Pagy::I18n.load(locale: "eo", filepath: Rails.root + "config/locales/pagy.eo.yml")
 #
 # load the "de", "en" and "es" built-in locales:
 # (the first passed :locale will be used also as the default_locale)

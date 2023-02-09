@@ -1,9 +1,9 @@
-require 'helpers/vcr_helper'
-require 'importilo'
+require "helpers/vcr_helper"
+require "importilo"
 
 class EventTest < ActiveSupport::TestCase
 
-  test 'sukcesa Meetup evento' do
+  test "sukcesa Meetup evento" do
 
     lando = Country.find_by(code: "ca")
     tempozono = "America/Toronto"
@@ -24,7 +24,7 @@ class EventTest < ActiveSupport::TestCase
             "description"=>"Socia kunveno"
         }
 
-        url = 'https://www.meetup.com/Esperanto-Toronto/events/nbplfqyzmbfb/'
+        url = "https://www.meetup.com/Esperanto-Toronto/events/nbplfqyzmbfb/"
         datumoj = Importilo.new(url).datumoj
         
         assert_not_nil datumoj

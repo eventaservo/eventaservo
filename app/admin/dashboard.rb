@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register_page 'Dashboard' do
-  menu priority: 1, label: proc { I18n.t('active_admin.dashboard') }
+ActiveAdmin.register_page "Dashboard" do
+  menu priority: 1, label: proc { I18n.t("active_admin.dashboard") }
 
-  content title: proc { I18n.t('active_admin.dashboard') } do
-    div class: 'blank_slate_container' do
-      span class: 'blank_slate' do
+  content title: proc { I18n.t("active_admin.dashboard") } do
+    div class: "blank_slate_container" do
+      span class: "blank_slate" do
         div "Events: #{Event.count}"
         div "Venontaj: #{Event.venontaj.count}"
       end
 
-      span class: 'blank_slate' do
+      span class: "blank_slate" do
         div "Users: #{User.count}"
       end
     end

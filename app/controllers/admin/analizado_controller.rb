@@ -12,12 +12,12 @@ module Admin
       respond_to :json
 
       @retumiloj = []
-      Analytic.select(:browser, 'count(id)').group(:browser).order('count DESC').each do |r|
+      Analytic.select(:browser, "count(id)").group(:browser).order("count DESC").each do |r|
         @retumiloj << { name: r.browser, y: r.count, drilldown: r.browser }
       end
 
       @versioj = []
-      Analytic.select(:browser, :version, 'count(id)').group(:browser, :version).order(:browser, :version).group_by(&:browser).each do |b, versions|
+      Analytic.select(:browser, :version, "count(id)").group(:browser, :version).order(:browser, :version).group_by(&:browser).each do |b, versions|
         data = []
         versions.each do |v|
           data << ["v#{v.version}", v.count]
@@ -32,7 +32,7 @@ module Admin
       respond_to :json
 
       sistemoj = []
-      Analytic.select(:platform, 'count(id)').group(:platform).order('count DESC').each do |r|
+      Analytic.select(:platform, "count(id)").group(:platform).order("count DESC").each do |r|
         sistemoj << { name: r.platform, y: r.count }
       end
       render json: { sistemoj: sistemoj }
@@ -57,8 +57,8 @@ module Admin
       respond_to :json
 
       tagoj = []
-      Analytic.where('created_at >= ?', Date.today - 3.months)
-              .select('count(distinct ip), created_at::date as tago').group(:tago).order(:tago).each do |r|
+      Analytic.where("created_at >= ?", Date.today - 3.months)
+              .select("count(distinct ip), created_at::date as tago").group(:tago).order(:tago).each do |r|
         tagoj << [Date.new(r[:tago].year, r[:tago].month, r[:tago].day).iso8601, r[:count]]
       end
 

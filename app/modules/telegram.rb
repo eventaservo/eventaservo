@@ -7,7 +7,7 @@ module Telegram
                     "Content-Type": "application/json"
                   },
                   body: {
-                    parse_mode: 'HTML',
+                    parse_mode: "HTML",
                     chat_id: TELEGRAM_CHAT_ID,
                     text: text
                   }.to_json

@@ -4,7 +4,7 @@ class Video < ApplicationRecord
 
   validates_length_of :description, maximum: 400
 
-  belongs_to :evento, class_name: 'Event', foreign_key: 'event_id'
+  belongs_to :evento, class_name: "Event", foreign_key: "event_id"
 
   before_save :validas_ligilon
   after_save :elshultas_bildon
@@ -45,6 +45,6 @@ class Video < ApplicationRecord
     return false unless saved_change_to_url?
 
     file = URI.open("https://i.ytimg.com/vi/#{self.youtube_id}/mqdefault.jpg")
-    self.bildo.attach(io: file, filename: 'bildo.jpg', content_type: 'image/jpg')
+    self.bildo.attach(io: file, filename: "bildo.jpg", content_type: "image/jpg")
   end
 end

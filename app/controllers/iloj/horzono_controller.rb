@@ -6,7 +6,7 @@ module Iloj
         value: params[:horzono], expires: 1.year, secure: true
       }
       redirect_to request.referrer,
-                  flash: { success: 'Horzono elektita sukcese' }
+                  flash: { success: "Horzono elektita sukcese" }
     end
 
     def forvishas
@@ -14,7 +14,7 @@ module Iloj
 
       if request.referrer
         redirect_to request.referrer,
-                    flash: { success: 'Horzona informo forviŝita sukcese' }
+                    flash: { success: "Horzona informo forviŝita sukcese" }
       else
         redirect_to root_url
       end

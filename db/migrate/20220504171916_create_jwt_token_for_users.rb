@@ -4,7 +4,7 @@ class CreateJwtTokenForUsers < ActiveRecord::Migration[6.0]
 
     User.unscoped.all.each do |user|
       payload = { id: user.id }
-      jwt_token = JWT.encode(payload, Rails.application.credentials.dig(:jwt, :secret), 'HS256')
+      jwt_token = JWT.encode(payload, Rails.application.credentials.dig(:jwt, :secret), "HS256")
       user.update_columns(jwt_token: jwt_token)
     end
   end

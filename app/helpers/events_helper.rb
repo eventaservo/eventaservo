@@ -3,12 +3,12 @@
 module EventsHelper
   def display_events_by_style
     case cookies[:vidmaniero]
-    when 'kalendaro'
-      render partial: 'events/events_as_calendar', locals: { events: @events + @today_events }
-    when 'mapo'
-      render partial: 'events/events_as_map', locals: { events: @today_events.order(:date_start) + @events.order(:date_start)  }
+    when "kalendaro"
+      render partial: "events/events_as_calendar", locals: { events: @events + @today_events }
+    when "mapo"
+      render partial: "events/events_as_map", locals: { events: @today_events.order(:date_start) + @events.order(:date_start)  }
     else
-      render partial: 'events/events_as_cards', locals: { events: @events }
+      render partial: "events/events_as_cards", locals: { events: @events }
     end
   end
 
@@ -37,39 +37,39 @@ module EventsHelper
   end
 
   def event_map_pin_color(event)
-    return 'redIcon' if event.cancelled
+    return "redIcon" if event.cancelled
 
     case days_to_event(event)
-    when -30..0 then 'greenIcon'
-    when 1..7 then 'orangeIcon'
-    when 8..30 then 'yellowIcon'
-    else 'blueIcon'
+    when -30..0 then "greenIcon"
+    when 1..7 then "orangeIcon"
+    when 8..30 then "yellowIcon"
+    else "blueIcon"
     end
   end
 
   def event_color_class(event)
     case days_to_event(event)
-    when 0 then 'event-color-today'
-    when 1..7 then 'event-color-7days'
-    when 8..30 then 'event-color-30days'
-    when 31..Float::INFINITY then 'event-color-future'
-    else 'event-color-past'
+    when 0 then "event-color-today"
+    when 1..7 then "event-color-7days"
+    when 8..30 then "event-color-30days"
+    when 31..Float::INFINITY then "event-color-future"
+    else "event-color-past"
     end
   end
 
   # Protektas la retadreson kontaŭ spamoj
   def display_event_email(event)
     if user_signed_in?
-      mail_to(event.email, event.email, subject: "Informoj pri la evento #{event.title}", class: 'button-contact')
+      mail_to(event.email, event.email, subject: "Informoj pri la evento #{event.title}", class: "button-contact")
     else
-      event.email.gsub('@', ' <ĉe> ').gsub('.', ' <punkto> ')
+      event.email.gsub("@", " <ĉe> ").gsub(".", " <punkto> ")
     end
   end
 
   def link_to_event_count(periodo, organizo, speco, &_block)
     active_class =
       if params[:periodo].present?
-        params[:periodo] == periodo ? 'ec-active' : 'ec-inactive'
+        params[:periodo] == periodo ? "ec-active" : "ec-inactive"
       end
 
     link_to url_for(periodo: (periodo unless params[:periodo] == periodo), o: organizo, s: speco),
@@ -80,10 +80,10 @@ module EventsHelper
 
   def speconomo_plurale(tag)
     case tag
-    when 'Internacia' then 'Internaciaj eventoj'
-    when 'Loka' then 'Lokaj kunvenoj'
-    when 'Kurso' then 'Kursoj'
-    when 'Alia' then 'Aliaj'
+    when "Internacia" then "Internaciaj eventoj"
+    when "Loka" then "Lokaj kunvenoj"
+    when "Kurso" then "Kursoj"
+    when "Alia" then "Aliaj"
     else tag
     end
   end

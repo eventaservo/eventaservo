@@ -19,9 +19,9 @@ module UsersHelper
       elsif user&.image?
         user.image
       else
-        'nekonata.jpg'
+        "nekonata.jpg"
       end
-    image_tag image, size: 40, class: 'user-photo-rounded' if image
+    image_tag image, size: 40, class: "user-photo-rounded" if image
   end
 
   def display_user_image_profile(user)
@@ -31,9 +31,9 @@ module UsersHelper
       elsif user.image?
         user.image
       else
-        'nekonata.jpg'
+        "nekonata.jpg"
       end
-    image_tag image, size: 162, class: 'profile-picture' if image
+    image_tag image, size: 162, class: "profile-picture" if image
   end
 
 end
