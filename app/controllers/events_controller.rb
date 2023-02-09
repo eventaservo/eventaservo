@@ -97,7 +97,9 @@ class EventsController < ApplicationController
     end
   rescue ActionView::Template::Error => e
     Sentry.capture_exception(e)
-    without_papertrail { @event.update(event_params) }
+    PaperTrail.request.disable_model(Event)
+    @event.update(event_params)
+    PaperTrail.request.enable_model(Event)
     redirect_to event_path(@event.ligilo), notice: "Evento sukcese ĝisdatigita"
   end
 
