@@ -32,6 +32,7 @@ class EventsController < ApplicationController
     end
   rescue ActionView::Template::Error => e
     Sentry.capture_exception(e)
+    redirect_to root_url, flash: { error: "Eraro okazis montrante tiun eventon" }
   end
 
   def new
@@ -96,6 +97,8 @@ class EventsController < ApplicationController
     end
   rescue ActionView::Template::Error => e
     Sentry.capture_exception(e)
+    without_papertrail { @event.update(event_params) }
+    redirect_to event_path(@event.ligilo), notice: "Evento sukcese ĝisdatigita"
   end
 
   def destroy
