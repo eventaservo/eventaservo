@@ -30,6 +30,8 @@ class EventsController < ApplicationController
       format.html
       format.ics { kreas_webcal(@event) }
     end
+  rescue ActionView::Template::Error => e
+    Sentry.capture_exception(e)
   end
 
   def new
@@ -69,7 +71,7 @@ class EventsController < ApplicationController
     end
   end
 
-  def update
+  def update # rubocop:disable Metrics/MethodLength, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
     if dosier_alshutado
       if params[:event].nil?
         redirect_to(event_url(@event.ligilo),
@@ -92,6 +94,8 @@ class EventsController < ApplicationController
     else
       render :edit
     end
+  rescue ActionView::Template::Error => e
+    Sentry.capture_exception(e)
   end
 
   def destroy
