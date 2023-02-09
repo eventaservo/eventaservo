@@ -106,8 +106,7 @@ gem "bullet", "~> 7.0.3"
 gem "ahoy_matey", "~> 4.1"
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem "byebug", platforms: %i[mri mingw x64_mingw]
+  gem "debug", ">= 1.0.0", require: false
   gem "dotenv-rails", "~> 2.8"
   gem "rake"
   gem "rubocop", require: false
