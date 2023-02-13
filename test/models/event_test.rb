@@ -127,4 +127,13 @@ class EventTest < ActiveSupport::TestCase
     evento.email = Faker::Internet.email
     assert evento.valid?
   end
+
+  test ".cet?" do
+    london_event = build(:evento, time_zone: "Europe/London")
+    assert_not london_event.cet?
+
+    paris_event = build(:evento, time_zone: "Europe/Paris")
+    assert paris_event.cet?
+  end
+
 end

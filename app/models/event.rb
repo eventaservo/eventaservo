@@ -259,6 +259,13 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     date_start.in_time_zone(time_zone).dst?
   end
 
+  # Check if the event timezone is CET (Central European Time)
+  #
+  # @return [Boolean]
+  def cet?
+    ActiveSupport::TimeZone.new(time_zone).cet?
+  end
+
   # total: Kvanto de tagoj de la evento
   # parcial: Kvanto de tagoj kiu jam pasis de la evento
   # restanta: Kvanto de tagoj restantaj en la evento
