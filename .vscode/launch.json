@@ -5,6 +5,11 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "rdbg",
+      "name": "Attach rdbg",
+      "request": "attach"
+    },
+    {
       "name": "Minitest - current line",
       "type": "Ruby",
       "cwd": "${workspaceRoot}",
