@@ -25,7 +25,7 @@
           = render partial: 'kalendareto', locals: { event: @event, tz: @event.time_zone }
           = render partial: 'horoj', locals: { tz: @event.time_zone }
           = render partial: 'horzono' if cookies[:horzono]
-          - unless @event.komenca_horo == '00:00' && @event.fina_horo == '00:00'
+          - unless @event.all_day?
             .text-right= render partial: 'horzono_elektilo'
 
 

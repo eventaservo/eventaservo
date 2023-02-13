@@ -1,4 +1,7 @@
-- unless @event.time_zone == @horzono
+- if Calendar.utc_offset(@event.time_zone) == Calendar.utc_offset(@horzono) && !@event.all_day?
+  %small.small.float-right.fg-color-grayDark
+    Sama kiel via horzono
+- else
   - unless @event.komenca_horo == '00:00' && @event.fina_horo == '00:00'
     - if @event.komenca_tago(horzono: @event.time_zone) != @event.komenca_tago(horzono: @horzono)
       %hr/
