@@ -10,4 +10,11 @@ module CalendarHelper
       concat content_tag(:span, l(date, format: "%d"))
     end
   end
+
+  def start_and_end_time_with_timezone(event, timezone)
+    cet = ActiveSupport::TimeZone[timezone].cet?
+    start_time = event.komenca_horo(horzono: timezone)
+    end_time = event.fina_horo(horzono: timezone)
+    icon("far", "clock", "#{start_time} - #{end_time} #{'(MET)' if cet}")
+  end
 end

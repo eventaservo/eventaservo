@@ -251,9 +251,10 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     !multtaga?
   end
 
-  def tuttaga?
+  def all_day?
     (fina_dato == komenca_dato) || multtaga?
   end
+  alias tuttaga? all_day?
 
   def dst?
     date_start.in_time_zone(time_zone).dst?
