@@ -4,7 +4,8 @@ require "test_helper"
 
 class EventTest < ActiveSupport::TestCase
   setup do
-    @event = create(:evento)
+    @event = FactoryBot.create(:event)
+    @user = FactoryBot.create(:user)
   end
 
   test "evento havas administranto" do
@@ -136,4 +137,33 @@ class EventTest < ActiveSupport::TestCase
     assert paris_event.cet?
   end
 
+  test ".komenca_dato" do
+    date_start = Time.parse("2023-02-13 15:00 UTC")
+
+    event = FactoryBot.build(:evento, date_start: date_start, date_end: date_start + 1.hour)
+    assert_equal date_start.in_time_zone("UTC"), event.komenca_dato
+    assert_equal date_start.in_time_zone("America/Recife"), event.komenca_dato(horzono: "America/Recife")
+  end
+
+  test ".fina_dato" do
+    date_end = Time.parse("2023-02-13 16:00 UTC")
+
+    event = FactoryBot.build(:evento, date_start: date_end - 1.hour, date_end: date_end)
+    assert_equal date_end.in_time_zone("UTC"), event.fina_dato
+    assert_equal date_end.in_time_zone("America/Recife"), event.fina_dato(horzono: "America/Recife")
+  end
+
+  test ".add_participant" do
+    assert_difference "@event.participants.count", 1 do
+      @event.add_participant(@user)
+    end
+  end
+
+  test ".remove_participant" do
+    @event.add_participant(@user)
+
+    assert_difference "@event.participants.count", -1 do
+      @event.remove_participant(@user)
+    end
+  end
 end
