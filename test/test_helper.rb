@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 ENV["RAILS_ENV"] ||= "test"
+# SimpleCov
+require "simplecov"
+SimpleCov.start "rails"
+
 require_relative "../config/environment"
 require "rails/test_help"
 require "minitest/autorun"
 require "debug"
-
-# SimpleCov
-require "simplecov"
-SimpleCov.start
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.

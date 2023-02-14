@@ -128,7 +128,7 @@ group :test do
   gem "capybara"
   gem "minitest", "~> 5.5"
   gem "selenium-webdriver"
-  gem "simplecov"
+  gem "simplecov", require: false
   gem "vcr"
   gem "webdrivers"
   gem "webmock"
