@@ -19,7 +19,7 @@ module EventsHelper
     if event.universala?
       "🖥 "
     elsif event.online
-      "#{flag_icon(event.country.code)} 🖥 "
+      flag_icon(event.country.code) + " 🖥 "
     else
       flag_icon(event.country.code)
     end
