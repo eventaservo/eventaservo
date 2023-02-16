@@ -16,6 +16,12 @@
           = f.text_field :short_name, class: 'form-control', required: true
           %small.form-text.text-muted Ne uzu spacojn aŭ specialajn signojn. Vi rajtas uzi _ kaj -
 
+        .form-group.form-check
+          = f.check_box :display_flag, class: 'form-check-input'
+          = f.label :display_flag, 'Montri flagon', class: 'form-check-label'
+          %small.form-text.text-muted
+            Montras la landan flagon en la organiza paĝo kaj en ĉiuj eventoj de ĝi
+
         .row
           .form-group.col-12.col-md-6
             = f.label :url, 'Reteja adreso (URL)'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_15_093811) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_16_090826) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -188,6 +188,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_15_093811) do
     t.jsonb "metadata"
     t.boolean "international_calendar", default: false
     t.integer "participants_count", default: 0
+    t.boolean "display_flag", default: true
     t.index "md5(content)", name: "index_events_on_content"
     t.index ["address"], name: "index_events_on_address"
     t.index ["cancelled"], name: "index_events_on_cancelled"
@@ -269,6 +270,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_15_093811) do
     t.boolean "partner", default: false
     t.boolean "major", default: false
     t.string "youtube"
+    t.boolean "display_flag", default: true
     t.index ["name"], name: "index_organizations_on_name"
     t.index ["short_name"], name: "index_organizations_on_short_name"
   end

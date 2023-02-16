@@ -109,6 +109,6 @@ class OrganizationsController < ApplicationController
 
     def organization_params
       params.require(:organization).permit(:name, :short_name, :logo, :email, :url, :country_id, :city, :address,
-                                           :description, :phone, :youtube)
+                                           :description, :phone, :youtube, :display_flag)
     end
 end
