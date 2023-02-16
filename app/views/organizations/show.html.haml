@@ -6,7 +6,7 @@
   .col-lg-8
     .box-white
       .lead
-        = montras_flagon(@organizo.country) unless @organizo.country.nil?
+        = montras_flagon(@organizo.country) if @organizo.country.present? && @organizo.display_flag?
         = @organizo.name
         %span.float-right
           = link_to icon('far', 'calendar-alt'),
