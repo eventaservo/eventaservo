@@ -166,4 +166,12 @@ class EventTest < ActiveSupport::TestCase
       @event.remove_participant(@user)
     end
   end
+
+  test "normalize title" do
+    event1 = FactoryBot.create(:event, title: "UEA Universala Kongreso")
+    assert_equal "UEA Universala Kongreso", event1.title
+
+    event2 = FactoryBot.create(:event, title: "UEA UNIVERSALA KONGRESO  ")
+    assert_equal "Uea Universala Kongreso", event2.title
+  end
 end
