@@ -52,9 +52,9 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test "fina dato devas esti post komenca dato" do
-    evento            = build(:evento)
+    evento = build(:evento)
     evento.date_start = Time.zone.today
-    evento.date_end   = Time.zone.today - 1.day
+    evento.date_end = Time.zone.today - 1.day
     assert_not evento.save
   end
 
@@ -117,7 +117,7 @@ class EventTest < ActiveSupport::TestCase
     evento = build_stubbed(:evento)
     assert evento.valid?
 
-    evento.site  = nil
+    evento.site = nil
     evento.email = nil
     assert evento.invalid?
 

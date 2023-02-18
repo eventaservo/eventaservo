@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 #
 # Eventaj dateno
 #
@@ -7,8 +8,8 @@
 # 1) Kolektas, per Geocode, la koordinatojn, se +require_geocode+ validas.
 # 2) Formatas la datumojn per +format_event_data+.
 class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
-  has_paper_trail versions: { scope: -> { order("created_at desc") } },
-                  ignore: %i[id delayed_job_id enhavo]
+  has_paper_trail versions: {scope: -> { order("created_at desc") }},
+    ignore: %i[id delayed_job_id enhavo]
 
   has_rich_text :enhavo
 
@@ -29,9 +30,9 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   has_many :videoj, class_name: "Video"
 
   validates :title, :description, :city, :country_id, :date_start, :date_end, :code, presence: true
-  validates :description, length: { maximum: 400 }
+  validates :description, length: {maximum: 400}
   validates :code, uniqueness: true, on: :create
-  validates :import_url, length: { maximum: 200 }
+  validates :import_url, length: {maximum: 200}
   validate :end_after_start
   validate :url_or_email
   validates_length_of :short_url, maximum: 32
@@ -49,30 +50,30 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :pasintaj, -> { where("date_end < ?", Time.zone.yesterday.end_of_day) }
   scope :today, -> { by_dates(from: Time.zone.today.beginning_of_day, to: Time.zone.today.end_of_day) }
   scope :not_today, -> { by_not_dates(from: Time.zone.today.beginning_of_day, to: Time.zone.today.end_of_day) }
-  scope :lau_jaro, ->(jaro) { where("extract(year from date_start) = ?", jaro )}
+  scope :lau_jaro, ->(jaro) { where("extract(year from date_start) = ?", jaro) }
   scope :in_7days,
-        lambda {
-          where(
-            "date_start BETWEEN ? and ?",
-            (Time.zone.today + 1.day).beginning_of_day,
-            (Time.zone.today + 7.days).end_of_day
-          )
-        }
+    lambda {
+      where(
+        "date_start BETWEEN ? and ?",
+        (Time.zone.today + 1.day).beginning_of_day,
+        (Time.zone.today + 7.days).end_of_day
+      )
+    }
   scope :in_30days,
-        lambda {
-          where(
-            "date_start BETWEEN ? and ?",
-            (Time.zone.today + 7.days).beginning_of_day,
-            (Time.zone.today + 30.days).end_of_day
-          )
-        }
+    lambda {
+      where(
+        "date_start BETWEEN ? and ?",
+        (Time.zone.today + 7.days).beginning_of_day,
+        (Time.zone.today + 30.days).end_of_day
+      )
+    }
   scope :after_30days, -> { where("date_start > ?", (Time.zone.today + 30.days).end_of_day) }
   scope :lau_lando, ->(lando) { joins(:country).where(country: lando) }
   scope :by_country_id, ->(id) { where(country_id: id) }
-  scope :by_country_name, ->(name) { joins(:country).where(countries: { name: name }) }
-  scope :by_country_code, ->(code) { joins(:country).where(countries: { code: code }) }
+  scope :by_country_name, ->(name) { joins(:country).where(countries: {name: name}) }
+  scope :by_country_code, ->(code) { joins(:country).where(countries: {code: code}) }
   scope :by_user, ->(user) { where(user: user) }
-  scope :by_username, ->(username) { joins(:user).where(users: { username: username }) }
+  scope :by_username, ->(username) { joins(:user).where(users: {username: username}) }
   scope :by_uuid, ->(uuid) { unscoped.where(uuid: uuid) }
   scope :without_location, -> { where(latitude: nil) }
   scope :online, -> { where(online: true) }
@@ -173,7 +174,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
               unaccent(events.content) ilike unaccent(:search) OR
               unaccent(events.city) ilike unaccent(:search) OR
               unaccent(countries.name) ilike unaccent(:search)',
-             search: "%#{search.strip.tr(' ', '%').downcase}%").order("events.date_start")
+        search: "%#{search.strip.tr(" ", "%").downcase}%").order("events.date_start")
   end
 
   def full_address
@@ -194,19 +195,11 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def komenca_dato(horzono: nil)
-    if horzono
-      date_start.in_time_zone(horzono)
-    else
-      date_start.in_time_zone(time_zone)
-    end
+    date_start.in_time_zone(horzono || time_zone)
   end
 
   def fina_dato(horzono: nil)
-    if horzono
-      date_end.in_time_zone(horzono)
-    else
-      date_end.in_time_zone(time_zone)
-    end
+    date_end.in_time_zone(horzono || time_zone)
   end
 
   def komenca_tago(horzono: nil)
@@ -221,21 +214,13 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   def komenca_horo(horzono: nil)
     time_zone =
-      if horzono
-        horzono
-      else
-        self.time_zone
-      end
+      horzono || self.time_zone
     date_start.in_time_zone(time_zone).strftime("%H:%M")
   end
 
   def fina_horo(horzono: nil)
     time_zone =
-      if horzono
-        horzono
-      else
-        self.time_zone
-      end
+      horzono || self.time_zone
     date_end.in_time_zone(time_zone).strftime("%H:%M")
   end
 
@@ -254,7 +239,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   def all_day?
     (fina_dato == komenca_dato) || multtaga?
   end
-  alias tuttaga? all_day?
+  alias_method :tuttaga?, :all_day?
 
   def dst?
     date_start.in_time_zone(time_zone).dst?
@@ -278,7 +263,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     parcial = (Time.zone.today - komenca_tago.to_date).to_i + 1
     restanta = total - parcial
     percent = (parcial.to_f / total.to_f).to_f * 100
-    { total: total, parcial: parcial, restanta: restanta, percent: percent.to_i }
+    {total: total, parcial: parcial, restanta: restanta, percent: percent.to_i}
   end
 
   # Montras la specan liston kiel matrico
@@ -312,7 +297,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   # Liveras la eventon laŭ +short_url+ aŭ +code+
   def self.lau_ligilo(dato)
-    #find_by(short_url: dato) || find_by(code: dato)
+    # find_by(short_url: dato) || find_by(code: dato)
     where("lower(short_url) = ?", dato.downcase).first || find_by(code: dato)
   end
 
@@ -353,90 +338,90 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   private
 
-    def first_uploaded_image
-      uploads.order(:created_at).find(&:image?)
-    end
+  def first_uploaded_image
+    uploads.order(:created_at).find(&:image?)
+  end
 
-    def first_body_image
-      enhavo.body&.attachments&.find { |attachment| attachment.content_type == "image" }
-    end
+  def first_body_image
+    enhavo.body&.attachments&.find { |attachment| attachment.content_type == "image" }
+  end
 
-    def organization_logo
-      return unless organizations.any? && organizations.first.logo.attached?
+  def organization_logo
+    return unless organizations.any? && organizations.first.logo.attached?
 
-      organizations.first.logo
-    end
+    organizations.first.logo
+  end
 
-    def verify_upload_content_type
-      if uploads.any?
-        uploads.each do |upload|
-          unless upload.content_type.in?([
-                                           "application/pdf",
-                                           "image/png",
-                                           "image/jpg",
-                                           "image/jpeg",
-                                           "image/gif",
-                                           "application/zip",
-                                           "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                                         ])
-            errors.add(:uploads, "Dosier-formato ne valida")
-            return false
-          end
+  def verify_upload_content_type
+    if uploads.any?
+      uploads.each do |upload|
+        unless upload.content_type.in?([
+          "application/pdf",
+          "image/png",
+          "image/jpg",
+          "image/jpeg",
+          "image/gif",
+          "application/zip",
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        ])
+          errors.add(:uploads, "Dosier-formato ne valida")
+          return false
         end
       end
     end
+  end
 
-    def end_after_start
-      return if date_start.blank? || date_end.blank?
+  def end_after_start
+    return if date_start.blank? || date_end.blank?
 
-      errors.add(:date_end, "ne povas okazi antaŭ la komenca dato") if date_end < date_start
+    errors.add(:date_end, "ne povas okazi antaŭ la komenca dato") if date_end < date_start
+  end
+
+  def url_or_email
+    errors.add("Eventa", "retadreso aŭ retpoŝtadreso necesas") unless site.present? || email.present?
+  end
+
+  # Formatas la eventon laŭ normala formato
+  def format_event_data
+    self.title = title.strip
+    self.city = city.tr("/", "").strip
+    self.site = fix_site(site)
+    self.time_zone = "Etc/UTC" if time_zone.empty?
+    self.short_url = nil if short_url == code || short_url.try(:strip).try(:empty?)
+
+    if online && city == "Reta"
+      self.city = "Reta"
+      self.country_id = 99_999
+      self.latitude = nil
+      self.longitude = nil
     end
 
-    def url_or_email
-      errors.add("Eventa", "retadreso aŭ retpoŝtadreso necesas") unless site.present? || email.present?
-    end
-
-    # Formatas la eventon laŭ normala formato
-    def format_event_data
-      self.title = title.strip
-      self.city = city.tr("/", "").strip
-      self.site = fix_site(site)
-      self.time_zone = "Etc/UTC" if time_zone.empty?
-      self.short_url = nil if self.short_url == self.code || self.short_url.try(:strip).try(:empty?)
-
-      if online && self.city == "Reta"
-        self.city = "Reta"
-        self.country_id = 99_999
-        self.latitude = nil
-        self.longitude = nil
-      end
-
-      if latitude_changed? || longitude_changed?
-        begin
-          self.time_zone = Timezone.lookup(latitude, longitude).name unless latitude.nil?
-        rescue StandardError
-          self.time_zone = "Etc/UTC"
-        end
-      end
-
-      if date_start_changed?
-        tz = TZInfo::Timezone.get(self.time_zone)
-        self.date_start = tz.local_to_utc(Time.new(date_start.year, date_start.month, date_start.day, date_start.hour, date_start.min)).in_time_zone(time_zone)
-        self.date_end = tz.local_to_utc(Time.new(date_end.year, date_end.month, date_end.day, date_end.hour, date_end.min)).in_time_zone(time_zone)
+    if latitude_changed? || longitude_changed?
+      begin
+        self.time_zone = Timezone.lookup(latitude, longitude).name unless latitude.nil?
+      rescue
+        self.time_zone = "Etc/UTC"
       end
     end
 
-    def fix_site(site)
-      return if site.nil?
-
-      if site[%r{\Ahttp:\/\/}] || site[%r{\Ahttps:\/\/}]
-        site.strip
-      elsif site.strip.empty?
-        nil
-      else
-        "http://#{site.strip}"
-      end
+    if date_start_changed?
+      tz = TZInfo::Timezone.get(time_zone)
+      self.date_start = tz.local_to_utc(Time.new(date_start.year, date_start.month, date_start.day, date_start.hour, date_start.min)).in_time_zone(time_zone)
+      self.date_end = tz.local_to_utc(Time.new(date_end.year, date_end.month, date_end.day, date_end.hour, date_end.min)).in_time_zone(time_zone)
     end
+  end
+
+  def fix_site(site)
+    return if site.nil?
+
+    if site[%r{\Ahttp://}] || site[%r{\Ahttps://}]
+      site.strip
+    elsif site.strip.empty?
+      nil
+    else
+      "http://#{site.strip}"
+    end
+  end
 
   def schedule_users_reminders_jobs
     # Destroy old delayed jobs enqueued
@@ -455,8 +440,8 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     return unless event.date_start > (DateTime.now + reminder_date)
 
     job = SciigasUzantojnAntauEventoJob
-          .set(wait_until: event.date_start - reminder_date)
-          .perform_later(event.code, reminder_date_string)
+      .set(wait_until: event.date_start - reminder_date)
+      .perform_later(event.code, reminder_date_string)
 
     job.provider_job_id
   end
