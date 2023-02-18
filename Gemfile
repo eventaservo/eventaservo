@@ -109,8 +109,6 @@ group :development, :test do
   gem "debug", ">= 1.0.0", require: false
   gem "dotenv-rails", "~> 2.8"
   gem "rake"
-  gem "rubocop", require: false
-  gem "rubocop-rails", require: false
   gem "spring"
 end
 
@@ -129,6 +127,7 @@ group :test do
   gem "minitest", "~> 5.5"
   gem "selenium-webdriver"
   gem "simplecov", require: false
+  gem "standard", "~> 1", require: false
   gem "vcr"
   gem "webdrivers"
   gem "webmock"

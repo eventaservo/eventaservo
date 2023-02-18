@@ -9,14 +9,8 @@ exclude:
 require: []
 domains: []
 reporters:
-- rubocop
 - require_not_found
-formatter:
-  rubocop:
-    cops: safe
-    except: []
-    only: []
-    extra_args: []
+formatter: []
 require_paths: []
 plugins: []
 max_files: 0
