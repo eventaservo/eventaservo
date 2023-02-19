@@ -105,6 +105,9 @@ gem "bullet", "~> 7.0.3"
 
 gem "ahoy_matey", "~> 4.1"
 
+# Hotwired and Importmap
+gem "importmap-rails", "~> 1.1"
+
 group :development, :test do
   gem "debug", ">= 1.0.0", require: false
   gem "dotenv-rails", "~> 2.8"
