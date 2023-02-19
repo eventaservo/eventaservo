@@ -85,18 +85,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   private
 
-    def registras_instru_informojn
-      if params[:user][:instruisto].present?
-        resource.instruisto        = true
-        resource.instruo["nivelo"] = params[:nivelo].keys
-        resource.instruo["sperto"] = params[:instru_sperto]
-      else
-        resource.instruo.delete("instruisto")
-        resource.instruo.delete("nivelo")
-        resource.instruo.delete("sperto")
-      end
-      resource.save
+  def registras_instru_informojn
+    if params[:user][:instruisto] == "true"
+      resource.instruisto = true
+
+      resource.instruo["nivelo"] = params[:nivelo].present? ? params[:nivelo].keys : ["baza"]
+
+      resource.instruo["sperto"] = params[:instru_sperto]
+    else
+      resource.instruo.delete("instruisto")
+      resource.instruo.delete("nivelo")
+      resource.instruo.delete("sperto")
     end
+    resource.save
+  end
 
     def registras_preleg_informojn
       if params[:user][:preleganto].present?

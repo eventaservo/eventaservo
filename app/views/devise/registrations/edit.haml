@@ -41,8 +41,8 @@
 
       .text-divider Mi pretas helpi
       .box-white
-        <instruado-form v-bind:instruo="#{resource.instruo.to_json}">
-        </instruado-form>
+        = render partial: 'instruisto_form', locals: { f: f, resource: resource }
+
         <prelego-form v-bind:prelego="#{resource.prelego.to_json}">
         </prelego-form>
       .text-divider Ligiloj
