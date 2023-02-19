@@ -7,17 +7,13 @@ import EventojLauMonatoj from '../components/statistikoj/EventojLauMonatoj'
 import EventojRetajKajFizikaj from '../components/statistikoj/EventojRetajKajFizikaj'
 import Serchilo from '../components/serchilo/Serchilo'
 import SerchiloNavbar from '../components/serchilo/SerchiloNavbar'
-import InstruadoForm from '../components/uzantoj/InstruadoForm';
+import InstruadoForm from '../components/uzantoj/InstruadoForm'
 import PrelegoForm from '../components/uzantoj/PrelegoForm'
 import Cheforganizoj from '../components/organizoj/Cheforganizoj'
 import EventaMapo from '../components/eventoj/EventaMapo'
 import PartoprenantaButono from '../components/eventoj/partoprenantoj/PartoprenantaButono'
 import VideoKarto from '../components/VideoKarto'
 import VideoNova from '../components/VideoNova'
-import LauRetumilo from '../components/analizado/LauRetumilo'
-import LauSistemo from '../components/analizado/LauSistemo'
-import LauVidmaniero from '../components/analizado/LauVidmaniero'
-import LauTago from '../components/analizado/LauTago'
 
 import moment from 'moment'
 moment.locale('eo')
@@ -42,11 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
       EventaMapo,
       PartoprenantaButono,
       VideoKarto,
-      VideoNova,
-      LauRetumilo,
-      LauSistemo,
-      LauVidmaniero,
-      LauTago
+      VideoNova
     }
   })
 })
