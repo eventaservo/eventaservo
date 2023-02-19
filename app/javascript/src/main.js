@@ -1,27 +1,52 @@
-import Vue from "vue/dist/vue.esm"
-import MapoVidmaniero from "../components/MapoVidmaniero"
-import Mallongilo from "../components/eventoj/Mallongilo"
+import Vue from 'vue/dist/vue.esm'
+import MapoVidmaniero from '../components/MapoVidmaniero'
+import RegistritajEventoj from '../components/statistikoj/RegistritajEventoj'
+import KvantoRegistritajUzantoj from '../components/statistikoj/KvantoRegistritajUzantoj'
+import KvantoRegistritajEventoj from '../components/statistikoj/KvantoRegistritajEventoj'
+import EventojLauMonatoj from '../components/statistikoj/EventojLauMonatoj'
+import EventojRetajKajFizikaj from '../components/statistikoj/EventojRetajKajFizikaj'
+import Serchilo from '../components/serchilo/Serchilo'
+import SerchiloNavbar from '../components/serchilo/SerchiloNavbar'
+import InstruadoForm from '../components/uzantoj/InstruadoForm';
+import PrelegoForm from '../components/uzantoj/PrelegoForm'
+import Cheforganizoj from '../components/organizoj/Cheforganizoj'
+import EventaMapo from '../components/eventoj/EventaMapo'
+import PartoprenantaButono from '../components/eventoj/partoprenantoj/PartoprenantaButono'
+import VideoKarto from '../components/VideoKarto'
+import VideoNova from '../components/VideoNova'
+import LauRetumilo from '../components/analizado/LauRetumilo'
+import LauSistemo from '../components/analizado/LauSistemo'
+import LauVidmaniero from '../components/analizado/LauVidmaniero'
+import LauTago from '../components/analizado/LauTago'
 
+import moment from 'moment'
+moment.locale('eo')
+Vue.prototype.$moment = moment
 
-document.addEventListener("DOMContentLoaded", () => {
-
-  if (document.getElementById("vue-mapo-vidmaniero")) {
-    const mapoVidManiero = new Vue({
-      el: "#vue-mapo-vidmaniero",
-      name: "Mapo vidmaniero",
-      components: {
-        MapoVidmaniero
-      }
-    })
-  }
-
-  if (document.getElementById("vue-mallongilo")) {
-    const mallongilo = new Vue({
-      el: "#vue-mallongilo",
-      name: "Mallongilo",
-      components: {
-        Mallongilo
-      }
-    })
-  }
+document.addEventListener('DOMContentLoaded', () => {
+  const vueapp = new Vue({
+    el: '#vueapp',
+    name: 'App',
+    components: {
+      MapoVidmaniero,
+      RegistritajEventoj,
+      KvantoRegistritajUzantoj,
+      KvantoRegistritajEventoj,
+      EventojLauMonatoj,
+      EventojRetajKajFizikaj,
+      Serchilo,
+      SerchiloNavbar,
+      InstruadoForm,
+      PrelegoForm,
+      Cheforganizoj,
+      EventaMapo,
+      PartoprenantaButono,
+      VideoKarto,
+      VideoNova,
+      LauRetumilo,
+      LauSistemo,
+      LauVidmaniero,
+      LauTago
+    }
+  })
 })
