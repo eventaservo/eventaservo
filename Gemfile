@@ -107,6 +107,7 @@ gem "ahoy_matey", "~> 4.1"
 
 # Hotwired and Importmap
 gem "importmap-rails", "~> 1.1"
+gem "stimulus-rails", "~> 1.2"
 
 group :development, :test do
   gem "debug", ">= 1.0.0", require: false
