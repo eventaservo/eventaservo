@@ -51,8 +51,6 @@ gem "coffee-rails"
 # gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder", "~> 2.5"
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -108,6 +106,7 @@ gem "ahoy_matey", "~> 4.1"
 # Hotwired and Importmap
 gem "importmap-rails", "~> 1.1"
 gem "stimulus-rails", "~> 1.2"
+gem "turbo-rails", "~> 1.3"
 
 group :development, :test do
   gem "debug", ">= 1.0.0", require: false
