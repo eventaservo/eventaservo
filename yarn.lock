@@ -1390,7 +1390,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rails/actiontext@npm:^7.0.4":
+"@rails/actiontext@npm:^7.0.4-2":
   version: 7.0.4
   resolution: "@rails/actiontext@npm:7.0.4"
   dependencies:
@@ -4232,7 +4232,7 @@ __metadata:
   resolution: "eventaservo@workspace:."
   dependencies:
     "@rails/actioncable": ^7.0.4
-    "@rails/actiontext": ^7.0.4
+    "@rails/actiontext": ^7.0.4-2
     "@rails/activestorage": ^7.0.4
     "@rails/ujs": ^7.0.4
     "@rails/webpacker": ^5.4.3
@@ -4244,7 +4244,7 @@ __metadata:
     moment: ^2.29.4
     node-sass: ^7.0.3
     sass-loader: ^10.3.1
-    trix: ^1.3.1
+    trix: ^2.0.4
     vue: ^2.7.10
     vue-loader: ^15.10.0
     vue-template-compiler: ^2.7.14
@@ -10383,10 +10383,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"trix@npm:^1.3.1":
-  version: 1.3.1
-  resolution: "trix@npm:1.3.1"
-  checksum: b4c6426d6fa78b09d6007cd627c10fe4f21a4f02abcd0266f6c34d16b030a328f1526ba5928c7ee315a48de54e9deb317ada31c3f8eccc0629a1ed67896f8692
+"trix@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "trix@npm:2.0.4"
+  checksum: 6a4d17359d01977dbf989b265419641f5b2a83b7672b28f56c78ca65f18ab8f2462904673c6624e212b4513367dae25ada8897d76dc38d86cd98bfeac38f1902
   languageName: node
   linkType: hard
 

@@ -23,7 +23,7 @@
  *= require actiontext
  *= require_self
  */
-
+@import 'actiontext.css';
 // Bazaj CSS
 @import "font-awesome-sprockets";
 @import "font-awesome";
@@ -32,20 +32,22 @@
 @import "social-share-button";
 
 @import "partials/*";
-
 // Social Share Buttons icon size
 $size : 32px;
+
 .social-share-button {
   .ssb-icon {
-    background-size : $size $size;
-    height          : $size;
-    width           : $size;
+    background-size: $size $size;
+    height: $size;
+    width: $size;
   }
 }
 
 // Reta eventa flago
-.flag-icon-ol { // ol estas la 'lando-kodo' por 'online'
+.flag-icon-ol {
+  // ol estas la 'lando-kodo' por 'online'
   background-image: image-url("online_flag.svg");
+
   &.flag-icon-squared {
     background-image: image-url("online_flag.svg");
   }
