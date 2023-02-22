@@ -11,7 +11,6 @@
     "@rails/webpacker": "^5.4.3",
     "@vue/compiler-sfc": "^3.2.45",
     "axios": "^0.21.4",
-    "leaflet": "^1.9.3",
     "moment": "^2.29.4",
     "trix": "^2.0.4",
     "vue": "^2.7.10",
