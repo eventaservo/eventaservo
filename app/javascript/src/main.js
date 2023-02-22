@@ -8,7 +8,6 @@ import EventojRetajKajFizikaj from '../components/statistikoj/EventojRetajKajFiz
 import Serchilo from '../components/serchilo/Serchilo'
 import SerchiloNavbar from '../components/serchilo/SerchiloNavbar'
 import InstruadoForm from '../components/uzantoj/InstruadoForm'
-import PrelegoForm from '../components/uzantoj/PrelegoForm'
 import Cheforganizoj from '../components/organizoj/Cheforganizoj'
 import EventaMapo from '../components/eventoj/EventaMapo'
 import PartoprenantaButono from '../components/eventoj/partoprenantoj/PartoprenantaButono'
@@ -32,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
       Serchilo,
       SerchiloNavbar,
       InstruadoForm,
-      PrelegoForm,
       Cheforganizoj,
       EventaMapo,
       PartoprenantaButono,

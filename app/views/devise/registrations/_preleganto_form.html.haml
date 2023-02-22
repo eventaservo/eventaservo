@@ -1,0 +1,16 @@
+%div{ data: { controller: 'user' } }
+  .lead Kiel preleganto
+  .form-group.row
+    = f.label :preleganto, 'Mi estas preleganto', class: 'col-form-label col-5'
+    .col-7
+      .form-group.form-check
+        = check_box 'user', 'preleganto',
+          { 'data-action': 'user#toggleUserPrelegantoDetails', 'data-user-target': 'preleganto' }, 'true', 'false'
+
+  #preleganto-details{ class: "#{'d-none' unless resource.preleganto == 'true'}" }
+    .form-group.row
+      %label.col-md-5.col-form-label{ for: 'preleg_temoj' } Mi prelegas pri la jenaj temoj
+      .col-md-7
+        .form-group
+          = text_area_tag 'preleg_temoj', resource.prelego["temoj"], rows: "3",
+            placeholder: "Sbriku pri la temoj pri kiuj vi pretas prelegi", class: "form-control"

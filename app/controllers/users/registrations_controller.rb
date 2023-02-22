@@ -100,15 +100,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
     resource.save
   end
 
-    def registras_preleg_informojn
-      if params[:user][:preleganto].present?
-        resource.preleganto        = true
-        resource.prelego["temoj"] = params[:preleg_temoj]
-      else
-        resource.prelego.delete("preleganto")
-        resource.prelego.delete("temoj")
-      end
-      resource.save
+  def registras_preleg_informojn
+    if params[:user][:preleganto] == "true"
+      resource.preleganto = true
+      resource.prelego["temoj"] = params[:preleg_temoj]
+    else
+      resource.prelego.delete("preleganto")
+      resource.prelego.delete("temoj")
     end
-
+    resource.save
+  end
 end

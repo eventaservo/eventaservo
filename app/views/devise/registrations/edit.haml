@@ -42,9 +42,8 @@
       .text-divider Mi pretas helpi
       .box-white
         = render partial: 'instruisto_form', locals: { f: f, resource: resource }
+        = render partial: 'preleganto_form', locals: { f: f, resource: resource }
 
-        <prelego-form v-bind:prelego="#{resource.prelego.to_json}">
-        </prelego-form>
       .text-divider Ligiloj
       .form-group.row
         = f.label :persona_retejo, image_tag('www.svg', size: 24) + ' Persona retejo', class: 'col-md-3 col-form-label'
