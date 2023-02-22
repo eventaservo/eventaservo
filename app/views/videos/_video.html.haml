@@ -1,0 +1,22 @@
+.card.mb-2{style: 'width: 300px'}
+  - video_url = video.bildo.attached? ?  url_for(video.bildo) : asset_url('video_thumbnail.png')
+  = image_tag video_url, height: '200px', class: 'card-img-top'
+  .card-body
+    %p.card-title
+      = link_to video.title, video.url
+    %p.card-text.small
+      = video.description
+
+      - if user_can_edit_event?(user: user, event: video.evento)
+        = link_to icon('fas', 'trash', class: 'fg-color-red'), "/video/#{video.id}/forigi"
+
+  - if show_event_details
+    .card-footer.small
+      = video.evento.date_start.strftime('%B %Y').downcase
+      %br
+      = link_to video.evento.title, "/e/#{video.evento.short_url}"
+
+      - organizations = video.evento.organizations.pluck(:name, :short_name)
+      - if organizations.any?
+        %br
+        = organizations.map { |o| link_to o[0], "/o/#{o[1]}", class: 'fg-color-blueLight' }.join(', ').html_safe

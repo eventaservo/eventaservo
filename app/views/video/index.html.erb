@@ -2,16 +2,8 @@
   <div class="lead">
     <%= icon('fas', 'video', 'Registritaj prezentoj') %>
   </div>
-  <div class="row">
-    <%- @videoj.each do |video| %>
-      <div class="col-12 col-md-6 col-lg-4">
-        <video-karto v-bind:video="<%= video.to_json %>"
-                     image-url="<%= video.bildo.attached? ?  url_for(video.bildo) : asset_url('video_thumbnail.png') %>"
-                     v-bind:evento="<%= video.evento.to_json %>"
-                     v-bind:organizoj="<%= video.evento.organizations.pluck(:name, :short_name).to_json %>"
-        />
-      </div>
-    <% end %>
+  <div class="d-flex justify-content-between flex-wrap">
+      <%= render partial: @videoj, locals: { user: @current_user, show_event_details: true } %>
   </div>
   <div class="d-flex justify-content-center small pt-3">
     <%= raw pagy_bootstrap_nav(@pagy) %>

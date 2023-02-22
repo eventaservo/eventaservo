@@ -12,7 +12,6 @@ import PrelegoForm from '../components/uzantoj/PrelegoForm'
 import Cheforganizoj from '../components/organizoj/Cheforganizoj'
 import EventaMapo from '../components/eventoj/EventaMapo'
 import PartoprenantaButono from '../components/eventoj/partoprenantoj/PartoprenantaButono'
-import VideoKarto from '../components/VideoKarto'
 import VideoNova from '../components/VideoNova'
 
 import moment from 'moment'
@@ -37,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
       Cheforganizoj,
       EventaMapo,
       PartoprenantaButono,
-      VideoKarto,
       VideoNova
     }
   })
