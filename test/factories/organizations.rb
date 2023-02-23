@@ -8,6 +8,12 @@ FactoryBot.define do
     country { Country.all.sample }
     email { Faker::Internet.email }
     users { [create(:user)] }
+    description { Faker::Lorem.paragraph_by_chars }
+
+    after(:build) do |o|
+      image = URI.open("https://loremflickr.com/400/200/insect")
+      o.logo.attach(io: image, filename: "animal.jpg")
+    end
   end
 
   trait :uea do
