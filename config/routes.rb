@@ -92,9 +92,6 @@ Rails.application.routes.draw do
   get "/video/:id/forigi", to: "video#destroy"
 
   # Organizoj
-  defaults format: :json do
-    get "/o/cheforganizoj.json", to: "organizations#cheforganizoj"
-  end
   get "/o/search", to: "organizations#search", as: "organization_search"
   resources :organizations, path: "o", param: "short_name" do
     post "aldoni_uzanton", to: "organizations#aldoni_uzanton"

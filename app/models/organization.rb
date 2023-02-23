@@ -15,12 +15,11 @@ class Organization < ApplicationRecord
   before_validation :fix_site
 
   validates :name, :short_name, presence: true
-  validates :short_name, uniqueness: { case_sensitive: false }
-  validates :short_name, format: { with: /\A[a-zA-Z0-9_\-ĈĉĴĵĜĝĤĥŜŝĴĵŬŭÜüÀàÁáÂâÄäÅåÈèÉéÊêĘęėëÍíÎîìïÇçĆćČčŁłÓóÔôÖöØøòõōŚśŠšßÚúÜüùûÝýŹźŻżŽž]*\z/, message: "enhavas spaco(j)n aŭ nevalida(j)n signo(j)n" }
+  validates :short_name, uniqueness: {case_sensitive: false}
+  validates :short_name, format: {with: /\A[a-zA-Z0-9_\-ĈĉĴĵĜĝĤĥŜŝŬŭÜüÀàÁáÂâÄäÅåÈèÉéÊêĘęėëÍíÎîìïÇçĆćČčŁłÓóÔôÖöØøòõōŚśŠšßÚúùûÝýŹźŻżŽž]*\z/, message: "enhavas spaco(j)n aŭ nevalida(j)n signo(j)n"}
 
-  # Ĉeforganizoj estas UEA kaj TEJO
-  # Informoj pri ili aperas ĉiam je la supra parto de Organizaj paĝo
-  scope :cheforganizoj, -> { where(major: true) }
+  # Mains organizations are UEA and TEJO
+  scope :mains, -> { where(major: true) }
 
   # Listas la organizatojn kiujn la uzanto rajtas aldoni al la eventoj
   # Se la uzando estas admin, li rajtas aldoni iun ajnan organizojn
@@ -31,7 +30,7 @@ class Organization < ApplicationRecord
     if user.admin?
       Organization.all.order(:name)
     else
-      joins(:uzantoj).where(organization_users: { user_id: user.id })
+      joins(:uzantoj).where(organization_users: {user_id: user.id})
     end
   end
 
@@ -60,7 +59,7 @@ class Organization < ApplicationRecord
   # Serĉas laŭ vorto la organizojn
   #
   def self.serchi(vorto)
-    where("unaccent(name) ilike unaccent(:v) OR unaccent(short_name) ilike unaccent(:v)", v: "%#{vorto.tr("''", '')}%")
+    where("unaccent(name) ilike unaccent(:v) OR unaccent(short_name) ilike unaccent(:v)", v: "%#{vorto.tr("''", "")}%")
   end
 
   def full_address
@@ -72,11 +71,11 @@ class Organization < ApplicationRecord
   end
 
   def fix_site
-    site = self.url
+    site = url
     return if site.nil?
 
     self.url =
-      if site[%r{\Ahttp:\/\/}] || site[%r{\Ahttps:\/\/}]
+      if site[%r{\Ahttp://}] || site[%r{\Ahttps://}]
         site.strip
       elsif site.strip.empty?
         nil

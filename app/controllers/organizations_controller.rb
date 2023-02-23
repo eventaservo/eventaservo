@@ -93,12 +93,6 @@ class OrganizationsController < ApplicationController
     redirect_to organization_url(organizo.short_name), flash: { success: "Sukceso" }
   end
 
-  # Produktas JSON rezulton kun listo de Ĉeforganizoj
-  # URL: /o/cheforganizoj.json
-  def cheforganizoj
-    @cheforganizoj = Organization.cheforganizoj
-  end
-
   private
 
     def set_organization
