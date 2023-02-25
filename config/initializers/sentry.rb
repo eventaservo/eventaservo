@@ -16,5 +16,5 @@ Sentry.init do |config|
   # end
 
   config.enabled_environments = %w[production staging]
-  config.release = JSON.parse(File.read(Rails.root.join("package.json")))["version"]
+  config.release = File.read(Rails.root.join("version.rb"))
 end
