@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.41.0](https://github.com/eventaservo/eventaservo/compare/v2.40.0...v2.41.0) (2023-02-25)
+
+
+### Features
+
+* use version.rb file for automated release numbers ([a07d5bb](https://github.com/eventaservo/eventaservo/commit/a07d5bb68e735d51fe4fe3009c397bdb983bba2e))
+
 ## [2.40.0](https://github.com/eventaservo/eventaservo/compare/v2.39.1...v2.40.0) (2023-02-25)
 
 
