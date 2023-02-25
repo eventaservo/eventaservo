@@ -1,6 +1,6 @@
 {
   "name": "eventaservo",
-  "version": "2.18.7",
+  "version": "2.40.0",
   "license": "AGPL-3.0",
   "private": true,
   "dependencies": {

@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.40.0](https://github.com/eventaservo/eventaservo/compare/v2.39.1...v2.40.0) (2023-02-25)
+
+
+### Features
+
+* My calendar (ES peronsa kalendaro) ([0fbe010](https://github.com/eventaservo/eventaservo/commit/0fbe010abffea3378b166779b5709a03248b48b5))
+* **PES106:** Aldonas ligilon al filmeto por klarigi kiel registriĝi ([607b16c](https://github.com/eventaservo/eventaservo/commit/607b16cc5c06413ceea45dd98cd99a209ba6f57a))
+
+
+### Bug Fixes
+
+* run search after 2.5 seconds ([a4c2552](https://github.com/eventaservo/eventaservo/commit/a4c2552c7f6c72ab256b099623b3da4d8118e80f))
+* Ŝanĝas vorton Instruistoj al Instruantoj ([8d37454](https://github.com/eventaservo/eventaservo/commit/8d374547db1e215dfd3622f76ae18edfbd31e5a1))
+* typo ([1267956](https://github.com/eventaservo/eventaservo/commit/12679567cac706bc90b08441b2f37742d02cf704))
+* typo ([216af44](https://github.com/eventaservo/eventaservo/commit/216af449b81028ed2f66d3163a9b0dd541057f21))
+* Typo ([589c0a0](https://github.com/eventaservo/eventaservo/commit/589c0a052f94c5eac1d91d8aae22fa75bc6c05ce))
+
 ## [v2.48](https://github.com/eventaservo/eventaservo/tree/v2.48) (2023-01-14)
 
 [Full Changelog](https://github.com/eventaservo/eventaservo/compare/v2.47...v2.48)
