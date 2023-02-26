@@ -19,7 +19,7 @@ jobs:
         ports: [ '5432:5432' ]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Ruby 3.0 e Bundler
         uses: ruby/setup-ruby@v1
