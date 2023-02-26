@@ -1,0 +1,13 @@
+.box-white
+  .box-header Organizoj
+  - if organizations.empty?
+    %p Neniu organizo trovita
+  - else
+    %h5= pluralize(organizations.count, 'organizo trovita', 'organizoj trovitaj')
+    .table-responsive
+      %table.table.table-sm.table-hover
+        %tbody
+          - organizations.each do |organizo|
+            %tr.small.pointer{ onclick: "window.location.href = '#{organization_path(organizo.short_name)}'" }
+              %td= (montras_flagon(organizo.country) if organizo.display_flag) + " #{organizo.name}"
+
