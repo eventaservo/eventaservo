@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   get "/search.json", to: "home#search", format: :json
   get "/versio", to: "home#versio", format: :json
 
-  authenticated :user, -> user { user.admin? }  do
+  authenticated :user, ->(user) { user.admin? } do
     mount DelayedJobWeb, at: "/delayed_job"
   end
 
@@ -29,13 +29,14 @@ Rails.application.routes.draw do
 
   root to: "home#index"
 
-  devise_for :users, controllers: { sessions:           "users/sessions",
-                                    registrations:      "users/registrations",
-                                    omniauth_callbacks: "users/omniauth_callbacks" }
+  devise_for :users, controllers: {sessions: "users/sessions",
+                                   registrations: "users/registrations",
+                                   omniauth_callbacks: "users/omniauth_callbacks"}
 
   # Mallongigoj kaj alidirektoj
   get "/r", to: redirect("/users/sign_up")
   get "/eventoj/:code", to: redirect("/e/%{code}")
+  get "/e/:code/k", to: redirect("/e/%{code}/kronologio")
   get "/vidmaniero/:view_style", to: redirect("/v/%{view_style}")
   get "/e/nova", to: redirect("/e/new")
   get "/reta", to: redirect("/Reta")
@@ -50,7 +51,7 @@ Rails.application.routes.draw do
       get "statistikoj", to: "statistics#index"
     end
 
-    namespace :v2, defaults: { format: :json } do
+    namespace :v2, defaults: {format: :json} do
       scope "eventoj" do
         get "/", to: "events#index"
       end
@@ -84,7 +85,7 @@ Rails.application.routes.draw do
   get "/anoncoj", to: "home#anoncoj", as: "anoncoj"
 
   # Instruistoj kaj prelegantoj
-  get "/instruistoj_kaj_prelegantoj", to: redirect("/instruantoj_kaj_prelegantoj") , as: "instruistoj_kaj_prelegantoj"
+  get "/instruistoj_kaj_prelegantoj", to: redirect("/instruantoj_kaj_prelegantoj"), as: "instruistoj_kaj_prelegantoj"
   get "/instruantoj_kaj_prelegantoj", to: "home#instruistoj_kaj_prelegantoj", as: "instruantoj_kaj_prelegantoj"
 
   # Video - Registritaj prezentaĵoj
@@ -131,8 +132,8 @@ Rails.application.routes.draw do
   end
 
   # Aldonaĵoj
-  match "upload/:record_id" => "attachments#upload", as: "attachment_upload", via: :post
-  match "dosiero/:id/forighu" => "attachments#destroy", as: "attachment_destroy", via: :delete
+  match "upload/:record_id" => "attachments#upload", :as => "attachment_upload", :via => :post
+  match "dosiero/:id/forighu" => "attachments#destroy", :as => "attachment_destroy", :via => :delete
 
   # Eventoj de uzantoj
   get "/uzanto/:username", controller: "events", action: "by_username", as: "events_by_username"
@@ -147,5 +148,4 @@ Rails.application.routes.draw do
   # get '/lando/:country_name', controller: 'events', action: 'by_country', as: 'events_by_country'
   get "/:continent/:country_name/:city_name", controller: "events", action: "by_city", as: "events_by_city"
   # get '/lando/:country_name/:city_name', controller: 'events', action: 'by_city', as: 'events_by_city'
-
 end
