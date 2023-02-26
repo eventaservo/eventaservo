@@ -1,5 +1,8 @@
 module Version
   def self.number
-    File.read(Rails.root.join("version.rb"))
+    file = File.read(Rails.root.join("package.json"))
+    json = JSON.parse(file)
+
+    json["version"]
   end
 end
