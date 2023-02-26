@@ -1,0 +1,17 @@
+.box-white
+  .box-header Uzantoj
+  - if users.empty?
+    %p Neniu uzanto trovita
+  - else
+    %h5= pluralize(users.count, 'uzanto trovita', 'uzantoj trovitaj')
+    .table-responsive
+      %table.table.table-sm.table-hover
+        %thead
+          %tr
+            %th Nomo
+            %th Lando
+        %tbody
+          - users.each do |user|
+            %tr.small.pointer{ onclick: "window.location.href = '#{events_by_username_path(user.username)}'" }
+              %td= user.name
+              %td= montras_flagon(user.country) + " #{user.country.name}"

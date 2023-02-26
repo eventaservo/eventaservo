@@ -5,7 +5,6 @@ import KvantoRegistritajUzantoj from '../components/statistikoj/KvantoRegistrita
 import KvantoRegistritajEventoj from '../components/statistikoj/KvantoRegistritajEventoj'
 import EventojLauMonatoj from '../components/statistikoj/EventojLauMonatoj'
 import EventojRetajKajFizikaj from '../components/statistikoj/EventojRetajKajFizikaj'
-import Serchilo from '../components/serchilo/Serchilo'
 import EventaMapo from '../components/eventoj/EventaMapo'
 import PartoprenantaButono from '../components/eventoj/partoprenantoj/PartoprenantaButono'
 import VideoNova from '../components/VideoNova'
@@ -25,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
       KvantoRegistritajEventoj,
       EventojLauMonatoj,
       EventojRetajKajFizikaj,
-      Serchilo,
       EventaMapo,
       PartoprenantaButono,
       VideoNova
