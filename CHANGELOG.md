@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.42.0](https://github.com/eventaservo/eventaservo/compare/v2.41.0...v2.42.0) (2023-02-26)
+
+
+### Features
+
+* add shorturl /k on event to view event history ([10ca4e4](https://github.com/eventaservo/eventaservo/commit/10ca4e4963cd0f37355fa276ed6fcecb5667b811))
+
 ## [2.41.0](https://github.com/eventaservo/eventaservo/compare/v2.40.0...v2.41.0) (2023-02-25)
 
 
