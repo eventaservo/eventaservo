@@ -1,5 +1,4 @@
 module Version
-  def self.number
-    File.read(Rails.root.join("version"))
-  end
+  NUMBER = "2.54.4".freeze
+  public_constant :NUMBER
 end
