@@ -111,7 +111,7 @@ Rails.application.routes.draw do
     post "nuligi", to: "events#nuligi", as: "nuligi"
     get "malnuligi", to: "events#malnuligi", as: "malnuligi"
     get "kronologio", to: "events#kronologio"
-    post "nova_video", to: "video#create"
+    post "nova_video", to: "video#create", as: "new_video"
     get "nova_video", to: "video#new"
   end
 

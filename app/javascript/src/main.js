@@ -7,7 +7,6 @@ import EventojLauMonatoj from '../components/statistikoj/EventojLauMonatoj'
 import EventojRetajKajFizikaj from '../components/statistikoj/EventojRetajKajFizikaj'
 import EventaMapo from '../components/eventoj/EventaMapo'
 import PartoprenantaButono from '../components/eventoj/partoprenantoj/PartoprenantaButono'
-import VideoNova from '../components/VideoNova'
 
 import moment from 'moment'
 moment.locale('eo')
@@ -25,8 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
       EventojLauMonatoj,
       EventojRetajKajFizikaj,
       EventaMapo,
-      PartoprenantaButono,
-      VideoNova
+      PartoprenantaButono
     }
   })
 })
