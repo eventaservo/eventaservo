@@ -92,6 +92,9 @@ gem "nokogiri", ">= 1.10.4"
 gem "whenever", require: false
 gem "yard"
 
+# JS bundling
+gem "jsbundling-rails", "~> 1.1"
+
 # Sentry.io
 gem "sentry-delayed_job", "~> 5"
 gem "sentry-rails", "~> 5"

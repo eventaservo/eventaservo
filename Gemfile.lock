@@ -230,6 +230,8 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
+    jsbundling-rails (1.1.1)
+      railties (>= 6.0.0)
     json (2.6.3)
     jwt (2.2.3)
     kaminari (1.2.2)
@@ -551,6 +553,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails (~> 4.3, >= 4.3.3)
   jquery-ui-rails (~> 6.0, >= 6.0.1)
+  jsbundling-rails (~> 1.1)
   jwt (~> 2.2.1)
   leaflet-rails (~> 1.7.0)
   listen
