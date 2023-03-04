@@ -29,11 +29,6 @@ tasks:
       gp sync-await setup
       bundle exec bin/rake jobs:work
 
-  - name: Webpacker
-    command: |
-      gp sync-await setup
-      bundle exec bin/webpack-dev-server
-
   - name: Rails console
     command: |
       gp sync-await setup

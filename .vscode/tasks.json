@@ -20,12 +20,6 @@
 				"console"
 			],
 			"problemMatcher": []
-		},
-		{
-			"label": "Webpack",
-			"command": "bin/webpack-dev-server",
-			"type": "shell",
-			"problemMatcher": []
 		}
 	]
 }
