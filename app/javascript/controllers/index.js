@@ -9,3 +9,9 @@ application.register('hello', HelloController)
 
 import EventMapController from './event_map_controller'
 application.register('event-map', EventMapController)
+
+import EventUserInterestedButtonController from './event_user_interested_button_controller'
+application.register(
+  'event-user-interested-button',
+  EventUserInterestedButtonController
+)

@@ -1,6 +1,5 @@
 import Vue from 'vue/dist/vue.esm'
 
-import PartoprenantaButono from '../components/eventoj/partoprenantoj/PartoprenantaButono'
 import VideoKarto from '../components/VideoKarto'
 import VideoNova from '../components/VideoNova'
 import moment from 'moment'
@@ -13,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
       el: '#evento',
       name: 'Evento',
       components: {
-        PartoprenantaButono,
         VideoKarto,
         VideoNova,
       },

@@ -1,0 +1,24 @@
+#div{ 'data-controller': 'event-user-interested-button' }
+  - if user_signed_in?
+    - if event.participants_records.include?(current_user)
+      = link_to event_toggle_participant_url(event.ligilo), class: 'link-green' do
+        %h1= icon('fas', 'user-check')
+        %span Mi interesiĝas!
+    - else
+      .link-blue{ 'data-action': 'click->event-user-interested-button#buttonClicked',
+        'data-event-user-interested-button-target': 'button' }
+        %h1= icon('fas', 'user')
+        %span Mi interesiĝas
+
+      .d-none{ 'data-event-user-interested-button-target': 'question' }
+        Ĉu aperigi vian nomon en la listo de interesiĝantoj?
+        %br
+        = link_to "JES", event_toggle_participant_url(event.ligilo, publika: 'jes'),
+          class: 'btn btn-sm btn-success btn-block'
+
+        = link_to "NE", event_toggle_participant_url(event.ligilo),
+          class: 'btn btn-sm btn-danger btn-block'
+
+  - else
+    = link_to 'Ensalutu', new_user_session_path, class: 'font-weight-bold'
+    por informi vian partoprenon
