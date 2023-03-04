@@ -166,6 +166,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hotwired/stimulus@npm:^3.2.1":
+  version: 3.2.1
+  resolution: "@hotwired/stimulus@npm:3.2.1"
+  checksum: 2617b10fb3ca0fb05205526693cbc9ea17fca84f40d8d95d0ce8d58f903aa74e020da858adc72f056f777f4854bdd7f5ee6d69810ecb17412af43d6ffb78997e
+  languageName: node
+  linkType: hard
+
 "@npmcli/fs@npm:^2.1.0":
   version: 2.1.2
   resolution: "@npmcli/fs@npm:2.1.2"
@@ -523,6 +530,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "eventaservo@workspace:."
   dependencies:
+    "@hotwired/stimulus": ^3.2.1
     "@rails/actioncable": ^7.0.4
     "@rails/actiontext": ^7.0.4
     "@rails/activestorage": ^7.0.4

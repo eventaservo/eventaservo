@@ -469,6 +469,8 @@ GEM
       language_server-protocol (~> 3.17.0.2)
       rubocop (= 1.44.1)
       rubocop-performance (= 1.15.2)
+    stimulus-rails (1.2.1)
+      railties (>= 6.0.0)
     temple (0.9.1)
     thor (1.2.1)
     tilt (2.0.11)
@@ -582,6 +584,7 @@ DEPENDENCIES
   social-share-button
   spring
   standard (~> 1)
+  stimulus-rails (~> 1.2)
   timezone (~> 1.0)
   vcr
   web-console

@@ -91,6 +91,9 @@ gem "nokogiri", ">= 1.10.4"
 gem "whenever", require: false
 gem "yard"
 
+# Hotwired
+gem "stimulus-rails", "~> 1.2"
+
 # JS bundling
 gem "jsbundling-rails", "~> 1.1"
 
