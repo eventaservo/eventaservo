@@ -38,6 +38,7 @@
     = csp_meta_tag
     = stylesheet_link_tag    'application'
     = javascript_include_tag 'application'
+    = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
     = invisible_captcha_styles
 
     = auto_discovery_link_tag :rss, events_rss_url
