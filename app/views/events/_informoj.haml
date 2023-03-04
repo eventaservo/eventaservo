@@ -7,7 +7,7 @@
       - unless @event.online && @event.city == 'Reta'
         = montras_adreson(@event.full_address, text: @event.address) unless @event.address.blank?
         - if @event.location_defined?
-          %eventa-mapo{"v-bind:latitude": @event.latitude, "v-bind:longitude": @event.longitude}
+          - # %eventa-mapo{"v-bind:latitude": @event.latitude, "v-bind:longitude": @event.longitude}
 
     = render partial: 'partoprenontoj'
 

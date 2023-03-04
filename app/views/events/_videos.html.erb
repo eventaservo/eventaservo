@@ -3,10 +3,7 @@
   <div class="row">
     <%- @event.videoj.each do |video| %>
       <div class="col-12 col-md-6">
-        <video-karto v-bind:video="<%= video.to_json %>"
-                     image-url="<%= video.bildo.attached? ?  url_for(video.bildo) : asset_url('video_thumbnail.png') %>"
-                     :forigebla="<%= user_can_edit_event?(user: current_user, event: @event) %>"
-        ></video-karto>
+
       </div>
     <% end %>
   </div>
