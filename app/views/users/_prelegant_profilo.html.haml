@@ -1,4 +1,3 @@
-- if @uzanto.preleganto
+- if user.preleganto == 'true'
   .lead Mi pretas prelegi pri
-  = simple_format(@uzanto.prelego['temoj'])
-
+  = simple_format(user.prelego['temoj'])
