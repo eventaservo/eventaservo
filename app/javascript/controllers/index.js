@@ -15,3 +15,6 @@ application.register("map-view", MapViewController)
 
 import UserController from "./user_controller"
 application.register("user", UserController)
+
+import VideoController from "./video_controller"
+application.register("video", VideoController)
