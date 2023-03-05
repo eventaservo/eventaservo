@@ -1,5 +1,4 @@
 import Vue from "vue/dist/vue.esm";
-import InstruadoForm from "../components/uzantoj/InstruadoForm";
 import PrelegoForm from '../components/uzantoj/PrelegoForm'
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -7,7 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const featured = new Vue({
       el: "#profilo",
       components: {
-        InstruadoForm,
         PrelegoForm
       },
     });

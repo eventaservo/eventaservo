@@ -4,9 +4,6 @@
 
 import { application } from './application'
 
-import HelloController from './hello_controller'
-application.register('hello', HelloController)
-
 import EventMapController from './event_map_controller'
 application.register('event-map', EventMapController)
 
@@ -15,3 +12,9 @@ application.register(
   'event-user-interested-button',
   EventUserInterestedButtonController
 )
+
+import HelloController from './hello_controller'
+application.register('hello', HelloController)
+
+import UserController from './user_controller'
+application.register('user', UserController)
