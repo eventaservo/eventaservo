@@ -1,0 +1,26 @@
+.box-white
+  .d-flex
+    %h1 Serĉilo
+
+  = form_with url: "/serchilo", method: :get do |form|
+    .row
+      .col-12.col-md-9
+        .input-group
+          %input.form-control{ type: "text", autofocus: true, value: params[:query], name: 'query',
+            placeholder: "Serĉi eventojn aŭ organizojn... (minimume 3 signoj)" }
+            = form.submit '🔎', class: 'btn btn-outline-primary'
+
+      .col-12.col-md-3
+        .d-sm-flex.justify-content-around.flex-md-column
+          .custom-control.custom-switch
+            = check_box_tag :pasintaj, true, params[:pasintaj],  class: 'custom-control-input'
+            = label_tag :pasintaj, 'Pasintaj', class: 'custom-control-label'
+
+          .custom-control.custom-switch
+            = check_box_tag :nuligitaj, true, params[:nuligitaj],  class: 'custom-control-input'
+            = label_tag :nuligitaj, 'Nuligitaj', class: 'custom-control-label'
+
+= render partial: "home/search/organizations_results", locals: { organizations: @organizations }
+= render partial: "home/search/events_results", locals: { events: @events }
+= render partial: "home/search/users_results", locals: { users: @users }
+= render partial: "home/search/videos_results", locals: { videos: @videos }

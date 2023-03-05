@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get "/statistikoj", to: "home#statistics"
   get "/akcepti_kuketojn", to: "home#accept_cookies"
   get "/forigas_kuketojn", to: "home#reset_cookies"
-  get "/serchilo", to: "home#serchilo"
+  get "/serchilo", to: "home#search"
   get "/search.json", to: "home#search", format: :json
   get "/versio", to: "home#versio", format: :json
 

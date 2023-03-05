@@ -105,21 +105,17 @@ class HomeController < ApplicationController
     redirect_to root_url
   end
 
-  def serchilo
-  end
-
   def search
-    respond_to :json
-    @eventoj = Event.includes(%i[country participants]).search(params[:query])
-    @organizoj = Organization.serchi(params[:query]).order(:name)
+    @events = Event.includes(%i[country participants]).search(params[:query])
+    @organizations = Organization.serchi(params[:query]).order(:name)
 
-    @eventoj = @eventoj.venontaj if params[:pasintaj] == "false"
-    @eventoj = @eventoj.ne_nuligitaj if params[:nuligitaj] == "false"
+    @events = @events.venontaj if params[:pasintaj].nil?
+    @events = @events.ne_nuligitaj if params[:nuligitaj].nil?
 
-    @uzantoj = User.serchi(params[:query])
-    @videoj = Video.serchi(params[:query])
+    @users = User.serchi(params[:query])
+    @videos = Video.serchi(params[:query])
 
-    @eventoj = @eventoj.order(:date_start)
+    @events = @events.order(:date_start)
   end
 
   def statistics
