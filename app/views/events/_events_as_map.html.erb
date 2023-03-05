@@ -10,26 +10,33 @@
     @eventoj << { title: e.title, description: e.description, latitude: e.latitude, longitude: e.longitude, ligilo: event_url(e.ligilo), date: event_date(e), pinColor: event_map_pin_color(e) }
   end
 %>
+<div
+  id="map-view-container"
+  class="full-map"
+  data-controller="map-view"
+  data-map-view-events-value="<%= @eventoj.to_json %>"
+  >
+</div>
 
 <div class="d-flex justify-content-center small">
   <div class="m-2 text-center">
-    <%= image_tag('leaflet_icons/pin_green.svg', height: 24, alt: 'verda pinglo') %>
+    <%= image_tag('/map_icons/pin_green.svg', height: 24, alt: 'verda pinglo') %>
     Okazas nuntempe
   </div>
   <div class="m-2 text-center">
-    <%= image_tag('leaflet_icons/pin_orange.svg', height: 24, alt: 'oranĝa pinglo') %>
+    <%= image_tag('/map_icons/pin_orange.svg', height: 24, alt: 'oranĝa pinglo') %>
     Proksimajn 7 tagojn
   </div>
   <div class="m-2 text-center">
-    <%= image_tag('leaflet_icons/pin_yellow.svg', height: 24, alt: 'flava pinglo') %>
+    <%= image_tag('/map_icons/pin_yellow.svg', height: 24, alt: 'flava pinglo') %>
     Proksimajn 30 tagojn
   </div>
   <div class="m-2 text-center">
-    <%= image_tag('leaflet_icons/pin_blue.svg', height: 24, alt: 'blua pinglo') %>
+    <%= image_tag('/map_icons/pin_blue.svg', height: 24, alt: 'blua pinglo') %>
     Estontece
   </div>
   <div class="m-2 text-center">
-    <%= image_tag('leaflet_icons/pin_red.svg', height: 24, alt: 'ruĝa pinglo') %>
+    <%= image_tag('/map_icons/pin_red.svg', height: 24, alt: 'ruĝa pinglo') %>
     Nuligita
   </div>
 </div>
