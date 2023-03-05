@@ -78,6 +78,8 @@
               = form.label :email, 'Retpoŝtadreso por kontakto'
               = form.email_field :email, class: 'form-control', required: @event.site.blank?
 
+        = render partial: 'events/form/short_url', locals: { form: form, event: @event }
+
         .form-group.form-check
           = form.check_box :online, class: 'form-check-input'
           = form.label :online, "🖥 Reta aŭ hibrida evento", class: 'form-check-label'
