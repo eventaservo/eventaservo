@@ -50,8 +50,6 @@ gem "coffee-rails"
 # gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder", "~> 2.5"
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -93,6 +91,7 @@ gem "yard"
 
 # Hotwired
 gem "stimulus-rails", "~> 1.2"
+gem "turbo-rails", "~> 1.4"
 
 # JS bundling
 gem "jsbundling-rails", "~> 1.1"

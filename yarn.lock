@@ -173,6 +173,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hotwired/turbo-rails@npm:^7.3.0":
+  version: 7.3.0
+  resolution: "@hotwired/turbo-rails@npm:7.3.0"
+  dependencies:
+    "@hotwired/turbo": ^7.3.0
+    "@rails/actioncable": ^7.0
+  checksum: 14e29fc7abcf966b652aaa5494398bd4a18559843d57fd5f6db785b3e1d2541c09fcbb979ccbf1dd8ab50d362558ac6bf52a97ce5dc2bbf503059793058b9e97
+  languageName: node
+  linkType: hard
+
+"@hotwired/turbo@npm:^7.3.0":
+  version: 7.3.0
+  resolution: "@hotwired/turbo@npm:7.3.0"
+  checksum: ccc03c980e4b4636e48ea2132c7d28be1be4f4e6123f63905fbf871e7647369b5c6ce53301443b218d7abf68fa4897eaf614254688108ed6ae303c5040241a97
+  languageName: node
+  linkType: hard
+
 "@npmcli/fs@npm:^2.1.0":
   version: 2.1.2
   resolution: "@npmcli/fs@npm:2.1.2"
@@ -193,7 +210,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rails/actioncable@npm:^7.0.4":
+"@rails/actioncable@npm:^7.0, @rails/actioncable@npm:^7.0.4":
   version: 7.0.4
   resolution: "@rails/actioncable@npm:7.0.4"
   checksum: b31cae40511a3df4d3048779255219b92f7dd89514f3c9f2da2b219b9b0635261b17b05031c7070756d319bf9165d4d6c021a820b110d53a3e6c441a062accdd
@@ -531,6 +548,7 @@ __metadata:
   resolution: "eventaservo@workspace:."
   dependencies:
     "@hotwired/stimulus": ^3.2.1
+    "@hotwired/turbo-rails": ^7.3.0
     "@rails/actioncable": ^7.0.4
     "@rails/actiontext": ^7.0.4
     "@rails/activestorage": ^7.0.4

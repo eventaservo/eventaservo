@@ -377,7 +377,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redcarpet (3.5.1)
-    redis (4.8.0)
+    redis (4.8.1)
     regexp_parser (2.6.1)
     reline (0.3.2)
       io-console (~> 0.5)
@@ -476,6 +476,10 @@ GEM
     tilt (2.0.11)
     timeout (0.3.1)
     timezone (1.3.21)
+    turbo-rails (1.4.0)
+      actionpack (>= 6.0.0)
+      activejob (>= 6.0.0)
+      railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.4.2)
@@ -586,6 +590,7 @@ DEPENDENCIES
   standard (~> 1)
   stimulus-rails (~> 1.2)
   timezone (~> 1.0)
+  turbo-rails (~> 1.4)
   vcr
   web-console
   webdrivers
