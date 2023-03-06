@@ -8,15 +8,15 @@ export default class extends Controller {
   connect() {}
 
   check() {
-    path = '/iloj/mallongilo_disponeblas'
-    headers = { Accept: 'text/vnd.turbo-stream.html' }
+    const path = '/iloj/mallongilo_disponeblas'
+    const headers = { Accept: 'text/vnd.turbo-stream.html' }
     fetch(
-      `${this.path}?` +
+      `${path}?` +
         new URLSearchParams({
           id: this.eventIdTarget.value,
           mallongilo: this.urlTarget.value,
         }),
-      { headers: this.headers }
+      { headers: headers }
     )
       .then((response) => response.text())
       .then((html) => {
