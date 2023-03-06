@@ -43,5 +43,6 @@ jobs:
           RAILS_ENV: test
           RAILS_MASTER_KEY: ${{ secrets.rails_master_key }}
         run: |
+          bin/rails assets:precompile
           bin/rails db:migrate
-          bin/rails test -v
+          bin/rails test
