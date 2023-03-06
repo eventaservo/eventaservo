@@ -20,7 +20,6 @@ export default class extends Controller {
     )
       .then((response) => response.text())
       .then((html) => {
-        console.log(html)
         Turbo.renderStreamMessage(html)
       })
   }
