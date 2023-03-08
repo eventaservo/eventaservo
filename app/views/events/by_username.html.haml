@@ -27,7 +27,7 @@
         .col-12.col-md-6.mb-5
           = render partial: 'users/instruist_profilo'
         .col-12.col-md-6.mb-5
-          = render partial: 'users/prelegant_profilo'
+          = render partial: 'users/prelegant_profilo', locals: { user: @uzanto }
 
       = render partial: "users/interested_events_list"
 

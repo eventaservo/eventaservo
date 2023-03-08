@@ -15,7 +15,6 @@ gem "sass-rails", "~> 6"
 # gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
-gem "webpacker", "~> 5.0"
 
 gem "acts-as-taggable-on", "~> 9.0"
 
@@ -51,8 +50,6 @@ gem "coffee-rails"
 # gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder", "~> 2.5"
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -91,6 +88,13 @@ gem "httparty", "~> 0.18"
 gem "nokogiri", ">= 1.10.4"
 gem "whenever", require: false
 gem "yard"
+
+# Hotwired
+gem "stimulus-rails", "~> 1.2"
+gem "turbo-rails", "~> 1.4"
+
+# JS bundling
+gem "jsbundling-rails", "~> 1.1"
 
 # Sentry.io
 gem "sentry-delayed_job", "~> 5"

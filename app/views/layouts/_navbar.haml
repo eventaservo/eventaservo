@@ -1,10 +1,10 @@
 %nav.navbar.navbar-expand-lg.navbar-dark.bg-success
   .navbar.container
-    .navbar.menu
+    .navbar.menu.flex-nowrap
       %a.navbar-brand{ href: root_url }
         = Rails.env.production? ? 'Eventa Servo' : Rails.env.upcase
-      #serchilo_navbar
-        %serchilo-navbar
+
+      = render partial: 'layouts/navbar_search'
       %button.navbar-toggler{'aria-controls' => 'navbarSupportedContent', 'aria-expanded' => 'false', 'aria-label' => 'Toggle navigation', 'data-target' => '#navbarSupportedContent', 'data-toggle' => 'collapse', :type => 'button'}
         %span.navbar-toggler-icon
       #navbarSupportedContent.collapse.navbar-collapse.justify-content-between

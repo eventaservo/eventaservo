@@ -78,8 +78,7 @@
               = form.label :email, 'Retpoŝtadreso por kontakto'
               = form.email_field :email, class: 'form-control', required: @event.site.blank?
 
-        #vue-mallongilo
-          %mallongilo{evento_rails: @event.to_json}
+        = render partial: 'events/form/short_url', locals: { form: form, event: @event }
 
         .form-group.form-check
           = form.check_box :online, class: 'form-check-input'

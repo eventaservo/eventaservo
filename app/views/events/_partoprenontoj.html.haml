@@ -5,7 +5,7 @@
       .col-6.my-auto
         %h1= @event.participants.size
       .col-6.my-auto
-        <partoprenanta-butono participant="#{@event.participants.pluck(:user_id).include?(current_user.id) if current_user}" :logged="#{current_user.present?}" ligilo="#{event_toggle_participant_url(@event.ligilo)}" />
+        = render partial: "mi_interesighas_button", locals: {event: @event}
     - if current_user && @event.participants.pluck(:user_id).include?(current_user.id)
       %p.bg-color-greenLighter.p-1.mt-2.text-center{style: 'border-radius: 5px;'}
         Vi ricevos memorigajn retmesaĝojn pri la evento.

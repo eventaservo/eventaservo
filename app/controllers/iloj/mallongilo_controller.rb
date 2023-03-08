@@ -1,21 +1,22 @@
 # frozen_string_literal: true
+
 module Iloj
-
   class MallongiloController < ApplicationController
-
     # Kontrolas ĉu la mallongilo estas disponeblas
     # Ricevas:
     #   params:
-    #     kodo,
+    #     id,
     #     mallongilo
     #
     # @return [Boolean]
     def disponeblas
-      disponeblo = true if params[:kodo] == params[:mallongilo]
-      disponeblo = true if params[:mallongilo].empty?
+      @short_url_available =
+        params[:mallongilo].empty? ||
+        Event.where(short_url: params[:mallongilo]).where.not(id: params[:id]).empty?
 
-      disponeblo = Event.lau_ligilo(params[:mallongilo]).nil?
-      render json: { disponeblo: disponeblo }
+      respond_to do |format|
+        format.turbo_stream
+      end
     end
   end
 end

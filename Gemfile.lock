@@ -230,6 +230,8 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
+    jsbundling-rails (1.1.1)
+      railties (>= 6.0.0)
     json (2.6.3)
     jwt (2.2.3)
     kaminari (1.2.2)
@@ -337,8 +339,6 @@ GEM
       rack (>= 2.0.0)
     rack-protection (3.0.5)
       rack
-    rack-proxy (0.7.4)
-      rack
     rack-test (2.0.2)
       rack (>= 1.3)
     rails (7.0.4)
@@ -377,7 +377,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redcarpet (3.5.1)
-    redis (4.8.0)
+    redis (4.8.1)
     regexp_parser (2.6.1)
     reline (0.3.2)
       io-console (~> 0.5)
@@ -427,7 +427,6 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    semantic_range (3.0.0)
     sentry-delayed_job (5.8.0)
       delayed_job (>= 4.0)
       sentry-ruby (~> 5.8.0)
@@ -470,11 +469,17 @@ GEM
       language_server-protocol (~> 3.17.0.2)
       rubocop (= 1.44.1)
       rubocop-performance (= 1.15.2)
+    stimulus-rails (1.2.1)
+      railties (>= 6.0.0)
     temple (0.9.1)
     thor (1.2.1)
     tilt (2.0.11)
     timeout (0.3.1)
     timezone (1.3.21)
+    turbo-rails (1.4.0)
+      actionpack (>= 6.0.0)
+      activejob (>= 6.0.0)
+      railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.4.2)
@@ -496,11 +501,6 @@ GEM
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    webpacker (5.4.3)
-      activesupport (>= 5.2)
-      rack-proxy (>= 0.6.1)
-      railties (>= 5.2)
-      semantic_range (>= 2.3.0)
     webrick (1.7.0)
     websocket (1.2.9)
     websocket-driver (0.7.5)
@@ -551,6 +551,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails (~> 4.3, >= 4.3.3)
   jquery-ui-rails (~> 6.0, >= 6.0.1)
+  jsbundling-rails (~> 1.1)
   jwt (~> 2.2.1)
   leaflet-rails (~> 1.7.0)
   listen
@@ -587,12 +588,13 @@ DEPENDENCIES
   social-share-button
   spring
   standard (~> 1)
+  stimulus-rails (~> 1.2)
   timezone (~> 1.0)
+  turbo-rails (~> 1.4)
   vcr
   web-console
   webdrivers
   webmock
-  webpacker (~> 5.0)
   whenever
   yard
 

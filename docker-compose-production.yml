@@ -21,7 +21,6 @@ services:
     ports:
       - 30000:3000
     depends_on:
-    #   - webpack
       - db
       - redis
 

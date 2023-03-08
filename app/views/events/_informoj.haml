@@ -6,8 +6,7 @@
       = montras_retposhtadreson(@event.email) + raw('<br/>') if @event.email.present?
       - unless @event.online && @event.city == 'Reta'
         = montras_adreson(@event.full_address, text: @event.address) unless @event.address.blank?
-        - if @event.location_defined?
-          %eventa-mapo{"v-bind:latitude": @event.latitude, "v-bind:longitude": @event.longitude}
+        = render partial: 'event_map', locals: { event: @event } if @event.location_defined?
 
     = render partial: 'partoprenontoj'
 

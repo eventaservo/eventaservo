@@ -1,0 +1,29 @@
+%div{ data: { controller: 'user' } }
+  .lead Kiel instruisto
+  .form-group.row
+    = f.label :instruisto, 'Mi estas instruisto', class: 'col-form-label col-5'
+    .col-7
+      .form-group.form-check
+        = check_box 'user', 'instruisto', { 'data-action': 'user#toggleUserInstruistoDetails', 'data-user-target': 'instruisto' }, 'true', 'false'
+
+  #instruisto-details{ class: "#{'d-none' unless resource.instruisto == 'true'}" }
+    .form-group.row
+      = f.label :instruo, 'Nivelo', class: 'col-5 col-form-label'
+      .col-7
+        .btn-group.btn-group-toggle.mb-1{ data: { toggle: 'buttons' } }
+          %label.btn.button-checkbox--main
+            = check_box_tag 'nivelo[baza]', 'baza', resource.instruo['nivelo']&.include?('baza'), {}
+            Baza
+          %label.btn.button-checkbox--main
+            = check_box_tag 'nivelo[meza]', 'meza', resource.instruo['nivelo']&.include?('meza'), {}
+            Meza
+          %label.btn.button-checkbox--main
+            = check_box_tag 'nivelo[supera]', 'supera', resource.instruo['nivelo']&.include?('supera'), {}
+            Supera
+
+    .form-group.row
+      %label.col-md-5.col-form-label{ for: 'instru_sperto' } Sperto
+      .col-md-7
+        .form-group
+          = text_area_tag 'instru_sperto', resource.instruo["sperto"], rows: "3",
+            placeholder: "Skribu pri via sperto kiel instruisto.", class: "form-control"

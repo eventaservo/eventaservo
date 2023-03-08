@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get "/statistikoj", to: "home#statistics"
   get "/akcepti_kuketojn", to: "home#accept_cookies"
   get "/forigas_kuketojn", to: "home#reset_cookies"
-  get "/serchilo", to: "home#serchilo"
+  get "/serchilo", to: "home#search"
   get "/search.json", to: "home#search", format: :json
   get "/versio", to: "home#versio", format: :json
 
@@ -93,9 +93,6 @@ Rails.application.routes.draw do
   get "/video/:id/forigi", to: "video#destroy"
 
   # Organizoj
-  defaults format: :json do
-    get "/o/cheforganizoj.json", to: "organizations#cheforganizoj"
-  end
   get "/o/search", to: "organizations#search", as: "organization_search"
   resources :organizations, path: "o", param: "short_name" do
     post "aldoni_uzanton", to: "organizations#aldoni_uzanton"
@@ -114,7 +111,7 @@ Rails.application.routes.draw do
     post "nuligi", to: "events#nuligi", as: "nuligi"
     get "malnuligi", to: "events#malnuligi", as: "malnuligi"
     get "kronologio", to: "events#kronologio"
-    post "nova_video", to: "video#create"
+    post "nova_video", to: "video#create", as: "new_video"
     get "nova_video", to: "video#new"
   end
 
@@ -129,11 +126,6 @@ Rails.application.routes.draw do
     get "forigitaj_eventoj", controller: "events", action: :deleted
     get "senlokaj_eventoj", to: "events#senlokaj_eventoj"
     patch "forigitaj_eventoj/restauri/:event_code", controller: "events", action: :recover, as: "recover_event"
-    get "analizado", to: "analizado#index"
-    get "analizado_lau_retumiloj", to: "analizado#lau_retumiloj"
-    get "analizado_lau_sistemoj", to: "analizado#lau_sistemoj"
-    get "analizado_lau_vidmaniero", to: "analizado#lau_vidmaniero"
-    get "analizado_lau_tago", to: "analizado#lau_tago"
     resources :reklamoj do
       get "toggle_active"
     end

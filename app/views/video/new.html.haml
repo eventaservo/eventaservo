@@ -1,0 +1,29 @@
+.row{ "data-controller": "video", "data-video-apikey": Rails.application.credentials.google_api_key }
+  .col-12.col-lg-8.offset-lg-2
+    .box-white
+      = form_with action: event_new_video_path, method: :post do |form|
+        .lead Ligi registritan prezenton
+        .form-group
+          = form.label :video_link, 'Adreso (URL) de la video'
+          = form.text_field :video_link, { autofocus: true, class: "form-control form-control-sm",
+            placeholder: "ekz: https://www.youtube.com/watch?v=t7YPEKvmHvo", required: true,
+            data: { action: "blur->video#fetchData", video_target: "url" }}
+
+        .form-group
+          = form.label :title, 'Titolo'
+          = form.text_field :title, { class: "form-control form-control-sm", required: true,
+            "data-video-target": "title" }
+
+        .form-group
+          = form.label :description, 'Priskribo'
+          = form.text_area :description, { class: "form-control form-control-sm", required: true,
+            rows: "5", maxlength: "400", "data-video-target": "description" }
+          %small.form-text.text-muted Maksimume 400 signoj
+
+        .form-group#thumbnail{ 'data-video-target': "thumbnail" }
+          .text-divider Alŝuti bild-dosieron
+          = form.file_field :image, { accept: "image/gif, image/jpeg, image/png", class: "form-control-file" }
+
+        .buttons-footer
+          = link_to "Ne registri", :back, class: "button-cancel"
+          = form.submit 'Registri', class: "btn ml-2 btn-primary btn-sm"
