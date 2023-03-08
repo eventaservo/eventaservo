@@ -1,5 +1,58 @@
 # Changelog
 
+## [v2.60.0](https://github.com/eventaservo/eventaservo/tree/v2.60.0) (2023-03-08)
+
+[Full Changelog](https://github.com/eventaservo/eventaservo/compare/es-without-stimulus...v2.60.0)
+
+**Merged pull requests:**
+
+- Migrate from Webpacker to JSBundling-rails [\#500](https://github.com/eventaservo/eventaservo/pull/500) ([shayani](https://github.com/shayani))
+
+## [es-without-stimulus](https://github.com/eventaservo/eventaservo/tree/es-without-stimulus) (2023-03-03)
+
+[Full Changelog](https://github.com/eventaservo/eventaservo/compare/v2.52...es-without-stimulus)
+
+## [v2.52](https://github.com/eventaservo/eventaservo/tree/v2.52) (2023-03-03)
+
+[Full Changelog](https://github.com/eventaservo/eventaservo/compare/v2.48...v2.52)
+
+**Closed issues:**
+
+- Require event form to fullfill start and end date [\#489](https://github.com/eventaservo/eventaservo/issues/489)
+- Option to do not display flag on events and organizations [\#483](https://github.com/eventaservo/eventaservo/issues/483)
+- NoMethodError: undefined method `without\_papertrail' for \#\<EventsController:0x000000000257b0\> [\#481](https://github.com/eventaservo/eventaservo/issues/481)
+- Ebligi redakti reklam-ligilon [\#457](https://github.com/eventaservo/eventaservo/issues/457)
+- BUG kiam oni redaktas specifan eventon [\#432](https://github.com/eventaservo/eventaservo/issues/432)
+- UTC horzono aperante kiam ne devas [\#416](https://github.com/eventaservo/eventaservo/issues/416)
+- Serĉilo: ĝi montru ankaŭ uzantojn \(nur por admin\) [\#346](https://github.com/eventaservo/eventaservo/issues/346)
+- Evento malaperiĝis? [\#341](https://github.com/eventaservo/eventaservo/issues/341)
+- Alinome Reta Eventa al Reta/Hibrida evento [\#338](https://github.com/eventaservo/eventaservo/issues/338)
+- MET horzono [\#323](https://github.com/eventaservo/eventaservo/issues/323)
+- Ne aperu dua horzono, se ĝi estas sama [\#289](https://github.com/eventaservo/eventaservo/issues/289)
+- Aldoni naskiĝdaton al uzantprofilo [\#236](https://github.com/eventaservo/eventaservo/issues/236)
+- Organizo: logoo dosier-formato [\#229](https://github.com/eventaservo/eventaservo/issues/229)
+- Ĉu aldoni bazajn datumojn ĉe organizo? [\#161](https://github.com/eventaservo/eventaservo/issues/161)
+- Aldoni kopieblon/eksporteblon de retpoŝtadresoj de uzantoj [\#130](https://github.com/eventaservo/eventaservo/issues/130)
+- Google Calendar: la ligilo al la evento en ES ne estas alklakebla [\#117](https://github.com/eventaservo/eventaservo/issues/117)
+- Aldonado de horoj ŝajnas funkcii malpli flue ol antaŭe [\#116](https://github.com/eventaservo/eventaservo/issues/116)
+- Kartara vido: ĉu aldoni la komencan horon? [\#115](https://github.com/eventaservo/eventaservo/issues/115)
+- Ĉu aldoni la eblon afiŝi malnovajn eventojn, celante ilin duobligi? [\#91](https://github.com/eventaservo/eventaservo/issues/91)
+- Elekti lokon en mapo: ĉu ebligi korekteblon se Google Geocode eraras? [\#63](https://github.com/eventaservo/eventaservo/issues/63)
+
+**Merged pull requests:**
+
+- 483 option to do not display flag on events and organizations [\#485](https://github.com/eventaservo/eventaservo/pull/485) ([shayani](https://github.com/shayani))
+- Multiples tasks [\#482](https://github.com/eventaservo/eventaservo/pull/482) ([shayani](https://github.com/shayani))
+- Update bundler and removes mini\_racer [\#480](https://github.com/eventaservo/eventaservo/pull/480) ([shayani](https://github.com/shayani))
+- Upgrade to Rails 7.0 [\#479](https://github.com/eventaservo/eventaservo/pull/479) ([shayani](https://github.com/shayani))
+- Bump http-cache-semantics from 4.1.0 to 4.1.1 [\#478](https://github.com/eventaservo/eventaservo/pull/478) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump globalid from 1.0.0 to 1.0.1 [\#476](https://github.com/eventaservo/eventaservo/pull/476) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.5 to 2.2.6.2 [\#475](https://github.com/eventaservo/eventaservo/pull/475) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Updates Brakeman workflow [\#474](https://github.com/eventaservo/eventaservo/pull/474) ([shayani](https://github.com/shayani))
+- feat: My calendar \(ES peronsa kalendaro\) [\#473](https://github.com/eventaservo/eventaservo/pull/473) ([shayani](https://github.com/shayani))
+- Upgrade Rails 6.1 to 7.0 [\#472](https://github.com/eventaservo/eventaservo/pull/472) ([shayani](https://github.com/shayani))
+- Bump json5 from 1.0.1 to 1.0.2 [\#467](https://github.com/eventaservo/eventaservo/pull/467) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v2.48](https://github.com/eventaservo/eventaservo/tree/v2.48) (2023-01-14)
 
 [Full Changelog](https://github.com/eventaservo/eventaservo/compare/v2.47...v2.48)
@@ -205,7 +258,6 @@
 - Necesas foje kontroli kiu nova uzanto aliĝas; ĉu vi tial povas aldoni ligilon al "ES administraĵoj" [\#294](https://github.com/eventaservo/eventaservo/issues/294)
 - Nova organizo: kial devigo elekti landon? [\#292](https://github.com/eventaservo/eventaservo/issues/292)
 - Ĉu ĉiuj novaj uzantoj kiuj registriĝas per FB loĝas en Afganio? [\#291](https://github.com/eventaservo/eventaservo/issues/291)
-- Ne aperu dua horzono, se ĝi estas sama [\#289](https://github.com/eventaservo/eventaservo/issues/289)
 - Ĉu ni aldonu memorigilon al la retejo? [\#287](https://github.com/eventaservo/eventaservo/issues/287)
 - Aldono de evento-skemo al ĉiu paĝo pri evento [\#286](https://github.com/eventaservo/eventaservo/issues/286)
 - Mesaĝo aperas, kiu ne aperu [\#285](https://github.com/eventaservo/eventaservo/issues/285)
