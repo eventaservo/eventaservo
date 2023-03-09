@@ -1,0 +1,58 @@
+name: End-to-end tests
+on: pull_request
+jobs:
+  cypress-run:
+    runs-on: ubuntu-22.04
+    services:
+      redis:
+        image: redis:6.2.6
+        ports: [ '6379:6379' ]
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_DB: eventaservo_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports: [ '5432:5432' ]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Ruby 3.0 e Bundler
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+          bundler-cache: true
+
+      - name: Node 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'yarn'
+
+      - name: Yarn
+        run: yarn install
+
+      - name: Start Rails server
+        env:
+          DB_USER: postgres
+          DB_PASSWORD: postgres
+          RAILS_ENV: test
+          RAILS_MASTER_KEY: ${{ secrets.rails_master_key }}
+        run: |
+          gem install bundler
+          bundle exec rails assets:precompile &>/dev/null
+          bundle exec rails db:migrate &>/dev/null
+          bundle exec rails db:seed:replant
+
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
+        with:
+          start: bundle exec rails server -b 0.0.0.0 -p 3000 -b 'ssl://0.0.0.0:3000?key=./certs/localhost.key&cert=./certs/localhost.crt'
+          wait-on: 'https://localhost:3000'
+          wait-on-timeout: 60
+          browser: chrome
+          headless: true
+
