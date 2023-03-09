@@ -5,5 +5,5 @@ import '@hotwired/turbo-rails'
 // After solving the issue, you can remove this line.
 Turbo.session.drive = false
 
-import './src/trix'
+// import './src/trix'
 import './controllers'

@@ -74,3 +74,6 @@ core.*
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
+
+# Cypress
+cypress/videos
