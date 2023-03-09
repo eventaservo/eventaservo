@@ -37,10 +37,10 @@ jobs:
           RAILS_ENV: test
           RAILS_MASTER_KEY: ${{ secrets.rails_master_key }}
         run: |
-          bundle exec assets:precompile
-          bundle exec db:migrate
-          bundle exec db:seed
-          bundle exec bin/rails server -d -u Puma -b 0.0.0.0 -p 3000 -e test -b 'ssl://0.0.0.0:3000?key=./certs/localhost.key&cert=./certs/localhost.crt'
+          bin/rails assets:precompile
+          bin/rails db:migrate
+          bin/rails db:seed
+          bin/rails bin/rails server -d -u Puma -b 0.0.0.0 -p 3000 -e test -b 'ssl://0.0.0.0:3000?key=./certs/localhost.key&cert=./certs/localhost.crt'
 
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
