@@ -4,6 +4,9 @@ jobs:
   cypress-run:
     runs-on: ubuntu-22.04
     services:
+      redis:
+        image: redis:6.2.6
+        ports: [ '6379:6379' ]
       postgres:
         image: postgres:13
         env:
@@ -40,7 +43,7 @@ jobs:
           bin/rails assets:precompile
           bin/rails db:migrate
           bin/rails db:seed
-          bin/rails bin/rails server -d -u Puma -b 0.0.0.0 -p 3000 -e test -b 'ssl://0.0.0.0:3000?key=./certs/localhost.key&cert=./certs/localhost.crt'
+          bin/rails server -d -u Puma -b 0.0.0.0 -p 3000 -e test -b 'ssl://0.0.0.0:3000?key=./certs/localhost.key&cert=./certs/localhost.crt'
 
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
