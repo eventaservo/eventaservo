@@ -22,5 +22,8 @@
   "packageManager": "yarn@3.2.1",
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets"
+  },
+  "devDependencies": {
+    "cypress": "^12.7.0"
   }
 }
