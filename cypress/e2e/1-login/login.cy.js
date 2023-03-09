@@ -21,7 +21,7 @@ describe('Login', () => {
 
   it('logins as admininistrator', () => {
     cy.login()
-
+    cy.visit('https://localhost:3000/')
     cy.contains('Administranto')
     // cy.visit('https://localhost:3000/users/sign_out')
     // // We use the `cy.get()` command to get all elements that match the selector.

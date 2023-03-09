@@ -13,13 +13,15 @@
 Cypress.Commands.add(
   'login',
   (email = 'admin@eventaservo.org', password = 'administranto') => {
-    cy.visit('https://localhost:3000')
-    cy.contains('Ensaluti / Registriĝi').click()
-    cy.get('#user_email').type(email)
-    cy.get('#user_password').type(password)
-    cy.get('.button-submit').click()
-    cy.url().should('be.equal', 'https://localhost:3000/')
-    cy.contains('Sukcesa ensaluto')
+    cy.session('admin', () => {
+      cy.visit('https://localhost:3000')
+      cy.contains('Ensaluti / Registriĝi').click()
+      cy.get('#user_email').type(email)
+      cy.get('#user_password').type(password)
+      cy.get('.button-submit').click()
+      cy.url().should('be.equal', 'https://localhost:3000/')
+      cy.contains('Sukcesa ensaluto')
+    })
   }
 )
 //

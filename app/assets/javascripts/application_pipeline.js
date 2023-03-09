@@ -12,6 +12,7 @@
 //
 //= require activestorage
 //= require jquery3
+//= require jquery_ujs
 //= require jquery-ui
 //= require popper
 //= require bootstrap-sprockets
@@ -29,4 +30,4 @@
 //= require_tree .
 
 // Tiu kono korektas la problemon de Select2 kiam ĝi estas ene de 'Modal'
-$.fn.modal.Constructor.prototype._enforceFocus = function () {};
+$.fn.modal.Constructor.prototype._enforceFocus = function () {}
