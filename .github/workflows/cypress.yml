@@ -43,9 +43,15 @@ jobs:
           bin/rails assets:precompile
           bin/rails db:migrate
           bin/rails db:seed
-          bin/rails server -d -u Puma -b 0.0.0.0 -p 3000 -e test -b 'ssl://0.0.0.0:3000?key=./certs/localhost.key&cert=./certs/localhost.crt'
 
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
       - name: Cypress run
         uses: cypress-io/github-action@v5
+        with:
+          start: bin/rails server -b 0.0.0.0 -p 3000 -b 'ssl://0.0.0.0:3000?key=./certs/localhost.key&cert=./certs/localhost.crt'
+          wait-on: 'https://localhost:3000'
+          wait-on-timeout: 60
+          browser: chrome
+          headless: true
+
