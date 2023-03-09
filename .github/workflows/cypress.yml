@@ -42,7 +42,7 @@ jobs:
         run: |
           bin/rails assets:precompile
           bin/rails db:migrate
-          bin/rails db:seed
+          bin/rails db:seed:replant
 
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
