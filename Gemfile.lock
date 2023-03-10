@@ -83,6 +83,8 @@ GEM
       activesupport (>= 5.2)
       device_detector
       safely_block (>= 0.2.1)
+    appsignal (3.3.7)
+      rack
     arbre (1.5.0)
       activesupport (>= 3.0.0, < 7.1)
       ruby2_keywords (>= 0.0.2, < 1.0)
@@ -521,6 +523,7 @@ DEPENDENCIES
   activeadmin
   acts-as-taggable-on (~> 9.0)
   ahoy_matey (~> 4.1)
+  appsignal (~> 3.3)
   better_errors
   binding_of_caller
   bootstrap (~> 4.3)
