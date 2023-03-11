@@ -61,8 +61,8 @@ class ApplicationHelperTest < ActionView::TestCase
 
   test "tuta eventa adreso por RSS" do
     event = create(:evento, :brazila)
-    event.date_start = Date.new(1978, 7, 17)
-    event.date_end = Date.new(1978, 7, 17)
+    event.date_start = Time.zone.parse("1978-07-17 21:00:00 +03:00")
+    event.date_end = event.date_start + 1.hour
     event.description = "Grava tago"
     event.city = "San-Paŭlo"
     event.save!
