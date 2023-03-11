@@ -2,7 +2,7 @@
 
 class FollowersController < ApplicationController
   def event
-    event    = Event.by_code(params[:event_code])
+    event = Event.by_code(params[:event_code])
     follower = event.followers.find_by(user_id: current_user.id)
 
     if follower

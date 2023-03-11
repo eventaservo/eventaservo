@@ -19,7 +19,7 @@ FactoryBot.define do
 
     email { Faker::Internet.email }
     site { Faker::Internet.url }
-    date_start { Faker::Time.between(from: DateTime.now, to: DateTime.now + rand(1..168).hours) }
+    date_start { Time.zone.now + rand(0..168).hours }
     date_end { date_start + rand(2..12).hours }
     code { SecureRandom.urlsafe_base64(12) }
     time_zone { Faker::Address.time_zone }

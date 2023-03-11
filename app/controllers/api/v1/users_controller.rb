@@ -8,7 +8,7 @@ module Api
           User.find(params[:id]).update(authentication_token: Devise.friendly_token)
           redirect_to edit_user_registration_path
         else
-          redirect_to root_url, flash: { error: "Vi ne rajtas fari tion." }
+          redirect_to root_url, flash: {error: "Vi ne rajtas fari tion."}
         end
       end
     end

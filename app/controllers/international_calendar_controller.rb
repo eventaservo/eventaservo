@@ -12,7 +12,7 @@ class InternationalCalendarController < ApplicationController
 
   def year
     @year = params[:year].to_i
-    redirect_to root_url, flash: { error: "Jaro ne validas" } and return if @year < 1887 || @year > 2100
+    redirect_to root_url, flash: {error: "Jaro ne validas"} and return if @year < 1887 || @year > 2100
 
     @events = Event.lau_jaro(@year).international_calendar.order(:date_start)
   end

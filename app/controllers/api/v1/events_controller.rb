@@ -19,22 +19,22 @@ module Api
 
       private
 
-        # necesaj params:
-        #   komenca_date + fina_dato
-        # aŭ
-        #   uuid
-        def validate_index_params
-          if (params[:komenca_dato].blank? || params[:fina_dato].blank?) && params[:uuid].blank?
-            render json: { eraro: "Mankas datoj aŭ eventa uuid" }
-          end
-
-          date_string = /\d{4}-\d{2}-\d{2}/
-          render json: { eraro: "Data formato malĝustas" } unless params[:komenca_dato] =~ date_string && params[:fina_dato] =~ date_string
+      # necesaj params:
+      #   komenca_date + fina_dato
+      # aŭ
+      #   uuid
+      def validate_index_params
+        if (params[:komenca_dato].blank? || params[:fina_dato].blank?) && params[:uuid].blank?
+          render json: {eraro: "Mankas datoj aŭ eventa uuid"}
         end
 
-        def validate_date(date)
-          Date.strptime(date, "%Y-%m-%d")
-        end
+        date_string = /\d{4}-\d{2}-\d{2}/
+        render json: {eraro: "Data formato malĝustas"} unless params[:komenca_dato] =~ date_string && params[:fina_dato] =~ date_string
+      end
+
+      def validate_date(date)
+        Date.strptime(date, "%Y-%m-%d")
+      end
     end
   end
 end
