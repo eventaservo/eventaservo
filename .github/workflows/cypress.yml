@@ -37,7 +37,7 @@ jobs:
         env:
           DB_USER: postgres
           DB_PASSWORD: postgres
-          RAILS_ENV: test
+          RAILS_ENV: development
           RAILS_MASTER_KEY: ${{ secrets.rails_master_key }}
         run: |
           gem install bundler
@@ -52,7 +52,7 @@ jobs:
         env:
           DB_USER: postgres
           DB_PASSWORD: postgres
-          RAILS_ENV: test
+          RAILS_ENV: development
           RAILS_MASTER_KEY: ${{ secrets.rails_master_key }}
         with:
           start: bundle exec rails server -b 0.0.0.0 -p 3000 -b 'ssl://0.0.0.0:3000?key=./certs/localhost.key&cert=./certs/localhost.crt'
