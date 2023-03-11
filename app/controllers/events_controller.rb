@@ -2,7 +2,7 @@
 
 class EventsController < ApplicationController
   rescue_from ActionController::UnknownFormat do |_e|
-    redirect_to root_url, flash: { error: "Formato ne ekzistas." }
+    redirect_to root_url, flash: {error: "Formato ne ekzistas."}
   end
   include Webcal
   before_action :authenticate_user!, only: %i[index new create edit update destroy nova_importado importi]
@@ -32,7 +32,7 @@ class EventsController < ApplicationController
     end
   rescue ActionView::Template::Error => e
     Sentry.capture_exception(e)
-    redirect_to root_url, flash: { error: "Eraro okazis montrante tiun eventon" }
+    redirect_to root_url, flash: {error: "Eraro okazis montrante tiun eventon"}
   end
 
   def new
@@ -66,7 +66,7 @@ class EventsController < ApplicationController
       @event.update_event_organizations(params[:organization_ids])
       NovaEventaSciigoJob.perform_later(@event)
       ahoy.track "Create event", event_id: @event.id
-      redirect_to event_path(@event.ligilo), flash: { notice: "Evento sukcese kreita." }
+      redirect_to event_path(@event.ligilo), flash: {notice: "Evento sukcese kreita."}
     else
       render :new
     end
@@ -76,7 +76,7 @@ class EventsController < ApplicationController
     if dosier_alshutado
       if params[:event].nil?
         redirect_to(event_url(@event.ligilo),
-                    flash: { error: "Vi devas unue elekti dosieron" }) && return
+          flash: {error: "Vi devas unue elekti dosieron"}) && return
       end
 
       if @event.update(params.require(:event).permit(uploads: []))
@@ -106,12 +106,12 @@ class EventsController < ApplicationController
   def destroy
     unless user_is_owner_or_admin(@event)
       redirect_to(event_path(@event.ligilo),
-                  flash: { error: "Vi ne rajtas forigi ĝin" }) && return
+        flash: {error: "Vi ne rajtas forigi ĝin"}) && return
     end
 
     # Ne vere forviŝas la eventon el la datumbazo, sed kaŝas ĝin
     @event.delete!
-    redirect_to root_url, flash: { error: "Evento sukcese forigita" }
+    redirect_to root_url, flash: {error: "Evento sukcese forigita"}
   end
 
   def nuligi
@@ -132,79 +132,79 @@ class EventsController < ApplicationController
   def importi
     datumoj = Importilo.new(params[:url]).datumoj
     if datumoj # Signifas ke la importado sukcesi kolekti informojn kaj eraroj ne troviĝis
-      evento            = Event.new(datumoj)
-      evento.user_id    = current_user.id
+      evento = Event.new(datumoj)
+      evento.user_id = current_user.id
       evento.specolisto = "Alia"
       evento.import_url = params[:url]
       evento.save!
       redirect_to event_url(evento.code)
     else
       # Eraro okazis
-      redirect_to importi_url, flash: { error: "Importado malsukcesis" }
+      redirect_to importi_url, flash: {error: "Importado malsukcesis"}
     end
   end
 
   def delete_file
     event = Event.by_code(params[:event_code])
     event.uploads.find(params[:file_id]).purge_later
-    redirect_to event_path(event.ligilo), flash: { success: "Dosiero sukcese forigita" }
+    redirect_to event_path(event.ligilo), flash: {success: "Dosiero sukcese forigita"}
   end
 
   def by_continent
     # Se la "kontinento" estas Reta, montru la eventojn per Kalendara vido
     # Se estas aliaj kontinentoj, montru per Kartaro aŭ Map
     if params[:continent] == "Reta" && cookies[:vidmaniero] != "kalendaro"
-      cookies[:vidmaniero] = { value: "kalendaro", expires: 2.weeks, secure: true }
+      cookies[:vidmaniero] = {value: "kalendaro", expires: 2.weeks, secure: true}
     elsif params[:continent] != "Reta"
       unless cookies[:vidmaniero].in? %w[kartaro mapo]
-        cookies[:vidmaniero] = { value: "kartaro", expires: 2.weeks, secure: true }
+        cookies[:vidmaniero] = {value: "kartaro", expires: 2.weeks, secure: true}
       end
     end
 
     @future_events = Event.by_continent(params[:continent]).venontaj
-    @events        = @events.by_continent(params[:continent])
-    @countries     = @events.count_by_country
-    @today_events  = @events.today.includes(:country)
-    @events        = @events.not_today.includes(:country)
+    @events = @events.by_continent(params[:continent])
+    @countries = @events.count_by_country
+    @today_events = @events.today.includes(:country)
+    @events = @events.not_today.includes(:country)
 
     kreas_paghadon_por_karta_vidmaniero if cookies[:vidmaniero] == "kartaro"
   end
 
   def by_country
-    redirect_to(root_path, flash: { error: "Lando ne ekzistas en la datumbazo" }) && return if @country.nil?
+    redirect_to(root_path, flash: {error: "Lando ne ekzistas en la datumbazo"}) && return if @country.nil?
 
     unless cookies[:vidmaniero].in? %w[kartaro mapo]
-      cookies[:vidmaniero] = { value: "kartaro", expires: 2.weeks, secure: true }
+      cookies[:vidmaniero] = {value: "kartaro", expires: 2.weeks, secure: true}
       redirect_to events_by_country_url(@country.continent, @country.name)
     end
 
     @future_events = Event.includes(:country).by_country_id(@country.id).venontaj
-    @cities        = @events.by_country_id(@country.id).count_by_cities
-    @today_events  = @events.today.includes(:country).by_country_id(@country.id)
-    @events        = @events.not_today.includes(:country).by_country_id(@country.id)
+    @cities = @events.by_country_id(@country.id).count_by_cities
+    @today_events = @events.today.includes(:country).by_country_id(@country.id)
+    @events = @events.not_today.includes(:country).by_country_id(@country.id)
 
     kreas_paghadon_por_karta_vidmaniero
   end
 
   # Listigas la eventoj laŭ urboj
   def by_city
-    redirect_to root_url, flash: { error: "Lando ne ekzistas" } and return if @country.nil?
+    redirect_to root_url, flash: {error: "Lando ne ekzistas"} and return if @country.nil?
 
     unless cookies[:vidmaniero].in? %w[kartaro mapo]
-      cookies[:vidmaniero] = { value: "kartaro", expires: 2.weeks, secure: true }
+      cookies[:vidmaniero] = {value: "kartaro", expires: 2.weeks, secure: true}
       redirect_to events_by_city_url(params[:continent], params[:country_name], params[:city_name])
     end
 
     @future_events = Event.by_city(params[:city_name]).venontaj
-    @today_events  = @events.today.includes(:country).by_city(params[:city_name])
-    @events        = @events.not_today.by_city(params[:city_name])
+    @today_events = @events.today.includes(:country).by_city(params[:city_name])
+    @events = @events.not_today.by_city(params[:city_name])
 
     kreas_paghadon_por_karta_vidmaniero
   end
 
   def by_username
     @uzanto = User.find_by(username: params[:username])
-    redirect_to root_path, flash: { error: "Uzantnomo ne ekzistas" } and return if @uzanto.nil?
+    redirect_to root_path, flash: {error: "Uzantnomo ne ekzistas"} and return if @uzanto.nil?
 
     @venontaj = Event.includes(:country).by_username(params[:username]).venontaj
     @interested_events = @uzanto.interested_events
@@ -218,19 +218,19 @@ class EventsController < ApplicationController
       ligilo = Event.by_code(params[:event_code]).ligilo
       redirect_to(
         event_url(ligilo),
-        flash: { error: "Malĝusta kontraŭspama sekurvorto. Entajpu la nomon de la internacia lingvo." }
+        flash: {error: "Malĝusta kontraŭspama sekurvorto. Entajpu la nomon de la internacia lingvo."}
       ) && return
     end
 
-    informoj = { name: params[:name], email: params[:email], message: params[:message] }
+    informoj = {name: params[:name], email: params[:email], message: params[:message]}
     EventMailer.kontakti_organizanton(params[:event_code], informoj).deliver_later
-    redirect_to event_url(params[:event_code]), flash: { info: "Mesaĝo sendita" }
+    redirect_to event_url(params[:event_code]), flash: {info: "Mesaĝo sendita"}
   end
 
   def kronologio
     @evento = Event.lau_ligilo(params[:event_code])
 
-    redirect_to root_path, flash: { error: "Evento ne ekzistas" } unless @evento
+    redirect_to root_path, flash: {error: "Evento ne ekzistas"} unless @evento
   end
 
   private
@@ -242,13 +242,13 @@ class EventsController < ApplicationController
     return unless cookies[:vidmaniero].in?(%w[kartoj kartaro])
 
     @kvanto_venontaj_eventoj = @events.count
-    @pagy, @events           = pagy(@events.not_today.includes(%i[country organizations]))
+    @pagy, @events = pagy(@events.not_today.includes(%i[country organizations]))
   end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_event
     @event = Event.lau_ligilo(params[:code])
-    redirect_to root_path, flash: { error: "Evento ne ekzistas" } if @event.nil?
+    redirect_to root_path, flash: {error: "Evento ne ekzistas"} if @event.nil?
   end
 
   def set_country
@@ -263,15 +263,15 @@ class EventsController < ApplicationController
   def event_params
     if params[:event][:date_start].present? # TODO: Arrumar - por conta do envio de arquivos
       params[:event][:date_start] = merge_date_time(params[:event][:date_start], params[:time_start],
-                                                    params[:event][:time_zone])
+        params[:event][:time_zone])
       params[:event][:date_end] = merge_date_time(params[:event][:date_end], params[:time_end],
-                                                  params[:event][:time_zone])
+        params[:event][:time_zone])
 
       params[:event][:specolisto] = if params[:specolisto].present?
-                                      params[:specolisto].keys.collect { |k, _v| k }.join(", ")
-                                    else
-                                      ""
-                                    end
+        params[:specolisto].keys.collect { |k, _v| k }.join(", ")
+      else
+        ""
+      end
     end
 
     params[:event][:commit] = params[:commit]
@@ -285,7 +285,7 @@ class EventsController < ApplicationController
   # Nur la permesataj uzantoj povas redakti, ĝisdatiĝi kaj foriĝi la eventon
   def authorize_user
     unless user_can_edit_event?(user: current_user, event: @event)
-      redirect_to root_url, flash: { error: "Vi ne rajtas" }
+      redirect_to root_url, flash: {error: "Vi ne rajtas"}
     end
   end
 
@@ -295,7 +295,7 @@ class EventsController < ApplicationController
     if params[:continent].normalized.in? continent_names.map(&:normalized)
       @continent = Country.continent_name(params[:continent])
     else
-      redirect_to root_url, flash: { notice: "Ne estas eventoj en tiu kontinento" }
+      redirect_to root_url, flash: {notice: "Ne estas eventoj en tiu kontinento"}
     end
   end
 

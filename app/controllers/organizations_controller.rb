@@ -46,7 +46,7 @@ class OrganizationsController < ApplicationController
     @organizo = Organization.new(organization_params)
     if @organizo.save
       @organizo.organization_users.create(user: current_user, admin: true)
-      redirect_to organization_url(@organizo.short_name), flash: { notice: "Organizo sukcese kreita." }
+      redirect_to organization_url(@organizo.short_name), flash: {notice: "Organizo sukcese kreita."}
     else
       render :new
     end
@@ -64,20 +64,20 @@ class OrganizationsController < ApplicationController
   def aldoni_uzanton
     uzanto = User.find(params[:id])
     organizo = Organization.find_by_short_name(params[:organization_short_name])
-    redirect_to organization_url(organizo.short_name), flash: { error: "Uzanto ne trovita" } and return if uzanto.nil?
+    redirect_to organization_url(organizo.short_name), flash: {error: "Uzanto ne trovita"} and return if uzanto.nil?
 
     OrganizationUser.create(organization_id: organizo.id, user_id: uzanto.id)
-    redirect_to organization_url(organizo.short_name), flash: { success: "Uzanto aldonita al la organizo" }
+    redirect_to organization_url(organizo.short_name), flash: {success: "Uzanto aldonita al la organizo"}
   end
 
   def estrighu
     organizo = Organization.find_by_short_name(params[:organization_short_name])
-    redirect_to organizations_url, flash: { error: "Vi ne rajtas fari tion" } and return unless current_user.administranto?(organizo)
+    redirect_to organizations_url, flash: {error: "Vi ne rajtas fari tion"} and return unless current_user.administranto?(organizo)
 
     uzanto = User.find_by_username(params[:username])
     ou = OrganizationUser.find_by(organization_id: organizo.id, user_id: uzanto.id)
     ou.update(admin: !ou.admin)
-    redirect_to organization_url(organizo.short_name), flash: { success: "Sukceso" }
+    redirect_to organization_url(organizo.short_name), flash: {success: "Sukceso"}
   end
 
   # Forigas uzanton el organizo
@@ -85,24 +85,24 @@ class OrganizationsController < ApplicationController
   #
   def forighu
     organizo = Organization.find_by_short_name(params[:organization_short_name])
-    redirect_to organizations_url, flash: { error: "Vi ne rajtas fari tion" } and return unless current_user.administranto?(organizo)
+    redirect_to organizations_url, flash: {error: "Vi ne rajtas fari tion"} and return unless current_user.administranto?(organizo)
 
     uzanto = User.find_by_username(params[:username])
     ou = OrganizationUser.find_by(organization_id: organizo.id, user_id: uzanto.id)
     ou.destroy
-    redirect_to organization_url(organizo.short_name), flash: { success: "Sukceso" }
+    redirect_to organization_url(organizo.short_name), flash: {success: "Sukceso"}
   end
 
   private
 
-    def set_organization
-      @organizo = Organization.find_by(short_name: params[:short_name])
+  def set_organization
+    @organizo = Organization.find_by(short_name: params[:short_name])
 
-      redirect_to root_url, flash: { error: "Organizo ne ekzistas" } if @organizo.nil?
-    end
+    redirect_to root_url, flash: {error: "Organizo ne ekzistas"} if @organizo.nil?
+  end
 
-    def organization_params
-      params.require(:organization).permit(:name, :short_name, :logo, :email, :url, :country_id, :city, :address,
-                                           :description, :phone, :youtube, :display_flag)
-    end
+  def organization_params
+    params.require(:organization).permit(:name, :short_name, :logo, :email, :url, :country_id, :city, :address,
+      :description, :phone, :youtube, :display_flag)
+  end
 end

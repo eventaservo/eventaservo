@@ -33,7 +33,7 @@ class Users::SessionsController < Devise::SessionsController
 
   private
 
-    def remember_logged_in_user
-      remember_me(self.resource)
-    end
+  def remember_logged_in_user
+    remember_me(resource)
+  end
 end

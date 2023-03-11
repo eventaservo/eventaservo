@@ -12,15 +12,15 @@ class HomeController < ApplicationController
       @future_events = @future_events.joins(:organizations).where("organizations.short_name = ?", params[:o])
     end
 
-    @continents    = @events.count_by_continents
-    @today_events  = @events.today.includes(:country).includes(:organizations)
+    @continents = @events.count_by_continents
+    @today_events = @events.today.includes(:country).includes(:organizations)
 
     @events = @events.not_today.includes(%i[country organizations])
     @reklamoj = Ad.active.sample(4)
 
     return if cookies[:vidmaniero].in? %w[kalendaro mapo]
 
-    cookies[:vidmaniero] = { value: "kalendaro", expires: 2.weeks, secure: true }
+    cookies[:vidmaniero] = {value: "kalendaro", expires: 2.weeks, secure: true}
     redirect_to root_url
   end
 
@@ -91,17 +91,17 @@ class HomeController < ApplicationController
     ahoy.track "Rendered feed"
 
     @events = Event.includes(%i[country uploads_attachments])
-                   .venontaj
-                   .ne_nuligitaj
-                   .ne_anoncoj
-                   .where(cancelled: false)
-                   .order(:date_start)
+      .venontaj
+      .ne_nuligitaj
+      .ne_anoncoj
+      .where(cancelled: false)
+      .order(:date_start)
 
     render layout: false
   end
 
   def view_style
-    cookies[:vidmaniero] = { value: params[:view_style], expires: 1.year, secure: true }
+    cookies[:vidmaniero] = {value: params[:view_style], expires: 1.year, secure: true}
     redirect_to root_url
   end
 
@@ -136,7 +136,7 @@ class HomeController < ApplicationController
         when "eventoj_retaj_kaj_fizikaj"
           render json: kalkulas_eventojn_retajn_kaj_fizikajn
         else
-          render json: { eraro: "Ne valida diagramo" }
+          render json: {eraro: "Ne valida diagramo"}
         end
       end
     end
@@ -144,9 +144,9 @@ class HomeController < ApplicationController
 
   def accept_cookies
     if params[:akceptas_ga] == "jes"
-      cookies[:akceptas_ga] = { value: "jes", expires: 1.year }
+      cookies[:akceptas_ga] = {value: "jes", expires: 1.year}
     else
-      cookies[:akceptas_ga] = { value: "ne", expires: 1.year }
+      cookies[:akceptas_ga] = {value: "ne", expires: 1.year}
       delete_ga_cookies
     end
 
@@ -176,13 +176,13 @@ class HomeController < ApplicationController
 
   def access_from_server
     request.headers["SERVER_NAME"].in? %w[testservilo.eventaservo.org staging.eventaservo.org
-                                          eventaservo.org localhost 127.0.0.1]
+      eventaservo.org localhost 127.0.0.1]
   end
 
   def definas_kuketojn
     return if cookies[:vidmaniero].in? %w[kartoj kalendaro mapo]
 
-    cookies[:vidmaniero] = { value: "kalendaro", expires: 2.weeks, secure: true } # Normala vidmaniero
+    cookies[:vidmaniero] = {value: "kalendaro", expires: 2.weeks, secure: true} # Normala vidmaniero
   end
 
   def kalkulas_registritajn_eventojn
@@ -192,7 +192,7 @@ class HomeController < ApplicationController
       countries << country
       quantity << qtd
     end
-    { landoj: countries, kvantoj: quantity }
+    {landoj: countries, kvantoj: quantity}
   end
 
   def kalkulas_kvanton_registritaj_uzantoj
@@ -210,7 +210,7 @@ class HomeController < ApplicationController
     quantity << User.where("created_at <= ?", (Time.zone.today - 1.month).end_of_month).count
     quantity << User.where("created_at <= ?", Time.zone.today.end_of_month).count
 
-    { monatoj: last_12_months_label, kvantoj: quantity }
+    {monatoj: last_12_months_label, kvantoj: quantity}
   end
 
   def kalkulas_kvanton_registritaj_eventoj
@@ -228,7 +228,7 @@ class HomeController < ApplicationController
     quantity << Event.where("created_at <= ?", (Time.zone.today - 1.month).end_of_month).count
     quantity << Event.where("created_at <= ?", Time.zone.today.end_of_month).count
 
-    { monatoj: last_12_months_label, kvantoj: quantity }
+    {monatoj: last_12_months_label, kvantoj: quantity}
   end
 
   def kalkulas_eventojn_lau_monatoj
@@ -250,10 +250,10 @@ class HomeController < ApplicationController
     quantity = []
     (1..12).each do |month|
       quantity << Event.where("extract(month from date_start) = :month OR extract(month from date_end) = :month",
-                              month: month).count
+        month: month).count
     end
 
-    { monatoj: monatoj, kvantoj: quantity }
+    {monatoj: monatoj, kvantoj: quantity}
   end
 
   def kalkulas_eventojn_retajn_kaj_fizikajn
@@ -281,9 +281,9 @@ class HomeController < ApplicationController
       fizikaj << Event.not_online.where(created_at: (Date.today - m.month).all_month).count
     end
 
-    eventoj << { name: "Fizikaj", data: fizikaj }
-    eventoj << { name: "Retaj", data: retaj }
+    eventoj << {name: "Fizikaj", data: fizikaj}
+    eventoj << {name: "Retaj", data: retaj}
 
-    { eventoj: eventoj, x_axis: last_12_months_label }
+    {eventoj: eventoj, x_axis: last_12_months_label}
   end
 end
