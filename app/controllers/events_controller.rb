@@ -21,7 +21,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    ahoy.track "Show event", event_id: @event.id
+    ahoy.track "Show event", event_url: @event.short_url
 
     @horzono = cookies[:horzono] || params[:horzono] || @event.time_zone
     @partoprenontoj = @event.participants
@@ -65,7 +65,7 @@ class EventsController < ApplicationController
     if @event.save
       @event.update_event_organizations(params[:organization_ids])
       NovaEventaSciigoJob.perform_later(@event)
-      ahoy.track "Create event", event_id: @event.id
+      ahoy.track "Create event", event_url: @event.short_url
       redirect_to event_path(@event.ligilo), flash: {notice: "Evento sukcese kreita."}
     else
       render :new
@@ -89,7 +89,7 @@ class EventsController < ApplicationController
       EventoGhisdatigitaJob.perform_later(@event)
       EventMailer.nova_administranto(@event).deliver_later if @event.saved_change_to_user_id?
       @event.update_event_organizations(params[:organization_ids])
-      ahoy.track "Update event", event_id: @event.id
+      ahoy.track "Update event", event_url: @event.short_url
 
       redirect_to event_path(@event.ligilo), notice: "Evento sukcese ĝisdatigita"
     else
@@ -111,18 +111,21 @@ class EventsController < ApplicationController
 
     # Ne vere forviŝas la eventon el la datumbazo, sed kaŝas ĝin
     @event.delete!
+    ahoy.track "Deleted event", event_url: @event.short_url
     redirect_to root_url, flash: {error: "Evento sukcese forigita"}
   end
 
   def nuligi
     e = Event.lau_ligilo(params[:event_code])
     e.update(cancelled: true, cancel_reason: params[:cancel_reason])
+    ahoy.track "Cancelled event", event_url: e.short_url
     redirect_to event_url(params[:event_code])
   end
 
   def malnuligi
     e = Event.lau_ligilo(params[:event_code])
     e.update(cancelled: false, cancel_reason: nil)
+    ahoy.track "Un-cancelled event", event_url: e.short_url
     redirect_to event_url(params[:event_code])
   end
 
