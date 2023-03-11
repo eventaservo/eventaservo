@@ -408,6 +408,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
       tz = TZInfo::Timezone.get(time_zone)
       self.date_start = tz.local_to_utc(Time.new(date_start.year, date_start.month, date_start.day, date_start.hour, date_start.min)).in_time_zone(time_zone)
       self.date_end = tz.local_to_utc(Time.new(date_end.year, date_end.month, date_end.day, date_end.hour, date_end.min)).in_time_zone(time_zone)
+
     end
   end
 
