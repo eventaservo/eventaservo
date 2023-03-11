@@ -10,7 +10,7 @@ jobs:
       postgres:
         image: postgres:13
         env:
-          POSTGRES_DB: eventaservo_test
+          POSTGRES_DB: eventaservo_devel
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         ports: [ '5432:5432' ]
