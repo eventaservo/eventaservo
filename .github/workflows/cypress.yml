@@ -55,7 +55,7 @@ jobs:
           RAILS_ENV: development
           RAILS_MASTER_KEY: ${{ secrets.rails_master_key }}
         with:
-          start: bundle exec rails server -b 0.0.0.0 -p 3000 -b 'ssl://0.0.0.0:3000?key=./certs/localhost.key&cert=./certs/localhost.crt'
+          start: bundle exec rails server -b "ssl://localhost:3000?key=./certs/localhost.key&cert=./certs/localhost.crt"
           wait-on: 'https://localhost:3000'
           wait-on-timeout: 60
           browser: chrome
