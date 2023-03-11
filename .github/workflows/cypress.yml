@@ -41,8 +41,8 @@ jobs:
           RAILS_MASTER_KEY: ${{ secrets.rails_master_key }}
         run: |
           gem install bundler
-          bundle exec rails assets:precompile &>/dev/null
-          bundle exec rails db:migrate &>/dev/null
+          bundle exec rails assets:precompile
+          bundle exec rails db:migrate
           bundle exec rails db:seed:replant
 
       # Install NPM dependencies, cache them correctly
