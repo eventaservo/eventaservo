@@ -3,61 +3,11 @@ on: pull_request
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
-    services:
-      redis:
-        image: redis:6.2.6
-        ports: [ '6379:6379' ]
-      postgres:
-        image: postgres:13
-        env:
-          POSTGRES_DB: eventaservo_devel
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-        ports: [ '5432:5432' ]
-
     steps:
       - uses: actions/checkout@v3
 
-      - name: Ruby 3.0 e Bundler
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.0'
-          bundler-cache: true
-
-      - name: Node 16
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          cache: 'yarn'
-
-      - name: Yarn
-        run: yarn install
-
-      - name: Prepare Rails server
+      - name: start docker-compose services
+        run: docker-compose -f docker-compose.ci.yml up -d --build
         env:
-          DB_USER: postgres
-          DB_PASSWORD: postgres
-          RAILS_ENV: development
-          RAILS_MASTER_KEY: ${{ secrets.rails_master_key }}
-        run: |
-          gem install bundler
-          bundle exec rails assets:precompile
-          bundle exec rails db:migrate
-          bundle exec rails db:seed:replant
-
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
-        uses: cypress-io/github-action@v5
-        env:
-          DB_USER: postgres
-          DB_PASSWORD: postgres
-          RAILS_ENV: development
-          RAILS_MASTER_KEY: ${{ secrets.rails_master_key }}
-        with:
-          start: bundle exec rails server
-          wait-on: 'http://localhost:3000'
-          wait-on-timeout: 60
-          browser: chrome
-          headless: true
+          CYPRESS_BASE_URL: https://localhost:3000
 

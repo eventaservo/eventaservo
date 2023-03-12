@@ -12,7 +12,7 @@ describe('Create events', () => {
   })
 
   it('with basic information', () => {
-    cy.visit('https://localhost:3000/e/new')
+    cy.visit('/e/new')
     cy.get('#event_title').type(faker.commerce.product())
     cy.get('#event_description').type(faker.commerce.productName())
     cy.get('#event_enhavo').type(faker.commerce.productDescription())
@@ -23,11 +23,11 @@ describe('Create events', () => {
   })
 
   it('deletes the first event from list', () => {
-    cy.visit('https://localhost:3000/')
+    cy.visit('/')
     cy.get(':nth-child(2) > .fc-list-item-title').click()
     cy.get('.buttons-footer > .btn-outline-primary').click()
     cy.get('.button-outline-red').click()
-    cy.url().should('be.equal', 'https://localhost:3000/')
+    cy.url().should('be.equal', `${Cypress.config().baseUrl}/`)
     cy.contains('Evento sukcese forigita')
   })
 })

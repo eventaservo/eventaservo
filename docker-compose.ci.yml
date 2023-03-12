@@ -1,0 +1,33 @@
+# Docker-compose file for DEVELOPMENT containers
+services:
+  backend:
+    environment:
+      - RAILS_ENV=development
+      - RAILS_SERVE_STATIC_FILES=false
+      - DB_HOST=db
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - REDIS_SERVER=redis
+      - PORT=3000
+      - CYPRESS_BASE_URL=https://localhost:3000
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.ci
+      args:
+        AMBIENTE: "development"
+        RAILS_MASTER_KEY: "8ed2c62ddbf43487450bdd2f62fde905"
+    ports:
+      - 3000:3000
+    depends_on:
+      - redis
+      - db
+
+  redis:
+    image: redis:6.2.6
+
+  db:
+    image: postgres:13.5
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=eventaservo_devel

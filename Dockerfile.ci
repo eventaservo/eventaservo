@@ -1,0 +1,62 @@
+FROM ruby:3.0-bullseye
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y \
+  g++ \
+  gcc \
+  iputils-ping \
+  libasound2 \
+  libgbm-dev \
+  libgconf-2-4 \
+  libgtk-3-0 \
+  libgtk2.0-0 \
+  libmagick++-dev \
+  libnotify-dev \
+  libnss3 \
+  libssl-dev \
+  libxss1 \
+  libxtst6 \
+  make \
+  nodejs \
+  poppler-utils \
+  postgresql-server-dev-all \
+  telnet \
+  xauth \
+  xvfb \
+  zlib1g-dev \
+  && rm -rf /var/lib/apt/lists/*
+
+ARG AMBIENTE=development
+# Sets environment variables
+ENV RAILS_ENV=${AMBIENTE}
+ENV RAILS_LOG_TO_STDOUT=true
+ENV RAILS_SERVE_STATIC_FILES=false
+ENV GOOGLE_MAPS_KEY=${GOOGLE_MAPS_KEY}
+ENV IPINFO_KEY=${IPINFO_KEY}
+
+# Bundler
+RUN echo "gem: --no-document" >> ~/.gemrc
+RUN gem install bundler:2.4.6
+
+COPY Gemfile Gemfile.lock ./
+RUN bundle install --retry=3
+
+# YARN
+# NodeJS PPA Repository
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
+RUN apt-get install -y nodejs
+RUN npm install -g yarn
+RUN yarn set version 3.2.1
+COPY .yarnrc.yml ./
+COPY package.json yarn.lock ./
+RUN yarn install
+
+COPY . .
+
+ARG RAILS_MASTER_KEY
+ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+
+EXPOSE 3000
+
+CMD ./ci.sh

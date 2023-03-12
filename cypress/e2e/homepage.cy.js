@@ -6,7 +6,7 @@ describe('Homepage', () => {
   })
 
   it('select and reset timezone', () => {
-    cy.visit('https://localhost:3000/')
+    cy.visit('/')
     cy.get('#select-timezone-link').click()
     cy.get('#select2-horzono-container').click()
     cy.wait(500)
