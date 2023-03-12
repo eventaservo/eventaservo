@@ -11,3 +11,7 @@ jobs:
         env:
           CYPRESS_BASE_URL: https://localhost:3000
 
+      - name: run cypress
+        run: docker-compose -f docker-compose.ci.yml run --rm backend
+        env:
+          CYPRESS_BASE_URL: https://localhost:3000
