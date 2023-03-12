@@ -7,3 +7,5 @@ Turbo.session.drive = false
 
 import './src/trix'
 import './controllers'
+import 'trix'
+import '@rails/actiontext'
