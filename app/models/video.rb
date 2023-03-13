@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: videos
+#
+#  id          :bigint           not null, primary key
+#  description :string
+#  title       :string
+#  url         :string           not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  event_id    :integer          not null
+#
 class Video < ApplicationRecord
 
   has_one_attached :bildo

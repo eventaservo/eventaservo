@@ -1,5 +1,22 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: analytics
+#
+#  id         :bigint           not null, primary key
+#  browser    :string
+#  city       :string
+#  country    :string
+#  ip         :string
+#  path       :string
+#  platform   :string
+#  region     :string
+#  version    :string
+#  vidmaniero :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class Analytic < ApplicationRecord
 
   scope :lau_tago, ->(tago) { where(created_at: tago.beginning_of_day..tago.end_of_day) }

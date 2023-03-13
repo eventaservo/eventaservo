@@ -1,5 +1,22 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: countries
+#
+#  id         :bigint           not null, primary key
+#  code       :string
+#  continent  :string
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_countries_on_continent           (continent)
+#  index_countries_on_name                (name)
+#  index_countries_on_name_and_continent  (name,continent)
+#
 class Country < ApplicationRecord
   has_many :users, inverse_of: :country, dependent: :restrict_with_exception
   has_many :recipients, class_name: "NotificationList", dependent: :destroy

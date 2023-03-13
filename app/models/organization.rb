@@ -1,5 +1,32 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: organizations
+#
+#  id           :bigint           not null, primary key
+#  address      :string
+#  city         :string
+#  display_flag :boolean          default(TRUE)
+#  email        :string
+#  logo         :string
+#  major        :boolean          default(FALSE)
+#  name         :string           not null
+#  official     :boolean          default(FALSE)
+#  partner      :boolean          default(FALSE)
+#  phone        :string
+#  short_name   :string           not null
+#  url          :string
+#  youtube      :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  country_id   :integer          default(99999)
+#
+# Indexes
+#
+#  index_organizations_on_name        (name)
+#  index_organizations_on_short_name  (short_name)
+#
 class Organization < ApplicationRecord
   has_paper_trail
   has_one_attached :logo
