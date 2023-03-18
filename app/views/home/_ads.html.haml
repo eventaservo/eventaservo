@@ -1,0 +1,7 @@
+- if ads.any?
+  .d-flex.justify-content-around
+    - responsive_classes = [ nil, 'd-none d-sm-block', 'd-none d-md-block', 'd-none d-lg-block']
+    - ads.each_with_index do |ad, index|
+      = link_to ad.url, class: responsive_classes[index] do
+        = image_tag ad.image.variant(resize_to_fill: [400, 200]).processed, class: 'reklam-bildo'
+  %br
