@@ -66,6 +66,15 @@ FactoryBot.define do
     password { Faker::Internet.password }
     confirmed_at { Time.now }
     country { Country.all.sample }
+    instruo { {instruisto: true, nivelo: ["baza"], sperto: Faker::Lorem.paragraph} }
+    prelego { {preleganto: true, temoj: Faker::Lorem.paragraph} }
+
+    after(:build) do |user|
+      if Rails.env.development?
+        picture = URI.parse(Faker::LoremFlickr.image(size: "256x256", search_terms: ["profile_picture"])).open
+        user.picture.attach(io: picture, filename: user.name.parameterize + "-picture.jpg", content_type: "image/jpg")
+      end
+    end
 
     trait :brazila do
       country { Country.find_by(code: "br") }
