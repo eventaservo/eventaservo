@@ -73,6 +73,14 @@ class EventTest < ActiveSupport::TestCase
     assert evento.invalid?
   end
 
+  test "title is limited to 100 characters" do
+    event = build(:event, title: Faker::Lorem.paragraph_by_chars(number: 100))
+    assert event.valid?
+
+    event.title = Faker::Lorem.paragraph_by_chars(number: 101)
+    refute event.valid?
+  end
+
   test "priskribo necesas" do
     evento = build(:evento, description: nil)
     assert evento.invalid?
