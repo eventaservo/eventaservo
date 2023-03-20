@@ -13,6 +13,8 @@
         .form-group
           = form.label :title, 'Titolo *'
           = form.text_field :title, class: 'form-control', autofocus: true, required: true
+          %small.form-text.text-muted#title-characters-count
+            Maksimume 100 signoj
 
         .form-group
           = form.label :description, 'Priskribo *'
