@@ -79,7 +79,7 @@ class EventsController < ApplicationController
           flash: {error: "Vi devas unue elekti dosieron"}) && return
       end
 
-      if @event.update(params.require(:event).permit(uploads: []))
+      if @event.uploads.attach(params[:event][:uploads])
         flash[:notice] = "Dokumento sukcese alŝutita"
       else
         flash[:error] = "Dosier-formato ne valida"
