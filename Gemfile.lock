@@ -334,7 +334,7 @@ GEM
     pry-rails (0.3.9)
       pry (>= 0.10.4)
     public_suffix (5.0.1)
-    puma (5.6.5)
+    puma (6.1.1)
       nio4r (~> 2.0)
     racc (1.6.2)
     rack (2.2.6.4)
@@ -575,7 +575,7 @@ DEPENDENCIES
   postmark-rails
   premailer-rails (~> 1.11)
   pry-rails (~> 0.3.4)
-  puma (~> 5)
+  puma (~> 6)
   rack-attack (~> 6.2)
   rack-cors (~> 1.1)
   rails (~> 7.0.4)
