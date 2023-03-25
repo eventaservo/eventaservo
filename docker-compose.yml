@@ -54,10 +54,5 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
 
-  mailcatcher:
-    image: schickling/mailcatcher:latest
-    ports:
-      - 1080:1080
-
 volumes:
   postgres:

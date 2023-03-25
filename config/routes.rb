@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     mount DelayedJobWeb, at: "/delayed_job"
   end
 
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+
   ActiveAdmin.routes(self)
 
   root to: "home#index"
