@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_16_090826) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_25_010340) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -224,6 +224,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_16_090826) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "logs", force: :cascade do |t|
+    t.string "text"
+    t.bigint "user_id", null: false
+    t.jsonb "metadata", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["text"], name: "index_logs_on_text"
+    t.index ["user_id"], name: "index_logs_on_user_id"
+  end
+
   create_table "notification_lists", force: :cascade do |t|
     t.integer "country_id", null: false
     t.string "email", null: false
@@ -402,4 +412,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_16_090826) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "logs", "users"
 end
