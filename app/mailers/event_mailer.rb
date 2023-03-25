@@ -97,9 +97,15 @@ class EventMailer < ApplicationMailer
 
     emails.each do |to|
       mail(to: to,
-           from: "Eventa Servo <kontakto@eventaservo.org>",
-           subject: email_subject,
-           track_opens: "true")
+        from: "Eventa Servo <kontakto@eventaservo.org>",
+        subject: email_subject,
+        track_opens: "true")
+
+      Log.create(
+        text: "Sent #{reminder_date_string} reminder message for event #{@evento.title} to #{to}",
+        user: User.system_account,
+        event_id: @evento.id
+      )
     end
   end
 
