@@ -26,4 +26,8 @@ class Log < ApplicationRecord
   def event
     Event.find_by(id: event_id)
   end
+
+  def organization
+    Organization.find_by(id: organization_id)
+  end
 end

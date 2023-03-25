@@ -47,6 +47,7 @@ class OrganizationsController < ApplicationController
     if @organizo.save
       @organizo.organization_users.create(user: current_user, admin: true)
       ahoy.track "Create organization", organization: @organizo.name
+      Log.create(text: "Created organization #{@organizo.name}", user: @current_user, organization_id: @organizo.id)
       redirect_to organization_url(@organizo.short_name), flash: {notice: "Organizo sukcese kreita."}
     else
       render :new
@@ -57,6 +58,7 @@ class OrganizationsController < ApplicationController
     if @organizo.update(organization_params)
       @organizo.logo.purge if params[:delete_logo] == "true"
       ahoy.track "Update organization", organization: @organizo.name
+      Log.create(text: "Updated organization #{@organizo.name}", user: @current_user, organization_id: @organizo.id)
       redirect_to organization_url(@organizo.short_name), notice: "Organizo sukcese ĝisdatigita"
     else
       render :edit
@@ -70,6 +72,7 @@ class OrganizationsController < ApplicationController
 
     OrganizationUser.create(organization_id: organizo.id, user_id: uzanto.id)
     ahoy.track "Add user to organization", organization: organizo.name, user: uzanto.name
+    Log.create(text: "Added #{uzanto.name} to #{organizo.name}", user: @current_user, organization_id: organizo.id)
     redirect_to organization_url(organizo.short_name), flash: {success: "Uzanto aldonita al la organizo"}
   end
 
@@ -81,6 +84,7 @@ class OrganizationsController < ApplicationController
     ou = OrganizationUser.find_by(organization_id: organizo.id, user_id: uzanto.id)
     ou.update(admin: !ou.admin)
     ahoy.track "Change user admin of organization", organization: organizo.name, user: uzanto.name
+    Log.create(text: "Changed admin status for #{uzanto.name} on #{organizo.name}", user: @current_user, organization_id: organizo.id)
     redirect_to organization_url(organizo.short_name), flash: {success: "Sukceso"}
   end
 
@@ -95,6 +99,7 @@ class OrganizationsController < ApplicationController
     ou = OrganizationUser.find_by(organization_id: organizo.id, user_id: uzanto.id)
     ou.destroy
     ahoy.track "Remover user from organization", organization: organizo.name, user: uzanto.name
+    Log.create(text: "Removed #{uzanto.name} from #{organizo.name}", user: @current_user, organization_id: organizo.id)
     redirect_to organization_url(organizo.short_name), flash: {success: "Sukceso"}
   end
 
