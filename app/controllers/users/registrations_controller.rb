@@ -19,7 +19,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     super
-    NovaUzantoSciigoJob.perform_later(resource) if resource.valid?
+    if resource.valid?
+      NovaUzantoSciigoJob.perform_later(resource)
+      Log.create(text: "User #{resource.name} registered", user: resource)
+    end
   end
 
   # GET /resource/edit
