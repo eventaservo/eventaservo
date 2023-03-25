@@ -66,6 +66,7 @@ class EventsController < ApplicationController
       @event.update_event_organizations(params[:organization_ids])
       NovaEventaSciigoJob.perform_later(@event)
       ahoy.track "Create event", event_url: @event.short_url
+      Log.create(text: "Created event #{@event.title}", user: @current_user, event_id: @event.id)
       redirect_to event_path(@event.ligilo), flash: {notice: "Evento sukcese kreita."}
     else
       render :new
@@ -90,7 +91,7 @@ class EventsController < ApplicationController
       EventMailer.nova_administranto(@event).deliver_later if @event.saved_change_to_user_id?
       @event.update_event_organizations(params[:organization_ids])
       ahoy.track "Update event", event_url: @event.short_url
-
+      Log.create(text: "Updated event #{@event.title}", user: @current_user, event_id: @event.id)
       redirect_to event_path(@event.ligilo), notice: "Evento sukcese ĝisdatigita"
     else
       render :edit
@@ -112,6 +113,7 @@ class EventsController < ApplicationController
     # Ne vere forviŝas la eventon el la datumbazo, sed kaŝas ĝin
     @event.delete!
     ahoy.track "Deleted event", event_url: @event.short_url
+    Log.create(text: "Deleted event #{@event.title}", user: @current_user, event_id: @event.id)
     redirect_to root_url, flash: {error: "Evento sukcese forigita"}
   end
 
