@@ -5,15 +5,17 @@ ActiveAdmin.register Log do
 
   includes :user
 
-  filter :user
-  filter :text_cont
+  filter :user_name_cont, label: "User name"
+  filter :text_cont, label: "Text"
+  filter :created_at, label: "Date"
 
   index do
+    id_column
     column("Date (UTC)") { |log| log.created_at.strftime("%d/%m/%Y %H:%M") }
     column :user
     column :text
 
-    actions defaults: true do |log|
+    actions defaults: false do |log|
       event = Event.find_by(id: log.event_id)
       organization = Organization.find_by(id: log.organization_id)
 
