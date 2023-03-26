@@ -10,9 +10,9 @@ ActiveAdmin.register User do
 
   includes :country
 
-  filter :name
-  filter :email
-  filter :username
+  filter :name_cont, label: "Name"
+  filter :email_cont, label: "Email"
+  filter :username_cont, label: "Username"
   filter :country
 
   controller do
@@ -23,9 +23,7 @@ ActiveAdmin.register User do
 
   index do
     id_column
-    column("Nomo") do |user|
-      link_to user.name, "/uzanto/#{user.username}", target: "_blank", rel: "noopener"
-    end
+    column :name
     column :email
     column :city
     column :country
@@ -34,7 +32,10 @@ ActiveAdmin.register User do
       user.events.size
     end
     column("Active?", :active?)
-    actions
+
+    actions defaults: true do |user|
+      span link_to "User", "/uzanto/#{user.username}", target: "_blank", rel: "noopener"
+    end
   end
 
   show do
@@ -46,7 +47,7 @@ ActiveAdmin.register User do
           row :email
           row :city
           row :country
-          row :user_name
+          row :username
           row :birthday
           row :ueacode
           row :about
@@ -86,7 +87,7 @@ ActiveAdmin.register User do
       redirect_to active_admin_users_path
     else
       redirect_to active_admin_user_path(resource),
-                  alert: "Could not disable the user. Maybe he belongs to an one-member organization."
+        alert: "Could not disable the user. Maybe he belongs to an one-member organization."
     end
   end
 
@@ -103,12 +104,12 @@ ActiveAdmin.register User do
   sidebar "Actions", only: :show do
     if resource.disabled == false
       div link_to "Disable user", \
-                  deactivate_active_admin_user_path(resource), \
-                  method: :put, \
-                  data: { \
-                    confirm: "To be used when a user wants his account to be destroyed. Removes the user from any " \
-                             "organization, move all events to system account and disable the user. Are your sure?" \
-                  }
+        deactivate_active_admin_user_path(resource), \
+        method: :put, \
+        data: { \
+          confirm: "To be used when a user wants his account to be destroyed. Removes the user from any " \
+                   "organization, move all events to system account and disable the user. Are your sure?" \
+        }
     end
 
     div link_to "Merge to another user", merge_active_admin_user_path(resource)
@@ -118,6 +119,7 @@ ActiveAdmin.register User do
     f.inputs do
       f.input :name
       f.input :country
+      f.input :city
       f.input :username
     end
 
