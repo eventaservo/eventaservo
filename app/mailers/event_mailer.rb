@@ -12,7 +12,7 @@ class EventMailer < ApplicationMailer
     return false unless Event.exists?(event_id)
     return false unless Rails.env.production? # Ne sendas retmesaĝon dum provo
 
-    event      = Event.includes(:country).find(event_id)
+    event = Event.includes(:country).find(event_id)
     recipients = event.country.recipients
     return false if recipients.empty?
 
@@ -23,7 +23,7 @@ class EventMailer < ApplicationMailer
 
   def notify_user(event_id, recipient_id)
     @recipient = NotificationList.find(recipient_id)
-    @event     = Event.includes(:country).find(event_id)
+    @event = Event.includes(:country).find(event_id)
     mail(to: @recipient.email, subject: "Nova evento: #{@event.title}")
   end
 
@@ -51,7 +51,7 @@ class EventMailer < ApplicationMailer
     @events = Event.by_dates(from: Time.zone.today, to: Time.zone.today + 7.days)
     # @user = user
     @user = User.find(1) # Nur por provoj
-    mail(to: "#{user.name.delete(',')} <#{user.email}>", subject: "Tutmonda semajna resumo de eventoj")
+    mail(to: "#{user.name.delete(",")} <#{user.email}>", subject: "Tutmonda semajna resumo de eventoj")
   end
 
   def kontakti_organizanton(eventa_kodo, informoj = {})
@@ -67,8 +67,8 @@ class EventMailer < ApplicationMailer
     end
 
     mail(to: to, bcc: bcc, reply_to: informoj[:email],
-         subject: "Informo pri via evento en Eventa Servo",
-         track_opens: "true")
+      subject: "Informo pri via evento en Eventa Servo",
+      track_opens: "true")
   end
 
   def nova_administranto(evento)
