@@ -85,28 +85,24 @@ class EventMailer < ApplicationMailer
     mail(to: to, bcc: bcc, subject: "Vi estas nova eventa administranto")
   end
 
-  def rememorigas_uzantojn_pri_evento(evento_id, reminder_date_string)
-    @evento = Event.find_by(id: evento_id)
-    return if @evento.nil?
-    return if @evento.date_start < DateTime.now
-    return if @evento.participants.empty?
+  def rememorigas_uzantojn_pri_evento(event_id, email, reminder_date_string)
+    @event = Event.find_by(id: event_id)
+    return if @event.nil?
+    return if @event.date_start < DateTime.now
 
     @reminder_message = event_reminder_message(reminder_date_string)
-    emails = @evento.participants_records.pluck(:email)
-    email_subject = reminder_email_subject(@evento.title, reminder_date_string)
+    email_subject = reminder_email_subject(@event.title, reminder_date_string)
 
-    emails.each do |to|
-      mail(to: to,
-        from: "Eventa Servo <kontakto@eventaservo.org>",
-        subject: email_subject,
-        track_opens: "true")
+    mail(to: email,
+      from: "Eventa Servo <kontakto@eventaservo.org>",
+      subject: email_subject,
+      track_opens: "true")
 
-      Log.create(
-        text: "Sent #{reminder_date_string} reminder message for event #{@evento.title} to #{to}",
-        user: User.system_account,
-        event_id: @evento.id
-      )
-    end
+    Log.create(
+      text: "Sent #{reminder_date_string} reminder message for event #{@event.title} to #{email}",
+      user: User.system_account,
+      event_id: @event.id
+    )
   end
 
   private
