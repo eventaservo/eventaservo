@@ -101,9 +101,6 @@ gem "sentry-delayed_job", "~> 5"
 gem "sentry-rails", "~> 5"
 gem "sentry-ruby", "~> 5"
 
-# AppSignal
-gem "appsignal", "~> 3.3"
-
 gem "listen"
 
 # Bullet
