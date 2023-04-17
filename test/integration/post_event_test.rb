@@ -8,9 +8,9 @@ class PostEventTest < ActionDispatch::IntegrationTest
   setup do
     sign_in create(:uzanto, :admin)
     @brazilo = Country.find_by(code: "br")
-    @bejo    = create(:organization, :bejo)
-    @tejo    = create(:organization, :tejo)
-    @evento  = create(:evento)
+    @bejo = create(:organization, :bejo)
+    @tejo = create(:organization, :tejo)
+    @evento = create(:evento)
   end
 
   test "kreas novan eventon" do
@@ -19,14 +19,14 @@ class PostEventTest < ActionDispatch::IntegrationTest
 
     assert_difference("Event.count", 1) do
       post "/e",
-           params: {
-             event: {
-               title: Faker::Book.title, description: Faker::Lorem.sentence, content: Faker::Lorem.paragraph,
-               city: "Ĵoan-Pesoo", country_id: @brazilo.id, site: Faker::Internet.url,
-               date_start: "17/07/2019", date_end: "17/07/2019"
-             },
-             time_start: "14:00", time_end: "16:00"
-           }
+        params: {
+          event: {
+            title: Faker::Book.title, description: Faker::Lorem.sentence, enhavo: Faker::Lorem.paragraph,
+            city: "Ĵoan-Pesoo", country_id: @brazilo.id, site: Faker::Internet.url,
+            date_start: "17/07/2019", date_end: "17/07/2019"
+          },
+          time_start: "14:00", time_end: "16:00"
+        }
       assert_response :redirect
       follow_redirect!
       assert_response :success
@@ -45,20 +45,20 @@ class PostEventTest < ActionDispatch::IntegrationTest
   test "aldonas_organizon_al_evento" do
     get edit_event_path(@evento.code)
     patch event_path(@evento.code),
-          params: {
-            event: { title: Faker::Book.title },
-            organization_ids: [@bejo.id, @tejo.id], code: @evento.code
-          }
+      params: {
+        event: {title: Faker::Book.title},
+        organization_ids: [@bejo.id, @tejo.id], code: @evento.code
+      }
     assert_equal 2, @evento.reload.organizations.count
   end
 
   test "forvishas_organizon_el_evento" do
     get edit_event_path(@evento.code)
     patch event_path(@evento.code),
-          params: {
-            event: { title: Faker::Book.title },
-            organization_ids: nil, code: @evento.code
-          }
+      params: {
+        event: {title: Faker::Book.title},
+        organization_ids: nil, code: @evento.code
+      }
 
     assert_equal 0, @evento.reload.organizations.count
   end

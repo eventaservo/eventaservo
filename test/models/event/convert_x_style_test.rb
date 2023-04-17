@@ -26,4 +26,14 @@ class Event::ConvertXStyleTest < ActiveSupport::TestCase
     @event.update(description: @text_with_x_chars)
     assert_equal @text_with_x_chars, @event.description
   end
+
+  test "convert enhavo when creating event" do
+    event = create(:event, enhavo: @text_with_x_chars)
+    assert_equal @converted_text, event.enhavo.to_plain_text
+  end
+
+  test "do not convert body when updating" do
+    @event.update(enhavo: @text_with_x_chars)
+    assert_equal @text_with_x_chars, @event.enhavo.to_plain_text
+  end
 end

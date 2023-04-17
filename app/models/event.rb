@@ -483,6 +483,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   def convert_x_characters
     self.title = Tools.convert_X_characters(title)
     self.description = Tools.convert_X_characters(description)
+    self.enhavo = Tools.convert_X_characters(enhavo.body.to_html)
   end
 
   def fix_site(site)
