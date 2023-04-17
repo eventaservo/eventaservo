@@ -437,6 +437,8 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   # Formatas la eventon laŭ normala formato
   def format_event_data
     normalize_title
+    convert_x_characters if new_record?
+
     self.city = city.tr("/", "").strip
     self.site = fix_site(site)
     self.time_zone = "Etc/UTC" if time_zone.empty?
@@ -475,6 +477,12 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
       else
         title
       end.strip
+  end
+
+  # Remove the X characters from the title, description and body
+  def convert_x_characters
+    self.title = Tools.convert_X_characters(title)
+    self.description = Tools.convert_X_characters(description)
   end
 
   def fix_site(site)
