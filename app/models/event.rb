@@ -61,7 +61,7 @@
 # 2) Formatas la datumojn per +format_event_data+.
 class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   has_paper_trail versions: {scope: -> { order("created_at desc") }},
-    ignore: %i[id delayed_job_id enhavo]
+    ignore: %i[id delayed_job_id enhavo metadata]
 
   has_rich_text :enhavo
 
