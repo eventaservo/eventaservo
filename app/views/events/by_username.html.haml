@@ -29,10 +29,6 @@
         .col-12.col-md-6.mb-5
           = render partial: 'users/prelegant_profilo', locals: { user: @uzanto }
 
-      = render partial: "users/interested_events_list"
-
-      = render partial: "users/my_events"
-
 #webcalModal.modal.fade{ aria: { hidden: :true, labelledby: 'shareModalCenterTitle' } , role: 'dialog', tabindex: '-1' }
   .modal-dialog.modal-lg.modal-dialog-centered{ role: 'document' }
     .modal-content

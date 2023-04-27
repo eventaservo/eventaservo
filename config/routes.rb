@@ -136,6 +136,7 @@ Rails.application.routes.draw do
 
   # Eventoj de uzantoj
   get "/uzanto/:username", controller: "events", action: "by_username", as: "events_by_username"
+  get "/uzanto/:username/eventoj", to: "profile#events", as: "user_events"
 
   # Sciigo
   get "/sciigo/:recipient_code/forigu", controller: "notification_list", action: :delete, as: "delete_recipient"

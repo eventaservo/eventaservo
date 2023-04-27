@@ -1,8 +1,8 @@
-- if @interested_events.venontaj.any?
+- if interested_events.venontaj.any?
   .mb-5
     .lead Venontaj eventoj pri kiuj mi interesiĝas
 
-    - @interested_events.venontaj.order(:date_start).each do |event|
+    - interested_events.venontaj.order(:date_start).each do |event|
       = link_to event_path(event.ligilo), class: 'item-row small' do
         .col-5
           = event_flag event
