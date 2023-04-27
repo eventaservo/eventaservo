@@ -19,7 +19,7 @@ gem "sass-rails", "~> 6"
 gem "acts-as-taggable-on", "~> 9.0"
 
 gem "bootstrap", "~> 4.3"
-gem "font-awesome-sass", "~> 5"
+gem "font-awesome-sass", "~> 6"
 gem "haml", "~> 5"
 gem "jquery-rails", "~> 4.3", ">= 4.3.3"
 gem "jquery-ui-rails", "~> 6.0", ">= 6.0.1"
