@@ -110,8 +110,8 @@ FactoryBot.define do
     end
 
     trait :venonta do
-      date_start { Time.zone.today + 1.day }
-      date_end { Time.zone.today + 1.day }
+      date_start { Time.zone.now + rand(0..2).days }
+      date_end { date_start + rand(2..36).hours }
     end
 
     trait :past do

@@ -7,7 +7,9 @@ ActiveAdmin.register_page "Dashboard" do
     div class: "blank_slate_container" do
       span class: "blank_slate" do
         div "Events: #{Event.count}"
-        div "Venontaj: #{Event.venontaj.count}"
+        hr
+        div "Future: #{Event.venontaj.count}"
+        div "Past: #{Event.venontaj.count}"
       end
 
       span class: "blank_slate" do
@@ -35,4 +37,34 @@ ActiveAdmin.register_page "Dashboard" do
     #   end
     # end
   end # content
+
+  sidebar "Staging tools", if: proc { !Rails.env.production? } do
+    li do
+      link_to "Create sample events", active_admin_dashboard_create_sample_events_path, method: :post,
+        data: {
+          confirm: "This will create 5 future events and 2 past events assigned to your account. Continue?"
+        }
+    end
+
+    li do
+      link_to "Delete all my events", active_admin_dashboard_delete_my_events_path, method: :delete,
+        data: {confirm: "This will delete all YOUR events. Continue?"}
+    end
+  end
+
+  page_action :create_sample_events, method: :post do
+    return false if Rails.env.production?
+
+    Rails.logger.info "Creating sample events for user #{current_user.id}"
+    CreateSampleEventsJob.perform_later(current_user.id)
+    redirect_to active_admin_dashboard_path, notice: "Sample events are being created and will be available soon."
+  end
+
+  page_action :delete_my_events, method: :delete do
+    return false if Rails.env.production?
+
+    Rails.logger.info "Deleting all events for user #{current_user.id}"
+    Event.by_user(current_user).destroy_all
+    redirect_to active_admin_dashboard_path, notice: "Your events were deleted"
+  end
 end
