@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"ruby.specPattern": "test",
+		"ruby.specSaveFile": true,
+		"ruby.specCommand": "bundle exec rails test",
+	}
+}
