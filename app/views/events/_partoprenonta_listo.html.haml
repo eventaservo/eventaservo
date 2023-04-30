@@ -5,7 +5,10 @@
     .modal-content.text-left
 
       .modal-header
-        %h5#titolo.modal-title #{@event.participants.count} interesiĝantoj
+        %h5.modal-title#titolo
+          = event.participants.count
+          = event.past? ? "interesiĝintoj" : "interesiĝantoj"
+
         %button.close{'aria-label': 'Fermi', 'data-dismiss': 'modal', type: 'button'}
           %span{'aria-hidden': 'true'} ×
 

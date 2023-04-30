@@ -8,7 +8,7 @@
         = montras_adreson(@event.full_address, text: @event.address) unless @event.address.blank?
         = render partial: 'event_map', locals: { event: @event } if @event.location_defined?
 
-    = render partial: 'partoprenontoj'
+    = render partial: 'partoprenontoj', locals: { event: @event, interested: @partoprenontoj }
 
     %p
     .text-divider Administranto
