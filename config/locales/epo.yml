@@ -32,6 +32,9 @@ epo:
         email: retpoŝtadreso
         country_id: lando
         city: urbo
+      event/report:
+        title: titolo
+        content: enhavo
   date:
     abbr_day_names:
       - dim
