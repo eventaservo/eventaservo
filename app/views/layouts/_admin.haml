@@ -13,3 +13,4 @@
     = link_to 'Eventoj sen lokoj', admin_senlokaj_eventoj_path, class: 'dropdown-item'
     .dropdown-divider
     = link_to 'Statistikoj', statistikoj_url, class: 'dropdown-item'
+    = link_to icon('fas', 'cog', 'Admin'), active_admin_root_url, class: 'dropdown-item' if current_user.admin?
