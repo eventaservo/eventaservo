@@ -24,6 +24,7 @@ class Event
 
       if report.save
         ahoy.track "Created report", title: report.title, event_url: @event.short_url
+        EventReportTelegramJob.perform_later(report.id, :create)
         redirect_to event_url(@event.code), flash: {success: "La raporto estis sukcese kreita"}
       else
         @report = report
@@ -37,6 +38,7 @@ class Event
     def update
       if @report.update(report_params)
         ahoy.track "Edited report", title: @report.title, event_url: @event.short_url
+        EventReportTelegramJob.perform_later(@report.id, :update)
         redirect_to event_url(@event.code), flash: {success: "La raporto estis sukcese ĝisdatigita"}
       else
         render :edit, status: :unprocessable_entity
@@ -46,6 +48,7 @@ class Event
     def destroy
       if @report.destroy
         ahoy.track "Deleted report", title: @report.title, event_url: @event.short_url
+        EventReportTelegramJob.perform_later(@report.id, :destroy)
         redirect_to event_url(@event.code), flash: {success: "La raporto estis sukcese forigita"}
       else
         redirect_to event_url(@event.code), flash: {error: "Eraro okazis forigante la raporton"}
