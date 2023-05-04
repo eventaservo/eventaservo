@@ -1,0 +1,21 @@
+.box-white
+  .lead Event-raporto
+
+  %br
+
+  = error_handling(report)
+
+  .form-group
+    = f.text_field :title, class: 'form-control', required: true, autofocus: true,
+      placeholder: 'Resumu vian sperton en unu frazo'
+
+  .field
+    = f.rich_text_area :content, style: 'height: 50vh; overflow-y: auto;',
+      placeholder: "Verku pri via sperto en la evento kaj aldonu proprajn fotojn! " |
+      "Vi ankaŭ povas aldoni ligilon al ekzistanta(j) raporto(j) kaj fotaro(j)!"    |
+
+  .buttons-footer
+    = delete_button event_report_path(event.code, report) if params[:action] == 'edit'
+
+    = link_to 'Ne registri', event_path(event.code), class: 'button-cancel'
+    = f.submit 'Registri', class: 'button-submit'

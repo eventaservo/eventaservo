@@ -1,0 +1,8 @@
+.box-white
+  .lead= @report.title
+
+  = @report.content
+
+  - if @report.can_be_edited_by?(current_user)
+    .buttons-footer
+      = edit_button(edit_event_report_path(@event.code, @report))

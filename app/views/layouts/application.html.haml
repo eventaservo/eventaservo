@@ -46,7 +46,7 @@
   %body{class: "#{controller_name} #{action_name}"}
     = render partial: 'layouts/navbar'
     .container
-      = yield
+      = content_for?(:content) ? yield(:content) : yield
       .row
       - flash.each do |key, value|
         - next unless value.is_a? String

@@ -1,0 +1,16 @@
+- if Time.zone.now > event.date_start
+  .box-white
+    .box-header.bg-color-purple 📸 Raportoj
+    .box-body
+      %p Verku raportojn pri via sperto kaj aldonu viajn proprajn fotojn! 🥳🎉
+
+      .text-right
+        - text = event.reports.any? ? "Aldoni raporton" : "Verku la unuan raporton nun!"
+        = link_to icon("fas", "plus-circle", text), new_event_report_path(event.code), class: 'link-green'
+
+      - if event.reports.any?
+        .text-divider Raportoj
+        - event.reports.each do |report|
+          %div
+            = link_to report.title, event_report_path(event.code, report)
+            %i.fg-color-grayDark - #{report.user.name}

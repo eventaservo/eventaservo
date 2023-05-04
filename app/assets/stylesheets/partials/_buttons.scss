@@ -133,3 +133,10 @@
 .no-border {
   border: 0;
 }
+
+.button--new {
+  @extend .btn;
+  @extend .btn-sm;
+  @extend .btn-outline-success;
+  @extend .no-border;
+}

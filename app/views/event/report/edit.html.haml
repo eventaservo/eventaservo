@@ -1,0 +1,2 @@
+= form_with(model: @report, url: event_report_path(@event.code, @report), method: :put) do |f|
+  = render partial: "form", locals: { event: @event, report: @report, f: f }
