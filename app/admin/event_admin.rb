@@ -3,10 +3,12 @@
 ActiveAdmin.register Event do # rubocop:disable Metrics/BlockLength
   config.sort_order = "date_start_asc"
 
+  menu label: "Events", parent: "Events"
+
   actions :all, except: %i[new destroy]
 
   permit_params :title, :description, :content, :address, :city, :country_id, :user_id, :date_start, :date_end, :code,
-                :site, :email, :online, :specolisto, :short_url, :cancelled, :cancel_reason, :international_calendar
+    :site, :email, :online, :specolisto, :short_url, :cancelled, :cancel_reason, :international_calendar
 
   includes :country
 
