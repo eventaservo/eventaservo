@@ -23,11 +23,19 @@ class Log < ApplicationRecord
 
   belongs_to :user
 
+  before_validation :set_default_user
+
   def event
     Event.find_by(id: event_id)
   end
 
   def organization
     Organization.find_by(id: organization_id)
+  end
+
+  private
+
+  def set_default_user
+    self.user ||= User.system_account if user_id.blank?
   end
 end
