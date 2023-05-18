@@ -25,5 +25,9 @@ class Event
     def can_be_edited_by?(user)
       user == self.user
     end
+
+    def label
+      title.presence || url
+    end
   end
 end

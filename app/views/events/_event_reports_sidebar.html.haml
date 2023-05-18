@@ -1,0 +1,15 @@
+- if Time.zone.now > event.date_start
+  .box-white
+    .box-header.bg-color-purple 📸 Raportoj
+    .box-body
+      %p 🥳 Aldonu ligilojn al raportoj 🎉
+
+      .text-right
+        = link_to icon("fas", "plus-circle", "Aldoni ligilon"), new_event_report_path(event.code), class: 'link-green'
+
+      - if event.reports.any?
+        .text-divider Raportoj
+        - event.reports.each do |report|
+          %div
+            = link_to report.label, event_report_path(event.code, report)
+            %i.fg-color-grayDark - #{report.user.name}
