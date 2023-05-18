@@ -234,4 +234,12 @@ class EventTest < ActiveSupport::TestCase
     event2 = FactoryBot.create(:event, title: "UEA UNIVERSALA KONGRESO  ")
     assert_equal "Uea Universala Kongreso", event2.title
   end
+
+  test "#past?" do
+    past_event = FactoryBot.build(:event, date_start: 1.day.ago, date_end: 1.day.ago)
+    assert past_event.past?
+
+    past_event.update(date_end: Time.zone.today)
+    assert_not past_event.past?
+  end
 end

@@ -389,6 +389,13 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     false
   end
 
+  # Returns if the event is in the past
+  #
+  # @return [Boolean]
+  def past?
+    date_end < Time.zone.yesterday.end_of_day
+  end
+
   private
 
   def first_uploaded_image
