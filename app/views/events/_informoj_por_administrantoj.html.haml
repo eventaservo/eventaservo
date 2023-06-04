@@ -2,14 +2,16 @@
   .card-header.bg-warning
     Informoj por administrantoj
   .card-body
-    = montras_retposhtadreson(@uzanto.email)
+    = montras_retposhtadreson(uzanto.email)
     %br
-    UEA-Kodo: #{@uzanto.ueacode}
+    UEA-Kodo: #{uzanto.ueacode}
     %br
-    Naskiĝdato: #{@uzanto.birthday.strftime("%d/%m/%Y") if @uzanto.birthday}
+    Naskiĝdato: #{uzanto.birthday.strftime("%d/%m/%Y") if uzanto.birthday}
     %hr
-    Aktiva: #{@uzanto.active? ? "JES" : "NE"}
+    Aktiva: #{uzanto.active? ? "JES" : "NE"}
     %br
-    Kreita en: #{@uzanto.created_at.strftime("%d/%m/%Y")}
+    Kreita en: #{uzanto.created_at.strftime("%d/%m/%Y")}
     %br
-    Laste ensalutis: #{@uzanto.last_sign_in_at&.strftime("%d/%m/%Y") || "neniam" }
+    Laste ensalutis: #{uzanto.last_sign_in_at&.strftime("%d/%m/%Y") || "neniam" }
+    %hr
+    = link_to 'Serĉi en Active Admin', active_admin_users_path(q: { name_cont: uzanto.name[0..3] }), target: :_blank
