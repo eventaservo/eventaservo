@@ -22,10 +22,6 @@ class Event
 
     validates_presence_of :url, :title
 
-    def can_be_edited_by?(user)
-      user == self.user
-    end
-
     def label
       title.presence || url
     end
