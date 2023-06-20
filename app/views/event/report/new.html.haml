@@ -15,12 +15,11 @@
 
         .form-group
           = f.label :title, 'Titolo'
-          = f.text_field :title, class: 'form-control'
+          = f.text_field :title, class: 'form-control', required: true
 
         .buttons-footer
           = link_to 'Ne registri', event_path(@event.code), class: 'button-cancel'
           = f.submit 'Registri', class: 'button-submit'
-
 
   .col-12.col-lg-3
     .mt-1

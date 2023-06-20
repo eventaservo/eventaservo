@@ -20,7 +20,7 @@ class Event
     belongs_to :event, inverse_of: :reports
     belongs_to :user, inverse_of: :event_reports
 
-    validates_presence_of :url
+    validates_presence_of :url, :title
 
     def can_be_edited_by?(user)
       user == self.user
