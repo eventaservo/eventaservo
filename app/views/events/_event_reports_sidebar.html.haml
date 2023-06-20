@@ -11,5 +11,12 @@
         .text-divider Raportoj
         - event.reports.each do |report|
           %div
-            = link_to report.label, event_report_path(event.code, report)
+            = link_to report.label, report.url, target: '_blank', rel: 'noopener noreferrer'
             %i.fg-color-grayDark - #{report.user.name}
+
+            - if @current_user && report.can_be_edited_by?(@current_user)
+              = link_to icon('far', 'trash-alt'),
+                event_report_url(event.code, report), method: :delete,
+                data: { confirm: 'Ĉu vi certas?' },
+                class: 'link-simples fg-color-red float-right'
+
