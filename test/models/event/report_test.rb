@@ -24,11 +24,14 @@ class Event::ReportTest < ActiveSupport::TestCase
     @report = FactoryBot.build_stubbed(:event_report, event: @event, user: @user)
   end
 
-  test "#can_be_edited_by? returns true if the user is the report's user" do
-    assert @report.can_be_edited_by?(@user)
+  test "#label should return title if present" do
+    @report.title = "foo"
+    assert_equal "foo", @report.label
   end
 
-  test "#can_be_edited_by? returns false if the user is not the report's user" do
-    assert_not @report.can_be_edited_by?(FactoryBot.build(:user))
+  test "#label should return url if title is blank" do
+    @report.title = nil
+    @report.url = "http://example.com"
+    assert_equal "http://example.com", @report.label
   end
 end
