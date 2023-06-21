@@ -22,8 +22,19 @@ class Event
 
     validates_presence_of :url, :title
 
+    before_validation :convert_x_characters
+
     def label
       title.presence || url
+    end
+
+    private
+
+    # Remove the X characters from the title for new records
+    def convert_x_characters
+      return unless new_record?
+
+      self.title = Tools.convert_X_characters(title)
     end
   end
 end
