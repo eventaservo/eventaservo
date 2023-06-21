@@ -13,6 +13,8 @@ class Event
       report.user = @current_user
 
       if report.save
+        NewEventReportNotificationJob.perform_later(report.id)
+
         redirect_to event_url(@event.code), flash: {success: "La raporto estis sukcese kreita"}
       else
         @report = report
