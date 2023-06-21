@@ -228,7 +228,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
               unaccent(events.content) ilike unaccent(:search) OR
               unaccent(events.city) ilike unaccent(:search) OR
               unaccent(countries.name) ilike unaccent(:search)',
-        search: "%#{search.strip.tr(" ", "%").downcase}%").order("events.date_start")
+        search: "%#{search.strip.tr(" ", "%").downcase}%")
   end
 
   def full_address
