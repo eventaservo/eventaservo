@@ -3,6 +3,8 @@
 ActiveAdmin.register Event do # rubocop:disable Metrics/BlockLength
   config.sort_order = "date_start_asc"
 
+  menu parent: "Events", priority: 1, label: "Events"
+
   actions :all, except: %i[new destroy]
 
   permit_params :title, :description, :content, :address, :city, :country_id, :user_id, :date_start, :date_end, :code,
@@ -59,5 +61,11 @@ ActiveAdmin.register Event do # rubocop:disable Metrics/BlockLength
     column :international_calendar
     column(:user) { |event| event.user.name }
     column(:event_link) { |event| "https://#{Rails.application.routes.default_url_options[:host]}/#{event.short_url}" }
+  end
+
+  sidebar "Event details", only: :show do
+    div link_to "View event on site", event.url, target: "_blank", rel: "noopener"
+    hr
+    div link_to "Reports: #{resource.reports.count}", active_admin_event_reports_path(q: "[event_title_cont=#{resource.title}]")
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_25_010340) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_01_081446) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -157,6 +157,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_25_010340) do
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "event_reports", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.string "title"
+    t.string "url", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_reports_on_event_id"
+    t.index ["user_id"], name: "index_event_reports_on_user_id"
   end
 
   create_table "events", force: :cascade do |t|

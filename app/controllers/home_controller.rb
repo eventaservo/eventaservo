@@ -115,7 +115,7 @@ class HomeController < ApplicationController
     @users = User.serchi(params[:query])
     @videos = Video.serchi(params[:query])
 
-    @events = @events.order(:date_start)
+    @events = @events.order(date_start: :desc)
   end
 
   def statistics

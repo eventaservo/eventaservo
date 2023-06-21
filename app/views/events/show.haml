@@ -51,9 +51,10 @@
           = link_to icon('far', 'copy', 'Duobligi'), new_event_url(from_event: @event), class: 'btn btn-sm btn-outline-success no-border'
           - if user_can_edit_event?(user: current_user, event: @event)
             = link_to icon('fas', 'plus-circle', 'Video'), event_nova_video_url(@event.ligilo), class: 'btn btn-sm btn-outline-success no-border'
-            = link_to icon('far', 'edit', 'Redakti'), edit_event_url(@event.ligilo), class: 'btn btn-sm btn-outline-primary no-border'
+            = link_to icon('far', 'edit', 'Redakti'), edit_event_url(@event.ligilo), class: "btn btn-sm btn-outline-primary no-border"
 
   .col-lg-4
+    = render partial: 'event_reports_sidebar', locals: { event: @event }
     = render partial: 'informoj'
 
 = render partial: 'event_scheme'

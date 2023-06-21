@@ -89,6 +89,7 @@ class User < ApplicationRecord
   has_many :organizoj, through: :organization_users, source: :organization
   has_many :interested_events_relation, class_name: "Participant", dependent: :destroy
   has_many :interested_events, through: :interested_events_relation, source: :event
+  has_many :event_reports, class_name: "Event::Report", dependent: :destroy
 
   validates :name, presence: true
   validates :username, uniqueness: true

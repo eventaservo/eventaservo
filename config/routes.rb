@@ -116,6 +116,8 @@ Rails.application.routes.draw do
     get "kronologio", to: "events#kronologio"
     post "nova_video", to: "video#create", as: "new_video"
     get "nova_video", to: "video#new"
+
+    resources :reports, controller: "event/report", path: "raportoj", only: [:new, :create, :destroy]
   end
 
   # Admin

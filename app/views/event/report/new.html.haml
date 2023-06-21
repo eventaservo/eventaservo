@@ -1,0 +1,26 @@
+.row.mt-3
+  .col-12.col-lg-9
+    = form_with(model: @report) do |f|
+      .box-white
+        .lead Event-raporto
+
+        %br
+
+        .field
+          = f.label :url, 'Ligilo'
+          = f.text_field :url, class: 'form-control', required: true, autofocus: true,
+            placeholder: "Ekz: https://uea.facila.org/artikoloj/movado/zamenhof-tago-r269"
+
+        %br
+
+        .form-group
+          = f.label :title, 'Titolo'
+          = f.text_field :title, class: 'form-control', required: true
+
+        .buttons-footer
+          = link_to 'Ne registri', event_path(@event.code), class: 'button-cancel'
+          = f.submit 'Registri', class: 'button-submit'
+
+  .col-12.col-lg-3
+    .mt-1
+      = render partial: "/events/card", locals: { event: @event }
