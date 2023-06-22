@@ -2,13 +2,10 @@
   .box-white
     .box-header.bg-color-purple 📸 Raportoj
     .box-body
-      %p 🥳 Aldonu ligilojn al raportoj 🎉
-
       .text-right
         = link_to icon("fas", "plus-circle", "Aldoni ligilon"), new_event_report_path(event.code), class: 'link-green'
 
       - if event.reports.any?
-        .text-divider Raportoj
         - event.reports.each do |report|
           %div
             = link_to report.label, report.url, target: '_blank', rel: 'noopener noreferrer'
@@ -19,4 +16,5 @@
                 event_report_url(event.code, report), method: :delete,
                 data: { confirm: 'Ĉu vi certas?' },
                 class: 'link-simples fg-color-red float-right'
-
+      - else
+        %p.mt-3.text-center 🥳 Aldonu ligilojn al raportoj 🎉
