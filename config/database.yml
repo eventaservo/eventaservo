@@ -22,8 +22,8 @@ staging:
   pool: 5
   timeout: 5000
   host: <%= ENV["DB_HOST"] %>
-  username: eventaservo
-  password: eventaservo
+  username: <%= ENV["DB_USER"] || "postgres" %>
+  password: <%= ENV["DB_PASSWORD"] || "postgres" %>
 
 production:
   adapter: postgresql
