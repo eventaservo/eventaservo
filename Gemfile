@@ -18,6 +18,7 @@ gem "sass-rails", "~> 6"
 
 gem "acts-as-taggable-on", "~> 9.0"
 
+gem "bootsnap", require: false
 gem "bootstrap", "~> 4.3"
 gem "font-awesome-sass", "~> 6"
 gem "haml", "~> 5"
