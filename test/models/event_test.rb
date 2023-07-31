@@ -60,6 +60,21 @@ class EventTest < ActiveSupport::TestCase
     @user = FactoryBot.create(:user)
   end
 
+  context "Associations" do
+    should belong_to(:user)
+    should belong_to :country
+    should have_many :organization_events
+    should have_many :organizations
+    should have_many :participants
+    should have_many :participants_records
+    should have_many :videoj
+    should have_many :reports
+
+    should "be true" do
+      assert true
+    end
+  end
+
   test "evento havas administranto" do
     assert_not_nil Event.reflect_on_association(:user)
   end
