@@ -64,9 +64,9 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :confirmable, :lockable, :trackable,
-         :omniauthable, omniauth_providers: %i[facebook]
+    :recoverable, :rememberable, :validatable,
+    :confirmable, :lockable, :trackable,
+    :omniauthable, omniauth_providers: %i[facebook]
 
   has_one_attached :picture
   store_accessor :mailings, :weekly_summary
@@ -77,7 +77,7 @@ class User < ApplicationRecord
   before_validation :generate_webcal_token, if: :new_record?
   before_save :generate_username, if: :new_record?
   before_save :subscribe_mailings, if: :new_record?
-  before_save :gererate_jwt_token, if: :new_record?
+  before_save :generate_jwt_token, if: :new_record?
   before_save :sanitize_links
 
   before_destroy :check_for_related_records
@@ -97,7 +97,7 @@ class User < ApplicationRecord
 
   default_scope { where(disabled: false) }
 
-  scope :receives_weekly_summary, -> { where("mailings @> ?", { weekly_summary: "1" }.to_json) }
+  scope :receives_weekly_summary, -> { where("mailings @> ?", {weekly_summary: "1"}.to_json) }
   scope :admins, -> { where(admin: true) }
   scope :instruistoj, -> { where("instruo ->> 'instruisto' = 'true'") }
   scope :prelegantoj, -> { where("prelego ->> 'preleganto' = 'true'") }
@@ -106,18 +106,18 @@ class User < ApplicationRecord
 
   def self.from_omniauth(auth)
     if where(email: auth.info.email).exists?
-      return_user          = find_by(email: auth.info.email)
+      return_user = find_by(email: auth.info.email)
       return_user.provider = auth.provider
-      return_user.uid      = auth.uid
+      return_user.uid = auth.uid
     else
       return_user =
         create! do |user|
-          user.provider   = auth.provider
-          user.uid        = auth.uid
-          user.email      = auth.info.email || "nova_uzanto_#{rand(1000)}@eventaservo.org"
-          user.password   = Devise.friendly_token[0, 20]
-          user.name       = auth.info.name # assuming the user model has a name
-          user.image      = auth.info.image # assuming the user model has an image
+          user.provider = auth.provider
+          user.uid = auth.uid
+          user.email = auth.info.email || "nova_uzanto_#{rand(1000)}@eventaservo.org"
+          user.password = Devise.friendly_token[0, 20]
+          user.name = auth.info.name # assuming the user model has a name
+          user.image = auth.info.image # assuming the user model has an image
           user.country_id = 99999
           user.skip_confirmation!
         end
@@ -181,7 +181,7 @@ class User < ApplicationRecord
   def self.serchi(teksto)
     User.where('unaccent(users.name) ilike unaccent(:search) OR
               unaccent(users.username) ilike unaccent(:search)',
-           search: "%#{teksto.strip.tr(' ', '%').downcase}%").order("users.name")
+      search: "%#{teksto.strip.tr(" ", "%").downcase}%").order("users.name")
   end
 
   # Kunigas la nunan konton kun alia konto-id
@@ -245,33 +245,33 @@ class User < ApplicationRecord
 
   private
 
-    # Generate JWT Token for API v2 before saving the user
-    def gererate_jwt_token
-      payload = { id: id }
-      jwt_token = JWT.encode(payload, Rails.application.credentials.dig(:jwt, :secret), "HS256")
-      self.jwt_token = jwt_token
-    end
+  # Generate JWT Token for API v2 before saving the user
+  def generate_jwt_token
+    payload = {id: id}
+    jwt_token = JWT.encode(payload, Rails.application.credentials.dig(:jwt, :secret), "HS256")
+    self.jwt_token = jwt_token
+  end
 
-    def subscribe_mailings
-      self.weekly_summary = "1"
-    end
+  def subscribe_mailings
+    self.weekly_summary = "1"
+  end
 
-    def sanitize_links
-      return if ligiloj.keys.empty?
+  def sanitize_links
+    return if ligiloj.keys.empty?
 
-      ligiloj.keys.each do |site|
-        next if site.empty?
+    ligiloj.keys.each do |site|
+      next if site.empty?
 
-        address = ligiloj[site]
-        if address[%r{\Ahttp:\/\/}] || address[%r{\Ahttps:\/\/}]
-          address.strip
-        elsif address.strip.empty?
-          nil
-        else
-          ligiloj[site] = "https://#{address.strip}"
-        end
+      address = ligiloj[site]
+      if address[%r{\Ahttp://}] || address[%r{\Ahttps://}]
+        address.strip
+      elsif address.strip.empty?
+        nil
+      else
+        ligiloj[site] = "https://#{address.strip}"
       end
     end
+  end
 
   # Kontrolas ĉu la uzanto ankoraŭ havas iun registron en ES antaŭ forigi ĝin
   # Se jes, ne permesu forigi la konton.
