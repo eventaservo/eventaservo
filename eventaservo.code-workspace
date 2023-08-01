@@ -8,5 +8,8 @@
 		"ruby.specPattern": "test",
 		"ruby.specSaveFile": true,
 		"ruby.specCommand": "bundle exec rails test",
+		"conventionalCommits.scopes": [
+			"API"
+		],
 	}
 }

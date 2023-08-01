@@ -56,7 +56,7 @@ Rails.application.routes.draw do
 
     namespace :v2, defaults: {format: :json} do
       scope "eventoj" do
-        get "/", to: "events#index"
+        get "/", to: "events#index", as: "events"
       end
     end
   end
