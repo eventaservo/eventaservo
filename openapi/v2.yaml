@@ -9,8 +9,9 @@ info:
   termsOfService: 'https://eventaservo.org/LICENSE'
   license:
     name: AGPL-3
-    identifier: AGPL-3
-  summary: API to list and manage data in EventaServo
+    url: 'https://github.com/eventaservo/eventaservo/blob/main/LICENSE'
+  summary: API dokumentado por Eventa Servo
+  description: API dokumentado por Eventa Servo
 servers:
   - url: 'https://localhost:3000/api/v2'
     description: Development
@@ -109,7 +110,7 @@ paths:
                     type: string
                     example: Mankas komenca_dato kaj fina_dato aŭ eventa UUID
           headers: {}
-      operationId: get-events.json
+      operationId: get-events-index
       parameters:
         - schema:
             type: string
@@ -118,6 +119,7 @@ paths:
           in: query
           name: komenca_dato
           required: true
+          description: 'Filtrila komenca dato '
         - schema:
             type: string
             example: '2022-01-31'
@@ -125,6 +127,7 @@ paths:
           in: query
           name: fina_dato
           required: true
+          description: Filtrila fina dato
         - schema:
             type: string
             format: uuid
@@ -138,12 +141,26 @@ paths:
             example: BR
           in: query
           name: landa_kodo
+          description: 2 signoj landa-kodo
         - schema:
             type: string
             example: UEA
           in: query
           name: o
           description: Organiza mallonga nomo
+        - schema:
+            type: string
+            enum:
+              - kurso
+              - Loka
+              - Internacia
+              - Alia
+              - Anonco
+              - Konkurso
+            example: kurso
+          in: query
+          name: speco
+          description: Eventa speco
       description: |-
         Listigas eventojn. Oni devas elekti listigi unun specifan eventon laŭ UUID kodo aŭ informi na komencan kaj finan datojn.
 
@@ -255,3 +272,6 @@ components:
       bearerFormat: JWT
 security:
   - BearerAuth: []
+tags:
+  - name: Eventoj
+    description: Rilate al eventoj
