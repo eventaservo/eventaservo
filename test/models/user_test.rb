@@ -64,25 +64,18 @@ class UserTest < ActiveSupport::TestCase
     @user = FactoryBot.create(:user)
   end
 
+  context "Associations" do
+    should belong_to(:country)
+  end
+
+  context "Validations" do
+    should validate_presence_of(:name)
+    should validate_presence_of(:email)
+    should validate_uniqueness_of(:email).case_insensitive
+  end
+
   test "uzanto validas" do
     assert build(:user).valid?
-  end
-
-  test "uzanto ne validas sen nomo" do
-    assert build_stubbed(:uzanto, name: nil).invalid?
-  end
-
-  test "uzando ne validas sen retpostadreso" do
-    assert build_stubbed(:uzanto, email: nil).invalid?
-  end
-
-  test "uzanto ne validas sen lando" do
-    assert build_stubbed(:uzanto, country_id: nil).invalid?
-  end
-
-  test "retpostadreso devas esti ne uzata" do
-    new_user = build(:uzanto, email: @user.email)
-    assert new_user.invalid?
   end
 
   test "ne permesas forigi uzant-konton se ĝi ankoraŭ havas eventojn rilatajn" do

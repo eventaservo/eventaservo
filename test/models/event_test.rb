@@ -69,61 +69,19 @@ class EventTest < ActiveSupport::TestCase
     should have_many :participants_records
     should have_many :videoj
     should have_many :reports
-
-    should "be true" do
-      assert true
-    end
+    should have_rich_text :enhavo
+    should have_many_attached :uploads
   end
 
-  test "evento havas administranto" do
-    assert_not_nil Event.reflect_on_association(:user)
-  end
-
-  test "evento havas landon" do
-    assert_not_nil Event.reflect_on_association(:country)
-  end
-
-  test "titolo necesas" do
-    evento = build(:evento, title: nil)
-    assert evento.invalid?
-  end
-
-  test "title is limited to 100 characters" do
-    event = build(:event, title: Faker::Lorem.paragraph_by_chars(number: 100))
-    assert event.valid?
-
-    event.title = Faker::Lorem.paragraph_by_chars(number: 101)
-    refute event.valid?
-  end
-
-  test "priskribo necesas" do
-    evento = build(:evento, description: nil)
-    assert evento.invalid?
-  end
-
-  test "urbo necesas" do
-    evento = build(:evento, city: nil)
-    assert evento.invalid?
-  end
-
-  test "evento sen lando devas fiaski" do
-    evento = build(:evento, country_id: nil)
-    assert evento.invalid?
-  end
-
-  test "komenca dato necesas" do
-    evento = build(:event, date_start: nil, date_end: nil)
-    assert evento.invalid?
-  end
-
-  test "fina dato necesas" do
-    evento = build(:evento, date_end: nil)
-    assert evento.invalid?
-  end
-
-  test "kodo necesas" do
-    evento = build(:evento, code: nil)
-    assert evento.invalid?
+  context "Validations" do
+    should validate_presence_of(:title)
+    should validate_presence_of(:description)
+    should validate_presence_of(:city)
+    should validate_presence_of(:date_start)
+    should validate_presence_of(:date_end)
+    should validate_presence_of(:code)
+    should validate_length_of(:title).is_at_most(100)
+    should validate_length_of(:description).is_at_most(400)
   end
 
   test "fina dato devas esti post komenca dato" do
@@ -144,11 +102,6 @@ class EventTest < ActiveSupport::TestCase
   test "serĉado" do
     evento = create(:evento, :brazila)
     assert Event.search("brazilo").exists?(id: evento.id)
-  end
-
-  test "priskribo ne povas esti pli ol 400 signoj" do
-    @event.description = SecureRandom.hex(201) # Pli ol 400 signoj
-    assert @event.invalid?
   end
 
   test "retejo devas enhavi http se ankoraŭ ne havas ĝin" do
