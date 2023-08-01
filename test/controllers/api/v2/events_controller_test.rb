@@ -39,5 +39,15 @@ class Api::V2::EventsControllerTest < ActionDispatch::IntegrationTest
       assert_equal 2, Event.count # Total events in DB should be 2
       assert_equal 1, JSON.parse(response.body).count # But only one event should be returned
     end
+
+    should "return event based on category" do
+      FactoryBot.create(:event, specolisto: "kurso", date_start: "2023-01-10", date_end: "2023-01-10")
+      FactoryBot.create(:event, specolisto: "alia speco", date_start: "2023-01-10", date_end: "2023-01-10")
+      get api_v2_events_path(speco: "kurso", komenca_dato: "2023-01-01", fina_dato: "2023-01-31"), headers: {"Authorization" => "Bearer #{@token}"}
+      assert_response :success
+
+      assert_equal 2, Event.count # Total events in DB should be 2
+      assert_equal 1, JSON.parse(response.body).count # But only one event should be returned
+    end
   end
 end
