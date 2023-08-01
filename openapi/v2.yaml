@@ -36,6 +36,7 @@ paths:
                     uuid:
                       type: string
                       example: 206da237-65ee-4b86-96f6-5bd4cc3bd210
+                      format: uuid
                     kodo:
                       type: string
                       example: ab6712d
@@ -64,15 +65,18 @@ paths:
                       type: array
                       items:
                         type: string
+                        example: '["UEA"]'
                     specoj:
                       type: array
                       items:
                         type: string
-                        example: Universala Esperanto-Asocio
+                        example: '["Kongreso"]'
                     nuligita:
                       type: boolean
                     nuligkialo:
-                      type: string
+                      type:
+                        - string
+                        - 'null'
                     reta:
                       type: boolean
                     loko:
@@ -98,7 +102,34 @@ paths:
                           example: 1.613334
                     administranto:
                       type: string
-                      example: '["Universala Esperanto-Asocio"]'
+                      example: '"Universala Esperanto-Asocio"'
+              examples:
+                Example 1:
+                  value:
+                    - uuid: 206da237-65ee-4b86-96f6-5bd4cc3bd210
+                      kodo: ab6712d
+                      titolo: 1-a Universala Kongreso
+                      priskribo: La unua Universala Kongreso de Esperanto!
+                      enhavo: Detalaj informoj pri la evento
+                      komenca_dato: '1905-08-05'
+                      fina_dato: '1905-08-12'
+                      retpagho: 'https://uea.org'
+                      retposhtadreso: kontakto@uea.org
+                      organizoj:
+                        - '["UEA"]'
+                      specoj:
+                        - '["Kongreso"]'
+                      nuligita: true
+                      nuligkialo: null
+                      reta: true
+                      loko:
+                        adreso: Stratnomo
+                        urbo: Bulonjo ĉe maro
+                        lando: Francio
+                        landokodo: FR
+                        latitudo: 50.725231
+                        longitudo: 1.613334
+                      administranto: '"Universala Esperanto-Asocio"'
         '400':
           description: UUID aŭ Komenca/Fina datoj mankas
           content:
@@ -112,6 +143,22 @@ paths:
           headers: {}
       operationId: get-events-index
       parameters:
+        - schema:
+            type: string
+            format: email
+            example: kontakto@eventaservo.org
+          in: query
+          name: user_email
+          description: Uzanta retadreso
+          required: true
+        - schema:
+            type: string
+            format: jwt
+            example: eyoaisdja81283u1982u3asdjaiojqwe.89asud81j2jeklajsd89qwe.9asu890daqkwe
+          in: query
+          name: user_token
+          description: Uzanta API token
+          required: true
         - schema:
             type: string
             example: '2022-01-01'
@@ -135,7 +182,7 @@ paths:
           in: query
           name: uuid
           allowEmptyValue: true
-          description: UUID de especifa evento
+          description: 'UUID de especifa evento (se oni uzas UUID filtrilon, ne bezonas informi komenca kaj fina dato)'
         - schema:
             type: string
             example: BR
