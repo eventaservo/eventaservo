@@ -39,7 +39,7 @@ class Organization < ApplicationRecord
   has_many :eventoj, through: :organization_events, source: :event # @deprecated use .events
   belongs_to :country
 
-  before_validation :fix_site
+  before_validation :normalize_urls
 
   validates :name, :short_name, presence: true
   validates :short_name, uniqueness: {case_sensitive: false}
@@ -97,18 +97,9 @@ class Organization < ApplicationRecord
     adr.compact.join(", ")
   end
 
-  def fix_site
-    site = url
-    return if site.nil?
-
-    self.url =
-      if site[%r{\Ahttp://}] || site[%r{\Ahttps://}]
-        site.strip
-      elsif site.strip.empty?
-        nil
-      else
-        "http://#{site.strip}"
-      end
+  def normalize_urls
+    self.url = UrlNormalizer.new(url).call
+    self.youtube = UrlNormalizer.new(youtube).call
   end
 
   def remove_user(user)

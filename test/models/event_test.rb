@@ -106,7 +106,7 @@ class EventTest < ActiveSupport::TestCase
 
   test "retejo devas enhavi http se ankoraŭ ne havas ĝin" do
     @event.update!(site: "google.com")
-    assert_equal "http://google.com", @event.site
+    assert_equal "https://google.com", @event.site
   end
 
   test "ne aldonu http se retejo jam havas ĝin" do
@@ -125,7 +125,7 @@ class EventTest < ActiveSupport::TestCase
     assert_nil @event.site
 
     @event.update!(site: "google.com")
-    assert_equal "http://google.com", @event.site
+    assert_equal "https://google.com", @event.site
   end
 
   test "forigas malpermesatajn signojn el urbonomo" do
