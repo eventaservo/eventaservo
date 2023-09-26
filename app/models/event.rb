@@ -448,7 +448,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     convert_x_characters if new_record?
 
     self.city = city.tr("/", "").strip
-    self.site = fix_site(site)
+    self.site = UrlNormalizer.new(site).call
     self.time_zone = "Etc/UTC" if time_zone.empty?
     self.short_url = nil if short_url == code || short_url.try(:strip).try(:empty?)
 
@@ -491,18 +491,6 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   def convert_x_characters
     self.title = Tools.convert_X_characters(title)
     self.description = Tools.convert_X_characters(description)
-  end
-
-  def fix_site(site)
-    return if site.nil?
-
-    if site[%r{\Ahttp://}] || site[%r{\Ahttps://}]
-      site.strip
-    elsif site.strip.empty?
-      nil
-    else
-      "http://#{site.strip}"
-    end
   end
 
   def schedule_users_reminders_jobs
