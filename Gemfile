@@ -135,7 +135,7 @@ group :test do
   gem "selenium-webdriver"
   gem "shoulda-context", "~> 2.0"
   gem "shoulda-matchers", "~> 5.3"
-  gem "simplecov", require: false
+  gem "simplecov-cobertura"
   gem "standard", "~> 1", require: false
   gem "vcr"
   gem "webdrivers"
