@@ -9,14 +9,14 @@ on:
 
 jobs:
   minitest:
-    uses: eventaservo/eventaservo/.github/workflows/template_test.yml@main
+    uses: ./.github/workflows/template_test.yml
     secrets:
       rails_master_key: ${{ secrets.RAILS_MASTER_KEY }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   docker:
     needs: minitest
-    uses: eventaservo/eventaservo/.github/workflows/docker.yml@main
+    uses: ./.github/workflows/docker.yml
     with:
       environment: staging
       tag: staging
@@ -27,7 +27,7 @@ jobs:
 
   sentry:
     needs: docker
-    uses: eventaservo/eventaservo/.github/workflows/sentry.yml@main
+    uses: ./.github/workflows/sentry.yml
     with:
       environment: 'staging'
     secrets:
