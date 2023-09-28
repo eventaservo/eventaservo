@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
 ENV["RAILS_ENV"] = "test"
-# SimpleCov
-require "simplecov"
-SimpleCov.start "rails"
-
 require_relative "../config/environment"
 require "rails/test_help"
 require "minitest/autorun"
 require "debug"
+require "simplecov-cobertura"
+SimpleCov.start
+SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
 
 class ActiveSupport::TestCase
   parallelize(workers: :number_of_processors)

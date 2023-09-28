@@ -5,6 +5,8 @@ on:
     secrets:
       RAILS_MASTER_KEY:
         required: true
+      CODECOV_TOKEN:
+        required: true
 
 jobs:
   minitest:
@@ -46,3 +48,8 @@ jobs:
           bin/rails assets:precompile
           bin/rails db:migrate
           bin/rails test
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

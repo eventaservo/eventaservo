@@ -13,6 +13,7 @@ jobs:
     uses: eventaservo/eventaservo/.github/workflows/template_test.yml@main
     secrets:
       rails_master_key: ${{ secrets.RAILS_MASTER_KEY }}
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   docker:
     needs: minitest
