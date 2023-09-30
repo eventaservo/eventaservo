@@ -138,6 +138,5 @@ group :test do
   gem "simplecov-cobertura"
   gem "standard", "~> 1", require: false
   gem "vcr"
-  gem "webdrivers"
   gem "webmock"
 end

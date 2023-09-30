@@ -3,5 +3,6 @@
 require "test_helper"
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
-  driven_by :selenium, using: :chrome, screen_size: [1440, 900]
+  using = ENV["CI"].present? ? :headless_chrome : :chrome
+  driven_by :selenium, using: using, screen_size: [1440, 900]
 end

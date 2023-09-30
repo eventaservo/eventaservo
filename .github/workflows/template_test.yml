@@ -20,6 +20,12 @@ jobs:
           POSTGRES_PASSWORD: postgres
         ports: [ '5432:5432' ]
 
+    env:
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      RAILS_ENV: test
+      RAILS_MASTER_KEY: ${{ secrets.rails_master_key }}
+
     steps:
       - uses: actions/checkout@v3
 
@@ -28,6 +34,9 @@ jobs:
         with:
           ruby-version: '3.0'
           bundler-cache: true
+
+      - name: Install libvips42
+        run: sudo apt-get install -y libvips42
 
       - name: Node 16
         uses: actions/setup-node@v3
@@ -48,6 +57,9 @@ jobs:
           bin/rails assets:precompile
           bin/rails db:migrate
           bin/rails test
+
+      - name: Run System tests
+        run: bundle exec rails test:system
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
