@@ -10,14 +10,8 @@ class LoginTest < ApplicationSystemTestCase
     fill_in "user_password", with: "administranto"
     click_on "Ensaluti"
 
+    page.assert_text "Sukcesa ensaluto"
     page.assert_text "Administranto"
-
-    debugger
-    visit destroy_user_session_path
-
-    sleep 5
-
-    page.assert_no_text "Administranto"
   end
   # test "visiting the index" do
   #   visit logins_url

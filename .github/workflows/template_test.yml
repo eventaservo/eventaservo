@@ -20,6 +20,12 @@ jobs:
           POSTGRES_PASSWORD: postgres
         ports: [ '5432:5432' ]
 
+    env:
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      RAILS_ENV: test
+      RAILS_MASTER_KEY: ${{ secrets.rails_master_key }}
+
     steps:
       - uses: actions/checkout@v3
 
@@ -48,6 +54,9 @@ jobs:
           bin/rails assets:precompile
           bin/rails db:migrate
           bin/rails test
+
+      - name: Run tests
+        run: bundle exec rails test:system
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
