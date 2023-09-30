@@ -1,0 +1,15 @@
+jes:
+  url: <%= Rails.application.routes.url_helpers.international_calendar_url %>
+  active: true
+
+printempas:
+  url: <%= Rails.application.routes.url_helpers.international_calendar_url %>
+  active: true
+
+international_calendar:
+  url: <%= Rails.application.routes.url_helpers.international_calendar_url %>
+  active: true
+
+himalaja_rekontigho:
+  url: <%= Rails.application.routes.url_helpers.international_calendar_url %>
+  active: true
