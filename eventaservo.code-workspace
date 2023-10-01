@@ -11,5 +11,13 @@
 		"conventionalCommits.scopes": [
 			"API"
 		],
+		"editor.formatOnSave": true,
+	},
+	"extensions": {
+		"recommendations": [
+			"testdouble.vscode-standard-ruby",
+			"kaiwood.endwise",
+			"noku.rails-run-spec-vscode"
+		]
 	}
 }

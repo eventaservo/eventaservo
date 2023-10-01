@@ -115,6 +115,7 @@ group :development, :test do
   gem "dotenv-rails", "~> 2.8"
   gem "rake"
   gem "spring"
+  gem "standard", "~> 1", require: false
 end
 
 group :development do
@@ -136,7 +137,6 @@ group :test do
   gem "shoulda-context", "~> 2.0"
   gem "shoulda-matchers", "~> 5.3"
   gem "simplecov-cobertura"
-  gem "standard", "~> 1", require: false
   gem "vcr"
   gem "webmock"
 end
