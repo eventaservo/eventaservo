@@ -10,8 +10,10 @@ on:
 jobs:
   minitest:
     uses: ./.github/workflows/template_test.yml
+    with:
+      environment: staging
     secrets:
-      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY_STAGING }}
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   docker:
@@ -23,12 +25,12 @@ jobs:
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
-      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY_STAGING }}
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
   sentry:
     needs: docker
     uses: ./.github/workflows/sentry.yml
     with:
-      environment: 'staging'
+      environment: staging
     secrets:
       sentry_auth_token: ${{ secrets.SENTRY_AUTH_TOKEN }}

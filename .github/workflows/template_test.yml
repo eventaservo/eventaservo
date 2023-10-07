@@ -2,6 +2,10 @@ name: Rails Minitest
 
 on:
   workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
     secrets:
       RAILS_MASTER_KEY:
         required: true
@@ -11,6 +15,7 @@ on:
 jobs:
   minitest:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
     services:
       postgres:
         image: postgres:13
