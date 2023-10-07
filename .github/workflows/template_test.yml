@@ -47,18 +47,16 @@ jobs:
       - name: Yarn
         run: yarn install
 
-      - name: Run tests
-        env:
-          DB_USER: postgres
-          DB_PASSWORD: postgres
-          RAILS_ENV: test
-          RAILS_MASTER_KEY: ${{ secrets.rails_master_key }}
-        run: |
-          bin/rails assets:precompile
-          bin/rails db:migrate
-          bin/rails test
+      - name: Precompile assets
+        run: bundle exec rails assets:precompile
 
-      - name: Run System tests
+      - name: Migrate database
+        run: bundle exec rails db:migrate
+
+      - name: Unit tests
+        run: bundle exec rails test
+
+      - name: System tests
         run: bundle exec rails test:system
 
       - name: Upload coverage reports to Codecov
