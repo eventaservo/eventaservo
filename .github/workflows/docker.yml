@@ -21,6 +21,10 @@ jobs:
   build_and_push:
     runs-on: ubuntu-latest
 
+    env:
+      RAILS_ENV: test
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
