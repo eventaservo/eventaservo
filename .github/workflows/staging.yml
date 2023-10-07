@@ -32,3 +32,17 @@ jobs:
       environment: staging
     secrets:
       sentry_auth_token: ${{ secrets.SENTRY_AUTH_TOKEN }}
+
+  update_swarm:
+    needs: docker
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Update swarm
+        uses: appleboy/ssh-action@master
+        with:
+          host: svr3.bahai.org.br
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: /docker/eventaservo/staging/update.sh
