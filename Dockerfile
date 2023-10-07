@@ -50,7 +50,6 @@ COPY . .
 
 ARG RAILS_MASTER_KEY
 ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
-RUN echo "RAILS_MASTER_KEY=${RAILS_MASTER_KEY}"
 RUN if [ "$RAILS_ENV" = "production" ] || [ "$RAILS_ENV" = "staging" ]; then \
   bundle exec rails assets:precompile ; \
   fi

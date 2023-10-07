@@ -30,6 +30,6 @@ jobs:
     needs: docker
     uses: ./.github/workflows/sentry.yml
     with:
-      environment: 'production'
+      environment: production
     secrets:
       sentry_auth_token: ${{ secrets.SENTRY_AUTH_TOKEN }}

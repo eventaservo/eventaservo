@@ -22,10 +22,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
 
-    env:
-      RAILS_ENV: test
-      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -38,11 +34,6 @@ jobs:
         with:
           username: ${{ secrets.dockerhub_username }}
           password: ${{ secrets.dockerhub_token }}
-
-      - name: RAILS ENV
-        run: |
-          echo "RAILS_ENV=${{ inputs.environment }}"
-          echo "RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}"
 
       - name: Build and push (${{ inputs.environment }})
         uses: docker/build-push-action@v4
