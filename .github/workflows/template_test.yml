@@ -2,18 +2,15 @@ name: Rails Minitest
 
 on:
   workflow_call:
-    inputs:
-      environment:
-        required: true
-        type: string
     secrets:
+      RAILS_MASTER_KEY:
+        required: true
       CODECOV_TOKEN:
         required: true
 
 jobs:
   minitest:
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}
     services:
       postgres:
         image: postgres:13
@@ -30,46 +27,39 @@ jobs:
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
     steps:
-      - name: ENV
-        run: |
-          echo "RAILS_ENV=${{ env.RAILS_ENV }}"
-          echo "ENV RAILS_MASTER_KEY=${{ env.RAILS_MASTER_KEY }}"
-          echo "SECRETS RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}"
-          echo "Inputs.environment=${{ inputs.environment }}"
+      - uses: actions/checkout@v3
 
-      # - uses: actions/checkout@v3
+      - name: Ruby 3.0 e Bundler
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+          bundler-cache: true
 
-      # - name: Ruby 3.0 e Bundler
-      #   uses: ruby/setup-ruby@v1
-      #   with:
-      #     ruby-version: '3.0'
-      #     bundler-cache: true
+      - name: Install libvips42
+        run: sudo apt-get install -y libvips42
 
-      # - name: Install libvips42
-      #   run: sudo apt-get install -y libvips42
+      - name: Node 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'yarn'
 
-      # - name: Node 16
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: 16
-      #     cache: 'yarn'
+      - name: Yarn
+        run: yarn install
 
-      # - name: Yarn
-      #   run: yarn install
+      - name: Precompile assets
+        run: bundle exec rails assets:precompile
 
-      # - name: Precompile assets
-      #   run: bundle exec rails assets:precompile
+      - name: Migrate database
+        run: bundle exec rails db:migrate
 
-      # - name: Migrate database
-      #   run: bundle exec rails db:migrate
+      - name: Unit tests
+        run: bundle exec rails test
 
-      # - name: Unit tests
-      #   run: bundle exec rails test
+      - name: System tests
+        run: bundle exec rails test:system
 
-      # - name: System tests
-      #   run: bundle exec rails test:system
-
-      # - name: Upload coverage reports to Codecov
-      #   uses: codecov/codecov-action@v3
-      #   env:
-      #     CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

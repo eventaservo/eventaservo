@@ -10,9 +10,8 @@ on:
 jobs:
   minitest:
     uses: ./.github/workflows/template_test.yml
-    with:
-      environment: staging
     secrets:
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY_TEST }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   docker:
