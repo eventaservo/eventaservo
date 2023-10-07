@@ -34,6 +34,10 @@ jobs:
           username: ${{ secrets.dockerhub_username }}
           password: ${{ secrets.dockerhub_token }}
 
+      - name: RAILS ENV
+        run: |
+          echo "RAILS_ENV=${{ inputs.environment }}"
+
       - name: Build and push (${{ inputs.environment }})
         uses: docker/build-push-action@v3
         with:
