@@ -11,7 +11,7 @@ jobs:
   minitest:
     uses: ./.github/workflows/template_test.yml
     secrets:
-      rails_master_key: ${{ secrets.RAILS_MASTER_KEY }}
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY_TEST }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   docker:
@@ -29,6 +29,6 @@ jobs:
     needs: docker
     uses: ./.github/workflows/sentry.yml
     with:
-      environment: 'staging'
+      environment: staging
     secrets:
       sentry_auth_token: ${{ secrets.SENTRY_AUTH_TOKEN }}

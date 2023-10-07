@@ -20,6 +20,7 @@ on:
 jobs:
   build_and_push:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
 
     steps:
       - name: Set up QEMU
@@ -35,10 +36,12 @@ jobs:
           password: ${{ secrets.dockerhub_token }}
 
       - name: Build and push (${{ inputs.environment }})
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           push: true
           tags: eventaservo/backend:${{ inputs.tag }}
+          cache-from: type=registry,ref=eventaservo/backend:${{ inputs.tag }}
+          cache-to: type=inline
           build-args: |
             AMBIENTE=${{ inputs.environment }}
             RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}

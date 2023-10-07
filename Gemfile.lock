@@ -620,7 +620,7 @@ DEPENDENCIES
   sitemap_generator (~> 6.1)
   social-share-button
   spring
-  standard (~> 1)
+  standard
   stimulus-rails (~> 1.2)
   timezone (~> 1.0)
   turbo-rails (~> 1.4)

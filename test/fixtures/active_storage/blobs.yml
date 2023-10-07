@@ -1,5 +1,3 @@
-cat_1: <%= ActiveStorage::FixtureSet.blob filename: "cat_1.jpg", service_name: "test" %>
-cat_2: <%= ActiveStorage::FixtureSet.blob filename: "cat_2.jpg", service_name: "test" %>
 international_calendar: <%= ActiveStorage::FixtureSet.blob filename: "international_calendar.png", service_name: "test" %>
 himalaja_rekontigho: <%= ActiveStorage::FixtureSet.blob filename: "himalaja_rekontigho.jpg", service_name: "test" %>
 printempas: <%= ActiveStorage::FixtureSet.blob filename: "printempas.jpg", service_name: "test" %>

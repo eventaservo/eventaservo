@@ -115,7 +115,7 @@ group :development, :test do
   gem "dotenv-rails", "~> 2.8"
   gem "rake"
   gem "spring"
-  gem "standard", "~> 1", require: false
+  gem "standard"
 end
 
 group :development do

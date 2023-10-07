@@ -7,13 +7,13 @@ module Api
     include Devise::Test::IntegrationHelpers
 
     def setup
-      @token = Rails.application.credentials.dig(:jwt, :test_user_token)
+      @token = users(:standard_user).send(:generate_jwt_token)
     end
 
     test "List event by UUID" do
       event = FactoryBot.create(:evento)
 
-      get "/api/v2/eventoj", headers: { HTTP_AUTHORIZATION: @token }, params: { uuid: event.uuid }
+      get "/api/v2/eventoj", headers: {HTTP_AUTHORIZATION: @token}, params: {uuid: event.uuid}
       assert_response :success
 
       response = JSON.parse(@response.body)
@@ -24,7 +24,7 @@ module Api
     end
 
     test "Return error when listing events without required parameters" do
-      get "/api/v2/eventoj", headers: { HTTP_AUTHORIZATION: @token }
+      get "/api/v2/eventoj", headers: {HTTP_AUTHORIZATION: @token}
       assert_response 400
 
       response = JSON.parse(@response.body)
