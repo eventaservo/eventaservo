@@ -10,7 +10,9 @@
 		"ruby.specCommand": "bundle exec rails test",
 		"conventionalCommits.scopes": [
 			"API",
-			"GitHub Actions"
+			"Events",
+			"GitHub Actions",
+			"Organizations"
 		],
 		"editor.formatOnSave": true,
 	},
