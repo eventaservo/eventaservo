@@ -1,9 +1,19 @@
 require "application_system_test_case"
 
 class EventTEst < ApplicationSystemTestCase
+  def setup
+    existing_admin_user = User.find_by(email: "admin@eventaservo.org")
+
+    @admin =
+      if existing_admin_user.nil?
+        FactoryBot.create(:user, email: "admin@eventaservo.org", password: "administranto")
+      else
+        existing_admin_user
+      end
+  end
+
   test "create a new event" do
-    FactoryBot.create(:user, email: "admin@eventaservo.org", password: "administranto")
-    login_as(nil)
+    login_as(@user)
 
     visit new_event_path
     fill_in "event_title", with: "Test event"
