@@ -22,9 +22,5 @@
   "packageManager": "yarn@3.2.1",
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets"
-  },
-  "devDependencies": {
-    "@faker-js/faker": "^7.6.0",
-    "cypress": "^12.7.0"
   }
 }
