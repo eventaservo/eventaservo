@@ -65,6 +65,7 @@ gem "rack-attack", "~> 6.2"
 gem "rack-cors", "~> 1.1", require: "rack/cors"
 
 gem "activeadmin"
+gem "aws-sdk-s3", "~> 1.136"
 gem "browser", "~> 5.0"
 gem "diffy", "~> 3.4"
 gem "factory_bot_rails"
