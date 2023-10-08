@@ -13,9 +13,4 @@ class LoginTest < ApplicationSystemTestCase
     page.assert_text "Sukcesa ensaluto"
     page.assert_text "Administranto"
   end
-  # test "visiting the index" do
-  #   visit logins_url
-  #
-  #   assert_selector "h1", text: "Login"
-  # end
 end
