@@ -9,7 +9,8 @@
 		"ruby.specSaveFile": true,
 		"ruby.specCommand": "bundle exec rails test",
 		"conventionalCommits.scopes": [
-			"API"
+			"API",
+			"GitHub Actions"
 		],
 		"editor.formatOnSave": true,
 	},
