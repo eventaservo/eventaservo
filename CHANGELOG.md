@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.62.0](https://github.com/eventaservo/eventaservo/compare/v2.61.0...v2.62.0) (2023-10-08)
+
+
+### Features
+
+* Add `release_please` Github Action workflow ([#556](https://github.com/eventaservo/eventaservo/issues/556)) ([59ce335](https://github.com/eventaservo/eventaservo/commit/59ce3356dada17cc032bba794ddc9324e7025e9c))
+* **Admin:** add filters to log page [#516](https://github.com/eventaservo/eventaservo/issues/516) ([7baf147](https://github.com/eventaservo/eventaservo/commit/7baf14773c647a91b695ff63f2f3aea1dc3cb79a))
+* **Ads:** improve logic ([42cba75](https://github.com/eventaservo/eventaservo/commit/42cba757d2050435199352c77004da3854272dc5))
+* **dev:** :sparkles: Replaces `mailcatcher` with `letter_opener_web` ([dbac88f](https://github.com/eventaservo/eventaservo/commit/dbac88f37981bcafccdf1fa751dfa019f73613da))
+* **Event:** :sparkles: limit event title to 100 characters [#511](https://github.com/eventaservo/eventaservo/issues/511) ([cb2bbf5](https://github.com/eventaservo/eventaservo/commit/cb2bbf5b4f3d3dd33dd79c5a31408d70b2d2a482))
+* **Reports:** :lipstick: Display frase if there's no report yet ([2beb15e](https://github.com/eventaservo/eventaservo/commit/2beb15eb65211f68136224d4414ab0feed215e97))
+
+
+### Bug Fixes
+
+* **Admin:** Show user's username ([77373fc](https://github.com/eventaservo/eventaservo/commit/77373fcc9529596b0f818cd526d8e55076a3c314))
+* **Event:** check if short_url is available during event creation [#508](https://github.com/eventaservo/eventaservo/issues/508) ([e273692](https://github.com/eventaservo/eventaservo/commit/e2736923cf60178e823a8a6da51d45212d7f16c7))
+* send event reminder emails in different background jobs [#516](https://github.com/eventaservo/eventaservo/issues/516) ([2dd226f](https://github.com/eventaservo/eventaservo/commit/2dd226f8e71f15254c3e7f2626ce1d66d0f46512))
+* Typo ([904e6e4](https://github.com/eventaservo/eventaservo/commit/904e6e41c63a92e01b2592d1d1085679bfd60aa7))
+* Validi mallongan ligilon [#429](https://github.com/eventaservo/eventaservo/issues/429) ([cb3fa76](https://github.com/eventaservo/eventaservo/commit/cb3fa767b839e6b6029fa46971eb11fe28570106))
+
 ## [v2.60.0](https://github.com/eventaservo/eventaservo/tree/v2.60.0) (2023-03-08)
 
 [Full Changelog](https://github.com/eventaservo/eventaservo/compare/es-without-stimulus...v2.60.0)
