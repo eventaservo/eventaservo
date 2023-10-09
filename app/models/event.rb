@@ -385,7 +385,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     Rails.application.routes.url_helpers.rails_representation_url(
       header_image.variant(resize_to_limit: [400, 400]).processed
     )
-  rescue MiniMagick::Error => e
+  rescue => e
     Sentry.capture_exception(e)
     false
   end
