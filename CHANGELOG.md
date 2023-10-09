@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.62.1](https://github.com/eventaservo/eventaservo/compare/v2.62.0...v2.62.1) (2023-10-09)
+
+
+### Bug Fixes
+
+* **Events:** Rake task to refresh trix attachments on demand ([9b16c52](https://github.com/eventaservo/eventaservo/commit/9b16c523398f6a8b8d6546ced1439a23c5801ed8))
+* **Events:** Rescue from errors when images cannot be processed through VIPS ([bef0dfe](https://github.com/eventaservo/eventaservo/commit/bef0dfe0563fede05b06d39f4adb18d97ad8e5a3)), closes [#562](https://github.com/eventaservo/eventaservo/issues/562)
+
 ## [2.62.0](https://github.com/eventaservo/eventaservo/compare/v2.61.0...v2.62.0) (2023-10-08)
 
 
