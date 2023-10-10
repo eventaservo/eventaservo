@@ -13,11 +13,6 @@ amazon:
   region: us-east-1
   bucket: <%= Rails.application.credentials.dig(:aws, :bucket_name) %>
 
-mirror:
-  service: Mirror
-  primary: local
-  mirrors: [ amazon ]
-
 # Remember not to checkin your GCS keyfile to a repository
 # google:
 #   service: GCS
