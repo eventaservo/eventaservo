@@ -16,5 +16,4 @@ Sentry.init do |config|
   # end
 
   config.enabled_environments = %w[production staging]
-  config.release = Constants::VERSIO
 end

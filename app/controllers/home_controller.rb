@@ -163,7 +163,7 @@ class HomeController < ApplicationController
   end
 
   def versio
-    render plain: Constants::VERSIO
+    render plain: Eventaservo::Application::VERSION
   end
 
   private
