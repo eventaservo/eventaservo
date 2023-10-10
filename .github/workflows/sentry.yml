@@ -16,6 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Read VERSION file
+        id: getversion
+        run: echo "::set-env name=VERSION::$(cat config/initializers/version.rb | grep VERSION | cut -d '"' -f2)"
+
       - name: Create Sentry release
         uses: getsentry/action-release@v1
         env:
@@ -24,3 +28,4 @@ jobs:
           SENTRY_PROJECT: eventa-servo
         with:
           environment: ${{ inputs.environment }}
+          version: ${{ env.VERSION }}
