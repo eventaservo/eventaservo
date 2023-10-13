@@ -1,0 +1,41 @@
+<script
+  src="https://js.sentry-cdn.com/4b501db06140b959102b67304c5397e7.min.js"
+  crossorigin="anonymous"
+></script>
+
+<script
+  src="https://browser.sentry-cdn.com/7.73.0/bundle.tracing.replay.min.js"
+  integrity="sha384-4Wr4V/uREn/Xw4C/neUC3VQsBQUZjXZqsv/rtoiol5dvcyPNoevLf0F0MjhqVdmp"
+  crossorigin="anonymous">
+</script>
+
+<script>
+  Sentry.init({
+    dsn: "https://6b22c73cdd694a8b90f6b1d84ffa51df@o199541.ingest.sentry.io/1309834",
+
+    // This sets the sample rate to be 10%. You may want this to be 100% while
+    // in development and sample at a lower rate in production
+    replaysSessionSampleRate: 0.1,
+
+    // If the entire session is not sampled, use the below sample rate to sample
+    // sessions when an error occurs.
+    replaysOnErrorSampleRate: 1.0,
+
+    integrations: [
+      new Sentry.Replay({
+        // Additional SDK configuration goes in here, for example:
+        maskAllText: true,
+        blockAllMedia: true,
+      }),
+    ],
+  });
+
+  <%- if @current_user %>
+    Sentry.setUser(
+      {
+        username: '<%= @current_user.name %>',
+        email: '<%= @current_user.email %>'
+      }
+    )
+  <% end %>
+</script>

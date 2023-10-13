@@ -45,6 +45,8 @@
 
     = auto_discovery_link_tag :rss, events_rss_url
 
+    = render partial: "snippets/sentry"
+
   %body{class: "#{controller_name} #{action_name}"}
     = render partial: 'layouts/navbar'
     .container
