@@ -7,13 +7,10 @@ class WorkerHeartbeatJob < ApplicationJob
   def perform
     return if Rails.env.development?
 
-    better_uptime_heartbeat_url =
-      if Rails.env.production?
-        "https://betteruptime.com/api/v1/heartbeat/7TPghCQDGwxddtgDEDywD4QY"
-      elsif Rails.env.staging?
-        "https://betteruptime.com/api/v1/heartbeat/g9FjLQENgV1pxurjWUz6fFFf"
-      end
+    url = Rails.application.credentials.dig(:sentry, :worker_heartbeat_url)
 
-    HTTParty.get(better_uptime_heartbeat_url)
+    HTTParty.get("#{url}?environment=#{Rails.env}&status=ok")
+  rescue
+    HTTParty.get("#{url}?environment=#{Rails.env}&status=error")
   end
 end
