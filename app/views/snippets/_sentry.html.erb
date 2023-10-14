@@ -1,4 +1,4 @@
-<%- if ENV["SENTRY_JS_URL"].present? %>
+<%- if Rails.application.credentials.dig(:sentry, :worker_heartbeat_url) %>
   <script
     src="https://js.sentry-cdn.com/4b501db06140b959102b67304c5397e7.min.js"
     crossorigin="anonymous">
@@ -12,7 +12,7 @@
 
   <script>
     Sentry.init({
-      dsn: "<%= ENV["SENTRY_JS_URL"] %>",
+      dsn: "<%= Rails.application.credentials.dig(:sentry, :worker_heartbeat_url) %>",
       replaysSessionSampleRate: 0.1,
       replaysOnErrorSampleRate: 1.0,
       environment: "<%= Rails.env %>",
