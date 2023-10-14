@@ -35,9 +35,6 @@ jobs:
           ruby-version: '3.0'
           bundler-cache: true
 
-      - name: Install libvips42
-        run: sudo apt-get install -y libvips42
-
       - name: Node 16
         uses: actions/setup-node@v3
         with:

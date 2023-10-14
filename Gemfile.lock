@@ -594,7 +594,7 @@ DEPENDENCIES
   hirb (~> 0.7)
   httparty (~> 0.18)
   icalendar (~> 2.6)
-  image_processing (~> 1.12)
+  image_processing (>= 1.2)
   invisible_captcha (~> 1.0)
   jbuilder (~> 2.5)
   jquery-rails (~> 4.3, >= 4.3.3)

@@ -16,7 +16,6 @@ RUN apk update \
   sqlite-dev \
   tzdata \
   vim \
-  vips \
   yarn \
   && rm -rf /var/cache/apk/*
 

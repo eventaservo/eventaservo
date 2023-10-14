@@ -22,7 +22,7 @@ module Eventaservo
     config.exceptions_app = self.routes
 
     config.active_job.queue_adapter = :delayed_job
-
+    config.active_storage.variant_processor = :mini_magick
     config.action_dispatch.default_headers = { "X-Frame-Options" => "ALLOWALL" }
 
     config.eager_load_paths << "#{Rails.root}/test/mailers/previews"
