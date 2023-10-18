@@ -33,7 +33,6 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  country_id             :integer          not null
-#  region_id              :integer
 #  user_id                :integer          not null
 #
 # Indexes
@@ -51,8 +50,7 @@
 #  index_events_on_specolisto          (specolisto)
 #  index_events_on_title               (title)
 #  index_events_on_user_id             (user_id)
-#
-#
+
 # Eventaj dateno
 #
 # Kiam oni kreas novan eventon:
