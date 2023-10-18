@@ -33,7 +33,6 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  country_id             :integer          not null
-#  region_id              :integer
 #  user_id                :integer          not null
 #
 # Indexes
