@@ -14,7 +14,8 @@ module Iloj
 
       @short_url_available =
         params[:mallongilo].empty? ||
-        Event.where("LOWER(short_url) = ?", params[:mallongilo].downcase).where.not(id: params[:id]).empty?
+        (Event.where("LOWER(short_url) = ?", params[:mallongilo].downcase).where.not(id: params[:id]).empty? &&
+        EventRedirection.where("LOWER(old_short_url) = ?", params[:mallongilo].downcase).empty?)
 
       respond_to do |format|
         format.turbo_stream

@@ -3,6 +3,10 @@
 require "test_helper"
 
 class Event::UserRemindersTest < ActiveSupport::TestCase
+  setup do
+    travel_to Time.zone.local(2023, 10, 21, 13, 0, 0)
+  end
+
   test "enqueue 1 reminder-messages job when event happens before next week" do
     assert_enqueued_jobs 0
     event = FactoryBot.create(:evento, date_start: DateTime.now + 2.days, date_end: DateTime.now + 2.days)

@@ -30,6 +30,31 @@ class EventTest < ActiveSupport::TestCase
     should validate_length_of(:description).is_at_most(400)
   end
 
+  class CreateRedirectionTest < ActiveSupport::TestCase
+    # Tests the callback after_update :create_redirection
+    def test_do_not_create_a_redirection_for_new_events
+      assert_no_difference "EventRedirection.count" do
+        create(:event)
+      end
+    end
+
+    def test_do_not_create_redirection_if_short_url_didnt_change
+      assert_no_difference "EventRedirection.count" do
+        event = create(:event)
+        event.update!(title: "New title")
+      end
+    end
+
+    def test_create_redirection_if_short_url_changes
+      event = create(:event)
+      old_short_url = event.short_url
+      event.update!(short_url: "new_short_url")
+
+      assert_equal old_short_url, EventRedirection.last.old_short_url
+      assert_equal "new_short_url", EventRedirection.last.new_short_url
+    end
+  end
+
   test "fina dato devas esti post komenca dato" do
     evento = build(:evento)
     evento.date_start = Time.zone.today

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_01_081446) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_18_193509) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -157,6 +157,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_01_081446) do
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "event_redirections", force: :cascade do |t|
+    t.string "old_short_url", null: false
+    t.string "new_short_url", null: false
+    t.integer "hits", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["old_short_url"], name: "index_event_redirections_on_old_short_url", unique: true
   end
 
   create_table "event_reports", force: :cascade do |t|
