@@ -50,11 +50,8 @@ jobs:
       - name: Migrate database
         run: bundle exec rails db:migrate
 
-      - name: Unit tests
-        run: bundle exec rails test
-
-      - name: System tests
-        run: bundle exec rails test:system
+      - name: Run all tests
+        run: bundle exec rails test:all
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
