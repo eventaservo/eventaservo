@@ -1,7 +1,9 @@
 <%= turbo_stream.replace "short_url_availability" do %>
   <%= turbo_frame_tag "short_url_availability" do %>
     <% if !@short_url_available %>
-      <div class="fg-color-red text-right small">Mallongilo ne estas disponebla. Elektu alian.</div>
+      <div class="fg-color-red text-right small">
+        Ĉi tiu mallonga ligilo ne estas disponebla. Elektu alian.
+      </div>
     <% end %>
   <% end %>
 <% end %>

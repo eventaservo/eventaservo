@@ -90,11 +90,12 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   validates_length_of :short_url, maximum: 32
   validates_uniqueness_of :short_url, case_sensitive: false, allow_blank: true, allow_nil: true
 
+  after_validation :geocode, if: :require_geocode?
   before_save :format_event_data
   before_save :schedule_users_reminders_jobs
+  after_update :create_redirection, if: :saved_change_to_short_url?
 
   geocoded_by :full_address
-  after_validation :geocode, if: :require_geocode?
 
   default_scope { where(deleted: false) }
   scope :deleted, -> { unscoped.where(deleted: true) }
@@ -512,5 +513,9 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
       .perform_later(event.code, reminder_date_string)
 
     job.provider_job_id
+  end
+
+  def create_redirection
+    EventRedirection.create(old_short_url: short_url_before_last_save, new_short_url: short_url)
   end
 end

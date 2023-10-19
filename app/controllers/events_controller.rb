@@ -6,6 +6,7 @@ class EventsController < ApplicationController
   end
   include Webcal
   before_action :authenticate_user!, only: %i[index new create edit update destroy nova_importado importi]
+  before_action :redirect_old_link, only: %i[show edit]
   before_action :set_event, only: %i[show edit update destroy]
   before_action :authorize_user, only: %i[edit update destroy]
   before_action :filter_events, only: %i[by_continent by_country by_city]
@@ -316,5 +317,14 @@ class EventsController < ApplicationController
 
   def dosier_alshutado
     params[:commit] == "Alŝuti"
+  end
+
+  # Redirect event with old links to the new ones
+  def redirect_old_link
+    redirection = EventRedirection.find_by(old_short_url: params[:code])
+    return unless redirection
+
+    redirection.increment!(:hits)
+    redirect_to event_path(redirection.new_short_url), status: :moved_permanently
   end
 end
