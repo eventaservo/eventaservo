@@ -1,6 +1,6 @@
 <%- if Rails.application.credentials.dig(:sentry, :worker_heartbeat_url) %>
   <script
-    src="https://js.sentry-cdn.com/4b501db06140b959102b67304c5397e7.min.js"
+    src="https://js.sentry-cdn.com/6b22c73cdd694a8b90f6b1d84ffa51df.min.js"
     crossorigin="anonymous">
   </script>
 
@@ -12,7 +12,7 @@
 
   <script>
     Sentry.init({
-      dsn: "<%= Rails.application.credentials.dig(:sentry, :worker_heartbeat_url) %>",
+      dsn: "<%= Rails.application.credentials.dig(:sentry, :js_url) %>",
       replaysSessionSampleRate: 0.1,
       replaysOnErrorSampleRate: 1.0,
       environment: "<%= Rails.env %>",
