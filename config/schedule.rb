@@ -22,3 +22,7 @@
 every 20.minutes do
   runner "Cron.worker_heartbeat"
 end
+
+every 6.hours do
+  runner "Cron.sitemap_refresh"
+end
