@@ -1,6 +1,6 @@
-<%- if Rails.application.credentials.dig(:sentry, :worker_heartbeat_url) %>
+<%- if Rails.application.credentials.dig(:sentry, :dsn) && Rails.application.credentials.dig(:sentry, :js_url) %>
   <script
-    src="https://js.sentry-cdn.com/6b22c73cdd694a8b90f6b1d84ffa51df.min.js"
+    src="<%= Rails.application.credentials.dig(:sentry, :js_url) %>"
     crossorigin="anonymous">
   </script>
 
@@ -12,13 +12,14 @@
 
   <script>
     Sentry.init({
-      dsn: "<%= Rails.application.credentials.dig(:sentry, :js_url) %>",
+      dsn: "<%= Rails.application.credentials.dig(:sentry, :dsn) %>",
       replaysSessionSampleRate: 0.1,
       replaysOnErrorSampleRate: 1.0,
       environment: "<%= Rails.env %>",
       integrations: [
         new Sentry.Replay({
           maskAllText: false,
+          maskAllInputs: false,
           blockAllMedia: false,
         }),
       ],
