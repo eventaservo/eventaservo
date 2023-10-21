@@ -1,9 +1,7 @@
-# frozen_string_literal: true
-
 require "constants"
 
 Sentry.init do |config|
-  config.dsn = "https://6b22c73cdd694a8b90f6b1d84ffa51df@o199541.ingest.sentry.io/1309834"
+  config.dsn = Rails.application.credentials.dig(:sentry, :dsn)
   config.breadcrumbs_logger = [:active_support_logger, :http_logger]
 
   # Set traces_sample_rate to 1.0 to capture 100%
