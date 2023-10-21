@@ -33,3 +33,11 @@ jobs:
       environment: production
     secrets:
       sentry_auth_token: ${{ secrets.SENTRY_AUTH_TOKEN }}
+
+  Portainer:
+    needs: docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update Docker Swarm on Portainer
+        run: |
+          curl -X POST ${{ secrets.PORTAINER_WEBHOOK_PRODUCTION }}
