@@ -12,7 +12,8 @@
 			"API",
 			"Events",
 			"GitHub Actions",
-			"Organizations"
+			"Organizations",
+			"Accessibility"
 		],
 		"editor.formatOnSave": true,
 	},
