@@ -11,7 +11,9 @@ RUN apk update \
   imagemagick6-dev \
   nodejs \
   npm \
+  postgresql-client \
   postgresql-dev \
+  rclone \
   shared-mime-info \
   sqlite-dev \
   tzdata \

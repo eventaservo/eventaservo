@@ -8,4 +8,8 @@ module Cron
   def self.sitemap_refresh
     SitemapRefreshJob.perform_later
   end
+
+  def self.backup_db
+    BackupDbJob.perform_later
+  end
 end

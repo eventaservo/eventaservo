@@ -26,3 +26,7 @@ end
 every 6.hours do
   runner "Cron.sitemap_refresh"
 end
+
+every 1.day, at: "5:00 am" do
+  runner "Cron.backup_db"
+end

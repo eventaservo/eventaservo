@@ -5,7 +5,7 @@ default: &default
   reconnect: true
   port: 5432
   host: <%= ENV["DB_HOST"] || "localhost" %>
-  username: <%= ENV["DB_USER"] || "postgres" %>
+  username: <%= ENV["DB_USERNAME"] || "postgres" %>
   password: <%= ENV["DB_PASSWORD"] || "postgres" %>
 
 development:
@@ -22,7 +22,7 @@ staging:
   pool: 5
   timeout: 5000
   host: <%= ENV["DB_HOST"] %>
-  username: <%= ENV["DB_USER"] || "postgres" %>
+  username: <%= ENV["DB_USERNAME"] || "postgres" %>
   password: <%= ENV["DB_PASSWORD"] || "postgres" %>
 
 production:
@@ -31,5 +31,5 @@ production:
   pool: 5
   timeout: 5000
   host: <%= ENV["DB_HOST"] %>
-  username: eventaservo
-  password: eventaservo
+  username: <%= ENV["DB_USERNAME"] || "eventaservo" %>
+  password: <%= ENV["DB_PASSWORD"] || "eventaservo" %>
