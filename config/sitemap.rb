@@ -1,11 +1,19 @@
 # Set the host name for URL creation
 
-SitemapGenerator::Sitemap.default_host = "https://eventaservo.org" if Rails.env == "production"
-SitemapGenerator::Sitemap.default_host = "https://testservilo.eventaservo.org" if Rails.env == "staging"
-SitemapGenerator::Sitemap.default_host = "https://devel.eventaservo.org" if Rails.env == "development"
+host =
+  case Rails.env
+  when "production" then "https://eventaservo.org"
+  when "staging" then "https://testservilo.eventaservo.org"
+  else "https://devel.eventaservo.org"
+  end
 
-SitemapGenerator::Sitemap.search_engines[:yahoo] = "http://www.bing.com/webmaster/ping.aspx?siteMap=%s"
-SitemapGenerator::Sitemap.search_engines[:yandex] = "http://blogs.yandex.ru/pings/?status=success&url=%s"
+SitemapGenerator::Sitemap.default_host = host
+
+# To be able to share a volume on Docker between the main service and the worker service,
+# (who will generate the site map), it was necessary to change the default path of the sitemap.
+SitemapGenerator::Sitemap.sitemaps_path = "sitemap/"
+
+SitemapGenerator::Sitemap.search_engines[:yandex] = "https://blogs.yandex.ru/pings/?status=success&url=%s"
 
 SitemapGenerator::Sitemap.create do
   # Put links creation logic here.
