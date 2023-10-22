@@ -11,7 +11,6 @@ RUN apk update \
   imagemagick6-dev \
   nodejs \
   npm \
-  postgresql-client \
   postgresql-dev \
   rclone \
   shared-mime-info \
@@ -19,6 +18,14 @@ RUN apk update \
   tzdata \
   vim \
   yarn \
+  && rm -rf /var/cache/apk/*
+
+# Install pg_dump from Alpine 3.18 repository.
+# This should be removed when upgrading this image to Alpine 3.18.
+RUN echo "https://dl-cdn.alpinelinux.org/alpine/v3.18/main" > /etc/apk/repositories
+RUN apk update \
+  && apk add --update --no-cache \
+  postgresql15-client \
   && rm -rf /var/cache/apk/*
 
 ARG AMBIENTE=production
