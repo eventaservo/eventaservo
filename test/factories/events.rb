@@ -74,7 +74,7 @@ FactoryBot.define do
     date_end { date_start + rand(2..12).hours }
     code { SecureRandom.urlsafe_base64(12) }
     time_zone { Faker::Address.time_zone }
-    short_url { "#{Faker::Food.fruits}_#{rand(1000)}" }
+    short_url { "#{Faker::Lorem.word}_#{rand(1000)}" }
     uuid { Faker::Internet.uuid }
     specolisto { Constants::TAGS.first.sample }
     international_calendar { rand(0..1) }
