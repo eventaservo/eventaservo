@@ -86,7 +86,6 @@ GEM
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
-    ansi (1.5.0)
     arbre (1.5.0)
       activesupport (>= 3.0.0, < 7.1)
       ruby2_keywords (>= 0.0.2, < 1.0)
@@ -299,11 +298,6 @@ GEM
     mini_magick (4.12.0)
     mini_mime (1.1.5)
     minitest (5.18.0)
-    minitest-reporters (1.6.1)
-      ansi
-      builder
-      minitest (>= 5.0)
-      ruby-progressbar
     momentjs-rails (2.29.4.1)
       railties (>= 3.1)
     msgpack (1.7.2)
@@ -612,7 +606,6 @@ DEPENDENCIES
   listen
   mini_magick (~> 4.10)
   minitest (~> 5.5)
-  minitest-reporters
   momentjs-rails (~> 2.20)
   nokogiri (>= 1.10.4)
   omniauth (~> 1.9)

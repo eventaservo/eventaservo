@@ -134,7 +134,6 @@ end
 group :test do
   gem "capybara"
   gem "minitest", "~> 5.5"
-  gem "minitest-reporters"
   gem "selenium-webdriver"
   gem "shoulda-context", "~> 2.0"
   gem "shoulda-matchers", "~> 5.3"
