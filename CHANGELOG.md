@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.63.0](https://github.com/eventaservo/eventaservo/compare/v2.62.1...v2.63.0) (2023-10-22)
+
+
+### Features
+
+* **Events:** :sparkles: Redirects user from old event link to new ([febf12d](https://github.com/eventaservo/eventaservo/commit/febf12d1cfafe0d9337c322557ffcaf1a14bbaef))
+* **Replay:** Use Sentry's replay function to track errors ([f000c07](https://github.com/eventaservo/eventaservo/commit/f000c073a84775b39707d2a96771eeb162f5bffb)), closes [#565](https://github.com/eventaservo/eventaservo/issues/565)
+
+
+### Bug Fixes
+
+* **Sentry:** DSN for Replay ([9e4ed85](https://github.com/eventaservo/eventaservo/commit/9e4ed855e7b6dae9ed857531335ede02ba5a4f10))
+
 ## [2.62.1](https://github.com/eventaservo/eventaservo/compare/v2.62.0...v2.62.1) (2023-10-09)
 
 
