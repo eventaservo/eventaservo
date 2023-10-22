@@ -1,4 +1,4 @@
-Sitemap: https://eventaservo.org/sitemap.xml.gz
+Sitemap: https://eventaservo.org/sitemap/sitemap.xml.gz
 
 User-agent: *
 Disallow: /uploads/
