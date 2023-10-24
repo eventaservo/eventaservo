@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.63.1](https://github.com/eventaservo/eventaservo/compare/v2.63.0...v2.63.1) (2023-10-24)
+
+
+### Performance Improvements
+
+* Update Ruby to 3.2.2 ([#578](https://github.com/eventaservo/eventaservo/issues/578)) ([dd6c58f](https://github.com/eventaservo/eventaservo/commit/dd6c58f4f35be3d15e43decd83a702b52ebe11a3))
+
 ## [2.63.0](https://github.com/eventaservo/eventaservo/compare/v2.62.1...v2.63.0) (2023-10-22)
 
 
