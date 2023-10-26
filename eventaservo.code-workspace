@@ -20,8 +20,8 @@
 	"extensions": {
 		"recommendations": [
 			"testdouble.vscode-standard-ruby",
-			"kaiwood.endwise",
-			"noku.rails-run-spec-vscode"
+			"noku.rails-run-spec-vscode",
+			"shopify.ruby-lsp"
 		]
 	}
 }
