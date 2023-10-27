@@ -20,6 +20,8 @@ module EventServices
       job_ids << create_reminder_job(1.month, "1.month")
 
       update_event_reminder_job_ids(job_ids.compact)
+    rescue => e
+      Sentry.capture_exception(e)
     end
 
     #
@@ -31,8 +33,10 @@ module EventServices
       return unless @event.event_reminder_job_ids
 
       schedule_set = Sidekiq::ScheduledSet.new
-      @event.event_reminder_job_ids.each do |scheduled_job|
-        schedule_set.scan(scheduled_job).each(&:delete)
+      @event.event_reminder_job_ids.each do |job_id|
+        next unless job_id.is_a?(String)
+
+        schedule_set.scan(job_id).each(&:delete)
       end
     ensure
       update_event_reminder_job_ids([])
