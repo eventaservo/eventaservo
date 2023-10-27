@@ -78,7 +78,7 @@ gem "paper_trail-association_tracking", "~> 2.2"
 gem "postmark-rails"
 gem "premailer-rails", "~> 1.11"
 gem "redcarpet", "~> 3.5"
-gem "redis", "~> 4.1"
+gem "redis", "~> 5"
 gem "sitemap_generator", "~> 6.1"
 gem "timezone", "~> 1.0"
 # gem 'trix-rails', require: 'trix'

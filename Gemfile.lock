@@ -403,7 +403,8 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redcarpet (3.6.0)
-    redis (4.8.1)
+    redis (5.0.8)
+      redis-client (>= 0.17.0)
     redis-client (0.18.0)
       connection_pool
     regexp_parser (2.8.1)
@@ -615,7 +616,7 @@ DEPENDENCIES
   rails (~> 7.0.4)
   rake
   redcarpet (~> 3.5)
-  redis (~> 4.1)
+  redis (~> 5)
   sass-rails (~> 6)
   seed_dump
   select2-rails (~> 4.0)
