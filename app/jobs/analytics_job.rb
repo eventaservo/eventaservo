@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AnalyticsJob < ApplicationJob
-  queue_as :analytics
+  queue_as :low
 
   def perform(browser_name, browser_version, platform, ip, path, vidmaniero)
     return false if duplicate?(browser_name, browser_version, platform, ip, path, vidmaniero)
