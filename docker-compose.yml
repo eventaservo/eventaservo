@@ -6,7 +6,7 @@ x-app: &backend-app
       - DB_HOST=db
       - DB_USERNAME=postgres
       - DB_PASSWORD=postgres
-      - REDIS_SERVER=redis
+      - REDIS_URL=REDIS_URL=redis://redis:6379/0
       - PORT=3000
 
 services:
@@ -29,16 +29,16 @@ services:
       - db
       - redis
 
-  worker:
+  sidekiq:
     <<: *backend-app
     image: es-dev
-    entrypoint: ./entrypoint-worker.sh
+    command: bundle exec rails sidekiq
     depends_on:
       - db
       - redis
 
   redis:
-    image: redis:6.2.6
+    image: redis:7
     healthcheck:
       test: [ "CMD", "redis-cli", "ping" ]
       interval: 10s
@@ -46,7 +46,7 @@ services:
       retries: 3
 
   db:
-    image: postgres:13.5
+    image: postgres:15
     environment:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
