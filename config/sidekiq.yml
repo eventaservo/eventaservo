@@ -1,0 +1,6 @@
+:queues:
+  - [high, 4]
+  - [default, 2]
+  - [low, 1]
+  - [event_reminders, 1]
+  - [mailers, 1]
