@@ -1,7 +1,7 @@
 # Sidekiq Cron jobs
 worker_heartbeat:
   description: "Check if the worker is alive"
-  cron: "* * * * *"
+  cron: "1 * * * *"
   class: "WorkerHeartbeatJob"
   queue: "default"
 
