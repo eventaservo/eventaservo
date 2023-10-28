@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class NovaUzantoSciigoJob < ApplicationJob
-  queue_as :telegram
+  queue_as :low
 
   def perform(uzanto)
     return true if Rails.env.test? || Rails.env.development?
