@@ -1,15 +1,15 @@
 # Sidekiq Cron jobs
 worker_heartbeat:
   description: "Check if the worker is alive"
-  cron: "1 * * * *"
+  cron: "every 20 minutes"
   class: "WorkerHeartbeatJob"
 
 sitemap_refresh:
   description: "Refreshes the Sitemap and publishes it"
-  cron: "0 */6 * * *"
+  cron: "every 6 hours"
   class: "SitemapRefreshJob"
 
 daily_backup:
   description: "Daily backup of the database"
-  cron: "0 5 * * *"
+  cron: "every day at 5 AM"
   class: "BackupDbJob"
