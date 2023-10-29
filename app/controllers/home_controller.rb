@@ -118,30 +118,6 @@ class HomeController < ApplicationController
     @events = @events.order(date_start: :desc)
   end
 
-  def statistics
-    ahoy.track "Visit Statistics"
-
-    respond_to do |format|
-      format.html
-      format.json do
-        case params[:q]
-        when "registritaj_eventoj"
-          render json: kalkulas_registritajn_eventojn
-        when "kvanto_registritaj_uzantoj"
-          render json: kalkulas_kvanton_registritaj_uzantoj
-        when "kvanto_registritaj_eventoj"
-          render json: kalkulas_kvanton_registritaj_eventoj
-        when "eventoj_lau_monatoj"
-          render json: kalkulas_eventojn_lau_monatoj
-        when "eventoj_retaj_kaj_fizikaj"
-          render json: kalkulas_eventojn_retajn_kaj_fizikajn
-        else
-          render json: {eraro: "Ne valida diagramo"}
-        end
-      end
-    end
-  end
-
   def accept_cookies
     if params[:akceptas_ga] == "jes"
       cookies[:akceptas_ga] = {value: "jes", expires: 1.year}
