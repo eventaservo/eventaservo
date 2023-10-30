@@ -6,11 +6,6 @@ Accept: application/json
 Authorization: {{ token}}
 
 ###
-GET {{ base_url }}/v1/statistikoj
-Accept: application/json
-Authorization: none
-
-###
 GET {{ base_url }}/v2/eventoj?komenca_dato=2022-01-01&fina_dato=2022-01-10
 Accept: application/json
 Authorization: Bearer {{ token }}

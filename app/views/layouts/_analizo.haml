@@ -1,5 +1,0 @@
-:ruby
-  unless browser.bot? || request.remote_ip.in?(Constants::IGNORENDAJ_IP)
-    AnalyticsJob.perform_later(browser.name, browser.version, browser.platform.name, request.remote_ip,
-                               request.original_fullpath, cookies[:vidmaniero])
-  end

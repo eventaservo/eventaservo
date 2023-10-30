@@ -7,6 +7,5 @@ Disallow: /eventoj/*/kronologio
 Disallow: /uzanto/
 Disallow: /rails/
 Disallow: /search
-Disallow: /statistikoj
 Disallow: /*?*
 Allow: /

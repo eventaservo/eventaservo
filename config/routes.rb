@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   get "/rss.xml", to: "home#feed", as: "events_rss"
   get "/novajhoj", to: "home#changes", as: "changes"
   get "/events.json", to: "home#events"
-  get "/statistikoj", to: "home#statistics"
   get "/akcepti_kuketojn", to: "home#accept_cookies"
   get "/forigas_kuketojn", to: "home#reset_cookies"
   get "/serchilo", to: "home#search"
@@ -50,9 +49,6 @@ Rails.application.routes.draw do
     namespace :v1 do
       get "events", to: "events#index"
       get "uzanto/:id/rekrei_api_kodon", to: "users#rekrei_api_kodon", as: "rekrei_api_kodon"
-
-      # Statistikoj
-      get "statistikoj", to: "statistics#index"
     end
 
     namespace :v2, defaults: {format: :json} do

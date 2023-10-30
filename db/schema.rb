@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_26_091050) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_29_133126) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -117,20 +117,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_26_091050) do
     t.datetime "started_at", precision: nil
     t.index ["user_id"], name: "index_ahoy_visits_on_user_id"
     t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
-  end
-
-  create_table "analytics", force: :cascade do |t|
-    t.string "browser"
-    t.string "version"
-    t.string "platform"
-    t.string "ip"
-    t.string "country"
-    t.string "path"
-    t.string "vidmaniero"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.string "city"
-    t.string "region"
   end
 
   create_table "countries", force: :cascade do |t|
