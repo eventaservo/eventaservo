@@ -70,8 +70,8 @@ FactoryBot.define do
 
     email { Faker::Internet.email }
     site { Faker::Internet.url }
-    date_start { Time.zone.now + rand(0..168).hours }
-    date_end { date_start + rand(2..12).hours }
+    date_start { Time.zone.today + rand(8..12).hours }
+    date_end { date_start + rand(13..20).hours }
     code { SecureRandom.urlsafe_base64(12) }
     time_zone { Faker::Address.time_zone }
     short_url { "#{Faker::Lorem.word}_#{rand(1000)}" }
