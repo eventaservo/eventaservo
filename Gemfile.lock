@@ -203,6 +203,8 @@ GEM
     geocoder (1.8.1)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    groupdate (6.4.0)
+      activesupport (>= 6.1)
     haml (5.2.2)
       temple (>= 0.8.0)
       tilt
@@ -582,6 +584,7 @@ DEPENDENCIES
   font-awesome-sass (~> 6)
   fullcalendar-rails (~> 3.9)
   geocoder (~> 1.6)
+  groupdate (~> 6.4)
   haml (~> 5)
   highcharts-rails (~> 6.0)
   hirb (~> 0.7)
