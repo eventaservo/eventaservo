@@ -7,7 +7,7 @@
 	"settings": {
 		"ruby.specPattern": "test",
 		"ruby.specSaveFile": true,
-		"ruby.specCommand": "bundle exec rails test",
+		"ruby.specCommand": "bundle exec rails test -v",
 		"conventionalCommits.scopes": [
 			"API",
 			"Events",
@@ -20,8 +20,8 @@
 	"extensions": {
 		"recommendations": [
 			"testdouble.vscode-standard-ruby",
-			"kaiwood.endwise",
-			"noku.rails-run-spec-vscode"
+			"noku.rails-run-spec-vscode",
+			"shopify.ruby-lsp"
 		]
 	}
 }

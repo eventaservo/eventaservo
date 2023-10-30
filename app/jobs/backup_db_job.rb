@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class BackupDbJob < ApplicationJob
+  queue_as :low
+
   def perform
     return if Rails.application.credentials.dig(:sentry, :backup_db_url).nil?
 

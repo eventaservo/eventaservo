@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class WorkerHeartbeatJob < ApplicationJob
-  queue_as :heartbeat
+  queue_as :low
   retry_on SocketError, wait: 1.minute, attempts: 5
 
   def perform

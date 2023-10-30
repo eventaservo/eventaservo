@@ -59,7 +59,7 @@
 # 2) Formatas la datumojn per +format_event_data+.
 class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   has_paper_trail versions: {scope: -> { order("created_at desc") }},
-    ignore: %i[id delayed_job_id enhavo metadata]
+    ignore: %i[id enhavo metadata]
 
   has_rich_text :enhavo
 
@@ -92,7 +92,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   after_validation :geocode, if: :require_geocode?
   before_save :format_event_data
-  before_save :schedule_users_reminders_jobs
+  after_commit :schedule_users_reminders_jobs
   after_update :create_redirection, if: :saved_change_to_short_url?
 
   geocoded_by :full_address
@@ -493,26 +493,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def schedule_users_reminders_jobs
-    # Destroy old delayed jobs enqueued
-    Delayed::Job.where(id: event_reminder_job_ids).destroy_all if event_reminder_job_ids.present?
-
-    delayed_job_ids = []
-
-    delayed_job_ids << create_reminder_job(self, 2.hours, "2.hours")
-    delayed_job_ids << create_reminder_job(self, 1.week, "1.week")
-    delayed_job_ids << create_reminder_job(self, 1.month, "1.month")
-
-    self.event_reminder_job_ids = delayed_job_ids
-  end
-
-  def create_reminder_job(event, reminder_date, reminder_date_string)
-    return unless event.date_start > (DateTime.now + reminder_date)
-
-    job = SciigasUzantojnAntauEventoJob
-      .set(wait_until: event.date_start - reminder_date)
-      .perform_later(event.code, reminder_date_string)
-
-    job.provider_job_id
+    EventServices::ScheduleReminders.new(self).call
   end
 
   def create_redirection

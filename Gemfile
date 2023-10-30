@@ -57,10 +57,6 @@ gem "jbuilder", "~> 2.5"
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
-gem "daemons", "~> 1.3"
-gem "delayed_job_active_record", "~> 4.1"
-gem "delayed_job_web"
-
 gem "rack-attack", "~> 6.2"
 gem "rack-cors", "~> 1.1", require: "rack/cors"
 
@@ -82,13 +78,12 @@ gem "paper_trail-association_tracking", "~> 2.2"
 gem "postmark-rails"
 gem "premailer-rails", "~> 1.11"
 gem "redcarpet", "~> 3.5"
-gem "redis", "~> 4.1"
+gem "redis", "~> 5"
 gem "sitemap_generator", "~> 6.1"
 gem "timezone", "~> 1.0"
 # gem 'trix-rails', require: 'trix'
 gem "httparty", "~> 0.18"
 gem "nokogiri", ">= 1.10.4"
-gem "whenever", require: false
 gem "yard"
 
 # Hotwired
@@ -99,9 +94,13 @@ gem "turbo-rails", "~> 1.4"
 gem "jsbundling-rails", "~> 1.1"
 
 # Sentry.io
-gem "sentry-delayed_job", "~> 5"
+gem "sentry-sidekiq", "~> 5"
 gem "sentry-rails", "~> 5"
 gem "sentry-ruby", "~> 5"
+
+# Sidekiq
+gem "sidekiq", "~> 7.1"
+gem "sidekiq-cron", "~> 1.10"
 
 gem "listen"
 

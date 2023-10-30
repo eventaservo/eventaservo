@@ -1,0 +1,4 @@
+codecov:
+  branch: main
+github_checks:
+  annotations: false

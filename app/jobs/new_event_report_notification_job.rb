@@ -1,5 +1,5 @@
 class NewEventReportNotificationJob < ApplicationJob
-  queue_as :telegram
+  queue_as :low
 
   def perform(report_id)
     return true if Rails.env.test? || Rails.env.development?

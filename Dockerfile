@@ -1,32 +1,29 @@
-FROM ruby:3.0-alpine3.16
+FROM ruby:3.2-bookworm
 
 WORKDIR /app
 
-RUN apk update \
-  && apk upgrade \
-  && apk add --update --no-cache \
-  alpine-sdk \
-  bash \
-  imagemagick \
-  imagemagick6-dev \
-  nodejs \
-  npm \
-  postgresql-dev \
-  rclone \
-  shared-mime-info \
-  sqlite-dev \
-  tzdata \
-  vim \
-  yarn \
-  && rm -rf /var/cache/apk/*
+# Adds NodeJS and Yarn repositories
+ENV NODE_MAJOR=20
+RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
 
-# Install pg_dump from Alpine 3.18 repository.
-# This should be removed when upgrading this image to Alpine 3.18.
-RUN echo "https://dl-cdn.alpinelinux.org/alpine/v3.18/main" > /etc/apk/repositories
-RUN apk update \
-  && apk add --update --no-cache \
-  postgresql15-client \
-  && rm -rf /var/cache/apk/*
+RUN apt-get update && apt-get install -y \
+  g++ \
+  gcc \
+  iputils-ping \
+  imagemagick \
+  libavahi-compat-libdnssd-dev \
+  libmagick++-dev \
+  libssl-dev \
+  make \
+  nodejs \
+  poppler-utils \
+  postgresql-server-dev-all \
+  rclone \
+  telnet \
+  vim \
+  zlib1g-dev \
+  && rm -rf /var/lib/apt/lists/*
 
 ARG AMBIENTE=production
 # Sets environment variables
@@ -61,9 +58,6 @@ ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
 RUN if [ "$RAILS_ENV" = "production" ] || [ "$RAILS_ENV" = "staging" ]; then \
   bundle exec rails assets:precompile ; \
   fi
-
-# Setup cron jobs
-RUN bundle exec whenever --update-crontab --set environment=$RAILS_ENV
 
 # Kreas API dokumentadon ĉe /public/docs/api/v2/
 RUN if [ "$RAILS_ENV" = "production" ]; then \
