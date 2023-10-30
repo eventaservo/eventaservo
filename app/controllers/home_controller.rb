@@ -118,37 +118,11 @@ class HomeController < ApplicationController
     @events = @events.order(date_start: :desc)
   end
 
-  def accept_cookies
-    if params[:akceptas_ga] == "jes"
-      cookies[:akceptas_ga] = {value: "jes", expires: 1.year}
-    else
-      cookies[:akceptas_ga] = {value: "ne", expires: 1.year}
-      delete_ga_cookies
-    end
-
-    respond_to do |format|
-      format.js
-      format.html { redirect_to root_url }
-    end
-  end
-
-  def reset_cookies
-    delete_ga_cookies
-    cookies.delete :akceptas_ga
-    redirect_to root_url
-  end
-
   def versio
     render plain: Eventaservo::Application::VERSION
   end
 
   private
-
-  # Forigas Google Analytics cookies
-  def delete_ga_cookies
-    cookies.delete :_ga, path: "/", domain: ".eventaservo.org"
-    cookies.delete :_gid, path: "/", domain: ".eventaservo.org"
-  end
 
   def access_from_server
     request.headers["SERVER_NAME"].in? %w[testservilo.eventaservo.org staging.eventaservo.org
