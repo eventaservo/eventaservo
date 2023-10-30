@@ -16,8 +16,3 @@ Ahoy.geocode = true if Rails.env.production?
 # GDPR compliance
 Ahoy.mask_ips = true
 Ahoy.cookies = false
-
-# Disables Ahoy on Development and Test environments
-Ahoy.exclude_method = lambda do |controller, request|
-  Rails.env.development? || Rails.env.test?
-end
