@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.64.0](https://github.com/eventaservo/eventaservo/compare/v2.63.0...v2.64.0) (2023-10-30)
+
+
+### Features
+
+* Remove old analytics ([#582](https://github.com/eventaservo/eventaservo/issues/582)) ([ae3caab](https://github.com/eventaservo/eventaservo/commit/ae3caab573e221e1ea2eb9b58d09c9452e8f039a))
+
+
+### Performance Improvements
+
+* Migrate DelayedJob to Sidekiq ([#581](https://github.com/eventaservo/eventaservo/issues/581)) ([396ecb1](https://github.com/eventaservo/eventaservo/commit/396ecb1aaf0c13e38add1547d0c2c6d4f4b33f1e))
+* Update Ruby to 3.2.2 ([#578](https://github.com/eventaservo/eventaservo/issues/578)) ([a77f521](https://github.com/eventaservo/eventaservo/commit/a77f521360e17a42273b420552bbf603e0f5d642))
+
 ## [2.63.0](https://github.com/eventaservo/eventaservo/compare/v2.62.1...v2.63.0) (2023-10-22)
 
 
