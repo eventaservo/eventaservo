@@ -16,3 +16,4 @@ Ahoy.geocode = true if Rails.env.production?
 # GDPR compliance
 Ahoy.mask_ips = true
 Ahoy.cookies = true
+Ahoy.visit_duration = 1.day
