@@ -110,7 +110,7 @@ gem "listen"
 # @TODO: must be moved to development but must be checked the docker build process to work fine
 gem "bullet", "~> 7.0.3"
 
-gem "ahoy_matey", "~> 4.1"
+gem "ahoy_matey", "~> 5"
 
 group :development, :test do
   gem "debug", ">= 1.0.0", require: false
