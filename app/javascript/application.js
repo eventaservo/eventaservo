@@ -9,3 +9,8 @@ import './src/trix'
 import './controllers'
 import 'trix'
 import '@rails/actiontext'
+
+// Chartkick
+import "chartkick"
+import Highcharts from "highcharts"
+window.Highcharts = Highcharts

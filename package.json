@@ -11,7 +11,9 @@
     "@rails/activestorage": "^7.0.4",
     "@rails/ujs": "^7.0.4",
     "axios": "^0.21.4",
+    "chartkick": "^5.0.1",
     "esbuild": "^0.17.11",
+    "highcharts": "^11.2.0",
     "leaflet": "^1.9.3",
     "moment": "^2.29.4",
     "trix": "^2.0.4"
