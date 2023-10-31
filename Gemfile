@@ -63,10 +63,12 @@ gem "rack-cors", "~> 1.1", require: "rack/cors"
 gem "activeadmin"
 gem "aws-sdk-s3", "~> 1.136"
 gem "browser", "~> 5.0"
+gem "chartkick", "~> 5.0"
 gem "diffy", "~> 3.4"
 gem "factory_bot_rails"
 gem "faker"
 gem "geocoder", "~> 1.6"
+gem "groupdate", "~> 6.4"
 gem "highcharts-rails", "~> 6.0"
 gem "hirb", "~> 0.7"
 gem "image_processing", ">= 1.2"
@@ -108,7 +110,7 @@ gem "listen"
 # @TODO: must be moved to development but must be checked the docker build process to work fine
 gem "bullet", "~> 7.0.3"
 
-gem "ahoy_matey", "~> 4.1"
+gem "ahoy_matey", "~> 5"
 
 group :development, :test do
   gem "debug", ">= 1.0.0", require: false
