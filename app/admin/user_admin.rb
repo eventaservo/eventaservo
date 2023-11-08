@@ -15,6 +15,7 @@ ActiveAdmin.register User do
   filter :email_cont, label: "Email"
   filter :username_cont, label: "Username"
   filter :country
+  filter :last_sign_in_at
 
   controller do
     def scoped_collection
