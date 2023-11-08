@@ -13,7 +13,8 @@
 			"Events",
 			"GitHub Actions",
 			"Organizations",
-			"Accessibility"
+			"Accessibility",
+			"Administration"
 		],
 		"editor.formatOnSave": true,
 	},

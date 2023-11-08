@@ -7,6 +7,7 @@ ActiveAdmin.register User do
 
   scope :enabled, default: true
   scope :disabled
+  scope :abandoned
 
   includes :country
 
@@ -77,6 +78,7 @@ ActiveAdmin.register User do
           row :confirmed_at
           row :disabled
           row :active?
+          row :last_sign_in_at
         end
       end
     end

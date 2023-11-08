@@ -103,6 +103,7 @@ class User < ApplicationRecord
   scope :prelegantoj, -> { where("prelego ->> 'preleganto' = 'true'") }
   scope :enabled, -> { where(disabled: false) }
   scope :disabled, -> { unscoped.where(disabled: true) }
+  scope :abandoned, -> { where("last_sign_in_at < ?", 2.years.ago) }
 
   def self.from_omniauth(auth)
     if where(email: auth.info.email).exists?
