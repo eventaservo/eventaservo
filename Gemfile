@@ -60,7 +60,7 @@ gem "jbuilder", "~> 2.5"
 gem "rack-attack", "~> 6.2"
 gem "rack-cors", "~> 1.1", require: "rack/cors"
 
-gem "activeadmin"
+gem "activeadmin", "~> 2"
 gem "aws-sdk-s3", "~> 1.136"
 gem "browser", "~> 5.0"
 gem "chartkick", "~> 5.0"
