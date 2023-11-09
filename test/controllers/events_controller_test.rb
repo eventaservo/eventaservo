@@ -16,9 +16,9 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
       /ameriko
       /Azio
       /azio
+      /Europo
       /Euxropo
       /euxropo
-      /E%C5%ADropo
       /e%C5%ADropo
       /Oceanio
       /oceanio
@@ -28,6 +28,18 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     valid_continents.each do |continent|
       get continent
       assert_response :success
+    end
+  end
+
+  test "redirect europe variations to /Europo" do
+    europe_variations = %w[
+      /E%C5%ADropo
+    ]
+
+    europe_variations.each do |continent|
+      puts continent
+      get continent
+      assert_redirected_to "/Europo"
     end
   end
 
