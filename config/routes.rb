@@ -34,13 +34,15 @@ Rails.application.routes.draw do
                                    omniauth_callbacks: "users/omniauth_callbacks",
                                    passwords: "users/passwords"}
 
-  # Mallongigoj kaj alidirektoj
+  # Shortcuts and redirects
   get "/r", to: redirect("/users/sign_up")
   get "/eventoj/:code", to: redirect("/e/%{code}")
   get "/e/:code/k", to: redirect("/e/%{code}/kronologio")
   get "/vidmaniero/:view_style", to: redirect("/v/%{view_style}")
   get "/e/nova", to: redirect("/e/new")
   get "/reta", to: redirect("/Reta")
+  get "/E%C5%ADropo", to: redirect("/Europo")
+  get "/Eŭropo", to: redirect("/Europo")
 
   # API
   namespace :api do

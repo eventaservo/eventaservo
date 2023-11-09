@@ -43,4 +43,9 @@ class CountryTest < ActiveSupport::TestCase
   test "serĉas landon Ĉeĥio (kaj similaj) per unaccent" do
     assert_not_nil Country.by_name("Ĉeĥio")
   end
+
+  test "#continent_url" do
+    france = Country.new(name: "Francio", continent: "Eŭropo")
+    assert_equal "Europo", france.continent_url
+  end
 end
