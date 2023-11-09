@@ -168,7 +168,7 @@ class EventsController < ApplicationController
     end
 
     @future_events = Event.by_continent(params[:continent]).venontaj
-    @events = @events.by_continent(params[:continent])
+    @events = @events.includes(:organizations).by_continent(params[:continent])
     @countries = @events.count_by_country
     @today_events = @events.today.includes(:country)
     @events = @events.not_today.includes(:country)
