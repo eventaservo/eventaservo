@@ -10,7 +10,7 @@
     "@rails/actiontext": "^7.0.4-2",
     "@rails/activestorage": "^7.0.4",
     "@rails/ujs": "^7.0.4",
-    "axios": "^0.21.4",
+    "axios": "^1.6.0",
     "chartkick": "^5.0.1",
     "esbuild": "^0.17.11",
     "highcharts": "^11.2.0",
