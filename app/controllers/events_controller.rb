@@ -159,9 +159,9 @@ class EventsController < ApplicationController
   def by_continent
     # Se la "kontinento" estas Reta, montru la eventojn per Kalendara vido
     # Se estas aliaj kontinentoj, montru per Kartaro aŭ Map
-    if params[:continent] == "Reta" && cookies[:vidmaniero] != "kalendaro"
+    if params[:continent] == "reta" && cookies[:vidmaniero] != "kalendaro"
       cookies[:vidmaniero] = {value: "kalendaro", expires: 2.weeks, secure: true}
-    elsif params[:continent] != "Reta"
+    elsif params[:continent] != "reta"
       unless cookies[:vidmaniero].in? %w[kartaro mapo]
         cookies[:vidmaniero] = {value: "kartaro", expires: 2.weeks, secure: true}
       end

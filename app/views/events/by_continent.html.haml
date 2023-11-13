@@ -5,14 +5,14 @@
   -# = render partial: 'home/shortcuts'
 
   -# Montras WebCAl ikonon nur por Retaj 'kontinentoj'
-  - if params[:continent] == 'Reta'
+  - if params[:continent] == 'reta'
     = content_for :breadcrumb_right do
       = link_to icon('far', 'calendar-alt'), webcal_url(landa_kodo: 'ol', protocol: :webcal, format: :ics), data: { target: '#webcalModal', toggle: 'modal' }
 
   = render partial: 'layouts/breadcrumb'
   = render partial: 'home/view_style_chooser', locals: { kartaro: true, kalendaro: false, mapo: true }
 
-  - unless params[:continent] == 'Reta'
+  - unless params[:continent] == 'reta'
     .text-center.m-2
       - @countries.each do |country|
         = link_to events_by_country_path(country.continent.normalized, country.name, periodo: params[:periodo].presence, o: params[:o].presence, s: params[:s].presence), class: 'button-event-count' do

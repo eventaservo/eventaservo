@@ -25,7 +25,7 @@
         = link_to events_by_continent_path(continent.name.normalized, periodo: params[:periodo].presence, o: params[:o].presence, s: params[:s].presence), class: 'button-event-count' do
           = continent.name
           %span.badge.badge-primary
-            = continent.name == 'Reta' ? Event.online.venontaj.count : continent.count
+            = continent.name == 'reta' ? Event.online.venontaj.count : continent.count
 
     = render partial: 'home/filters'
 
