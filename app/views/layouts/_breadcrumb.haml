@@ -4,10 +4,10 @@
 
     - if params[:code].present? && params[:controller] == 'events'
       - event = Event.joins(:country).lau_ligilo(params[:code])
-      %li.breadcrumb-item= link_to event.country.continent, events_by_continent_path(event.country.continent)
+      %li.breadcrumb-item= link_to event.country.continent, events_by_continent_path(event.country.continent.normalized)
       - unless event.universala?
-        %li.breadcrumb-item= link_to event.country.name, events_by_country_path(event.country.continent, event.country.name)
-        %li.breadcrumb-item= link_to event.city, events_by_city_url(event.country.continent, event.country.name, event.city)
+        %li.breadcrumb-item= link_to event.country.name, events_by_country_path(event.country.continent.normalized, event.country.name)
+        %li.breadcrumb-item= link_to event.city, events_by_city_url(event.country.continent.normalized, event.country.name, event.city)
 
     - elsif params[:action] == 'by_username'
       - user = User.find_by(username: params[:username])
@@ -15,15 +15,15 @@
 
     -# Kontinento
     - if params[:continent].present?
-      %li.breadcrumb-item= link_to @continent, events_by_continent_path(params[:continent], s: params[:s].presence, t: params[:t].presence)
+      %li.breadcrumb-item= link_to @continent, events_by_continent_path(params[:continent].normalized, s: params[:s].presence, t: params[:t].presence)
 
     -# Lando
     - if params[:country_name].present?
-      %li.breadcrumb-item= link_to @country.name, events_by_country_path(params[:continent], params[:country_name], s: params[:s].presence, t: params[:t].presence)
+      %li.breadcrumb-item= link_to @country.name, events_by_country_path(params[:continent].normalized, params[:country_name], s: params[:s].presence, t: params[:t].presence)
 
     -# Urbo
     - if params[:city_name].present?
-      %li.breadcrumb-item= link_to params[:city_name].titleize, events_by_city_path(params[:continent], params[:country_name], params[:city_name], s: params[:s].presence, t: params[:t].presence)
+      %li.breadcrumb-item= link_to params[:city_name].titleize, events_by_city_path(params[:continent].normalized, params[:country_name], params[:city_name], s: params[:s].presence, t: params[:t].presence)
 
     .ml-auto
       = yield :breadcrumb_right

@@ -153,7 +153,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def self.by_continent(continent_name)
-    if continent_name == "Reta"
+    if continent_name == "reta"
       joins(:country).online
     else
       joins(:country).where("unaccent(lower(countries.continent)) = ?", continent_name.normalized)
