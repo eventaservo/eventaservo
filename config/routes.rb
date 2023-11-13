@@ -113,6 +113,7 @@ Rails.application.routes.draw do
 
     resources :reports, controller: "event/report", path: "raportoj", only: [:new, :create, :destroy]
   end
+  get "/raportoj", to: "event/report#index", as: "reports"
 
   # Admin
   namespace :admin do

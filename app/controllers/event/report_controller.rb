@@ -1,8 +1,13 @@
 class Event
   class ReportController < ApplicationController
     before_action :authenticate_user!, only: %i[new create edit update destroy]
-    before_action :set_event
+    before_action :set_event, except: %i[index]
     before_action :set_report, only: %i[destroy]
+
+    def index
+      @events = Event.with_reports.order(date_start: :desc)
+      @pagy, @events = pagy(@events, items: 10)
+    end
 
     def new
       @report = @event.reports.new

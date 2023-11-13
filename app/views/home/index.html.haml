@@ -4,19 +4,24 @@
       = link_to image_tag('uea_emblemeto.png', alt: "UEA logo", height: '36px', class: 'mr-2 mb-2'), prie_url
     .div
       Diskonigu Esperanto-eventojn tutmonde!
-      %br
-      = link_to "Anoncoj kaj konkursoj", anoncoj_url, class: 'btn btn-sm btn-link'
-      |
-      = link_to "Internacia Kalendaro", international_calendar_path, class: "btn btn-sm btn-link"
-      |
-      = link_to "Instruantoj kaj prelegantoj", instruantoj_kaj_prelegantoj_path, class: 'btn btn-sm btn-link'
-      |
-      = link_to icon('fas', 'video', 'Registritaj prezentoj'), video_url, class: 'btn btn-sm btn-link'
-
     .div
       = link_to image_tag('tejo.svg', alt: "TEJO logo", height: '28px'), prie_url
 
-  <br>
+  .text-center.small
+    = link_to "Anoncoj kaj konkursoj", anoncoj_url
+    |
+    = link_to "Internacia Kalendaro", international_calendar_path
+    |
+    = link_to "Instruantoj kaj prelegantoj", instruantoj_kaj_prelegantoj_path
+    |
+    = link_to icon('fas', 'video', 'Registritaj prezentoj'), video_url
+    %br
+      %span
+        🌟
+        = link_to 'NOVA: Raportoj', reports_url, class: "font-weight-bold"
+        🌟
+
+  %br
   #events_container
     = render partial: 'home/view_style_chooser', locals: { kartaro: false, kalendaro: true, mapo: true }
 

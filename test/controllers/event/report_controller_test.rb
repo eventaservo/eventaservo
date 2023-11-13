@@ -9,6 +9,14 @@ class Event::ReportControllerTest < ActionDispatch::IntegrationTest
     @report = FactoryBot.create(:event_report, event: @event, user: @user)
   end
 
+  class IndexAction < Event::ReportControllerTest
+    test "should render /raportoj page" do
+      get reports_url
+      assert_response :success
+      assert_equal "/raportoj", path
+    end
+  end
+
   class NewAction < Event::ReportControllerTest
     test "must be logged in to create a report" do
       get new_event_report_url(@event.code)
