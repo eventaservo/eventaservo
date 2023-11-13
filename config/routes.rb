@@ -40,9 +40,6 @@ Rails.application.routes.draw do
   get "/e/:code/k", to: redirect("/e/%{code}/kronologio")
   get "/vidmaniero/:view_style", to: redirect("/v/%{view_style}")
   get "/e/nova", to: redirect("/e/new")
-  get "/reta", to: redirect("/Reta")
-  get "/E%C5%ADropo", to: redirect("/Europo")
-  get "/Eŭropo", to: redirect("/Europo")
 
   # API
   namespace :api do
@@ -143,10 +140,8 @@ Rails.application.routes.draw do
   get "/sciigo/:recipient_code/forigu", controller: "notification_list", action: :delete, as: "delete_recipient"
   post "/sciigo", controller: "notification_list", action: :create, as: "new_recipient"
 
-  # Landoj kaj urboj
+  # Countries and cities
   get "/:continent", to: "events#by_continent", as: "events_by_continent"
   get "/:continent/:country_name", controller: "events", action: "by_country", as: "events_by_country"
-  # get '/lando/:country_name', controller: 'events', action: 'by_country', as: 'events_by_country'
   get "/:continent/:country_name/:city_name", controller: "events", action: "by_city", as: "events_by_city"
-  # get '/lando/:country_name/:city_name', controller: 'events', action: 'by_city', as: 'events_by_city'
 end

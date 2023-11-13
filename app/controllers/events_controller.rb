@@ -167,6 +167,10 @@ class EventsController < ApplicationController
       end
     end
 
+    if params[:continent] != params[:continent].normalized
+      redirect_to events_by_continent_path(params[:continent].normalized) and return
+    end
+
     @future_events = Event.by_continent(params[:continent]).venontaj
     @events = @events.includes(:organizations).by_continent(params[:continent])
     @countries = @events.count_by_country
@@ -181,7 +185,7 @@ class EventsController < ApplicationController
 
     unless cookies[:vidmaniero].in? %w[kartaro mapo]
       cookies[:vidmaniero] = {value: "kartaro", expires: 2.weeks, secure: true}
-      redirect_to events_by_country_url(@country.continent_url, @country.name)
+      redirect_to events_by_country_url(@country.continent.normalized, @country.name.normalized)
     end
 
     @future_events = Event.includes(:country).by_country_id(@country.id).venontaj
