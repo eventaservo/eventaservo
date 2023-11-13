@@ -15,7 +15,7 @@
   - unless params[:continent] == 'Reta'
     .text-center.m-2
       - @countries.each do |country|
-        = link_to events_by_country_path(I18n.transliterate(country.continent), country.name, periodo: params[:periodo].presence, o: params[:o].presence, s: params[:s].presence), class: 'button-event-count' do
+        = link_to events_by_country_path(country.continent.normalized, country.name, periodo: params[:periodo].presence, o: params[:o].presence, s: params[:s].presence), class: 'button-event-count' do
           = flag_icon(country.code, squared: true)
           = country.name
           %span.badge.badge-primary= country.count
