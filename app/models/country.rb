@@ -29,14 +29,6 @@ class Country < ApplicationRecord
 
   scope :not_online, -> { where.not(name: "Enreta") }
 
-  # Returns the continent name without any special characters
-  # eg: "Eŭropo" => "Europo"
-  #
-  # @return [String]
-  def continent_url
-    I18n.transliterate(continent)
-  end
-
   # Ĝusta nomo de la kontinento, ne gravas la ortografion
   def self.continent_name(name)
     record = where("unaccent(lower(countries.continent)) = ?", name.normalized)
