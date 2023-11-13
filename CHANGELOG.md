@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.65.0](https://github.com/eventaservo/eventaservo/compare/v2.64.0...v2.65.0) (2023-11-13)
+
+
+### Features
+
+* :sparkles: Re-add basic statistics page for Admins ([#584](https://github.com/eventaservo/eventaservo/issues/584)) ([f279d29](https://github.com/eventaservo/eventaservo/commit/f279d29327b569642397faf940a938b35b076ab9))
+* **Administration:** List abandoned users ([a0a0825](https://github.com/eventaservo/eventaservo/commit/a0a0825cb8e13426eca85ec2f73e50c25f53e5d6))
+* Transliterate continent names ([#590](https://github.com/eventaservo/eventaservo/issues/590)) ([c5863f4](https://github.com/eventaservo/eventaservo/commit/c5863f441e61bc2aa90a08dd437c5c94ca3c35d5)), closes [#588](https://github.com/eventaservo/eventaservo/issues/588)
+
+
+### Performance Improvements
+
+* Improves loading performance of events by continents ([c8a2801](https://github.com/eventaservo/eventaservo/commit/c8a28015ba100c85f8753a1d47da91423f4f52c7))
+
 ## [2.64.0](https://github.com/eventaservo/eventaservo/compare/v2.63.0...v2.64.0) (2023-10-30)
 
 
