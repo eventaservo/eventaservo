@@ -663,6 +663,21 @@ epo:
     Pacific/Tongatapu: Pacifiko/Tongatapuo
     Pacific/Wake: Pacifiko/Vejkinsulo
     Pacific/Wallis: Pacifiko/Valiso
+  i18n:
+    transliterate:
+      rule:
+        Ĉ: Ch
+        ĉ: ch
+        Ŝ: Sh
+        ŝ: sh
+        Ĝ: Gh
+        ĝ: gh
+        Ĥ: H
+        ĥ: h
+        Ĵ: Jh
+        ĵ: jh
+        Ŭ: U
+        ŭ: u
   social_share_button:
     share_to: diskonigi per
     whatsapp_app: WhatsApp
