@@ -108,7 +108,7 @@ gem "listen"
 
 # Bullet
 # @TODO: must be moved to development but must be checked the docker build process to work fine
-gem "bullet", "~> 7.0.3"
+gem "bullet", "~> 7"
 
 gem "ahoy_matey", "~> 5"
 
