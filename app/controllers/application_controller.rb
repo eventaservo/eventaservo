@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   def user_is_owner_or_admin(event)
     user_signed_in? &&
-      (current_user.owner_of(event) || current_user.organiza_membro_de_evento(event) || current_user.admin?)
+      (current_user.owner_of?(event) || current_user.organiza_membro_de_evento(event) || current_user.admin?)
   end
   helper_method :user_is_owner_or_admin
 
@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
   def user_can_edit_event?(user:, event:)
     return false unless current_user
     return true if user.admin?
-    return true if user.owner_of(event)
+    return true if user.owner_of?(event)
 
     if event.organizations.any?
       event.organizations.each do |o|

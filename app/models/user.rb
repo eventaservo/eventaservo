@@ -127,8 +127,15 @@ class User < ApplicationRecord
     return_user
   end
 
-  def owner_of(record)
-    record.user_id == id
+  # Returns true if the user if owner of the record (eg. event)
+  # returns false otherwise
+  #
+  # The object must respond to user_id
+  #
+  # @param object [Object]
+  # @return [Boolean]
+  def owner_of?(object)
+    object.user_id == id
   end
 
   def organiza_membro_de_evento(evento)

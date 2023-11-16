@@ -57,4 +57,20 @@ class UserTest < ActiveSupport::TestCase
     @user.generate_webcal_token!
     assert_not_equal @user.webcal_token, original_webcal_token
   end
+
+  class OwnerOf < ActiveSupport::TestCase
+    def test_return_true_if_user_is_owner_of_event
+      user = create(:user)
+      event = create(:event, user: user)
+
+      assert user.owner_of?(event)
+    end
+
+    def test_return_false_if_user_if_not_owner_of_event
+      user1 = create(:user)
+      event = create(:event, user: user1)
+      user2 = create(:user)
+      assert_not user2.owner_of?(event)
+    end
+  end
 end
