@@ -169,12 +169,11 @@ class User < ApplicationRecord
     (in? organizo.administrantoj) || admin
   end
 
-  # Kontras ĉu la uzanto havas ian publikan kontaktan informon
+  # Checks if the user has any public contact information fullfilled
   #
   # @return [Boolean]
-  # @since 2.15
-  def havas_publikajn_kontaktojn?
-    youtube.present? or telegram.present? or instagram.present? or persona_retejo.present? or twitter.present?
+  def has_public_contact?
+    youtube.present? || telegram.present? || instagram.present? || persona_retejo.present? || twitter.present?
   end
 
   # Serĉas uzanton laŭ teksto
