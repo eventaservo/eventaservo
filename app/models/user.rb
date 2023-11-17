@@ -169,14 +169,6 @@ class User < ApplicationRecord
     (in? organizo.administrantoj) || admin
   end
 
-  # Kontrolas ĉu la uzanto estas membro de organizo.
-  #
-  # @param [Object] organizo Organizo
-  # @return [Boolean] se la uzanto estas administranto
-  def membro?(organizo)
-    (in? organizo.membroj)
-  end
-
   # Kontras ĉu la uzanto havas ian publikan kontaktan informon
   #
   # @return [Boolean]
