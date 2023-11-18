@@ -28,6 +28,7 @@ body {
 .error-handling {
   @extend .alert;
   @extend .alert-warning;
+  @extend .small;
 }
 
 .front-page-title {

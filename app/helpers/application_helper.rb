@@ -24,7 +24,7 @@ module ApplicationHelper
     return unless record.errors.any?
 
     return_html = "<div class='error-handling'>"
-    return_html += "<h4>Troviĝas eraro en la formularo</h4>"
+    return_html += "<h5>Troviĝas eraro en la formularo</h5>"
     return_html += "<ul>"
 
     record.errors.full_messages.each do |msg|

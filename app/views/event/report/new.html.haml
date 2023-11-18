@@ -4,17 +4,19 @@
       .box-white
         .lead Event-raporto
 
+        = error_handling(@report)
+
         %br
 
         .field
-          = f.label :url, 'Ligilo'
-          = f.text_field :url, class: 'form-control', required: true, autofocus: true,
-            placeholder: "Ekz: https://uea.facila.org/artikoloj/movado/zamenhof-tago-r269"
+          = f.label :url
+          = f.text_field :url, class: 'form-control', required: true, autofocus: true
+          %small.form-text.text-muted Ekz: https://uea.facila.org/artikoloj/movado/zamenhof-tago-r269
 
         %br
 
         .form-group
-          = f.label :title, 'Titolo'
+          = f.label :title
           = f.text_field :title, class: 'form-control', required: true
 
         .buttons-footer
