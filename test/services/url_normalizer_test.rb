@@ -28,4 +28,9 @@ class UrlNormalizerTest < ActiveSupport::TestCase
   test "should return nil if is empty space" do
     assert_nil UrlNormalizer.new(" ").call
   end
+
+  test "normalize url: https://uea.org/vikio/Kategorio:Novaĵoj_-_ILEI-KE" do
+    url = "https://uea.org/vikio/Kategorio:Novaĵoj_-_ILEI-KE"
+    assert_equal url, UrlNormalizer.new(url).call
+  end
 end
