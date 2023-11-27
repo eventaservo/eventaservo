@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.66.0](https://github.com/eventaservo/eventaservo/compare/v2.65.0...v2.66.0) (2023-11-27)
+
+
+### Features
+
+* **Events:** Change button label from "Raporti" to "Eraro?" ([6245f24](https://github.com/eventaservo/eventaservo/commit/6245f2443cca93b8407396d4491dd643588f9064))
+* **Events:** Validates report URL format before saving ([d995c97](https://github.com/eventaservo/eventaservo/commit/d995c976374b7267aadeaefd3143fb0d4bebedab))
+* NOVA: Raportoj ([35736ac](https://github.com/eventaservo/eventaservo/commit/35736ac3ce237d1ca00b6486fe125ddd09f8b935))
+
+
+### Bug Fixes
+
+* **Events:** :bug: Add event website address with special characters ([9d83807](https://github.com/eventaservo/eventaservo/commit/9d8380741198ab5ef527d948bf80b2d460a8a568))
+
 ## [2.65.0](https://github.com/eventaservo/eventaservo/compare/v2.64.0...v2.65.0) (2023-11-13)
 
 
