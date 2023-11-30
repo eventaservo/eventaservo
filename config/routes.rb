@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get "/serchilo", to: "home#search"
   get "/search.json", to: "home#search", format: :json
   get "/versio", to: "home#versio", format: :json
+  get "/dev/error", to: "home#error"
 
   authenticated :user, ->(user) { user.admin? } do
     mount Sidekiq::Web => "/sidekiq"

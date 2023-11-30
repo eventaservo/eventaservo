@@ -122,6 +122,13 @@ class HomeController < ApplicationController
     render plain: Eventaservo::Application::VERSION
   end
 
+  # Force an error for testing purposes
+  #
+  # +GET /dev/error+
+  def error
+    raise "This is a test error"
+  end
+
   private
 
   def access_from_server
