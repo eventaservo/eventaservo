@@ -5,9 +5,7 @@
 		}
 	],
 	"settings": {
-		"ruby.specPattern": "test",
 		"ruby.specSaveFile": true,
-		"ruby.specCommand": "bundle exec rails test -v",
 		"conventionalCommits.scopes": [
 			"API",
 			"Events",

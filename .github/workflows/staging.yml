@@ -8,14 +8,14 @@ on:
       - staging
 
 jobs:
-  minitest:
+  tests:
     uses: ./.github/workflows/template_test.yml
     secrets:
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY_TEST }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   docker:
-    needs: minitest
+    needs: tests
     uses: ./.github/workflows/docker.yml
     with:
       environment: staging

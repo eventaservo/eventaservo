@@ -1,4 +1,4 @@
-name: Rails Minitest
+name: Rails tests
 
 on:
   workflow_call:
@@ -9,7 +9,7 @@ on:
         required: true
 
 jobs:
-  minitest:
+  tests:
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -53,8 +53,11 @@ jobs:
       - name: Migrate database
         run: bundle exec rails db:migrate
 
-      - name: Run all tests
+      - name: Minitest
         run: bundle exec rails test:all
+
+      - name: RSpec
+        run: bundle exec rspec
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3

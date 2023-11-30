@@ -5,16 +5,6 @@ class UserTest < ActiveSupport::TestCase
     @user = FactoryBot.create(:user)
   end
 
-  context "Associations" do
-    should belong_to(:country)
-  end
-
-  context "Validations" do
-    should validate_presence_of(:name)
-    should validate_presence_of(:email)
-    should validate_uniqueness_of(:email).case_insensitive
-  end
-
   test "uzanto validas" do
     assert build(:user).valid?
   end
