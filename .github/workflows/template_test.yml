@@ -9,7 +9,7 @@ on:
         required: true
 
 jobs:
-  tests:
+  minitest:
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -32,10 +32,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Ruby 3.0 e Bundler
+      - name: Ruby 3.2 e Bundler
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.0'
+          ruby-version: '3.2'
           bundler-cache: true
 
       - name: Node 16
@@ -55,6 +55,55 @@ jobs:
 
       - name: Minitest
         run: bundle exec rails test:all
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  rspec:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_DB: eventaservo_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports: [ '5432:5432' ]
+      redis:
+        image: redis:7
+        ports: ["6379:6379"]
+
+    env:
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      RAILS_ENV: test
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Ruby 3.2 e Bundler
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Node 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'yarn'
+
+      - name: Yarn
+        run: yarn install
+
+      - name: Precompile assets
+        run: bundle exec rails assets:precompile
+
+      - name: Migrate database
+        run: bundle exec rails db:migrate
 
       - name: RSpec
         run: bundle exec rspec
