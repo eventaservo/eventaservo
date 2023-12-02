@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.66.1](https://github.com/eventaservo/eventaservo/compare/v2.66.0...v2.66.1) (2023-12-02)
+
+
+### Bug Fixes
+
+* Send user feedback when error occurs ([2ef962a](https://github.com/eventaservo/eventaservo/commit/2ef962a4b1bca5a9900c09c05ab6d228bfc91d49))
+
 ## [2.66.0](https://github.com/eventaservo/eventaservo/compare/v2.65.0...v2.66.0) (2023-11-27)
 
 
