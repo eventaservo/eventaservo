@@ -21,7 +21,7 @@ class ErrorsController < ApplicationController
                  "/#{Constants::SENTRY_PROJECT_SLUG}/user-feedback/"
 
     body = {
-      event_id: "eb6cd3ca9eb241d9971433a98729b072", # params[:sentry_event_id],
+      event_id: params[:sentry_event_id],
       name: params[:name],
       email: params[:email],
       comments: params[:comments]
@@ -33,6 +33,7 @@ class ErrorsController < ApplicationController
     }
 
     HTTParty.post(sentry_url, body: body, headers: headers)
+    AdminMailer.notify(subject: "[ES] User reported error", body:).deliver_later
 
     redirect_to root_path, notice: "Dankon!"
   end
