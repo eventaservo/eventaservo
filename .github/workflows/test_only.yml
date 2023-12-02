@@ -1,8 +1,6 @@
 name: Rails tests
 
-on:
-  pull_request:
-    branches: [ main, staging ]
+on: [pull_request]
 
 jobs:
   tests:

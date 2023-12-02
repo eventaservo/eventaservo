@@ -3,12 +3,7 @@
 
 name: Brakeman Scan
 
-on:
-  pull_request:
-    branches: [ main ]
-    paths-ignore:
-      - '**/*.md'
-      - '**/*.txt'
+on: [pull_request]
 
 jobs:
   brakeman-scan:
