@@ -3,31 +3,26 @@
   %p
     Ni pardonpetas. Ni korektos tiun eraron baldaŭ.
 
-  - if @sentry_id
-    %p
-      Vi povas helpi nin sendante pli da informoj pri kio okazis
+  %p
+    Vi povas helpi nin sendante pli da informoj pri kio okazis
 
-    = form_tag error_form_url, method: :post do
-      - if current_user
-        = hidden_field_tag :name, current_user.name
-        = hidden_field_tag :email, current_user.email
-        = hidden_field_tag :sentry_event_id, @sentry_id
-      - else
-        .form-group
-          = label_tag :name, "Nomo"
-          = text_field_tag :name, "", autocomplete: "name", class: "form-control", required: true, autofocus: true
-        .form-group
-          = label_tag :email, "Retadreso"
-          = text_field_tag :email, "", autocomplete: "email", class: "form-control", required: true
-
+  = form_tag error_form_url, method: :post do
+    - if current_user
+      = hidden_field_tag :name, current_user.name
+      = hidden_field_tag :email, current_user.email
+      = hidden_field_tag :sentry_event_id, @sentry_id
+    - else
       .form-group
-        = label_tag :comments, "Kion vi faris antaŭ la eraro okazis?"
-        = text_area_tag :comments, nil, class: "form-control", rows: 4, required: true, autofocus: true
+        = label_tag :name, "Nomo"
+        = text_field_tag :name, "", autocomplete: "name", class: "form-control", required: true, autofocus: true
+      .form-group
+        = label_tag :email, "Retadreso"
+        = text_field_tag :email, "", autocomplete: "email", class: "form-control", required: true
 
-      .buttons-footer
-        = link_to "Iri al ĉefpaĝo", root_url, class: "button-cancel"
-        = submit_tag "Sendi", class: "button-submit"
-  - else
-    %p
-      = link_to "Iru al la ĉefpaĝo", root_url, class: "button-submit col-12"
+    .form-group
+      = label_tag :comments, "Kion vi faris antaŭ la eraro okazis?"
+      = text_area_tag :comments, nil, class: "form-control", rows: 4, required: true, autofocus: true
 
+    .buttons-footer
+      = link_to "Iri al ĉefpaĝo", root_url, class: "button-cancel"
+      = submit_tag "Sendi", class: "button-submit"
