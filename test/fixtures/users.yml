@@ -57,10 +57,12 @@
 #
 standard_user:
   id: 1
-  email: stndard@user.com
+  email: standard@user.com
   username: standard_user
   name: Standard user
   city: New York
   country_id: 1
   birthday: "1978-07-17"
   admin: false
+  authentication_token: _bfXEu9FayHUNQRd9pxg
+  confirmed_at: "2019-01-01 00:00:00"
