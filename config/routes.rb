@@ -35,26 +35,8 @@ Rails.application.routes.draw do
                                    omniauth_callbacks: "users/omniauth_callbacks",
                                    passwords: "users/passwords"}
 
-  # Shortcuts and redirects
-  get "/r", to: redirect("/users/sign_up")
-  get "/eventoj/:code", to: redirect("/e/%{code}")
-  get "/e/:code/k", to: redirect("/e/%{code}/kronologio")
-  get "/vidmaniero/:view_style", to: redirect("/v/%{view_style}")
-  get "/e/nova", to: redirect("/e/new")
-
-  # API
-  namespace :api do
-    namespace :v1 do
-      get "events", to: "events#index"
-      get "uzanto/:id/rekrei_api_kodon", to: "users#rekrei_api_kodon", as: "rekrei_api_kodon"
-    end
-
-    namespace :v2, defaults: {format: :json} do
-      scope "eventoj" do
-        get "/", to: "events#index", as: "events"
-      end
-    end
-  end
+  draw(:shortcuts)
+  draw(:api)
 
   # iloj
   namespace :iloj do
@@ -90,45 +72,10 @@ Rails.application.routes.draw do
   get "/video", to: "video#index"
   get "/video/:id/forigi", to: "video#destroy"
 
-  # Organizoj
-  get "/o/search", to: "organizations#search", as: "organization_search"
-  resources :organizations, path: "o", param: "short_name" do
-    post "aldoni_uzanton", to: "organizations#aldoni_uzanton"
-    get "estrighu/:username", to: "organizations#estrighu", as: "estrighu"
-    get "forighu/:username", to: "organizations#forighu", as: "forighu"
-  end
-
-  # Eventoj
-  get "/importi", to: "events#nova_importado", as: "importi_eventon"
-  post "/importi", to: "events#importi"
-  resources :events, path: "e", param: "code" do
-    get "partopreni", to: "participants#event", as: "toggle_participant"
-    get "follow", to: "followers#event", as: "toggle_follow"
-    delete "delete_file/:file_id", to: "events#delete_file", as: "delete_file"
-    post "kontakti_organizanton", to: "events#kontakti_organizanton", as: "kontakti_organizanton"
-    post "nuligi", to: "events#nuligi", as: "nuligi"
-    get "malnuligi", to: "events#malnuligi", as: "malnuligi"
-    get "kronologio", to: "events#kronologio"
-    post "nova_video", to: "video#create", as: "new_video"
-    get "nova_video", to: "video#new"
-
-    resources :reports, controller: "event/report", path: "raportoj", only: [:new, :create, :destroy]
-  end
-  get "/raportoj", to: "event/report#index", as: "reports"
-
-  # Admin
-  namespace :admin do
-    get "sciiga_listo", controller: "notifications", action: :index, as: "notification_list"
-    get "countries", controller: "countries", action: :index
-    get "eventoj", controller: "events", action: :index
-    get "forigitaj_eventoj", controller: "events", action: :deleted
-    get "senlokaj_eventoj", to: "events#senlokaj_eventoj"
-    get "statistics", controller: "statistics", action: :index
-    patch "forigitaj_eventoj/restauri/:event_code", controller: "events", action: :recover, as: "recover_event"
-    resources :reklamoj do
-      get "toggle_active"
-    end
-  end
+  draw(:organizations)
+  draw(:events)
+  draw(:reports)
+  draw(:admin)
 
   # Aldonaĵoj
   match "upload/:record_id" => "attachments#upload", :as => "attachment_upload", :via => :post
