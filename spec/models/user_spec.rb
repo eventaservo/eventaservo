@@ -10,4 +10,14 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:email) }
     it { should validate_uniqueness_of(:email).case_insensitive }
   end
+
+  describe "scopes" do
+    it "default scope should return only enabled users" do
+      expect(User.count).to eq(1)
+
+      create(:user, disabled: true)
+      expect(User.count).to eq(1)
+      expect(User.unscoped.count).to eq(2)
+    end
+  end
 end

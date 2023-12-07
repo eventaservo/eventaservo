@@ -10,7 +10,7 @@ RSpec.describe "Api::Events", type: :request do
     subject do
       get "/api/v1/events.json",
         params: {
-          user_email: users(:standard_user).email, user_token: users(:standard_user).authentication_token,
+          user_email: users(:user).email, user_token: users(:user).authentication_token,
           komenca_dato: Time.zone.today.strftime("%Y-%m-%d"),
           fina_dato: (Time.zone.today + 1.year).strftime("%Y-%m-%d")
         }
@@ -26,7 +26,7 @@ RSpec.describe "Api::Events", type: :request do
   end
 
   describe "GET /api/v2/eventoj" do
-    before { @token = users(:standard_user).send(:generate_jwt_token) }
+    before { @token = users(:user).send(:generate_jwt_token) }
 
     let(:event) { create(:evento) }
 

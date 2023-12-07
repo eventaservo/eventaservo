@@ -55,14 +55,14 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #  index_users_on_unlock_token          (unlock_token) UNIQUE
 #
-standard_user:
-  id: 1
-  email: standard@user.com
-  username: standard_user
-  name: Standard user
-  city: New York
-  country_id: 1
-  birthday: "1978-07-17"
+user:
   admin: false
   authentication_token: _bfXEu9FayHUNQRd9pxg
+  birthday: "1978-07-17"
+  city: New York
   confirmed_at: "2019-01-01 00:00:00"
+  country_id: 1
+  disabled: false
+  email: standard@user.com
+  name: Standard user
+  username: standard_user

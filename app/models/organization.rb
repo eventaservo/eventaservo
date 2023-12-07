@@ -103,7 +103,7 @@ class Organization < ApplicationRecord
   end
 
   def remove_user(user)
-    return false if users.count == 1
+    return false if organization_users.count == 1
 
     OrganizationUser.find_by(user_id: user.id, organization_id: id).destroy
   end
