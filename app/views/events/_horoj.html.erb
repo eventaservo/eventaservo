@@ -1,0 +1,16 @@
+<% unless @event.all_day? %>
+  <div class="small text-right mt-1 font-weight-bold">
+    <div>
+      <%= start_and_end_time_with_timezone(@event, timezone) %>
+    </div>
+
+    <div>
+      <%= render partial: 'events/timezone_modal' %>
+
+      <%= link_to '#', id: 'select-timezone-link', data: { target: '#timezoneModal', toggle: 'modal'} do %>
+        <%= t(timezone, scope: :timezones) %>
+        <%= icon("fas", "sun", data: { toggle: "tooltip", placement: "top", title: "Somera/Vintra tempo" }) if @event.dst? %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

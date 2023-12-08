@@ -1,0 +1,23 @@
+.modal.fade#date-time-calendar-modal{'aria-hidden': 'true', 'aria-labelledby': 'date-time-calendar-title', role: 'dialog', tabindex: '-1'}
+  .modal-dialog{role: 'document'}
+    .modal-content
+      .modal-header
+        %h5.modal-title#date-time-calendar-title Pliaj informoj
+        %button.close{'aria-label': 'Fermi', 'data-dismiss': 'modal', type: 'button'}
+          %span{'aria-hidden': 'true'} ×
+
+      .modal-body
+        %h5.text-center Laŭ UTC
+
+        .d-flex.kalendareto-grupo.justify-content-center
+          %div
+            = calendar_icon(event.komenca_tago(horzono: 'UTC'))
+            .text-center
+              = event.komenca_horo(horzono: 'UTC')
+              = " - #{event.fina_horo(horzono: 'UTC')}" unless event.multtaga?(horzono: 'UTC')
+
+          - if event.multtaga?(horzono: 'UTC')
+            .p-2= icon('fas', 'arrow-right')
+            %div
+              = calendar_icon(event.fina_tago(horzono: 'UTC'))
+              .text-center= event.fina_horo(horzono: 'UTC')

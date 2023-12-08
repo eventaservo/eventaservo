@@ -22,12 +22,11 @@
           = @event.cancel_reason
       #div
         .ml-2.float-right
-          = render partial: 'kalendareto', locals: { event: @event, tz: @event.time_zone }
-          = render partial: 'horoj', locals: { tz: @event.time_zone }
-          = render partial: 'horzono' if cookies[:horzono]
-          - unless @event.all_day?
-            .text-right= render partial: 'horzono_elektilo'
+          = render "calendar_click_modal", event: @event
 
+          = link_to "#", class: "link--hover", data: { target: '#date-time-calendar-modal', toggle: 'modal' } do
+            = render partial: 'kalendareto', locals: { event: @event, tz: @event.time_zone }
+          = render "horoj", event: @event, timezone: (cookies[:horzono] ? @horzono : @event.time_zone)
 
         %h5.text-left= @event.description
 
