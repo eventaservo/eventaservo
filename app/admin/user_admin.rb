@@ -8,6 +8,7 @@ ActiveAdmin.register User do
   scope :enabled, default: true
   scope :disabled
   scope :abandoned
+  scope :not_confirmed
 
   includes :country
 
@@ -85,6 +86,11 @@ ActiveAdmin.register User do
     end
   end
 
+  member_action :confirm, method: :get do
+    resource.update(confirmed_at: Time.zone.now)
+    redirect_to active_admin_user_path(resource), notice: "User's email marked as confirmed"
+  end
+
   member_action :deactivate, method: :put do
     if resource.disable!
       redirect_to active_admin_users_path
@@ -105,6 +111,11 @@ ActiveAdmin.register User do
   end
 
   sidebar "Actions", only: :show do
+    if resource.confirmed_at.nil?
+      div link_to "Confirm user's email", confirm_active_admin_user_path(resource), \
+        data: {confirm: "This will confirm the user's email. Are you sure?"}
+    end
+
     if resource.disabled == false
       div link_to "Disable user", \
         deactivate_active_admin_user_path(resource), \

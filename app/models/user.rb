@@ -104,6 +104,7 @@ class User < ApplicationRecord
   scope :enabled, -> { where(disabled: false) }
   scope :disabled, -> { unscoped.where(disabled: true) }
   scope :abandoned, -> { where("last_sign_in_at < ?", 2.years.ago) }
+  scope :not_confirmed, -> { where(confirmed_at: nil) }
 
   def self.from_omniauth(auth)
     if where(email: auth.info.email).exists?
