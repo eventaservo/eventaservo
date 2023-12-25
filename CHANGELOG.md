@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.67.0](https://github.com/eventaservo/eventaservo/compare/v2.66.1...v2.67.0) (2023-12-25)
+
+
+### Features
+
+* **Administration:** Confirm user's email mannually ([14006a0](https://github.com/eventaservo/eventaservo/commit/14006a0649eea4aa52bd56db52a25804c606f901))
+* **Event Reports:** Increase the list of reports from 10 to 25 ([39d76e7](https://github.com/eventaservo/eventaservo/commit/39d76e77b2b4a43bd3bfa15a1a9d3b9e51f28c94))
+* Search events return also just finished ones (15 days) ([76e8bd4](https://github.com/eventaservo/eventaservo/commit/76e8bd4b4f6d3daeb6989d47b66eda513bf760bc))
+
 ## [2.66.1](https://github.com/eventaservo/eventaservo/compare/v2.66.0...v2.66.1) (2023-12-02)
 
 
