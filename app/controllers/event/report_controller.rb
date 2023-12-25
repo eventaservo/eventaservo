@@ -6,7 +6,7 @@ class Event
 
     def index
       @events = Event.with_reports.order(date_start: :desc)
-      @pagy, @events = pagy(@events, items: 10)
+      @pagy, @events = pagy(@events, items: 25)
     end
 
     def new
