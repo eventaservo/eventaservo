@@ -109,7 +109,7 @@ class HomeController < ApplicationController
     @events = Event.includes(%i[country participants]).search(params[:query])
     @organizations = Organization.serchi(params[:query]).order(:name)
 
-    @events = @events.venontaj if params[:pasintaj].nil?
+    @events = @events.future_and_just_finished if params[:pasintaj].nil?
     @events = @events.ne_nuligitaj if params[:nuligitaj].nil?
 
     @users = User.serchi(params[:query])
