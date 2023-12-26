@@ -1,9 +1,13 @@
 .box-white
-  .box-header Eventoj (estontaj kaj ĵus okazintaj)
+  .box-header Eventoj
   - if events.empty?
     %p Neniu evento trovita
   - else
-    %h5= pluralize(events.count, 'evento trovita', 'eventoj trovitaj')
+    %h5
+      = pluralize(events.count, 'evento trovita', 'eventoj trovitaj')
+      - if params[:pasintaj].blank?
+        (estontaj kaj ĵus okazintaj)
+
     .table-responsive
       %table.table.table-sm.table-hover
         %thead
@@ -13,8 +17,8 @@
             %th Dato
         %tbody
           - events.each do |event|
-            %tr.small.pointer{ onclick: "window.location.href = '#{event_path(event.ligilo)}'",
-              class: event_color_class(event) }
+            %tr.small.pointer{onclick: "window.location.href = '#{event_path(event.ligilo)}'",
+              class: event_color_class(event)}
               %td #{event_flag(event)} #{event.title}
               %td= event.city
               %td= event_date(event)
