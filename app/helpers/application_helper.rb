@@ -55,12 +55,12 @@ module ApplicationHelper
 
     if de.year == ds.year # Samjara
       if de.month == ds.month # Sammonata
-        "#{ds.day} - #{de.day} #{l(de, format: '%B %Y')}"
+        "#{ds.day} - #{de.day} #{l(de, format: "%B %Y")}"
       else # malsammonata
-        "#{l(ds, format: '%e %B')} - #{l(de, format: '%e %B %Y')}"
+        "#{l(ds, format: "%e %B")} - #{l(de, format: "%e %B %Y")}"
       end
     else # malsamjara
-      "#{l(ds, format: '%e %B %Y').strip} - #{l(de, format: '%e %B %Y').strip}"
+      "#{l(ds, format: "%e %B %Y").strip} - #{l(de, format: "%e %B %Y").strip}"
     end
   end
 
@@ -77,7 +77,7 @@ module ApplicationHelper
   end
 
   def markdown(text)
-    options = { hard_wrap: true, filter_html: true, autolink: true }
+    options = {hard_wrap: true, filter_html: true, autolink: true}
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::XHTML, options)
     markdown.render(text).html_safe
   end
@@ -112,7 +112,7 @@ module ApplicationHelper
     return if retposhtadreso.blank?
 
     if user_signed_in?
-      icon("fas", "at", retposhtadreso, class: "copy-to-clipboard", data: { clipboard: retposhtadreso })
+      icon("fas", "at", retposhtadreso, class: "copy-to-clipboard", data: {clipboard: retposhtadreso})
     else
       icon("fas", "at", retposhtadreso.gsub("@", "(ĉe)"))
     end
@@ -127,7 +127,7 @@ module ApplicationHelper
   def montras_retpaghon(url)
     return if url.blank?
 
-    text = url.length > 40 ? url[0..40] + "..." : url
+    text = (url.length > 40) ? url[0..40] + "..." : url
     text = text.gsub(%r{http[s]?://}, "")
     icon("fas", "globe", class: "fg-color-link mr-1") + link_to(text, url, target: :_blank)
   end

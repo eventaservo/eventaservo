@@ -204,6 +204,13 @@ RSpec.describe Event, type: :model do
         event.update(city: "urbo / alia urbo")
         expect(event.city).to eq("urbo  alia urbo")
       end
+
+      it "should call Tools.convert_X_characters for new records for title and description" do
+        event = build(:event)
+        expect(Tools).to receive(:convert_X_characters).with(event.title)
+        expect(Tools).to receive(:convert_X_characters).with(event.description)
+        event.send(:format_event_data)
+      end
     end
   end
 end

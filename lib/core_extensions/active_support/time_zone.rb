@@ -8,6 +8,6 @@ module ActiveSupport
     def cet?
       utc_offset == 3600
     end
-    alias met? cet?
+    alias_method :met?, :cet?
   end
 end

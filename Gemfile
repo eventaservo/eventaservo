@@ -115,6 +115,7 @@ gem "ahoy_matey", "~> 5"
 group :development, :test do
   gem "debug", ">= 1.0.0", require: false
   gem "dotenv-rails", "~> 2.8"
+  gem "parallel_tests"
   gem "rake"
   gem "rspec-rails", "~> 6.1"
   gem "spring"
@@ -123,7 +124,7 @@ end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem "web-console"
+  # gem "web-console", group: :development
 
   gem "annotate", "~> 3.2", require: false
   gem "better_errors"

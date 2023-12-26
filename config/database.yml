@@ -14,7 +14,7 @@ development:
 
 test:
   <<: *default
-  database: eventaservo_test
+  database: eventaservo_test<%= ENV['TEST_ENV_NUMBER'] %>
 
 staging:
   adapter: postgresql

@@ -3,6 +3,8 @@ module Tools
   # @param text [String]
   # @return [String]
   def self.convert_X_characters(text)
+    return unless text
+
     text
       .gsub("Cx", "Ĉ")
       .gsub("cx", "ĉ")

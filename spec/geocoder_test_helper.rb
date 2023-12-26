@@ -11,3 +11,29 @@ Geocoder::Lookup::Test.set_default_stub(
     }
   ]
 )
+
+Geocoder::Lookup::Test.add_stub(
+  "Sao Paŭlo, BR", [
+    {
+      coordinates: [-23.55, -46.63],
+      address: "Sao Paŭlo urbocentro",
+      state: "Sao Paŭlo",
+      state_code: "SP",
+      country: "Brazil",
+      country_code: "BR"
+    }
+  ]
+)
+
+Geocoder::Lookup::Test.add_stub(
+  "Ĵoan-Pesoo, BR", [
+    {
+      coordinates: [-7.11, -34.86],
+      address: "Centro",
+      state: "Paraíba",
+      state_code: "PB",
+      country: "Brazil",
+      country_code: "BR"
+    }
+  ]
+)
