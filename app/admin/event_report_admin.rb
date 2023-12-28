@@ -11,10 +11,11 @@ ActiveAdmin.register Event::Report do
   filter :user_name_cont, label: "User name"
 
   index do
+    selectable_column
     id_column
     column :event
     column :title
-    column :url
+    column(:url) { |report| report.url.truncate(75) }
     column :user
 
     actions
@@ -28,5 +29,13 @@ ActiveAdmin.register Event::Report do
     end
 
     f.actions
+  end
+
+  batch_action :change_to_system_account, confirm: "Are you sure?" do |ids|
+    batch_action_collection.find(ids).each do |report|
+      report.update(user: User.system_account)
+    end
+
+    redirect_to collection_path, alert: "The reports have been changed to system account"
   end
 end
