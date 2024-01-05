@@ -50,7 +50,6 @@ class HomeController < ApplicationController
 
   def prie
     ahoy.track "Visit Prie"
-    render layout: "full_size"
   end
 
   def changes
