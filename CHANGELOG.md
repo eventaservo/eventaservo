@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.68.0](https://github.com/eventaservo/eventaservo/compare/v2.67.0...v2.68.0) (2024-01-07)
+
+
+### Features
+
+* **Administration:** Batch change report user ([1617a2b](https://github.com/eventaservo/eventaservo/commit/1617a2b35d593aff881e32deb24372dc3f8d0cf7))
+
+
+### Bug Fixes
+
+* User navbar doesn't open on About page ([2205ad3](https://github.com/eventaservo/eventaservo/commit/2205ad39c1375660f33af8ff39c3fcc0458f50f6))
+
 ## [2.67.0](https://github.com/eventaservo/eventaservo/compare/v2.66.1...v2.67.0) (2023-12-25)
 
 
