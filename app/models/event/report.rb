@@ -29,6 +29,14 @@ class Event
       title.presence || url
     end
 
+    def self.ransackable_associations(auth_object = nil)
+      ["event", "user"]
+    end
+
+    def self.ransackable_attributes(auth_object = nil)
+      ["created_at", "event_id", "id", "title", "updated_at", "url", "user_id"]
+    end
+
     private
 
     # Remove the X characters from the title for new records

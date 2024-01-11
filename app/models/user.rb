@@ -243,6 +243,21 @@ class User < ApplicationRecord
     self.webcal_token ||= create_webcal_token
   end
 
+  def self.ransackable_associations(auth_object = nil)
+    ["country", "event_reports", "events", "interested_events", "interested_events_relation", "organization_users",
+      "organizations", "organizoj", "picture_attachment", "picture_blob", "versions"]
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["about", "admin", "authentication_token", "avatar", "birthday", "city", "confirmation_sent_at",
+      "confirmation_token", "confirmed_at", "country_id", "created_at", "current_sign_in_at", "current_sign_in_ip",
+      "disabled", "email", "encrypted_password", "events_count", "failed_attempts", "id", "image", "instruo",
+      "jwt_token", "last_sign_in_at", "last_sign_in_ip", "ligiloj", "locked_at", "mailings", "name", "prelego",
+      "provider", "remember_created_at", "reset_password_sent_at", "reset_password_token", "sign_in_count",
+      "system_account", "ueacode", "uid", "unconfirmed_email", "unlock_token", "updated_at", "username",
+      "webcal_token"]
+  end
+
   private
 
   # Generate JWT Token for API v2 before saving the user

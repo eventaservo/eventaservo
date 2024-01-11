@@ -107,4 +107,14 @@ class Organization < ApplicationRecord
 
     OrganizationUser.find_by(user_id: user.id, organization_id: id).destroy
   end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["country", "eventoj", "events", "logo_attachment", "logo_blob", "organization_events", "organization_users",
+      "rich_text_description", "users", "uzantoj", "versions"]
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["address", "city", "country_id", "created_at", "display_flag", "email", "id", "logo", "major", "name", "official",
+      "partner", "phone", "short_name", "updated_at", "url", "youtube"]
+  end
 end

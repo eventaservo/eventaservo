@@ -20,4 +20,8 @@ class OrganizationEvent < ApplicationRecord
 
   belongs_to :organization
   belongs_to :event
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "event_id", "id", "organization_id", "updated_at"]
+  end
 end

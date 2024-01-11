@@ -45,4 +45,8 @@ class Country < ApplicationRecord
     record = where("unaccent(lower(countries.code)) = ?", code.normalized)
     record.first if record.any?
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["code", "continent", "created_at", "id", "name", "updated_at"]
+  end
 end

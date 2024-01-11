@@ -22,4 +22,8 @@ class Ad < ApplicationRecord
   validates :image, presence: true
 
   scope :active, -> { where(active: true) }
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["active", "created_at", "event_id", "id", "updated_at", "url"]
+  end
 end
