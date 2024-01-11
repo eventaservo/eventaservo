@@ -28,4 +28,12 @@ class Ahoy::Event < ApplicationRecord
   def self.users
     joins(:user).select("distinct users.name").map(&:name).sort
   end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["user", "visit"]
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["id", "id_value", "name", "properties", "time", "user_id", "visit_id"]
+  end
 end

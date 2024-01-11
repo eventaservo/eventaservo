@@ -6,6 +6,8 @@ ActiveAdmin.register Ahoy::Visit do
   filter :country
   filter :city
 
+  includes [:user]
+
   index do
     id_column
 
