@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.69.0](https://github.com/eventaservo/eventaservo/compare/v2.68.0...v2.69.0) (2024-01-11)
+
+
+### Features
+
+* Upgrade Rails to 7.1 ([#610](https://github.com/eventaservo/eventaservo/issues/610)) ([8926a4a](https://github.com/eventaservo/eventaservo/commit/8926a4ac4f1e4872561827c08f9aded85fd06403))
+
 ## [2.68.0](https://github.com/eventaservo/eventaservo/compare/v2.67.0...v2.68.0) (2024-01-07)
 
 
