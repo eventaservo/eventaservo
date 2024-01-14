@@ -33,8 +33,8 @@ class HomeController < ApplicationController
   def instruistoj_kaj_prelegantoj
     ahoy.track "Visit Instruantoj kaj Prelegantoj"
 
-    @instruistoj = User.instruistoj.order(:name)
-    @prelegantoj = User.prelegantoj.order(:name)
+    @instruistoj = User.includes([:country, [picture_attachment: :blob]]).instruistoj.order(:name)
+    @prelegantoj = User.includes([:country, [picture_attachment: :blob]]).prelegantoj.order(:name)
   end
 
   def privateco
@@ -89,7 +89,7 @@ class HomeController < ApplicationController
   def feed
     ahoy.track "Rendered feed"
 
-    @events = Event.includes(%i[country uploads_attachments])
+    @events = Event.includes([:country, [uploads_attachments: :blob]])
       .venontaj
       .ne_nuligitaj
       .ne_anoncoj
@@ -105,8 +105,8 @@ class HomeController < ApplicationController
   end
 
   def search
-    @events = Event.includes(%i[country participants]).search(params[:query])
-    @organizations = Organization.serchi(params[:query]).order(:name)
+    @events = Event.includes(%i[country participants organizations]).search(params[:query])
+    @organizations = Organization.includes(:country).serchi(params[:query]).order(:name)
 
     @events = @events.future_and_just_finished if params[:pasintaj].nil?
     @events = @events.ne_nuligitaj if params[:nuligitaj].nil?
