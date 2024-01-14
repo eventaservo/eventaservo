@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.69.1](https://github.com/eventaservo/eventaservo/compare/v2.69.0...v2.69.1) (2024-01-14)
+
+
+### Bug Fixes
+
+* ActiveAdmin Ransack methods ([0e667bc](https://github.com/eventaservo/eventaservo/commit/0e667bc97006ddb74e04f03fd53fef5f5b86f8c0))
+* **Events:** Validate start and end date/time for new events ([#615](https://github.com/eventaservo/eventaservo/issues/615)) ([74bcf94](https://github.com/eventaservo/eventaservo/commit/74bcf9429c8f68dd0879c6fa46461b4f3f5b8ec6))
+
 ## [2.69.0](https://github.com/eventaservo/eventaservo/compare/v2.68.0...v2.69.0) (2024-01-11)
 
 
