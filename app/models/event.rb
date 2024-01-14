@@ -258,22 +258,30 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def komenca_tago(horzono: nil)
+    return unless date_start
+
     time_zone = horzono if horzono
     date_start.in_time_zone(time_zone).strftime("%d/%m/%Y")
   end
 
   def fina_tago(horzono: nil)
+    return unless date_end
+
     time_zone = horzono if horzono
     date_end.in_time_zone(time_zone).strftime("%d/%m/%Y")
   end
 
   def komenca_horo(horzono: nil)
+    return unless date_start
+
     time_zone =
       horzono || self.time_zone
     date_start.in_time_zone(time_zone).strftime("%H:%M")
   end
 
   def fina_horo(horzono: nil)
+    return unless date_end
+
     time_zone =
       horzono || self.time_zone
     date_end.in_time_zone(time_zone).strftime("%H:%M")
