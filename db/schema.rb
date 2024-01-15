@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_29_133126) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_08_095802) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -401,7 +401,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_29_133126) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "weathers", force: :cascade do |t|
+    t.string "city"
+    t.bigint "country_id", null: false
+    t.date "date"
+    t.jsonb "metadata"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city", "country_id", "date"], name: "index_weathers_on_city_and_country_id_and_date", unique: true
+    t.index ["country_id"], name: "index_weathers_on_country_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "logs", "users"
+  add_foreign_key "weathers", "countries"
 end

@@ -8,8 +8,8 @@ module Code
 
     private
 
-      def set_code
-        self.code = SecureRandom.hex(3)
-      end
+    def set_code
+      self.code = SecureRandom.hex(3)
+    end
   end
 end

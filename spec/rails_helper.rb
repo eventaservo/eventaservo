@@ -7,6 +7,8 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require "rspec/rails"
 require "debug"
 require "geocoder_test_helper"
+require "support/system_test_helpers"
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -31,7 +33,9 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
+
 RSpec.configure do |config|
+  config.include ActiveJob::TestHelper
   config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
@@ -66,6 +70,23 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  # Configures System tests
+  config.before(:each, type: :system) do
+    # Capybara.server_port = 3001
+    # Capybara.server_host = "localhost"
+    # Capybara.default_max_wait_time = 30
+
+    # Selenium::WebDriver::Chrome::Service.driver_path = ENV["CHROMEDRIVER_PATH"] if ENV["CHROMEDRIVER_PATH"]
+
+    # if ENV["SHOW_E2E_TEST_BROWSER"].present?
+    if ENV["CI"].present?
+      driven_by :selenium_chrome_headless, screen_size: [540, 1170]
+    else
+      driven_by :selenium, screen_size: [540, 1170]
+    end
+    # else
+    # end
+  end
 end
 
 Shoulda::Matchers.configure do |config|

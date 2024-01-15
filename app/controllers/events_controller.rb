@@ -157,6 +157,7 @@ class EventsController < ApplicationController
   end
 
   def by_continent
+    debugger
     # Se la "kontinento" estas Reta, montru la eventojn per Kalendara vido
     # Se estas aliaj kontinentoj, montru per Kartaro aŭ Map
     if params[:continent] == "reta" && cookies[:vidmaniero] != "kalendaro"

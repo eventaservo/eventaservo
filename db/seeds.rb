@@ -16,13 +16,13 @@ Rake.application["db:fixtures:load"].invoke
 # Kreas la administranton
 User.destroy_all
 User.create(email: "admin@eventaservo.org",
-            name: "Administranto",
-            password: "administranto",
-            username: "admin",
-            country_id: Country.find_by(code: "br").id,
-            city: "Rio de Janeiro",
-            admin: true,
-            confirmed_at: DateTime.now)
+  name: "Administranto",
+  password: "administranto",
+  username: "admin",
+  country_id: Country.find_by(code: "br").id,
+  city: "Rio de Janeiro",
+  admin: true,
+  confirmed_at: DateTime.now)
 
 puts "Create System Account"
 FactoryBot.create(:user, name: "EventaServo Sistemo", email: "kontakto@eventaservo.org", system_account: true)
