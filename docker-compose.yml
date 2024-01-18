@@ -27,23 +27,13 @@ services:
       - 3000:3000
     depends_on:
       - db
-      - redis
 
-  sidekiq:
+  solid_queue:
     <<: *backend-app
     image: es-dev
-    command: bundle exec rails sidekiq
+    command: bundle exec rails solid_queue:start
     depends_on:
       - db
-      - redis
-
-  redis:
-    image: redis:7
-    healthcheck:
-      test: [ "CMD", "redis-cli", "ping" ]
-      interval: 10s
-      timeout: 3s
-      retries: 3
 
   db:
     image: postgres:15

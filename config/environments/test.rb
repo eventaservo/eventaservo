@@ -65,5 +65,5 @@ Rails.application.configure do
   Rails.application.routes.default_url_options[:port] = 3000
   Rails.application.routes.default_url_options[:protocol] = :https
 
-  config.active_job.queue_adapter = :test
+  config.active_job.queue_adapter = :solid_queue
 end
