@@ -30,13 +30,12 @@ module EventServices
     # @return [Boolean]
     #
     def delete_enqueued_jobs
-      return unless @event.event_reminder_job_ids
+      return if @event.event_reminder_job_ids.blank?
 
-      schedule_set = Sidekiq::ScheduledSet.new
       @event.event_reminder_job_ids.each do |job_id|
         next unless job_id.is_a?(String)
 
-        schedule_set.scan(job_id).each(&:delete)
+        SolidQueue::Job.find_by(active_job_id: job_id).destroy
       end
     ensure
       update_event_reminder_job_ids([])
