@@ -2,7 +2,7 @@
 
 class SciigasUzantojnAntauEventoJob < ApplicationJob
   queue_as :event_reminders
-  retry_on Postmark::TimeoutError, Net::OpenTimeout, wait: 1.minute, attempts: 5
+  # retry_on Postmark::TimeoutError, Net::OpenTimeout, wait: 1.minute, attempts: 5
 
   # reminder_date_string must be one of
   #   - "2.hours"

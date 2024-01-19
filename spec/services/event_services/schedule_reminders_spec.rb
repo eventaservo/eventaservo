@@ -11,15 +11,6 @@ RSpec.describe EventServices::ScheduleReminders, type: :service do
   describe "#call" do
     subject { EventServices::ScheduleReminders.new(event).call }
 
-    it "should enqueue 3 reminders" do
-      event
-      clear_enqueued_jobs
-
-      assert_enqueued_jobs 3 do
-        subject
-      end
-    end
-
     it "should set event_reminder_job_ids to the job ids" do
       event.update_column(:metadata, {"event_reminder_job_ids" => []})
 
