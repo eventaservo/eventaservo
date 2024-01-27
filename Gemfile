@@ -96,7 +96,7 @@ gem "turbo-rails", "~> 1.4"
 gem "jsbundling-rails", "~> 1.1"
 
 # Solid Queue
-gem "solid_queue", "~> 0.1.2"
+gem "solid_queue", "~> 0.1"
 
 # Sentry.io
 gem "sentry-ruby", "~> 5"
