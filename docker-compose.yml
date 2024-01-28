@@ -1,13 +1,13 @@
 # Docker-compose file for DEVELOPMENT containers
 x-app: &backend-app
   environment:
-      - RAILS_ENV=${RAILS_ENV:-development}
-      - RAILS_SERVE_STATIC_FILES=${RAILS_SERVE_STATIC_FILES:-false}
-      - DB_HOST=db
-      - DB_USERNAME=postgres
-      - DB_PASSWORD=postgres
-      - REDIS_URL=redis://redis:6379/0
-      - PORT=3000
+    - RAILS_ENV=${RAILS_ENV:-development}
+    - RAILS_SERVE_STATIC_FILES=${RAILS_SERVE_STATIC_FILES:-false}
+    - DB_HOST=db
+    - DB_USERNAME=postgres
+    - DB_PASSWORD=postgres
+    - REDIS_URL=redis://redis:6379/0
+    - PORT=3000
 
 services:
   backend:
@@ -28,6 +28,14 @@ services:
     depends_on:
       - db
       - redis
+
+  cronjobs:
+    <<: *backend-app
+    image: es-dev
+    entrypoint: ./entrypoint_cronjobs.sh
+    command: tail -f /app/log/cronjobs.log
+    depends_on:
+      - db
 
   solid_queue:
     <<: *backend-app
