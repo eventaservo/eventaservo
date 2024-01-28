@@ -1,6 +1,3 @@
-require "sidekiq/web"
-require "sidekiq/cron/web"
-
 Rails.application.routes.draw do
   # Dynamic error pages
   get "/robots.txt", to: "home#robots"
@@ -19,10 +16,6 @@ Rails.application.routes.draw do
   get "/search.json", to: "home#search", format: :json
   get "/versio", to: "home#versio", format: :json
   get "/dev/error", to: "home#error"
-
-  authenticated :user, ->(user) { user.admin? } do
-    mount Sidekiq::Web => "/sidekiq"
-  end
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
