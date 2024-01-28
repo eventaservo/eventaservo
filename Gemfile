@@ -110,6 +110,9 @@ gem "bullet", "~> 7"
 
 gem "ahoy_matey", "~> 5"
 
+# For scheduling tasks
+gem "whenever", "~> 1.0"
+
 group :development, :test do
   gem "debug", ">= 1.0.0", require: false
   gem "dotenv-rails", "~> 2.8"
