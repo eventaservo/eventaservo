@@ -1,0 +1,49 @@
+<div class="box-white">
+  <div class="d-flex">
+    <h1>Serĉilo</h1>
+  </div>
+
+  <%= form_with url: "/serchilo", method: :get do |form| %>
+    <div class="row">
+      <div class="col-12 col-md-9">
+        <div class="input-group">
+          <input
+            type="text"
+            autofocus="true"
+            value="<%= @search_term %>"
+            name="query"
+            placeholder="Serĉi eventojn aŭ organizojn... (minimume 3 signoj)"
+            class="form-control <%= 'is-invalid' unless @search_is_valid %>"
+            >
+            <%= form.submit '🔎', class: 'btn btn-outline-primary' %>
+
+            <% unless @search_is_valid %>
+              <div class="invalid-feedback d-inline">La serĉa frazo devas enhavi almenaŭ 3 signojn</div>
+            <% end %>
+
+          </div>
+        </div>
+
+        <div class="col-12 col-md-3">
+          <div class="d-sm-flex justify-content-around flex-md-column">
+            <div class="custom-control custom-switch">
+              <%= check_box_tag :pasintaj, true, params[:pasintaj],  class: 'custom-control-input' %>
+              <%= label_tag :pasintaj, 'Pasintaj', class: 'custom-control-label' %>
+            </div>
+
+            <div class="custom-control custom-switch">
+              <%= check_box_tag :nuligitaj, true, params[:nuligitaj],  class: 'custom-control-input' %>
+              <%= label_tag :nuligitaj, 'Nuligitaj', class: 'custom-control-label' %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <% if @search_is_valid %>
+        <%= render partial: "home/search/organizations_results", locals: { organizations: @organizations } %>
+        <%= render partial: "home/search/events_results", locals: { events: @events } %>
+        <%= render partial: "home/search/users_results", locals: { users: @users } %>
+        <%= render partial: "home/search/videos_results", locals: { videos: @videos } %>
+      <% end %>
+    <% end %>
+  </div>

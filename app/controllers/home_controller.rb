@@ -105,14 +105,21 @@ class HomeController < ApplicationController
   end
 
   def search
-    @organizations = Organization.includes(:country).serchi(params[:query]).limit(20).order(:name)
-    @users = User.serchi(params[:query]).limit(20)
-    @videos = Video.serchi(params[:query]).limit(20)
+    @search_term = params[:query]&.strip
+    if @search_term.blank? || @search_term.length < 3
+      @search_is_valid = false
+    else
+      @search_is_valid = true
 
-    @events = Event.includes(%i[country participants organizations]).search(params[:query])
-    @events = @events.future_and_just_finished if params[:pasintaj].nil?
-    @events = @events.ne_nuligitaj if params[:nuligitaj].nil?
-    @events = @events.limit(30).order(date_start: :desc)
+      @organizations = Organization.includes(:country).serchi(@search_term).order(:name)
+      @users = User.serchi(@search_term)
+      @videos = Video.serchi(@search_term)
+
+      @events = Event.includes(%i[country participants organizations]).search(@search_term)
+      @events = @events.future_and_just_finished if params[:pasintaj].nil?
+      @events = @events.ne_nuligitaj if params[:nuligitaj].nil?
+      @events = @events.order(date_start: :desc)
+    end
   end
 
   def versio
