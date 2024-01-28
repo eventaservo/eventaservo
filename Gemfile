@@ -95,14 +95,12 @@ gem "turbo-rails", "~> 1.4"
 # JS bundling
 gem "jsbundling-rails", "~> 1.1"
 
-# Sentry.io
-gem "sentry-sidekiq", "~> 5"
-gem "sentry-rails", "~> 5"
-gem "sentry-ruby", "~> 5"
+# Solid Queue
+gem "solid_queue", "~> 0.1.2"
 
-# Sidekiq
-gem "sidekiq", "~> 7.1"
-gem "sidekiq-cron", "~> 1.10"
+# Sentry.io
+gem "sentry-ruby", "~> 5"
+gem "sentry-rails", "~> 5"
 
 gem "listen"
 

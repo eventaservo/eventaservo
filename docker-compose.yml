@@ -6,7 +6,7 @@ x-app: &backend-app
       - DB_HOST=db
       - DB_USERNAME=postgres
       - DB_PASSWORD=postgres
-      - REDIS_URL=REDIS_URL=redis://redis:6379/0
+      - REDIS_URL=redis://redis:6379/0
       - PORT=3000
 
 services:
@@ -29,14 +29,14 @@ services:
       - db
       - redis
 
-  sidekiq:
+  solid_queue:
     <<: *backend-app
     image: es-dev
-    command: bundle exec rails sidekiq
+    command: bundle exec rails solid_queue:start
     depends_on:
       - db
-      - redis
 
+  # Used for Geocoder cache
   redis:
     image: redis:7
     healthcheck:

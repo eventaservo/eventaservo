@@ -21,7 +21,7 @@ module Eventaservo
     config.i18n.default_locale = :epo
     config.exceptions_app = self.routes
 
-    config.active_job.queue_adapter = :sidekiq
+    config.active_job.queue_adapter = :solid_queue
     config.active_storage.variant_processor = :mini_magick
     config.action_dispatch.default_headers = { "X-Frame-Options" => "ALLOWALL" }
 
