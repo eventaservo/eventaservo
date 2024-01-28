@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.70.0](https://github.com/eventaservo/eventaservo/compare/v2.69.1...v2.70.0) (2024-01-28)
+
+
+### Features
+
+* Add ActiveAdmin pages for SolidQueue ([#622](https://github.com/eventaservo/eventaservo/issues/622)) ([cba8d89](https://github.com/eventaservo/eventaservo/commit/cba8d894facfc4f228a3f8ca512f36134852e9ca))
+* Do not search with less than 3 characters ([a3065e5](https://github.com/eventaservo/eventaservo/commit/a3065e50a9690352f3372489bda55d355d31557d))
+* Replace Sidekiq for Solid Queue ([#620](https://github.com/eventaservo/eventaservo/issues/620)) ([541f3a0](https://github.com/eventaservo/eventaservo/commit/541f3a0fbe1961724cd931b09928d4de086927fb))
+
+
+### Bug Fixes
+
+* **Admin:** create sample events job ([5a3bd42](https://github.com/eventaservo/eventaservo/commit/5a3bd427113222b70ef0dbfe5ea76b57e7ca1842))
+* Force environment for tests ([#624](https://github.com/eventaservo/eventaservo/issues/624)) ([e0ba2d6](https://github.com/eventaservo/eventaservo/commit/e0ba2d6bb03e1dcc56578aa1f9b8af55a8ae44a6))
+* N+1 queries ([#616](https://github.com/eventaservo/eventaservo/issues/616)) ([8a692f5](https://github.com/eventaservo/eventaservo/commit/8a692f5afcb5c678bbc23eef4378061d77cf118c))
+* remove debugger ([3e55f9a](https://github.com/eventaservo/eventaservo/commit/3e55f9afe2cb095f9b69741637b5c448849d6f01))
+
 ## [2.69.1](https://github.com/eventaservo/eventaservo/compare/v2.69.0...v2.69.1) (2024-01-14)
 
 
