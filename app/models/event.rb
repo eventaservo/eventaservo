@@ -465,7 +465,8 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   # Formatas la eventon laŭ normala formato
   def format_event_data
-    normalize_title
+    self.title = TitleNormalizer.new(title).call if new_record?
+
     convert_x_characters if new_record?
 
     self.city = city.tr("/", "").strip
@@ -493,19 +494,6 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
       self.date_start = tz.local_to_utc(Time.new(date_start.year, date_start.month, date_start.day, date_start.hour, date_start.min)).in_time_zone(time_zone)
       self.date_end = tz.local_to_utc(Time.new(date_end.year, date_end.month, date_end.day, date_end.hour, date_end.min)).in_time_zone(time_zone)
     end
-  end
-
-  # Titleize the title if it's mostly in uppercase
-  #
-  # @return [String] the normalized title
-  def normalize_title
-    upcase_chars = title.scan(/[A-Z]/).length.to_f
-    self.title =
-      if upcase_chars / title.length > 0.5
-        title.titleize
-      else
-        title
-      end.strip
   end
 
   # Remove the X characters from the title, description and body

@@ -76,6 +76,33 @@ RSpec.describe Event, type: :model do
         expect(EventRedirection.last.new_short_url).to eq("new_short_url")
       end
     end
+
+    context "before_save" do
+      context "when the event is new" do
+        it "normalizes the title" do # rubocop:disable RSpec/ExampleLength
+          event = build(:event, title: "UEA Universala Kongreso")
+          event.save
+          expect(event.title).to eq("UEA Universala Kongreso")
+
+          event = build(:event, title: "PSKK")
+          event.save
+          expect(event.title).to eq("Pskk")
+        end
+      end
+
+      context "when the event is being updated" do
+        it "doesn't normalize the title" do
+          event = create(:event, title: "UEA Universala Kongreso")
+          event.update(title: "UEA UNIVERSALA KONGRESO  ")
+          expect(event.title).to eq("UEA UNIVERSALA KONGRESO  ")
+
+          event = create(:event, title: "PSKK")
+          expect(event.title).to eq("Pskk")
+          event.update(title: "PSKK")
+          expect(event.title).to eq("PSKK")
+        end
+      end
+    end
   end
 
   describe "instance methods" do
@@ -142,16 +169,6 @@ RSpec.describe Event, type: :model do
       context "when the event is in the future" do
         let(:event) { build(:event, date_start: 1.day.from_now, date_end: 1.day.from_now) }
         it { is_expected.to be_falsey }
-      end
-    end
-
-    describe "#normalize title" do
-      it "should normalize the title" do
-        event.update(title: "UEA Universala Kongreso")
-        expect(event.title).to eq("UEA Universala Kongreso")
-
-        event.update(title: "UEA UNIVERSALA KONGRESO  ")
-        expect(event.title).to eq("Uea Universala Kongreso")
       end
     end
 
