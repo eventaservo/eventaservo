@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.71.0](https://github.com/eventaservo/eventaservo/compare/v2.70.0...v2.71.0) (2024-02-02)
+
+
+### Features
+
+* **Event:** Titleize the title only for new events ([#629](https://github.com/eventaservo/eventaservo/issues/629)) ([f0a2a25](https://github.com/eventaservo/eventaservo/commit/f0a2a252ced839ad50f6f6001344d8237d96ee38))
+
 ## [2.70.0](https://github.com/eventaservo/eventaservo/compare/v2.69.1...v2.70.0) (2024-01-28)
 
 
