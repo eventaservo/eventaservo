@@ -52,6 +52,12 @@ ActiveAdmin.register_page "Dashboard" do
     end
   end
 
+  sidebar "Tools" do
+    li do
+      link_to "Mission Control - Jobs", "/jobs"
+    end
+  end
+
   page_action :create_sample_events, method: :post do
     return false if Rails.env.production?
 
