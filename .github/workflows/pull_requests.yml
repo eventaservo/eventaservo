@@ -1,9 +1,10 @@
-name: Rails tests
+name: Pull Requests
 
 on: [pull_request]
 
 jobs:
   tests:
+    if: github.ref != 'refs/heads/release-please--branches-main'
     uses: ./.github/workflows/template_test.yml
     secrets:
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
