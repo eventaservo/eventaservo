@@ -5,28 +5,24 @@ tasks:
   - name: Setup
     init: |
       docker run -d -p 5432:5432 -e POSTGRES_DB=eventaservo_devel -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -v postgres_db:/var/lib/postgresql/data --name postgres postgres:13.5
-      docker run -d -p 6379:6379 --name redis redis:6.2.6
-      gem install solargraph rubocop rubocop-rails
       gem install bundler:2.4.6
       bundle install
       bundle exec rails db:setup
-      solargraph download-core
-      solargraph bundle
       yarn install
       gp sync-done setup
     command: |
-      docker start postgres redis
+      docker start postgres
       gp sync-done setup
 
   - name: Rails
     command: |
       gp sync-await setup
-      bundle exec bin/rails server -b 0.0.0.0 -p 3000 -e development -b 'ssl://0.0.0.0:3000?key=./certs/localhost.key&cert=./certs/localhost.crt'
+      bundle exec bin/rails server -b 0.0.0.0 -p 3000 -e development
 
-  - name: Delayed Job
-    command: |
-      gp sync-await setup
-      bundle exec bin/rake jobs:work
+  # - name: Delayed Job
+  #   command: |
+  #     gp sync-await setup
+  #     bundle exec bin/rake jobs:work
 
   - name: Rails console
     command: |
@@ -56,10 +52,10 @@ vscode:
     - castwide.solargraph
     - karunamurti.haml
 
-github:
-  prebuilds:
-    master: true
-    branches: true
-    pullRequests: true
-    addCheck: true
-    addBadge: true
+# github:
+#   prebuilds:
+#     master: true
+#     branches: true
+#     pullRequests: true
+#     addCheck: true
+#     addBadge: true
