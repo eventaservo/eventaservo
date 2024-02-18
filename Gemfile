@@ -118,10 +118,10 @@ gem "whenever", "~> 1.0"
 
 group :development, :test do
   gem "debug", ">= 1.0.0", require: false
-  gem "dotenv-rails", "~> 2.8"
+  gem "dotenv-rails"
   gem "parallel_tests"
   gem "rake"
-  gem "rspec-rails", "~> 6.1"
+  gem "rspec-rails"
   gem "spring"
   gem "standard"
 end
@@ -142,8 +142,7 @@ group :test do
   gem "capybara"
   gem "minitest", "~> 5.5"
   gem "selenium-webdriver"
-  gem "shoulda-context", "~> 2.0"
-  gem "shoulda-matchers", "~> 5.3"
+  gem "shoulda-matchers"
   gem "simplecov-cobertura"
   gem "vcr"
   gem "webmock"
