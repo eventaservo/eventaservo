@@ -17,6 +17,6 @@
     %br
     .text-divider.font-weight-bold.fg-color-grayDark AŬ
     %br
-    = link_to "Ensaluti per Facebook", user_facebook_omniauth_authorize_path, class: 'facebook-button col-12'
+    = button_to "Ensaluti per Facebook", user_facebook_omniauth_authorize_path, class: 'facebook-button col-12', data: { turbo: false }
 
   = render partial: 'devise/shared/links'
