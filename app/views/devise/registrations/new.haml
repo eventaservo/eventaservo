@@ -7,7 +7,7 @@
         %br
         Estas senpage!
 
-    = link_to 'Registriĝi per Facebook', user_facebook_omniauth_authorize_path, class: 'facebook-button col-12'
+    = button_to 'Registriĝi per Facebook', user_facebook_omniauth_authorize_path, class: 'facebook-button col-12', data: { turbo: false }
     %br
     %br
     .text-divider.font-weight-bold.fg-color-grayDark AŬ
