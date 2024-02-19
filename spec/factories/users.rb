@@ -67,6 +67,7 @@ FactoryBot.define do
     confirmed_at { Time.now }
     last_sign_in_at { Time.now }
     last_sign_in_ip { Faker::Internet.ip_v4_address }
+    created_at { Time.now - rand(1..12).months }
     country { Country.all.sample }
     instruo { {instruisto: true, nivelo: ["baza"], sperto: Faker::Lorem.paragraph} }
     prelego { {preleganto: true, temoj: Faker::Lorem.paragraph} }
