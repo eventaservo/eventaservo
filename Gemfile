@@ -33,7 +33,7 @@ gem "icalendar", "~> 2.6"
 gem "momentjs-rails", "~> 2.20"
 
 gem "mini_magick", "~> 4.10"
-gem "omniauth", "~> 1.9"
+gem "omniauth", "~> 2.0"
 gem "omniauth-facebook", "~> 6.0"
 
 # CSS kaj fasonado
