@@ -464,6 +464,9 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     rexml (3.2.6)
+    rollups (0.3.2)
+      activesupport (>= 6.1)
+      groupdate (>= 6.1)
     rouge (4.2.0)
     rspec-core (3.13.0)
       rspec-support (~> 3.13.0)
@@ -675,6 +678,7 @@ DEPENDENCIES
   rake
   redcarpet (~> 3.5)
   redis (~> 5)
+  rollups (~> 0.3.2)
   rspec-rails
   sass-rails (~> 6)
   seed_dump
