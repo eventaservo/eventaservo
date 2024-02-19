@@ -30,3 +30,7 @@ end
 every 1.day, at: "5am" do
   rake "cron:backup_db"
 end
+
+every 1.day, at: "1am" do
+  rake "cron:generate_statistics"
+end
