@@ -92,7 +92,7 @@ gem "yard"
 
 # Hotwired
 gem "stimulus-rails", "~> 1.2"
-gem "turbo-rails", "~> 1.4"
+gem "turbo-rails", "~> 2"
 
 # JS bundling
 gem "jsbundling-rails", "~> 1.1"
