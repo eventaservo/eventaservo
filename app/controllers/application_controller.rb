@@ -18,28 +18,46 @@ class ApplicationController < ActionController::Base
   def filter_events
     @events =
       case params[:periodo]
-      when "hodiau" then Event.today
-      when "p7_tagojn" then Event.in_7days
-      when "p30_tagojn" then Event.in_30days
-      when "estontece" then Event.after_30days
-      else Event.venontaj
+      when "hodiau"
+        ahoy.track "Filter by today events", kind: "filters"
+        Event.today
+      when "p7_tagojn"
+        ahoy.track "Filter by events in 7 days", kind: "filters"
+        Event.in_7days
+      when "p30_tagojn"
+        ahoy.track "Filter by events in 30 days", kind: "filters"
+        Event.in_30days
+      when "estontece"
+        ahoy.track "Filter by events after 30 days", kind: "filters"
+        Event.after_30days
+      else
+        Event.venontaj
       end
 
     # Filtras la anoncojn kaj konkursojn, kiuj devas aperi nur en ilia specifa paĝo
     @events = @events.includes([:organization_events]).chefaj
 
-    # Filtras laŭ organizo
-    @events = @events.joins(:organizations).where(organizations: {short_name: params[:o]}) if params[:o].present?
+    # Filter by organization
+    if params[:o].present?
+      ahoy.track "Filter by organization", kind: "filters"
+      @events = @events.joins(:organizations).where(organizations: {short_name: params[:o]})
+    end
 
-    # Filtras per Speco
+    # Filter by category
     if params[:s].present? && params[:s].in?(Constants::TAGS[0])
       speco = params[:s].tr("%2C", "").tr(",", "")
+      ahoy.track "Filter category by #{speco}", kind: "filters"
       @events = @events.kun_speco(speco)
     end
 
     # Filtras per Unutaga aŭ Plurtaga
-    @events = @events.unutagaj if params[:t] == "unutaga"
-    @events = @events.plurtagaj if params[:t] == "plurtaga"
+    if params[:t] == "unutaga"
+      ahoy.track "Filter by one-day-event", kind: "filters"
+      @events = @events.unutagaj
+    elsif params[:t] == "plurtaga"
+      ahoy.track "Filter by multi-day-event", kind: "filters"
+      @events = @events.plurtagaj
+    end
   end
 
   def user_can_edit_event?(user:, event:)
