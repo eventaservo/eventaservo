@@ -113,8 +113,9 @@ gem "listen"
 # @TODO: must be moved to development but must be checked the docker build process to work fine
 gem "bullet", "~> 7"
 
+# For statistics
 gem "ahoy_matey", "~> 5"
-
+gem "rollups", "~> 0.3.2"
 # For scheduling tasks
 gem "whenever", "~> 1.0"
 

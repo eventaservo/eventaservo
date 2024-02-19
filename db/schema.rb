@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_18_232918) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_19_141501) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -285,6 +285,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_18_232918) do
     t.index ["event_id"], name: "index_participants_on_event_id"
     t.index ["public"], name: "index_participants_on_public"
     t.index ["user_id"], name: "index_participants_on_user_id"
+  end
+
+  create_table "rollups", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "interval", null: false
+    t.datetime "time", null: false
+    t.jsonb "dimensions", default: {}, null: false
+    t.float "value"
+    t.index ["name", "interval", "time", "dimensions"], name: "index_rollups_on_name_and_interval_and_time_and_dimensions", unique: true
   end
 
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
