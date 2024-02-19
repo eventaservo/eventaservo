@@ -10,4 +10,6 @@
 
   .row
     .col-12.col-md-6
+      = render(Graphs::NewUsersByMonthComponent.new)
+    .col-12.col-md-6
       = line_chart @visitors, title: "Vizitantoj monate"
