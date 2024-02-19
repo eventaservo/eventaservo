@@ -60,7 +60,7 @@ gem "jbuilder", "~> 2.5"
 # gem 'mini_magick', '~> 4.8'
 
 gem "rack-attack", "~> 6.2"
-gem "rack-cors", "~> 1.1", require: "rack/cors"
+gem "rack-cors", "~> 2.0", require: "rack/cors"
 
 gem "activeadmin", "~> 3"
 gem "aws-sdk-s3", "~> 1.136"
