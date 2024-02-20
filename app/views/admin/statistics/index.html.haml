@@ -3,13 +3,11 @@
 
   .row
     .col-12.col-md-6
-      = line_chart @users_registered_by_month, title: "Uzantoj"
+      = render(Graphs::NewUsersByMonthComponent.new)
 
     .col-12.col-md-6
       = area_chart @event_created_by_month, stacked: true, title: "Eventoj kreitaj monate"
 
   .row
     .col-12.col-md-6
-      = render(Graphs::NewUsersByMonthComponent.new)
-    .col-12.col-md-6
-      = line_chart @visitors, title: "Vizitantoj monate"
+      = render(Graphs::VisitsByMonthComponent.new)
