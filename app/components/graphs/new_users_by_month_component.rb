@@ -15,7 +15,7 @@ class Graphs::NewUsersByMonthComponent < ApplicationComponent
   end
 
   def total_users_by_month
-    total = 0
+    total = User.where("created_at < ?", time_range.first.beginning_of_month).count
     Rollup.where(time: time_range).series("New users by month", interval: "month").transform_values { |v|
       total += v
       total
