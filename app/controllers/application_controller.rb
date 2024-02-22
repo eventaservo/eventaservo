@@ -40,7 +40,8 @@ class ApplicationController < ActionController::Base
     # Filter by organization
     if params[:o].present?
       ahoy.track "Filter by organization", kind: "filters"
-      @events = @events.joins(:organizations).where(organizations: {short_name: params[:o]})
+      ids = @events.joins(:organizations).where(organizations: {short_name: params[:o]}).pluck(:id)
+      @events = Event.where(id: ids)
     end
 
     # Filter by category
