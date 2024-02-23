@@ -8,7 +8,8 @@ Geocoder.configure(
   ipinfo_io: {
     api_key: Rails.application.credentials.ipinfo_key || ENV["IPINFO_KEY"]
   },
-  lookup: :google,
+  nominatim: {},
+  lookup: Rails.env.development? ? :nominatim : :google,
   ip_lookup: :ipinfo_io,      # name of IP address geocoding service (symbol)
   language: :eo,                # ISO-639 language code
   use_https: true,              # use HTTPS for lookup requests? (if supported)
