@@ -15,14 +15,16 @@ Rake.application["db:fixtures:load"].invoke
 
 # Kreas la administranton
 User.destroy_all
-User.create(email: "admin@eventaservo.org",
+User.create(
+  email: "admin@eventaservo.org",
   name: "Administranto",
   password: "administranto",
   username: "admin",
   country_id: Country.find_by(code: "br").id,
   city: "Rio de Janeiro",
   admin: true,
-  confirmed_at: DateTime.now)
+  confirmed_at: DateTime.now
+)
 
 puts "Create System Account"
 FactoryBot.create(:user, name: "EventaServo Sistemo", email: "kontakto@eventaservo.org", system_account: true)
@@ -32,13 +34,34 @@ FactoryBot.create(:organization, :uea)
 FactoryBot.create(:organization, :tejo)
 3.times { FactoryBot.create(:organization) }
 
-# Events
-puts "- Creating events"
-4.times { FactoryBot.create(:event) }
-4.times { FactoryBot.create(:event, user: User.system_account) }
-3.times { FactoryBot.create(:event, :online) }
-3.times { FactoryBot.create(:event, :past) }
+# Common users
+puts "- Creating users and events"
+2.times do
+  user = FactoryBot.create(:user)
+  puts "  - User #{user.name}"
+  4.times do
+    puts "  \\_ creating future event"
+    FactoryBot.create(:event, user:)
+  end
+  3.times do
+    puts "  \\_ creating past event"
+    FactoryBot.create(:event, :past, user:)
+  end
+  3.times do
+    puts "  \\_ creating future online event"
+    FactoryBot.create(:event, :online, user:)
+  end
+end
+
+# International events
 puts "- Creating international calendar events"
-3.times { FactoryBot.create(:event, :international_calendar, date_start: DateTime.now + rand(1..3).months) }
+3.times do
+  FactoryBot.create(
+    :event,
+    :international_calendar,
+    user: User.all.sample,
+    date_start: DateTime.now + rand(1..3).months
+  )
+end
 
 puts "== FINISHED"
