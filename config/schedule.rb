@@ -19,10 +19,6 @@ set :output, "/app/log/cronjobs.log"
 
 # Learn more: http://github.com/javan/whenever
 
-every 20.minutes do
-  rake "cron:workerheartbeat"
-end
-
 every 6.hours do
   rake "cron:sitemap_refresh"
 end
