@@ -116,8 +116,6 @@ gem "bullet", "~> 7"
 # For statistics
 gem "ahoy_matey", "~> 5"
 gem "rollups", "~> 0.3.2"
-# For scheduling tasks
-gem "whenever", "~> 1.0"
 
 group :development, :test do
   gem "debug", ">= 1.0.0", require: false
