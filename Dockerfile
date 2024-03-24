@@ -8,8 +8,10 @@ RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg -
 RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
 
 RUN apt-get update && apt-get install -y \
+  btop \
   g++ \
   gcc \
+  htop \
   iputils-ping \
   imagemagick \
   libavahi-compat-libdnssd-dev \
