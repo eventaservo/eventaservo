@@ -23,7 +23,7 @@ gem "bootstrap", "~> 4.3"
 gem "font-awesome-sass", "~> 6"
 gem "haml", "~> 6"
 gem "jquery-rails", "~> 4.3", ">= 4.3.3"
-gem "jquery-ui-rails", "~> 6.0", ">= 6.0.1"
+gem "jquery-ui-rails", "~> 7.0"
 
 gem "select2-rails", "~> 4.0"
 
