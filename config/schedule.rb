@@ -19,10 +19,6 @@ set :output, "/app/log/cronjobs.log"
 
 # Learn more: http://github.com/javan/whenever
 
-every 6.hours do
-  rake "cron:sitemap_refresh"
-end
-
 every 1.day, at: "5am" do
   rake "cron:backup_db"
 end

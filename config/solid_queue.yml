@@ -6,6 +6,9 @@ default: &default
         worker_heartbeat:
           class: WorkerHeartbeatJob
           schedule: "0 * * * *"
+        sitemap_refresh:
+          class: SitemapRefreshJob
+          schedule: "0 */6 * * *" # Every 6 hours
   workers:
     - queues: "*"
       threads: 3
