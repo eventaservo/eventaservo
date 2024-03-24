@@ -18,7 +18,3 @@ set :output, "/app/log/cronjobs.log"
 # end
 
 # Learn more: http://github.com/javan/whenever
-
-every 1.day, at: "1am" do
-  rake "cron:generate_statistics"
-end
