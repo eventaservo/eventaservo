@@ -12,6 +12,9 @@ default: &default
         backup_db:
           class: BackupDbJob
           schedule: "0 5 * * *" # Every day at 5:00
+        generate_statistics:
+          class: GenerateStatisticsJob
+          schedule: "0 1 * * *" # Every day at 1:00
   workers:
     - queues: "*"
       threads: 3
