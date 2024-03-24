@@ -27,14 +27,6 @@ services:
     depends_on:
       - db
 
-  cronjobs:
-    <<: *backend-app
-    image: es-dev
-    entrypoint: ./entrypoint_cronjobs.sh
-    command: tail -f /app/log/cronjobs.log
-    depends_on:
-      - db
-
   solid_queue:
     <<: *backend-app
     image: es-dev
