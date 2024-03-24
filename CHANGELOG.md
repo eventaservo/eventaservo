@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.71.1](https://github.com/eventaservo/eventaservo/compare/v2.71.0...v2.71.1) (2024-03-24)
+
+
+### Bug Fixes
+
+* **Events:** :bug: access events on continents filtered by organization ([00a1940](https://github.com/eventaservo/eventaservo/commit/00a1940d4206d84f9d935f699ffacbc90b2c6c1b))
+* new users statistics graph ([f2af74b](https://github.com/eventaservo/eventaservo/commit/f2af74b7a0af3d481d7388233fcc99c41aa2a6ef))
+* Typo ([bd8fdc4](https://github.com/eventaservo/eventaservo/commit/bd8fdc4bf6588d8d4ff7679a91219380f6b71816))
+
 ## [2.71.0](https://github.com/eventaservo/eventaservo/compare/v2.70.0...v2.71.0) (2024-02-02)
 
 
