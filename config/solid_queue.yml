@@ -9,6 +9,9 @@ default: &default
         sitemap_refresh:
           class: SitemapRefreshJob
           schedule: "0 */6 * * *" # Every 6 hours
+        backup_db:
+          class: BackupDbJob
+          schedule: "0 5 * * *" # Every day at 5:00
   workers:
     - queues: "*"
       threads: 3

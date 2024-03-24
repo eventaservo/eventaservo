@@ -19,10 +19,6 @@ set :output, "/app/log/cronjobs.log"
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.day, at: "5am" do
-  rake "cron:backup_db"
-end
-
 every 1.day, at: "1am" do
   rake "cron:generate_statistics"
 end
