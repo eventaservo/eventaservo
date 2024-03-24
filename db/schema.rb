@@ -482,7 +482,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_19_141501) do
   end
 
   create_table "versions", force: :cascade do |t|
-    t.string "item_type", null: false
+    t.string "item_type"
+    t.string "{:null=>false}"
     t.bigint "item_id", null: false
     t.string "event", null: false
     t.string "whodunnit"
@@ -503,17 +504,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_19_141501) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "weathers", force: :cascade do |t|
-    t.string "city"
-    t.bigint "country_id", null: false
-    t.date "date"
-    t.jsonb "metadata"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["city", "country_id", "date"], name: "index_weathers_on_city_and_country_id_and_date", unique: true
-    t.index ["country_id"], name: "index_weathers_on_country_id"
-  end
-
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "logs", "users"
@@ -522,5 +512,4 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_19_141501) do
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
-  add_foreign_key "weathers", "countries"
 end

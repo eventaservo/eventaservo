@@ -5,7 +5,6 @@ tasks:
   - name: Setup
     init: |
       docker run -d -p 5432:5432 -e POSTGRES_DB=eventaservo_devel -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -v postgres_db:/var/lib/postgresql/data --name postgres postgres:13.5
-      docker run -d -p 6379:6379 --name redis redis:6.2.6
       gem install solargraph rubocop rubocop-rails
       gem install bundler:2.4.6
       bundle install
@@ -15,7 +14,7 @@ tasks:
       yarn install
       gp sync-done setup
     command: |
-      docker start postgres redis
+      docker start postgres
       gp sync-done setup
 
   - name: Rails
