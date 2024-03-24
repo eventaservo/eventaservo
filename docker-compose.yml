@@ -6,7 +6,6 @@ x-app: &backend-app
     - DB_HOST=db
     - DB_USERNAME=postgres
     - DB_PASSWORD=postgres
-    - REDIS_URL=redis://redis:6379/0
     - PORT=3000
 
 services:
@@ -27,7 +26,6 @@ services:
       - 3000:3000
     depends_on:
       - db
-      - redis
 
   cronjobs:
     <<: *backend-app
@@ -43,15 +41,6 @@ services:
     command: bundle exec rails solid_queue:start
     depends_on:
       - db
-
-  # Used for Geocoder cache
-  redis:
-    image: redis:7
-    healthcheck:
-      test: [ "CMD", "redis-cli", "ping" ]
-      interval: 10s
-      timeout: 3s
-      retries: 3
 
   db:
     image: postgres:15
