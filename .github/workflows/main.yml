@@ -8,6 +8,10 @@ on:
       - ".github/**"
       - ".gitpod*"
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   tests:
     uses: ./.github/workflows/template_test.yml
