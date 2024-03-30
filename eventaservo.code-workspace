@@ -23,5 +23,20 @@
 			"noku.rails-run-spec-vscode",
 			"shopify.ruby-lsp"
 		]
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "Run tests (except system ones)",
+				"type": "shell",
+				"command": "bundle exec rspec spec/  --tag ~type:system"
+			},
+			{
+				"label": "Run ALL tests",
+				"type": "shell",
+				"command": "bundle exec rspec spec/"
+			}
+		]
 	}
 }
