@@ -124,7 +124,6 @@ group :development, :test do
   gem "rake"
   gem "rspec-rails"
   gem "spring"
-  gem "standard"
 end
 
 group :development do
@@ -136,6 +135,10 @@ group :development do
   gem "binding_of_caller"
   gem "letter_opener_web", "~> 2.0"
   gem "pry-rails", "~> 0.3.4"
+  gem "rubocop", require: false
+  gem "rubocop-performance", require: false
+  gem "rubocop-rails", require: false
+  gem "rubocop-rspec", require: false
   gem "seed_dump" # Por rekrei la seeds.db dosieron
 end
 
