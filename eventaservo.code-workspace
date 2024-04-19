@@ -13,7 +13,8 @@
 			"Organizations",
 			"Accessibility",
 			"Administration",
-			"Event Reports"
+			"Event Reports",
+			"Gems"
 		],
 		"editor.formatOnSave": true,
 	},
