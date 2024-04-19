@@ -19,8 +19,6 @@
 	},
 	"extensions": {
 		"recommendations": [
-			"testdouble.vscode-standard-ruby",
-			"noku.rails-run-spec-vscode",
 			"shopify.ruby-lsp"
 		]
 	},
