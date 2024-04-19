@@ -238,9 +238,12 @@ class EventsController < ApplicationController
   end
 
   def kronologio
-    @evento = Event.lau_ligilo(params[:event_code])
+    @event = Event.lau_ligilo(params[:event_code])
 
-    redirect_to root_path, flash: {error: "Evento ne ekzistas"} unless @evento
+    version_ids = (@event.versions + @event.enhavo.versions).map(&:id)
+    @versions = PaperTrail::Version.where(id: version_ids).order(created_at: :desc)
+
+    redirect_to root_path, flash: {error: "Evento ne ekzistas"} unless @event
   end
 
   private

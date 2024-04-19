@@ -19,14 +19,15 @@ module Eventaservo
     config.time_zone = "UTC"
 
     config.i18n.default_locale = :epo
-    config.exceptions_app = self.routes
+    config.exceptions_app = routes
 
     config.active_job.queue_adapter = :solid_queue
     config.active_storage.variant_processor = :mini_magick
-    config.action_dispatch.default_headers = { "X-Frame-Options" => "ALLOWALL" }
+    config.action_dispatch.default_headers = {"X-Frame-Options" => "ALLOWALL"}
+    config.active_record.yaml_column_permitted_classes = [Symbol, Date, Time, ActiveSupport::TimeWithZone, ActiveSupport::TimeZone]
 
-    config.eager_load_paths << "#{Rails.root}/test/mailers/previews"
+    config.eager_load_paths << "#{Rails.root.join("test/mailers/previews")}"
 
-    Dotenv::Rails.load if Rails.env.development? || Rails.env.test?
+    Dotenv::Rails.load if Rails.env.local?
   end
 end
