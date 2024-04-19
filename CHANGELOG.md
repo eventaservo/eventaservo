@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.72.0](https://github.com/eventaservo/eventaservo/compare/v2.71.0...v2.72.0) (2024-04-19)
+
+
+### Features
+
+* :boom: Disables Facebook login and registration ([d6346c1](https://github.com/eventaservo/eventaservo/commit/d6346c11ae10b2807df7be648c2d3371da91b3d4))
+* **Administration:** Allow deletion of events ([#670](https://github.com/eventaservo/eventaservo/issues/670)) ([e5450cc](https://github.com/eventaservo/eventaservo/commit/e5450cc091cc9f2f63609aabdf064dc80527cf30))
+
+
+### Bug Fixes
+
+* **Events:** :bug: access events on continents filtered by organization ([00a1940](https://github.com/eventaservo/eventaservo/commit/00a1940d4206d84f9d935f699ffacbc90b2c6c1b))
+* **Events:** :bug: History ([76ba83d](https://github.com/eventaservo/eventaservo/commit/76ba83da88badd6ae1f2bdb54f7dbbb29147ad36))
+* new users statistics graph ([f2af74b](https://github.com/eventaservo/eventaservo/commit/f2af74b7a0af3d481d7388233fcc99c41aa2a6ef))
+* Typo ([bd8fdc4](https://github.com/eventaservo/eventaservo/commit/bd8fdc4bf6588d8d4ff7679a91219380f6b71816))
+
 ## [2.71.0](https://github.com/eventaservo/eventaservo/compare/v2.70.0...v2.71.0) (2024-02-02)
 
 
