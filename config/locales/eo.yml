@@ -1,4 +1,4 @@
-epo:
+eo:
   activerecord:
     errors:
       messages:
@@ -227,6 +227,98 @@ epo:
       long: "%A %d %B %Y %H:%M"
       short: "%d %b %H:%M"
     pm: pm
+  devise:
+    confirmations:
+      confirmed: "Via retpoŝtadreso estas konfirmita. Vi nun povas ensaluti."
+      send_instructions: "Vi ricevos baldaŭ retmesaĝon kun instrukcioj por konfirmi vian registron"
+      send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
+    failure:
+      already_authenticated: "Vi jam ensalutis antaŭe"
+      inactive: "Via konto ankoraŭ ne estas aktiva"
+      invalid: "Nevalida retpoŝtadreso aŭ pasvorto"
+      locked: "Your account is locked."
+      last_attempt: "You have one more attempt before your account is locked."
+      not_found_in_database: "Nevalida retpoŝtadreso aŭ pasvorto."
+      timeout: "Via sesio finiĝis. Bonvolu ensaluti denove."
+      unauthenticated: "Vi bezonas ensaluti por fari tion"
+      unconfirmed: "Vi bezonas konfirmi vian retpoŝtadreson por ensaluti"
+    mailer:
+      confirmation_instructions:
+        subject: "Konfirminstrukcioj"
+      reset_password_instructions:
+        subject: "Krei novan pasvorton"
+      unlock_instructions:
+        subject: "Unlock instructions"
+      email_changed:
+        subject: "Email Changed"
+      password_change:
+        subject: "Password Changed"
+    omniauth_callbacks:
+      failure: 'Could not authenticate you from %{kind} because "%{reason}".'
+      success: "Sukcesa ensaluto per %{kind}."
+    passwords:
+      no_token: "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided."
+      send_instructions: "Vi ricevos retmesaĝon kun instrukcioj por rekrei vian pasvorton"
+      send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
+      updated: "Via pasvorto estas sukcese ŝanĝita. Vi nun estas ensalutinta."
+      updated_not_active: "Via pasvorto estas sukcese ŝanĝita."
+    registrations:
+      destroyed: "Bye! Your account has been successfully cancelled. We hope to see you again soon."
+      signed_up: "Welcome! You have signed up successfully."
+      signed_up_but_inactive: "You have signed up successfully. However, we could not sign you in because your account is not yet activated."
+      signed_up_but_locked: "You have signed up successfully. However, we could not sign you in because your account is locked."
+      signed_up_but_unconfirmed: "Ni sendis retmesaĝon al via retpoŝtadreso kun instrukcioj por konfirmi vian registriĝon"
+      update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and follow the confirm link to confirm your new email address."
+      updated: "Vi sukcese ĝisdatigis viajn informojn."
+    sessions:
+      signed_in: "Sukcesa ensaluto"
+      signed_out: "Sukcesa elsaluto"
+      already_signed_out: "Vi jam elsalutas"
+    unlocks:
+      send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
+      send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."
+      unlocked: "Your account has been unlocked successfully. Please sign in to continue."
+  errors:
+    messages:
+      already_confirmed: "was already confirmed, please try signing in"
+      confirmation_period_expired: "needs to be confirmed within %{period}, please request a new one"
+      expired: "has expired, please request a new one"
+      not_found: "ne trovita"
+      not_locked: "was not locked"
+      not_saved:
+        one: "1 eraro malpermesis daŭrigi"
+        other: "%{count} eraroj malpermesis daŭrigi"
+  activerecord:
+    attributes:
+      user:
+        name: "Plena nomo"
+        password: "Pasvorto"
+        email: "Retpoŝtadreso"
+        password_confirmation: "Pasvorto-konfirmado"
+        city: Urbo
+        country_id: Lando
+        avatar: Profilbildo
+        picture: Profilbildo
+        authentication_token: API-ŝlosilo
+  pagy:
+
+    item_name:
+      one: "item"
+      other: "items"
+
+    nav:
+      prev: "&lsaquo;&nbsp;Antaŭa"
+      next: "Sekva&nbsp;&rsaquo;"
+      gap: "&hellip;"
+
+    info:
+      no_items: "No %{item_name} found"
+      single_page: "Montrante <b>%{count}</b> eventojn"
+      multiple_pages: "Montrante <b>%{from}-%{to}</b> el <b>%{count}</b> eventoj"
+
+    combo_nav_js: "Paĝo %{page_input} de %{pages}"
+
+    items_selector_js: "Show %{items_input} %{item_name} per page"
 
   invisible_captcha:
     sentence_for_humans: Se vi estas homo, ne plenumu tiun kampon
