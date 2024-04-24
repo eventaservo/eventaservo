@@ -18,7 +18,9 @@ module Eventaservo
 
     config.time_zone = "UTC"
 
+    config.i18n.available_locales = [:epo, :en]
     config.i18n.default_locale = :epo
+
     config.exceptions_app = routes
 
     config.active_job.queue_adapter = :solid_queue
