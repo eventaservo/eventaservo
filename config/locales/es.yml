@@ -1,5 +1,5 @@
 ---
-pt_BR:
+es:
   active_admin:
     access_denied:
       message: ''
@@ -202,18 +202,18 @@ pt_BR:
     - ''
     abbr_month_names:
     - ''
-    - jan
-    - fev
-    - mar
-    - abr
-    - mai
-    - jun
-    - jul
-    - ago
-    - set
-    - out
-    - nov
-    - dez
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - Ago
+    - ''
+    - Oct
+    - Nov
+    - Dic
     day_names:
     - ''
     - ''
@@ -228,18 +228,18 @@ pt_BR:
       short: ''
     month_names:
     - ''
-    - janeiro
-    - fevereiro
-    - março
-    - abril
-    - maio
-    - junho
-    - julho
+    - Enero
+    - Febrero
+    - marzo
+    - Abril
+    - mayo
+    - junio
+    - julio
     - agosto
-    - setembro
-    - outubro
-    - novembro
-    - dezembro
+    - Septiembre
+    - Octubre
+    - noviembre
+    - diciembre
   datetime:
     distance_in_words:
       about_x_hours:
@@ -280,9 +280,9 @@ pt_BR:
       day: ''
       hour: ''
       minute: ''
-      month: Mês
-      second: Segundo
-      year: Ano
+      month: ''
+      second: ''
+      year: ''
   devise:
     confirmations:
       confirmed: ''
@@ -292,8 +292,8 @@ pt_BR:
       messages:
         already_confirmed: ''
         confirmation_period_expired: ''
-        expired: expirou, solicite um novo
-        not_found: não encontrado
+        expired: ''
+        not_found: ''
         not_locked: ''
         not_saved:
           one: ''
@@ -326,18 +326,16 @@ pt_BR:
       no_token: ''
       send_instructions: ''
       send_paranoid_instructions: ''
-      updated: Sua senha foi alterada com sucesso. Agora você está logado.
+      updated: ''
       updated_not_active: ''
     registrations:
       destroyed: ''
-      signed_up: Bem-vindo! Você se inscreveu com sucesso.
+      signed_up: ''
       signed_up_but_inactive: ''
-      signed_up_but_locked: Você se inscreveu com sucesso. No entanto, não foi possível
-        fazer login porque sua conta está bloqueada.
-      signed_up_but_unconfirmed: Enviamos um e-mail para o seu endereço de e-mail
-        com instruções para confirmar seu registro.
+      signed_up_but_locked: ''
+      signed_up_but_unconfirmed: ''
       update_needs_confirmation: ''
-      updated: Você atualizou suas informações com sucesso.
+      updated: ''
     sessions:
       already_signed_out: ''
       signed_in: ''
@@ -385,15 +383,15 @@ pt_BR:
     sentence_for_humans: ''
     timestamp_error_message: ''
   links:
-    announcements_and_contests: Anúncios e concursos
-    international_calendar: Calendário Internacional
-    presentations: Apresentações Gravadas
-    reports: Relatórios
-    teachers_and_lecturers: Professores e palestrantes
+    announcements_and_contests: ''
+    international_calendar: ''
+    presentations: ''
+    reports: Informes
+    teachers_and_lecturers: ''
   navbar:
-    add_event: Adicionar evento
-    log_in_sign_up: Entrar / Cadastrar
-    organizations: Organizações
+    add_event: Agregar un evento
+    log_in_sign_up: Iniciar sesión / Registrarse
+    organizations: Organizaciones
   number:
     currency:
       format:
@@ -463,7 +461,7 @@ pt_BR:
       last_word_connector: ''
       two_words_connector: ''
       words_connector: ''
-  tagline: Divulgue eventos de Esperanto em todo o mundo!
+  tagline: ''
   time:
     am: ''
     formats:
@@ -645,7 +643,7 @@ pt_BR:
     America/Punta_Arenas: ''
     America/Rainy_River: ''
     America/Rankin_Inlet: ''
-    America/Recife: América/Recife
+    America/Recife: ''
     America/Regina: ''
     America/Resolute: ''
     America/Rio_Branco: ''
@@ -850,7 +848,7 @@ pt_BR:
     Europe/Vienna: ''
     Europe/Vilnius: ''
     Europe/Volgograd: ''
-    Europe/Warsaw: Europa/Varsóvia
+    Europe/Warsaw: ''
     Europe/Zagreb: ''
     Europe/Zaporozhye: ''
     Europe/Zurich: ''
@@ -866,7 +864,7 @@ pt_BR:
     Indian/Mayotte: ''
     Indian/Reunion: ''
     Pacific/Apia: ''
-    Pacific/Auckland: Pacífico/Auckland
+    Pacific/Auckland: ''
     Pacific/Bougainville: ''
     Pacific/Chatham: ''
     Pacific/Chuuk: ''
@@ -874,7 +872,7 @@ pt_BR:
     Pacific/Efate: ''
     Pacific/Enderbury: ''
     Pacific/Fakaofo: ''
-    Pacific/Fiji: Pacífico/Fiji
+    Pacific/Fiji: ''
     Pacific/Funafuti: ''
     Pacific/Galapagos: ''
     Pacific/Gambier: ''

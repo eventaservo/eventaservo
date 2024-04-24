@@ -206,7 +206,7 @@ eo:
     - ven
     - sab
     abbr_month_names:
-    -
+    - ''
     - jan
     - feb
     - mar
@@ -232,7 +232,7 @@ eo:
       long: "{0} %B %Y"
       short: "{0} {0}"
     month_names:
-    -
+    - ''
     - januaro
     - februaro
     - marto
@@ -402,6 +402,16 @@ eo:
   invisible_captcha:
     sentence_for_humans: Se vi estas homo, ne plenumu tiun kampon
     timestamp_error_message: Tro rapide! Refaru ĝin
+  links:
+    announcements_and_contests: Anoncoj kaj konkursoj
+    international_calendar: Internacia Kalendaro
+    presentations: Registritaj Prezentoj
+    reports: Raportoj
+    teachers_and_lecturers: Instruantoj kaj prelegantoj
+  navbar:
+    add_event: Aldoni eventon
+    log_in_sign_up: Ensaluti / Registriĝi
+    organizations: Organizoj
   number:
     currency:
       format:

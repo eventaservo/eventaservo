@@ -3,22 +3,22 @@
     .div
       = link_to image_tag('uea_emblemeto.png', alt: "UEA logo", height: '36px', class: 'mr-2 mb-2'), prie_url
     .div
-      Diskonigu Esperanto-eventojn tutmonde!
+      = t("tagline")
     .div
       = link_to image_tag('tejo.svg', alt: "TEJO logo", height: '28px'), prie_url
 
   .text-center.small
-    = link_to "Anoncoj kaj konkursoj", anoncoj_url
+    = link_to t("links.announcements_and_contests"), anoncoj_url
     |
-    = link_to "Internacia Kalendaro", international_calendar_path
+    = link_to t("links.international_calendar"), international_calendar_path
     |
-    = link_to "Instruantoj kaj prelegantoj", instruantoj_kaj_prelegantoj_path
+    = link_to t("links.teachers_and_lecturers"), instruantoj_kaj_prelegantoj_path
     |
-    = link_to icon('fas', 'video', 'Registritaj prezentoj'), video_url
+    = link_to icon('fas', 'video', t("links.presentations")), video_url
     %br
       %span
         🌟
-        = link_to 'NOVA: Raportoj', reports_url, class: "font-weight-bold"
+        = link_to t("links.reports"), reports_url, class: "font-weight-bold"
         🌟
 
   %br

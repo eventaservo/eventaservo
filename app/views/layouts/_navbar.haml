@@ -2,6 +2,7 @@
   .d-flex.flex-nowrap
     %a.navbar-brand{href: root_url}
       = Rails.env.production? ? 'Eventa Servo' : Rails.env.upcase
+      = I18n.locale
 
     = render partial: 'layouts/navbar_search'
 
@@ -14,9 +15,9 @@
 
     %ul.navbar-nav.mx-auto
       %li.nav-item
-        = link_to icon('fas', 'calendar-plus', 'Aldoni eventon'), new_event_path, class: 'nav-link'
+        = link_to icon('fas', 'calendar-plus', t("navbar.add_event")), new_event_path, class: 'nav-link'
       %li.nav-item
-        = link_to icon('fas', 'building', 'Organizoj'), organizations_url, class: 'nav-link'
+        = link_to icon('fas', 'building', t("navbar.organizations")), organizations_url, class: 'nav-link'
 
     %ul.navbar-nav
       = render 'layouts/navbar_tools'

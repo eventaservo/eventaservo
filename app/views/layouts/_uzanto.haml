@@ -12,4 +12,4 @@
         = link_to icon('fa-solid', 'sign-out-alt', 'Elsaluti'), destroy_user_session_path, class: 'dropdown-item', method: :delete
   - else
     %li.nav-item
-      = link_to icon('fa-solid', 'sign-in-alt', 'Ensaluti / Registriĝi'), new_user_session_path, class: 'btn btn-sm btn-outline-light'
+      = link_to icon('fa-solid', 'sign-in-alt', t('navbar.log_in_sign_up')), new_user_session_path, class: 'btn btn-sm btn-outline-light'
