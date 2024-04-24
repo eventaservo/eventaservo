@@ -206,6 +206,7 @@ eo:
     - ven
     - sab
     abbr_month_names:
+    -
     - jan
     - feb
     - mar
@@ -231,6 +232,7 @@ eo:
       long: "{0} %B %Y"
       short: "{0} {0}"
     month_names:
+    -
     - januaro
     - februaro
     - marto
@@ -469,6 +471,7 @@ eo:
       last_word_connector: " kaj "
       two_words_connector: " kaj "
       words_connector: ", "
+  tagline: Diskonigu Esperanto-eventojn tutmonde!
   time:
     am: am
     formats:

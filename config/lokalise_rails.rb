@@ -3,8 +3,8 @@
 if defined?(LokaliseRails) && defined?(LokaliseRails::GlobalConfig)
   LokaliseRails::GlobalConfig.config do |c|
     # These are mandatory options that you must set before running rake tasks:
-    c.api_token = ENV["LOKALISE_API_TOKEN"] || "97c2512d769abffcefcddd11c6bf60bac94724fb"
-    c.project_id = ENV["LOKALISE_PROJECT_ID"] || "756086886628e9efad2ac9.73201310"
+    c.api_token = ENV["LOKALISE_API_TOKEN"]
+    c.project_id = ENV["LOKALISE_PROJECT_ID"]
 
     # Provide a custom path to the directory with your translation files:
     # c.locales_path = "#{Rails.root}/config/locales"
@@ -35,7 +35,10 @@ if defined?(LokaliseRails) && defined?(LokaliseRails::GlobalConfig)
     # c.import_safe_mode = false
 
     # Additional export options (only filename, contents, and lang_iso params are provided by default)
-    # c.export_opts = {}
+    c.export_opts = {
+      # cleanup_mode: true,
+      replace_modified: true
+    }
 
     # Provide additional file exclusion criteria for exports (by default, any file with the proper extension will be exported)
     # c.skip_file_export = ->(file) { file.split[1].to_s.include?('fr') }

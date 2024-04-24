@@ -236,8 +236,8 @@ pt_BR:
     - ''
     - ''
     - ''
-    - novembro
-    - dezembro
+    - ''
+    - ''
   datetime:
     distance_in_words:
       about_x_hours:
@@ -449,6 +449,7 @@ pt_BR:
       last_word_connector: ''
       two_words_connector: ''
       words_connector: ''
+  tagline: ''
   time:
     am: ''
     formats:
@@ -630,7 +631,7 @@ pt_BR:
     America/Punta_Arenas: ''
     America/Rainy_River: ''
     America/Rankin_Inlet: ''
-    America/Recife: América/Recife
+    America/Recife: ''
     America/Regina: ''
     America/Resolute: ''
     America/Rio_Branco: ''
