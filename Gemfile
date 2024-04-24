@@ -117,6 +117,10 @@ gem "bullet", "~> 7"
 gem "ahoy_matey", "~> 5"
 gem "rollups", "~> 0.3.2"
 
+# For localization
+# https://lokalise.com
+gem "lokalise_rails", "~> 7.0"
+
 group :development, :test do
   gem "debug", ">= 1.0.0", require: false
   gem "dotenv-rails"
