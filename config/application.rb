@@ -18,7 +18,7 @@ module Eventaservo
 
     config.time_zone = "UTC"
 
-    config.i18n.available_locales = [:eo, :en, :pt_BR]
+    config.i18n.available_locales = [:eo, :en, :pt_br]
     config.i18n.default_locale = :eo
 
     config.exceptions_app = routes
