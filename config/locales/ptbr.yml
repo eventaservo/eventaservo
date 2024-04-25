@@ -1,5 +1,5 @@
 ---
-pt_br:
+ptbr:
   activerecord:
     attributes:
       event/report:
