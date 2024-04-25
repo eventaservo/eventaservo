@@ -1,0 +1,45 @@
+<%= link_to icon('fas', 'exclamation-triangle', 'Eraro?'), '#', class: 'btn btn-sm btn-outline-warning no-border', data: { target: '#problemoModal', toggle: 'modal' } %>
+
+<div id="problemoModal" class="modal fade" aria-hidden="true" aria-labelledby="problemoModalCenterTitle" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content text-left">
+      <div class="modal-header">
+        <h5 id="problemoModalCenterTitle" class="modal-title">Ĉu vi trovis problemon?</h5>
+        <button class="close" aria-label="Fermi" data-dismiss="modal" type="button">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+
+      <%= form_tag event_kontakti_organizanton_url(@event.code) do %>
+        <div class="modal-body" style="font-weight: normal; font-size: 1rem;">
+          <p>Se vi opinias ke estas problemo pri tiu ĉi evento, informu pri tio ĝian ĉefan administranton.</p>
+          <div class="form-group">
+            <label>Nomo</label>
+            <%= text_field_tag :name, current_user.try(:name).presence, autocomplete: 'name', class: 'form-control', required: true %>
+            <%= invisible_captcha :title %>
+          </div>
+
+          <div class="form-group">
+            <label>Retpoŝtadreso</label>
+            <%= text_field_tag :email, current_user.try(:email).presence, autocomplete: 'email', class: 'form-control', required: true %>
+          </div>
+
+          <div class="form-group">
+            <label>Mesaĝo</label>
+            <%= text_area_tag :message, nil, class: 'form-control', rows: 4, required: true %>
+          </div>
+
+          <div class="form-group">
+            <label>Kiel nomiĝas nia lingvo?</label>
+            <%= text_field_tag 'sekurfrazo', nil, autocomplete: false, required: true, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-sm btn-outline-secondary" data-dismiss="modal" type="button">Nuligi</button>
+          <%= submit_tag 'Sendi', class: 'button-submit' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

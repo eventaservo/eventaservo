@@ -44,7 +44,7 @@
       = render partial: 'videos'
 
       .buttons-footer.d-flex.justify-content-between
-        = render partial: 'informi_pri_problemo'
+        = render "report_problem_modal"
         = link_to icon('fas', 'share-alt', 'Diskonigi'), '#', class: 'btn btn-sm btn-outline-info no-border', data: { target: '#shareModal', toggle: 'modal' }
 
         - if user_signed_in?
