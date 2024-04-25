@@ -91,6 +91,10 @@ Rails.application.configure do
   config.hosts << "*.gitpod.io"
   config.hosts << "devel.eventaservo.org"
   config.hosts << "en.eventaservo.local:3000"
+  config.hosts << "eo.eventaservo.local:3000"
+  config.hosts << "es.eventaservo.local:3000"
+  config.hosts << "fr.eventaservo.local:3000"
+  config.hosts << "nl.eventaservo.local:3000"
   config.hosts << "pt_br.eventaservo.local:3000"
 
   config.active_job.default_url_options = {host: "localhost", port: 3000, protocol: :https}
