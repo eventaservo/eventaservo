@@ -1,5 +1,5 @@
 ---
-en:
+fr:
   activerecord:
     attributes:
       event/report:
@@ -57,18 +57,18 @@ en:
     - ''
     abbr_month_names:
     - ''
-    - jan
-    - feb
-    - mar
-    - apr
-    - may
-    - jun
-    - jul
-    - Aug
-    - sep
-    - Oct
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - Août
+    - ''
+    - Octobre
     - Nov
-    - Dec
+    - Déc
     day_names:
     - ''
     - ''
@@ -83,18 +83,18 @@ en:
       short: ''
     month_names:
     - ''
-    - January
-    - February
-    - march
-    - April
-    - May
-    - June
-    - july
-    - august
-    - September
-    - October
-    - November
-    - December
+    - Janvier
+    - Février
+    - mars
+    - Avril
+    - ''
+    - juin
+    - juillet
+    - août
+    - Septembre
+    - Octobre
+    - novembre
+    - décembre
   datetime:
     distance_in_words:
       about_x_hours:
@@ -238,15 +238,15 @@ en:
     sentence_for_humans: ''
     timestamp_error_message: ''
   links:
-    announcements_and_contests: Announcements & contests
-    international_calendar: International Calendar
-    presentations: Recorded Presentations
-    reports: Recorded Presentations
-    teachers_and_lecturers: Teachers & lecturers
+    announcements_and_contests: ''
+    international_calendar: ''
+    presentations: ''
+    reports: Rapports
+    teachers_and_lecturers: ''
   navbar:
-    add_event: Add an event
-    log_in_sign_up: Login / Register
-    organizations: Organizations
+    add_event: Ajouter un événement
+    log_in_sign_up: S'identifier S'enregistrer
+    organizations: Organisations
   number:
     currency:
       format:
@@ -316,7 +316,7 @@ en:
       last_word_connector: ''
       two_words_connector: ''
       words_connector: ''
-  tagline: Share Esperanto events worldwide!
+  tagline: ''
   time:
     am: ''
     formats:
