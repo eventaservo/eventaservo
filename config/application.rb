@@ -19,7 +19,7 @@ module Eventaservo
     config.time_zone = "UTC"
 
     config.i18n.load_path += Dir[Rails.root.join("config/locales/**/*.{rb,yml}")]
-    config.i18n.available_locales = [:eo, :en, :es, :fr, :nl, :ptbr]
+    config.i18n.available_locales = [:eo, :en, :ptbr]
     config.i18n.default_locale = :eo
 
     config.exceptions_app = routes
