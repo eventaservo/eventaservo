@@ -1,5 +1,5 @@
 ---
-eo:
+en:
   activerecord:
     attributes:
       event/report:
@@ -83,3 +83,13 @@ eo:
       two_words_connector: " kaj "
       words_connector: ", "
   tagline: ''
+  links:
+    announcements_and_contests: Announcements & Contests
+    international_calendar: International Calendar
+    presentations: Presentations
+    reports: Reports
+    teachers_and_lecturers: Teachers & Lecturers
+  navbar:
+    add_event: Add event
+    log_in_sign_up: Login / Signup
+    organizations: Organizations
