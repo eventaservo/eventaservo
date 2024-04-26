@@ -2,6 +2,7 @@
   .d-flex.flex-nowrap
     %a.navbar-brand{href: root_url}
       = Rails.env.production? ? 'Eventa Servo' : Rails.env.upcase
+      = I18n.locale if Rails.env.in?(["development", "staging"])
 
     = render partial: 'layouts/navbar_search'
 

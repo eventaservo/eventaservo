@@ -83,3 +83,13 @@ eo:
       two_words_connector: " kaj "
       words_connector: ", "
   tagline: ''
+  links:
+    announcements_and_contests: Anoncoj kaj konkursoj
+    international_calendar: Internacia Kalendaro
+    presentations: Registritaj Prezentoj
+    reports: Raportoj
+    teachers_and_lecturers: Instruantoj kaj prelegantoj
+  navbar:
+    add_event: Aldoni eventon
+    log_in_sign_up: Ensaluti / Registriĝi
+    organizations: Organizoj
