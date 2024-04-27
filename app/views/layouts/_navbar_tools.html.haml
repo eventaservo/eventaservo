@@ -23,4 +23,5 @@
     %i.fas.fa-user-friends{'data-toggle': "tooltip", 'data-placement': "bottom", 'title': "Pri ni"}
 %li.nav-item.d-md-block.d-lg-none= link_to icon('fas', 'user-friends', 'Pri ni'), prie_url, class: 'nav-link'
 
+= render "layouts/navbar/language_selector" if Rails.env.in?(%w[development staging])
 = render partial: 'layouts/admin' if user_signed_in? && current_user.admin?
