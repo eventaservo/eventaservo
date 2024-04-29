@@ -5,8 +5,8 @@ class ApplicationController < ActionController::Base
 
   include Constants
   include Pagy::Backend
+  include Internationalization
 
-  around_action :switch_locale
   before_action :set_paper_trail_whodunnit
   before_action :set_sentry_user
 
@@ -100,20 +100,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
-  def switch_locale(&action)
-    locale = extract_locale_from_subdomain || I18n.default_locale
-    I18n.with_locale(locale, &action)
-  end
-
-  # Get locale code from request subdomain (like http://it.application.local:3000)
-  # You have to put something like:
-  #   127.0.0.1 gr.application.local
-  # in your /etc/hosts file to try this out locally
-  def extract_locale_from_subdomain
-    parsed_locale = request.subdomains.first
-    I18n.available_locales.map(&:to_s).include?(parsed_locale) ? parsed_locale : nil
-  end
 
   def authenticate_admin!
     redirect_to root_path unless current_user.admin?
