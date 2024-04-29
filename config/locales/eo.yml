@@ -74,15 +74,6 @@ eo:
   invisible_captcha:
     sentence_for_humans: Se vi estas homo, ne plenumu tiun kampon
     timestamp_error_message: Tro rapide! Refaru ĝin
-  social_share_button:
-    share_to: diskonigi per
-    whatsapp_app: WhatsApp
-  support:
-    array:
-      last_word_connector: " kaj "
-      two_words_connector: " kaj "
-      words_connector: ", "
-  tagline: ''
   links:
     announcements_and_contests: Anoncoj kaj konkursoj
     international_calendar: Internacia Kalendaro
@@ -93,3 +84,12 @@ eo:
     add_event: Aldoni eventon
     log_in_sign_up: Ensaluti / Registriĝi
     organizations: Organizoj
+  social_share_button:
+    share_to: diskonigi per
+    whatsapp_app: WhatsApp
+  support:
+    array:
+      last_word_connector: " kaj "
+      two_words_connector: " kaj "
+      words_connector: ", "
+  tagline: Diskonigu Esperanto-eventojn tutmonde!

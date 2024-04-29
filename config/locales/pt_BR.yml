@@ -74,15 +74,6 @@ pt_BR:
   invisible_captcha:
     sentence_for_humans: Se vi estas homo, ne plenumu tiun kampon
     timestamp_error_message: Tro rapide! Refaru ĝin
-  social_share_button:
-    share_to: diskonigi per
-    whatsapp_app: WhatsApp
-  support:
-    array:
-      last_word_connector: " kaj "
-      two_words_connector: " kaj "
-      words_connector: ", "
-  tagline: ''
   links:
     announcements_and_contests: Anúncios e Concursos
     international_calendar: Calendário Internacional
@@ -93,3 +84,12 @@ pt_BR:
     add_event: Adicionar evento
     log_in_sign_up: Entrar / Registrar
     organizations: Organizações
+  social_share_button:
+    share_to: diskonigi per
+    whatsapp_app: WhatsApp
+  support:
+    array:
+      last_word_connector: " kaj "
+      two_words_connector: " kaj "
+      words_connector: ", "
+  tagline: Divulgue eventos de Esperanto em todo o mundo!

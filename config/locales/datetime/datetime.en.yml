@@ -32,7 +32,7 @@ en:
     - vendredo
     - sabato
     formats:
-      default: "%d/%m/%Y"
+      default: "%m/%d/%Y"
       long: "%e %B %Y"
       short: "%e %b"
     month_names:
