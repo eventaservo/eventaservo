@@ -12,7 +12,7 @@
       .col-6.font-weight-bold Eventoj
 
     - @events_by_year.each do |year, event_count|
-      = link_to international_calendar_year_path(year.to_i), class: 'item-row small' do
+      = link_to international_calendar_year_path(year: year.to_i), class: 'item-row small' do
         .col-6= year.to_i
         .col-6= event_count
 
