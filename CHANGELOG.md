@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.72.1](https://github.com/eventaservo/eventaservo/compare/v2.72.0...v2.72.1) (2024-04-30)
+
+
+### Bug Fixes
+
+* **International Calendar:** :bug: Broken page ([13ae9a3](https://github.com/eventaservo/eventaservo/commit/13ae9a3fd7368934c66f16fdafc492dd5cea517b))
+
 ## [2.72.0](https://github.com/eventaservo/eventaservo/compare/v2.71.0...v2.72.0) (2024-04-19)
 
 
