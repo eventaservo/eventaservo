@@ -37,6 +37,8 @@ module EventServices
 
         SolidQueue::Job.find_by(active_job_id: job_id).destroy
       end
+    rescue
+      Rails.logger.warn("Failed to delete enqueued jobs for event ##{@event.id}")
     ensure
       update_event_reminder_job_ids([])
     end
