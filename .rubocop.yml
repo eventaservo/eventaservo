@@ -2104,3 +2104,5 @@ RSpec/VerifiedDoubleReference: # new in 2.10.0
   Enabled: true
 RSpec/NestedGroups:
   Enabled: false
+RSpec/MultipleExpectations:
+  Enabled: false
