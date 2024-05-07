@@ -622,7 +622,7 @@ __metadata:
     highcharts: ^11.2.0
     leaflet: ^1.9.3
     moment: ^2.29.4
-    trix: ^2.0.4
+    trix: ^2.1.1
   dependenciesMeta:
     fsevents:
       optional: true
@@ -1276,10 +1276,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"trix@npm:^2.0.4":
-  version: 2.0.4
-  resolution: "trix@npm:2.0.4"
-  checksum: 6a4d17359d01977dbf989b265419641f5b2a83b7672b28f56c78ca65f18ab8f2462904673c6624e212b4513367dae25ada8897d76dc38d86cd98bfeac38f1902
+"trix@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "trix@npm:2.1.1"
+  checksum: dbaf3fee42c7b6582974178c55574c159aec34067e985190c9edb83b07f633947c64fd666c2fce0e733bc72aa6d81a82e39757c9080da13ac8c11e75eaab7a36
   languageName: node
   linkType: hard
 

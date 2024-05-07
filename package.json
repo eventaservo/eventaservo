@@ -16,7 +16,7 @@
     "highcharts": "^11.2.0",
     "leaflet": "^1.9.3",
     "moment": "^2.29.4",
-    "trix": "^2.0.4"
+    "trix": "^2.1.1"
   },
   "optionalDependencies": {
     "fsevents": "^2.3.2"
