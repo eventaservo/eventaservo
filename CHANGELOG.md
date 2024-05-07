@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.72.2](https://github.com/eventaservo/eventaservo/compare/v2.72.1...v2.72.2) (2024-05-07)
+
+
+### Bug Fixes
+
+* :bug: Merge users ([04c990a](https://github.com/eventaservo/eventaservo/commit/04c990aea0df3703fb463e81015414c93f593206))
+* Privacy policy links ([f59e6d3](https://github.com/eventaservo/eventaservo/commit/f59e6d33eb311a17926610e9d471be5127007fd3))
+
 ## [2.72.1](https://github.com/eventaservo/eventaservo/compare/v2.72.0...v2.72.1) (2024-04-30)
 
 
