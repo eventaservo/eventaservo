@@ -5,8 +5,8 @@
   </script>
 
   <script
-    src="https://browser.sentry-cdn.com/7.73.0/bundle.tracing.replay.min.js"
-    integrity="sha384-4Wr4V/uREn/Xw4C/neUC3VQsBQUZjXZqsv/rtoiol5dvcyPNoevLf0F0MjhqVdmp"
+    src="https://browser.sentry-cdn.com/7.113.0/bundle.tracing.replay.min.js"
+    integrity="sha384-wXgzLdc+RJ2eAiFpbvC5qUGzPUApNnMOI/DBvb1hSu8Zo4J/7NkxmP4DvBmNvWbQ"
     crossorigin="anonymous">
   </script>
 
@@ -16,8 +16,9 @@
       replaysSessionSampleRate: 0.1,
       replaysOnErrorSampleRate: 1.0,
       environment: "<%= Rails.env %>",
+      release: "<%= Eventaservo::Application::VERSION %>",
       integrations: [
-        new Sentry.Replay({
+        Sentry.replayIntegration({
           maskAllText: false,
           maskAllInputs: false,
           blockAllMedia: false,
