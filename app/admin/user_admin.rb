@@ -110,9 +110,16 @@ ActiveAdmin.register User do
     end
   end
 
+  member_action :reset_password, method: :put do
+    new_password = resource.name.split(" ").first + rand(1000).to_s
+    resource.update!(password: new_password, password_confirmation: new_password)
+
+    redirect_to active_admin_user_path(resource), alert: "New password: #{new_password}"
+  end
+
   sidebar "Actions", only: :show do
     if resource.confirmed_at.nil?
-      div link_to "Confirm user's email", confirm_active_admin_user_path(resource), \
+      div link_to "Confirm user's email", confirm_active_admin_user_path(resource),
         data: {confirm: "This will confirm the user's email. Are you sure?"}
     end
 
@@ -127,6 +134,8 @@ ActiveAdmin.register User do
     end
 
     div link_to "Merge to another user", merge_active_admin_user_path(resource)
+    div link_to "Reset password", reset_password_active_admin_user_path(resource), method: :put,
+      data: {confirm: "This will change the user's password. Are you sure?"}
   end
 
   form do |f|
