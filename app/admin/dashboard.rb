@@ -39,23 +39,22 @@ ActiveAdmin.register_page "Dashboard" do
   end # content
 
   sidebar "Staging tools", if: proc { !Rails.env.production? } do
-    li do
+    div do
       link_to "Create sample events", active_admin_dashboard_create_sample_events_path, method: :post,
         data: {
           confirm: "This will create 5 future events and 2 past events assigned to your account. Continue?"
         }
     end
 
-    li do
+    div do
       link_to "Delete all my events", active_admin_dashboard_delete_my_events_path, method: :delete,
         data: {confirm: "This will delete all YOUR events. Continue?"}
     end
   end
 
   sidebar "Tools" do
-    li do
-      link_to "Mission Control - Jobs", "/jobs"
-    end
+    div link_to "Mission Control - Jobs", "/jobs"
+    div link_to "Letter Opener", "/letter_opener" if !Rails.env.production?
   end
 
   page_action :create_sample_events, method: :post do
