@@ -1,5 +1,5 @@
 Rails.application.config.after_initialize do
-  if Rails.env.in?(%w[production staging])
+  if Rails.env.production?
     AdminMailer.startup_notifier.deliver_now
   end
 end
