@@ -2116,3 +2116,9 @@ RSpec/PredicateMatcher:
   Enabled: false
 RSpec/NamedSubject:
   Enabled: false
+Style/MapIntoArray: # new in 1.63
+  Enabled: true
+RSpec/EmptyOutput: # new in 2.29
+  Enabled: true
+RSpec/UndescriptiveLiteralsDescription: # new in 2.29
+  Enabled: true
