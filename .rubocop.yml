@@ -991,7 +991,7 @@ Style/AndOr:
   Enabled: true
 
 Style/ArgumentsForwarding:
-  Enabled: true
+  Enabled: false
 
 Style/ArrayCoercion:
   Enabled: false
@@ -2102,7 +2102,17 @@ RSpec/SubjectDeclaration: # new in 2.5
   Enabled: true
 RSpec/VerifiedDoubleReference: # new in 2.10.0
   Enabled: true
+RSpec/VerifiedDoubles:
+  Enabled: false
+RSpec/MessageSpies:
+  Enabled: true
+  EnforcedStyle: receive
 RSpec/NestedGroups:
   Enabled: false
-RSpec/MultipleExpectations:
+RSpec/ExpectChange:
+  Enabled: true
+  EnforcedStyle: block
+RSpec/PredicateMatcher:
+  Enabled: false
+RSpec/NamedSubject:
   Enabled: false

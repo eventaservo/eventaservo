@@ -9,6 +9,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
   end
 
+  # GET /resource/edit
+  def edit
+    super
+  end
+
   # POST /resource
   def create
     unless params[:sekurfrazo].strip.downcase == "esperanto"
@@ -25,15 +30,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  # GET /resource/edit
-  def edit
-    super
-  end
-
   # PUT /resource
   def update
     registras_instru_informojn
     registras_preleg_informojn
+
+    if params[:remove_picture] == "1"
+      ::UserServices::RemoveProfilePicture.call(user: resource)
+    end
+
     super
   end
 
