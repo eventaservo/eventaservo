@@ -64,6 +64,10 @@ pt_BR:
       header:
         one: 'Ne eblas registri tiun %{model}: 1 eraro'
         other: 'Ne eblas registri tiun %{model}: %{count} eraroj'
+  events:
+    horzono_elektilo:
+      change_timezone: Alterar
+      select_timezone: Selecionar fuso horário
   helpers:
     select:
       prompt: Bonvolu elekti
@@ -71,6 +75,9 @@ pt_BR:
       create: Krei %{model}
       submit: Registri tiun %{model}
       update: Modifi tiun %{model}
+  home:
+    uzanta_horzono:
+      timezone_text: Você vê os eventos de acordo com o fuso horário local.
   invisible_captcha:
     sentence_for_humans: Se vi estas homo, ne plenumu tiun kampon
     timestamp_error_message: Tro rapide! Refaru ĝin

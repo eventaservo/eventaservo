@@ -43,7 +43,7 @@ class HomeController < ApplicationController
     respond_to do |format|
       format.html
       format.text do
-        render "privateco.txt", layout: false
+        render "privateco", layout: false
       end
     end
   end
