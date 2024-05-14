@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.73.0](https://github.com/eventaservo/eventaservo/compare/v2.72.2...v2.73.0) (2024-05-14)
+
+
+### Features
+
+* :sparkles: Re-enable Facebook integration ([#696](https://github.com/eventaservo/eventaservo/issues/696)) ([23da60e](https://github.com/eventaservo/eventaservo/commit/23da60e150e8525a1534347297c53860aeb611b4))
+* **Admin:** Reset user password ([9076588](https://github.com/eventaservo/eventaservo/commit/9076588eb62a7ca58759ed54102e75419e6d135c))
+* Copy Facebook picture to user profile ([#697](https://github.com/eventaservo/eventaservo/issues/697)) ([97e3f85](https://github.com/eventaservo/eventaservo/commit/97e3f853e1bd2b83f37d171ea84c5b1705404283))
+* **User:** Option to clear profile picture ([#698](https://github.com/eventaservo/eventaservo/issues/698)) ([d9b77e7](https://github.com/eventaservo/eventaservo/commit/d9b77e71e91a7b8ed318cb5406b4a65e66fac0f7))
+
 ## [2.72.2](https://github.com/eventaservo/eventaservo/compare/v2.72.1...v2.72.2) (2024-05-07)
 
 
