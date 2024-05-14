@@ -991,7 +991,7 @@ Style/AndOr:
   Enabled: true
 
 Style/ArgumentsForwarding:
-  Enabled: true
+  Enabled: false
 
 Style/ArrayCoercion:
   Enabled: false
@@ -2101,4 +2101,24 @@ RSpec/SpecFilePathSuffix: # new in 2.24
 RSpec/SubjectDeclaration: # new in 2.5
   Enabled: true
 RSpec/VerifiedDoubleReference: # new in 2.10.0
+  Enabled: true
+RSpec/VerifiedDoubles:
+  Enabled: false
+RSpec/MessageSpies:
+  Enabled: true
+  EnforcedStyle: receive
+RSpec/NestedGroups:
+  Enabled: false
+RSpec/ExpectChange:
+  Enabled: true
+  EnforcedStyle: block
+RSpec/PredicateMatcher:
+  Enabled: false
+RSpec/NamedSubject:
+  Enabled: false
+Style/MapIntoArray: # new in 1.63
+  Enabled: true
+RSpec/EmptyOutput: # new in 2.29
+  Enabled: true
+RSpec/UndescriptiveLiteralsDescription: # new in 2.29
   Enabled: true

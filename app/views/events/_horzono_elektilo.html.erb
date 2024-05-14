@@ -1,0 +1,3 @@
+<%= render partial: 'events/timezone_modal' %>
+<%= link_to "#{cookies[:horzono] ? t(".change_timezone") : t(".select_timezone")}", '#', id: 'select-timezone-link',
+  class: 'badge', data: { target: '#timezoneModal', toggle: 'modal'} %>

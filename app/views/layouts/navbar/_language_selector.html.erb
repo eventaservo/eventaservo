@@ -1,0 +1,11 @@
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" id="navbar-dropdown" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button">
+    <div class="d-inline"><%= I18n.locale %></div>
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="navbar-dropdown">
+    <% I18n.available_locales.each do |locale| %>
+      <%= link_to locale, UrlLanguageChanger.new(request.original_url, locale).call, class: 'dropdown-item' %>
+    <% end %>
+  </div>
+</li>

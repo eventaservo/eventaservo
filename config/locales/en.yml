@@ -1,33 +1,102 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
+---
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      event/report:
+        title: Titolo
+        url: Ligilo
+      event:
+        city: Urbo
+        country_id: Lando
+        date_end: Fina dato
+        date_start: Komenca dato
+        description: Priskribo
+        short_url: mallonga ligilo
+        title: Titolo
+      organization:
+        city: urbo
+        country_id: lando
+        email: retpoŝtadreso
+        logo: Emblemo
+        name: nomo
+        short_name: mallonga nomo
+    errors:
+      messages:
+        record_invalid: 'Validado malsukcesis: %{errors}'
+      models:
+        event:
+          attributes:
+            country:
+              required: necesas
+            user:
+              required: necesas
+        user:
+          attributes:
+            country:
+              required: necesas
+    models:
+      event: Eventoj
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: devas esti akceptita
+      blank: devas esti kompletigita
+      confirmation: ne kongruas kun la konfirmo
+      empty: devas esti kompletigita
+      equal_to: devas egali %{count}
+      even: devas esti para
+      exclusion: ne estas disponebla
+      greater_than: devas superi %{count}
+      greater_than_or_equal_to: devas superi aŭ egali %{count}
+      inclusion: ne estas inkluzivita de la listo
+      invalid: estas nevalida
+      less_than: devas malsuperi %{count}
+      less_than_or_equal_to: devas malsuperi aŭ egali %{count}
+      not_a_number: ne estas nombro
+      not_an_integer: devas esti entjero
+      odd: devas esti nepara
+      taken: ne estas disponebla
+      too_long: estas tro longa (maksimume %{count} signoj)
+      too_short: estas tro mallonga (minimume %{count} signoj)
+      wrong_length: ne estas je ĝusta longo (devas enhavi %{count} signojn)
+    template:
+      body: 'Kontrolu la jenajn kampojn: '
+      header:
+        one: 'Ne eblas registri tiun %{model}: 1 eraro'
+        other: 'Ne eblas registri tiun %{model}: %{count} eraroj'
+  events:
+    horzono_elektilo:
+      change_timezone: Change
+      select_timezone: Select time zone
+  helpers:
+    select:
+      prompt: Bonvolu elekti
+    submit:
+      create: Krei %{model}
+      submit: Registri tiun %{model}
+      update: Modifi tiun %{model}
+  home:
+    uzanta_horzono:
+      timezone_text: You see the events according to their local time zone.
+  invisible_captcha:
+    sentence_for_humans: Se vi estas homo, ne plenumu tiun kampon
+    timestamp_error_message: Tro rapide! Refaru ĝin
+  links:
+    announcements_and_contests: Announcements & Contests
+    international_calendar: International Calendar
+    presentations: Presentations
+    reports: Reports
+    teachers_and_lecturers: Teachers & Lecturers
+  navbar:
+    add_event: Add event
+    log_in_sign_up: Login / Signup
+    organizations: Organizations
+  social_share_button:
+    share_to: diskonigi per
+    whatsapp_app: WhatsApp
+  support:
+    array:
+      last_word_connector: " kaj "
+      two_words_connector: " kaj "
+      words_connector: ", "
+  tagline: Share Esperanto events worldwide!

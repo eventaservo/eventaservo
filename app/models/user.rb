@@ -125,6 +125,11 @@ class User < ApplicationRecord
         end
       NovaUzantoSciigoJob.perform_later(return_user)
     end
+
+    if !return_user.picture.attached?
+      UserServices::CopyImageUrlToProfile.call(user: return_user, url: auth.info.image)
+    end
+
     return_user
   end
 
@@ -189,9 +194,13 @@ class User < ApplicationRecord
   def merge_to(destination_user_id)
     return false if destination_user_id == id
 
-    Event.where(user_id: id).update_all(user_id: destination_user_id)
-    OrganizationUser.where(user_id: id).update_all(user_id: destination_user_id)
-    destroy
+    ActiveRecord::Base.transaction do
+      Event.where(user_id: id).update_all(user_id: destination_user_id)
+      OrganizationUser.where(user_id: id).update_all(user_id: destination_user_id)
+      Log.where(user_id: id).update_all(user_id: destination_user_id)
+      User.reset_counters(destination_user_id, :events)
+      destroy
+    end
   end
 
   # To be used when a user wants his account to be destroyed.

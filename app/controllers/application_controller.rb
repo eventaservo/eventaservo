@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   include Constants
   include Pagy::Backend
+  include Internationalization
 
   before_action :set_paper_trail_whodunnit
   before_action :set_sentry_user

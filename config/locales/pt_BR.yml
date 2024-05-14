@@ -1,0 +1,102 @@
+---
+pt_BR:
+  activerecord:
+    attributes:
+      event/report:
+        title: Titolo
+        url: Ligilo
+      event:
+        city: Urbo
+        country_id: Lando
+        date_end: Fina dato
+        date_start: Komenca dato
+        description: Priskribo
+        short_url: mallonga ligilo
+        title: Titolo
+      organization:
+        city: urbo
+        country_id: lando
+        email: retpoŝtadreso
+        logo: Emblemo
+        name: nomo
+        short_name: mallonga nomo
+    errors:
+      messages:
+        record_invalid: 'Validado malsukcesis: %{errors}'
+      models:
+        event:
+          attributes:
+            country:
+              required: necesas
+            user:
+              required: necesas
+        user:
+          attributes:
+            country:
+              required: necesas
+    models:
+      event: Eventoj
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: devas esti akceptita
+      blank: devas esti kompletigita
+      confirmation: ne kongruas kun la konfirmo
+      empty: devas esti kompletigita
+      equal_to: devas egali %{count}
+      even: devas esti para
+      exclusion: ne estas disponebla
+      greater_than: devas superi %{count}
+      greater_than_or_equal_to: devas superi aŭ egali %{count}
+      inclusion: ne estas inkluzivita de la listo
+      invalid: estas nevalida
+      less_than: devas malsuperi %{count}
+      less_than_or_equal_to: devas malsuperi aŭ egali %{count}
+      not_a_number: ne estas nombro
+      not_an_integer: devas esti entjero
+      odd: devas esti nepara
+      taken: ne estas disponebla
+      too_long: estas tro longa (maksimume %{count} signoj)
+      too_short: estas tro mallonga (minimume %{count} signoj)
+      wrong_length: ne estas je ĝusta longo (devas enhavi %{count} signojn)
+    template:
+      body: 'Kontrolu la jenajn kampojn: '
+      header:
+        one: 'Ne eblas registri tiun %{model}: 1 eraro'
+        other: 'Ne eblas registri tiun %{model}: %{count} eraroj'
+  events:
+    horzono_elektilo:
+      change_timezone: Alterar
+      select_timezone: Selecionar fuso horário
+  helpers:
+    select:
+      prompt: Bonvolu elekti
+    submit:
+      create: Krei %{model}
+      submit: Registri tiun %{model}
+      update: Modifi tiun %{model}
+  home:
+    uzanta_horzono:
+      timezone_text: Você vê os eventos de acordo com o fuso horário local.
+  invisible_captcha:
+    sentence_for_humans: Se vi estas homo, ne plenumu tiun kampon
+    timestamp_error_message: Tro rapide! Refaru ĝin
+  links:
+    announcements_and_contests: Anúncios e Concursos
+    international_calendar: Calendário Internacional
+    presentations: Apresentações Gravadas
+    reports: Relatórios
+    teachers_and_lecturers: Professores e Palestrantes
+  navbar:
+    add_event: Adicionar evento
+    log_in_sign_up: Entrar / Registrar
+    organizations: Organizações
+  social_share_button:
+    share_to: diskonigi per
+    whatsapp_app: WhatsApp
+  support:
+    array:
+      last_word_connector: " kaj "
+      two_words_connector: " kaj "
+      words_connector: ", "
+  tagline: Divulgue eventos de Esperanto em todo o mundo!
