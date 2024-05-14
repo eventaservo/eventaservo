@@ -125,6 +125,11 @@ class User < ApplicationRecord
         end
       NovaUzantoSciigoJob.perform_later(return_user)
     end
+
+    if !return_user.picture.attached?
+      UserServices::CopyImageUrlToProfile.call(user: return_user, url: auth.info.image)
+    end
+
     return_user
   end
 
