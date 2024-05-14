@@ -17,11 +17,6 @@
     %br
     .text-divider.font-weight-bold.fg-color-grayDark AŬ
     %br
-    = button_to "Ensaluti per Facebook", user_facebook_omniauth_authorize_path, class: 'facebook-button col-12', disabled: true, data: { turbo: false }
-    .text-center.small.font-italic
-      Pro teknikaj kialoj provizore ne plu eblas ensaluti per Facebook.
-      Se vi kutimis ensaluti tiel, alklaku
-      = link_to 'Mi forgesis mian pasvorton', new_password_path(resource_name)
-      kaj elektu novan pasvorton.
+    = button_to "Ensaluti per Facebook", user_facebook_omniauth_authorize_path, class: 'facebook-button col-12', data: { turbo: false }
 
   = render partial: 'devise/shared/links'

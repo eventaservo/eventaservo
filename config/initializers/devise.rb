@@ -159,7 +159,7 @@ Devise.setup do |config|
 
   # Options to be passed to the created cookie. For instance, you can set
   # secure: true in order to force SSL only cookies.
-  config.rememberable_options = { secure: true }
+  config.rememberable_options = {secure: true}
 
   # ==> Configuration for :validatable
   # Range for password length.
@@ -258,12 +258,12 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   config.omniauth :facebook, "243701312975059", "e68d86942416dc69b9b3bf710e6a1d49",
-                  scope:            "email,public_profile",
-                  secure_image_url: true,
-                  client_options:   {
-                  site:          "https://graph.facebook.com/v3.1",
-                  authorize_url: "https://www.facebook.com/v3.1/dialog/oauth"
-                  }
+    scope: "email,public_profile",
+    secure_image_url: true,
+    client_options: {
+      site: "https://graph.facebook.com/v19.0",
+      authorize_url: "https://www.facebook.com/v19.0/dialog/oauth"
+    }
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
