@@ -257,7 +257,9 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  config.omniauth :facebook, "243701312975059", "e68d86942416dc69b9b3bf710e6a1d49",
+  config.omniauth :facebook,
+    Rails.application.credentials.dig(:facebook, :app_id) || ENV["FACEBOOK_APP_ID"],
+    Rails.application.credentials.dig(:facebook, :app_secret) || ENV["FACEBOOK_APP_SECRET"],
     scope: "email,public_profile",
     secure_image_url: true,
     client_options: {
