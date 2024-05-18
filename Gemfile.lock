@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/shayani/telegram_simple_messenger.git
+  revision: 7786c3978fa64c11db4b3b7fc7dda22e334655be
+  specs:
+    telegram_simple_messenger (0.1.1)
+      httparty (~> 0.18)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -164,6 +171,7 @@ GEM
     crass (1.0.6)
     css_parser (1.16.0)
       addressable
+    csv (3.3.0)
     date (3.3.4)
     debug (1.9.1)
       irb (~> 1.10)
@@ -235,7 +243,8 @@ GEM
       railties (>= 3.1)
     hirb (0.7.3)
     htmlentities (4.3.4)
-    httparty (0.21.0)
+    httparty (0.22.0)
+      csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
     i18n (1.14.5)
@@ -333,7 +342,8 @@ GEM
     momentjs-rails (2.29.4.1)
       railties (>= 3.1)
     msgpack (1.7.2)
-    multi_xml (0.6.0)
+    multi_xml (0.7.1)
+      bigdecimal (~> 3.1)
     mutex_m (0.2.0)
     net-http (0.4.1)
       uri
@@ -725,6 +735,7 @@ DEPENDENCIES
   solid_queue (~> 0.1)
   spring
   stimulus-rails (~> 1.2)
+  telegram_simple_messenger!
   timezone (~> 1.0)
   turbo-rails (~> 2)
   vcr
