@@ -260,7 +260,7 @@ GEM
       has_scope (>= 0.6)
       railties (>= 6.0)
       responders (>= 2)
-    invisible_captcha (2.2.0)
+    invisible_captcha (2.3.0)
       rails (>= 5.2)
     io-console (0.7.2)
     irb (1.13.1)
