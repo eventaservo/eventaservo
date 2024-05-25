@@ -26,7 +26,7 @@
           = render partial: 'horoj', locals: { tz: @event.time_zone }
           = render partial: 'horzono' if cookies[:horzono]
           - unless @event.all_day?
-            .text-right= render partial: 'horzono_elektilo'
+            .text-right= render partial: 'timezone_selector'
 
 
         %h5.text-left= @event.description

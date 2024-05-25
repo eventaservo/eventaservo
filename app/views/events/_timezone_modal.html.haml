@@ -3,7 +3,8 @@
     .modal-content
       = form_tag(iloj_elektas_horzonon_url, method: :posts) do
         .modal-header
-          %h5.modal-title#timezoneModalCenterTitle Horzono
+          %h5.modal-title#timezoneModalCenterTitle
+            = t("timezone.timezone")
           %button.close{'aria-label': 'Fermi', 'data-dismiss': 'modal', type: 'button'}
             %span{'aria-hidden': 'true'} ×
         .modal-body{style: 'font-size: 1rem; font-weight: normal;'}
@@ -15,11 +16,15 @@
               Por vidi la eventojn laŭ la propra/loka horzono,
               = link_to "alklaku ĉi tie.", iloj_forvishas_horzonon_url, id: 'remove-timezone-link'
             %hr
-          %p Elektu horzonon:
+
+          %p
+            = t("timezone.select_timezone")
+
           .form-group
             - selected = @event.nil? ? (cookies[:horzono] || nil) : @event.time_zone
             = select_tag(:horzono, options_for_select(Horzono.all.map { |h| [h.eo, h.en] }, selected), class: 'select2-input form-control')
 
         .modal-footer
-          %button.button-cancel{'data-dismiss' => 'modal', type: 'button'} Fermi
-          = submit_tag "#{cookies[:horzono] ? 'Ŝanĝi' : 'Elekti'} ", class: 'button-submit'
+          %button.button-cancel{'data-dismiss' => 'modal', type: 'button'}
+            = t("buttons.close")
+          = submit_tag "#{cookies[:horzono] ? t("buttons.change") : t("buttons.select")} ", class: 'button-submit'
