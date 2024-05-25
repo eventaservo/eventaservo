@@ -1,5 +1,11 @@
 ---
 pt_BR:
+  timezone:
+    change_timezone: Alterar
+    current_timezone_text: Você está vendo os eventos de acordo com o fuso horário
+      local.
+    select_timezone: Selecionar fuso horário
+    timezone: Fuso horário
   timezones:
     Africa/Abidjan: Afriko/Abiĝano
     Africa/Accra: Afriko/Akrao

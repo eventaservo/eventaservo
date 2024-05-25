@@ -36,6 +36,10 @@ eo:
               required: necesas
     models:
       event: Eventoj
+  buttons:
+    change: Ŝangi
+    close: Fermi
+    select: Elekti
   errors:
     format: "%{attribute} %{message}"
     messages:
@@ -64,10 +68,6 @@ eo:
       header:
         one: 'Ne eblas registri tiun %{model}: 1 eraro'
         other: 'Ne eblas registri tiun %{model}: %{count} eraroj'
-  events:
-    horzono_elektilo:
-      change_timezone: Ŝanĝi
-      select_timezone: Elekti horzonon
   helpers:
     select:
       prompt: Bonvolu elekti
@@ -75,9 +75,6 @@ eo:
       create: Krei %{model}
       submit: Registri tiun %{model}
       update: Modifi tiun %{model}
-  home:
-    uzanta_horzono:
-      timezone_text: Vi vidas la eventojn laŭ ilia loka horzono.
   invisible_captcha:
     sentence_for_humans: Se vi estas homo, ne plenumu tiun kampon
     timestamp_error_message: Tro rapide! Refaru ĝin
