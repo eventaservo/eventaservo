@@ -39,6 +39,8 @@ Rails.application.routes.draw do
     get "j", to: redirect("/ik")
     get "j/:year", to: redirect("/ik/%{year}")
     get "/eventoj-hu", to: redirect("/ik/jaroj#eventoj-hu")
+
+    draw(:videos)
   end
 
   devise_for :users, controllers: {sessions: "users/sessions",
@@ -66,10 +68,6 @@ Rails.application.routes.draw do
   # Instruistoj kaj prelegantoj
   get "/instruistoj_kaj_prelegantoj", to: redirect("/instruantoj_kaj_prelegantoj"), as: "instruistoj_kaj_prelegantoj"
   get "/instruantoj_kaj_prelegantoj", to: "home#instruistoj_kaj_prelegantoj", as: "instruantoj_kaj_prelegantoj"
-
-  # Video - Registritaj prezentaĵoj
-  get "/video", to: "video#index"
-  get "/video/:id/forigi", to: "video#destroy"
 
   draw(:organizations)
   draw(:events)

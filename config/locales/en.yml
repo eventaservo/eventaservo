@@ -97,3 +97,5 @@ en:
       two_words_connector: " kaj "
       words_connector: ", "
   tagline: Share Esperanto events worldwide!
+  video:
+    presentations: Presentations

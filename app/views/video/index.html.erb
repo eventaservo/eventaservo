@@ -1,6 +1,6 @@
 <div class="box-white" id="evento">
   <div class="lead">
-    <%= icon('fas', 'video', 'Registritaj prezentoj') %>
+    <%= icon('fas', 'video', t("video.presentations")) %>
   </div>
   <div class="d-flex justify-content-between flex-wrap">
       <%= render partial: @videoj, locals: { user: @current_user, show_event_details: true } %>

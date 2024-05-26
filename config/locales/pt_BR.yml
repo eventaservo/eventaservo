@@ -97,3 +97,5 @@ pt_BR:
       two_words_connector: " kaj "
       words_connector: ", "
   tagline: Divulgue eventos de Esperanto em todo o mundo!
+  video:
+    presentations: Apresentações gravadas
