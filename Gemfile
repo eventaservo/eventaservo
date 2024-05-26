@@ -64,7 +64,7 @@ gem "rack-cors", "~> 2.0", require: "rack/cors"
 
 gem "activeadmin", "~> 3"
 gem "aws-sdk-s3", "~> 1.136"
-gem "browser", "~> 5.0"
+gem "browser", "~> 5"
 gem "chartkick", "~> 5.0"
 gem "diffy", "~> 3.4"
 gem "factory_bot_rails"
@@ -138,7 +138,7 @@ group :development do
   gem "annotate", "~> 3.2", require: false
   gem "better_errors"
   gem "binding_of_caller"
-  gem "letter_opener_web", "~> 2.0"
+  gem "letter_opener_web", "~> 3"
   gem "pry-rails", "~> 0.3.4"
   gem "rubocop", require: false
   gem "rubocop-performance", require: false
