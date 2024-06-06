@@ -39,6 +39,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
+          target: ${{ inputs.environment }}
           tags: eventaservo/backend:${{ inputs.tag }}
           cache-from: type=registry,ref=eventaservo/backend:${{ inputs.tag }}
           cache-to: type=inline

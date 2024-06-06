@@ -1,23 +1,29 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/ruby-rails-postgres
 {
-	"name": "Ruby on Rails & Postgres",
-	"dockerComposeFile": "docker-compose.yml",
-	"service": "app",
+	"name": "EventaServo",
+	"dockerComposeFile": [
+		"../docker-compose.yml",
+		"docker-compose.yml"
+	],
+	"service": "backend",
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	"features": {
-		"ghcr.io/devcontainers-contrib/features/zsh-plugins": {}
+		"ghcr.io/devcontainers/features/github-cli:1": {},
+		"ghcr.io/devcontainers/features/docker-outside-of-docker": {}
 	},
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"Shopify.ruby-lsp",
-				"noku.rails-run-spec-vscode",
-				"testdouble.vscode-standard-ruby",
-				"mhutchie.git-graph",
+				"Codeium.codeium",
 				"eamodio.gitlens",
-				"GitHub.copilot",
-				"ms-azuretools.vscode-docker"
+				"jemmyw.rails-fast-nav",
+				"KoichiSasada.vscode-rdbg",
+				"mhutchie.git-graph",
+				"ms-azuretools.vscode-docker",
+				"noku.rails-run-spec-vscode",
+				"Shopify.ruby-lsp",
+				"usernamehw.errorlens"
 			]
 		}
 	}
