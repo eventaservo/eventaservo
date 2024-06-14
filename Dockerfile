@@ -1,4 +1,4 @@
-FROM ruby:3.2-bookworm
+FROM ruby:3.2-bookworm as base
 
 WORKDIR /app
 
@@ -12,8 +12,8 @@ RUN apt-get update && apt-get install -y \
   g++ \
   gcc \
   htop \
-  iputils-ping \
   imagemagick \
+  iputils-ping \
   libavahi-compat-libdnssd-dev \
   libmagick++-dev \
   libssl-dev \
@@ -25,10 +25,30 @@ RUN apt-get update && apt-get install -y \
   telnet \
   vim \
   zlib1g-dev \
+  zsh \
   && rm -rf /var/lib/apt/lists/*
 
-ARG AMBIENTE=production
+# Bundler
+RUN gem install bundler:2.4.6
+
+# Yarn
+RUN npm install -g yarn
+RUN yarn set version 3.2.1
+COPY .yarnrc.yml ./
+COPY package.json yarn.lock ./
+RUN yarn install
+
+
+
+
+############
+# Production
+############
+
+FROM base as production
+
 # Sets environment variables
+ARG AMBIENTE=production
 ENV RAILS_ENV=${AMBIENTE}
 ENV RAILS_LOG_TO_STDOUT=true
 ENV RAILS_SERVE_STATIC_FILES=true
@@ -37,39 +57,69 @@ ENV IPINFO_KEY=${IPINFO_KEY}
 
 # Bundler
 RUN echo "gem: --no-document" >> ~/.gemrc
-RUN gem install bundler:2.4.6
-RUN if [ "$RAILS_ENV" = "production" ] || [ "$RAILS_ENV" = "staging" ]; then \
-  bundle config set without development test && \
+RUN bundle config set without development test && \
   bundle config set deployment true && \
-  bundle config set frozen true ; fi
+  bundle config set frozen true
 
 COPY Gemfile Gemfile.lock ./
 RUN bundle install --retry=3
-
-# YARN
-RUN npm install -g yarn
-RUN yarn set version 3.2.1
-COPY .yarnrc.yml ./
-COPY package.json yarn.lock ./
-RUN yarn install
 
 COPY . .
 
 ARG RAILS_MASTER_KEY
 ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
-RUN if [ "$RAILS_ENV" = "production" ] || [ "$RAILS_ENV" = "staging" ]; then \
-  bundle exec rails assets:precompile ; \
-  fi
 
-# Kreas API dokumentadon ĉe /public/docs/api/v2/
-RUN if [ "$RAILS_ENV" = "production" ]; then \
-  npm install -g redoc-cli && \
+RUN bundle exec rails assets:precompile
+
+# Creates and publishes the API documentation at /public/docs/api/v2/
+RUN npm install -g redoc-cli && \
   mkdir -p public/docs/api/v2/ && \
-  redoc-cli build openapi/v2.yaml -o public/docs/api/v2/index.html ; \
-  fi
+  redoc-cli build openapi/v2.yaml -o public/docs/api/v2/index.html
 
 EXPOSE 3000
 
 ENTRYPOINT [ "./entrypoint.sh" ]
 
 CMD bundle exec rails db:migrate; bundle exec rails server -b 0.0.0.0 -p 3000
+
+
+
+
+
+#############
+# Staging
+#############
+
+FROM production as staging
+
+
+
+
+
+#############
+# Development
+#############
+
+FROM base as development
+
+ENV RAILS_ENV=development
+ARG RAILS_MASTER_KEY
+ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+
+COPY Gemfile Gemfile.lock ./
+RUN bundle install --retry=3
+
+# Installs Oh-My-Zsh and plugins
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+RUN git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+RUN sed -i "s/plugins=(git)/plugins=(git zsh-autosuggestions)/" ~/.zshrc
+
+# Installs Graphite
+RUN npm install -g @withgraphite/graphite-cli@stable
+
+COPY . .
+
+EXPOSE 3000
+
+CMD sleep infinity
+
