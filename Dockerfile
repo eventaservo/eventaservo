@@ -1,4 +1,4 @@
-FROM ruby:3.2-bookworm as base
+FROM ruby:3.2.2-bookworm as base
 
 WORKDIR /app
 
@@ -7,7 +7,7 @@ ENV NODE_MAJOR=20
 RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
 RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
 
-RUN apt-get update && apt-get install -y \
+RUN apt update && apt install -y \
   btop \
   g++ \
   gcc \
@@ -107,17 +107,17 @@ ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
 COPY Gemfile Gemfile.lock ./
 RUN bundle install --retry=3
 
+# Git configuration
+RUN git config --global --add safe.directory /workspaces/eventaservo
+
 # Installs Oh-My-Zsh and plugins
-RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-RUN git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-RUN sed -i "s/plugins=(git)/plugins=(git zsh-autosuggestions)/" ~/.zshrc
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && \
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
+  sed -i "s/plugins=(git)/plugins=(git zsh-autosuggestions)/" ~/.zshrc
 
 # Installs Graphite
 RUN npm install -g @withgraphite/graphite-cli@stable
 
-COPY . .
-
 EXPOSE 3000
 
 CMD sleep infinity
-
