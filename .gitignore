@@ -60,18 +60,6 @@ config/es_admin_channel.conf
 
 reseta_base_devel.sh
 
-# YARN
-.yarn/*
-!.yarn/patches
-!.yarn/releases
-!.yarn/plugins
-!.yarn/sdks
-!.yarn/versions
-.pnp.*
-/yarn-error.log
-yarn-debug.log*
-.yarn-integrity
-
 # Gitpod related files
 core.*
 
