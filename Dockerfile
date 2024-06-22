@@ -33,8 +33,6 @@ RUN gem install bundler:2.4.6
 
 # Yarn
 RUN npm install -g yarn
-RUN yarn set version 3.2.1
-COPY .yarnrc.yml ./
 COPY package.json yarn.lock ./
 RUN yarn install
 
