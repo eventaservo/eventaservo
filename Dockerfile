@@ -1,6 +1,6 @@
 FROM ruby:3.2.2-bookworm as base
 
-WORKDIR /app
+WORKDIR /eventaservo
 
 # Adds NodeJS and Yarn repositories
 ENV NODE_MAJOR=20
@@ -108,7 +108,7 @@ COPY Gemfile Gemfile.lock ./
 RUN bundle install --retry=3
 
 # Git configuration
-RUN git config --global --add safe.directory /workspaces/eventaservo
+RUN git config --global --add safe.directory /eventaservo
 
 # Installs Oh-My-Zsh and plugins
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && \
