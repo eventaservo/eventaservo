@@ -44,7 +44,7 @@ jobs:
           cache-from: type=registry,ref=eventaservo/backend:${{ inputs.tag }}
           cache-to: type=inline
           build-args: |
-            AMBIENTE=${{ inputs.environment }}
+            ENVIRONMENT=${{ inputs.environment }}
             RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}
             GOOGLE_MAPS_KEY=${{ secrets.GOOGLE_MAPS_KEY }}
             IPINFO_KEY=${{ secrets.IPINFO_KEY }}
