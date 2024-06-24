@@ -16,7 +16,6 @@ services:
       dockerfile: ./Dockerfile
       target: development
       args:
-        AMBIENTE: "${RAILS_ENV:-development}"
         RAILS_MASTER_KEY: "${RAILS_MASTER_KEY}"
     tty: true
     ports:

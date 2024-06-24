@@ -1,13 +1,13 @@
-FROM ruby:3.2-bookworm as base
+FROM ruby:3.2.2-bookworm as base
 
-WORKDIR /app
+WORKDIR /eventaservo
 
 # Adds NodeJS and Yarn repositories
 ENV NODE_MAJOR=20
 RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
 RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
 
-RUN apt-get update && apt-get install -y \
+RUN apt update && apt install -y \
   btop \
   g++ \
   gcc \
@@ -46,8 +46,8 @@ RUN yarn install
 FROM base as production
 
 # Sets environment variables
-ARG AMBIENTE=production
-ENV RAILS_ENV=${AMBIENTE}
+ARG ENVIRONMENT=production
+ENV RAILS_ENV=${ENVIRONMENT}
 ENV RAILS_LOG_TO_STDOUT=true
 ENV RAILS_SERVE_STATIC_FILES=true
 ENV GOOGLE_MAPS_KEY=${GOOGLE_MAPS_KEY}
@@ -69,10 +69,7 @@ ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
 
 RUN bundle exec rails assets:precompile
 
-# Creates and publishes the API documentation at /public/docs/api/v2/
-RUN npm install -g redoc-cli && \
-  mkdir -p public/docs/api/v2/ && \
-  redoc-cli build openapi/v2.yaml -o public/docs/api/v2/index.html
+RUN npx @redocly/cli build-docs openapi/v2.yaml -o public/docs/api/v2/index.html
 
 EXPOSE 3000
 
@@ -107,17 +104,17 @@ ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
 COPY Gemfile Gemfile.lock ./
 RUN bundle install --retry=3
 
+# Git configuration
+RUN git config --global --add safe.directory /eventaservo
+
 # Installs Oh-My-Zsh and plugins
-RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-RUN git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-RUN sed -i "s/plugins=(git)/plugins=(git zsh-autosuggestions)/" ~/.zshrc
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && \
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
+  sed -i "s/plugins=(git)/plugins=(git zsh-autosuggestions)/" ~/.zshrc
 
 # Installs Graphite
 RUN npm install -g @withgraphite/graphite-cli@stable
 
-COPY . .
-
 EXPOSE 3000
 
 CMD sleep infinity
-
