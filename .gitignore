@@ -60,9 +60,6 @@ config/es_admin_channel.conf
 
 reseta_base_devel.sh
 
-# Gitpod related files
-core.*
-
 /app/assets/builds/*
 !/app/assets/builds/.keep
 

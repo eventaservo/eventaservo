@@ -87,8 +87,6 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.force_ssl = false
-  config.hosts << "3000-eventaservo-eventaservo-lbisapj41jr.ws-us46.gitpod.io"
-  config.hosts << "*.gitpod.io"
   config.hosts << "devel.eventaservo.org"
   config.hosts << "en.eventaservo.local:3000"
   config.hosts << "eo.eventaservo.local:3000"
