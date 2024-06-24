@@ -1,0 +1,14 @@
+---
+en:
+  pages:
+    event:
+      add_to_calendar: Add to your calendar
+      cancel_event: Cancel event
+      report_problem: Problem?
+      report_problem_form:
+        email: Email
+        message: Message
+        name: Name
+        security_phrase: What is our language called?
+        text: If you think there is a problem with this event, please notify its administrator.
+        title: Found a problem?

@@ -8,7 +8,7 @@ class EventoGhisdatigitaJob < ApplicationJob
 
     mesagho = "Evento ĝisdatigita:\n\n"
     mesagho += "<b>#{evento.title}</b>\n\n"
-    mesagho += "#{event_url(evento.ligilo)}/kronologio"
+    mesagho += "#{event_url(code: evento.ligilo)}/kronologio"
     Telegram.send_message(mesagho)
   end
 end

@@ -36,7 +36,7 @@
         %p.small
           = link_to "Listigi venontajn eventojn de #{@organizo.short_name} en la ĉefa paĝo", root_url(o: @organizo.short_name)
         - @future_events.order(:date_start).each do |e|
-          = link_to event_path(e.ligilo), class: 'item-row small' do
+          = link_to event_path(code: e.ligilo), class: 'item-row small' do
             .col-5 #{event_flag e} #{e.city} - #{format_date(e.komenca_dato, style: :short)}
             .col{class: ("cancelled" if e.cancelled)} #{e.title}
 
@@ -44,7 +44,7 @@
       .box-white
         .lead Pasintaj eventoj
         - @past_events.each do |e|
-          = link_to event_path(e.ligilo), class: 'item-row small' do
+          = link_to event_path(code: e.ligilo), class: 'item-row small' do
             .col-5 #{event_flag e} #{e.city} - #{format_date(e.date_start, style: :short)}
             .col{class: ("cancelled" if e.cancelled)} #{e.title}
         .d-flex.justify-content-center.small.pt-3

@@ -11,9 +11,9 @@ RSpec.describe "Report event problems by email", type: :request do
         sekurfrazo: "esperanto"
       }
 
-      post event_kontakti_organizanton_url(evento.code, params)
+      post event_kontakti_organizanton_url(event_code: evento.code, params:)
     end
 
-    assert_redirected_to event_url(evento.code)
+    assert_redirected_to event_url(code: evento.code)
   end
 end

@@ -1,0 +1,14 @@
+---
+pt_BR:
+  pages:
+    event:
+      add_to_calendar: Adicionar ao seu calendário
+      cancel_event: Cancelar evento
+      report_problem: Problema?
+      report_problem_form:
+        email: E-mail
+        message: Mensagem
+        name: Nome
+        security_phrase: Como é chamada a nossa língua?
+        text: Se você pensa que há um problema com este evento, notifique o administrador.
+        title: Encontrou um problema?

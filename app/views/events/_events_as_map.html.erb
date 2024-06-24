@@ -7,7 +7,7 @@
     next if [e.title, e.description, e.city].in? dup
 
     dup << [e.title, e.description, e.city]
-    @eventoj << { title: e.title, description: e.description, latitude: e.latitude, longitude: e.longitude, ligilo: event_url(e.ligilo), date: event_date(e), pinColor: event_map_pin_color(e) }
+    @eventoj << { title: e.title, description: e.description, latitude: e.latitude, longitude: e.longitude, ligilo: event_url(code: e.ligilo), date: event_date(e), pinColor: event_map_pin_color(e) }
   end
 %>
 <div

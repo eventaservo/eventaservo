@@ -2,7 +2,7 @@
   .mb-5
     .lead Venontaj eventoj kies administranto mi estas
     - future_events.order(:date_start).each do |e|
-      = link_to event_path(e.ligilo), class: 'item-row small' do
+      = link_to event_path(code: e.ligilo), class: 'item-row small' do
         .col-5
           = event_flag e
           = "#{e.city} - #{format_date(e.komenca_dato, style: :short)}"
@@ -11,7 +11,7 @@
 - if past_events.any?
   .lead Pasintaj eventoj kies administranto mi estas
   - past_events.order(date_start: :desc).each do |e|
-    = link_to event_path(e.ligilo), class: 'item-row small' do
+    = link_to event_path(code: e.ligilo), class: 'item-row small' do
       .col-5
         = event_flag e
         = "#{e.city} - #{format_date(e.komenca_dato, style: :short)}"

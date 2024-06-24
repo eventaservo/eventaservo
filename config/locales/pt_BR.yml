@@ -37,9 +37,15 @@ pt_BR:
     models:
       event: Eventoj
   buttons:
+    add_video: Video
+    duplicate: Duplicar
+    edit: Editar
+    share: Compartilhar
+    cancel: Cancelar
     change: Alterar
     close: Fechar
     select: Selecionar
+    send: Enviar
   errors:
     format: "%{attribute} %{message}"
     messages:
