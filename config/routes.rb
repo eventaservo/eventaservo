@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   get "/v/:view_style", to: "home#view_style", as: "view_style"
   get "/prie", to: "home#prie"
   get "/rss.xml", to: "home#feed", as: "events_rss"
-  get "/novajhoj", to: "home#changes", as: "changes"
   get "/events.json", to: "home#events"
   get "/serchilo", to: "home#search"
   get "/search.json", to: "home#search", format: :json

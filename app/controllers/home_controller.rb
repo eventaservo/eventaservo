@@ -52,10 +52,6 @@ class HomeController < ApplicationController
     ahoy.track "Visit Prie"
   end
 
-  def changes
-    ahoy.track "Visit Novaĵoj"
-  end
-
   def robots
     ahoy.track "Read /robots.txt"
 
