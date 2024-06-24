@@ -16,7 +16,7 @@
       Se vi havas dubon, spektu #{link_to "ĉi tiun filmeton", "https://mallonge.net/es1", target: :_blank}. Ĝi klarigas kiel registriĝi.
 
     = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-      = devise_error_messages!
+      = render "devise/shared/error_messages", resource: resource
       .form-group
         = f.text_field :name, autocomplete: 'name', required: true, class: 'form-control', autofocus: true, placeholder: 'Plena nomo'
       .form-group
