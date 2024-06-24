@@ -1,0 +1,15 @@
+---
+eo:
+  pages:
+    event:
+      add_to_calendar: Aldoni al via kalendaro
+      cancel_event: Niligi eventon
+      report_problem: Eraro?
+      report_problem_form:
+        email: Retpoŝtadreso
+        message: Mesaĝo
+        name: Nomo
+        security_phrase: Kiel nomiĝas nia lingvo?
+        text: Se vi opinias ke estas problemo pri tiu ĉi evento, informu pri tio ĝian
+          administranton.
+        title: Ĉu vi trovis problemon?

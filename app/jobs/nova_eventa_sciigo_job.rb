@@ -11,7 +11,7 @@ class NovaEventaSciigoJob < ApplicationJob
     mesagho += "#{ApplicationController.helpers.event_date(evento)}\n"
     mesagho += "#{evento.city} (#{evento.country.code.upcase})\n\n"
     mesagho += "#{evento.description}\n\n"
-    mesagho += event_url(evento.ligilo)
+    mesagho += event_url(code: evento.ligilo)
     Telegram.send_message(mesagho)
   end
 end

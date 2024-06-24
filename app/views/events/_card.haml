@@ -17,7 +17,7 @@
         - if event.universala?
           (Reta evento)
         - else
-          = link_to event.city, events_by_city_path(event.country.continent, country_name: event.country.name, city_name: event.city), class: 'card-link'
-          = link_to "(#{event.country.name})", events_by_country_path(event.country.continent, country_name: event.country.name), class: 'card-link'
+          = link_to event.city, events_by_city_path(continent: event.country.continent, country_name: event.country.name, city_name: event.city), class: 'card-link'
+          = link_to "(#{event.country.name})", events_by_country_path(continent: event.country.continent, country_name: event.country.name), class: 'card-link'
     %p.card-text
       = event.description

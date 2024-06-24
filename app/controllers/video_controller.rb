@@ -23,7 +23,7 @@ class VideoController < ApplicationController
     end
 
     ahoy.track "Add video to event", event_url: event.short_url, video_url: new_video.url
-    redirect_to event_url(params[:event_code])
+    redirect_to event_url(code: params[:event_code])
   end
 
   def destroy

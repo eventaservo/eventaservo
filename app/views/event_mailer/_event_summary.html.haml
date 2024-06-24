@@ -3,7 +3,7 @@
   %tbody
     %tr
       %td.title{colspan: 2}
-        = link_to @event.title, event_url(@event.ligilo)
+        = link_to @event.title, event_url(code: @event.ligilo)
         %br
         %span.sub-title
           #{@event.city} (#{@event.country.name})
@@ -19,7 +19,7 @@
         %p= raw @event.content
         %br
         %p.button-blue.text-center
-          = link_to 'LEGI PLI', event_url(@event.ligilo)
+          = link_to 'LEGI PLI', event_url(code: @event.ligilo)
 
     %tr.footer
       %td

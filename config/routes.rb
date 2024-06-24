@@ -30,6 +30,8 @@ Rails.application.routes.draw do
                                    passwords: "users/passwords"}
 
   draw(:api)
+  draw(:reports)
+  draw(:organizations)
 
   draw(:shortcuts)
 
@@ -51,8 +53,6 @@ Rails.application.routes.draw do
   get "/instruistoj_kaj_prelegantoj", to: redirect("/instruantoj_kaj_prelegantoj"), as: "instruistoj_kaj_prelegantoj"
   get "/instruantoj_kaj_prelegantoj", to: "home#instruistoj_kaj_prelegantoj", as: "instruantoj_kaj_prelegantoj"
 
-  draw(:organizations)
-  draw(:reports)
   draw(:admin)
 
   # Aldonaĵoj

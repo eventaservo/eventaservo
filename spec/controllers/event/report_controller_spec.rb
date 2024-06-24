@@ -32,7 +32,7 @@ RSpec.describe Event::ReportController, type: :controller do
 
     it "should redirect to event page" do
       subject
-      expect(response).to redirect_to(event_path(event.code))
+      expect(response).to redirect_to(event_path(code: event.code))
     end
 
     context "when report is invalid" do

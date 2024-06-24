@@ -7,11 +7,11 @@
           Saluton.
         %p
           Vi indikis en la retejo de #{link_to "Eventa Servo", "eventaservo.org"},
-          ke la jena evento interesas vin: #{link_to @event.title, event_url(@event.ligilo)}.
+          ke la jena evento interesas vin: #{link_to @event.title, event_url(code: @event.ligilo)}.
         %p= @reminder_message
 
         %p.button-blue.text-center
-          = link_to 'VIDI LA EVENTAN PAĜON', event_url(@event.ligilo)
+          = link_to 'VIDI LA EVENTAN PAĜON', event_url(code: @event.ligilo)
 
         %br
         %p{ style: "font-size: small; color: gray;" }

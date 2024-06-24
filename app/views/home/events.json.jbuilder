@@ -23,6 +23,6 @@ json.array!(@events) do |event|
   # FullCalendar montras la malĝustan finan tagon. Pro tio, ES aldonas unu plian tagon al la fina dato
   json.end event.multtaga? ? (event.fina_dato(horzono: @horzono) + 1.day) : event.fina_dato(horzono: @horzono)
 
-  json.url event_url(event.ligilo)
+  json.url event_url(code: event.ligilo)
   json.color color_event(event)
 end

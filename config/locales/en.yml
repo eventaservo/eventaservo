@@ -37,9 +37,15 @@ en:
     models:
       event: Eventoj
   buttons:
+    add_video: Video
+    duplicate: Duplicate
+    edit: Edit
+    share: Share
+    cancel: Cancel
     change: Change
     close: Close
     select: Select
+    send: Send
   errors:
     format: "%{attribute} %{message}"
     messages:
