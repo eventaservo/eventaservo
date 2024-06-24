@@ -69,10 +69,7 @@ ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
 
 RUN bundle exec rails assets:precompile
 
-# Creates and publishes the API documentation at /public/docs/api/v2/
-RUN npm install -g redoc-cli && \
-  mkdir -p public/docs/api/v2/ && \
-  redoc-cli build openapi/v2.yaml -o public/docs/api/v2/index.html
+RUN npx @redocly/cli build-docs openapi/v2.yaml -o public/docs/api/v2/index.html
 
 EXPOSE 3000
 
