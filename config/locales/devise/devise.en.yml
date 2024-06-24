@@ -8,17 +8,6 @@ en:
       send_paranoid_instructions: If your email address exists in our database, you
         will receive an email with instructions for how to confirm your email address
         in a few minutes.
-    errors:
-      messages:
-        already_confirmed: was already confirmed, please try signing in
-        confirmation_period_expired: needs to be confirmed within %{period}, please
-          request a new one
-        expired: has expired, please request a new one
-        not_found: ne trovita
-        not_locked: was not locked
-        not_saved:
-          one: 1 eraro malpermesis daŭrigi
-          other: "%{count} eraroj malpermesis daŭrigi"
     failure:
       already_authenticated: Vi jam ensalutis antaŭe
       inactive: Via konto ankoraŭ ne estas aktiva
@@ -76,3 +65,14 @@ en:
       send_paranoid_instructions: If your account exists, you will receive an email
         with instructions for how to unlock it in a few minutes.
       unlocked: Your account has been unlocked successfully. Please sign in to continue.
+  errors:
+    messages:
+      already_confirmed: was already confirmed, please try signing in
+      confirmation_period_expired: needs to be confirmed within %{period}, please
+        request a new one
+      expired: has expired, please request a new one
+      not_found: not found
+      not_locked: was not locked
+      not_saved:
+        one: 1 error prevented continuation
+        other: "%{count} errors prevented continuation"

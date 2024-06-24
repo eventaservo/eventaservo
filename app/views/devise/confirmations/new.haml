@@ -5,7 +5,7 @@
       %p.fg-color-grayDark.font-weight-bold Resendu konfirminstrukciojn
 
     = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
-      = devise_error_messages!
+      = render "devise/shared/error_messages", resource: resource
       .form-group
         = f.email_field :email, autocomplete: 'email', class: 'form-control', autofocus: true, placeholder: 'Retpoŝtadreso'
       = f.submit 'Resendi', class: 'button-submit col-12'
