@@ -50,7 +50,7 @@ GEM
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
-    activeadmin (3.2.1)
+    activeadmin (3.2.2)
       arbre (~> 1.2, >= 1.2.1)
       csv
       formtastic (>= 3.1)
