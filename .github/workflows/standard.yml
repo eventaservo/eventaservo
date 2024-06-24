@@ -1,0 +1,13 @@
+name: Standard Ruby
+
+on: [pull_request]
+
+jobs:
+  checker:
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      contents: write
+    steps:
+    - name: Standard Ruby
+      uses: standardrb/standard-ruby-action@v1

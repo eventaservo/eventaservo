@@ -4,11 +4,11 @@ module EventsHelper
   def display_events_by_style
     case cookies[:vidmaniero]
     when "kalendaro"
-      render partial: "events/events_as_calendar", locals: { events: @events + @today_events }
+      render partial: "events/events_as_calendar", locals: {events: @events + @today_events}
     when "mapo"
-      render partial: "events/events_as_map", locals: { events: @today_events.order(:date_start) + @events.order(:date_start)  }
+      render partial: "events/events_as_map", locals: {events: @today_events.order(:date_start) + @events.order(:date_start)}
     else
-      render partial: "events/events_as_cards", locals: { events: @events }
+      render partial: "events/events_as_cards", locals: {events: @events}
     end
   end
 
@@ -70,11 +70,11 @@ module EventsHelper
   def link_to_event_count(periodo, organizo, speco, &_block)
     active_class =
       if params[:periodo].present?
-        params[:periodo] == periodo ? "ec-active" : "ec-inactive"
+        (params[:periodo] == periodo) ? "ec-active" : "ec-inactive"
       end
 
     link_to url_for(periodo: (periodo unless params[:periodo] == periodo), o: organizo, s: speco),
-            class: "event-count #{periodo} #{active_class}" do
+      class: "event-count #{periodo} #{active_class}" do
       yield
     end
   end
