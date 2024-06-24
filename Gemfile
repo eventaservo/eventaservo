@@ -140,11 +140,8 @@ group :development do
   gem "binding_of_caller"
   gem "letter_opener_web", "~> 3"
   gem "pry-rails", "~> 0.3.4"
-  gem "rubocop", require: false
-  gem "rubocop-performance", require: false
-  gem "rubocop-rails", require: false
-  gem "rubocop-rspec", require: false
   gem "seed_dump" # Por rekrei la seeds.db dosieron
+  gem "standard"
 end
 
 group :test do

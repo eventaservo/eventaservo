@@ -1,4 +1,4 @@
-#unless Rails.env.development?
+# unless Rails.env.development?
 #  Rails.application.config.content_security_policy_report_only = true
 #
 #  Rails.application.config.content_security_policy do |policy|
@@ -10,4 +10,4 @@
 #    policy.style_src   :self, :https, :unsafe_inline
 #    policy.report_uri  "https://eventaservo.report-uri.com/r/d/csp/reportOnly"
 #  end
-#end
+# end

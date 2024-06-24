@@ -1,6 +1,6 @@
 class Rack::Attack
   safelist("allow-localhost") do |req|
-    "127.0.0.1" == req.ip || "::1" == req.ip
+    req.ip == "127.0.0.1" || req.ip == "::1"
   end
 
   throttle("requets by IP", limit: 500, period: 5) do |req|

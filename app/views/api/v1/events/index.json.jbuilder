@@ -6,8 +6,8 @@ json.array!(@events) do |event|
   json.titolo event.title
   json.priskribo event.description
   json.enhavo event.content
-  json.komenca_dato event.date_start.strftime('%Y-%m-%d')
-  json.fina_dato event.date_end.strftime('%Y-%m-%d')
+  json.komenca_dato event.date_start.strftime("%Y-%m-%d")
+  json.fina_dato event.date_end.strftime("%Y-%m-%d")
   json.retpaĝo event.site.presence
   json.retpoŝtadreso event.email.presence
   json.organizoj event.organizations.pluck(:name) if event.organizations.any?

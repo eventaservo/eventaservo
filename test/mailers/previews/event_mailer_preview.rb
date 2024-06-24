@@ -17,8 +17,8 @@ class EventMailerPreview < ActionMailer::Preview
   end
 
   def informi_pri_problemo_en_evento
-    params = { name: Faker::Name.name, email: Faker::Internet.email,
-               message: Faker::Lorem.paragraph(sentence_count: 6) }
+    params = {name: Faker::Name.name, email: Faker::Internet.email,
+              message: Faker::Lorem.paragraph(sentence_count: 6)}
     EventMailer.kontakti_organizanton(Event.all.sample.code, params)
   end
 

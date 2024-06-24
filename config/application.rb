@@ -29,7 +29,7 @@ module Eventaservo
     config.action_dispatch.default_headers = {"X-Frame-Options" => "ALLOWALL"}
     config.active_record.yaml_column_permitted_classes = [Symbol, Date, Time, ActiveSupport::TimeWithZone, ActiveSupport::TimeZone]
 
-    config.eager_load_paths << "#{Rails.root.join("test/mailers/previews")}"
+    config.eager_load_paths << Rails.root.join("test/mailers/previews")
 
     Dotenv::Rails.load if Rails.env.local?
   end

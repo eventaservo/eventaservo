@@ -31,7 +31,8 @@
 				"noku.rails-run-spec-vscode",
 				"Shopify.ruby-lsp",
 				"usernamehw.errorlens",
-				"Graphite.gti-vscode"
+				"Graphite.gti-vscode",
+				"testdouble.vscode-standard-ruby"
 			]
 		}
 	}

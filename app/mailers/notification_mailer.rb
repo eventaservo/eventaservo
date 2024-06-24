@@ -5,7 +5,7 @@ class NotificationMailer < ApplicationMailer
 
   def new_email_subscribed(recipient_id:)
     @recipient = NotificationList.find(recipient_id)
-    @country   = Country.find(@recipient.country_id)
+    @country = Country.find(@recipient.country_id)
 
     mail(
       to: @recipient.email,

@@ -6,7 +6,7 @@ class CreateEventaEnhavoRichText < ActiveRecord::Migration[6.0]
       e.enhavo = e.content
       e.save
       printf "#{i}     \r"
-      i = i - 1
+      i -= 1
     end
     PaperTrail.enabled = true
   end

@@ -218,21 +218,6 @@ class HomeController < ApplicationController
   end
 
   def kalkulas_eventojn_retajn_kaj_fizikajn
-    monatoj = %w[
-      Jan
-      Feb
-      Mar
-      Apr
-      Maj
-      Jun
-      Jul
-      Aŭg
-      Sep
-      Okt
-      Nov
-      Dec
-    ]
-
     eventoj = []
     retaj = []
     fizikaj = []

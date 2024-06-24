@@ -11,7 +11,6 @@
 #  event_id    :integer          not null
 #
 class Video < ApplicationRecord
-
   has_one_attached :bildo
 
   validates_length_of :description, maximum: 400
@@ -28,8 +27,8 @@ class Video < ApplicationRecord
   def youtube_id
     return nil unless youtube?
 
-    regex =  Regexp.new(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/)
-    url[regex,1]
+    regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/
+    url[regex, 1]
   end
 
   def self.serchi(teksto)
@@ -37,7 +36,7 @@ class Video < ApplicationRecord
       .joins(:evento)
       .where(
         "unaccent(videos.title) ilike unaccent(:search) OR unaccent(videos.description) ilike unaccent(:search)",
-        search: "%#{teksto.strip.tr(' ', '%').downcase}%"
+        search: "%#{teksto.strip.tr(" ", "%").downcase}%"
       ).order("events.date_start DESC")
   end
 
@@ -45,10 +44,10 @@ class Video < ApplicationRecord
 
   # Kontrolas ĉu la ligilo komencas per https
   def validas_ligilon
-    if url[%r{\Ahttp:\/\/}] || url[%r{\Ahttps:\/\/}]
-      self.url = url.strip
+    self.url = if url[%r{\Ahttp://}] || url[%r{\Ahttps://}]
+      url.strip
     else
-      self.url = "https://#{url.strip}"
+      "https://#{url.strip}"
     end
   end
 
@@ -56,7 +55,7 @@ class Video < ApplicationRecord
     return false unless youtube?
     return false unless saved_change_to_url?
 
-    file = URI.open("https://i.ytimg.com/vi/#{self.youtube_id}/mqdefault.jpg")
-    self.bildo.attach(io: file, filename: "bildo.jpg", content_type: "image/jpg")
+    file = URI.open("https://i.ytimg.com/vi/#{youtube_id}/mqdefault.jpg")
+    bildo.attach(io: file, filename: "bildo.jpg", content_type: "image/jpg")
   end
 end
