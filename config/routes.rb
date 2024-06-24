@@ -31,29 +31,6 @@ Rails.application.routes.draw do
 
   draw(:api)
 
-  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
-    root to: "home#index"
-
-    # Anoncoj kaj Konkursoj
-    get "/anoncoj", to: "home#anoncoj", as: "anoncoj"
-
-    # International Calendar (Internacia kalendaro)
-    get "ik", to: "international_calendar#index", as: "international_calendar"
-    get "ik/jaroj", to: "international_calendar#year_list", as: "international_calendar_year_list"
-    get "ik/:year", to: "international_calendar#year", as: "international_calendar_year"
-    get "kalendaro", to: redirect("/ik")
-    get "j", to: redirect("/ik")
-    get "j/:year", to: redirect("/ik/%{year}")
-    get "/eventoj-hu", to: redirect("/ik/jaroj#eventoj-hu")
-
-    draw(:videos)
-
-    # Countries and cities
-    get "/:continent", to: "events#by_continent", as: "events_by_continent"
-    get "/:continent/:country_name", controller: "events", action: "by_country", as: "events_by_country"
-    get "/:continent/:country_name/:city_name", controller: "events", action: "by_city", as: "events_by_city"
-  end
-
   draw(:shortcuts)
 
   # iloj
@@ -75,7 +52,6 @@ Rails.application.routes.draw do
   get "/instruantoj_kaj_prelegantoj", to: "home#instruistoj_kaj_prelegantoj", as: "instruantoj_kaj_prelegantoj"
 
   draw(:organizations)
-  draw(:events)
   draw(:reports)
   draw(:admin)
 

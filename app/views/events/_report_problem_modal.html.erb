@@ -10,7 +10,7 @@
         </button>
       </div>
 
-      <%= form_tag event_kontakti_organizanton_url(@event.code) do %>
+      <%= form_tag event_kontakti_organizanton_url(event_code: @event.code) do %>
         <div class="modal-body" style="font-weight: normal; font-size: 1rem;">
           <p>Se vi opinias ke estas problemo pri tiu ĉi evento, informu pri tio ĝian ĉefan administranton.</p>
           <div class="form-group">

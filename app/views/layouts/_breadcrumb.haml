@@ -4,10 +4,10 @@
 
     - if params[:code].present? && params[:controller] == 'events'
       - event = Event.joins(:country).lau_ligilo(params[:code])
-      %li.breadcrumb-item= link_to event.country.continent, events_by_continent_path(event.country.continent.normalized)
+      %li.breadcrumb-item= link_to event.country.continent, events_by_continent_path(continent: event.country.continent.normalized)
       - unless event.universala?
-        %li.breadcrumb-item= link_to event.country.name, events_by_country_path(event.country.continent.normalized, event.country.name)
-        %li.breadcrumb-item= link_to event.city, events_by_city_url(event.country.continent.normalized, event.country.name, event.city)
+        %li.breadcrumb-item= link_to event.country.name, events_by_country_path(continent: event.country.continent.normalized, country_name: event.country.name)
+        %li.breadcrumb-item= link_to event.city, events_by_city_url(continent: event.country.continent.normalized, country_name: event.country.name, city_name: event.city)
 
     - elsif params[:action] == 'by_username'
       - user = User.find_by(username: params[:username])
