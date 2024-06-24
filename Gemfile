@@ -138,6 +138,7 @@ group :development do
   gem "annotate", "~> 3.2", require: false
   gem "better_errors"
   gem "binding_of_caller"
+  gem "htmlbeautifier", "~> 1.4"
   gem "letter_opener_web", "~> 3"
   gem "pry-rails", "~> 0.3.4"
   gem "seed_dump" # Por rekrei la seeds.db dosieron

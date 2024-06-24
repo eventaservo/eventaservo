@@ -22,17 +22,19 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
+				"aliariff.vscode-erb-beautify",
 				"Codeium.codeium",
 				"eamodio.gitlens",
+				"Graphite.gti-vscode",
 				"jemmyw.rails-fast-nav",
+				"karunamurti.haml",
 				"KoichiSasada.vscode-rdbg",
 				"mhutchie.git-graph",
 				"ms-azuretools.vscode-docker",
 				"noku.rails-run-spec-vscode",
 				"Shopify.ruby-lsp",
-				"usernamehw.errorlens",
-				"Graphite.gti-vscode",
-				"testdouble.vscode-standard-ruby"
+				"testdouble.vscode-standard-ruby",
+				"usernamehw.errorlens"
 			]
 		}
 	}

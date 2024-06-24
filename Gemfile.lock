@@ -238,6 +238,7 @@ GEM
     highcharts-rails (6.0.3)
       railties (>= 3.1)
     hirb (0.7.3)
+    htmlbeautifier (1.4.3)
     htmlentities (4.3.4)
     httparty (0.22.0)
       csv
@@ -683,6 +684,7 @@ DEPENDENCIES
   haml (~> 6)
   highcharts-rails (~> 6.0)
   hirb (~> 0.7)
+  htmlbeautifier (~> 1.4)
   httparty (~> 0.18)
   icalendar (~> 2.6)
   image_processing (>= 1.2)
