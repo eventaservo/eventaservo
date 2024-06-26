@@ -51,7 +51,11 @@ jobs:
         run: bundle exec rails db:migrate
 
       - name: RSpec
-        run: bundle exec rspec
+        run: bundle exec rspec --tag ~type:system
+
+      - name: RSpec | System tests
+        run: bundle exec rspec --tag type:system
+
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
