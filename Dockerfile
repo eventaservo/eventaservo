@@ -7,11 +7,10 @@ ENV NODE_MAJOR=20
 RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
 RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
 
-RUN apt update && apt install -y \
+RUN apt update && apt install -y --no-install-recommends \
   btop \
   g++ \
   gcc \
-  htop \
   imagemagick \
   iputils-ping \
   libavahi-compat-libdnssd-dev \
@@ -25,16 +24,11 @@ RUN apt update && apt install -y \
   telnet \
   vim \
   zlib1g-dev \
-  zsh \
   && rm -rf /var/lib/apt/lists/*
-
-# Bundler
-RUN gem install bundler:2.4.6
 
 # Yarn
 RUN npm install -g yarn
-COPY package.json yarn.lock ./
-RUN yarn install
+
 
 
 
@@ -61,6 +55,9 @@ RUN bundle config set without development test && \
 
 COPY Gemfile Gemfile.lock ./
 RUN bundle install --retry=3
+
+COPY package.json yarn.lock ./
+RUN yarn install
 
 COPY . .
 
@@ -101,8 +98,29 @@ ENV RAILS_ENV=development
 ARG RAILS_MASTER_KEY
 ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
 
+# Install tools for development
+RUN apt update \
+  && apt install -y --no-install-recommends \
+      chromium-driver \
+      sudo \
+      zsh \
+  && rm -rf /var/lib/apt/lists/*
+RUN npm install -g @withgraphite/graphite-cli@stable
+
+# Adds a non-root user
+RUN useradd rails --create-home --shell /usr/bin/zsh && \
+  echo 'rails:password' | chpasswd && \
+  adduser rails sudo && \
+  newgrp sudo && \
+  echo 'rails ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers && \
+  chown rails:rails /eventaservo -R
+USER rails
+
 COPY Gemfile Gemfile.lock ./
 RUN bundle install --retry=3
+
+COPY package.json yarn.lock ./
+RUN yarn install
 
 # Git configuration
 RUN git config --global --add safe.directory /eventaservo
@@ -112,8 +130,6 @@ RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
   sed -i "s/plugins=(git)/plugins=(git zsh-autosuggestions)/" ~/.zshrc
 
-# Installs Graphite
-RUN npm install -g @withgraphite/graphite-cli@stable
 
 EXPOSE 3000
 

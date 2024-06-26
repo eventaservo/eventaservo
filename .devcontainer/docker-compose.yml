@@ -4,8 +4,8 @@ services:
   backend:
     volumes:
       - ./:/eventaservo:cached
-      - ~/.ssh:/root/.ssh:ro
-      - ~/.config:/root/.config
+      - ~/.ssh:/home/rails/.ssh:ro
+      - ~/.config:/home/rails/.config
 
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
