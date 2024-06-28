@@ -39,7 +39,7 @@ class Event
     private
 
     def set_event
-      @event = Event.lau_ligilo(params[:event_code])
+      @event = Event.by_link(params[:event_code])
     end
 
     def set_report
