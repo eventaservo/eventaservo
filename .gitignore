@@ -64,3 +64,4 @@ reseta_base_devel.sh
 !/app/assets/builds/.keep
 
 /.idea
+/.yardoc
