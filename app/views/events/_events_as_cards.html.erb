@@ -1,0 +1,23 @@
+<h5 class="text-center font-weight-bold">
+  <%= pluralize(@kvanto_venontaj_eventoj, 'venonta', 'venontaj') if events.count > 0 %>
+</h5>
+
+<% events.grouped_by_months.each do |date, events| %>
+  <br>
+  <h3 class="text-divider"><%= l(date, format: "%B %Y") %></h3>
+  <div class="row">
+    <% events.each do |event| %>
+      <div class="col-12 col-md-4">
+        <%= render partial: 'events/card', locals: { event: event } %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<% if defined?(@pagy) %>
+  <% if @pagy.try(:pages) > 1 %>
+    <div class="d-flex justify-content-center small">
+      <%= raw pagy_bootstrap_nav(@pagy) %>
+    </div>
+  <% end %>
+<% end %>

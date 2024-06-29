@@ -1,0 +1,16 @@
+<div class="box-white">
+  <%= page_title current_user.name %>
+  <div class="lead">Eventoj</div>
+  <div class="item-row-header">
+    <div class="col-lg-4">Nomo</div>
+    <div class="col-lg-4">Dato</div>
+    <div class="col-lg-4">Loko</div>
+  </div>
+  <% @events.each do |event| %>
+    <%= link_to event_path(code: event.ligilo), class: 'item-row' do %>
+      <div class="col-lg-4"><%= event.title %></div>
+      <div class="col-lg-4"><%= event_date(event) %></div>
+      <div class="col-lg-4"><%= "#{event.city} (#{event.country.name})" %></div>
+    <% end %>
+  <% end %>
+</div>

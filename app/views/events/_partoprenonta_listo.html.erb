@@ -1,0 +1,38 @@
+<%= link_to 'kaj pli...', '#', data: { target: '#partoprenontojModal', toggle: 'modal' } %>
+
+<div id="partoprenontojModal" class="modal fade" aria-hidden="true" aria-labelledby="titolo" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content text-left">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="titolo">
+          <%= event.participants.count %>
+          <%= event.past? ? "interesiĝintoj" : "interesiĝantoj" %>
+        </h5>
+
+        <button class="close" aria-label="Fermi" data-dismiss="modal" type="button">
+          <span aria-hidden="true"> × </span>
+        </button>
+      </div>
+
+      <div class="modal-body" style="font-weight: normal; font-size: 1rem;">
+        <% @partoprenontoj.publikaj.each do |participant| %>
+          <% next unless participant.user %>
+
+          <br>
+          <%= link_to display_user(participant.user), events_by_username_path(participant.user&.username) %>
+          <br>
+        <% end %>
+
+        <% if @partoprenontoj.ne_publikaj.count > 0 %>
+          <p>
+            <br>
+            kaj <%= pluralize(@partoprenontoj.ne_publikaj.count, 'alia kiu', plural: "aliaj kiuj") %>
+            preferis ne aperigi sian nomon
+          </p>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

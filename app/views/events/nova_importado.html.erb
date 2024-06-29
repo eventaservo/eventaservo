@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-lg-8 offset-lg-2">
+    <div class="box-white">
+      <div class="lead">
+        Importi eventon
+      </div>
+
+      Eventa Servo kapablas importi eventojn de la jenaj retejoj:
+
+      <div class="d-flex justify-content-around m-4">
+        <%= link_to image_tag('meetup.svg', size: '128'), 'https://www.meetup.com', target: :_blank %>
+        <!-- <%= link_to image_tag('duolingo.png', size: '128'), 'https://events.duolingo.com', target: :_blank %> -->
+      </div>
+
+      Algluu aŭ tajpu la eksteran URL kaj alklaku 'Importi'
+
+      <%= form_tag importi_url do %>
+        <div class="form-group">
+          <%= text_field_tag :url, '', placeholder: 'https://', autofocus: true, class: 'form-control' %>
+          <%= submit_tag 'Importi', class: 'button-submit mt-2' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

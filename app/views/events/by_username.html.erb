@@ -1,0 +1,80 @@
+<div class="box-white">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="text-center">
+        <%= display_user_image_profile(@uzanto) %>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="d-flex justify-content-between">
+        <h1 class="display-4"><%= @uzanto.name %></h1>
+        <%= link_to icon('far', 'calendar-alt'),
+          webcal_user_url(webcal_token: @uzanto.webcal_token, protocol: :webcal, format: :ics),
+          data: { target: '#webcalModal', toggle: 'modal' } %>
+      </div>
+
+      <%= montras_flagon(@uzanto.country) %>
+      <%= @uzanto.country.name if @uzanto.country %>
+      (<%= @uzanto.city %>)
+      <p class="small"><%= simple_format(@uzanto.about) %></p>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-lg-3 col-md-12">
+      <%= render partial: 'uzantaj_ligiloj' %>
+      <br>
+      <%= render partial: 'uzantaj_organizoj' %>
+      <%= render partial: 'informoj_por_administrantoj', locals: { uzanto: @uzanto } if current_user&.admin? %>
+    </div>
+    <div class="col-lg-9 col-md-12">
+      <div class="row">
+        <div class="col-12 col-md-6 mb-5">
+          <%= render partial: 'users/instruist_profilo' %>
+        </div>
+        <div class="col-12 col-md-6 mb-5">
+          <%= render partial: 'users/prelegant_profilo', locals: { user: @uzanto } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="webcalModal" class="modal fade" aria-hidden="true" aria-labelledby="shareModalCenterTitle" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="shareModalCenterTitle" class="modal-title">
+          Aboni personan kalendaron
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fermi">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Kiam oni abonas personan kalendaron, ĉiuj propraj eventoj kaj tiuj pri kiu oni interesiĝas, estas aldonataj al la kalendaro. Ajnaj eventaj ŝanĝoj aŭtomate ĝisdatiĝas.
+        </p>
+        <div class="alert alert-warning">
+          Ne konigu la adreson de via persona kalendaro al alia homo. Ĝi estas privata.
+        </div>
+        <p>
+          Jen Webcal-ligilo por aboni la kalendaron. Uzu ĝin en programoj kiel Google Calendar, iCal aŭ similaj. Se vi bezonas klarigon kiel uzi la ligilon, legu <%= link_to 'ĉi tiun artikolon', 'https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)', target: '_blank' %>.
+        </p>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <%= link_to 'Kopii', 'javascript:;', id: 'copy_button', class: 'input-group-text' %>
+          </div>
+          <%= text_field_tag nil, webcal_user_url(webcal_token: @uzanto.webcal_token, format: :ics), id: 'webcalurl', readonly: true, class: 'form-control bg-color-white' %>
+        </div>
+        <br>
+        <p>
+          Kelkaj kalendaraj programoj ebligas aŭtomate aboni la kalendaron se oni alklakas specifan ligilon. Vi povas provi tion per <%= link_to 'ĉi tiu ligilo', webcal_user_url(webcal_token: @uzanto.webcal_token, protocol: :webcal, format: :ics) %>.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Fermi</button>
+      </div>
+    </div>
+  </div>
+</div>

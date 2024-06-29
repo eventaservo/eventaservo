@@ -1,0 +1,8 @@
+<h2>Organizoj</h2>
+<ul class="list-group">
+  <% @uzanto.organizations.order(:name).each do |o| %>
+    <li class="list-group-item list-group-item-action small">
+      <%= link_to o.name, organization_url(o.short_name) %>
+    </li>
+  <% end %>
+</ul>

@@ -1,0 +1,13 @@
+<% if Calendar.utc_offset(@event.time_zone) == Calendar.utc_offset(@horzono) && !@event.all_day? %>
+  <small class="small float-right fg-color-grayDark">
+    Sama kiel via horzono
+  </small>
+<% else %>
+  <% unless @event.komenca_horo == '00:00' && @event.fina_horo == '00:00' %>
+    <% if @event.komenca_tago(horzono: @event.time_zone) != @event.komenca_tago(horzono: @horzono) %>
+      <hr>
+      <%= render partial: 'kalendareto', locals: { event: @event, tz: @horzono } %>
+    <% end %>
+    <%= render partial: 'horoj', locals: { tz: @horzono } %>
+  <% end %>
+<% end %>

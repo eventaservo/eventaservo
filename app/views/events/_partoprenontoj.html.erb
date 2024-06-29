@@ -1,0 +1,45 @@
+<!-- partoprenantoj.html.erb -->
+<div id="partoprenantoj">
+  <div class="text-divider">
+    <% if event.past? %>
+      Interesiĝintoj
+    <% else %>
+      Interesiĝantoj
+    <% end %>
+  </div>
+
+  <div class="box-body">
+    <% unless event.past? %>
+      <div class="row text-center">
+        <div class="col-6 my-auto">
+          <h1><%= event.participants.size %></h1>
+        </div>
+        <div class="col-6 my-auto">
+          <%= render partial: "mi_interesighas_button", locals: {event: event} %>
+        </div>
+      </div>
+      <% if current_user && event.participants.pluck(:user_id).include?(current_user.id) %>
+        <p class="bg-color-greenLighter p-1 mt-2 text-center" style="border-radius: 5px;">
+          Vi ricevos memorigajn retmesaĝojn pri la evento.
+        </p>
+      <% elsif current_user %>
+        <p class="bg-color-grayLighter p-1 mt-2 text-center" style="border-radius: 5px;">
+          Indiku ke vi interesiĝas kaj vi ricevos memorigajn retmesaĝojn pri la evento.
+        </p>
+      <% end %>
+    <% end %>
+
+    <!-- Listo de interesiĝ(a/i)ntoj -->
+    <% interested.publikaj.sample(3).each do |participant| %>
+      <% next unless participant.user %>
+      <br>
+      <%= link_to display_user(participant.user), events_by_username_path(participant.user&.username) %>
+      <br>
+      <br>
+    <% end %>
+
+    <% if interested.size > 3 %>
+      <%= render partial: 'partoprenonta_listo', locals: { event: event } %>
+    <% end %>
+  </div>
+</div>

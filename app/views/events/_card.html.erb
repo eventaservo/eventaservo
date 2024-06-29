@@ -1,0 +1,29 @@
+<div class="card mb-3 <%= event_color_class(event) %>">
+  <div class="card-body">
+    <h5 class="card-title">
+      <%= event_flag(event) %>
+      <% titolo = event.title %>
+      <% if event.participants.size > Constants::FAJRA_EVENTO_PARTOPRENONTOJ %>
+        <% titolo = "🔥 #{titolo}" %>
+      <% end %>
+      <%= link_to titolo, event_path(code: event.ligilo), class: ("cancelled" if event.cancelled) %>
+    </h5>
+    <div class="card-text text-muted">
+      <%= display_organizations_for_event(event, limited: true) %>
+      <%= display_event_tags(event) %>
+      <p class="small">
+        <%= event.komenca_horo(horzono: (cookies[:horzono] || event.time_zone)) unless (event.multtaga? or event.tuttaga?) %>
+        <%= event_date(event) %><br>
+        <% if event.universala? %>
+          (Reta evento)
+        <% else %>
+          <%= link_to event.city, events_by_city_path(continent: event.country.continent, country_name: event.country.name, city_name: event.city), class: 'card-link' %>
+          <%= link_to "(#{event.country.name})", events_by_country_path(continent: event.country.continent, country_name: event.country.name), class: 'card-link' %>
+        <% end %>
+      </p>
+    </div>
+    <p class="card-text">
+      <%= event.description %>
+    </p>
+  </div>
+</div>

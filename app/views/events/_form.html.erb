@@ -1,0 +1,209 @@
+<div class="row">
+  <div class="col-lg-8 offset-lg-2">
+    <div class="box-white">
+      <div class="lead">
+        <% if params[:action] == 'new' %>
+          Nova evento, kunveno aŭ okazaĵo
+        <% else %>
+          Redakti
+        <% end %>
+      </div>
+
+      <div class="alert alert-info small">
+        Skribu esperante. Povu ĉiuj scii, kio okazas en Esperantujo tutmonde!
+      </div>
+
+      <%= form_for(@event, url: (event_path(code: @event.code) if params[:action].in? %w(edit update))) do |form| %>
+        <%= error_handling(@event) %>
+
+        <div class="form-group">
+          <%= form.label :title, 'Titolo *' %>
+          <%= form.text_field :title, class: 'form-control', autofocus: true, required: true %>
+          <small class="form-text text-muted" id="title-characters-count">
+            Maksimume 100 signoj
+          </small>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :description, 'Priskribo *' %>
+          <%= form.text_field :description, class: 'form-control', required: true %>
+          <small class="form-text text-muted">
+            Maksimume 140 signoj
+          </small>
+        </div>
+
+        <% if Organization.by_user(current_user).any? %>
+          <div class="form-group">
+            <%= label_tag :organization_id, 'Organizo(j)' %>
+            <%= select_tag 'organization_ids[]',
+              options_from_collection_for_select(Organization.by_user(current_user), 'id', 'full_name', @event_organization_ids),
+              multiple: true, class: 'form-control select2-input' %>
+            <small class="form-text text-muted">
+              Lasu malplena se la evento ne apartenas al organizo
+            </small>
+          </div>
+        <% end %>
+
+        <div class="form-row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <%= form.label :date_start, 'Komenca dato' %>
+              <div class="form-row">
+                <div class="col-8">
+                  <%= form.text_field :date_start, value: @event.komenca_tago(horzono: @event.time_zone), class: 'datepicker form-control' %>
+                </div>
+                <div class="col-4">
+                  <%= text_field_tag(:time_start, @event.komenca_horo, class: 'timemask form-control', required: true) %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="form-group">
+              <%= form.label :date_end, 'Fina dato' %>
+              <div class="form-row">
+                <div class="col-8">
+                  <%= form.text_field :date_end, value: @event.fina_tago(horzono: @event.time_zone), class: 'datepicker form-control' %>
+                </div>
+                <div class="col-4">
+                  <%= text_field_tag(:time_end, @event.fina_horo, class: 'timemask form-control', required: true) %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :specolisto, 'Speco' %>
+          <div class="text-center" id="event_tags">
+            <% Constants::TAGS[0].each do |etikedo| %>
+              <div class="btn-group btn-group-toggle mb-1" data-toggle="buttons">
+                <label class="btn button-checkbox--main <%= 'active' if (@event.specolisto.present? && etikedo.in?(@event.specoj)) %>">
+                  <% if @event.specolisto.present? %>
+                    <%= check_box_tag "specolisto[#{etikedo}]", 1, etikedo.in?(@event.specoj) %>
+                  <% else %>
+                    <%= check_box_tag "specolisto[#{etikedo}]", 0 %>
+                  <% end %>
+                  <%= etikedo %>
+                </label>
+              </div>
+            <% end %>
+            <br>
+            <% Constants::TAGS[1].each do |etikedo| %>
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn button-checkbox--orange <%= 'active' if (@event.specolisto.present? && etikedo.in?(@event.specoj)) %>">
+                  <% if @event.specolisto.present? %>
+                    <%= check_box_tag "specolisto[#{etikedo}]", 1, etikedo.in?(@event.specoj) %>
+                  <% else %>
+                    <%= check_box_tag "specolisto[#{etikedo}]", 0 %>
+                  <% end %>
+                  <%= etikedo %>
+                </label>
+              </div>
+            <% end %>
+            <br>
+            <small class="form-text text-muted">
+              Anoncoj kaj konkursoj ne aperos en la ĉefpaĝo
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :enhavo, 'Enhavo' %>
+          <%= form.rich_text_area :enhavo, style: 'height: 24em; overflow-y: auto;' %>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <%= form.label :site, 'Retpaĝo' %>
+              <%= form.text_field :site, class: 'form-control', required: @event.email.blank? %>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <%= form.label :email, 'Retpoŝtadreso por kontakto' %>
+              <%= form.email_field :email, class: 'form-control', required: @event.site.blank? %>
+            </div>
+          </div>
+        </div>
+
+        <%= render partial: 'events/form/short_url', locals: { form: form, event: @event } %>
+
+        <div class="form-group form-check">
+          <%= form.check_box :online, class: 'form-check-input' %>
+          <%= form.label :online, "🖥 Reta aŭ hibrida evento", class: 'form-check-label' %>
+        </div>
+
+        <div id="retaj_informoj">
+          <div class="form-group">
+            <%= check_box_tag 'universala', "1", @event.universala? %>
+            <%= label_tag 'universala', 'Elekti horzonon anstataŭ adreson/landon', class: 'form-check-label' %>
+          </div>
+        </div>
+
+        <div id="horzono">
+          <div class="form-group">
+            <%= form.label :time_zone, 'Horzono' %>
+            <% timezones = Horzono.all.map { |h| [h.eo, h.en] } %>
+            <% timezones << I18n.t(@event.time_zone, scope: [:timezones]) %>
+            <% timezones << 'Etc/UTC' %>
+            <%= form.select(:time_zone, options_for_select(timezones, @event.time_zone), {}, class: 'select2-input form-control') %>
+          </div>
+        </div>
+
+        <div id="malretaj_informoj">
+          <div class="form-group">
+            <%= form.label :address, 'Loka adreso de la evento' %>
+            <%= form.text_field :address, class: 'form-control' %>
+            <small class="form-text text-muted">
+              Aldonu la strat-nomon por precizigi la eventlokon en la mapo
+            </small>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <%= form.label :city, 'Urbo (aŭ loko)' %>
+                <%= form.text_field :city, class: 'form-control', required: true %>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <%= form.label :country_id, 'Lando' %>
+                <%= form.select(:country_id, options_from_collection_for_select(Country.not_online, 'id', 'name', @event.country_id), {}, class: 'form-control select2-input') %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <% if current_user.admin? %>
+          <div class="box-white bg-color-admin">
+            <div class="lead">
+              Administraj funkcioj
+            </div>
+            <div class="form-group form-check">
+              <%= form.check_box :international_calendar, class: 'form-check-input' %>
+              <%= form.label :international_calendar, '📅 Aldoni al Internacia Kalendaro', class: 'form-check-label' %>
+            </div>
+            <div class="form-group">
+              <%= label_tag :user_id, 'Eventa administranto' %>
+              <%= form.select(:user_id, options_from_collection_for_select(User.order(:name), 'id', "name_with_username", @event.user_id || current_user.id), {}, class: 'form-control select2-input') %>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="buttons-footer">
+          <% if params[:action] == 'edit' %>
+            <%= link_to 'Ne registri', :back, class: 'button-cancel' %>
+            <%= link_to 'Forigi', event_path(code: @event.ligilo), class: 'button-outline-red float-left', method: :delete, data: { confirm: 'Ĉu vi certas? Vi ne kapablos malfari tion.' } %>
+          <% end %>
+          <% if params[:action] == 'new' %>
+            <%= link_to 'Ne registri', root_path, class: 'button-cancel' %>
+          <% end %>
+          <%= form.submit 'Registri', class: 'button-submit' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
