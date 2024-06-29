@@ -1,0 +1,24 @@
+<div data-controller="user">
+  <div class="lead">Kiel preleganto</div>
+  <div class="form-group row">
+    <%= f.label :preleganto, 'Mi estas preleganto', class: 'col-form-label col-5' %>
+    <div class="col-7">
+      <div class="form-group form-check">
+        <%= check_box 'user', 'preleganto',
+          { 'data-action': 'user#toggleUserPrelegantoDetails', 'data-user-target': 'preleganto' }, 'true', 'false' %>
+      </div>
+    </div>
+  </div>
+
+  <div id="preleganto-details" class="<%= 'd-none' unless resource.preleganto == 'true' %>">
+    <div class="form-group row">
+      <label class="col-md-5 col-form-label" for="preleg_temoj">Mi prelegas pri la jenaj temoj</label>
+      <div class="col-md-7">
+        <div class="form-group">
+          <%= text_area_tag 'preleg_temoj', resource.prelego["temoj"], rows: "3",
+            placeholder: "Sbriku pri la temoj pri kiuj vi pretas prelegi", class: "form-control" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

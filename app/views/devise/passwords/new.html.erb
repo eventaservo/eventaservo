@@ -1,0 +1,21 @@
+<div class="col-12 col-lg-4 offset-lg-4 col-sm-8 offset-sm-2">
+  <div class="box-white">
+    <div class="text-center">
+      <h3>Eventa Servo</h3>
+      <p class="fg-color-grayDark font-weight-bold">
+        Ĉu vi forgesis vian pasvorton?
+      </p>
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="form-group">
+        <p class="small">Skribu vian retpoŝtadreson. Ni sendos al vi instrukciojn por krei novan pasvorton.</p>
+        <%= f.email_field :email, autocomplete: 'email', class: 'form-control', autofocus: true, placeholder: 'Retpoŝtadreso' %>
+      </div>
+      <%= f.submit 'Ricevu instrukciojn', class: 'button-submit col-12' %>
+    <% end %>
+  </div>
+
+  <%= render partial: 'devise/shared/links' %>
+</div>

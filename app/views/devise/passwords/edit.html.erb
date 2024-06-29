@@ -1,0 +1,23 @@
+<div class="col-lg-6 offset-lg-3">
+  <div class="box-white">
+    <div class="lead">Ŝanĝu vian pasvorton</div>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <%= f.hidden_field :reset_password_token %>
+
+      <div class="form-group">
+        <%= f.label :password, 'Nova pasvorto' %>
+        <%= f.password_field :password, autofocus: true, autocomplete: 'new-password', class: 'form-control' %>
+        <small class="form-text text-muted">Minimume 6 signoj</small>
+      </div>
+      <div class="form-group">
+        <%= f.label :password_confirmation, 'Pasvorto-konfirmado' %>
+        <%= f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control' %>
+      </div>
+
+      <div class="buttons-footer">
+        <%= f.submit 'Ŝanĝu ĝin', class: 'button-submit' %>
+      </div>
+    <% end %>
+  </div>
+</div>

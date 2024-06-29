@@ -1,0 +1,29 @@
+<div class="col-12 col-lg-4 offset-lg-4 col-sm-8 offset-sm-2">
+  <div class="box-white">
+    <div class="text-center">
+      <h3>Eventa Servo</h3>
+      <p class="fg-color-grayDark font-weight-bold">Ensalutu por krei novajn eventojn.</p>
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="form-group">
+        <%= f.email_field :email, autocomplete: 'email', class: 'form-control', autofocus: true, placeholder: 'Retpoŝtadreso' %>
+      </div>
+      <div class="form-group">
+        <%= f.password_field :password, autocomplete: 'current-password', class: 'form-control', placeholder: 'Pasvorto' %>
+        <small class="form-text text-right">
+          <%= link_to 'Mi forgesis mian pasvorton', new_password_path(resource_name) %>
+        </small>
+      </div>
+
+      <%= f.submit 'Ensaluti', class: 'button-submit col-12' %>
+    <% end %>
+
+    <br>
+    <div class="text-divider font-weight-bold fg-color-grayDark">AŬ</div>
+    <br>
+    <%= button_to "Ensaluti per Facebook", user_facebook_omniauth_authorize_path, class: 'facebook-button col-12', data: { turbo: false } %>
+  </div>
+
+  <%= render partial: 'devise/shared/links' %>
+</div>

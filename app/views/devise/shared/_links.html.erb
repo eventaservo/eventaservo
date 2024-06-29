@@ -1,0 +1,17 @@
+<div class="box-white small text-center">
+  <% if controller_name != 'sessions' %>
+    Ĉu vi jam registriĝis?
+    <%= link_to 'Ensalutu', new_session_path(resource_name), class: 'font-weight-bold' %>
+    <br/>
+  <% end %>
+  <% if devise_mapping.registerable? && controller_name != 'registrations' %>
+    Ĉu vi ne registriĝis?
+    <%= link_to 'Registriĝu nun', new_registration_path(resource_name), class: 'font-weight-bold' %>
+    <br/>
+  <% end %>
+  <% if devise_mapping.confirmable? && controller_name != 'confirmations' && controller_name != 'sessions' %>
+    <br/>
+    <%= link_to 'Ĉu vi ne ricevis konfirminstrukciojn?', new_confirmation_path(resource_name) %>
+    <br/>
+  <% end %>
+</div>
