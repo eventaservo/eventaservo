@@ -1,0 +1,28 @@
+<!-- /eventaservo/app/views/events/_nuligilo_modal.html.erb -->
+<div id="nuligiloModal" class="modal fade" aria-hidden="true" aria-labelledby="nuligiloModalCenterTitle" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content text-left">
+
+      <div class="modal-header">
+        <h5 id="nuligiloModalCenterTitle" class="modal-title">Nuligi la eventon</h5>
+        <button type="button" class="close" aria-label="Fermi" data-dismiss="modal">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+
+      <%= form_tag event_nuligi_url(event_code: @event.code) do %>
+        <div class="modal-body" style="font-weight: normal; font-size: 1rem;">
+          <p>Nuligi la eventon ne forigas ĝin de la listo, sed aperigas ĝin kiel nuligitan. Tiel homoj informiĝos, ke la evento ne okazos.</p>
+          <div class="form-group">
+            <%= text_field_tag :cancel_reason, '', class: 'form-control', required: true, placeholder: 'Entajpu la kialon' %>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <%= submit_tag 'Konfirmi la nuligon', class: 'button-submit' %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

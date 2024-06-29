@@ -1,0 +1,26 @@
+<% if @event.uploads.attached? %>
+  <div class="text-divider">Dosieroj</div>
+  <div id="lightgallery" class="fotoj-container d-flex justify-content-center flex-wrap align-content-around">
+    <% @event.uploads.each do |upload| %>
+      <% if upload.blob.image? %>
+        <div class="foto flex-fill m-1">
+          <%= link_to(image_tag(url_for(upload.variant(resize_to_limit: [150, 150])), class: 'img-thumbnail'), url_for(upload), class: 'js-smartPhoto', data: { group: @event.code }) %>
+          <% if user_is_owner_or_admin(@event) %>
+            <p><%= link_to(icon('far', 'trash-alt', 'Forigi'), event_delete_file_path(event_code: @event.code, file_id: upload.id), method: :delete, data: { confirm: 'Ĉu vi certas?' }, class: 'btn btn-sm btn-outline-link') %></p>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <% @event.uploads.each do |upload| %>
+    <% unless upload.blob.image? %>
+      <div class="item-row-no-chevron">
+        <% if user_is_owner_or_admin(@event) %>
+          <%= link_to(icon('far', 'trash-alt'), event_delete_file_path(@event.code, upload.id), method: :delete, data: { confirm: 'Ĉu vi certas?' }, class: 'btn btn-sm btn-outline-link') %>
+        <% end %>
+        <%= link_to(upload.filename, upload, class: 'btn btn-sm btn-outline-link') %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

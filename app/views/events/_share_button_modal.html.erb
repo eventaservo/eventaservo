@@ -1,0 +1,27 @@
+<!-- /eventaservo/app/views/events/_share_button_modal.html.erb -->
+<div id="shareModal" class="modal fade" aria-hidden="true" aria-labelledby="shareModalCenterTitle" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 id="shareModalCenterTitle" class="modal-title">Diskonigilo</h5>
+        <button type="button" class="close" aria-label="Fermi" data-dismiss="modal">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="text-center">
+          <p>Elektu kiel diskonigi la eventon</p>
+          <% sharing_text = "#{@event.title.tr("'", "")} | #{@event.description}" %>
+          <%= social_share_button_tag(sharing_text, desc: sharing_text, 'data-twitter-title' => sharing_text[0..200] + " #eventaservo") %>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Fermi</button>
+      </div>
+
+    </div>
+  </div>
+</div>

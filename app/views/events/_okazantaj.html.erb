@@ -1,0 +1,28 @@
+<% if cookies[:vidmaniero].in?(%w[kartoj kartaro]) && params[:pagho].nil? %>
+  <% if @today_events.any? %>
+    <br>
+    <h5 class="text-center font-weight-bold"><%= @today_events.ne_nuligitaj.length %> okazas nuntempe</h5>
+    <div class="row">
+      <% @today_events.order(:date_start).each do |evento| %>
+        <div class="col-12 col-md-6">
+          <div class="okazantaj-eventoj">
+            <h6 class="text-truncate">
+              <%= event_flag(evento) %>
+              <% titolo = evento.title %>
+              <% if evento.participants.size > 5 %>
+                <% titolo = "🔥 #{titolo}" %>
+              <% end %>
+              <%= link_to titolo, event_path(code: evento.ligilo), class: ("cancelled" if evento.cancelled) %>
+            </h6>
+            <div class="small pl-4">
+              <%= evento.komenca_horo(horzono: (cookies[:horzono] || evento.time_zone)) unless (evento.multtaga? or evento.tuttaga?) %>
+              <%= evento.universala? ? 'Reta' : "#{evento.city} (#{evento.country.code.upcase})" %>
+              <%= display_event_days_left(evento) %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+<br>

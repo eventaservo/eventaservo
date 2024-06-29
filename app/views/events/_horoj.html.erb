@@ -1,0 +1,11 @@
+<% unless @event.all_day? %>
+  <div class="small text-right mt-1 font-weight-bold">
+    <div>
+      <%= start_and_end_time_with_timezone(@event, tz) %>
+    </div>
+    <div>
+      <%= I18n.t tz, scope: :timezones %>
+      <%= icon('fas', 'sun', data: { toggle: 'tooltip', placement: 'top', title: 'Somera/Vintra tempo' }) if @event.dst? %>
+    </div>
+  </div>
+<% end %>
