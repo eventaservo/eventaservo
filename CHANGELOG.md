@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.73.1](https://github.com/eventaservo/eventaservo/compare/v2.73.0...v2.73.1) (2024-06-29)
+
+
+### Bug Fixes
+
+* Timezone translation ([5d1ce60](https://github.com/eventaservo/eventaservo/commit/5d1ce600f97238c917bb4dd2f758cb7d7fc67a6f))
+
 ## [2.73.0](https://github.com/eventaservo/eventaservo/compare/v2.72.2...v2.73.0) (2024-05-14)
 
 
