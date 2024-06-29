@@ -1,0 +1,217 @@
+<div class="text-center">
+  <h1>Eventa Servo</h1>
+  <p>La sistemo por diskonigi Esperanto-eventojn tutmonde!</p>
+</div>
+
+<div class="d-flex justify-content-around text-center m-2">
+  <div>
+    <h3><%= User.all.size %></h3>
+    <p>registritaj uzantoj</p>
+  </div>
+  <div>
+    <h3><%= Event.all.size %></h3>
+    <p>registritaj eventoj</p>
+  </div>
+</div>
+
+<div class="full_rectangle bg-color-grayLighter" style="min-height: 0px;">
+  <div class="col-6">
+    <h3 class="title">Historio</h3>
+    <div style="text-align: justify;">
+      <p>
+        <%= link_to "Fernando Ŝajani", 'https://t.me/fernandoshayani' %>
+        kreis la retejon Eventa Servo en 2017.
+        En lia urbo troviĝas malmultaj esperantistoj, tial maloftas la renkontiĝoj.
+        Li certis, ke esperantistoj agas en aliaj urboj kaj landoj, sed kiujn
+        eventojn ili organizas? Kie? Kiam? Li kreis Eventan Servon por ordigi tiajn informojn.
+      </p>
+      <p>
+        En aprilo 2019, Fernando donacis la sistemon al Universala Esperanto-Asocio.
+        UEA kaj TEJO ekde tiam instigas al la uza­do de Eventa Servo por informi Espe­rantujon pri in­ternaciaj, lan­daj kaj lokaj eventoj, kon­gresoj, kun­venoj, renkontiĝoj k.s.
+      </p>
+      <p>
+        Fine de 2020, Eventa Servo iĝis la oficiala posteulo de la
+        <%= link_to("Kalendaro de Eventoj.hu", "http://eventoj.hu/kalendaro.htm", target: :_blank) %>.
+      </p>
+    </div>
+  </div>
+  <div class="col-6">
+    <h3 class="title">Helpantoj</h3>
+    <div style="text-align: justify;">
+      <p>
+        <%= link_to "Yves Nevelsteen", 'https://t.me/yvesnev' %>
+        eksciis pri Eventa Servo en 2018.
+        Li tuj komprenis ĝian potencialon kaj tial multe ekhelpis varbi por la retejo. Hodiaŭ li daŭre estas 'ĉefhelpanto': konsilanto, testanto de novaj funkcioj kaj komunikanto (kun uzantoj kaj gazetaro).
+        <br>
+        <%= link_to "Robin van der Vliet", 'https://t.me/robin' %>
+        ekde 2020 ankaŭ helpas pri konsilado kaj programado.
+      </p>
+      <p>
+        Ni aparte dankas
+        <%= link_to "Fernando Maia,", 'https://t.me/fmaiajr' %>
+        vic-prezidanton de UEA, pro liaj apogo kaj helpo disvastigi Eventan Servon.
+      </p>
+      <p>
+        Se ankaŭ vi volas helpi, aliĝu al ĉi tiu
+        <%= link_to "Telegram-grupo.", 'https://eventaservo.telegramo.org', target: "_blank" %>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="full_rectangle bg-color-white" style="min-height: 0px;">
+  <div class="col-12">
+    <h3 class="title">Artikoloj kaj prelegoj pri Eventa Servo</h3>
+    <div style="text-align: justify;">
+      <%= article_link("Kiel kreskigi Esperantujon per Eventa Servo",
+        "https://www.youtube.com/watch?v=ke-p-bnudTs%5D",
+        "(Prelego de Yves Nevelsteen por la Londona Esperanto-klubo kaj La Verda Stelo en januaro 2023)") %>
+
+      <%= article_link("Eventa Servo havigis novan retadreson",
+        "https://www.liberafolio.org/2022/12/06/eventa-servo-havigis-novan-retadreson",
+        "(Artikolo aperinta en Libera Folio 2022-12-06)") %>
+
+      <%= article_link("Zamenhof-festoj tutmonde: superrigardo en Eventa Servo",
+        "https://uea.org/aktuale/komunikoj/2022/Zamenhof-festoj-tutmonde-superrigardo-en-Eventa-Servo",
+        "(Gazetara komuniko de UEA kiu plurfoje mencias Eventan Servon - 2022-11-30)") %>
+
+      <%= article_link("Eventa Servo: evoluoj kaj planoj",
+        "https://eventaservo.org/ES-RevuoEsperanto-oktobro2022.pdf",
+        "(Artikolo de Yves Nevelsteen kiu aperis en la oktobra numero de 2022 de Revuo Esperanto") %>
+
+      <%= article_link("Ĉu viaj eventoj estas diskonigindaj?",
+        "https://eventaservo.org/ES-RevuoEsperanto-februaro2020.pdf",
+        "(Artikolo de Yves Nevelsteen kiu aperis en la februara numero de 2020 de Revuo Esperanto)") %>
+
+      <%= article_link("Virtualaj eventoj anstataŭ la Malferma Tago kaj la UK en 2020",
+        "https://uea.org/aktuale/komunikoj/2020/Virtualaj-eventoj-anstataux-la-Malferma-Tago-kaj-la-UK-en-2020",
+        "(Gazetara komuniko de UEA kiu plurfoje mencias Eventan Servon)") %>
+
+      <%= article_link("Eventa Servo helpas trovi retajn renkontiĝojn",
+        "https://www.liberafolio.org/2020/04/23/eventa-servo-helpas-trovi-retajn-renkontigojn/",
+        "(Intervjuo kun Yves Nevelsteen kiu aperis en Libera Folio en aprilo 2020)") %>
+
+      <%= article_link("Prelego de Fernando Ŝajani pri Eventa Servo",
+        "https://www.youtube.com/watch?v=t7YPEKvmHvo",
+        "(por virtuala Zoom-kunveno de la klubo La Verda Stelo 2020-12)") %>
+
+      <%= article_link("Prelego de Yves Nevelsteen pri Eventa Servo",
+        "https://www.youtube.com/watch?v=HQduoiEWUvo",
+        "(por la Virtuala Kongreso de Esperanto 2020-08)") %>
+
+      <%= article_link("Eventa Servo – La nova sistemo por diskonigi Esperantajn eventojn",
+        "https://uea.org/l/?prenu=kto6_18",
+        "(Artikolo de Fernando kiu aperis en Kontakto 6-2018)") %>
+
+      <%= article_link("Vidu pli da informoj", "https://eo.wikipedia.org/wiki/Eventa_Servo", "en Vikipedio.") %>
+    </div>
+  </div>
+</div>
+
+<div class="full_rectangle bg-color-grayLighter align-items-center">
+  <div class="col-12 col-md-6">
+    <h3 class="title">Facile listigi kaj trovi eventojn!</h3>
+    <p>Per Eventa Servo oni povas vidi eventojn ĉirkaŭ la tuta mondo laŭ mapo, listo, kartaro kaj kalendaro.</p>
+    <p>Ankaŭ eblas filtri la eventojn laŭ kontinentoj, landoj kaj urboj.</p>
+  </div>
+  <div class="col-12 col-md-6">
+    <%= image_tag 'prie/mapo.png', class: 'screen-shot border' %>
+  </div>
+</div>
+
+<div class="full_rectangle bg-color-white align-items-center">
+  <div class="col-12 col-md-6 order-lg-2">
+    <h3 class="title">Aboni per via kalendara programo</h3>
+    <p>Oni povas aboni landan aŭ organizan eventan liston per kalendara programo kiel Google Calendar, Apple iCal aŭ simila.</p>
+  </div>
+  <div class="col-12 col-md-6 order-lg-1">
+    <%= image_tag 'prie/kalendaro.png', class: 'screen-shot' %>
+  </div>
+</div>
+
+<div class="full_rectangle bg-color-grayLighter align-items-center">
+  <div class="col-12 col-md-6">
+    <h3 class="title">Uzebla per komputilo aŭ poŝtelefono</h3>
+    <p>Oni povas uzi Eventan Servon per tradicia komputilo, poŝtelefono aŭ tabulkomputilo. Instali aplikaĵon ne necesas.</p>
+  </div>
+  <div class="col-12 col-md-6">
+    <%= image_tag 'prie/mobile.png', class: 'screen-shot border' %>
+  </div>
+</div>
+
+<div class="full_rectangle bg-color-white align-items-center">
+  <div class="row">
+    <div class="col-12">
+      <h3 class="title">UEA kaj TEJO</h3>
+      <p>
+        Eventa Servo apartenas al <%= link_to 'Universala Esperanto-Asocio (UEA)', 'https://uea.org', target: :_blank %>
+        kun apogo de <%= link_to 'Tutmonda Esperanta Junulara Organizo (TEJO)', 'https://www.tejo.org', target: :_blank %>.
+      </p>
+      <p>
+        Ambaŭ organizoj instigas la uzadon de Eventa Servo por informi Esperantujon pri internaciaj, landaj kaj lokaj
+        eventoj, kongresoj, kunvenoj, renkontiĝoj k.s.
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <%= link_to image_tag('prie/uea.png', class: 'screen-shot'), 'https://uea.org', target: :_blank %>
+    </div>
+    <div class="col-6">
+      <%= link_to image_tag('tejo.svg', class: 'screen-shot', width: '75%'), 'https://www.tejo.org', target: :_blank %>
+    </div>
+  </div>
+</div>
+
+<div class="full_rectangle bg-color-grayLighter align-items-center">
+  <div class="row">
+    <div class="col-12 mb-5">
+      <h3 class="title">Kaj multaj aliaj avantaĝoj</h3>
+    </div>
+    <div class="col-md mb-3">
+      <div class="title">Dosierujo</div>
+      <p>Aldonu fotojn kaj dosierojn al viaj eventoj.</p>
+    </div>
+    <div class="col-md mb-3">
+      <div class="title">Sociaj komunikiloj</div>
+      <p>Facile diskonigu vian eventon per diversaj sociaj komunikiloj kiel Facebook, Twitter, WhatsApp, Telegram, retpoŝtaj servoj ktp.</p>
+    </div>
+    <div class="col-md mb-3">
+      <div class="title">Senpaga kaj malfermitkoda</div>
+      <p>Estas tute senpaga. La programkodo estas libera en <%= link_to 'Github', 'https://github.com/eventaservo/eventaservo' %>.
+      Se vi volas kontribui al la programado, <%= mail_to 'kontakto@eventaservo.org', 'kontaktu nin', subject: 'Pri Eventa Servo' %>.</p>
+    </div>
+    <div class="col-md mb-3">
+      <div class="title">Teknologioj</div>
+      <p>Konektu la eventojn al aliaj sistemoj per API-teknologio. Abonu la eventan liston per RSS-teknologio.</p>
+    </div>
+  </div>
+</div>
+
+<div class="full_rectangle bg-color-white align-items-center">
+  <div class="col-12">
+    <h3 class="title">Dankoj al partneraj teknologiaj kompanioj</h3>
+    <p>Ni dankas ĉi tiujn kompaniojn pro la permeso uzi iliajn teknologiojn senpage por plibonigi Eventan Servon.</p>
+    <div class="d-flex justify-content-around align-items-center">
+      <%= link_to(image_tag('jetbrains.svg', width: 128, alt: 'Jetbrains'), 'http://jetbrains.com', target: :_blank) %>
+      <%= link_to(image_tag('sentry.svg', width: 128, alt: 'Sentry'), 'https://sentry.io', target: :_blank) %>
+      <%= link_to(image_tag('github.svg', width: 128, alt: 'Github'), 'https://github.com/eventaservo', target: :_blank) %>
+    </div>
+  </div>
+</div>
+
+<div class="text-right mt-3">
+  <p class="small">
+    EventaServo estas kreita de Fernando Ŝajani per
+    <br>
+    Kosmotek Tecnologia da Informação LTDA
+    <br>
+    CNPJ 45.619.066/0001-00
+    <br>
+    AV. Brigadeiro Faria Lima, 2369 - Conj. 1102
+    <br>
+    01452-922 - São Paulo - SP - Brazilo
+    <br>
+    fernando@eventaservo.org
+  </p>
+</div>

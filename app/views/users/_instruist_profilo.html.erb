@@ -1,0 +1,9 @@
+<% if @uzanto.instruisto == 'true' %>
+  <div class="lead">Mi estas instruisto</div>
+  <div>Mi instruas al nivelo(j):</div>
+  <% @uzanto.instruo['nivelo'].each do |nivelo| %>
+    <div class="badge badge-info"><%= nivelo.capitalize %></div>
+  <% end %>
+  <br>
+  <%= @uzanto.instruo['sperto'] %>
+<% end %>

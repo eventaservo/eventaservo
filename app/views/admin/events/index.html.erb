@@ -1,0 +1,23 @@
+<div class="box-white small">
+  <div class="lead">Ĉiuj eventoj</div>
+  <div class="item-row-header">
+    <div class="col">Titolo</div>
+    <div class="col">Loko</div>
+    <div class="col">Horzono</div>
+    <div class="col">Komenca tago</div>
+    <div class="col">Uzanto</div>
+    <div class="col">Lasta informo</div>
+  </div>
+
+  <% @events.each do |event| %>
+    <% bg_color = (event.date_start < Time.zone.today) ? 'bg-color-gray' : nil %>
+    <%= link_to event_path(code: event.ligilo), class: "item-row #{bg_color}" do %>
+      <div class="col"><%= event.title %></div>
+      <div class="col"><%= event.city %></div>
+      <div class="col"><%= event.time_zone %></div>
+      <div class="col"><%= event.komenca_tago %></div>
+      <div class="col"><%= event.user.name %></div>
+      <div class="col"><%= format_date event.updated_at %></div>
+    <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,13 @@
+<div class="card mt-1">
+  <div class="card-body">
+    <div class="card-title">
+      <%= link_to display_user(preleganto), events_by_username_path(preleganto.username) %>
+    </div>
+    <div class="card-subtitle text-muted small">
+      <%= preleganto.country.name %>
+    </div>
+    <div class="card-text">
+      <%= simple_format(preleganto.prelego['temoj']) %>
+    </div>
+  </div>
+</div>

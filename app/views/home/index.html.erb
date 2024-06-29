@@ -1,0 +1,56 @@
+<div class="box-white">
+  <div class="front-page-title d-flex justify-content-around">
+    <div>
+      <%= link_to image_tag('uea_emblemeto.png', alt: "UEA logo", height: '36px', class: 'mr-2 mb-2'), prie_url %>
+    </div>
+    <div>
+      <%= t("tagline") %>
+    </div>
+    <div>
+      <%= link_to image_tag('tejo.svg', alt: "TEJO logo", height: '28px'), prie_url %>
+    </div>
+  </div>
+
+  <div class="text-center small">
+    <%= link_to t("links.announcements_and_contests"), anoncoj_url %>
+    |
+    <%= link_to t("links.international_calendar"), international_calendar_path %>
+    |
+    <%= link_to t("links.teachers_and_lecturers"), instruantoj_kaj_prelegantoj_path %>
+    |
+    <%= link_to icon('fas', 'video', t("links.presentations")), video_url %>
+    <br>
+    <span>
+      🌟
+      <%= link_to t("links.reports"), reports_url, class: "font-weight-bold" %>
+      🌟
+    </span>
+  </div>
+
+  <br>
+  <div id="events_container">
+    <%= render partial: 'home/view_style_chooser', locals: { kartaro: false, kalendaro: true, mapo: true } %>
+
+    <div class="text-center m-2">
+      <% @continents.each do |continent| %>
+        <%= link_to events_by_continent_path(continent: continent.name.normalized, periodo: params[:periodo].presence, o: params[:o].presence, s: params[:s].presence), class: 'button-event-count' do %>
+          <%= continent.name %>
+          <span class="badge badge-primary">
+            <%= continent.name == 'reta' ? Event.online.venontaj.count : continent.count %>
+          </span>
+        <% end %>
+      <% end %>
+    </div>
+
+    <%= render partial: 'home/filters' %>
+
+    <div class="d-flex justify-content-center">
+      <%= render "home/current_timezone" %>
+    </div>
+    <%= render partial: 'home/ads', locals: { ads: @ads } %>
+    <%= render partial: 'events/okazantaj' %>
+    <%= display_events_by_style %>
+  </div>
+
+  <div id="search_results"></div>
+</div>

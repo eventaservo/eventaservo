@@ -1,0 +1,19 @@
+<div class="box-white small">
+  <div class="lead">Sciiga listo</div>
+  <div class="item-row-header">
+    <div class="col">Retpoŝtadreso</div>
+    <div class="col">Lando</div>
+    <div class="col">Kreada dato</div>
+  </div>
+
+  <% @recipients.each do |recipient| %>
+    <div class="item-row-no-chevron">
+      <div class="col">
+        <%= link_to icon('fas', 'minus-circle'), delete_recipient_path(recipient.code), class: 'fg-color-red' %>
+        <%= recipient.email %>
+      </div>
+      <div class="col"><%= recipient.country.name %></div>
+      <div class="col"><%= format_date recipient.created_at %></div>
+    </div>
+  <% end %>
+</div>

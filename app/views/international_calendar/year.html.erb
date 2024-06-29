@@ -1,0 +1,26 @@
+<div class="box-white">
+  <div class="text-center">
+    <h1>Internacia kalendaro <%= @year %></h1>
+    <%= link_to "Nuna Internacia Kalendaro", international_calendar_path, class: 'btn btn-sm btn-link' %>
+  </div>
+
+  <% @events.grouped_by_months.each do |date, events| %>
+    <br>
+    <h3 class="text-divider"><%= l(date, format: '%B %Y').upcase %></h3>
+    <div class="row">
+      <% events.each do |e| %>
+        <div class="col-12">
+          <%= event_flag(e) %>
+          <strong><%= link_to(e.title, event_url(code: e.ligilo), class: ("cancelled" if e.cancelled)) %></strong>
+          <%= display_organizations_for_event(e) %>
+          <p class="small">
+            <strong><%= event_date(e) %> en <%= e.city %></strong>
+            <br>
+            <%= e.description %>
+          </p>
+          <hr>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

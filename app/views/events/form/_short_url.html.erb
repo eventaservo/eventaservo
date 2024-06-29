@@ -1,0 +1,12 @@
+<div class="form-group" data-controller="short-url">
+  <%= hidden_field_tag :event_id, event.id, 'data-short-url-target': 'eventId' %>
+  <label for="event_short_url">Mallonga ligilo (nedeviga)</label>
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <div class="input-group-text">https://eventaservo.org/e/</div>
+    </div>
+    <%= form.text_field :short_url, class: 'form-control', maxlength: 32, value: (event.short_url || event.code),
+      'data-action': 'blur->short-url#check', 'data-short-url-target': 'url' %>
+  </div>
+  <%= turbo_frame_tag "short_url_availability" %>
+</div>

@@ -1,0 +1,18 @@
+<% events.each do |event| %>
+  <div class="row">
+    <div class="col">
+      <%= event_flag(event) %> <%= link_to event.title, event_path(code: event.ligilo), class: "link-blue" %>
+    </div>
+    <div class="col text-right small"><%= format_date(event.date_start, style: :short) %></div>
+  </div>
+  <div class="row small">
+    <div class="col mt-3">
+      <% event.reports.each do |report| %>
+        <%= link_to report.label, report.url, target: '_blank', rel: 'noopener noreferrer' %>
+        <i class="fg-color-grayDark">- <%= report.user.name %></i>
+        <br>
+      <% end %>
+    </div>
+  </div>
+  <hr>
+<% end %>
