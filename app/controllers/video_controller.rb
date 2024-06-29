@@ -8,11 +8,11 @@ class VideoController < ApplicationController
   end
 
   def new
-    @evento = Event.lau_ligilo(params[:event_code])
+    @evento = Event.by_link(params[:event_code])
   end
 
   def create
-    event = Event.lau_ligilo(params[:event_code])
+    event = Event.by_link(params[:event_code])
     params.permit(:event_code, :video_link, :title, :description, :image)
     new_video = Video.create(evento: event,
       url: params[:video_link],

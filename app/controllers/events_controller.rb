@@ -119,14 +119,14 @@ class EventsController < ApplicationController
   end
 
   def nuligi
-    e = Event.lau_ligilo(params[:event_code])
+    e = Event.by_link(params[:event_code])
     e.update(cancelled: true, cancel_reason: params[:cancel_reason])
     ahoy.track "Cancelled event", event_url: e.short_url
     redirect_to event_url(code: params[:event_code])
   end
 
   def malnuligi
-    e = Event.lau_ligilo(params[:event_code])
+    e = Event.by_link(params[:event_code])
     e.update(cancelled: false, cancel_reason: nil)
     ahoy.track "Un-cancelled event", event_url: e.short_url
     redirect_to event_url(code: params[:event_code])
@@ -238,7 +238,7 @@ class EventsController < ApplicationController
   end
 
   def kronologio
-    @event = Event.lau_ligilo(params[:event_code])
+    @event = Event.by_link(params[:event_code])
 
     version_ids = (@event.versions + @event.enhavo.versions).map(&:id)
     @versions = PaperTrail::Version.where(id: version_ids).order(created_at: :desc)
@@ -260,7 +260,7 @@ class EventsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_event
-    @event = Event.lau_ligilo(params[:code])
+    @event = Event.by_link(params[:code])
     redirect_to root_path, flash: {error: "Evento ne ekzistas"} if @event.nil?
   end
 
