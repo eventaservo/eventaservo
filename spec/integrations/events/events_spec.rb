@@ -41,8 +41,8 @@ RSpec.describe "Events", type: :request do
   end
 
   it "adds organization to event" do
-    get edit_event_path(@evento.code)
-    patch event_path(@evento.code),
+    get edit_event_path(code: @evento.code)
+    patch event_path(code: @evento.code),
       params: {
         event: {title: Faker::Book.title},
         organization_ids: [@bejo.id, @tejo.id], code: @evento.code
@@ -51,8 +51,8 @@ RSpec.describe "Events", type: :request do
   end
 
   it "removes organization from event" do
-    get edit_event_path(@evento.code)
-    patch event_path(@evento.code),
+    get edit_event_path(code: @evento.code)
+    patch event_path(code: @evento.code),
       params: {
         event: {title: Faker::Book.title},
         organization_ids: nil, code: @evento.code

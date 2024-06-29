@@ -20,7 +20,7 @@
       - events.each do |e|
         .col-12
           = event_flag(e)
-          %strong= link_to(e.title, event_url(e.ligilo), class: ("cancelled" if e.cancelled))
+          %strong= link_to(e.title, event_url(code: e.ligilo), class: ("cancelled" if e.cancelled))
           = display_organizations_for_event(e)
           %p.small
             %strong #{event_date(e)} en #{e.city}

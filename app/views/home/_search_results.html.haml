@@ -6,7 +6,7 @@
     .item-row-no-chevron
       .col-12
         %p
-          .text-center.font-weight-bold= link_to((highlight event.title, params[:query].split), event_path(event.ligilo), class: ("cancelled" if event.cancelled))
+          .text-center.font-weight-bold= link_to((highlight event.title, params[:query].split), event_path(code: event.ligilo), class: ("cancelled" if event.cancelled))
           .text-center.small #{highlight event.city, params[:query].split} - #{highlight event.country.name, params[:query].split} | #{event_date(event)}
           .text-center= display_event_tags(event)
         .row.col-md-12

@@ -3,7 +3,7 @@
     <div><%= event_flag(@event) %> <%= @event.title %></div>
   </div>
 
-  <%= link_to "Revidi la eventon", event_url(@event.ligilo), class: "btn btn-sm btn-outline-primary" %>
+  <%= link_to "Revidi la eventon", event_url(code: @event.ligilo), class: "btn btn-sm btn-outline-primary" %>
 
   <h4 class="text-center">Kronologio</h4>
 

@@ -350,7 +350,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   # @return [String]
   #
   def url
-    Rails.application.routes.url_helpers.event_url(code)
+    Rails.application.routes.url_helpers.event_url(code: code)
   end
 
   # Liveras +short_url+ se ĝi ekzistas. Se ne, liveras +code+

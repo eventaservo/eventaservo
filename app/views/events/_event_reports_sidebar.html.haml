@@ -3,7 +3,7 @@
     .box-header.bg-color-purple 📸 Raportoj
     .box-body
       .text-right
-        = link_to icon("fas", "plus-circle", "Aldoni ligilon"), new_event_report_path(event.code), class: 'link-green'
+        = link_to icon("fas", "plus-circle", "Aldoni ligilon"), new_event_report_path(event_code: event.code), class: 'link-green'
 
       - if event.reports.any?
         - event.reports.each do |report|
@@ -13,7 +13,7 @@
 
             - if @current_user == report.user || user_can_edit_event?(user: @current_user, event: event)
               = link_to icon('far', 'trash-alt'),
-                event_report_url(event.code, report), method: :delete,
+                event_report_url(event_code: event.code, id: report), method: :delete,
                 data: { confirm: 'Ĉu vi certas?' },
                 class: 'link-simples fg-color-red float-right'
       - else

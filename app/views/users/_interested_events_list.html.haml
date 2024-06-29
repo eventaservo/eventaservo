@@ -3,7 +3,7 @@
     .lead Venontaj eventoj pri kiuj mi interesiĝas
 
     - interested_events.venontaj.order(:date_start).each do |event|
-      = link_to event_path(event.ligilo), class: 'item-row small' do
+      = link_to event_path(code: event.ligilo), class: 'item-row small' do
         .col-5
           = event_flag event
           = "#{event.city} - #{format_date(event.komenca_dato, style: :short)}"

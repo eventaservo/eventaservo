@@ -17,7 +17,7 @@
             %th Dato
         %tbody
           - events.each do |event|
-            %tr.small.pointer{onclick: "window.location.href = '#{event_path(event.ligilo)}'",
+            %tr.small.pointer{onclick: "window.location.href = '#{event_path(code: event.ligilo)}'",
               class: event_color_class(event)}
               %td #{event_flag(event)} #{event.title}
               %td= event.city

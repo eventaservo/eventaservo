@@ -7,7 +7,7 @@
         %button.close{'aria-label' => 'Fermi', 'data-dismiss' => 'modal', type: 'button'}
           %span{'aria-hidden' => 'true'} ×
 
-      = form_tag event_nuligi_url(@event.code) do
+      = form_tag event_nuligi_url(event_code: @event.code) do
         .modal-body{style: 'font-weight: normal; font-size: 1rem;'}
           %p Nuligi la eventon ne forigas ĝin de la listo, sed aperigas ĝin kiel nuligitan. Tiel homoj informiĝos, ke la evento ne okazos.
           .form-group

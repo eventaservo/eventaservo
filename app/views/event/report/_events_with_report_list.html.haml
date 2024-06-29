@@ -1,7 +1,7 @@
 - events.each do |event|
   .row
     .col
-      #{event_flag(event)} #{link_to event.title, event_path(event.ligilo), class: "link-blue"}
+      #{event_flag(event)} #{link_to event.title, event_path(code: event.ligilo), class: "link-blue"}
     .col.text-right.small= format_date(event.date_start, style: :short)
   .row.small
     .col.mt-3

@@ -7,7 +7,7 @@
       .alert.alert-info.small
         Skribu esperante. Povu ĉiuj scii, kio okazas en Esperantujo tutmonde!
 
-      = form_for(@event, url: (event_path(@event.code) if params[:action].in? %w(edit update))) do |form|
+      = form_for(@event, url: (event_path(code: @event.code) if params[:action].in? %w(edit update))) do |form|
         = error_handling(@event)
 
         .form-group
@@ -128,7 +128,7 @@
         .buttons-footer
           - if params[:action] == 'edit'
             = link_to 'Ne registri', :back, class: 'button-cancel'
-            = link_to 'Forigi', event_path(@event.ligilo), class: 'button-outline-red float-left', method: :delete, data: { confirm: 'Ĉu vi certas? Vi ne kapablos malfari tion.' }
+            = link_to 'Forigi', event_path(code: @event.ligilo), class: 'button-outline-red float-left', method: :delete, data: { confirm: 'Ĉu vi certas? Vi ne kapablos malfari tion.' }
           - if params[:action] == 'new'
             = link_to 'Ne registri', root_path, class: 'button-cancel'
           = form.submit 'Registri', class: 'button-submit'

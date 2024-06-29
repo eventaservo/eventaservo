@@ -31,7 +31,7 @@ module Webcal
           tzid: evento.time_zone
         ).call
         e.summary = evento.title
-        e.description = evento.description + '\n\n' + event_url(evento.ligilo)
+        e.description = evento.description + '\n\n' + event_url(code: evento.ligilo)
         e.location = evento.full_address
       end
     end
@@ -48,7 +48,7 @@ module Webcal
         tzid: evento.time_zone
       ).call
       e.summary = evento.title
-      e.description = evento.description + '\n\n' + event_url(evento.ligilo)
+      e.description = evento.description + '\n\n' + event_url(code: evento.ligilo)
       e.location = evento.full_address
     end
   end
@@ -68,7 +68,7 @@ module Webcal
         (event.date_end.in_time_zone(event.time_zone) + 1.day).strftime("%Y%m%d"), tzid: event.time_zone
       ).call
       e.summary = event.title
-      e.description = "#{event.description}\n\n#{event_url(event.ligilo)}"
+      e.description = "#{event.description}\n\n#{event_url(code: event.ligilo)}"
       e.location = event.full_address
     end
   end
