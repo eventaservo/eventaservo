@@ -2,7 +2,7 @@
 
 class ParticipantsController < ApplicationController
   def event
-    event = Event.lau_ligilo(params[:event_code])
+    event = Event.by_link(params[:event_code])
 
     redirect_to root_url and return if event.nil?
 

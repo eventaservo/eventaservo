@@ -145,6 +145,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :anoncoj_kaj_konkursoj, -> { anoncoj.or(konkursoj) }
   scope :international_calendar, -> { where(international_calendar: true) }
   scope :with_reports, -> { joins(:reports).distinct }
+  scope :by_link, ->(link) { find_by("lower(short_url) = ?", link.downcase) || find_by(code: link) }
 
   def self.by_code(code)
     find_by(code: code)
@@ -356,12 +357,6 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   # Liveras +short_url+ se ĝi ekzistas. Se ne, liveras +code+
   def ligilo
     short_url || code
-  end
-
-  # Liveras la eventon laŭ +short_url+ aŭ +code+
-  def self.lau_ligilo(dato)
-    # find_by(short_url: dato) || find_by(code: dato)
-    where("lower(short_url) = ?", dato.downcase).first || find_by(code: dato)
   end
 
   # Universala evento estas retaj eventoj kiuj ne taŭgas elekti landon aŭ urbon
