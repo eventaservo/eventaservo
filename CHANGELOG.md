@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.73.2](https://github.com/eventaservo/eventaservo/compare/v2.73.1...v2.73.2) (2024-06-29)
+
+
+### Bug Fixes
+
+* :bug: redirect to root_url when event is not found ([cf9bd19](https://github.com/eventaservo/eventaservo/commit/cf9bd1995d700658ca6823bedc1ceb942f794c71))
+
 ## [2.73.1](https://github.com/eventaservo/eventaservo/compare/v2.73.0...v2.73.1) (2024-06-29)
 
 
