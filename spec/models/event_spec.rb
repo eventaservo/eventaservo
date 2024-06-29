@@ -56,6 +56,20 @@ RSpec.describe Event, type: :model do
     it { should have_many_attached :uploads }
   end
 
+  describe "Scopes" do
+    describe ".by_link" do
+      let!(:event) { create(:event, short_url: "short_url", code: "code") }
+
+      it "finds the event by the short_url" do
+        expect(Event.by_link("short_url")).to eq(event)
+      end
+
+      it "finds the event by the code" do
+        expect(Event.by_link("code")).to eq(event)
+      end
+    end
+  end
+
   describe "callbacks" do
     context "after_update" do
       it "do not create a redirection for new events" do
