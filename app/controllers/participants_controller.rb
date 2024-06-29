@@ -14,6 +14,6 @@ class ParticipantsController < ApplicationController
       event.add_participant(current_user, public: params[:publika] == "jes")
     end
 
-    redirect_to event_url(event.ligilo)
+    redirect_to event_url(code: event.ligilo)
   end
 end

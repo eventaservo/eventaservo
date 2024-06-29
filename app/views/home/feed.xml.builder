@@ -18,11 +18,11 @@ xml.rss version: "2.0", "xmlns:atom": "http://www.w3.org/2005/Atom" do
     @events.each do |event|
       xml.item do
         xml.title event.title
-        xml.link event_url(event.code)
+        xml.link event_url(code: event.code)
         xml.description event_full_description(event)
         rss_enclosure(xml, event)
         xml.pubDate event.updated_at.strftime("%a, %d %b %Y %T %z")
-        xml.guid event_url(event.code), isPermaLink: true
+        xml.guid event_url(code: event.code), isPermaLink: true
       end
     end
   end

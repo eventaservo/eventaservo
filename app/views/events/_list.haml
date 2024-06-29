@@ -3,7 +3,7 @@
     %p
       .text-center.font-weight-bold
         = event_flag(event)
-        = link_to event.title, event_path(event.ligilo), class: ("cancelled" if event.cancelled)
+        = link_to event.title, event_path(code: event.ligilo), class: ("cancelled" if event.cancelled)
       .text-center
         = display_organizations_for_event(event)
         %br

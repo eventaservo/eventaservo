@@ -7,7 +7,7 @@
           Saluton #{@evento.user.name}.
 
         %p
-          Vi nun estas la administranto de la evento #{link_to @evento.title, event_url(@evento.ligilo)}
+          Vi nun estas la administranto de la evento #{link_to @evento.title, event_url(code: @evento.ligilo)}
           en Eventa Servo. Tio signifas ke vi povas ŝanĝi ĝian enhavon aŭ forigi ĝin.
 
         %p
@@ -16,7 +16,7 @@
 
         %p Sukceson kun via agado!
         %p.button-blue.text-center
-          = link_to 'VIDI LA EVENTAN PAĜON', event_url(@evento.ligilo)
+          = link_to 'VIDI LA EVENTAN PAĜON', event_url(code: @evento.ligilo)
 
     %tr.footer
       %td
