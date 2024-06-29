@@ -1,0 +1,57 @@
+<div class="col-12 col-lg-6 offset-lg-3">
+  <div class="box-white">
+    <div class="text-center">
+      <h3>Eventa Servo</h3>
+      <p class="fg-color-grayDark font-weight-bold">
+        Registriĝu por krei novajn eventojn.
+        <br>
+        Estas senpage!
+      </p>
+    </div>
+
+    <%= button_to 'Registriĝi per Facebook', user_facebook_omniauth_authorize_path, class: 'facebook-button col-12', data: { turbo: false } %>
+    <br>
+    <div class="text-divider font-weight-bold fg-color-grayDark">AŬ</div>
+    <br>
+
+    <div class="alert alert-info small mt-2 text-center">
+      Se vi havas dubon, spektu <%= link_to "ĉi tiun filmeton", "https://mallonge.net/es1", target: :_blank %>. Ĝi klarigas kiel registriĝi.
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="form-group">
+        <%= f.text_field :name, autocomplete: 'name', required: true, class: 'form-control', autofocus: true, placeholder: 'Plena nomo' %>
+      </div>
+      <div class="form-group">
+        <%= f.email_field :email, autocomplete: 'email', required: true, class: 'form-control', placeholder: 'Retpoŝtadreso' %>
+      </div>
+      <div class="form-group">
+        <%= f.text_field :city, required: true, class: 'form-control', placeholder: 'Urbo' %>
+      </div>
+      <div class="form-group">
+        <%= f.select(:country_id, options_from_collection_for_select(Country.all, 'id', 'name'), { include_blank: '--- Elektu landon ---' }, class: 'form-control select2-input', required: true) %>
+      </div>
+      <div class="form-group">
+        <%= f.text_field :birthday, class: 'birthday form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.text_field :ueacode, class: 'form-control', placeholder: 'UEA-kodo *ne deviga' %>
+      </div>
+      <div class="form-group">
+        <%= f.password_field :password, required: true, class: 'form-control', placeholder: 'Pasvorto' %>
+      </div>
+      <div class="form-group">
+        <%= f.password_field :password, required: true, class: 'form-control', placeholder: 'Pasvorto-konfirmado' %>
+      </div>
+
+      <div class="form-group">
+        <%= text_field_tag 'sekurfrazo', nil, autocomplete: 'off', required: true, class: 'form-control', placeholder: 'Kiel nomiĝas nia lingvo?' %>
+      </div>
+
+      <%= f.submit 'Registriĝi', class: 'btn btn-sm btn-success col-12' %>
+    <% end %>
+  </div>
+
+  <%= render partial: 'devise/shared/links' %>
+</div>

@@ -1,0 +1,130 @@
+<div class="col-lg-8 offset-lg-2">
+  <div class="box-white" id="profilo">
+    <div class="lead">Redakti profilon</div>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="form-group row">
+        <%= f.label :name, class: 'col-form-label col-md-3' %>
+        <div class="col-md-9">
+          <%= f.text_field :name, autocomplete: 'name', class: 'form-control', autofocus: true %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= f.label :email, class: 'col-form-label col-md-3' %>
+        <div class="col-md-9">
+          <%= f.email_field :email, autocomplete: 'email', class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= f.label :about, 'Pri mi', class: 'col-form-label col-md-3' %>
+        <div class="col-md-9">
+          <%= f.text_area :about, rows: 2, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= f.label :city, class: 'col-form-label col-md-3' %>
+        <div class="col-md-9">
+          <%= f.text_field :city, autocomplete: 'city', class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= f.label :country_id, class: 'col-form-label col-md-3' %>
+        <div class="col-md-9">
+          <%= f.select(:country_id,
+                       options_from_collection_for_select(Country.not_online, 'id', 'name', @user.country_id),
+                       {}, class: 'form-control select2-input') %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= f.label :birthday, 'Naskiĝdato', class: 'col-form-label col-md-3' %>
+        <div class="col-md-9">
+          <%= f.text_field :birthday, value: (resource.birthday.strftime("%d/%m/%Y") if resource.birthday?),
+                           class: 'birthday form-control' %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= f.label :ueacode, 'UEA-kodo', class: 'col-form-label col-md-3' %>
+        <div class="col-md-9">
+          <%= f.text_field :ueacode, class: 'form-control', placeholder: '*ne deviga' %>
+        </div>
+      </div>
+      <div class="text-divider">Mi pretas helpi</div>
+      <div class="box-white">
+        <%= render partial: 'instruisto_form', locals: { f: f, resource: resource } %>
+        <%= render partial: 'preleganto_form', locals: { f: f, resource: resource } %>
+      </div>
+      <div class="text-divider">Ligiloj</div>
+      <div class="form-group row">
+        <%= f.label :persona_retejo, image_tag('www.svg', size: 24) + ' Persona retejo', class: 'col-md-3 col-form-label' %>
+        <div class="col-md-9">
+          <%= f.text_field :persona_retejo, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= f.label :youtube, image_tag('youtube-link.svg', size: 24) + ' YouTube', class: 'col-md-3 col-form-label' %>
+        <div class="col-md-9">
+          <%= f.text_field :youtube, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= f.label :telegram, image_tag('telegram-link.svg', size: 24) + ' Telegram', class: 'col-md-3 col-form-label' %>
+        <div class="col-md-9">
+          <%= f.text_field :telegram, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= f.label :instagram, image_tag('instagram-link.svg', size: 24) + ' Instagram', class: 'col-md-3 col-form-label' %>
+        <div class="col-md-9">
+          <%= f.text_field :instagram, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= f.label :twitter, image_tag('twitter.svg', size: 24) + ' Twitter', class: 'col-md-3 col-form-label' %>
+        <div class="col-md-9">
+          <%= f.text_field :twitter, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= f.label :facebook, image_tag('facebook.svg', size: 24) + ' Facebook', class: 'col-md-3 col-form-label' %>
+        <div class="col-md-9">
+          <%= f.text_field :facebook, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= f.label :vk, image_tag('vk.svg', size: 24) + ' Vkontakte', class: 'col-md-3 col-form-label' %>
+        <div class="col-md-9">
+          <%= f.text_field :vk, class: 'form-control' %>
+        </div>
+      </div>
+      <hr>
+      <div class="form-group row">
+        <%= f.label :avatar, class: 'col-form-label col-md-3' %>
+        <div class="col-md-9">
+          <%= display_user_image(@user) %>
+          <%= f.file_field :picture, class: 'form-control-file', accept: 'image/gif,image/jpeg,image/png' %>
+          <div class="form-check">
+            <%= check_box_tag :remove_picture, '1', false, class: 'form-check-input' %>
+            <%= label_tag :remove_picture, "Forviŝi avatar", class: 'form-check-label' %>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="form-group row">
+        <%= f.label :jwt_token, 'API v2 Token', class: 'col-form-label col-md-3' %>
+        <div class="col-md-9">
+          <%= f.text_field :jwt_token, readonly: true, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="text-divider">Organizoj</div>
+      <% @user.organizoj.each do |organizo| %>
+        <%= link_to organizo.short_name, organization_url(organizo.short_name), class: 'btn btn-sm btn-outline-primary' %>
+      <% end %>
+      <div class="buttons-footer">
+        <%= link_to "Forviŝi konton", user_registration_url, method: :delete, class: "button-cancel float-left",
+                    data: { confirm: "Ĉu vi certas? Oni NE POVOS mal-fari tion!" } %>
+        <%= link_to 'Nuligi', root_path, class: 'button-cancel' %>
+        <%= f.submit 'Ĝisdatigi', class: 'button-submit' %>
+      </div>
+    <% end %>
+  </div>
+</div>
