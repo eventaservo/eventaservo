@@ -248,6 +248,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def require_geocode?
+    return false if @created_from_factory
     return false if online && city == "Reta"
 
     address_changed? || city_changed? || country_id_changed?

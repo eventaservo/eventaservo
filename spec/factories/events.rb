@@ -53,6 +53,10 @@
 #
 FactoryBot.define do
   factory :event, aliases: [:evento], class: :event do
+    after(:build) do |event|
+      event.instance_variable_set(:@created_from_factory, true)
+    end
+
     book = Faker::Book
     address = Faker::Address
 
