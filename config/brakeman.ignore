@@ -70,81 +70,13 @@
       "note": ""
     },
     {
-      "warning_type": "Cross-Site Scripting",
-      "warning_code": 2,
-      "fingerprint": "abd6ffd36d274711c28d2bfd29bf13f85021d39048e2818b2e8db0e759746c8d",
-      "check_name": "CrossSiteScripting",
-      "message": "Unescaped model attribute",
-      "file": "app/views/events/kronologio.html.haml",
-      "line": 32,
-      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
-      "code": "Diffy::Diff.new(((changes[0] or User.find(changes[0]).name) or Country.find((changes[0] or User.find(changes[0]).name)).name), ((changes[1] or User.find(changes[1]).name) or Country.find((changes[1] or User.find(changes[1]).name)).name))",
-      "render_path": [
-        {
-          "type": "controller",
-          "class": "EventsController",
-          "method": "kronologio",
-          "line": 244,
-          "file": "app/controllers/events_controller.rb",
-          "rendered": {
-            "name": "events/kronologio",
-            "file": "app/views/events/kronologio.html.haml"
-          }
-        }
-      ],
-      "location": {
-        "type": "template",
-        "template": "events/kronologio"
-      },
-      "user_input": "User.find(changes[0]).name",
-      "confidence": "Weak",
-      "cwe_id": [
-        79
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "Cross-Site Scripting",
-      "warning_code": 2,
-      "fingerprint": "abd6ffd36d274711c28d2bfd29bf13f85021d39048e2818b2e8db0e759746c8d",
-      "check_name": "CrossSiteScripting",
-      "message": "Unescaped model attribute",
-      "file": "app/views/events/kronologio.html.haml",
-      "line": 56,
-      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
-      "code": "Diffy::Diff.new(((changes[0] or User.find(changes[0]).name) or Country.find((changes[0] or User.find(changes[0]).name)).name), ((changes[1] or User.find(changes[1]).name) or Country.find((changes[1] or User.find(changes[1]).name)).name))",
-      "render_path": [
-        {
-          "type": "controller",
-          "class": "EventsController",
-          "method": "kronologio",
-          "line": 244,
-          "file": "app/controllers/events_controller.rb",
-          "rendered": {
-            "name": "events/kronologio",
-            "file": "app/views/events/kronologio.html.haml"
-          }
-        }
-      ],
-      "location": {
-        "type": "template",
-        "template": "events/kronologio"
-      },
-      "user_input": "User.find(changes[0]).name",
-      "confidence": "Weak",
-      "cwe_id": [
-        79
-      ],
-      "note": ""
-    },
-    {
       "warning_type": "SQL Injection",
       "warning_code": 0,
       "fingerprint": "ad70bdfe76ce03b388bde83950ff343fe68f31fcdfb8ac2d3a91133bcffe8bde",
       "check_name": "SQL",
       "message": "Possible SQL injection",
       "file": "app/models/event.rb",
-      "line": 341,
+      "line": 350,
       "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
       "code": "where(\"specolisto ilike '%#{t}%'\")",
       "render_path": null,
@@ -167,7 +99,7 @@
       "check_name": "SQL",
       "message": "Possible SQL injection",
       "file": "app/models/event.rb",
-      "line": 345,
+      "line": 354,
       "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
       "code": "where(\"specolisto not ilike '%#{t}%'\")",
       "render_path": null,
@@ -184,6 +116,6 @@
       "note": ""
     }
   ],
-  "updated": "2024-02-19 07:37:26 -0300",
-  "brakeman_version": "6.1.1"
+  "updated": "2024-06-29 21:23:30 +0000",
+  "brakeman_version": "6.1.2"
 }
