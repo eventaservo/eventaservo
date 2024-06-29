@@ -226,10 +226,6 @@ GEM
       activesupport (>= 6.1)
     groupdate (6.4.0)
       activesupport (>= 6.1)
-    haml (6.3.0)
-      temple (>= 0.8.2)
-      thor
-      tilt
     has_scope (0.8.2)
       actionpack (>= 5.2)
       activesupport (>= 5.2)
@@ -614,7 +610,6 @@ GEM
     strscan (3.1.0)
     telegram_simple_messenger (0.1.2)
       httparty (~> 0.18)
-    temple (0.10.3)
     thor (1.3.1)
     tilt (2.3.0)
     timeout (0.4.1)
@@ -681,7 +676,6 @@ DEPENDENCIES
   fullcalendar-rails (~> 3.9)
   geocoder (~> 1.6)
   groupdate (~> 6.4)
-  haml (~> 6)
   highcharts-rails (~> 6.0)
   hirb (~> 0.7)
   htmlbeautifier (~> 1.4)
