@@ -2,6 +2,8 @@ version: '3.8'
 
 services:
   backend:
+    environment:
+      - EDITOR=code --wait
     volumes:
       - ./:/eventaservo:cached
       - ~/.ssh:/home/rails/.ssh:ro
