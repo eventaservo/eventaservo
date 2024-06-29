@@ -1,0 +1,14 @@
+<%= link_to organization_url(organizo.short_name), class: "es-list__row" do %>
+  <div class="col-lg-1 col-2">
+    <%= organization_logo(organizo, size: :medium) %>
+  </div>
+  <div class="col-lg-9 col-6 align-self-center">
+    <%= organizo.name %>
+  </div>
+  <div class="col-lg-1 col-2 text-center align-self-center">
+    <%= organizo.eventoj.count %>
+  </div>
+  <div class="col-lg-1 col-2 text-center align-self-center">
+    <%= organizo.uzantoj.count %>
+  </div>
+<% end %>

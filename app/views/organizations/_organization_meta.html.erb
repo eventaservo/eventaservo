@@ -1,0 +1,21 @@
+<% content_for :organization_meta do %>
+  <%# Facebook OpenGraph informoj %>
+  <meta content="<%= request.original_url %>" property="og:url">
+  <meta content="article" property="og:type">
+  <meta content="<%= @organizo.name %>" property="og:title">
+  <meta content="<%= @organizo.description.to_plain_text %>" property="og:description">
+  <% if @organizo.logo.attached? %>
+    <% logo = @organizo.logo %>
+    <meta content="<%= ActionDispatch::Http::URL.url_for(ActionMailer::Base.default_url_options) + url_for(logo) %>" property="og:image">
+    <meta content="<%= ActionDispatch::Http::URL.url_for(ActionMailer::Base.default_url_options) + url_for(logo) %>" property="og:image:secure_url">
+    <meta content="<%= logo.content_type %>" property="og:image:type">
+    <meta content="<%= logo.blob.metadata[:width] %>" property="og:image:width">
+    <meta content="<%= logo.blob.metadata[:height] %>" property="og:image:height">
+  <% else %>
+    <meta content="<%= image_url('eventa_servo_facebook.jpg') %>" property="og:image">
+    <meta content="<%= image_url('eventa_servo_facebook.jpg') %>" property="og:image:secure_url">
+    <meta content="Eventa Servo" property="og:image:alt">
+    <meta content="315" property="og:image:height">
+    <meta content="600" property="og:image:width">
+  <% end %>
+<% end %>

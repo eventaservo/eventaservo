@@ -1,0 +1,119 @@
+<% content_for :title do %>
+  <%= @organizo.name %>
+<% end %>
+
+<%= render 'organization_meta' %>
+
+<div class="row">
+  <div class="col-lg-8">
+    <div class="box-white">
+      <div class="lead">
+        <%= montras_flagon(@organizo.country) if @organizo.country.present? && @organizo.display_flag? %>
+        <%= @organizo.name %>
+        <span class="float-right">
+          <%= link_to icon('far', 'calendar-alt'),
+            webcal_organizo_url(short_name: @organizo.short_name, protocol: :webcal, format: :ics),
+            data: { target: '#webcalModal', toggle: 'modal' } %>
+        </span>
+      </div>
+
+      <div class="clearfix mb-2">
+        <%= organization_logo(@organizo, size: :large, html_class: 'float-left mr-2') %>
+        <%= @organizo.description %>
+      </div>
+
+      <p class="small">
+        <%= montras_telefonnumeron(@organizo.phone) + raw('<br/>') if @organizo.phone.present? %>
+        <%= montras_retpaghon(@organizo.url) + raw('<br/>') if @organizo.url.present? %>
+        <%= montras_retposhtadreson(@organizo.email) + raw('<br/>') if @organizo.email.present? %>
+        <% if @organizo.youtube.present? %>
+          <%= link_to icon('fab', 'youtube', 'YouTube-kanalo'), @organizo.youtube, target: :_blank, class: 'fg-color-link mr-1' %>
+          <br>
+        <% end %>
+        <% if @organizo.country.present? && (@organizo.country_id != 99999) %>
+          <%= montras_adreson(@organizo.full_address) %>
+        <% end %>
+      </p>
+
+      <% if user_signed_in? && current_user.administranto?(@organizo) %>
+        <div class="buttons-footer">
+          <%= link_to icon('far', 'edit', 'Redakti'), edit_organization_url(@organizo.short_name), class: 'btn btn-sm btn-outline-primary no-border' %>
+        </div>
+      <% end %>
+    </div>
+
+    <% if @future_events.any? %>
+      <div class="box-white">
+        <div class="lead">Venontaj eventoj</div>
+        <p class="small">
+          <%= link_to "Listigi venontajn eventojn de #{@organizo.short_name} en la ĉefa paĝo", root_url(o: @organizo.short_name) %>
+        </p>
+        <% @future_events.order(:date_start).each do |e| %>
+          <%= link_to event_path(code: e.ligilo), class: 'item-row small' do %>
+            <div class="col-5"><%= event_flag e %> <%= e.city %> - <%= format_date(e.komenca_dato, style: :short) %></div>
+            <div class="col <%= "cancelled" if e.cancelled %>"><%= e.title %></div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if @past_events.any? %>
+      <div class="box-white">
+        <div class="lead">Pasintaj eventoj</div>
+        <% @past_events.each do |e| %>
+          <%= link_to event_path(code: e.ligilo), class: 'item-row small' do %>
+            <div class="col-5"><%= event_flag e %> <%= e.city %> - <%= format_date(e.date_start, style: :short) %></div>
+            <div class="col <%= "cancelled" if e.cancelled %>"><%= e.title %></div>
+          <% end %>
+        <% end %>
+        <div class="d-flex justify-content-center small pt-3">
+          <%= raw pagy_bootstrap_nav(@pagy) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <% unless params['iframe'] %>
+    <div class="col-lg-4">
+      <%= render partial: 'uzantoj' %>
+    </div>
+  <% end %>
+</div>
+
+<div id="webcalModal" class="modal fade" aria-hidden="true" aria-labelledby="shareModalCenterTitle" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="shareModalCenterTitle" class="modal-title">Aboni organizan kalendaron</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fermi">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Kiam oni abonas organizan kalendaron, ĉiuj eventoj estas aldonataj al la kalendaro kaj ajnaj eventaj ŝanĝoj
+          aŭtomate ĝisdatiĝas.
+        </p>
+        <p>
+          Jen Webcal-ligilo por aboni la kalendaron de eventoj de <%= @organizo.short_name %>.
+          Uzu ĝin en programoj kiel Google Calendar, iCal aŭ similaj. Se vi bezonas klarigon kiel uzi la ligilon, legu
+          <%= link_to 'ĉi tiun artikolon', 'https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)', target: :'_blank' %>.
+        </p>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <%= link_to 'Kopii', 'javascript:;', id: 'copy_button' %>
+          </div>
+          <%= text_field_tag nil, webcal_organizo_url(short_name: @organizo.short_name, format: :ics), id: 'webcalurl', readonly: true, class: 'form-control bg-color-white' %>
+        </div>
+        <br>
+        <p>
+          Kelkaj kalendaraj programoj ebligas aŭtomate aboni la kalendaron se oni alklakas specifan ligilon. Vi povas
+          provi tion per <%= link_to 'ĉi tiu ligilo', webcal_organizo_url(short_name: @organizo.short_name, protocol: :webcal, format: :ics) %>.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Fermi</button>
+      </div>
+    </div>
+  </div>
+</div>

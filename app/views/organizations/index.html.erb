@@ -1,0 +1,32 @@
+<div class="box-white">
+  <% if user_signed_in? %>
+    <p><%= link_to icon('fas', 'plus-circle', 'Krei novan organizon'), new_organization_url, class: 'small fg-color-green' %></p>
+  <% end %>
+
+  <% unless params[:serchi].present? %>
+    <%= render partial: "organizations/main_organizations", locals: { organizations: Organization.mains } %>
+    <hr>
+  <% end %>
+
+  <div class="es-list">
+    <h4 class="text-center">
+      <i class="fas fa-users fg-color-info"></i>
+      ORGANIZOJ
+    </h4>
+
+    <%= form_tag organization_search_url, method: :get, id: 'o_search_form', remote: true, class: 'mb-3' do %>
+      <%= text_field_tag :serchi, nil, class: 'form-control col-12', autofocus: true, placeholder: 'Serĉi organizon' %>
+    <% end %>
+
+    <% if params[:serchi].present? %>
+      <div class="row col-12">
+        Serĉas:
+        <%= link_to icon('fas', 'times', params[:serchi]), organizations_url, class: 'btn btn-sm btn-link' %>
+      </div>
+    <% end %>
+
+    <div id="o_search_results">
+      <%= render partial: "organizations/search_results" %>
+    </div>
+  </div>
+</div>
