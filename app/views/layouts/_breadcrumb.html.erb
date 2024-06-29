@@ -16,17 +16,17 @@
 
     <%# Continent %>
     <% if params[:continent].present? %>
-      <li class="breadcrumb-item"><%= link_to @continent, events_by_continent_path(params[:continent].normalized, s: params[:s].presence, t: params[:t].presence) %></li>
+      <li class="breadcrumb-item"><%= link_to @continent, events_by_continent_path(continent: params[:continent].normalized, s: params[:s].presence, t: params[:t].presence) %></li>
     <% end %>
 
     <%# Country %>
     <% if params[:country_name].present? %>
-      <li class="breadcrumb-item"><%= link_to @country.name, events_by_country_path(params[:continent].normalized, params[:country_name], s: params[:s].presence, t: params[:t].presence) %></li>
+      <li class="breadcrumb-item"><%= link_to @country.name, events_by_country_path(continent: params[:continent].normalized, country_name: params[:country_name], s: params[:s].presence, t: params[:t].presence) %></li>
     <% end %>
 
     <%# City %>
     <% if params[:city_name].present? %>
-      <li class="breadcrumb-item"><%= link_to params[:city_name].titleize, events_by_city_path(params[:continent].normalized, params[:country_name], params[:city_name], s: params[:s].presence, t: params[:t].presence) %></li>
+      <li class="breadcrumb-item"><%= link_to params[:city_name].titleize, events_by_city_path(continent: params[:continent].normalized, country_name: params[:country_name], city_name: params[:city_name], s: params[:s].presence, t: params[:t].presence) %></li>
     <% end %>
 
     <div class="ml-auto">
