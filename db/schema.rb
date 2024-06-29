@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_24_155914) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_29_140250) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -223,16 +223,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_24_155914) do
     t.datetime "updated_at", null: false
     t.index ["text"], name: "index_logs_on_text"
     t.index ["user_id"], name: "index_logs_on_user_id"
-  end
-
-  create_table "notification_lists", force: :cascade do |t|
-    t.integer "country_id", null: false
-    t.string "email", null: false
-    t.string "code", null: false
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.index ["code"], name: "index_notification_lists_on_code"
-    t.index ["country_id", "email"], name: "index_notification_lists_on_country_id_and_email"
   end
 
   create_table "organization_events", force: :cascade do |t|

@@ -8,10 +8,6 @@ class EventMailerPreview < ActionMailer::Preview
     EventMailer.send_updates_to_followers(event)
   end
 
-  def notify_users
-    EventMailer.notify_user(Event.order("RANDOM()").first.id, NotificationList.order("RANDOM()").first.id)
-  end
-
   def weekly_summary
     EventMailer.weekly_summary(User.receives_weekly_summary.sample(1).first)
   end

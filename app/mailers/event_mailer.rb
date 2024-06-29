@@ -8,25 +8,6 @@ class EventMailer < ApplicationMailer
 
   require "redcarpet/render_strip"
 
-  def self.send_notification_to_users(event_id:)
-    return false unless Event.exists?(event_id)
-    return false unless Rails.env.production? # Ne sendas retmesaĝon dum provo
-
-    event = Event.includes(:country).find(event_id)
-    recipients = event.country.recipients
-    return false if recipients.empty?
-
-    recipients.each do |recipient|
-      notify_user(event_id, recipient.id).deliver_later(wait: 1.hour)
-    end
-  end
-
-  def notify_user(event_id, recipient_id)
-    @recipient = NotificationList.find(recipient_id)
-    @event = Event.includes(:country).find(event_id)
-    mail(to: @recipient.email, subject: "Nova evento: #{@event.title}")
-  end
-
   def notify_admins(event_id, ghisdatigho: false)
     return false if Rails.env.development?
 

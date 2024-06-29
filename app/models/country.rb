@@ -19,7 +19,6 @@
 #
 class Country < ApplicationRecord
   has_many :users, inverse_of: :country, dependent: :restrict_with_exception
-  has_many :recipients, class_name: "NotificationList", dependent: :destroy
 
   validates :name, presence: true
   validates :name, uniqueness: true

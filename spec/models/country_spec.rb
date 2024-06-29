@@ -9,7 +9,6 @@ RSpec.describe Country, type: :model do
 
   describe "associations" do
     it { should have_many(:users) }
-    it { should have_many(:recipients) }
   end
 
   describe "class methods" do

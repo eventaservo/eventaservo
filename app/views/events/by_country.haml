@@ -2,7 +2,6 @@
   = @country.name
 
 .box-white
-  -# = render partial: 'home/shortcuts'
   = content_for :breadcrumb_right do
     = link_to icon('far', 'calendar-alt'), webcal_url(landa_kodo: @country.code, protocol: :webcal, format: :ics), data: { target: '#webcalModal', toggle: 'modal' }
   = render partial: 'layouts/breadcrumb'
