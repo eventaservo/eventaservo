@@ -3,7 +3,7 @@
   .text-divider Alŝutilo
   %p Aldonu fotojn aŭ dokumentojn al la evento.
 
-  = form_with(model: @event, url: event_path(@event.code), local: true, id: 'uploader_form', method: :patch) do |f|
+  = form_with(model: @event, url: event_path(code: @event.code), local: true, id: 'uploader_form', method: :patch) do |f|
     = f.file_field :uploads, multiple: true, direct_upload: true,
       accept: 'application/pdf,
       image/png,

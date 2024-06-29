@@ -68,7 +68,7 @@ class EventsController < ApplicationController
       NovaEventaSciigoJob.perform_later(@event)
       ahoy.track "Create event", event_url: @event.short_url
       Log.create(text: "Created event #{@event.title}", user: @current_user, event_id: @event.id)
-      redirect_to event_path(@event.ligilo), flash: {notice: "Evento sukcese kreita."}
+      redirect_to event_path(code: @event.ligilo), flash: {notice: "Evento sukcese kreita."}
     else
       render :new
     end
@@ -77,7 +77,7 @@ class EventsController < ApplicationController
   def update # rubocop:disable Metrics/MethodLength, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
     if dosier_alshutado
       if params[:event].nil?
-        redirect_to(event_url(@event.ligilo),
+        redirect_to(event_url(code: @event.ligilo),
           flash: {error: "Vi devas unue elekti dosieron"}) && return
       end
 
@@ -86,14 +86,14 @@ class EventsController < ApplicationController
       else
         flash[:error] = "Dosier-formato ne valida"
       end
-      redirect_to event_path(@event.ligilo)
+      redirect_to event_path(code: @event.ligilo)
     elsif @event.update(event_params)
       EventoGhisdatigitaJob.perform_later(@event)
       EventMailer.nova_administranto(@event).deliver_later if @event.saved_change_to_user_id?
       @event.update_event_organizations(params[:organization_ids])
       ahoy.track "Update event", event_url: @event.short_url
       Log.create(text: "Updated event #{@event.title}", user: @current_user, event_id: @event.id)
-      redirect_to event_path(@event.ligilo), notice: "Evento sukcese ĝisdatigita"
+      redirect_to event_path(code: @event.ligilo), notice: "Evento sukcese ĝisdatigita"
     else
       render :edit
     end
@@ -102,12 +102,12 @@ class EventsController < ApplicationController
     PaperTrail.request.disable_model(Event)
     @event.update(event_params)
     PaperTrail.request.enable_model(Event)
-    redirect_to event_path(@event.ligilo), notice: "Evento sukcese ĝisdatigita"
+    redirect_to event_path(code: @event.ligilo), notice: "Evento sukcese ĝisdatigita"
   end
 
   def destroy
     unless user_is_owner_or_admin(@event)
-      redirect_to(event_path(@event.ligilo),
+      redirect_to(event_path(code: @event.ligilo),
         flash: {error: "Vi ne rajtas forigi ĝin"}) && return
     end
 
@@ -122,14 +122,14 @@ class EventsController < ApplicationController
     e = Event.lau_ligilo(params[:event_code])
     e.update(cancelled: true, cancel_reason: params[:cancel_reason])
     ahoy.track "Cancelled event", event_url: e.short_url
-    redirect_to event_url(params[:event_code])
+    redirect_to event_url(code: params[:event_code])
   end
 
   def malnuligi
     e = Event.lau_ligilo(params[:event_code])
     e.update(cancelled: false, cancel_reason: nil)
     ahoy.track "Un-cancelled event", event_url: e.short_url
-    redirect_to event_url(params[:event_code])
+    redirect_to event_url(code: params[:event_code])
   end
 
   def nova_importado
@@ -143,7 +143,7 @@ class EventsController < ApplicationController
       evento.specolisto = "Alia"
       evento.import_url = params[:url]
       evento.save!
-      redirect_to event_url(evento.code)
+      redirect_to event_url(code: evento.code)
     else
       # Eraro okazis
       redirect_to importi_url, flash: {error: "Importado malsukcesis"}
@@ -153,7 +153,7 @@ class EventsController < ApplicationController
   def delete_file
     event = Event.by_code(params[:event_code])
     event.uploads.find(params[:file_id]).purge_later
-    redirect_to event_path(event.ligilo), flash: {success: "Dosiero sukcese forigita"}
+    redirect_to event_path(code: event.ligilo), flash: {success: "Dosiero sukcese forigita"}
   end
 
   def by_continent
@@ -227,14 +227,14 @@ class EventsController < ApplicationController
     unless params[:sekurfrazo].strip.downcase == "esperanto"
       ligilo = Event.by_code(params[:event_code]).ligilo
       redirect_to(
-        event_url(ligilo),
+        event_url(code: ligilo),
         flash: {error: "Malĝusta kontraŭspama sekurvorto. Entajpu la nomon de la internacia lingvo."}
       ) && return
     end
 
     informoj = {name: params[:name], email: params[:email], message: params[:message]}
     EventMailer.kontakti_organizanton(params[:event_code], informoj).deliver_later
-    redirect_to event_url(params[:event_code]), flash: {info: "Mesaĝo sendita"}
+    redirect_to event_url(code: params[:event_code]), flash: {info: "Mesaĝo sendita"}
   end
 
   def kronologio
@@ -332,6 +332,6 @@ class EventsController < ApplicationController
     return unless redirection
 
     redirection.increment!(:hits)
-    redirect_to event_path(redirection.new_short_url), status: :moved_permanently
+    redirect_to event_path(code: redirection.new_short_url), status: :moved_permanently
   end
 end

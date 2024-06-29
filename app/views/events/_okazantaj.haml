@@ -11,7 +11,7 @@
               - titolo = evento.title
               - if evento.participants.size > 5
                 - titolo = "🔥 #{titolo}"
-              = link_to titolo, event_path(evento.ligilo), class: ("cancelled" if evento.cancelled)
+              = link_to titolo, event_path(code: evento.ligilo), class: ("cancelled" if evento.cancelled)
               .small.pl-4
                 = evento.komenca_horo(horzono: (cookies[:horzono] || evento.time_zone)) unless (evento.multtaga? or evento.tuttaga?)
                 = evento.universala? ? 'Reta' : "#{evento.city} (#{evento.country.code.upcase})"

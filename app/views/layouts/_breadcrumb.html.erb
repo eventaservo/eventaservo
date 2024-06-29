@@ -1,0 +1,36 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Mondo', root_path(s: params[:s].presence, t: params[:t].presence) %></li>
+
+    <% if params[:code].present? && params[:controller] == 'events' %>
+      <% event = Event.joins(:country).lau_ligilo(params[:code]) %>
+      <li class="breadcrumb-item"><%= link_to event.country.continent, events_by_continent_path(continent: event.country.continent.normalized) %></li>
+      <% unless event.universala? %>
+        <li class="breadcrumb-item"><%= link_to event.country.name, events_by_country_path(continent: event.country.continent.normalized, country_name: event.country.name) %></li>
+        <li class="breadcrumb-item"><%= link_to event.city, events_by_city_url(continent: event.country.continent.normalized, country_name: event.country.name, city_name: event.city) %></li>
+      <% end %>
+    <% elsif params[:action] == 'by_username' %>
+      <% user = User.find_by(username: params[:username]) %>
+      <li class="breadcrumb-item"><%= link_to user.name, events_by_username_path(params[:username]) %></li>
+    <% end %>
+
+    <%# Continent %>
+    <% if params[:continent].present? %>
+      <li class="breadcrumb-item"><%= link_to @continent, events_by_continent_path(params[:continent].normalized, s: params[:s].presence, t: params[:t].presence) %></li>
+    <% end %>
+
+    <%# Country %>
+    <% if params[:country_name].present? %>
+      <li class="breadcrumb-item"><%= link_to @country.name, events_by_country_path(params[:continent].normalized, params[:country_name], s: params[:s].presence, t: params[:t].presence) %></li>
+    <% end %>
+
+    <%# City %>
+    <% if params[:city_name].present? %>
+      <li class="breadcrumb-item"><%= link_to params[:city_name].titleize, events_by_city_path(params[:continent].normalized, params[:country_name], params[:city_name], s: params[:s].presence, t: params[:t].presence) %></li>
+    <% end %>
+
+    <div class="ml-auto">
+      <%= yield :breadcrumb_right %>
+    </div>
+  </ol>
+</nav>

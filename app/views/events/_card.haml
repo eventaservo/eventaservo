@@ -5,7 +5,7 @@
       - titolo = event.title
       - if event.participants.size > Constants::FAJRA_EVENTO_PARTOPRENONTOJ
         - titolo = "🔥 #{titolo}"
-      = link_to titolo, event_path(event.ligilo), class: ("cancelled" if event.cancelled)
+      = link_to titolo, event_path(code: event.ligilo), class: ("cancelled" if event.cancelled)
     .card-text.text-muted
       = display_organizations_for_event(event, limited: true)
       = display_event_tags(event)
@@ -17,7 +17,7 @@
         - if event.universala?
           (Reta evento)
         - else
-          = link_to event.city, events_by_city_path(event.country.continent, event.country.name, event.city), class: 'card-link'
-          = link_to "(#{event.country.name})", events_by_country_path(event.country.continent, event.country.name), class: 'card-link'
+          = link_to event.city, events_by_city_path(continent: event.country.continent, country_name: event.country.name, city_name: event.city), class: 'card-link'
+          = link_to "(#{event.country.name})", events_by_country_path(continent: event.country.continent, country_name: event.country.name), class: 'card-link'
     %p.card-text
       = event.description

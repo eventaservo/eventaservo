@@ -37,9 +37,15 @@ eo:
     models:
       event: Eventoj
   buttons:
+    add_video: Video
+    duplicate: Duobligi
+    edit: Redakti
+    share: Diskonigi
+    cancel: Nuligi
     change: Ŝangi
     close: Fermi
     select: Elekti
+    send: Sendi
   errors:
     format: "%{attribute} %{message}"
     messages:
