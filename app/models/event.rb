@@ -145,10 +145,17 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :anoncoj_kaj_konkursoj, -> { anoncoj.or(konkursoj) }
   scope :international_calendar, -> { where(international_calendar: true) }
   scope :with_reports, -> { joins(:reports).distinct }
-  scope :by_link, ->(link) { find_by("lower(short_url) = ?", link.downcase) || find_by(code: link) }
 
   def self.by_code(code)
     find_by(code: code)
+  end
+
+  # Finds an event by its short URL or code.
+  #
+  # @param link [String] the short URL or code of the event.
+  # @return [Event, nil] the event with the given short URL or code, or nil if not found.
+  def self.by_link(link)
+    find_by("lower(short_url) = ?", link.downcase) || find_by(code: link)
   end
 
   def self.grouped_by_months
