@@ -1,0 +1,30 @@
+<% events.each do |date, events| %>
+  <br>
+  <br>
+  <h3 class="text-divider"><%= l(date, format: "%B %Y") %></h3>
+  <% events.each do |event| %>
+    <div class="item-row-no-chevron">
+      <div class="col-12">
+        <p>
+          <div class="text-center font-weight-bold">
+            <%= link_to((highlight event.title, params[:query].split), event_path(code: event.ligilo), class: ("cancelled" if event.cancelled)) %>
+          </div>
+          <div class="text-center small">
+            <%= "#{highlight event.city, params[:query].split} - #{highlight event.country.name, params[:query].split} | #{event_date(event)}" %>
+          </div>
+          <div class="text-center">
+            <%= display_event_tags(event) %>
+          </div>
+        </p>
+        <div class="row col-md-12">
+          <p class="small">
+            <%= highlight event.description, params[:query].split %>
+          </p>
+          <p class="small">
+            <%= highlight ActionView::Base.full_sanitizer.sanitize(event.content), params[:query].split %>
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

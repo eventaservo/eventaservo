@@ -1,0 +1,17 @@
+<% if interested_events.venontaj.any? %>
+  <div class="mb-5">
+    <div class="lead">Venontaj eventoj pri kiuj mi interesiĝas</div>
+
+    <% interested_events.venontaj.order(:date_start).each do |event| %>
+      <%= link_to event_path(code: event.ligilo), class: 'item-row small' do %>
+        <div class="col-5">
+          <%= event_flag event %>
+          <%= "#{event.city} - #{format_date(event.komenca_dato, style: :short)}" %>
+        </div>
+        <div class="col <%= "cancelled" if event.cancelled %>">
+          <%= "#{event.title}" %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,30 @@
+<div class="box-white small">
+  <div class="lead">
+    Reklamoj
+    <%= link_to icon('fas', 'plus-circle'), new_admin_reklamoj_url, class: 'small fg-color-green' %>
+  </div>
+  <div class="row">
+    <% @ads.each do |r| %>
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card m-2 align-items-center <%= 'bg-color-gray' unless r.active? %>">
+          <% if r.image.attached? %>
+            <%= image_tag r.image.variant(resize_to_fill: [200, 100]), class: 'card-img-top reklam-bildo mt-2' %>
+          <% end %>
+
+          <div class="card-body">
+            <p class="card-text"><%= link_to r.url, r.url, target: :_blank %></p>
+            <div class="d-flex justify-content-between">
+              <% if r.active? %>
+                <%= link_to 'Malebligi', admin_reklamoj_toggle_active_path(r), class: 'fg-color-orange' %>
+              <% else %>
+                <%= link_to 'Ebligi', admin_reklamoj_toggle_active_path(r), class: 'fg-color-green' %>
+              <% end %>
+
+              <%= link_to 'Forviŝi', admin_reklamoj_url(r), method: :delete, data: { confirm: 'Ĉu vi certas?' }, class: 'fg-color-red' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

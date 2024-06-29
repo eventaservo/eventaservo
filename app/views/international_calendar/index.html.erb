@@ -1,0 +1,42 @@
+<% content_for :title do %>
+  Internacia Kalendaro | Eventa Servo
+<% end %>
+
+<% content_for :og_title do %>
+  Internacia Kalendaro | Eventa Servo
+<% end %>
+
+<% content_for :og_description do %>
+  Listo de la ĉefaj Esperanto-eventoj tutmonde
+<% end %>
+
+<div class="box-white">
+  <div class="text-center">
+    <h1>Internacia Kalendaro</h1>
+    <p>
+      Jen listo de la ĉefaj Esperanto-eventoj tutmonde.<br>
+      Se laŭ vi mankas evento aŭ estas eraro, <%= mail_to("kontakto@eventaservo.org", "informu nin per retmesaĝo") %>.
+    </p>
+    <hr>
+    <%= link_to "Pasintaj internaciaj eventoj", international_calendar_year_list_path, class: 'btn btn-sm btn-link' %>
+  </div>
+
+  <% @events.grouped_by_months.each do |date, events| %>
+    <br>
+    <h3 class="text-divider"><%= l(date, format: '%B %Y').upcase %></h3>
+    <div class="row">
+      <% events.each do |e| %>
+        <div class="col-12">
+          <%= event_flag(e) %>
+          <strong><%= link_to(e.title, event_url(code: e.ligilo), class: ("cancelled" if e.cancelled)) %></strong>
+          <%= display_organizations_for_event(e) %>
+          <p class="small">
+            <strong><%= event_date(e) %> en <%= e.city %></strong><br>
+            <%= e.description %>
+          </p>
+          <hr>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,8 @@
+<div class="box-white">
+  <h1 class="lead">Landoj</h1>
+  <% @landoj.each do |lando| %>
+    <%= link_to root_path, class: 'item-row' do %>
+      <div class="col-12"><%= lando.name %></div>
+    <% end %>
+  <% end %>
+</div>

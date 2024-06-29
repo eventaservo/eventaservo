@@ -1,0 +1,34 @@
+<div class="box-white">
+  <div class="box-header">Eventoj</div>
+  <% if events.empty? %>
+    <p>Neniu evento trovita</p>
+  <% else %>
+    <h5>
+      <%= pluralize(events.count, 'evento trovita', 'eventoj trovitaj') %>
+      <% if params[:pasintaj].blank? %>
+        (estontaj kaj ĵus okazintaj)
+      <% end %>
+    </h5>
+
+    <div class="table-responsive">
+      <table class="table table-sm table-hover">
+        <thead>
+          <tr>
+            <th>Titolo</th>
+            <th>Urbo</th>
+            <th>Dato</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% events.each do |event| %>
+            <tr class="small pointer" onclick="window.location.href = '<%= event_path(code: event.ligilo) %>'" class="<%= event_color_class(event) %>">
+              <td><%= event_flag(event) %> <%= event.title %></td>
+              <td><%= event.city %></td>
+              <td><%= event_date(event) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>

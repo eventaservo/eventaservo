@@ -1,0 +1,23 @@
+<div class="box-white small">
+  <div class="lead">Forigitaj eventoj</div>
+  <div class="item-row-header">
+    <div class="col">Titolo</div>
+    <div class="col">Loko</div>
+    <div class="col">Dato</div>
+    <div class="col">Uzanto</div>
+    <div class="col">Lasta informo</div>
+  </div>
+
+  <% @events.each do |event| %>
+    <div class="item-row-no-chevron">
+      <div class="col"><%= event.title %></div>
+      <div class="col"><%= event.city %></div>
+      <div class="col"><%= format_date(event.date_start) %></div>
+      <div class="col"><%= event.user.name %></div>
+      <div class="col">
+        <%= format_date(event.updated_at) %>
+        <%= link_to(icon('fas', 'plus-circle'), admin_recover_event_path(event.ligilo), method: :patch, class: 'fg-color-green') %>
+      </div>
+    </div>
+  <% end %>
+</div>

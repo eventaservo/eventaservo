@@ -1,0 +1,46 @@
+<% if @events.online.exists? %>
+  <table class="stripped bordered">
+    <tbody>
+      <tr class="row-title">
+        <td class="text-center">Retaj eventoj</td>
+      </tr>
+      <% @events.online.each do |event| %>
+        <tr>
+          <td class="text-center">
+            <div class="event">
+              <div class="title"><%= link_to event.title, event_url(code: event.ligilo), class: 'bold' %></div>
+              <div class="date-and-city"><%= event_date(event) %></div>
+              <div class="description"><%= event.description %></div>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+  <br>
+<% end %>
+
+<table class="bordered">
+  <tbody>
+    <tr class="row-title">
+      <td class="text-center">Ĉeestaj eventoj</td>
+    </tr>
+    <% @events.grouped_by_countries.each do |country_name, events| %>
+      <tr class="row-header">
+        <td><%= country_name %></td>
+      </tr>
+      <% events.each do |event| %>
+        <tr>
+          <td class="text-center">
+            <div class="event">
+              <div class="title"><%= link_to event.title, event_url(code: event.ligilo), class: 'bold' %></div>
+              <div class="date-and-city"><%= event_date(event) %></div>
+              <div class="description"><%= event.description %></div>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

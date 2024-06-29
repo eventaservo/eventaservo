@@ -1,8 +1,0 @@
-.card.mt-1
-  .card-body
-    .card-title
-      = link_to display_user(preleganto), events_by_username_path(preleganto.username)
-    .card-subtitle.text-muted.small
-      = preleganto.country.name
-    .card-text
-      = simple_format(preleganto.prelego['temoj'])

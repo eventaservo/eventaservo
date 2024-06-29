@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="eo">
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta content="#28a745" name="theme-color">
+
+    <title>
+      <%= yield(:title) + " | " if content_for?(:title) %>
+      Eventa Servo
+    </title>
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application' %>
+    <%= javascript_include_tag 'application_pipeline' %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
+  </body>
+</html>

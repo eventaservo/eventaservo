@@ -1,0 +1,18 @@
+<div class="card mt-1">
+  <div class="card-body">
+    <div class="card-title">
+      <%= link_to display_user(instruisto), events_by_username_path(instruisto.username) %>
+    </div>
+    <div class="card-subtitle text-muted small">
+      <%= instruisto.country.name %>
+    </div>
+    <div class="card-text">
+      <% instruisto.instruo['nivelo'].each do |nivelo| %>
+        <span class="badge badge-info"><%= nivelo %></span>
+      <% end %>
+      <p>
+        <%= instruisto.instruo['sperto'] %>
+      </p>
+    </div>
+  </div>
+</div>

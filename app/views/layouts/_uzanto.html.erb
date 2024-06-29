@@ -1,0 +1,21 @@
+<ul class="navbar-nav">
+  <% if user_signed_in? %>
+    <li class="nav-item dropdown active">
+      <a id="uzantoDropdown" class="nav-link dropdown-toggle" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button">
+        <%= display_user(current_user) %>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="uzantoDropdown">
+        <%= link_to icon('fa-solid', 'user', 'Mia profilo'), events_by_username_path(current_user.username), class: 'dropdown-item' %>
+        <%= link_to icon('fa-regular', 'calendar', 'Miaj eventoj'), user_events_path(current_user.username), class: 'dropdown-item' %>
+        <div class="dropdown-divider"></div>
+        <%= link_to icon('fa-solid', 'user-edit', 'Redakti mian profilon'), edit_user_registration_path, class: 'dropdown-item' %>
+        <div class="dropdown-divider"></div>
+        <%= link_to icon('fa-solid', 'sign-out-alt', 'Elsaluti'), destroy_user_session_path, class: 'dropdown-item', method: :delete %>
+      </div>
+    </li>
+  <% else %>
+    <li class="nav-item">
+      <%= link_to icon('fa-solid', 'sign-in-alt', t('navbar.log_in_sign_up')), new_user_session_path, class: 'btn btn-sm btn-outline-light' %>
+    </li>
+  <% end %>
+</ul>
