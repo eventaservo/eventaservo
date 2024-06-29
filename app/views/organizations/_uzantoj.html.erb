@@ -1,0 +1,49 @@
+<div class="box-white">
+  <div class="box-header">Administrantoj</div>
+  <div class="box-body">
+    <div class="text-divider">Ĉefadministranto(j)</div>
+
+    <p class="bg-color-grayLighter p-1 mt-2 text-center" style="border-radius: 5px;">
+      Ĉefadministranto rajtas aldoni novan administranton
+    </p>
+
+    <% @organizo.administrantoj.order(:name).each do |u| %>
+      <br>
+      <%= link_to display_user(u), events_by_username_path(u.username) %>
+      <% if user_signed_in? && current_user.administranto?(@organizo) %>
+        <%= link_to icon('fas', 'star', class: 'fg-color-yellow'), organization_estrighu_url(@organizo.short_name, u.username) %>
+      <% else %>
+        <%= icon('fas', 'star', class: 'fg-color-yellow') %>
+      <% end %>
+      <br>
+    <% end %>
+
+    <br>
+    <br>
+    <div class="text-divider">Kunadministranto(j)</div>
+    <% @organizo.ne_estroj.order(:name).each do |u| %>
+      <br>
+      <%= link_to display_user(u), events_by_username_path(u.username) %>
+
+      <% if user_signed_in? && current_user.administranto?(@organizo) %>
+        <%= link_to icon('far', 'star', class: 'fg-color-gray'), organization_estrighu_url(@organizo.short_name, u.username) %>
+        <%= link_to icon('fas', 'minus-circle', class: 'fg-color-red'),
+          organization_forighu_url(@organizo.short_name, u.username),
+          data: { confirm: 'Ĉu vi certas ke vi volas forigi la uzanton el la organizo?' } %>
+      <% end %>
+      <br>
+    <% end %>
+
+    <% if user_signed_in? && current_user.administranto?(@organizo) %>
+      <br>
+      <br>
+      <div class="text-divider">Aldoni</div>
+      <%= form_tag organization_aldoni_uzanton_url(@organizo.short_name) do %>
+        <div class="form-group">
+          <%= select_tag(:id, options_for_select(User.all.map { |u| ["#{u.name} (#{u.username})", u.id] }), class: 'form-control select2-input', required: true) %>
+        </div>
+        <%= submit_tag 'Aldoni', class: 'button-submit col-12' %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

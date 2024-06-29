@@ -1,0 +1,99 @@
+<div class="row">
+  <div class="col-lg-8 offset-lg-2">
+    <div class="box-white">
+      <div class="lead">
+        <% if params[:action] == 'new' %>
+          Nova organizo
+        <% else %>
+          Redakti organizon
+        <% end %>
+      </div>
+
+      <%= form_for(@organizo, url: (organization_url(@organizo.short_name) if params[:action].in? %w(edit update))) do |f| %>
+        <%= error_handling(@organizo) %>
+
+        <div class="form-group">
+          <%= f.label :name, 'Nomo' %>
+          <%= f.text_field :name, class: 'form-control', autofocus: true, required: true %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :short_name, 'Mallonga nomo' %>
+          <%= f.text_field :short_name, class: 'form-control', required: true %>
+          <small class="form-text text-muted">Ne uzu spacojn aŭ specialajn signojn. Vi rajtas uzi _ kaj -</small>
+        </div>
+
+        <div class="form-group form-check">
+          <%= f.check_box :display_flag, class: 'form-check-input' %>
+          <%= f.label :display_flag, 'Montri flagon', class: 'form-check-label' %>
+          <small class="form-text text-muted">Montras la landan flagon en la organiza paĝo kaj en ĉiuj eventoj de ĝi</small>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-12 col-md-6">
+            <%= f.label :url, 'Reteja adreso (URL)' %>
+            <%= f.text_field :url, class: 'form-control' %>
+          </div>
+          <div class="form-group col-12 col-md-6">
+            <%= f.label :youtube, 'YouTube-kanalo (URL)' %>
+            <%= f.text_field :youtube, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-12 col-md-6">
+            <%= f.label :email, 'Retpoŝtadreso' %>
+            <%= f.text_field :email, class: 'form-control', type: 'email' %>
+          </div>
+          <div class="form-group col-12 col-md-6">
+            <%= f.label :phone, 'Telefon-numero' %>
+            <%= f.text_field :phone, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :address, 'Adreso' %>
+          <%= f.text_field :address, class: 'form-control' %>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-12 col-md-6">
+            <%= f.label :city, 'Urbo (aŭ loko)' %>
+            <%= f.text_field :city, class: 'form-control' %>
+          </div>
+          <div class="form-group col-12 col-md-6">
+            <%= f.label :country_id, 'Lando' %>
+            <%= f.select(:country_id, options_from_collection_for_select(Country.all, 'id', 'name', @organizo.country_id), {}, class: 'form-control select2-input') %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :description, 'Priskribo' %>
+          <%= f.rich_text_area :description, class: 'form-control', style: 'height: 15em; overflow-y: auto;' %>
+        </div>
+
+        <div class="form-group">
+          <div class="text-divider">Emblemo</div>
+          <br>
+          <% if @organizo.logo.attached? %>
+            <div class="d-flex flex-column align-items-center justify-content-center">
+              <%= organization_logo(@organizo, size: :large) %>
+              <div class="form-check">
+                <%= check_box_tag :delete_logo, true, false, class: 'form-check-input' %>
+                <%= label_tag 'delete_logo', 'Forviŝi emblemon', class: 'form-check-label' %>
+                <p>(aŭ alŝutu novan por anstataŭigi ĝin)</p>
+              </div>
+            </div>
+          <% end %>
+
+          <%= f.file_field :logo, class: 'form-control-file', accept: 'image/gif,image/jpeg,image/png' %>
+        </div>
+
+        <div class="buttons-footer">
+          <%= link_to 'Nuligi', organizations_url, class: 'button-cancel' %>
+          <%= f.submit 'Registri', class: 'button-submit' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
