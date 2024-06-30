@@ -55,6 +55,7 @@ RSpec.describe ApplicationHelper, type: :helper do
   describe "#event_date" do
     it "should return formatted event dates" do
       event = create(:evento)
+      event.update(time_zone: "Etc/UTC")
 
       # Samtaga evento
       event.update!(
