@@ -51,11 +51,11 @@ SitemapGenerator::Sitemap.create do
 
   # Landoj
   Country.find_each do |country|
-    add events_by_country_path(country.continent, country.name), priority: 0.7, changefreq: "daily"
+    add events_by_country_path(continent: country.continent, country_name: country.name), priority: 0.7, changefreq: "daily"
   end
 
   # Urboj
   Event.joins(:country).select(:city, "countries.name as lando, countries.continent").distinct(:city).order("countries.name, city").each do |city|
-    add events_by_city_path(city.continent, city.lando, city.city), priority: 0.7, changefreq: "daily"
+    add events_by_city_path(continent: city.continent, country_name: city.lando, city_name: city.city), priority: 0.7, changefreq: "daily"
   end
 end
