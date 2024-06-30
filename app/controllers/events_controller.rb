@@ -185,7 +185,7 @@ class EventsController < ApplicationController
 
     unless cookies[:vidmaniero].in? %w[kartaro mapo]
       cookies[:vidmaniero] = {value: "kartaro", expires: 2.weeks, secure: true}
-      redirect_to events_by_country_url(@country.continent.normalized, @country.name.normalized)
+      redirect_to events_by_country_url(continent: @country.continent.normalized, country_name: @country.name.normalized)
     end
 
     @future_events = Event.includes(:country).by_country_id(@country.id).venontaj
