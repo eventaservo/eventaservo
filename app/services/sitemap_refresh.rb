@@ -1,19 +1,13 @@
 class SitemapRefresh
   def call
-    trigger_sentry_cron("in_progress")
+    monitor_slug = "sitemap-refresh"
+    check_in_id = Sentry.capture_check_in(monitor_slug, :in_progress)
 
     Eventaservo::Application.load_tasks
     Rake::Task["sitemap:refresh"].invoke
 
-    trigger_sentry_cron("ok")
+    Sentry.capture_check_in(monitor_slug, :ok, check_in_id:)
   rescue
-    trigger_sentry_cron("error")
-  end
-
-  private
-
-  def trigger_sentry_cron(status)
-    sentry_url = Rails.application.credentials.dig(:sentry, :sitemap_refresh_url)
-    HTTParty.get("#{sentry_url}?environment=#{Rails.env}&status=#{status}")
+    Sentry.capture_check_in(monitor_slug, :error, check_in_id:)
   end
 end
