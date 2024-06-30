@@ -17,7 +17,7 @@
     <% unless upload.blob.image? %>
       <div class="item-row-no-chevron">
         <% if user_is_owner_or_admin(@event) %>
-          <%= link_to(icon('far', 'trash-alt'), event_delete_file_path(@event.code, upload.id), method: :delete, data: { confirm: 'Ĉu vi certas?' }, class: 'btn btn-sm btn-outline-link') %>
+          <%= link_to(icon('far', 'trash-alt'), event_delete_file_path(event_code: @event.code, file_id: upload.id), method: :delete, data: { confirm: 'Ĉu vi certas?' }, class: 'btn btn-sm btn-outline-link') %>
         <% end %>
         <%= link_to(upload.filename, upload, class: 'btn btn-sm btn-outline-link') %>
       </div>
