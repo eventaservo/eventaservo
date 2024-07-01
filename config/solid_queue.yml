@@ -15,6 +15,9 @@ default: &default
         generate_statistics:
           class: GenerateStatisticsJob
           schedule: "0 1 * * *" # Every day at 1:00
+        housekeeping:
+          class: HousekeepingJob
+          schedule: "30 0 * * *" # Every day at 0:30
   workers:
     - queues: "*"
       threads: 3
