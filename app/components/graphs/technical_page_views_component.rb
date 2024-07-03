@@ -1,4 +1,4 @@
-class Graphs::TechnicalPagesViewsComponent < ApplicationComponent
+class Graphs::TechnicalPageViewsComponent < ApplicationComponent
   erb_template <<-ERB
     <div>
       <%= line_chart series, title: %>
@@ -6,11 +6,11 @@ class Graphs::TechnicalPagesViewsComponent < ApplicationComponent
   ERB
 
   def title
-    "Technical pages views"
+    "Technical page views"
   end
 
   def series
-    series = Rollup.multi_series("Techinical page views", interval: "month")
+    series = Rollup.multi_series("Technical page views", interval: "month")
     series.each do |s|
       s[:name] = s[:dimensions]["name"]
     end

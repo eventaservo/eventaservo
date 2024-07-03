@@ -11,7 +11,7 @@ ActiveAdmin.register_page "Statistics" do
         end
         column do
           span class: "blank_slate" do
-            div render(Graphs::TechnicalPagesViewsComponent.new)
+            div render(Graphs::TechnicalPageViewsComponent.new)
           end
         end
       end
