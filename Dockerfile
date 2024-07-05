@@ -16,6 +16,7 @@ RUN apt update && apt install -y --no-install-recommends \
   libavahi-compat-libdnssd-dev \
   libmagick++-dev \
   libssl-dev \
+  libvips42 \
   make \
   nodejs \
   poppler-utils \
