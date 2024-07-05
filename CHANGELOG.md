@@ -1,5 +1,29 @@
 # Changelog
 
+## [2.74.0](https://github.com/eventaservo/eventaservo/compare/v2.73.2...v2.74.0) (2024-07-05)
+
+
+### Features
+
+* adds technical page views statistics ([#763](https://github.com/eventaservo/eventaservo/issues/763)) ([033e8b2](https://github.com/eventaservo/eventaservo/commit/033e8b2394b6ad352823bd6ac643e2b899ca5d70))
+* create a housekeeping job ([#762](https://github.com/eventaservo/eventaservo/issues/762)) ([24af219](https://github.com/eventaservo/eventaservo/commit/24af219e9e6574168b11721c742380a0347b2f3a))
+* **Statistics:** filter use by category graph ([#761](https://github.com/eventaservo/eventaservo/issues/761)) ([e4b8e67](https://github.com/eventaservo/eventaservo/commit/e4b8e676ef64d9ffd13a1021ef7743d7e3c2173c))
+
+
+### Bug Fixes
+
+* :bug: breadcrumb links ([#752](https://github.com/eventaservo/eventaservo/issues/752)) ([d4903bd](https://github.com/eventaservo/eventaservo/commit/d4903bdbf29fc44897d9431c72a7c8918e10565f))
+* :bug: breadcrumb links downcase ([c8a77fd](https://github.com/eventaservo/eventaservo/commit/c8a77fd43ac079c61e1dcd286cf4391e262d9550))
+* :bug: Sitemap refresh periodically ([#755](https://github.com/eventaservo/eventaservo/issues/755)) ([df609b5](https://github.com/eventaservo/eventaservo/commit/df609b524cfc808b4ef19bb45461e2317dc57538))
+* downgrade Rails to 7.1.3.3 ([#765](https://github.com/eventaservo/eventaservo/issues/765)) ([3954533](https://github.com/eventaservo/eventaservo/commit/3954533ebb8d12fadec51270ad1e86fb692f4eb8))
+* **Event:** :bug: delete uploaded file ([#760](https://github.com/eventaservo/eventaservo/issues/760)) ([1e1b29e](https://github.com/eventaservo/eventaservo/commit/1e1b29ecc452f9b8d9438d20d4468e555b3c4999))
+* technical page view statistics ([27c597c](https://github.com/eventaservo/eventaservo/commit/27c597c3460774a680885bc296c32fbd05c2218a))
+
+
+### Performance Improvements
+
+* do not run geocoder on event factory ([#743](https://github.com/eventaservo/eventaservo/issues/743)) ([8052d6a](https://github.com/eventaservo/eventaservo/commit/8052d6abc716ca62c5e74fc178d2ac13c7f5aaa5))
+
 ## [2.73.2](https://github.com/eventaservo/eventaservo/compare/v2.73.1...v2.73.2) (2024-06-29)
 
 
