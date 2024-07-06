@@ -91,9 +91,14 @@ ActiveAdmin.register User do
     redirect_to active_admin_user_path(resource), notice: "User's email marked as confirmed"
   end
 
+  member_action :enable, method: :put do
+    UserServices::Enable.call(user: resource)
+    redirect_to active_admin_user_path(resource), alert: "User enabled"
+  end
+
   member_action :deactivate, method: :put do
     if resource.disable!
-      redirect_to active_admin_users_path
+      redirect_to active_admin_user_path(resource), alert: "User deactivated"
     else
       redirect_to active_admin_user_path(resource),
         alert: "Could not disable the user. Maybe he belongs to an one-member organization."
@@ -121,6 +126,15 @@ ActiveAdmin.register User do
     if resource.confirmed_at.nil?
       div link_to "Confirm user's email", confirm_active_admin_user_path(resource),
         data: {confirm: "This will confirm the user's email. Are you sure?"}
+    end
+
+    if resource.disabled == true
+      div link_to "Enable the user",
+        enable_active_admin_user_path(resource),
+        method: :put,
+        data: {
+          confirm: "Enabled the deleted user. Are your sure?"
+        }
     end
 
     if resource.disabled == false
