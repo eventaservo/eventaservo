@@ -97,7 +97,7 @@ ActiveAdmin.register User do
   end
 
   member_action :deactivate, method: :put do
-    if resource.disable!
+    if UserServices::Disable.call(resource).success?
       redirect_to active_admin_user_path(resource), alert: "User deactivated"
     else
       redirect_to active_admin_user_path(resource),

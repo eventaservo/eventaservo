@@ -44,7 +44,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # DELETE /resource
   def destroy
-    @user.disable!
+    UserServices::Disable.call(resource)
     sign_out(@user)
 
     redirect_to root_url, notice: "Via konto estas forviŝita."
