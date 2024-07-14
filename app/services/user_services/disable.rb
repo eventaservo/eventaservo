@@ -1,14 +1,19 @@
 module UserServices
-  class Disable
+  class Disable < ApplicationService
     # @param user [User]
     def initialize(user)
       @user = user
     end
 
+    # @return [Boolean] true if the user was disabled successfully
     def call
-      @user.update!(disabled: true) &&
-        move_user_events_to_system_account &&
-        remove_user_from_organizations
+      if @user.update!(disabled: true) &&
+          move_user_events_to_system_account &&
+          remove_user_from_organizations
+        success
+      else
+        failure(false)
+      end
     end
 
     private

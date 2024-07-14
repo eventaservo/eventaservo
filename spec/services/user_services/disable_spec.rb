@@ -3,14 +3,14 @@ require "rails_helper"
 RSpec.describe UserServices::Disable, type: :service do
   describe "#call" do
     let(:user) { users(:user) }
-    subject { described_class.new(user).call }
+    subject { described_class.call(user) }
 
     it "should set disabled to true" do
       expect { subject }.to change { user.reload.disabled }.from(false).to(true)
     end
 
     it "should return true" do
-      expect(subject).to eq(true)
+      expect(subject.success?).to eq(true)
     end
 
     it "should call EventServices::MoveToSystemAccount" do
@@ -42,7 +42,7 @@ RSpec.describe UserServices::Disable, type: :service do
 
       it "should return false" do
         expect(user.organizations.count).to eq(1)
-        expect(subject).to eq(false)
+        expect(subject.success?).to eq(false)
       end
     end
   end
