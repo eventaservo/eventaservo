@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.75.0](https://github.com/eventaservo/eventaservo/compare/v2.74.0...v2.75.0) (2024-07-24)
+
+
+### Features
+
+* **Admin:** option to enable disabled user ([5f3c970](https://github.com/eventaservo/eventaservo/commit/5f3c970153ee357bbd7bbf7330819c6eb4c516d8))
+* Renames `Luksemburgo` to `Luksemburgio` ([66ad09b](https://github.com/eventaservo/eventaservo/commit/66ad09bfcd80106c5c9b68a7497962b6413051d9))
+
+
+### Bug Fixes
+
+* Patch ActionText edits with attachments ([ad421bd](https://github.com/eventaservo/eventaservo/commit/ad421bdef91804a70a2d0b2b982a98401413f17e))
+
 ## [2.74.0](https://github.com/eventaservo/eventaservo/compare/v2.73.2...v2.74.0) (2024-07-05)
 
 
