@@ -54,20 +54,8 @@
   <body class="<%= "#{controller_name} #{action_name}" %>">
     <%= render partial: 'layouts/navbar' %>
     <div class="container">
+      <%= render "layouts/flash" %>
       <%= yield %>
-      <div class="row">
-        <% flash.each do |key, value| %>
-          <% next unless value.is_a? String %>
-
-          <div class="flash-alert-box alert <%= flash_class(key.to_sym) %>" role="alert" style="">
-            <button class="close" data-dismiss="alert" type="button">
-              <span aria-hidden="true">x</span>
-              <span class="sr-only">Close</span>
-            </button>
-            <%= value %>
-          </div>
-        <% end %>
-      </div>
     </div>
     <br>
     <%= render partial: 'layouts/footer' %>

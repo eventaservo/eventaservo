@@ -32,23 +32,23 @@ RSpec.describe ApplicationHelper, type: :helper do
 
   describe "#flash_class" do
     it "should return class color 'primary' for :notice" do
-      expect(flash_class(:notice)).to eq("alert alert-primary alert-dismissible")
+      expect(flash_class(:notice)).to eq("alert-primary")
     end
 
     it "should return class color 'success' for :success" do
-      expect(flash_class(:success)).to eq("alert alert-success alert-dismissible")
+      expect(flash_class(:success)).to eq("alert-success")
     end
 
     it "should return class color 'danger' for :error" do
-      expect(flash_class(:error)).to eq("alert alert-danger alert-dismissible")
+      expect(flash_class(:error)).to eq("alert-danger")
     end
 
     it "should return class color 'warning' for :alert" do
-      expect(flash_class(:alert)).to eq("alert alert-warning alert-dismissible")
+      expect(flash_class(:alert)).to eq("alert-warning")
     end
 
     it "should return class color 'info' for :alia" do
-      expect(flash_class(:alia)).to eq("alert alert-info alert-dismissible")
+      expect(flash_class(:alia)).to eq("alert-info")
     end
   end
 
