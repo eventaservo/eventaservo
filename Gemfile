@@ -9,6 +9,8 @@ ruby "~> 3.0"
 gem "rails", "= 7.1.3.3"
 # Use Puma as the app server
 gem "puma", "~> 6"
+gem "thruster", "~> 0.1.7"
+
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 6"
 # Use Uglifier as compressor for JavaScript assets
