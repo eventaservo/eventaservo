@@ -73,7 +73,7 @@ EXPOSE 3000
 
 ENTRYPOINT [ "./entrypoint.sh" ]
 
-CMD bundle exec rails db:migrate; bundle exec rails server -b 0.0.0.0 -p 3000
+CMD bin/rails db:migrate; bundle exec thrust bin/rails server -b 0.0.0.0 -p 3000
 
 
 
