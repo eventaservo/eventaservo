@@ -48,8 +48,6 @@ gem "pg", "~> 1.1", ">= 1.1.3"
 gem "simple_token_authentication", "~> 1.0"
 gem "social-share-button"
 
-# Use CoffeeScript for .coffee assets and views
-gem "coffee-rails"
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 # gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
