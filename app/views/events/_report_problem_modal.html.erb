@@ -1,10 +1,16 @@
-<%= link_to icon('fas', 'exclamation-triangle', t("pages.event.report_problem")), '#', class: 'btn btn-sm btn-outline-warning no-border', data: { target: '#problemoModal', toggle: 'modal' } %>
+<%= link_to icon('fas', 'exclamation-triangle', t("pages.event.report_problem")), '#', class: 'btn btn-sm btn-outline-warning no-border', data: { target: '#reportProblemModal', toggle: 'modal' } %>
 
-<div id="problemoModal" class="modal fade" aria-hidden="true" aria-labelledby="problemoModalCenterTitle" role="dialog" tabindex="-1">
+<div id="reportProblemModal"
+  data-controller="report-problem-form"
+  class="modal fade"
+  aria-hidden="true"
+  aria-labelledby="reportProblemModalCenterTitle"
+  role="dialog"
+  tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content text-left">
       <div class="modal-header">
-        <h5 id="problemoModalCenterTitle" class="modal-title">
+        <h5 id="reportProblemModalCenterTitle" class="modal-title">
           <%= t("pages.event.report_problem_form.title") %>
         </h5>
         <button class="close" aria-label="Fermi" data-dismiss="modal" type="button">
