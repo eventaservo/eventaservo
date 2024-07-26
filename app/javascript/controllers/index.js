@@ -16,6 +16,9 @@ application.register("flash-message", FlashMessageController)
 import MapViewController from "./map_view_controller"
 application.register("map-view", MapViewController)
 
+import ReportProblemFormController from "./report_problem_form_controller"
+application.register("report-problem-form", ReportProblemFormController)
+
 import SearchController from "./search_controller"
 application.register("search", SearchController)
 
