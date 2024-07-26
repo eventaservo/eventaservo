@@ -10,6 +10,9 @@ application.register("event-map", EventMapController)
 import EventUserInterestedButtonController from "./event_user_interested_button_controller"
 application.register("event-user-interested-button", EventUserInterestedButtonController)
 
+import FlashMessageController from "./flash_message_controller"
+application.register("flash-message", FlashMessageController)
+
 import MapViewController from "./map_view_controller"
 application.register("map-view", MapViewController)
 
