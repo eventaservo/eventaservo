@@ -665,7 +665,6 @@ DEPENDENCIES
   bullet (~> 7)
   capybara
   chartkick (~> 5.0)
-  coffee-rails
   debug (>= 1.0.0)
   devise (>= 4.7.1)
   diffy (~> 3.4)
