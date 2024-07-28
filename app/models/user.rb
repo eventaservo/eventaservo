@@ -255,6 +255,10 @@ class User < ApplicationRecord
       "webcal_token"]
   end
 
+  def to_combobox_display
+    "#{name} (#{username})"
+  end
+
   private
 
   # Generate JWT Token for API v2 before saving the user

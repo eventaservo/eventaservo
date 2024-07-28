@@ -40,7 +40,7 @@
       <div class="text-divider">Aldoni</div>
       <%= form_tag organization_aldoni_uzanton_url(@organizo.short_name) do %>
         <div class="form-group">
-          <%= select_tag(:id, options_for_select(User.all.map { |u| ["#{u.name} (#{u.username})", u.id] }), class: 'form-control select2-input', required: true) %>
+          <%= combobox_tag("id", combobox_users_with_username_path, placeholder: "Serĉi uzanton", required: true) %>
         </div>
         <%= submit_tag 'Aldoni', class: 'button-submit col-12' %>
       <% end %>

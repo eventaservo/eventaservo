@@ -29,6 +29,10 @@ Rails.application.routes.draw do
                                    omniauth_callbacks: "users/omniauth_callbacks",
                                    passwords: "users/passwords"}
 
+  namespace :combobox do
+    get "users_with_username"
+  end
+
   draw(:api)
   draw(:reports)
   draw(:organizations)
