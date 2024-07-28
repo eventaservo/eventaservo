@@ -48,4 +48,8 @@ class Country < ApplicationRecord
   def self.ransackable_attributes(auth_object = nil)
     ["code", "continent", "created_at", "id", "name", "updated_at"]
   end
+
+  def to_combobox_display
+    name # or `title`, `to_s`, etc.
+  end
 end

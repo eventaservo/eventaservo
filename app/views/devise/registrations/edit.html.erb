@@ -30,9 +30,7 @@
       <div class="form-group row">
         <%= f.label :country_id, class: 'col-form-label col-md-3' %>
         <div class="col-md-9">
-          <%= f.select(:country_id,
-                       options_from_collection_for_select(Country.not_online, 'id', 'name', @user.country_id),
-                       {}, class: 'form-control select2-input') %>
+          <%= f.combobox("country_id", Country.all, placeholder: 'Lando', required: true)%>
         </div>
       </div>
       <div class="form-group row">
