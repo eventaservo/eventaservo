@@ -45,7 +45,7 @@
 #  webcal_token           :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  country_id             :integer          default(99999)
+#  country_id             :integer
 #
 # Indexes
 #
