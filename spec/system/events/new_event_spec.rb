@@ -20,9 +20,6 @@ RSpec.describe "Create a new event", type: :system do
     fill_in "event_email", with: "admin@eventaservo.org"
     fill_in "event_address", with: "Av. Brasil 123"
     fill_in "event_city", with: "Rio de Janeiro"
-    find("#select2-event_country_id-container").click
-    find(".select2-search__field").click
-    send_keys "Brazilo", :enter
 
     click_on "Registri"
 

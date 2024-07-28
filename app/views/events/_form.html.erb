@@ -149,7 +149,7 @@
             <% timezones = Horzono.all.map { |h| [h.eo, h.en] } %>
             <% timezones << I18n.t(@event.time_zone, scope: [:timezones]) %>
             <% timezones << 'Etc/UTC' %>
-            <%= form.select(:time_zone, options_for_select(timezones, @event.time_zone), {}, class: 'select2-input form-control') %>
+            <%= form.combobox("time_zone", timezones) %>
           </div>
         </div>
 
@@ -171,7 +171,7 @@
             <div class="col-lg-6">
               <div class="form-group">
                 <%= form.label :country_id, 'Lando' %>
-                <%= form.select(:country_id, options_from_collection_for_select(Country.not_online, 'id', 'name', @event.country_id), {}, class: 'form-control select2-input') %>
+                <%= form.combobox("country_id", Country.not_online) %>
               </div>
             </div>
           </div>
