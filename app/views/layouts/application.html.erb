@@ -43,6 +43,7 @@
     <%= csp_meta_tag %>
     <%= combobox_style_tag %>
     <%= stylesheet_link_tag 'application' %>
+    <%= stylesheet_link_tag "cssbundling", "data-turbo-track": "reload" %>
     <%= javascript_include_tag 'application_pipeline' %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
     <%= invisible_captcha_styles %>

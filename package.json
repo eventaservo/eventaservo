@@ -17,12 +17,14 @@
     "highcharts": "^11.2.0",
     "leaflet": "^1.9.4",
     "moment": "^2.30.1",
+    "sass": "^1.77.8",
     "trix": "^2.1.1"
   },
   "optionalDependencies": {
     "fsevents": "^2.3.3"
   },
   "scripts": {
-    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets"
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",
+    "build:css": "sass ./app/assets/stylesheets/cssbundling.sass.scss:./app/assets/builds/cssbundling.css --no-source-map --load-path=node_modules"
   }
 }
