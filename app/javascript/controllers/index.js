@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import Event__FormController from "./event/form_controller"
+application.register("event--form", Event__FormController)
+
 import EventMapController from "./event_map_controller"
 application.register("event-map", EventMapController)
 
