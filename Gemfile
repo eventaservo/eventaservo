@@ -26,8 +26,6 @@ gem "font-awesome-sass", "~> 6"
 gem "jquery-rails", "~> 4.3", ">= 4.3.3"
 gem "jquery-ui-rails", "~> 6.0", ">= 6.0.1"
 
-gem "select2-rails", "~> 4.0"
-
 # Kalendaroj
 gem "fullcalendar-rails", "~> 3.9"
 gem "icalendar", "~> 2.6"

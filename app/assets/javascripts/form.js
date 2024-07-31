@@ -53,10 +53,6 @@ $(document).ready(function () {
     })
     // <-- RETAJ EVENTOJ
 
-    $("#event_country_id").on("select2:close", function () {
-      return $(".button-submit").focus()
-    })
-
     const $inputs = $("#event_site, #event_email")
     $inputs.on("input", function () {
       return $inputs.not(this).prop("required", !$(this).val().length)

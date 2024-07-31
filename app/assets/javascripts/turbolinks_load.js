@@ -18,15 +18,6 @@ $(function() {
 
   $('[data-toggle="tooltip"]').tooltip();
 
-  $('.select2-input').select2({
-    theme: 'bootstrap',
-    language: {
-      noResults: function() {
-        return 'Neniu trafo';
-      }
-    }
-  });
-
   $('.js-smartPhoto').SmartPhoto();
 
   $('#search_form input').keyup(function(event) {
