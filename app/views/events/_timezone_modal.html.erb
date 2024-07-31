@@ -27,9 +27,10 @@
             <%= t("timezone.select_timezone") %>
           </p>
 
-          <div class="form-group">
+          <div data-controller="timezone" class="form-group">
             <% selected = @event.nil? ? (cookies[:horzono] || nil) : @event.time_zone %>
-            <%= select_tag(:horzono, options_for_select(Horzono.all.map { |h| [h.eo, h.en] }, selected), class: 'select2-input form-control') %>
+            <%= select_tag(:horzono, options_for_select(Horzono.all.map { |h| [h.eo, h.en] }, selected),
+              data: { timezone_target: "timezoneSelect" }) %>
           </div>
         </div>
         <div class="modal-footer">

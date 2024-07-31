@@ -28,6 +28,9 @@ application.register("search", SearchController)
 import ShortUrlController from "./short_url_controller"
 application.register("short-url", ShortUrlController)
 
+import TimezoneController from "./timezone_controller"
+application.register("timezone", TimezoneController)
+
 import UserController from "./user_controller"
 application.register("user", UserController)
 

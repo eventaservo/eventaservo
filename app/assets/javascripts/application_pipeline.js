@@ -17,7 +17,6 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require jquery.mask.min
-//= require select2
 //= require moment
 //= require fullcalendar
 //= require jquery-smartphoto
@@ -29,5 +28,5 @@
 //= require leaflet.markercluster
 //= require_tree .
 
-// Tiu kono korektas la problemon de Select2 kiam ĝi estas ene de 'Modal'
-$.fn.modal.Constructor.prototype._enforceFocus = function () {}
+// Fixes the problem to select and option using slim-select inside a modal
+$.fn.modal.Constructor.prototype._enforceFocus = function () { }
