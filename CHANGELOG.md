@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.75.1](https://github.com/eventaservo/eventaservo/compare/v2.75.0...v2.75.1) (2024-07-31)
+
+
+### Performance Improvements
+
+* applies `slim-select` on timezone selector ([#788](https://github.com/eventaservo/eventaservo/issues/788)) ([aab6730](https://github.com/eventaservo/eventaservo/commit/aab6730954deadf667d7e69eedaf74983d5be674))
+* applies `slim-select` to event organization selection ([#791](https://github.com/eventaservo/eventaservo/issues/791)) ([caad570](https://github.com/eventaservo/eventaservo/commit/caad5706f657ca8d5b438192e8f11b0b890f7466))
+* **Combobox:** Apply for event admin selection ([#785](https://github.com/eventaservo/eventaservo/issues/785)) ([42a218b](https://github.com/eventaservo/eventaservo/commit/42a218b53da0260047684958a30d77dadd78a147))
+* **Combobox:** apply on event country and timezone ([#784](https://github.com/eventaservo/eventaservo/issues/784)) ([910aac6](https://github.com/eventaservo/eventaservo/commit/910aac6895bf38027f1c9f5b467eade3595c4ecc))
+* **Combobox:** apply on organization pages ([#783](https://github.com/eventaservo/eventaservo/issues/783)) ([a64b9b5](https://github.com/eventaservo/eventaservo/commit/a64b9b5bda7ba8e59812bbafe7f91a6b9730a0fa))
+* **Combobox:** apply on registration page ([#782](https://github.com/eventaservo/eventaservo/issues/782)) ([d75df5a](https://github.com/eventaservo/eventaservo/commit/d75df5aaff67b7f47d57f75d80e318ec3a7c0e39))
+* Removes `coffee-rails` gem dependency ([#779](https://github.com/eventaservo/eventaservo/issues/779)) ([529bb3e](https://github.com/eventaservo/eventaservo/commit/529bb3eec3bd4d2f82af628f2f086789d37ed070))
+* Use `thurster` gem ([#773](https://github.com/eventaservo/eventaservo/issues/773)) ([54f4011](https://github.com/eventaservo/eventaservo/commit/54f4011c6316fceab5872a9846f4b9e407cdf1a0))
+* Use stimullus controller for Flash messages ([#776](https://github.com/eventaservo/eventaservo/issues/776)) ([dbc2b71](https://github.com/eventaservo/eventaservo/commit/dbc2b71b17ed87483190eb68c750314c92dd0ba4))
+* Use stimullus controller for report problem modal ([#777](https://github.com/eventaservo/eventaservo/issues/777)) ([0d591b7](https://github.com/eventaservo/eventaservo/commit/0d591b782938b49b12ff374585fbc9a3ef9a75e8))
+
 ## [2.75.0](https://github.com/eventaservo/eventaservo/compare/v2.74.0...v2.75.0) (2024-07-24)
 
 
