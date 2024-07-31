@@ -10,8 +10,8 @@ export default class extends Controller {
       select: this.organizationsTarget,
       settings: {
         placeholderText: null,
-        showSearch: false,
-        hideSelected: true
+        searchPlaceholder: "Serĉi...",
+        searchText: "Neniu trafo",
       }
     })
   }
