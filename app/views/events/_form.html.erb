@@ -13,7 +13,8 @@
         Skribu esperante. Povu ĉiuj scii, kio okazas en Esperantujo tutmonde!
       </div>
 
-      <%= form_for(@event, url: (event_path(code: @event.code) if params[:action].in? %w(edit update))) do |form| %>
+      <%= form_for(@event, url: (event_path(code: @event.code) if params[:action].in? %w(edit update)),
+          data: { controller: 'event--form'}) do |form| %>
         <%= error_handling(@event) %>
 
         <div class="form-group">
@@ -37,7 +38,8 @@
             <%= label_tag :organization_id, 'Organizo(j)' %>
             <%= select_tag 'organization_ids[]',
               options_from_collection_for_select(Organization.by_user(current_user), 'id', 'full_name', @event_organization_ids),
-              multiple: true, class: 'form-control select2-input' %>
+              multiple: true,
+              data: { 'event--form-target': 'organizations'} %>
             <small class="form-text text-muted">
               Lasu malplena se la evento ne apartenas al organizo
             </small>
