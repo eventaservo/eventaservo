@@ -21,6 +21,20 @@ export default class extends Controller {
         id: 'mapbox/streets-v12',
       }
     ).addTo(map)
-    L.marker([latitude, longitude]).addTo(map)
+    L.marker([latitude, longitude], { icon: this.pinColor() }).addTo(map)
+  }
+
+  pinColor() {
+    const markerShadowUrl = '/map_icons/marker-shadow.png'
+    const blueIcon = new L.Icon({
+      iconUrl: '/map_icons/pin_blue.svg',
+      shadowUrl: markerShadowUrl,
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41],
+    })
+
+    return blueIcon
   }
 }

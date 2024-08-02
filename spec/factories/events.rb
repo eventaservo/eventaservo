@@ -113,12 +113,12 @@ FactoryBot.define do
     end
 
     trait :future do
-      date_start { Time.zone.now + rand(0..2).days }
+      date_start { Time.zone.now + rand(0..90).days }
       date_end { date_start + rand(2..36).hours }
     end
 
     trait :past do
-      date_start { Faker::Time.between(from: DateTime.now - 7.days, to: DateTime.now - 2.days) }
+      date_start { Faker::Time.between(from: DateTime.now - 90.days, to: DateTime.now - 2.days) }
     end
   end
 end

@@ -10,6 +10,10 @@ import './controllers'
 import 'trix'
 import '@rails/actiontext'
 
+// Leaflet
+import 'leaflet'
+import 'leaflet.markercluster'
+
 // Chartkick
 import "chartkick"
 import Highcharts from "highcharts"

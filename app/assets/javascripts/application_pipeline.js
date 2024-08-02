@@ -24,8 +24,6 @@
 //= require social-share-button
 //= require highcharts
 //= require highcharts/modules/drilldown
-//= require leaflet
-//= require leaflet.markercluster
 //= require_tree .
 
 // Fixes the problem to select and option using slim-select inside a modal

@@ -7,7 +7,7 @@ class CreateSampleEventsJob < ApplicationJob
     user = User.find_by(id: user_id)
     return false unless user&.admin?
 
-    FactoryBot.create_list(:event, 5, :future, user: user)
-    FactoryBot.create_list(:event, 2, :past, user: user)
+    FactoryBot.create_list(:event, 20, :future, user: user)
+    FactoryBot.create_list(:event, 5, :past, user: user)
   end
 end
