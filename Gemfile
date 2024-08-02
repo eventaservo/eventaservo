@@ -93,8 +93,9 @@ gem "stimulus-rails", "~> 1.2"
 gem "turbo-rails", "~> 2"
 gem "hotwire_combobox", "~> 0.3.1"
 
-# JS bundling
+# Bundling gems
 gem "jsbundling-rails", "~> 1.1"
+gem "cssbundling-rails", "~> 1.4"
 
 # Solid Queue
 gem "solid_queue", "~> 0.1"
