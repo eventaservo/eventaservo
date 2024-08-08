@@ -184,9 +184,15 @@ class User < ApplicationRecord
 
   # Serĉas uzanton laŭ teksto
   def self.serchi(teksto)
-    User.where('unaccent(users.name) ilike unaccent(:search) OR
-              unaccent(users.username) ilike unaccent(:search)',
-      search: "%#{teksto.strip.tr(" ", "%").downcase}%").order("users.name")
+    User
+      .left_joins(:organizations)
+      .distinct
+      .where('unaccent(users.name) ilike unaccent(:search) OR
+              unaccent(users.username) ilike unaccent(:search) OR
+              unaccent(organizations.name) ilike unaccent(:search) OR
+              unaccent(organizations.short_name) ilike unaccent(:search)',
+        search: "%#{teksto.strip.tr(" ", "%").downcase}%")
+      .order("users.name")
   end
 
   # Kunigas la nunan konton kun alia konto-id
