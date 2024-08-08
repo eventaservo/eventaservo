@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.76.0](https://github.com/eventaservo/eventaservo/compare/v2.75.1...v2.76.0) (2024-08-08)
+
+
+### Features
+
+* Searches user by his organization name ([52e457a](https://github.com/eventaservo/eventaservo/commit/52e457ac629231f159f84b204bbbd6f67fd8249b))
+
+
+### Bug Fixes
+
+* **Event:** Enables search for organization when editing ([9f9adae](https://github.com/eventaservo/eventaservo/commit/9f9adaef5bfdc854edcf70bca0168b97b6e4c78a))
+
 ## [2.75.1](https://github.com/eventaservo/eventaservo/compare/v2.75.0...v2.75.1) (2024-07-31)
 
 
