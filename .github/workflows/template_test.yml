@@ -25,6 +25,7 @@ jobs:
       DB_PASSWORD: postgres
       RAILS_ENV: test
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      DISABLE_SPRING: 1
 
     steps:
       - uses: actions/checkout@v3
@@ -47,15 +48,13 @@ jobs:
       - name: Precompile assets
         run: bundle exec rails assets:precompile
 
-      - name: Migrate database
-        run: bundle exec rails db:migrate
-
       - name: RSpec
-        run: bundle exec rspec --tag ~type:system
-
-      - name: RSpec | System tests
-        run: bundle exec rspec --tag type:system
-
+        run: |
+          bundle exec rails db:migrate
+          bin/rake parallel:create
+          bin/rake parallel:prepare
+          bin/rake parallel:migrate
+          bin/rake parallel:spec
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
