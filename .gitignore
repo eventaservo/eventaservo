@@ -65,3 +65,5 @@ reseta_base_devel.sh
 
 /.idea
 /.yardoc
+
+http-requests/.env
