@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.76.1](https://github.com/eventaservo/eventaservo/compare/v2.76.0...v2.76.1) (2024-08-31)
+
+
+### Bug Fixes
+
+* typo ([0278d2f](https://github.com/eventaservo/eventaservo/commit/0278d2fc8ef26f4d579d1bf691670210970d1d0b))
+
+
+### Performance Improvements
+
+* run Rspec in parallel in GitHub Actions ([#801](https://github.com/eventaservo/eventaservo/issues/801)) ([aab8205](https://github.com/eventaservo/eventaservo/commit/aab82051d962b4399aa05f4908dd645c422019d3))
+
 ## [2.76.0](https://github.com/eventaservo/eventaservo/compare/v2.75.1...v2.76.0) (2024-08-08)
 
 
