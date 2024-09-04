@@ -8,6 +8,7 @@ export default class extends Controller {
 
   connect() {
     this.drawMap()
+    this.hideLeaflet()
   }
 
   drawMap() {
@@ -28,7 +29,7 @@ export default class extends Controller {
           icon: this.eventoPinColor(evento.pinColor),
         }).bindPopup(
           `<strong><a href='${evento.ligilo}'>${evento.title}</a></strong><br>` +
-            `${evento.date}<br><br>${evento.description}`
+          `${evento.date}<br><br>${evento.description}`
         )
       )
       bounds.push([evento.latitude, evento.longitude])
@@ -96,6 +97,13 @@ export default class extends Controller {
         return orangeIcon
       default:
         return redIcon
+    }
+  }
+
+  hideLeaflet() {
+    const el = document.querySelector('a[href="https://leafletjs.com"]')
+    if (el) {
+      el.remove()
     }
   }
 }

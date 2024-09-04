@@ -9,6 +9,7 @@ export default class extends Controller {
 
   connect() {
     this.drawMap(this.latitudeValue, this.longitudeValue)
+    this.hideLeaflet();
   }
 
   drawMap(latitude, longitude) {
@@ -36,5 +37,12 @@ export default class extends Controller {
     })
 
     return blueIcon
+  }
+
+  hideLeaflet() {
+    const el = document.querySelector('a[href="https://leafletjs.com"]')
+    if (el) {
+      el.remove()
+    }
   }
 }
