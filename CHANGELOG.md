@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.77.0](https://github.com/eventaservo/eventaservo/compare/v2.76.1...v2.77.0) (2024-09-23)
+
+
+### Features
+
+* Validates city name ([#806](https://github.com/eventaservo/eventaservo/issues/806)) ([a0cc403](https://github.com/eventaservo/eventaservo/commit/a0cc403274276dbce069fae76069f589c9b8dade))
+
+
+### Bug Fixes
+
+* datepicker start day of week ([#803](https://github.com/eventaservo/eventaservo/issues/803)) ([5ac6e8c](https://github.com/eventaservo/eventaservo/commit/5ac6e8ceda020a1cfbe9427f5622d802e334fd47))
+* standard warnings ([#804](https://github.com/eventaservo/eventaservo/issues/804)) ([5e3c23c](https://github.com/eventaservo/eventaservo/commit/5e3c23cf634eb217f2a891339875e0e29f212847))
+
 ## [2.76.1](https://github.com/eventaservo/eventaservo/compare/v2.76.0...v2.76.1) (2024-08-31)
 
 
