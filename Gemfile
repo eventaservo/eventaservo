@@ -97,7 +97,7 @@ gem "jsbundling-rails", "~> 1.1"
 gem "cssbundling-rails", "~> 1.4"
 
 # Solid Queue
-gem "solid_queue", "= 0.6.1"
+gem "solid_queue", "~> 0.9.0"
 
 # Mission Contorl
 gem "mission_control-jobs", "~> 0.1"
