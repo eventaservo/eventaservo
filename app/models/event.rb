@@ -86,6 +86,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   validates :import_url, length: {maximum: 200}
   validate :end_after_start
   validate :url_or_email
+  validate :city_name_not_upcase
   validates_length_of :title, maximum: 100
   validates_length_of :short_url, maximum: 32
   validates_uniqueness_of :short_url, case_sensitive: false, allow_blank: true, allow_nil: true
@@ -511,5 +512,11 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   def create_redirection
     EventRedirection.create(old_short_url: short_url_before_last_save, new_short_url: short_url)
+  end
+
+  def city_name_not_upcase
+    return if city.blank?
+
+    errors.add(:city, "ne povas esti tute maiuskle") if city.upcase == city
   end
 end

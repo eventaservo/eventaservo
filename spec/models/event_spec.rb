@@ -41,6 +41,16 @@ RSpec.describe Event, type: :model do
       event.date_end = Time.zone.today - 1.day
       expect(event).to_not be_valid
     end
+
+    it "checks if city is not all upcase" do
+      event = build(:event)
+      event.city = "ALL UPCASE CITY NAME"
+      expect(event.valid?).to be_falsey
+      expect(event.errors.messages).to eq({city: ["ne povas esti tute maiuskle"]})
+
+      event.city = "All Upcase City Name"
+      expect(event.valid?).to be_truthy
+    end
   end
 
   describe "Associations" do
