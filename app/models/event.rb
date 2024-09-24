@@ -517,6 +517,6 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   def city_name_not_upcase
     return if city.blank?
 
-    errors.add(:city, "ne povas esti tute maiuskle") if city.upcase == city
+    errors.add(:city, "aŭ loko ne povas esti tute majuskla") if city.upcase == city
   end
 end

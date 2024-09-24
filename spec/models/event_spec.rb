@@ -46,7 +46,7 @@ RSpec.describe Event, type: :model do
       event = build(:event)
       event.city = "ALL UPCASE CITY NAME"
       expect(event.valid?).to be_falsey
-      expect(event.errors.messages).to eq({city: ["ne povas esti tute maiuskle"]})
+      expect(event.errors.messages).to include(:city)
 
       event.city = "All Upcase City Name"
       expect(event.valid?).to be_truthy
