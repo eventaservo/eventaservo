@@ -129,7 +129,7 @@ RUN git config --global --add safe.directory /eventaservo
 # Installs Oh-My-Zsh and plugins
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && \
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
-  sed -i "s/plugins=(git)/plugins=(git zsh-autosuggestions)/" ~/.zshrc
+  sed -i "s/plugins=(git)/plugins=(git zsh-autosuggestions bundler)/" ~/.zshrc
 
 
 EXPOSE 3000
