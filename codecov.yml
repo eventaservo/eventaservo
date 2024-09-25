@@ -1,4 +1,7 @@
 codecov:
   branch: main
-github_checks:
-  annotations: false
+  notify:
+    wait_for_ci: false
+coverage:
+  status:
+    project: true
