@@ -3,6 +3,12 @@ class Rack::Attack
     req.ip == "127.0.0.1" || req.ip == "::1"
   end
 
+  throttle("limit API requests per IP", limit: 2, period: 10) do |req|
+    if req.path == "/api/v2/organizations"
+      req.ip
+    end
+  end
+
   throttle("requets by IP", limit: 500, period: 5) do |req|
     req.ip
   end

@@ -33,7 +33,8 @@
 				"noku.rails-run-spec-vscode",
 				"Shopify.ruby-lsp",
 				"testdouble.vscode-standard-ruby",
-				"usernamehw.errorlens"
+				"usernamehw.errorlens",
+				"humao.rest-client"
 			]
 		}
 	}

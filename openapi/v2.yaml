@@ -10,13 +10,15 @@ info:
   license:
     name: AGPL-3
     url: 'https://github.com/eventaservo/eventaservo/blob/main/LICENSE'
-  summary: API dokumentado por Eventa Servo
-  description: API dokumentado por Eventa Servo
+  summary: EventaServo API Documentation
+  description: EventaServo API Documentation
 servers:
   - url: 'https://localhost:3000/api/v2'
     description: Development
   - url: 'https://eventaservo.org/api/v2'
     description: Production
+  - url: 'https://testservilo.eventaservo.org/api/v2'
+    description: Staging
 paths:
   /eventoj:
     get:
@@ -213,6 +215,30 @@ paths:
 
         Eblas filtri la rezultojn laŭ organizo aŭ landa kodo.
     parameters: []
+  /organizations:
+    get:
+      summary: List organizations
+      tags:
+        - Organizations
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/Organization'
+      operationId: get-organizations
+      x-stoplight:
+        id: fp4bvm6y9yp10
+      description: List organizations and its details.
+      parameters:
+        - schema:
+            type: string
+            example: br
+          in: query
+          name: country_code
+          description: The 2-letter country code to fiter the organizations
 components:
   schemas:
     Event:
@@ -312,6 +338,81 @@ components:
         - reta
         - loko
         - administranto
+    Organization:
+      type: object
+      x-examples:
+        Example 1:
+          name: Universala Esperanto Asocio
+          short_name: UEA
+          address: null
+          city: Rotterdam
+          country: Nederlando
+          country_code: nl
+          contact:
+            email: uea@uea.org
+            phone: null
+            url: null
+            youtube: 'https://www.youtube.com/user/UEAviva'
+          updated_at: '2024-08-31T16:54:32.114Z'
+      properties:
+        name:
+          type: string
+          example: Universala Esperanto Asocio
+        short_name:
+          type: string
+          example: UEA
+        address:
+          type:
+            - string
+            - 'null'
+          example: 'Nieuwe Binnenweg 176, 3015 BJ Rotterdam'
+        city:
+          type: string
+          example: Rotterdam
+        country:
+          type: string
+          example: Nederlando
+        country_code:
+          type: string
+          example: NL
+        contact:
+          type: object
+          properties:
+            email:
+              type: string
+              example: info@uea.org
+            phone:
+              type:
+                - string
+                - 'null'
+              example: +31 10 436 1044
+            url:
+              type:
+                - string
+                - 'null'
+              example: 'https://uea.org'
+            youtube:
+              type: string
+              example: 'https://www.youtube.com/user/UEAviva'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2024-08-31T16:54:32.114Z'
+      examples:
+        - name: Universala Esperanto Asocio
+          short_name: UEA
+          address: 'Nieuwe Binnenweg 176, 3015 BJ Rotterdam'
+          city: Rotterdam
+          country: Nederlando
+          country_code: NL
+          contact:
+            email: info@uea.org
+            phone: +31 10 436 1044
+            url: 'https://uea.org'
+            youtube: 'https://www.youtube.com/user/UEAviva'
+          updated_at: '2024-08-31T16:54:32.114Z'
+      title: Organization
+      description: Information about an organization
   securitySchemes:
     BearerAuth:
       type: http
@@ -322,3 +423,5 @@ security:
 tags:
   - name: Eventoj
     description: Rilate al eventoj
+  - name: Organizations
+    description: Organizations

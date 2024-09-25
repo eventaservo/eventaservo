@@ -8,5 +8,7 @@ namespace :api do
     scope "eventoj" do
       get "/", to: "events#index", as: "events"
     end
+
+    resources :organizations, only: [:index]
   end
 end

@@ -54,7 +54,7 @@ FactoryBot.define do
     name { "Brazila Esperanta Junulara Organizo" }
     short_name { "BEJO" }
     city { "São Paulo" }
-    country { Country.all.sample }
+    country { Country.find_by(code: "br") }
     email { "bejo@bejo.org.br" }
   end
 
