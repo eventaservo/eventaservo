@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "~> 3.3.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "= 7.1.3.3"
+gem "rails", "~> 7.2.0"
 # Use Puma as the app server
 gem "puma", "~> 6"
 gem "thruster", "~> 0.1.7"
@@ -18,7 +18,7 @@ gem "sass-rails", "~> 6"
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
-gem "acts-as-taggable-on", "~> 10.0"
+gem "acts-as-taggable-on", "~> 11.0"
 
 gem "bootsnap", require: false
 gem "bootstrap", "~> 4.3"
