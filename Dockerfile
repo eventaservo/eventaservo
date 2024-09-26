@@ -1,4 +1,4 @@
-FROM ruby:3.3.4-bookworm as base
+FROM ruby:3.3.5-bookworm as base
 
 WORKDIR /eventaservo
 
