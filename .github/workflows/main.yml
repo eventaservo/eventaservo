@@ -13,7 +13,15 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  tests:
+    if: github.ref != 'refs/heads/release-please--branches-main'
+    uses: ./.github/workflows/template_test.yml
+    secrets:
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
   docker:
+    needs: tests
     uses: ./.github/workflows/docker.yml
     with:
       environment: production
