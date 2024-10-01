@@ -14,7 +14,7 @@
           <% if cookies[:horzono] %>
             <p>
               Nuntempe vi vidas ĉiujn eventojn laŭ
-              <b><%= cookies[:horzono] %>.</b>
+              <b><%= I18n.t(cookies[:horzono], scope: :timezones) %>.</b>
             </p>
             <div class="small">
               Por vidi la eventojn laŭ la propra/loka horzono,
