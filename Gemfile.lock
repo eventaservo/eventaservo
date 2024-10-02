@@ -727,6 +727,7 @@ DEPENDENCIES
   sentry-ruby (~> 5)
   shoulda-matchers
   simple_token_authentication (~> 1.0)
+  simplecov
   simplecov-cobertura
   sitemap_generator (~> 6.1)
   social-share-button
