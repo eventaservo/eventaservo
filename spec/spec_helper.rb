@@ -13,6 +13,14 @@
 # it.
 #
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+
+ENV["RAILS_ENV"] = "test"
+require "simplecov"
+require "simplecov-cobertura"
+
+SimpleCov.start
+SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest

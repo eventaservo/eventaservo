@@ -148,6 +148,7 @@ group :test do
   gem "minitest", "~> 5.5"
   gem "selenium-webdriver"
   gem "shoulda-matchers"
+  gem "simplecov", require: false
   gem "simplecov-cobertura"
   gem "vcr"
   gem "webmock"
