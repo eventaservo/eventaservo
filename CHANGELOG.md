@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.78.0](https://github.com/eventaservo/eventaservo/compare/v2.77.0...v2.78.0) (2024-10-02)
+
+
+### Features
+
+* **API:** :sparkles: List organizations ([#811](https://github.com/eventaservo/eventaservo/issues/811)) ([879bf50](https://github.com/eventaservo/eventaservo/commit/879bf50359624e8ad5df6c65667793134561d706))
+
+
+### Bug Fixes
+
+* **Event:** City validation phrase ([#809](https://github.com/eventaservo/eventaservo/issues/809)) ([3156da7](https://github.com/eventaservo/eventaservo/commit/3156da7f0afac9e5cec6f5174d294f470432b767))
+* timezone translation ([#822](https://github.com/eventaservo/eventaservo/issues/822)) ([06ded64](https://github.com/eventaservo/eventaservo/commit/06ded64f3913a01a86f7a7f5045e7b611b45b9f4))
+
 ## [2.77.0](https://github.com/eventaservo/eventaservo/compare/v2.76.1...v2.77.0) (2024-09-23)
 
 
