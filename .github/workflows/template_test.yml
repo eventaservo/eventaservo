@@ -28,7 +28,7 @@ jobs:
       DISABLE_SPRING: 1
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Ruby e Bundler
         uses: ruby/setup-ruby@v1
@@ -37,7 +37,7 @@ jobs:
           bundler-cache: true
 
       - name: Node 20
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'yarn'
@@ -80,7 +80,7 @@ jobs:
       DISABLE_SPRING: 1
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Ruby e Bundler
         uses: ruby/setup-ruby@v1
@@ -89,7 +89,7 @@ jobs:
           bundler-cache: true
 
       - name: Node 20
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'yarn'
