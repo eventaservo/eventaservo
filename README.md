@@ -2,6 +2,9 @@
 
 [![Kontaktu nin en Telegramo https://t.me/fernandoshayani](https://img.shields.io/badge/babili%20en-Telegramo-179CDE.svg)](https://eventaservo.telegramo.org)
 
+[![codecov](https://codecov.io/gh/eventaservo/eventaservo/branch/main/graph/badge.svg?token=1KPTIXP8HQ)](https://codecov.io/gh/eventaservo/eventaservo)
+
+
 Program-kodo: [Github](https://github.com/shayani/eventaservo)
 
 ## Legu min
