@@ -5,3 +5,10 @@ codecov:
 coverage:
   status:
     project: true
+    project:
+      default:
+        target: auto
+        threshold: 1%
+  ignore:
+    - lib
+    - config
