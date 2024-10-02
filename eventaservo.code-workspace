@@ -17,6 +17,7 @@
 			"Gems"
 		],
 		"editor.formatOnSave": true,
+		"ruby.specCommand": "bundle exec rspec",
 	},
 	"extensions": {
 		"recommendations": [
