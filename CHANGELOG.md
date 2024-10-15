@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.79.0](https://github.com/eventaservo/eventaservo/compare/v2.78.0...v2.79.0) (2024-10-15)
+
+
+### Features
+
+* adds CodeCov badge to README ([#827](https://github.com/eventaservo/eventaservo/issues/827)) ([a867b71](https://github.com/eventaservo/eventaservo/commit/a867b71b51c643f5404ef9d5aa9b365bfc049641))
+
+
+### Bug Fixes
+
+* **Event:** Add to calendar link when not logged in ([#830](https://github.com/eventaservo/eventaservo/issues/830)) ([d4cfeba](https://github.com/eventaservo/eventaservo/commit/d4cfeba1509205d34a1ddd622f989d34883b0266))
+
 ## [2.78.0](https://github.com/eventaservo/eventaservo/compare/v2.77.0...v2.78.0) (2024-10-02)
 
 
