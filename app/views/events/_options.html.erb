@@ -3,8 +3,8 @@
      aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#">
   </a>
   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="eventMenu">
+    <%= link_to t("pages.event.add_to_calendar"), event_url(code: @event.code, format: :ics), class: 'dropdown-item' %>
     <% if user_signed_in? && user_can_edit_event?(user: current_user, event: @event) %>
-      <%= link_to t("pages.event.add_to_calendar"), event_url(code: @event.code, format: :ics), class: 'dropdown-item' %>
       <% if @event.cancelled %>
         <%= link_to icon('fas', 'ban', 'Malnuligi'), event_malnuligi_url(event_code: @event.code), class: 'btn btn-sm btn-outline-danger no-border' %>
       <% else %>
