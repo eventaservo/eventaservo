@@ -127,6 +127,7 @@ group :development, :test do
   gem "rake"
   gem "rspec-rails"
   gem "spring"
+  gem "spring-commands-rspec"
 end
 
 group :development do
