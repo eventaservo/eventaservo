@@ -11,6 +11,17 @@ RSpec.describe User, type: :model do
     it "FactoryBot should be valid" do
       expect(build(:user)).to be_valid
     end
+
+    context "username uniqueness" do
+      it { should validate_uniqueness_of(:username).case_insensitive }
+
+      it "returns true if the same username is used on a disabled user" do
+        _disabled_user = create(:user, username: "username", disabled: true)
+
+        user = build(:user, username: "username")
+        expect(user).to be_valid
+      end
+    end
   end
 
   describe "associations" do

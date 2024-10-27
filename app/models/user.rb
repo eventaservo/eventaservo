@@ -92,7 +92,7 @@ class User < ApplicationRecord
   has_many :event_reports, class_name: "Event::Report", dependent: :destroy
 
   validates :name, presence: true
-  validates :username, uniqueness: true
+  validates :username, uniqueness: {case_sensitive: false, conditions: -> { where(disabled: false) }}
   validates :webcal_token, uniqueness: true
 
   default_scope { where(disabled: false) }
