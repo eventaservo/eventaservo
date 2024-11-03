@@ -2,11 +2,11 @@ Sitemap: https://eventaservo.org/sitemap/sitemap.xml.gz
 
 User-agent: *
 Disallow: /uploads/
-Disallow: /eventoj/new
-Disallow: /eventoj/*/kronologio
 Disallow: /uzanto/
 Disallow: /rails/
 Disallow: /search
 Disallow: /*.ics
+Disallow: /**/new
+Disallow: /**/kronologio
 Disallow: /*?*
 Allow: /
