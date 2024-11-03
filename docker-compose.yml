@@ -20,6 +20,13 @@ services:
     tty: true
     ports:
       - 3000:3000
+    volumes:
+      - ./:/eventaservo:cached
+      - ~/.ssh:/home/rails/.ssh:ro
+      - ~/.config:/home/rails/.config
+
+    # Overrides default command so things don"t shut down after the process ends.
+    command: sleep infinity
     depends_on:
       - db
 
@@ -27,6 +34,8 @@ services:
     <<: *backend-app
     image: eventaservo-dev
     command: bundle exec rails solid_queue:start
+    volumes:
+      - ./:/eventaservo:cached
     depends_on:
       - db
 
@@ -38,6 +47,15 @@ services:
       - POSTGRES_DB=eventaservo_devel
     volumes:
       - postgres:/var/lib/postgresql/data
+
+  selenium:
+    image: selenium/standalone-chromium
+    environment:
+      - SE_VNC_NO_PASSWORD=1
+    ports:
+      - 7901:7900
+    shm_size: "2gb"
+    restart: unless-stopped
 
 volumes:
   postgres:

@@ -3,15 +3,14 @@
 {
 	"name": "EventaServo",
 	"dockerComposeFile": [
-		"../docker-compose.yml",
-		"docker-compose.yml"
+		"../docker-compose.yml"
 	],
 	"service": "backend",
-	"runServices": [
-		"backend",
-		"solid_queue",
-		"db"
-	],
+	// "runServices": [
+	// 	"backend",
+	// 	"solid_queue",
+	// 	"db"
+	// ],
 	// "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	"workspaceFolder": "/eventaservo",
 	// Features to add to the dev container. More info: https://containers.dev/features.
