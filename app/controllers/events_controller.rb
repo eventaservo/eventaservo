@@ -17,6 +17,7 @@ class EventsController < ApplicationController
   invisible_captcha only: :kontakti_organizanton, honeypot: :tiel, on_spam: :spam_detected
 
   # Montras la uzantajn eventojn
+  # This action is probable deprecated and it is required to explore if can be removed
   def index
     @events = Event.includes(:country).by_user(current_user).order(date_start: :desc)
   end

@@ -7,7 +7,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require "rspec/rails"
 require "debug"
 require "geocoder_test_helper"
-require "support/system_test_helpers"
+Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -82,7 +82,11 @@ RSpec.configure do |config|
     if ENV["CI"].present?
       driven_by :selenium_chrome_headless, screen_size: [540, 1170]
     else
-      driven_by :selenium, screen_size: [540, 1170]
+      # driven_by :selenium, screen_size: [540, 1170]
+      driven_by :remote_chrome
+      Capybara.server_host = "0.0.0.0"  # Bind to all interfaces
+      Capybara.server_port = 3001
+      Capybara.app_host = "http://backend:3001"
     end
     # else
     # end
