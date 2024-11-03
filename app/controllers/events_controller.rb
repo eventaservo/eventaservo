@@ -7,7 +7,7 @@ class EventsController < ApplicationController
   include Webcal
   before_action :authenticate_user!, only: %i[index new create edit update destroy nova_importado importi]
   before_action :redirect_old_link, only: %i[show edit]
-  before_action :set_event, only: %i[show edit update destroy]
+  before_action :set_event, only: %i[show edit update destroy kronologio]
   before_action :authorize_user, only: %i[edit update destroy]
   before_action :filter_events, only: %i[by_continent by_country by_city]
   before_action :validate_continent, only: %i[by_continent by_country by_city]
@@ -260,7 +260,7 @@ class EventsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_event
-    @event = Event.by_link(params[:code])
+    @event = Event.by_link(params[:code] || params[:event_code])
     redirect_to root_path, flash: {error: "Evento ne ekzistas"} if @event.nil?
   end
 
