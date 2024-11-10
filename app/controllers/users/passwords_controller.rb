@@ -8,7 +8,7 @@ class Users::PasswordsController < Devise::PasswordsController
 
   # POST /resource/password
   def create
-    Log.create(text: "Sent reset password instructions to #{params[:user][:email]}")
+    log_passaword_request
     super
   end
 
@@ -32,4 +32,12 @@ class Users::PasswordsController < Devise::PasswordsController
   # def after_sending_reset_password_instructions_path_for(resource_name)
   #   super(resource_name)
   # end
+
+  private
+
+  def log_passaword_request
+    return unless params[:user].present? && params[:user][:email].present?
+
+    Logs::CreateJob.perform_later(text: "Requested reset password instructions for #{params[:user][:email]}")
+  end
 end
