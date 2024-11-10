@@ -56,7 +56,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable,
     :confirmable, :lockable, :trackable,
-    :omniauthable, omniauth_providers: %i[facebook]
+    :omniauthable, omniauth_providers: %i[facebook google_oauth2]
 
   has_one_attached :picture
   store_accessor :mailings, :weekly_summary

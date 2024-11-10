@@ -373,6 +373,11 @@ GEM
       rack-protection
     omniauth-facebook (9.0.0)
       omniauth-oauth2 (~> 1.2)
+    omniauth-google-oauth2 (1.2.0)
+      jwt (>= 2.9)
+      oauth2 (~> 2.0)
+      omniauth (~> 2.0)
+      omniauth-oauth2 (~> 1.8)
     omniauth-oauth2 (1.8.0)
       oauth2 (>= 1.4, < 3)
       omniauth (~> 2.0)
@@ -704,6 +709,7 @@ DEPENDENCIES
   momentjs-rails (~> 2.20)
   nokogiri (>= 1.10.4)
   omniauth-facebook (~> 9.0)
+  omniauth-google-oauth2 (~> 1.2)
   omniauth-rails_csrf_protection
   pagy (~> 7.0)
   paper_trail (~> 15.1)
