@@ -8,7 +8,9 @@
     </div>
 
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <%= error_handling(resource) %>
+
       <div class="form-group">
         <p class="small">Skribu vian retpoŝtadreson. Ni sendos al vi instrukciojn por krei novan pasvorton.</p>
         <%= f.email_field :email, autocomplete: 'email', class: 'form-control', autofocus: true, placeholder: 'Retpoŝtadreso' %>
