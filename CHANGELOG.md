@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.79.1](https://github.com/eventaservo/eventaservo/compare/v2.79.0...v2.79.1) (2024-11-10)
+
+
+### Bug Fixes
+
+* :bug: Logs password reset request ([#846](https://github.com/eventaservo/eventaservo/issues/846)) ([32502cd](https://github.com/eventaservo/eventaservo/commit/32502cdb483c16b6251a495709e6073a80f1094c))
+* FullCalendar dataset presence ([d75173f](https://github.com/eventaservo/eventaservo/commit/d75173fd1292f5f8d2d597a15122f006a60cc294))
+* **Users:** :bug: Fix username uniqueness validation ([131b422](https://github.com/eventaservo/eventaservo/commit/131b422640b36972bc7df2fdbc45bf7fd71f7e98))
+
 ## [2.79.0](https://github.com/eventaservo/eventaservo/compare/v2.78.0...v2.79.0) (2024-10-15)
 
 
