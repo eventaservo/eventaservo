@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "/500", to: "errors#internal_error"
   post "/500", to: "errors#error_form", as: "error_form"
   get "/privateco", to: "home#privateco"
+  get "/privacy", to: "home#privateco"
   get "/license", to: "home#privateco"
   get "/v/:view_style", to: "home#view_style", as: "view_style"
   get "/prie", to: "home#prie"
