@@ -48,6 +48,16 @@ class HomeController < ApplicationController
     end
   end
 
+  # /terms
+  def terms
+    respond_to do |format|
+      format.html
+      format.text do
+        render "terms", layout: false
+      end
+    end
+  end
+
   def prie
     ahoy.track "Visit Prie"
   end

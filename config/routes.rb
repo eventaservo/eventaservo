@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get "/privateco", to: "home#privateco"
   get "/privacy", to: "home#privateco"
   get "/license", to: "home#privateco"
+  get "/terms", to: "home#terms"
   get "/v/:view_style", to: "home#view_style", as: "view_style"
   get "/prie", to: "home#prie"
   get "/rss.xml", to: "home#feed", as: "events_rss"
