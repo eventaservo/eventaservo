@@ -3,17 +3,11 @@
 # Table name: participants
 #
 #  id         :bigint           not null, primary key
-#  public     :boolean          default(FALSE)
+#  public     :boolean          default(FALSE), indexed
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  event_id   :bigint
-#  user_id    :bigint
-#
-# Indexes
-#
-#  index_participants_on_event_id  (event_id)
-#  index_participants_on_public    (public)
-#  index_participants_on_user_id   (user_id)
+#  event_id   :bigint           indexed
+#  user_id    :bigint           indexed
 #
 class Participant < ApplicationRecord
   self.table_name = "participants"
