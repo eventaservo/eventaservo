@@ -6,6 +6,7 @@
 	"description": "<%= @event.description %>",
 	"inLanguage": "eo",
 	"url": "<%= event_url(code: @event.ligilo) %>",
+  "location": "<%= @event.full_address%>",
 	"startDate": "<%= @event.date_start.to_date %>",
 	"endDate": "<%= @event.date_end.to_date %>",
 	"eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
