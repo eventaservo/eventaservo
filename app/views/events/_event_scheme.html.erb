@@ -1,25 +1,49 @@
 <script type="application/ld+json">
-{
-	"@context": "https://schema.org/",
-	"@type": "Event",
-	"name": "<%= @event.title %>",
-	"description": "<%= @event.description %>",
-	"inLanguage": "eo",
-	"url": "<%= event_url(code: @event.ligilo) %>",
-  "location": "<%= @event.full_address%>",
-	"startDate": "<%= @event.date_start.to_date %>",
-	"endDate": "<%= @event.date_end.to_date %>",
-	"eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-  "organizer": {
-    <% if @event.organizations.empty? %>
-        "@type": "Organization",
-        "name": "<%= @event.user.name %>",
-        "url": "<%= events_by_username_url(@event.user.username) %>"
-    <% else  %>
-        "@type": "Organization",
-        "name": "<%= @event.organizations.first.name %>",
-        "url": "<%= organization_url(@event.organizations.first.short_name) %>"
-    <% end  %>
+  {
+    "@context": "https://schema.org/",
+    "@type": "Event",
+    "name": "<%= @event.title %>",
+    "description": "<%= @event.description %>",
+    "inLanguage": "eo",
+    "url": "<%= event_url(code: @event.ligilo) %>",
+    <% if @event.online && @event.city == "Reta" %>
+    "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+    "location": {
+      "@type": "VirtualLocation",
+      "url": "<%= @event.site %>"
+    },
+    <% else %>
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "location": {
+      "@type": "Place",
+      "name": "<%= @event.city %>",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "<%= @event.address %>",
+        "addressLocality": "<%= @event.city %>",
+        "addressCountry": "<%= @event.country.name %>"
+      },
+      <% if @event.location_defined? %>
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": <%= @event.latitude %>,
+        "longitude": <%= @event.longitude %>
+      }
+      <% end %>
+    },
+    <% end %>
+    "startDate": "<%= @event.date_start.to_date %>",
+    "endDate": "<%= @event.date_end.to_date %>",
+    "organizer": {
+      <% if @event.organizations.empty? %>
+          "@type": "Organization",
+          "name": "<%= @event.user.name %>",
+          "url": "<%= events_by_username_url(@event.user.username) %>"
+      <% else  %>
+          "@type": "Organization",
+          "name": "<%= @event.organizations.first.name %>",
+          "url": "<%= organization_url(@event.organizations.first.short_name) %>"
+      <% end  %>
+    }
   }
-}
 </script>
