@@ -10,7 +10,7 @@
     "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
     "location": {
       "@type": "VirtualLocation",
-      "url": "<%= @event.site %>"
+      "url": "<%= event_url(code: @event.ligilo) %>"
     },
     <% else %>
     "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
