@@ -1,6 +1,7 @@
 <% content_for :title do %>
   <%= @event.title %>
 <% end %>
+<% content_for(:head) { render partial: 'event_scheme' } %>
 
 <%= render partial: 'fb_meta', locals: { event: @event } %>
 <%= render partial: 'layouts/breadcrumb' %>
@@ -73,5 +74,3 @@
     <%= render partial: 'informoj' %>
   </div>
 </div>
-
-<%= render partial: 'event_scheme' %>
