@@ -2,7 +2,8 @@
 eo:
   pages:
     event:
-      add_to_calendar: Aldoni al via kalendaro
+      add_to_calendar:
+        download_ics: Elŝulti ICS
       cancel_event: Nuligi eventon
       report_problem: Eraro?
       report_problem_form:
