@@ -1,0 +1,55 @@
+<%# locals: (user:) %>
+
+<% if user.has_public_contact? %>
+
+  <div class="box-white">
+    <div class="box-header">Kontaktoj</div>
+
+    <div class="d-flex justify-content-around flex-wrap">
+      <% if user.persona_retejo.present? %>
+        <%= link_to image_tag("www.svg", size: 24, alt: "Personal website", class: "mr-1"),
+              user.persona_retejo,
+              target: :_blank %>
+      <% end %>
+
+      <% if user.youtube.present? %>
+        <%= link_to image_tag("youtube-link.svg", size: 24, alt: "Youtube", class: "mr-1"),
+              user.youtube,
+              target: :_blank %>
+      <% end %>
+
+      <% if user.telegram.present? %>
+        <%= link_to image_tag("telegram-link.svg", size: 24, alt: "Telegram", class: "mr-1"),
+              user.telegram,
+              target: :_blank %>
+      <% end %>
+
+      <% if user.instagram.present? %>
+        <%= link_to image_tag("instagram-link.svg", size: 24, alt: "instagram", class: "mr-1"),
+              user.instagram,
+              target: :_blank %>
+      <% end %>
+
+      <% if user.twitter.present? %>
+        <%= link_to image_tag("twitter.svg", size: 24, alt: "twitter", class: "mr-1"),
+              user.twitter,
+              target: :_blank %>
+      <% end %>
+
+      <% if user.facebook.present? %>
+        <%= link_to image_tag("facebook.svg", size: 24, alt: "facebook", class: "mr-1"),
+              user.facebook,
+              target: :_blank %>
+      <% end %>
+
+      <% if user.vk.present? %>
+        <%= link_to image_tag("vk.svg", size: 24, alt: "vk", class: "mr-1"),
+              user.vk,
+              target: :_blank %>
+      <% end %>
+
+    </div>
+
+  </div>
+
+<% end %>

@@ -22,7 +22,7 @@
   <br>
   <div class="row">
     <div class="col-lg-3 col-md-12">
-      <%= render partial: 'uzantaj_ligiloj' %>
+      <%= render 'user_social_links', user: @uzanto %>
       <br>
       <%= render partial: 'uzantaj_organizoj' %>
       <%= render partial: 'informoj_por_administrantoj', locals: { uzanto: @uzanto } if current_user&.admin? %>
