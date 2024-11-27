@@ -2,7 +2,8 @@
 en:
   pages:
     event:
-      add_to_calendar: Add to your calendar
+      add_to_calendar:
+        download_ics: Download ICS
       cancel_event: Cancel event
       report_problem: Problem?
       report_problem_form:

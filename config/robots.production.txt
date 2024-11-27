@@ -3,6 +3,7 @@ Sitemap: https://eventaservo.org/sitemap/sitemap.xml.gz
 User-agent: *
 Disallow: /uploads/
 Disallow: /uzanto/
+Disallow: /eventoj/
 Disallow: /rails/
 Disallow: /search
 Disallow: /*.ics

@@ -11,21 +11,16 @@
 #  email        :string
 #  logo         :string
 #  major        :boolean          default(FALSE)
-#  name         :string           not null
+#  name         :string           not null, indexed
 #  official     :boolean          default(FALSE)
 #  partner      :boolean          default(FALSE)
 #  phone        :string
-#  short_name   :string           not null
+#  short_name   :string           not null, indexed
 #  url          :string
 #  youtube      :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  country_id   :integer          default(99999)
-#
-# Indexes
-#
-#  index_organizations_on_name        (name)
-#  index_organizations_on_short_name  (short_name)
 #
 class Organization < ApplicationRecord
   has_paper_trail

@@ -267,6 +267,9 @@ Devise.setup do |config|
       authorize_url: "https://www.facebook.com/v19.0/dialog/oauth"
     }
 
+  config.omniauth :google_oauth2,
+    ENV["GOOGLE_CLIENT_ID"] || Rails.application.credentials.dig(:google, :client_id),
+    ENV["GOOGLE_CLIENT_SECRET"] || Rails.application.credentials.dig(:google, :client_secret)
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

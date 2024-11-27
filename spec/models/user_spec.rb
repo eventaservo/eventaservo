@@ -92,6 +92,77 @@ RSpec.describe User, type: :model do
         expect(create(:user).owner_of?(event)).to be_falsey
       end
     end
+
+    describe "#has_public_contact?" do
+      subject { user.has_public_contact? }
+
+      it "returns false if user has no public contact" do
+        expect(subject).to eq(false)
+      end
+
+      context "when the user has a personal website" do
+        before do
+          user.persona_retejo = "https://example.com"
+          user.save
+        end
+
+        it { is_expected.to be_truthy }
+      end
+
+      context "when the user has a YouTube" do
+        before do
+          user.youtube = "https://example.com"
+          user.save
+        end
+
+        it { is_expected.to be_truthy }
+      end
+
+      context "when the user has a Telegram" do
+        before do
+          user.telegram = "https://example.com"
+          user.save
+        end
+
+        it { is_expected.to be_truthy }
+      end
+
+      context "when the user has a Instagram" do
+        before do
+          user.instagram = "https://example.com"
+          user.save
+        end
+
+        it { is_expected.to be_truthy }
+      end
+
+      context "when the user has a Twitter" do
+        before do
+          user.twitter = "https://example.com"
+          user.save
+        end
+
+        it { is_expected.to be_truthy }
+      end
+
+      context "when the user has a Facebook" do
+        before do
+          user.facebook = "https://example.com"
+          user.save
+        end
+
+        it { is_expected.to be_truthy }
+      end
+
+      context "when the user has a vk" do
+        before do
+          user.vk = "https://example.com"
+          user.save
+        end
+
+        it { is_expected.to be_truthy }
+      end
+    end
   end
 
   describe "#merge_to" do

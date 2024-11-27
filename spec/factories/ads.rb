@@ -9,11 +9,7 @@
 #  url        :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  event_id   :bigint
-#
-# Indexes
-#
-#  index_ads_on_event_id  (event_id)
+#  event_id   :bigint           indexed
 #
 FactoryBot.define do
   factory :ad do

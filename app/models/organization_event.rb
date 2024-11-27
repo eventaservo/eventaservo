@@ -7,13 +7,8 @@
 #  id              :bigint           not null, primary key
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  event_id        :bigint
-#  organization_id :bigint
-#
-# Indexes
-#
-#  index_organization_events_on_event_id         (event_id)
-#  index_organization_events_on_organization_id  (organization_id)
+#  event_id        :bigint           indexed
+#  organization_id :bigint           indexed
 #
 class OrganizationEvent < ApplicationRecord
   has_paper_trail

@@ -5,16 +5,16 @@
 # Table name: events
 #
 #  id                     :bigint           not null, primary key
-#  address                :string
+#  address                :string           indexed
 #  cancel_reason          :text
-#  cancelled              :boolean          default(FALSE)
-#  city                   :text
+#  cancelled              :boolean          default(FALSE), indexed
+#  city                   :text             indexed
 #  code                   :string           not null
 #  content                :text
-#  date_end               :datetime
-#  date_start             :datetime         not null
-#  deleted                :boolean          default(FALSE), not null
-#  description            :string(400)
+#  date_end               :datetime         indexed
+#  date_start             :datetime         not null, indexed
+#  deleted                :boolean          default(FALSE), not null, indexed
+#  description            :string(400)      indexed
 #  display_flag           :boolean          default(TRUE)
 #  email                  :string
 #  import_url             :string(400)
@@ -22,34 +22,19 @@
 #  latitude               :float
 #  longitude              :float
 #  metadata               :jsonb
-#  online                 :boolean          default(FALSE)
-#  participants_count     :integer          default(0)
+#  online                 :boolean          default(FALSE), indexed
+#  participants_count     :integer          default(0), indexed
 #  short_url              :string
 #  site                   :string
-#  specolisto             :string           default("Kunveno")
+#  specolisto             :string           default("Kunveno"), indexed
 #  time_zone              :string           default("Etc/UTC"), not null
-#  title                  :string           not null
+#  title                  :string           not null, indexed
 #  uuid                   :uuid
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  country_id             :integer          not null
-#  user_id                :integer          not null
+#  user_id                :integer          not null, indexed
 #
-# Indexes
-#
-#  index_events_on_address             (address)
-#  index_events_on_cancelled           (cancelled)
-#  index_events_on_city                (city)
-#  index_events_on_content             (md5(content))
-#  index_events_on_date_end            (date_end)
-#  index_events_on_date_start          (date_start)
-#  index_events_on_deleted             (deleted)
-#  index_events_on_description         (description)
-#  index_events_on_online              (online)
-#  index_events_on_participants_count  (participants_count)
-#  index_events_on_specolisto          (specolisto)
-#  index_events_on_title               (title)
-#  index_events_on_user_id             (user_id)
 
 # Eventaj dateno
 #

@@ -32,6 +32,8 @@
     <meta content="Eventa Servo" property="og:site_name" />
     <meta content="243701312975059" property="fb:app_id" />
 
+    <%= yield(:head)%>
+
     <title>
       <% if content_for?(:title) %>
         <%= yield(:title) %> |

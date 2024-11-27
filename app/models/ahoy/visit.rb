@@ -25,14 +25,9 @@
 #  utm_medium       :string
 #  utm_source       :string
 #  utm_term         :string
-#  visit_token      :string
+#  visit_token      :string           indexed
 #  visitor_token    :string
-#  user_id          :bigint
-#
-# Indexes
-#
-#  index_ahoy_visits_on_user_id      (user_id)
-#  index_ahoy_visits_on_visit_token  (visit_token) UNIQUE
+#  user_id          :bigint           indexed
 #
 class Ahoy::Visit < ApplicationRecord
   self.table_name = "ahoy_visits"

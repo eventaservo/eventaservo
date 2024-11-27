@@ -6,16 +6,10 @@
 #
 #  id         :bigint           not null, primary key
 #  code       :string
-#  continent  :string
-#  name       :string
+#  continent  :string           indexed, indexed => [name]
+#  name       :string           indexed, indexed => [continent]
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#
-# Indexes
-#
-#  index_countries_on_continent           (continent)
-#  index_countries_on_name                (name)
-#  index_countries_on_name_and_continent  (name,continent)
 #
 class Country < ApplicationRecord
   has_many :users, inverse_of: :country, dependent: :restrict_with_exception

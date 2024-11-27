@@ -3,18 +3,11 @@
 # Table name: ahoy_events
 #
 #  id         :bigint           not null, primary key
-#  name       :string
-#  properties :jsonb
-#  time       :datetime
-#  user_id    :bigint
-#  visit_id   :bigint
-#
-# Indexes
-#
-#  index_ahoy_events_on_name_and_time  (name,time)
-#  index_ahoy_events_on_properties     (properties) USING gin
-#  index_ahoy_events_on_user_id        (user_id)
-#  index_ahoy_events_on_visit_id       (visit_id)
+#  name       :string           indexed => [time]
+#  properties :jsonb            indexed
+#  time       :datetime         indexed => [name]
+#  user_id    :bigint           indexed
+#  visit_id   :bigint           indexed
 #
 class Ahoy::Event < ApplicationRecord
   include Ahoy::QueryMethods

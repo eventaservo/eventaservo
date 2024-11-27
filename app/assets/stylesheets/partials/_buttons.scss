@@ -14,15 +14,34 @@
 }
 
 .facebook-button {
-  @extend %button-standard;
+  @extend .btn;
+  @extend .btn-sm;
   @extend .btn-light;
-  background-color : #4260B4;
-  color            : white;
+  @extend .btn-block;
+
+  background-color: #4260B4;
+  border: 1px solid #4260B4;
+  color: white;
 
   &:before {
     @extend .fab;
-    content       : fa-content($fa-var-facebook);
-    padding-right : 5px;
+    content: fa-content($fa-var-facebook);
+    padding-right: 5px;
+  }
+}
+
+.google-button {
+  @extend .btn;
+  @extend .btn-sm;
+  @extend .btn-light;
+  @extend .btn-block;
+
+  border: 1px solid #CCCCCC;
+
+  &:before {
+    @extend .fab;
+    content: fa-content($fa-var-google);
+    padding-right: 5px;
   }
 }
 
@@ -37,8 +56,8 @@
 
   &:before {
     @extend .fas;
-    content       : fa-content($fa-var-arrow-left);
-    padding-right : 5px;
+    content: fa-content($fa-var-arrow-left);
+    padding-right: 5px;
   }
 }
 
@@ -64,10 +83,11 @@
 .button-notify-me {
   @extend .button-event-count;
   @extend .btn-outline-success;
+
   &:before {
     @extend .fas;
-    content       : fa-content($fa-var-info-circle);
-    padding-right : 5px;
+    content: fa-content($fa-var-info-circle);
+    padding-right: 5px;
   }
 }
 
@@ -87,11 +107,11 @@
 }
 
 .buttons-footer {
-  vertical-align : middle;
-  padding-top    : 5px;
-  border-top     : 1px solid gray;
-  margin-top     : 20px;
-  text-align     : right;
+  vertical-align: middle;
+  padding-top: 5px;
+  border-top: 1px solid gray;
+  margin-top: 20px;
+  text-align: right;
 }
 
 .button-contact {
@@ -125,9 +145,10 @@
 .button--bold--red {
   font-weight: bold;
   color: red;
+
   &:hover {
-      @extend .fg-color-red;
-    }
+    @extend .fg-color-red;
+  }
 }
 
 .no-border {

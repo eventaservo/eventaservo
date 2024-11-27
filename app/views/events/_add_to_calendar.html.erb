@@ -1,0 +1,35 @@
+<% presenter = EventPresenter.new(event: @event) %>
+<div class="dropdown">
+  <a id="add-to-calendar-options" class="far fa-calendar link-black"
+     aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#">
+  </a>
+  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="add-to-calendar-options">
+    <h5 class="dropdown-header">Aldoni al via kalendaro</h5>
+
+    <%= link_to icon('fa-brands', 'google', 'Google'),
+          presenter.add_to_calendar_links[:google],
+          target: :_blank,
+          class: 'dropdown-item' %>
+
+    <%= link_to icon('fa-brands', 'apple', 'Apple'),
+          presenter.add_to_calendar_links[:apple],
+          target: :_blank,
+          class: 'dropdown-item' %>
+
+    <%= link_to icon('fa-brands', 'microsoft', 'Outlook.com'),
+          presenter.add_to_calendar_links[:outlook],
+          target: :_blank,
+          class: 'dropdown-item' %>
+
+    <%= link_to icon('fa-brands', 'yahoo', 'Yahoo'),
+          presenter.add_to_calendar_links[:yahoo],
+          target: :_blank,
+          class: 'dropdown-item' %>
+
+    <div class="dropdown-divider"></div>
+
+    <%= link_to icon('fas', 'calendar', t('pages.event.add_to_calendar.download_ics')),
+          presenter.add_to_calendar_links[:ics],
+          class: 'dropdown-item' %>
+  </div>
+</div>

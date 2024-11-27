@@ -1,6 +1,7 @@
 <% content_for :title do %>
   <%= @event.title %>
 <% end %>
+<% content_for(:head) { render partial: 'event_scheme' } %>
 
 <%= render partial: 'fb_meta', locals: { event: @event } %>
 <%= render partial: 'layouts/breadcrumb' %>
@@ -18,7 +19,12 @@
           <%= event_flag(@event) %> <span class="<%= 'cancelled' if @event.cancelled %>"><%= @event.title %></span>
         </div>
         <div class="ml-auto">
-          <%= render partial: 'options' %>
+          <div class="d-flex">
+            <div class="mr-2">
+              <%= render 'add_to_calendar', event: @event %>
+            </div>
+            <%= render partial: 'options' %>
+          </div>
         </div>
       </div>
 
@@ -73,5 +79,3 @@
     <%= render partial: 'informoj' %>
   </div>
 </div>
-
-<%= render partial: 'event_scheme' %>

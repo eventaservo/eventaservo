@@ -9,7 +9,12 @@
       </p>
     </div>
 
-    <%= button_to 'Registriĝi per Facebook', user_facebook_omniauth_authorize_path, class: 'facebook-button col-12', data: { turbo: false } %>
+    <%= button_to 'Registriĝi per Google', user_google_oauth2_omniauth_authorize_path,
+          data: { turbo: false },
+          class: 'google-button mb-1' %>
+    <%= button_to 'Registriĝi per Facebook', user_facebook_omniauth_authorize_path,
+          data: { turbo: false },
+          class: 'facebook-button' %>
     <br>
     <div class="text-divider font-weight-bold fg-color-grayDark">AŬ</div>
     <br>

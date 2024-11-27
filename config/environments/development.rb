@@ -50,7 +50,7 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = {host: "localhost", port: 3000, protocol: "https"}
+  config.action_mailer.default_url_options = {host: "localhost", port: 3000, protocol: "http"}
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -94,8 +94,8 @@ Rails.application.configure do
   config.hosts << "nl.eventaservo.local:3000"
   config.hosts << "pt_BR.eventaservo.local:3000"
 
-  config.active_job.default_url_options = {host: "localhost", port: 3000, protocol: :https}
+  config.active_job.default_url_options = {host: "localhost", port: 3000, protocol: :http}
   Rails.application.routes.default_url_options[:host] = "localhost"
   Rails.application.routes.default_url_options[:port] = 3000
-  Rails.application.routes.default_url_options[:protocol] = :https
+  Rails.application.routes.default_url_options[:protocol] = :http
 end

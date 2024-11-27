@@ -4,15 +4,10 @@
 #
 #  id         :bigint           not null, primary key
 #  metadata   :jsonb
-#  text       :string
+#  text       :string           indexed
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  user_id    :bigint           not null
-#
-# Indexes
-#
-#  index_logs_on_text     (text)
-#  index_logs_on_user_id  (user_id)
+#  user_id    :bigint           not null, indexed
 #
 # Foreign Keys
 #
