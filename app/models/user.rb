@@ -169,7 +169,8 @@ class User < ApplicationRecord
   #
   # @return [Boolean]
   def has_public_contact?
-    youtube.present? || telegram.present? || instagram.present? || persona_retejo.present? || twitter.present?
+    youtube.present? || telegram.present? || instagram.present? || persona_retejo.present? || twitter.present? ||
+      facebook.present? || vk.present?
   end
 
   # Serĉas uzanton laŭ teksto
