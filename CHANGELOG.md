@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.80.0](https://github.com/eventaservo/eventaservo/compare/v2.79.1...v2.80.0) (2025-01-07)
+
+
+### Features
+
+* :sparkling: Adds Google Authentication ([#850](https://github.com/eventaservo/eventaservo/issues/850)) ([1f43876](https://github.com/eventaservo/eventaservo/commit/1f43876f475abe82883ccef27f5bc147721fee39))
+* **Event:** :sparkles: Add to Calendar links on event page ([#852](https://github.com/eventaservo/eventaservo/issues/852)) ([764a4ac](https://github.com/eventaservo/eventaservo/commit/764a4ac7e02dac7be7c1393c514ba6df4fb1398f)), closes [#836](https://github.com/eventaservo/eventaservo/issues/836)
+* **Events:** Adds location to indexing data ([9f10141](https://github.com/eventaservo/eventaservo/commit/9f101410b51605e7a42536e7399facb8aec0a15b))
+* **User:** New social links box layout ([#853](https://github.com/eventaservo/eventaservo/issues/853)) ([7f093a2](https://github.com/eventaservo/eventaservo/commit/7f093a2d4a126c6340658d46ac9480b0eba6f20a))
+
+
+### Bug Fixes
+
+* **Events:** Adds location details do indexing data ([a799d00](https://github.com/eventaservo/eventaservo/commit/a799d00bbd4ed7e63bb693cef19e53249c761c0c))
+
 ## [2.79.1](https://github.com/eventaservo/eventaservo/compare/v2.79.0...v2.79.1) (2024-11-10)
 
 
