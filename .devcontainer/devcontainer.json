@@ -22,7 +22,6 @@
 		"vscode": {
 			"extensions": [
 				"aliariff.vscode-erb-beautify",
-				"Codeium.codeium",
 				"eamodio.gitlens",
 				"Graphite.gti-vscode",
 				"jemmyw.rails-fast-nav",
