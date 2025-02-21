@@ -138,10 +138,10 @@ ActiveAdmin.register User do
     end
 
     if resource.disabled == false
-      div link_to "Disable user", \
-        deactivate_active_admin_user_path(resource), \
-        method: :put, \
-        data: { \
+      div link_to "Disable user",
+        deactivate_active_admin_user_path(resource),
+        method: :put,
+        data: {
           confirm: "To be used when a user wants his account to be destroyed. Removes the user from any " \
                    "organization, move all events to system account and disable the user. Are your sure?" \
         }
