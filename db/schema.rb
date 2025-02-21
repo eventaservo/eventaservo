@@ -180,6 +180,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_21_104208) do
     t.boolean "international_calendar", default: false
     t.integer "participants_count", default: 0
     t.boolean "display_flag", default: true
+    t.string "format"
     t.index "md5(content)", name: "index_events_on_content"
     t.index ["address"], name: "index_events_on_address"
     t.index ["cancelled"], name: "index_events_on_cancelled"
@@ -188,6 +189,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_21_104208) do
     t.index ["date_start"], name: "index_events_on_date_start"
     t.index ["deleted"], name: "index_events_on_deleted"
     t.index ["description"], name: "index_events_on_description"
+    t.index ["format"], name: "index_events_on_format"
     t.index ["online"], name: "index_events_on_online"
     t.index ["participants_count"], name: "index_events_on_participants_count"
     t.index ["specolisto"], name: "index_events_on_specolisto"
