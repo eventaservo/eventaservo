@@ -102,9 +102,9 @@ ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
 # Install tools for development
 RUN apt update \
   && apt install -y --no-install-recommends \
-      chromium-driver \
-      sudo \
-      zsh \
+  chromium-driver \
+  sudo \
+  zsh \
   && rm -rf /var/lib/apt/lists/*
 RUN npm install -g @withgraphite/graphite-cli@stable
 
@@ -119,6 +119,7 @@ USER rails
 
 COPY Gemfile Gemfile.lock ./
 RUN bundle install --retry=3
+RUN gem install htmlbeautifier
 
 COPY package.json yarn.lock ./
 RUN yarn install

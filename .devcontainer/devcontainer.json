@@ -22,7 +22,6 @@
 		"vscode": {
 			"extensions": [
 				"aliariff.vscode-erb-beautify",
-				"Codeium.codeium",
 				"eamodio.gitlens",
 				"Graphite.gti-vscode",
 				"jemmyw.rails-fast-nav",
@@ -33,7 +32,9 @@
 				"Shopify.ruby-lsp",
 				"testdouble.vscode-standard-ruby",
 				"usernamehw.errorlens",
-				"humao.rest-client"
+				"humao.rest-client",
+				"GitHub.copilot",
+				"GitHub.copilot-chat"
 			]
 		}
 	}
