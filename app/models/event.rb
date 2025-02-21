@@ -17,6 +17,7 @@
 #  description            :string(400)      indexed
 #  display_flag           :boolean          default(TRUE)
 #  email                  :string
+#  format                 :string           indexed
 #  import_url             :string(400)
 #  international_calendar :boolean          default(FALSE)
 #  latitude               :float
@@ -75,6 +76,8 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   validates_length_of :title, maximum: 100
   validates_length_of :short_url, maximum: 32
   validates_uniqueness_of :short_url, case_sensitive: false, allow_blank: true, allow_nil: true
+
+  enum :format, {onsite: "onsite", hybrid: "hybrid", online: "online"}, prefix: true
 
   after_validation :geocode, if: :require_geocode?
   before_save :format_event_data

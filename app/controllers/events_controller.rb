@@ -66,6 +66,7 @@ class EventsController < ApplicationController
 
     if @event.save
       @event.update_event_organizations(params[:organization_ids])
+      set_event_format(@event)
       NovaEventaSciigoJob.perform_later(@event)
       ahoy.track "Create event", event_url: @event.short_url
       Log.create(text: "Created event #{@event.title}", user: @current_user, event_id: @event.id)
@@ -92,6 +93,7 @@ class EventsController < ApplicationController
       EventoGhisdatigitaJob.perform_later(@event)
       EventMailer.nova_administranto(@event).deliver_later if @event.saved_change_to_user_id?
       @event.update_event_organizations(params[:organization_ids])
+      set_event_format(@event)
       ahoy.track "Update event", event_url: @event.short_url
       Log.create(text: "Updated event #{@event.title}", user: @current_user, event_id: @event.id)
       redirect_to event_path(code: @event.ligilo), notice: "Evento sukcese ĝisdatigita"
@@ -334,5 +336,18 @@ class EventsController < ApplicationController
 
     redirection.increment!(:hits)
     redirect_to event_path(code: redirection.new_short_url), status: :moved_permanently
+  end
+
+  def set_event_format(event)
+    format =
+      if !event.online?
+        "onsite"
+      elsif event.online? && event.city == "Reta"
+        "online"
+      elsif event.online? && event.city != "Reta"
+        "hybrid"
+      end
+
+    event.update_columns(format:)
   end
 end
