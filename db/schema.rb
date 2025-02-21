@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_23_102033) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_21_001247) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -180,6 +180,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_23_102033) do
     t.boolean "international_calendar", default: false
     t.integer "participants_count", default: 0
     t.boolean "display_flag", default: true
+    t.string "format"
     t.index "md5(content)", name: "index_events_on_content"
     t.index ["address"], name: "index_events_on_address"
     t.index ["cancelled"], name: "index_events_on_cancelled"
@@ -188,6 +189,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_23_102033) do
     t.index ["date_start"], name: "index_events_on_date_start"
     t.index ["deleted"], name: "index_events_on_deleted"
     t.index ["description"], name: "index_events_on_description"
+    t.index ["format"], name: "index_events_on_format"
     t.index ["online"], name: "index_events_on_online"
     t.index ["participants_count"], name: "index_events_on_participants_count"
     t.index ["specolisto"], name: "index_events_on_specolisto"
@@ -500,8 +502,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_23_102033) do
   end
 
   create_table "versions", force: :cascade do |t|
-    t.string "item_type"
-    t.string "{:null=>false}"
+    t.string "item_type", null: false
     t.bigint "item_id", null: false
     t.string "event", null: false
     t.string "whodunnit"

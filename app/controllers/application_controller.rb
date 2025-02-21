@@ -60,6 +60,17 @@ class ApplicationController < ActionController::Base
       ahoy.track "Filter by multi-day-event", kind: "filters"
       @events = @events.plurtagaj
     end
+
+    if params[:f] == "onsite"
+      ahoy.track "Filter by onsite events", kind: "filters"
+      @events = @events.onsite
+    elsif params[:f] == "hybrid"
+      ahoy.track "Filter by hybrid events", kind: "filters"
+      @events = @events.hybrid
+    elsif params[:f] == "online"
+      ahoy.track "Filter by online events", kind: "filters"
+      @events = @events.where(format: :online)
+    end
   end
 
   def user_can_edit_event?(user:, event:)

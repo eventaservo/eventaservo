@@ -1,4 +1,15 @@
 <div class="text-center m-2">
+  <%# Event Format %>
+  <div class="d-flex justify-content-center flex-wrap">
+    <% Event.formats.each do |format, _| %>
+      <% if format == params[:f] %>
+        <%= link_to(icon('fas', 'times', t("event_formats.#{format}")), url_for(s: params[:s], o: params[:o], periodo: params[:periodo]), class: 'badge badge-pill badge-info m-1') %>
+      <% else %>
+        <%= link_to(t("event_formats.#{format}"), url_for(t: params[:t], s: params[:s], o: params[:o], periodo: params[:periodo], f: format), class: 'badge badge-pill badge-light m-1') %>
+      <% end %>
+    <% end %>
+  </div>
+
   <%# Specoj %>
   <div class="d-flex justify-content-center flex-wrap">
     <% Constants::TAGS[0].each do |tag| %>

@@ -17,6 +17,7 @@
 #  description            :string(400)      indexed
 #  display_flag           :boolean          default(TRUE)
 #  email                  :string
+#  format                 :string           indexed
 #  import_url             :string(400)
 #  international_calendar :boolean          default(FALSE)
 #  latitude               :float

@@ -46,6 +46,10 @@ eo:
     close: Fermi
     select: Elekti
     send: Sendi
+  event_formats:
+    onsite: Ĉeestaj
+    hybrid: Hibridaj
+    online: Retaj
   errors:
     format: "%{attribute} %{message}"
     messages:
