@@ -87,9 +87,9 @@ eo:
   links:
     announcements_and_contests: Anoncoj kaj konkursoj
     international_calendar: Internacia Kalendaro
-    presentations: Registritaj Prezentoj
+    presentations: Registraĵoj
     reports: Raportoj
-    teachers_and_lecturers: Instruantoj kaj prelegantoj
+    teachers_and_lecturers: Instruantoj
   navbar:
     add_event: Aldoni eventon
     log_in_sign_up: Ensaluti / Registriĝi
@@ -104,4 +104,4 @@ eo:
       words_connector: ", "
   tagline: Diskonigu Esperanto-eventojn tutmonde!
   video:
-    presentations: Registritaj prezentoj
+    presentations: Registraĵoj
