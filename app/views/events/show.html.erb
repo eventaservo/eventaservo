@@ -47,7 +47,14 @@
 
         <h5 class="text-left"><%= @event.description %></h5>
 
-        <p><%= display_event_tags(@event) %></p>
+        <p>
+          <% if @event.international_calendar? %>
+            <div class="badge badge-success">
+              <b>★ Internacia Evento</b>
+            </div>
+          <% end %>
+          <%= display_event_tags(@event) %>
+        </p>
 
         <% begin %>
           <%= @event.enhavo %>
