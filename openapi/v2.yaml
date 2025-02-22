@@ -201,7 +201,6 @@ paths:
             type: string
             enum:
               - kurso
-              - Loka
               - Kunveno/Evento
               - Alia
               - Anonco

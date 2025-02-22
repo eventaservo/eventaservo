@@ -15,7 +15,7 @@ RSpec.describe "Create a new event", type: :system do
     fill_in "time_end", with: "14:00"
     find("#event_enhavo").click
     send_keys "Test event content"
-    find("#specolisto_Loka").first(:xpath, ".//..").click
+    find("#specolisto_Alia").first(:xpath, ".//..").click
     fill_in "event_site", with: "http://www.eventaservo.org"
     fill_in "event_email", with: "admin@eventaservo.org"
     fill_in "event_address", with: "Av. Brasil 123"

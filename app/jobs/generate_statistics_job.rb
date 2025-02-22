@@ -15,7 +15,6 @@ class GenerateStatisticsJob < ApplicationJob
       "Filter category by Alia",
       "Filter category by Kunveno/Evento",
       "Filter category by Kurso",
-      "Filter category by Loka",
       "Filter by one-day-event",
       "Filter by multi-day-event"
     ]

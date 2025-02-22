@@ -82,7 +82,6 @@ module EventsHelper
   def speconomo_plurale(tag)
     case tag
     when "Kunveno/Evento" then "Kunvenoj/Eventoj"
-    when "Loka" then "Lokaj kunvenoj"
     when "Kurso" then "Kursoj"
     when "Alia" then "Aliaj"
     else tag
