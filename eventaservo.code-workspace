@@ -21,10 +21,14 @@
 		],
 		"editor.formatOnSave": true,
 		"ruby.specCommand": "bin/rspec",
+		"[ruby]": {
+			"editor.defaultFormatter": "testdouble.vscode-standard-ruby"
+		}
 	},
 	"extensions": {
 		"recommendations": [
-			"shopify.ruby-lsp"
+			"shopify.ruby-lsp",
+			"testdouble.vscode-standard-ruby"
 		]
 	},
 	"tasks": {

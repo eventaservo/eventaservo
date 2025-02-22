@@ -83,6 +83,7 @@ module EventsHelper
     case tag
     when "Kunveno/Evento" then "Kunvenoj/Eventoj"
     when "Kurso" then "Kursoj"
+    when "por_junulo" then "Por Junuloj"
     when "Alia" then "Aliaj"
     else tag
     end
