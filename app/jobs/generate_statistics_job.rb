@@ -13,7 +13,7 @@ class GenerateStatisticsJob < ApplicationJob
   def generate_statistics_for_filter_event
     categories = [
       "Filter category by Alia",
-      "Filter category by Internacia",
+      "Filter category by Kunveno/Evento",
       "Filter category by Kurso",
       "Filter category by Loka",
       "Filter by one-day-event",
