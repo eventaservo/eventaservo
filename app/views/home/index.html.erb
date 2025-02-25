@@ -12,19 +12,16 @@
   </div>
 
   <div class="text-center small">
-    <%= link_to t("links.announcements_and_contests"), anoncoj_url %>
+    <%= link_to icon("fas", "bullhorn", t("links.announcements_and_contests")), anoncoj_url, class: "btn btn-sm btn-link" %>
     |
-    <%= link_to t("links.international_calendar"), international_calendar_path %>
+    <%= link_to icon("fas", "calendar-check", t("links.reports")), reports_url, class: "btn btn-sm btn-link" %>
     |
-    <%= link_to t("links.teachers_and_lecturers"), instruantoj_kaj_prelegantoj_path %>
+    <%= link_to icon("fas", "person-chalkboard", t("links.teachers_and_lecturers")), instruantoj_kaj_prelegantoj_path, class: "btn btn-sm btn-link" %>
     |
-    <%= link_to icon('fas', 'video', t("links.presentations")), video_url %>
+    <%= link_to icon('fas', 'video', t("links.presentations")), video_url, class: "btn btn-sm btn-link" %>
     <br>
-    <span>
-      🌟
-      <%= link_to t("links.reports"), reports_url, class: "font-weight-bold" %>
-      🌟
-    </span>
+    <%= link_to icon("far", "calendar", t("links.international_calendar")), international_calendar_path,
+        class: "btn btn-sm btn-link fg-color-green font-weight-bold" %>
   </div>
 
   <br>
@@ -33,7 +30,7 @@
 
     <div class="text-center m-2">
       <% @continents.each do |continent| %>
-        <%= link_to events_by_continent_path(continent: continent.name.normalized, periodo: params[:periodo].presence, o: params[:o].presence, s: params[:s].presence), class: 'button-event-count' do %>
+        <%= link_to events_by_continent_path(continent: continent.name.normalized, periodo: params[:periodo].presence, o: params[:o].presence, s: params[:s].presence, f: params[:f].presence), class: 'button-event-count' do %>
           <%= continent.name %>
           <span class="badge badge-primary">
             <%= continent.name == 'reta' ? Event.online.venontaj.count : continent.count %>

@@ -87,9 +87,9 @@ pt_BR:
   links:
     announcements_and_contests: Anúncios e Concursos
     international_calendar: Calendário Internacional
-    presentations: Apresentações Gravadas
+    presentations: Apresentações
     reports: Relatórios
-    teachers_and_lecturers: Professores e Palestrantes
+    teachers_and_lecturers: Professores
   navbar:
     add_event: Adicionar evento
     log_in_sign_up: Entrar / Registrar
@@ -104,4 +104,4 @@ pt_BR:
       words_connector: ", "
   tagline: Divulgue eventos de Esperanto em todo o mundo!
   video:
-    presentations: Apresentações gravadas
+    presentations: Apresentações
