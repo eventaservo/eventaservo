@@ -17,6 +17,7 @@
 #  description            :string(400)      indexed
 #  display_flag           :boolean          default(TRUE)
 #  email                  :string
+#  format                 :string           indexed
 #  import_url             :string(400)
 #  international_calendar :boolean          default(FALSE)
 #  latitude               :float
@@ -67,6 +68,7 @@ FactoryBot.define do
     specolisto { Constants::TAGS.first.sample }
     international_calendar { rand(0..1) }
     online { false }
+    format { "onsite" }
 
     trait :online do
       address { nil }
@@ -75,6 +77,7 @@ FactoryBot.define do
       latitude { nil }
       longitude { nil }
       online { true }
+      format { "online" }
     end
 
     trait :international_calendar do
