@@ -48,11 +48,7 @@
         <h5 class="text-left"><%= @event.description %></h5>
 
         <p>
-          <% if @event.international_calendar? %>
-            <div class="badge badge-success">
-              <b>★ Internacia Evento</b>
-            </div>
-          <% end %>
+          <%= render(InternationalEventBadgeComponent.new(event: @event)) %>
           <%= display_event_tags(@event) %>
         </p>
 

@@ -124,6 +124,7 @@ gem "lokalise_rails", "~> 7.0"
 group :development, :test do
   gem "debug", ">= 1.0.0", require: false
   gem "dotenv-rails"
+  gem "lookbook", ">= 2.3.4"
   gem "parallel_tests"
   gem "rake"
   gem "rspec-rails"
