@@ -55,6 +55,7 @@ ActiveAdmin.register_page "Dashboard" do
   sidebar "Tools" do
     div link_to "Mission Control - Jobs", "/jobs"
     div link_to "Letter Opener", "/letter_opener" if !Rails.env.production?
+    div link_to "Lookbook", "/lookbook" if Rails.env.development?
   end
 
   page_action :create_sample_events, method: :post do
