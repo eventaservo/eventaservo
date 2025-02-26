@@ -4,7 +4,7 @@ module Constants
   ADMIN_EMAILS = %w[yves.nevelsteen@gmail.com shayani@gmail.com].freeze
   public_constant :ADMIN_EMAILS
 
-  TAGS = [%w[Kunveno/Evento Kurso Alia], %w[Anonco Konkurso]].freeze
+  TAGS = [%w[Kunveno/Evento Kurso por_junulo Alia], %w[Anonco Konkurso]].freeze
   public_constant :TAGS
 
   IGNORENDAJ_IP = %w[127.0.0.1 207.180.227.223 2a02:c207:2022:6445::1 ::1].freeze
