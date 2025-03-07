@@ -13,8 +13,6 @@ info:
   summary: EventaServo API Documentation
   description: EventaServo API Documentation
 servers:
-  - url: 'https://localhost:3000/api/v2'
-    description: Development
   - url: 'https://eventaservo.org/api/v2'
     description: Production
   - url: 'https://testservilo.eventaservo.org/api/v2'
@@ -22,7 +20,7 @@ servers:
 paths:
   /eventoj:
     get:
-      summary: Listigas eventojn
+      summary: List events
       tags:
         - Eventoj
       responses:
@@ -147,28 +145,12 @@ paths:
       parameters:
         - schema:
             type: string
-            format: email
-            example: kontakto@eventaservo.org
-          in: query
-          name: user_email
-          description: Uzanta retadreso
-          required: true
-        - schema:
-            type: string
-            format: jwt
-            example: eyoaisdja81283u1982u3asdjaiojqwe.89asud81j2jeklajsd89qwe.9asu890daqkwe
-          in: query
-          name: user_token
-          description: Uzanta API token
-          required: true
-        - schema:
-            type: string
             example: '2022-01-01'
             format: date
           in: query
           name: komenca_dato
           required: true
-          description: 'Filtrila komenca dato '
+          description: Filtrila komenca dato
         - schema:
             type: string
             example: '2022-01-31'
@@ -209,11 +191,8 @@ paths:
           in: query
           name: speco
           description: Eventa speco
-      description: |-
-        Listigas eventojn. Oni devas elekti listigi unun specifan eventon laŭ UUID kodo aŭ informi na komencan kaj finan datojn.
-
-        Eblas filtri la rezultojn laŭ organizo aŭ landa kodo.
-    parameters: []
+      description: 'List events by date period, filtering by country code or organization; or fetch a specific event by its UUID.'
+    servers: []
   /organizations:
     get:
       summary: List organizations
@@ -413,14 +392,13 @@ components:
       title: Organization
       description: Information about an organization
   securitySchemes:
-    BearerAuth:
+    JWTToken:
       type: http
       scheme: bearer
-      bearerFormat: JWT
-security:
-  - BearerAuth: []
 tags:
   - name: Eventoj
-    description: Rilate al eventoj
+    description: Events
   - name: Organizations
     description: Organizations
+security:
+  - JWTToken: []

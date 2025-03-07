@@ -13,12 +13,14 @@ module Api
         token = request.headers["Authorization"]&.gsub(/^Bearer /, "")
 
         if token.nil?
+          ahoy.track "Token missing", kind: "api"
           render json: {eraro: "Token mankas"}, status: :unauthorized and return
         end
 
         begin
           decoded = ::JWT.decode token, Rails.application.credentials.dig(:jwt, :secret)
         rescue JWT::DecodeError
+          ahoy.track "Token invalid", kind: "api"
           render json: {eraro: "Token ne validas"}, status: :unauthorized and return
         end
 
