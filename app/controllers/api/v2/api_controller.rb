@@ -10,7 +10,7 @@ module Api
       private
 
       def validas_token
-        token = request.headers["Authorization"]&.gsub(/^Bearer /, "")
+        token = request.headers["Authorization"]&.gsub(/^Bearer /, "") || params["user_token"]
 
         if token.nil?
           ahoy.track "Token missing", kind: "api"
