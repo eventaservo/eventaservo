@@ -7,6 +7,7 @@ module Api
 
       def index
         ahoy.track "API V1 List Events", kind: "api"
+
         @events = Event.includes(:country).includes(:user).includes(:organizations).order(:date_start)
 
         if params[:uuid].present?
