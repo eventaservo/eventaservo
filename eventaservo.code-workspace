@@ -5,6 +5,9 @@
 		}
 	],
 	"settings": {
+		"[ruby]": {
+			"editor.defaultFormatter": "testdouble.vscode-standard-ruby"
+		},
 		"ruby.specSaveFile": true,
 		"conventionalCommits.scopes": [
 			"API",
