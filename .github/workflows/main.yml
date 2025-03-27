@@ -45,4 +45,4 @@ jobs:
     steps:
       - name: Update Docker Swarm on Portainer
         run: |
-          curl -X POST ${{ secrets.PORTAINER_WEBHOOK_PRODUCTION }}
+          curl -k -X POST ${{ secrets.PORTAINER_WEBHOOK_PRODUCTION }}
