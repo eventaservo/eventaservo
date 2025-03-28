@@ -229,7 +229,7 @@ class EventsController < ApplicationController
   end
 
   def kontakti_organizanton
-    unless params[:sekurfrazo].strip.downcase == "esperanto"
+    unless params[:sekurfrazo].strip.downcase == Rails.application.credentials.dig("form_security_phrase")
       ligilo = Event.by_code(params[:event_code]).ligilo
       redirect_to(
         event_url(code: ligilo),

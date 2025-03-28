@@ -16,7 +16,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    unless params[:sekurfrazo].strip.downcase == "esperanto"
+    unless params[:sekurfrazo].strip.downcase == Rails.application.credentials.dig("form_security_phrase")
       redirect_to(
         new_registration_path(resource_name),
         flash: {error: "Malĝusta kontraŭspama sekurvorto. Entajpu la nomon de la internacia lingvo."}
