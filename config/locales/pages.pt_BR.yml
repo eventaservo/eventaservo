@@ -4,7 +4,8 @@ pt_BR:
     event:
       add_to_calendar:
         download_ics: Baixar ICS
-      cancel_event: Cancelar evento
+      cancel_event: Cancelar
+      uncancel_event: Descancelar
       report_problem: Problema?
       report_problem_form:
         email: E-mail

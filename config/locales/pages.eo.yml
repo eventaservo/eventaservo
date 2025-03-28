@@ -4,7 +4,8 @@ eo:
     event:
       add_to_calendar:
         download_ics: Elŝulti ICS
-      cancel_event: Nuligi eventon
+      cancel_event: Nuligi
+      uncancel_event: Malnuligi
       report_problem: Eraro?
       report_problem_form:
         email: Retpoŝtadreso

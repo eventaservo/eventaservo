@@ -125,14 +125,16 @@ class EventsController < ApplicationController
     e = Event.by_link(params[:event_code])
     e.update(cancelled: true, cancel_reason: params[:cancel_reason])
     ahoy.track "Cancelled event", event_url: e.short_url
-    redirect_to event_url(code: params[:event_code])
+
+    redirect_to event_url(code: params[:event_code]), flash: {notice: "Evento nuligita"}
   end
 
   def malnuligi
     e = Event.by_link(params[:event_code])
     e.update(cancelled: false, cancel_reason: nil)
     ahoy.track "Un-cancelled event", event_url: e.short_url
-    redirect_to event_url(code: params[:event_code])
+
+    redirect_to event_url(code: params[:event_code]), flash: {notice: "Evento malnuligita"}
   end
 
   def nova_importado
