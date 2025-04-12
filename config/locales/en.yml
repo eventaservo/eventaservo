@@ -3,39 +3,44 @@ en:
   activerecord:
     attributes:
       event/report:
-        title: Titolo
-        url: Ligilo
+        title: Title
+        url: Link
       event:
-        city: Urbo
-        country_id: Lando
-        date_end: Fina dato
-        date_start: Komenca dato
-        description: Priskribo
-        short_url: mallonga ligilo
-        title: Titolo
+        city: City
+        country_id: Country
+        date_end: End date
+        date_start: Start date
+        description: Description
+        short_url: Short URL
+        title: Title
       organization:
-        city: urbo
-        country_id: lando
-        email: retpoŝtadreso
-        logo: Emblemo
-        name: nomo
-        short_name: mallonga nomo
+        city: City
+        country_id: Country
+        email: Email
+        logo: Logo
+        name: Name
+        short_name: Short name
+      user:
+        name: Name
+        email: Email
+        city: City
+        country_id: Country
     errors:
       messages:
-        record_invalid: 'Validado malsukcesis: %{errors}'
+        record_invalid: 'Validation failed: %{errors}'
       models:
         event:
           attributes:
             country:
-              required: necesas
+              required: is required
             user:
-              required: necesas
+              required: is required
         user:
           attributes:
             country:
-              required: necesas
+              required: is required
     models:
-      event: Eventoj
+      event: Events
   buttons:
     add_video: Video
     duplicate: Duplicate
@@ -49,41 +54,41 @@ en:
   errors:
     format: "%{attribute} %{message}"
     messages:
-      accepted: devas esti akceptita
-      blank: devas esti kompletigita
-      confirmation: ne kongruas kun la konfirmo
-      empty: devas esti kompletigita
-      equal_to: devas egali %{count}
-      even: devas esti para
-      exclusion: ne estas disponebla
-      greater_than: devas superi %{count}
-      greater_than_or_equal_to: devas superi aŭ egali %{count}
-      inclusion: ne estas inkluzivita de la listo
-      invalid: estas nevalida
-      less_than: devas malsuperi %{count}
-      less_than_or_equal_to: devas malsuperi aŭ egali %{count}
-      not_a_number: ne estas nombro
-      not_an_integer: devas esti entjero
-      odd: devas esti nepara
-      taken: ne estas disponebla
-      too_long: estas tro longa (maksimume %{count} signoj)
-      too_short: estas tro mallonga (minimume %{count} signoj)
-      wrong_length: ne estas je ĝusta longo (devas enhavi %{count} signojn)
+      accepted: must be accepted
+      blank: can't be blank
+      confirmation: doesn't match confirmation
+      empty: can't be empty
+      equal_to: must be equal to %{count}
+      even: must be even
+      exclusion: is reserved
+      greater_than: must be greater than %{count}
+      greater_than_or_equal_to: must be greater than or equal to %{count}
+      inclusion: is not included in the list
+      invalid: is invalid
+      less_than: must be less than %{count}
+      less_than_or_equal_to: must be less than or equal to %{count}
+      not_a_number: is not a number
+      not_an_integer: must be an integer
+      odd: must be odd
+      taken: has already been taken
+      too_long: is too long (maximum is %{count} characters)
+      too_short: is too short (minimum is %{count} characters)
+      wrong_length: is the wrong length (should be %{count} characters)
     template:
-      body: 'Kontrolu la jenajn kampojn: '
+      body: 'Please review the following fields:'
       header:
-        one: 'Ne eblas registri tiun %{model}: 1 eraro'
-        other: 'Ne eblas registri tiun %{model}: %{count} eraroj'
+        one: 'Cannot save this %{model}: 1 error'
+        other: 'Cannot save this %{model}: %{count} errors'
   helpers:
     select:
-      prompt: Bonvolu elekti
+      prompt: Please select
     submit:
-      create: Krei %{model}
-      submit: Registri tiun %{model}
-      update: Modifi tiun %{model}
+      create: Create %{model}
+      submit: Save this %{model}
+      update: Update this %{model}
   invisible_captcha:
-    sentence_for_humans: Se vi estas homo, ne plenumu tiun kampon
-    timestamp_error_message: Tro rapide! Refaru ĝin
+    sentence_for_humans: If you are human, do not fill in this field
+    timestamp_error_message: Too fast! Please try again
   links:
     announcements_and_contests: Announcements & Contests
     international_calendar: International Calendar
@@ -95,12 +100,12 @@ en:
     log_in_sign_up: Login / Signup
     organizations: Organizations
   social_share_button:
-    share_to: diskonigi per
+    share_to: share via
     whatsapp_app: WhatsApp
   support:
     array:
-      last_word_connector: " kaj "
-      two_words_connector: " kaj "
+      last_word_connector: " and "
+      two_words_connector: " and "
       words_connector: ", "
   tagline: Share Esperanto events worldwide!
   video:

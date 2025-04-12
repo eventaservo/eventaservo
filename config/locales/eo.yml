@@ -20,6 +20,11 @@ eo:
         logo: Emblemo
         name: nomo
         short_name: mallonga nomo
+      user:
+        name: Nomo
+        email: Retadreso
+        city: Urbo
+        country_id: Lando
     errors:
       messages:
         record_invalid: 'Validado malsukcesis: %{errors}'
