@@ -207,7 +207,7 @@ GEM
       zlib (~> 3.0)
     faraday-net_http (3.3.0)
       net-http
-    ffi (1.17.0-x86_64-linux-gnu)
+    ffi (1.17.0)
     flag-icons-rails (3.4.6.1)
       sass-rails
     font-awesome-sass (6.5.2)
@@ -770,7 +770,7 @@ DEPENDENCIES
   yard
 
 RUBY VERSION
-   ruby 3.3.5p100
+   ruby 3.4.2p28
 
 BUNDLED WITH
    2.4.6
