@@ -21,11 +21,14 @@ RUN apt update && apt install -y --no-install-recommends \
   nodejs \
   poppler-utils \
   postgresql-server-dev-all \
-  rclone \
   telnet \
   vim \
   zlib1g-dev \
   && rm -rf /var/lib/apt/lists/*
+
+# Installs RClone
+RUN curl -O https://downloads.rclone.org/v1.69.1/rclone-v1.69.1-linux-amd64.deb
+RUN dpkg -i rclone-v1.69.1-linux-amd64.deb
 
 # Yarn
 RUN npm install -g yarn
