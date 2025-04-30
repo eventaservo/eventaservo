@@ -5,7 +5,8 @@ class Backup
     end
 
     def dump
-      @output_file = File.join(Rails.root, "tmp", "#{Date.today.strftime("%Y-%m-%d")}-#{ENV["DB_NAME"]}.backup")
+      filename = "#{Date.today.strftime("%Y-%m-%d")}-#{ENV["DB_NAME"]}_#{Rails.env}.backup"
+      @output_file = File.join(Rails.root, "tmp", filename)
       Rails.logger.info "Exportando base de dados #{ENV["DB_NAME"]} para #{@output_file}"
 
       command = <<~CMD
