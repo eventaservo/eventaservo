@@ -21,7 +21,9 @@
         </thead>
         <tbody>
           <% events.each do |event| %>
-            <tr class="small pointer" onclick="window.location.href = '<%= event_path(code: event.ligilo) %>'" class="<%= event_color_class(event) %>">
+            <tr class="small pointer <%= event_color_class(event) %>"
+                data-href="<%= event_path(code: event.ligilo) %>"
+                onclick="window.location.href = this.dataset.href">
               <td><%= event_flag(event) %> <%= event.title %></td>
               <td><%= event.city %></td>
               <td><%= event_date(event) %></td>
