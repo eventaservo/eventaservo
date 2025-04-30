@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.80.1](https://github.com/eventaservo/eventaservo/compare/v2.80.0...v2.80.1) (2025-04-30)
+
+
+### Bug Fixes
+
+* **Search:** Link to City name on event breadcrumb ([2e4cb3b](https://github.com/eventaservo/eventaservo/commit/2e4cb3b638beebf556077f27565a0c0dec5a50cc))
+* **workflow:** set SECRET_KEY_BASE_DUMMY for asset precompilation in CI ([225842c](https://github.com/eventaservo/eventaservo/commit/225842cd029d0621cb782e73b90e2d710bfd7269))
+
 ## [2.80.0](https://github.com/eventaservo/eventaservo/compare/v2.79.1...v2.80.0) (2025-04-30)
 
 
