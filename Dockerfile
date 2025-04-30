@@ -106,6 +106,7 @@ ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
 RUN apt update \
   && apt install -y --no-install-recommends \
   chromium-driver \
+  fish \
   sudo \
   zsh \
   && rm -rf /var/lib/apt/lists/*
