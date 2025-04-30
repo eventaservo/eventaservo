@@ -659,7 +659,7 @@ GEM
       unicode-emoji (~> 4.0, >= 4.0.4)
     unicode-emoji (4.0.4)
     uniform_notifier (1.16.0)
-    uri (0.13.1)
+    uri (0.13.2)
     useragent (0.16.11)
     vcr (6.3.1)
       base64
