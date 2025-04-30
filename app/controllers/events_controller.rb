@@ -205,9 +205,10 @@ class EventsController < ApplicationController
   def by_city
     redirect_to root_url, flash: {error: "Lando ne ekzistas"} and return if @country.nil?
 
+    puts "Cookies: #{cookies[:vidmaniero]} -- " * 50
     unless cookies[:vidmaniero].in? %w[kartaro mapo]
       cookies[:vidmaniero] = {value: "kartaro", expires: 2.weeks, secure: true}
-      redirect_to events_by_city_url(params[:continent], params[:country_name], params[:city_name])
+      redirect_to events_by_city_url(continent: params[:continent].normalized, country_name: params[:country_name].downcase, city_name: params[:city_name].downcase)
     end
 
     @future_events = Event.by_city(params[:city_name]).venontaj
