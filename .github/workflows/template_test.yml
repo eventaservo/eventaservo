@@ -46,7 +46,7 @@ jobs:
         run: yarn install
 
       - name: Precompile assets
-        run: bundle exec rails assets:precompile
+        run: SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
       - name: RSpec
         run: |
