@@ -164,6 +164,11 @@
   resolved "https://registry.yarnpkg.com/@rails/ujs/-/ujs-7.1.3.tgz#6d94a68b7da5046147d31716e0c187a4ead4fb93"
   integrity sha512-FxtgKNvvIonoBE1TK7U10VMf6CYvzq8SIZ1XZ1Q8zcn/BEXzPzid3zC9qFiojuI5WXVwWhO8GFqApq0stD+OqQ==
 
+"@types/trusted-types@^2.0.7":
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/@types/trusted-types/-/trusted-types-2.0.7.tgz#baccb07a970b91707df3a3e8ba6896c57ead2d11"
+  integrity sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==
+
 anymatch@~3.1.2:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/anymatch/-/anymatch-3.1.3.tgz#790c58b19ba1720a84205b57c618d5ad8524973e"
@@ -250,6 +255,13 @@ delayed-stream@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/delayed-stream/-/delayed-stream-1.0.0.tgz#df3ae199acadfb7d440aaae0b29e2272b24ec619"
   integrity sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==
+
+dompurify@^3.2.3:
+  version "3.2.5"
+  resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-3.2.5.tgz#11b108656a5fb72b24d916df17a1421663d7129c"
+  integrity sha512-mLPd29uoRe9HpvwP2TxClGQBzGXeEC/we/q+bFlmPPmj2p2Ugl3r6ATu/UU1v77DXNcehiBg9zsr1dREyA/dJQ==
+  optionalDependencies:
+    "@types/trusted-types" "^2.0.7"
 
 esbuild@^0.17.19:
   version "0.17.19"
@@ -426,7 +438,9 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
-trix@^2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/trix/-/trix-2.1.4.tgz#a2f1e37fec03c9050bc7ba1d56056e606389a46f"
-  integrity sha512-f0AGnqBV8J2qW+fCtVU71JmvzjcxnO5Xbbd6Cl2KrHVRpgXKDqNGTmDmQzNHWU7T2OgtwHwvNiN+OIf3Z3KmHQ==
+trix@^2.1.12:
+  version "2.1.12"
+  resolved "https://registry.yarnpkg.com/trix/-/trix-2.1.12.tgz#102306c3a90afcc5b66815ce8d631ee43048a477"
+  integrity sha512-0hQvJdy257XuzRdCzSQ/QvcqyTp+8ixMxVLWxSbWvEzD2kgKFlcrMjgWZbtVkJENaod+jm2sBTOWAZVNWK+DMA==
+  dependencies:
+    dompurify "^3.2.3"
