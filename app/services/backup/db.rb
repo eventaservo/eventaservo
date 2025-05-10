@@ -1,5 +1,5 @@
-class Backup
-  class Db < Backup
+module Backup
+  class Db
     def call
       dump && upload
     end
@@ -22,8 +22,9 @@ class Backup
     end
 
     def upload
-      Rails.logger.info "Uploading #{@output_file} to OneDrive through Rclone"
-      system("rclone move #{@output_file} onedrive:/db")
+      Rails.logger.info "Uploading #{@output_file} to Google Drive"
+      client = ::GoogleDrive::Client.new
+      client.upload_file(@output_file)
     end
   end
 end
