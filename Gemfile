@@ -120,6 +120,9 @@ gem "rollups", "~> 0.3.2"
 # https://lokalise.com
 gem "lokalise_rails", "~> 7.0"
 
+# For connecting to Google Drive
+gem "google-api-client", "~> 0.53.0"
+
 group :development, :test do
   gem "debug", ">= 1.0.0", require: false
   gem "dotenv-rails"
