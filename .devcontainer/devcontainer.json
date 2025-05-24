@@ -15,8 +15,8 @@
 	"workspaceFolder": "/eventaservo",
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"containerEnv": {
-		"EDITOR": "code --wait",
-		"VISUAL": "code --wait"
+		"EDITOR": "cursor --wait",
+		"VISUAL": "cursor --wait"
 	},
 	"features": {
 		"ghcr.io/devcontainers/features/github-cli:1": {},
