@@ -125,14 +125,16 @@ class EventsController < ApplicationController
     e = Event.by_link(params[:event_code])
     e.update(cancelled: true, cancel_reason: params[:cancel_reason])
     ahoy.track "Cancelled event", event_url: e.short_url
-    redirect_to event_url(code: params[:event_code])
+
+    redirect_to event_url(code: params[:event_code]), flash: {notice: "Evento nuligita"}
   end
 
   def malnuligi
     e = Event.by_link(params[:event_code])
     e.update(cancelled: false, cancel_reason: nil)
     ahoy.track "Un-cancelled event", event_url: e.short_url
-    redirect_to event_url(code: params[:event_code])
+
+    redirect_to event_url(code: params[:event_code]), flash: {notice: "Evento malnuligita"}
   end
 
   def nova_importado
@@ -205,7 +207,7 @@ class EventsController < ApplicationController
 
     unless cookies[:vidmaniero].in? %w[kartaro mapo]
       cookies[:vidmaniero] = {value: "kartaro", expires: 2.weeks, secure: true}
-      redirect_to events_by_city_url(params[:continent], params[:country_name], params[:city_name])
+      redirect_to events_by_city_url(continent: params[:continent].normalized, country_name: params[:country_name].downcase, city_name: params[:city_name].downcase)
     end
 
     @future_events = Event.by_city(params[:city_name]).venontaj
@@ -227,7 +229,7 @@ class EventsController < ApplicationController
   end
 
   def kontakti_organizanton
-    unless params[:sekurfrazo].strip.downcase == "esperanto"
+    unless params[:sekurfrazo].strip.downcase == Rails.application.credentials.dig("form_security_phrase")
       ligilo = Event.by_code(params[:event_code]).ligilo
       redirect_to(
         event_url(code: ligilo),

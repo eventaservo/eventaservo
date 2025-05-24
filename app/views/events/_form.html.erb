@@ -1,3 +1,5 @@
+<%= render partial: 'cancel_event_modal' %>
+
 <div class="row">
   <div class="col-lg-8 offset-lg-2">
     <div class="box-white">
@@ -203,6 +205,15 @@
           <% if params[:action] == 'edit' %>
             <%= link_to 'Ne registri', :back, class: 'button-cancel' %>
             <%= link_to 'Forigi', event_path(code: @event.ligilo), class: 'button-outline-red float-left', method: :delete, data: { confirm: 'Ĉu vi certas? Vi ne kapablos malfari tion.' } %>
+
+            <% if @event.cancelled %>
+              <%= link_to t("pages.event.uncancel_event"), event_malnuligi_url(event_code: @event.code), class: 'btn btn-sm btn-outline-success float-left ml-2' %>
+            <% else %>
+              <a href="#" class="button-outline-red float-left ml-2" data-target="#nuligiloModal" data-toggle="modal">
+                <%= t("pages.event.cancel_event") %>
+              </a>
+            <% end %>
+
           <% end %>
           <% if params[:action] == 'new' %>
             <%= link_to 'Ne registri', root_path, class: 'button-cancel' %>

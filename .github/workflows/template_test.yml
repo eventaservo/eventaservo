@@ -33,7 +33,7 @@ jobs:
       - name: Ruby e Bundler
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3.5'
+          ruby-version: '3.4.2'
           bundler-cache: true
 
       - name: Node 20
@@ -46,7 +46,7 @@ jobs:
         run: yarn install
 
       - name: Precompile assets
-        run: bundle exec rails assets:precompile
+        run: SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
       - name: RSpec
         run: |
@@ -85,7 +85,7 @@ jobs:
       - name: Ruby e Bundler
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3.5'
+          ruby-version: '3.4.2'
           bundler-cache: true
 
       - name: Node 20

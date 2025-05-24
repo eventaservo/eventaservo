@@ -8,7 +8,7 @@ RSpec.describe "Report event problems by email", type: :request do
         name: Faker::Name.name,
         email: Faker::Internet.email,
         message: Faker::Lorem.paragraph,
-        sekurfrazo: "esperanto"
+        sekurfrazo: Rails.application.credentials.dig("form_security_phrase")
       }
 
       post event_kontakti_organizanton_url(event_code: evento.code, params:)

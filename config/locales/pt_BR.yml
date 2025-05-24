@@ -3,41 +3,46 @@ pt_BR:
   activerecord:
     attributes:
       event/report:
-        title: Titolo
-        url: Ligilo
+        title: Título
+        url: Link
       event:
-        city: Urbo
-        country_id: Lando
-        date_end: Fina dato
-        date_start: Komenca dato
-        description: Priskribo
-        short_url: mallonga ligilo
-        title: Titolo
+        city: Cidade
+        country_id: País
+        date_end: Data final
+        date_start: Data inicial
+        description: Descrição
+        short_url: URL curta
+        title: Título
       organization:
-        city: urbo
-        country_id: lando
-        email: retpoŝtadreso
-        logo: Emblemo
-        name: nomo
-        short_name: mallonga nomo
+        city: Cidade
+        country_id: País
+        email: E-mail
+        logo: Logo
+        name: Nome
+        short_name: Nome curto
+      user:
+        name: Nome
+        email: E-mail
+        city: Cidade
+        country_id: País
     errors:
       messages:
-        record_invalid: 'Validado malsukcesis: %{errors}'
+        record_invalid: 'Validação falhou: %{errors}'
       models:
         event:
           attributes:
             country:
-              required: necesas
+              required: é obrigatório
             user:
-              required: necesas
+              required: é obrigatório
         user:
           attributes:
             country:
-              required: necesas
+              required: é obrigatório
     models:
-      event: Eventoj
+      event: Eventos
   buttons:
-    add_video: Video
+    add_video: Vídeo
     duplicate: Duplicar
     edit: Editar
     share: Compartilhar
@@ -49,41 +54,41 @@ pt_BR:
   errors:
     format: "%{attribute} %{message}"
     messages:
-      accepted: devas esti akceptita
-      blank: devas esti kompletigita
-      confirmation: ne kongruas kun la konfirmo
-      empty: devas esti kompletigita
-      equal_to: devas egali %{count}
-      even: devas esti para
-      exclusion: ne estas disponebla
-      greater_than: devas superi %{count}
-      greater_than_or_equal_to: devas superi aŭ egali %{count}
-      inclusion: ne estas inkluzivita de la listo
-      invalid: estas nevalida
-      less_than: devas malsuperi %{count}
-      less_than_or_equal_to: devas malsuperi aŭ egali %{count}
-      not_a_number: ne estas nombro
-      not_an_integer: devas esti entjero
-      odd: devas esti nepara
-      taken: ne estas disponebla
-      too_long: estas tro longa (maksimume %{count} signoj)
-      too_short: estas tro mallonga (minimume %{count} signoj)
-      wrong_length: ne estas je ĝusta longo (devas enhavi %{count} signojn)
+      accepted: deve ser aceito
+      blank: não pode ficar em branco
+      confirmation: não confere com a confirmação
+      empty: não pode ficar vazio
+      equal_to: deve ser igual a %{count}
+      even: deve ser par
+      exclusion: está reservado
+      greater_than: deve ser maior que %{count}
+      greater_than_or_equal_to: deve ser maior ou igual a %{count}
+      inclusion: não está incluído na lista
+      invalid: é inválido
+      less_than: deve ser menor que %{count}
+      less_than_or_equal_to: deve ser menor ou igual a %{count}
+      not_a_number: não é um número
+      not_an_integer: deve ser um número inteiro
+      odd: deve ser ímpar
+      taken: já está em uso
+      too_long: é muito longo (máximo de %{count} caracteres)
+      too_short: é muito curto (mínimo de %{count} caracteres)
+      wrong_length: não possui o tamanho correto (deve ter %{count} caracteres)
     template:
-      body: 'Kontrolu la jenajn kampojn: '
+      body: 'Por favor, verifique os seguintes campos:'
       header:
-        one: 'Ne eblas registri tiun %{model}: 1 eraro'
-        other: 'Ne eblas registri tiun %{model}: %{count} eraroj'
+        one: 'Não foi possível salvar este %{model}: 1 erro'
+        other: 'Não foi possível salvar este %{model}: %{count} erros'
   helpers:
     select:
-      prompt: Bonvolu elekti
+      prompt: Por favor, selecione
     submit:
-      create: Krei %{model}
-      submit: Registri tiun %{model}
-      update: Modifi tiun %{model}
+      create: Criar %{model}
+      submit: Salvar este %{model}
+      update: Atualizar este %{model}
   invisible_captcha:
-    sentence_for_humans: Se vi estas homo, ne plenumu tiun kampon
-    timestamp_error_message: Tro rapide! Refaru ĝin
+    sentence_for_humans: Se você é humano, não preencha este campo
+    timestamp_error_message: Muito rápido! Por favor, tente novamente
   links:
     announcements_and_contests: Anúncios e Concursos
     international_calendar: Calendário Internacional
@@ -92,16 +97,16 @@ pt_BR:
     teachers_and_lecturers: Professores
   navbar:
     add_event: Adicionar evento
-    log_in_sign_up: Entrar / Registrar
+    log_in_sign_up: Entrar / Cadastrar
     organizations: Organizações
   social_share_button:
-    share_to: diskonigi per
+    share_to: compartilhar via
     whatsapp_app: WhatsApp
   support:
     array:
-      last_word_connector: " kaj "
-      two_words_connector: " kaj "
+      last_word_connector: " e "
+      two_words_connector: " e "
       words_connector: ", "
-  tagline: Divulgue eventos de Esperanto em todo o mundo!
+  tagline: Compartilhe eventos de Esperanto em todo o mundo!
   video:
     presentations: Apresentações

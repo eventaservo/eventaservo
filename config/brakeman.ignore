@@ -3,36 +3,13 @@
     {
       "warning_type": "Command Injection",
       "warning_code": 14,
-      "fingerprint": "0cb971e21ef20141351435f66834fad53a74e7786b9448bce317e383377aeb3b",
-      "check_name": "Execute",
-      "message": "Possible command injection",
-      "file": "app/services/backup.rb",
-      "line": 22,
-      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
-      "code": "system(\"echo '#{\"[onedrive]\\ntype = onedrive\\nroot_folder_id = #{Rails.application.credentials.dig(:rclone, :root_folder_id)}\\ntoken = {\\\"access_token\\\":\\\"#{Rails.application.credentials.dig(:rclone, :access_token)}\\\",\\\"token_type\\\":\\\"Bearer\\\",\\\"refresh_token\\\":\\\"#{Rails.application.credentials.dig(:rclone, :refresh_token)}\\\",\\\"expiry\\\":\\\"2023-06-30T07:32:32.741424207-03:00\\\"}\\ndrive_id = #{Rails.application.credentials.dig(:rclone, :drive_id)}\\ndrive_type = personal\\n\"}' > ~/.config/rclone/rclone.conf\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Backup",
-        "method": "setup_rclone"
-      },
-      "user_input": "Rails.application.credentials.dig(:rclone, :root_folder_id)",
-      "confidence": "Medium",
-      "cwe_id": [
-        77
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "Command Injection",
-      "warning_code": 14,
-      "fingerprint": "9b2316ad3b0c8cb07add71366a139b433fd40de3788986a8299211a4003339fc",
+      "fingerprint": "190c167d1dd0abea9b64ac45b65317c1444270e79e431bf5c3d2e3bb7de32077",
       "check_name": "Execute",
       "message": "Possible command injection",
       "file": "app/services/backup/db.rb",
-      "line": 26,
+      "line": 21,
       "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
-      "code": "system(\"PGPASSWORD=#{ENV[\"DB_PASSWORD\"]}         /usr/bin/pg_dump         --username=#{ENV[\"DB_USERNAME\"]}         --dbname=#{ENV[\"DB_NAME\"]}         --host=#{ENV[\"DB_HOST\"]}         --format custom         --file #{File.join(Rails.root, \"tmp\", \"#{Date.today.strftime(\"%Y-%m-%d\")}-#{ENV[\"DB_NAME\"]}.backup\")}\\n\")",
+      "code": "system(\"PGPASSWORD=#{ENV[\"DB_PASSWORD\"]} /usr/bin/pg_dump --username=#{ENV[\"DB_USERNAME\"]} --dbname=#{ENV[\"DB_NAME\"]} --host=#{ENV[\"DB_HOST\"]} --format custom --file #{File.join(Rails.root, \"tmp\", \"#{Date.today.strftime(\"%Y-%m-%d\")}-#{ENV[\"DB_NAME\"]}_#{Rails.env}.backup\")}\\n\")",
       "render_path": null,
       "location": {
         "type": "method",
@@ -47,25 +24,36 @@
       "note": ""
     },
     {
-      "warning_type": "Command Injection",
-      "warning_code": 14,
-      "fingerprint": "9bb844cd357c98fb0095fc6362fb2c2a26131cc99b4e6ff8027a9e957622cf67",
-      "check_name": "Execute",
-      "message": "Possible command injection",
-      "file": "app/services/backup/db.rb",
-      "line": 31,
-      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
-      "code": "system(\"rclone move #{@output_file} onedrive:/db\")",
-      "render_path": null,
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "3cc1dcd7cf83e9cf778d66d12969fcdfe7fa54b7f36e3ae723bc66d314222d97",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/events/kronologio.html.erb",
+      "line": 33,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "Diffy::Diff.new(((changes[0] or User.find(changes[0]).name) or Country.find((changes[0] or User.find(changes[0]).name)).name), ((changes[1] or User.find(changes[1]).name) or Country.find((changes[1] or User.find(changes[1]).name)).name)).to_s(:html)",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "EventsController",
+          "method": "kronologio",
+          "line": 252,
+          "file": "app/controllers/events_controller.rb",
+          "rendered": {
+            "name": "events/kronologio",
+            "file": "app/views/events/kronologio.html.erb"
+          }
+        }
+      ],
       "location": {
-        "type": "method",
-        "class": "Backup::Db",
-        "method": "upload"
+        "type": "template",
+        "template": "events/kronologio"
       },
-      "user_input": "@output_file",
-      "confidence": "Medium",
+      "user_input": "User.find(changes[0]).name",
+      "confidence": "Weak",
       "cwe_id": [
-        77
+        79
       ],
       "note": ""
     },
@@ -76,7 +64,7 @@
       "check_name": "SQL",
       "message": "Possible SQL injection",
       "file": "app/models/event.rb",
-      "line": 350,
+      "line": 339,
       "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
       "code": "where(\"specolisto ilike '%#{t}%'\")",
       "render_path": null,
@@ -99,7 +87,7 @@
       "check_name": "SQL",
       "message": "Possible SQL injection",
       "file": "app/models/event.rb",
-      "line": 354,
+      "line": 343,
       "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
       "code": "where(\"specolisto not ilike '%#{t}%'\")",
       "render_path": null,
@@ -116,6 +104,5 @@
       "note": ""
     }
   ],
-  "updated": "2024-06-29 21:23:30 +0000",
-  "brakeman_version": "6.1.2"
+  "brakeman_version": "7.0.2"
 }

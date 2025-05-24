@@ -1,5 +1,34 @@
 # Changelog
 
+## [2.80.1](https://github.com/eventaservo/eventaservo/compare/v2.80.0...v2.80.1) (2025-04-30)
+
+
+### Bug Fixes
+
+* **Search:** Link to City name on event breadcrumb ([2e4cb3b](https://github.com/eventaservo/eventaservo/commit/2e4cb3b638beebf556077f27565a0c0dec5a50cc))
+* **workflow:** set SECRET_KEY_BASE_DUMMY for asset precompilation in CI ([225842c](https://github.com/eventaservo/eventaservo/commit/225842cd029d0621cb782e73b90e2d710bfd7269))
+
+## [2.80.0](https://github.com/eventaservo/eventaservo/compare/v2.79.1...v2.80.0) (2025-04-30)
+
+
+### Features
+
+* :sparkling: Adds Google Authentication ([#850](https://github.com/eventaservo/eventaservo/issues/850)) ([1f43876](https://github.com/eventaservo/eventaservo/commit/1f43876f475abe82883ccef27f5bc147721fee39))
+* Add icons and rename homepage links ([#860](https://github.com/eventaservo/eventaservo/issues/860)) ([7f4c254](https://github.com/eventaservo/eventaservo/commit/7f4c254d10fd003ee0b50ea87b6cbe662994ae91))
+* **API:** Allow token retrieval from query string in addition to Authorization header ([244e6e3](https://github.com/eventaservo/eventaservo/commit/244e6e3cfcd74912f9d987b26ed1d1d9baf9dffe))
+* **Event:** :sparkles: Add to Calendar links on event page ([#852](https://github.com/eventaservo/eventaservo/issues/852)) ([764a4ac](https://github.com/eventaservo/eventaservo/commit/764a4ac7e02dac7be7c1393c514ba6df4fb1398f)), closes [#836](https://github.com/eventaservo/eventaservo/issues/836)
+* **Event:** Move "Cancel event" button to edit form ([#868](https://github.com/eventaservo/eventaservo/issues/868)) ([80ded7c](https://github.com/eventaservo/eventaservo/commit/80ded7c23705c9c36bf3197bcf13f657bbc183c2))
+* **Event:** Removes "Loka" tag ([#861](https://github.com/eventaservo/eventaservo/issues/861)) ([acae4be](https://github.com/eventaservo/eventaservo/commit/acae4be94e401a42535b1a40487124d3b2ab4cc2))
+* **Events:** Adds location to indexing data ([9f10141](https://github.com/eventaservo/eventaservo/commit/9f101410b51605e7a42536e7399facb8aec0a15b))
+* **Events:** Show International event badge on event card ([#864](https://github.com/eventaservo/eventaservo/issues/864)) ([7cf9fc2](https://github.com/eventaservo/eventaservo/commit/7cf9fc21e35573d8b6e45fb2174e4bb9fd886aaa))
+* **User:** New social links box layout ([#853](https://github.com/eventaservo/eventaservo/issues/853)) ([7f093a2](https://github.com/eventaservo/eventaservo/commit/7f093a2d4a126c6340658d46ac9480b0eba6f20a))
+
+
+### Bug Fixes
+
+* **Events:** Adds location details do indexing data ([a799d00](https://github.com/eventaservo/eventaservo/commit/a799d00bbd4ed7e63bb693cef19e53249c761c0c))
+* **Search:** Link to City name on event breadcrumb when coming from the Search page ([c9ca138](https://github.com/eventaservo/eventaservo/commit/c9ca13841aa51fd6a21a8f327caba19fb755880b))
+
 ## [2.79.1](https://github.com/eventaservo/eventaservo/compare/v2.79.0...v2.79.1) (2024-11-10)
 
 

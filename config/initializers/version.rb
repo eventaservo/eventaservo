@@ -1,5 +1,5 @@
 module Eventaservo
   class Application
-    VERSION = "2.79.1"
+    VERSION = "2.80.1"
   end
 end

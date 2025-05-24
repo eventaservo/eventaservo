@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "~> 3.3.0"
+ruby "~> 3.4.2"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 7.2.0"
@@ -70,7 +70,6 @@ gem "faker"
 gem "geocoder", "~> 1.6"
 gem "groupdate", "~> 6.4"
 gem "highcharts-rails", "~> 6.0"
-gem "hirb", "~> 0.7"
 gem "image_processing", ">= 1.2"
 gem "invisible_captcha", "~> 2.2"
 gem "pagy", "~> 7.0"
@@ -120,6 +119,9 @@ gem "rollups", "~> 0.3.2"
 # For localization
 # https://lokalise.com
 gem "lokalise_rails", "~> 7.0"
+
+# For connecting to Google Drive
+gem "google-api-client", "~> 0.53.0"
 
 group :development, :test do
   gem "debug", ">= 1.0.0", require: false

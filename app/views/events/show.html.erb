@@ -6,9 +6,6 @@
 <%= render partial: 'fb_meta', locals: { event: @event } %>
 <%= render partial: 'layouts/breadcrumb' %>
 
-<% if user_signed_in? && user_can_edit_event?(user: current_user, event: @event) && !@event.cancelled %>
-  <%= render partial: 'nuligilo_modal' %>
-<% end %>
 <%= render partial: 'share_button_modal' %>
 
 <div class="row" id="evento">
@@ -23,7 +20,7 @@
             <div class="mr-2">
               <%= render 'add_to_calendar', event: @event %>
             </div>
-            <%= render partial: 'options' %>
+            <%#= render partial: 'options' %>
           </div>
         </div>
       </div>

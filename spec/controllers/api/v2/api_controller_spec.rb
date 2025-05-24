@@ -38,27 +38,55 @@ RSpec.describe "Api::V2::ApiController", type: :request do
     end
 
     context "when the token is valid" do
-      subject { get "/api/v2/eventoj", headers: {HTTP_AUTHORIZATION: "Bearer #{token}"}, params: }
+      context "and it is provided by the Authorization header" do
+        subject { get "/api/v2/eventoj", headers: {HTTP_AUTHORIZATION: "Bearer #{token}"}, params: }
 
-      let(:user) do
-        user = create(:user)
-        user.send(:generate_jwt_token)
-        user.save!
+        let(:user) do
+          user = create(:user)
+          user.send(:generate_jwt_token)
+          user.save!
 
-        user
+          user
+        end
+        let(:token) { user.jwt_token }
+        let(:params) do
+          {
+            komenca_dato: Time.zone.today.strftime("%Y-%m-%d"),
+            fina_dato: (Time.zone.today + 1.year).strftime("%Y-%m-%d")
+          }
+        end
+        let!(:event) { create(:evento, date_start: Time.zone.yesterday, date_end: Time.zone.tomorrow) }
+
+        it "returns success status" do
+          subject
+          expect(response).to have_http_status(:success)
+        end
       end
-      let(:token) { user.jwt_token }
-      let(:params) do
-        {
-          komenca_dato: Time.zone.today.strftime("%Y-%m-%d"),
-          fina_dato: (Time.zone.today + 1.year).strftime("%Y-%m-%d")
-        }
-      end
-      let!(:event) { create(:evento, date_start: Time.zone.yesterday, date_end: Time.zone.tomorrow) }
 
-      it "returns success status" do
-        subject
-        expect(response).to have_http_status(:success)
+      context "and it is provided by the query string" do
+        subject { get "/api/v2/eventoj", params: }
+
+        let(:user) do
+          user = create(:user)
+          user.send(:generate_jwt_token)
+          user.save!
+
+          user
+        end
+        let(:token) { user.jwt_token }
+        let(:params) do
+          {
+            user_token: token,
+            komenca_dato: Time.zone.today.strftime("%Y-%m-%d"),
+            fina_dato: (Time.zone.today + 1.year).strftime("%Y-%m-%d")
+          }
+        end
+        let!(:event) { create(:evento, date_start: Time.zone.yesterday, date_end: Time.zone.tomorrow) }
+
+        it "returns success status" do
+          subject
+          expect(response).to have_http_status(:success)
+        end
       end
     end
   end

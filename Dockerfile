@@ -1,4 +1,4 @@
-FROM ruby:3.3.5-bookworm as base
+FROM ruby:3.4.2-bookworm as base
 
 WORKDIR /eventaservo
 
@@ -21,7 +21,6 @@ RUN apt update && apt install -y --no-install-recommends \
   nodejs \
   poppler-utils \
   postgresql-server-dev-all \
-  rclone \
   telnet \
   vim \
   zlib1g-dev \
@@ -103,6 +102,7 @@ ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
 RUN apt update \
   && apt install -y --no-install-recommends \
   chromium-driver \
+  fish \
   sudo \
   zsh \
   && rm -rf /var/lib/apt/lists/*
@@ -117,12 +117,7 @@ RUN useradd rails --create-home --shell /usr/bin/zsh && \
   chown rails:rails /eventaservo -R
 USER rails
 
-COPY Gemfile Gemfile.lock ./
-RUN bundle install --retry=3
 RUN gem install htmlbeautifier
-
-COPY package.json yarn.lock ./
-RUN yarn install
 
 # Git configuration
 RUN git config --global --add safe.directory /eventaservo
@@ -131,7 +126,6 @@ RUN git config --global --add safe.directory /eventaservo
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && \
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
   sed -i "s/plugins=(git)/plugins=(git zsh-autosuggestions bundler)/" ~/.zshrc
-
 
 EXPOSE 3000
 
