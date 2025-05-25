@@ -38,13 +38,13 @@ module OrganizationsHelper
   def display_event_tags(event)
     content_tag(:div, class: "event-tags") do
       event.tags.each do |tag|
+        next unless tag.category? || tag.characteristic?
+
         tag_color =
           if tag.category?
             "badge-info"
           elsif tag.characteristic?
             "badge-warning"
-          else
-            "badge-danger"
           end
         concat content_tag(:span, tag.name, class: "mr-1 badge badge-pill #{tag_color}")
       end

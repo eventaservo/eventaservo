@@ -80,7 +80,7 @@
 
         <div class="form-group">
           <div class="text-center" id="tags-categories">
-            <% Tag.categories.each do |tag| %>
+            <% Tag.categories.order(:sort_order).each do |tag| %>
               <div class="btn-group btn-group-toggle mb-1" data-toggle="buttons">
                 <label class="btn button-checkbox--main <%= 'active' if @event.tags.categories.pluck(:name).include?(tag.name) %>">
                   <%= check_box_tag "tags_categories[]", tag.id, @event.tags.categories.include?(tag), id: "tag_#{tag.id}" %>
@@ -91,7 +91,7 @@
           </div>
 
           <div class="text-center" id="tags-characteristics">
-            <% Tag.characteristics.each do |tag| %>
+            <% Tag.characteristics.order(:sort_order).each do |tag| %>
               <div class="btn-group btn-group-toggle" data-toggle="buttons">
                 <label class="btn button-checkbox--orange <%= 'active' if @event.characteristics.pluck(:name).include?(tag) %>">
                   <%= check_box_tag "tags_characteristics[]", tag.id, @event.characteristics.include?(tag), id: "tag_#{tag.id}" %>

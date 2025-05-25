@@ -46,10 +46,10 @@ class ApplicationController < ActionController::Base
     end
 
     # Filter by category
-    if params[:s].present? && params[:s].in?(Constants::TAGS[0])
-      speco = params[:s].tr("%2C", "").tr(",", "")
-      ahoy.track "Filter category by #{speco}", kind: "filters"
-      @events = @events.kun_speco(speco)
+    if params[:s].present?
+      tag_ids = params[:s].split(",").map(&:to_i)
+      ahoy.track "Filter category by #{tag_ids}", kind: "filters"
+      @events = @events.with_tags(tag_ids)
     end
 
     # Filtras per Unutaga aŭ Plurtaga

@@ -4,11 +4,13 @@
 #
 # Table name: tags
 #
-#  id         :bigint           not null, primary key
-#  group_name :string           not null, indexed => [name]
-#  name       :string           not null, indexed => [group_name]
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id                 :bigint           not null, primary key
+#  display_in_filters :boolean          default(TRUE), not null
+#  group_name         :string           not null, indexed => [name]
+#  name               :string           not null, indexed => [group_name]
+#  sort_order         :integer          default(0), not null
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
 #
 class Tag < ApplicationRecord
   has_many :taggings, dependent: :destroy
@@ -26,4 +28,12 @@ class Tag < ApplicationRecord
   scope :categories, -> { where(group_name: "category") }
   scope :characteristics, -> { where(group_name: "characteristic") }
   scope :times, -> { where(group_name: "time") }
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["group_name", "name", "sort_order", "display_in_filters"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["taggings"]
+  end
 end

@@ -423,6 +423,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_25_150001) do
   create_table "tags", force: :cascade do |t|
     t.string "name", null: false
     t.string "group_name", null: false
+    t.integer "sort_order", default: 0, null: false
+    t.boolean "display_in_filters", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name", "group_name"], name: "index_tags_on_name_and_group_name", unique: true

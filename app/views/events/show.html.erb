@@ -47,6 +47,7 @@
         <p>
           <%= render(InternationalEventBadgeComponent.new(event: @event)) %>
           <%= display_event_tags(@event) %>
+          <%= @event.specolisto %>
         </p>
 
         <% begin %>

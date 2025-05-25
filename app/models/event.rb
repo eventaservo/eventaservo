@@ -142,6 +142,17 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :anoncoj_kaj_konkursoj, -> { anoncoj.or(konkursoj) }
   scope :international_calendar, -> { where(international_calendar: true) }
   scope :with_reports, -> { joins(:reports).distinct }
+  scope :with_tags, ->(tag_ids) {
+    where(
+      "events.id IN (
+        SELECT taggable_id
+        FROM taggings
+        WHERE taggable_type = 'Event' AND tag_id IN (?)
+        GROUP BY taggable_id
+        HAVING COUNT(DISTINCT tag_id) = ?
+      )", tag_ids, tag_ids.size
+    )
+  }
 
   def self.by_code(code)
     find_by(code: code)
