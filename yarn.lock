@@ -145,10 +145,10 @@
   resolved "https://registry.yarnpkg.com/@hotwired/turbo/-/turbo-7.3.0.tgz#2226000fff1aabda9fd9587474565c9929dbf15d"
   integrity sha512-Dcu+NaSvHLT7EjrDrkEmH4qET2ZJZ5IcCWmNXxNQTBwlnE5tBZfN6WxZ842n5cHV52DH/AKNirbPBtcEXDLW4g==
 
-"@josefarias/hotwire_combobox@^0.3.1":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@josefarias/hotwire_combobox/-/hotwire_combobox-0.3.1.tgz#80395c71aa57e22a4686d877eda32ce49a4cc9ec"
-  integrity sha512-LAxwhwYsYmBPAZdDP5qAHdwF5YJZP3nz1x/FNETKzX3cmKWibvzUwsEG980K9voTBwUHvd6wXdk+T9JR/Zm7QA==
+"@josefarias/hotwire_combobox@^0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@josefarias/hotwire_combobox/-/hotwire_combobox-0.3.2.tgz#bf3d4b069bc3d41e72022bc0158666d35d010514"
+  integrity sha512-FFs6nqL1xmdofaBJDkAcLcFdiLgTOajSopPaBFc05EddgS2EjP9bkGvJDLaIEZn/CzWPSwwbMt3WvLEW968Geg==
 
 "@kurkle/color@^0.3.0":
   version "0.3.2"
