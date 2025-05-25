@@ -37,7 +37,7 @@ module OrganizationsHelper
 
   def display_event_tags(event)
     content_tag(:div, class: "event-tags") do
-      event.tags.each do |tag|
+      event.tags.order(:group_name, :sort_order).each do |tag|
         next unless tag.category? || tag.characteristic?
 
         tag_color =
