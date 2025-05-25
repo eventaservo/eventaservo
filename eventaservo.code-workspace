@@ -20,10 +20,7 @@
 			"Gems"
 		],
 		"editor.formatOnSave": true,
-		"ruby.specCommand": "bin/rspec",
-		"[ruby]": {
-			"editor.defaultFormatter": "testdouble.vscode-standard-ruby"
-		}
+		"ruby.specCommand": "bin/rspec"
 	},
 	"extensions": {
 		"recommendations": [

@@ -5,7 +5,7 @@ RSpec.describe EventsHelper, type: :helper do
     it "returns plural form for known tags" do
       expect(helper.speconomo_plurale("Kunveno/Evento")).to eq("Kunvenoj/Eventoj")
       expect(helper.speconomo_plurale("Kurso")).to eq("Kursoj")
-      expect(helper.speconomo_plurale("por_junulo")).to eq("Por Junuloj")
+      expect(helper.speconomo_plurale("por_junulo")).to eq("Por junuloj")
       expect(helper.speconomo_plurale("Alia")).to eq("Aliaj")
     end
 
