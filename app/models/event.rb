@@ -129,9 +129,6 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :for_webcal, -> { where("date_start >= ? OR date_end >= ?", Time.zone.today - 6.months, Time.zone.today) }
   scope :unutagaj, -> { joins(:tags).where(tags: {name: "Unutaga", group_name: "characteristic"}) }
   scope :plurtagaj, -> { joins(:tags).where(tags: {name: "Plurtaga", group_name: "characteristic"}) }
-  scope :kun_kategorio, ->(tag_name) { joins(:tags).where(tags: {name: tag_name, group_name: "category"}) }
-  scope :kun_karakterizo, ->(tag_name) { joins(:tags).where(tags: {name: tag_name, group_name: "characteristic"}) }
-  scope :por_junuloj, -> { kun_karakterizo("Para Jovens") }
   scope :nuligitaj, -> { where(cancelled: true) }
   scope :ne_nuligitaj, -> { where(cancelled: false) }
   scope :konkursoj, -> { kun_speco("Konkurso") }
@@ -436,14 +433,6 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   def characteristics
     tags.where(group_name: "characteristic")
-  end
-
-  def has_tag?(name, group_name_value)
-    tags.exists?(name: name, group_name: group_name_value)
-  end
-
-  def por_junuloj?
-    has_tag?("Para Jovens", "characteristic")
   end
 
   private
