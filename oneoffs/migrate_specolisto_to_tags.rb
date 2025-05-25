@@ -8,9 +8,58 @@ migrated = 0
 errors = 0
 tag_cache = {}
 
-Tag.find_or_create_by!(name: "Por junuloj", group_name: "characteristic")
+Tag.find_or_initialize_by(name: "Kunveno/Evento").tap do |tag|
+  tag.group_name = "category"
+  tag.sort_order = 100
+  tag.display_in_filters = true
+  tag.save!
+end
+Tag.find_or_initialize_by(name: "Kurso").tap do |tag|
+  tag.group_name = "category"
+  tag.sort_order = 200
+  tag.display_in_filters = true
+  tag.save!
+end
+Tag.find_or_initialize_by(name: "Alia").tap do |tag|
+  tag.group_name = "category"
+  tag.sort_order = 300
+  tag.display_in_filters = true
+  tag.save!
+end
 
-Event.all.last(1000).each do |event|
+Tag.find_or_initialize_by(name: "Anonco").tap do |tag|
+  tag.group_name = "characteristic"
+  tag.sort_order = 100
+  tag.display_in_filters = false
+  tag.save!
+end
+Tag.find_or_initialize_by(name: "Konkurso").tap do |tag|
+  tag.group_name = "characteristic"
+  tag.sort_order = 200
+  tag.display_in_filters = false
+  tag.save!
+end
+Tag.find_or_initialize_by(name: "Por junuloj").tap do |tag|
+  tag.group_name = "characteristic"
+  tag.sort_order = 300
+  tag.display_in_filters = true
+  tag.save!
+end
+
+Tag.find_or_initialize_by(name: "Unutaga").tap do |tag|
+  tag.group_name = "time"
+  tag.sort_order = 100
+  tag.display_in_filters = true
+  tag.save!
+end
+Tag.find_or_initialize_by(name: "Plurtaga").tap do |tag|
+  tag.group_name = "time"
+  tag.sort_order = 200
+  tag.display_in_filters = true
+  tag.save!
+end
+
+Event.all.find_each do |event|
   print "Processing event ID ##{event.id}...      \r"
 
   tags = event.specolisto.tr(" ", "").split(",")

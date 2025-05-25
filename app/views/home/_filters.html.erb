@@ -15,7 +15,7 @@
 
   <%# Tag: Characteristics %>
   <div class="d-flex justify-content-center flex-wrap">
-    <% ([Tag.characteristics.where(display_in_filters: true), Tag.times.where(display_in_filters: true)].flatten.uniq).each do |tag| %>
+    <% ([Tag.times.where(display_in_filters: true).order(:sort_order), Tag.characteristics.where(display_in_filters: true).order(:sort_order) ].flatten.uniq).each do |tag| %>
       <% if tag_ids.include?(tag.id) %>
         <% new_tag_ids = tag_ids - [tag.id] %>
         <%= link_to(icon('fas', 'times', speconomo_plurale(tag.name)), url_for(s: new_tag_ids.join(","), o: params[:o], periodo: params[:periodo]), class: 'badge badge-pill badge-info m-1') %>
