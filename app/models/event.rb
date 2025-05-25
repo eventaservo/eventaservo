@@ -127,10 +127,10 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :online, -> { where(online: true) }
   scope :not_online, -> { where(online: false) }
   scope :for_webcal, -> { where("date_start >= ? OR date_end >= ?", Time.zone.today - 6.months, Time.zone.today) }
-  scope :unutagaj, -> { joins(:tags).where(tags: { name: "Unutaga", group_name: "characteristic" }) }
-  scope :plurtagaj, -> { joins(:tags).where(tags: { name: "Plurtaga", group_name: "characteristic" }) }
-  scope :kun_kategorio, ->(tag_name) { joins(:tags).where(tags: { name: tag_name, group_name: "category" }) }
-  scope :kun_karakterizo, ->(tag_name) { joins(:tags).where(tags: { name: tag_name, group_name: "characteristic" }) }
+  scope :unutagaj, -> { joins(:tags).where(tags: {name: "Unutaga", group_name: "characteristic"}) }
+  scope :plurtagaj, -> { joins(:tags).where(tags: {name: "Plurtaga", group_name: "characteristic"}) }
+  scope :kun_kategorio, ->(tag_name) { joins(:tags).where(tags: {name: tag_name, group_name: "category"}) }
+  scope :kun_karakterizo, ->(tag_name) { joins(:tags).where(tags: {name: tag_name, group_name: "characteristic"}) }
   scope :por_junuloj, -> { kun_karakterizo("Para Jovens") }
   scope :nuligitaj, -> { where(cancelled: true) }
   scope :ne_nuligitaj, -> { where(cancelled: false) }
@@ -534,16 +534,16 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def update_duration_tags
-    return unless saved_change_to_date_start? || saved_change_to_date_end? || new_record? || saved_change_to_time_zone?
+    # return unless saved_change_to_date_start? || saved_change_to_date_end? || saved_change_to_time_zone?
 
-    existing_duration_tags = self.tags.where(group_name: "characteristic", name: ["Unutaga", "Plurtaga"])
-    self.tags.delete(existing_duration_tags) if existing_duration_tags.any?
+    existing_duration_tags = tags.where(group_name: "time", name: ["Unutaga", "Plurtaga"])
+    tags.delete(existing_duration_tags) if existing_duration_tags.any?
 
     if date_start.present? && date_end.present?
       is_multiday = multtaga?
       duration_tag_name = is_multiday ? "Plurtaga" : "Unutaga"
-      tag_to_add = Tag.find_or_create_by!(name: duration_tag_name, group_name: "characteristic")
-      self.tags << tag_to_add unless self.tags.include?(tag_to_add)
+      tag_to_add = Tag.find_or_create_by!(name: duration_tag_name, group_name: "time")
+      tags << tag_to_add unless tags.include?(tag_to_add)
     end
   end
 end

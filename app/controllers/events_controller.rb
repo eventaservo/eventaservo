@@ -65,6 +65,36 @@ class EventsController < ApplicationController
     @event.user_id ||= current_user.id
 
     if @event.save
+      # Process categories tags
+      params[:tags_categories].each do |id|
+        tag = Tag.find(id)
+        @event.tags << tag unless @event.tags.include?(tag)
+      end
+
+      # Process characteristics tags
+      if params[:tags_characteristics].present?
+        params[:tags_characteristics].each do |id|
+          tag = Tag.find(id)
+          @event.tags << tag unless @event.tags.include?(tag)
+        end
+      end
+
+      # Processa as tags de categoria selecionadas
+      if params[:tags].present?
+        selected_names = Array(params[:tags]) & Constants::TAGS[0]
+        # Remove tags de categoria não selecionadas
+        @event.tags.where(group_name: "category").where.not(name: selected_names).each do |tag|
+          @event.tags.delete(tag)
+        end
+        # Adiciona tags de categoria selecionadas
+        selected_names.each do |name|
+          tag = Tag.find_or_create_by!(name: name, group_name: "category")
+          @event.tags << tag unless @event.tags.include?(tag)
+        end
+      else
+        # Remove todas as tags de categoria se nada foi selecionado
+        @event.tags.where(group_name: "category").each { |tag| @event.tags.delete(tag) }
+      end
       @event.update_event_organizations(params[:organization_ids])
       set_event_format(@event)
       NovaEventaSciigoJob.perform_later(@event)
@@ -90,6 +120,28 @@ class EventsController < ApplicationController
       end
       redirect_to event_path(code: @event.ligilo)
     elsif @event.update(event_params)
+      # Process categories tags
+      @event.tags.categories.where.not(id: params[:tags_categories]).each do |tag|
+        @event.tags.delete(tag)
+      end
+      params[:tags_categories].each do |id|
+        tag = Tag.find(id)
+        @event.tags << tag unless @event.tags.include?(tag)
+      end
+
+      # Process characteristics tags
+      if params[:tags_characteristics].present?
+        @event.tags.characteristics.where.not(id: params[:tags_characteristics]).each do |tag|
+          @event.tags.delete(tag)
+        end
+        params[:tags_characteristics].each do |id|
+          tag = Tag.find(id)
+          @event.tags << tag unless @event.tags.include?(tag)
+        end
+      else
+        @event.tags.characteristics.each { |tag| @event.tags.delete(tag) }
+      end
+
       EventoGhisdatigitaJob.perform_later(@event)
       EventMailer.nova_administranto(@event).deliver_later if @event.saved_change_to_user_id?
       @event.update_event_organizations(params[:organization_ids])

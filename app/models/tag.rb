@@ -15,13 +15,15 @@ class Tag < ApplicationRecord
 
   validates :name, presence: true
   validates :group_name, presence: true
-  validates :name, uniqueness: { scope: :group_name, message: "should be unique within its group" }
+  validates :name, uniqueness: {scope: :group_name, message: "should be unique within its group"}
 
   enum :group_name, {
     category: "category",
-    characteristic: "characteristic"
+    characteristic: "characteristic",
+    time: "time"
   }
 
   scope :categories, -> { where(group_name: "category") }
   scope :characteristics, -> { where(group_name: "characteristic") }
+  scope :times, -> { where(group_name: "time") }
 end

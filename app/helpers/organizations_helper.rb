@@ -37,8 +37,16 @@ module OrganizationsHelper
 
   def display_event_tags(event)
     content_tag(:div, class: "event-tags") do
-      event.specoj.each do |t|
-        concat content_tag(:span, t, class: "badge badge-pill badge-info mr-1")
+      event.tags.each do |tag|
+        tag_color =
+          if tag.category?
+            "badge-info"
+          elsif tag.characteristic?
+            "badge-warning"
+          else
+            "badge-danger"
+          end
+        concat content_tag(:span, tag.name, class: "mr-1 badge badge-pill #{tag_color}")
       end
     end
   end
