@@ -38,7 +38,7 @@ module OrganizationsHelper
   def display_event_tags(event)
     content_tag(:div, class: "event-tags") do
       event.specoj.each do |tag|
-        concat content_tag(:span, tag.titleize, class: "badge badge-pill badge-info mr-1")
+        concat content_tag(:span, tag.titleize.capitalize, class: "badge badge-pill badge-info mr-1")
       end
     end
   end
