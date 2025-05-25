@@ -98,9 +98,7 @@ gem "cssbundling-rails", "~> 1.4"
 
 # Solid Queue
 gem "solid_queue", "~> 0.9.0"
-
-# Mission Contorl
-gem "mission_control-jobs", "~> 0.1"
+gem "mission_control-jobs", "= 0.3.3"
 
 # Sentry.io
 gem "sentry-ruby", "~> 5"
