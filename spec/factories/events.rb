@@ -41,6 +41,9 @@ FactoryBot.define do
     after(:build) do |event|
       event.instance_variable_set(:@created_from_factory, true)
     end
+    after(:create) do |event|
+      event.tags << Tag.categories.first
+    end
 
     book = Faker::Book
     address = Faker::Address

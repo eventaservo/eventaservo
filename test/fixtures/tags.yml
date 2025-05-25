@@ -1,0 +1,47 @@
+kunveno_evento:
+  name: Kunveno/Evento
+  group_name: category
+  sort_order: 100
+  display_in_filters: true
+
+kurso:
+  name: Kurso
+  group_name: category
+  sort_order: 200
+  display_in_filters: true
+
+alia:
+  name: Alia
+  group_name: category
+  sort_order: 300
+  display_in_filters: true
+
+anonco:
+  name: Anonco
+  group_name: characteristic
+  sort_order: 100
+  display_in_filters: false
+
+konkurso:
+  name: Konkurso
+  group_name: characteristic
+  sort_order: 200
+  display_in_filters: false
+
+por_junuloj:
+  name: Por junuloj
+  group_name: characteristic
+  sort_order: 300
+  display_in_filters: true
+
+unutaga:
+  name: Unutaga
+  group_name: time
+  sort_order: 100
+  display_in_filters: true
+
+plurtaga:
+  name: Plurtaga
+  group_name: time
+  sort_order: 200
+  display_in_filters: true

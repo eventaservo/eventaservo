@@ -12,9 +12,6 @@ RSpec.describe "Events", type: :request do
   end
 
   it "creates an event" do
-    get "/e/new"
-    assert_response :success
-
     assert_difference("Event.count", 1) do
       post "/e",
         params: {
@@ -23,7 +20,8 @@ RSpec.describe "Events", type: :request do
             city: "Ĵoan-Pesoo", country_id: @brazilo.id, site: Faker::Internet.url,
             date_start: "17/07/2019", date_end: "17/07/2019"
           },
-          time_start: "14:00", time_end: "16:00"
+          time_start: "14:00", time_end: "16:00",
+          tags_categories: [Tag.categories.first.id]
         }
       assert_response :redirect
       follow_redirect!
@@ -38,20 +36,20 @@ RSpec.describe "Events", type: :request do
     assert_equal "14:00", evento.komenca_horo
     assert_equal "17/07/2019", evento.fina_tago
     assert_equal "16:00", evento.fina_horo
+    assert_equal 1, evento.tags.categories.count
   end
 
   it "adds organization to event" do
-    get edit_event_path(code: @evento.code)
     patch event_path(code: @evento.code),
       params: {
         event: {title: Faker::Book.title},
+        tags_categories: [@evento.tags.categories.first.id.to_s],
         organization_ids: [@bejo.id, @tejo.id], code: @evento.code
       }
     assert_equal 2, @evento.reload.organizations.count
   end
 
   it "removes organization from event" do
-    get edit_event_path(code: @evento.code)
     patch event_path(code: @evento.code),
       params: {
         event: {title: Faker::Book.title},

@@ -5,6 +5,6 @@ class CreateTaggings < ActiveRecord::Migration[7.0]
       t.references :taggable, polymorphic: true, null: false
       t.timestamps
     end
-    add_index :taggings, [:tag_id, :taggable_id, :taggable_type], unique: true, name: 'index_taggings_on_tag_and_taggable'
+    add_index :taggings, [:tag_id, :taggable_id, :taggable_type], unique: true, name: "index_taggings_on_tag_and_taggable"
   end
 end

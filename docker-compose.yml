@@ -50,10 +50,11 @@ services:
 
   selenium:
     image: selenium/standalone-chromium
+    container_name: eventaservo-selenium
     environment:
       - SE_VNC_NO_PASSWORD=1
     ports:
-      - 7901:7900
+      - 7900:7900
     shm_size: "2gb"
     restart: unless-stopped
 
