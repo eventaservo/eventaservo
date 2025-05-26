@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.81.0](https://github.com/eventaservo/eventaservo/compare/v2.80.1...v2.81.0) (2025-05-26)
+
+
+### Features
+
+* **Event:** :sparkles: New tag system and "Por Junuloj" tag ([#883](https://github.com/eventaservo/eventaservo/issues/883)) ([4a74ab5](https://github.com/eventaservo/eventaservo/commit/4a74ab5df6595a44d37e60f05be6528e1da2a5e4))
+
 ## [2.80.1](https://github.com/eventaservo/eventaservo/compare/v2.80.0...v2.80.1) (2025-04-30)
 
 
