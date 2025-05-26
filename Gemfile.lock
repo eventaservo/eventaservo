@@ -82,9 +82,6 @@ GEM
       minitest (>= 5.1)
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
-    acts-as-taggable-on (11.0.0)
-      activerecord (>= 7.0, < 8.0)
-      zeitwerk (>= 2.4, < 3.0)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
     ahoy_matey (5.4.0)
@@ -748,7 +745,6 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin (~> 3)
-  acts-as-taggable-on (~> 11.0)
   ahoy_matey (~> 5)
   annotate (~> 3.2)
   aws-sdk-s3 (~> 1.136)

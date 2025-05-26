@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_22_133957) do
+ActiveRecord::Schema[7.2].define(version: 2025_05_25_150001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -409,29 +409,25 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_22_133957) do
     t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
   end
 
-  create_table "taggings", id: :serial, force: :cascade do |t|
-    t.integer "tag_id"
-    t.string "taggable_type"
-    t.integer "taggable_id"
-    t.string "tagger_type"
-    t.integer "tagger_id"
-    t.string "context", limit: 128
-    t.datetime "created_at", precision: nil
-    t.index ["context"], name: "index_taggings_on_context"
-    t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
+  create_table "taggings", force: :cascade do |t|
+    t.bigint "tag_id", null: false
+    t.string "taggable_type", null: false
+    t.bigint "taggable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag_id", "taggable_id", "taggable_type"], name: "index_taggings_on_tag_and_taggable", unique: true
     t.index ["tag_id"], name: "index_taggings_on_tag_id"
-    t.index ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context"
-    t.index ["taggable_id", "taggable_type", "tagger_id", "context"], name: "taggings_idy"
-    t.index ["taggable_id"], name: "index_taggings_on_taggable_id"
-    t.index ["taggable_type"], name: "index_taggings_on_taggable_type"
-    t.index ["tagger_id", "tagger_type"], name: "index_taggings_on_tagger_id_and_tagger_type"
-    t.index ["tagger_id"], name: "index_taggings_on_tagger_id"
+    t.index ["taggable_type", "taggable_id"], name: "index_taggings_on_taggable"
   end
 
-  create_table "tags", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.integer "taggings_count", default: 0
-    t.index ["name"], name: "index_tags_on_name", unique: true
+  create_table "tags", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "group_name", null: false
+    t.integer "sort_order", default: 0, null: false
+    t.boolean "display_in_filters", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name", "group_name"], name: "index_tags_on_name_and_group_name", unique: true
   end
 
   create_table "timezones", force: :cascade do |t|
@@ -502,8 +498,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_22_133957) do
   end
 
   create_table "versions", force: :cascade do |t|
-    t.string "item_type"
-    t.string "{:null=>false}"
+    t.string "item_type", null: false
     t.bigint "item_id", null: false
     t.string "event", null: false
     t.string "whodunnit"
@@ -533,4 +528,5 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_22_133957) do
   add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "taggings", "tags"
 end

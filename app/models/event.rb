@@ -66,6 +66,10 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   has_many :videoj, class_name: "Video"
   has_many :reports, class_name: "Event::Report", dependent: :destroy
 
+  # Novas associações para Tags Polimórficas
+  has_many :taggings, as: :taggable, dependent: :destroy
+  has_many :tags, through: :taggings
+
   validates :title, :description, :city, :country_id, :date_start, :date_end, :code, presence: true
   validates :description, length: {maximum: 400}
   validates :code, uniqueness: true, on: :create
@@ -83,6 +87,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   before_save :format_event_data
   after_commit :schedule_users_reminders_jobs
   after_update :create_redirection, if: :saved_change_to_short_url?
+  after_save :update_duration_tags
 
   geocoded_by :full_address
 
@@ -122,8 +127,8 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :online, -> { where(online: true) }
   scope :not_online, -> { where(online: false) }
   scope :for_webcal, -> { where("date_start >= ? OR date_end >= ?", Time.zone.today - 6.months, Time.zone.today) }
-  scope :unutagaj, -> { where("((to_timestamp(date_end::text, 'YYYY-MM-DD HH24:MI:SS')) AT TIME ZONE(time_zone))::timestamp::date = ((to_timestamp(date_start::text, 'YYYY-MM-DD HH24:MI:SS')) AT TIME ZONE(time_zone))::timestamp::date") }
-  scope :plurtagaj, -> { where("((to_timestamp(date_end::text, 'YYYY-MM-DD HH24:MI:SS')) AT TIME ZONE(time_zone))::timestamp::date > ((to_timestamp(date_start::text, 'YYYY-MM-DD HH24:MI:SS')) AT TIME ZONE(time_zone))::timestamp::date") }
+  scope :unutagaj, -> { joins(:tags).where(tags: {name: "Unutaga", group_name: "characteristic"}) }
+  scope :plurtagaj, -> { joins(:tags).where(tags: {name: "Plurtaga", group_name: "characteristic"}) }
   scope :nuligitaj, -> { where(cancelled: true) }
   scope :ne_nuligitaj, -> { where(cancelled: false) }
   scope :konkursoj, -> { kun_speco("Konkurso") }
@@ -134,6 +139,17 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :anoncoj_kaj_konkursoj, -> { anoncoj.or(konkursoj) }
   scope :international_calendar, -> { where(international_calendar: true) }
   scope :with_reports, -> { joins(:reports).distinct }
+  scope :with_tags, ->(tag_ids) {
+    where(
+      "events.id IN (
+        SELECT taggable_id
+        FROM taggings
+        WHERE taggable_type = 'Event' AND tag_id IN (?)
+        GROUP BY taggable_id
+        HAVING COUNT(DISTINCT tag_id) = ?
+      )", tag_ids, tag_ids.size
+    )
+  }
 
   def self.by_code(code)
     find_by(code: code)
@@ -410,6 +426,15 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
       "time_zone", "title", "updated_at", "user_id", "uuid"]
   end
 
+  # Métodos auxiliares para acessar tags agrupadas
+  def main_categories
+    tags.where(group_name: "category")
+  end
+
+  def characteristics
+    tags.where(group_name: "characteristic")
+  end
+
   private
 
   def first_uploaded_image
@@ -506,5 +531,19 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     return if city.blank?
 
     errors.add(:city, "aŭ loko ne povas esti tute majuskla") if city.upcase == city
+  end
+
+  def update_duration_tags
+    # return unless saved_change_to_date_start? || saved_change_to_date_end? || saved_change_to_time_zone?
+
+    existing_duration_tags = tags.where(group_name: "time", name: ["Unutaga", "Plurtaga"])
+    tags.delete(existing_duration_tags) if existing_duration_tags.any?
+
+    if date_start.present? && date_end.present?
+      is_multiday = multtaga?
+      duration_tag_name = is_multiday ? "Plurtaga" : "Unutaga"
+      tag_to_add = Tag.find_or_create_by!(name: duration_tag_name, group_name: "time")
+      tags << tag_to_add unless tags.include?(tag_to_add)
+    end
   end
 end

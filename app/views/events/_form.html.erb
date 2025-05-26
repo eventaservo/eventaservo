@@ -79,30 +79,23 @@
         </div>
 
         <div class="form-group">
-          <%= form.label :specolisto, 'Speco' %>
-          <div class="text-center" id="event_tags">
-            <% Constants::TAGS[0].each do |etikedo| %>
+          <div class="text-center" id="tags-categories">
+            <% Tag.categories.order(:sort_order).each do |tag| %>
               <div class="btn-group btn-group-toggle mb-1" data-toggle="buttons">
-                <label class="btn button-checkbox--main <%= 'active' if (@event.specolisto.present? && etikedo.in?(@event.specoj)) %>">
-                  <% if @event.specolisto.present? %>
-                    <%= check_box_tag "specolisto[#{etikedo}]", 1, etikedo.in?(@event.specoj) %>
-                  <% else %>
-                    <%= check_box_tag "specolisto[#{etikedo}]", 0 %>
-                  <% end %>
-                  <%= etikedo %>
+                <label class="btn button-checkbox--main <%= 'active' if @event.tags.categories.pluck(:id).include?(tag.id) %>">
+                  <%= check_box_tag "tags_categories[]", tag.id, @event.tags.categories.include?(tag), id: "tag_#{tag.id}" %>
+                  <%= tag.name %>
                 </label>
               </div>
             <% end %>
-            <br>
-            <% Constants::TAGS[1].each do |etikedo| %>
+          </div>
+
+          <div class="text-center" id="tags-characteristics">
+            <% Tag.characteristics.order(:sort_order).each do |tag| %>
               <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn button-checkbox--orange <%= 'active' if (@event.specolisto.present? && etikedo.in?(@event.specoj)) %>">
-                  <% if @event.specolisto.present? %>
-                    <%= check_box_tag "specolisto[#{etikedo}]", 1, etikedo.in?(@event.specoj) %>
-                  <% else %>
-                    <%= check_box_tag "specolisto[#{etikedo}]", 0 %>
-                  <% end %>
-                  <%= etikedo %>
+                <label class="btn button-checkbox--orange <%= 'active' if @event.characteristics.pluck(:id).include?(tag.id) %>">
+                  <%= check_box_tag "tags_characteristics[]", tag.id, @event.characteristics.include?(tag), id: "tag_#{tag.id}" %>
+                  <%= tag.name %>
                 </label>
               </div>
             <% end %>

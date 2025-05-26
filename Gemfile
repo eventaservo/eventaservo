@@ -18,8 +18,6 @@ gem "sass-rails", "~> 6"
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
-gem "acts-as-taggable-on", "~> 11.0"
-
 gem "bootsnap", require: false
 gem "bootstrap", "~> 4.3"
 gem "font-awesome-sass", "~> 6"

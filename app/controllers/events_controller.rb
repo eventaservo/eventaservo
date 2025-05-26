@@ -65,6 +65,20 @@ class EventsController < ApplicationController
     @event.user_id ||= current_user.id
 
     if @event.save
+      # Process categories tags
+      params[:tags_categories].each do |id|
+        tag = Tag.find(id)
+        @event.tags << tag unless @event.tags.include?(tag)
+      end
+
+      # Process characteristics tags
+      if params[:tags_characteristics].present?
+        params[:tags_characteristics].each do |id|
+          tag = Tag.find(id)
+          @event.tags << tag unless @event.tags.include?(tag)
+        end
+      end
+
       @event.update_event_organizations(params[:organization_ids])
       set_event_format(@event)
       NovaEventaSciigoJob.perform_later(@event)
@@ -90,6 +104,28 @@ class EventsController < ApplicationController
       end
       redirect_to event_path(code: @event.ligilo)
     elsif @event.update(event_params)
+      # Process categories tags
+      @event.tags.categories.where.not(id: params[:tags_categories]).each do |tag|
+        @event.tags.delete(tag)
+      end
+      params[:tags_categories].each do |id|
+        tag = Tag.find(id)
+        @event.tags << tag unless @event.tags.include?(tag)
+      end
+
+      # Process characteristics tags
+      if params[:tags_characteristics].present?
+        @event.tags.characteristics.where.not(id: params[:tags_characteristics]).each do |tag|
+          @event.tags.delete(tag)
+        end
+        params[:tags_characteristics].each do |id|
+          tag = Tag.find(id)
+          @event.tags << tag unless @event.tags.include?(tag)
+        end
+      else
+        @event.tags.characteristics.each { |tag| @event.tags.delete(tag) }
+      end
+
       EventoGhisdatigitaJob.perform_later(@event)
       EventMailer.nova_administranto(@event).deliver_later if @event.saved_change_to_user_id?
       @event.update_event_organizations(params[:organization_ids])

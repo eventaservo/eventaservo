@@ -59,7 +59,7 @@ $(document).ready(function () {
     })
 
     $("form").on("submit", function () {
-      if ($("#event_tags").find(".active").length === 0) {
+      if ($("#tags-categories").find(".active").length === 0) {
         alert("Vi devas elekti almenaŭ unu specon")
         return false
       }
