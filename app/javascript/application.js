@@ -18,3 +18,6 @@ import 'leaflet.markercluster'
 import "chartkick"
 import Highcharts from "highcharts"
 window.Highcharts = Highcharts
+
+// Tailwind and Flowbite
+import "flowbite/dist/flowbite.turbo.js";
