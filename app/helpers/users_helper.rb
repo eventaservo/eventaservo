@@ -12,7 +12,7 @@ module UsersHelper
     image =
       if user&.picture&.attached?
         if user.picture.variable?
-          url_for(user.picture.variant(resize_to_limit: [42, 42]))
+          url_for(user.picture.variant(resize_to_limit: [40, 40]))
         else
           url_for(user.picture)
         end
@@ -21,7 +21,7 @@ module UsersHelper
       else
         "nekonata.jpg"
       end
-    image_tag image, size: 40, alt: "User profile picture", class: "tw:rounded-full" if image
+    image_tag image, alt: "User profile picture", class: "tw:rounded-full tw:w-10 tw:h-10" if image
   end
 
   def display_user_image_profile(user)
