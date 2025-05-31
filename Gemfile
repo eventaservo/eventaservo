@@ -119,6 +119,10 @@ gem "lokalise_rails", "~> 7.0"
 # For connecting to Google Drive
 gem "google-api-client", "~> 0.53.0"
 
+# For Tailwind CSS
+gem "tailwindcss-ruby", "~> 4.1"
+gem "tailwindcss-rails", "~> 4.2"
+
 group :development, :test do
   gem "debug", ">= 1.0.0", require: false
   gem "dotenv-rails"

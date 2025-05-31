@@ -104,6 +104,7 @@ RUN apt update \
   chromium-driver \
   fish \
   sudo \
+  watchman \
   zsh \
   && rm -rf /var/lib/apt/lists/*
 RUN npm install -g @withgraphite/graphite-cli@stable
