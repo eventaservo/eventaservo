@@ -1,6 +1,6 @@
 <div class="card mb-2" style="width: 300px">
   <% video_url = video.bildo.attached? ? url_for(video.bildo) : asset_url('video_thumbnail.png') %>
-  <%= image_tag video_url, height: '200px', class: 'card-img-top' %>
+  <%= image_tag video_url, class: 'card-img-top' %>
   <div class="card-body">
     <p class="card-title">
       <%= link_to video.title, video.url %>
