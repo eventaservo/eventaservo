@@ -269,6 +269,10 @@ GEM
     hashie (5.0.0)
     highcharts-rails (6.0.3)
       railties (>= 3.1)
+    hotwire-spark (0.1.13)
+      listen
+      rails (>= 7.0.0)
+      zeitwerk
     hotwire_combobox (0.3.2)
       rails (>= 7.0.7.2)
       stimulus-rails (>= 1.2)
@@ -774,6 +778,7 @@ DEPENDENCIES
   google-api-client (~> 0.53.0)
   groupdate (~> 6.4)
   highcharts-rails (~> 6.0)
+  hotwire-spark (~> 0.1.13)
   hotwire_combobox (~> 0.3.1)
   htmlbeautifier (~> 1.4)
   httparty (~> 0.18)

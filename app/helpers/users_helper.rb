@@ -21,7 +21,7 @@ module UsersHelper
       else
         "nekonata.jpg"
       end
-    image_tag image, size: 40, alt: "User profile picture", class: "user-photo-rounded" if image
+    image_tag image, size: 40, alt: "User profile picture", class: "tw:rounded-full" if image
   end
 
   def display_user_image_profile(user)

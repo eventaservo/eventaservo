@@ -158,3 +158,5 @@ group :test do
   gem "vcr"
   gem "webmock"
 end
+
+gem "hotwire-spark", "~> 0.1.13"
