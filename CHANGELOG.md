@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.81.1](https://github.com/eventaservo/eventaservo/compare/v2.81.0...v2.81.1) (2025-05-31)
+
+
+### Bug Fixes
+
+* **Video:** Thumbnail for Youtube Shorts ([5211fdf](https://github.com/eventaservo/eventaservo/commit/5211fdfc60d1f3427d688689dc1fd4d4e77b9c21))
+
 ## [2.81.0](https://github.com/eventaservo/eventaservo/compare/v2.80.1...v2.81.0) (2025-05-26)
 
 
