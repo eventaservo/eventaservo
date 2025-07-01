@@ -77,15 +77,6 @@ class ApplicationController < ActionController::Base
   end
   helper_method :user_can_edit_event?
 
-  def last_6_months_label
-    array = []
-    5.downto(0) do |m|
-      array << (Time.zone.today - m.months).end_of_month.strftime("%b-%y")
-    end
-    array
-  end
-  helper_method :last_6_months_label
-
   def last_12_months_label
     array = []
     11.downto(0) do |m|
