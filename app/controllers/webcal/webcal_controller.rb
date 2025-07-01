@@ -7,9 +7,9 @@ module Webcal
 
     def lando
       eventoj = if @lando.code == "ol" # Retaj eventoj
-        Event.ne_nuligitaj.ne_anoncoj.venontaj.online
+        Event.ne_nuligitaj.without_tag("Anonco").venontaj.online
       else
-        Event.ne_nuligitaj.ne_anoncoj.lau_lando(@lando).for_webcal
+        Event.ne_nuligitaj.without_tag("Anonco").lau_lando(@lando).for_webcal
       end
 
       respond_to do |format|

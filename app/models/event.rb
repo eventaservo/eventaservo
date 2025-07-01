@@ -132,10 +132,8 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :nuligitaj, -> { where(cancelled: true) }
   scope :ne_nuligitaj, -> { where(cancelled: false) }
   scope :konkursoj, -> { kun_speco("Konkurso") }
-  scope :ne_konkursoj, -> { sen_speco("Konkurso") }
   scope :anoncoj, -> { kun_speco("Anonco") }
-  scope :ne_anoncoj, -> { sen_speco("Anonco") }
-  scope :chefaj, -> { ne_konkursoj.ne_anoncoj }
+  scope :chefaj, -> { without_tag("Konkurso").without_tag("Anonco") }
   scope :anoncoj_kaj_konkursoj, -> { anoncoj.or(konkursoj) }
   scope :international_calendar, -> { where(international_calendar: true) }
   scope :with_reports, -> { joins(:reports).distinct }
@@ -149,6 +147,9 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
         HAVING COUNT(DISTINCT tag_id) = ?
       )", tag_ids, tag_ids.size
     )
+  }
+  scope :without_tag, ->(tag_name) {
+    where.not(id: joins(:tags).where(tags: {name: tag_name}).select(:id))
   }
 
   def self.by_code(code)

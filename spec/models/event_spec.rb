@@ -115,6 +115,25 @@ RSpec.describe Event, type: :model do
     end
   end
 
+  describe "scopes" do
+    describe ".with_tags" do
+      it "returns events with the given tags" do
+        test_tag = create(:tag, name: "Test", group_name: "characteristic")
+        event_with_tag = create(:event, tags: [test_tag])
+        _event_without_tag = create(:event)
+        expect(Event.with_tags([test_tag.id])).to eq([event_with_tag])
+      end
+    end
+
+    describe ".without_tag" do
+      it "returns events without the given tag" do
+        _event_with_tag = create(:event, tags: [create(:tag, name: "Test", group_name: "characteristic")])
+        event_without_tag = create(:event)
+        expect(Event.without_tag("Test")).to eq([event_without_tag])
+      end
+    end
+  end
+
   describe "class methods" do
     describe ".by_link" do
       let!(:event) { create(:event, short_url: "short_url", code: "code") }
