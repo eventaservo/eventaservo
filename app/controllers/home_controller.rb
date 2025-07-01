@@ -100,7 +100,6 @@ class HomeController < ApplicationController
     @events = Event.includes([:country, [uploads_attachments: :blob]])
       .venontaj
       .ne_nuligitaj
-      .ne_anoncoj
       .where(cancelled: false)
       .order(:date_start)
 
