@@ -282,7 +282,7 @@ class EventsController < ApplicationController
     @event = Event.by_link(params[:event_code])
 
     version_ids = (@event.versions + @event.enhavo.versions).map(&:id)
-    @versions = PaperTrail::Version.where(id: version_ids).order(created_at: :desc)
+    @versions = PaperTrail::Version.includes(:item).where(id: version_ids).order(created_at: :desc)
 
     redirect_to root_path, flash: {error: "Evento ne ekzistas"} unless @event
   end
