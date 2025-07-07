@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_07_07_093253) do
+ActiveRecord::Schema[7.2].define(version: 2025_07_07_101535) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -23,6 +23,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_07_093253) do
     t.bigint "record_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_on_record_and_name"
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
@@ -507,6 +508,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_07_093253) do
     t.text "object_changes"
     t.integer "transaction_id"
     t.index ["created_at"], name: "index_versions_on_created_at"
+    t.index ["item_type", "item_id", "created_at"], name: "index_versions_on_item_and_created_at"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
     t.index ["transaction_id"], name: "index_versions_on_transaction_id"
   end
