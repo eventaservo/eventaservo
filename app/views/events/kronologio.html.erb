@@ -7,33 +7,45 @@
 
   <h4 class="text-center">Kronologio</h4>
 
-  <% @versions.each do |version| %>
-    <% next if version.changeset.empty? %>
+  <% if @versions.any? %>
+    <% @versions.each do |version| %>
+      <% next if version.changeset.empty? %>
 
-    <div class="box-white small">
-      <p>
-        <%= User.find(version.whodunnit).name if version.whodunnit %>
-        en <%= format_date version.created_at %> <%= version.event %>:
-      </p>
-      <% version.changeset.except(:updated_at).map do |item, changes| %>
-        <div class="row">
-          <div class="col-2"><%= t item %>:</div>
-          <div class="col-10">
-            <% old = changes[0] %>
-            <% new = changes[1] %>
-            <% if item == 'user_id' %>
-              <% old = User.find(old).name if old %>
-              <% new = User.find(new).name %>
-            <% end %>
-            <% if item == 'country_id' %>
-              <% old = Country.find(old).name if old %>
-              <% new = Country.find(new).name %>
-            <% end %>
+      <div class="box-white small">
+        <p>
+          <%= version.user_name if version.user_name %>
+          en <%= format_date version.created_at %> <%= version.event %>:
+        </p>
+        <% version.changeset.except(:updated_at).each do |item, changes| %>
+          <div class="row">
+            <div class="col-2"><%= t item %>:</div>
+            <div class="col-10">
+              <% old = changes[0] %>
+              <% new = changes[1] %>
+              <% if item == 'user_id' %>
+                <% old = @users_cache&.dig(old.to_i)&.name if old %>
+                <% new = @users_cache&.dig(new.to_i)&.name if new %>
+              <% end %>
+              <% if item == 'country_id' %>
+                <% old = @countries_cache&.dig(old.to_i)&.name if old %>
+                <% new = @countries_cache&.dig(new.to_i)&.name if new %>
+              <% end %>
 
-            <%= raw Diffy::Diff.new(old, new).to_s(:html) %>
+              <%= raw Diffy::Diff.new(old, new).to_s(:html) %>
+            </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if @pagy.pages > 1 %>
+      <div class="text-center mt-3">
+        <%= raw pagy_bootstrap_nav(@pagy) %>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="text-center text-muted mt-4">
+      <p>Neniu ŝanĝo troviĝis en la kronologio.</p>
     </div>
   <% end %>
 

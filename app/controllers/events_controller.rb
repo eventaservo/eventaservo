@@ -280,11 +280,20 @@ class EventsController < ApplicationController
 
   def kronologio
     @event = Event.by_link(params[:event_code])
+    redirect_to root_path, flash: {error: "Evento ne ekzistas"} and return unless @event
 
-    version_ids = (@event.versions + @event.enhavo.versions).map(&:id)
-    @versions = PaperTrail::Version.includes(:item).where(id: version_ids).order(created_at: :desc)
+    # Cache key based on event and last version update
+    cache_key = "kronologio_#{@event.id}_#{@event.updated_at.to_i}"
 
-    redirect_to root_path, flash: {error: "Evento ne ekzistas"} unless @event
+    # Try to get from cache first
+    cached_data = Rails.cache.fetch(cache_key, expires_in: 1.hour) do
+      build_kronologio_data(@event)
+    end
+
+    # Apply pagination to cached data
+    @pagy, @versions = pagy_array(cached_data[:versions], items: 15)
+    @users_cache = cached_data[:users_cache]
+    @countries_cache = cached_data[:countries_cache]
   end
 
   private
@@ -387,5 +396,53 @@ class EventsController < ApplicationController
       end
 
     event.update_columns(format:)
+  end
+
+  def build_kronologio_data(event)
+    # Single optimized query to get all versions
+    versions = PaperTrail::Version
+      .joins("LEFT JOIN users ON versions.whodunnit = users.id::text")
+      .where(build_versions_where_clause(event))
+      .select("versions.*, users.name as user_name")
+      .order(created_at: :desc)
+      .limit(500) # Reasonable limit for performance
+
+    # Preload users and countries that might be referenced in changesets
+    all_user_ids = Set.new
+    all_country_ids = Set.new
+
+    versions.each do |version|
+      version.changeset.each do |_field, changes|
+        if changes.is_a?(Array) && changes.length == 2
+          all_user_ids << changes[0].to_i if changes[0].to_s.match?(/^\d+$/)
+          all_user_ids << changes[1].to_i if changes[1].to_s.match?(/^\d+$/)
+          all_country_ids << changes[0].to_i if changes[0].to_s.match?(/^\d+$/)
+          all_country_ids << changes[1].to_i if changes[1].to_s.match?(/^\d+$/)
+        end
+      end
+    end
+
+    users_cache = User.where(id: all_user_ids.to_a).index_by(&:id)
+    countries_cache = Country.where(id: all_country_ids.to_a).index_by(&:id)
+
+    {
+      versions: versions.to_a,
+      users_cache: users_cache,
+      countries_cache: countries_cache
+    }
+  end
+
+  def build_versions_where_clause(event)
+    event_clause = "(item_type = 'Event' AND item_id = #{event.id})"
+
+    # Handle rich text versions for enhavo
+    rich_text_clause = if event.enhavo.present?
+      rich_text_id = event.enhavo.id
+      "(item_type = 'ActionText::RichText' AND item_id = #{rich_text_id})"
+    else
+      "(1=0)" # No enhavo versions
+    end
+
+    "#{event_clause} OR #{rich_text_clause}"
   end
 end
