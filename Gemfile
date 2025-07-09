@@ -99,6 +99,7 @@ gem "solid_queue", "~> 0.9.0"
 gem "mission_control-jobs", "= 0.3.3"
 
 # Sentry.io
+gem "stackprof"
 gem "sentry-ruby", "~> 5"
 gem "sentry-rails", "~> 5"
 
