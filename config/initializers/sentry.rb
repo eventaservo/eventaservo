@@ -8,6 +8,7 @@ Sentry.init do |config|
   # of transactions for performance monitoring.
   # This provides sufficient data while keeping costs reasonable.
   config.traces_sample_rate = 0.2
+  config.profiles_sample_rate = 0.2
   # or
   # config.traces_sampler = lambda do |_context|
   #   true
