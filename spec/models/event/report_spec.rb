@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: event_reports
+#
+#  id         :bigint           not null, primary key
+#  title      :string
+#  url        :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  event_id   :bigint           not null, indexed
+#  user_id    :bigint           not null, indexed
+#
 require "rails_helper"
 
 RSpec.describe Event::Report, type: :model do

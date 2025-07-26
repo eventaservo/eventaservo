@@ -5,11 +5,11 @@
 # Table name: taggings
 #
 #  id            :bigint           not null, primary key
-#  taggable_type :string           not null, indexed => [tag_id, taggable_id], indexed => [taggable_id]
+#  taggable_type :string           not null, uniquely indexed => [tag_id, taggable_id], indexed => [taggable_id]
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  tag_id        :bigint           not null, indexed => [taggable_id, taggable_type], indexed
-#  taggable_id   :bigint           not null, indexed => [tag_id, taggable_type], indexed => [taggable_type]
+#  tag_id        :bigint           not null, uniquely indexed => [taggable_id, taggable_type], indexed
+#  taggable_id   :bigint           not null, uniquely indexed => [tag_id, taggable_type], indexed => [taggable_type]
 #
 # Foreign Keys
 #

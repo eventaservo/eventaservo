@@ -5,7 +5,7 @@
 #  id            :bigint           not null, primary key
 #  hits          :integer          default(0), not null
 #  new_short_url :string           not null
-#  old_short_url :string           not null, indexed
+#  old_short_url :string           not null, uniquely indexed
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #

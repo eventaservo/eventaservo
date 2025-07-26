@@ -1,3 +1,39 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id                     :bigint           not null, primary key
+#  address                :string           indexed
+#  cancel_reason          :text
+#  cancelled              :boolean          default(FALSE), indexed
+#  city                   :text             indexed
+#  code                   :string           not null
+#  content                :text
+#  date_end               :datetime         indexed
+#  date_start             :datetime         not null, indexed
+#  deleted                :boolean          default(FALSE), not null, indexed
+#  description            :string(400)      indexed
+#  display_flag           :boolean          default(TRUE)
+#  email                  :string
+#  format                 :string           indexed
+#  import_url             :string(400)
+#  international_calendar :boolean          default(FALSE)
+#  latitude               :float
+#  longitude              :float
+#  metadata               :jsonb
+#  online                 :boolean          default(FALSE), indexed
+#  participants_count     :integer          default(0), indexed
+#  short_url              :string
+#  site                   :string
+#  specolisto             :string           default("Kunveno"), indexed
+#  time_zone              :string           default("Etc/UTC"), not null
+#  title                  :string           not null, indexed
+#  uuid                   :uuid
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  country_id             :integer          not null
+#  user_id                :integer          not null, indexed
+#
 require "rails_helper"
 
 RSpec.describe Event, type: :model do

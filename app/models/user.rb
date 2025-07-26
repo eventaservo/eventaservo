@@ -7,17 +7,17 @@
 #  id                     :bigint           not null, primary key
 #  about                  :string
 #  admin                  :boolean          default(FALSE)
-#  authentication_token   :string(30)       indexed
+#  authentication_token   :string(30)       uniquely indexed
 #  avatar                 :string
 #  birthday               :date
 #  city                   :string
 #  confirmation_sent_at   :datetime
-#  confirmation_token     :string           indexed
+#  confirmation_token     :string           uniquely indexed
 #  confirmed_at           :datetime
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :inet
 #  disabled               :boolean          default(FALSE), indexed
-#  email                  :string           default(""), not null, indexed
+#  email                  :string           default(""), not null, uniquely indexed
 #  encrypted_password     :string           default(""), not null
 #  events_count           :integer          default(0), indexed
 #  failed_attempts        :integer          default(0), not null
@@ -34,13 +34,13 @@
 #  provider               :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
-#  reset_password_token   :string           indexed
+#  reset_password_token   :string           uniquely indexed
 #  sign_in_count          :integer          default(0), not null
 #  system_account         :boolean          default(FALSE)
 #  ueacode                :string
 #  uid                    :string
 #  unconfirmed_email      :string
-#  unlock_token           :string           indexed
+#  unlock_token           :string           uniquely indexed
 #  username               :string
 #  webcal_token           :string
 #  created_at             :datetime         not null

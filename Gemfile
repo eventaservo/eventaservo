@@ -135,7 +135,7 @@ group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   # gem "web-console", group: :development
 
-  gem "annotate", "~> 3.2", require: false
+  gem "annotaterb", require: false
   gem "better_errors"
   gem "binding_of_caller"
   gem "htmlbeautifier", "~> 1.4"

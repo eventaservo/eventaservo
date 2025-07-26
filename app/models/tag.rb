@@ -6,8 +6,8 @@
 #
 #  id                 :bigint           not null, primary key
 #  display_in_filters :boolean          default(TRUE), not null
-#  group_name         :string           not null, indexed => [name]
-#  name               :string           not null, indexed => [group_name]
+#  group_name         :string           not null, uniquely indexed => [name]
+#  name               :string           not null, uniquely indexed => [group_name]
 #  sort_order         :integer          default(0), not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null

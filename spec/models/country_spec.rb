@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: countries
+#
+#  id         :bigint           not null, primary key
+#  code       :string
+#  continent  :string           indexed, indexed => [name]
+#  name       :string           indexed, indexed => [continent]
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 require "rails_helper"
 
 RSpec.describe Country, type: :model do

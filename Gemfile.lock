@@ -88,9 +88,9 @@ GEM
       activesupport (>= 7.1)
       device_detector (>= 1)
       safely_block (>= 0.4)
-    annotate (3.2.0)
-      activerecord (>= 3.2, < 8.0)
-      rake (>= 10.4, < 14.0)
+    annotaterb (4.17.0)
+      activerecord (>= 6.0.0)
+      activesupport (>= 6.0.0)
     arbre (1.7.0)
       activesupport (>= 3.0.0)
       ruby2_keywords (>= 0.0.2)
@@ -747,7 +747,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin (~> 3)
   ahoy_matey (~> 5)
-  annotate (~> 3.2)
+  annotaterb
   aws-sdk-s3 (~> 1.136)
   better_errors
   binding_of_caller
