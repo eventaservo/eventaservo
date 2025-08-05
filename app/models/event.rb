@@ -131,8 +131,8 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :plurtagaj, -> { joins(:tags).where(tags: {name: "Plurtaga", group_name: "characteristic"}) }
   scope :nuligitaj, -> { where(cancelled: true) }
   scope :ne_nuligitaj, -> { where(cancelled: false) }
-  scope :konkursoj, -> { kun_speco("Konkurso") }
-  scope :anoncoj, -> { kun_speco("Anonco") }
+  scope :konkursoj, -> { with_tags([Tag.find_by(name: "Konkurso", group_name: "characteristic").id]) }
+  scope :anoncoj, -> { with_tags([Tag.find_by(name: "Anonco", group_name: "characteristic").id]) }
   scope :chefaj, -> { without_tag("Konkurso").without_tag("Anonco") }
   scope :anoncoj_kaj_konkursoj, -> { anoncoj.or(konkursoj) }
   scope :international_calendar, -> { where(international_calendar: true) }
