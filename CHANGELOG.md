@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.82.0](https://github.com/eventaservo/eventaservo/compare/v2.81.0...v2.82.0) (2025-08-05)
+
+
+### Features
+
+* remove contents and announcements from main page ([#887](https://github.com/eventaservo/eventaservo/issues/887)) ([2ea5d26](https://github.com/eventaservo/eventaservo/commit/2ea5d26157a086139baa67d3eea6944fec61ca7b))
+
+
+### Bug Fixes
+
+* Add database index to improve kronologio performance ([#888](https://github.com/eventaservo/eventaservo/issues/888)) ([53aa656](https://github.com/eventaservo/eventaservo/commit/53aa6560aac9466bc468c72f4d090a48d704198f))
+* **Event:** Display of Announcements & Contests ([eaefc16](https://github.com/eventaservo/eventaservo/commit/eaefc16ed9709742db1b55279d51d1b104525be4))
+* **Events:** optimize version retrieval with eager loading ([a789c9c](https://github.com/eventaservo/eventaservo/commit/a789c9cdf44b48e8f6a20ed2053d0f90269067c1))
+* ReferenceError ([333eae5](https://github.com/eventaservo/eventaservo/commit/333eae50dc3ac0dd1a4536ba7669519a85c98ea3))
+* **Video:** Thumbnail for Youtube Shorts ([5211fdf](https://github.com/eventaservo/eventaservo/commit/5211fdfc60d1f3427d688689dc1fd4d4e77b9c21))
+
+
+### Performance Improvements
+
+* 🚀 Comprehensive Performance Optimization for Kronologio Action ([#889](https://github.com/eventaservo/eventaservo/issues/889)) ([869b2f7](https://github.com/eventaservo/eventaservo/commit/869b2f72bfb33b5563f598bb3dd4b45151c8d3b6))
+
 ## [2.81.0](https://github.com/eventaservo/eventaservo/compare/v2.80.1...v2.81.0) (2025-05-26)
 
 
