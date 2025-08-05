@@ -352,14 +352,6 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     specolisto.tr(" ", "").split(",")
   end
 
-  def self.kun_speco(t)
-    where("specolisto ilike '%#{t}%'")
-  end
-
-  def self.sen_speco(t)
-    where("specolisto not ilike '%#{t}%'")
-  end
-
   # Returns the full URL for the event
   #
   # @return [String]

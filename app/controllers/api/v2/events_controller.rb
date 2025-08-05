@@ -16,7 +16,6 @@ module Api
           @events = @events.by_dates(from: validate_date(params[:komenca_dato]), to: validate_date(params[:fina_dato]))
           @events = @events.by_country_code(params[:landa_kodo].downcase) if params[:landa_kodo].present?
           @events = @events.lau_organizo(params[:o]) if params[:o].present?
-          @events = @events.kun_speco(params[:speco]) if params[:speco].present?
         end
       end
 
