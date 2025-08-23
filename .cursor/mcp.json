@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "Sentry": {
+      "url": "https://mcp.sentry.dev/mcp"
+    },
+    "graphite": {
+      "command": "gt",
+      "args": [
+        "mcp"
+      ]
+    }
+  }
+}
