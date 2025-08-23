@@ -66,9 +66,11 @@ class EventsController < ApplicationController
 
     if @event.save
       # Process categories tags
-      params[:tags_categories].each do |id|
-        tag = Tag.find(id)
-        @event.tags << tag unless @event.tags.include?(tag)
+      if params[:tags_categories].present?
+        params[:tags_categories].each do |id|
+          tag = Tag.find(id)
+          @event.tags << tag unless @event.tags.include?(tag)
+        end
       end
 
       # Process characteristics tags
@@ -105,12 +107,17 @@ class EventsController < ApplicationController
       redirect_to event_path(code: @event.ligilo)
     elsif @event.update(event_params)
       # Process categories tags
-      @event.tags.categories.where.not(id: params[:tags_categories]).each do |tag|
-        @event.tags.delete(tag)
-      end
-      params[:tags_categories].each do |id|
-        tag = Tag.find(id)
-        @event.tags << tag unless @event.tags.include?(tag)
+      if params[:tags_categories].present?
+        @event.tags.categories.where.not(id: params[:tags_categories]).each do |tag|
+          @event.tags.delete(tag)
+        end
+        params[:tags_categories].each do |id|
+          tag = Tag.find(id)
+          @event.tags << tag unless @event.tags.include?(tag)
+        end
+      else
+        # Remove all category tags if no categories are selected
+        @event.tags.categories.each { |tag| @event.tags.delete(tag) }
       end
 
       # Process characteristics tags
