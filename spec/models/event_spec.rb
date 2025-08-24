@@ -204,13 +204,6 @@ RSpec.describe Event, type: :model do
       end
     end
 
-    describe "#delete!" do
-      it "marks the event :deleted field as true" do
-        event.delete!
-        expect(event.deleted).to eq(true)
-      end
-    end
-
     describe "#undelete!" do
       it "marks the event :deleted field as false" do
         event.update_columns(deleted: true)

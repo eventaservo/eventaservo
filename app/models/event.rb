@@ -222,11 +222,6 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     joins(:organizations).where("LOWER(organizations.short_name) IN (?)", organizoj)
   end
 
-  # Malapareigu la eventon, sed ne forviŝu ĝin
-  def delete!
-    update!(deleted: true)
-  end
-
   # Reapegiru la eventon
   def undelete!
     update!(deleted: false)
