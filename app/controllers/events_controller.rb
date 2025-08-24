@@ -152,16 +152,13 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    unless user_is_owner_or_admin(@event)
-      redirect_to(event_path(code: @event.ligilo),
-        flash: {error: "Vi ne rajtas forigi ĝin"}) && return
-    end
+    result = Events::SoftDelete.call(event: @event, user: current_user)
 
-    # Ne vere forviŝas la eventon el la datumbazo, sed kaŝas ĝin
-    @event.delete!
-    ahoy.track "Deleted event", event_url: @event.short_url
-    Log.create(text: "Deleted event #{@event.title}", user: @current_user, event_id: @event.id)
-    redirect_to root_url, flash: {error: "Evento sukcese forigita"}
+    if result.success?
+      redirect_to root_url, flash: {notice: "Evento sukcese forigita"}
+    else
+      redirect_to event_path(code: @event.ligilo), flash: {error: result.error}
+    end
   end
 
   def nuligi
