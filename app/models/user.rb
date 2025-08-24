@@ -208,13 +208,6 @@ class User < ApplicationRecord
     find_by(system_account: true)
   end
 
-  # Returns the user's name with username
-  #
-  # @return [String]
-  def name_with_username
-    "#{name} (#{username})"
-  end
-
   # Returns if the user is active
   # Active means he confirmed the email address and logged in at least once
   #

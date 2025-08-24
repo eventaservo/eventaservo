@@ -108,7 +108,7 @@ ActiveAdmin.register User do
   member_action :merge, method: %i[get post] do
     if request.get?
       @page_title = "Merge users"
-      @user_list = User.where.not(id: resource.id).map { |u| [u.name_with_username, u.id] }.sort
+      @user_list = User.where.not(id: resource.id).map { |u| ["#{u.name} (#{u.username})", u.id] }.sort
     elsif request.post?
       resource.merge_to(params["merge_users"]["target_user_id"])
       redirect_to active_admin_user_path(params["merge_users"]["target_user_id"])
