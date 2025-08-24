@@ -14,10 +14,6 @@
 	// "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	"workspaceFolder": "/eventaservo",
 	// Features to add to the dev container. More info: https://containers.dev/features.
-	"containerEnv": {
-		"EDITOR": "code --wait",
-		"VISUAL": "code --wait"
-	},
 	"features": {
 		"ghcr.io/devcontainers/features/github-cli:1": {},
 		"ghcr.io/devcontainers/features/docker-outside-of-docker": {}
@@ -38,7 +34,8 @@
 				"usernamehw.errorlens",
 				"humao.rest-client",
 				"GitHub.copilot",
-				"GitHub.copilot-chat"
+				"GitHub.copilot-chat",
+				"Thadeu.vscode-run-rspec-file"
 			]
 		}
 	},
