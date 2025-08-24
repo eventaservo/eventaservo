@@ -1,0 +1,6 @@
+---
+globs: *.html.erb
+alwaysApply: false
+---
+# CSS Library
+Use Bootstrap V4.6 for all CSS classes and UI styling.

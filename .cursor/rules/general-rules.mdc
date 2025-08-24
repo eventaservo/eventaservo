@@ -1,0 +1,7 @@
+---
+alwaysApply: true
+---
+
+# Language
+
+Always use English as the main language to develop, create services, methods, Ruby classes, specs and commit messages.
