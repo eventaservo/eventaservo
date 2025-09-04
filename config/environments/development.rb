@@ -17,6 +17,13 @@ Rails.application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
+  # Include generic and useful information about system operation, but avoid logging too much
+  # information to avoid inadvertent exposure of personally identifiable information (PII).
+  config.log_level = :debug
+
+  # Prepend all log lines with the following tags.
+  config.log_tags = [:request_id, :remote_ip]
+
   # Show full error reports.
   config.consider_all_requests_local = true
 

@@ -56,7 +56,7 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
   config.log_level = :info
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [:request_id]
+  config.log_tags = [:request_id, :remote_ip]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
