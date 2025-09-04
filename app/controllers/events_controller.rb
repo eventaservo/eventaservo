@@ -23,7 +23,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    ahoy.track "Show event", event_url: @event.short_url
+    # ahoy.track "Show event", event_url: @event.short_url
 
     @horzono = cookies[:horzono] || params[:horzono] || @event.time_zone
     @partoprenontoj = @event.participants
