@@ -17,12 +17,14 @@ test:
   database: eventaservo_test<%= ENV['TEST_ENV_NUMBER'] %>
 
 staging:
+  <<: *default
   database: <%= ENV["DB_NAME"] %>
   host: <%= ENV["DB_HOST"] %>
   username: <%= ENV["DB_USERNAME"] || "postgres" %>
   password: <%= ENV["DB_PASSWORD"] || "postgres" %>
 
 production:
+  <<: *default
   database: <%= ENV["DB_NAME"] %>
   host: <%= ENV["DB_HOST"] %>
   username: <%= ENV["DB_USERNAME"] || "eventaservo" %>
