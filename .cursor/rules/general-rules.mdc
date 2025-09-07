@@ -5,3 +5,7 @@ alwaysApply: true
 # Language
 
 Always use English as the main language to develop, create services, methods, Ruby classes, specs and commit messages.
+
+# Commits and PRs
+
+Do do create branchs, commits or PRs without asking for the user permission.
