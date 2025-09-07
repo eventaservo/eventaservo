@@ -8,7 +8,7 @@
 
 ## Code Style
 - **Language**: Always use English for code, comments, specs, and commit messages
-- **Ruby**: Use `standard` gem formatting, `frozen_string_literal: true` at top of files
+- **Ruby**: Use `standard` gem formatting
 - **Documentation**: Use YARD format (`@param`, `@return`) for all methods and classes
 - **Schema**: Keep `annotate` gem annotations at top of models
 

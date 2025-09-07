@@ -12,7 +12,7 @@
 #  code                   :string           not null
 #  content                :text
 #  date_end               :datetime         indexed
-#  date_start             :datetime         not null, indexed
+#  date_start             :datetime         not null, indexed, indexed => [is_recurring_master], indexed => [master_event_id]
 #  deleted                :boolean          default(FALSE), not null, indexed
 #  description            :string(400)      indexed
 #  display_flag           :boolean          default(TRUE)
@@ -20,6 +20,7 @@
 #  format                 :string           indexed
 #  import_url             :string(400)
 #  international_calendar :boolean          default(FALSE)
+#  is_recurring_master    :boolean          default(FALSE), not null, indexed, indexed => [date_start]
 #  latitude               :float
 #  longitude              :float
 #  metadata               :jsonb
@@ -34,7 +35,12 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  country_id             :integer          not null
+#  master_event_id        :bigint           indexed, indexed => [date_start]
 #  user_id                :integer          not null, indexed
+#
+# Foreign Keys
+#
+#  fk_rails_...  (master_event_id => events.id)
 #
 FactoryBot.define do
   factory :event, aliases: [:evento], class: :event do
@@ -109,6 +115,13 @@ FactoryBot.define do
 
     trait :past do
       date_start { Faker::Time.between(from: DateTime.now - 90.days, to: DateTime.now - 2.days) }
+    end
+
+    trait :recurring_parent do
+      is_recurring_master { true }
+      after(:create) do |event|
+        create(:event_recurrence, master_event: event)
+      end
     end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_09_07_001251) do
+ActiveRecord::Schema[7.2].define(version: 2025_09_07_105433) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -132,6 +132,22 @@ ActiveRecord::Schema[7.2].define(version: 2025_09_07_001251) do
     t.index ["name"], name: "index_countries_on_name"
   end
 
+  create_table "event_recurrences", force: :cascade do |t|
+    t.bigint "master_event_id", null: false
+    t.string "frequency", null: false
+    t.integer "interval", default: 1, null: false
+    t.text "days_of_week"
+    t.integer "day_of_month"
+    t.string "end_type", null: false
+    t.date "end_date"
+    t.boolean "active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["active", "frequency"], name: "index_event_recurrences_on_active_and_frequency"
+    t.index ["master_event_id", "active"], name: "index_event_recurrences_on_master_event_id_and_active"
+    t.index ["master_event_id"], name: "index_event_recurrences_on_master_event_id"
+  end
+
   create_table "event_redirections", force: :cascade do |t|
     t.string "old_short_url", null: false
     t.string "new_short_url", null: false
@@ -183,6 +199,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_09_07_001251) do
     t.integer "participants_count", default: 0
     t.boolean "display_flag", default: true
     t.string "format"
+    t.bigint "master_event_id"
+    t.boolean "is_recurring_master", default: false, null: false
     t.index "md5(content)", name: "index_events_on_content"
     t.index ["address"], name: "index_events_on_address"
     t.index ["cancelled"], name: "index_events_on_cancelled"
@@ -192,6 +210,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_09_07_001251) do
     t.index ["deleted"], name: "index_events_on_deleted"
     t.index ["description"], name: "index_events_on_description"
     t.index ["format"], name: "index_events_on_format"
+    t.index ["is_recurring_master", "date_start"], name: "index_events_on_is_recurring_master_and_date_start"
+    t.index ["is_recurring_master"], name: "index_events_on_is_recurring_master"
+    t.index ["master_event_id", "date_start"], name: "index_events_on_master_event_id_and_date_start"
+    t.index ["master_event_id"], name: "index_events_on_master_event_id"
     t.index ["online"], name: "index_events_on_online"
     t.index ["participants_count"], name: "index_events_on_participants_count"
     t.index ["specolisto"], name: "index_events_on_specolisto"
@@ -524,6 +546,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_09_07_001251) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "event_recurrences", "events", column: "master_event_id"
+  add_foreign_key "events", "events", column: "master_event_id"
   add_foreign_key "logs", "users"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

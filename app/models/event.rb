@@ -12,7 +12,7 @@
 #  code                   :string           not null
 #  content                :text
 #  date_end               :datetime         indexed
-#  date_start             :datetime         not null, indexed
+#  date_start             :datetime         not null, indexed, indexed => [is_recurring_master], indexed => [master_event_id]
 #  deleted                :boolean          default(FALSE), not null, indexed
 #  description            :string(400)      indexed
 #  display_flag           :boolean          default(TRUE)
@@ -20,6 +20,7 @@
 #  format                 :string           indexed
 #  import_url             :string(400)
 #  international_calendar :boolean          default(FALSE)
+#  is_recurring_master    :boolean          default(FALSE), not null, indexed, indexed => [date_start]
 #  latitude               :float
 #  longitude              :float
 #  metadata               :jsonb
@@ -34,7 +35,12 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  country_id             :integer          not null
+#  master_event_id        :bigint           indexed, indexed => [date_start]
 #  user_id                :integer          not null, indexed
+#
+# Foreign Keys
+#
+#  fk_rails_...  (master_event_id => events.id)
 #
 
 # Eventaj dateno
@@ -56,6 +62,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   include Code
   include Events::Organizations
+  include RecurringEvents
 
   belongs_to :user, counter_cache: true
   belongs_to :country
