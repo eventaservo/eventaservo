@@ -172,7 +172,8 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     if continent_name == "reta"
       joins(:country).online
     else
-      joins(:country).where("unaccent(lower(countries.continent)) = ?", continent_name.normalized)
+      normalized_name = continent_name.normalized
+      joins(:country).where("unaccent(lower(countries.continent)) = lower(?)", normalized_name)
     end
   end
 
@@ -201,8 +202,8 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   def self.count_by_country
     joins(:country)
-      .select("countries.name", "countries.code", "countries.continent", "count(events.id)")
-      .group("countries.name, countries.code", "countries.continent")
+      .select("countries.name", "countries.code", "countries.continent", "count(events.id) as count")
+      .group("countries.name", "countries.code", "countries.continent")
       .order("countries.name")
   end
 

@@ -216,11 +216,12 @@ class EventsController < ApplicationController
       redirect_to events_by_continent_path(params[:continent].normalized) and return
     end
 
-    @future_events = Event.by_continent(params[:continent]).venontaj
-    @events = @events.includes(:organizations).by_continent(params[:continent])
-    @countries = @events.count_by_country
-    @today_events = @events.today.includes(:country)
-    @events = @events.not_today.includes(:country)
+    continent_events_base = @events.by_continent(params[:continent])
+
+    @future_events = continent_events_base.venontaj
+    @countries = continent_events_base.count_by_country
+    @today_events = continent_events_base.today.includes(:country)
+    @events = continent_events_base.not_today.includes(:country, :organizations)
 
     kreas_paghadon_por_karta_vidmaniero if cookies[:vidmaniero] == "kartaro"
   end
