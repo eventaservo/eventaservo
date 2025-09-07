@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.82.1](https://github.com/eventaservo/eventaservo/compare/v2.82.0...v2.82.1) (2025-09-07)
+
+
+### Bug Fixes
+
+* optimize EventsController#by_continent to resolve slow DB queries ([#904](https://github.com/eventaservo/eventaservo/issues/904)) ([b868b6d](https://github.com/eventaservo/eventaservo/commit/b868b6dec45cc77c187ae7632da8d66fb4cbcdf4))
+* prevent Stimulus error when organizations target is missing ([#906](https://github.com/eventaservo/eventaservo/issues/906)) ([53d0b6b](https://github.com/eventaservo/eventaservo/commit/53d0b6b291cb34c90fef8173ee3c3ddba5209558))
+
 ## [2.82.0](https://github.com/eventaservo/eventaservo/compare/v2.81.0...v2.82.0) (2025-08-23)
 
 
