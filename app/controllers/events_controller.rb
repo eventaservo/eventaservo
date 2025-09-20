@@ -47,9 +47,6 @@ class EventsController < ApplicationController
       @event.specolisto = origin.specolisto
       @event_organization_ids = origin.organizations.pluck(:id)
       @event.user_id = origin.user_id
-
-      # Para que as tags apareçam marcadas no formulário, precisamos
-      # carregá-las diretamente pois @event não está persistido
       @event.tag_ids = origin.tag_ids
       @copied_tags = Tag.where(id: origin.tag_ids)
     else

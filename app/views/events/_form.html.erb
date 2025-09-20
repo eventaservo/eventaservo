@@ -81,7 +81,7 @@
         <div class="form-group">
           <div class="text-center" id="tags-categories">
             <%
-              # Usar tags copiadas se disponíveis (para duplicação) ou tags do evento (para edição)
+              # Use copied tags if available (for duplication) or event's tags (for editing)
               event_categories = @copied_tags&.categories || @event.tags.categories
               event_category_ids = event_categories.pluck(:id)
             %>
@@ -97,7 +97,7 @@
 
           <div class="text-center" id="tags-characteristics">
             <%
-              # Usar tags copiadas se disponíveis (para duplicação) ou tags do evento (para edição)
+              # Use copied tags if available (for duplication) or event's characteristics (for editing)
               event_characteristics = @copied_tags&.characteristics || @event.characteristics
               event_characteristic_ids = event_characteristics.pluck(:id)
             %>
