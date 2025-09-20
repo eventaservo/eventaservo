@@ -47,6 +47,8 @@ class EventsController < ApplicationController
       @event.specolisto = origin.specolisto
       @event_organization_ids = origin.organizations.pluck(:id)
       @event.user_id = origin.user_id
+      @event.tag_ids = origin.tag_ids
+      @copied_tags = Tag.where(id: origin.tag_ids)
     else
       @event = Event.new
       @event.city = current_user.city if current_user.city?
