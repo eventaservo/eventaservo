@@ -39,6 +39,13 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
+  # Configura o Rails para confiar no proxy do NPM
+  # Substitua pelo range da rede Swarm que o NPM usa
+  trusted_swarm_proxy = IPAddr.new("10.0.0.0/8")
+  # Inclui na lista de proxies confiáveis
+  config.action_dispatch.trusted_proxies =
+  (config.action_dispatch.trusted_proxies || []) << trusted_swarm_proxy
+
   # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :amazon
   config.active_storage.service_urls_expire_in = 4.hours
@@ -56,7 +63,7 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
   config.log_level = :info
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [:request_id]
+  config.log_tags = [:remote_ip, :request_id]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
