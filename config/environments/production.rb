@@ -39,10 +39,11 @@ Rails.application.configure do
 
   # Configura o Rails para confiar no proxy do NPM
   # Substitua pelo range da rede Swarm que o NPM usa
-  trusted_swarm_proxy = IPAddr.new("10.0.0.0/8")
+  # trusted_swarm_proxy = IPAddr.new("10.0.0.0/8")
   # Inclui na lista de proxies confiáveis
-  config.action_dispatch.trusted_proxies =
-  (config.action_dispatch.trusted_proxies || []) << trusted_swarm_proxy
+  # config.action_dispatch.trusted_proxies =
+  # (config.action_dispatch.trusted_proxies || []) << trusted_swarm_proxy
+  config.action_dispatch.ip_spoofing_check = false
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :amazon
