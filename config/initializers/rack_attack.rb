@@ -9,7 +9,7 @@ class Rack::Attack
     end
   end
 
-  Rack::Attack.blocklist('bloqueio por header X-Real-IP') do |req|
+  blocklist('block specific IPs') do |req|
     # Substitua 'X-Real-IP' pelo header que contém o IP real
     if req.headers['X-Real-IP'] == '43.131.247.38' || req.headers['X-Real-IP'] == '36.5.221.155' ||
       req.ip == '43.131.247.38' || req.ip == '36.5.221.155'
