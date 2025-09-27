@@ -9,14 +9,6 @@ class Rack::Attack
     end
   end
 
-  blocklist('block specific IPs') do |req|
-    # Substitua 'X-Real-IP' pelo header que contém o IP real
-    if req.headers['X-Real-IP'] == '43.131.247.38' || req.headers['X-Real-IP'] == '36.5.221.155' ||
-      req.ip == '43.131.247.38' || req.ip == '36.5.221.155'
-      true # Bloqueia
-    end
-  end
-
   # ADJUSTED: Much more strict general limit (5 per second)
   throttle("requets by IP", limit: 5, period: 1) do |req|
     req.ip
