@@ -9,7 +9,8 @@ class Rack::Attack
     end
   end
 
-  throttle("requets by IP", limit: 30, period: 1) do |req|
+  # ADJUSTED: Much more strict general limit (5 per second)
+  throttle("requets by IP", limit: 5, period: 1) do |req|
     req.ip
   end
 
