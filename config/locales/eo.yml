@@ -86,9 +86,6 @@ eo:
       create: Krei %{model}
       submit: Registri tiun %{model}
       update: Modifi tiun %{model}
-  invisible_captcha:
-    sentence_for_humans: Se vi estas homo, ne plenumu tiun kampon
-    timestamp_error_message: Tro rapide! Refaru ĝin
   links:
     announcements_and_contests: Anoncoj kaj konkursoj
     international_calendar: Internacia Kalendaro
