@@ -5,7 +5,7 @@ class EventsController < ApplicationController
     redirect_to root_url, flash: {error: "Formato ne ekzistas."}
   end
   include Webcal
-  before_action :authenticate_user!, only: %i[index new create edit update destroy nova_importado importi]
+  before_action :authenticate_user!, only: %i[index new create edit update destroy nova_importado importi kontakti_organizanton]
   before_action :redirect_old_link, only: %i[show edit]
   before_action :set_event, only: %i[show edit update destroy kronologio]
   before_action :authorize_user, only: %i[edit update destroy]
@@ -13,8 +13,6 @@ class EventsController < ApplicationController
   before_action :validate_continent, only: %i[by_continent by_country by_city]
   before_action :set_country, only: %i[by_country by_city]
   before_action :sanitize_params
-
-  invisible_captcha only: :kontakti_organizanton, honeypot: :tiel, on_spam: :spam_detected
 
   # Montras la uzantajn eventojn
   # This action is probable deprecated and it is required to explore if can be removed
@@ -272,16 +270,11 @@ class EventsController < ApplicationController
   end
 
   def kontakti_organizanton
-    unless params[:sekurfrazo].strip.downcase == Rails.application.credentials.dig("form_security_phrase")
-      ligilo = Event.by_code(params[:event_code]).ligilo
-      redirect_to(
-        event_url(code: ligilo),
-        flash: {error: "Malĝusta kontraŭspama sekurvorto. Entajpu la nomon de la internacia lingvo."}
-      ) && return
-    end
+    event = Event.by_code(params[:event_code])
+    message = params[:message]
 
-    informoj = {name: params[:name], email: params[:email], message: params[:message]}
-    EventMailer.kontakti_organizanton(params[:event_code], informoj).deliver_later
+    EventMailer.kontakti_organizanton(event:, user: current_user, message:).deliver_later
+
     redirect_to event_url(code: params[:event_code]), flash: {info: "Mesaĝo sendita"}
   end
 

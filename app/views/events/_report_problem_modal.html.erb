@@ -22,29 +22,13 @@
         <div class="modal-body" style="font-weight: normal; font-size: 1rem;">
           <p><%= t("pages.event.report_problem_form.text") %></p>
           <div class="form-group">
-            <label><%= t("pages.event.report_problem_form.name") %></label>
-            <%= text_field_tag :name, current_user.try(:name).presence, autocomplete: 'name', class: 'form-control', required: true, data: { report_problem_form_target: "name" } %>
-            <%= invisible_captcha :title %>
-          </div>
-
-          <div class="form-group">
-            <label><%= t("pages.event.report_problem_form.email") %></label>
-            <%= text_field_tag :email, current_user.try(:email).presence, autocomplete: 'email', class: 'form-control', required: true %>
-          </div>
-
-          <div class="form-group">
             <label><%= t("pages.event.report_problem_form.message") %></label>
             <%= text_area_tag :message, nil, class: 'form-control', rows: 4, required: true, data: { report_problem_form_target: "message" } %>
-          </div>
-
-          <div class="form-group">
-            <label><%= t("pages.event.report_problem_form.security_phrase") %></label>
-            <%= text_field_tag 'sekurfrazo', nil, autocomplete: false, required: true, class: 'form-control' %>
           </div>
         </div>
 
         <div class="modal-footer">
-          <button class="btn btn-sm btn-outline-secondary" data-dismiss="modal" type="button">
+          <button class="button-cancel" data-dismiss="modal" type="button">
             <%= t("buttons.cancel") %>
           </button>
           <%= submit_tag t("buttons.send"), class: 'button-submit' %>

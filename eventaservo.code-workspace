@@ -6,8 +6,9 @@
 	],
 	"settings": {
 		"[ruby]": {
-			"editor.defaultFormatter": "testdouble.vscode-standard-ruby"
+			"editor.defaultFormatter": "Shopify.ruby-lsp"
 		},
+		"rubyLsp.formatter": "standard",
 		"ruby.specSaveFile": true,
 		"conventionalCommits.scopes": [
 			"API",

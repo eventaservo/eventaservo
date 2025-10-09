@@ -86,9 +86,6 @@ en:
       create: Create %{model}
       submit: Save this %{model}
       update: Update this %{model}
-  invisible_captcha:
-    sentence_for_humans: If you are human, do not fill in this field
-    timestamp_error_message: Too fast! Please try again
   links:
     announcements_and_contests: Announcements & Contests
     international_calendar: International Calendar

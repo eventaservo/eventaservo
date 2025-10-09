@@ -44,7 +44,7 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
   trusted_swarm_proxy = IPAddr.new("10.0.0.0/8")
   # Inclui na lista de proxies confiáveis
   config.action_dispatch.trusted_proxies =
-  (config.action_dispatch.trusted_proxies || []) << trusted_swarm_proxy
+    (config.action_dispatch.trusted_proxies || []) << trusted_swarm_proxy
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :amazon

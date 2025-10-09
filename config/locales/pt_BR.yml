@@ -86,9 +86,6 @@ pt_BR:
       create: Criar %{model}
       submit: Salvar este %{model}
       update: Atualizar este %{model}
-  invisible_captcha:
-    sentence_for_humans: Se você é humano, não preencha este campo
-    timestamp_error_message: Muito rápido! Por favor, tente novamente
   links:
     announcements_and_contests: Anúncios e Concursos
     international_calendar: Calendário Internacional

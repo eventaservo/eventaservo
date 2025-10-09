@@ -9,7 +9,7 @@
 
         <p>
           Iu havas demandon, volas raporti problemon aŭ informi vin pri la
-          evento "<%= link_to @evento.title, event_url(code: @evento.ligilo) %>", kiun vi administras
+          evento "<%= link_to @event.title, event_url(code: @event.ligilo) %>", kiun vi administras
           en Eventa Servo. Ĉu vi povas kontroli tion kaj korekti, se necese?
         </p>
 
@@ -18,7 +18,7 @@
         </p>
 
         <p class="block-quote">
-          "<%= @informoj[:message] %>" - <i><%= @informoj[:name] %></i>
+          "<%= @message %>" - <i><%= @user.name %></i>
         </p>
       </td>
     </tr>

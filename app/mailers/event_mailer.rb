@@ -35,21 +35,31 @@ class EventMailer < ApplicationMailer
     mail(to: "#{user.name.delete(",")} <#{user.email}>", subject: "Tutmonda semajna resumo de eventoj")
   end
 
-  def kontakti_organizanton(eventa_kodo, informoj = {})
-    @evento = Event.by_code(eventa_kodo)
-    @informoj = informoj
+  # Sends message to event owner
+  #
+  # @param event [Event]
+  # @param user [User]
+  # @param message [String] The message to send to the owner
+  def kontakti_organizanton(event:, user:, message:)
+    @event = event
+    @user = user
+    @message = message
 
     if Rails.env.production?
-      to = @evento.user.email
+      to = @event.user.email
       bcc = "yves.nevelsteen@gmail.com"
     else
       to = Constants::ADMIN_EMAILS
       bcc = nil
     end
 
-    mail(to: to, bcc: bcc, reply_to: informoj[:email],
+    mail(
+      to:,
+      bcc:,
+      reply_to: @user.email,
       subject: "Informo pri via evento en Eventa Servo",
-      track_opens: "true")
+      track_opens: "true"
+    )
   end
 
   def nova_administranto(evento)
