@@ -30,7 +30,7 @@ class CountryTest < ActiveSupport::TestCase
   test "should validate uniqueness of name" do
     # Use a unique name to avoid conflicts with fixtures
     unique_name = "UniqueTestCountry#{Time.now.to_i}"
-    country1 = Country.create!(name: unique_name, continent: "South America")
+    _country1 = Country.create!(name: unique_name, continent: "South America")
     country2 = Country.new(name: unique_name, continent: "South America")
     assert_not country2.valid?
     assert country2.errors[:name].present?, "Expected name to have uniqueness error"
