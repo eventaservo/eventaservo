@@ -5,6 +5,8 @@ require_relative "../config/environment"
 require "rails/test_help"
 require "minitest/autorun"
 require "debug"
+require "simplecov"
+require "simplecov-cobertura"
 
 class ActiveSupport::TestCase
   parallelize(workers: :number_of_processors)

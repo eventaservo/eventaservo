@@ -104,3 +104,47 @@ jobs:
         run: |
           bundle exec rails db:test:prepare
           bundle exec rspec spec/ --tag type:system
+
+  minitest:
+    runs-on: ubuntu-22.04
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_DB: eventaservo_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports: [ '5432:5432' ]
+
+    env:
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      RAILS_ENV: test
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      DISABLE_SPRING: 1
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ruby e Bundler
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4.2'
+          bundler-cache: true
+
+      - name: Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'yarn'
+
+      - name: Yarn
+        run: yarn install
+
+      - name: Precompile assets
+        run: SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+
+      - name: Minitest
+        run: |
+          bundle exec rails db:migrate
+          bundle exec rails test
