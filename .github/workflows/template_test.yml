@@ -144,7 +144,8 @@ jobs:
       - name: Precompile assets
         run: SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
+      - name: Prepare Test
+        run: bundle exec rails db:test:prepare
+
       - name: Minitest
-        run: |
-          bundle exec rails db:migrate
-          bundle exec rails test
+        run: bundle exec rails test
