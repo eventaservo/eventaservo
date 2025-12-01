@@ -10,5 +10,8 @@ namespace :api do
     end
 
     resources :organizations, only: [:index]
+
+    # Catch-all for invalid API v2 endpoints
+    match "*path", to: "api#not_found", via: :all
   end
 end

@@ -7,6 +7,26 @@ module Api
 
       before_action :validas_token
 
+      # Handles requests to invalid API v2 endpoints.
+      #
+      # Returns a JSON response with error details and a link to the API documentation.
+      # This catch-all action is triggered by the '*path' route when no other
+      # API v2 route matches the request.
+      #
+      # @return [void] Renders JSON with :not_found status (404)
+      #
+      # @example Response body
+      #   {
+      #     "error": "Endpoint not found",
+      #     "documentation": "https://api.eventaservo.org"
+      #   }
+      def not_found
+        render json: {
+          error: "Endpoint not found",
+          documentation: "https://api.eventaservo.org"
+        }, status: :not_found
+      end
+
       private
 
       def validas_token
