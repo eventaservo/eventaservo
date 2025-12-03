@@ -76,7 +76,6 @@ gem "postmark-rails"
 gem "premailer-rails", "~> 1.11"
 gem "redcarpet", "~> 3.5"
 gem "sitemap_generator", "~> 6.1"
-gem "telegram_simple_messenger"
 gem "timezone", "~> 1.0"
 gem "view_component", "~> 3.10"
 # gem 'trix-rails', require: 'trix'
