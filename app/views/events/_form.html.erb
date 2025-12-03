@@ -158,8 +158,6 @@
           <div class="form-group">
             <%= form.label :time_zone, 'Horzono' %>
             <% timezones = Horzono.all.map { |h| [h.eo, h.en] } %>
-            <% timezones << I18n.t(@event.time_zone, scope: [:timezones]) %>
-            <% timezones << 'Etc/UTC' %>
             <%= form.combobox("time_zone", timezones) %>
           </div>
         </div>
