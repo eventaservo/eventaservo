@@ -1,5 +1,24 @@
 # Changelog
 
+## [2.83.0](https://github.com/eventaservo/eventaservo/compare/v2.82.0...v2.83.0) (2025-12-03)
+
+
+### Features
+
+* **Ahoy:** enable bot tracking in Ahoy configuration ([f580eb4](https://github.com/eventaservo/eventaservo/commit/f580eb45a271742f3381efd26fcd9d3a55491cef))
+* allow only authenticated users to send message to event owner ([78dddad](https://github.com/eventaservo/eventaservo/commit/78dddad6b052977c5ef0ea2c6754ea7c3c16f19e))
+* **api:** add friendly 404 response for invalid API v2 endpoints ([bd7bf25](https://github.com/eventaservo/eventaservo/commit/bd7bf25e83613ed45a60e175ce9867a2a0f98a3d))
+* **Event:** enhance event duplication by preserving tags and characteristics ([#911](https://github.com/eventaservo/eventaservo/issues/911)) ([75d447c](https://github.com/eventaservo/eventaservo/commit/75d447ce06ed16d2f86b2c3d218bdb11115b49a2))
+* **Rack::Attack:** add blocklist for specific IPs in request headers ([2bfe88b](https://github.com/eventaservo/eventaservo/commit/2bfe88b2e33a3237825aa00fccdb3bb9e71fe817))
+
+
+### Bug Fixes
+
+* optimize EventsController#by_continent to resolve slow DB queries ([#904](https://github.com/eventaservo/eventaservo/issues/904)) ([b868b6d](https://github.com/eventaservo/eventaservo/commit/b868b6dec45cc77c187ae7632da8d66fb4cbcdf4))
+* prevent Stimulus error when organizations target is missing ([#906](https://github.com/eventaservo/eventaservo/issues/906)) ([53d0b6b](https://github.com/eventaservo/eventaservo/commit/53d0b6b291cb34c90fef8173ee3c3ddba5209558))
+* **Rack::Attack:** update blocklist description for clarity ([8177088](https://github.com/eventaservo/eventaservo/commit/8177088d9eced97b846ee07909de572a70e95967))
+* remove duplicate timezone entries and display UTC instead of Etc/UTC ([405c4c8](https://github.com/eventaservo/eventaservo/commit/405c4c8a12d5d8776de688143db6c9a467c1f5ee))
+
 ## [2.82.0](https://github.com/eventaservo/eventaservo/compare/v2.81.0...v2.82.0) (2025-08-23)
 
 
