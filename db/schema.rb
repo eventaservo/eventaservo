@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_09_07_001251) do
+ActiveRecord::Schema[7.2].define(version: 2025_12_03_004850) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -126,7 +126,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_09_07_001251) do
     t.datetime "updated_at", precision: nil, null: false
     t.string "code"
     t.string "continent"
-    t.index "lower((continent)::text)", name: "index_countries_on_lower_continent"
     t.index ["continent"], name: "index_countries_on_continent"
     t.index ["name", "continent"], name: "index_countries_on_name_and_continent"
     t.index ["name"], name: "index_countries_on_name"
