@@ -33,7 +33,7 @@ jobs:
       - name: Ruby e Bundler
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.4.6'
+          ruby-version: '3.4.7'
           bundler-cache: true
 
       - name: Node 20
@@ -85,7 +85,7 @@ jobs:
       - name: Ruby e Bundler
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.4.6'
+          ruby-version: '3.4.7'
           bundler-cache: true
 
       - name: Node 20
@@ -129,7 +129,7 @@ jobs:
       - name: Ruby e Bundler
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.4.6'
+          ruby-version: '3.4.7'
           bundler-cache: true
 
       - name: Node 20

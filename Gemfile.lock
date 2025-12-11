@@ -209,6 +209,7 @@ GEM
       zlib (~> 3.0)
     faraday-net_http (3.4.1)
       net-http (>= 0.5.0)
+    ffi (1.17.2-arm64-darwin)
     ffi (1.17.2-x86_64-linux-gnu)
     flag-icons-rails (3.4.6.1)
       sass-rails
@@ -413,6 +414,8 @@ GEM
     net-smtp (0.5.1)
       net-protocol
     nio4r (2.7.4)
+    nokogiri (1.18.9-arm64-darwin)
+      racc (~> 1.4)
     nokogiri (1.18.9-x86_64-linux-gnu)
       racc (~> 1.4)
     oauth2 (2.0.12)
@@ -455,6 +458,7 @@ GEM
     parser (3.3.9.0)
       ast (~> 2.4.1)
       racc
+    pg (1.6.1-arm64-darwin)
     pg (1.6.1-x86_64-linux)
     popper_js (1.16.1)
     postmark (1.25.1)
@@ -699,6 +703,7 @@ GEM
       railties (>= 6.0.0)
     stringio (3.1.7)
     thor (1.4.0)
+    thruster (0.1.15-arm64-darwin)
     thruster (0.1.15-x86_64-linux)
     tilt (2.6.1)
     timeout (0.4.3)
@@ -743,6 +748,7 @@ GEM
     zlib (3.2.1)
 
 PLATFORMS
+  arm64-darwin-25
   x86_64-linux
 
 DEPENDENCIES
@@ -836,7 +842,7 @@ DEPENDENCIES
   yard
 
 RUBY VERSION
-   ruby 3.4.6
+   ruby 3.4.7p58
 
 BUNDLED WITH
    2.4.6
