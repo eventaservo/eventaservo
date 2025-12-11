@@ -116,7 +116,8 @@ end
 ActiveSupport::Notifications.subscribe("throttle.rack_attack") do |name, start, finish, request_id, payload|
   req = payload[:request]
   visitor_ip = req.env["HTTP_CF_CONNECTING_IP"] || req.ip
-  Rails.logger.warn "[Rack::Attack] Throttled #{visitor_ip} - #{req.path} - #{payload[:match_type]}: #{payload[:match_data][:discriminator]}"
+  discriminator = payload.dig(:match_data, :discriminator)
+  Rails.logger.warn "[Rack::Attack] Throttled #{visitor_ip} - #{req.path} - #{payload[:match_type]}: #{discriminator}"
 end
 
 ActiveSupport::Notifications.subscribe("blocklist.rack_attack") do |name, start, finish, request_id, payload|
