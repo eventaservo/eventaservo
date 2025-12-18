@@ -22,7 +22,7 @@ gem "bootsnap", require: false
 gem "bootstrap", "~> 4.3"
 gem "font-awesome-sass", "~> 6"
 gem "jquery-rails", "~> 4.3", ">= 4.3.3"
-gem "jquery-ui-rails", "~> 6.0", ">= 6.0.1"
+gem "jquery-ui-rails", "~> 8.0"
 
 # Kalendaroj
 gem "fullcalendar-rails", "~> 3.9"
@@ -59,7 +59,7 @@ gem "rack-attack", "~> 6.2"
 gem "rack-cors", "~> 2.0", require: "rack/cors"
 
 gem "activeadmin", "~> 3"
-gem "aws-sdk-s3", "~> 1.197"
+gem "aws-sdk-s3", "~> 1.208"
 gem "browser", "~> 5"
 gem "chartkick", "~> 5.0"
 gem "diffy", "~> 3.4"
