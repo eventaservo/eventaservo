@@ -8,8 +8,9 @@ xml.rss version: "2.0", "xmlns:atom": "http://www.w3.org/2005/Atom" do
     xml.description "Esperantaj eventoj en #{@country.name}"
     xml.language "eo"
     if @events.any?
-      xml.pubDate @events.order(updated_at: :desc).first.updated_at.strftime("%a, %d %b %Y %T %z")
-      xml.lastBuildDate @events.order(updated_at: :desc).first.updated_at.strftime("%a, %d %b %Y %T %z")
+      latest = @events.max_by(&:updated_at)
+      xml.pubDate latest.updated_at.strftime("%a, %d %b %Y %T %z")
+      xml.lastBuildDate latest.updated_at.strftime("%a, %d %b %Y %T %z")
     end
     xml.docs "http://blogs.law.harvard.edu/tech/rss"
     xml.generator "Ruby on Rails"
