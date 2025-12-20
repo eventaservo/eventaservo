@@ -24,6 +24,9 @@ services:
       - ./:/eventaservo:cached
       - ~/.ssh:/home/rails/.ssh:ro
       - ~/.config:/home/rails/.config
+      # Claude related files
+      - ~/.claude:/home/rails/.claude
+      - ~/.claude.json:/home/rails/.claude.json
 
     # Overrides default command so things don"t shut down after the process ends.
     command: sleep infinity

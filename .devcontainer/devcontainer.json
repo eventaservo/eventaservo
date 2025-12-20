@@ -23,7 +23,6 @@
 			"extensions": [
 				"aliariff.vscode-erb-beautify",
 				"eamodio.gitlens",
-				"Graphite.gti-vscode",
 				"jemmyw.rails-fast-nav",
 				"KoichiSasada.vscode-rdbg",
 				"mhutchie.git-graph",
@@ -31,7 +30,6 @@
 				"noku.rails-run-spec-vscode",
 				"Shopify.ruby-lsp",
 				"testdouble.vscode-standard-ruby",
-				"usernamehw.errorlens",
 				"humao.rest-client",
 				"GitHub.copilot",
 				"GitHub.copilot-chat",

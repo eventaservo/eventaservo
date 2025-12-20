@@ -56,6 +56,20 @@ Call services with: `UserServices::Disable.call(user)` or `UserServices::Disable
 - **v1**: Legacy API at `/api/v1/`
 - **v2**: JSON API at `/api/v2/` with events and organizations endpoints
 
+### Feeds (RSS & Webcal)
+Event feeds support multiple formats via `respond_to` blocks in controllers:
+
+- **RSS feeds** (`.xml`): Add `.xml` to existing URLs
+  - Country: `/europo/Montenegro.xml`, `/ameriko/Brazilo.xml`
+  - Continent/Online: `/reta.xml`
+  - Templates: `app/views/events/*.xml.builder`
+
+- **Webcal feeds** (`.ics`): Calendar subscriptions via `Webcal` module
+  - Country: `/webcal/lando/:country_code`
+  - Organization: `/webcal/o/:short_name`
+  - User: `/webcal/uzanto/:webcal_token`
+  - Module: `app/modules/webcal.rb`
+
 ### Frontend
 - **CSS**: Bootstrap 4.6
 - **JS**: Stimulus + Turbo (Hotwire) with esbuild bundling

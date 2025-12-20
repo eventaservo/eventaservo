@@ -5,6 +5,7 @@
 <div class="box-white">
   <% content_for :breadcrumb_right do %>
     <%= link_to icon('far', 'calendar-alt'), webcal_url(landa_kodo: @country.code, protocol: :webcal, format: :ics), data: { target: '#webcalModal', toggle: 'modal' } %>
+    <%= link_to icon('fas', 'rss'), events_by_country_path(continent: @country.continent.normalized, country_name: @country.name.normalized, format: :xml), title: 'RSS', class: 'mr-2' %>
   <% end %>
   <%= render partial: 'layouts/breadcrumb' %>
   <%= render partial: 'home/view_style_chooser', locals: { kartaro: true, kalendaro: false, mapo: true } %>

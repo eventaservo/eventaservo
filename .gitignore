@@ -67,3 +67,5 @@ reseta_base_devel.sh
 /.yardoc
 
 http-requests/.env
+
+.overmind.sock

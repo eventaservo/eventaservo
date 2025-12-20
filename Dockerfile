@@ -106,7 +106,9 @@ RUN apt update \
   sudo \
   zsh \
   && rm -rf /var/lib/apt/lists/*
-RUN npm install -g @withgraphite/graphite-cli@stable
+
+# Install Claude Code CLI (Anthropic)
+RUN npm install -g @anthropic-ai/claude-code
 
 # Adds a non-root user
 RUN useradd rails --create-home --shell /usr/bin/zsh && \
