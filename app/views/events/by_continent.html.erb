@@ -7,6 +7,7 @@
   <% if params[:continent] == 'reta' %>
     <% content_for :breadcrumb_right do %>
       <%= link_to icon('far', 'calendar-alt'), webcal_url(landa_kodo: 'ol', protocol: :webcal, format: :ics), data: { target: '#webcalModal', toggle: 'modal' } %>
+      <%= link_to icon('fas', 'rss'), events_by_continent_path(continent: params[:continent], format: :xml), title: 'RSS', class: 'mr-2' %>
     <% end %>
   <% end %>
 

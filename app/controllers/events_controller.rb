@@ -202,44 +202,62 @@ class EventsController < ApplicationController
   end
 
   def by_continent
-    # Se la "kontinento" estas Reta, montru la eventojn per Kalendara vido
-    # Se estas aliaj kontinentoj, montru per Kartaro aŭ Map
-    if params[:continent] == "reta" && cookies[:vidmaniero] != "kalendaro"
-      cookies[:vidmaniero] = {value: "kalendaro", expires: 2.weeks, secure: true}
-    elsif params[:continent] != "reta"
-      unless cookies[:vidmaniero].in? %w[kartaro mapo]
-        cookies[:vidmaniero] = {value: "kartaro", expires: 2.weeks, secure: true}
-      end
-    end
-
     if params[:continent] != params[:continent].normalized
       redirect_to events_by_continent_path(params[:continent].normalized) and return
     end
 
-    continent_events_base = @events.by_continent(params[:continent])
+    respond_to do |format|
+      format.xml do
+        ahoy.track "RSS feed by continent", continent: params[:continent]
+        render_rss_feed(scope: Event.by_continent(params[:continent]))
+      end
 
-    @future_events = continent_events_base.venontaj
-    @countries = continent_events_base.count_by_country
-    @today_events = continent_events_base.today.includes(:country)
-    @events = continent_events_base.not_today.includes(:country, :organizations)
+      format.html do
+        # Se la "kontinento" estas Reta, montru la eventojn per Kalendara vido
+        # Se estas aliaj kontinentoj, montru per Kartaro aŭ Map
+        if params[:continent] == "reta" && cookies[:vidmaniero] != "kalendaro"
+          cookies[:vidmaniero] = {value: "kalendaro", expires: 2.weeks, secure: true}
+        elsif params[:continent] != "reta"
+          unless cookies[:vidmaniero].in? %w[kartaro mapo]
+            cookies[:vidmaniero] = {value: "kartaro", expires: 2.weeks, secure: true}
+          end
+        end
 
-    kreas_paghadon_por_karta_vidmaniero if cookies[:vidmaniero] == "kartaro"
+        continent_events_base = @events.by_continent(params[:continent])
+
+        @future_events = continent_events_base.venontaj
+        @countries = continent_events_base.count_by_country
+        @today_events = continent_events_base.today.includes(:country)
+        @events = continent_events_base.not_today.includes(:country, :organizations)
+
+        kreas_paghadon_por_karta_vidmaniero if cookies[:vidmaniero] == "kartaro"
+      end
+    end
   end
 
   def by_country
     redirect_to(root_path, flash: {error: "Lando ne ekzistas en la datumbazo"}) && return if @country.nil?
 
-    unless cookies[:vidmaniero].in? %w[kartaro mapo]
-      cookies[:vidmaniero] = {value: "kartaro", expires: 2.weeks, secure: true}
-      redirect_to events_by_country_url(continent: @country.continent.normalized, country_name: @country.name.normalized)
+    respond_to do |format|
+      format.xml do
+        ahoy.track "RSS feed by country", country: @country.code
+        render_rss_feed(scope: Event.by_country_id(@country.id))
+      end
+
+      format.html do
+        unless cookies[:vidmaniero].in? %w[kartaro mapo]
+          cookies[:vidmaniero] = {value: "kartaro", expires: 2.weeks, secure: true}
+          redirect_to events_by_country_url(continent: @country.continent.normalized, country_name: @country.name.normalized)
+        end
+
+        @future_events = Event.includes(:country).by_country_id(@country.id).venontaj
+        @cities = @events.by_country_id(@country.id).count_by_cities
+        @today_events = @events.today.includes(:country).by_country_id(@country.id)
+        @events = @events.not_today.includes(:country).by_country_id(@country.id)
+
+        kreas_paghadon_por_karta_vidmaniero
+      end
     end
-
-    @future_events = Event.includes(:country).by_country_id(@country.id).venontaj
-    @cities = @events.by_country_id(@country.id).count_by_cities
-    @today_events = @events.today.includes(:country).by_country_id(@country.id)
-    @events = @events.not_today.includes(:country).by_country_id(@country.id)
-
-    kreas_paghadon_por_karta_vidmaniero
   end
 
   # Listigas la eventoj laŭ urboj
@@ -297,6 +315,19 @@ class EventsController < ApplicationController
   end
 
   private
+
+  # Renders RSS feed for events filtered by a given scope.
+  #
+  # @param scope [ActiveRecord::Relation] the filtered events scope
+  def render_rss_feed(scope:)
+    @events = Event.includes([:country, [uploads_attachments: :blob]])
+      .merge(scope)
+      .venontaj
+      .ne_nuligitaj
+      .order(:date_start)
+
+    render layout: false
+  end
 
   # La karta vidmaniero uzas paĝadon. La aliaj ne. Tial necesas krei la variablojn
   # +@kvanto_venontaj_eventoj+ kaj +@pagy+
