@@ -22,6 +22,27 @@
 		],
 		"editor.formatOnSave": true,
 		"ruby.specCommand": "bin/rspec",
+		"mcp": {
+			"servers": {
+				"Sentry": {
+					"url": "https://mcp.sentry.dev/mcp",
+					"type": "http"
+				},
+				"github": {
+					"type": "http",
+					"url": "https://api.githubcopilot.com/mcp/"
+				},
+				"postgres": {
+					"type": "stdio",
+					"command": "npx",
+					"args": [
+						"-y",
+						"@modelcontextprotocol/server-postgres",
+						"postgresql://postgres:postgres@db/eventaservo_devel"
+					]
+				}
+			},
+		}
 	},
 	"extensions": {
 		"recommendations": [
