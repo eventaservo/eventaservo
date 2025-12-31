@@ -27,6 +27,10 @@ services:
       # Claude related files
       - ~/.claude:/home/rails/.claude
       - ~/.claude.json:/home/rails/.claude.json
+      # Gemini
+      - ~/.gemini:/home/rails/.gemini
+      # Bundle gems
+      - bundle_gems:/usr/local/bundle
 
     # Overrides default command so things don"t shut down after the process ends.
     command: sleep infinity
@@ -63,3 +67,4 @@ services:
 
 volumes:
   postgres:
+  bundle_gems:

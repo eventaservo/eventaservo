@@ -41,7 +41,7 @@
 	// This can be used to network with other containers or the host.
 	// "forwardPorts": [3000, 5432],
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "yarn install && bundle install"
+	"postCreateCommand": "bin/setup",
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
+	"remoteUser": "rails"
 }

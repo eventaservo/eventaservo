@@ -107,8 +107,9 @@ RUN apt update \
   zsh \
   && rm -rf /var/lib/apt/lists/*
 
-# Install Claude Code CLI (Anthropic)
+# Install AI Tools
 RUN npm install -g @anthropic-ai/claude-code
+RUN npm install -g @google/gemini-cli
 
 # Adds a non-root user
 RUN useradd rails --create-home --shell /usr/bin/zsh && \
