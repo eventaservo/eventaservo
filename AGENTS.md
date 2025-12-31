@@ -19,6 +19,7 @@ Eventa Servo is a Ruby on Rails application for organizing and publicizing Esper
 ## Code Style
 
 - **Language**: Always use English for code, comments, specs, and commit messages
+- **Commits**: Use **Conventional Commits** standard and always write messages in **English**
 - **Ruby formatting**: Use `standard` gem; include `frozen_string_literal: true` at top of files
 - **Documentation**: Use YARD format (`@param`, `@return`) for methods and classes
 - **Models**: Keep `annotate` gem schema annotations at top of model files
@@ -99,4 +100,4 @@ end
 - Do not create branches, commits, or PRs without explicit user permission
 - Error tracking via Sentry (`Sentry.capture_exception(e)`)
 - Localization managed via Lokalise
-- **Database**: The project uses PostgreSQL, configured in `docker-compose.yml`.
+- **Database**: The project uses PostgreSQL, configured in `docker-compose.yml`.- **Commit Pattern**: All commits must follow the **Conventional Commits** specification (e.g., `feat:`, `fix:`, `chore:`, `docs:`) and must be in **English**.
