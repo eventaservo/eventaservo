@@ -69,3 +69,6 @@ reseta_base_devel.sh
 http-requests/.env
 
 .overmind.sock
+
+# Claude / AI Assistants
+.claude/
