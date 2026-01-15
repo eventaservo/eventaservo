@@ -8,7 +8,7 @@ module Calendar
         params = {
           action: "TEMPLATE",
           text: event.title,
-          dates: "#{event.date_start.strftime("%Y%m%dT%H%M%SZ")}/#{event.date_end.strftime("%Y%m%dT%H%M%SZ")}",
+          dates: "#{event.date_start.utc.strftime("%Y%m%dT%H%M%SZ")}/#{event.date_end.utc.strftime("%Y%m%dT%H%M%SZ")}",
           details: details,
           location: location
         }
