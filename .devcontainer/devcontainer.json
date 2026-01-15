@@ -30,7 +30,8 @@
 				"humao.rest-client",
 				"GitHub.copilot",
 				"GitHub.copilot-chat",
-				"Thadeu.vscode-run-rspec-file"
+				"Thadeu.vscode-run-rspec-file",
+				"Anthropic.claude-code"
 			]
 		}
 	},

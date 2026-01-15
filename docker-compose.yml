@@ -22,14 +22,7 @@ services:
       - 3000:3000
     volumes:
       - ./:/eventaservo:cached
-      - ~/.ssh:/home/rails/.ssh:ro
-      - ~/.config:/home/rails/.config
-      # Claude related files
-      - ~/.claude:/home/rails/.claude
-      - ~/.claude.json:/home/rails/.claude.json
-      # Gemini
-      - ~/.gemini:/home/rails/.gemini
-      # Bundle gems
+      - home-folder:/home/rails
       - bundle_gems:/usr/local/bundle
 
     # Overrides default command so things don"t shut down after the process ends.
@@ -67,4 +60,5 @@ services:
 
 volumes:
   postgres:
+  home-folder:
   bundle_gems:

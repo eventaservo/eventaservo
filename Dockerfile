@@ -103,6 +103,7 @@ RUN apt update \
   && apt install -y --no-install-recommends \
   chromium-driver \
   fish \
+  gh \
   sudo \
   zsh \
   && rm -rf /var/lib/apt/lists/*

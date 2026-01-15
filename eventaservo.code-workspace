@@ -46,7 +46,8 @@
 	},
 	"extensions": {
 		"recommendations": [
-			"shopify.ruby-lsp"
+			"shopify.ruby-lsp",
+			"anthropic.claude-code"
 		]
 	},
 	"tasks": {
