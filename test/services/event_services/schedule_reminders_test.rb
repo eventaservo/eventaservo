@@ -3,8 +3,6 @@
 require "test_helper"
 
 class EventServices::ScheduleRemindersTest < ActiveSupport::TestCase
-  include ActiveJob::TestHelper
-
   setup do
     @event = create(:event,
       date_start: (Time.zone.now + 45.days),

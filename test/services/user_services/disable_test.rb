@@ -27,7 +27,7 @@ class UserServices::DisableTest < ActiveSupport::TestCase
     service_instance = Minitest::Mock.new
     service_instance.expect(:call, nil, [])
 
-    EventServices::MoveToSystemAccount.stub(:new, ->(event) { service_instance }) do
+    EventServices::MoveToSystemAccount.stub(:new, ->(_event) { service_instance }) do
       UserServices::Disable.call(user)
     end
 
