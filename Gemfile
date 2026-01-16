@@ -125,8 +125,6 @@ group :development, :test do
   gem "parallel_tests"
   gem "rake"
   gem "rspec-rails"
-  gem "spring"
-  gem "spring-commands-rspec"
 end
 
 group :development do
