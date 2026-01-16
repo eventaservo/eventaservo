@@ -18,8 +18,8 @@ services:
       args:
         RAILS_MASTER_KEY: "${RAILS_MASTER_KEY}"
     tty: true
-    ports:
-      - 3000:3000
+    # ports:
+      # - 3000:3000
     volumes:
       - ./:/eventaservo:cached
       - home-folder:/home/rails
