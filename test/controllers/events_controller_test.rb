@@ -33,7 +33,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   # GET #kronologio tests
   class KronologioTest < EventsControllerTest
     test "kronologio returns http success" do
-      event = create(:event)
+      event = create(:event, :minimal)
       get event_kronologio_path(event_code: event.code)
       assert_response :success
     end

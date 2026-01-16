@@ -74,5 +74,13 @@ FactoryBot.define do
       email { "admin@eventaservo.org" }
       password { "administranto" }
     end
+
+    trait :minimal do
+      name { "Test User" }
+      email { "test@example.com" }
+      password { "password123" }
+      confirmed_at { Time.now }
+      country { Country.find_by(code: "br") || create(:country, code: "br") }
+    end
   end
 end

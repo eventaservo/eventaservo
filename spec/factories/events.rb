@@ -110,5 +110,16 @@ FactoryBot.define do
     trait :past do
       date_start { Faker::Time.between(from: DateTime.now - 90.days, to: DateTime.now - 2.days) }
     end
+
+    trait :minimal do
+      title { "Test Event" }
+      description { "Test description" }
+      enhavo { "Test content" }
+      country { Country.find_by(code: "br") || create(:country, code: "br") }
+      user { create(:user, :minimal) }
+      date_start { 1.day.from_now }
+      date_end { 1.day.from_now + 4.hours }
+      code { "test123" }
+    end
   end
 end
