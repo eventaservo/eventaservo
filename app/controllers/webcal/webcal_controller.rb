@@ -3,6 +3,7 @@
 module Webcal
   class WebcalController < ApplicationController
     include Webcal
+
     before_action :definas_landon, only: :lando
 
     def lando

@@ -130,7 +130,7 @@ module ApplicationHelper
     return if url.blank?
 
     text = (url.length > 40) ? url[0..40] + "..." : url
-    text = text.gsub(%r{http[s]?://}, "")
+    text = text.gsub(%r{https?://}, "")
     icon("fas", "globe", class: "fg-color-link mr-1") + link_to(text, url, target: :_blank)
   end
 
