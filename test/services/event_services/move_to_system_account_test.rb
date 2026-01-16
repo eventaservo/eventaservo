@@ -4,7 +4,7 @@ require "test_helper"
 
 class EventServices::MoveToSystemAccountTest < ActiveSupport::TestCase
   test "moves the event to the system account" do
-    system_account = create(:user, system_account: true)
+    create(:user, system_account: true)
     event = create(:event)
 
     EventServices::MoveToSystemAccount.new(event).call

@@ -14,7 +14,7 @@ class UserServices::RemoveProfilePictureTest < ActiveSupport::TestCase
       UserServices::RemoveProfilePicture.call(user: user)
     end
 
-    picture_mock.verify
+    assert picture_mock.verify
   end
 
   test "nullifies the image" do

@@ -9,7 +9,7 @@ class Events::SoftDeleteTest < ActiveSupport::TestCase
   end
 
   test "marks the event as deleted" do
-    service = Events::SoftDelete.new(event: @event, user: @user).call
+    Events::SoftDelete.new(event: @event, user: @user).call
 
     assert @event.reload.deleted
   end
@@ -54,7 +54,7 @@ class Events::SoftDeleteTest < ActiveSupport::TestCase
   end
 
   test "returns success when user is a member of event's organization" do
-    organization = create(:organization)
+    create(:organization)
     other_user = create(:user)
     event = create(:event, deleted: false, user: other_user)
 

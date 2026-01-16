@@ -14,6 +14,7 @@ class ActiveSupport::TestCase
   fixtures :all
   include FactoryBot::Syntax::Methods
   include ActionMailer::TestHelper
+  include Devise::Test::IntegrationHelpers
 
   # Timezone agordoj por provkodoj
   ::Timezone::Lookup.config(:test)

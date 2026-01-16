@@ -10,12 +10,12 @@ class ProfileControllerTest < ActionDispatch::IntegrationTest
 
   # GET #events tests
   test "events returns success for authenticated user viewing own profile" do
-    get profile_events_path(username: @user.username)
+    get user_events_path(username: @user.username)
     assert_response :success
   end
 
   test "events redirects to root when username is unknown" do
-    get profile_events_path(username: "unknown")
+    get user_events_path(username: "unknown")
 
     assert_redirected_to root_path
     assert_not_nil flash[:error]
@@ -23,7 +23,7 @@ class ProfileControllerTest < ActionDispatch::IntegrationTest
 
   test "events redirects to root when user is not the profile user" do
     another_user = create(:user)
-    get profile_events_path(username: another_user.username)
+    get user_events_path(username: another_user.username)
 
     assert_redirected_to root_path
     assert_not_nil flash[:error]
