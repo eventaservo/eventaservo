@@ -25,7 +25,6 @@ jobs:
       DB_PASSWORD: postgres
       RAILS_ENV: test
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-      DISABLE_SPRING: 1
 
     steps:
       - uses: actions/checkout@v4
@@ -77,7 +76,6 @@ jobs:
       DB_PASSWORD: postgres
       RAILS_ENV: test
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-      DISABLE_SPRING: 1
 
     steps:
       - uses: actions/checkout@v4
@@ -121,7 +119,6 @@ jobs:
       DB_PASSWORD: postgres
       RAILS_ENV: test
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-      DISABLE_SPRING: 1
 
     steps:
       - uses: actions/checkout@v4
