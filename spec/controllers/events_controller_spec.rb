@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe EventsController, type: :request do
   include Devise::Test::IntegrationHelpers
+
   describe "GET #index" do
     subject { get events_path }
 

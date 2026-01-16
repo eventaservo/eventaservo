@@ -5,6 +5,7 @@ class EventsController < ApplicationController
     redirect_to root_url, flash: {error: "Formato ne ekzistas."}
   end
   include Webcal
+
   before_action :authenticate_user!, only: %i[index new create edit update destroy nova_importado importi kontakti_organizanton]
   before_action :redirect_old_link, only: %i[show edit]
   before_action :set_event, only: %i[show edit update destroy kronologio]
