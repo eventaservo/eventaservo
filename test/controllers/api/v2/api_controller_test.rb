@@ -46,4 +46,77 @@ class Api::V2::ApiControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
   end
+
+  # Token validation tests
+  test "returns unauthorized when token is missing" do
+    get "/api/v2/eventoj"
+
+    assert_response :unauthorized
+    assert_equal "Token mankas", JSON.parse(response.body)["eraro"]
+  end
+
+  test "tracks event when token is missing" do
+    # Mock the tracker to verify the track call
+    tracker = Minitest::Mock.new
+    tracker.expect(:track, nil, ["Token missing", {kind: "api"}])
+
+    Ahoy::Tracker.stub(:new, tracker) do
+      get "/api/v2/eventoj"
+    end
+
+    tracker.verify
+  end
+
+  test "returns unauthorized when token is invalid" do
+    get "/api/v2/eventoj", headers: {HTTP_AUTHORIZATION: "invalid_token"}
+
+    assert_response :unauthorized
+    assert_equal "Token ne validas", JSON.parse(response.body)["eraro"]
+  end
+
+  test "tracks event when token is invalid" do
+    # Mock the tracker to verify the track call
+    tracker = Minitest::Mock.new
+    tracker.expect(:track, nil, ["Token invalid", {kind: "api"}])
+
+    Ahoy::Tracker.stub(:new, tracker) do
+      get "/api/v2/eventoj", headers: {HTTP_AUTHORIZATION: "invalid_token"}
+    end
+
+    tracker.verify
+  end
+
+  test "returns success when valid token is provided in Authorization header" do
+    user = create(:user)
+    user.send(:generate_jwt_token)
+    user.save!
+
+    create(:evento, date_start: Time.zone.yesterday, date_end: Time.zone.tomorrow)
+
+    get "/api/v2/eventoj",
+      params: {
+        komenca_dato: Time.zone.today.strftime("%Y-%m-%d"),
+        fina_dato: (Time.zone.today + 1.year).strftime("%Y-%m-%d")
+      },
+      headers: {HTTP_AUTHORIZATION: "Bearer #{user.jwt_token}"}
+
+    assert_response :success
+  end
+
+  test "returns success when valid token is provided in query string" do
+    user = create(:user)
+    user.send(:generate_jwt_token)
+    user.save!
+
+    create(:evento, date_start: Time.zone.yesterday, date_end: Time.zone.tomorrow)
+
+    get "/api/v2/eventoj",
+      params: {
+        user_token: user.jwt_token,
+        komenca_dato: Time.zone.today.strftime("%Y-%m-%d"),
+        fina_dato: (Time.zone.today + 1.year).strftime("%Y-%m-%d")
+      }
+
+    assert_response :success
+  end
 end
