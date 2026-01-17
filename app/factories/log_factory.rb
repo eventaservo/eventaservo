@@ -23,34 +23,30 @@
 #   log.text #=> nil
 #
 class LogFactory
-  attr_reader :loggable, :user, :text
+  ALLOWED_ATTRIBUTES = %i[loggable user text].freeze
 
-  def initialize(loggable: nil, user: nil, text: nil)
-    @loggable = loggable
-    @user = user
-    @text = text
-  end
+  class << self
+    # Builds a new Log instance without saving to database.
+    #
+    # @param kwargs [Hash] loggable:, user:, text:
+    # @return [Log] unsaved Log instance
+    def build(**kwargs)
+      Log.new(allowed_attributes(kwargs))
+    end
 
-  def self.build(loggable: nil, user: nil, text: nil)
-    new(loggable:, user:, text:).build
-  end
+    # Creates and saves a new Log instance.
+    #
+    # @param kwargs [Hash] loggable:, user:, text:
+    # @return [Log] persisted Log instance
+    # @raise [ActiveRecord::RecordInvalid] if validation fails
+    def create(**kwargs)
+      Log.create!(allowed_attributes(kwargs))
+    end
 
-  def self.create(loggable: nil, user: nil, text: nil)
-    new(loggable:, user:, text:).create
-  end
+    private
 
-  # Builds a new Log instance without saving to database.
-  #
-  # @return [Log] unsaved Log instance
-  def build
-    Log.new(loggable:, user:, text:)
-  end
-
-  # Creates and saves a new Log instance.
-  #
-  # @return [Log] persisted Log instance
-  # @raise [ActiveRecord::RecordInvalid] if validation fails
-  def create
-    Log.create!(loggable:, user:, text:)
+    def allowed_attributes(kwargs)
+      kwargs.slice(*ALLOWED_ATTRIBUTES).compact
+    end
   end
 end
