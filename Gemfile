@@ -60,7 +60,7 @@ gem "rack-cors", "~> 2.0", require: "rack/cors"
 
 gem "activeadmin", "~> 3"
 gem "aws-sdk-s3", "~> 1.197"
-gem "browser", "~> 5"
+gem "browser", "~> 6"
 gem "chartkick", "~> 5.0"
 gem "diffy", "~> 3.4"
 gem "factory_bot_rails"
@@ -105,7 +105,7 @@ gem "listen"
 
 # Bullet
 # @TODO: must be moved to development but must be checked the docker build process to work fine
-gem "bullet", "~> 7"
+gem "bullet", "~> 8"
 
 # For statistics
 gem "ahoy_matey", "~> 5"
