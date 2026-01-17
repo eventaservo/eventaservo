@@ -18,6 +18,8 @@ require "rails/test_help"
 require "minitest/autorun"
 require "debug"
 require "geocoder"
+require_relative "support/geocoder_stub"
+require_relative "support/timezone_stub"
 
 class ActiveSupport::TestCase
   # Parallelization disabled on macOS due to fork() incompatibility with PostgreSQL/GSS
@@ -26,63 +28,12 @@ class ActiveSupport::TestCase
   if !RUBY_PLATFORM.include?("darwin")
     parallelize(workers: :number_of_processors)
   end
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
+
   fixtures :all
   include FactoryBot::Syntax::Methods
   include ActionMailer::TestHelper
   include ActiveJob::TestHelper
   include Devise::Test::IntegrationHelpers
-
-  # Geocoder agordoj por provkodoj
-  Geocoder.configure(lookup: :test, ip_lookup: :test)
-  Geocoder::Lookup::Test.set_default_stub(
-    [
-      {
-        coordinates: [40.71, -74.00],
-        address: "New York, NY, USA",
-        state: "New York",
-        state_code: "NY",
-        country: "United States",
-        country_code: "US"
-      }
-    ]
-  )
-
-  Geocoder::Lookup::Test.add_stub(
-    "Sao Paŭlo, BR", [
-      {
-        coordinates: [-23.55, -46.63],
-        address: "Sao Paŭlo urbocentro",
-        state: "Sao Paŭlo",
-        state_code: "SP",
-        country: "Brazil",
-        country_code: "BR"
-      }
-    ]
-  )
-
-  Geocoder::Lookup::Test.add_stub(
-    "Ĵoan-Pesoo, BR", [
-      {
-        coordinates: [-7.11, -34.86],
-        address: "Centro",
-        state: "Paraíba",
-        state_code: "PB",
-        country: "Brazil",
-        country_code: "BR"
-      }
-    ]
-  )
-
-  # Timezone agordoj por provkodoj
-  ::Timezone::Lookup.config(:test)
-  ::Timezone::Lookup.lookup.stub(40.71, -74.00, "America/New_York")
-  ::Timezone::Lookup.lookup.stub(-23.55, -46.63, "America/Sao_Paulo")
-  ::Timezone::Lookup.lookup.stub(-7.11, -34.86, "America/Fortaleza")
-  ::Timezone::Lookup.lookup.stub(43.66590881347656, -79.38521575927734, "America/Toronto")
-  ::Timezone::Lookup.lookup.stub(48.8566, 2.3522, "Europe/Paris")
-  ::Timezone::Lookup.lookup.stub(51.5074, -0.1278, "Europe/London")
-  ::Timezone::Lookup.lookup.default("Etc/UTC")
 end
 
 Shoulda::Matchers.configure do |config|
