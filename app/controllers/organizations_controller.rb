@@ -47,7 +47,7 @@ class OrganizationsController < ApplicationController
     if @organizo.save
       @organizo.organization_users.create(user: current_user, admin: true)
       ahoy.track "Create organization", organization: @organizo.name
-      Logs::Create.call(text: "Organization created", user: current_user, loggable: @organizo)
+      Logs::Create.call(text: "Created organization #{@organizo.name}", user: current_user, loggable: @organizo)
       redirect_to organization_url(@organizo.short_name), flash: {notice: "Organizo sukcese kreita."}
     else
       render :new
