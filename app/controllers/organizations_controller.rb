@@ -72,7 +72,7 @@ class OrganizationsController < ApplicationController
 
     OrganizationUser.create(organization_id: organizo.id, user_id: uzanto.id)
     ahoy.track "Add user to organization", organization: organizo.name, user: uzanto.name
-    Logs::Create.call(text: "Member added", user: current_user, loggable: organizo, metadata: {member_id: uzanto.id})
+    Logs::Create.call(text: "Added #{uzanto.name} to organization", user: current_user, loggable: organizo, metadata: {member_id: uzanto.id})
     redirect_to organization_url(organizo.short_name), flash: {success: "Uzanto aldonita al la organizo"}
   end
 
@@ -84,7 +84,7 @@ class OrganizationsController < ApplicationController
     ou = OrganizationUser.find_by(organization_id: organizo.id, user_id: uzanto.id)
     ou.update(admin: !ou.admin)
     ahoy.track "Change user admin of organization", organization: organizo.name, user: uzanto.name
-    Logs::Create.call(text: "Admin status changed", user: current_user, loggable: organizo, metadata: {member_id: uzanto.id})
+    Logs::Create.call(text: "Changed admin status for #{uzanto.name}", user: current_user, loggable: organizo, metadata: {member_id: uzanto.id})
     redirect_to organization_url(organizo.short_name), flash: {success: "Sukceso"}
   end
 
@@ -99,7 +99,7 @@ class OrganizationsController < ApplicationController
     ou = OrganizationUser.find_by(organization_id: organizo.id, user_id: uzanto.id)
     ou.destroy
     ahoy.track "Remover user from organization", organization: organizo.name, user: uzanto.name
-    Logs::Create.call(text: "Member removed", user: current_user, loggable: organizo, metadata: {member_id: uzanto.id})
+    Logs::Create.call(text: "Removed #{uzanto.name} from organization", user: current_user, loggable: organizo, metadata: {member_id: uzanto.id})
     redirect_to organization_url(organizo.short_name), flash: {success: "Sukceso"}
   end
 

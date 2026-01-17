@@ -32,10 +32,11 @@ RSpec.describe "Events Soft Delete", type: :request do
 
         # Log entry should be created
         expect(Log.count).to eq(initial_log_count + 1)
-        log = Log.last
-        expect(log.text).to eq("Deleted event #{event_to_delete.title}")
+        log = Log.order(created_at: :desc).first
+        expect(log.text).to eq("Event deleted")
         expect(log.user).to eq(user)
-        expect(log.event_id).to eq(event_to_delete.id)
+        expect(log.loggable_id).to eq(event_to_delete.id)
+        expect(log.loggable_type).to eq("Event")
       end
     end
 

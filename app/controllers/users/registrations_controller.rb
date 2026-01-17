@@ -26,7 +26,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
     if resource.valid?
       NovaUzantoSciigoJob.perform_later(resource)
-      Logs::Create.call(text: "User registered", user: resource, loggable: resource)
+      Logs::Create.call(text: "User #{resource.name} registered", user: resource, loggable: resource)
     end
   end
 

@@ -90,7 +90,7 @@ class EventMailer < ApplicationMailer
       track_opens: "true")
 
     Logs::Create.call(
-      text: "Reminder sent",
+      text: "Sent #{reminder_date_string} reminder message for event #{@event.title} to #{email}",
       user: User.system_account,
       loggable: @event,
       metadata: {reminder: reminder_date_string, email: email}
