@@ -119,7 +119,6 @@ gem "google-api-client", "~> 0.53.0"
 group :development, :test do
   gem "debug", ">= 1.0.0", require: false
   gem "dotenv-rails"
-  gem "factory_bot_rails"
   gem "faker"
   gem "lookbook", ">= 2.3.4"
   gem "parallel_tests"
@@ -143,6 +142,7 @@ end
 
 group :test do
   gem "capybara"
+  gem "factory_bot_rails"
   gem "minitest", "~> 5.5"
   gem "selenium-webdriver"
   gem "shoulda-matchers"

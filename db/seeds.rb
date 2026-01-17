@@ -32,7 +32,8 @@ User.create!(
   email: "kontakto@eventaservo.org",
   system_account: true,
   password: SecureRandom.hex(16),
-  confirmed_at: DateTime.now
+  confirmed_at: DateTime.now,
+  country: Country.find_by(code: "br")
 )
 
 puts "- Creating organizations"
@@ -54,20 +55,118 @@ Organization.create!(
   major: true
 )
 
-# Fake data only in development (when FactoryBot is available)
-if Rails.env.development? && defined?(FactoryBot)
+# Sample data for development environment
+if Rails.env.development?
   puts "- Creating sample users and events (development only)"
-  2.times do
-    user = FactoryBot.create(:user)
+
+  countries = Country.all.to_a
+
+  2.times do |i|
+    user = User.create!(
+      name: Faker::Name.name,
+      email: Faker::Internet.unique.email,
+      password: "password123",
+      city: Faker::Address.city,
+      country: countries.sample,
+      confirmed_at: DateTime.now
+    )
     puts "  - User #{user.name}"
-    4.times { FactoryBot.create(:event, user:) }
-    3.times { FactoryBot.create(:event, :past, user:) }
-    3.times { FactoryBot.create(:event, :online, user:) }
+
+    # Future events
+    4.times do
+      date_start = DateTime.now + rand(1..30).days + rand(8..12).hours
+      event = Event.new(
+        title: Faker::Book.title,
+        description: "Evento por praktiki Esperanton kun amikoj.",
+        content: Faker::Lorem.paragraph(sentence_count: 10),
+        user: user,
+        address: Faker::Address.street_address,
+        city: Faker::Address.city,
+        country: countries.sample,
+        date_start: date_start,
+        date_end: date_start + rand(2..6).hours,
+        email: Faker::Internet.email,
+        code: SecureRandom.urlsafe_base64(12),
+        time_zone: "America/Sao_Paulo",
+        online: false,
+        format: "onsite"
+      )
+      event.instance_variable_set(:@created_from_factory, true)
+      event.save!
+      event.tags << Tag.categories.first if Tag.categories.any?
+    end
+
+    # Past events
+    3.times do
+      date_start = DateTime.now - rand(2..90).days
+      event = Event.new(
+        title: Faker::Book.title,
+        description: "Evento pasinta.",
+        content: Faker::Lorem.paragraph(sentence_count: 10),
+        user: user,
+        address: Faker::Address.street_address,
+        city: Faker::Address.city,
+        country: countries.sample,
+        date_start: date_start,
+        date_end: date_start + rand(2..6).hours,
+        email: Faker::Internet.email,
+        code: SecureRandom.urlsafe_base64(12),
+        time_zone: "America/Sao_Paulo",
+        online: false,
+        format: "onsite"
+      )
+      event.instance_variable_set(:@created_from_factory, true)
+      event.save!
+      event.tags << Tag.categories.first if Tag.categories.any?
+    end
+
+    # Online events
+    3.times do
+      date_start = DateTime.now + rand(1..30).days + rand(8..12).hours
+      event = Event.new(
+        title: Faker::Book.title,
+        description: "Reta evento.",
+        content: Faker::Lorem.paragraph(sentence_count: 10),
+        user: user,
+        city: "Reta",
+        country_id: 99999,
+        date_start: date_start,
+        date_end: date_start + rand(2..6).hours,
+        email: Faker::Internet.email,
+        code: SecureRandom.urlsafe_base64(12),
+        time_zone: "Etc/UTC",
+        online: true,
+        format: "online"
+      )
+      event.instance_variable_set(:@created_from_factory, true)
+      event.save!
+      event.tags << Tag.categories.first if Tag.categories.any?
+    end
   end
 
   puts "- Creating international calendar events"
   3.times do
-    FactoryBot.create(:event, :international_calendar, user: User.all.sample, date_start: DateTime.now + rand(1..3).months)
+    date_start = DateTime.now + rand(1..3).months
+    event = Event.new(
+      title: Faker::Book.title,
+      description: "Internacia evento.",
+      content: Faker::Lorem.paragraph(sentence_count: 10),
+      user: User.all.sample,
+      address: Faker::Address.street_address,
+      city: Faker::Address.city,
+      country: countries.sample,
+      date_start: date_start,
+      date_end: date_start + rand(2..6).hours,
+      email: Faker::Internet.email,
+      code: SecureRandom.urlsafe_base64(12),
+      time_zone: "Etc/UTC",
+      international_calendar: true,
+      online: false,
+      format: "onsite"
+    )
+    event.instance_variable_set(:@created_from_factory, true)
+    event.save!
+    event.tags << Tag.categories.first if Tag.categories.any?
   end
 end
 
