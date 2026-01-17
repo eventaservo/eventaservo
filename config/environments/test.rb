@@ -67,4 +67,6 @@ Rails.application.configure do
   Rails.application.routes.default_url_options[:protocol] = :https
 
   config.active_job.queue_adapter = :test
+
+  config.factory_bot.definition_file_paths = [Rails.root.join("spec/factory_bot")]
 end

@@ -108,4 +108,6 @@ Rails.application.configure do
   Rails.application.routes.default_url_options[:protocol] = :http
 
   config.lookbook.project_name = "Eventaservo"
+
+  config.factory_bot.definition_file_paths = [Rails.root.join("spec/factory_bot")]
 end
