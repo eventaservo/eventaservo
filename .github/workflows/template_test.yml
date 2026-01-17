@@ -9,7 +9,7 @@ on:
         required: true
 
 jobs:
-  rspec:
+  tests:
     runs-on: ubuntu-22.04
     services:
       postgres:
@@ -18,7 +18,7 @@ jobs:
           POSTGRES_DB: eventaservo_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-        ports: [ '5432:5432' ]
+        ports: ["5432:5432"]
 
     env:
       DB_USER: postgres
@@ -32,108 +32,14 @@ jobs:
       - name: Ruby e Bundler
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.4.7'
+          ruby-version: "3.4.7"
           bundler-cache: true
 
       - name: Node 20
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'yarn'
-
-      - name: Yarn
-        run: yarn install
-
-      - name: Precompile assets
-        run: SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
-
-      - name: RSpec
-        run: |
-          bundle exec rails db:migrate
-          bin/rake parallel:create
-          bin/rake parallel:prepare
-          bin/rake parallel:migrate
-          bin/rake parallel:spec
-
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-
-  system_tests:
-    runs-on: ubuntu-22.04
-    services:
-      postgres:
-        image: postgres:13
-        env:
-          POSTGRES_DB: eventaservo_test
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-        ports: [ '5432:5432' ]
-
-    env:
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-      RAILS_ENV: test
-      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Ruby e Bundler
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.4.7'
-          bundler-cache: true
-
-      - name: Node 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'yarn'
-
-      - name: Yarn
-        run: yarn install
-
-      - name: Precompile assets
-        run: bundle exec rails assets:precompile
-
-      - name: RSpec
-        run: |
-          bundle exec rails db:test:prepare
-          bundle exec rspec spec/ --tag type:system
-
-  minitest:
-    runs-on: ubuntu-22.04
-    services:
-      postgres:
-        image: postgres:13
-        env:
-          POSTGRES_DB: eventaservo_test
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-        ports: [ '5432:5432' ]
-
-    env:
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-      RAILS_ENV: test
-      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Ruby e Bundler
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.4.7'
-          bundler-cache: true
-
-      - name: Node 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'yarn'
+          cache: "yarn"
 
       - name: Yarn
         run: yarn install
@@ -142,7 +48,15 @@ jobs:
         run: SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
       - name: Prepare Test
-        run: bundle exec rails db:test:prepare
+        run: |
+          bundle exec rails db:test:prepare
 
-      - name: Minitest
-        run: bundle exec rails test
+      - name: Run Tests
+        run: |
+          bundle exec rails test
+          bundle exec rails test:system
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}

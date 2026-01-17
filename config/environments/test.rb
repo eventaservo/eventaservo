@@ -30,7 +30,7 @@ Rails.application.configure do
   config.cache_store = :null_store
 
   # Raise exceptions instead of rendering exception templates.
-  config.action_dispatch.show_exceptions = false
+  config.action_dispatch.show_exceptions = :none
 
   # Disable request forgery protection in test environment.
   config.action_controller.allow_forgery_protection = false
@@ -68,5 +68,12 @@ Rails.application.configure do
 
   config.active_job.queue_adapter = :test
 
-  config.factory_bot.definition_file_paths = [Rails.root.join("spec/factory_bot")]
+  config.factory_bot.definition_file_paths = [Rails.root.join("test/factory_bot")]
+
+  # Disable Sprockets file store cache to avoid I/O conflicts in parallel tests
+  # This prevents "Input/output error @ fptr_finalize_flush" when multiple
+  # workers try to access the same cache files simultaneously
+  config.assets.configure do |env|
+    env.cache = ActiveSupport::Cache::MemoryStore.new
+  end
 end

@@ -121,9 +121,7 @@ group :development, :test do
   gem "dotenv-rails"
   gem "faker"
   gem "lookbook", ">= 2.3.4"
-  gem "parallel_tests"
   gem "rake"
-  gem "rspec-rails"
 end
 
 group :development do

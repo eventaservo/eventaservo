@@ -9,8 +9,8 @@ Eventa Servo is a Ruby on Rails application for organizing and publicizing Esper
 ## Commands
 
 - **Development server**: `bin/dev`
-- **Tests (RSpec)**: `bin/rspec` (all), `bin/rspec spec/path/to/file_spec.rb` (single file)
-- **Tests (Minitest)**: `bin/rails test` (all), `bin/rails test test/path/to/file_test.rb` (single file)
+- **Tests**: `bin/rails test` (all), `bin/rails test test/path/to/file_test.rb` (single file)
+- **System Tests**: `bin/rails test:system`
 - **Lint**: `bundle exec standardrb` (check), `bundle exec standardrb --fix` (autofix)
 - **Build JS**: `yarn build`
 - **Build CSS**: `yarn build:css`
@@ -103,18 +103,17 @@ Event feeds support multiple formats via `respond_to` blocks in controllers:
 
 ## Testing
 
-- **RSpec** (`spec/`): Primary test framework with FactoryBot
-- **Minitest** (`test/`): Secondary framework, also uses FactoryBot and fixtures
+- **Minitest** (`test/`): Primary test framework with FactoryBot and fixtures.
+- **System Tests**: Located in `test/system/` using Capybara.
+- **Integration Tests**: Located in `test/integration/`.
+- **FactoryBot**: Definitions are located in `test/factory_bot/`.
 
 ```ruby
-RSpec.describe UserServices::Disable, type: :service do
-  subject(:service) { described_class.new(user) }
-  let(:user) { create(:user) }
-
-  describe '#call' do
-    it 'disables user successfully' do
-      expect(service.call).to be_success
-    end
+class UserServices::DisableTest < ActiveSupport::TestCase
+  test "disables user successfully" do
+    user = create(:user)
+    service = UserServices::Disable.new(user)
+    assert service.call.success?
   end
 end
 ```
