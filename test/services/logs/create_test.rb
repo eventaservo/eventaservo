@@ -46,4 +46,11 @@ class Logs::CreateTest < ActiveSupport::TestCase
     assert_nil log.user
     assert_nil log.loggable
   end
+
+  test "creates log with metadata" do
+    result = Logs::Create.call(text: "Test", metadata: {ip: "127.0.0.1"})
+
+    assert result.success?
+    assert_equal "127.0.0.1", result.payload.metadata["ip"]
+  end
 end

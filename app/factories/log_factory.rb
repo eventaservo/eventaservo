@@ -22,13 +22,17 @@
 #   log = LogFactory.create(user: user)
 #   log.text #=> nil
 #
+# @example Create a log with metadata
+#   log = LogFactory.create(text: "Action", metadata: { ip: "127.0.0.1" })
+#   log.metadata #=> { "ip" => "127.0.0.1" }
+#
 class LogFactory
-  ALLOWED_ATTRIBUTES = %i[loggable user text].freeze
+  ALLOWED_ATTRIBUTES = %i[loggable user text metadata].freeze
 
   class << self
     # Builds a new Log instance without saving to database.
     #
-    # @param kwargs [Hash] loggable:, user:, text:
+    # @param kwargs [Hash] loggable:, user:, text:, metadata:
     # @return [Log] unsaved Log instance
     def build(**kwargs)
       Log.new(allowed_attributes(kwargs))
@@ -36,7 +40,7 @@ class LogFactory
 
     # Creates and saves a new Log instance.
     #
-    # @param kwargs [Hash] loggable:, user:, text:
+    # @param kwargs [Hash] loggable:, user:, text:, metadata:
     # @return [Log] persisted Log instance
     # @raise [ActiveRecord::RecordInvalid] if validation fails
     def create(**kwargs)

@@ -25,4 +25,11 @@ class LogFactoryTest < ActiveSupport::TestCase
     assert_equal @user, log.user
     assert_equal @event, log.loggable
   end
+
+  test ".create with metadata stores JSON data" do
+    log = LogFactory.create(text: "Test", metadata: {ip: "127.0.0.1", action: "test"})
+
+    assert_equal "127.0.0.1", log.metadata["ip"]
+    assert_equal "test", log.metadata["action"]
+  end
 end

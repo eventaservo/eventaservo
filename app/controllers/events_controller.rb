@@ -86,7 +86,7 @@ class EventsController < ApplicationController
       set_event_format(@event)
       NovaEventaSciigoJob.perform_later(@event)
       ahoy.track "Create event", event_url: @event.short_url
-      Log.create(text: "Created event #{@event.title}", user: @current_user, event_id: @event.id)
+      Logs::Create.call(text: "Event created", user: current_user, loggable: @event)
       redirect_to event_path(code: @event.ligilo), flash: {notice: "Evento sukcese kreita."}
     else
       render :new
@@ -139,7 +139,7 @@ class EventsController < ApplicationController
       @event.update_event_organizations(params[:organization_ids])
       set_event_format(@event)
       ahoy.track "Update event", event_url: @event.short_url
-      Log.create(text: "Updated event #{@event.title}", user: @current_user, event_id: @event.id)
+      Logs::Create.call(text: "Event updated", user: current_user, loggable: @event)
       redirect_to event_path(code: @event.ligilo), notice: "Evento sukcese ĝisdatigita"
     else
       render :edit
