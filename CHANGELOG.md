@@ -1,5 +1,35 @@
 # Changelog
 
+## [2.83.0](https://github.com/eventaservo/eventaservo/compare/v2.82.0...v2.83.0) (2026-01-17)
+
+
+### Features
+
+* Add MCP server configurations for Sentry, GitHub, and Postgres. ([8b5f920](https://github.com/eventaservo/eventaservo/commit/8b5f920a49b8e6212040a14e949f0249ee072427))
+* add RSS feeds for country and continent pages ([#925](https://github.com/eventaservo/eventaservo/issues/925)) ([f10ac62](https://github.com/eventaservo/eventaservo/commit/f10ac6218f5239062bbddcde023a8ba40a936113))
+* Add support for Anthropic Claude in dev container and workspace ([30ca731](https://github.com/eventaservo/eventaservo/commit/30ca731e19d7d6d7527af87cb41dbdcf06db4123))
+* **Ahoy:** enable bot tracking in Ahoy configuration ([f580eb4](https://github.com/eventaservo/eventaservo/commit/f580eb45a271742f3381efd26fcd9d3a55491cef))
+* allow only authenticated users to send message to event owner ([78dddad](https://github.com/eventaservo/eventaservo/commit/78dddad6b052977c5ef0ea2c6754ea7c3c16f19e))
+* **api:** add friendly 404 response for invalid API v2 endpoints ([bd7bf25](https://github.com/eventaservo/eventaservo/commit/bd7bf25e83613ed45a60e175ce9867a2a0f98a3d))
+* **Event:** enhance event duplication by preserving tags and characteristics ([#911](https://github.com/eventaservo/eventaservo/issues/911)) ([75d447c](https://github.com/eventaservo/eventaservo/commit/75d447ce06ed16d2f86b2c3d218bdb11115b49a2))
+* **Gemfile.lock:** add aarch64-linux support for various gems ([9949630](https://github.com/eventaservo/eventaservo/commit/9949630040762b66a5a927ef01bce664d98439f5))
+* **queue:** add dedicated worker for ahoy queue ([50b8eb2](https://github.com/eventaservo/eventaservo/commit/50b8eb2cf7f34f2057ba76316b01d41b010acb42))
+* **Rack::Attack:** add blocklist for specific IPs in request headers ([2bfe88b](https://github.com/eventaservo/eventaservo/commit/2bfe88b2e33a3237825aa00fccdb3bb9e71fe817))
+* **Rack::Attack:** enhance IP handling for throttling and blocking ([de90520](https://github.com/eventaservo/eventaservo/commit/de905209bff26f45c5c9f4d2e29490da8ce97993))
+* **Rack::Attack:** enhance throttling and blocking mechanisms ([0d09a1a](https://github.com/eventaservo/eventaservo/commit/0d09a1ae9184c1675b523d8f41361658e87c4f42))
+* Update dev container setup and add AI tools support ([87e3bd2](https://github.com/eventaservo/eventaservo/commit/87e3bd281730b2d7caa008d397c15c44f59080c4))
+
+
+### Bug Fixes
+
+* **Event:** Correct timezone conversion in Google Calendar export ([#928](https://github.com/eventaservo/eventaservo/issues/928)) ([56746ad](https://github.com/eventaservo/eventaservo/commit/56746ad117cfff3d03f8b0a428b2e4c8ec4f240a))
+* optimize EventsController#by_continent to resolve slow DB queries ([#904](https://github.com/eventaservo/eventaservo/issues/904)) ([b868b6d](https://github.com/eventaservo/eventaservo/commit/b868b6dec45cc77c187ae7632da8d66fb4cbcdf4))
+* prevent Stimulus error when organizations target is missing ([#906](https://github.com/eventaservo/eventaservo/issues/906)) ([53d0b6b](https://github.com/eventaservo/eventaservo/commit/53d0b6b291cb34c90fef8173ee3c3ddba5209558))
+* **Rack::Attack:** improve logging for throttled requests ([d109c23](https://github.com/eventaservo/eventaservo/commit/d109c23a20f41b7c17694a29d8a638c68f1e3930))
+* **Rack::Attack:** update blocklist description for clarity ([8177088](https://github.com/eventaservo/eventaservo/commit/8177088d9eced97b846ee07909de572a70e95967))
+* remove duplicate timezone entries and display UTC instead of Etc/UTC ([405c4c8](https://github.com/eventaservo/eventaservo/commit/405c4c8a12d5d8776de688143db6c9a467c1f5ee))
+* update javascript dependencies and resolve security vulnerability in trix ([#939](https://github.com/eventaservo/eventaservo/issues/939)) ([bd6a009](https://github.com/eventaservo/eventaservo/commit/bd6a0095b4114f4d2838aa969bf9d4898cb3d59c))
+
 ## [2.82.0](https://github.com/eventaservo/eventaservo/compare/v2.81.0...v2.82.0) (2025-08-23)
 
 
