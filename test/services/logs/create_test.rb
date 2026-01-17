@@ -43,7 +43,7 @@ class Logs::CreateTest < ActiveSupport::TestCase
     assert result.success?
     log = result.payload
     assert_equal "System log only", log.text
-    assert_equal User.system_account, log.user
+    assert_nil log.user
     assert_nil log.loggable
   end
 end
