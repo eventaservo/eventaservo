@@ -9,7 +9,7 @@ on:
         required: true
 
 jobs:
-  tests:
+  minitest:
     runs-on: ubuntu-22.04
     services:
       postgres:
@@ -51,10 +51,11 @@ jobs:
         run: |
           bundle exec rails db:test:prepare
 
-      - name: Run Tests
-        run: |
-          bundle exec rails test
-          bundle exec rails test:system
+      - name: Run Minitest
+        run: bundle exec rails test
+
+      - name: Run System Tests
+        run: bundle exec rails test:system
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4
