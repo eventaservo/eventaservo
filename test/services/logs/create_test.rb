@@ -3,36 +3,47 @@
 require "test_helper"
 
 class Logs::CreateTest < ActiveSupport::TestCase
-  test "creates a new Log" do
-    user = create(:user)
-    text = "Test log"
-    metadata = {foo: "bar"}
-
-    assert_difference("Log.count", 1) do
-      Logs::Create.call(text: text, user: user, metadata: metadata)
-    end
+  def setup
+    @user = create(:user)
+    @event = create(:event)
   end
 
-  test "returns the created Log" do
-    user = create(:user)
-    text = "Test log"
-    metadata = {foo: "bar"}
+  test "creates log successfully with all parameters" do
+    result = Logs::Create.call(text: "Test log", user: @user, loggable: @event)
 
-    result = Logs::Create.call(text: text, user: user, metadata: metadata)
-
-    assert_instance_of Log, result.payload
+    assert result.success?
+    log = result.payload
+    assert_equal "Test log", log.text
+    assert_equal @user, log.user
+    assert_equal @event, log.loggable
   end
 
-  test "saves the provided attributes" do
-    user = create(:user)
-    text = "Test log"
-    metadata = {foo: "bar"}
+  test "creates log without text" do
+    result = Logs::Create.call(user: @user, loggable: @event)
 
-    result = Logs::Create.call(text: text, user: user, metadata: metadata)
-    created_log = result.payload
+    assert result.success?
+    log = result.payload
+    assert_nil log.text
+    assert_equal @user, log.user
+  end
 
-    assert_equal "Test log", created_log.text
-    assert_equal({"foo" => "bar"}, created_log.metadata)
-    assert_equal user.id, created_log.user_id
+  test "creates log without user" do
+    result = Logs::Create.call(text: "No user log", loggable: @event)
+
+    assert result.success?
+    log = result.payload
+    assert_equal "No user log", log.text
+    assert_nil log.user
+    assert_equal @event, log.loggable
+  end
+
+  test "creates log without user or loggable uses system account" do
+    result = Logs::Create.call(text: "System log only")
+
+    assert result.success?
+    log = result.payload
+    assert_equal "System log only", log.text
+    assert_equal User.system_account, log.user
+    assert_nil log.loggable
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_12_03_004850) do
+ActiveRecord::Schema[7.2].define(version: 2026_01_16_224110) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -220,10 +220,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_03_004850) do
 
   create_table "logs", force: :cascade do |t|
     t.string "text"
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.jsonb "metadata", default: {}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "loggable_type"
+    t.bigint "loggable_id"
+    t.index ["loggable_type", "loggable_id"], name: "index_logs_on_loggable"
     t.index ["text"], name: "index_logs_on_text"
     t.index ["user_id"], name: "index_logs_on_user_id"
   end
