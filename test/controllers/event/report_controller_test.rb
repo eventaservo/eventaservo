@@ -34,7 +34,8 @@ class Event::ReportControllerTest < ActionDispatch::IntegrationTest
     }
 
     post event_reports_path(event_code: @event.code), params: params
-    assert_equal "Created report Report title", Log.last.text
+    assert_equal "Report created", Log.last.text
+    assert_equal Event::Report.last, Log.last.loggable
   end
 
   test "create redirects to event page" do

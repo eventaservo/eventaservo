@@ -19,7 +19,7 @@ class Event
 
       if report.save
         NewEventReportNotificationJob.perform_later(report.id)
-        Log.create(text: "Created report #{report.title}", user: @current_user, event_id: report.event.id)
+        Logs::Create.call(text: "Report created", user: current_user, loggable: report)
 
         redirect_to event_url(code: @event.code), flash: {success: "La raporto estis sukcese kreita"}
       else
