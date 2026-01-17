@@ -7,19 +7,19 @@
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^7.3.0",
     "@josefarias/hotwire_combobox": "^0.3.2",
-    "@rails/actioncable": "^7.1.3",
-    "@rails/actiontext": "^7.1.3",
-    "@rails/activestorage": "^7.1.3",
-    "@rails/ujs": "^7.1.3",
+    "@rails/actioncable": "^7.2.300",
+    "@rails/actiontext": "^7.2.300",
+    "@rails/activestorage": "^7.2.300",
+    "@rails/ujs": "^7.1.600",
     "chartkick": "^5.0.1",
-    "esbuild": "^0.25.0",
-    "highcharts": "^11.2.0",
+    "esbuild": "^0.25.12",
+    "highcharts": "^11.4.8",
     "leaflet": "^1.9.4",
     "leaflet.markercluster": "^1.5.3",
     "moment": "^2.30.1",
-    "sass": "^1.77.8",
-    "slim-select": "^2.9.2",
-    "trix": "^2.1.15"
+    "sass": "^1.97.2",
+    "slim-select": "^2.13.1",
+    "trix": "^2.1.16"
   },
   "optionalDependencies": {
     "fsevents": "^2.3.3"
