@@ -37,6 +37,7 @@ end
 RSpec.configure do |config|
   config.include ActiveJob::TestHelper
   config.include FactoryBot::Syntax::Methods
+  FactoryBot.definition_file_paths = [Rails.root.join("spec/factory_bot")]
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include ViewComponent::TestHelpers, type: :component
