@@ -89,10 +89,11 @@ class EventMailer < ApplicationMailer
       subject: email_subject,
       track_opens: "true")
 
-    Log.create(
+    Logs::Create.call(
       text: "Sent #{reminder_date_string} reminder message for event #{@event.title} to #{email}",
       user: User.system_account,
-      event_id: @event.id
+      loggable: @event,
+      metadata: {reminder: reminder_date_string, email: email}
     )
   end
 

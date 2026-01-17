@@ -32,7 +32,7 @@ module Events
     end
 
     def create_log
-      Log.create(text: "Deleted event #{event.title}", user:, event_id: event.id)
+      Logs::Create.call(text: "Event deleted", user:, loggable: event)
     end
   end
 end

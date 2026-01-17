@@ -21,9 +21,33 @@ Eventa Servo is a Ruby on Rails application for organizing and publicizing Esper
 - **Language**: Always use English for code, comments, specs, and commit messages
 - **Commits**: Use **Conventional Commits** standard and always write messages in **English**
 - **Ruby formatting**: Use `standard` gem; include `frozen_string_literal: true` at top of files
-- **Documentation**: Use YARD format (`@param`, `@return`) for methods and classes
+- **Documentation**: Use YARD format (`@param`, `@return`) for all methods including private ones
 - **Models**: Keep `annotate` gem schema annotations at top of model files
 - **Named parameters**: Omit redundant variable names: `my_method(user:)` instead of `my_method(user: user)`
+
+## Services Pattern
+
+- Use `attr_reader` for service parameters
+- Services inherit from `ApplicationService` and return `Response` objects
+- Call with: `SomeService.call(args)` or `SomeService.new(args).call`
+
+## Custom Factory Pattern
+
+- Place domain factories in `app/factories/`
+- Factories should have `build` and `create` module methods:
+  ```ruby
+  module LogFactory
+    module_function
+
+    def build(attributes = {})
+      Log.new(attributes)
+    end
+
+    def create(attributes = {})
+      Log.create!(attributes)
+    end
+  end
+  ```
 
 ## Architecture
 

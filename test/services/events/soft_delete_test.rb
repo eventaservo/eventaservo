@@ -19,9 +19,11 @@ class Events::SoftDeleteTest < ActiveSupport::TestCase
       Events::SoftDelete.new(event: @event, user: @user).call
     end
 
-    assert_equal "Deleted event #{@event.title}", Log.last.text
-    assert_equal @user, Log.last.user
-    assert_equal @event.id, Log.last.event_id
+    log = Log.order(created_at: :desc).first
+    assert_equal "Event deleted", log.text
+    assert_equal @user, log.user
+    assert_equal @event.id, log.loggable_id
+    assert_equal "Event", log.loggable_type
   end
 
   test "returns success" do

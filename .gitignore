@@ -71,4 +71,6 @@ http-requests/.env
 .overmind.sock
 
 # Claude / AI Assistants
-.claude/
+.claude/*
+!.claude/skills/
+!.claude/commands/
