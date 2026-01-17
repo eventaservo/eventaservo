@@ -8,7 +8,7 @@ ruby "~> 3.4.7"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 7.2.2.2"
 # Use Puma as the app server
-gem "puma", "~> 6"
+gem "puma", "~> 7"
 gem "thruster", "~> 0.1.7"
 
 # Use SCSS for stylesheets
@@ -56,7 +56,7 @@ gem "jbuilder", "~> 2.14"
 # gem 'mini_magick', '~> 4.8'
 
 gem "rack-attack", "~> 6.2"
-gem "rack-cors", "~> 2.0", require: "rack/cors"
+gem "rack-cors", "~> 3.0", require: "rack/cors"
 
 gem "activeadmin", "~> 3"
 gem "aws-sdk-s3", "~> 1.197"
@@ -98,8 +98,8 @@ gem "mission_control-jobs"
 
 # Sentry.io
 gem "stackprof"
-gem "sentry-ruby", "~> 5"
-gem "sentry-rails", "~> 5"
+gem "sentry-ruby", "~> 6"
+gem "sentry-rails", "~> 6"
 
 gem "listen"
 
