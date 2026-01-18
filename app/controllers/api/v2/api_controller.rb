@@ -34,17 +34,22 @@ module Api
 
         if token.nil?
           ahoy.track "Token missing", kind: "api"
-          render json: {eraro: "Token mankas"}, status: :unauthorized and return
+          render json: {eraro: I18n.t("api.v2.errors.token_missing")}, status: :unauthorized and return
         end
 
         begin
           decoded = ::JWT.decode token, Rails.application.credentials.dig(:jwt, :secret)
         rescue JWT::DecodeError
           ahoy.track "Token invalid", kind: "api"
-          render json: {eraro: "Token ne validas"}, status: :unauthorized and return
+          render json: {eraro: I18n.t("api.v2.errors.token_invalid")}, status: :unauthorized and return
         end
 
         @user = ::User.find(decoded[0]["id"])
+
+        if @user.jwt_token != token
+          ahoy.track "Token expired/regenerated", kind: "api"
+          render json: {eraro: I18n.t("api.v2.errors.token_expired")}, status: :unauthorized and return
+        end
       end
     end
   end

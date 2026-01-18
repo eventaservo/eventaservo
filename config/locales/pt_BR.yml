@@ -41,6 +41,17 @@ pt_BR:
               required: é obrigatório
     models:
       event: Eventos
+    registrations:
+      regenerate_token: Regenerar token
+      regenerate_token_confirmation: Tem certeza que deseja regenerar seu token de API? O token antigo deixará de funcionar imediatamente.
+      token_regenerated: Token de API regenerado com sucesso.
+      token_regeneration_error: "Erro ao regenerar token de API: %{error}"
+  api:
+    v2:
+      errors:
+        token_missing: Token faltando
+        token_invalid: Token inválido
+        token_expired: Token expirado
   buttons:
     add_video: Vídeo
     duplicate: Duplicar

@@ -23,9 +23,9 @@ class Api::EventsTest < ActionDispatch::IntegrationTest
   test "GET /api/v2/eventoj with UUID returns only one record" do
     event = create(:evento)
     user = users(:user)
-    token = user.send(:generate_jwt_token)
+    Users::RegenerateApiToken.call(user: user)
 
-    get "/api/v2/eventoj", headers: {Authorization: token}, params: {uuid: event.uuid}
+    get "/api/v2/eventoj", headers: {Authorization: user.reload.jwt_token}, params: {uuid: event.uuid}
 
     assert_response :success
     json = JSON.parse(response.body)

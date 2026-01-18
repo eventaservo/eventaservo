@@ -42,7 +42,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
   end
 
-  # DELETE /resource
   def destroy
     UserServices::Disable.call(resource)
     sign_out(@user)

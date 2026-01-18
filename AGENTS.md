@@ -6,6 +6,13 @@ This file provides guidance to AI coding assistants (e.g., Cursor, Claude Code, 
 
 Eventa Servo is a Ruby on Rails application for organizing and publicizing Esperanto events worldwide. It's a system of UEA (Universal Esperanto Association) licensed under AGPLv3+.
 
+## Supported Languages
+
+The project supports three languages:
+- **Esperanto (eo)**: Main language.
+- **English (en)**
+- **Portuguese (pt_BR)**
+
 ## Commands
 
 - **Development server**: `bin/dev`
@@ -25,9 +32,35 @@ Eventa Servo is a Ruby on Rails application for organizing and publicizing Esper
 - **Models**: Keep `annotate` gem schema annotations at top of model files
 - **Named parameters**: Omit redundant variable names: `my_method(user:)` instead of `my_method(user: user)`
 
+## Documentation
+
+All classes, modules, and methods (including private ones) must be documented using [YARD](https://yardoc.org/).
+
+### Example
+
+```ruby
+# Service to regenerate the API V2 JWT token.
+#
+class RegenerateApiToken < ApplicationService
+  attr_reader :user
+
+  # @param user [User] The user to regenerate token for
+  def initialize(user:)
+    @user = user
+  end
+
+  # Executes the logic
+  #
+  # @return [ApplicationService::Response]
+  def call
+    # ...
+  end
+end
+```
+
 ## Services Pattern
 
-- Use `attr_reader` for service parameters
+- Use `attr_reader` for all service parameters. Access them via the reader method, not `@instance_variables`.
 - Services inherit from `ApplicationService` and return `Response` objects
 - Call with: `SomeService.call(args)` or `SomeService.new(args).call`
 

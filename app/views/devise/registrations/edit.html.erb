@@ -111,6 +111,14 @@
         <%= f.label :jwt_token, 'API v2 Token', class: 'col-form-label col-md-3' %>
         <div class="col-md-9">
           <%= f.text_field :jwt_token, readonly: true, class: 'form-control' %>
+          <div class="float-right">
+            <button type="submit"
+                    form="regenerate_token_form"
+                    data-confirm="<%= t('activerecord.registrations.regenerate_token_confirmation') %>"
+                    class="btn btn-outline-primary btn-xs">
+              <i class="fas fa-sync-alt"></i> <%= t("activerecord.registrations.regenerate_token") %>
+            </button>
+          </div>
         </div>
       </div>
       <div class="text-divider">Organizoj</div>
@@ -123,6 +131,8 @@
         <%= link_to 'Nuligi', root_path, class: 'button-cancel' %>
         <%= f.submit 'Ĝisdatigi', class: 'button-submit' %>
       </div>
+    <% end %>
+    <%= form_with url: regenerate_api_token_path, method: :post, id: "regenerate_token_form" do %>
     <% end %>
   </div>
 </div>
