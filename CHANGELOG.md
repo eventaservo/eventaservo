@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.84.0](https://github.com/eventaservo/eventaservo/compare/v2.83.0...v2.84.0) (2026-01-18)
+
+
+### Features
+
+* **Users:** implement API token regeneration functionality for users ([#941](https://github.com/eventaservo/eventaservo/issues/941)) ([be2b371](https://github.com/eventaservo/eventaservo/commit/be2b371c9367f1b41539ce97277ad000628cdae2))
+
 ## [2.83.0](https://github.com/eventaservo/eventaservo/compare/v2.82.0...v2.83.0) (2026-01-17)
 
 
