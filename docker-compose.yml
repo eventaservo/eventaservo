@@ -1,11 +1,12 @@
 x-app: &backend-app
   environment:
+    - DB_HOST=db
+    - DB_PASSWORD=postgres
+    - DB_USERNAME=postgres
+    - PORT=3000
     - RAILS_ENV=${RAILS_ENV:-development}
     - RAILS_SERVE_STATIC_FILES=${RAILS_SERVE_STATIC_FILES:-false}
-    - DB_HOST=db
-    - DB_USERNAME=postgres
-    - DB_PASSWORD=postgres
-    - PORT=3000
+    - SELENIUM_REMOTE=true
 
 services:
   backend:
@@ -19,7 +20,7 @@ services:
         RAILS_MASTER_KEY: "${RAILS_MASTER_KEY}"
     tty: true
     # ports:
-      # - 3000:3000
+    # - 3000:3000
     volumes:
       - ./:/eventaservo:cached
       - home-folder:/home/rails
