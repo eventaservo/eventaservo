@@ -73,7 +73,6 @@ Rails.application.routes.draw do
   get "/uzanto/:username", controller: "events", action: "by_username", as: "events_by_username"
   get "/uzanto/:username/eventoj", to: "profile#events", as: "user_events"
 
-
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
     root to: "home#index"
 

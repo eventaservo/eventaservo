@@ -16,8 +16,8 @@ class Users::RegenerateApiTokenTest < ActiveSupport::TestCase
 
     user.reload
     assert_not_equal old_token, user.jwt_token
-    
-    decoded = JWT.decode(user.jwt_token, Rails.application.credentials.dig(:jwt, :secret), true, { algorithm: 'HS256' })
+
+    decoded = JWT.decode(user.jwt_token, Rails.application.credentials.dig(:jwt, :secret), true, {algorithm: "HS256"})
     assert_equal user.id, decoded[0]["id"]
   end
 

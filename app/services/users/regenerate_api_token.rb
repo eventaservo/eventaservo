@@ -20,17 +20,17 @@ module Users
     # @return [ApplicationService::Response] Success with user payload or failure with error message
     def call
       payload = {
-        id: user.id, 
+        id: user.id,
         iat: Time.now.to_i,
         jti: SecureRandom.uuid
       }
       jwt_token = JWT.encode(payload, Rails.application.credentials.dig(:jwt, :secret), "HS256")
-      
+
       user.jwt_token = jwt_token
       user.save!
 
       success(user)
-    rescue StandardError => e
+    rescue => e
       failure(e.message)
     end
   end
