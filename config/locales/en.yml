@@ -41,6 +41,17 @@ en:
               required: is required
     models:
       event: Events
+    registrations:
+      regenerate_token: Regenerate Token
+      regenerate_token_confirmation: Are you sure you want to regenerate your API token? The old token will stop working immediately.
+      token_regenerated: API token successfully regenerated.
+      token_regeneration_error: "Error regenerating API token: %{error}"
+  api:
+    v2:
+      errors:
+        token_missing: Token missing
+        token_invalid: Token invalid
+        token_expired: Token expired
   buttons:
     add_video: Video
     duplicate: Duplicate

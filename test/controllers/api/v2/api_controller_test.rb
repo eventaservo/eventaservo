@@ -9,9 +9,9 @@ require "test_helper"
 class Api::V2::ApiControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:user)
-    # Generate JWT token for the test user
-    payload = {id: @user.id}
-    @token = JWT.encode(payload, Rails.application.credentials.dig(:jwt, :secret), "HS256")
+    # Ensure the user has a valid token
+    Users::RegenerateApiToken.call(user: @user)
+    @token = @user.jwt_token
   end
 
   test "returns 404 JSON for invalid endpoint" do
@@ -52,7 +52,7 @@ class Api::V2::ApiControllerTest < ActionDispatch::IntegrationTest
     get "/api/v2/eventoj"
 
     assert_response :unauthorized
-    assert_equal "Token mankas", JSON.parse(response.body)["eraro"]
+    assert_equal "Ĵetono mankas", JSON.parse(response.body)["eraro"]
   end
 
   test "tracks event when token is missing" do
@@ -66,7 +66,7 @@ class Api::V2::ApiControllerTest < ActionDispatch::IntegrationTest
     get "/api/v2/eventoj", headers: {HTTP_AUTHORIZATION: "invalid_token"}
 
     assert_response :unauthorized
-    assert_equal "Token ne validas", JSON.parse(response.body)["eraro"]
+    assert_equal "Ĵetono ne validas", JSON.parse(response.body)["eraro"]
   end
 
   test "tracks event when token is invalid" do
@@ -78,8 +78,7 @@ class Api::V2::ApiControllerTest < ActionDispatch::IntegrationTest
 
   test "returns success when valid token is provided in Authorization header" do
     user = create(:user)
-    user.send(:generate_jwt_token)
-    user.save!
+    # user has callbacks that generate token
 
     create(:evento, date_start: Time.zone.yesterday, date_end: Time.zone.tomorrow)
 
@@ -95,8 +94,6 @@ class Api::V2::ApiControllerTest < ActionDispatch::IntegrationTest
 
   test "returns success when valid token is provided in query string" do
     user = create(:user)
-    user.send(:generate_jwt_token)
-    user.save!
 
     create(:evento, date_start: Time.zone.yesterday, date_end: Time.zone.tomorrow)
 

@@ -154,3 +154,9 @@
 .no-border {
   border: 0;
 }
+
+.btn-xs {
+  font-size: 0.75rem;
+  border: 0;
+  @extend .rounded-sm;
+}

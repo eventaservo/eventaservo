@@ -73,6 +73,7 @@ Rails.application.routes.draw do
   get "/uzanto/:username", controller: "events", action: "by_username", as: "events_by_username"
   get "/uzanto/:username/eventoj", to: "profile#events", as: "user_events"
 
+
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
     root to: "home#index"
 
@@ -91,6 +92,9 @@ Rails.application.routes.draw do
     draw(:videos)
 
     draw(:events)
+
+    # Custom user actions
+    post "users/regenerate_api_token", to: "users#regenerate_api_token", as: :regenerate_api_token
 
     # Countries and cities
     get "/:continent", to: "events#by_continent", as: "events_by_continent"

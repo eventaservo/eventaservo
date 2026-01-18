@@ -41,6 +41,17 @@ eo:
               required: necesas
     models:
       event: Eventoj
+    registrations:
+      regenerate_token: Regeneri ĵetonon
+      regenerate_token_confirmation: Ĉu vi certas, ke vi volas regeneri vian API-ĵetonon? La malnova ĵetono tuj ĉesos funkcii.
+      token_regenerated: API-ĵetono sukcese regenerita.
+      token_regeneration_error: "Eraro dum regenerado de API-ĵetono: %{error}"
+  api:
+    v2:
+      errors:
+        token_missing: Ĵetono mankas
+        token_invalid: Ĵetono ne validas
+        token_expired: Ĵetono malaktuala
   buttons:
     add_video: Video
     duplicate: Duobligi

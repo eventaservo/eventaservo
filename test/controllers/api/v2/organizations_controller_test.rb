@@ -5,7 +5,7 @@ require "test_helper"
 class Api::V2::OrganizationsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = create(:user)
-    @token = @user.send(:generate_jwt_token)
+    @token = @user.jwt_token
     @uea = create(:organization, :uea)
     @bejo = create(:organization, :bejo)
   end

@@ -67,7 +67,7 @@ class User < ApplicationRecord
   before_validation :generate_webcal_token, if: :new_record?
   before_save :generate_username, if: :new_record?
   before_save :subscribe_mailings, if: :new_record?
-  before_save :generate_jwt_token, if: :new_record?
+  after_create :generate_initial_api_token
   before_save :sanitize_links
 
   before_destroy :check_for_related_records
@@ -251,11 +251,8 @@ class User < ApplicationRecord
 
   private
 
-  # Generate JWT Token for API v2 before saving the user
-  def generate_jwt_token
-    payload = {id: id}
-    jwt_token = JWT.encode(payload, Rails.application.credentials.dig(:jwt, :secret), "HS256")
-    self.jwt_token = jwt_token
+  def generate_initial_api_token
+    Users::RegenerateApiToken.call(user: self)
   end
 
   def subscribe_mailings

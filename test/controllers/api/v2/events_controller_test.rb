@@ -5,7 +5,7 @@ require "test_helper"
 class Api::V2::EventsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = create(:user)
-    @token = @user.send(:generate_jwt_token)
+    @token = @user.jwt_token
   end
 
   # #index tests
