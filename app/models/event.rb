@@ -245,8 +245,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   def full_address
     return "" if online && city == "Reta"
 
-    # TODO: Forviŝu la komon kiam ne estas adreso
-    [address, city, country.try(:code).try(:upcase)].compact.join(", ")
+    [address, city, country.try(:code).try(:upcase)].reject(&:blank?).join(", ")
   end
 
   def require_geocode?
