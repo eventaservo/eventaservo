@@ -21,7 +21,7 @@
 
         <div class="form-group">
           <%= form.label :title, 'Titolo *' %>
-          <%= form.text_field :title, class: 'form-control', autofocus: true, required: true %>
+          <%= form.text_field :title, class: 'form-control', autofocus: true, required: true, aria: { describedby: 'title-characters-count' } %>
           <small class="form-text text-muted" id="title-characters-count">
             Maksimume 100 signoj
           </small>
@@ -29,8 +29,8 @@
 
         <div class="form-group">
           <%= form.label :description, 'Priskribo *' %>
-          <%= form.text_field :description, class: 'form-control', required: true %>
-          <small class="form-text text-muted">
+          <%= form.text_field :description, class: 'form-control', required: true, aria: { describedby: 'description-help' } %>
+          <small class="form-text text-muted" id="description-help">
             Maksimume 140 signoj
           </small>
         </div>
@@ -41,8 +41,9 @@
             <%= select_tag 'organization_ids[]',
               options_from_collection_for_select(Organization.by_user(current_user), 'id', 'full_name', @event_organization_ids),
               multiple: true,
-              data: { 'event--form-target': 'organizations'} %>
-            <small class="form-text text-muted">
+              data: { 'event--form-target': 'organizations'},
+              aria: { describedby: 'organization-help' } %>
+            <small class="form-text text-muted" id="organization-help">
               Lasu malplena se la evento ne apartenas al organizo
             </small>
           </div>
@@ -57,7 +58,7 @@
                   <%= form.text_field :date_start, value: @event.komenca_tago(horzono: @event.time_zone), class: 'datepicker form-control' %>
                 </div>
                 <div class="col-4">
-                  <%= text_field_tag(:time_start, @event.komenca_horo, class: 'timemask form-control', required: true) %>
+                  <%= text_field_tag(:time_start, @event.komenca_horo, class: 'timemask form-control', required: true, aria: { label: 'Komenca horo' }) %>
                 </div>
               </div>
             </div>
@@ -71,7 +72,7 @@
                   <%= form.text_field :date_end, value: @event.fina_tago(horzono: @event.time_zone), class: 'datepicker form-control' %>
                 </div>
                 <div class="col-4">
-                  <%= text_field_tag(:time_end, @event.fina_horo, class: 'timemask form-control', required: true) %>
+                  <%= text_field_tag(:time_end, @event.fina_horo, class: 'timemask form-control', required: true, aria: { label: 'Fina horo' }) %>
                 </div>
               </div>
             </div>
@@ -165,8 +166,8 @@
         <div id="malretaj_informoj">
           <div class="form-group">
             <%= form.label :address, 'Loka adreso de la evento' %>
-            <%= form.text_field :address, class: 'form-control' %>
-            <small class="form-text text-muted">
+            <%= form.text_field :address, class: 'form-control', aria: { describedby: 'address-help' } %>
+            <small class="form-text text-muted" id="address-help">
               Aldonu la strat-nomon por precizigi la eventlokon en la mapo
             </small>
           </div>
