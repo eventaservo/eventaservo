@@ -7,9 +7,11 @@
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="form-group">
+        <%= f.label :email, 'Retpoŝtadreso' %>
         <%= f.email_field :email, autocomplete: 'email', class: 'form-control', autofocus: true, placeholder: 'Retpoŝtadreso' %>
       </div>
       <div class="form-group">
+        <%= f.label :password, 'Pasvorto' %>
         <%= f.password_field :password, autocomplete: 'current-password', class: 'form-control', placeholder: 'Pasvorto' %>
         <small class="form-text text-right">
           <%= link_to 'Mi forgesis mian pasvorton', new_password_path(resource_name) %>
