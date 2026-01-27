@@ -8,27 +8,22 @@
           Redakti organizon
         <% end %>
       </div>
-
       <%= form_for(@organizo, url: (organization_url(@organizo.short_name) if params[:action].in? %w(edit update))) do |f| %>
         <%= error_handling(@organizo) %>
-
         <div class="form-group">
           <%= f.label :name, 'Nomo' %>
           <%= f.text_field :name, class: 'form-control', autofocus: true, required: true %>
         </div>
-
         <div class="form-group">
           <%= f.label :short_name, 'Mallonga nomo' %>
-          <%= f.text_field :short_name, class: 'form-control', required: true %>
-          <small class="form-text text-muted">Ne uzu spacojn aŭ specialajn signojn. Vi rajtas uzi _ kaj -</small>
+          <%= f.text_field :short_name, class: 'form-control', required: true, aria: { describedby: 'short_name_help' } %>
+          <small id="short_name_help" class="form-text text-muted">Ne uzu spacojn aŭ specialajn signojn. Vi rajtas uzi _ kaj -</small>
         </div>
-
         <div class="form-group form-check">
-          <%= f.check_box :display_flag, class: 'form-check-input' %>
+          <%= f.check_box :display_flag, class: 'form-check-input', aria: { describedby: 'display_flag_help' } %>
           <%= f.label :display_flag, 'Montri flagon', class: 'form-check-label' %>
-          <small class="form-text text-muted">Montras la landan flagon en la organiza paĝo kaj en ĉiuj eventoj de ĝi</small>
+          <small id="display_flag_help" class="form-text text-muted">Montras la landan flagon en la organiza paĝo kaj en ĉiuj eventoj de ĝi</small>
         </div>
-
         <div class="row">
           <div class="form-group col-12 col-md-6">
             <%= f.label :url, 'Reteja adreso (URL)' %>
@@ -39,7 +34,6 @@
             <%= f.text_field :youtube, class: 'form-control' %>
           </div>
         </div>
-
         <div class="row">
           <div class="form-group col-12 col-md-6">
             <%= f.label :email, 'Retpoŝtadreso' %>
@@ -50,12 +44,10 @@
             <%= f.text_field :phone, class: 'form-control' %>
           </div>
         </div>
-
         <div class="form-group">
           <%= f.label :address, 'Adreso' %>
           <%= f.text_field :address, class: 'form-control' %>
         </div>
-
         <div class="row">
           <div class="form-group col-12 col-md-6">
             <%= f.label :city, 'Urbo (aŭ loko)' %>
@@ -66,12 +58,10 @@
             <%= f.combobox("country_id", Country.all, placeholder: 'Lando', required: true)%>
           </div>
         </div>
-
         <div class="form-group">
           <%= f.label :description, 'Priskribo' %>
           <%= f.rich_text_area :description, class: 'form-control', style: 'height: 15em; overflow-y: auto;' %>
         </div>
-
         <div class="form-group">
           <div class="text-divider">Emblemo</div>
           <br>
@@ -85,10 +75,8 @@
               </div>
             </div>
           <% end %>
-
           <%= f.file_field :logo, class: 'form-control-file', accept: 'image/gif,image/jpeg,image/png' %>
         </div>
-
         <div class="buttons-footer">
           <%= link_to 'Nuligi', organizations_url, class: 'button-cancel' %>
           <%= f.submit 'Registri', class: 'button-submit' %>
