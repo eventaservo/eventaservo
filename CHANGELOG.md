@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.84.0](https://github.com/eventaservo/eventaservo/compare/v2.83.0...v2.84.0) (2026-01-28)
+
+
+### Features
+
+* improve accessibility of organization form help text ([811f3db](https://github.com/eventaservo/eventaservo/commit/811f3db203ffc93a7543e56bfb791df2347c9cc2))
+* **Users:** implement API token regeneration functionality for users ([#941](https://github.com/eventaservo/eventaservo/issues/941)) ([be2b371](https://github.com/eventaservo/eventaservo/commit/be2b371c9367f1b41539ce97277ad000628cdae2))
+
 ## [2.83.0](https://github.com/eventaservo/eventaservo/compare/v2.82.0...v2.83.0) (2026-01-17)
 
 
