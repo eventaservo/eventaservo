@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "test_helper"
 
 class FollowersControllerTest < ActionDispatch::IntegrationTest
@@ -7,14 +9,14 @@ class FollowersControllerTest < ActionDispatch::IntegrationTest
     sign_in user
 
     # Follow
-    assert_difference -> { event.reload.followers.count }, 1 do
+    assert_difference "event.followers.count", 1 do
       get event_toggle_follow_path(event_code: event.code)
     end
 
     assert_redirected_to root_url
 
     # Unfollow
-    assert_difference -> { event.reload.followers.count }, -1 do
+    assert_difference "event.followers.count", -1 do
       get event_toggle_follow_path(event_code: event.code)
     end
 
