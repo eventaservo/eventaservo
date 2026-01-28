@@ -16,7 +16,7 @@
       </div>
 
       <%= form_for(@event, url: (event_path(code: @event.code) if params[:action].in? %w(edit update)),
-          data: { controller: 'event--form'}) do |form| %>
+          data: { controller: 'event--form', action: 'submit->event--form#submit' }) do |form| %>
         <%= error_handling(@event) %>
 
         <div class="form-group">
@@ -220,7 +220,9 @@
           <% if params[:action] == 'new' %>
             <%= link_to 'Ne registri', root_path, class: 'button-cancel' %>
           <% end %>
-          <%= form.submit 'Registri', class: 'button-submit' %>
+          <%= button_tag(type: 'submit', class: 'button-submit', data: { 'event--form-target': 'submit' }) do %>
+            Registri
+          <% end %>
         </div>
       <% end %>
     </div>
