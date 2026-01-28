@@ -65,6 +65,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   has_many :participants_records, through: :participants, source: :user
   has_many :videoj, class_name: "Video"
   has_many :reports, class_name: "Event::Report", dependent: :destroy
+  has_many :followers, as: :followable, dependent: :destroy
 
   # Novas associações para Tags Polimórficas
   has_many :taggings, as: :taggable, dependent: :destroy
