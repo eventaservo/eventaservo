@@ -3,6 +3,7 @@ pt_BR:
   pages:
     event:
       add_to_calendar:
+        title: Adicionar ao calendário
         download_ics: Baixar ICS
       cancel_event: Cancelar
       uncancel_event: Descancelar

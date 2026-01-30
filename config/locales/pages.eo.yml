@@ -3,6 +3,7 @@ eo:
   pages:
     event:
       add_to_calendar:
+        title: Aldoni al kalendaro
         download_ics: Elŝulti ICS
       cancel_event: Nuligi
       uncancel_event: Malnuligi
