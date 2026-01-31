@@ -7,8 +7,8 @@
 
       <div class="form-group">
         <%= f.label :password, 'Nova pasvorto' %>
-        <%= f.password_field :password, autofocus: true, autocomplete: 'new-password', class: 'form-control' %>
-        <small class="form-text text-muted">Minimume 6 signoj</small>
+        <%= f.password_field :password, autofocus: true, autocomplete: 'new-password', class: 'form-control', aria: { describedby: "password-help" } %>
+        <small class="form-text text-muted" id="password-help">Minimume 6 signoj</small>
       </div>
       <div class="form-group">
         <%= f.label :password_confirmation, 'Pasvorto-konfirmado' %>
