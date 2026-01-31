@@ -3,7 +3,7 @@ import SlimSelect from "slim-select"
 
 // Connects to data-controller="event--form"
 export default class extends Controller {
-  static targets = ["organizations"]
+  static targets = ["organizations", "submit"]
 
   connect() {
     // Only initialize SlimSelect if organizations target exists
@@ -17,6 +17,13 @@ export default class extends Controller {
           searchText: "Neniu trafo",
         }
       })
+    }
+  }
+
+  submit(event) {
+    if (this.hasSubmitTarget) {
+      this.submitTarget.disabled = true
+      this.submitTarget.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Registras...'
     }
   }
 }
