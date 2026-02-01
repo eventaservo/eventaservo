@@ -6,8 +6,8 @@ class EventsIntegrationTest < ActionDispatch::IntegrationTest
   def setup
     sign_in create(:uzanto, :admin)
     @brazilo = Country.find_by(code: "br")
-    @bejo = create(:organization, :bejo)
-    @tejo = create(:organization, :tejo)
+    @bejo = Organization.find_by(short_name: "BEJO") || create(:organization, :bejo)
+    @tejo = Organization.find_by(short_name: "TEJO") || create(:organization, :tejo)
     @evento = create(:evento)
   end
 
