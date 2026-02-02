@@ -105,13 +105,13 @@
             <% Tag.characteristics.order(:sort_order).each do |tag| %>
               <div class="btn-group btn-group-toggle" data-toggle="buttons">
                 <label class="btn button-checkbox--orange <%= 'active' if event_characteristic_ids.include?(tag.id) %>">
-                  <%= check_box_tag "tags_characteristics[]", tag.id, event_characteristics.include?(tag), id: "tag_#{tag.id}" %>
+                  <%= check_box_tag "tags_characteristics[]", tag.id, event_characteristics.include?(tag), id: "tag_#{tag.id}", aria: { describedby: "tags-help" } %>
                   <%= tag.name %>
                 </label>
               </div>
             <% end %>
             <br>
-            <small class="form-text text-muted">
+            <small class="form-text text-muted" id="tags-help">
               Anoncoj kaj konkursoj ne aperos en la ĉefpaĝo.
               <br>
               Ĉu evento estas aldonita al la
