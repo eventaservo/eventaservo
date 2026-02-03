@@ -10,8 +10,8 @@
 
         <div class="field">
           <%= f.label :url %>
-          <%= f.text_field :url, class: 'form-control', required: true, autofocus: true %>
-          <small class="form-text text-muted">Ekz: https://uea.facila.org/artikoloj/movado/zamenhof-tago-r269</small>
+          <%= f.text_field :url, class: 'form-control', required: true, autofocus: true, aria: { describedby: 'url-help' } %>
+          <small class="form-text text-muted" id="url-help">Ekz: https://uea.facila.org/artikoloj/movado/zamenhof-tago-r269</small>
         </div>
 
         <br>
