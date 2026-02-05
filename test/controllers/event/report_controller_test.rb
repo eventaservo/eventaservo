@@ -9,6 +9,14 @@ class Event::ReportControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
   end
 
+  # GET #new tests
+  test "new page has accessible url input" do
+    get new_event_report_path(event_code: @event.code)
+    assert_response :success
+    assert_select "input[name='event_report[url]'][aria-describedby='url-help']"
+    assert_select "small[id='url-help']"
+  end
+
   # POST #create tests
   test "create enqueues NewEventReportNotificationJob" do
     params = {
