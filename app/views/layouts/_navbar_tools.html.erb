@@ -1,14 +1,14 @@
 <li class="nav-item d-none d-lg-block mr-2">
   <% if cookies[:vidmaniero] == 'mapo' %>
-    <%= link_to view_style_url('kalendaro'), class: 'nav-link' do %>
-      <i class="fas fa-map-marker-alt fg-color-yellow" data-toggle="tooltip" data-placement="bottom" title="Fermi la mapon"></i>
+    <%= link_to view_style_url('kalendaro'), class: 'nav-link', aria: { label: 'Fermi la mapon' } do %>
+      <i class="fas fa-map-marker-alt fg-color-yellow" data-toggle="tooltip" data-placement="bottom" title="Fermi la mapon" aria-hidden="true"></i>
     <% end %>
     <li class="nav-item d-md-block d-lg-none">
       <%= link_to icon('fas', 'map-marker-alt', 'Fermi la mapon', class: 'fg-color-yellow'), view_style_url('kalendaro'), class: 'nav-link' %>
     </li>
   <% else %>
-    <%= link_to view_style_url('mapo'), class: 'nav-link' do %>
-      <i class="fas fa-map-marker-alt" data-toggle="tooltip" data-placement="bottom" title="Vidi kiel mapo"></i>
+    <%= link_to view_style_url('mapo'), class: 'nav-link', aria: { label: 'Vidi kiel mapo' } do %>
+      <i class="fas fa-map-marker-alt" data-toggle="tooltip" data-placement="bottom" title="Vidi kiel mapo" aria-hidden="true"></i>
     <% end %>
     <li class="nav-item d-md-block d-lg-none">
       <%= link_to icon('fas', 'map-marker-alt', 'Vidi kiel mapo'), view_style_url('mapo'), class: 'nav-link' %>
@@ -17,8 +17,8 @@
 </li>
 
 <li class="nav-item d-none d-lg-block">
-  <%= link_to "https://liberapay.com/instigo", target: "_blank", class: 'nav-link' do %>
-    <i class="fas fa-heart" data-toggle="tooltip" data-placement="bottom" title="Subteni"></i>
+  <%= link_to "https://liberapay.com/instigo", target: "_blank", class: 'nav-link', aria: { label: 'Subteni' } do %>
+    <i class="fas fa-heart" data-toggle="tooltip" data-placement="bottom" title="Subteni" aria-hidden="true"></i>
   <% end %>
 </li>
 <li class="nav-item d-md-block d-lg-none">
@@ -26,8 +26,8 @@
 </li>
 
 <li class="nav-item d-none d-lg-block">
-  <%= link_to "https://t.me/s/eventaservo", target: "_blank", class: 'nav-link' do %>
-    <i class="fas fa-newspaper" data-toggle="tooltip" data-placement="bottom" title="Novaĵoj"></i>
+  <%= link_to "https://t.me/s/eventaservo", target: "_blank", class: 'nav-link', aria: { label: 'Novaĵoj' } do %>
+    <i class="fas fa-newspaper" data-toggle="tooltip" data-placement="bottom" title="Novaĵoj" aria-hidden="true"></i>
   <% end %>
 </li>
 <li class="nav-item d-md-block d-lg-none">
@@ -35,8 +35,8 @@
 </li>
 
 <li class="nav-item d-none d-lg-block">
-  <%= link_to prie_url, class: 'nav-link' do %>
-    <i class="fas fa-user-friends" data-toggle="tooltip" data-placement="bottom" title="Pri ni"></i>
+  <%= link_to prie_url, class: 'nav-link', aria: { label: 'Pri ni' } do %>
+    <i class="fas fa-user-friends" data-toggle="tooltip" data-placement="bottom" title="Pri ni" aria-hidden="true"></i>
   <% end %>
 </li>
 <li class="nav-item d-md-block d-lg-none">
