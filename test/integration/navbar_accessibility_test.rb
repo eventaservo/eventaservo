@@ -52,7 +52,7 @@ class NavbarAccessibilityTest < ActionDispatch::IntegrationTest
 
   test "navbar map toggle link has aria-label when map is active" do
     # Simulate cookie being set
-    get root_path, headers: { "HTTP_COOKIE" => "vidmaniero=mapo" }
+    get root_path, headers: {"HTTP_COOKIE" => "vidmaniero=mapo"}
 
     assert_select "a[href*='/v/kalendaro']" do |links|
       assert_not_empty links
