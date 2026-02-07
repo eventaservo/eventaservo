@@ -1,9 +1,7 @@
 <% content_for :title do %>
   <%= @organizo.name %>
 <% end %>
-
 <%= render 'organization_meta' %>
-
 <div class="row">
   <div class="col-lg-8">
     <div class="box-white">
@@ -13,15 +11,14 @@
         <span class="float-right">
           <%= link_to icon('far', 'calendar-alt'),
             webcal_organizo_url(short_name: @organizo.short_name, protocol: :webcal, format: :ics),
-            data: { target: '#webcalModal', toggle: 'modal' } %>
+            data: { target: '#webcalModal', toggle: 'modal' },
+            aria: { label: 'Aboni organizan kalendaron' } %>
         </span>
       </div>
-
       <div class="clearfix mb-2">
         <%= organization_logo(@organizo, size: :large, html_class: 'float-left mr-2') %>
         <%= @organizo.description %>
       </div>
-
       <p class="small">
         <%= montras_telefonnumeron(@organizo.phone) + raw('<br/>') if @organizo.phone.present? %>
         <%= montras_retpaghon(@organizo.url) + raw('<br/>') if @organizo.url.present? %>
@@ -34,14 +31,12 @@
           <%= montras_adreson(@organizo.full_address) %>
         <% end %>
       </p>
-
       <% if user_signed_in? && current_user.administranto?(@organizo) %>
         <div class="buttons-footer">
           <%= link_to icon('far', 'edit', 'Redakti'), edit_organization_url(@organizo.short_name), class: 'btn btn-sm btn-outline-primary no-border' %>
         </div>
       <% end %>
     </div>
-
     <% if @future_events.any? %>
       <div class="box-white">
         <div class="lead">Venontaj eventoj</div>
@@ -56,7 +51,6 @@
         <% end %>
       </div>
     <% end %>
-
     <% if @past_events.any? %>
       <div class="box-white">
         <div class="lead">Pasintaj eventoj</div>
@@ -72,19 +66,17 @@
       </div>
     <% end %>
   </div>
-
   <% unless params['iframe'] %>
     <div class="col-lg-4">
       <%= render partial: 'uzantoj' %>
     </div>
   <% end %>
 </div>
-
-<div id="webcalModal" class="modal fade" aria-hidden="true" aria-labelledby="shareModalCenterTitle" role="dialog" tabindex="-1">
+<div id="webcalModal" class="modal fade" aria-hidden="true" aria-labelledby="webcalModalLabel" role="dialog" tabindex="-1">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 id="shareModalCenterTitle" class="modal-title">Aboni organizan kalendaron</h5>
+        <h5 id="webcalModalLabel" class="modal-title">Aboni organizan kalendaron</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Fermi">
           <span aria-hidden="true">×</span>
         </button>

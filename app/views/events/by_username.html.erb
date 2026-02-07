@@ -10,9 +10,9 @@
         <h1 class="display-4"><%= @uzanto.name %></h1>
         <%= link_to icon('far', 'calendar-alt'),
           webcal_user_url(webcal_token: @uzanto.webcal_token, protocol: :webcal, format: :ics),
-          data: { target: '#webcalModal', toggle: 'modal' } %>
+          data: { target: '#webcalModal', toggle: 'modal' },
+          aria: { label: 'Aboni personan kalendaron' } %>
       </div>
-
       <%= montras_flagon(@uzanto.country) %>
       <%= @uzanto.country.name if @uzanto.country %>
       (<%= @uzanto.city %>)
@@ -39,12 +39,11 @@
     </div>
   </div>
 </div>
-
-<div id="webcalModal" class="modal fade" aria-hidden="true" aria-labelledby="shareModalCenterTitle" role="dialog" tabindex="-1">
+<div id="webcalModal" class="modal fade" aria-hidden="true" aria-labelledby="webcalModalLabel" role="dialog" tabindex="-1">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 id="shareModalCenterTitle" class="modal-title">
+        <h5 id="webcalModalLabel" class="modal-title">
           Aboni personan kalendaron
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Fermi">

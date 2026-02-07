@@ -1,19 +1,16 @@
 <% content_for :title do %>
   <%= params[:continent] %>
 <% end %>
-
 <div class="box-white">
   <%# Montras WebCAl ikonon nur por Retaj 'kontinentoj' %>
   <% if params[:continent] == 'reta' %>
     <% content_for :breadcrumb_right do %>
-      <%= link_to icon('far', 'calendar-alt'), webcal_url(landa_kodo: 'ol', protocol: :webcal, format: :ics), data: { target: '#webcalModal', toggle: 'modal' } %>
-      <%= link_to icon('fas', 'rss'), events_by_continent_path(continent: params[:continent], format: :xml), title: 'RSS', class: 'mr-2' %>
+      <%= link_to icon('far', 'calendar-alt'), webcal_url(landa_kodo: 'ol', protocol: :webcal, format: :ics), data: { target: '#webcalModal', toggle: 'modal' }, aria: { label: 'Aboni kalendaron' } %>
+      <%= link_to icon('fas', 'rss'), events_by_continent_path(continent: params[:continent], format: :xml), title: 'RSS', class: 'mr-2', aria: { label: 'RSS fluo' } %>
     <% end %>
   <% end %>
-
   <%= render partial: 'layouts/breadcrumb' %>
   <%= render partial: 'home/view_style_chooser', locals: { kartaro: true, kalendaro: false, mapo: true } %>
-
   <% unless params[:continent] == 'reta' %>
     <div class="text-center m-2">
       <% @countries.each do |country| %>
@@ -25,17 +22,15 @@
       <% end %>
     </div>
   <% end %>
-
   <%= render partial: 'home/filters' %>
   <%= render partial: 'events/okazantaj' %>
   <%= display_events_by_style %>
 </div>
-
-<div id="webcalModal" class="modal fade" aria-hidden="true" role="dialog" tabindex="-1">
+<div id="webcalModal" class="modal fade" aria-hidden="true" role="dialog" tabindex="-1" aria-labelledby="webcalModalLabel">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 id="shareModalCenterTitle" class="modal-title">Aboni kalendaron</h5>
+        <h5 id="webcalModalLabel" class="modal-title">Aboni kalendaron</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Fermi">
           <span aria-hidden="true">×</span>
         </button>
