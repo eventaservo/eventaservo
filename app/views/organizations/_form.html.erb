@@ -63,7 +63,7 @@
           <%= f.rich_text_area :description, class: 'form-control', style: 'height: 15em; overflow-y: auto;' %>
         </div>
         <div class="form-group">
-          <div class="text-divider">Emblemo</div>
+          <%= f.label :logo, "Emblemo", class: "text-divider d-block" %>
           <br>
           <% if @organizo.logo.attached? %>
             <div class="d-flex flex-column align-items-center justify-content-center">
