@@ -30,6 +30,21 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  # GET #new tests
+  class NewTest < EventsControllerTest
+    test "new requires authentication" do
+      get new_event_path
+      assert_redirected_to new_user_session_path
+    end
+
+    test "new returns http success" do
+      user = create(:user)
+      sign_in user
+      get new_event_path
+      assert_response :success
+    end
+  end
+
   # GET #kronologio tests
   class KronologioTest < EventsControllerTest
     test "kronologio returns http success" do
