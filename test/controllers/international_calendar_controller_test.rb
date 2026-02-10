@@ -13,8 +13,8 @@ class InternationalCalendarControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     assert_match "Internacia Kalendaro", response.body
-    assert_match @international_event.title, response.body
-    refute_match @local_event.title, response.body
+    assert_match CGI.escapeHTML(@international_event.title), response.body
+    refute_match CGI.escapeHTML(@local_event.title), response.body
   end
 
   test "should get year" do
@@ -24,7 +24,7 @@ class InternationalCalendarControllerTest < ActionDispatch::IntegrationTest
 
     get international_calendar_year_path(year: year)
     assert_response :success
-    assert_match event_in_year.title, response.body
+    assert_match CGI.escapeHTML(event_in_year.title), response.body
   end
 
   test "should redirect for invalid year" do
