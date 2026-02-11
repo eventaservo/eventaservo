@@ -3,24 +3,18 @@
     <%= form_with(model: @report) do |f| %>
       <div class="box-white">
         <h1 class="lead">Event-raporto</h1>
-
         <%= error_handling(@report) %>
-
         <br>
-
         <div class="field">
           <%= f.label :url %>
-          <%= f.text_field :url, class: 'form-control', required: true, autofocus: true %>
-          <small class="form-text text-muted">Ekz: https://uea.facila.org/artikoloj/movado/zamenhof-tago-r269</small>
+          <%= f.text_field :url, class: 'form-control', required: true, autofocus: true, aria: { describedby: 'url_help' } %>
+          <small id="url_help" class="form-text text-muted">Ekz: https://uea.facila.org/artikoloj/movado/zamenhof-tago-r269</small>
         </div>
-
         <br>
-
         <div class="form-group">
           <%= f.label :title %>
           <%= f.text_field :title, class: 'form-control', required: true %>
         </div>
-
         <div class="buttons-footer">
           <%= link_to 'Ne registri', event_path(code: @event.code), class: 'button-cancel' %>
           <%= f.submit 'Registri', class: 'button-submit' %>
@@ -28,7 +22,6 @@
       </div>
     <% end %>
   </div>
-
   <div class="col-12 col-lg-3">
     <div class="mt-1">
       <%= render partial: "/events/card", locals: { event: @event } %>
