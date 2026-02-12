@@ -62,6 +62,27 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  # POST #nuligi tests
+  class NuligiTest < EventsControllerTest
+    setup do
+      @user = create(:user)
+      @event = create(:event, user: @user)
+      sign_in @user
+    end
+
+    test "cancels the event with a reason" do
+      reason = "Weather conditions"
+      post event_nuligi_path(event_code: @event.code), params: {cancel_reason: reason}
+
+      assert_redirected_to event_path(code: @event.code)
+      assert_equal "Evento nuligita", flash[:notice]
+
+      @event.reload
+      assert @event.cancelled?
+      assert_equal reason, @event.cancel_reason
+    end
+  end
+
   # DELETE #destroy tests
   class DestroyTest < EventsControllerTest
     setup do
