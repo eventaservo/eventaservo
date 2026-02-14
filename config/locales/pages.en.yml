@@ -3,6 +3,7 @@ en:
   pages:
     event:
       add_to_calendar:
+        title: Add to calendar
         download_ics: Download ICS
       cancel_event: Cancel
       uncancel_event: Uncancel

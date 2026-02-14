@@ -6,8 +6,8 @@ class EventsIntegrationTest < ActionDispatch::IntegrationTest
   def setup
     sign_in create(:uzanto, :admin)
     @brazilo = Country.find_by(code: "br")
-    @bejo = create(:organization, :bejo)
-    @tejo = create(:organization, :tejo)
+    @bejo = Organization.find_by(short_name: "BEJO") || create(:organization, :bejo)
+    @tejo = Organization.find_by(short_name: "TEJO") || create(:organization, :tejo)
     @evento = create(:evento)
   end
 
@@ -57,5 +57,11 @@ class EventsIntegrationTest < ActionDispatch::IntegrationTest
       }
 
     assert_equal 0, @evento.reload.organizations.count
+  end
+
+  test "event page has accessible calendar button" do
+    get event_path(code: @evento.code)
+    assert_response :success
+    assert_select "a[id='add-to-calendar-options'][aria-label='Aldoni al kalendaro']"
   end
 end
