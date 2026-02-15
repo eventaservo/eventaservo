@@ -1,16 +1,15 @@
 <div data-controller="event-user-interested-button">
   <% if user_signed_in? %>
     <% if event.participants_records.include?(current_user) %>
-      <%= link_to event_toggle_participant_url(event_code: event.ligilo), class: 'link-green' do %>
-        <h1><%= icon('fas', 'user-check') %></h1>
+      <%= link_to event_toggle_participant_url(event_code: event.ligilo), class: 'link-green text-decoration-none' do %>
+        <span class="h1 d-block"><%= icon('fas', 'user-check') %></span>
         <span>Mi interesiĝas!</span>
       <% end %>
     <% else %>
-      <div class="link-blue" data-action="click->event-user-interested-button#buttonClicked" data-event-user-interested-button-target="button">
-        <h1><%= icon('fas', 'user') %></h1>
+      <button type="button" class="link-blue btn btn-link p-0 border-0 text-decoration-none" data-action="click->event-user-interested-button#buttonClicked" data-event-user-interested-button-target="button">
+        <span class="h1 d-block"><%= icon('fas', 'user') %></span>
         <span>Mi interesiĝas</span>
-      </div>
-
+      </button>
       <div class="d-none" data-event-user-interested-button-target="question">
         Ĉu aperigi vian nomon en la listo de interesiĝantoj?<br>
         <%= link_to "JES", event_toggle_participant_url(event_code: event.ligilo, publika: 'jes'), class: 'btn btn-sm btn-success btn-block' %><br>
