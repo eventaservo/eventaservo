@@ -136,20 +136,36 @@ Event feeds support multiple formats via `respond_to` blocks in controllers:
 
 ## Testing
 
-- **Minitest** (`test/`): Primary test framework with FactoryBot and fixtures.
-- **System Tests**: Located in `test/system/` using Capybara.
-- **Integration Tests**: Located in `test/integration/`.
-- **FactoryBot**: Definitions are located in `test/factory_bot/`.
+**🚨 CRITICAL - READ FIRST**: When creating or modifying tests, you **MUST** follow the guidelines defined in [TEST_ARCHITECTURE.md](TEST_ARCHITECTURE.md).
 
-```ruby
-class UserServices::DisableTest < ActiveSupport::TestCase
-  test "disables user successfully" do
-    user = create(:user)
-    service = UserServices::Disable.new(user)
-    assert service.call.success?
-  end
-end
-```
+That document contains:
+- ✅ Complete test architecture rules
+- ✅ Directory organization patterns
+- ✅ Naming conventions and templates
+- ✅ Fixtures vs FactoryBot decision guide
+- ✅ Step-by-step instructions for AI agents (Section 9)
+- ✅ Code review checklist
+
+### Quick Reference
+
+- **Framework**: Minitest (`test/`)
+- **Test Data**: **Always prefer Fixtures over FactoryBot**
+- **Directory Structure**: Organized by responsibility
+  - Models: `test/models/<model>/<context>_test.rb`
+  - Controllers: `test/controllers/<controller>/<action>_test.rb`
+  - Services: `test/services/<resource_plural>/<service_name>_test.rb`
+- **Namespacing**:
+  - Models: `Event::ValidationTest`
+  - Controllers: `EventsController::IndexTest`
+  - Services: `Events::SoftDeleteTest`
+
+### Mandatory Checklist Before Writing Tests
+
+- [ ] Read [TEST_ARCHITECTURE.md](TEST_ARCHITECTURE.md) Section 9 (AI Agent Instructions)
+- [ ] Check if fixtures exist for the data you need
+- [ ] Verify the correct directory structure
+- [ ] Use the appropriate template from the guidelines
+- [ ] Use fixtures unless there's a justified reason for FactoryBot
 
 ## Important Notes
 

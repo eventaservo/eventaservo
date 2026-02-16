@@ -94,15 +94,15 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "default scope should return only enabled users" do
-    # Clean up any existing users first
-    User.unscoped.destroy_all
+    initial_enabled_count = User.count
+    initial_total_count = User.unscoped.count
 
     create(:user)
-    assert_equal 1, User.count
+    assert_equal initial_enabled_count + 1, User.count
 
     create(:user, disabled: true)
-    assert_equal 1, User.count
-    assert_equal 2, User.unscoped.count
+    assert_equal initial_enabled_count + 1, User.count
+    assert_equal initial_total_count + 2, User.unscoped.count
   end
 
   test "should not be able to delete an user with events" do

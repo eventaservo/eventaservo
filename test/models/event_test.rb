@@ -40,52 +40,8 @@
 require "test_helper"
 
 class EventTest < ActiveSupport::TestCase
-  test "should be valid" do
-    event = build(:event)
-    assert event.valid?
-  end
-
-  test "should validate presence of title" do
-    event = Event.new
-    assert_not event.valid?
-    assert_includes event.errors[:title], "devas esti kompletigita"
-  end
-
-  test "should validate presence of description" do
-    event = Event.new
-    assert_not event.valid?
-    assert_includes event.errors[:description], "devas esti kompletigita"
-  end
-
-  test "should validate presence of city" do
-    event = Event.new
-    assert_not event.valid?
-    assert_includes event.errors[:city], "devas esti kompletigita"
-  end
-
-  test "should validate presence of date_start" do
-    event = Event.new
-    assert_not event.valid?
-    assert_includes event.errors[:date_start], "devas esti kompletigita"
-  end
-
-  test "should validate presence of date_end" do
-    event = Event.new
-    assert_not event.valid?
-    assert_includes event.errors[:date_end], "devas esti kompletigita"
-  end
-
-  test "should validate maximum length of title" do
-    event = build(:event, title: "a" * 101)
-    assert_not event.valid?
-    assert_includes event.errors[:title], "estas tro longa (maksimume 100 signoj)"
-  end
-
-  test "should validate maximum length of description" do
-    event = build(:event, description: "a" * 401)
-    assert_not event.valid?
-    assert_includes event.errors[:description], "estas tro longa (maksimume 400 signoj)"
-  end
+  # NOTE: Validation tests have been moved to test/models/event/validation_test.rb
+  # following the new test architecture guidelines defined in TEST_ARCHITECTURE.md
 
   test "should be valid with :site or :url" do
     evento = build(:evento)
@@ -225,7 +181,10 @@ class EventTest < ActiveSupport::TestCase
   test "without_tag returns events without the given tag" do
     create(:event, tags: [create(:tag, name: "Test", group_name: "characteristic")])
     event_without_tag = create(:event)
-    assert_equal [event_without_tag], Event.without_tag("Test")
+
+    result = Event.without_tag("Test")
+    assert_includes result, event_without_tag
+    assert_not result.any? { |e| e.tags.any? { |t| t.name == "Test" } }
   end
 
   test "by_link finds the event by the short_url" do

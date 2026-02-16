@@ -19,19 +19,16 @@ class UserServices::DisableTest < ActiveSupport::TestCase
     assert result.success?
   end
 
-  test "calls EventServices::MoveToSystemAccount" do
+  test "moves user events to system account" do
     user = users(:user)
-    create(:user, system_account: true)
-    create(:event, user: user)
+    system_user = users(:system_user)
+    event = create(:event, user: user)
 
-    service_instance = Minitest::Mock.new
-    service_instance.expect(:call, nil, [])
+    assert_equal user.id, event.user_id
 
-    EventServices::MoveToSystemAccount.stub(:new, ->(_event) { service_instance }) do
-      UserServices::Disable.call(user)
-    end
+    UserServices::Disable.call(user)
 
-    assert service_instance.verify
+    assert_equal system_user.id, event.reload.user_id
   end
 
   test "removes the user from its organizations" do
