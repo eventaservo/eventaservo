@@ -1,75 +1,75 @@
-# Proposta de Reorganização da Arquitetura de Testes
+# Test Architecture Reorganization Proposal
 
-Este documento detalha a análise da estrutura atual de testes da aplicação Ruby on Rails e propõe uma nova arquitetura modularizada, focada em escalabilidade, manutenibilidade e facilidade de automação por IA.
+This document details the analysis of the Ruby on Rails application's current test structure and proposes a new modularized architecture, focused on scalability, maintainability, and ease of AI automation.
 
-## 1. Análise da Organização Atual
+## 1. Analysis of Current Organization
 
-A aplicação utiliza Minitest e segue uma estrutura monolítica padrão do Rails, mas apresenta inconsistências e arquivos que tendem ao crescimento desordenado.
+The application uses Minitest and follows a standard monolithic Rails structure, but presents inconsistencies and files that tend to grow disorderly.
 
-### Estrutura Existente
-- **`test/models/`**: Arquivos únicos por model (ex: `event_test.rb` com ~200 linhas). Misturam validações, escopos, métodos de instância e callbacks em um único arquivo.
-- **`test/controllers/`**: Arquivos únicos por controller (ex: `events_controller_test.rb`). Utilizam classes aninhadas (`class NewTest < EventsControllerTest`) para separar contextos, o que ajuda na organização lógica, mas mantém tudo no mesmo arquivo físico.
-- **`test/services/`**: Organização inconsistente. Alguns diretórios usam sufixo `_services` (ex: `test/services/event_services/`) enquanto outros usam o nome do recurso no plural (ex: `test/services/events/`).
-- **Factories (`test/factory_bot/`)**: Definidas fora do padrão `test/factories/`. Factories como `event` criam associações pesadas por padrão, tornando os testes lentos.
-- **Fixtures (`test/fixtures/`)**: Já utilizadas para dados estáticos (`countries.yml`, `tags.yml`), o que é uma prática positiva.
+### Existing Structure
+- **`test/models/`**: Single files per model (e.g., `event_test.rb` with ~200 lines). They mix validations, scopes, instance methods, and callbacks in a single file.
+- **`test/controllers/`**: Single files per controller (e.g., `events_controller_test.rb`). They use nested classes (`class NewTest < EventsControllerTest`) to separate contexts, which helps with logical organization but keeps everything in the same physical file.
+- **`test/services/`**: Inconsistent organization. Some directories use the `_services` suffix (e.g., `test/services/event_services/`) while others use the resource name in plural (e.g., `test/services/events/`).
+- **Factories (`test/factory_bot/`)**: Defined outside the standard `test/factories/`. Factories like `event` create heavy associations by default, making tests slow.
+- **Fixtures (`test/fixtures/`)**: Already used for static data (`countries.yml`, `tags.yml`), which is a positive practice.
 
-### Problemas Identificados
-1.  **Arquivos Monolíticos**: `test/models/event_test.rb` e `test/controllers/events_controller_test.rb` acumulam muitas responsabilidades, dificultando a leitura e manutenção.
-2.  **Dificuldade de Localização**: Encontrar um teste específico dentro de um arquivo de 200+ linhas requer busca textual.
-3.  **Inconsistência em Serviços**: A mistura de padrões de nomenclatura (`event_services` vs `events`) confunde a estrutura.
-4.  **Acoplamento em Controllers**: O uso de classes aninhadas em um único arquivo cria dependências implícitas e dificulta a execução isolada de um contexto específico via linha de comando de forma simples.
-5.  **Factories Pesadas**: Factories criam dados desnecessários para testes simples (ex: validação), impactando a performance.
+### Identified Problems
+1.  **Monolithic Files**: `test/models/event_test.rb` and `test/controllers/events_controller_test.rb` accumulate many responsibilities, making reading and maintenance difficult.
+2.  **Difficulty of Location**: Finding a specific test within a 200+ line file requires textual search.
+3.  **Inconsistency in Services**: The mix of naming patterns (`event_services` vs `events`) confuses the structure.
+4.  **Coupling in Controllers**: The use of nested classes in a single file creates implicit dependencies and makes it difficult to run a specific context in isolation via the command line simply.
+5.  **Heavy Factories**: Factories create unnecessary data for simple tests (e.g., validation), impacting performance.
 
-## 2. Nova Arquitetura de Testes Modularizada
+## 2. New Modularized Test Architecture
 
-A proposta visa dividir arquivos grandes em componentes menores e focados, facilitando a geração de testes por IA e a manutenção humana.
+The proposal aims to split large files into smaller, focused components, facilitating test generation by AI and human maintenance.
 
-### Princípios Fundamentais
-1.  **Um Arquivo, Uma Responsabilidade**: Cada arquivo de teste deve focar em um aspecto específico (validação, escopo, ação de controller).
-2.  **Limite de Tamanho**: Arquivos não devem exceder **200 linhas**. Se excederem, devem ser refatorados em sub-contextos.
-3.  **Independência**: Testes devem ser capazes de rodar isoladamente sem depender de estados globais complexos definidos em classes pai.
-4.  **Fixtures > Factories**: Utilizar Fixtures para dados estáticos ou de referência. Utilizar Factories apenas quando a variabilidade de dados for essencial.
+### Fundamental Principles
+1.  **One File, One Responsibility**: Each test file must focus on a specific aspect (validation, scope, controller action).
+2.  **Size Limit**: Files should not exceed **200 lines**. If they do, they must be refactored into sub-contexts.
+3.  **Independence**: Tests must be able to run in isolation without depending on complex global states defined in parent classes.
+4.  **Fixtures > Factories**: Use Fixtures for static or reference data. Use Factories only when data variability is essential.
 
-### Organização de Diretórios Proposta
+### Proposed Directory Organization
 
 #### Models (`test/models/<model_name>/`)
-Ao invés de `test/models/event_test.rb`, teremos um diretório:
+Instead of `test/models/event_test.rb`, we will have a directory:
 
 ```ruby
 test/models/event/
-├── validation_test.rb    # Testes de validações (presence, length, format)
-├── association_test.rb   # Testes de associações (belongs_to, has_many)
-├── scope_test.rb         # Testes de escopos (past?, online?, etc)
-├── method_test.rb        # Testes de métodos de instância complexos
-└── callback_test.rb      # Testes de callbacks (se houver lógica complexa)
+├── validation_test.rb    # Validation tests (presence, length, format)
+├── association_test.rb   # Association tests (belongs_to, has_many)
+├── scope_test.rb         # Scope tests (past?, online?, etc)
+├── method_test.rb        # Complex instance method tests
+└── callback_test.rb      # Callback tests (if there is complex logic)
 ```
 
 #### Controllers (`test/controllers/<controller_name>/`)
-Ao invés de `test/controllers/events_controller_test.rb`, teremos um diretório com testes independentes por action:
+Instead of `test/controllers/events_controller_test.rb`, we will have a directory with independent tests per action:
 
 ```ruby
 test/controllers/events/
-├── index_test.rb         # Testes para GET /events
-├── show_test.rb          # Testes para GET /events/:code
-├── create_test.rb        # Testes para POST /events
-├── update_test.rb        # Testes para PATCH/PUT /events/:code
-└── destroy_test.rb       # Testes para DELETE /events/:code
+├── index_test.rb         # Tests for GET /events
+├── show_test.rb          # Tests for GET /events/:code
+├── create_test.rb        # Tests for POST /events
+├── update_test.rb        # Tests for PATCH/PUT /events/:code
+└── destroy_test.rb       # Tests for DELETE /events/:code
 ```
 
 #### Services (`test/services/<resource_plural>/`)
-Padronização para usar o nome do recurso no plural, eliminando sufixos redundantes como `_services`.
+Standardization to use the resource name in plural, eliminating redundant suffixes like `_services`.
 
 ```ruby
-test/services/events/     # Antes: test/services/event_services/
+test/services/events/     # Before: test/services/event_services/
 ├── move_to_system_account_test.rb
 ├── schedule_reminders_test.rb
 └── soft_delete_test.rb
 ```
 
-## 3. Convenções de Nomenclatura e Código
+## 3. Naming and Code Conventions
 
-### Classes de Teste
-Devem refletir o caminho do arquivo para facilitar o autoloading e localização.
+### Test Classes
+Must reflect the file path to facilitate autoloading and location.
 
 **Model:**
 ```ruby
@@ -86,7 +86,7 @@ end
 ```
 
 **Controller:**
-Testes de controller devem herdar diretamente de `ActionDispatch::IntegrationTest` (ou `IntegrationTest` se configurado), evitando aninhamento em classes "Pai" vazias.
+Controller tests must inherit directly from `ActionDispatch::IntegrationTest` (or `IntegrationTest` if configured), avoiding nesting in empty "Parent" classes.
 
 ```ruby
 # test/controllers/events/index_test.rb
@@ -100,23 +100,23 @@ class Events::IndexTest < ActionDispatch::IntegrationTest
 end
 ```
 
-### Factories e Fixtures
+### Factories and Fixtures
 
-**Localização:**
-- Factories: Manter em `test/factory_bot/` (conforme preferência atual).
-- Fixtures: Manter em `test/fixtures/`.
+**Location:**
+- Factories: Keep in `test/factory_bot/` (as per current preference).
+- Fixtures: Keep in `test/fixtures/`.
 
-**Estratégia:**
-1.  **Fixture First**: Para tabelas de domínio fixo (Countries, Tags, Roles), use sempre Fixtures.
-2.  **Minimal Factory**: A factory padrão (`:event`) deve conter apenas o estritamente necessário para o objeto ser válido.
-3.  **Traits para Complexidade**: Use traits para adicionar associações ou estados complexos.
+**Strategy:**
+1.  **Fixture First**: For fixed domain tables (Countries, Tags, Roles), always use Fixtures.
+2.  **Minimal Factory**: The default factory (`:event`) must contain only what is strictly necessary for the object to be valid.
+3.  **Traits for Complexity**: Use traits to add associations or complex states.
 
 ```ruby
-# Exemplo de Factory Otimizada
+# Example of Optimized Factory
 FactoryBot.define do
   factory :event do
-    title { "Evento Simples" }
-    association :user # Obrigatório
+    title { "Simple Event" }
+    association :user # Mandatory
 
     trait :with_participants do
       after(:create) { |event| create_list(:participant, 3, event: event) }
@@ -125,30 +125,30 @@ FactoryBot.define do
 end
 ```
 
-## 4. Guia de Migração Gradual
+## 4. Gradual Migration Guide
 
-Não tente migrar tudo de uma vez. Siga esta ordem para evitar quebra de CI/CD:
+Do not try to migrate everything at once. Follow this order to avoid CI/CD breakage:
 
-1.  **Padronizar Serviços**:
-    - Mover `test/services/event_services/` para `test/services/events/`.
-    - Ajustar namespaces nos arquivos movidos.
+1.  **Standardize Services**:
+    - Move `test/services/event_services/` to `test/services/events/`.
+    - Adjust namespaces in the moved files.
 
-2.  **Refatorar Models Críticos (Ex: Event)**:
-    - Criar diretório `test/models/event/`.
-    - Criar `validation_test.rb` e mover testes de validação do `event_test.rb`.
-    - Criar `scope_test.rb` e mover testes de escopo.
-    - Manter `event_test.rb` apenas com o que sobrar, até que esteja vazio e possa ser removido.
+2.  **Refactor Critical Models (Ex: Event)**:
+    - Create directory `test/models/event/`.
+    - Create `validation_test.rb` and move validation tests from `event_test.rb`.
+    - Create `scope_test.rb` and move scope tests.
+    - Keep `event_test.rb` only with what remains, until it is empty and can be removed.
 
-3.  **Refatorar Controllers Críticos (Ex: EventsController)**:
-    - Criar diretório `test/controllers/events/`.
-    - Extrair classe `IndexTest` para `test/controllers/events/index_test.rb`.
-    - Remover a classe aninhada do arquivo original.
-    - Repetir para outras actions.
+3.  **Refactor Critical Controllers (Ex: EventsController)**:
+    - Create directory `test/controllers/events/`.
+    - Extract `IndexTest` class to `test/controllers/events/index_test.rb`.
+    - Remove the nested class from the original file.
+    - Repeat for other actions.
 
-## 5. Diretrizes para Automação (IA)
+## 5. Guidelines for Automation (AI)
 
-Ao solicitar novos testes a uma IA, forneça estas regras:
-- "Crie o teste em `test/models/<model>/<context>_test.rb`."
-- "Não adicione ao arquivo principal do model."
-- "Use Fixtures para dados estáticos se disponíveis."
-- "Mantenha o arquivo abaixo de 200 linhas."
+When requesting new tests from an AI, provide these rules:
+- "Create the test in `test/models/<model>/<context>_test.rb`."
+- "Do not add to the main model file."
+- "Use Fixtures for static data if available."
+- "Keep the file under 200 lines."
