@@ -1,15 +1,17 @@
 # frozen_string_literal: true
 
-require "simplecov"
-require "simplecov-cobertura"
+if ENV["CI"]
+  require "simplecov"
+  require "simplecov-cobertura"
 
-SimpleCov.start "rails" do
-  add_filter "/test/"
-  add_filter "/config/"
-  formatter SimpleCov::Formatter::MultiFormatter.new([
-    SimpleCov::Formatter::HTMLFormatter,
-    SimpleCov::Formatter::CoberturaFormatter
-  ])
+  SimpleCov.start "rails" do
+    add_filter "/test/"
+    add_filter "/config/"
+    formatter SimpleCov::Formatter::MultiFormatter.new([
+      SimpleCov::Formatter::HTMLFormatter,
+      SimpleCov::Formatter::CoberturaFormatter
+    ])
+  end
 end
 
 ENV["RAILS_ENV"] = "test"
