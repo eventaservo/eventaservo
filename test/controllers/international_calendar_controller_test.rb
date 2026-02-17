@@ -4,8 +4,8 @@ require "test_helper"
 
 class InternationalCalendarControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @international_event = create(:event, :international_calendar, :future)
-    @local_event = create(:event, :future, international_calendar: false)
+    @international_event = create(:event, :international_calendar, :future, title: "International Event Title")
+    @local_event = create(:event, :future, international_calendar: false, title: "Local Event Title")
   end
 
   test "should get index" do
@@ -20,7 +20,7 @@ class InternationalCalendarControllerTest < ActionDispatch::IntegrationTest
   test "should get year" do
     # Create an event in the specific year to ensure we're testing data retrieval too
     year = Time.zone.now.year + 1
-    event_in_year = create(:event, :international_calendar, date_start: Time.zone.parse("#{year}-06-01 12:00:00"))
+    event_in_year = create(:event, :international_calendar, title: "Event In Year", date_start: Time.zone.parse("#{year}-06-01 12:00:00"))
 
     get international_calendar_year_path(year: year)
     assert_response :success
