@@ -16,7 +16,7 @@ class HomeController < ApplicationController
     @today_events = @events.today.includes(:country).includes(:organizations)
 
     @events = @events.not_today.includes(%i[country organizations])
-    @ads = Ad.includes([image_attachment: :blob]).active.sample(4)
+    @ads = Ad.includes([image_attachment: :blob]).active.order(Arel.sql("RANDOM()")).limit(4)
 
     return if cookies[:vidmaniero].in? %w[kalendaro mapo]
 
