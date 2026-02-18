@@ -66,7 +66,7 @@ ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
 
 RUN bundle exec rails assets:precompile
 
-RUN npx @redocly/cli build-docs openapi/v2.yaml -o public/docs/api/v2/index.html
+RUN npm install -g @redocly/cli@1.0.2 && redocly build-docs openapi/v2.yaml -o public/docs/api/v2/index.html
 
 EXPOSE 3000
 
