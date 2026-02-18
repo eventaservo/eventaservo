@@ -1,4 +1,4 @@
-rails: truncate -s 0 log/*; RUBY_DEBUG_OPEN=true thrust bin/rails server -b 0.0.0.0
+rails: truncate -s 0 log/*; RUBY_DEBUG_OPEN=true thrust bin/rails server -b 0.0.0.0 -p $PORT
 js: yarn build --watch
 css: yarn build:css --watch
 worker: bin/jobs
