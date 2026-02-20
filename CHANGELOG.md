@@ -1,5 +1,28 @@
 # Changelog
 
+## [2.84.0](https://github.com/eventaservo/eventaservo/compare/v2.83.0...v2.84.0) (2026-02-20)
+
+
+### Features
+
+* improve accessibility of organization form help text ([811f3db](https://github.com/eventaservo/eventaservo/commit/811f3db203ffc93a7543e56bfb791df2347c9cc2))
+* **Users:** implement API token regeneration functionality for users ([#941](https://github.com/eventaservo/eventaservo/issues/941)) ([be2b371](https://github.com/eventaservo/eventaservo/commit/be2b371c9367f1b41539ce97277ad000628cdae2))
+
+
+### Bug Fixes
+
+* Correct typo in article link description ([3fceccc](https://github.com/eventaservo/eventaservo/commit/3fceccc14d02428b5e7f7c829cf9811a7fc95276))
+* minify JS bundle in production to prevent asset truncation ([#995](https://github.com/eventaservo/eventaservo/issues/995)) ([7e95b30](https://github.com/eventaservo/eventaservo/commit/7e95b3067155fce54eb1667a5e9b7abf30538043))
+* pin @redocly/cli to v1.0.2 to fix Docker build ([#992](https://github.com/eventaservo/eventaservo/issues/992)) ([0ea16ff](https://github.com/eventaservo/eventaservo/commit/0ea16ff5db5d591228d23e2ab74b5e78db5889e6))
+* remove duplicate Sentry loader script causing replayIntegration error ([e5e74fe](https://github.com/eventaservo/eventaservo/commit/e5e74fef0b42a1839de61a37b0824595fa1f3456))
+* remove extra commas in full_address when fields are empty ([554d8b6](https://github.com/eventaservo/eventaservo/commit/554d8b6a9192cf56912662b1b127f8ed8be729d8))
+
+
+### Performance Improvements
+
+* add functional indexes to speed up EventsController#by_continent ([#996](https://github.com/eventaservo/eventaservo/issues/996)) ([5083a56](https://github.com/eventaservo/eventaservo/commit/5083a56668cba33ca34f20b87e07174b9642b300))
+* Optimize ads loading in HomeController ([#988](https://github.com/eventaservo/eventaservo/issues/988)) ([190aecb](https://github.com/eventaservo/eventaservo/commit/190aecb5b5d98808619c954344345ed7d529bec5))
+
 ## [2.83.0](https://github.com/eventaservo/eventaservo/compare/v2.82.0...v2.83.0) (2026-01-17)
 
 
