@@ -42,6 +42,7 @@ FROM base as production
 # Sets environment variables
 ARG ENVIRONMENT=production
 ENV RAILS_ENV=${ENVIRONMENT}
+ENV NODE_ENV=production
 ENV RAILS_LOG_TO_STDOUT=true
 ENV RAILS_SERVE_STATIC_FILES=true
 ENV GOOGLE_MAPS_KEY=${GOOGLE_MAPS_KEY}
