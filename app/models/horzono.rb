@@ -10,4 +10,10 @@
 #
 class Horzono < ApplicationRecord
   self.table_name = "timezones"
+
+  def self.for_select
+    Rails.cache.fetch("horzono/for_select", expires_in: 1.day) do
+      all.map { |h| [h.eo, h.en] }
+    end
+  end
 end
