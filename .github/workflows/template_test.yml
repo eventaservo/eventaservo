@@ -44,8 +44,8 @@ jobs:
       - name: Yarn
         run: yarn install
 
-      - name: Precompile assets
-        run: SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+      - name: Build assets
+        run: yarn build && yarn build:css
 
       - name: Prepare Test
         run: |
