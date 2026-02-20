@@ -24,7 +24,7 @@ class Country < ApplicationRecord
 
   # Ĝusta nomo de la kontinento, ne gravas la ortografion
   def self.continent_name(name)
-    record = where("unaccent(lower(countries.continent)) = ?", name.normalized)
+    record = where("immutable_unaccent(lower(countries.continent)) = ?", name.normalized)
     record.first.continent if record.any?
   end
 
