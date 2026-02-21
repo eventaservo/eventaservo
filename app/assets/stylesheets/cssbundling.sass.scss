@@ -1,5 +1,7 @@
 // Entry point for your Sass build
 
+@import "bootstrap/scss/bootstrap";
+
 @import "leaflet/dist/leaflet";
 @import "leaflet.markercluster/dist/MarkerCluster";
 @import "leaflet.markercluster/dist/MarkerCluster.Default";

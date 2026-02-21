@@ -19,7 +19,6 @@ gem "sass-rails", "~> 6"
 # gem 'mini_racer', platforms: :ruby
 
 gem "bootsnap", require: false
-gem "bootstrap", "~> 4.3"
 gem "font-awesome-sass", "~> 6"
 gem "jquery-rails", "~> 4.3", ">= 4.3.3"
 gem "jquery-ui-rails", "~> 8.0"
