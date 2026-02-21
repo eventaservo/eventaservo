@@ -1,15 +1,8 @@
 require "test_helper"
 
-class VideoControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
-    video = create(:video)
-    get video_url
-    assert_response :success
-    assert_match video.title, response.body
-  end
-
+class VideoController::CreateTest < ActionDispatch::IntegrationTest
   test "should create video" do
-    event = create(:event)
+    event = events(:valid_event)
 
     assert_difference("Video.count") do
       post event_new_video_url(event_code: event.code), params: {
