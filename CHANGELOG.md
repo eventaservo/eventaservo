@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.84.1](https://github.com/eventaservo/eventaservo/compare/v2.84.0...v2.84.1) (2026-02-21)
+
+
+### Bug Fixes
+
+* refactor timezone selection to use cached method for improved performance ([8fe351d](https://github.com/eventaservo/eventaservo/commit/8fe351d5ee524d1b0620fa8c3c844e1a901623ec))
+* remove self-closing tags in HTML for better compatibility ([e7d0dde](https://github.com/eventaservo/eventaservo/commit/e7d0dded7a7d16d91ff8afc4303e2756343d6e3d))
+* remove unused ad factory file to clean up test suite ([6c3afe7](https://github.com/eventaservo/eventaservo/commit/6c3afe7103c3b37aaeb92fa8a7e60fc9283b54c3))
+* update gem versions for improved compatibility and security ([bdbb8ae](https://github.com/eventaservo/eventaservo/commit/bdbb8aebfaa47fcbfa034b917bd261bb33c47ed2))
+
 ## [2.84.0](https://github.com/eventaservo/eventaservo/compare/v2.83.0...v2.84.0) (2026-02-20)
 
 
