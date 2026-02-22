@@ -42,7 +42,6 @@ gem "devise", ">= 4.7.1"
 gem "jwt", "~> 2.2"
 gem "pg", "~> 1.1", ">= 1.1.3"
 gem "simple_token_authentication", "~> 1.0"
-gem "social-share-button"
 
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 # gem 'turbolinks', '~> 5'

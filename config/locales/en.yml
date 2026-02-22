@@ -107,9 +107,6 @@ en:
     add_event: Add event
     log_in_sign_up: Login / Signup
     organizations: Organizations
-  social_share_button:
-    share_to: share via
-    whatsapp_app: WhatsApp
   support:
     array:
       last_word_connector: " and "

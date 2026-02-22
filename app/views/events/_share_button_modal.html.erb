@@ -13,8 +13,32 @@
       <div class="modal-body">
         <div class="text-center">
           <p>Elektu kiel diskonigi la eventon</p>
-          <% sharing_text = "#{@event.title.tr("'", "")} | #{@event.description}" %>
-          <%= social_share_button_tag(sharing_text, desc: sharing_text, 'data-twitter-title' => sharing_text[0..200] + " #eventaservo") %>
+          <% encoded_url = CGI.escape(request.url) %>
+          <% encoded_title = CGI.escape(@event.title.to_s) %>
+          <a href="mailto:?subject=<%= encoded_title %>&body=<%= encoded_url %>" class="btn btn-outline-secondary m-1" title="Email">
+            <i class="fas fa-envelope"></i>
+          </a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=<%= encoded_url %>" class="btn btn-outline-secondary m-1" title="Facebook" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-facebook"></i>
+          </a>
+          <a href="https://twitter.com/intent/tweet?url=<%= encoded_url %>&text=<%= encoded_title %>" class="btn btn-outline-secondary m-1" title="Twitter" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="whatsapp://send?text=<%= encoded_title %>%0A<%= encoded_url %>" class="btn btn-outline-secondary m-1" title="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+          <a href="https://telegram.me/share/url?text=<%= encoded_title %>&url=<%= encoded_url %>" class="btn btn-outline-secondary m-1" title="Telegram" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-telegram"></i>
+          </a>
+          <a href="https://www.pinterest.com/pin/create/button/?url=<%= encoded_url %>&description=<%= encoded_title %>" class="btn btn-outline-secondary m-1" title="Pinterest" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-pinterest"></i>
+          </a>
+          <a href="https://vk.com/share.php?url=<%= encoded_url %>&title=<%= encoded_title %>" class="btn btn-outline-secondary m-1" title="VKontakte" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-vk"></i>
+          </a>
+          <a href="https://www.reddit.com/submit?url=<%= encoded_url %>&newwindow=1" class="btn btn-outline-secondary m-1" title="Reddit" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-reddit"></i>
+          </a>
         </div>
       </div>
 
