@@ -4,6 +4,7 @@
   "license": "AGPL-3.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "6",
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^7.3.0",
     "@josefarias/hotwire_combobox": "^0.3.2",
@@ -11,12 +12,15 @@
     "@rails/actiontext": "^7.2.300",
     "@rails/activestorage": "^7.2.300",
     "@rails/ujs": "^7.1.600",
+    "bootstrap": "4.6.2",
     "chartkick": "^5.0.1",
     "esbuild": "^0.25.12",
     "highcharts": "^11.4.8",
+    "jquery": "3",
     "leaflet": "^1.9.4",
     "leaflet.markercluster": "^1.5.3",
     "moment": "^2.30.1",
+    "popper.js": "^1.16.1",
     "sass": "^1.97.2",
     "slim-select": "^2.13.1",
     "trix": "^2.1.16"
@@ -26,6 +30,6 @@
   },
   "scripts": {
     "build": "node esbuild.config.js",
-    "build:css": "sass ./app/assets/stylesheets/cssbundling.sass.scss:./app/assets/builds/cssbundling.css --no-source-map --load-path=node_modules"
+    "build:css": "cp -r node_modules/@fortawesome/fontawesome-free/webfonts public/webfonts && sass ./app/assets/stylesheets/cssbundling.sass.scss:./app/assets/builds/cssbundling.css --no-source-map --load-path=node_modules"
   }
 }
