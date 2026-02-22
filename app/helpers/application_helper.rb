@@ -3,6 +3,21 @@
 module ApplicationHelper
   include Pagy::Frontend
 
+  # Font Awesome icon helper — replicates font-awesome-sass gem's icon() method.
+  # Generates <i class="STYLE fa-NAME" aria-hidden="true"></i> followed by optional text.
+  def icon(style, name, text = nil, html_options = {})
+    text, html_options = nil, text if text.is_a?(Hash)
+
+    content_class = "#{style} fa-#{name}"
+    content_class << " #{html_options[:class]}" if html_options.key?(:class)
+    html_options[:class] = content_class
+    html_options["aria-hidden"] ||= true
+
+    html = content_tag(:i, nil, html_options)
+    html << " " << text.to_s unless text.blank?
+    html
+  end
+
   def page_title(title, subtext = nil)
     content_tag(:h2, class: "text-center") do
       concat title

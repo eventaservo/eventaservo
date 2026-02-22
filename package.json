@@ -4,6 +4,7 @@
   "license": "AGPL-3.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "6",
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^7.3.0",
     "@josefarias/hotwire_combobox": "^0.3.2",
@@ -27,6 +28,6 @@
   },
   "scripts": {
     "build": "node esbuild.config.js",
-    "build:css": "sass ./app/assets/stylesheets/cssbundling.sass.scss:./app/assets/builds/cssbundling.css --no-source-map --load-path=node_modules"
+    "build:css": "cp -r node_modules/@fortawesome/fontawesome-free/webfonts public/webfonts && sass ./app/assets/stylesheets/cssbundling.sass.scss:./app/assets/builds/cssbundling.css --no-source-map --load-path=node_modules"
   }
 }

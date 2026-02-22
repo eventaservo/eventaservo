@@ -2,6 +2,34 @@
 
 @import "bootstrap/scss/bootstrap";
 
+@import "@fortawesome/fontawesome-free/scss/fontawesome";
+@import "@fortawesome/fontawesome-free/scss/solid";
+@import "@fortawesome/fontawesome-free/scss/brands";
+@import "@fortawesome/fontawesome-free/scss/regular";
+
+// App styles (depend on Bootstrap mixins/variables)
+@import "colors";
+@import "partials/boxwhite";
+@import "partials/buttons";
+@import "partials/calendar_icon";
+@import "partials/changelog";
+@import "partials/combobox";
+@import "partials/diffy";
+@import "partials/es-lists";
+@import "partials/event-count";
+@import "partials/events";
+@import "partials/flash";
+@import "partials/form";
+@import "partials/full_calendar";
+@import "partials/maps";
+@import "partials/organizations";
+@import "partials/page";
+@import "partials/prie";
+@import "partials/profile";
+@import "partials/reklamoj";
+@import "partials/toolbar";
+@import "partials/typography";
+
 @import "leaflet/dist/leaflet";
 @import "leaflet.markercluster/dist/MarkerCluster";
 @import "leaflet.markercluster/dist/MarkerCluster.Default";
