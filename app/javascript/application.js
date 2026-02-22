@@ -1,9 +1,10 @@
 // Entry point for the build script in your package.json
 import '@hotwired/turbo-rails'
 
-// jQuery — exposed globally for Sprockets-loaded scripts (form.js, etc.)
+// jQuery — use the Sprockets-loaded jQuery if already present, otherwise expose the npm one.
+// This ensures jQuery UI, jquery.mask and other Sprockets plugins share the same jQuery instance.
 import $ from 'jquery'
-window.$ = window.jQuery = $
+if (!window.jQuery) window.$ = window.jQuery = $
 
 // Bootstrap JS (includes Popper.js for dropdowns, tooltips, etc.)
 import 'bootstrap'
