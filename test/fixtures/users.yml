@@ -70,3 +70,17 @@ system_user:
   username: system_account
   system_account: true
   webcal_token: systemAccountWebcalToken456
+
+admin_user:
+  admin: true
+  authentication_token: _adminUserToken123
+  birthday: "1980-01-01"
+  city: Admin City
+  confirmed_at: "2019-01-01 00:00:00"
+  country_id: 1
+  disabled: false
+  email: admin@example.com
+  name: Admin User
+  username: admin_user
+  system_account: false
+  webcal_token: adminUserWebcalToken789
