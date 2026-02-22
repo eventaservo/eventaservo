@@ -1,6 +1,6 @@
 require "test_helper"
 
-class Admin::CountriesControllerTest < ActionDispatch::IntegrationTest
+class Admin::CountriesController::IndexTest < ActionDispatch::IntegrationTest
   test "should get index as admin" do
     sign_in users(:admin_user)
     get admin_countries_url

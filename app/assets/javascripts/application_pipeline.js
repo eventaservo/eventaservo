@@ -14,6 +14,8 @@
 //= require jquery3
 //= require jquery_ujs
 //= require jquery-ui
+//= require popper
+//= require bootstrap-sprockets
 //= require jquery.mask.min
 //= require moment
 //= require fullcalendar
