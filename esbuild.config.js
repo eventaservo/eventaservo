@@ -9,8 +9,6 @@ const config = {
   publicPath: "assets",
   minify: isProduction,
   logLevel: "info",
-  // jquery and popper.js are loaded via Sprockets (jquery-rails gem)
-  external: ["jquery", "popper.js"],
 }
 
 if (isWatch) {
