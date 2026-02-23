@@ -75,3 +75,6 @@ http-requests/.env
 .claude/*
 !.claude/skills/
 !.claude/commands/
+
+# bun (not the package manager used by this project)
+bun.lock
