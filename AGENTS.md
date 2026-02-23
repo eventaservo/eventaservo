@@ -25,7 +25,7 @@ The project supports three languages:
 
 ## Code Style
 
-- **Language**: Always use English for code, comments, specs, and commit messages
+- **Language**: Always use English for code, comments, specs, commit messages, PR titles, and PR descriptions
 - **Commits**: Use **Conventional Commits** standard and always write messages in **English**
 - **Ruby formatting**: Use `standard` gem; include `frozen_string_literal: true` at top of files
 - **Documentation**: Use YARD format (`@param`, `@return`) for all methods including private ones

@@ -28,6 +28,7 @@ module Eventaservo
     config.active_storage.variant_processor = :mini_magick
     config.action_dispatch.default_headers = {"X-Frame-Options" => "ALLOWALL"}
     config.active_record.yaml_column_permitted_classes = [Symbol, Date, Time, ActiveSupport::TimeWithZone, ActiveSupport::TimeZone]
+    config.active_record.schema_format = :sql
 
     config.eager_load_paths << Rails.root.join("test/mailers/previews")
 

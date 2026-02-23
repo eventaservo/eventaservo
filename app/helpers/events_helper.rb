@@ -16,12 +16,13 @@ module EventsHelper
     return unless event.country.code
     return if event.organizations.any? { |o| o.display_flag == false }
 
+    flag = flag_icon(event.country.code)
     if event.universala?
       "🖥 "
     elsif event.online
-      flag_icon(event.country.code) + " 🖥 "
+      flag + " 🖥 "
     else
-      flag_icon(event.country.code)
+      flag
     end
   end
 

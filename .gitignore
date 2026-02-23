@@ -25,6 +25,8 @@
 
 /public/assets
 /public/sitemap
+/public/webfonts
+/public/flags
 .byebug_history
 
 # Ignore master key for decrypting credentials and more.
@@ -74,3 +76,6 @@ http-requests/.env
 .claude/*
 !.claude/skills/
 !.claude/commands/
+
+# bun (not the package manager used by this project)
+bun.lock

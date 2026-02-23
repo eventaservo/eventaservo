@@ -1,9 +1,4 @@
-<%- if Rails.application.credentials.dig(:sentry, :dsn) && Rails.application.credentials.dig(:sentry, :js_url) %>
-  <script
-    src="<%= Rails.application.credentials.dig(:sentry, :js_url) %>"
-    crossorigin="anonymous">
-  </script>
-
+<%- if Rails.application.credentials.dig(:sentry, :dsn) %>
   <script
     src="https://browser.sentry-cdn.com/7.113.0/bundle.tracing.replay.min.js"
     integrity="sha384-wXgzLdc+RJ2eAiFpbvC5qUGzPUApNnMOI/DBvb1hSu8Zo4J/7NkxmP4DvBmNvWbQ"

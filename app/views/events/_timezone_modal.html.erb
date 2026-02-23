@@ -29,7 +29,7 @@
 
           <div data-controller="timezone" class="form-group">
             <% selected = @event.nil? ? (cookies[:horzono] || nil) : @event.time_zone %>
-            <%= select_tag(:horzono, options_for_select(Horzono.all.map { |h| [h.eo, h.en] }, selected),
+            <%= select_tag(:horzono, options_for_select(Horzono.for_select, selected),
               data: { timezone_target: "timezoneSelect" }) %>
           </div>
         </div>

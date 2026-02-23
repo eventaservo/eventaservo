@@ -107,9 +107,6 @@ eo:
     add_event: Aldoni eventon
     log_in_sign_up: Ensaluti / Registriĝi
     organizations: Organizoj
-  social_share_button:
-    share_to: diskonigi per
-    whatsapp_app: WhatsApp
   support:
     array:
       last_word_connector: " kaj "

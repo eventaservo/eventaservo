@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "~> 3.4.7"
+ruby "~> 3.4.8"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 7.2.2.2"
@@ -19,8 +19,7 @@ gem "sass-rails", "~> 6"
 # gem 'mini_racer', platforms: :ruby
 
 gem "bootsnap", require: false
-gem "bootstrap", "~> 4.3"
-gem "font-awesome-sass", "~> 6"
+
 gem "jquery-rails", "~> 4.3", ">= 4.3.3"
 gem "jquery-ui-rails", "~> 8.0"
 
@@ -36,14 +35,10 @@ gem "omniauth-facebook", "~> 9.0"
 gem "omniauth-google-oauth2", "~> 1.2"
 gem "omniauth-rails_csrf_protection"
 
-# CSS kaj fasonado
-gem "flag-icons-rails", "~> 3.4"
-
 gem "devise", ">= 4.7.1"
 gem "jwt", "~> 2.2"
 gem "pg", "~> 1.1", ">= 1.1.3"
 gem "simple_token_authentication", "~> 1.0"
-gem "social-share-button"
 
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 # gem 'turbolinks', '~> 5'

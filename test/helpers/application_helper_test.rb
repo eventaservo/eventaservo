@@ -75,6 +75,46 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_equal "17 julio 2018 - 6 januaro 2019", event_date(event)
   end
 
+  # flag_icon tests
+  test "flag_icon renders a span with fi classes for a string country code" do
+    result = flag_icon("br")
+
+    assert_equal '<span class="fi fi-br"></span>', result
+  end
+
+  test "flag_icon renders a span with fi classes for a symbol country code" do
+    result = flag_icon(:gb)
+
+    assert_equal '<span class="fi fi-gb"></span>', result
+  end
+
+  test "flag_icon upcases country code correctly" do
+    result = flag_icon("BR")
+
+    assert_equal '<span class="fi fi-br"></span>', result
+  end
+
+  test "flag_icon adds fis class when squared is true" do
+    result = flag_icon("br", squared: true)
+
+    assert_equal '<span class="fi fi-br fis"></span>', result
+  end
+
+  # montras_flagon tests
+  test "montras_flagon renders flag for a country" do
+    country = countries(:country_1)
+
+    result = montras_flagon(country)
+
+    assert_equal '<span class="fi fi-af"></span>', result
+  end
+
+  test "montras_flagon returns nil when country is nil" do
+    result = montras_flagon(nil)
+
+    assert_nil result
+  end
+
   # event_full_description tests
   test "event_full_description should return the full address for RSS" do
     event = create(:event, :brazila)

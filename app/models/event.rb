@@ -33,7 +33,7 @@
 #  uuid                   :uuid
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  country_id             :integer          not null
+#  country_id             :integer          not null, indexed
 #  user_id                :integer          not null, indexed
 #
 
@@ -174,7 +174,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
       joins(:country).online
     else
       normalized_name = continent_name.normalized
-      joins(:country).where("unaccent(lower(countries.continent)) = lower(?)", normalized_name)
+      joins(:country).where("immutable_unaccent(lower(countries.continent)) = lower(?)", normalized_name)
     end
   end
 
@@ -246,8 +246,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   def full_address
     return "" if online && city == "Reta"
 
-    # TODO: Forviŝu la komon kiam ne estas adreso
-    [address, city, country.try(:code).try(:upcase)].compact.join(", ")
+    [address, city, country.try(:code).try(:upcase)].reject(&:blank?).join(", ")
   end
 
   def require_geocode?

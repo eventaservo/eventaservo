@@ -3,6 +3,21 @@
 module ApplicationHelper
   include Pagy::Frontend
 
+  # Font Awesome icon helper — replicates font-awesome-sass gem's icon() method.
+  # Generates <i class="STYLE fa-NAME" aria-hidden="true"></i> followed by optional text.
+  def icon(style, name, text = nil, html_options = {})
+    text, html_options = nil, text if text.is_a?(Hash)
+
+    content_class = "#{style} fa-#{name}"
+    content_class << " #{html_options[:class]}" if html_options.key?(:class)
+    html_options[:class] = content_class
+    html_options["aria-hidden"] ||= true
+
+    html = content_tag(:i, nil, html_options)
+    html << " " << text.to_s unless text.blank?
+    html
+  end
+
   def page_title(title, subtext = nil)
     content_tag(:h2, class: "text-center") do
       concat title
@@ -104,6 +119,31 @@ module ApplicationHelper
     end
   end
 
+  # Renders a country flag icon as an inline span element using the flag-icons npm package.
+  #
+  # @example Rectangular flag
+  #   flag_icon("br")
+  #   # => <span class="fi fi-br"></span>
+  #
+  # @example Squared flag
+  #   flag_icon(:gb, squared: true)
+  #   # => <span class="fi fi-gb fis"></span>
+  #
+  # @param country_code [String, Symbol] ISO 3166-1 alpha-2 country code (e.g. "br", :gb)
+  # @param squared [Boolean] whether to render the squared (1x1) variant; defaults to false
+  #
+  # @return [ActiveSupport::SafeBuffer] HTML span with the appropriate flag-icons CSS classes
+  def flag_icon(country_code, squared: false)
+    classes = ["fi", "fi-#{country_code.to_s.downcase}"]
+    classes << "fis" if squared
+    content_tag(:span, nil, class: classes.join(" "))
+  end
+
+  # Renders the flag icon for a country object (Esperanto: montras flagon).
+  #
+  # @param lando [Country, nil] a country object responding to `#code`
+  #
+  # @return [ActiveSupport::SafeBuffer, nil] flag icon HTML, or nil if lando is nil
   def montras_flagon(lando)
     return if lando.nil?
     flag_icon(lando.code)

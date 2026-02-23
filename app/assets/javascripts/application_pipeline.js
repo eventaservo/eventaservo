@@ -14,14 +14,11 @@
 //= require jquery3
 //= require jquery_ujs
 //= require jquery-ui
-//= require popper
-//= require bootstrap-sprockets
 //= require jquery.mask.min
 //= require moment
 //= require fullcalendar
 //= require jquery-smartphoto
 //= require direct_uploads
-//= require social-share-button
 //= require highcharts
 //= require highcharts/modules/drilldown
 //= require_tree .

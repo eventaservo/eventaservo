@@ -158,8 +158,7 @@
         <div id="horzono">
           <div class="form-group">
             <%= form.label :time_zone, 'Horzono' %>
-            <% timezones = Horzono.all.map { |h| [h.eo, h.en] } %>
-            <%= form.combobox("time_zone", timezones) %>
+            <%= form.combobox("time_zone", Horzono.for_select) %>
           </div>
         </div>
 

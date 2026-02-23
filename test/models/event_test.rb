@@ -33,7 +33,7 @@
 #  uuid                   :uuid
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  country_id             :integer          not null
+#  country_id             :integer          not null, indexed
 #  user_id                :integer          not null, indexed
 #
 
