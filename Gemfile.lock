@@ -198,8 +198,6 @@ GEM
     ffi (1.17.3-aarch64-linux-gnu)
     ffi (1.17.3-arm64-darwin)
     ffi (1.17.3-x86_64-linux-gnu)
-    flag-icons-rails (3.4.6.1)
-      sass-rails
     formtastic (5.0.0)
       actionpack (>= 6.0.0)
     formtastic_i18n (0.7.0)
@@ -742,7 +740,6 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   faker
-  flag-icons-rails (~> 3.4)
   fullcalendar-rails (~> 3.9)
   geocoder (~> 1.6)
   google-api-client (~> 0.53.0)

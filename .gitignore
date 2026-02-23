@@ -26,6 +26,7 @@
 /public/assets
 /public/sitemap
 /public/webfonts
+/public/flags
 .byebug_history
 
 # Ignore master key for decrypting credentials and more.

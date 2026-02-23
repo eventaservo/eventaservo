@@ -15,6 +15,7 @@
     "bootstrap": "4.6.2",
     "chartkick": "^5.0.1",
     "esbuild": "^0.25.12",
+    "flag-icons": "^7.5.0",
     "fullcalendar": "3.10.5",
     "highcharts": "^11.4.8",
     "jquery": "3",
@@ -32,6 +33,6 @@
   },
   "scripts": {
     "build": "node esbuild.config.js",
-    "build:css": "cp -r node_modules/@fortawesome/fontawesome-free/webfonts public/webfonts && sass ./app/assets/stylesheets/cssbundling.sass.scss:./app/assets/builds/cssbundling.css --no-source-map --load-path=node_modules"
+    "build:css": "cp -r node_modules/@fortawesome/fontawesome-free/webfonts public/webfonts && cp -r node_modules/flag-icons/flags public/flags && sass ./app/assets/stylesheets/cssbundling.sass.scss:./app/assets/builds/cssbundling.css --no-source-map --load-path=node_modules"
   }
 }

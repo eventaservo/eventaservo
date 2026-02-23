@@ -119,6 +119,31 @@ module ApplicationHelper
     end
   end
 
+  # Renders a country flag icon as an inline span element using the flag-icons npm package.
+  #
+  # @example Rectangular flag
+  #   flag_icon("br")
+  #   # => <span class="fi fi-br"></span>
+  #
+  # @example Squared flag
+  #   flag_icon(:gb, squared: true)
+  #   # => <span class="fi fi-gb fis"></span>
+  #
+  # @param country_code [String, Symbol] ISO 3166-1 alpha-2 country code (e.g. "br", :gb)
+  # @param squared [Boolean] whether to render the squared (1x1) variant; defaults to false
+  #
+  # @return [ActiveSupport::SafeBuffer] HTML span with the appropriate flag-icons CSS classes
+  def flag_icon(country_code, squared: false)
+    classes = ["fi", "fi-#{country_code.to_s.downcase}"]
+    classes << "fis" if squared
+    content_tag(:span, nil, class: classes.join(" "))
+  end
+
+  # Renders the flag icon for a country object (Esperanto: montras flagon).
+  #
+  # @param lando [Country, nil] a country object responding to `#code`
+  #
+  # @return [ActiveSupport::SafeBuffer, nil] flag icon HTML, or nil if lando is nil
   def montras_flagon(lando)
     return if lando.nil?
     flag_icon(lando.code)
