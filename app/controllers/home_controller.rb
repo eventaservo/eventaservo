@@ -119,8 +119,8 @@ class HomeController < ApplicationController
       @search_is_valid = true
 
       @organizations = Organization.includes(:country).serchi(@search_term).order(:name)
-      @users = User.serchi(@search_term)
-      @videos = Video.serchi(@search_term)
+      @users = User.includes(:country).serchi(@search_term)
+      @videos = Video.includes(:evento).serchi(@search_term)
 
       @events = Event.includes(%i[country participants organizations]).search(@search_term)
       @events = @events.future_and_just_finished if params[:pasintaj].nil?
