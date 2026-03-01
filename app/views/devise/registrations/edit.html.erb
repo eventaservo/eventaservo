@@ -37,7 +37,7 @@
         <%= f.label :birthday, 'Naskiĝdato', class: 'col-form-label col-md-3' %>
         <div class="col-md-9">
           <%= f.text_field :birthday, value: (resource.birthday.strftime("%d/%m/%Y") if resource.birthday?),
-                           class: 'birthday form-control' %>
+                           class: 'birthday form-control', data: { controller: 'mask', mask_pattern_value: 'birthday' } %>
         </div>
       </div>
       <div class="form-group row">

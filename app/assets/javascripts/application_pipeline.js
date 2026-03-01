@@ -14,7 +14,6 @@
 //= require jquery3
 //= require jquery_ujs
 //= require jquery-ui
-//= require jquery.mask.min
 //= require moment/moment
 //= require fullcalendar
 //= require jquery-smartphoto

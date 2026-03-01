@@ -16,6 +16,9 @@ application.register("event-user-interested-button", EventUserInterestedButtonCo
 import FlashMessageController from "./flash_message_controller"
 application.register("flash-message", FlashMessageController)
 
+import MaskController from "./mask_controller"
+application.register("mask", MaskController)
+
 import MapViewController from "./map_view_controller"
 application.register("map-view", MapViewController)
 
