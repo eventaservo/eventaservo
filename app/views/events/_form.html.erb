@@ -54,11 +54,16 @@
             <div class="form-group">
               <%= form.label :date_start, 'Komenca dato' %>
               <div class="form-row">
-                <div class="col-8">
-                  <%= form.text_field :date_start, value: @event.komenca_tago(horzono: @event.time_zone), class: 'datepicker form-control', data: { controller: 'mask', mask_pattern_value: 'date' } %>
+                <div class="col-8" data-controller="datepicker"
+                     data-action="datepicker:complete->event--form#syncEndDate">
+                  <input type="hidden" name="event[date_start]" data-datepicker-target="hidden">
+                  <input type="date" class="form-control"
+                         data-datepicker-target="input"
+                         data-action="change->datepicker#sync blur->datepicker#complete"
+                         data-initial="<%= @event.komenca_tago(horzono: @event.time_zone) %>">
                 </div>
                 <div class="col-4">
-                  <%= text_field_tag(:time_start, @event.komenca_horo, class: 'timemask form-control', required: true, aria: { label: 'Komenca horo' }, data: { controller: 'mask', mask_pattern_value: 'time' }) %>
+                  <%= text_field_tag(:time_start, @event.komenca_horo, class: 'timemask form-control', required: true, aria: { label: 'Komenca horo' }, data: { controller: 'mask', mask_pattern_value: 'time', 'event--form-target': 'timeStart' }) %>
                 </div>
               </div>
             </div>
@@ -68,11 +73,17 @@
             <div class="form-group">
               <%= form.label :date_end, 'Fina dato' %>
               <div class="form-row">
-                <div class="col-8">
-                  <%= form.text_field :date_end, value: @event.fina_tago(horzono: @event.time_zone), class: 'datepicker form-control', data: { controller: 'mask', mask_pattern_value: 'date' } %>
+                <div class="col-8" data-controller="datepicker"
+                     data-action="datepicker:complete->event--form#focusEndTime">
+                  <input type="hidden" name="event[date_end]" data-datepicker-target="hidden" data-event--form-target="endDateHidden">
+                  <input type="date" class="form-control"
+                         data-datepicker-target="input"
+                         data-action="change->datepicker#sync blur->datepicker#complete"
+                         data-initial="<%= @event.fina_tago(horzono: @event.time_zone) %>"
+                         data-event--form-target="endDateInput">
                 </div>
                 <div class="col-4">
-                  <%= text_field_tag(:time_end, @event.fina_horo, class: 'timemask form-control', required: true, aria: { label: 'Fina horo' }, data: { controller: 'mask', mask_pattern_value: 'time' }) %>
+                  <%= text_field_tag(:time_end, @event.fina_horo, class: 'timemask form-control', required: true, aria: { label: 'Fina horo' }, data: { controller: 'mask', mask_pattern_value: 'time', 'event--form-target': 'timeEnd' }) %>
                 </div>
               </div>
             </div>

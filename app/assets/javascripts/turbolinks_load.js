@@ -1,10 +1,4 @@
 $(function () {
-  $('.datepicker').datepicker({
-    dateFormat: 'dd/mm/yy',
-    firstDay: 1
-
-  });
-
   $('[data-toggle="tooltip"]').tooltip();
 
   $('#search_form input').keyup(function (event) {

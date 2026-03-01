@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import DatepickerController from "./datepicker_controller"
+application.register("datepicker", DatepickerController)
+
 import Event__FormController from "./event/form_controller"
 application.register("event--form", Event__FormController)
 
