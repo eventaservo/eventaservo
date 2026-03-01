@@ -7,8 +7,6 @@ $(function () {
 
   $('[data-toggle="tooltip"]').tooltip();
 
-  $('.js-smartPhoto').SmartPhoto();
-
   $('#search_form input').keyup(function (event) {
     if (event.which === 13) {
       $(this).blur();
