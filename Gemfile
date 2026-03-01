@@ -26,7 +26,6 @@ gem "jquery-ui-rails", "~> 8.0"
 # Kalendaroj
 gem "fullcalendar-rails", "~> 3.9"
 gem "icalendar", "~> 2.6"
-gem "momentjs-rails", "~> 2.20"
 
 gem "mini_magick", "~> 4.10"
 

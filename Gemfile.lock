@@ -762,7 +762,6 @@ DEPENDENCIES
   mini_magick (~> 4.10)
   minitest (~> 5.5)
   mission_control-jobs
-  momentjs-rails (~> 2.20)
   nokogiri (>= 1.10.4)
   omniauth-facebook (~> 9.0)
   omniauth-google-oauth2 (~> 1.2)
