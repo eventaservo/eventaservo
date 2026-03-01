@@ -13,7 +13,8 @@
         <span class="float-right">
           <%= link_to icon('far', 'calendar-alt'),
             webcal_organizo_url(short_name: @organizo.short_name, protocol: :webcal, format: :ics),
-            data: { target: '#webcalModal', toggle: 'modal' } %>
+            data: { target: '#webcalModal', toggle: 'modal' },
+            aria: { label: 'Aboni organizan kalendaron' } %>
         </span>
       </div>
 
