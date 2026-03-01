@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class TagTest < ActiveSupport::TestCase
+class Tag::ValidationTest < ActiveSupport::TestCase
   test "invalid without name" do
     tag = Tag.new(group_name: "category")
     refute tag.valid?
