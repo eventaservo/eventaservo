@@ -16,7 +16,6 @@
 //= require jquery-ui
 //= require moment/moment
 //= require fullcalendar
-//= require jquery-smartphoto
 //= require direct_uploads
 //= require highcharts
 //= require highcharts/modules/drilldown
