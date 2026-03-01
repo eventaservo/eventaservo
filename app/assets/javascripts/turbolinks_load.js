@@ -5,18 +5,6 @@ $(function () {
 
   });
 
-  $('.datepicker').mask('00/00/0000', {
-    placeholder: '__/__/____'
-  });
-  $('.birthday').mask('00/00/0000', {
-    placeholder: 'Naskiĝdato (T/M/J) *ne deviga'
-  });
-  $('.timemask').mask('00:00', {
-    placeholder: '__:__'
-  }).on('focus click touchend', function () {
-    $(this)[0].setSelectionRange(0, 5);
-  });
-
   $('[data-toggle="tooltip"]').tooltip();
 
   $('.js-smartPhoto').SmartPhoto();

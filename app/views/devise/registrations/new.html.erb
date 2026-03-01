@@ -38,7 +38,7 @@
         <%= f.combobox("country_id", Country.all, placeholder: 'Lando', required: true)%>
       </div>
       <div class="form-group">
-        <%= f.text_field :birthday, class: 'birthday form-control' %>
+        <%= f.text_field :birthday, class: 'birthday form-control', placeholder: 'Naskiĝdato (T/M/J) *ne deviga', data: { controller: 'mask', mask_pattern_value: 'birthday' } %>
       </div>
       <div class="form-group">
         <%= f.text_field :ueacode, class: 'form-control', placeholder: 'UEA-kodo *ne deviga' %>
