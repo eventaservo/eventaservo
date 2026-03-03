@@ -10,9 +10,9 @@ class EventsSystemTest < ApplicationSystemTestCase
     visit new_event_path
     fill_in "event_title", with: "Test event"
     fill_in "event_description", with: "Test event description"
-    fill_in "event_date_start", with: Date.today.strftime("%d/%m/%Y")
+    fill_in "event_date_start", with: Date.today.iso8601
     fill_in "time_start", with: "12:00"
-    fill_in "event_date_end", with: Date.today.strftime("%d/%m/%Y")
+    fill_in "event_date_end", with: Date.today.iso8601
     fill_in "time_end", with: "14:00"
     find("#event_enhavo").click
     send_keys "Test event content"

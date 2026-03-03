@@ -57,7 +57,7 @@
                 <div class="col-8" data-controller="datepicker"
                      data-action="datepicker:complete->event--form#syncEndDate">
                   <input type="hidden" name="event[date_start]" data-datepicker-target="hidden">
-                  <input type="date" class="form-control"
+                  <input type="date" id="event_date_start" class="form-control"
                          data-datepicker-target="input"
                          data-action="change->datepicker#sync blur->datepicker#complete"
                          data-initial="<%= @event.komenca_tago(horzono: @event.time_zone) %>">
@@ -76,7 +76,7 @@
                 <div class="col-8" data-controller="datepicker"
                      data-action="datepicker:complete->event--form#focusEndTime">
                   <input type="hidden" name="event[date_end]" data-datepicker-target="hidden" data-event--form-target="endDateHidden">
-                  <input type="date" class="form-control"
+                  <input type="date" id="event_date_end" class="form-control"
                          data-datepicker-target="input"
                          data-action="change->datepicker#sync blur->datepicker#complete"
                          data-initial="<%= @event.fina_tago(horzono: @event.time_zone) %>"
