@@ -62,11 +62,11 @@
         <p>
           Jen Webcal-ligilo por aboni la kalendaron. Uzu ĝin en programoj kiel Google Calendar, iCal aŭ similaj. Se vi bezonas klarigon kiel uzi la ligilon, legu <%= link_to 'ĉi tiun artikolon', 'https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)', target: '_blank' %>.
         </p>
-        <div class="input-group">
+        <div class="input-group" data-controller="clipboard">
           <div class="input-group-prepend">
-            <%= link_to 'Kopii', 'javascript:;', id: 'copy_button', class: 'input-group-text' %>
+            <%= link_to 'Kopii', '#', class: 'input-group-text', data: { action: 'click->clipboard#copy' } %>
           </div>
-          <%= text_field_tag nil, webcal_user_url(webcal_token: @uzanto.webcal_token, format: :ics), id: 'webcalurl', readonly: true, class: 'form-control bg-color-white' %>
+          <%= text_field_tag nil, webcal_user_url(webcal_token: @uzanto.webcal_token, format: :ics), readonly: true, class: 'form-control bg-color-white', data: { clipboard_target: 'source' } %>
         </div>
         <br>
         <p>

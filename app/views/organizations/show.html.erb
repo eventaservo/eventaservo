@@ -100,11 +100,11 @@
           Uzu ĝin en programoj kiel Google Calendar, iCal aŭ similaj. Se vi bezonas klarigon kiel uzi la ligilon, legu
           <%= link_to 'ĉi tiun artikolon', 'https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)', target: :'_blank' %>.
         </p>
-        <div class="input-group">
+        <div class="input-group" data-controller="clipboard">
           <div class="input-group-prepend">
-            <%= link_to 'Kopii', 'javascript:;', id: 'copy_button' %>
+            <%= link_to 'Kopii', '#', data: { action: 'click->clipboard#copy' } %>
           </div>
-          <%= text_field_tag nil, webcal_organizo_url(short_name: @organizo.short_name, format: :ics), id: 'webcalurl', readonly: true, class: 'form-control bg-color-white' %>
+          <%= text_field_tag nil, webcal_organizo_url(short_name: @organizo.short_name, format: :ics), readonly: true, class: 'form-control bg-color-white', data: { clipboard_target: 'source' } %>
         </div>
         <br>
         <p>
