@@ -2,15 +2,6 @@
 
 $(document).ready(function () {
   if ($(".events.new").length > 0 || $(".events.edit").length > 0) {
-    $("#event_date_start").change(function () {
-      $("#event_date_end").val($("#event_date_start").val())
-      $("#time_start").focus()
-    })
-
-    $("#event_date_end").change(function () {
-      $("#time_end").focus()
-    })
-
     // RETAJ EVENTOJ -->
     if ($("#event_online").is(":checked") === true) {
       $("#retaj_informoj").show();

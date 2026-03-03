@@ -29,8 +29,6 @@ export default class extends Controller {
 
   maskConfig() {
     switch (this.patternValue) {
-      case "date":
-        return { mask: "00{/}00{/}0000", lazy: false, placeholderChar: "_", eager: true }
       case "time":
         return { mask: "00{:}00", lazy: false, placeholderChar: "_", eager: true }
       case "birthday":
