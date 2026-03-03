@@ -19,11 +19,15 @@ export default class extends Controller {
   static targets = ["source"]
   static values = { text: String }
 
-  copy() {
+  copy(event) {
+    event.preventDefault()
+
     const text = this.hasSourceTarget ? this.sourceTarget.value : this.textValue
 
     navigator.clipboard.writeText(text).then(() => {
       this.#showFeedback(text)
+    }).catch(() => {
+      alert("Ne eblis kopii al la tondujo")
     })
   }
 
