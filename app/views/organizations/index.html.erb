@@ -14,7 +14,7 @@
       ORGANIZOJ
     </h4>
 
-    <%= form_tag organization_search_url, method: :get, id: 'o_search_form', remote: true, class: 'mb-3' do %>
+    <%= form_tag organization_search_url, method: :get, remote: true, class: 'mb-3', data: { controller: 'org-search', action: 'keyup->org-search#search' } do %>
       <%= text_field_tag :serchi, nil, class: 'form-control col-12', autofocus: true, placeholder: 'Serĉi organizon' %>
     <% end %>
 
@@ -25,7 +25,7 @@
       </div>
     <% end %>
 
-    <div id="o_search_results">
+    <div id="o_search_results" data-controller="tooltip">
       <%= render partial: "organizations/search_results" %>
     </div>
   </div>
