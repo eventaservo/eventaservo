@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import FullcalendarController from "./fullcalendar_controller"
+application.register("fullcalendar", FullcalendarController)
+
 import ClipboardController from "./clipboard_controller"
 application.register("clipboard", ClipboardController)
 
