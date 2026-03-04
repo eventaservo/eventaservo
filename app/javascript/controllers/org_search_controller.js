@@ -9,17 +9,15 @@ import $ from "jquery"
 //     <input type="text" name="serchi">
 //   </form>
 export default class extends Controller {
-  // Debounces the search input. On Enter, blurs the field; otherwise
-  // waits 500ms before sending the AJAX request.
+  // Debounces the search input. On Enter, the form submits via
+  // remote: true (Rails UJS) so we just cancel the pending timer to
+  // avoid a duplicate request. Otherwise waits 500ms before sending.
   //
   // @param {KeyboardEvent} event
   search(event) {
     clearTimeout(this._timer)
 
-    if (event.key === "Enter") {
-      event.target.blur()
-      return
-    }
+    if (event.key === "Enter") return
 
     this._timer = setTimeout(() => {
       $.get(this.element.action, $(this.element).serialize(), null, "script")
