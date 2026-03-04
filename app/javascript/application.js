@@ -1,13 +1,20 @@
 // Entry point for the build script in your package.json
 import '@hotwired/turbo-rails'
 
-// jQuery — use the Sprockets-loaded jQuery if already present, otherwise expose the npm one.
-// This ensures jQuery UI, jquery.mask and other Sprockets plugins share the same jQuery instance.
+// jQuery — expose globally for Bootstrap and Rails UJS
 import $ from 'jquery'
-if (!window.jQuery) window.$ = window.jQuery = $
+window.$ = window.jQuery = $
 
 // Bootstrap JS (includes Popper.js for dropdowns, tooltips, etc.)
 import 'bootstrap'
+
+// Rails UJS — handles data-method, data-confirm, remote: true
+import Rails from '@rails/ujs'
+Rails.start()
+
+// ActiveStorage — direct uploads
+import * as ActiveStorage from '@rails/activestorage'
+ActiveStorage.start()
 
 // Disables Turbo Drive, since it's conflicting with FullCalendar.
 // After solving the issue, you can remove this line.
@@ -26,3 +33,9 @@ import 'leaflet.markercluster'
 import "chartkick"
 import Highcharts from "highcharts"
 window.Highcharts = Highcharts
+
+// Direct upload progress UI
+import './src/direct_uploads'
+
+// Fixes slim-select option selection inside Bootstrap modals
+$.fn.modal.Constructor.prototype._enforceFocus = function () { }
