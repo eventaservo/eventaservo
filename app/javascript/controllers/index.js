@@ -34,6 +34,9 @@ application.register("mask", MaskController)
 import MapViewController from "./map_view_controller"
 application.register("map-view", MapViewController)
 
+import OrgSearchController from "./org_search_controller"
+application.register("org-search", OrgSearchController)
+
 import ReportProblemFormController from "./report_problem_form_controller"
 application.register("report-problem-form", ReportProblemFormController)
 
@@ -45,6 +48,9 @@ application.register("short-url", ShortUrlController)
 
 import TimezoneController from "./timezone_controller"
 application.register("timezone", TimezoneController)
+
+import TooltipController from "./tooltip_controller"
+application.register("tooltip", TooltipController)
 
 import UserController from "./user_controller"
 application.register("user", UserController)
