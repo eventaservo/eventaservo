@@ -50,13 +50,13 @@
           Uzu ĝin en programoj kiel Google Calendar, iCal aŭ similaj. Se vi bezonas klarigon kiel uzi la ligilon, legu
           <%= link_to 'ĉi tiun artikolon', 'https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)', target: :'_blank' %>.
         </p>
-        <div class="input-group" contenteditable="true">
+        <div class="input-group" data-controller="clipboard">
           <div class="input-group-prepend">
-            <div class="input-group-text" id="copy_button">
-              <%= link_to 'Kopii', 'javascript:;' %>
+            <div class="input-group-text">
+              <%= link_to 'Kopii', '#', data: { action: 'click->clipboard#copy' } %>
             </div>
           </div>
-          <%= text_field_tag nil, webcal_url(landa_kodo: 'ol', format: :ics), id: 'webcalurl', class: 'form-control bg-color-white' %>
+          <%= text_field_tag nil, webcal_url(landa_kodo: 'ol', format: :ics), readonly: true, class: 'form-control bg-color-white', data: { clipboard_target: 'source' } %>
         </div>
         <br>
         <p>

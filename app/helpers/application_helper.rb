@@ -154,7 +154,7 @@ module ApplicationHelper
     return if retposhtadreso.blank?
 
     if user_signed_in?
-      icon("fas", "at", retposhtadreso, class: "copy-to-clipboard", data: {clipboard: retposhtadreso})
+      icon("fas", "at", retposhtadreso, data: {controller: "clipboard", clipboard_text_value: retposhtadreso, action: "click->clipboard#copy"})
     else
       icon("fas", "at", retposhtadreso.gsub("@", "(ĉe)"))
     end
