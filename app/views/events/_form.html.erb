@@ -16,7 +16,7 @@
       </div>
 
       <%= form_for(@event, url: (event_path(code: @event.code) if params[:action].in? %w(edit update)),
-          data: { controller: 'event--form'}) do |form| %>
+          data: { controller: 'event--form', action: 'submit->event--form#validateCategories'}) do |form| %>
         <%= error_handling(@event) %>
 
         <div class="form-group">
@@ -91,7 +91,7 @@
         </div>
 
         <div class="form-group">
-          <div class="text-center" id="tags-categories">
+          <div class="text-center" id="tags-categories" data-event--form-target="tagsCategories">
             <%
               # Use copied tags if available (for duplication) or event's tags (for editing)
               event_categories = @copied_tags&.categories || @event.tags.categories
@@ -141,13 +141,13 @@
           <div class="col-lg-6">
             <div class="form-group">
               <%= form.label :site, 'Retpaĝo' %>
-              <%= form.text_field :site, class: 'form-control', required: @event.email.blank? %>
+              <%= form.text_field :site, class: 'form-control', required: @event.email.blank?, data: { 'event--form-target': 'site', action: 'input->event--form#crossValidateSiteEmail' } %>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="form-group">
               <%= form.label :email, 'Retpoŝtadreso por kontakto' %>
-              <%= form.email_field :email, class: 'form-control', required: @event.site.blank? %>
+              <%= form.email_field :email, class: 'form-control', required: @event.site.blank?, data: { 'event--form-target': 'email', action: 'input->event--form#crossValidateSiteEmail' } %>
             </div>
           </div>
         </div>
@@ -155,25 +155,25 @@
         <%= render partial: 'events/form/short_url', locals: { form: form, event: @event } %>
 
         <div class="form-group form-check">
-          <%= form.check_box :online, class: 'form-check-input' %>
+          <%= form.check_box :online, class: 'form-check-input', data: { 'event--form-target': 'online', action: 'change->event--form#toggleOnline' } %>
           <%= form.label :online, "🖥 Reta aŭ hibrida evento", class: 'form-check-label' %>
         </div>
 
-        <div id="retaj_informoj">
+        <div id="retaj_informoj" data-event--form-target="onlineInfo">
           <div class="form-group">
-            <%= check_box_tag 'universala', "1", @event.universala? %>
+            <%= check_box_tag 'universala', "1", @event.universala?, data: { 'event--form-target': 'universala', action: 'change->event--form#toggleUniversala' } %>
             <%= label_tag 'universala', 'Elekti horzonon anstataŭ adreson/landon', class: 'form-check-label' %>
           </div>
         </div>
 
-        <div id="horzono">
+        <div id="horzono" data-event--form-target="timezone">
           <div class="form-group">
             <%= form.label :time_zone, 'Horzono' %>
             <%= form.combobox("time_zone", Horzono.for_select) %>
           </div>
         </div>
 
-        <div id="malretaj_informoj">
+        <div id="malretaj_informoj" data-event--form-target="offlineInfo">
           <div class="form-group">
             <%= form.label :address, 'Loka adreso de la evento' %>
             <%= form.text_field :address, class: 'form-control', aria: { describedby: 'address-help' } %>
@@ -185,7 +185,7 @@
             <div class="col-lg-6">
               <div class="form-group">
                 <%= form.label :city, 'Urbo (aŭ loko)' %>
-                <%= form.text_field :city, class: 'form-control', required: true %>
+                <%= form.text_field :city, class: 'form-control', required: true, data: { 'event--form-target': 'city' } %>
               </div>
             </div>
             <div class="col-lg-6">
