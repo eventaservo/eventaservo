@@ -20,11 +20,7 @@ gem "sassc-rails"
 
 gem "bootsnap", require: false
 
-gem "jquery-rails", "~> 4.3", ">= 4.3.3"
-gem "jquery-ui-rails", "~> 8.0"
-
 # Kalendaroj
-gem "fullcalendar-rails", "~> 3.9"
 gem "icalendar", "~> 2.6"
 
 gem "mini_magick", "~> 4.10"
