@@ -5,7 +5,7 @@
     </div>
     <div>
       <%= I18n.t tz, scope: :timezones %>
-      <%= icon('fas', 'sun', data: { toggle: 'tooltip', placement: 'top', title: 'Somera/Vintra tempo' }) if @event.dst? %>
+      <%= icon('fas', 'sun', data: { bs_toggle: 'tooltip', bs_placement: 'top', title: 'Somera/Vintra tempo' }) if @event.dst? %>
     </div>
   </div>
 <% end %>

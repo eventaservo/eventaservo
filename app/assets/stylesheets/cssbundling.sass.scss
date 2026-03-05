@@ -1,5 +1,8 @@
 // Entry point for your Sass build
 
+// Preserve Bootstrap 4 success color used in navbar and badges
+$success: #28a745;
+
 @import "bootstrap/scss/bootstrap";
 
 @import "@fortawesome/fontawesome-free/scss/fontawesome";

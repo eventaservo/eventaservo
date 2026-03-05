@@ -41,7 +41,18 @@ body {
 }
 
 .breadcrumb {
-  margin-top : 1rem;
+  margin-top: 1rem;
+  background-color: #e9ecef;
+  padding: 0.75rem 1rem;
+  border-radius: 0.25rem;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+a.badge {
+  text-decoration: none;
 }
 
 .search-field {

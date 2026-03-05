@@ -12,9 +12,10 @@ export default class extends Controller {
   }
 
   drawMap() {
+    const mapboxToken = document.querySelector('meta[name="mapbox-token"]')?.content
     const map = L.map('map-view-container')
     L.tileLayer(
-      'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXZlbnRhc2Vydm8iLCJhIjoiY2s2OGcxaWU5MDRtYzNucWZqdXRicnFpMyJ9.HRdmn4ful40N4svL9ix8vA',
+      `https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${mapboxToken}`,
       {
         attribution:
           `© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Plibonigi ĉi tiun mapon</a></strong>`,
@@ -36,7 +37,11 @@ export default class extends Controller {
     }
 
     map.addLayer(markers)
-    map.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 })
+    if (bounds.length > 0) {
+      map.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 })
+    } else {
+      map.setView([20, 0], 2)
+    }
   }
 
   eventoPinColor(epc) {

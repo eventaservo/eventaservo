@@ -120,26 +120,24 @@
 
 .button-checkbox--main {
   @extend .btn-sm;
-  background-color: white;
-  border: 1px solid #17a2b8;
-  color: #17a2b8;
+  @extend .btn-outline-info;
+}
 
-  &.active {
-    background-color: #17a2b8;
-    color: white;
-  }
+.btn-check + .button-checkbox--main:hover {
+  color: white;
+  background-color: var(--bs-info);
+  border-color: var(--bs-info);
 }
 
 .button-checkbox--orange {
   @extend .btn-sm;
-  background-color: white;
-  border: 1px solid #c69500;
-  color: #c69500;
+  @extend .btn-outline-warning;
+}
 
-  &.active {
-    background-color: #d39e00;
-    color: white;
-  }
+.btn-check + .button-checkbox--orange:hover {
+  color: white;
+  background-color: var(--bs-warning);
+  border-color: var(--bs-warning);
 }
 
 .button--bold--red {

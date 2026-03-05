@@ -98,9 +98,9 @@
               event_category_ids = event_categories.pluck(:id)
             %>
             <% Tag.categories.order(:sort_order).each do |tag| %>
-              <div class="btn-group mb-1" data-bs-toggle="buttons">
-                <label class="btn button-checkbox--main <%= 'active' if event_category_ids.include?(tag.id) %>">
-                  <%= check_box_tag "tags_categories[]", tag.id, event_categories.include?(tag), id: "tag_#{tag.id}" %>
+              <div class="btn-group mb-1">
+                <%= check_box_tag "tags_categories[]", tag.id, event_categories.include?(tag), id: "tag_#{tag.id}", class: "btn-check", autocomplete: "off" %>
+                <label class="btn button-checkbox--main" for="tag_<%= tag.id %>">
                   <%= tag.name %>
                 </label>
               </div>
@@ -114,9 +114,9 @@
               event_characteristic_ids = event_characteristics.pluck(:id)
             %>
             <% Tag.characteristics.order(:sort_order).each do |tag| %>
-              <div class="btn-group" data-bs-toggle="buttons">
-                <label class="btn button-checkbox--orange <%= 'active' if event_characteristic_ids.include?(tag.id) %>">
-                  <%= check_box_tag "tags_characteristics[]", tag.id, event_characteristics.include?(tag), id: "tag_#{tag.id}" %>
+              <div class="btn-group">
+                <%= check_box_tag "tags_characteristics[]", tag.id, event_characteristics.include?(tag), id: "tag_#{tag.id}", class: "btn-check", autocomplete: "off" %>
+                <label class="btn button-checkbox--orange" for="tag_<%= tag.id %>">
                   <%= tag.name %>
                 </label>
               </div>

@@ -92,7 +92,7 @@ export default class extends Controller {
   //
   // @param {Event} event - form submit event
   validateCategories(event) {
-    if (this.tagsCategoriesTarget.querySelectorAll(".active").length === 0) {
+    if (this.tagsCategoriesTarget.querySelectorAll(".btn-check:checked").length === 0) {
       alert("Vi devas elekti almenaŭ unu specon")
       event.preventDefault()
       event.stopPropagation()
