@@ -3,7 +3,7 @@
     <div class="col">
       <%= event_flag(event) %> <%= link_to event.title, event_path(code: event.ligilo), class: "link-blue" %>
     </div>
-    <div class="col text-right small"><%= format_date(event.date_start, style: :short) %></div>
+    <div class="col text-end small"><%= format_date(event.date_start, style: :short) %></div>
   </div>
   <div class="row small">
     <div class="col mt-3">

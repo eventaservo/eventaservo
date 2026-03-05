@@ -4,7 +4,7 @@
     <p>Bild-grandeco: 400x200 px</p>
 
     <%= form_with model: @ad, method: :post, url: admin_reklamoj_index_url, local: true do |f| %>
-      <div class="form-group">
+      <div class="mb-3">
         <%= f.label :url, "URL" %>
         <%= f.text_field :url, class: "form-control", required: true %>
       </div>

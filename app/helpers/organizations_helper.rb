@@ -42,11 +42,11 @@ module OrganizationsHelper
 
         tag_color =
           if tag.category?
-            "badge-info"
+            "text-bg-info"
           elsif tag.characteristic?
-            "badge-warning"
+            "text-bg-warning"
           end
-        concat content_tag(:span, tag.name, class: "mr-1 badge badge-pill #{tag_color}")
+        concat content_tag(:span, tag.name, class: "me-1 badge rounded-pill #{tag_color}")
       end
     end
   end

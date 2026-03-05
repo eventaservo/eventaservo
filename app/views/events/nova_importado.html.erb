@@ -15,7 +15,7 @@
       Algluu aŭ tajpu la eksteran URL kaj alklaku 'Importi'
 
       <%= form_tag importi_url do %>
-        <div class="form-group">
+        <div class="mb-3">
           <%= text_field_tag :url, '', placeholder: 'https://', autofocus: true, class: 'form-control' %>
           <%= submit_tag 'Importi', class: 'button-submit mt-2' %>
         </div>

@@ -7,7 +7,7 @@
   <% if params[:continent] == 'reta' %>
     <% content_for :breadcrumb_right do %>
       <%= link_to icon('far', 'calendar-alt'), webcal_url(landa_kodo: 'ol', protocol: :webcal, format: :ics), data: { target: '#webcalModal', toggle: 'modal' }, aria: { label: 'Aboni kalendaron' } %>
-      <%= link_to icon('fas', 'rss'), events_by_continent_path(continent: params[:continent], format: :xml), title: 'RSS', class: 'mr-2', aria: { label: 'RSS' } %>
+      <%= link_to icon('fas', 'rss'), events_by_continent_path(continent: params[:continent], format: :xml), title: 'RSS', class: 'me-2', aria: { label: 'RSS' } %>
     <% end %>
   <% end %>
 
@@ -20,7 +20,7 @@
         <%= link_to events_by_country_path(continent: country.continent.normalized, country_name: country.name, periodo: params[:periodo].presence, o: params[:o].presence, s: params[:s].presence), class: 'button-event-count' do %>
           <%= flag_icon(country.code, squared: true) %>
           <%= country.name %>
-          <span class="badge badge-primary"><%= country.count %></span>
+          <span class="badge text-bg-primary"><%= country.count %></span>
         <% end %>
       <% end %>
     </div>
@@ -36,9 +36,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 id="shareModalCenterTitle" class="modal-title">Aboni kalendaron</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Fermi">
-          <span aria-hidden="true">×</span>
-        </button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermi"></button>
       </div>
       <div class="modal-body">
         <p>
@@ -51,10 +49,8 @@
           <%= link_to 'ĉi tiun artikolon', 'https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)', target: :'_blank' %>.
         </p>
         <div class="input-group" data-controller="clipboard">
-          <div class="input-group-prepend">
-            <div class="input-group-text">
+          <div class="input-group-text">
               <%= link_to 'Kopii', '#', data: { action: 'click->clipboard#copy' } %>
-            </div>
           </div>
           <%= text_field_tag nil, webcal_url(landa_kodo: 'ol', format: :ics), readonly: true, class: 'form-control bg-color-white', data: { clipboard_target: 'source' } %>
         </div>
@@ -65,7 +61,7 @@
         </p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Fermi</button>
+        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Fermi</button>
       </div>
     </div>
   </div>

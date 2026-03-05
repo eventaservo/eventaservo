@@ -15,9 +15,9 @@
         <div>
           <%= event_flag(@event) %> <span class="<%= 'cancelled' if @event.cancelled %>"><%= @event.title %></span>
         </div>
-        <div class="ml-auto">
+        <div class="ms-auto">
           <div class="d-flex">
-            <div class="mr-2">
+            <div class="me-2">
               <%= render 'add_to_calendar', event: @event %>
             </div>
             <%#= render partial: 'options' %>
@@ -33,16 +33,16 @@
       <% end %>
 
       <div id="div">
-        <div class="ml-2 float-right">
+        <div class="ms-2 float-end">
           <%= render partial: 'kalendareto', locals: { event: @event, tz: @event.time_zone } %>
           <%= render partial: 'horoj', locals: { tz: @event.time_zone } %>
           <%= render partial: 'horzono' if cookies[:horzono] %>
           <% unless @event.all_day? %>
-            <div class="text-right"><%= render partial: 'timezone_selector' %></div>
+            <div class="text-end"><%= render partial: 'timezone_selector' %></div>
           <% end %>
         </div>
 
-        <h5 class="text-left"><%= @event.description %></h5>
+        <h5 class="text-start"><%= @event.description %></h5>
 
         <p>
           <%= render(InternationalEventBadgeComponent.new(event: @event)) %>
@@ -69,7 +69,7 @@
             <% end %>
             <%= link_to icon('fas', 'share-alt', t("buttons.share")), '#', class: 'btn btn-sm btn-outline-info no-border', data: { target: '#shareModal', toggle: 'modal' } %>
           <% else %>
-            <%= link_to icon('fas', 'share-alt', t("buttons.share")), '#', class: 'btn btn-sm btn-outline-info no-border ml-auto', data: { target: '#shareModal', toggle: 'modal' } %>
+            <%= link_to icon('fas', 'share-alt', t("buttons.share")), '#', class: 'btn btn-sm btn-outline-info no-border ms-auto', data: { target: '#shareModal', toggle: 'modal' } %>
           <% end %>
         </div>
       </div>

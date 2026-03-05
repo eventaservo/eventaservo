@@ -8,27 +8,25 @@
   role="dialog"
   tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content text-left">
+    <div class="modal-content text-start">
       <div class="modal-header">
         <h5 id="reportProblemModalCenterTitle" class="modal-title">
           <%= t("pages.event.report_problem_form.title") %>
         </h5>
-        <button class="close" aria-label="Fermi" data-dismiss="modal" type="button">
-          <span aria-hidden="true">×</span>
-        </button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermi"></button>
       </div>
 
       <%= form_tag event_kontakti_organizanton_url(event_code: @event.code) do %>
         <div class="modal-body" style="font-weight: normal; font-size: 1rem;">
           <p><%= t("pages.event.report_problem_form.text") %></p>
-          <div class="form-group">
+          <div class="mb-3">
             <label><%= t("pages.event.report_problem_form.message") %></label>
             <%= text_area_tag :message, nil, class: 'form-control', rows: 4, required: true, data: { report_problem_form_target: "message" } %>
           </div>
         </div>
 
         <div class="modal-footer">
-          <button class="button-cancel" data-dismiss="modal" type="button">
+          <button class="button-cancel" data-bs-dismiss="modal" type="button">
             <%= t("buttons.cancel") %>
           </button>
           <%= submit_tag t("buttons.send"), class: 'button-submit' %>

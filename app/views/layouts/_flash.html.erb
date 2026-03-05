@@ -5,9 +5,7 @@
     role="alert"
     class="flash-alert-box alert alert-dismissible <%= flash_class(key.to_sym) %>">
     <%= value %>
-    <button class="close" data-dismiss="alert" type="button" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 
 <% end %>

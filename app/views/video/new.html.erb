@@ -3,34 +3,34 @@
     <div class="box-white">
       <%= form_with(action: event_new_video_path, method: :post) do |form| %>
         <p class="lead">Ligi registritan prezenton</p>
-        <div class="form-group">
+        <div class="mb-3">
           <%= form.label :video_link, 'Adreso (URL) de la video' %>
           <%= form.text_field :video_link, autofocus: true, class: "form-control form-control-sm",
             placeholder: "ekz: https://www.youtube.com/watch?v=t7YPEKvmHvo", required: true,
             data: { action: "blur->video#fetchData", video_target: "url" } %>
         </div>
 
-        <div class="form-group">
+        <div class="mb-3">
           <%= form.label :title, 'Titolo' %>
           <%= form.text_field :title, class: "form-control form-control-sm", required: true,
             "data-video-target": "title" %>
         </div>
 
-        <div class="form-group">
+        <div class="mb-3">
           <%= form.label :description, 'Priskribo' %>
           <%= form.text_area :description, class: "form-control form-control-sm", required: true,
             rows: "5", maxlength: "400", "data-video-target": "description", aria: { describedby: "description-help" } %>
           <small class="form-text text-muted" id="description-help">Maksimume 400 signoj</small>
         </div>
 
-        <div class="form-group" id="thumbnail" data-video-target="thumbnail">
+        <div class="mb-3" id="thumbnail" data-video-target="thumbnail">
           <p class="text-divider">Alŝuti bild-dosieron</p>
           <%= form.file_field :image, accept: "image/gif, image/jpeg, image/png", class: "form-control-file" %>
         </div>
 
         <div class="buttons-footer">
           <%= link_to "Ne registri", :back, class: "button-cancel" %>
-          <%= form.submit 'Registri', class: "btn ml-2 btn-primary btn-sm" %>
+          <%= form.submit 'Registri', class: "btn ms-2 btn-primary btn-sm" %>
         </div>
       <% end %>
     </div>

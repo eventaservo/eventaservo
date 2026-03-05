@@ -10,7 +10,7 @@
       <div class="lead">
         <%= montras_flagon(@organizo.country) if @organizo.country.present? && @organizo.display_flag? %>
         <%= @organizo.name %>
-        <span class="float-right">
+        <span class="float-end">
           <%= link_to icon('far', 'calendar-alt'),
             webcal_organizo_url(short_name: @organizo.short_name, protocol: :webcal, format: :ics),
             data: { target: '#webcalModal', toggle: 'modal' },
@@ -19,7 +19,7 @@
       </div>
 
       <div class="clearfix mb-2">
-        <%= organization_logo(@organizo, size: :large, html_class: 'float-left mr-2') %>
+        <%= organization_logo(@organizo, size: :large, html_class: 'float-start me-2') %>
         <%= @organizo.description %>
       </div>
 
@@ -28,7 +28,7 @@
         <%= montras_retpaghon(@organizo.url) + raw('<br/>') if @organizo.url.present? %>
         <%= montras_retposhtadreson(@organizo.email) + raw('<br/>') if @organizo.email.present? %>
         <% if @organizo.youtube.present? %>
-          <%= link_to icon('fab', 'youtube', 'YouTube-kanalo'), @organizo.youtube, target: :_blank, class: 'fg-color-link mr-1' %>
+          <%= link_to icon('fab', 'youtube', 'YouTube-kanalo'), @organizo.youtube, target: :_blank, class: 'fg-color-link me-1' %>
           <br>
         <% end %>
         <% if @organizo.country.present? && (@organizo.country_id != 99999) %>
@@ -86,9 +86,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 id="shareModalCenterTitle" class="modal-title">Aboni organizan kalendaron</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Fermi">
-          <span aria-hidden="true">×</span>
-        </button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermi"></button>
       </div>
       <div class="modal-body">
         <p>
@@ -101,9 +99,7 @@
           <%= link_to 'ĉi tiun artikolon', 'https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)', target: :'_blank' %>.
         </p>
         <div class="input-group" data-controller="clipboard">
-          <div class="input-group-prepend">
-            <%= link_to 'Kopii', '#', data: { action: 'click->clipboard#copy' } %>
-          </div>
+          <%= link_to 'Kopii', '#', data: { action: 'click->clipboard#copy' } %>
           <%= text_field_tag nil, webcal_organizo_url(short_name: @organizo.short_name, format: :ics), readonly: true, class: 'form-control bg-color-white', data: { clipboard_target: 'source' } %>
         </div>
         <br>
@@ -113,7 +109,7 @@
         </p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Fermi</button>
+        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Fermi</button>
       </div>
     </div>
   </div>

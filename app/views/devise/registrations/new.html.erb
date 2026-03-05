@@ -2,7 +2,7 @@
   <div class="box-white">
     <div class="text-center">
       <h3>Eventa Servo</h3>
-      <p class="fg-color-grayDark font-weight-bold">
+      <p class="fg-color-grayDark fw-bold">
         Registriĝu por krei novajn eventojn.
         <br>
         Estas senpage!
@@ -16,7 +16,7 @@
           data: { turbo: false },
           class: 'facebook-button' %>
     <br>
-    <div class="text-divider font-weight-bold fg-color-grayDark">AŬ</div>
+    <div class="text-divider fw-bold fg-color-grayDark">AŬ</div>
     <br>
 
     <div class="alert alert-info small mt-2 text-center">
@@ -25,32 +25,32 @@
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
-      <div class="form-group">
+      <div class="mb-3">
         <%= f.text_field :name, autocomplete: 'name', required: true, class: 'form-control', autofocus: true, placeholder: 'Plena nomo' %>
       </div>
-      <div class="form-group">
+      <div class="mb-3">
         <%= f.email_field :email, autocomplete: 'email', required: true, class: 'form-control', placeholder: 'Retpoŝtadreso' %>
       </div>
-      <div class="form-group">
+      <div class="mb-3">
         <%= f.text_field :city, required: true, class: 'form-control', placeholder: 'Urbo' %>
       </div>
-      <div class="form-group">
+      <div class="mb-3">
         <%= f.combobox("country_id", Country.all, placeholder: 'Lando', required: true)%>
       </div>
-      <div class="form-group">
+      <div class="mb-3">
         <%= f.text_field :birthday, class: 'birthday form-control', placeholder: 'Naskiĝdato (T/M/J) *ne deviga', data: { controller: 'mask', mask_pattern_value: 'birthday' } %>
       </div>
-      <div class="form-group">
+      <div class="mb-3">
         <%= f.text_field :ueacode, class: 'form-control', placeholder: 'UEA-kodo *ne deviga' %>
       </div>
-      <div class="form-group">
+      <div class="mb-3">
         <%= f.password_field :password, required: true, class: 'form-control', placeholder: 'Pasvorto' %>
       </div>
-      <div class="form-group">
+      <div class="mb-3">
         <%= f.password_field :password, required: true, class: 'form-control', placeholder: 'Pasvorto-konfirmado' %>
       </div>
 
-      <div class="form-group">
+      <div class="mb-3">
         <%= text_field_tag 'sekurfrazo', nil, autocomplete: 'off', required: true, class: 'form-control', placeholder: 'Kiel nomiĝas nia lingvo?' %>
       </div>
 

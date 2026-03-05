@@ -12,7 +12,7 @@
     "@rails/actiontext": "^7.2.300",
     "@rails/activestorage": "^7.2.300",
     "@rails/ujs": "^7.1.600",
-    "bootstrap": "4.6.2",
+    "bootstrap": "^5.3",
     "chartkick": "^5.0.1",
     "esbuild": "^0.25.12",
     "flag-icons": "^7.5.0",
@@ -25,7 +25,7 @@
     "leaflet": "^1.9.4",
     "leaflet.markercluster": "^1.5.3",
     "moment": "^2.30.1",
-    "popper.js": "^1.16.1",
+    "@popperjs/core": "^2.11",
     "sass": "^1.97.2",
     "slim-select": "^2.13.1",
     "trix": "^2.1.16"

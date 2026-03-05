@@ -1,7 +1,7 @@
 <div class="box-white">
   <div class="front-page-title d-flex justify-content-around">
     <div>
-      <%= link_to image_tag('uea_emblemeto.png', alt: "UEA logo", height: '36px', class: 'mr-2 mb-2'), prie_url %>
+      <%= link_to image_tag('uea_emblemeto.png', alt: "UEA logo", height: '36px', class: 'me-2 mb-2'), prie_url %>
     </div>
     <div>
       <%= t("tagline") %>
@@ -21,7 +21,7 @@
     <%= link_to icon('fas', 'video', t("links.presentations")), video_url, class: "btn btn-sm btn-link" %>
     <br>
     <%= link_to icon("far", "calendar", t("links.international_calendar")), international_calendar_path,
-        class: "btn btn-sm btn-link fg-color-green font-weight-bold" %>
+        class: "btn btn-sm btn-link fg-color-green fw-bold" %>
   </div>
 
   <br>
@@ -32,7 +32,7 @@
       <% @continents.each do |continent| %>
         <%= link_to events_by_continent_path(continent: continent.name.normalized, periodo: params[:periodo].presence, o: params[:o].presence, s: params[:s].presence, f: params[:f].presence), class: 'button-event-count' do %>
           <%= continent.name %>
-          <span class="badge badge-primary">
+          <span class="badge text-bg-primary">
             <%= continent.name == 'reta' ? Event.online.venontaj.count : continent.count %>
           </span>
         <% end %>

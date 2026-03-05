@@ -6,7 +6,7 @@
     <div class="item-row-no-chevron">
       <div class="col-12">
         <p>
-          <div class="text-center font-weight-bold">
+          <div class="text-center fw-bold">
             <%= link_to((highlight event.title, params[:query].split), event_path(code: event.ligilo), class: ("cancelled" if event.cancelled)) %>
           </div>
           <div class="text-center small">
