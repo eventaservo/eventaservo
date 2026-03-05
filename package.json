@@ -35,6 +35,6 @@
   },
   "scripts": {
     "build": "node esbuild.config.js",
-    "build:css": "cp -r node_modules/@fortawesome/fontawesome-free/webfonts public/webfonts && cp -r node_modules/flag-icons/flags public/flags && sass ./app/assets/stylesheets/cssbundling.sass.scss:./app/assets/builds/cssbundling.css --no-source-map --load-path=node_modules"
+    "build:css": "cp -r node_modules/@fortawesome/fontawesome-free/webfonts public/webfonts && cp -r node_modules/flag-icons/flags public/flags && sass ./app/assets/stylesheets/cssbundling.sass.scss:./app/assets/builds/cssbundling.css --no-source-map --load-path=node_modules && sass ./app/assets/stylesheets/active_admin.scss:./app/assets/builds/active_admin.css --no-source-map --load-path=$(bundle show activeadmin)/app/assets/stylesheets && sass ./app/assets/stylesheets/mailer.sass:./app/assets/builds/mailer.css --no-source-map"
   }
 }
