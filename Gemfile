@@ -6,12 +6,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "~> 3.4.8"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 7.2.2.2"
+gem "rails", "~> 8.0.0"
 # Use Puma as the app server
 gem "puma", "~> 7"
 gem "thruster", "~> 0.1.7"
-gem "sprockets-rails"
-gem "sassc-rails"
+gem "propshaft"
 
 # Use Uglifier as compressor for JavaScript assets
 # gem 'uglifier', '>= 1.3.0'
@@ -33,7 +32,7 @@ gem "omniauth-rails_csrf_protection"
 gem "devise", ">= 4.7.1"
 gem "jwt", "~> 2.2"
 gem "pg", "~> 1.1", ">= 1.1.3"
-gem "simple_token_authentication", "~> 1.0"
+gem "simple_token_authentication", github: "gonzalo-bulnes/simple_token_authentication", branch: "master"
 
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 # gem 'turbolinks', '~> 5'
@@ -58,7 +57,7 @@ gem "groupdate", "~> 6.4"
 gem "highcharts-rails", "~> 6.0"
 gem "image_processing", ">= 1.2"
 gem "pagy", "~> 7.0"
-gem "paper_trail", "~> 15.1"
+gem "paper_trail", "~> 17.0"
 gem "paper_trail-association_tracking", "~> 2.2"
 gem "postmark-rails"
 gem "premailer-rails", "~> 1.11"
