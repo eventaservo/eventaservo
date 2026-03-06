@@ -6,10 +6,11 @@
         <span>Mi interesiĝas!</span>
       <% end %>
     <% else %>
-      <div class="link-blue" data-action="click->event-user-interested-button#buttonClicked" data-event-user-interested-button-target="button">
+      <a href="#" class="pointer" data-action="click->event-user-interested-button#buttonClicked" data-event-user-interested-button-target="button">
         <h1><%= icon('fas', 'user') %></h1>
         <span>Mi interesiĝas</span>
-      </div>
+      </a>
+
 
       <div class="d-none" data-event-user-interested-button-target="question">
         Ĉu aperigi vian nomon en la listo de interesiĝantoj?<br>

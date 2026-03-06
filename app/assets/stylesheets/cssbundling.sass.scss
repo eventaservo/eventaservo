@@ -1,7 +1,8 @@
 // Entry point for your Sass build
 
-// Preserve Bootstrap 4 success color used in navbar and badges
+// Preserve Bootstrap 4 success and info colors used in navbar, badges and alerts
 $success: #28a745;
+$info: #17a2b8;
 
 @import "bootstrap/scss/bootstrap";
 
