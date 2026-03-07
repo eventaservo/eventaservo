@@ -13,8 +13,15 @@ export default class extends Controller {
   }
 
   drawMap(latitude, longitude) {
+    if (!this.element) return
+
+    // Limpar se já houver um mapa inicializado (comum em navegação Turbo)
+    if (this.map) {
+      this.map.remove()
+    }
+
     const mapboxToken = document.querySelector('meta[name="mapbox-token"]')?.content
-    const map = L.map('event_map_container').setView([latitude, longitude], 13)
+    this.map = L.map(this.element).setView([latitude, longitude], 13)
 
     if (mapboxToken) {
       L.tileLayer(
@@ -24,14 +31,14 @@ export default class extends Controller {
             `© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Plibonigi ĉi tiun mapon</a></strong>`,
           id: 'mapbox/streets-v12',
         }
-      ).addTo(map)
+      ).addTo(this.map)
     } else {
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      }).addTo(map)
+      }).addTo(this.map)
     }
 
-    L.marker([latitude, longitude], { icon: this.pinColor() }).addTo(map)
+    L.marker([latitude, longitude], { icon: this.pinColor() }).addTo(this.map)
   }
 
   pinColor() {

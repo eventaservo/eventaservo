@@ -12,8 +12,14 @@ export default class extends Controller {
   }
 
   drawMap() {
+    if (!this.element) return
+
+    if (this.map) {
+      this.map.remove()
+    }
+
     const mapboxToken = document.querySelector('meta[name="mapbox-token"]')?.content
-    const map = L.map('map-view-container')
+    this.map = L.map(this.element)
 
     if (mapboxToken) {
       L.tileLayer(
@@ -23,11 +29,11 @@ export default class extends Controller {
             `© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Plibonigi ĉi tiun mapon</a></strong>`,
           id: 'mapbox/streets-v12',
         }
-      ).addTo(map)
+      ).addTo(this.map)
     } else {
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      }).addTo(map)
+      }).addTo(this.map)
     }
 
     const bounds = []
@@ -44,11 +50,11 @@ export default class extends Controller {
       bounds.push([evento.latitude, evento.longitude])
     }
 
-    map.addLayer(markers)
+    this.map.addLayer(markers)
     if (bounds.length > 0) {
-      map.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 })
+      this.map.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 })
     } else {
-      map.setView([20, 0], 2)
+      this.map.setView([20, 0], 2)
     }
   }
 

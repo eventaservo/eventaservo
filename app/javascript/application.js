@@ -27,7 +27,8 @@ import 'trix'
 import '@rails/actiontext'
 
 // Leaflet
-import 'leaflet'
+import L from 'leaflet'
+window.L = L
 import 'leaflet.markercluster'
 
 // Chartkick
