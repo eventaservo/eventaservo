@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Graphs::NewUsersByMonthComponent < ApplicationComponent
+  # @param range [Range<Date>] the date range for the statistics
   def initialize(range: nil)
     @range = range || default_range
   end
@@ -28,6 +29,7 @@ class Graphs::NewUsersByMonthComponent < ApplicationComponent
 
   private
 
+  # @return [Range<Date>] the default date range of the last 12 months
   def default_range
     (Date.today - 11.months).beginning_of_month..Date.today.end_of_month
   end
