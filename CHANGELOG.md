@@ -1,5 +1,25 @@
 # Changelog
 
+## [2.85.0](https://github.com/eventaservo/eventaservo/compare/v2.84.0...v2.85.0) (2026-03-07)
+
+
+### Features
+
+* Enhance admin statistics and remove unreliable visitors chart ([#1059](https://github.com/eventaservo/eventaservo/issues/1059)) ([9343643](https://github.com/eventaservo/eventaservo/commit/9343643099bc908d382984029dc6e50d5aec1a45))
+
+
+### Bug Fixes
+
+* refactor timezone selection to use cached method for improved performance ([8fe351d](https://github.com/eventaservo/eventaservo/commit/8fe351d5ee524d1b0620fa8c3c844e1a901623ec))
+* remove self-closing tags in HTML for better compatibility ([e7d0dde](https://github.com/eventaservo/eventaservo/commit/e7d0dded7a7d16d91ff8afc4303e2756343d6e3d))
+* remove unused ad factory file to clean up test suite ([6c3afe7](https://github.com/eventaservo/eventaservo/commit/6c3afe7103c3b37aaeb92fa8a7e60fc9283b54c3))
+* update gem versions for improved compatibility and security ([bdbb8ae](https://github.com/eventaservo/eventaservo/commit/bdbb8aebfaa47fcbfa034b917bd261bb33c47ed2))
+
+
+### Performance Improvements
+
+* Optimize N+1 queries in HomeController#search ([#1037](https://github.com/eventaservo/eventaservo/issues/1037)) ([8297ce5](https://github.com/eventaservo/eventaservo/commit/8297ce5b1f1dbbcb86d91104f4cd62dc7caa10a1))
+
 ## [2.84.0](https://github.com/eventaservo/eventaservo/compare/v2.83.0...v2.84.0) (2026-02-20)
 
 
