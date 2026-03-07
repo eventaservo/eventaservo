@@ -41,7 +41,6 @@
       Eventa Servo
     </title>
 
-    <%= tag.meta name: "mapbox-token", content: Rails.application.credentials.dig(:mapbox, :access_token) || ENV["MAPBOX_ACCESS_TOKEN"] %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= combobox_style_tag %>

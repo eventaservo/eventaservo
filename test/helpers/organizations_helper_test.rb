@@ -6,20 +6,7 @@ class OrganizationsHelperTest < ActionView::TestCase
   include OrganizationsHelper
 
   test "display_event_tags returns correct bootstrap 5 classes" do
-    country = Country.first || Country.create!(name: "Test", code: "TS", continent: "Europe")
-    user = User.first || User.create!(email: "test#{rand(1000)}@example.com", password: "password", username: "testuser#{rand(1000)}")
-
-    event = Event.create!(
-      title: "Test Event",
-      description: "Test Description",
-      city: "Test City",
-      country: country,
-      user: user,
-      date_start: Time.zone.now,
-      date_end: Time.zone.now + 1.hour,
-      code: "TEST#{rand(1000)}",
-      site: "https://eventaservo.org"
-    )
+    event = create(:event)
 
     category_tag = Tag.find_or_create_by!(name: "Kategorio", group_name: "category")
     characteristic_tag = Tag.find_or_create_by!(name: "Karakterizo", group_name: "characteristic")
@@ -32,5 +19,16 @@ class OrganizationsHelperTest < ActionView::TestCase
     assert_match(/text-bg-info/, result)
     assert_match(/text-bg-warning/, result)
     assert_match(/badge rounded-pill/, result)
+  end
+
+  test "display_event_days_left returns correct text" do
+    event = create(:event, date_start: Time.zone.now, date_end: 1.day.from_now)
+    assert_equal "| finiĝos morgaŭ", display_event_days_left(event)
+
+    event = create(:event, date_start: Time.zone.now, date_end: 2.days.from_now)
+    assert_equal "| finiĝos post 2 tagoj", display_event_days_left(event)
+
+    event = create(:event, date_start: 2.days.ago, date_end: 1.day.ago)
+    assert_equal "", display_event_days_left(event)
   end
 end

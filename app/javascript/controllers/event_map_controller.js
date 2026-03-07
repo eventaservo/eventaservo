@@ -12,10 +12,17 @@ export default class extends Controller {
     this.hideLeaflet();
   }
 
+  disconnect() {
+    if (this.map) {
+      this.map.remove()
+      this.map = null
+    }
+  }
+
   drawMap(latitude, longitude) {
     if (!this.element) return
 
-    // Limpar se já houver um mapa inicializado (comum em navegação Turbo)
+    // Clean up if a map is already initialized (common in Turbo navigation)
     if (this.map) {
       this.map.remove()
     }

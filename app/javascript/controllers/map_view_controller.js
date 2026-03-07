@@ -11,6 +11,13 @@ export default class extends Controller {
     this.hideLeaflet()
   }
 
+  disconnect() {
+    if (this.map) {
+      this.map.remove()
+      this.map = null
+    }
+  }
+
   drawMap() {
     if (!this.element) return
 
