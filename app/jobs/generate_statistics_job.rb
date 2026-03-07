@@ -3,7 +3,7 @@ class GenerateStatisticsJob < ApplicationJob
 
   def perform
     User.rollup("New users by month", interval: "month")
-    Ahoy::Event.where(name: "Homepage").joins(:visit).rollup("Unique homepage views", interval: "month") { |r| r.distinct.count(:visitor_token) }
+
     generate_statistics_for_filter_event
     generate_statistics_for_technical_page_views
   end
