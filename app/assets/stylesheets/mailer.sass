@@ -1,3 +1,5 @@
+@use "sass:color"
+
 $esperantoGreen: #28a745
 $blue: #4285F4
 
@@ -117,7 +119,7 @@ table
       color: white
 
     &:hover
-      background-color: lighten($blue, 10%) !important
+      background-color: color.adjust($blue, $lightness: 10%) !important
 
 .tag
   font-size: 0.8em
