@@ -1,13 +1,13 @@
 import { Controller } from "@hotwired/stimulus"
-import $ from "jquery"
+import { Tooltip } from "bootstrap"
 
-// Initializes Bootstrap 4 tooltips on elements with data-toggle="tooltip"
+// Initializes Bootstrap 5 tooltips on elements with data-bs-toggle="tooltip"
 // within the controller's scope. Automatically re-initializes when the
 // DOM content changes (e.g. after AJAX updates).
 //
 // Usage:
 //   <div data-controller="tooltip">
-//     <i data-toggle="tooltip" title="Help text"></i>
+//     <i data-bs-toggle="tooltip" title="Help text"></i>
 //   </div>
 export default class extends Controller {
   // Initializes tooltips and starts observing for DOM changes.
@@ -20,11 +20,15 @@ export default class extends Controller {
   // Stops the observer and disposes of all tooltips to prevent memory leaks.
   disconnect() {
     this._observer?.disconnect()
-    $(this.element).find('[data-toggle="tooltip"]').tooltip("dispose")
+    this.element.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
+      Tooltip.getInstance(el)?.dispose()
+    })
   }
 
   // Finds and activates all tooltip-enabled elements inside this controller.
   #initTooltips() {
-    $(this.element).find('[data-toggle="tooltip"]').tooltip()
+    this.element.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
+      if (!Tooltip.getInstance(el)) new Tooltip(el)
+    })
   }
 }

@@ -3,6 +3,14 @@
   padding: 3px 6px;
 }
 
+.btn-link {
+  text-decoration: none !important;
+
+  &:hover, &:focus, &:active {
+    text-decoration: none !important;
+  }
+}
+
 %button-standard {
   @extend .btn;
   @extend .btn-sm;
@@ -17,7 +25,7 @@
   @extend .btn;
   @extend .btn-sm;
   @extend .btn-light;
-  @extend .btn-block;
+  width: 100%;
 
   background-color: #4260B4;
   border: 1px solid #4260B4;
@@ -34,7 +42,7 @@
   @extend .btn;
   @extend .btn-sm;
   @extend .btn-light;
-  @extend .btn-block;
+  width: 100%;
 
   border: 1px solid #CCCCCC;
 
@@ -69,14 +77,14 @@
 .button-event-count {
   @extend %button-standard;
   @extend .btn-outline-primary;
-  @extend .mr-1;
+  @extend .me-1;
   @extend .mb-1;
 }
 
 .button-filters {
   @extend %button-standard;
   @extend .btn-info;
-  @extend .mr-1;
+  @extend .me-1;
   @extend .mb-1;
 }
 
@@ -120,26 +128,24 @@
 
 .button-checkbox--main {
   @extend .btn-sm;
-  background-color: white;
-  border: 1px solid #17a2b8;
-  color: #17a2b8;
+  @extend .btn-outline-info;
+}
 
-  &.active {
-    background-color: #17a2b8;
-    color: white;
-  }
+.btn-check + .button-checkbox--main:hover {
+  color: white;
+  background-color: var(--bs-info);
+  border-color: var(--bs-info);
 }
 
 .button-checkbox--orange {
   @extend .btn-sm;
-  background-color: white;
-  border: 1px solid #c69500;
-  color: #c69500;
+  @extend .btn-outline-warning;
+}
 
-  &.active {
-    background-color: #d39e00;
-    color: white;
-  }
+.btn-check + .button-checkbox--orange:hover {
+  color: white;
+  background-color: var(--bs-warning);
+  border-color: var(--bs-warning);
 }
 
 .button--bold--red {
@@ -158,5 +164,5 @@
 .btn-xs {
   font-size: 0.75rem;
   border: 0;
-  @extend .rounded-sm;
+  @extend .rounded-1;
 }

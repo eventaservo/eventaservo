@@ -26,14 +26,14 @@
 
         <div class="col-12 col-md-3">
           <div class="d-sm-flex justify-content-around flex-md-column">
-            <div class="custom-control custom-switch">
-              <%= check_box_tag :pasintaj, true, params[:pasintaj],  class: 'custom-control-input' %>
-              <%= label_tag :pasintaj, 'Pasintaj', class: 'custom-control-label' %>
+            <div class="form-check form-switch">
+              <%= check_box_tag :pasintaj, true, params[:pasintaj],  class: 'form-check-input' %>
+              <%= label_tag :pasintaj, 'Pasintaj', class: 'form-check-label' %>
             </div>
 
-            <div class="custom-control custom-switch">
-              <%= check_box_tag :nuligitaj, true, params[:nuligitaj],  class: 'custom-control-input' %>
-              <%= label_tag :nuligitaj, 'Nuligitaj', class: 'custom-control-label' %>
+            <div class="form-check form-switch">
+              <%= check_box_tag :nuligitaj, true, params[:nuligitaj],  class: 'form-check-input' %>
+              <%= label_tag :nuligitaj, 'Nuligitaj', class: 'form-check-label' %>
             </div>
           </div>
         </div>

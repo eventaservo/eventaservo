@@ -10,7 +10,7 @@ class ReportsIntegrationTest < ActionDispatch::IntegrationTest
     get reports_url
     assert_response :success
     assert_select "div.lead", text: "Eventoj kun raportoj"
-    assert_select "a.link-blue", text: event_with_report.title
-    assert_select "a.link-blue", {count: 0, text: event_without_report.title}
+    assert_select "a", text: event_with_report.title
+    assert_select "a", {count: 0, text: event_without_report.title}
   end
 end

@@ -11,16 +11,38 @@ export default class extends Controller {
     this.hideLeaflet()
   }
 
+  disconnect() {
+    if (this.map) {
+      this.map.remove()
+      this.map = null
+    }
+  }
+
   drawMap() {
-    const map = L.map('map-view-container')
-    L.tileLayer(
-      'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXZlbnRhc2Vydm8iLCJhIjoiY2s2OGcxaWU5MDRtYzNucWZqdXRicnFpMyJ9.HRdmn4ful40N4svL9ix8vA',
-      {
-        attribution:
-          `© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Plibonigi ĉi tiun mapon</a></strong>`,
-        id: 'mapbox/streets-v12',
-      }
-    ).addTo(map)
+    if (!this.element) return
+
+    if (this.map) {
+      this.map.remove()
+    }
+
+    const mapboxToken = document.querySelector('meta[name="mapbox-token"]')?.content
+    this.map = L.map(this.element)
+
+    if (mapboxToken) {
+      L.tileLayer(
+        `https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${mapboxToken}`,
+        {
+          attribution:
+            `© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Plibonigi ĉi tiun mapon</a></strong>`,
+          id: 'mapbox/streets-v12',
+        }
+      ).addTo(this.map)
+    } else {
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(this.map)
+    }
+
     const bounds = []
     const markers = L.markerClusterGroup({ maxClusterRadius: 20 })
     for (const evento of this.eventsValue) {
@@ -35,8 +57,12 @@ export default class extends Controller {
       bounds.push([evento.latitude, evento.longitude])
     }
 
-    map.addLayer(markers)
-    map.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 })
+    this.map.addLayer(markers)
+    if (bounds.length > 0) {
+      this.map.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 })
+    } else {
+      this.map.setView([20, 0], 2)
+    }
   }
 
   eventoPinColor(epc) {

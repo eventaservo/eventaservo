@@ -19,7 +19,7 @@
           data: { controller: 'event--form', action: 'submit->event--form#validateCategories'}) do |form| %>
         <%= error_handling(@event) %>
 
-        <div class="form-group">
+        <div class="mb-3">
           <%= form.label :title, 'Titolo *' %>
           <%= form.text_field :title, class: 'form-control', autofocus: true, required: true, aria: { describedby: 'title-characters-count' } %>
           <small class="form-text text-muted" id="title-characters-count">
@@ -27,7 +27,7 @@
           </small>
         </div>
 
-        <div class="form-group">
+        <div class="mb-3">
           <%= form.label :description, 'Priskribo *' %>
           <%= form.text_field :description, class: 'form-control', required: true, aria: { describedby: 'description-help' } %>
           <small class="form-text text-muted" id="description-help">
@@ -36,7 +36,7 @@
         </div>
 
         <% if Organization.by_user(current_user).any? %>
-          <div class="form-group">
+          <div class="mb-3">
             <%= label_tag :organization_id, 'Organizo(j)' %>
             <%= select_tag 'organization_ids[]',
               options_from_collection_for_select(Organization.by_user(current_user), 'id', 'full_name', @event_organization_ids),
@@ -49,11 +49,11 @@
           </div>
         <% end %>
 
-        <div class="form-row">
+        <div class="row g-3">
           <div class="col-lg-6">
-            <div class="form-group">
+            <div class="mb-3">
               <%= form.label :date_start, 'Komenca dato' %>
-              <div class="form-row">
+              <div class="row g-3">
                 <div class="col-8" data-controller="datepicker"
                      data-action="datepicker:complete->event--form#syncEndDate">
                   <input type="hidden" name="event[date_start]" data-datepicker-target="hidden">
@@ -70,9 +70,9 @@
           </div>
 
           <div class="col-lg-6">
-            <div class="form-group">
+            <div class="mb-3">
               <%= form.label :date_end, 'Fina dato' %>
-              <div class="form-row">
+              <div class="row g-3">
                 <div class="col-8" data-controller="datepicker"
                      data-action="datepicker:complete->event--form#focusEndTime">
                   <input type="hidden" name="event[date_end]" data-datepicker-target="hidden" data-event--form-target="endDateHidden">
@@ -90,7 +90,7 @@
           </div>
         </div>
 
-        <div class="form-group">
+        <div class="mb-3">
           <div class="text-center" id="tags-categories" data-event--form-target="tagsCategories">
             <%
               # Use copied tags if available (for duplication) or event's tags (for editing)
@@ -98,9 +98,9 @@
               event_category_ids = event_categories.pluck(:id)
             %>
             <% Tag.categories.order(:sort_order).each do |tag| %>
-              <div class="btn-group btn-group-toggle mb-1" data-toggle="buttons">
-                <label class="btn button-checkbox--main <%= 'active' if event_category_ids.include?(tag.id) %>">
-                  <%= check_box_tag "tags_categories[]", tag.id, event_categories.include?(tag), id: "tag_#{tag.id}" %>
+              <div class="btn-group mb-1">
+                <%= check_box_tag "tags_categories[]", tag.id, event_categories.include?(tag), id: "tag_#{tag.id}", class: "btn-check", autocomplete: "off" %>
+                <label class="btn button-checkbox--main" for="tag_<%= tag.id %>">
                   <%= tag.name %>
                 </label>
               </div>
@@ -114,9 +114,9 @@
               event_characteristic_ids = event_characteristics.pluck(:id)
             %>
             <% Tag.characteristics.order(:sort_order).each do |tag| %>
-              <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn button-checkbox--orange <%= 'active' if event_characteristic_ids.include?(tag.id) %>">
-                  <%= check_box_tag "tags_characteristics[]", tag.id, event_characteristics.include?(tag), id: "tag_#{tag.id}" %>
+              <div class="btn-group">
+                <%= check_box_tag "tags_characteristics[]", tag.id, event_characteristics.include?(tag), id: "tag_#{tag.id}", class: "btn-check", autocomplete: "off" %>
+                <label class="btn button-checkbox--orange" for="tag_<%= tag.id %>">
                   <%= tag.name %>
                 </label>
               </div>
@@ -132,20 +132,20 @@
           </div>
         </div>
 
-        <div class="form-group">
+        <div class="mb-3">
           <%= form.label :enhavo, 'Enhavo' %>
           <%= form.rich_text_area :enhavo, style: 'height: 24em; overflow-y: auto;' %>
         </div>
 
         <div class="row">
           <div class="col-lg-6">
-            <div class="form-group">
+            <div class="mb-3">
               <%= form.label :site, 'Retpaĝo' %>
               <%= form.text_field :site, class: 'form-control', required: @event.email.blank?, data: { 'event--form-target': 'site', action: 'input->event--form#crossValidateSiteEmail' } %>
             </div>
           </div>
           <div class="col-lg-6">
-            <div class="form-group">
+            <div class="mb-3">
               <%= form.label :email, 'Retpoŝtadreso por kontakto' %>
               <%= form.email_field :email, class: 'form-control', required: @event.site.blank?, data: { 'event--form-target': 'email', action: 'input->event--form#crossValidateSiteEmail' } %>
             </div>
@@ -154,27 +154,27 @@
 
         <%= render partial: 'events/form/short_url', locals: { form: form, event: @event } %>
 
-        <div class="form-group form-check">
+        <div class="mb-3 form-check">
           <%= form.check_box :online, class: 'form-check-input', data: { 'event--form-target': 'online', action: 'change->event--form#toggleOnline' } %>
           <%= form.label :online, "🖥 Reta aŭ hibrida evento", class: 'form-check-label' %>
         </div>
 
         <div id="retaj_informoj" data-event--form-target="onlineInfo">
-          <div class="form-group">
+          <div class="mb-3">
             <%= check_box_tag 'universala', "1", @event.universala?, data: { 'event--form-target': 'universala', action: 'change->event--form#toggleUniversala' } %>
             <%= label_tag 'universala', 'Elekti horzonon anstataŭ adreson/landon', class: 'form-check-label' %>
           </div>
         </div>
 
         <div id="horzono" data-event--form-target="timezone">
-          <div class="form-group">
+          <div class="mb-3">
             <%= form.label :time_zone, 'Horzono' %>
             <%= form.combobox("time_zone", Horzono.for_select) %>
           </div>
         </div>
 
         <div id="malretaj_informoj" data-event--form-target="offlineInfo">
-          <div class="form-group">
+          <div class="mb-3">
             <%= form.label :address, 'Loka adreso de la evento' %>
             <%= form.text_field :address, class: 'form-control', aria: { describedby: 'address-help' } %>
             <small class="form-text text-muted" id="address-help">
@@ -183,13 +183,13 @@
           </div>
           <div class="row">
             <div class="col-lg-6">
-              <div class="form-group">
+              <div class="mb-3">
                 <%= form.label :city, 'Urbo (aŭ loko)' %>
                 <%= form.text_field :city, class: 'form-control', required: true, data: { 'event--form-target': 'city' } %>
               </div>
             </div>
             <div class="col-lg-6">
-              <div class="form-group">
+              <div class="mb-3">
                 <%= form.label :country_id, 'Lando' %>
                 <%= form.combobox("country_id", Country.not_online) %>
               </div>
@@ -202,11 +202,11 @@
             <div class="lead">
               Administraj funkcioj
             </div>
-            <div class="form-group form-check">
+            <div class="mb-3 form-check">
               <%= form.check_box :international_calendar, class: 'form-check-input' %>
               <%= form.label :international_calendar, '📅 Aldoni al Internacia Kalendaro', class: 'form-check-label' %>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
               <%= label_tag :user_id, 'Eventa administranto' %>
               <%= form.combobox("user_id", combobox_users_with_username_path, value: (@event.user_id || current_user.id)) %>
             </div>
@@ -216,12 +216,12 @@
         <div class="buttons-footer">
           <% if params[:action] == 'edit' %>
             <%= link_to 'Ne registri', :back, class: 'button-cancel' %>
-            <%= link_to 'Forigi', event_path(code: @event.ligilo), class: 'button-outline-red float-left', method: :delete, data: { confirm: 'Ĉu vi certas? Vi ne kapablos malfari tion.' } %>
+            <%= link_to 'Forigi', event_path(code: @event.ligilo), class: 'button-outline-red float-start', method: :delete, data: { confirm: 'Ĉu vi certas? Vi ne kapablos malfari tion.' } %>
 
             <% if @event.cancelled %>
-              <%= link_to t("pages.event.uncancel_event"), event_malnuligi_url(event_code: @event.code), class: 'btn btn-sm btn-outline-success float-left ml-2' %>
+              <%= link_to t("pages.event.uncancel_event"), event_malnuligi_url(event_code: @event.code), class: 'btn btn-sm btn-outline-success float-start ms-2' %>
             <% else %>
-              <a href="#" class="button-outline-red float-left ml-2" data-target="#nuligiloModal" data-toggle="modal">
+              <a href="#" class="button-outline-red float-start ms-2" data-bs-target="#nuligiloModal" data-bs-toggle="modal">
                 <%= t("pages.event.cancel_event") %>
               </a>
             <% end %>

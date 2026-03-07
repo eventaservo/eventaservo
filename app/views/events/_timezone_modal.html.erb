@@ -1,4 +1,4 @@
-<div class="modal text-left fade" id="timezoneModal" aria-hidden="true" aria-labelledby="timezoneModalCenterTitle" role="dialog" tabindex="-1" data-focus="false">
+<div class="modal text-start fade" id="timezoneModal" aria-hidden="true" aria-labelledby="timezoneModalCenterTitle" role="dialog" tabindex="-1" data-bs-focus="false">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <%= form_tag(iloj_elektas_horzonon_url, method: :post) do %>
@@ -6,9 +6,7 @@
           <h5 class="modal-title" id="timezoneModalCenterTitle">
             <%= t("timezone.timezone") %>
           </h5>
-          <button class="close" aria-label="Fermi" data-dismiss="modal" type="button">
-            <span aria-hidden="true">×</span>
-          </button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermi"></button>
         </div>
         <div class="modal-body" style="font-size: 1rem; font-weight: normal;">
           <% if cookies[:horzono] %>
@@ -27,14 +25,14 @@
             <%= t("timezone.select_timezone") %>
           </p>
 
-          <div data-controller="timezone" class="form-group">
+          <div data-controller="timezone" class="mb-3">
             <% selected = @event.nil? ? (cookies[:horzono] || nil) : @event.time_zone %>
             <%= select_tag(:horzono, options_for_select(Horzono.for_select, selected),
               data: { timezone_target: "timezoneSelect" }) %>
           </div>
         </div>
         <div class="modal-footer">
-          <button class="button-cancel" data-dismiss="modal" type="button">
+          <button class="button-cancel" data-bs-dismiss="modal" type="button">
             <%= t("buttons.close") %>
           </button>
           <%= submit_tag("#{cookies[:horzono] ? t("buttons.change") : t("buttons.select")}", class: 'button-submit') %>

@@ -1,12 +1,13 @@
 // Entry point for the build script in your package.json
 import '@hotwired/turbo-rails'
 
-// jQuery — expose globally for Bootstrap and Rails UJS
+// jQuery — expose globally for Rails UJS and legacy plugins
 import $ from 'jquery'
 window.$ = window.jQuery = $
 
-// Bootstrap JS (includes Popper.js for dropdowns, tooltips, etc.)
-import 'bootstrap'
+// Bootstrap 5 JS (jQuery-free, uses @popperjs/core)
+import * as bootstrap from 'bootstrap'
+window.bootstrap = bootstrap
 
 // Rails UJS — handles data-method, data-confirm, remote: true
 import Rails from '@rails/ujs'
@@ -26,7 +27,8 @@ import 'trix'
 import '@rails/actiontext'
 
 // Leaflet
-import 'leaflet'
+import L from 'leaflet'
+window.L = L
 import 'leaflet.markercluster'
 
 // Chartkick
@@ -37,5 +39,3 @@ window.Highcharts = Highcharts
 // Direct upload progress UI
 import './src/direct_uploads'
 
-// Fixes slim-select option selection inside Bootstrap modals
-$.fn.modal.Constructor.prototype._enforceFocus = function () { }

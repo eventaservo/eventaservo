@@ -1,7 +1,7 @@
 <div class="item-row-no-chevron <%= event_color_class(event) %>">
   <div class="col-12">
     <p>
-      <div class="text-center font-weight-bold">
+      <div class="text-center fw-bold">
         <%= event_flag(event) %>
         <%= link_to event.title, event_path(code: event.ligilo), class: ("cancelled" if event.cancelled) %>
       </div>

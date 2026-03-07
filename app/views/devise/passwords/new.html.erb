@@ -2,7 +2,7 @@
   <div class="box-white">
     <div class="text-center">
       <h3>Eventa Servo</h3>
-      <p class="fg-color-grayDark font-weight-bold">
+      <p class="fg-color-grayDark fw-bold">
         Ĉu vi forgesis vian pasvorton?
       </p>
     </div>
@@ -11,7 +11,7 @@
 
       <%= error_handling(resource) %>
 
-      <div class="form-group">
+      <div class="mb-3">
         <p class="small">Skribu vian retpoŝtadreson. Ni sendos al vi instrukciojn por krei novan pasvorton.</p>
         <%= f.email_field :email, autocomplete: 'email', class: 'form-control', autofocus: true, placeholder: 'Retpoŝtadreso' %>
       </div>

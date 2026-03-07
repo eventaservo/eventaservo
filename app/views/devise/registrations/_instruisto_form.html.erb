@@ -1,39 +1,35 @@
 <div data-controller="user">
   <div class="lead">Kiel instruisto</div>
-  <div class="form-group row">
+  <div class="row mb-3">
     <%= f.label :instruisto, 'Mi estas instruisto', class: 'col-form-label col-5' %>
     <div class="col-7">
-      <div class="form-group form-check">
+      <div class="mb-3 form-check">
         <%= check_box 'user', 'instruisto', { 'data-action': 'user#toggleUserInstruistoDetails', 'data-user-target': 'instruisto' }, 'true', 'false' %>
       </div>
     </div>
   </div>
 
   <div id="instruisto-details" class="<%= 'd-none' unless resource.instruisto == 'true' %>">
-    <div class="form-group row">
+    <div class="row mb-3">
       <%= f.label :instruo, 'Nivelo', class: 'col-5 col-form-label' %>
       <div class="col-7">
-        <div class="btn-group btn-group-toggle mb-1" data-toggle="buttons">
-          <label class="btn button-checkbox--main">
-            <%= check_box_tag 'nivelo[baza]', 'baza', resource.instruo['nivelo']&.include?('baza'), {} %>
-            Baza
-          </label>
-          <label class="btn button-checkbox--main">
-            <%= check_box_tag 'nivelo[meza]', 'meza', resource.instruo['nivelo']&.include?('meza'), {} %>
-            Meza
-          </label>
-          <label class="btn button-checkbox--main">
-            <%= check_box_tag 'nivelo[supera]', 'supera', resource.instruo['nivelo']&.include?('supera'), {} %>
-            Supera
-          </label>
+        <div class="btn-group mb-1" role="group" aria-label="Nivelo">
+          <%= check_box_tag 'nivelo[baza]', 'baza', resource.instruo['nivelo']&.include?('baza'), class: 'btn-check', id: 'nivelo_baza' %>
+          <label class="btn button-checkbox--main" for="nivelo_baza">Baza</label>
+
+          <%= check_box_tag 'nivelo[meza]', 'meza', resource.instruo['nivelo']&.include?('meza'), class: 'btn-check', id: 'nivelo_meza' %>
+          <label class="btn button-checkbox--main" for="nivelo_meza">Meza</label>
+
+          <%= check_box_tag 'nivelo[supera]', 'supera', resource.instruo['nivelo']&.include?('supera'), class: 'btn-check', id: 'nivelo_supera' %>
+          <label class="btn button-checkbox--main" for="nivelo_supera">Supera</label>
         </div>
       </div>
     </div>
 
-    <div class="form-group row">
+    <div class="row mb-3">
       <label class="col-md-5 col-form-label" for="instru_sperto">Sperto</label>
       <div class="col-md-7">
-        <div class="form-group">
+        <div class="mb-3">
           <%= text_area_tag 'instru_sperto', resource.instruo["sperto"], rows: "3",
             placeholder: "Skribu pri via sperto kiel instruisto.", class: "form-control" %>
         </div>

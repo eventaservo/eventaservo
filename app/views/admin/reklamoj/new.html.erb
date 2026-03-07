@@ -4,11 +4,11 @@
     <p>Bild-grandeco: 400x200 px</p>
 
     <%= form_with model: @ad, method: :post, url: admin_reklamoj_index_url, local: true do |f| %>
-      <div class="form-group">
+      <div class="mb-3">
         <%= f.label :url, "URL" %>
         <%= f.text_field :url, class: "form-control", required: true %>
       </div>
-      <%= f.file_field :image, class: 'form-control-file', accept: 'image/*', required: true %>
+      <%= f.file_field :image, class: 'form-control', accept: 'image/*', required: true %>
 
       <div class="buttons-footer">
         <%= link_to 'Nuligi', admin_reklamoj_index_url, class: 'button-cancel' %>

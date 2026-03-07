@@ -12,7 +12,7 @@
           </div>
           <div class="card-body">
             <% if organization.logo.attached? %>
-              <%= image_tag url_for(organization.logo), style: 'float: left; max-width: 64px;', class: 'mr-2' %>
+              <%= image_tag url_for(organization.logo), style: 'float: left; max-width: 64px;', class: 'me-2' %>
             <% end %>
 
             <%= organization.description.to_plain_text.first(120) + "..." %>

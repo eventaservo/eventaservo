@@ -163,7 +163,7 @@ module ApplicationHelper
   def montras_telefonnumeron(phone)
     return if phone.blank?
 
-    icon("fas", "phone", class: "fg-color-link mr-1") + link_to(phone, "tel:#{phone}")
+    icon("fas", "phone", class: "fg-color-link me-1") + link_to(phone, "tel:#{phone}")
   end
 
   def montras_retpaghon(url)
@@ -171,11 +171,11 @@ module ApplicationHelper
 
     text = (url.length > 40) ? url[0..40] + "..." : url
     text = text.gsub(%r{https?://}, "")
-    icon("fas", "globe", class: "fg-color-link mr-1") + link_to(text, url, target: :_blank)
+    icon("fas", "globe", class: "fg-color-link me-1") + link_to(text, url, target: :_blank)
   end
 
   def montras_adreson(adreso, text: adreso)
-    icon("fas", "map-marker-alt fg-color-link mr-1") +
+    icon("fas", "map-marker-alt fg-color-link me-1") +
       link_to(text, "https://www.google.com/maps/search/?api=1&query=#{adreso}", target: :_blank)
   end
 

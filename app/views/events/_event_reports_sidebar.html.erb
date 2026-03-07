@@ -2,7 +2,7 @@
   <div class="box-white">
     <div class="box-header bg-color-purple">📸 Raportoj</div>
     <div class="box-body">
-      <div class="text-right">
+      <div class="text-end">
         <%= link_to icon("fas", "plus-circle", "Aldoni ligilon"), new_event_report_path(event_code: event.code), class: 'link-green' %>
       </div>
 
@@ -16,7 +16,7 @@
               <%= link_to icon('far', 'trash-alt'),
                 event_report_url(event_code: event.code, id: report), method: :delete,
                 data: { confirm: 'Ĉu vi certas?' },
-                class: 'link-simples fg-color-red float-right' %>
+                class: 'link-simples fg-color-red float-end' %>
             <% end %>
           </div>
         <% end %>

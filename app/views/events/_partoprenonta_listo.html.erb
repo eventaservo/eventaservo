@@ -1,8 +1,8 @@
-<%= link_to 'kaj pli...', '#', data: { target: '#partoprenontojModal', toggle: 'modal' } %>
+<%= link_to 'kaj pli...', '#', data: { bs_target: '#partoprenontojModal', bs_toggle: 'modal' } %>
 
 <div id="partoprenontojModal" class="modal fade" aria-hidden="true" aria-labelledby="titolo" role="dialog" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content text-left">
+    <div class="modal-content text-start">
 
       <div class="modal-header">
         <h5 class="modal-title" id="titolo">
@@ -10,9 +10,7 @@
           <%= event.past? ? "interesiĝintoj" : "interesiĝantoj" %>
         </h5>
 
-        <button class="close" aria-label="Fermi" data-dismiss="modal" type="button">
-          <span aria-hidden="true"> × </span>
-        </button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermi"></button>
       </div>
 
       <div class="modal-body" style="font-weight: normal; font-size: 1rem;">

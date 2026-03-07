@@ -10,7 +10,7 @@
         <h1 class="display-4"><%= @uzanto.name %></h1>
         <%= link_to icon('far', 'calendar-alt'),
           webcal_user_url(webcal_token: @uzanto.webcal_token, protocol: :webcal, format: :ics),
-          data: { target: '#webcalModal', toggle: 'modal' },
+          data: { bs_target: '#webcalModal', bs_toggle: 'modal' },
           aria: { label: 'Aboni personan kalendaron' } %>
       </div>
 
@@ -48,9 +48,7 @@
         <h5 id="shareModalCenterTitle" class="modal-title">
           Aboni personan kalendaron
         </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Fermi">
-          <span aria-hidden="true">×</span>
-        </button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermi"></button>
       </div>
       <div class="modal-body">
         <p>
@@ -63,9 +61,7 @@
           Jen Webcal-ligilo por aboni la kalendaron. Uzu ĝin en programoj kiel Google Calendar, iCal aŭ similaj. Se vi bezonas klarigon kiel uzi la ligilon, legu <%= link_to 'ĉi tiun artikolon', 'https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)', target: '_blank' %>.
         </p>
         <div class="input-group" data-controller="clipboard">
-          <div class="input-group-prepend">
-            <%= link_to 'Kopii', '#', class: 'input-group-text', data: { action: 'click->clipboard#copy' } %>
-          </div>
+          <%= link_to 'Kopii', '#', class: 'input-group-text', data: { action: 'click->clipboard#copy' } %>
           <%= text_field_tag nil, webcal_user_url(webcal_token: @uzanto.webcal_token, format: :ics), readonly: true, class: 'form-control bg-color-white', data: { clipboard_target: 'source' } %>
         </div>
         <br>
@@ -74,7 +70,7 @@
         </p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Fermi</button>
+        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Fermi</button>
       </div>
     </div>
   </div>
