@@ -13,19 +13,15 @@
     <div class="row mb-3">
       <%= f.label :instruo, 'Nivelo', class: 'col-5 col-form-label' %>
       <div class="col-7">
-        <div class="btn-group mb-1" data-bs-toggle="buttons">
-          <label class="btn button-checkbox--main">
-            <%= check_box_tag 'nivelo[baza]', 'baza', resource.instruo['nivelo']&.include?('baza'), {} %>
-            Baza
-          </label>
-          <label class="btn button-checkbox--main">
-            <%= check_box_tag 'nivelo[meza]', 'meza', resource.instruo['nivelo']&.include?('meza'), {} %>
-            Meza
-          </label>
-          <label class="btn button-checkbox--main">
-            <%= check_box_tag 'nivelo[supera]', 'supera', resource.instruo['nivelo']&.include?('supera'), {} %>
-            Supera
-          </label>
+        <div class="btn-group mb-1" role="group" aria-label="Nivelo">
+          <%= check_box_tag 'nivelo[baza]', 'baza', resource.instruo['nivelo']&.include?('baza'), class: 'btn-check', id: 'nivelo_baza' %>
+          <label class="btn button-checkbox--main" for="nivelo_baza">Baza</label>
+
+          <%= check_box_tag 'nivelo[meza]', 'meza', resource.instruo['nivelo']&.include?('meza'), class: 'btn-check', id: 'nivelo_meza' %>
+          <label class="btn button-checkbox--main" for="nivelo_meza">Meza</label>
+
+          <%= check_box_tag 'nivelo[supera]', 'supera', resource.instruo['nivelo']&.include?('supera'), class: 'btn-check', id: 'nivelo_supera' %>
+          <label class="btn button-checkbox--main" for="nivelo_supera">Supera</label>
         </div>
       </div>
     </div>

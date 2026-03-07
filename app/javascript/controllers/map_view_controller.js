@@ -14,14 +14,22 @@ export default class extends Controller {
   drawMap() {
     const mapboxToken = document.querySelector('meta[name="mapbox-token"]')?.content
     const map = L.map('map-view-container')
-    L.tileLayer(
-      `https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${mapboxToken}`,
-      {
-        attribution:
-          `© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Plibonigi ĉi tiun mapon</a></strong>`,
-        id: 'mapbox/streets-v12',
-      }
-    ).addTo(map)
+
+    if (mapboxToken) {
+      L.tileLayer(
+        `https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${mapboxToken}`,
+        {
+          attribution:
+            `© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Plibonigi ĉi tiun mapon</a></strong>`,
+          id: 'mapbox/streets-v12',
+        }
+      ).addTo(map)
+    } else {
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map)
+    }
+
     const bounds = []
     const markers = L.markerClusterGroup({ maxClusterRadius: 20 })
     for (const evento of this.eventsValue) {

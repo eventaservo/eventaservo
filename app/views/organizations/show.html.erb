@@ -99,7 +99,7 @@
           <%= link_to 'ĉi tiun artikolon', 'https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)', target: :'_blank' %>.
         </p>
         <div class="input-group" data-controller="clipboard">
-          <%= link_to 'Kopii', '#', data: { action: 'click->clipboard#copy' } %>
+          <%= link_to 'Kopii', '#', class: 'input-group-text', data: { action: 'click->clipboard#copy' } %>
           <%= text_field_tag nil, webcal_organizo_url(short_name: @organizo.short_name, format: :ics), readonly: true, class: 'form-control bg-color-white', data: { clipboard_target: 'source' } %>
         </div>
         <br>
