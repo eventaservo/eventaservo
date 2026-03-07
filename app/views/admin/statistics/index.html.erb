@@ -1,19 +1,31 @@
 <div class="box-white">
   <h1 class="lead">Statistikoj</h1>
 
+  <div class="mb-4">
+    <%= form_with url: admin_statistics_path, method: :get, class: "row g-3" do |f| %>
+      <div class="col-auto">
+        <%= f.label :start_date, "Komenca dato", class: "form-label" %>
+        <%= f.date_field :start_date, value: @start_date, class: "form-control" %>
+      </div>
+      <div class="col-auto">
+        <%= f.label :end_date, "Fina dato", class: "form-label" %>
+        <%= f.date_field :end_date, value: @end_date, class: "form-control" %>
+      </div>
+      <div class="col-auto align-self-end">
+        <%= f.submit "Filtri", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+
   <div class="row">
-    <div class="col-12 col-md-6">
-      <%= render(Graphs::NewUsersByMonthComponent.new) %>
+    <div class="col-12 mb-4">
+      <%= render(Graphs::NewUsersByMonthComponent.new(range: @range)) %>
     </div>
 
-    <div class="col-12 col-md-6">
+    <div class="col-12 mb-4">
       <%= area_chart @event_created_by_month, stacked: true, title: "Eventoj kreitaj monate" %>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-12 col-md-6">
-      <%= render(Graphs::VisitsByMonthComponent.new) %>
-    </div>
-  </div>
+
 </div>
