@@ -29,7 +29,7 @@ gem "omniauth-facebook", "~> 9.0"
 gem "omniauth-google-oauth2", "~> 1.2"
 gem "omniauth-rails_csrf_protection"
 
-gem "devise", ">= 4.7.1"
+gem "devise", "~> 5.0"
 gem "jwt", "~> 2.2"
 gem "pg", "~> 1.1", ">= 1.1.3"
 gem "simple_token_authentication", github: "gonzalo-bulnes/simple_token_authentication", branch: "master"
