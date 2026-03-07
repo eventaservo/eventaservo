@@ -8,6 +8,7 @@
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^7.3.0",
     "@josefarias/hotwire_combobox": "^0.3.2",
+    "@popperjs/core": "^2.11",
     "@rails/actioncable": "^7.2.300",
     "@rails/actiontext": "^7.2.300",
     "@rails/activestorage": "^7.2.300",
@@ -25,7 +26,6 @@
     "leaflet": "^1.9.4",
     "leaflet.markercluster": "^1.5.3",
     "moment": "^2.30.1",
-    "@popperjs/core": "^2.11",
     "sass": "^1.97.2",
     "slim-select": "^2.13.1",
     "trix": "^2.1.16"
@@ -35,6 +35,7 @@
   },
   "scripts": {
     "build": "node esbuild.config.js",
-    "build:css": "cp -r node_modules/@fortawesome/fontawesome-free/webfonts public/webfonts && cp -r node_modules/flag-icons/flags public/flags && sass ./app/assets/stylesheets/cssbundling.sass.scss:./app/assets/builds/cssbundling.css --no-source-map --load-path=node_modules && sass ./app/assets/stylesheets/active_admin.scss:./app/assets/builds/active_admin.css --no-source-map --load-path=$(bundle show activeadmin)/app/assets/stylesheets && sass ./app/assets/stylesheets/mailer.sass:./app/assets/builds/mailer.css --no-source-map"
-  }
+    "build:css": "cp -r node_modules/@fortawesome/fontawesome-free/webfonts public/webfonts && cp -r node_modules/flag-icons/flags public/flags && sass ./app/assets/stylesheets/cssbundling.sass.scss:./app/assets/builds/cssbundling.css --no-source-map --load-path=node_modules --quiet-deps --silence-deprecation=import && sass ./app/assets/stylesheets/active_admin.scss:./app/assets/builds/active_admin.css --no-source-map --load-path=$(bundle show activeadmin)/app/assets/stylesheets --quiet-deps --silence-deprecation=import && sass ./app/assets/stylesheets/mailer.sass:./app/assets/builds/mailer.css --no-source-map --quiet-deps --silence-deprecation=import"
+  },
+  "devDependencies": {}
 }

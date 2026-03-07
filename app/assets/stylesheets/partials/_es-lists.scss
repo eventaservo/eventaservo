@@ -1,3 +1,5 @@
+@use "sass:color";
+
 .es-list {
   border: 1px solid lightgray;
   margin: 5px 0 5px 0;
@@ -34,7 +36,7 @@
   border-bottom: 1px solid lightgrey;
 
   &:hover {
-    background-color: lighten(lightgrey, 10%);
+    background-color: color.adjust(lightgrey, $lightness: 10%);
     text-decoration: none;
   }
 }
