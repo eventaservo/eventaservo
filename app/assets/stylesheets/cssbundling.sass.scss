@@ -47,3 +47,9 @@ $info: #17a2b8;
 @import "slim-select/dist/slimselect";
 @import "trix/dist/trix";
 @import "glightbox/dist/css/glightbox";
+
+// Ultimate link reset to ensure no underlines in Bootstrap 5
+a, a:hover, a:focus, a:active, a:visited {
+  text-decoration: none !important;
+}
+

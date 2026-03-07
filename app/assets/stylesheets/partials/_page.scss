@@ -51,12 +51,12 @@ body {
   border-radius: 0.25rem;
 
   a {
-    text-decoration: none;
+    text-decoration: none !important;
   }
 }
 
 a.badge {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 .search-field {
@@ -78,40 +78,54 @@ a.badge {
   font-family: monospace;
 }
 
+// Global Link Reset for Bootstrap 5
+a, a:hover, a:focus, a:active, a:visited {
+  text-decoration: none !important;
+}
+
 a {
   color: #0d6efd;
-  text-decoration: none;
 
   &:hover {
     color: color.adjust(#0d6efd, $lightness: -15%);
-    text-decoration: none;
   }
 }
 
 .nav-link {
   color: white !important;
+  text-decoration: none !important;
 
   &:hover {
     color: whitesmoke !important;
+    text-decoration: none !important;
   }
 }
 
 .link-green {
-  color: #00A300;
-  text-decoration: none;
+  color: #00A300 !important;
+  text-decoration: none !important;
 
   &:hover {
     color: #028102 !important;
-    text-decoration: none;
+    text-decoration: none !important;
   }
 }
 
 .link-black {
-  color: black;
+  color: black !important;
+  text-decoration: none !important;
 
   &:hover {
     color: dimgray !important;
-    text-decoration: none;
+    text-decoration: none !important;
+  }
+}
+
+.fg-color-green, .fg-color-blue, .fg-color-red, .fg-color-yellow, .fg-color-orange, .fg-color-purple, .fg-color-pink {
+  text-decoration: none !important;
+
+  &:hover {
+    text-decoration: none !important;
   }
 }
 
