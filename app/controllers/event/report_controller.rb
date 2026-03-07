@@ -1,6 +1,6 @@
 class Event
   class ReportController < ApplicationController
-    before_action :authenticate_user!, only: %i[new create edit update destroy]
+    before_action :authenticate_user!, only: %i[new create destroy]
     before_action :set_event, except: %i[index]
     before_action :set_report, only: %i[destroy]
 
