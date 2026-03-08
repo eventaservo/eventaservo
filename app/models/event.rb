@@ -124,7 +124,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :by_user, ->(user) { where(user: user) }
   scope :by_username, ->(username) { joins(:user).where(users: {username: username}) }
   scope :by_uuid, ->(uuid) { unscoped.where(uuid: uuid) }
-  scope :without_location, -> { where(latitude: nil) }
+  scope :without_location, -> { where(latitude: nil, online: false) }
   scope :online, -> { where(online: true) }
   scope :not_online, -> { where(online: false) }
   scope :for_webcal, -> { where("date_start >= ? OR date_end >= ?", Time.zone.today - 6.months, Time.zone.today) }

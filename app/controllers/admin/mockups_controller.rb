@@ -11,7 +11,8 @@ module Admin
 
     # Registry of available mockups with metadata.
     MOCKUPS = [
-      {name: "Tables", action: "tables", description: "Standard table patterns using .item-row variants"}
+      {name: "Breadcrumbs", action: "breadcrumbs", icon: "route", description: "Navigation breadcrumb patterns for admin pages"},
+      {name: "Tables", action: "tables", icon: "table", description: "Standard table patterns using .item-row variants"}
     ].freeze
 
     # Sample events used as data source for table mockups.
@@ -44,6 +45,12 @@ module Admin
     # @return [void]
     def tables
       @events = SAMPLE_EVENTS
+    end
+
+    # Displays breadcrumb mockup variants.
+    #
+    # @return [void]
+    def breadcrumbs
     end
   end
 end

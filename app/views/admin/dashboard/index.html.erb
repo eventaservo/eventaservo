@@ -1,0 +1,93 @@
+<div class="box-white">
+  <div class="lead">Admin Panel</div>
+
+  <%# ── Events ─────────────────────────────────────────── %>
+  <div class="text-uppercase fw-bold text-body-secondary small mt-2 mb-2" style="letter-spacing:1px; font-size:11px">Events</div>
+
+  <div class="list-group list-group-flush mb-3">
+    <%= link_to admin_events_path, class: "list-group-item list-group-item-action border-0 px-2 py-2" do %>
+      <div class="d-flex align-items-center gap-3">
+        <span class="text-success fs-5"><%= icon('fas', 'calendar-alt') %></span>
+        <div>
+          <div class="fw-semibold small">Events</div>
+          <div class="text-body-secondary" style="font-size:12px">List, filter and manage all events</div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%# ── Data & Content ─────────────────────────────────── %>
+  <div class="text-uppercase fw-bold text-body-secondary small mb-2" style="letter-spacing:1px; font-size:11px">Data & Content</div>
+
+  <div class="list-group list-group-flush mb-3">
+    <%= link_to admin_statistics_path, class: "list-group-item list-group-item-action border-0 px-2 py-2" do %>
+      <div class="d-flex align-items-center gap-3">
+        <span class="text-success fs-5"><%= icon('fas', 'chart-bar') %></span>
+        <div>
+          <div class="fw-semibold small">Statistics</div>
+          <div class="text-body-secondary" style="font-size:12px">Charts and analytics about events and users</div>
+        </div>
+      </div>
+    <% end %>
+
+    <%= link_to admin_countries_path, class: "list-group-item list-group-item-action border-0 px-2 py-2" do %>
+      <div class="d-flex align-items-center gap-3">
+        <span class="text-success fs-5"><%= icon('fas', 'globe') %></span>
+        <div>
+          <div class="fw-semibold small">Countries</div>
+          <div class="text-body-secondary" style="font-size:12px">List of all countries in the system</div>
+        </div>
+      </div>
+    <% end %>
+
+    <%= link_to admin_reklamoj_index_path, class: "list-group-item list-group-item-action border-0 px-2 py-2" do %>
+      <div class="d-flex align-items-center gap-3">
+        <span class="text-success fs-5"><%= icon('fas', 'ad') %></span>
+        <div>
+          <div class="fw-semibold small">Advertisements</div>
+          <div class="text-body-secondary" style="font-size:12px">Manage advertisements and images</div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%# ── System ─────────────────────────────────────────── %>
+  <div class="text-uppercase fw-bold text-body-secondary small mb-2" style="letter-spacing:1px; font-size:11px">System</div>
+
+  <div class="list-group list-group-flush mb-3">
+    <%= link_to "/active_admin", class: "list-group-item list-group-item-action border-0 px-2 py-2" do %>
+      <div class="d-flex align-items-center gap-3">
+        <span class="text-secondary fs-5"><%= icon('fas', 'database') %></span>
+        <div>
+          <div class="fw-semibold small">ActiveAdmin <span class="badge bg-light text-body-secondary fw-normal border">external</span></div>
+          <div class="text-body-secondary" style="font-size:12px">Full database administration</div>
+        </div>
+      </div>
+    <% end %>
+
+    <%= link_to "/jobs", class: "list-group-item list-group-item-action border-0 px-2 py-2" do %>
+      <div class="d-flex align-items-center gap-3">
+        <span class="text-secondary fs-5"><%= icon('fas', 'cogs') %></span>
+        <div>
+          <div class="fw-semibold small">Background Jobs <span class="badge bg-light text-body-secondary fw-normal border">external</span></div>
+          <div class="text-body-secondary" style="font-size:12px">Solid Queue — background tasks and queues</div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%# ── Development ────────────────────────────────────── %>
+  <div class="text-uppercase fw-bold text-body-secondary small mb-2" style="letter-spacing:1px; font-size:11px">Development</div>
+
+  <div class="list-group list-group-flush">
+    <%= link_to admin_mockups_path, class: "list-group-item list-group-item-action border-0 px-2 py-2" do %>
+      <div class="d-flex align-items-center gap-3">
+        <span class="text-success fs-5"><%= icon('fas', 'paint-brush') %></span>
+        <div>
+          <div class="fw-semibold small">Mockups</div>
+          <div class="text-body-secondary" style="font-size:12px">UI component sketches and templates</div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
