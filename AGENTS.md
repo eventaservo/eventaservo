@@ -133,7 +133,8 @@ Event feeds support multiple formats via `respond_to` blocks in controllers:
 - **CSS**: Bootstrap 5.3
 - **JS**: Stimulus + Turbo (Hotwire) with esbuild bundling
 - **Maps**: Leaflet with marker clustering
-- **UI Mockups**: Before creating or modifying UI components, **always** check the mockups at `app/views/admin/mockups/` for established patterns (tables, breadcrumbs, etc.). Use the existing patterns to ensure visual consistency across the application.
+- **UI Mockups**: Before creating or modifying UI components, **always** check the mockups at `app/views/admin/mockups/` for established patterns (tables, breadcrumbs, cards, etc.). Use the existing patterns to ensure visual consistency across the application.
+- **Admin Breadcrumbs**: Every admin page **must** include a breadcrumb navigation at the top (before the main content). Use the pattern from `app/views/admin/mockups/breadcrumbs.html.erb` as reference. The breadcrumb follows the hierarchy: `Admin > Section > Page`.
 
 ## Testing
 

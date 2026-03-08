@@ -1,0 +1,40 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb small mb-2">
+    <li class="breadcrumb-item"><%= link_to "Admin", admin_root_path %></li>
+    <li class="breadcrumb-item"><%= link_to "Mockups", admin_mockups_path %></li>
+    <li class="breadcrumb-item active" aria-current="page">Cards</li>
+  </ol>
+</nav>
+
+<div class="box-white">
+
+  <!-- ==================== TEACHER CARDS (Instruistoj) ==================== -->
+  <div class="lead">Teacher Cards</div>
+  <p class="text-body-secondary small mb-3">
+    Teacher cards with level badges and experience. Uses a colored header area with primary tones.
+  </p>
+
+  <div class="row g-3 mb-5">
+    <% @teachers.each do |teacher| %>
+      <div class="col-12 col-md-4">
+        <%= render "admin/mockups/teacher_card", teacher: teacher %>
+      </div>
+    <% end %>
+  </div>
+
+  <hr class="my-4">
+
+  <!-- ==================== SPEAKER CARDS (Prelegantoj) ==================== -->
+  <div class="lead">Speaker Cards</div>
+  <p class="text-body-secondary small mb-3">
+    Speaker cards with topics. Uses a colored header area with success tones.
+  </p>
+
+  <div class="row g-3">
+    <% @speakers.each do |speaker| %>
+      <div class="col-12 col-md-4">
+        <%= render "admin/mockups/speaker_card", speaker: speaker %>
+      </div>
+    <% end %>
+  </div>
+</div>

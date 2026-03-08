@@ -12,7 +12,34 @@ module Admin
     # Registry of available mockups with metadata.
     MOCKUPS = [
       {name: "Breadcrumbs", action: "breadcrumbs", icon: "route", description: "Navigation breadcrumb patterns for admin pages"},
+      {name: "Cards", action: "cards", icon: "id-card", description: "Teacher and speaker card patterns for directory pages"},
       {name: "Tables", action: "tables", icon: "table", description: "Standard table patterns using .item-row variants"}
+    ].freeze
+
+    # Sample teachers used as data source for card mockups.
+    SAMPLE_TEACHERS = [
+      {name: "Anna Schmidt", country: "Germanio", country_code: "de",
+       avatar: "mockups/avatar_1.jpg",
+       levels: ["Baza", "Meza"], experience: "Mi instruas Esperanton ekde 2010. Mi speciale ŝatas labori kun komencantoj kaj uzi interaktivajn metodojn."},
+      {name: "Carlos Mendes", country: "Brazilo", country_code: "br",
+       avatar: "mockups/avatar_2.jpg",
+       levels: ["Baza", "Meza", "Supera"], experience: "Universitata profesoro pri lingvistiko. Spertulo pri la Zagreba metodo kaj reta instruado."},
+      {name: "Yuki Tanaka", country: "Japanio", country_code: "jp",
+       avatar: nil,
+       levels: ["Baza"], experience: "Volontula instruistino por junulaj grupoj. Mi organizas semajnfinajn kursojn en Tokio."}
+    ].freeze
+
+    # Sample speakers used as data source for card mockups.
+    SAMPLE_SPEAKERS = [
+      {name: "Jean Dupont", country: "Francio", country_code: "fr",
+       avatar: nil,
+       topics: "Esperanto-kulturo kaj historio, la rolo de planlingvoj en Eŭropo, lingva justeco"},
+      {name: "Marta Kowalska", country: "Pollando", country_code: "pl",
+       avatar: "mockups/avatar_3.jpg",
+       topics: "Zamenhof kaj la origino de Esperanto, Esperanto-literaturo, tradukarto"},
+      {name: "Maria Silva", country: "Portugalio", country_code: "pt",
+       avatar: "mockups/avatar_4.jpg",
+       topics: "Interkomprenado inter romanaj lingvoj, Esperanto kiel ponto-lingvo, lingvaj rajtoj"}
     ].freeze
 
     # Sample events used as data source for table mockups.
@@ -38,6 +65,14 @@ module Admin
     # @return [void]
     def index
       @mockups = MOCKUPS
+    end
+
+    # Displays teacher and speaker card mockup variants.
+    #
+    # @return [void]
+    def cards
+      @teachers = SAMPLE_TEACHERS
+      @speakers = SAMPLE_SPEAKERS
     end
 
     # Displays table mockup variants with sample data.
