@@ -1,14 +1,16 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-  <div class="container-fluid flex-nowrap">
-    <%= link_to(root_url, class: "navbar-brand") do %>
-      <% if Rails.env.production? %>
-        Eventa Servo
-      <% else %>
-        <span class="small"><%= Rails.env.upcase %></span>
+  <div class="container-fluid">
+    <div class="d-flex flex-nowrap align-items-center flex-shrink-1" style="min-width: 0">
+      <%= link_to(root_url, class: "navbar-brand") do %>
+        <% if Rails.env.production? %>
+          Eventa Servo
+        <% else %>
+          <span class="small"><%= Rails.env.upcase %></span>
+        <% end %>
       <% end %>
-    <% end %>
 
-    <%= render partial: "layouts/navbar_search" %>
+      <%= render partial: "layouts/navbar_search" %>
+    </div>
 
     <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-supported-content" aria-controls="navbar-supported-content" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
