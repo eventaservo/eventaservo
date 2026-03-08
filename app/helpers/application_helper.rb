@@ -51,10 +51,23 @@ module ApplicationHelper
     raw return_html
   end
 
-  # Stiloj:
-  #   default   = 1-a de Januaru de 2019
-  #   :short    = 01/Jan/19
-  #   :compact  = 1 JAN 19
+  # Formats a date according to the given style.
+  #
+  # @param date [Date, Time, DateTime] the date to format
+  # @param style [Symbol, nil] the format style (:short, :compact, :month_year, or nil for default)
+  # @return [String] the formatted date string
+  #
+  # @example Default style
+  #   format_date(Date.new(2026, 3, 8)) #=> "Dimanĉo, 8 Marto 2026"
+  #
+  # @example Short style
+  #   format_date(Date.new(2026, 3, 8), style: :short) #=> " 8/Mar/26"
+  #
+  # @example Compact style
+  #   format_date(Date.new(2026, 3, 8), style: :compact) #=> "8 MAR 26"
+  #
+  # @example Month/year style
+  #   format_date(Date.new(2026, 3, 8), style: :month_year) #=> "Marto 2026"
   def format_date(date, style: nil)
     case style
     when :short then l(date, format: "%e/%b/%y").strip

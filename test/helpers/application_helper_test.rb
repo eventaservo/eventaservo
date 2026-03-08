@@ -9,6 +9,21 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_equal "lundo, 17 julio 1978", format_date(date)
   end
 
+  test "format_date with short style should return day/month/year" do
+    date = Date.new(2026, 3, 8)
+    assert_equal "8/mar/26", format_date(date, style: :short)
+  end
+
+  test "format_date with compact style should return uppercase day month year" do
+    date = Date.new(2026, 3, 8)
+    assert_equal "8 MAR 26", format_date(date, style: :compact)
+  end
+
+  test "format_date with month_year style should return month and year" do
+    date = Date.new(2026, 3, 8)
+    assert_equal "marto 2026", format_date(date, style: :month_year)
+  end
+
   # color_event tests
   test "color_event should return gray for past events" do
     assert_equal "gray", color_event(build_stubbed(:event, :past))
