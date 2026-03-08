@@ -1,0 +1,10 @@
+<div class="box-white">
+  <h1 class="lead">Mockups</h1>
+
+  <% @mockups.each do |mockup| %>
+    <%= link_to send("admin_mockups_#{mockup[:action]}_path"), class: "item-row" do %>
+      <div class="col-3"><%= mockup[:name] %></div>
+      <div class="col"><%= mockup[:description] %></div>
+    <% end %>
+  <% end %>
+</div>

@@ -54,9 +54,11 @@ module ApplicationHelper
   # Stiloj:
   #   default   = 1-a de Januaru de 2019
   #   :short    = 01/Jan/19
+  #   :compact  = 1 JAN 19
   def format_date(date, style: nil)
     case style
     when :short then l(date, format: "%e/%b/%y").strip
+    when :compact then l(date, format: "%e %b %y").strip.upcase
     when :month_year then l(date, format: "%B %Y").strip
     else l(date, format: "%A, %e %B %Y").strip
     end

@@ -2,16 +2,28 @@
   <div class="mb-5">
     <div class="lead">Venontaj eventoj pri kiuj mi interesiĝas</div>
 
-    <% interested_events.venontaj.order(:date_start).each do |event| %>
-      <%= link_to event_path(code: event.ligilo), class: 'item-row small' do %>
-        <div class="col-5">
-          <%= event_flag event %>
-          <%= "#{event.city} - #{format_date(event.komenca_dato, style: :short)}" %>
-        </div>
-        <div class="col <%= "cancelled" if event.cancelled %>">
-          <%= "#{event.title}" %>
-        </div>
+    <div class="border rounded overflow-hidden small">
+      <div class="row g-0 align-items-center bg-success text-white text-uppercase fw-bold smaller px-2 py-2">
+        <div class="col-2">Dato</div>
+        <div class="col">Evento</div>
+        <div class="col-3">Loko</div>
+      </div>
+
+      <% venontaj = interested_events.venontaj.order(:date_start) %>
+      <% venontaj.each_with_index do |event, i| %>
+        <%= link_to event_path(code: event.ligilo), class: "row g-0 align-items-center px-2 py-1 small hover-row text-decoration-none text-dark #{'border-bottom' unless i == venontaj.size - 1} #{'bg-body-tertiary' if i.odd?}" do %>
+          <div class="col-2 fw-semibold text-success-emphasis small">
+            <%= format_date(event.komenca_dato, style: :compact) %>
+          </div>
+          <div class="col fw-medium text-truncate <%= 'cancelled' if event.cancelled %>">
+            <%= event.title %>
+          </div>
+          <div class="col-3 text-body-secondary text-truncate">
+            <%= event_flag event %>
+            <%= event.city %>
+          </div>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
 <% end %>

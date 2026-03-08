@@ -1,28 +1,43 @@
-.text-divider {
-  position   : relative;
-  font-size  : 1.2em;
-  z-index    : 1;
-  overflow   : hidden;
-  text-align : center;
+.smaller {
+  font-size: 0.6rem !important;
+}
 
-  &:before, &:after {
-    position         : absolute;
-    top              : 51%;
-    overflow         : hidden;
-    width            : 50%;
-    height           : 1px;
-    content          : '\a0';
-    background-color : lightgray;
+.hover-row {
+  transition: background-color 0.12s ease;
+
+  &:hover {
+    background-color: #E8E8E8 !important;
+  }
+}
+
+.text-divider {
+  position: relative;
+  font-size: 1.2em;
+  z-index: 1;
+  overflow: hidden;
+  text-align: center;
+
+  &:before,
+  &:after {
+    position: absolute;
+    top: 51%;
+    overflow: hidden;
+    width: 50%;
+    height: 1px;
+    content: '\a0';
+    background-color: lightgray;
   }
 
   &:before {
-    margin-left : -52%;
-    text-align  : right;
+    margin-left: -52%;
+    text-align: right;
   }
 
-  &:after { margin-left : 2%; }
+  &:after {
+    margin-left: 2%;
+  }
 
   .color {
-    background-color : #CCCCCC;
+    background-color: #CCCCCC;
   }
 }

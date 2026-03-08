@@ -4,6 +4,8 @@ namespace :admin do
   get "forigitaj_eventoj", controller: "events", action: :deleted
   get "senlokaj_eventoj", to: "events#senlokaj_eventoj"
   get "statistics", controller: "statistics", action: :index
+  get "mockups", controller: "mockups", action: :index
+  get "mockups/tables", controller: "mockups", action: :tables, as: "mockups_tables"
   patch "forigitaj_eventoj/restauri/:event_code", controller: "events", action: :recover, as: "recover_event"
   resources :reklamoj do
     get "toggle_active"
