@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.86.0](https://github.com/eventaservo/eventaservo/compare/v2.85.0...v2.86.0) (2026-03-08)
+
+
+### Features
+
+* add mockups feature with compact and detailed row views, including admin access control ([4c0b033](https://github.com/eventaservo/eventaservo/commit/4c0b03399cc9c38ad7413254c123f878802b77df))
+* **Admin:** enhance event management with filtering options and improved UI ([852252b](https://github.com/eventaservo/eventaservo/commit/852252bbf762f8dbf290543d990a5005156c5502))
+
 ## [2.85.0](https://github.com/eventaservo/eventaservo/compare/v2.84.0...v2.85.0) (2026-03-07)
 
 
