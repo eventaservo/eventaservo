@@ -1,6 +1,12 @@
-<div class="box-white">
-  <p><%= link_to "← Back to mockups", admin_mockups_path %></p>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb small mb-2">
+    <li class="breadcrumb-item"><%= link_to "Admin", admin_root_path %></li>
+    <li class="breadcrumb-item"><%= link_to "Mockups", admin_mockups_path %></li>
+    <li class="breadcrumb-item active" aria-current="page">Tables</li>
+  </ol>
+</nav>
 
+<div class="box-white">
   <%= render "admin/mockups/compact_row" %>
   <%= render "admin/mockups/detailed_row" %>
 </div>

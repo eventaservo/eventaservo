@@ -1,0 +1,48 @@
+<div class="card shadow-sm card-hover h-100 position-relative">
+  <div class="card-body p-0">
+    <!-- Top accent bar -->
+    <div class="bg-primary bg-opacity-10 border-bottom border-primary border-opacity-25 px-3 py-3">
+      <div class="d-flex align-items-center gap-3">
+        <% if teacher[:avatar] %>
+          <img src="<%= teacher[:avatar] %>" alt="<%= teacher[:name] %>"
+               class="rounded-circle flex-shrink-0 object-fit-cover"
+               style="width:56px;height:56px">
+        <% else %>
+          <div class="bg-secondary-subtle rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+               style="width:56px;height:56px">
+            <i class="fas fa-user text-secondary"></i>
+          </div>
+        <% end %>
+        <div>
+          <h6 class="fw-bold mb-0 text-truncate">
+            <a href="#" class="stretched-link text-decoration-none text-body"><%= teacher[:name] %></a>
+          </h6>
+          <span class="text-body-secondary small">
+            <% if teacher[:country_code] %>
+              <%= flag_icon(teacher[:country_code]) %>
+            <% end %>
+            <%= teacher[:country] %>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Levels -->
+    <div class="px-3 pt-3 pb-3">
+      <div class="text-uppercase text-body-tertiary fw-semibold small mb-2" style="font-size:0.7rem;letter-spacing:0.05em">
+        <i class="fas fa-layer-group me-1"></i>Niveloj
+      </div>
+      <div class="d-flex flex-wrap gap-1 mb-3">
+        <% teacher[:levels].each do |level| %>
+          <span class="badge rounded-pill text-bg-primary"><%= level %></span>
+        <% end %>
+      </div>
+
+      <!-- Experience -->
+      <div class="text-uppercase text-body-tertiary fw-semibold small mb-1" style="font-size:0.7rem;letter-spacing:0.05em">
+        <i class="fas fa-briefcase me-1"></i>Sperto
+      </div>
+      <p class="small text-body-secondary mb-0"><%= teacher[:experience] %></p>
+    </div>
+  </div>
+</div>
