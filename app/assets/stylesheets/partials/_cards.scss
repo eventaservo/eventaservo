@@ -4,7 +4,7 @@
 //
 // Usage: <div class="card card-hover">
 .card-hover {
-  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition: border-color 0.2s ease-in-out;
 
   &:hover {
     border-color: var(--bs-gray-500) !important;

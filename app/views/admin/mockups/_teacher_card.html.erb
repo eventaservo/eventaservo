@@ -4,9 +4,9 @@
     <div class="bg-primary bg-opacity-10 border-bottom border-primary border-opacity-25 px-3 py-3">
       <div class="d-flex align-items-center gap-3">
         <% if teacher[:avatar] %>
-          <img src="<%= teacher[:avatar] %>" alt="<%= teacher[:name] %>"
-               class="rounded-circle flex-shrink-0 object-fit-cover"
-               style="width:56px;height:56px">
+          <%= image_tag teacher[:avatar], alt: teacher[:name],
+                class: "rounded-circle flex-shrink-0 object-fit-cover",
+                size: "56x56" %>
         <% else %>
           <div class="bg-secondary-subtle rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
                style="width:56px;height:56px">

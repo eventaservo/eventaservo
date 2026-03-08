@@ -19,10 +19,10 @@ module Admin
     # Sample teachers used as data source for card mockups.
     SAMPLE_TEACHERS = [
       {name: "Anna Schmidt", country: "Germanio", country_code: "de",
-       avatar: "https://i.pravatar.cc/112?img=32",
+       avatar: "mockups/avatar_1.jpg",
        levels: ["Baza", "Meza"], experience: "Mi instruas Esperanton ekde 2010. Mi speciale ŝatas labori kun komencantoj kaj uzi interaktivajn metodojn."},
       {name: "Carlos Mendes", country: "Brazilo", country_code: "br",
-       avatar: "https://i.pravatar.cc/112?img=14",
+       avatar: "mockups/avatar_2.jpg",
        levels: ["Baza", "Meza", "Supera"], experience: "Universitata profesoro pri lingvistiko. Spertulo pri la Zagreba metodo kaj reta instruado."},
       {name: "Yuki Tanaka", country: "Japanio", country_code: "jp",
        avatar: nil,
@@ -35,10 +35,10 @@ module Admin
        avatar: nil,
        topics: "Esperanto-kulturo kaj historio, la rolo de planlingvoj en Eŭropo, lingva justeco"},
       {name: "Marta Kowalska", country: "Pollando", country_code: "pl",
-       avatar: "https://i.pravatar.cc/112?img=47",
+       avatar: "mockups/avatar_3.jpg",
        topics: "Zamenhof kaj la origino de Esperanto, Esperanto-literaturo, tradukarto"},
       {name: "Maria Silva", country: "Portugalio", country_code: "pt",
-       avatar: "https://i.pravatar.cc/112?img=23",
+       avatar: "mockups/avatar_4.jpg",
        topics: "Interkomprenado inter romanaj lingvoj, Esperanto kiel ponto-lingvo, lingvaj rajtoj"}
     ].freeze
 
