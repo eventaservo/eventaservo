@@ -11,7 +11,7 @@
       <br>
       <%= link_to display_user(u), events_by_username_path(u.username) %>
       <% if user_signed_in? && current_user.administranto?(@organizo) %>
-        <%= link_to icon('fas', 'star', class: 'fg-color-yellow'), organization_estrighu_url(@organizo.short_name, u.username) %>
+        <%= link_to icon('fas', 'star', class: 'fg-color-yellow'), organization_estrighu_url(@organizo.short_name, u.username), aria: { label: 'Igu ĉefadministranto' } %>
       <% else %>
         <%= icon('fas', 'star', class: 'fg-color-yellow') %>
       <% end %>
@@ -26,10 +26,10 @@
       <%= link_to display_user(u), events_by_username_path(u.username) %>
 
       <% if user_signed_in? && current_user.administranto?(@organizo) %>
-        <%= link_to icon('far', 'star', class: 'fg-color-gray'), organization_estrighu_url(@organizo.short_name, u.username) %>
+        <%= link_to icon('far', 'star', class: 'fg-color-gray'), organization_estrighu_url(@organizo.short_name, u.username), aria: { label: 'Igu kunadministranto' } %>
         <%= link_to icon('fas', 'minus-circle', class: 'fg-color-red'),
           organization_forighu_url(@organizo.short_name, u.username),
-          data: { confirm: 'Ĉu vi certas ke vi volas forigi la uzanton el la organizo?' } %>
+          data: { confirm: 'Ĉu vi certas ke vi volas forigi la uzanton el la organizo?' }, aria: { label: 'Forigi uzanton el la organizo' } %>
       <% end %>
       <br>
     <% end %>

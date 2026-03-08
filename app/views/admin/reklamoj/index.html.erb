@@ -1,7 +1,7 @@
 <div class="box-white small">
   <div class="lead">
     Reklamoj
-    <%= link_to icon('fas', 'plus-circle'), new_admin_reklamoj_url, class: 'small fg-color-green' %>
+    <%= link_to icon('fas', 'plus-circle'), new_admin_reklamoj_url, class: 'small fg-color-green', aria: { label: 'Krei novan reklamon' } %>
   </div>
   <div class="row">
     <% @ads.each do |r| %>

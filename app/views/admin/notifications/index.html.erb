@@ -9,7 +9,7 @@
   <% @recipients.each do |recipient| %>
     <div class="item-row-no-chevron">
       <div class="col">
-        <%= link_to icon('fas', 'minus-circle'), delete_recipient_path(recipient.code), class: 'fg-color-red' %>
+        <%= link_to icon('fas', 'minus-circle'), delete_recipient_path(recipient.code), class: 'fg-color-red', aria: { label: 'Forigi sciigon' } %>
         <%= recipient.email %>
       </div>
       <div class="col"><%= recipient.country.name %></div>
