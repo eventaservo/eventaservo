@@ -43,21 +43,44 @@
     </div>
   </div>
 
-  <div class="text-divider">Instruantoj</div>
-  <div class="row">
-    <% @instruistoj.each do |instruisto| %>
-      <div class="col-12 col-md-4">
-        <%= render partial: 'instruisto_karto', locals: { instruisto: instruisto } %>
-      </div>
-    <% end %>
-  </div>
+  <%= render "instruistoj_kaj_prelegantoj_filtro" %>
 
-  <div class="mt-5 text-divider">Prelegantoj</div>
-  <div class="row">
-    <% @prelegantoj.each do |preleganto| %>
-      <div class="col-12 col-md-4">
-        <%= render partial: 'preleganto_karto', locals: { preleganto: preleganto } %>
-      </div>
-    <% end %>
-  </div>
+  <% unless @filtering %>
+    <div class="text-center text-body-secondary small mb-3">
+      <i class="fas fa-shuffle me-1"></i>
+      Montrataj hazardaj instruanto kaj preleganto. Uzu la filtrilon por vidi pliajn.
+    </div>
+  <% end %>
+
+  <!-- Teachers -->
+  <div class="text-divider">Instruantoj</div>
+  <% if @instruistoj.any? %>
+    <div class="row g-3">
+      <% @instruistoj.each do |instruisto| %>
+        <div class="col-12 col-md-4">
+          <%= render partial: "instruisto_karto", locals: {instruisto: instruisto} %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-body-secondary text-center py-3">
+      <i class="fas fa-search me-1"></i>Neniu instruanto trovita kun tiuj filtriloj.
+    </p>
+  <% end %>
+
+  <!-- Speakers -->
+  <div class="mt-4 text-divider">Prelegantoj</div>
+  <% if @prelegantoj.any? %>
+    <div class="row g-3">
+      <% @prelegantoj.each do |preleganto| %>
+        <div class="col-12 col-md-4">
+          <%= render partial: "preleganto_karto", locals: {preleganto: preleganto} %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-body-secondary text-center py-3">
+      <i class="fas fa-search me-1"></i>Neniu preleganto trovita kun tiuj filtriloj.
+    </p>
+  <% end %>
 </div>

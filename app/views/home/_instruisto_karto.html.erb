@@ -1,18 +1,35 @@
-<div class="card mt-1">
-  <div class="card-body">
-    <div class="card-title">
-      <%= link_to display_user(instruisto), events_by_username_path(instruisto.username) %>
+<div class="card shadow-sm card-hover h-100 position-relative">
+  <div class="card-body p-0">
+    <div class="bg-primary bg-opacity-10 border-bottom border-primary border-opacity-25 px-3 py-3">
+      <div class="d-flex align-items-center gap-3">
+        <%= display_user_image(instruisto) %>
+        <div>
+          <h6 class="fw-bold mb-0 text-truncate">
+            <%= link_to instruisto.name, events_by_username_path(instruisto.username),
+                  class: "stretched-link text-decoration-none text-body" %>
+          </h6>
+          <span class="text-body-secondary small">
+            <%= montras_flagon(instruisto.country) %>
+            <%= instruisto.country.name %>
+          </span>
+        </div>
+      </div>
     </div>
-    <div class="card-subtitle text-muted small">
-      <%= instruisto.country.name %>
-    </div>
-    <div class="card-text">
-      <% instruisto.instruo['nivelo'].each do |nivelo| %>
-        <span class="badge text-bg-info"><%= nivelo %></span>
-      <% end %>
-      <p>
-        <%= instruisto.instruo['sperto'] %>
-      </p>
+
+    <div class="px-3 pt-3 pb-3">
+      <div class="text-uppercase text-body-tertiary fw-semibold small mb-2" style="font-size:0.7rem;letter-spacing:0.05em">
+        <i class="fas fa-layer-group me-1"></i>Niveloj
+      </div>
+      <div class="d-flex flex-wrap gap-1 mb-3">
+        <% instruisto.instruo['nivelo'].each do |nivelo| %>
+          <span class="badge rounded-pill text-bg-primary"><%= nivelo %></span>
+        <% end %>
+      </div>
+
+      <div class="text-uppercase text-body-tertiary fw-semibold small mb-1" style="font-size:0.7rem;letter-spacing:0.05em">
+        <i class="fas fa-briefcase me-1"></i>Sperto
+      </div>
+      <p class="small text-body-secondary mb-0"><%= instruisto.instruo['sperto'] %></p>
     </div>
   </div>
 </div>

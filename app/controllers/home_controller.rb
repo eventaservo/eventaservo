@@ -30,11 +30,45 @@ class HomeController < ApplicationController
     @eventoj = Event.anoncoj_kaj_konkursoj.venontaj
   end
 
+  # Displays the teachers and speakers directory.
+  #
+  # When filters are present, shows matching results.
+  # When no filter is applied, shows one random teacher and one random speaker.
+  #
+  # @return [void]
+  # Displays the teachers and speakers directory.
+  #
+  # When filters are present, shows matching results.
+  # When no filter is applied, shows one random teacher and one random speaker.
+  #
+  # @return [void]
   def instruistoj_kaj_prelegantoj
     ahoy.track "Visit Instruantoj kaj Prelegantoj"
 
-    @instruistoj = User.includes([:country, [picture_attachment: :blob]]).instruistoj.order(:name)
-    @prelegantoj = User.includes([:country, [picture_attachment: :blob]]).prelegantoj.order(:name)
+    @filtering = filter_params_present?
+    @countries = Country.joins(:users).merge(User.instruistoj.or(User.prelegantoj)).distinct.order(:name)
+
+    base = User.includes([:country, [picture_attachment: :blob]])
+
+    if @filtering
+      filtered = base
+      filtered = filtered.where("name ILIKE ?", "%#{params[:name]}%") if params[:name].present?
+      filtered = filtered.where(country_id: params[:country_id]) if params[:country_id].present?
+
+      @instruistoj = filtered.instruistoj.order(:name)
+      @prelegantoj = filtered.prelegantoj.order(:name)
+
+      @instruistoj = @instruistoj.where("instruo -> 'nivelo' ? :nivelo", nivelo: params[:level]) if params[:level].present?
+
+      if params[:keyword].present?
+        keyword = "%#{params[:keyword]}%"
+        @instruistoj = @instruistoj.where("instruo ->> 'sperto' ILIKE ?", keyword)
+        @prelegantoj = @prelegantoj.where("prelego ->> 'temoj' ILIKE ?", keyword)
+      end
+    else
+      @instruistoj = base.instruistoj.order(Arel.sql("RANDOM()")).limit(1)
+      @prelegantoj = base.prelegantoj.order(Arel.sql("RANDOM()")).limit(1)
+    end
   end
 
   def privateco
@@ -141,6 +175,13 @@ class HomeController < ApplicationController
   end
 
   private
+
+  # Checks if any filter parameter is present for the teachers/speakers page.
+  #
+  # @return [Boolean]
+  def filter_params_present?
+    params[:name].present? || params[:country_id].present? || params[:level].present? || params[:keyword].present?
+  end
 
   def access_from_server
     request.headers["SERVER_NAME"].in? %w[testservilo.eventaservo.org staging.eventaservo.org
