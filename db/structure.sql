@@ -1,8 +1,3 @@
-\restrict DSTp1NVlY1BpkXkhA4ggbGAydj3Bbc2cYlhd2QxsCoczDWN7d7mWQuyVgjqEWLM
-
--- Dumped from database version 15.7 (Debian 15.7-1.pgdg120+1)
--- Dumped by pg_dump version 15.14 (Debian 15.14-0+deb12u1)
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -46,7 +41,7 @@ COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UU
 -- Name: immutable_unaccent(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
-CREATE OR REPLACE FUNCTION public.immutable_unaccent(text) RETURNS text
+CREATE FUNCTION public.immutable_unaccent(text) RETURNS text
     LANGUAGE sql IMMUTABLE STRICT PARALLEL SAFE
     AS $_$ SELECT public.unaccent($1) $_$;
 
@@ -2800,8 +2795,6 @@ ALTER TABLE ONLY public.solid_queue_scheduled_executions
 --
 -- PostgreSQL database dump complete
 --
-
-\unrestrict DSTp1NVlY1BpkXkhA4ggbGAydj3Bbc2cYlhd2QxsCoczDWN7d7mWQuyVgjqEWLM
 
 SET search_path TO "$user", public;
 
