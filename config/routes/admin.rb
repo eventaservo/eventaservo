@@ -7,6 +7,7 @@ namespace :admin do
   get "statistics", controller: "statistics", action: :index
   get "mockups", controller: "mockups", action: :index
   get "mockups/tables", controller: "mockups", action: :tables, as: "mockups_tables"
+  get "mockups/breadcrumbs", controller: "mockups", action: :breadcrumbs, as: "mockups_breadcrumbs"
   resources :reklamoj do
     get "toggle_active"
   end

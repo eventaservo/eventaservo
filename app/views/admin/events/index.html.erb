@@ -1,13 +1,20 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb small mb-2">
+    <li class="breadcrumb-item"><%= link_to "Admin", admin_root_path %></li>
+    <li class="breadcrumb-item active" aria-current="page">Eventoj</li>
+  </ol>
+</nav>
+
 <div class="box-white">
   <div class="lead">Ĉiuj eventoj</div>
 
   <%= form_with url: admin_events_path, method: :get, local: true, class: "mb-3" do |f| %>
     <div class="row g-2 align-items-end">
-      <div class="col-md-2">
+      <div class="col-6 col-md-2">
         <label class="form-label smaller text-uppercase fw-bold text-body-secondary mb-1">Ekde</label>
         <%= date_field_tag :start_date, params[:start_date], class: "form-control form-control-sm" %>
       </div>
-      <div class="col-md-2">
+      <div class="col-6 col-md-2">
         <label class="form-label smaller text-uppercase fw-bold text-body-secondary mb-1">Ĝis</label>
         <%= date_field_tag :end_date, params[:end_date], class: "form-control form-control-sm" %>
       </div>

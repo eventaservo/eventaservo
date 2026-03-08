@@ -1,10 +1,24 @@
-<div class="box-white">
-  <h1 class="lead">Mockups</h1>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb small mb-2">
+    <li class="breadcrumb-item"><%= link_to "Admin", admin_root_path %></li>
+    <li class="breadcrumb-item active" aria-current="page">Mockups</li>
+  </ol>
+</nav>
 
-  <% @mockups.each do |mockup| %>
-    <%= link_to send("admin_mockups_#{mockup[:action]}_path"), class: "item-row" do %>
-      <div class="col-3"><%= mockup[:name] %></div>
-      <div class="col"><%= mockup[:description] %></div>
+<div class="box-white">
+  <div class="lead">Mockups</div>
+
+  <div class="list-group list-group-flush">
+    <% @mockups.each do |mockup| %>
+      <%= link_to send("admin_mockups_#{mockup[:action]}_path"), class: "list-group-item list-group-item-action border-0 px-2 py-2" do %>
+        <div class="d-flex align-items-center gap-3">
+          <span class="text-success fs-5"><%= icon('fas', mockup[:icon]) %></span>
+          <div>
+            <div class="fw-semibold small"><%= mockup[:name] %></div>
+            <div class="text-body-secondary" style="font-size:12px"><%= mockup[:description] %></div>
+          </div>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>

@@ -1,0 +1,58 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb small mb-2">
+    <li class="breadcrumb-item"><%= link_to "Admin", admin_root_path %></li>
+    <li class="breadcrumb-item"><%= link_to "Mockups", admin_mockups_path %></li>
+    <li class="breadcrumb-item active" aria-current="page">Breadcrumbs</li>
+  </ol>
+</nav>
+
+<div class="box-white">
+  <div class="lead">Breadcrumbs</div>
+
+  <%# ── 1 level ──────────────────────────────────────── %>
+  <h6 class="text-uppercase fw-bold text-body-secondary mt-3 mb-2 small">1 level (subpage)</h6>
+  <div class="border rounded p-3 mb-4 bg-body-tertiary">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb small mb-0">
+        <li class="breadcrumb-item"><a href="#">Admin</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Events</li>
+      </ol>
+    </nav>
+  </div>
+
+  <%# ── 2 levels ─────────────────────────────────────── %>
+  <h6 class="text-uppercase fw-bold text-body-secondary mb-2 small">2 levels (detail)</h6>
+  <div class="border rounded p-3 mb-4 bg-body-tertiary">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb small mb-0">
+        <li class="breadcrumb-item"><a href="#">Admin</a></li>
+        <li class="breadcrumb-item"><a href="#">Events</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Esperanto Summer School</li>
+      </ol>
+    </nav>
+  </div>
+
+  <%# ── 3 levels ─────────────────────────────────────── %>
+  <h6 class="text-uppercase fw-bold text-body-secondary mb-2 small">3 levels (deep)</h6>
+  <div class="border rounded p-3 mb-4 bg-body-tertiary">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb small mb-0">
+        <li class="breadcrumb-item"><a href="#">Admin</a></li>
+        <li class="breadcrumb-item"><a href="#">Mockups</a></li>
+        <li class="breadcrumb-item"><a href="#">Tables</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Compact Row</li>
+      </ol>
+    </nav>
+  </div>
+
+  <%# ── Usage ─────────────────────────────────────────── %>
+  <h6 class="text-uppercase fw-bold text-body-secondary mb-2 small">Usage (ERB)</h6>
+  <div class="border rounded p-3 bg-body-tertiary">
+<pre class="mb-0 small"><code>&lt;nav aria-label="breadcrumb"&gt;
+  &lt;ol class="breadcrumb small mb-2"&gt;
+    &lt;li class="breadcrumb-item"&gt;&lt;%= link_to "Admin", admin_root_path %&gt;&lt;/li&gt;
+    &lt;li class="breadcrumb-item active" aria-current="page"&gt;Events&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;</code></pre>
+  </div>
+</div>
