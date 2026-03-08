@@ -110,7 +110,6 @@ RUN apt update \
   && rm -rf /var/lib/apt/lists/*
 
 # Install AI Tools
-RUN npm install -g @anthropic-ai/claude-code
 RUN npm install -g @google/gemini-cli
 
 # Adds a non-root user
