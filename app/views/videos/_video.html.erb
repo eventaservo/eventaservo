@@ -10,7 +10,7 @@
     </p>
 
     <% if user_can_edit_event?(user: user, event: video.evento) %>
-      <%= link_to icon('fas', 'trash', class: 'fg-color-red'), "/video/#{video.id}/forigi" %>
+      <%= link_to icon('fas', 'trash', class: 'fg-color-red'), "/video/#{video.id}/forigi", aria: { label: 'Forigi videon' } %>
     <% end %>
   </div>
 
