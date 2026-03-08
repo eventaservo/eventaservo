@@ -130,7 +130,7 @@ Event feeds support multiple formats via `respond_to` blocks in controllers:
   - Module: `app/modules/webcal.rb`
 
 ### Frontend
-- **CSS**: Bootstrap 4.6
+- **CSS**: Bootstrap 5.3
 - **JS**: Stimulus + Turbo (Hotwire) with esbuild bundling
 - **Maps**: Leaflet with marker clustering
 
