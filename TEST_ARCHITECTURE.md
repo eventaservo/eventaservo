@@ -2,7 +2,7 @@
 
 This document defines the rules and instructions for creating new tests in the Rails application using Minitest. The goal is to maintain a coherent, organized, and easy-to-read standard.
 
-> **For AI Agents**: This document is referenced by [AGENTS.md](AGENTS.md), [CLAUDE.md](CLAUDE.md), and [geminar.md](geminar.md). Section 9 contains specific instructions for AI assistants.
+> **For AI Agents**: This document is referenced by [AGENTS.md](AGENTS.md), [CLAUDE.md](CLAUDE.md), and [gemini.md](gemini.md). Section 9 contains specific instructions for AI assistants.
 
 ## Table of Contents
 
