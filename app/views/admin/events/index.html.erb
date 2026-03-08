@@ -1,7 +1,7 @@
 <div class="box-white">
   <div class="lead">Ĉiuj eventoj</div>
 
-  <%= form_with url: admin_eventoj_path, method: :get, local: true, class: "mb-3" do |f| %>
+  <%= form_with url: admin_events_path, method: :get, local: true, class: "mb-3" do |f| %>
     <div class="row g-2 align-items-end">
       <div class="col-md-2">
         <label class="form-label smaller text-uppercase fw-bold text-body-secondary mb-1">Ekde</label>
@@ -23,9 +23,19 @@
         <label class="form-label smaller text-uppercase fw-bold text-body-secondary mb-1">Organizaĵo</label>
         <%= select_tag :organization_id, options_from_collection_for_select(@organizations, :id, :name, params[:organization_id]), include_blank: "Ĉiuj", class: "form-select form-select-sm" %>
       </div>
-      <div class="col-md-2 d-flex gap-2">
+      <div class="col-md-auto d-flex align-items-center gap-3">
+        <div class="form-check">
+          <%= check_box_tag :senlokaj, "1", params[:senlokaj] == "1", class: "form-check-input", id: "senlokaj" %>
+          <label class="form-check-label smaller text-uppercase fw-bold text-body-secondary" for="senlokaj">Senlokaj</label>
+        </div>
+        <div class="form-check">
+          <%= check_box_tag :forigitaj, "1", params[:forigitaj] == "1", class: "form-check-input", id: "forigitaj" %>
+          <label class="form-check-label smaller text-uppercase fw-bold text-body-secondary" for="forigitaj">Forigitaj</label>
+        </div>
+      </div>
+      <div class="col-md-auto d-flex gap-2">
         <%= f.submit "Filtri", class: "btn btn-sm btn-success" %>
-        <%= link_to "Nuligi", admin_eventoj_path, class: "btn btn-sm btn-outline-secondary" %>
+        <%= link_to "Nuligi", admin_events_path, class: "btn btn-sm btn-outline-secondary" %>
       </div>
     </div>
   <% end %>
@@ -35,13 +45,25 @@
       <div class="col-2">Dato</div>
       <div class="col">Titolo</div>
       <div class="col-3">Loko</div>
+      <% if @forigitaj %><div class="col-auto" style="width:40px"></div><% end %>
     </div>
 
     <% @events.each_with_index do |event, i| %>
-      <%= link_to event_path(code: event.ligilo), class: "row g-0 align-items-center px-2 py-1 small hover-row text-decoration-none text-dark #{'border-bottom' unless i == @events.size - 1} #{'bg-body-tertiary' if i.odd?}" do %>
-        <div class="col-2 fw-semibold text-success-emphasis small"><%= format_date(event.komenca_dato, style: :compact) %></div>
-        <div class="col fw-medium text-truncate"><%= event.title %></div>
-        <div class="col-3 text-body-secondary text-truncate"><%= event_flag(event) %> <%= event.city %></div>
+      <% if @forigitaj %>
+        <div class="row g-0 align-items-center px-2 py-1 small #{'border-bottom' unless i == @events.size - 1} #{'bg-body-tertiary' if i.odd?}">
+          <div class="col-2 fw-semibold text-success-emphasis small"><%= format_date(event.komenca_dato, style: :compact) %></div>
+          <div class="col fw-medium text-truncate"><%= event.title %></div>
+          <div class="col-3 text-body-secondary text-truncate"><%= event_flag(event) %> <%= event.city %></div>
+          <div class="col-auto" style="width:40px">
+            <%= link_to icon('fas', 'trash-restore'), admin_recover_event_path(event.ligilo), method: :patch, class: "fg-color-green", title: "Restaŭri" %>
+          </div>
+        </div>
+      <% else %>
+        <%= link_to event_path(code: event.ligilo), class: "row g-0 align-items-center px-2 py-1 small hover-row text-decoration-none text-dark #{'border-bottom' unless i == @events.size - 1} #{'bg-body-tertiary' if i.odd?}" do %>
+          <div class="col-2 fw-semibold text-success-emphasis small"><%= format_date(event.komenca_dato, style: :compact) %></div>
+          <div class="col fw-medium text-truncate"><%= event.title %></div>
+          <div class="col-3 text-body-secondary text-truncate"><%= event_flag(event) %> <%= event.city %></div>
+        <% end %>
       <% end %>
     <% end %>
   </div>

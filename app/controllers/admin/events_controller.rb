@@ -15,18 +15,16 @@ module Admin
     def index
       @countries = Country.all
       @organizations = Organization.all.order(:name)
+      @forigitaj = params[:forigitaj] == "1"
 
-      events = Event.includes(:user, :country, :organizations).order(date_start: :desc)
+      events = if @forigitaj
+        Event.deleted.includes(:user, :country, :organizations).order(date_start: :desc)
+      else
+        Event.includes(:user, :country, :organizations).order(date_start: :desc)
+      end
       events = apply_filters(events)
 
       @pagy, @events = pagy(events)
-    end
-
-    # Displays soft-deleted events.
-    #
-    # @return [void]
-    def deleted
-      @events = Event.deleted
     end
 
     # Recovers a soft-deleted event by its code.
@@ -35,14 +33,7 @@ module Admin
     def recover
       event = Event.deleted.find_by(code: params[:event_code])
       event.undelete!
-      redirect_to event_path(code: event.ligilo), flash: {success: "Evento sukcesi restaŭrata"}
-    end
-
-    # Displays events that have no location set.
-    #
-    # @return [void]
-    def senlokaj_eventoj
-      @events = Event.without_location
+      redirect_to admin_events_path(forigitaj: "1"), flash: {success: "Evento sukcese restaŭrita"}
     end
 
     private
@@ -59,6 +50,7 @@ module Admin
       if params[:organization_id].present?
         events = events.joins(:organization_events).where(organization_events: {organization_id: params[:organization_id]})
       end
+      events = events.without_location if params[:senlokaj] == "1"
       events
     end
   end
