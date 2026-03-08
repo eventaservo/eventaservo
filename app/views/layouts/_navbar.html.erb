@@ -1,10 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-  <div class="d-flex flex-nowrap ps-2">
+  <div class="container-fluid flex-nowrap">
     <%= link_to(root_url, class: "navbar-brand") do %>
       <% if Rails.env.production? %>
         Eventa Servo
       <% else %>
-        <%= Rails.env.upcase %>
+        <span class="small"><%= Rails.env.upcase %></span>
       <% end %>
     <% end %>
 
@@ -13,30 +13,30 @@
     <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-supported-content" aria-controls="navbar-supported-content" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  </div>
 
-  <div class="collapse navbar-collapse justify-content-between" id="navbar-supported-content">
-    <ul class="navbar-nav mx-auto">
-      <li class="nav-item">
-        <%= link_to(new_event_path, class: "nav-link") do %>
-          <%= icon("fas", "calendar-plus") %>
-          <%= t("navbar.add_event") %>
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to(organizations_url, class: "nav-link") do %>
-          <%= icon("fas", "building") %>
-          <%= t("navbar.organizations") %>
-        <% end %>
-      </li>
-    </ul>
+    <div class="collapse navbar-collapse justify-content-between" id="navbar-supported-content">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item">
+          <%= link_to(new_event_path, class: "nav-link") do %>
+            <%= icon("fas", "calendar-plus") %>
+            <%= t("navbar.add_event") %>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to(organizations_url, class: "nav-link") do %>
+            <%= icon("fas", "building") %>
+            <%= t("navbar.organizations") %>
+          <% end %>
+        </li>
+      </ul>
 
-    <ul class="navbar-nav" data-controller="tooltip">
-      <%= render "layouts/navbar_tools" %>
-    </ul>
+      <ul class="navbar-nav" data-controller="tooltip">
+        <%= render "layouts/navbar_tools" %>
+      </ul>
 
-    <ul class="navbar-nav">
-      <%= render partial: "layouts/uzanto" %>
-    </ul>
+      <ul class="navbar-nav">
+        <%= render partial: "layouts/uzanto" %>
+      </ul>
+    </div>
   </div>
 </nav>
