@@ -109,6 +109,7 @@ group :development, :test do
   gem "debug", ">= 1.0.0", require: false
   gem "dotenv-rails"
   gem "faker"
+  gem "hotwire-spark"
   gem "lookbook", ">= 2.3.4"
   gem "rake"
 end
