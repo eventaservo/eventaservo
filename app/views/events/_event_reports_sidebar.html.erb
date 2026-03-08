@@ -15,7 +15,7 @@
             <% if @current_user == report.user || user_can_edit_event?(user: @current_user, event: event) %>
               <%= link_to icon('far', 'trash-alt'),
                 event_report_url(event_code: event.code, id: report), method: :delete,
-                data: { confirm: 'Ĉu vi certas?' },
+                data: { confirm: 'Ĉu vi certas?' }, aria: { label: 'Forigi raporton' },
                 class: 'link-simples fg-color-red float-end' %>
             <% end %>
           </div>
