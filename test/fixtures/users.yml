@@ -126,3 +126,17 @@ teacher_and_speaker:
   webcal_token: teacherSpeakerWebcalToken123
   instruo: <%= {instruisto: "true", nivelo: ["meza"], sperto: "literaturo"}.to_json %>
   prelego: <%= {preleganto: "true", temoj: "esperanta literaturo"}.to_json %>
+
+like_escaped_teacher:
+  admin: false
+  authentication_token: _likeEscapedToken123
+  confirmed_at: "2019-01-01 00:00:00"
+  country_id: 1
+  disabled: false
+  email: like_escaped@example.com
+  name: Test%User
+  username: like_escaped_user
+  system_account: false
+  webcal_token: likeEscapedWebcalToken123
+  instruo: <%= {instruisto: "true", nivelo: ["baza"], sperto: "test"}.to_json %>
+  prelego: <%= {preleganto: "false"}.to_json %>

@@ -15,8 +15,8 @@ class Users::TeachersAndSpeakersQueryTest < ActiveSupport::TestCase
     result = Users::TeachersAndSpeakersQuery.new.call
 
     assert_not result.filtering?
-    assert_operator result.instruistoj.size, :<=, 1
-    assert_operator result.prelegantoj.size, :<=, 1
+    assert_equal 1, result.instruistoj.size
+    assert_equal 1, result.prelegantoj.size
   end
 
   # -- Filter by name --
@@ -85,13 +85,10 @@ class Users::TeachersAndSpeakersQueryTest < ActiveSupport::TestCase
   # -- LIKE metacharacter escaping --
 
   test "LIKE metacharacters in name are escaped" do
-    special_user = create(:user, name: "Test%User",
-      instruo: {instruisto: "true", nivelo: ["baza"], sperto: "test"},
-      prelego: {preleganto: "false"})
-
+    like_escaped_teacher = users(:like_escaped_teacher)
     result = Users::TeachersAndSpeakersQuery.new(name: "t%u").call
 
-    assert_includes result.instruistoj, special_user
+    assert_includes result.instruistoj, like_escaped_teacher
   end
 
   test "LIKE underscore in name is escaped" do

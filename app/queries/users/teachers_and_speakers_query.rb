@@ -8,7 +8,7 @@ module Users
   #
   # @example With filters
   #   result = Users::TeachersAndSpeakersQuery.new(name: "Ana", level: "baza").call
-  #   result.instruistoj # => [#<User ...>]
+  #   result.instruistoj # => #<ActiveRecord::Relation [...]>
   #   result.filtering?  # => true
   #
   # @example Without filters (random)
@@ -67,14 +67,14 @@ module Users
         prelegantoj = prelegantoj.where("prelego ->> 'temoj' ILIKE ?", kw)
       end
 
-      Result.new(instruistoj: instruistoj.load, prelegantoj: prelegantoj.load, filtering: true)
+      Result.new(instruistoj:, prelegantoj:, filtering: true)
     end
 
     # @return [Result]
     def random_results
       Result.new(
-        instruistoj: base_scope.instruistoj.order(Arel.sql("RANDOM()")).limit(1).load,
-        prelegantoj: base_scope.prelegantoj.order(Arel.sql("RANDOM()")).limit(1).load,
+        instruistoj: base_scope.instruistoj.order(Arel.sql("RANDOM()")).limit(1),
+        prelegantoj: base_scope.prelegantoj.order(Arel.sql("RANDOM()")).limit(1),
         filtering: false
       )
     end
@@ -90,9 +90,9 @@ module Users
     # Holds the query results.
     #
     # @!attribute [r] instruistoj
-    #   @return [Array<User>] matched teachers
+    #   @return [ActiveRecord::Relation] matched teachers
     # @!attribute [r] prelegantoj
-    #   @return [Array<User>] matched speakers
+    #   @return [ActiveRecord::Relation] matched speakers
     # @!attribute [r] filtering
     #   @return [Boolean] whether filters were applied
     Result = Struct.new(:instruistoj, :prelegantoj, :filtering, keyword_init: true) do
