@@ -60,8 +60,8 @@ class HomeController < ApplicationController
         @prelegantoj = @prelegantoj.where("prelego ->> 'temoj' ILIKE ?", keyword)
       end
 
-      @instruistoj.load
-      @prelegantoj.load
+      @instruistoj = @instruistoj.load
+      @prelegantoj = @prelegantoj.load
     else
       @instruistoj = base.instruistoj.order(Arel.sql("RANDOM()")).limit(1).load
       @prelegantoj = base.prelegantoj.order(Arel.sql("RANDOM()")).limit(1).load

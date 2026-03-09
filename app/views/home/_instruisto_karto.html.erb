@@ -3,7 +3,7 @@
     <div class="bg-primary bg-opacity-10 border-bottom border-primary border-opacity-25 px-3 py-3">
       <div class="d-flex align-items-center gap-3">
         <%= display_user_image(instruisto) %>
-        <div>
+        <div class="overflow-hidden">
           <h6 class="fw-bold mb-0 text-truncate">
             <%= link_to instruisto.name, events_by_username_path(instruisto.username),
                   class: "stretched-link text-decoration-none text-body" %>
