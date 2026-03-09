@@ -1,13 +1,26 @@
-<div class="card mt-1">
-  <div class="card-body">
-    <div class="card-title">
-      <%= link_to display_user(preleganto), events_by_username_path(preleganto.username) %>
+<div class="card shadow-sm card-hover h-100 position-relative">
+  <div class="card-body p-0">
+    <div class="bg-success bg-opacity-10 border-bottom border-success border-opacity-25 px-3 py-3">
+      <div class="d-flex align-items-center gap-3">
+        <%= display_user_image(preleganto) %>
+        <div class="overflow-hidden">
+          <h6 class="fw-bold mb-0 text-truncate">
+            <%= link_to preleganto.name, events_by_username_path(preleganto.username),
+                  class: "stretched-link text-decoration-none text-body" %>
+          </h6>
+          <span class="text-body-secondary small">
+            <%= montras_flagon(preleganto.country) %>
+            <%= preleganto.country.name %>
+          </span>
+        </div>
+      </div>
     </div>
-    <div class="card-subtitle text-muted small">
-      <%= preleganto.country.name %>
-    </div>
-    <div class="card-text">
-      <%= simple_format(preleganto.prelego['temoj']) %>
+
+    <div class="px-3 pt-3 pb-3">
+      <div class="text-uppercase text-success fw-semibold small mb-2" style="font-size:0.7rem;letter-spacing:0.05em">
+        <i class="fas fa-comments me-1"></i>Temoj
+      </div>
+      <%= simple_format(preleganto.prelego['temoj'], class: 'small mb-0') %>
     </div>
   </div>
 </div>

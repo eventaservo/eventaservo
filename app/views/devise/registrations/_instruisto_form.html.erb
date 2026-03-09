@@ -1,7 +1,7 @@
 <div data-controller="user">
-  <div class="lead">Kiel instruisto</div>
+  <div class="lead">Kiel instruanto</div>
   <div class="row mb-3">
-    <%= f.label :instruisto, 'Mi estas instruisto', class: 'col-form-label col-5' %>
+    <%= f.label :instruisto, 'Mi estas instruanto', class: 'col-form-label col-5' %>
     <div class="col-7">
       <div class="mb-3 form-check">
         <%= check_box 'user', 'instruisto', { 'data-action': 'user#toggleUserInstruistoDetails', 'data-user-target': 'instruisto' }, 'true', 'false' %>
