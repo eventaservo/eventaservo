@@ -84,3 +84,45 @@ admin_user:
   username: admin_user
   system_account: false
   webcal_token: adminUserWebcalToken789
+
+teacher:
+  admin: false
+  authentication_token: _teacherToken123
+  confirmed_at: "2019-01-01 00:00:00"
+  country_id: 30
+  disabled: false
+  email: teacher@example.com
+  name: Ana Instruisto
+  username: teacher_user
+  system_account: false
+  webcal_token: teacherWebcalToken123
+  instruo: <%= {instruisto: "true", nivelo: ["baza"], sperto: "gramatiko kaj vortprovizo"}.to_json %>
+  prelego: <%= {preleganto: "false"}.to_json %>
+
+speaker:
+  admin: false
+  authentication_token: _speakerToken123
+  confirmed_at: "2019-01-01 00:00:00"
+  country_id: 30
+  disabled: false
+  email: speaker@example.com
+  name: Bruno Preleganto
+  username: speaker_user
+  system_account: false
+  webcal_token: speakerWebcalToken123
+  instruo: <%= {instruisto: "false"}.to_json %>
+  prelego: <%= {preleganto: "true", temoj: "lingvistiko kaj kulturo"}.to_json %>
+
+teacher_and_speaker:
+  admin: false
+  authentication_token: _teacherSpeakerToken123
+  confirmed_at: "2019-01-01 00:00:00"
+  country_id: 1
+  disabled: false
+  email: teacher_speaker@example.com
+  name: Carla Ambaŭ
+  username: teacher_speaker_user
+  system_account: false
+  webcal_token: teacherSpeakerWebcalToken123
+  instruo: <%= {instruisto: "true", nivelo: ["meza"], sperto: "literaturo"}.to_json %>
+  prelego: <%= {preleganto: "true", temoj: "esperanta literaturo"}.to_json %>

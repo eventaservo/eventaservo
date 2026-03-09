@@ -84,6 +84,27 @@ end
 
 ## Architecture
 
+### Query Objects
+
+Query objects encapsulate read-only query logic that returns ActiveRecord relations. Place them in `app/queries/<resource>/`. Unlike Services (which have side effects and return `Response` objects), query objects are for pure reads.
+
+```ruby
+module Users
+  class TeachersAndSpeakersQuery
+    def initialize(name: nil, country_id: nil)
+      @name = name
+      @country_id = country_id
+    end
+
+    def call
+      # Returns a Result struct with ActiveRecord relations
+    end
+  end
+end
+```
+
+Tests go in `test/queries/<resource>/<query_name>_test.rb`.
+
 ### Services
 Services inherit from `ApplicationService` and return `Response` objects:
 ```ruby
@@ -138,7 +159,7 @@ Event feeds support multiple formats via `respond_to` blocks in controllers:
 
 ## Testing
 
-**🚨 CRITICAL - READ FIRST**: When creating or modifying tests, you **MUST** follow the guidelines defined in [TEST_ARCHITECTURE.md](TEST_ARCHITECTURE.md).
+**🚨 CRITICAL - READ FIRST**: Before creating or modifying **any** test, you **MUST** read and follow [TEST_ARCHITECTURE.md](TEST_ARCHITECTURE.md) in its entirety. This is a **mandatory prerequisite** — do not write test code until you have read it. Every test must comply with its rules.
 
 That document contains:
 - ✅ Complete test architecture rules
@@ -156,10 +177,12 @@ That document contains:
   - Models: `test/models/<model>/<context>_test.rb`
   - Controllers: `test/controllers/<controller>/<action>_test.rb`
   - Services: `test/services/<resource_plural>/<service_name>_test.rb`
+  - Queries: `test/queries/<resource_plural>/<query_name>_test.rb`
 - **Namespacing**:
   - Models: `Event::ValidationTest`
   - Controllers: `EventsController::IndexTest`
   - Services: `Events::SoftDeleteTest`
+  - Queries: `Users::TeachersAndSpeakersQueryTest`
 
 ### Mandatory Checklist Before Writing Tests
 
