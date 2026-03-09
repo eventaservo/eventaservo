@@ -63,7 +63,7 @@ ActiveAdmin.register User do
 
       column do
         panel "Events" do
-          link_to "#{resource.events.count} events", active_admin_events_path("q[user_id_eq]": resource.id)
+          "#{resource.events.count} events"
         end
 
         panel "Organizations" do
@@ -123,6 +123,8 @@ ActiveAdmin.register User do
   end
 
   sidebar "Actions", only: :show do
+    div link_to "View user profile", "/uzanto/#{resource.username}", target: "_blank", rel: "noopener"
+
     if resource.confirmed_at.nil?
       div link_to "Confirm user's email", confirm_active_admin_user_path(resource),
         data: {confirm: "This will confirm the user's email. Are you sure?"}
