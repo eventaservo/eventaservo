@@ -64,7 +64,11 @@
     </div>
   <% else %>
     <p class="text-body-secondary text-center py-3">
-      <i class="fas fa-search me-1"></i>Neniu instruanto trovita kun tiuj filtriloj.
+      <% if @filtering %>
+        <i class="fas fa-search me-1"></i>Neniu instruanto trovita kun tiuj filtriloj.
+      <% else %>
+        <i class="fas fa-user-slash me-1"></i>Neniu instruanto estas registrita.
+      <% end %>
     </p>
   <% end %>
 
@@ -80,7 +84,11 @@
     </div>
   <% else %>
     <p class="text-body-secondary text-center py-3">
-      <i class="fas fa-search me-1"></i>Neniu preleganto trovita kun tiuj filtriloj.
+      <% if @filtering %>
+        <i class="fas fa-search me-1"></i>Neniu preleganto trovita kun tiuj filtriloj.
+      <% else %>
+        <i class="fas fa-user-slash me-1"></i>Neniu preleganto estas registrita.
+      <% end %>
     </p>
   <% end %>
 </div>

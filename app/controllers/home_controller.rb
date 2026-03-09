@@ -36,12 +36,6 @@ class HomeController < ApplicationController
   # When no filter is applied, shows one random teacher and one random speaker.
   #
   # @return [void]
-  # Displays the teachers and speakers directory.
-  #
-  # When filters are present, shows matching results.
-  # When no filter is applied, shows one random teacher and one random speaker.
-  #
-  # @return [void]
   def instruistoj_kaj_prelegantoj
     ahoy.track "Visit Instruantoj kaj Prelegantoj"
 
@@ -52,8 +46,8 @@ class HomeController < ApplicationController
 
     if @filtering
       filtered = base
-      filtered = filtered.where("name ILIKE ?", "%#{params[:name]}%") if params[:name].present?
-      filtered = filtered.where(country_id: params[:country_id]) if params[:country_id].present?
+      filtered = filtered.where("name ILIKE ?", "%#{ActiveRecord::Base.sanitize_sql_like(params[:name])}%") if params[:name].present?
+      filtered = filtered.where(country_id: params[:country_id].to_i) if params[:country_id].present?
 
       @instruistoj = filtered.instruistoj.order(:name)
       @prelegantoj = filtered.prelegantoj.order(:name)
@@ -61,13 +55,16 @@ class HomeController < ApplicationController
       @instruistoj = @instruistoj.where("instruo -> 'nivelo' ? :nivelo", nivelo: params[:level]) if params[:level].present?
 
       if params[:keyword].present?
-        keyword = "%#{params[:keyword]}%"
+        keyword = "%#{ActiveRecord::Base.sanitize_sql_like(params[:keyword])}%"
         @instruistoj = @instruistoj.where("instruo ->> 'sperto' ILIKE ?", keyword)
         @prelegantoj = @prelegantoj.where("prelego ->> 'temoj' ILIKE ?", keyword)
       end
+
+      @instruistoj.load
+      @prelegantoj.load
     else
-      @instruistoj = base.instruistoj.order(Arel.sql("RANDOM()")).limit(1)
-      @prelegantoj = base.prelegantoj.order(Arel.sql("RANDOM()")).limit(1)
+      @instruistoj = base.instruistoj.order(Arel.sql("RANDOM()")).limit(1).load
+      @prelegantoj = base.prelegantoj.order(Arel.sql("RANDOM()")).limit(1).load
     end
   end
 
