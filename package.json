@@ -28,7 +28,7 @@
     "moment": "^2.30.1",
     "sass": "^1.97.2",
     "slim-select": "^2.13.1",
-    "trix": "^2.1.16"
+    "trix": "^2.1.17"
   },
   "optionalDependencies": {
     "fsevents": "^2.3.3"
