@@ -1,10 +1,18 @@
 // Entry point for your Sass build
 
-// Preserve Bootstrap 4 success and info colors used in navbar, badges and alerts
+// Preserve Bootstrap 4 success and info colors
 $success: #28a745;
 $info: #17a2b8;
+$badge-font-weight: normal;
 
 @import "bootstrap/scss/bootstrap";
+
+// Force white text on success and info backgrounds where Bootstrap's
+// color-contrast() picks black due to the custom (lighter) color values
+.text-bg-success,
+.text-bg-info {
+  color: #fff !important;
+}
 
 @import "@fortawesome/fontawesome-free/scss/fontawesome";
 @import "@fortawesome/fontawesome-free/scss/solid";
@@ -50,6 +58,10 @@ $info: #17a2b8;
 @import "glightbox/dist/css/glightbox";
 
 // Ultimate link reset to ensure no underlines in Bootstrap 5
-a, a:hover, a:focus, a:active, a:visited {
+a,
+a:hover,
+a:focus,
+a:active,
+a:visited {
   text-decoration: none !important;
 }

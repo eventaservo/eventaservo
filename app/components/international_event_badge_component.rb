@@ -2,7 +2,7 @@ class InternationalEventBadgeComponent < ApplicationComponent
   erb_template <<-ERB
     <% if @event.international_calendar? %>
       <div class="badge text-bg-success">
-        <b>★ Internacia Evento</b>
+        ★ Internacia Evento
       </div>
     <% end %>
   ERB
