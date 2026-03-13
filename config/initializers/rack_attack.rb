@@ -22,6 +22,12 @@ class Rack::Attack
     ip == "127.0.0.1" || ip == "::1"
   end
 
+  # Allow Active Storage proxy requests (lightweight S3 streaming, cached by Cloudflare)
+  safelist("allow-active-storage-proxy") do |req|
+    req.path.start_with?("/rails/active_storage/representations/proxy/",
+                          "/rails/active_storage/blobs/proxy/")
+  end
+
   # Block known problematic subnets
   blocklist("block bad subnets") do |req|
     ip = IPAddr.new(real_ip(req))
