@@ -8,17 +8,23 @@ default: &default
   host: <%= ENV["DB_HOST"] || "localhost" %>
   username: <%= ENV["DB_USERNAME"] || "postgres" %>
   password: <%= ENV["DB_PASSWORD"] || "postgres" %>
-  # Disable GSSAPI encryption to prevent segfaults when forking (e.g. SolidQueue workers).
-  # On macOS, libpq loads Kerberos plugins that are not fork-safe, causing crashes.
-  gssencmode: disable
+
+
+
 
 development:
   <<: *default
   database: <%= ENV["DB_NAME"] || "eventaservo_devel" %>
+  # Disable GSSAPI encryption to prevent segfaults when forking (e.g. SolidQueue workers).
+  # On macOS, libpq loads Kerberos plugins that are not fork-safe, causing crashes.
+  gssencmode: disable
 
 test:
   <<: *default
   database: eventaservo_test<%= ENV['TEST_ENV_NUMBER'] %>
+  # Disable GSSAPI encryption to prevent segfaults when forking (e.g. SolidQueue workers).
+  # On macOS, libpq loads Kerberos plugins that are not fork-safe, causing crashes.
+  gssencmode: disable
 
 staging:
   <<: *default
