@@ -54,8 +54,27 @@ module Logs
       assert_not_includes query, @log2
     end
 
-    test "handles invalid dates gracefully" do
+    test "handles invalid start_date gracefully (ArgumentError)" do
       params = {start_date: "invalid-date"}
+      query = SearchQuery.new(params).call
+      assert_equal 2, query.count
+    end
+
+    test "handles invalid end_date gracefully (ArgumentError)" do
+      params = {end_date: "invalid-date"}
+      query = SearchQuery.new(params).call
+      assert_equal 2, query.count
+    end
+
+    test "handles TypeError in dates gracefully" do
+      # Passing something that might cause TypeError in parse or beginning_of_day
+      params = {start_date: ["not", "a", "string"], end_date: {also: "not"}}
+      query = SearchQuery.new(params).call
+      assert_equal 2, query.count
+    end
+
+    test "handles dates that parse to nil" do
+      params = {start_date: " ", end_date: ""}
       query = SearchQuery.new(params).call
       assert_equal 2, query.count
     end

@@ -8,6 +8,7 @@ class Admin::LogsController::IndexTest < ActionDispatch::IntegrationTest
     sign_in @admin
 
     @user = users(:user)
+    # Log 1: Sem associações
     @log1 = Log.create!(
       user: @user,
       text: "User action",
@@ -19,11 +20,20 @@ class Admin::LogsController::IndexTest < ActionDispatch::IntegrationTest
     end
     @event = events(:valid_event)
 
+    # Log 2: Com evento e organização
     @log2 = Log.create!(
       user: @admin,
       text: "Admin update",
       created_at: Time.zone.parse("2026-03-12 15:00:00"),
       metadata: {event_id: @event.id, organization_id: @org.id}
+    )
+
+    # Log 3: Com o mesmo evento (testar .uniq e pre-load)
+    @log3 = Log.create!(
+      user: @admin,
+      text: "Another update",
+      created_at: Time.zone.parse("2026-03-13 10:00:00"),
+      metadata: {event_id: @event.id}
     )
   end
 
@@ -33,13 +43,14 @@ class Admin::LogsController::IndexTest < ActionDispatch::IntegrationTest
     assert_select ".lead", "Logs"
     assert_select "div.px-2.py-1", text: /#{@log1.text}/
     assert_select "div.px-2.py-1", text: /#{@log2.text}/
-    # Check for related links
-    assert_select "a", text: "Evento"
-    assert_select "a", text: "Organizo"
+    assert_select "div.px-2.py-1", text: /#{@log3.text}/
+
+    # Verifica se os links foram renderizados corretamente usando o pre-load
+    assert_select "a", text: "Evento", count: 2
+    assert_select "a", text: "Organizo", count: 1
   end
 
   test "should use query object for filtering" do
-    # Testing that the controller correctly calls the query object
     get admin_logs_url, params: {user_name: @user.name}
     assert_response :success
     assert_select "div.px-2.py-1", text: /#{@log1.text}/
