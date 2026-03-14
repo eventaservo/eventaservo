@@ -13,12 +13,12 @@ class Admin::LogsController::IndexTest < ActionDispatch::IntegrationTest
       text: "User action",
       created_at: Time.zone.parse("2026-03-10 10:00:00")
     )
-    
+
     @org = Organization.find_or_create_by!(short_name: "test-org") do |o|
       o.name = "Test Org"
     end
     @event = events(:valid_event)
-    
+
     @log2 = Log.create!(
       user: @admin,
       text: "Admin update",

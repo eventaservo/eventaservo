@@ -29,8 +29,7 @@ module Logs
       logs = @relation.includes(:user).order(created_at: :desc)
       logs = filter_by_user(logs)
       logs = filter_by_text(logs)
-      logs = filter_by_date(logs)
-      logs
+      filter_by_date(logs)
     end
 
     private
