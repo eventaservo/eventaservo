@@ -1,0 +1,87 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb small mb-2">
+    <li class="breadcrumb-item"><%= link_to "Admin", admin_root_path %></li>
+    <li class="breadcrumb-item"><%= link_to "Organizaĵoj", admin_organizations_path %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= @organization.name %></li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="box-white mb-4">
+      <div class="d-flex align-items-center gap-3 mb-3">
+        <% if @organization.logo.attached? %>
+          <%= image_tag @organization.logo, class: "rounded border", style: "width: 64px; height: 64px; object-fit: contain;" %>
+        <% end %>
+        <div>
+          <h2 class="h4 mb-0"><%= @organization.name %></h2>
+          <div class="text-body-secondary small"><%= @organization.short_name %></div>
+        </div>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-sm-6">
+          <label class="smaller text-uppercase fw-bold text-body-secondary d-block">Lando / Urbo</label>
+          <div><%= @organization.country&.name %> / <%= @organization.city %></div>
+        </div>
+        <div class="col-sm-6">
+          <label class="smaller text-uppercase fw-bold text-body-secondary d-block">Retpoŝto</label>
+          <div><%= mail_to @organization.email %></div>
+        </div>
+        <div class="col-sm-6">
+          <label class="smaller text-uppercase fw-bold text-body-secondary d-block">Retejo</label>
+          <div><%= link_to @organization.url, @organization.url, target: "_blank", rel: :noopener if @organization.url.present? %></div>
+        </div>
+        <div class="col-sm-6">
+          <label class="smaller text-uppercase fw-bold text-body-secondary d-block">Adreso</label>
+          <div><%= @organization.address %></div>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <%= link_to "Vidi publike", organization_path(@organization.short_name), class: "btn btn-outline-success btn-sm", target: "_blank" %>
+      </div>
+    </div>
+
+    <div class="box-white">
+      <h3 class="h5 mb-3">Eventoj</h3>
+      <div class="border rounded overflow-hidden small">
+        <div class="row g-0 align-items-center bg-success text-white text-uppercase fw-bold px-2 py-2 smaller">
+          <div class="col-2">Dato</div>
+          <div class="col">Titolo</div>
+          <div class="col-2 text-center">Formato</div>
+        </div>
+
+        <% @organization.events.order(date_start: :desc).each_with_index do |event, i| %>
+          <div class="row g-0 align-items-center px-2 py-1 small <%= 'border-bottom' unless i == @organization.events.size - 1 %> <%= 'bg-body-tertiary' if i.odd? %>">
+            <div class="col-2 text-body-secondary"><%= format_date(event.date_start, style: :compact) %></div>
+            <div class="col fw-medium"><%= link_to event.title, event_path(code: event.ligilo), class: "text-decoration-none text-dark" %></div>
+            <div class="col-2 text-center text-body-secondary"><%= event.format %></div>
+          </div>
+        <% end %>
+
+        <% if @organization.events.empty? %>
+          <div class="p-3 text-center text-body-secondary">Neniu evento trovita.</div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="box-white">
+      <h3 class="h5 mb-3">Uzantoj</h3>
+      <div class="list-group list-group-flush small">
+        <% @organization.users.each do |user| %>
+          <div class="list-group-item px-0 py-2 border-0 <%= 'border-bottom' unless user == @organization.users.last %>">
+            <div class="fw-medium"><%= user.name %></div>
+            <div class="text-body-secondary smaller"><%= user.username %></div>
+          </div>
+        <% end %>
+
+        <% if @organization.users.empty? %>
+          <div class="p-2 text-center text-body-secondary">Neniu uzanto trovita.</div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
