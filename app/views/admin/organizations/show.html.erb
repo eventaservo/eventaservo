@@ -47,15 +47,15 @@
         <div class="row g-0 align-items-center bg-success text-white text-uppercase fw-bold px-2 py-2 smaller">
           <div class="col-2">Dato</div>
           <div class="col">Titolo</div>
-          <div class="col-2 text-center">Formato</div>
+          <div class="col-3">Loko</div>
         </div>
 
         <% @events.each_with_index do |event, i| %>
-          <div class="row g-0 align-items-center px-2 py-1 small <%= 'border-bottom' unless i == @events.size - 1 %> <%= 'bg-body-tertiary' if i.odd? %>">
-            <div class="col-2 text-body-secondary"><%= format_date(event.komenca_dato, style: :compact) %></div>
-            <div class="col fw-medium"><%= link_to event.title, event_path(code: event.ligilo), class: "text-decoration-none text-dark" %></div>
-            <div class="col-2 text-center text-body-secondary"><%= event.format %></div>
-          </div>
+          <%= link_to event_path(code: event.ligilo), class: "row g-0 align-items-center px-2 py-1 small hover-row text-decoration-none text-dark #{'border-bottom' unless i == @events.size - 1} #{'bg-body-tertiary' if i.odd?}" do %>
+            <div class="col-2 fw-semibold text-success-emphasis small"><%= format_date(event.komenca_dato, style: :compact) %></div>
+            <div class="col fw-medium text-truncate"><%= event.title %></div>
+            <div class="col-3 text-body-secondary text-truncate"><%= event_flag(event) %> <%= event.city %></div>
+          <% end %>
         <% end %>
 
         <% if @events.empty? %>

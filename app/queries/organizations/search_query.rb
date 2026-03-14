@@ -30,6 +30,7 @@ module Organizations
       organizations = filter_by_name(organizations)
       filter_by_country(organizations)
     end
+
     private
 
     # Filters by name using a partial ILIKE match.

@@ -19,7 +19,7 @@ class Admin::OrganizationsController::IndexTest < ActionDispatch::IntegrationTes
     get admin_organizations_url, params: {name_cont: @org.name}
     assert_response :success
     assert_select "div", text: /#{@org.name}/
-    
+
     get admin_organizations_url, params: {name_cont: "Non-existent"}
     assert_response :success
     assert_select "div", text: /#{@org.name}/, count: 0
