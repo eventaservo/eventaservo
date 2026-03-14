@@ -28,7 +28,7 @@ module Admin
     #
     # @return [void]
     def show
-      @organization = Organization.includes(:users, events: :translations).find(params[:id])
+      @organization = Organization.includes(:users, :events).find(params[:id])
     end
   end
 end
