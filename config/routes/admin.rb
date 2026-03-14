@@ -8,6 +8,17 @@ namespace :admin do
   resources :redirections, except: [:show]
   resources :reports, except: [:new, :create]
 
+  resources :users, only: %i[index show edit update] do
+    member do
+      patch :confirm
+      patch :enable
+      patch :deactivate
+      get :merge
+      post :merge
+      patch :reset_password
+    end
+  end
+
   get "statistics", controller: "statistics", action: :index
   get "mockups", controller: "mockups", action: :index
   get "mockups/breadcrumbs", controller: "mockups", action: :breadcrumbs, as: "mockups_breadcrumbs"

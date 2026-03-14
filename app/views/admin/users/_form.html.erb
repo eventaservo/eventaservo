@@ -1,0 +1,23 @@
+<%= form_with(model: user, url: admin_user_path(user), local: true) do |f| %>
+  <%= error_handling(user) %>
+
+  <div class="mb-3">
+    <%= f.label :name, "Name", class: "form-label fw-bold small text-uppercase text-body-secondary" %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :country_id, "Country", class: "form-label fw-bold small text-uppercase text-body-secondary" %>
+    <%= f.collection_select :country_id, Country.order(:name), :id, :name, {}, { class: "form-select" } %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :city, "City", class: "form-label fw-bold small text-uppercase text-body-secondary" %>
+    <%= f.text_field :city, class: "form-control" %>
+  </div>
+
+  <div class="mt-4 d-flex gap-2">
+    <%= f.submit "Save", class: "btn btn-success" %>
+    <%= link_to "Cancel", admin_user_path(user), class: "btn btn-outline-secondary" %>
+  </div>
+<% end %>
