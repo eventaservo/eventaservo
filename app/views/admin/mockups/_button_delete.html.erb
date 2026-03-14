@@ -1,0 +1,51 @@
+<div class="mb-5">
+  <h6 class="text-uppercase fw-bold text-body-secondary mb-2 small">Delete — <code>.button-delete</code></h6>
+  <p class="text-body-secondary small mb-3">
+    Extends <code>.btn-link</code>. No border, no background. Use in forms and detail pages for destructive actions.
+    Always placed flush <strong>left</strong> inside <code>.buttons-footer</code> using <code>me-auto</code>.
+  </p>
+
+  <div class="border rounded p-3 mb-2 bg-body-tertiary">
+    <div class="d-flex flex-wrap align-items-center gap-3">
+      <div class="text-center">
+        <button class="button-delete">Delete</button>
+        <div class="text-body-secondary mt-1" style="font-size:11px">normal</div>
+      </div>
+      <div class="text-center">
+        <button class="button-delete" style="color:#8a1535;">Delete</button>
+        <div class="text-body-secondary mt-1" style="font-size:11px">hover</div>
+      </div>
+      <div class="text-center">
+        <button class="button-delete" style="outline:0;box-shadow:0 0 0 3px rgba(185,29,71,0.25);">Delete</button>
+        <div class="text-body-secondary mt-1" style="font-size:11px">focus</div>
+      </div>
+      <div class="text-center">
+        <button class="button-delete" disabled>Delete</button>
+        <div class="text-body-secondary mt-1" style="font-size:11px">disabled</div>
+      </div>
+    </div>
+  </div>
+  <div class="text-body-secondary mb-3" style="font-size:11px">
+    Normal: <code>#B91D47</code> (<code>$red</code>) &nbsp;·&nbsp; Hover: darker &nbsp;·&nbsp; No border, no background
+  </div>
+
+  <p class="text-body-secondary small mb-2">Common labels for this button:</p>
+  <div class="d-flex flex-wrap gap-2 mb-3">
+    <button class="button-delete">Delete</button>
+    <button class="button-delete">Remove</button>
+    <button class="button-delete">Void</button>
+  </div>
+
+  <p class="text-body-secondary small mb-1">Typical placement — edit form using <code>.buttons-footer</code></p>
+  <div class="border rounded p-3 mb-2 bg-body-tertiary" style="max-width:480px">
+    <div class="mb-3">
+      <label class="form-label small fw-semibold">Old URL</label>
+      <input type="text" class="form-control form-control-sm" value="ijk2024" autocomplete="off" readonly>
+    </div>
+    <div class="buttons-footer">
+      <button class="button-delete me-auto">Delete</button>
+      <button class="button-cancel">Cancel</button>
+      <button class="button-submit">Save</button>
+    </div>
+  </div>
+</div>

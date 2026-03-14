@@ -6,11 +6,9 @@
 </nav>
 
 <div class="box-white">
-  <div class="mb-3">
+  <div class="mb-3 d-flex justify-content-between align-items-center">
     <div class="lead">Eventaj Redirektoj</div>
-    <%= link_to new_admin_redirection_path, class: "btn btn-sm btn-success mt-2" do %>
-      <%= icon('fas', 'plus', 'Nova Redirekto') %>
-    <% end %>
+    <%= link_to "Nova Redirekto", new_admin_redirection_path, class: "button-new-link" %>
   </div>
 
   <%= form_with url: admin_redirections_path, method: :get, local: true, class: "mb-3" do |f| %>
@@ -24,8 +22,8 @@
         <%= text_field_tag :new_url, params[:new_url], class: "form-control form-control-sm", placeholder: "Serĉi novan URL..." %>
       </div>
       <div class="col-md-auto d-flex gap-2">
-        <%= f.submit "Filtri", class: "btn btn-sm btn-success" %>
-        <%= link_to "Nuligi", admin_redirections_path, class: "btn btn-sm btn-outline-secondary" %>
+        <%= f.submit "Filtri", class: "button-submit" %>
+        <%= link_to "Nuligi", admin_redirections_path, class: "button-cancel" %>
       </div>
     </div>
   <% end %>

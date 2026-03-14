@@ -13,15 +13,11 @@
     <div class="form-text small text-body-secondary">Tio estas la celo de la redirekto.</div>
   </div>
 
-  <div class="mt-4 d-flex justify-content-between align-items-center">
-    <div class="d-flex gap-2">
-      <%= f.submit "Konservi", class: "btn btn-success" %>
-      <%= link_to "Nuligi", admin_redirections_path, class: "btn btn-outline-secondary" %>
-    </div>
+  <div class="buttons-footer">
     <% if redirection.persisted? %>
-      <%= link_to admin_redirection_path(redirection), data: { method: :delete, confirm: "Ĉu vi estas certa?" }, class: "btn btn-outline-danger" do %>
-        <%= icon('fas', 'trash', 'Forigi') %>
-      <% end %>
+      <%= link_to "Forigi", admin_redirection_path(redirection), data: { method: :delete, confirm: "Ĉu vi estas certa?" }, class: "button-delete me-auto" %>
     <% end %>
+    <%= link_to "Nuligi", admin_redirections_path, class: "button-cancel" %>
+    <%= f.submit "Konservi", class: "button-submit" %>
   </div>
 <% end %>
