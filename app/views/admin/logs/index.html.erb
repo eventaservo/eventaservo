@@ -47,13 +47,20 @@
         <div class="col-2 fw-medium text-truncate"><%= log.user&.name %></div>
         <div class="col text-body-secondary"><%= log.text %></div>
         <div class="col-2 d-flex flex-wrap gap-1">
-          <% if log.event %>
-            <%= link_to "Evento", event_url(code: log.event.ligilo), target: "_blank", class: "badge bg-secondary text-decoration-none" %>
+          <% if log.event_id && (event = @events[log.event_id.to_i]) %>
+            <%= link_to "Evento", event_url(code: event.ligilo), target: "_blank", class: "badge bg-secondary text-decoration-none" %>
           <% end %>
-          <% if log.organization %>
-            <%= link_to "Organizo", organization_url(log.organization.short_name), target: "_blank", class: "badge bg-secondary text-decoration-none" %>
+          <% if log.organization_id && (org = @organizations[log.organization_id.to_i]) %>
+            <%= link_to "Organizo", organization_url(org.short_name), target: "_blank", class: "badge bg-secondary text-decoration-none" %>
           <% end %>
         </div>
+      </div>
+    <% end %>
+
+    <% if @logs.empty? %>
+      <div class="p-4 text-center text-body-secondary">
+        <%= icon('fas', 'search', class: 'fa-2x mb-3 opacity-25') %>
+        <p>Neniu protokolo trovita.</p>
       </div>
     <% end %>
   </div>
