@@ -1,0 +1,23 @@
+<%= form_with(model: report, url: admin_report_path(report), local: true) do |f| %>
+  <%= error_handling(report) %>
+
+  <div class="mb-3">
+    <%= f.label :title, "Titolo de la raporto", class: "form-label fw-bold small text-uppercase text-body-secondary" %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :url, "URL de la raporto", class: "form-label fw-bold small text-uppercase text-body-secondary" %>
+    <%= f.text_field :url, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :user_id, "Raportanto (Uziranto)", class: "form-label fw-bold small text-uppercase text-body-secondary" %>
+    <%= f.collection_select :user_id, @users, :id, :name, { include_blank: true }, { class: "form-select" } %>
+  </div>
+
+  <div class="mt-4 d-flex gap-2">
+    <%= f.submit "Konservi", class: "btn btn-success" %>
+    <%= link_to "Nuligi", admin_report_path(report), class: "btn btn-outline-secondary" %>
+  </div>
+<% end %>

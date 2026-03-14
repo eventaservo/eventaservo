@@ -14,6 +14,26 @@
         </div>
       </div>
     <% end %>
+
+    <%= link_to admin_redirections_path, class: "list-group-item list-group-item-action border-0 px-2 py-2" do %>
+      <div class="d-flex align-items-center gap-3">
+        <span class="text-success fs-5"><%= icon('fas', 'directions') %></span>
+        <div>
+          <div class="fw-semibold small">Redirections</div>
+          <div class="text-body-secondary" style="font-size:12px">Short URL redirections for events</div>
+        </div>
+      </div>
+    <% end %>
+
+    <%= link_to admin_reports_path, class: "list-group-item list-group-item-action border-0 px-2 py-2" do %>
+      <div class="d-flex align-items-center gap-3">
+        <span class="text-success fs-5"><%= icon('fas', 'file-alt') %></span>
+        <div>
+          <div class="fw-semibold small">Reports</div>
+          <div class="text-body-secondary" style="font-size:12px">Event reports and external links</div>
+        </div>
+      </div>
+    <% end %>
   </div>
 
   <%# ── Data & Content ─────────────────────────────────── %>
@@ -61,16 +81,6 @@
         <div>
           <div class="fw-semibold small">Logs</div>
           <div class="text-body-secondary" style="font-size:12px">View system audit logs and activity</div>
-        </div>
-      </div>
-    <% end %>
-
-    <%= link_to admin_redirections_path, class: "list-group-item list-group-item-action border-0 px-2 py-2" do %>
-      <div class="d-flex align-items-center gap-3">
-        <span class="text-success fs-5"><%= icon('fas', 'directions') %></span>
-        <div>
-          <div class="fw-semibold small">Redirections</div>
-          <div class="text-body-secondary" style="font-size:12px">Short URL redirections for events</div>
         </div>
       </div>
     <% end %>
