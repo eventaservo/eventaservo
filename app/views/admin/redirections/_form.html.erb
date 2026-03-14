@@ -15,7 +15,7 @@
 
   <div class="buttons-footer">
     <% if redirection.persisted? %>
-      <%= link_to "Forigi", admin_redirection_path(redirection), data: { turbo_method: :delete, turbo_confirm: "Ĉu vi estas certa?" }, class: "button-delete me-auto" %>
+      <%= link_to "Forigi", admin_redirection_path(redirection), data: { method: :delete, confirm: "Ĉu vi estas certa?" }, class: "button-delete me-auto" %>
     <% end %>
     <%= link_to "Nuligi", admin_redirections_path, class: "button-cancel" %>
     <%= f.submit "Konservi", class: "button-submit" %>
