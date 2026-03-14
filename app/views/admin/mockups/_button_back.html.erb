@@ -1,0 +1,37 @@
+<div class="mb-5">
+  <h6 class="text-uppercase fw-bold text-body-secondary mb-2 small">Back — <code>.button-back</code></h6>
+  <p class="text-body-secondary small mb-3">
+    Extends <code>.btn-outline-secondary</code>. Use for navigation only — returning to the previous page.
+    Not interchangeable with <code>.button-cancel</code>, which discards an in-progress action.
+    Renders a left-arrow icon via Font Awesome (<code>fa-arrow-left</code>).
+  </p>
+
+  <div class="border rounded p-3 mb-2 bg-body-tertiary">
+    <div class="d-flex flex-wrap align-items-center gap-3">
+      <div class="text-center">
+        <button class="button-back">Back</button>
+        <div class="text-body-secondary mt-1" style="font-size:11px">normal</div>
+      </div>
+      <div class="text-center">
+        <button class="button-back" style="color:#fff;background-color:#6c757d;border-color:#6c757d;">Back</button>
+        <div class="text-body-secondary mt-1" style="font-size:11px">hover</div>
+      </div>
+      <div class="text-center">
+        <button class="button-back" style="outline:0;box-shadow:0 0 0 3px rgba(108,117,125,0.30);">Back</button>
+        <div class="text-body-secondary mt-1" style="font-size:11px">focus</div>
+      </div>
+    </div>
+  </div>
+  <div class="text-body-secondary mb-3" style="font-size:11px">
+    Normal: outline <code>#6c757d</code> &nbsp;·&nbsp; Hover: filled <code>#6c757d</code> &nbsp;·&nbsp; Always rendered as <code>&lt;a&gt;</code> (navigation link)
+  </div>
+
+  <p class="text-body-secondary small mb-1">Typical placement — top of page, standalone</p>
+  <div class="border rounded p-3 mb-2 bg-body-tertiary" style="max-width:480px">
+    <div class="mb-3">
+      <%= link_to "Back", admin_mockups_path, class: "button-back" %>
+    </div>
+    <div class="fw-semibold small">Event: Esperanto Summer School</div>
+    <div class="text-body-secondary small">Berlin · Jul 1, 2026</div>
+  </div>
+</div>

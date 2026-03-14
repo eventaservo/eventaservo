@@ -1,0 +1,95 @@
+<div class="mb-5">
+  <h6 class="text-uppercase fw-bold text-body-secondary mb-2 small">New / Add / Create — <code>.button-new</code></h6>
+  <p class="text-body-secondary small mb-3">
+    Extends <code>.btn-success</code>. Use for any action that creates a new record: New, Add, Create, etc.
+  </p>
+
+  <div class="border rounded p-3 mb-2 bg-body-tertiary">
+    <div class="d-flex flex-wrap align-items-center gap-3">
+      <div class="text-center">
+        <button class="button-new">New</button>
+        <div class="text-body-secondary mt-1" style="font-size:11px">normal</div>
+      </div>
+      <div class="text-center">
+        <button class="button-new" style="background-color:#1e7145;border-color:#1e7145;">New</button>
+        <div class="text-body-secondary mt-1" style="font-size:11px">hover</div>
+      </div>
+      <div class="text-center">
+        <button class="button-new" style="outline:0;box-shadow:0 0 0 3px rgba(40,167,69,0.30);">New</button>
+        <div class="text-body-secondary mt-1" style="font-size:11px">focus</div>
+      </div>
+      <div class="text-center">
+        <button class="button-new" disabled>New</button>
+        <div class="text-body-secondary mt-1" style="font-size:11px">disabled</div>
+      </div>
+    </div>
+  </div>
+  <div class="text-body-secondary mb-3" style="font-size:11px">
+    Normal: <code>#28a745</code> (<code>$esperantoGreen</code>) &nbsp;·&nbsp; Hover: <code>#1e7145</code> (<code>$greenDark</code>) &nbsp;·&nbsp; Focus ring: <code>rgba(40,167,69,0.30)</code>
+  </div>
+
+  <p class="text-body-secondary small mb-2">Common labels for this button:</p>
+  <div class="d-flex flex-wrap gap-2 mb-3">
+    <button class="button-new">New</button>
+    <button class="button-new">Add</button>
+    <button class="button-new">Create</button>
+    <button class="button-new">New Event</button>
+    <button class="button-new">Add User</button>
+  </div>
+
+  <p class="text-body-secondary small mb-1">Typical placement — index page, top right</p>
+  <div class="border rounded p-3 mb-4 bg-body-tertiary" style="max-width:480px">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="fw-semibold small">Events</div>
+      <%= link_to "New Event", admin_mockups_path, class: "button-new" %>
+    </div>
+  </div>
+
+  <hr class="my-4">
+
+  <h6 class="text-uppercase fw-bold text-body-secondary mb-2 small">New link variant — <code>.button-new-link</code></h6>
+  <p class="text-body-secondary small mb-3">
+    Link-style variant. Extends <code>.btn-link</code> with <code>$green</code> color → <code>$greenDark</code> on hover.
+    Use when a full button would be too heavy — e.g. inline inside a list or a form section.
+  </p>
+
+  <div class="border rounded p-3 mb-2 bg-body-tertiary">
+    <div class="d-flex flex-wrap align-items-center gap-3">
+      <div class="text-center">
+        <button class="button-new-link">Add</button>
+        <div class="text-body-secondary mt-1" style="font-size:11px">normal</div>
+      </div>
+      <div class="text-center">
+        <button class="button-new-link" style="color:#1e7145;">Add</button>
+        <div class="text-body-secondary mt-1" style="font-size:11px">hover</div>
+      </div>
+      <div class="text-center">
+        <button class="button-new-link" style="outline:0;box-shadow:0 0 0 3px rgba(40,167,69,0.25);">Add</button>
+        <div class="text-body-secondary mt-1" style="font-size:11px">focus</div>
+      </div>
+      <div class="text-center">
+        <button class="button-new-link" disabled>Add</button>
+        <div class="text-body-secondary mt-1" style="font-size:11px">disabled</div>
+      </div>
+    </div>
+  </div>
+  <div class="text-body-secondary mb-3" style="font-size:11px">
+    Normal: <code>#00A300</code> (<code>$green</code>) &nbsp;·&nbsp; Hover: <code>#1e7145</code> (<code>$greenDark</code>) &nbsp;·&nbsp; No background fill
+  </div>
+
+  <p class="text-body-secondary small mb-2">Common labels for this variant:</p>
+  <div class="d-flex flex-wrap gap-2 mb-3">
+    <button class="button-new-link">Add</button>
+    <button class="button-new-link">Add item</button>
+    <button class="button-new-link">New</button>
+    <button class="button-new-link">Create</button>
+  </div>
+
+  <p class="text-body-secondary small mb-1">Typical placement — inline inside a section</p>
+  <div class="border rounded p-3 mb-2 bg-body-tertiary" style="max-width:480px">
+    <div class="fw-semibold small mb-2">Organizers</div>
+    <div class="text-body-secondary small mb-1">Anna Schmidt</div>
+    <div class="text-body-secondary small mb-2">Carlos Mendes</div>
+    <%= link_to "Add organizer", admin_mockups_path, class: "button-new-link" %>
+  </div>
+</div>

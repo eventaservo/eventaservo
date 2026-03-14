@@ -12,6 +12,7 @@ module Admin
     # Registry of available mockups with metadata.
     MOCKUPS = [
       {name: "Breadcrumbs", action: "breadcrumbs", icon: "route", description: "Navigation breadcrumb patterns for admin pages"},
+      {name: "Buttons", action: "buttons", icon: "hand-pointer", description: "Button variants: save, cancel — all states and sizes"},
       {name: "Cards", action: "cards", icon: "id-card", description: "Teacher and speaker card patterns for directory pages"},
       {name: "Tables", action: "tables", icon: "table", description: "Standard table patterns using .item-row variants"}
     ].freeze
@@ -86,6 +87,12 @@ module Admin
     #
     # @return [void]
     def breadcrumbs
+    end
+
+    # Displays button mockup variants (save, cancel) with all states.
+    #
+    # @return [void]
+    def buttons
     end
   end
 end

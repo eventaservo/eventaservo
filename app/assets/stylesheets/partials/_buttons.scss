@@ -1,3 +1,5 @@
+@use "sass:color";
+
 .btn {
   border-radius: 3px;
   padding: 3px 6px;
@@ -58,6 +60,34 @@
   @extend .btn-primary;
 }
 
+.button-new {
+  @extend %button-standard;
+  @extend .btn-success;
+  --bs-btn-color: #fff;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-color: #fff;
+}
+
+.button-new-link {
+  @extend %button-link;
+  @extend .fg-color-green;
+
+  &:hover {
+    @extend .fg-color-greenDark;
+  }
+}
+
+.button-delete {
+  @extend %button-standard;
+  @extend .btn-link;
+  color: $red;
+
+  &:hover {
+    color: color.adjust($red, $lightness: -10%);
+  }
+}
+
+
 .button-back {
   @extend %button-standard;
   @extend .btn-outline-secondary;
@@ -115,11 +145,13 @@
 }
 
 .buttons-footer {
-  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
   padding-top: 5px;
   border-top: 1px solid gray;
   margin-top: 20px;
-  text-align: right;
 }
 
 .button-contact {
