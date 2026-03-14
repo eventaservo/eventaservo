@@ -26,11 +26,10 @@ module Organizations
     #
     # @return [ActiveRecord::Relation]
     def call
-      organizations = @relation.includes(:country).order(name: :asc)
+      organizations = @relation.includes(:country, :users, :events).order(name: :asc)
       organizations = filter_by_name(organizations)
       filter_by_country(organizations)
     end
-
     private
 
     # Filters by name using a partial ILIKE match.

@@ -44,8 +44,8 @@
           <%= organization.country&.name %><br>
           <span class="smaller"><%= organization.city %></span>
         </div>
-        <div class="col-1 text-center"><%= organization.users.count %></div>
-        <div class="col-1 text-center"><%= organization.events.count %></div>
+        <div class="col-1 text-center"><%= organization.users.size %></div>
+        <div class="col-1 text-center"><%= organization.events.size %></div>
       <% end %>
     <% end %>
 
