@@ -4,7 +4,7 @@ namespace :admin do
   patch "events/recover/:event_code", controller: "events", action: :recover, as: "recover_event"
 
   resources :logs, only: [:index]
-  resources :organizations, only: [:index, :show]
+  resources :organizations, only: [:index]
 
   get "statistics", controller: "statistics", action: :index
   get "mockups", controller: "mockups", action: :index

@@ -92,6 +92,13 @@ class Organization < ApplicationRecord
     adr.compact.join(", ")
   end
 
+  # Uses short_name for URLs instead of ID.
+  #
+  # @return [String]
+  def to_param
+    short_name
+  end
+
   def normalize_urls
     self.url = UrlNormalizer.new(url).call
     self.youtube = UrlNormalizer.new(youtube).call
