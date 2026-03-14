@@ -1,0 +1,35 @@
+# frozen_string_literal: true
+
+module Admin
+  # Allows administrators to manage organizations.
+  #
+  # This controller is responsible for listing and viewing organizations.
+  # The creation, update, and deletion of organizations are disabled.
+  class OrganizationsController < ApplicationController
+    before_action :authenticate_user!
+    before_action :authenticate_admin!
+
+    # Lists all organizations with optional filtering and pagination.
+    #
+    # GET /admin/organizations
+    #
+    # The list can be filtered by name and country through query parameters.
+    #
+    # @return [void]
+    def index
+      @filter_params = params.permit(:name_cont, :country_id_eq)
+      @pagy, @organizations = pagy(::Organizations::SearchQuery.new(@filter_params).call)
+      @countries = Country.all
+    end
+
+    # Shows a single organization and its associated users and events.
+    #
+    # GET /admin/organizations/:id
+    #
+    # @return [void]
+    def show
+      @organization = Organization.includes(:users, :country, :logo_attachment).find(params[:id])
+      @pagy, @events = pagy(@organization.events.includes(:country).order(date_start: :desc))
+    end
+  end
+end
