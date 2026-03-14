@@ -76,8 +76,9 @@
         <% users = @organization.users.to_a %>
         <% users.each do |user| %>
           <div class="list-group-item px-0 py-2 border-0 <%= 'border-bottom' unless user == users.last %>">
-            <div class="fw-medium"><%= user.name %></div>
-            <div class="text-body-secondary smaller"><%= user.username %></div>
+            <div class="d-flex align-items-center">
+              <%= link_to display_user(user), events_by_username_path(user.username), class: "text-decoration-none text-dark fw-medium d-flex align-items-center gap-2" %>
+            </div>
           </div>
         <% end %>
 

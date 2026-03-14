@@ -27,25 +27,19 @@
 
   <div class="border rounded overflow-hidden small">
     <div class="row g-0 align-items-center bg-success text-white text-uppercase fw-bold px-2 py-2 smaller">
-      <div class="col-1">ID</div>
       <div class="col">Nomo</div>
-      <div class="col-2">Mallonga nomo</div>
-      <div class="col-2">Lando / Urbo</div>
-      <div class="col-1 text-center">Uzantoj</div>
-      <div class="col-1 text-center">Eventoj</div>
+      <div class="col-3">Mallonga nomo</div>
+      <div class="col-3">Lando / Urbo</div>
     </div>
 
     <% @organizations.each_with_index do |organization, i| %>
       <%= link_to admin_organization_path(organization), class: "row g-0 align-items-center px-2 py-1 small hover-row text-decoration-none text-dark #{'border-bottom' unless i == @organizations.size - 1} #{'bg-body-tertiary' if i.odd?}" do %>
-        <div class="col-1 text-body-secondary"><%= organization.id %></div>
         <div class="col fw-medium"><%= organization.name %></div>
-        <div class="col-2 text-body-secondary"><%= organization.short_name %></div>
-        <div class="col-2 text-body-secondary text-truncate">
+        <div class="col-3 text-body-secondary"><%= organization.short_name %></div>
+        <div class="col-3 text-body-secondary text-truncate">
           <%= organization.country&.name %><br>
           <span class="smaller"><%= organization.city %></span>
         </div>
-        <div class="col-1 text-center"><%= organization.users.size %></div>
-        <div class="col-1 text-center"><%= organization.events.size %></div>
       <% end %>
     <% end %>
 
