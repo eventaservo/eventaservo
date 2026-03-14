@@ -27,7 +27,8 @@ The project supports three languages:
 
 - **Language**: Always use English for code, comments, specs, commit messages, PR titles, and PR descriptions
 - **Commits**: Use **Conventional Commits** standard and always write messages in **English**
-- **Ruby formatting**: Use `standard` gem; include `frozen_string_literal: true` at top of files. **Mandatory**: Always run `bundle exec standardrb --fix` on all modified `.rb` files before committing or submitting a PR.
+- **Ruby formatting**: Use `standard` gem; include `frozen_string_literal: true` at top of files. **Mandatory**: You **MUST** run `bundle exec standardrb --fix` on all modified `.rb` files before every commit and before submitting a PR.
+- **Testing**: **Mandatory**: All new tests **MUST** follow the rules and directory organization defined in [TEST_ARCHITECTURE.md](TEST_ARCHITECTURE.md).
 - **Documentation**: Use YARD format (`@param`, `@return`) for all methods including private ones
 - **Models**: Keep `annotate` gem schema annotations at top of model files
 - **Named parameters**: Omit redundant variable names: `my_method(user:)` instead of `my_method(user: user)`
