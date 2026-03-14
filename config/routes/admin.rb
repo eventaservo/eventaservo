@@ -1,6 +1,5 @@
 namespace :admin do
   root "dashboard#index"
-  get "countries", controller: "countries", action: :index
   get "events", controller: "events", action: :index
   patch "events/recover/:event_code", controller: "events", action: :recover, as: "recover_event"
 
