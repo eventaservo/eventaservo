@@ -1,19 +1,6 @@
-<li class="nav-item dropdown">
-  <a id="navbar-dropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <div class="d-inline d-lg-none"><%= icon('fas', 'cog', 'Admin') %></div>
-    <div class="d-none d-lg-inline"><%= icon('fas', 'cog') %></div>
-  </a>
-
-  <div class="dropdown-menu" aria-labelledby="navbar-dropdown">
-    <%= link_to 'Eventoj', admin_events_url, class: 'dropdown-item' %>
-    <%= link_to 'Reklamoj', admin_reklamoj_index_url, class: 'dropdown-item' %>
-    <%= link_to 'Redirektoj', admin_redirections_path, class: 'dropdown-item' %>
-    <%= link_to 'Raportoj', admin_reports_path, class: 'dropdown-item' %>
-    <%= link_to 'Uzantoj', admin_users_path, class: 'dropdown-item' %>
-
-    <%= link_to 'Statistikoj', admin_statistics_path, class: 'dropdown-item' %>
-    <div class="dropdown-divider"></div>
-    <%= link_to 'Dashboard', active_admin_dashboard_url, class: 'dropdown-item' %>
-    <%= link_to 'New Admin Panel', admin_root_url, class: 'dropdown-item' %>
-  </div>
+<li class="nav-item">
+  <%= link_to(admin_root_url, class: "nav-link") do %>
+    <div class="d-inline d-lg-none"><%= icon("fas", "cog", "Admin") %></div>
+    <div class="d-none d-lg-inline"><%= icon("fas", "cog") %></div>
+  <% end %>
 </li>

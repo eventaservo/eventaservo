@@ -2,7 +2,7 @@ const isProduction = process.env.NODE_ENV === "production"
 const isWatch = process.argv.includes("--watch")
 
 const config = {
-  entryPoints: ["app/javascript/application.js", "app/javascript/active_admin.js"],
+  entryPoints: ["app/javascript/application.js"],
   bundle: true,
   sourcemap: true,
   outdir: "app/assets/builds",

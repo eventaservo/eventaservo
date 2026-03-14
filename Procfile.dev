@@ -1,6 +1,5 @@
 rails: truncate -s 0 log/*; RUBY_DEBUG_OPEN=true thrust bin/rails server -b 0.0.0.0 -p $PORT
 js: yarn build --watch
 css: yarn build:css:assets && yarn build:css:app --watch
-css_admin: yarn build:css:admin --watch
 css_mailer: yarn build:css:mailer --watch
 worker: bin/jobs

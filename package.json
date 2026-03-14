@@ -37,9 +37,8 @@
     "build": "node esbuild.config.js",
     "build:css:assets": "cp -r node_modules/@fortawesome/fontawesome-free/webfonts public/webfonts && cp -r node_modules/flag-icons/flags public/flags",
     "build:css:app": "sass ./app/assets/stylesheets/cssbundling.sass.scss:./app/assets/builds/cssbundling.css --no-source-map --load-path=node_modules --quiet-deps --silence-deprecation=import",
-    "build:css:admin": "sass ./app/assets/stylesheets/active_admin.scss:./app/assets/builds/active_admin.css --no-source-map --load-path=$(bundle show activeadmin)/app/assets/stylesheets --quiet-deps --silence-deprecation=import",
     "build:css:mailer": "sass ./app/assets/stylesheets/mailer.sass:./app/assets/builds/mailer.css --no-source-map --quiet-deps --silence-deprecation=import",
-    "build:css": "yarn build:css:assets && yarn build:css:app && yarn build:css:admin && yarn build:css:mailer"
+    "build:css": "yarn build:css:assets && yarn build:css:app && yarn build:css:mailer"
   },
   "devDependencies": {}
 }
