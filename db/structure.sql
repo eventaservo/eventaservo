@@ -90,42 +90,6 @@ ALTER SEQUENCE public.action_text_rich_texts_id_seq OWNED BY public.action_text_
 
 
 --
--- Name: active_admin_comments; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.active_admin_comments (
-    id bigint NOT NULL,
-    namespace character varying,
-    body text,
-    resource_type character varying,
-    resource_id bigint,
-    author_type character varying,
-    author_id bigint,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
-);
-
-
---
--- Name: active_admin_comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.active_admin_comments_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: active_admin_comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.active_admin_comments_id_seq OWNED BY public.active_admin_comments.id;
-
-
---
 -- Name: active_storage_attachments; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1446,13 +1410,6 @@ ALTER TABLE ONLY public.action_text_rich_texts ALTER COLUMN id SET DEFAULT nextv
 
 
 --
--- Name: active_admin_comments id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.active_admin_comments ALTER COLUMN id SET DEFAULT nextval('public.active_admin_comments_id_seq'::regclass);
-
-
---
 -- Name: active_storage_attachments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1710,14 +1667,6 @@ ALTER TABLE ONLY public.videos ALTER COLUMN id SET DEFAULT nextval('public.video
 
 ALTER TABLE ONLY public.action_text_rich_texts
     ADD CONSTRAINT action_text_rich_texts_pkey PRIMARY KEY (id);
-
-
---
--- Name: active_admin_comments active_admin_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.active_admin_comments
-    ADD CONSTRAINT active_admin_comments_pkey PRIMARY KEY (id);
 
 
 --
@@ -2036,27 +1985,6 @@ CREATE INDEX index_action_text_rich_texts_on_record_and_name ON public.action_te
 --
 
 CREATE UNIQUE INDEX index_action_text_rich_texts_uniqueness ON public.action_text_rich_texts USING btree (record_type, record_id, name);
-
-
---
--- Name: index_active_admin_comments_on_author; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_active_admin_comments_on_author ON public.active_admin_comments USING btree (author_type, author_id);
-
-
---
--- Name: index_active_admin_comments_on_namespace; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_active_admin_comments_on_namespace ON public.active_admin_comments USING btree (namespace);
-
-
---
--- Name: index_active_admin_comments_on_resource; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_active_admin_comments_on_resource ON public.active_admin_comments USING btree (resource_type, resource_id);
 
 
 --
@@ -2806,6 +2734,7 @@ ALTER TABLE ONLY public.solid_queue_scheduled_executions
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20260314101500'),
 ('20260220024106'),
 ('20260220024100'),
 ('20260116224110'),
