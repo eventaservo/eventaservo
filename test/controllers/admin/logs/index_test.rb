@@ -8,7 +8,7 @@ class Admin::LogsController::IndexTest < ActionDispatch::IntegrationTest
     sign_in @admin
 
     @user = users(:user)
-    # Log 1: Sem associações
+    # Log 1: Without associations
     @log1 = Log.create!(
       user: @user,
       text: "User action",
@@ -20,7 +20,7 @@ class Admin::LogsController::IndexTest < ActionDispatch::IntegrationTest
     end
     @event = events(:valid_event)
 
-    # Log 2: Com evento e organização
+    # Log 2: With event and organization
     @log2 = Log.create!(
       user: @admin,
       text: "Admin update",
@@ -28,7 +28,7 @@ class Admin::LogsController::IndexTest < ActionDispatch::IntegrationTest
       metadata: {event_id: @event.id, organization_id: @org.id}
     )
 
-    # Log 3: Com o mesmo evento (testar .uniq e pre-load)
+    # Log 3: With the same event (to test .uniq and pre-load)
     @log3 = Log.create!(
       user: @admin,
       text: "Another update",
@@ -45,7 +45,7 @@ class Admin::LogsController::IndexTest < ActionDispatch::IntegrationTest
     assert_select "div.px-2.py-1", text: /#{@log2.text}/
     assert_select "div.px-2.py-1", text: /#{@log3.text}/
 
-    # Verifica se os links foram renderizados corretamente usando o pre-load
+    # Verify if the links were rendered correctly using the pre-load
     assert_select "a", text: "Evento", count: 2
     assert_select "a", text: "Organizo", count: 1
   end

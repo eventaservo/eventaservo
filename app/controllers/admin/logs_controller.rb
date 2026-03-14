@@ -12,7 +12,8 @@ module Admin
     #
     # @return [void]
     def index
-      @pagy, @logs = pagy(Logs::SearchQuery.new(params).call)
+      filter_params = params.slice(:user_name, :text, :start_date, :end_date).permit!
+      @pagy, @logs = pagy(Logs::SearchQuery.new(filter_params).call)
 
       # Pre-load related events and organizations to avoid N+1 queries
       # since they are stored in a JSONB column (metadata)
