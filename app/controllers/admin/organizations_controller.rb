@@ -28,7 +28,8 @@ module Admin
     #
     # @return [void]
     def show
-      @organization = Organization.includes(:users, :country, :logo_attachment, events: :country).find(params[:id])
+      @organization = Organization.includes(:users, :country, :logo_attachment).find(params[:id])
+      @pagy, @events = pagy(@organization.events.includes(:country).order(date_start: :desc))
     end
   end
 end

@@ -50,17 +50,21 @@
           <div class="col-2 text-center">Formato</div>
         </div>
 
-        <% @organization.events.sort_by { |e| e.date_start || Time.at(0) }.reverse.each_with_index do |event, i| %>
-          <div class="row g-0 align-items-center px-2 py-1 small <%= 'border-bottom' unless i == @organization.events.size - 1 %> <%= 'bg-body-tertiary' if i.odd? %>">
+        <% @events.each_with_index do |event, i| %>
+          <div class="row g-0 align-items-center px-2 py-1 small <%= 'border-bottom' unless i == @events.size - 1 %> <%= 'bg-body-tertiary' if i.odd? %>">
             <div class="col-2 text-body-secondary"><%= format_date(event.komenca_dato, style: :compact) %></div>
             <div class="col fw-medium"><%= link_to event.title, event_path(code: event.ligilo), class: "text-decoration-none text-dark" %></div>
             <div class="col-2 text-center text-body-secondary"><%= event.format %></div>
           </div>
         <% end %>
 
-        <% if @organization.events.empty? %>
+        <% if @events.empty? %>
           <div class="p-3 text-center text-body-secondary">Neniu evento trovita.</div>
         <% end %>
+      </div>
+
+      <div class="d-flex justify-content-center small pt-3">
+        <%= raw pagy_bootstrap_nav(@pagy, params: request.GET) %>
       </div>
     </div>
   </div>
