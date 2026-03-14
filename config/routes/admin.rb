@@ -4,6 +4,8 @@ namespace :admin do
   get "events", controller: "events", action: :index
   patch "events/recover/:event_code", controller: "events", action: :recover, as: "recover_event"
 
+  resources :logs, only: [:index]
+
   get "statistics", controller: "statistics", action: :index
   get "mockups", controller: "mockups", action: :index
   get "mockups/breadcrumbs", controller: "mockups", action: :breadcrumbs, as: "mockups_breadcrumbs"

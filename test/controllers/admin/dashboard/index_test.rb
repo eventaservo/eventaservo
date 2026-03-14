@@ -8,9 +8,10 @@ class Admin::DashboardController::IndexTest < ActionDispatch::IntegrationTest
     sign_in @admin
   end
 
-  test "admin can access dashboard" do
+  test "admin can access dashboard and see logs link" do
     get admin_root_url
     assert_response :success
+    assert_select "a[href=?]", admin_logs_path, text: /Logs/
   end
 
   test "non-admin is redirected to root" do
