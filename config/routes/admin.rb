@@ -5,6 +5,7 @@ namespace :admin do
 
   resources :logs, only: [:index]
   resources :organizations, only: [:index]
+  resources :redirections, except: [:show]
 
   get "statistics", controller: "statistics", action: :index
   get "mockups", controller: "mockups", action: :index
