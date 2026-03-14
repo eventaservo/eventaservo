@@ -1,0 +1,9 @@
+one:
+  old_short_url: "old_one"
+  new_short_url: "new_one"
+  hits: 10
+
+two:
+  old_short_url: "old_two"
+  new_short_url: "new_two"
+  hits: 0

@@ -1,0 +1,27 @@
+<%= form_with(model: redirection, url: redirection.new_record? ? admin_redirections_path : admin_redirection_path(redirection), local: true) do |f| %>
+  <%= error_handling(redirection) %>
+
+  <div class="mb-3">
+    <%= f.label :old_short_url, "Malnova URL (short code)", class: "form-label fw-bold small text-uppercase text-body-secondary" %>
+    <%= f.text_field :old_short_url, class: "form-control", placeholder: "ekz: ijk2024" %>
+    <div class="form-text small text-body-secondary">Tio estas kion la uzanto tajpas post la domajno.</div>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :new_short_url, "Nova URL (short code)", class: "form-label fw-bold small text-uppercase text-body-secondary" %>
+    <%= f.text_field :new_short_url, class: "form-control", placeholder: "ekz: ijk2025" %>
+    <div class="form-text small text-body-secondary">Tio estas la celo de la redirekto.</div>
+  </div>
+
+  <div class="mt-4 d-flex justify-content-between align-items-center">
+    <div class="d-flex gap-2">
+      <%= f.submit "Konservi", class: "btn btn-success" %>
+      <%= link_to "Nuligi", admin_redirections_path, class: "btn btn-outline-secondary" %>
+    </div>
+    <% if redirection.persisted? %>
+      <%= link_to admin_redirection_path(redirection), data: { method: :delete, confirm: "Ĉu vi estas certa?" }, class: "btn btn-outline-danger" do %>
+        <%= icon('fas', 'trash', 'Forigi') %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
