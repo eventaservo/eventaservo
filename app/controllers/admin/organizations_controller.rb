@@ -17,7 +17,7 @@ module Admin
     #
     # @return [void]
     def index
-      @filter_params = params.slice(:name_cont, :country_id_eq).permit!
+      @filter_params = params.permit(:name_cont, :country_id_eq)
       @pagy, @organizations = pagy(::Organizations::SearchQuery.new(@filter_params).call)
       @countries = Country.all
     end

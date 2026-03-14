@@ -52,7 +52,7 @@
           <div class="col-2 text-center">Formato</div>
         </div>
 
-        <% @organization.events.order(date_start: :desc).each_with_index do |event, i| %>
+        <% @organization.events.sort_by(&:date_start).reverse.each_with_index do |event, i| %>
           <div class="row g-0 align-items-center px-2 py-1 small <%= 'border-bottom' unless i == @organization.events.size - 1 %> <%= 'bg-body-tertiary' if i.odd? %>">
             <div class="col-2 text-body-secondary"><%= format_date(event.date_start, style: :compact) %></div>
             <div class="col fw-medium"><%= link_to event.title, event_path(code: event.ligilo), class: "text-decoration-none text-dark" %></div>

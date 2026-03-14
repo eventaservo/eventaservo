@@ -31,6 +31,12 @@ class Admin::OrganizationsController::IndexTest < ActionDispatch::IntegrationTes
     get admin_organizations_url
     assert_redirected_to root_path
   end
+
+  test "should redirect to login if not authenticated" do
+    sign_out @admin
+    get admin_organizations_url
+    assert_redirected_to new_user_session_path
+  end
 end
 
 class Admin::OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
@@ -51,5 +57,11 @@ class Admin::OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
     sign_in users(:user)
     get admin_organization_url(@org)
     assert_redirected_to root_path
+  end
+
+  test "should redirect to login if not authenticated" do
+    sign_out @admin
+    get admin_organization_url(@org)
+    assert_redirected_to new_user_session_path
   end
 end
