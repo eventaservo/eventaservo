@@ -10,9 +10,7 @@
   <div class="col-md-8">
     <div class="box-white mb-4">
       <div class="d-flex align-items-center gap-3 mb-3">
-        <% if @organization.logo.attached? %>
-          <%= image_tag @organization.logo, class: "rounded border", style: "width: 64px; height: 64px; object-fit: contain;" %>
-        <% end %>
+        <%= organization_logo(@organization, size: :medium, html_class: "rounded border") %>
         <div>
           <h2 class="h4 mb-0"><%= @organization.name %></h2>
           <div class="text-body-secondary small"><%= @organization.short_name %></div>
@@ -52,9 +50,9 @@
           <div class="col-2 text-center">Formato</div>
         </div>
 
-        <% @organization.events.sort_by(&:date_start).reverse.each_with_index do |event, i| %>
+        <% @organization.events.sort_by { |e| e.date_start || Time.at(0) }.reverse.each_with_index do |event, i| %>
           <div class="row g-0 align-items-center px-2 py-1 small <%= 'border-bottom' unless i == @organization.events.size - 1 %> <%= 'bg-body-tertiary' if i.odd? %>">
-            <div class="col-2 text-body-secondary"><%= format_date(event.date_start, style: :compact) %></div>
+            <div class="col-2 text-body-secondary"><%= format_date(event.komenca_dato, style: :compact) %></div>
             <div class="col fw-medium"><%= link_to event.title, event_path(code: event.ligilo), class: "text-decoration-none text-dark" %></div>
             <div class="col-2 text-center text-body-secondary"><%= event.format %></div>
           </div>
@@ -71,14 +69,15 @@
     <div class="box-white">
       <h3 class="h5 mb-3">Uzantoj</h3>
       <div class="list-group list-group-flush small">
-        <% @organization.users.each do |user| %>
-          <div class="list-group-item px-0 py-2 border-0 <%= 'border-bottom' unless user == @organization.users.last %>">
+        <% users = @organization.users.to_a %>
+        <% users.each do |user| %>
+          <div class="list-group-item px-0 py-2 border-0 <%= 'border-bottom' unless user == users.last %>">
             <div class="fw-medium"><%= user.name %></div>
             <div class="text-body-secondary smaller"><%= user.username %></div>
           </div>
         <% end %>
 
-        <% if @organization.users.empty? %>
+        <% if users.empty? %>
           <div class="p-2 text-center text-body-secondary">Neniu uzanto trovita.</div>
         <% end %>
       </div>
