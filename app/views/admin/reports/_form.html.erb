@@ -13,7 +13,7 @@
 
   <div class="mb-3">
     <%= f.label :user_id, "Raportanto (Uziranto)", class: "form-label fw-bold small text-uppercase text-body-secondary" %>
-    <%= f.collection_select :user_id, @users, :id, :name, { include_blank: true }, { class: "form-select" } %>
+    <%= f.collection_select :user_id, @users, :id, :name, {}, { class: "form-select" } %>
   </div>
 
   <div class="mt-4 d-flex gap-2">
