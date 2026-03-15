@@ -1,0 +1,21 @@
+<div class="d-flex align-items-center justify-content-between mb-2 flex-wrap gap-2">
+  <% week_end = date + 6.days %>
+  <% month_names = I18n.t("date.month_names") %>
+  <strong class="text-uppercase fs-5">
+    <% if date.month == week_end.month %>
+      <%= date.day %> – <%= week_end.day %> <%= month_names[date.month].upcase %> <%= date.year %>
+    <% else %>
+      <%= date.day %> <%= month_names[date.month].upcase %> – <%= week_end.day %> <%= month_names[week_end.month].upcase %> <%= week_end.year %>
+    <% end %>
+  </strong>
+  <div class="d-flex align-items-center gap-2">
+    <%= link_to "Hodiaŭ", today_path, class: "btn btn-light" %>
+
+    <div class="btn-group" role="group" aria-label="Navigado inter semajnoj">
+      <%= link_to icon("fas", "chevron-left"), prev_path,
+          class: "btn btn-light px-3", title: "Antaŭa semajno" %>
+      <%= link_to icon("fas", "chevron-right"), next_path,
+          class: "btn btn-light px-3", title: "Sekva semajno" %>
+    </div>
+  </div>
+</div>

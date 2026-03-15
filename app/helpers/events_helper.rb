@@ -4,7 +4,13 @@ module EventsHelper
   def display_events_by_style
     case cookies[:vidmaniero]
     when "kalendaro"
-      render partial: "events/events_as_calendar", locals: {events: @events + @today_events}
+      render partial: "events/events_calendar", locals: {
+        date: @calendar_date,
+        today_path: @calendar_today_path,
+        prev_path: @calendar_prev_path,
+        next_path: @calendar_next_path,
+        events_by_day: @events_by_day
+      }
     when "mapo"
       render partial: "events/events_as_map", locals: {events: @today_events.order(:date_start) + @events.order(:date_start)}
     else
