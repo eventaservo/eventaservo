@@ -45,13 +45,17 @@ module CalendarData
       to: (@calendar_date + 6.days).end_of_day
     )
     user_timezone = cookies[:horzono].presence
-    @events_by_day = calendar_events.order(:date_start).group_by { |e|
+    grouped = calendar_events.order(:date_start).group_by { |e|
       begin
         tz = user_timezone || e.time_zone
         e.date_start.in_time_zone(tz).to_date
       rescue ArgumentError, TZInfo::InvalidTimezoneIdentifier
         e.date_start.in_time_zone(e.time_zone).to_date
       end
+    }
+    # All-day events appear first within each day, then by start time.
+    @events_by_day = grouped.transform_values { |events|
+      events.sort_by { |e| [e.tuttaga? ? 0 : 1, e.date_start] }
     }
   end
 end
