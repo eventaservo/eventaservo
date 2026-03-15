@@ -9,12 +9,12 @@
 // States: outline (off) → tinted hover → solid + checkmark (on)
 // ---------------------------------------------------------------------------
 
-$_tag-blue:         #0dcaf0;
-$_tag-blue-dark:    color.adjust($_tag-blue, $lightness: -10%);
-$_tag-blue-hover:   rgba($_tag-blue, 0.10);
+$_tag-blue: #17a2b8;
+$_tag-blue-dark: color.adjust($_tag-blue, $lightness: -10%);
+$_tag-blue-hover: rgba($_tag-blue, 0.10);
 
-$_tag-orange:       #ffc107;
-$_tag-orange-dark:  color.adjust($_tag-orange, $lightness: -10%);
+$_tag-orange: #ffc107;
+$_tag-orange-dark: color.adjust($_tag-orange, $lightness: -10%);
 $_tag-orange-hover: rgba($_tag-orange, 0.10);
 
 .tag-check {
@@ -39,8 +39,8 @@ $_tag-orange-hover: rgba($_tag-orange, 0.10);
     content: fa-content($fa-var-check);
     font-size: 0.65em;
     transition: width 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                opacity 0.2s ease,
-                margin 0.2s ease;
+      opacity 0.2s ease,
+      margin 0.2s ease;
   }
 
   // --- Modifier: Blue --------------------------------------------------------
@@ -49,7 +49,7 @@ $_tag-orange-hover: rgba($_tag-orange, 0.10);
     border-color: $_tag-blue;
 
     // Hover (unchecked): soft tinted fill
-    .btn-check:not(:checked) + & {
+    .btn-check:not(:checked)+& {
       &:hover {
         color: $_tag-blue;
         background-color: $_tag-blue-hover;
@@ -58,11 +58,10 @@ $_tag-orange-hover: rgba($_tag-orange, 0.10);
     }
 
     // Checked: solid fill + white text + checkmark + inset shadow
-    .btn-check:checked + & {
+    .btn-check:checked+& {
       color: #fff;
       background-color: $_tag-blue;
       border-color: $_tag-blue;
-      font-weight: 600;
 
       &::before {
         width: 0.75em;
@@ -84,7 +83,7 @@ $_tag-orange-hover: rgba($_tag-orange, 0.10);
     border-color: $_tag-orange;
 
     // Hover (unchecked): soft tinted fill
-    .btn-check:not(:checked) + & {
+    .btn-check:not(:checked)+& {
       &:hover {
         color: $_tag-orange;
         background-color: $_tag-orange-hover;
@@ -93,11 +92,10 @@ $_tag-orange-hover: rgba($_tag-orange, 0.10);
     }
 
     // Checked: solid fill + white text + checkmark + inset shadow
-    .btn-check:checked + & {
-      color: #fff;
+    .btn-check:checked+& {
+      color: #212529;
       background-color: $_tag-orange;
       border-color: $_tag-orange;
-      font-weight: 600;
 
       &::before {
         width: 0.75em;
