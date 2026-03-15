@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class EventsController < ApplicationController
+  include CalendarData
+
   rescue_from ActionController::UnknownFormat do |_e|
     redirect_to root_url, flash: {error: "Formato ne ekzistas."}
   end
@@ -230,6 +232,13 @@ class EventsController < ApplicationController
         @countries = continent_events_base.count_by_country
         @today_events = continent_events_base.today.includes(:country)
         @events = continent_events_base.not_today.includes(:country, :organizations)
+
+        if cookies[:vidmaniero] == "kalendaro"
+          # Reassign @events without not_today so the calendar includes today's events.
+          # prepare_calendar_data reads @events as the base relation for the 7-day window.
+          @events = continent_events_base.includes(:country, :organizations)
+          prepare_calendar_data
+        end
 
         kreas_paghadon_por_karta_vidmaniero if cookies[:vidmaniero] == "kartaro"
       end
