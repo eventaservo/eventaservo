@@ -1,4 +1,4 @@
-<nav aria-label="breadcrumb">
+<nav aria-label="Breadcrumb navigation">
   <ol class="breadcrumb small mb-2">
     <li class="breadcrumb-item"><%= link_to "Admin", admin_root_path %></li>
     <li class="breadcrumb-item"><%= link_to "Mockups", admin_mockups_path %></li>
@@ -7,5 +7,5 @@
 </nav>
 
 <div class="box-white">
-  <%= render "admin/mockups/calendar_week" %>
+  <%= render "admin/mockups/calendar_week", calendar_date: @calendar_date, events_by_day: @events_by_day %>
 </div>

@@ -2,13 +2,13 @@
 
 <%# Toolbar — same pattern as current calendar %>
 <div class="d-flex align-items-center justify-content-between mb-2 flex-wrap gap-2">
-  <% week_end = @calendar_date + 6.days %>
+  <% week_end = calendar_date + 6.days %>
   <% month_names = I18n.t("date.month_names") %>
   <strong class="text-uppercase fs-5">
-    <% if @calendar_date.month != week_end.month %>
-      <%= @calendar_date.day %> <%= month_names[@calendar_date.month].upcase %> – <%= week_end.day %> <%= month_names[week_end.month].upcase %> <%= @calendar_date.year %>
+    <% if calendar_date.month != week_end.month %>
+      <%= calendar_date.day %> <%= month_names[calendar_date.month].upcase %> – <%= week_end.day %> <%= month_names[week_end.month].upcase %> <%= calendar_date.year %>
     <% else %>
-      <%= @calendar_date.day %> – <%= week_end.day %> <%= month_names[@calendar_date.month].upcase %> <%= @calendar_date.year %>
+      <%= calendar_date.day %> – <%= week_end.day %> <%= month_names[calendar_date.month].upcase %> <%= calendar_date.year %>
     <% end %>
   </strong>
   <div class="d-flex align-items-center gap-2">
@@ -22,7 +22,7 @@
 
 <%# Week list with day grouping %>
 <div class="border rounded overflow-hidden small">
-  <% @events_by_day.each_with_index do |(day, day_events), di| %>
+  <% events_by_day.each_with_index do |(day, day_events), di| %>
     <div class="<%= 'border-top' if di > 0 %>">
 
       <%# Day header %>
