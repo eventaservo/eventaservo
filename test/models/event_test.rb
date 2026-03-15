@@ -32,7 +32,7 @@
 #  title                  :string           not null, indexed
 #  uuid                   :uuid
 #  created_at             :datetime         not null
-#  updated_at             :datetime         not null
+#  updated_at             :datetime         not null, indexed
 #  country_id             :integer          not null, indexed
 #  user_id                :integer          not null, indexed
 #
