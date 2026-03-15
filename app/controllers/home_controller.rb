@@ -17,7 +17,10 @@ class HomeController < ApplicationController
     @continents = @events.count_by_continents
     @today_events = @events.today.includes(:country).includes(:organizations)
 
-    prepare_calendar_data if cookies[:vidmaniero] == "kalendaro"
+    if cookies[:vidmaniero] == "kalendaro"
+      @events = @events.includes(:country, :organizations)
+      prepare_calendar_data
+    end
 
     @events = @events.not_today.includes(%i[country organizations])
     @ads = Ad.includes([image_attachment: :blob]).active.order(Arel.sql("RANDOM()")).limit(4)
