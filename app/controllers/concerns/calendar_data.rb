@@ -15,9 +15,8 @@ module CalendarData
 
   # Prepares assigns for the native calendar partial.
   #
-  # Builds a 7-day window starting from the requested date (or today),
-  # groups events falling within that window by day, and computes the
-  # navigation paths for prev/next/today preserving active filter params.
+  # Parses the date param, builds navigation paths, and delegates
+  # event querying/grouping to {Events::ByDatesQuery}.
   #
   # The +periodo+ param is intentionally excluded from navigation paths:
   # period-based scopes (today-only, 7-day, etc.) conflict with the calendar's
@@ -28,37 +27,34 @@ module CalendarData
   #   will cause today's events to be absent from the calendar.
   # @return [void]
   def prepare_calendar_data
-    @calendar_date = begin
-      Date.iso8601(params[:date])
-    rescue ArgumentError, TypeError
-      Date.current
-    end
+    @calendar_date = parse_calendar_date
+    build_navigation_paths
 
-    # Exclude :periodo — period filters conflict with the calendar's own date-window query.
+    @events_by_day = Events::ByDatesQuery.new(
+      from: @calendar_date,
+      to: @calendar_date + 6.days,
+      scope: @events,
+      timezone: cookies[:horzono].presence
+    ).call
+  end
+
+  # Parses the date parameter from the request, defaulting to today.
+  #
+  # @return [Date]
+  def parse_calendar_date
+    Date.iso8601(params[:date])
+  rescue ArgumentError, TypeError
+    Date.current
+  end
+
+  # Builds prev/next/today navigation paths, preserving filter params
+  # but excluding +:periodo+.
+  #
+  # @return [void]
+  def build_navigation_paths
     filter_params = params.permit(:o, :s, :t, :continent, :country_name, :city_name, :username)
     @calendar_today_path = url_for(filter_params.merge(date: Date.current.iso8601))
     @calendar_prev_path = url_for(filter_params.merge(date: (@calendar_date - 7.days).iso8601))
     @calendar_next_path = url_for(filter_params.merge(date: (@calendar_date + 7.days).iso8601))
-
-    calendar_events = @events.by_dates(
-      from: @calendar_date.beginning_of_day,
-      to: (@calendar_date + 6.days).end_of_day
-    )
-    user_timezone = cookies[:horzono].presence
-    grouped = calendar_events.order(:date_start).group_by { |e|
-      begin
-        tz = user_timezone || e.time_zone
-        e.date_start.in_time_zone(tz).to_date
-      rescue ArgumentError, TZInfo::InvalidTimezoneIdentifier
-        # TODO: add a nested rescue here for the case where e.time_zone is also
-        # invalid, falling back to Time.zone. Currently an event with a corrupt
-        # time_zone column would raise an unrescued TZInfo::InvalidTimezoneIdentifier.
-        e.date_start.in_time_zone(e.time_zone).to_date
-      end
-    }
-    # All-day events appear first within each day, then by start time.
-    @events_by_day = grouped.transform_values { |events|
-      events.sort_by { |e| [e.tuttaga? ? 0 : 1, e.date_start] }
-    }
   end
 end
