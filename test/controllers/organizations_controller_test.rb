@@ -6,4 +6,12 @@ class OrganizationsControllerTest < ActionDispatch::IntegrationTest
     get organizations_url
     assert_response :success
   end
+
+  test "should get new" do
+    user = create(:user)
+    sign_in user
+
+    get new_organization_url
+    assert_response :success
+  end
 end
