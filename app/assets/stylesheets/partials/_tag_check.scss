@@ -1,0 +1,115 @@
+@use "sass:color";
+
+// ---------------------------------------------------------------------------
+// Tag checkbox buttons — BEM "tag-check" block
+// Self-contained styles: no @extend on Bootstrap color classes (btn-outline-*)
+// to prevent Bootstrap state rules from leaking into these components.
+// Only .btn and .btn-sm are extended for baseline sizing.
+//
+// States: outline (off) → tinted hover → solid + checkmark (on)
+// ---------------------------------------------------------------------------
+
+$_tag-blue:         #0dcaf0;
+$_tag-blue-dark:    color.adjust($_tag-blue, $lightness: -10%);
+$_tag-blue-hover:   rgba($_tag-blue, 0.10);
+
+$_tag-orange:       #ffc107;
+$_tag-orange-dark:  color.adjust($_tag-orange, $lightness: -10%);
+$_tag-orange-hover: rgba($_tag-orange, 0.10);
+
+.tag-check {
+  @extend .btn;
+  @extend .btn-sm;
+  position: relative;
+  border-width: 1.5px;
+  border-style: solid;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  // Checkmark icon — hidden by default, animates in on selection
+  &::before {
+    display: inline-block;
+    width: 0;
+    overflow: hidden;
+    opacity: 0;
+    vertical-align: middle;
+    margin-right: 0;
+    @extend .fas;
+    content: fa-content($fa-var-check);
+    font-size: 0.65em;
+    transition: width 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 0.2s ease,
+                margin 0.2s ease;
+  }
+
+  // --- Modifier: Blue --------------------------------------------------------
+  &--blue {
+    color: $_tag-blue;
+    border-color: $_tag-blue;
+
+    // Hover (unchecked): soft tinted fill
+    .btn-check:not(:checked) + & {
+      &:hover {
+        color: $_tag-blue;
+        background-color: $_tag-blue-hover;
+        border-color: $_tag-blue;
+      }
+    }
+
+    // Checked: solid fill + white text + checkmark + inset shadow
+    .btn-check:checked + & {
+      color: #fff;
+      background-color: $_tag-blue;
+      border-color: $_tag-blue;
+      font-weight: 600;
+
+      &::before {
+        width: 0.75em;
+        opacity: 1;
+        margin-right: 0.3em;
+      }
+
+      // Hover while checked: darker shade
+      &:hover {
+        background-color: $_tag-blue-dark;
+        border-color: $_tag-blue-dark;
+      }
+    }
+  }
+
+  // --- Modifier: Orange ------------------------------------------------------
+  &--orange {
+    color: $_tag-orange;
+    border-color: $_tag-orange;
+
+    // Hover (unchecked): soft tinted fill
+    .btn-check:not(:checked) + & {
+      &:hover {
+        color: $_tag-orange;
+        background-color: $_tag-orange-hover;
+        border-color: $_tag-orange;
+      }
+    }
+
+    // Checked: solid fill + white text + checkmark + inset shadow
+    .btn-check:checked + & {
+      color: #fff;
+      background-color: $_tag-orange;
+      border-color: $_tag-orange;
+      font-weight: 600;
+
+      &::before {
+        width: 0.75em;
+        opacity: 1;
+        margin-right: 0.3em;
+      }
+
+      // Hover while checked: darker shade
+      &:hover {
+        background-color: $_tag-orange-dark;
+        border-color: $_tag-orange-dark;
+      }
+    }
+  }
+}
