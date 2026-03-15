@@ -3,9 +3,23 @@
     <span class="text-muted">tuttaga</span>
   <% else %>
     <%= event.komenca_horo(horzono: cookies[:horzono]) %>
+    <% end_time = event.fina_horo(horzono: cookies[:horzono]) %>
+    <% if end_time %><br>
+      <span class="calendar-end-time"><%= end_time %></span>
+    <% end %>
   <% end %>
 </div>
-<div class="col fw-light text-truncate">
-  <%= event_flag(event) %>
-  <%= link_to event.title, event_path(code: event.ligilo), class: "text-decoration-none text-reset stretched-link", data: {turbo_frame: "_top"} %>
+<div class="col py-1 calendar-event-col">
+  <div class="fw-medium text-truncate">
+    <%= link_to event.title, event_path(code: event.ligilo), class: "text-decoration-none text-reset stretched-link", data: {turbo_frame: "_top"} %>
+  </div>
+  <div class="text-body-secondary small text-truncate">
+    <%= event_flag(event) %>
+    <% if event.country&.code && !event.universala? %>
+      <span class="d-none d-md-inline"><%= event.country.name %></span>
+      <span class="d-inline d-md-none"><%= event.country.code.upcase %></span>
+      <% if event.city.present? %> · <% end %>
+    <% end %>
+    <%= event.city %>
+  </div>
 </div>
