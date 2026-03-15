@@ -1,10 +1,25 @@
 # frozen_string_literal: true
 
 module EventsHelper
+  # Renders the appropriate events partial based on the +vidmaniero+ cookie.
+  #
+  # Dispatches to:
+  # - +events/events_calendar+ when cookie is +"kalendaro"+ (requires calendar assigns
+  #   prepared by {CalendarData#prepare_calendar_data})
+  # - +events/events_as_map+ when cookie is +"mapo"+
+  # - +events/events_as_cards+ for all other values
+  #
+  # @return [String] rendered HTML partial
   def display_events_by_style
     case cookies[:vidmaniero]
     when "kalendaro"
-      render partial: "events/events_as_calendar", locals: {events: @events + @today_events}
+      render partial: "events/events_calendar", locals: {
+        date: @calendar_date,
+        today_path: @calendar_today_path,
+        prev_path: @calendar_prev_path,
+        next_path: @calendar_next_path,
+        events_by_day: @events_by_day
+      }
     when "mapo"
       render partial: "events/events_as_map", locals: {events: @today_events.order(:date_start) + @events.order(:date_start)}
     else

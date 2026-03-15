@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class HomeController < ApplicationController
+  include CalendarData
+
   before_action :filter_events, only: :index
   before_action :definas_kuketojn, only: :index
 
@@ -15,13 +17,18 @@ class HomeController < ApplicationController
     @continents = @events.count_by_continents
     @today_events = @events.today.includes(:country).includes(:organizations)
 
+    if cookies[:vidmaniero] == "kalendaro"
+      @events = @events.includes(:country, :organizations)
+      prepare_calendar_data
+    end
+
     @events = @events.not_today.includes(%i[country organizations])
     @ads = Ad.includes([image_attachment: :blob]).active.order(Arel.sql("RANDOM()")).limit(4)
 
     return if cookies[:vidmaniero].in? %w[kalendaro mapo]
 
     cookies[:vidmaniero] = {value: "kalendaro", expires: 2.weeks, secure: true}
-    redirect_to root_url
+    redirect_to root_url(params.permit(:date))
   end
 
   def anoncoj
