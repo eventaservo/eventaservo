@@ -50,6 +50,9 @@ module CalendarData
         tz = user_timezone || e.time_zone
         e.date_start.in_time_zone(tz).to_date
       rescue ArgumentError, TZInfo::InvalidTimezoneIdentifier
+        # TODO: add a nested rescue here for the case where e.time_zone is also
+        # invalid, falling back to Time.zone. Currently an event with a corrupt
+        # time_zone column would raise an unrescued TZInfo::InvalidTimezoneIdentifier.
         e.date_start.in_time_zone(e.time_zone).to_date
       end
     }
