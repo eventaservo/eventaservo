@@ -75,7 +75,7 @@ class Rack::Attack
   # ============================================
 
   # Homepage - very heavy (20 queries according to logs)
-  throttle("homepage requests by IP", limit: 3, period: 10) do |req|
+  throttle("homepage requests by IP", limit: 12, period: 10) do |req|
     real_ip(req) if req.path == "/" && req.get?
   end
 
