@@ -46,7 +46,12 @@ module CalendarData
     )
     user_timezone = cookies[:horzono].presence
     @events_by_day = calendar_events.order(:date_start).group_by { |e|
-      e.date_start.in_time_zone(user_timezone || e.time_zone).to_date
+      begin
+        tz = user_timezone || e.time_zone
+        e.date_start.in_time_zone(tz).to_date
+      rescue ArgumentError, TZInfo::InvalidTimezoneIdentifier
+        e.date_start.in_time_zone(e.time_zone).to_date
+      end
     }
   end
 end

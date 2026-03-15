@@ -4,10 +4,12 @@
   <% week_end = date + 6.days %>
   <% month_names = I18n.t("date.month_names") %>
   <strong class="text-uppercase fs-5">
-    <% if date.month == week_end.month %>
-      <%= date.day %> – <%= week_end.day %> <%= month_names[date.month].upcase %> <%= date.year %>
+    <% if date.year != week_end.year %>
+      <%= date.day %> <%= month_names[date.month].upcase %> <%= date.year %> – <%= week_end.day %> <%= month_names[week_end.month].upcase %> <%= week_end.year %>
+    <% elsif date.month != week_end.month %>
+      <%= date.day %> <%= month_names[date.month].upcase %> – <%= week_end.day %> <%= month_names[week_end.month].upcase %> <%= date.year %>
     <% else %>
-      <%= date.day %> <%= month_names[date.month].upcase %> – <%= week_end.day %> <%= month_names[week_end.month].upcase %> <%= week_end.year %>
+      <%= date.day %> – <%= week_end.day %> <%= month_names[date.month].upcase %> <%= date.year %>
     <% end %>
   </strong>
   <div class="d-flex align-items-center gap-2">
