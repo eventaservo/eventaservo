@@ -1,5 +1,8 @@
+turbo-frame#native-calendar {
+  transition: opacity 0.3s ease-in-out;
+}
+
 turbo-frame.calendar--loading {
   opacity: 0.5;
   pointer-events: none;
-  transition: opacity 0.15s ease-in;
 }

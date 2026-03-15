@@ -25,6 +25,7 @@ namespace :admin do
   get "mockups/cards", controller: "mockups", action: :cards, as: "mockups_cards"
   get "mockups/tables", controller: "mockups", action: :tables, as: "mockups_tables"
   get "mockups/buttons", controller: "mockups", action: :buttons, as: "mockups_buttons"
+  get "mockups/calendar", controller: "mockups", action: :calendar, as: "mockups_calendar"
   resources :reklamoj do
     get "toggle_active"
   end

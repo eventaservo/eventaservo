@@ -12,7 +12,7 @@
         <div class="px-2 py-1 text-muted fst-italic small">Neniu evento</div>
       <% else %>
         <% day_events.each_with_index do |event, i| %>
-          <div class="row g-0 align-items-center px-2 py-1 hover-row position-relative <%= 'border-bottom' unless i == day_events.size - 1 %> <%= 'bg-body-tertiary' if i.odd? %>">
+          <div class="row g-0 align-items-center px-2 py-1 hover-row position-relative <%= 'border-bottom' unless i == day_events.size - 1 %>">
             <%= render "events/calendar_event_row", event: event %>
           </div>
         <% end %>
