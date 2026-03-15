@@ -55,7 +55,7 @@ COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UU
 -- Name: immutable_unaccent(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
-CREATE FUNCTION public.immutable_unaccent(text) RETURNS text
+CREATE OR REPLACE FUNCTION public.immutable_unaccent(text) RETURNS text
     LANGUAGE sql IMMUTABLE STRICT PARALLEL SAFE
     AS $_$ SELECT public.unaccent($1) $_$;
 

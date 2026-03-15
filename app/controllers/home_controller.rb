@@ -16,7 +16,7 @@ class HomeController < ApplicationController
 
     cache_key = ["continent_counts", params.permit(:o, :s, :t, :periodo).to_h, Event.maximum(:updated_at)]
     @continents = Rails.cache.fetch(cache_key, expires_in: 1.hour) do
-      @events.count_by_continents
+      @events.count_by_continents.load
     end
     @today_events = @events.today.includes(:country).includes(:organizations)
 
