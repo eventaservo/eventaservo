@@ -3,8 +3,6 @@
 require "test_helper"
 
 class Admin::StatisticsController::IndexTest < ActionDispatch::IntegrationTest
-  parallelize(workers: 1)
-
   setup do
     @admin = users(:admin_user)
     sign_in @admin
