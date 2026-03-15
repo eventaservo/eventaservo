@@ -104,10 +104,13 @@ gem "lokalise_rails", "~> 7.0"
 # For connecting to Google Drive
 gem "google-api-client", "~> 0.53.0"
 
+group :development, :test, :staging do
+  gem "faker"
+end
+
 group :development, :test do
   gem "debug", ">= 1.0.0", require: false
   gem "dotenv-rails"
-  gem "faker"
   gem "hotwire-spark"
   gem "lookbook", ">= 2.3.4"
   gem "rake"

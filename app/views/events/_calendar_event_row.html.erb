@@ -1,0 +1,11 @@
+<div class="col-2 col-md-1 fw-light text-success-emphasis py-1">
+  <% if event.tuttaga? %>
+    <span class="text-muted">tuttaga</span>
+  <% else %>
+    <%= event.komenca_horo(horzono: cookies[:horzono]) %>
+  <% end %>
+</div>
+<div class="col fw-light text-truncate">
+  <%= event_flag(event) %>
+  <%= link_to event.title, event_path(code: event.ligilo), class: "text-decoration-none text-reset stretched-link", data: {turbo_frame: "_top"} %>
+</div>
