@@ -19,9 +19,11 @@ export default class extends Controller {
 
     this.frame.removeEventListener("turbo:before-fetch-request", this._onBeforeFetch)
     this.frame.removeEventListener("turbo:frame-render",         this._onFrameRender)
+    this.frame.removeEventListener("turbo:fetch-request-error",  this._onFrameRender)
   }
 
   onBeforeFetch() {
+    this.frame.removeEventListener("turbo:fetch-request-error", this._onFrameRender)
     this.frame.classList.add("calendar--loading")
     this.frame.addEventListener("turbo:fetch-request-error", this._onFrameRender, { once: true })
   }
