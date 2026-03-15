@@ -23,6 +23,7 @@ export default class extends Controller {
 
   onBeforeFetch() {
     this.frame.classList.add("calendar--loading")
+    this.frame.addEventListener("turbo:fetch-request-error", this._onFrameRender, { once: true })
   }
 
   // Updates the browser URL after Turbo Frame navigation using the date
