@@ -35,7 +35,7 @@
         <div class="px-2 py-1 text-muted fst-italic small">Neniu evento</div>
       <% else %>
         <% day_events.each_with_index do |event, i| %>
-          <div class="row g-0 align-items-center px-2 py-1 hover-row <%= 'border-bottom' unless i == day_events.size - 1 %>">
+          <div class="row g-0 align-items-center px-2 py-1 hover-row position-relative <%= 'border-bottom' unless i == day_events.size - 1 %>">
 
             <%# Column 1: Start time – End time %>
             <div class="col-2 col-md-1 fw-light text-success-emphasis py-1">
@@ -43,15 +43,22 @@
                 <span class="text-muted">tuttaga</span>
               <% else %>
                 <%= event[:time] %><% if event[:end_time] %><br>
-                  <span style="font-size: 0.8em; opacity: 0.45;"><%= event[:end_time] %></span><% end %>
+                  <span class="calendar-end-time"><%= event[:end_time] %></span><% end %>
               <% end %>
             </div>
 
             <%# Column 2: Title (line 1) + Country & City (line 2) %>
-            <div class="col py-1" style="min-width: 0;">
+            <div class="col py-1 calendar-event-col">
               <div class="fw-medium text-truncate"><%= event[:title] %></div>
               <div class="text-body-secondary small text-truncate">
-                <% if event[:country_code] %>
+                <% if event[:online] == :universala %>
+                  🖥
+                <% elsif event[:online] == :with_flag && event[:country_code] %>
+                  <%= flag_icon(event[:country_code]) %> 🖥
+                  <span class="d-none d-md-inline"><%= event[:country] %></span>
+                  <span class="d-inline d-md-none"><%= event[:country_code].upcase %></span>
+                  <% if event[:city] %> · <% end %>
+                <% elsif event[:country_code] %>
                   <%= flag_icon(event[:country_code]) %>
                   <span class="d-none d-md-inline"><%= event[:country] %></span>
                   <span class="d-inline d-md-none"><%= event[:country_code].upcase %></span>

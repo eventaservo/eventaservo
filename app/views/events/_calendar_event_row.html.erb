@@ -5,11 +5,11 @@
     <%= event.komenca_horo(horzono: cookies[:horzono]) %>
     <% end_time = event.fina_horo(horzono: cookies[:horzono]) %>
     <% if end_time %><br>
-      <span style="font-size: 0.8em; opacity: 0.45;"><%= end_time %></span>
+      <span class="calendar-end-time"><%= end_time %></span>
     <% end %>
   <% end %>
 </div>
-<div class="col py-1" style="min-width: 0;">
+<div class="col py-1 calendar-event-col">
   <div class="fw-medium text-truncate">
     <%= link_to event.title, event_path(code: event.ligilo), class: "text-decoration-none text-reset stretched-link", data: {turbo_frame: "_top"} %>
   </div>

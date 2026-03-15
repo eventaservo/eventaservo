@@ -6,3 +6,12 @@ turbo-frame.calendar--loading {
   opacity: 0.5;
   pointer-events: none;
 }
+
+.calendar-end-time {
+  font-size: 0.8em;
+  opacity: 0.45;
+}
+
+.calendar-event-col {
+  min-width: 0;
+}
