@@ -1,8 +1,3 @@
-\restrict DSTp1NVlY1BpkXkhA4ggbGAydj3Bbc2cYlhd2QxsCoczDWN7d7mWQuyVgjqEWLM
-
--- Dumped from database version 15.7 (Debian 15.7-1.pgdg120+1)
--- Dumped by pg_dump version 15.14 (Debian 15.14-0+deb12u1)
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -13,6 +8,20 @@ SET check_function_bodies = false;
 SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
+
+--
+-- Name: public; Type: SCHEMA; Schema: -; Owner: -
+--
+
+-- *not* creating schema, since initdb creates it
+
+
+--
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON SCHEMA public IS '';
+
 
 --
 -- Name: unaccent; Type: EXTENSION; Schema: -; Owner: -
@@ -46,7 +55,7 @@ COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UU
 -- Name: immutable_unaccent(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
-CREATE OR REPLACE FUNCTION public.immutable_unaccent(text) RETURNS text
+CREATE FUNCTION public.immutable_unaccent(text) RETURNS text
     LANGUAGE sql IMMUTABLE STRICT PARALLEL SAFE
     AS $_$ SELECT public.unaccent($1) $_$;
 
@@ -314,8 +323,8 @@ ALTER SEQUENCE public.ahoy_visits_id_seq OWNED BY public.ahoy_visits.id;
 CREATE TABLE public.ar_internal_metadata (
     key character varying NOT NULL,
     value character varying,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -1337,8 +1346,7 @@ ALTER SEQUENCE public.version_associations_id_seq OWNED BY public.version_associ
 
 CREATE TABLE public.versions (
     id bigint NOT NULL,
-    item_type character varying,
-    "{null: false}" character varying,
+    item_type character varying NOT NULL,
     item_id bigint NOT NULL,
     event character varying NOT NULL,
     whodunnit character varying,
@@ -2212,6 +2220,13 @@ CREATE INDEX index_events_on_title ON public.events USING btree (title);
 
 
 --
+-- Name: index_events_on_updated_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_events_on_updated_at ON public.events USING btree (updated_at);
+
+
+--
 -- Name: index_events_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2729,11 +2744,10 @@ ALTER TABLE ONLY public.solid_queue_scheduled_executions
 -- PostgreSQL database dump complete
 --
 
-\unrestrict DSTp1NVlY1BpkXkhA4ggbGAydj3Bbc2cYlhd2QxsCoczDWN7d7mWQuyVgjqEWLM
-
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20260315122454'),
 ('20260314101500'),
 ('20260220024106'),
 ('20260220024100'),
