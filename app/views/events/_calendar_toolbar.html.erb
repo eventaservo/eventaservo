@@ -1,3 +1,5 @@
+<%# Navigation links target "native-calendar" explicitly so Turbo Frame navigation
+    works correctly even if this partial is ever rendered outside the frame context. %>
 <div class="d-flex align-items-center justify-content-between mb-2 flex-wrap gap-2">
   <% week_end = date + 6.days %>
   <% month_names = I18n.t("date.month_names") %>
@@ -9,13 +11,15 @@
     <% end %>
   </strong>
   <div class="d-flex align-items-center gap-2">
-    <%= link_to "Hodiaŭ", today_path, class: "btn btn-light" %>
+    <%= link_to "Hodiaŭ", today_path, class: "btn btn-light", data: {turbo_frame: "native-calendar"} %>
 
     <div class="btn-group" role="group" aria-label="Navigado inter semajnoj">
       <%= link_to icon("fas", "chevron-left"), prev_path,
-          class: "btn btn-light px-3", title: "Antaŭa semajno" %>
+          class: "btn btn-light px-3", title: "Antaŭa semajno",
+          data: {turbo_frame: "native-calendar"} %>
       <%= link_to icon("fas", "chevron-right"), next_path,
-          class: "btn btn-light px-3", title: "Sekva semajno" %>
+          class: "btn btn-light px-3", title: "Sekva semajno",
+          data: {turbo_frame: "native-calendar"} %>
     </div>
   </div>
 </div>

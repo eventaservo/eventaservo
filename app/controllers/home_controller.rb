@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class HomeController < ApplicationController
+  include CalendarData
+
   before_action :filter_events, only: :index
   before_action :definas_kuketojn, only: :index
 
@@ -15,10 +17,10 @@ class HomeController < ApplicationController
     @continents = @events.count_by_continents
     @today_events = @events.today.includes(:country).includes(:organizations)
 
+    prepare_calendar_data if cookies[:vidmaniero] == "kalendaro"
+
     @events = @events.not_today.includes(%i[country organizations])
     @ads = Ad.includes([image_attachment: :blob]).active.order(Arel.sql("RANDOM()")).limit(4)
-
-    prepare_calendar_data if cookies[:vidmaniero] == "kalendaro"
 
     return if cookies[:vidmaniero].in? %w[kalendaro mapo]
 
@@ -157,32 +159,6 @@ class HomeController < ApplicationController
   end
 
   private
-
-  # Prepares assigns for the native calendar partial.
-  #
-  # Builds a 7-day window starting from the requested date (or today),
-  # groups events falling within that window by day, and computes the
-  # navigation paths for prev/next/today preserving active filter params.
-  #
-  # @return [void]
-  def prepare_calendar_data
-    @calendar_date = begin
-      Date.parse(params[:date])
-    rescue ArgumentError, TypeError
-      Date.current
-    end
-
-    filter_params = params.permit(:periodo, :o, :s, :t, :continent, :country_name, :city_name, :username)
-    @calendar_today_path = url_for(filter_params.merge(date: Date.current.iso8601))
-    @calendar_prev_path = url_for(filter_params.merge(date: (@calendar_date - 7.days).iso8601))
-    @calendar_next_path = url_for(filter_params.merge(date: (@calendar_date + 7.days).iso8601))
-
-    calendar_events = @events.by_dates(
-      from: @calendar_date.beginning_of_day,
-      to: (@calendar_date + 6.days).end_of_day
-    )
-    @events_by_day = calendar_events.order(:date_start).group_by { |e| e.date_start.to_date }
-  end
 
   def access_from_server
     request.headers["SERVER_NAME"].in? %w[testservilo.eventaservo.org staging.eventaservo.org

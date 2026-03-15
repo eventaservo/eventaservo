@@ -17,5 +17,4 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     get instruantoj_kaj_prelegantoj_url, params: {name: "Test", country_id: 1, level: "Baza", keyword: "lingvo"}
     assert_response :success
   end
-
 end
