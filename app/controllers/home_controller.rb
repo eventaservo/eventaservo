@@ -23,7 +23,7 @@ class HomeController < ApplicationController
     end
 
     @events = @events.not_today.includes(%i[country organizations]) unless cookies[:vidmaniero] == "kalendaro"
-    @ads = Ad.includes(image_attachment: :blob).active.order(Arel.sql("RANDOM()")).limit(4)
+    @ads = Ad.with_attached_image.active.order(Arel.sql("RANDOM()")).limit(4)
 
     return if cookies[:vidmaniero].in? %w[kalendaro mapo]
 
