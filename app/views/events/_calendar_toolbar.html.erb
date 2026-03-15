@@ -16,9 +16,11 @@
     <div class="btn-group" role="group" aria-label="Navigado inter semajnoj">
       <%= link_to icon("fas", "chevron-left"), prev_path,
           class: "btn btn-light px-3", title: "Antaŭa semajno",
+          aria: {label: "Antaŭa semajno"},
           data: {turbo_frame: "native-calendar"} %>
       <%= link_to icon("fas", "chevron-right"), next_path,
           class: "btn btn-light px-3", title: "Sekva semajno",
+          aria: {label: "Sekva semajno"},
           data: {turbo_frame: "native-calendar"} %>
     </div>
   </div>

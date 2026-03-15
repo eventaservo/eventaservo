@@ -29,7 +29,7 @@ module CalendarData
   # @return [void]
   def prepare_calendar_data
     @calendar_date = begin
-      Date.parse(params[:date])
+      Date.iso8601(params[:date])
     rescue ArgumentError, TypeError
       Date.current
     end
@@ -44,6 +44,9 @@ module CalendarData
       from: @calendar_date.beginning_of_day,
       to: (@calendar_date + 6.days).end_of_day
     )
-    @events_by_day = calendar_events.order(:date_start).group_by { |e| e.date_start.to_date }
+    user_timezone = cookies[:horzono].presence
+    @events_by_day = calendar_events.order(:date_start).group_by { |e|
+      e.date_start.in_time_zone(user_timezone || e.time_zone).to_date
+    }
   end
 end

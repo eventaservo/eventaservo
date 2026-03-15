@@ -6,11 +6,15 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   connect() {
     this.frame = this.element.querySelector("turbo-frame")
+    if (!this.frame) return
+
     this._onFrameRender = this.onFrameRender.bind(this)
     this.frame.addEventListener("turbo:frame-render", this._onFrameRender)
   }
 
   disconnect() {
+    if (!this.frame) return
+
     this.frame.removeEventListener("turbo:frame-render", this._onFrameRender)
   }
 
