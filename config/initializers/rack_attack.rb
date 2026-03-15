@@ -47,49 +47,10 @@ class Rack::Attack
     real_ip(req)
   end
 
-  # Longer limit: 60 requests per minute per IP
-  throttle("requests by IP per minute", limit: 60, period: 60) do |req|
+  # Longer limit: 120 requests per minute per IP
+  # Allows real users to navigate the calendar (up to ~35 week clicks + overhead)
+  throttle("requests by IP per minute", limit: 120, period: 60) do |req|
     real_ip(req)
-  end
-
-  # ============================================
-  # Throttle by Subnet (/24 - e.g.: 47.79.215.x)
-  # This limits when multiple IPs from the same range attack
-  # ============================================
-
-  # Extract /24 subnet from IP (e.g.: 47.79.215.131 -> 47.79.215)
-  throttle("requests by subnet /24", limit: 30, period: 10) do |req|
-    ip = real_ip(req)
-    ip.to_s.split(".")[0, 3].join(".") if ip.present?
-  end
-
-  # Broader /16 subnet (e.g.: 47.79.x.x -> 47.79)
-  # For distributed attacks within the same larger block
-  throttle("requests by subnet /16", limit: 100, period: 60) do |req|
-    ip = real_ip(req)
-    ip.to_s.split(".")[0, 2].join(".") if ip.present?
-  end
-
-  # ============================================
-  # Throttle for heavy routes
-  # ============================================
-
-  # Homepage - very heavy (20 queries according to logs)
-  throttle("homepage requests by IP", limit: 12, period: 10) do |req|
-    real_ip(req) if req.path == "/" && req.get?
-  end
-
-  # Continent pages (also heavy)
-  CONTINENT_PATHS = %w[/europo /ameriko /azio /afriko /oceanio /reta].freeze
-  throttle("continent pages by IP", limit: 3, period: 10) do |req|
-    real_ip(req) if req.get? && CONTINENT_PATHS.include?(req.path)
-  end
-
-  # Throttle by subnet for heavy routes
-  throttle("heavy pages by subnet /24", limit: 10, period: 30) do |req|
-    if req.get? && (req.path == "/" || CONTINENT_PATHS.include?(req.path))
-      real_ip(req).to_s.split(".")[0, 3].join(".")
-    end
   end
 
   # ============================================
