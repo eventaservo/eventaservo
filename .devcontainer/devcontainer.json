@@ -6,11 +6,12 @@
 		"../docker-compose.yml"
 	],
 	"service": "backend",
-	// "runServices": [
-	// 	"backend",
-	// 	"solid_queue",
-	// 	"db"
-	// ],
+	"runServices": [
+		"backend",
+		"db"
+		// "selenium",
+		// 	"solid_queue"
+	],
 	// "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	"workspaceFolder": "/eventaservo",
 	// Features to add to the dev container. More info: https://containers.dev/features.

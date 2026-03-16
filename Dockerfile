@@ -1,4 +1,4 @@
-FROM ruby:3.4.8-bookworm as base
+FROM ruby:3.4.8-trixie as base
 
 WORKDIR /eventaservo
 
@@ -108,9 +108,6 @@ RUN apt update \
   sudo \
   zsh \
   && rm -rf /var/lib/apt/lists/*
-
-# Install AI Tools
-RUN npm install -g @google/gemini-cli
 
 # Adds a non-root user
 RUN useradd rails --create-home --shell /usr/bin/zsh && \
