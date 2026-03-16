@@ -1,12 +1,12 @@
 <div class="d-flex">
   <p class="small">
     <% if cookies[:horzono] %>
-      Vi vidas la eventojn laŭ la horzono <%= I18n.t cookies[:horzono], scope: :timezones %> |
-      <%= '(MET)' if Time.now.in_time_zone(cookies[:horzono]).utc_offset == 3600 %> |
-      (UTC <%= Time.now.in_time_zone(cookies[:horzono]).formatted_offset.split(":").first %>) |
+      Vi vidas la eventojn laŭ la horzono <%= I18n.t cookies[:horzono], scope: :timezones %>
+      <%= '(MET)' if Time.now.in_time_zone(cookies[:horzono]).utc_offset == 3600 %>
+      (UTC <%= Time.now.in_time_zone(cookies[:horzono]).formatted_offset.split(":").first %>) ·
     <% else %>
       <%= t("timezone.current_timezone_text") %>
     <% end %>
   </p>
-  <%= render partial: 'events/timezone_selector' %>
+  &nbsp;<%= render partial: 'events/timezone_selector' %>
 </div>
