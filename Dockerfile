@@ -1,4 +1,4 @@
-FROM ruby:3.4-trixie as base
+FROM ruby:3.4.8-trixie as base
 
 WORKDIR /eventaservo
 
