@@ -28,8 +28,8 @@ export default class extends Controller {
     this.frame.addEventListener("turbo:fetch-request-error", this._onFrameRender, { once: true })
   }
 
-  // Updates the browser URL after Turbo Frame navigation using the date
-  // attribute on the frame element, which is re-rendered on every navigation.
+  // Updates the browser URL after Turbo Frame navigation and scrolls the
+  // calendar into view so footer navigation lands back at the top of the calendar.
   onFrameRender() {
     this.frame.classList.remove("calendar--loading")
 
@@ -39,5 +39,7 @@ export default class extends Controller {
     const url = new URL(window.location)
     url.searchParams.set("date", newDate)
     history.replaceState({}, "", url)
+
+    this.element.scrollIntoView({ behavior: "smooth", block: "start" })
   }
 }

@@ -1,6 +1,6 @@
 <div data-controller="events-calendar">
   <%= turbo_frame_tag "native-calendar", data: { date: date.iso8601 } do %>
-    <%= render "events/calendar_toolbar",
+    <%= render "events/calendar_toolbar_header",
         date: date,
         today_path: today_path,
         prev_path: prev_path,
@@ -8,5 +8,8 @@
     <%= render "events/calendar_week_list",
         events_by_day: events_by_day,
         date: date %>
+    <%= render "events/calendar_toolbar_footer",
+        prev_path: prev_path,
+        next_path: next_path %>
   <% end %>
 </div>
