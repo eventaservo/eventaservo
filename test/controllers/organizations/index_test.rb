@@ -1,6 +1,6 @@
 require "test_helper"
 
-class OrganizationsControllerTest < ActionDispatch::IntegrationTest
+class OrganizationsController::IndexTest < ActionDispatch::IntegrationTest
   test "should get index" do
     create(:organization)
     get organizations_url
