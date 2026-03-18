@@ -32,7 +32,7 @@
 #  title                  :string           not null, indexed
 #  uuid                   :uuid
 #  created_at             :datetime         not null
-#  updated_at             :datetime         not null
+#  updated_at             :datetime         not null, indexed
 #  country_id             :integer          not null, indexed
 #  user_id                :integer          not null, indexed
 #
@@ -134,7 +134,14 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :ne_nuligitaj, -> { where(cancelled: false) }
   scope :konkursoj, -> { with_tags([Tag.find_by(name: "Konkurso", group_name: "characteristic").id]) }
   scope :anoncoj, -> { with_tags([Tag.find_by(name: "Anonco", group_name: "characteristic").id]) }
-  scope :chefaj, -> { without_tag("Konkurso").without_tag("Anonco") }
+  # TODO: Move this scope to a query object at app/queries/events/chefaj_query.rb
+  scope :chefaj, -> {
+    excluded = Tag.where(name: %w[Konkurso Anonco])
+      .joins(:taggings)
+      .where(taggings: {taggable_type: "Event"})
+      .select("taggings.taggable_id")
+    where.not(id: excluded)
+  }
   scope :anoncoj_kaj_konkursoj, -> { anoncoj.or(konkursoj) }
   scope :international_calendar, -> { where(international_calendar: true) }
   scope :with_reports, -> { joins(:reports).distinct }

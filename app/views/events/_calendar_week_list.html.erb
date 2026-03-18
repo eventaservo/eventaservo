@@ -1,0 +1,22 @@
+<div class="border rounded overflow-hidden small">
+  <% (date..(date + 6.days)).each_with_index do |day, di| %>
+    <% day_events = events_by_day[day] || [] %>
+    <div class="<%= 'border-top' if di > 0 %>">
+
+      <div class="row g-0 align-items-center bg-success text-white text-uppercase fw-bold px-2 py-1">
+        <div class="col-3 col-md-1"><%= l(day, format: :short) %></div>
+        <div class="col text-uppercase"><%= l(day, format: "%A") %></div>
+      </div>
+
+      <% if day_events.empty? %>
+        <div class="px-2 py-1 text-muted fst-italic small">Neniu evento</div>
+      <% else %>
+        <% day_events.each_with_index do |event, i| %>
+          <div class="row g-0 align-items-center px-2 py-1 hover-row position-relative <%= 'border-bottom' unless i == day_events.size - 1 %>">
+            <%= render "events/calendar_event_row", event: event %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -13,6 +13,7 @@ module Admin
     MOCKUPS = [
       {name: "Breadcrumbs", action: "breadcrumbs", icon: "route", description: "Navigation breadcrumb patterns for admin pages"},
       {name: "Buttons", action: "buttons", icon: "hand-pointer", description: "Common action button patterns — all states and sizes"},
+      {name: "Calendar", action: "calendar", icon: "calendar-week", description: "Weekly calendar view with day grouping and event rows"},
       {name: "Cards", action: "cards", icon: "id-card", description: "Teacher and speaker card patterns for directory pages"},
       {name: "Tables", action: "tables", icon: "table", description: "Standard table patterns using .item-row variants"}
     ].freeze
@@ -61,6 +62,37 @@ module Admin
        location: "Warsaw", country_code: "pl", user: "Marta Kowalska", color: "#C0C0C0", status: "past"}
     ].freeze
 
+    # Sample calendar data used for calendar mockups.
+    # Keyed by date, each value is an array of events for that day.
+    SAMPLE_CALENDAR_DAYS = {
+      Date.new(2026, 3, 16) => [
+        {time: "tuttaga", end_time: nil, title: "Weekend Seminar", country: "Francio", city: "Paris", country_code: "fr", online: false},
+        {time: "09:00", end_time: "12:00", title: "Esperanto Summer School", country: "Germanio", city: "Berlin", country_code: "de", online: false},
+        {time: "14:30", end_time: "16:00", title: "International Congress", country: "Japanio", city: "Tokyo", country_code: "jp", online: false}
+      ],
+      Date.new(2026, 3, 17) => [
+        {time: "tuttaga", end_time: nil, title: "Azia Esperanto-Kongreso", country: "Japanio", city: "Tokyo", country_code: "jp", online: false},
+        {time: "10:00", end_time: "11:30", title: "Conversation Practice", country: nil, city: "Reta", country_code: nil, online: :universala},
+        {time: "18:00", end_time: nil, title: "South American Esperanto Meeting", country: "Brazilo", city: "São Paulo", country_code: "br", online: false}
+      ],
+      Date.new(2026, 3, 18) => [
+        {time: "tuttaga", end_time: nil, title: "Azia Esperanto-Kongreso", country: "Japanio", city: "Tokyo", country_code: "jp", online: false}
+      ],
+      Date.new(2026, 3, 19) => [
+        {time: "tuttaga", end_time: nil, title: "Azia Esperanto-Kongreso", country: "Japanio", city: "Tokyo", country_code: "jp", online: false},
+        {time: "08:00", end_time: "10:00", title: "Zamenhof Day Celebration", country: "Pollando", city: "Warsaw", country_code: "pl", online: false}
+      ],
+      Date.new(2026, 3, 20) => [
+        {time: "11:00", end_time: "13:00", title: "Regional Meeting", country: "Nederlando", city: "Rotterdam", country_code: "nl", online: false},
+        {time: "15:00", end_time: "17:30", title: "Esperanto Culture Workshop", country: "Portugalio", city: "Lisbon", country_code: "pt", online: false},
+        {time: "19:30", end_time: "21:00", title: "Evening Lecture: Lingva Justeco", country: "Germanio", city: "Munich", country_code: "de", online: :with_flag}
+      ],
+      Date.new(2026, 3, 21) => [
+        {time: "tuttaga", end_time: nil, title: "Open Day for Beginners", country: "Brazilo", city: "Rio de Janeiro", country_code: "br", online: false}
+      ],
+      Date.new(2026, 3, 22) => []
+    }.freeze
+
     # Displays the list of available mockups.
     #
     # @return [void]
@@ -93,6 +125,14 @@ module Admin
     #
     # @return [void]
     def buttons
+    end
+
+    # Displays calendar view mockup with weekly day grouping.
+    #
+    # @return [void]
+    def calendar
+      @calendar_date = SAMPLE_CALENDAR_DAYS.keys.first
+      @events_by_day = SAMPLE_CALENDAR_DAYS
     end
   end
 end

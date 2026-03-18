@@ -23,7 +23,9 @@ $badge-font-weight: normal;
 @import "colors";
 @import "partials/boxwhite";
 @import "partials/buttons";
+@import "partials/tag_check";
 @import "partials/cards";
+@import "partials/calendar";
 @import "partials/calendar_icon";
 @import "partials/changelog";
 @import "partials/combobox";
@@ -33,7 +35,6 @@ $badge-font-weight: normal;
 @import "partials/events";
 @import "partials/flash";
 @import "partials/form";
-@import "partials/full_calendar";
 @import "partials/maps";
 @import "partials/organizations";
 @import "partials/page";
@@ -50,7 +51,6 @@ $badge-font-weight: normal;
 @import "leaflet.markercluster/dist/MarkerCluster.Default";
 
 @import "jquery-ui-dist/jquery-ui";
-@import "fullcalendar/dist/fullcalendar";
 @import "flag-icons/css/flag-icons";
 
 @import "slim-select/dist/slimselect";

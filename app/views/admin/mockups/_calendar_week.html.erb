@@ -1,0 +1,76 @@
+<div class="lead mb-3">Calendar View</div>
+
+<%# Toolbar — same pattern as current calendar %>
+<div class="d-flex align-items-center justify-content-between mb-2 flex-wrap gap-2">
+  <% week_end = calendar_date + 6.days %>
+  <% month_names = I18n.t("date.month_names") %>
+  <strong class="text-uppercase fs-5">
+    <% if calendar_date.month != week_end.month %>
+      <%= calendar_date.day %> <%= month_names[calendar_date.month].upcase %> – <%= week_end.day %> <%= month_names[week_end.month].upcase %> <%= calendar_date.year %>
+    <% else %>
+      <%= calendar_date.day %> – <%= week_end.day %> <%= month_names[calendar_date.month].upcase %> <%= calendar_date.year %>
+    <% end %>
+  </strong>
+  <div class="d-flex align-items-center gap-2">
+    <button class="btn btn-light" disabled>Hodiaŭ</button>
+    <div class="btn-group" role="group">
+      <button class="btn btn-light px-3" disabled><%= icon("fas", "chevron-left") %></button>
+      <button class="btn btn-light px-3" disabled><%= icon("fas", "chevron-right") %></button>
+    </div>
+  </div>
+</div>
+
+<%# Week list with day grouping %>
+<div class="border rounded overflow-hidden small">
+  <% events_by_day.each_with_index do |(day, day_events), di| %>
+    <div class="<%= 'border-top' if di > 0 %>">
+
+      <%# Day header %>
+      <div class="row g-0 align-items-center bg-success text-white text-uppercase fw-bold px-2 py-1">
+        <div class="col-3 col-md-1"><%= l(day, format: :short) %></div>
+        <div class="col text-uppercase"><%= l(day, format: "%A") %></div>
+      </div>
+
+      <% if day_events.empty? %>
+        <div class="px-2 py-1 text-muted fst-italic small">Neniu evento</div>
+      <% else %>
+        <% day_events.each_with_index do |event, i| %>
+          <div class="row g-0 align-items-center px-2 py-1 hover-row position-relative <%= 'border-bottom' unless i == day_events.size - 1 %>">
+
+            <%# Column 1: Start time – End time %>
+            <div class="col-2 col-md-1 fw-light text-success-emphasis py-1">
+              <% if event[:time] == "tuttaga" %>
+                <span class="text-muted">tuttaga</span>
+              <% else %>
+                <%= event[:time] %><% if event[:end_time] %><br>
+                  <span class="calendar-end-time"><%= event[:end_time] %></span><% end %>
+              <% end %>
+            </div>
+
+            <%# Column 2: Title (line 1) + Country & City (line 2) %>
+            <div class="col py-1 calendar-event-col">
+              <div class="fw-medium text-truncate"><%= event[:title] %></div>
+              <div class="text-body-secondary small text-truncate">
+                <% if event[:online] == :universala %>
+                  🖥
+                <% elsif event[:online] == :with_flag && event[:country_code] %>
+                  <%= flag_icon(event[:country_code]) %> 🖥
+                  <span class="d-none d-md-inline"><%= event[:country] %></span>
+                  <span class="d-inline d-md-none"><%= event[:country_code].upcase %></span>
+                  <% if event[:city] %> · <% end %>
+                <% elsif event[:country_code] %>
+                  <%= flag_icon(event[:country_code]) %>
+                  <span class="d-none d-md-inline"><%= event[:country] %></span>
+                  <span class="d-inline d-md-none"><%= event[:country_code].upcase %></span>
+                  <% if event[:city] %> · <% end %>
+                <% end %>
+                <%= event[:city] %>
+              </div>
+            </div>
+
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

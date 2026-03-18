@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class HomeController < ApplicationController
+  include CalendarData
+
   before_action :filter_events, only: :index
   before_action :definas_kuketojn, only: :index
 
@@ -12,16 +14,24 @@ class HomeController < ApplicationController
       @future_events = @future_events.joins(:organizations).where("organizations.short_name = ?", params[:o])
     end
 
-    @continents = @events.count_by_continents
+    cache_key = ["continent_counts", params.permit(:o, :s, :t, :periodo).to_h, Event.maximum(:updated_at)]
+    @continents = Rails.cache.fetch(cache_key, expires_in: 1.hour) do
+      @events.count_by_continents.load
+    end
     @today_events = @events.today.includes(:country).includes(:organizations)
 
-    @events = @events.not_today.includes(%i[country organizations])
-    @ads = Ad.includes([image_attachment: :blob]).active.order(Arel.sql("RANDOM()")).limit(4)
+    if cookies[:vidmaniero] == "kalendaro"
+      @events = @events.includes(:country, :organizations)
+      prepare_calendar_data
+    end
+
+    @events = @events.not_today.includes(%i[country organizations]) unless cookies[:vidmaniero] == "kalendaro"
+    @ads = Ad.with_attached_image.active.order(Arel.sql("RANDOM()")).limit(4)
 
     return if cookies[:vidmaniero].in? %w[kalendaro mapo]
 
     cookies[:vidmaniero] = {value: "kalendaro", expires: 2.weeks, secure: true}
-    redirect_to root_url
+    redirect_to root_url(params.permit(:date))
   end
 
   def anoncoj

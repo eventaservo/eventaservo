@@ -10,7 +10,7 @@
       "args": [
         "-y",
         "@modelcontextprotocol/server-postgres",
-        "postgresql://postgres:postgres@localhost/eventaservo_devel"
+        "postgresql://postgres:postgres@db/eventaservo_devel"
       ]
     }
   }
