@@ -207,7 +207,8 @@ class Events::ByDatesQueryTest < ActiveSupport::TestCase
 
     result = Events::ByDatesQuery.new(
       from: @window_start,
-      to: @window_start
+      to: @window_start,
+      scope: Event.all
     ).call
 
     assert_equal 1, result.size
