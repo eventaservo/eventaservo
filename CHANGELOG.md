@@ -1,5 +1,44 @@
 # Changelog
 
+## [3.0.0](https://github.com/eventaservo/eventaservo/compare/v2.85.0...v3.0.0) (2026-03-21)
+
+
+### Features
+
+* **a11y:** add aria-labels to icon-only links in navbar tools ([#1084](https://github.com/eventaservo/eventaservo/issues/1084)) ([28d08b7](https://github.com/eventaservo/eventaservo/commit/28d08b713a58f80171be9fab7717ed0e4edbef8c))
+* Add ARIA labels to icon-only buttons for accessibility ([a7c079f](https://github.com/eventaservo/eventaservo/commit/a7c079f0091eafb35cc075b280075dce5d8162d3))
+* add eventaservo-code-review skill and update skillshare manifests ([93b59aa](https://github.com/eventaservo/eventaservo/commit/93b59aa37382aec489305513723dbf06947ea4b5))
+* add filters and new card design to Instruantoj directory page ([#1068](https://github.com/eventaservo/eventaservo/issues/1068)) ([386981d](https://github.com/eventaservo/eventaservo/commit/386981d4f2d92fb2a66cee623445104bd473030a))
+* add mockups feature with compact and detailed row views, including admin access control ([4c0b033](https://github.com/eventaservo/eventaservo/commit/4c0b03399cc9c38ad7413254c123f878802b77df))
+* **Admin:** add administration dashboard ([#1066](https://github.com/eventaservo/eventaservo/issues/1066)) ([540af19](https://github.com/eventaservo/eventaservo/commit/540af199b24c5d1e98f6a0e7b92bd8071dc07036))
+* **Admin:** Add button design system with mockups ([#1082](https://github.com/eventaservo/eventaservo/issues/1082)) ([6db87a1](https://github.com/eventaservo/eventaservo/commit/6db87a1d2b76c5def5b9ec9228b60db08ab1dbac))
+* **Admin:** enhance event management with filtering options and improved UI ([852252b](https://github.com/eventaservo/eventaservo/commit/852252bbf762f8dbf290543d990a5005156c5502))
+* **Admin:** Migrate event redirections management to new admin panel ([#1079](https://github.com/eventaservo/eventaservo/issues/1079)) ([486b5c5](https://github.com/eventaservo/eventaservo/commit/486b5c5ea2726fe66c49d2f9fb56ce7b38baa264))
+* **Admin:** Migrate event reports management to new admin panel ([#1076](https://github.com/eventaservo/eventaservo/issues/1076)) ([2613d62](https://github.com/eventaservo/eventaservo/commit/2613d624f860967428348ed3cedf9c9636594999))
+* **admin:** migrate logs from ActiveAdmin to custom admin panel ([#1074](https://github.com/eventaservo/eventaservo/issues/1074)) ([6db57c0](https://github.com/eventaservo/eventaservo/commit/6db57c062a9cc0fe9ebd1eb72b580a9675a2f971))
+* **admin:** migrate organizations from ActiveAdmin to custom admin panel ([#1075](https://github.com/eventaservo/eventaservo/issues/1075)) ([4ceb8b4](https://github.com/eventaservo/eventaservo/commit/4ceb8b4547c6cebf2fa733814cd663ad184bdb53))
+* **Admin:** Migrate users management to new admin panel ([#1080](https://github.com/eventaservo/eventaservo/issues/1080)) ([da94374](https://github.com/eventaservo/eventaservo/commit/da94374c6b5f3f989c19a28796615d9b86d779d9))
+* **Admin:** Redirect admin organizations to public view ([#1078](https://github.com/eventaservo/eventaservo/issues/1078)) ([a28e9cd](https://github.com/eventaservo/eventaservo/commit/a28e9cd52d37ea136c9444cc8c0a92277d5dd34b))
+* **Mockups:** add teacher and speaker card mockups ([#1067](https://github.com/eventaservo/eventaservo/issues/1067)) ([0511e45](https://github.com/eventaservo/eventaservo/commit/0511e45b7178b7957365475550242e5889ad9bd6))
+* **Queries:** implement TeachersAndSpeakersQuery for filtering teach… ([#1069](https://github.com/eventaservo/eventaservo/issues/1069)) ([f8f80f2](https://github.com/eventaservo/eventaservo/commit/f8f80f2bba284ddf0fe1bc01c7e99b3030e88f7b))
+
+
+### Bug Fixes
+
+* About Us page paragraph spacing ([6a05525](https://github.com/eventaservo/eventaservo/commit/6a05525a21a613ff493370dc5e5ddd666775a055))
+* **ActiveStorage:** switch from redirect to proxy mode for CDN caching ([#1073](https://github.com/eventaservo/eventaservo/issues/1073)) ([db16ba5](https://github.com/eventaservo/eventaservo/commit/db16ba51b5d690edcc98bb6667c6249d638510ab))
+* **Admin:** Fix user view page ([574cddd](https://github.com/eventaservo/eventaservo/commit/574cddd19054cf0503de7f7c6addf66f44c1cfe0))
+* **Navbar:** add padding to the navbar for improved layout ([92390fd](https://github.com/eventaservo/eventaservo/commit/92390fd4fea7fa599335776404dfcbce6e999deb))
+* **Navbar:** adjust container structure for improved layout and alignment ([e702b6d](https://github.com/eventaservo/eventaservo/commit/e702b6d2e62bfc4a3af64dbca948e87b89ba1c08))
+* **Navbar:** align toggler icon to far right on small screens ([288db2b](https://github.com/eventaservo/eventaservo/commit/288db2b1ca8e9be52338db4814248143d2368e81))
+* Parallel tests ([#1088](https://github.com/eventaservo/eventaservo/issues/1088)) ([6764332](https://github.com/eventaservo/eventaservo/commit/676433281b0835d3fc87fdde94e2e19b17ead132))
+* **RackAttack:** safelist Active Storage proxy paths from rate limiting ([f3367a5](https://github.com/eventaservo/eventaservo/commit/f3367a5a1b4144eacdf8abadfd86b6d04b85e14c))
+
+
+### Miscellaneous Chores
+
+* release 3.0.0 ([4bced54](https://github.com/eventaservo/eventaservo/commit/4bced54a383272c18c61e47c135140baffd74b93))
+
 ## [2.85.0](https://github.com/eventaservo/eventaservo/compare/v2.84.0...v2.85.0) (2026-03-07)
 
 
