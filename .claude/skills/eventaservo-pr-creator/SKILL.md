@@ -20,14 +20,14 @@ repository using the **GitHub CLI** (`gh`).
 
 - This skill and all **preview text** you show for this flow are **English only**.
 - The user may speak another language; **PR title and body** must still be **English**
-  (project convention per [AGENTS.md](AGENTS.md)).
+  (project convention per `AGENTS.md`).
 
 ## Prerequisites
 
 - **`gh` installed and authenticated** — if unsure, run `gh auth status`.
 - The user must **explicitly** ask to create or update a PR. Do **not** push, commit
   for this purpose, or change GitHub without their **yes** after the preview
-  ([AGENTS.md](AGENTS.md): no branches, commits, or PRs without permission).
+  (`AGENTS.md`: no branches, commits, or PRs without permission).
 
 ## Workflow
 
@@ -47,12 +47,12 @@ repository using the **GitHub CLI** (`gh`).
 ### 3. Ruby style (if applicable)
 
 - For **`.rb` files included in the PR**, run `bundle exec standardrb --fix` on those
-  paths before commit ([AGENTS.md](AGENTS.md)).
+  paths before commit (`AGENTS.md`).
 
 ### 4. Tests in the diff
 
-- If the change adds or restructures tests, read [TEST_ARCHITECTURE.md](TEST_ARCHITECTURE.md)
-  before assuming layout or naming.
+- If the change adds or restructures tests, read `TEST_ARCHITECTURE.md` before assuming
+  layout or naming.
 
 ### 5. Commit message
 
@@ -61,10 +61,15 @@ repository using the **GitHub CLI** (`gh`).
 
 ### 6. Detect an existing PR for this branch
 
-- Ensure the branch exists on `origin` (push if needed before checking).
-- Check for an open PR for the current branch, e.g.:
+- **Do not push here.** Pushing to `origin` happens only after the user approves the
+  preview (step 9), per prerequisites and `AGENTS.md`.
+- If the branch **already exists on `origin`** (e.g. `git rev-parse origin/<branch>`
+  succeeds, or equivalent), check for an open PR, e.g.:
   - `gh pr list --head <branch> --json number,url,title,state`
   - or `gh pr view --branch <branch>` if supported by the installed `gh` version.
+- If the branch is **not** on `origin` yet, **skip** this lookup. In the preview, assume
+  **Create new PR** unless the user says a PR already exists; after you push in step 9,
+  **run the same `gh` lookup again** before choosing `gh pr create` vs `gh pr edit`.
 - If a PR exists, note its **number**, **URL**, and a **short summary** of current title/body.
 
 ### 7. Draft PR title and body
@@ -110,6 +115,8 @@ Proceed? (yes / edit / cancel)
 1. `git add` (scoped to agreed files), `git commit` if there are staged/uncommitted
    changes the user wants in the PR.
 2. `git push -u origin <branch>` if the remote is not up to date.
+3. If step 6 was skipped because the branch was not on `origin` yet, run the PR lookup
+   from step 6 now so you choose **create** vs **edit** correctly.
 
 **If no PR exists:**
 
@@ -126,12 +133,12 @@ Prefer **`--body-file`** for multiline bodies. Add `--draft` only if the user as
 - If the user only wanted to **ensure a PR exists** and the narrative is unchanged,
   do **not** rewrite the body without need — state that in the preview (“ensure only”).
 
-3. Print the **PR URL** (created or updated).
+4. Print the **PR URL** (created or updated).
 
 For extra `gh` options (reviewers, base branch other than `main`, labels), see
 `gh pr create --help` and `gh pr edit --help`.
 
 ## After the PR is open
 
-The user may run a follow-up review using the **eventaservo-code-review** skill
-(available under `.skillshare/skills/` and synced copies in `.claude/skills/`, etc.).
+The user may run a follow-up review using the **eventaservo-code-review** skill when
+needed.
