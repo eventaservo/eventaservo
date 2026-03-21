@@ -135,7 +135,8 @@ end
 group :test do
   gem "capybara"
   gem "factory_bot_rails"
-  gem "minitest", "~> 5.5"
+  gem "minitest", "~> 6.0"
+  gem "minitest-mock", "~> 5.27"
   gem "selenium-webdriver"
   gem "shoulda-matchers"
   gem "simplecov", require: false
