@@ -31,7 +31,14 @@
                 <% new = @countries_cache&.dig(new.to_i)&.name if new %>
               <% end %>
 
-              <%= raw Diffy::Diff.new(old, new).to_s(:html) %>
+              <%= sanitize(
+                    Diffy::Diff.new(
+                      ERB::Util.html_escape(old.to_s),
+                      ERB::Util.html_escape(new.to_s)
+                    ).to_s(:html),
+                    tags: %w[div ul li del ins strong],
+                    attributes: %w[class]
+                  ) %>
             </div>
           </div>
         <% end %>
