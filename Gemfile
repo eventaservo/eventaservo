@@ -47,7 +47,7 @@ gem "jbuilder", "~> 2.14"
 gem "rack-attack", "~> 6.2"
 gem "rack-cors", "~> 3.0", require: "rack/cors"
 
-gem "aws-sdk-s3", "~> 1.197"
+gem "aws-sdk-s3", "~> 1.217"
 gem "browser", "~> 6"
 gem "chartkick", "~> 5.0"
 gem "diffy", "~> 3.4"
