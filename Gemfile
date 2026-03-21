@@ -120,6 +120,7 @@ group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   # gem "web-console", group: :development
 
+  gem "brakeman", require: false
   gem "annotaterb", require: false
   gem "better_errors"
   gem "binding_of_caller"

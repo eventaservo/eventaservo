@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-22.04
     permissions:
       checks: write
-      contents: write
+      contents: read
     steps:
-    - name: Standard Ruby
-      uses: standardrb/standard-ruby-action@v1
+      - name: Standard Ruby
+        uses: standardrb/standard-ruby-action@v1

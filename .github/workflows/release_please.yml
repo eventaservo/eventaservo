@@ -5,6 +5,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
   pull-requests: write
 
 name: release-please
@@ -13,7 +14,7 @@ jobs:
   release-please:
     runs-on: ubuntu-22.04
     steps:
-      - uses: google-github-actions/release-please-action@v3
+      - uses: googleapis/release-please-action@v4
         with:
-          release-type: ruby
-          version-file: config/initializers/version.rb
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json

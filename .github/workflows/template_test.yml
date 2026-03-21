@@ -11,17 +11,26 @@ on:
 jobs:
   minitest:
     runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+    timeout-minutes: 10
     services:
       postgres:
-        image: postgres:13
+        image: postgres:15.7
         env:
           POSTGRES_DB: eventaservo_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-        ports: ["5432:5432"]
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d eventaservo_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     env:
-      DB_USER: postgres
+      DB_USERNAME: postgres
       DB_PASSWORD: postgres
       RAILS_ENV: test
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
@@ -32,7 +41,7 @@ jobs:
       - name: Ruby e Bundler
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.4.8"
+          ruby-version: .ruby-version
           bundler-cache: true
 
       - name: Node 20
@@ -42,7 +51,7 @@ jobs:
           cache: "yarn"
 
       - name: Yarn
-        run: yarn install
+        run: yarn install --frozen-lockfile
 
       - name: Precompile assets
         run: SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile

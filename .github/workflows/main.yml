@@ -30,6 +30,8 @@ jobs:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      GOOGLE_MAPS_KEY: ${{ secrets.GOOGLE_MAPS_KEY }}
+      IPINFO_KEY: ${{ secrets.IPINFO_KEY }}
 
   sentry:
     needs: docker
@@ -42,6 +44,8 @@ jobs:
   Portainer:
     needs: docker
     runs-on: ubuntu-22.04
+    permissions:
+      contents: none
     steps:
       - name: Update Docker Swarm on Portainer
         run: |
