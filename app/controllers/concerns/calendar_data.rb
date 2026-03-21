@@ -66,13 +66,13 @@ module CalendarData
     @calendar_next_path = url_for(filter_params.merge(date: (@calendar_date + 7.days).iso8601))
   end
 
-  # Builds labeled URLs for navigating to the first day of each month in the
-  # current month plus the next eleven months (twelve entries total).
+  # Builds labeled URLs for navigating to the first day of each month starting
+  # the month after the current one, for twelve consecutive months.
   #
   # @return [void]
   def build_calendar_month_navigation_options
     filter_params = calendar_navigation_filter_params
-    anchor = Time.zone.today.beginning_of_month
+    anchor = Time.zone.today.beginning_of_month.advance(months: 1)
     @calendar_month_navigation_options = (0..11).map do |i|
       month_start = anchor.advance(months: i)
       label = I18n.l(month_start, format: :month_navigation).capitalize
