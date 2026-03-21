@@ -2,7 +2,23 @@
   "packages": {
     ".": {
       "release-type": "ruby",
-      "version-file": "config/initializers/version.rb"
+      "version-file": "config/initializers/version.rb",
+      "versioning": "always-bump-patch",
+      "changelog-sections": [
+        { "type": "feat", "section": "Features" },
+        { "type": "fix", "section": "Bug Fixes" },
+        { "type": "perf", "section": "Performance Improvements" },
+        { "type": "ui", "section": "User Interface" },
+        { "type": "style", "section": "Code Style" },
+        { "type": "refactor", "section": "Code Refactoring" },
+        { "type": "docs", "section": "Documentation" },
+        { "type": "security", "section": "Security" },
+        { "type": "ci", "section": "Continuous Integration" },
+        { "type": "deps", "section": "Dependencies", "hidden": true },
+        { "type": "chore", "section": "Miscellaneous Chores" },
+        { "type": "test", "section": "Tests", "hidden": true },
+        { "type": "config", "section": "Configuration" }
+      ]
     }
   }
 }
