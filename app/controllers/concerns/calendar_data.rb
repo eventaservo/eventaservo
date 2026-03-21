@@ -29,6 +29,7 @@ module CalendarData
   def prepare_calendar_data
     @calendar_date = parse_calendar_date
     build_navigation_paths
+    build_calendar_month_navigation_options
 
     @events_by_day = Events::ByDatesQuery.new(
       from: @calendar_date,
@@ -47,14 +48,36 @@ module CalendarData
     Date.current
   end
 
+  # Permitted query params preserved on calendar navigation URLs.
+  #
+  # @return [ActionController::Parameters]
+  def calendar_navigation_filter_params
+    params.permit(:o, :s, :t, :continent, :country_name, :city_name, :username)
+  end
+
   # Builds prev/next/today navigation paths, preserving filter params
   # but excluding +:periodo+.
   #
   # @return [void]
   def build_navigation_paths
-    filter_params = params.permit(:o, :s, :t, :continent, :country_name, :city_name, :username)
+    filter_params = calendar_navigation_filter_params
     @calendar_today_path = url_for(filter_params.merge(date: Date.current.iso8601))
     @calendar_prev_path = url_for(filter_params.merge(date: (@calendar_date - 7.days).iso8601))
     @calendar_next_path = url_for(filter_params.merge(date: (@calendar_date + 7.days).iso8601))
+  end
+
+  # Builds labeled URLs for navigating to the first day of each month in the
+  # current month plus the next eleven months (twelve entries total).
+  #
+  # @return [void]
+  def build_calendar_month_navigation_options
+    filter_params = calendar_navigation_filter_params
+    anchor = Time.zone.today.beginning_of_month
+    @calendar_month_navigation_options = (0..11).map do |i|
+      month_start = anchor.advance(months: i)
+      label = I18n.l(month_start, format: :month_navigation).capitalize
+      path = url_for(filter_params.merge(date: month_start.iso8601))
+      [label, path]
+    end
   end
 end

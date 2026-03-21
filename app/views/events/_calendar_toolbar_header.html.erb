@@ -1,9 +1,9 @@
 <%# Navigation links target "native-calendar" explicitly so Turbo Frame navigation
     works correctly even if this partial is ever rendered outside the frame context. %>
-<div class="d-flex align-items-center justify-content-between mb-2 flex-wrap gap-2">
+<div class="d-flex flex-column flex-md-row align-items-stretch align-items-md-center gap-2 mb-2 w-100">
   <% week_end = date + 6.days %>
   <% month_names = I18n.t("date.month_names") %>
-  <strong class="text-uppercase fs-5">
+  <strong class="text-uppercase fs-5 text-start w-md-auto flex-shrink-0">
     <% if date.year != week_end.year %>
       <%= date.day %> <%= month_names[date.month].upcase %> <%= date.year %> – <%= week_end.day %> <%= month_names[week_end.month].upcase %> <%= week_end.year %>
     <% elsif date.month != week_end.month %>
@@ -12,7 +12,23 @@
       <%= date.day %> – <%= week_end.day %> <%= month_names[date.month].upcase %> <%= date.year %>
     <% end %>
   </strong>
-  <div class="d-flex align-items-center gap-2">
+  <div class="d-flex align-items-center justify-content-between justify-content-md-end gap-2 flex-wrap flex-md-nowrap w-100 flex-md-grow-1">
+    <div class="dropdown">
+      <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="calendarMonthNavigation"
+        data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true"
+        aria-label="<%= t("events.calendar.jump_to_month") %>">
+        <%= t("events.calendar.jump_to_month") %>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="calendarMonthNavigation">
+        <% month_navigation_options.each do |label, path| %>
+          <li>
+            <%= link_to label, path, class: "dropdown-item",
+              data: {turbo_frame: "native-calendar"} %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
     <%= link_to "Hodiaŭ", today_path, class: "btn btn-light", data: {turbo_frame: "native-calendar"} %>
 
     <div class="btn-group" role="group" aria-label="Navigado inter semajnoj">

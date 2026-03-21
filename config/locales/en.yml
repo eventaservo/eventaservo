@@ -103,6 +103,9 @@ en:
     presentations: Presentations
     reports: Reports
     teachers_and_lecturers: Teachers
+  events:
+    calendar:
+      jump_to_month: Month
   navbar:
     add_event: Add event
     log_in_sign_up: Login / Signup
