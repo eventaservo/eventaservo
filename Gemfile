@@ -9,7 +9,7 @@ ruby "~> 3.4.8"
 gem "rails", "~> 8.1.0"
 # Use Puma as the app server
 gem "puma", "~> 7"
-gem "thruster", "~> 0.1.7"
+gem "thruster", "~> 0.1.19"
 gem "propshaft"
 
 # Use Uglifier as compressor for JavaScript assets
