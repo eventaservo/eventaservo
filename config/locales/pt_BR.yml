@@ -123,6 +123,26 @@ pt_BR:
     destroyed: Recorrência removida com sucesso.
     not_found: Nenhuma regra de recorrência encontrada para este evento.
     inactive: Esta recorrência está inativa e não pode ser editada.
+    info:
+      recurring_event: Evento recorrente
+      edit_recurrence: Editar recorrência
+      part_of_series: Parte de uma série recorrente
+      view_series: Ver série
+      detached: Desvinculado
+      inactive: Inativa
+      active: Ativa
+    description:
+      every_day: Todos os dias
+      every_n_days: "A cada %{count} dias"
+      every_weekdays: "Toda %{days}"
+      every_n_weeks_on: "A cada %{count} semanas na %{days}"
+      nth_weekday_every_month: "%{nth} %{day} de cada mês"
+      nth_weekday_every_n_months: "%{nth} %{day} a cada %{count} meses"
+      day_of_every_month: "Dia %{day} de cada mês"
+      day_every_n_months: "Dia %{day} a cada %{count} meses"
+      every_year_on: "Todo %{day} de %{month}"
+      every_n_years_on: "A cada %{count} anos em %{day} de %{month}"
+      custom: Recorrência personalizada
     form:
       frequency: Frequência
       select_frequency: "Selecione a frequência..."

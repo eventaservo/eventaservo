@@ -123,6 +123,26 @@ en:
     destroyed: Recurrence removed successfully.
     not_found: No recurrence rule found for this event.
     inactive: This recurrence is inactive and cannot be edited.
+    info:
+      recurring_event: Recurring event
+      edit_recurrence: Edit recurrence
+      part_of_series: Part of a recurring series
+      view_series: View series
+      detached: Detached
+      inactive: Inactive
+      active: Active
+    description:
+      every_day: Every day
+      every_n_days: "Every %{count} days"
+      every_weekdays: "Every %{days}"
+      every_n_weeks_on: "Every %{count} weeks on %{days}"
+      nth_weekday_every_month: "%{nth} %{day} of every month"
+      nth_weekday_every_n_months: "%{nth} %{day} every %{count} months"
+      day_of_every_month: "Day %{day} of every month"
+      day_every_n_months: "Day %{day} every %{count} months"
+      every_year_on: "Every %{month} %{day}"
+      every_n_years_on: "Every %{count} years on %{month} %{day}"
+      custom: Custom recurrence
     form:
       frequency: Frequency
       select_frequency: "Select frequency..."

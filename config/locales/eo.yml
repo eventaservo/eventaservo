@@ -123,6 +123,26 @@ eo:
     destroyed: Ripetregulo forigita sukcese.
     not_found: Neniu ripetregulo trovita por ĉi tiu evento.
     inactive: Ĉi tiu ripetregulo estas neaktiva kaj ne redaktebla.
+    info:
+      recurring_event: Ripeta evento
+      edit_recurrence: Redakti ripetregulojn
+      part_of_series: Parto de ripeta serio
+      view_series: Vidi serion
+      detached: Malligita
+      inactive: Neaktiva
+      active: Aktiva
+    description:
+      every_day: Ĉiutage
+      every_n_days: "Ĉiun %{count} tagojn"
+      every_weekdays: "Ĉiun %{days}"
+      every_n_weeks_on: "Ĉiun %{count} semajnojn je %{days}"
+      nth_weekday_every_month: "%{nth} %{day} de ĉiu monato"
+      nth_weekday_every_n_months: "%{nth} %{day} ĉiun %{count} monatojn"
+      day_of_every_month: "Tago %{day} de ĉiu monato"
+      day_every_n_months: "Tago %{day} ĉiun %{count} monatojn"
+      every_year_on: "Ĉiujare je %{day} de %{month}"
+      every_n_years_on: "Ĉiun %{count} jarojn je %{day} de %{month}"
+      custom: Propra ripetregulo
     form:
       frequency: Ofteco
       select_frequency: "Elektu oftecon..."
