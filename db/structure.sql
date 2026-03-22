@@ -1,6 +1,7 @@
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -55,7 +56,7 @@ COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UU
 -- Name: immutable_unaccent(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
-CREATE OR REPLACE FUNCTION public.immutable_unaccent(text) RETURNS text
+CREATE FUNCTION public.immutable_unaccent(text) RETURNS text
     LANGUAGE sql IMMUTABLE STRICT PARALLEL SAFE
     AS $_$ SELECT public.unaccent($1) $_$;
 
@@ -2747,6 +2748,7 @@ ALTER TABLE ONLY public.solid_queue_scheduled_executions
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20260322125025'),
 ('20260315122454'),
 ('20260314101500'),
 ('20260220024106'),
