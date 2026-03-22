@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.0.1](https://github.com/eventaservo/eventaservo/compare/v3.0.0...v3.0.1) (2026-03-22)
+
+
+### Features
+
+* :sparkles: add month navigation to calendar toolbar ([#1111](https://github.com/eventaservo/eventaservo/issues/1111)) ([c9e3614](https://github.com/eventaservo/eventaservo/commit/c9e36141928b493b79118b959e73a8466c46f849))
+
+
+### Miscellaneous Chores
+
+* update release-please configuration to enhance versioning and changelog structure ([9240826](https://github.com/eventaservo/eventaservo/commit/9240826701e6b6c53819cc2daa4d4abe1d6ae177))
+* upgrade Minitest 6 and refresh dependencies ([#1109](https://github.com/eventaservo/eventaservo/issues/1109)) ([bd072e8](https://github.com/eventaservo/eventaservo/commit/bd072e82d36eed517291ed38ad4c2541e9b1125b))
+
 ## [3.0.0](https://github.com/eventaservo/eventaservo/compare/v2.85.0...v3.0.0) (2026-03-21)
 
 
