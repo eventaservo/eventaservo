@@ -66,7 +66,8 @@ class Importilo
     evento["latitude"] = res["venue"]["lat"]
     evento["longitude"] = res["venue"]["lon"]
     evento["address"] = "#{res["venue"]["name"]}, #{res["venue"]["address_1"]}"
-    evento["time_zone"] = Timezone.lookup(evento["latitude"], evento["longitude"]).name
+    result = TimeZone::Normalize.call(Timezone.lookup(evento["latitude"], evento["longitude"]).name)
+    evento["time_zone"] = result.success? ? result.payload : "Etc/UTC"
     evento["date_start"] = Time.at(res["time"].to_i / 1000).in_time_zone(evento["time_zone"]).strftime("%Y-%m-%d %H:%M:%S")
     evento["date_end"] = Time.at((res["time"].to_i + res["duration"].to_i) / 1000).in_time_zone(evento["time_zone"]).strftime("%Y-%m-%d %H:%M:%S")
     evento["content"] = res["description"] + res.fetch("how_to_find_us", "")
@@ -140,7 +141,8 @@ class Importilo
     evento["latitude"] = koordinatoj[0]
     evento["longitude"] = koordinatoj[1]
     evento["address"] = adreso
-    evento["time_zone"] = Timezone.lookup(evento["latitude"], evento["longitude"]).name
+    result = TimeZone::Normalize.call(Timezone.lookup(evento["latitude"], evento["longitude"]).name)
+    evento["time_zone"] = result.success? ? result.payload : "Etc/UTC"
     evento["date_start"] = Time.parse(res["start_date_naive"]).utc
     evento["date_end"] = Time.parse(res["end_date_naive"]).utc
     evento["content"] = res["description"]
