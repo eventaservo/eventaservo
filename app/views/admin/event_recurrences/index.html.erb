@@ -17,40 +17,32 @@
           class: "form-select form-select-sm" %>
       </div>
       <div class="col-auto">
-        <label class="form-label smaller text-uppercase fw-bold text-body-secondary mb-1">Frequency</label>
-        <%= select_tag :frequency,
-          options_for_select([["All", ""], ["Daily", "daily"], ["Weekly", "weekly"], ["Monthly", "monthly"], ["Yearly", "yearly"]], params[:frequency]),
-          class: "form-select form-select-sm" %>
-      </div>
-      <div class="col-auto">
-        <%= submit_tag "Filter", class: "btn btn-sm btn-success" %>
+        <%= submit_tag "Filter", class: "button-submit" %>
       </div>
     </div>
   <% end %>
 
   <% if @recurrences.any? %>
-    <div class="border rounded overflow-hidden small">
-      <div class="row g-0 align-items-center bg-success text-white text-uppercase fw-bold px-2 py-2 smaller">
-        <div class="col">Event</div>
-        <div class="col-4">Recurrence</div>
-        <div class="col-1 text-center">Children</div>
-        <div class="col-1 text-center">Status</div>
-      </div>
-
-      <% @recurrences.each_with_index do |recurrence, i| %>
-        <%= link_to admin_event_recurrence_path(recurrence), class: "row g-0 align-items-center px-2 py-1 small hover-row text-decoration-none text-dark #{('border-bottom' unless i == @recurrences.size - 1)} #{('bg-body-tertiary' if i.odd?)}" do %>
-          <div class="col fw-medium text-truncate">
-            <%= event_flag(recurrence.master_event) %>
-            <%= recurrence.master_event.title %>
+    <div class="row-detailed-list">
+      <% @recurrences.each do |recurrence| %>
+        <% presenter = EventRecurrencePresenter.new(recurrence:) %>
+        <%= link_to admin_event_recurrence_path(recurrence), class: "row-detailed" do %>
+          <div class="row-detailed-accent <%= recurrence.active? ? 'bg-color-green' : 'bg-color-gray' %>"></div>
+          <div class="row-detailed-body">
+            <div class="row-detailed-info">
+              <div class="row-detailed-title">
+                <%= event_flag(recurrence.master_event) %>
+                <%= recurrence.master_event.title %>
+              </div>
+              <div class="row-detailed-meta">
+                <%= presenter.description %>
+                <% if recurrence.end_type_on_date? %>
+                  &middot; Ends <%= format_date(recurrence.end_date, style: :short) %>
+                <% end %>
+                &middot; <%= recurrence.master_event.recurrent_child_events.size %> child events
+              </div>
+            </div>
           </div>
-          <div class="col-4 text-body-secondary text-truncate">
-            <%= EventRecurrencePresenter.new(recurrence:).description %>
-            <% if recurrence.end_type_on_date? %>
-              <span class="text-body-tertiary">&mdash; <%= format_date(recurrence.end_date, style: :short) %></span>
-            <% end %>
-          </div>
-          <div class="col-1 text-center"><%= recurrence.master_event.recurrent_child_events.size %></div>
-          <div class="col-1 text-center"><%= EventRecurrencePresenter.new(recurrence:).badge_html %></div>
         <% end %>
       <% end %>
     </div>

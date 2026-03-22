@@ -1,119 +1,27 @@
-<% badge_classes = {"upcoming" => "badge-upcoming", "open" => "badge-open", "past" => "badge-past"} %>
+<% badge_classes = {"upcoming" => "row-detailed-badge-upcoming", "open" => "row-detailed-badge-open", "past" => "row-detailed-badge-past"} %>
 
 <div class="mb-5">
   <div class="lead">Detailed Row</div>
 
-  <style>
-    .mockup-card-table .card-row {
-      display: flex;
-      align-items: stretch;
-      background: #fff;
-      border: 1px solid #e8e8e8;
-      border-radius: 6px;
-      margin-bottom: 8px;
-      overflow: hidden;
-      transition: box-shadow 0.2s ease, transform 0.15s ease;
-    }
-    .mockup-card-table .card-row:hover {
-      box-shadow: 0 2px 12px rgba(43, 87, 151, 0.12);
-      transform: translateY(-1px);
-    }
-    .mockup-card-table .card-row-accent {
-      width: 4px;
-      flex-shrink: 0;
-    }
-    .mockup-card-table .card-row-body {
-      display: flex;
-      align-items: center;
-      flex: 1;
-      padding: 12px 16px;
-      gap: 16px;
-    }
-    .mockup-card-table .card-row-date {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      color: #2B5797;
-      min-width: 90px;
-      line-height: 1.2;
-    }
-    .mockup-card-table .card-row-date .card-row-year {
-      font-weight: 400;
-      color: #999;
-    }
-    .mockup-card-table .card-row-info {
-      flex: 1;
-      min-width: 0;
-    }
-    .mockup-card-table .card-row-title {
-      font-size: 14px;
-      font-weight: 600;
-      color: #1D1D1D;
-      margin-bottom: 2px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .mockup-card-table .card-row-meta {
-      font-size: 12px;
-      color: #707070;
-    }
-    .mockup-card-table .card-row-badge {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      padding: 3px 10px;
-      border-radius: 12px;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .mockup-card-table .badge-upcoming {
-      background: #eaffe7;
-      color: #1E7145;
-    }
-    .mockup-card-table .badge-open {
-      background: #e8f0fe;
-      color: #2B5797;
-    }
-    .mockup-card-table .badge-past {
-      background: #F5F5F5;
-      color: #999;
-    }
-    .mockup-card-table .card-row-header {
-      display: flex;
-      align-items: center;
-      padding: 8px 16px 8px 20px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      color: #707070;
-      gap: 16px;
-      margin-bottom: 4px;
-    }
-    .mockup-card-table .card-row-header .card-row-date { color: #707070; }
-  </style>
-
-  <div class="mockup-card-table">
-    <div class="card-row-header">
-      <div class="card-row-date">Date</div>
-      <div class="card-row-info">Event</div>
+  <div class="row-detailed-list">
+    <div class="row-detailed-header">
+      <div class="row-detailed-date">Date</div>
+      <div class="row-detailed-info">Event</div>
       <div>Status</div>
     </div>
 
     <% @events.each do |event| %>
-      <div class="card-row">
-        <div class="card-row-accent" style="background: <%= event[:color] %>;"></div>
-        <div class="card-row-body">
-          <div class="card-row-date">
-            <%= event[:date_short] %><br><span class="card-row-year"><%= event[:year] %></span>
+      <div class="row-detailed">
+        <div class="row-detailed-accent" style="background: <%= event[:color] %>;"></div>
+        <div class="row-detailed-body">
+          <div class="row-detailed-date">
+            <%= event[:date_short] %><br><span class="row-detailed-year"><%= event[:year] %></span>
           </div>
-          <div class="card-row-info">
-            <div class="card-row-title"><%= event[:title] %></div>
-            <div class="card-row-meta"><%= event[:location] %> &middot; <%= event[:user] %></div>
+          <div class="row-detailed-info">
+            <div class="row-detailed-title"><%= event[:title] %></div>
+            <div class="row-detailed-meta"><%= event[:location] %> &middot; <%= event[:user] %></div>
           </div>
-          <span class="card-row-badge <%= badge_classes[event[:status]] %>"><%= event[:status].capitalize %></span>
+          <span class="row-detailed-badge <%= badge_classes[event[:status]] %>"><%= event[:status].capitalize %></span>
         </div>
       </div>
     <% end %>

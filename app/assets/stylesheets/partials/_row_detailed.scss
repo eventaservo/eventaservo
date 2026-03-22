@@ -1,0 +1,114 @@
+// Detailed Row — extracted from admin/mockups/_detailed_row.html.erb
+// Reusable card-style list rows with left accent bar, hover lift, and status badge.
+
+.row-detailed-list {
+  .row-detailed {
+    display: flex;
+    align-items: stretch;
+    background: $white;
+    border: 1px solid #e8e8e8;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    color: $darken;
+    transition: box-shadow 0.2s ease, transform 0.15s ease;
+
+    &:hover {
+      box-shadow: 0 2px 12px rgba($blueDark, 0.12);
+      transform: translateY(-1px);
+    }
+  }
+
+  .row-detailed-accent {
+    width: 4px;
+    flex-shrink: 0;
+  }
+
+  .row-detailed-body {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    padding: 12px 16px;
+    gap: 16px;
+  }
+
+  .row-detailed-date {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: $blueDark;
+    min-width: 90px;
+    line-height: 1.2;
+  }
+
+  .row-detailed-year {
+    font-weight: 400;
+    color: $grayDark;
+  }
+
+  .row-detailed-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .row-detailed-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: $darken;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .row-detailed-meta {
+    font-size: 12px;
+    color: $grayDarker;
+  }
+
+  .row-detailed-badge {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .row-detailed-header {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px 8px 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: $grayDarker;
+    gap: 16px;
+    margin-bottom: 4px;
+
+    .row-detailed-date {
+      color: $grayDarker;
+    }
+  }
+
+  // Badge variants
+  .row-detailed-badge-upcoming {
+    background: $greenLighter;
+    color: $greenDark;
+  }
+
+  .row-detailed-badge-open {
+    background: #e8f0fe;
+    color: $blueDark;
+  }
+
+  .row-detailed-badge-past {
+    background: $grayLight;
+    color: $grayDark;
+  }
+}

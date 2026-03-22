@@ -16,7 +16,6 @@ module Admin
     def index
       recurrences = EventRecurrence.joins(:master_event).includes(master_event: :country).order(created_at: :desc)
       recurrences = recurrences.where(active: params[:active] == "1") if params[:active].present?
-      recurrences = recurrences.where(frequency: params[:frequency]) if params[:frequency].present?
 
       @pagy, @recurrences = pagy(recurrences)
     end
