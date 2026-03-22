@@ -103,6 +103,9 @@ pt_BR:
     presentations: Apresentações
     reports: Relatórios
     teachers_and_lecturers: Professores
+  events:
+    calendar:
+      jump_to_month: Mês
   navbar:
     add_event: Adicionar evento
     log_in_sign_up: Entrar / Cadastrar

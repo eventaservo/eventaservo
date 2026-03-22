@@ -5,7 +5,7 @@ module EventsHelper
   #
   # Dispatches to:
   # - +events/events_calendar+ when cookie is +"kalendaro"+ (requires calendar assigns
-  #   prepared by {CalendarData#prepare_calendar_data})
+  #   prepared by {CalendarData#prepare_calendar_data}, including +@calendar_month_navigation_options+)
   # - +events/events_as_map+ when cookie is +"mapo"+
   # - +events/events_as_cards+ for all other values
   #
@@ -18,6 +18,7 @@ module EventsHelper
         today_path: @calendar_today_path,
         prev_path: @calendar_prev_path,
         next_path: @calendar_next_path,
+        month_navigation_options: @calendar_month_navigation_options,
         events_by_day: @events_by_day
       }
     when "mapo"
