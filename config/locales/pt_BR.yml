@@ -122,6 +122,7 @@ pt_BR:
     updated: Recorrência atualizada com sucesso.
     destroyed: Recorrência removida com sucesso.
     not_found: Nenhuma regra de recorrência encontrada para este evento.
+    inactive: Esta recorrência está inativa e não pode ser editada.
     form:
       frequency: Frequência
       select_frequency: "Selecione a frequência..."

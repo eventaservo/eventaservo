@@ -122,6 +122,7 @@ en:
     updated: Recurrence updated successfully.
     destroyed: Recurrence removed successfully.
     not_found: No recurrence rule found for this event.
+    inactive: This recurrence is inactive and cannot be edited.
     form:
       frequency: Frequency
       select_frequency: "Select frequency..."

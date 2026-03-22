@@ -4,9 +4,12 @@
     <div>
       <strong>Recurring event</strong> &mdash;
       <%= recurrence_description(event.recurrence) %>
-      <% if user_can_edit_event?(user: current_user, event: event) %>
+      <% if user_can_edit_event?(user: current_user, event: event) && event.recurrence.active? %>
         &middot;
         <%= link_to "Edit recurrence", edit_event_recurrence_path(event_code: event.ligilo) %>
+      <% end %>
+      <% unless event.recurrence.active? %>
+        <span class="badge bg-secondary ms-1">Inactive</span>
       <% end %>
     </div>
   </div>

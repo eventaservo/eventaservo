@@ -35,7 +35,9 @@
 
   <div class="d-flex gap-2">
     <%= link_to "View master event", event_path(code: @recurrence.master_event.ligilo), class: "btn btn-sm btn-outline-success" %>
-    <%= link_to "Edit recurrence", edit_event_recurrence_path(event_code: @recurrence.master_event.ligilo), class: "btn btn-sm btn-outline-primary" %>
+    <% if @recurrence.active? %>
+      <%= link_to "Edit recurrence", edit_event_recurrence_path(event_code: @recurrence.master_event.ligilo), class: "btn btn-sm btn-outline-primary" %>
+    <% end %>
     <% if @recurrence.active? %>
       <%= button_to "Deactivate", deactivate_admin_event_recurrence_path(@recurrence),
           method: :patch, class: "btn btn-sm btn-outline-warning",
@@ -66,7 +68,7 @@
         <% is_past = event.date_start < Time.current %>
         <%= link_to event_path(code: event.ligilo), class: "row g-0 align-items-center px-2 py-1 small hover-row text-decoration-none text-dark #{('border-bottom' unless i == @series_events.size - 1)} #{('bg-body-tertiary' if i.odd?)} #{('opacity-50' if is_past && !is_master)}" do %>
           <div class="col-2 fw-semibold text-success-emphasis small">
-            <%= format_date(event.komenca_dato, style: :compact) %>
+            <%= l(event.komenca_dato, format: "%a").capitalize %> <%= format_date(event.komenca_dato, style: :compact) %>
           </div>
           <div class="col fw-medium text-truncate">
             <%= event_flag(event) %> <%= event.title %>

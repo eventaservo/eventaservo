@@ -2,8 +2,8 @@
 
 module EventRecurrences
   # Updates a recurrence rule. When the scheduling pattern changes,
-  # soft-deletes future non-detached children and regenerates them
-  # with the new dates.
+  # deletes future non-detached children and regenerates them.
+  # When an end date is set or moved earlier, deletes children beyond it.
   #
   # @example
   #   EventRecurrences::Update.call(
@@ -13,7 +13,7 @@ module EventRecurrences
   class Update < ApplicationService
     attr_reader :recurrence, :recurrence_params
 
-    # Fields that affect when events occur — changes require regeneration
+    # Fields that affect when events occur — changes require full regeneration
     SCHEDULE_FIELDS = %w[frequency interval days_of_week day_of_month
       week_of_month day_of_week_monthly month_of_year].freeze
 
@@ -34,6 +34,9 @@ module EventRecurrences
           delete_future_non_detached_children
           reset_generation_horizon
           GenerateChildren.call(recurrence: recurrence.reload)
+        else
+          delete_children_beyond_end_date
+          backfill_if_needed
         end
 
         success(recurrence)
@@ -68,6 +71,29 @@ module EventRecurrences
         .where("date_start >= ?", Time.current)
         .where("metadata->>'detached_from_recurrent_series' IS NULL OR metadata->>'detached_from_recurrent_series' != ?", "true")
         .destroy_all
+    end
+
+    # Deletes child events that fall after the recurrence end date.
+    # Triggered when end_type changes to on_date or end_date is moved earlier.
+    #
+    # @return [void]
+    def delete_children_beyond_end_date
+      return unless recurrence.end_type_on_date? && recurrence.end_date.present?
+
+      recurrence.master_event
+        .recurrent_child_events
+        .where("date_start > ?", recurrence.end_date.end_of_day)
+        .where("metadata->>'detached_from_recurrent_series' IS NULL OR metadata->>'detached_from_recurrent_series' != ?", "true")
+        .destroy_all
+    end
+
+    # Generates missing children when end_date or other non-schedule
+    # fields changed and there are unfilled slots.
+    #
+    # @return [void]
+    def backfill_if_needed
+      reset_generation_horizon
+      GenerateChildren.call(recurrence: recurrence.reload)
     end
 
     # Resets last_generated_date so GenerateChildren recalculates from scratch

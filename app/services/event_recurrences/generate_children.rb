@@ -36,7 +36,10 @@ module EventRecurrences
 
       return success([]) if slots_available <= 0
 
-      from_date = recurrence.last_generated_date || master.date_start.to_date
+      from_date = [
+        recurrence.last_generated_date || master.date_start.to_date,
+        Date.current - 1.day
+      ].max
       to_date = recurrence.horizon_end_date
 
       return success([]) if from_date >= to_date
@@ -71,9 +74,11 @@ module EventRecurrences
     # @param date [Date]
     # @return [Boolean]
     def child_exists_for_date?(master, date)
-      master.recurrent_child_events.exists?(
-        date_start: date.beginning_of_day..date.end_of_day
-      )
+      tz = ActiveSupport::TimeZone[master.time_zone]
+      day_start = tz.parse("#{date} 00:00:00")
+      day_end = tz.parse("#{date} 23:59:59")
+
+      master.recurrent_child_events.exists?(date_start: day_start..day_end)
     end
 
     # @param master [Event]

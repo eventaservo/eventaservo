@@ -44,12 +44,17 @@ class EventRecurrencesController < ApplicationController
   #
   # @return [void]
   def edit
+    redirect_to event_path(code: @event.ligilo), flash: {error: t("recurrences.inactive")} unless @recurrence.active?
   end
 
   # Updates the recurrence rule and optionally propagates changes.
   #
   # @return [void]
   def update
+    unless @recurrence.active?
+      redirect_to event_path(code: @event.ligilo), flash: {error: t("recurrences.inactive")}
+      return
+    end
     result = EventRecurrences::Update.call(
       recurrence: @recurrence,
       recurrence_params: recurrence_params

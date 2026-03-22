@@ -89,7 +89,56 @@
 - O evento master permanece, mas deixa de ser um recurring master.
 - Disparado por: service `EventRecurrences::Destroy`.
 
-### Cenário 7: Job diário de geração é executado
+### Cenário 7: Evento filho é apagado individualmente
+
+- O evento filho é automaticamente **detached** da série antes de ser soft-deleted.
+- Isso impede que o job diário de geração recrie um evento para aquela data.
+- O `recurrent_master_event_id` é preservado (link histórico).
+- Disparado por: service `Events::SoftDelete` (detecta que o evento é um filho e faz o detach).
+
+### Cenário 8: Evento master é cancelado
+
+- O master é marcado como cancelado (`cancelled = true`).
+- Todos os eventos filhos **futuros** são **permanentemente apagados** do banco de dados.
+- A recorrência é **desativada** (`active = false`), mas não destruída.
+- Eventos filhos **passados** são mantidos.
+- Se o master for des-cancelado posteriormente, a recorrência pode ser reativada pelo painel admin.
+- Disparado por: `EventsController#nuligi`.
+
+### Cenário 9: Horário do evento master é alterado
+
+- A mudança de horário (hora de início/fim) é propagada para todos os eventos filhos **futuros e não-detached**.
+- Cada filho mantém sua data original, mas recebe o novo horário e a duração do master.
+- Exemplo: master muda de 18:00–19:00 para 20:00–21:00 → todos os filhos futuros passam para 20:00–21:00.
+- A propagação ocorre junto com as demais alterações de campo via `EventRecurrences::PropagateChangesJob`.
+
+### Cenário 10: Regra de recorrência alterada com master no passado
+
+- Quando o master tem uma data no passado e a regra de recorrência é alterada (ex: de terça para quarta), a regeneração **nunca cria eventos com datas anteriores a hoje**.
+- Exemplo: master começou em 3 de março, hoje é 22 de março. Ao mudar de terça para quarta, os novos eventos começam a partir da próxima quarta-feira (25 de março), nunca em 4, 11 ou 18 de março.
+- Implementação: o `GenerateChildren` usa `max(last_generated_date, ontem)` como base de cálculo, garantindo que o dia mais antigo gerado é hoje.
+- Eventos filhos passados que existiam com o padrão anterior já foram apagados pelo `Update` (cenário 3).
+
+### Cenário 11: Data final da recorrência é definida ou antecipada
+
+- A recorrência foi criada sem data final ("Never") e posteriormente é editada para ter uma data final.
+- Todos os eventos filhos **não-detached** com data **posterior à data final** são **permanentemente apagados**.
+- Eventos filhos antes da data final e eventos detached não são afetados.
+- Também se aplica quando a data final já existia e é movida para uma data mais cedo.
+- O `GenerateChildren` já respeita o `end_date` via `horizon_end_date`, então novos eventos não serão gerados além do limite.
+- Disparado por: service `EventRecurrences::Update` (método `delete_children_beyond_end_date`).
+
+### Cenário 12: Tentativa de editar recorrência inativa
+
+- Se a recorrência está desativada (`active = false`), **não é possível editá-la**.
+- O link "Edit recurrence" **não é exibido** na página do evento.
+- Um badge "Inactive" é mostrado no lugar, indicando o estado da recorrência.
+- Tanto a página de edição quanto o submit do formulário são bloqueados no controller.
+- O usuário é redirecionado para o evento com uma mensagem de erro caso tente acessar diretamente a URL.
+- Para editar, a recorrência deve primeiro ser reativada pelo painel admin.
+- Disparado por: `EventRecurrencesController` (ações `edit` e `update`) e `_recurrence_info.html.erb`.
+
+### Cenário 13: Job diário de geração é executado
 
 - `GenerateRecurringEventsJob` roda às 2h diariamente.
 - Para cada recorrência ativa, conta os eventos filhos futuros existentes.

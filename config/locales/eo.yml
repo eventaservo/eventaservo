@@ -122,6 +122,7 @@ eo:
     updated: Ripetregulo ĝisdatigita sukcese.
     destroyed: Ripetregulo forigita sukcese.
     not_found: Neniu ripetregulo trovita por ĉi tiu evento.
+    inactive: Ĉi tiu ripetregulo estas neaktiva kaj ne redaktebla.
     form:
       frequency: Ofteco
       select_frequency: "Elektu oftecon..."
