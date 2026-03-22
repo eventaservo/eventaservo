@@ -3,7 +3,6 @@
     ".": {
       "release-type": "ruby",
       "version-file": "config/initializers/version.rb",
-      "versioning": "always-bump-patch",
       "changelog-sections": [
         { "type": "feat", "section": "Features" },
         { "type": "fix", "section": "Bug Fixes" },
