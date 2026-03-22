@@ -176,10 +176,13 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   #
   # @return [Hash{Date => Array<Event>}]
   def self.grouped_by_months
+    tz_cache = Hash.new do |h, k|
+      result = TimeZone::Normalize.call(k)
+      h[k] = result.success? ? result.payload : "Etc/UTC"
+    end
+
     order(:date_start).group_by do |m|
-      result = TimeZone::Normalize.call(m.time_zone)
-      tz = result.success? ? result.payload : "Etc/UTC"
-      m.date_start.in_time_zone(tz).beginning_of_month.to_date
+      m.date_start.in_time_zone(tz_cache[m.time_zone]).beginning_of_month.to_date
     end
   end
 
@@ -492,8 +495,6 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     self.city = city.tr("/", "").strip
     self.site = UrlNormalizer.new(site).call
     self.time_zone = "Etc/UTC" if time_zone.empty?
-    result = TimeZone::Normalize.call(time_zone)
-    self.time_zone = result.success? ? result.payload : "Etc/UTC"
     self.short_url = nil if short_url == code || short_url.try(:strip).try(:empty?)
 
     if online && city == "Reta"
@@ -510,6 +511,9 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
         self.time_zone = "Etc/UTC"
       end
     end
+
+    result = TimeZone::Normalize.call(time_zone)
+    self.time_zone = result.success? ? result.payload : "Etc/UTC"
 
     if date_start_changed?
       tz = TZInfo::Timezone.get(time_zone)
