@@ -1,0 +1,32 @@
+# Configuration for recurring event generation.
+#
+# max_children: Maximum number of future child events to generate per recurrence.
+#   The daily background job (GenerateRecurringEventsJob) will top up the series
+#   as events occur, always keeping this many upcoming events in the series.
+#
+# horizon: Maximum time window to look ahead when calculating dates.
+#   Acts as a safety cap so the date calculator doesn't scan indefinitely.
+#   Should be generous enough to accommodate max_children occurrences.
+
+default: &default
+  daily:
+    max_children: 7
+    horizon: 30 days
+  weekly:
+    max_children: 10
+    horizon: 6 months
+  monthly:
+    max_children: 6
+    horizon: 2 years
+  yearly:
+    max_children: 5
+    horizon: 10 years
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

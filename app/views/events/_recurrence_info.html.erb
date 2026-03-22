@@ -1,0 +1,27 @@
+<% if event.recurring_master? && event.recurrence %>
+  <div class="alert alert-info d-flex align-items-center gap-2 small">
+    <i class="bi bi-arrow-repeat"></i>
+    <div>
+      <strong>Recurring event</strong> &mdash;
+      <%= recurrence_description(event.recurrence) %>
+      <% if user_can_edit_event?(user: current_user, event: event) %>
+        &middot;
+        <%= link_to "Edit recurrence", edit_event_recurrence_path(event_code: event.ligilo) %>
+      <% end %>
+    </div>
+  </div>
+<% elsif event.recurring_child? %>
+  <div class="alert alert-light d-flex align-items-center gap-2 small">
+    <i class="bi bi-arrow-repeat"></i>
+    <div>
+      Part of a recurring series
+      <% if event.recurrent_master_event %>
+        &middot;
+        <%= link_to "View series", event_path(code: event.recurrent_master_event.ligilo) %>
+      <% end %>
+      <% if event.detached_from_recurrent_series? %>
+        <span class="badge bg-warning text-dark ms-1">Detached</span>
+      <% end %>
+    </div>
+  </div>
+<% end %>

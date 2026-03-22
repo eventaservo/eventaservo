@@ -1,0 +1,28 @@
+# == Schema Information
+#
+# Table name: event_recurrences
+#
+#  id                  :bigint           not null, primary key
+#  active              :boolean          default(TRUE), not null
+#  day_of_month        :integer
+#  day_of_week_monthly :integer
+#  days_of_week        :integer          default([]), is an Array
+#  end_date            :date
+#  end_type            :string           default("never"), not null
+#  frequency           :string           not null
+#  interval            :integer          default(1), not null
+#  last_generated_date :date
+#  month_of_year       :integer
+#  week_of_month       :integer
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  master_event_id     :bigint           not null, indexed
+#
+
+weekly_recurrence:
+  master_event: valid_event
+  frequency: weekly
+  interval: 1
+  days_of_week: "{2,4}"
+  end_type: never
+  active: true

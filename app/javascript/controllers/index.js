@@ -58,5 +58,8 @@ application.register("user", UserController)
 import VideoController from "./video_controller"
 application.register("video", VideoController)
 
+import RecurrenceFormController from "./recurrence_form_controller"
+application.register("recurrence-form", RecurrenceFormController)
+
 import HwComboboxController from "@josefarias/hotwire_combobox"
 application.register("hw-combobox", HwComboboxController)

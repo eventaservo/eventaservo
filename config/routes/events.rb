@@ -12,4 +12,6 @@ resources :events, path: "e", param: "code" do
   get "nova_video", to: "video#new"
 
   resources :reports, controller: "event/report", path: "raportoj", only: [:new, :create, :destroy]
+
+  resource :recurrence, controller: "event_recurrences", only: [:new, :create, :edit, :update, :destroy]
 end

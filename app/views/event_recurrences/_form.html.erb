@@ -1,0 +1,153 @@
+<%= form_with(
+  model: recurrence,
+  url: recurrence.new_record? ? event_recurrence_path(event_code: event.ligilo) : event_recurrence_path(event_code: event.ligilo),
+  method: recurrence.new_record? ? :post : :patch,
+  data: { controller: "recurrence-form" }
+) do |f| %>
+
+  <%# Frequency %>
+  <div class="mb-3">
+    <%= f.label :frequency, t("recurrences.form.frequency"), class: "form-label fw-bold" %>
+    <%= f.select :frequency,
+      options_for_select([
+        [t("recurrences.form.frequencies.daily"), "daily"],
+        [t("recurrences.form.frequencies.weekly"), "weekly"],
+        [t("recurrences.form.frequencies.monthly"), "monthly"],
+        [t("recurrences.form.frequencies.yearly"), "yearly"]
+      ], recurrence.frequency),
+      { include_blank: t("recurrences.form.select_frequency") },
+      class: "form-select",
+      data: { recurrence_form_target: "frequency", action: "recurrence-form#frequencyChanged" } %>
+  </div>
+
+  <%# Interval %>
+  <div class="mb-3">
+    <%= f.label :interval, t("recurrences.form.repeat_every"), class: "form-label fw-bold" %>
+    <div class="input-group" style="max-width: 220px;">
+      <%= f.number_field :interval, min: 1, max: 100, value: recurrence.interval || 1, class: "form-control" %>
+      <span class="input-group-text" data-recurrence-form-target="intervalLabel"
+            data-label-daily="<%= t("recurrences.form.interval_labels.days") %>"
+            data-label-weekly="<%= t("recurrences.form.interval_labels.weeks") %>"
+            data-label-monthly="<%= t("recurrences.form.interval_labels.months") %>"
+            data-label-yearly="<%= t("recurrences.form.interval_labels.years") %>">
+        <%= t("recurrences.form.interval_labels.days") %>
+      </span>
+    </div>
+  </div>
+
+  <%# Weekly: days of week checkboxes %>
+  <div class="mb-3" data-recurrence-form-target="weeklyOptions" style="display: none;">
+    <label class="form-label fw-bold"><%= t("recurrences.form.days_of_week") %></label>
+    <div class="d-flex flex-wrap gap-3">
+      <% t("recurrences.form.day_names").each_with_index do |day_name, i| %>
+        <div class="form-check">
+          <%= check_box_tag "event_recurrence[days_of_week][]", i,
+            recurrence.days_of_week&.include?(i),
+            id: "dow_#{i}", class: "form-check-input" %>
+          <label class="form-check-label" for="dow_<%= i %>"><%= day_name %></label>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <%# Monthly options %>
+  <div data-recurrence-form-target="monthlyOptions" style="display: none;">
+    <div class="mb-3">
+      <label class="form-label fw-bold"><%= t("recurrences.form.monthly_pattern") %></label>
+
+      <%# Option 1: fixed day of month %>
+      <div class="form-check mb-2">
+        <input type="radio" name="monthly_type" value="day_of_month" id="monthly_fixed"
+               class="form-check-input" data-action="recurrence-form#monthlyTypeChanged"
+               data-recurrence-form-target="monthlyTypeRadio"
+               <%= "checked" if recurrence.day_of_month.present? || recurrence.week_of_month.blank? %>>
+        <label class="form-check-label" for="monthly_fixed"><%= t("recurrences.form.on_day_of_month") %></label>
+      </div>
+      <div class="ms-4 mb-3" data-recurrence-form-target="monthlyDayOfMonth">
+        <div class="input-group" style="max-width: 180px;">
+          <%= f.number_field :day_of_month, min: 1, max: 31, class: "form-control", placeholder: t("recurrences.form.day_placeholder") %>
+        </div>
+      </div>
+
+      <%# Option 2: Nth weekday %>
+      <div class="form-check mb-2">
+        <input type="radio" name="monthly_type" value="nth_weekday" id="monthly_nth"
+               class="form-check-input" data-action="recurrence-form#monthlyTypeChanged"
+               data-recurrence-form-target="monthlyTypeRadio"
+               <%= "checked" if recurrence.week_of_month.present? %>>
+        <label class="form-check-label" for="monthly_nth"><%= t("recurrences.form.on_nth_weekday") %></label>
+      </div>
+      <div class="ms-4 mb-3" data-recurrence-form-target="monthlyNthWeekday" style="display: none;">
+        <div class="row g-2">
+          <div class="col-auto">
+            <%= f.select :week_of_month,
+              options_for_select(
+                t("recurrences.form.ordinals").each_with_index.map { |name, i| [name, i + 1] },
+                recurrence.week_of_month
+              ),
+              { include_blank: t("recurrences.form.select_ordinal") },
+              class: "form-select" %>
+          </div>
+          <div class="col-auto">
+            <%= f.select :day_of_week_monthly,
+              options_for_select(
+                t("recurrences.form.day_names").each_with_index.map { |name, i| [name, i] },
+                recurrence.day_of_week_monthly
+              ),
+              { include_blank: t("recurrences.form.select_day") },
+              class: "form-select" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%# Yearly options %>
+  <div data-recurrence-form-target="yearlyOptions" style="display: none;">
+    <div class="mb-3">
+      <label class="form-label fw-bold"><%= t("recurrences.form.yearly_pattern") %></label>
+      <div class="row g-2 align-items-center">
+        <div class="col-auto">
+          <%= f.select :month_of_year,
+            options_for_select(
+              t("recurrences.form.month_names").each_with_index.map { |name, i| [name, i + 1] },
+              recurrence.month_of_year
+            ),
+            { include_blank: t("recurrences.form.select_month") },
+            class: "form-select" %>
+        </div>
+        <div class="col-auto">
+          <%= f.number_field :day_of_month, min: 1, max: 31, class: "form-control",
+              style: "max-width: 100px;", placeholder: t("recurrences.form.day_placeholder") %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%# End type %>
+  <div class="mb-3">
+    <label class="form-label fw-bold"><%= t("recurrences.form.ends") %></label>
+    <div class="form-check mb-2">
+      <input type="radio" name="event_recurrence[end_type]" value="never" id="end_never"
+             class="form-check-input" data-action="recurrence-form#endTypeChanged"
+             data-recurrence-form-target="endTypeRadio"
+             <%= "checked" if recurrence.end_type.blank? || recurrence.end_type == "never" %>>
+      <label class="form-check-label" for="end_never"><%= t("recurrences.form.ends_never") %></label>
+    </div>
+    <div class="form-check mb-2">
+      <input type="radio" name="event_recurrence[end_type]" value="on_date" id="end_on_date"
+             class="form-check-input" data-action="recurrence-form#endTypeChanged"
+             data-recurrence-form-target="endTypeRadio"
+             <%= "checked" if recurrence.end_type == "on_date" %>>
+      <label class="form-check-label" for="end_on_date"><%= t("recurrences.form.ends_on_date") %></label>
+    </div>
+    <div class="ms-4 mt-2" data-recurrence-form-target="endDateField" style="<%= "display: none;" unless recurrence.end_type == "on_date" %>">
+      <%= f.date_field :end_date, class: "form-control", style: "max-width: 220px;", value: recurrence.end_date %>
+    </div>
+  </div>
+
+  <div class="d-flex gap-2 mt-4">
+    <%= f.submit(recurrence.new_record? ? t("recurrences.form.create") : t("recurrences.form.update"), class: "btn btn-success") %>
+    <%= link_to t("buttons.cancel"), event_path(code: event.ligilo), class: "btn btn-outline-secondary" %>
+  </div>
+<% end %>

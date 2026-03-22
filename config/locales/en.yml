@@ -60,6 +60,7 @@ en:
     cancel: Cancel
     change: Change
     close: Close
+    make_recurring: Make recurring
     select: Select
     send: Send
   errors:
@@ -115,6 +116,69 @@ en:
       last_word_connector: " and "
       two_words_connector: " and "
       words_connector: ", "
+  recurrences:
+    already_exists: This event already has a recurrence rule.
+    created: Recurrence created successfully. Child events are being generated.
+    updated: Recurrence updated successfully.
+    destroyed: Recurrence removed successfully.
+    not_found: No recurrence rule found for this event.
+    form:
+      frequency: Frequency
+      select_frequency: "Select frequency..."
+      frequencies:
+        daily: Daily
+        weekly: Weekly
+        monthly: Monthly
+        yearly: Yearly
+      repeat_every: Repeat every
+      interval_labels:
+        days: days
+        weeks: weeks
+        months: months
+        years: years
+      days_of_week: Days of the week
+      day_names:
+        - Sunday
+        - Monday
+        - Tuesday
+        - Wednesday
+        - Thursday
+        - Friday
+        - Saturday
+      monthly_pattern: Monthly pattern
+      on_day_of_month: On a specific day of the month
+      on_nth_weekday: On a specific weekday
+      day_placeholder: Day
+      ordinals:
+        - First
+        - Second
+        - Third
+        - Fourth
+        - Fifth
+      select_ordinal: "Select..."
+      select_day: "Select day..."
+      yearly_pattern: Yearly pattern
+      month_names:
+        - January
+        - February
+        - March
+        - April
+        - May
+        - June
+        - July
+        - August
+        - September
+        - October
+        - November
+        - December
+      select_month: "Select month..."
+      ends: Ends
+      ends_never: Never
+      ends_on_date: On a specific date
+      create: Create recurrence
+      update: Update recurrence
+      propagate_changes: Apply changes to future events
+      propagate_help: Updates title, description, location and other details on all upcoming events in this series that have not been individually edited.
   tagline: Share Esperanto events worldwide!
   video:
     presentations: Presentations

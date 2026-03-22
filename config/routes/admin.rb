@@ -29,4 +29,11 @@ namespace :admin do
   resources :reklamoj do
     get "toggle_active"
   end
+
+  resources :event_recurrences, only: [:index, :show] do
+    member do
+      patch :deactivate
+      patch :reactivate
+    end
+  end
 end

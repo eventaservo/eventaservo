@@ -22,3 +22,6 @@ generate_statistics:
 housekeeping:
   class: HousekeepingJob
   schedule: every day at 0:30am
+generate_recurring_events:
+  class: GenerateRecurringEventsJob
+  schedule: every day at 2am

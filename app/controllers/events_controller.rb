@@ -140,6 +140,10 @@ class EventsController < ApplicationController
       EventMailer.nova_administranto(@event).deliver_later if @event.saved_change_to_user_id?
       @event.update_event_organizations(params[:organization_ids])
       set_event_format(@event)
+
+      # Auto-propagate changes to future child events when editing a recurring master
+      EventRecurrences::PropagateChangesJob.perform_later(@event.id) if @event.recurring_master?
+
       ahoy.track "Update event", event_url: @event.short_url
       Logs::Create.call(text: "Event updated", user: current_user, loggable: @event)
       redirect_to event_path(code: @event.ligilo), notice: "Evento sukcese ĝisdatigita"
@@ -167,8 +171,14 @@ class EventsController < ApplicationController
   def nuligi
     e = Event.by_link(params[:event_code])
     e.update(cancelled: true, cancel_reason: params[:cancel_reason])
-    ahoy.track "Cancelled event", event_url: e.short_url
 
+    # When a recurring master is cancelled, destroy future children and deactivate recurrence
+    if e.recurring_master?
+      e.recurrent_child_events.where("date_start >= ?", Time.current).destroy_all
+      e.recurrence&.deactivate!
+    end
+
+    ahoy.track "Cancelled event", event_url: e.short_url
     redirect_to event_url(code: params[:event_code]), flash: {notice: "Evento nuligita"}
   end
 

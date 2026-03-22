@@ -55,7 +55,7 @@ COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UU
 -- Name: immutable_unaccent(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
-CREATE OR REPLACE FUNCTION public.immutable_unaccent(text) RETURNS text
+CREATE FUNCTION public.immutable_unaccent(text) RETURNS text
     LANGUAGE sql IMMUTABLE STRICT PARALLEL SAFE
     AS $_$ SELECT public.unaccent($1) $_$;
 
@@ -362,6 +362,48 @@ ALTER SEQUENCE public.countries_id_seq OWNED BY public.countries.id;
 
 
 --
+-- Name: event_recurrences; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.event_recurrences (
+    id bigint NOT NULL,
+    master_event_id bigint NOT NULL,
+    frequency character varying NOT NULL,
+    "interval" integer DEFAULT 1 NOT NULL,
+    days_of_week integer[] DEFAULT '{}'::integer[],
+    day_of_month integer,
+    week_of_month integer,
+    day_of_week_monthly integer,
+    month_of_year integer,
+    end_type character varying DEFAULT 'never'::character varying NOT NULL,
+    end_date date,
+    active boolean DEFAULT true NOT NULL,
+    last_generated_date date,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: event_recurrences_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.event_recurrences_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: event_recurrences_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.event_recurrences_id_seq OWNED BY public.event_recurrences.id;
+
+
+--
 -- Name: event_redirections; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -463,7 +505,8 @@ CREATE TABLE public.events (
     international_calendar boolean DEFAULT false,
     participants_count integer DEFAULT 0,
     display_flag boolean DEFAULT true,
-    format character varying
+    format character varying,
+    recurrent_master_event_id bigint
 );
 
 
@@ -1467,6 +1510,13 @@ ALTER TABLE ONLY public.countries ALTER COLUMN id SET DEFAULT nextval('public.co
 
 
 --
+-- Name: event_recurrences id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.event_recurrences ALTER COLUMN id SET DEFAULT nextval('public.event_recurrences_id_seq'::regclass);
+
+
+--
 -- Name: event_redirections id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1739,6 +1789,14 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 ALTER TABLE ONLY public.countries
     ADD CONSTRAINT countries_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: event_recurrences event_recurrences_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.event_recurrences
+    ADD CONSTRAINT event_recurrences_pkey PRIMARY KEY (id);
 
 
 --
@@ -2101,6 +2159,20 @@ CREATE INDEX index_countries_on_unaccent_lower_continent ON public.countries USI
 
 
 --
+-- Name: index_event_recurrences_on_active_and_frequency; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_event_recurrences_on_active_and_frequency ON public.event_recurrences USING btree (active, frequency);
+
+
+--
+-- Name: index_event_recurrences_on_master_event_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_event_recurrences_on_master_event_id ON public.event_recurrences USING btree (master_event_id);
+
+
+--
 -- Name: index_event_redirections_on_old_short_url; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2203,6 +2275,13 @@ CREATE INDEX index_events_on_online ON public.events USING btree (online);
 --
 
 CREATE INDEX index_events_on_participants_count ON public.events USING btree (participants_count);
+
+
+--
+-- Name: index_events_on_recurrent_master_event_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_events_on_recurrent_master_event_id ON public.events USING btree (recurrent_master_event_id);
 
 
 --
@@ -2685,6 +2764,14 @@ ALTER TABLE ONLY public.solid_queue_blocked_executions
 
 
 --
+-- Name: event_recurrences fk_rails_6676f4c069; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.event_recurrences
+    ADD CONSTRAINT fk_rails_6676f4c069 FOREIGN KEY (master_event_id) REFERENCES public.events(id);
+
+
+--
 -- Name: solid_queue_ready_executions fk_rails_81fcbd66af; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2741,12 +2828,21 @@ ALTER TABLE ONLY public.solid_queue_scheduled_executions
 
 
 --
+-- Name: events fk_rails_ffdfb1c4c7; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.events
+    ADD CONSTRAINT fk_rails_ffdfb1c4c7 FOREIGN KEY (recurrent_master_event_id) REFERENCES public.events(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20260322200000'),
 ('20260322125025'),
 ('20260315122454'),
 ('20260314101500'),

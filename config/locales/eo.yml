@@ -60,6 +60,7 @@ eo:
     cancel: Nuligi
     change: Ŝangi
     close: Fermi
+    make_recurring: Ripetigi
     select: Elekti
     send: Sendi
   errors:
@@ -115,6 +116,69 @@ eo:
       last_word_connector: " kaj "
       two_words_connector: " kaj "
       words_connector: ", "
+  recurrences:
+    already_exists: Ĉi tiu evento jam havas ripetregulojn.
+    created: Ripetregulo kreita sukcese. Filaj eventoj estas generataj.
+    updated: Ripetregulo ĝisdatigita sukcese.
+    destroyed: Ripetregulo forigita sukcese.
+    not_found: Neniu ripetregulo trovita por ĉi tiu evento.
+    form:
+      frequency: Ofteco
+      select_frequency: "Elektu oftecon..."
+      frequencies:
+        daily: Ĉiutage
+        weekly: Ĉiusemajne
+        monthly: Ĉiumonate
+        yearly: Ĉiujare
+      repeat_every: Ripeti ĉiun
+      interval_labels:
+        days: tagojn
+        weeks: semajnojn
+        months: monatojn
+        years: jarojn
+      days_of_week: Tagoj de la semajno
+      day_names:
+        - Dimanĉo
+        - Lundo
+        - Mardo
+        - Merkredo
+        - Ĵaŭdo
+        - Vendredo
+        - Sabato
+      monthly_pattern: Monata aranĝo
+      on_day_of_month: Je specifa tago de la monato
+      on_nth_weekday: Je specifa semajntago
+      day_placeholder: Tago
+      ordinals:
+        - Unua
+        - Dua
+        - Tria
+        - Kvara
+        - Kvina
+      select_ordinal: "Elektu..."
+      select_day: "Elektu tagon..."
+      yearly_pattern: Jara aranĝo
+      month_names:
+        - Januaro
+        - Februaro
+        - Marto
+        - Aprilo
+        - Majo
+        - Junio
+        - Julio
+        - Aŭgusto
+        - Septembro
+        - Oktobro
+        - Novembro
+        - Decembro
+      select_month: "Elektu monaton..."
+      ends: Finiĝas
+      ends_never: Neniam
+      ends_on_date: Je specifa dato
+      create: Krei ripetregulojn
+      update: Ĝisdatigi ripetregulojn
+      propagate_changes: Apliki ŝanĝojn al estontaj eventoj
+      propagate_help: Ĝisdatigas titolon, priskribon, lokon kaj aliajn detalojn de ĉiuj estontaj eventoj en ĉi tiu serio kiuj ne estis individue redaktitaj.
   tagline: Diskonigu Esperanto-eventojn tutmonde!
   video:
     presentations: Registraĵoj
