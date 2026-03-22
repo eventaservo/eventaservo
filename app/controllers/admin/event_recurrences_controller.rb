@@ -25,6 +25,7 @@ module Admin
     #
     # @return [void]
     def show
+      @presenter = EventRecurrencePresenter.new(recurrence: @recurrence)
       master = @recurrence.master_event
 
       # All events in the series: master + children, ordered by date

@@ -1,9 +1,7 @@
 <div class="container py-4">
   <div class="box-white">
-    <h4 class="mb-3">Set up recurrence for: <%= @event.title %></h4>
-    <p class="text-body-secondary">
-      Configure how this event should repeat. Child events will be generated automatically.
-    </p>
+    <h4 class="mb-3"><%= t("recurrences.new_title", event: @event.title) %></h4>
+    <p class="text-body-secondary"><%= t("recurrences.new_subtitle") %></p>
     <hr>
     <%= render "form", recurrence: @recurrence, event: @event %>
   </div>

@@ -44,13 +44,13 @@
             <%= recurrence.master_event.title %>
           </div>
           <div class="col-4 text-body-secondary text-truncate">
-            <%= recurrence_description(recurrence) %>
+            <%= EventRecurrencePresenter.new(recurrence:).description %>
             <% if recurrence.end_type_on_date? %>
-              <span class="text-body-tertiary">&mdash; until <%= format_date(recurrence.end_date, style: :short) %></span>
+              <span class="text-body-tertiary">&mdash; <%= format_date(recurrence.end_date, style: :short) %></span>
             <% end %>
           </div>
           <div class="col-1 text-center"><%= recurrence.master_event.recurrent_child_events.size %></div>
-          <div class="col-1 text-center"><%= recurrence_status_badge(recurrence) %></div>
+          <div class="col-1 text-center"><%= EventRecurrencePresenter.new(recurrence:).badge_html %></div>
         <% end %>
       <% end %>
     </div>

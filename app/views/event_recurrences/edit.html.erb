@@ -1,20 +1,17 @@
 <div class="container py-4">
   <div class="box-white">
-    <h4 class="mb-3">Edit recurrence for: <%= @event.title %></h4>
-    <p class="text-body-secondary">
-      Changes to the recurrence pattern affect future event generation.
-      You can optionally propagate the master event's current details to all future child events.
-    </p>
+    <h4 class="mb-3"><%= t("recurrences.edit_title", event: @event.title) %></h4>
+    <p class="text-body-secondary"><%= t("recurrences.edit_subtitle") %></p>
     <hr>
     <%= render "form", recurrence: @recurrence, event: @event %>
 
     <hr class="my-4">
-    <h5 class="text-danger">Danger zone</h5>
-    <%= button_to "Delete recurrence",
-        event_recurrence_path(@event),
+    <h5 class="text-danger"><%= t("recurrences.danger_zone") %></h5>
+    <%= button_to t("recurrences.delete_recurrence"),
+        event_recurrence_path(event_code: @event.ligilo),
         method: :delete,
         params: { delete_future_events: "1" },
         class: "btn btn-outline-danger btn-sm",
-        data: { turbo_confirm: "This will delete the recurrence and all future events. Are you sure?" } %>
+        data: { turbo_confirm: t("recurrences.delete_confirm") } %>
   </div>
 </div>

@@ -121,6 +121,13 @@ pt_BR:
     created: Recorrência criada com sucesso. Eventos filhos estão sendo gerados.
     updated: Recorrência atualizada com sucesso.
     destroyed: Recorrência removida com sucesso.
+    new_title: "Configurar recorrência para: %{event}"
+    new_subtitle: Configure como este evento deve se repetir. Eventos filhos serão gerados automaticamente.
+    edit_title: "Editar recorrência de: %{event}"
+    edit_subtitle: Alterações no padrão de recorrência afetam a geração de eventos futuros.
+    danger_zone: Zona de perigo
+    delete_recurrence: Excluir recorrência
+    delete_confirm: Isso excluirá a recorrência e todos os eventos futuros. Tem certeza?
     not_found: Nenhuma regra de recorrência encontrada para este evento.
     inactive: Esta recorrência está inativa e não pode ser editada.
     info:

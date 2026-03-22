@@ -121,6 +121,13 @@ en:
     created: Recurrence created successfully. Child events are being generated.
     updated: Recurrence updated successfully.
     destroyed: Recurrence removed successfully.
+    new_title: "Set up recurrence for: %{event}"
+    new_subtitle: Configure how this event should repeat. Child events will be generated automatically.
+    edit_title: "Edit recurrence for: %{event}"
+    edit_subtitle: Changes to the recurrence pattern affect future event generation.
+    danger_zone: Danger zone
+    delete_recurrence: Delete recurrence
+    delete_confirm: This will delete the recurrence and all future events. Are you sure?
     not_found: No recurrence rule found for this event.
     inactive: This recurrence is inactive and cannot be edited.
     info:

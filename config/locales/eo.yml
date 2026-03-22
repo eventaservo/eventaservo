@@ -121,6 +121,13 @@ eo:
     created: Ripetregulo kreita sukcese. Filaj eventoj estas generataj.
     updated: Ripetregulo ĝisdatigita sukcese.
     destroyed: Ripetregulo forigita sukcese.
+    new_title: "Agordi ripetregulojn por: %{event}"
+    new_subtitle: Agordu kiel ĉi tiu evento ripetu. Filaj eventoj estos aŭtomate generataj.
+    edit_title: "Redakti ripetregulojn por: %{event}"
+    edit_subtitle: Ŝanĝoj al la ripetaranĝo afektas estontajn eventojn.
+    danger_zone: Danĝera zono
+    delete_recurrence: Forigi ripetregulojn
+    delete_confirm: Ĉi tio forigos la ripetregulojn kaj ĉiujn estontajn eventojn. Ĉu vi certas?
     not_found: Neniu ripetregulo trovita por ĉi tiu evento.
     inactive: Ĉi tiu ripetregulo estas neaktiva kaj ne redaktebla.
     info:

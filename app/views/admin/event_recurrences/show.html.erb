@@ -11,14 +11,14 @@
   <div class="d-flex justify-content-between align-items-start mb-3">
     <div>
       <div class="lead"><%= @recurrence.master_event.title %></div>
-      <p class="text-body-secondary mb-0"><%= recurrence_description(@recurrence) %></p>
+      <p class="text-body-secondary mb-0"><%= @presenter.description %></p>
     </div>
-    <div><%= recurrence_status_badge(@recurrence) %></div>
+    <div><%= @presenter.badge_html %></div>
   </div>
 
   <div class="row g-3 small">
     <div class="col-md-3">
-      <strong>Frequency:</strong> <%= @recurrence.frequency.capitalize %>
+      <strong>Frequency:</strong> <%= @presenter.description %>
     </div>
     <div class="col-md-3">
       <strong>Interval:</strong> <%= @recurrence.interval %>
@@ -37,8 +37,6 @@
     <%= link_to "View master event", event_path(code: @recurrence.master_event.ligilo), class: "btn btn-sm btn-outline-success" %>
     <% if @recurrence.active? %>
       <%= link_to "Edit recurrence", edit_event_recurrence_path(event_code: @recurrence.master_event.ligilo), class: "btn btn-sm btn-outline-primary" %>
-    <% end %>
-    <% if @recurrence.active? %>
       <%= button_to "Deactivate", deactivate_admin_event_recurrence_path(@recurrence),
           method: :patch, class: "btn btn-sm btn-outline-warning",
           data: { turbo_confirm: "Deactivate this recurrence?" } %>

@@ -3,7 +3,7 @@
     <i class="bi bi-arrow-repeat"></i>
     <div>
       <strong><%= t("recurrences.info.recurring_event") %></strong> &mdash;
-      <%= recurrence_description(event.recurrence) %>
+      <%= EventRecurrencePresenter.new(recurrence: event.recurrence).description %>
       <% if user_can_edit_event?(user: current_user, event: event) && event.recurrence.active? %>
         &middot;
         <%= link_to t("recurrences.info.edit_recurrence"), edit_event_recurrence_path(event_code: event.ligilo) %>
