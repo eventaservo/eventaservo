@@ -8,41 +8,35 @@
 
 <%# Recurrence details card %>
 <div class="box-white mb-3">
-  <div class="d-flex justify-content-between align-items-start mb-3">
-    <div>
-      <div class="lead"><%= @recurrence.master_event.title %></div>
-      <p class="text-body-secondary mb-0"><%= @presenter.description %></p>
-    </div>
-    <div><%= @presenter.badge_html %></div>
-  </div>
+  <div class="d-flex align-items-center gap-3 mb-3">
 
-  <div class="row g-3 small">
-    <div class="col-md-3">
-      <strong>Frequency:</strong> <%= @presenter.description %>
-    </div>
-    <div class="col-md-3">
-      <strong>Interval:</strong> <%= @recurrence.interval %>
-    </div>
-    <div class="col-md-3">
-      <strong>Ends:</strong> <%= @recurrence.end_type_on_date? ? format_date(@recurrence.end_date, style: :short) : "Never" %>
-    </div>
-    <div class="col-md-3">
-      <strong>Created:</strong> <%= format_date(@recurrence.created_at, style: :short) %>
+    <div class="flex-grow-1">
+      <div class="d-flex align-items-center gap-2 mb-1 justify-content-between">
+        <h5 class="fw-bold mb-0"><%= @recurrence.master_event.title %></h5>
+        <%= @presenter.badge_html %>
+      </div>
+      <div class="text-body-secondary small">
+        <i class="fas fa-redo-alt me-1"></i><%= @presenter.description %>
+        <span class="mx-1">&middot;</span>
+        <i class="fas fa-calendar-check me-1"></i><%= @recurrence.end_type_on_date? ? "Ends #{format_date(@recurrence.end_date, style: :short)}" : "No end date" %>
+      </div>
+      <div>
+        <%= link_to "View master event", event_path(code: @recurrence.master_event.ligilo), class: "py-2 small" %>
+      </div>
     </div>
   </div>
 
-  <hr>
-
-  <div class="d-flex gap-2">
-    <%= link_to "View master event", event_path(code: @recurrence.master_event.ligilo), class: "btn btn-sm btn-outline-success" %>
+  <div class="buttons-footer">
     <% if @recurrence.active? %>
-      <%= link_to "Edit recurrence", edit_event_recurrence_path(event_code: @recurrence.master_event.ligilo), class: "btn btn-sm btn-outline-primary" %>
       <%= button_to "Deactivate", deactivate_admin_event_recurrence_path(@recurrence),
-          method: :patch, class: "btn btn-sm btn-outline-warning",
+          method: :patch, class: "button-delete me-auto",
           data: { turbo_confirm: "Deactivate this recurrence?" } %>
+    <% end %>
+    <% if @recurrence.active? %>
+      <%= link_to "Edit", edit_event_recurrence_path(event_code: @recurrence.master_event.ligilo), class: "button-submit" %>
     <% else %>
       <%= button_to "Reactivate", reactivate_admin_event_recurrence_path(@recurrence),
-          method: :patch, class: "btn btn-sm btn-outline-success" %>
+          method: :patch, class: "button-submit" %>
     <% end %>
   </div>
 </div>
@@ -56,7 +50,6 @@
       <div class="row g-0 align-items-center bg-success text-white text-uppercase fw-bold px-2 py-2 smaller">
         <div class="col-2">Date</div>
         <div class="col">Title</div>
-        <div class="col-2">Location</div>
         <div class="col-1 text-center">Type</div>
         <div class="col-1 text-center">Status</div>
       </div>
@@ -66,31 +59,17 @@
         <% is_past = event.date_start < Time.current %>
         <%= link_to event_path(code: event.ligilo), class: "row g-0 align-items-center px-2 py-1 small hover-row text-decoration-none text-dark #{('border-bottom' unless i == @series_events.size - 1)} #{('bg-body-tertiary' if i.odd?)} #{('opacity-50' if is_past && !is_master)}" do %>
           <div class="col-2 fw-semibold text-success-emphasis small">
-            <%= l(event.komenca_dato, format: "%a").capitalize %> <%= format_date(event.komenca_dato, style: :compact) %>
+            <%= format_date(event.komenca_dato, style: :compact) %>
           </div>
           <div class="col fw-medium text-truncate">
             <%= event_flag(event) %> <%= event.title %>
           </div>
-          <div class="col-2 text-body-secondary text-truncate"><%= event.city %></div>
-          <div class="col-1 text-center">
-            <% if is_master %>
-              <span class="badge bg-primary">Master</span>
-            <% else %>
-              <span class="badge bg-light text-dark">Child</span>
-            <% end %>
+          <% event_presenter = EventPresenter.new(event:) %>
+          <div class="col text-center">
+            <%= event_presenter.recurrence_type_badge_html %>
           </div>
-          <div class="col-1 text-center">
-            <% if event.detached_from_recurrent_series? %>
-              <span class="badge bg-warning text-dark">Detached</span>
-            <% elsif event.cancelled? %>
-              <span class="badge bg-danger">Cancelled</span>
-            <% elsif event.deleted? %>
-              <span class="badge bg-dark">Deleted</span>
-            <% elsif is_past %>
-              <span class="badge bg-secondary">Past</span>
-            <% else %>
-              <span class="badge bg-success">Upcoming</span>
-            <% end %>
+          <div class="col text-center">
+            <%= event_presenter.recurrence_status_badge_html %>
           </div>
         <% end %>
       <% end %>
