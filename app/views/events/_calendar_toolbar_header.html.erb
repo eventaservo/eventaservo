@@ -3,7 +3,7 @@
 <div class="d-flex flex-column flex-md-row align-items-stretch align-items-md-center gap-2 mb-2 w-100">
   <% week_end = date + 6.days %>
   <% month_names = I18n.t("date.month_names") %>
-  <strong class="text-uppercase fs-5 text-start w-md-auto flex-shrink-0">
+  <strong class="text-uppercase fs-5 text-start flex-shrink-0">
     <% if date.year != week_end.year %>
       <%= date.day %> <%= month_names[date.month].upcase %> <%= date.year %> – <%= week_end.day %> <%= month_names[week_end.month].upcase %> <%= week_end.year %>
     <% elsif date.month != week_end.month %>
@@ -15,8 +15,7 @@
   <div class="d-flex align-items-center justify-content-between justify-content-md-end gap-2 flex-wrap flex-md-nowrap w-100 flex-md-grow-1">
     <div class="dropdown">
       <button class="btn btn-light dropdown-toggle" type="button" id="calendarMonthNavigation"
-        data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true"
-        aria-label="<%= t("events.calendar.jump_to_month") %>">
+        data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
         <%= t("events.calendar.jump_to_month") %>
       </button>
       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="calendarMonthNavigation">
