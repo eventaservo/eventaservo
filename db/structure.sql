@@ -2747,6 +2747,7 @@ ALTER TABLE ONLY public.solid_queue_scheduled_executions
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20260322125025'),
 ('20260315122454'),
 ('20260314101500'),
 ('20260220024106'),

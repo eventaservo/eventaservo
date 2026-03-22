@@ -172,8 +172,18 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     find_by("lower(short_url) = ?", link.downcase) || find_by(code: link)
   end
 
+  # Groups events by their starting month, respecting each event's timezone.
+  #
+  # @return [Hash{Date => Array<Event>}]
   def self.grouped_by_months
-    order(:date_start).group_by { |m| m.date_start.in_time_zone(m.time_zone).beginning_of_month.to_date }
+    tz_cache = Hash.new do |h, k|
+      result = TimeZone::Normalize.call(k)
+      h[k] = result.success? ? result.payload : "Etc/UTC"
+    end
+
+    order(:date_start).group_by do |m|
+      m.date_start.in_time_zone(tz_cache[m.time_zone]).beginning_of_month.to_date
+    end
   end
 
   def self.by_continent(continent_name)
@@ -501,6 +511,9 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
         self.time_zone = "Etc/UTC"
       end
     end
+
+    result = TimeZone::Normalize.call(time_zone)
+    self.time_zone = result.success? ? result.payload : "Etc/UTC"
 
     if date_start_changed?
       tz = TZInfo::Timezone.get(time_zone)
