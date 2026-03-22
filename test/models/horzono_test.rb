@@ -25,7 +25,7 @@ class HorzonoTest < ActiveSupport::TestCase
 
     # We test that Rails.cache.fetch is called with correct parameters
     mock_cache = Minitest::Mock.new
-    mock_cache.expect(:fetch, [["Esperanto", "English"]], ["horzono/for_select"], **{expires_in: 1.day})
+    mock_cache.expect(:fetch, [["Esperanto", "English"]], ["horzono/for_select"], expires_in: 1.day)
 
     Rails.stub(:cache, mock_cache) do
       assert_equal [["Esperanto", "English"]], Horzono.for_select
