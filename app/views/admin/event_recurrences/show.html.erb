@@ -50,26 +50,21 @@
       <div class="row g-0 align-items-center bg-success text-white text-uppercase fw-bold px-2 py-2 smaller">
         <div class="col-2">Date</div>
         <div class="col">Title</div>
-        <div class="col-1 text-center">Type</div>
-        <div class="col-1 text-center">Status</div>
+        <div class="col-2 text-center">Type</div>
       </div>
 
       <% @series_events.each_with_index do |event, i| %>
         <% is_master = event.id == @recurrence.master_event.id %>
         <% is_past = event.date_start < Time.current %>
-        <%= link_to event_path(code: event.ligilo), class: "row g-0 align-items-center px-2 py-1 small hover-row text-decoration-none text-dark #{('border-bottom' unless i == @series_events.size - 1)} #{('bg-body-tertiary' if i.odd?)} #{('opacity-50' if is_past && !is_master)}" do %>
+        <%= link_to event_path(code: event.ligilo), class: "row g-0 align-items-center px-2 py-1 small hover-row text-decoration-none text-dark #{event_color_class(event)} #{('border-bottom' unless i == @series_events.size - 1)} #{('bg-body-tertiary' if i.odd?)} #{('opacity-50' if is_past && !is_master)}" do %>
           <div class="col-2 fw-semibold text-success-emphasis small">
             <%= format_date(event.komenca_dato, style: :compact) %>
           </div>
           <div class="col fw-medium text-truncate">
             <%= event_flag(event) %> <%= event.title %>
           </div>
-          <% event_presenter = EventPresenter.new(event:) %>
-          <div class="col text-center">
-            <%= event_presenter.recurrence_type_badge_html %>
-          </div>
-          <div class="col text-center">
-            <%= event_presenter.recurrence_status_badge_html %>
+          <div class="col-2 text-center">
+            <%= EventPresenter.new(event:).recurrence_type_badge_html %>
           </div>
         <% end %>
       <% end %>

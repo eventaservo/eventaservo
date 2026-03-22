@@ -19,23 +19,6 @@ class EventPresenter
     end
   end
 
-  # Returns a Bootstrap badge for the event's recurrence status.
-  #
-  # @return [String] safe HTML string
-  def recurrence_status_badge_html
-    if event.detached_from_recurrent_series?
-      content_tag(:span, "Detached", class: "badge bg-warning text-dark")
-    elsif event.cancelled?
-      content_tag(:span, "Cancelled", class: "badge bg-danger")
-    elsif event.deleted?
-      content_tag(:span, "Deleted", class: "badge bg-dark")
-    elsif event.date_start < Time.current
-      content_tag(:span, "Past", class: "badge bg-secondary")
-    else
-      content_tag(:span, "Upcoming", class: "badge bg-success")
-    end
-  end
-
   def add_to_calendar_links
     {
       ics: Calendar::AddToCalendarPresenter.new(event:, provider: :ics_file).url,
