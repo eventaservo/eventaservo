@@ -83,6 +83,26 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  # GET #malnuligi tests
+  class MalnuligiTest < EventsControllerTest
+    setup do
+      @user = create(:user)
+      @event = create(:event, user: @user, cancelled: true, cancel_reason: "Weather conditions")
+      sign_in @user
+    end
+
+    test "uncancels the event and clears the reason" do
+      get event_malnuligi_path(event_code: @event.code)
+
+      assert_redirected_to event_path(code: @event.code)
+      assert_equal "Evento malnuligita", flash[:notice]
+
+      @event.reload
+      assert_not @event.cancelled?
+      assert_nil @event.cancel_reason
+    end
+  end
+
   # DELETE #destroy tests
   class DestroyTest < EventsControllerTest
     setup do
