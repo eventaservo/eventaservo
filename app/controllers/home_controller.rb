@@ -3,12 +3,12 @@
 class HomeController < ApplicationController
   include CalendarData
 
-  before_action :filter_events, only: :index
   before_action :definas_kuketojn, only: :index
 
   def index
     ahoy.track "Homepage"
 
+    @events = build_events_scope
     @future_events = Event.venontaj
     if params[:o].present?
       @future_events = @future_events.joins(:organizations).where("organizations.short_name = ?", params[:o])
@@ -169,6 +169,31 @@ class HomeController < ApplicationController
   def access_from_server
     request.headers["SERVER_NAME"].in? %w[testservilo.eventaservo.org staging.eventaservo.org
       eventaservo.org localhost 127.0.0.1]
+  end
+
+  # Builds the base +@events+ scope for the home page.
+  #
+  # Calendar mode uses a broader scope (non-cancelled, no date restriction)
+  # so that past-week navigation works. Other view modes use +venontaj+.
+  # The +periodo+ param overrides both when present.
+  #
+  # @return [ActiveRecord::Relation]
+  def build_events_scope
+    base = case params[:periodo]
+    when "hodiau" then Event.today
+    when "p7_tagojn" then Event.in_7days
+    when "p30_tagojn" then Event.in_30days
+    when "estontece" then Event.after_30days
+    else
+      (cookies[:vidmaniero] == "kalendaro") ? Event.ne_nuligitaj : Event.venontaj
+    end
+
+    Events::FilterQuery.new(
+      scope: base.includes(:organization_events).chefaj,
+      organization: params[:o],
+      tag_ids: params[:s]&.split(",")&.map(&:to_i) || [],
+      duration_type: params[:t]
+    ).call
   end
 
   def definas_kuketojn
