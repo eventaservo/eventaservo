@@ -18,14 +18,14 @@ class HomeController < ApplicationController
     @continents = Rails.cache.fetch(cache_key, expires_in: 1.hour) do
       Events::ContinentCountsQuery.new(scope: @events.venontaj).call
     end
-    @today_events = @events.today.includes(:country).includes(:organizations)
+    @today_events = @events.today.includes(:country, :organizations)
 
     if cookies[:vidmaniero] == "kalendaro"
       @events = @events.includes(:country, :organizations)
       prepare_calendar_data
     end
 
-    @events = @events.not_today.includes(%i[country organizations]) unless cookies[:vidmaniero] == "kalendaro"
+    @events = @events.not_today.includes(:country, :organizations) unless cookies[:vidmaniero] == "kalendaro"
     @ads = Ad.with_attached_image.active.order(Arel.sql("RANDOM()")).limit(4)
 
     return if cookies[:vidmaniero].in? %w[kalendaro mapo]
