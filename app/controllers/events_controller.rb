@@ -229,7 +229,7 @@ class EventsController < ApplicationController
         continent_events_base = @events.by_continent(params[:continent])
 
         @future_events = continent_events_base.venontaj
-        @countries = continent_events_base.count_by_country
+        @countries = Events::CountryCountsQuery.new(scope: continent_events_base.venontaj).call
         @today_events = continent_events_base.today.includes(:country)
         @events = continent_events_base.not_today.includes(:country, :organizations)
 

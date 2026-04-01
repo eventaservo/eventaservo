@@ -211,13 +211,6 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     where.not("(date_start>=:from AND date_start<=:to) OR (date_start<=:from AND date_end>=:from)", from: from, to: to)
   end
 
-  def self.count_by_country
-    joins(:country)
-      .select("countries.name", "countries.code", "countries.continent", "count(events.id) as count")
-      .group("countries.name", "countries.code", "countries.continent")
-      .order("countries.name")
-  end
-
   def self.count_by_cities
     select("events.city as name", "count(events.id)").group(:city).order(:city)
   end
