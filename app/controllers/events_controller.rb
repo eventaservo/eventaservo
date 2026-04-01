@@ -261,7 +261,7 @@ class EventsController < ApplicationController
         end
 
         @future_events = Event.includes(:country).by_country_id(@country.id).venontaj
-        @cities = @events.by_country_id(@country.id).count_by_cities
+        @cities = Events::CityCountsQuery.new(scope: @events.venontaj.by_country_id(@country.id)).call
         @today_events = @events.today.includes(:country).by_country_id(@country.id)
         @events = @events.not_today.includes(:country).by_country_id(@country.id)
 
