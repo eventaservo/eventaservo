@@ -16,49 +16,17 @@ class ApplicationController < ActionController::Base
   end
   helper_method :user_is_owner_or_admin
 
+  # Builds the base +@events+ relation by combining a temporal scope with
+  # user-selected filters (organization, tags, duration type).
+  #
+  # @return [void]
   def filter_events
-    @events =
-      case params[:periodo]
-      when "hodiau"
-        # ahoy.track "Filter by today events", kind: "filters"
-        Event.today
-      when "p7_tagojn"
-        # ahoy.track "Filter by events in 7 days", kind: "filters"
-        Event.in_7days
-      when "p30_tagojn"
-        # ahoy.track "Filter by events in 30 days", kind: "filters"
-        Event.in_30days
-      when "estontece"
-        # ahoy.track "Filter by events after 30 days", kind: "filters"
-        Event.after_30days
-      else
-        Event.venontaj
-      end
-
-    # Filtras la anoncojn kaj konkursojn, kiuj devas aperi nur en ilia specifa paĝo
-    @events = @events.includes([:organization_events]).chefaj
-
-    # Filter by organization
-    if params[:o].present?
-      # ahoy.track "Filter by organization", kind: "filters"
-      @events = @events.joins(:organizations).where(organizations: {short_name: params[:o]})
-    end
-
-    # Filter by category
-    if params[:s].present?
-      tag_ids = params[:s].split(",").map(&:to_i)
-      # ahoy.track "Filter category by #{tag_ids}", kind: "filters"
-      @events = @events.with_tags(tag_ids)
-    end
-
-    # Filtras per Unutaga aŭ Plurtaga
-    if params[:t] == "unutaga"
-      # ahoy.track "Filter by one-day-event", kind: "filters"
-      @events = @events.unutagaj
-    elsif params[:t] == "plurtaga"
-      # ahoy.track "Filter by multi-day-event", kind: "filters"
-      @events = @events.plurtagaj
-    end
+    @events = Events::FilterQuery.new(
+      scope: temporal_base_scope.includes(:organization_events).chefaj,
+      organization: params[:o],
+      tag_ids: params[:s]&.split(",")&.map(&:to_i) || [],
+      duration_type: params[:t]
+    ).call
   end
 
   def user_can_edit_event?(user:, event:)
@@ -90,6 +58,22 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  # Selects the temporal base scope based on the +periodo+ param and
+  # the current view mode. Calendar mode uses a broader scope (non-cancelled
+  # events without date restriction) so that past-week navigation works.
+  #
+  # @return [ActiveRecord::Relation]
+  def temporal_base_scope
+    case params[:periodo]
+    when "hodiau" then Event.today
+    when "p7_tagojn" then Event.in_7days
+    when "p30_tagojn" then Event.in_30days
+    when "estontece" then Event.after_30days
+    else
+      (cookies[:vidmaniero] == "kalendaro") ? Event.ne_nuligitaj : Event.venontaj
+    end
+  end
 
   def authenticate_admin!
     redirect_to root_path unless current_user.admin?
