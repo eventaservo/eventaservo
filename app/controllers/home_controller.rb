@@ -16,6 +16,7 @@ class HomeController < ApplicationController
 
     cache_key = ["continent_counts", params.permit(:o, :s, :t, :periodo).to_h, Event.maximum(:updated_at)]
     @continents = Rails.cache.fetch(cache_key, expires_in: 1.hour) do
+      # Sidebar counts always show future events, regardless of the active periodo filter.
       Events::ContinentCountsQuery.new(scope: @events.venontaj).call
     end
     @today_events = @events.today.includes(:country, :organizations)

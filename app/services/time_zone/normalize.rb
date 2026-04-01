@@ -38,8 +38,8 @@ module TimeZone
     # @return [ApplicationService::Response] payload contains the canonical timezone string
     def call
       return success("Etc/UTC") if tz.blank?
-      return success(tz) if Time.find_zone(tz)
       return success(LEGACY_ZONES[tz]) if LEGACY_ZONES.key?(tz)
+      return success(tz) if Time.find_zone(tz)
 
       canonical = TZInfo::Timezone.get(tz).canonical_identifier
       return success(canonical) if Time.find_zone(canonical)

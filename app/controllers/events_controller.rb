@@ -229,6 +229,7 @@ class EventsController < ApplicationController
         continent_events_base = @events.by_continent(params[:continent])
 
         @future_events = continent_events_base.venontaj
+        # Sidebar counts always show future events, regardless of the active periodo filter.
         @countries = Events::CountryCountsQuery.new(scope: continent_events_base.venontaj).call
         @today_events = continent_events_base.today.includes(:country)
         @events = continent_events_base.not_today.includes(:country, :organizations)
@@ -262,6 +263,7 @@ class EventsController < ApplicationController
 
         @events = build_events_scope
         @future_events = Event.includes(:country).by_country_id(@country.id).venontaj
+        # Sidebar counts always show future events, regardless of the active periodo filter.
         @cities = Events::CityCountsQuery.new(scope: @events.venontaj.by_country_id(@country.id)).call
         @today_events = @events.today.includes(:country).by_country_id(@country.id)
         @events = @events.not_today.includes(:country).by_country_id(@country.id)
