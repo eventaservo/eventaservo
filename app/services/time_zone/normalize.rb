@@ -39,10 +39,7 @@ module TimeZone
     def call
       return success("Etc/UTC") if tz.blank?
       return success(tz) if Time.find_zone(tz)
-
-      if LEGACY_ZONES.key?(tz)
-        return success(LEGACY_ZONES[tz])
-      end
+      return success(LEGACY_ZONES[tz]) if LEGACY_ZONES.key?(tz)
 
       canonical = TZInfo::Timezone.get(tz).canonical_identifier
       return success(canonical) if Time.find_zone(canonical)

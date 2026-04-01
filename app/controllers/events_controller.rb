@@ -334,6 +334,10 @@ class EventsController < ApplicationController
   # so that past-week navigation works. Other view modes use +venontaj+.
   # The +periodo+ param overrides both when present.
   #
+  # Reads +params[:periodo]+, +params[:o]+, +params[:s]+, +params[:t]+,
+  # and +cookies[:vidmaniero]+ to compose the scope.
+  #
+  # @note Duplicated in {HomeController} — keep both in sync.
   # @return [ActiveRecord::Relation]
   def build_events_scope
     base = case params[:periodo]
