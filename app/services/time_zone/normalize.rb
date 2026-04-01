@@ -15,6 +15,19 @@ module TimeZone
   #   result.payload # => "America/New_York"
   #
   class Normalize < ApplicationService
+    # Legacy IANA identifiers that some tzdata versions no longer recognize.
+    # Maps deprecated names to their current canonical equivalents.
+    LEGACY_ZONES = {
+      "Asia/Saigon" => "Asia/Ho_Chi_Minh",
+      "US/Eastern" => "America/New_York",
+      "US/Central" => "America/Chicago",
+      "US/Mountain" => "America/Denver",
+      "US/Pacific" => "America/Los_Angeles",
+      "US/Alaska" => "America/Anchorage",
+      "US/Hawaii" => "Pacific/Honolulu",
+      "US/Arizona" => "America/Phoenix"
+    }.freeze
+
     attr_reader :tz
 
     # @param tz [String] the timezone identifier to normalize
@@ -25,6 +38,7 @@ module TimeZone
     # @return [ApplicationService::Response] payload contains the canonical timezone string
     def call
       return success("Etc/UTC") if tz.blank?
+      return success(LEGACY_ZONES[tz]) if LEGACY_ZONES.key?(tz)
       return success(tz) if Time.find_zone(tz)
 
       canonical = TZInfo::Timezone.get(tz).canonical_identifier

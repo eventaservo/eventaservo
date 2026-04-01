@@ -12,7 +12,6 @@ class EventsController < ApplicationController
   before_action :redirect_old_link, only: %i[show edit]
   before_action :set_event, only: %i[show edit update destroy kronologio]
   before_action :authorize_user, only: %i[edit update destroy]
-  before_action :filter_events, only: %i[by_continent by_country by_city]
   before_action :validate_continent, only: %i[by_continent by_country by_city]
   before_action :set_country, only: %i[by_country by_city]
   before_action :sanitize_params
@@ -226,10 +225,12 @@ class EventsController < ApplicationController
           end
         end
 
+        @events = build_events_scope
         continent_events_base = @events.by_continent(params[:continent])
 
         @future_events = continent_events_base.venontaj
-        @countries = continent_events_base.count_by_country
+        # Sidebar counts always show future events, regardless of the active periodo filter.
+        @countries = Events::CountryCountsQuery.new(scope: continent_events_base.venontaj).call
         @today_events = continent_events_base.today.includes(:country)
         @events = continent_events_base.not_today.includes(:country, :organizations)
 
@@ -260,8 +261,10 @@ class EventsController < ApplicationController
           redirect_to events_by_country_url(continent: @country.continent.normalized, country_name: @country.name.normalized)
         end
 
+        @events = build_events_scope
         @future_events = Event.includes(:country).by_country_id(@country.id).venontaj
-        @cities = @events.by_country_id(@country.id).count_by_cities
+        # Sidebar counts always show future events, regardless of the active periodo filter.
+        @cities = Events::CityCountsQuery.new(scope: @events.venontaj.by_country_id(@country.id)).call
         @today_events = @events.today.includes(:country).by_country_id(@country.id)
         @events = @events.not_today.includes(:country).by_country_id(@country.id)
 
@@ -279,6 +282,7 @@ class EventsController < ApplicationController
       redirect_to events_by_city_url(continent: params[:continent].normalized, country_name: params[:country_name].downcase, city_name: params[:city_name].downcase)
     end
 
+    @events = build_events_scope
     @future_events = Event.by_city(params[:city_name]).venontaj
     @today_events = @events.today.includes(:country).by_city(params[:city_name])
     @events = @events.not_today.by_city(params[:city_name])
@@ -325,6 +329,35 @@ class EventsController < ApplicationController
   end
 
   private
+
+  # Builds the base +@events+ scope for event listing pages.
+  #
+  # Calendar mode uses a broader scope (non-cancelled, no date restriction)
+  # so that past-week navigation works. Other view modes use +venontaj+.
+  # The +periodo+ param overrides both when present.
+  #
+  # Reads +params[:periodo]+, +params[:o]+, +params[:s]+, +params[:t]+,
+  # and +cookies[:vidmaniero]+ to compose the scope.
+  #
+  # @note Duplicated in {HomeController} — keep both in sync.
+  # @return [ActiveRecord::Relation]
+  def build_events_scope
+    base = case params[:periodo]
+    when "hodiau" then Event.today
+    when "p7_tagojn" then Event.in_7days
+    when "p30_tagojn" then Event.in_30days
+    when "estontece" then Event.after_30days
+    else
+      (cookies[:vidmaniero] == "kalendaro") ? Event.ne_nuligitaj : Event.venontaj
+    end
+
+    Events::FilterQuery.new(
+      scope: base.includes(:organization_events).chefaj,
+      organization: params[:o],
+      tag_ids: params[:s]&.split(",")&.map(&:to_i) || [],
+      duration_type: params[:t]
+    ).call
+  end
 
   # Renders RSS feed for events filtered by a given scope.
   #

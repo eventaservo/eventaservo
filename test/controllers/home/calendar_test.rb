@@ -39,6 +39,30 @@ class HomeController::CalendarTest < ActionDispatch::IntegrationTest
     assert_select "turbo-frame[data-date='2026-06-01']"
   end
 
+  test "past week navigation shows events from that week" do
+    travel_to Time.zone.parse("2026-04-07 12:00:00") do
+      Event.create!(
+        title: "Last Week Event",
+        description: "Test",
+        city: "Test City",
+        country_id: 1,
+        date_start: Time.zone.parse("2026-04-02 10:00:00"),
+        date_end: Time.zone.parse("2026-04-02 18:00:00"),
+        time_zone: "Etc/UTC",
+        code: SecureRandom.hex(6),
+        site: "https://test.example.com",
+        user: users(:user)
+      )
+
+      # First request establishes the kalendaro cookie
+      get root_url
+      # Navigate to a past week — event should be visible
+      get root_url, params: {date: "2026-03-31"}
+      assert_response :success
+      assert_match "Last Week Event", response.body
+    end
+  end
+
   test "month navigation dropdown lists twelve months from next month" do
     travel_to Time.zone.parse("2026-03-15 12:00:00") do
       get root_url

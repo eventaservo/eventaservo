@@ -16,51 +16,6 @@ class ApplicationController < ActionController::Base
   end
   helper_method :user_is_owner_or_admin
 
-  def filter_events
-    @events =
-      case params[:periodo]
-      when "hodiau"
-        # ahoy.track "Filter by today events", kind: "filters"
-        Event.today
-      when "p7_tagojn"
-        # ahoy.track "Filter by events in 7 days", kind: "filters"
-        Event.in_7days
-      when "p30_tagojn"
-        # ahoy.track "Filter by events in 30 days", kind: "filters"
-        Event.in_30days
-      when "estontece"
-        # ahoy.track "Filter by events after 30 days", kind: "filters"
-        Event.after_30days
-      else
-        Event.venontaj
-      end
-
-    # Filtras la anoncojn kaj konkursojn, kiuj devas aperi nur en ilia specifa paĝo
-    @events = @events.includes([:organization_events]).chefaj
-
-    # Filter by organization
-    if params[:o].present?
-      # ahoy.track "Filter by organization", kind: "filters"
-      @events = @events.joins(:organizations).where(organizations: {short_name: params[:o]})
-    end
-
-    # Filter by category
-    if params[:s].present?
-      tag_ids = params[:s].split(",").map(&:to_i)
-      # ahoy.track "Filter category by #{tag_ids}", kind: "filters"
-      @events = @events.with_tags(tag_ids)
-    end
-
-    # Filtras per Unutaga aŭ Plurtaga
-    if params[:t] == "unutaga"
-      # ahoy.track "Filter by one-day-event", kind: "filters"
-      @events = @events.unutagaj
-    elsif params[:t] == "plurtaga"
-      # ahoy.track "Filter by multi-day-event", kind: "filters"
-      @events = @events.plurtagaj
-    end
-  end
-
   def user_can_edit_event?(user:, event:)
     return false unless current_user
     return true if user.admin?
