@@ -25,20 +25,21 @@ class TimeZone::NormalizeTest < ActiveSupport::TestCase
   end
 
   test "returns success for a legacy identifier" do
-    # On macOS, Asia/Saigon is directly recognized; on Linux it is not.
-    # Either way the service must succeed and return a valid timezone.
     result = TimeZone::Normalize.call("Asia/Saigon")
 
     assert result.success?
-    assert_includes ["Asia/Saigon", "Asia/Ho_Chi_Minh"], result.payload
+    assert_equal "Asia/Ho_Chi_Minh", result.payload
     assert Time.find_zone(result.payload), "Expected payload to be a valid ActiveSupport timezone"
   end
 
-  test "canonical_identifier resolves to a valid timezone for legacy zones" do
-    # Verifies the TZInfo fallback path produces a usable result
-    canonical = TZInfo::Timezone.get("Asia/Saigon").canonical_identifier
+  test "normalizes all known legacy zones to valid timezones" do
+    TimeZone::Normalize::LEGACY_ZONES.each do |legacy, canonical|
+      result = TimeZone::Normalize.call(legacy)
 
-    assert Time.find_zone(canonical), "Expected #{canonical} to be recognized by ActiveSupport"
+      assert result.success?, "Expected success for #{legacy}, got failure: #{result.error}"
+      assert_equal canonical, result.payload
+      assert Time.find_zone(result.payload), "Expected #{canonical} to be recognized by ActiveSupport"
+    end
   end
 
   test "returns failure for a completely invalid timezone" do
