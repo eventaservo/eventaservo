@@ -1,6 +1,6 @@
 <div class="dropdown">
   <a id="eventMenu" class="fas fa-ellipsis-v link-black"
-     aria-expanded="false" aria-haspopup="true" data-bs-toggle="dropdown" href="#">
+     aria-expanded="false" aria-haspopup="true" data-bs-toggle="dropdown" href="#" aria-label="Eventaj ebloj">
   </a>
   <div class="dropdown-menu dropdown-menu-end" aria-labelledby="eventMenu">
     <% if user_signed_in? && user_can_edit_event?(user: current_user, event: @event) %>
