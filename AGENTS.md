@@ -197,4 +197,5 @@ That document contains:
 
 - Do not create branches, commits, or PRs without explicit user permission
 - Error tracking via Sentry (`Sentry.capture_exception(e)`)
-- **Database**: The project uses PostgreSQL, configured in `docker-compose.yml`.- **Commit Pattern**: All commits must follow the **Conventional Commits** specification (e.g., `feat:`, `fix:`, `chore:`, `docs:`) and must be in **English**.
+- **Database**: The project uses PostgreSQL, configured in `docker-compose.yml`.
+- **Commit Pattern**: All commits must follow the **Conventional Commits** specification (e.g., `feat:`, `fix:`, `chore:`, `docs:`) and must be in **English**.
