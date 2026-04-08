@@ -8,3 +8,6 @@ Pagy::DEFAULT[:page_param] = :pagho
 require "pagy/extras/array"
 require "pagy/extras/bootstrap"
 require "pagy/extras/trim"
+
+# When you are done setting your own default freeze it, so it will not get changed accidentally
+Pagy::DEFAULT.freeze
