@@ -25,7 +25,7 @@ gem "icalendar", "~> 2.6"
 gem "mini_magick", "~> 4.10"
 
 # Omniauth authentication
-gem "omniauth-facebook", "~> 9.0"
+gem "omniauth-facebook", "~> 10.0"
 gem "omniauth-google-oauth2", "~> 1.2"
 gem "omniauth-rails_csrf_protection"
 
