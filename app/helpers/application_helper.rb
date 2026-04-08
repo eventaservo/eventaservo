@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-  include Pagy::Frontend
-
   # Font Awesome icon helper — replicates font-awesome-sass gem's icon() method.
   # Generates <i class="STYLE fa-NAME" aria-hidden="true"></i> followed by optional text.
   def icon(style, name, text = nil, html_options = {})

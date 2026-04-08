@@ -4,7 +4,7 @@ class VideoController < ApplicationController
   def index
     ahoy.track "Visit Registritaj prezentoj page"
     @videoj = ::Video.joins(:evento).order("events.date_start DESC")
-    @pagy, @videoj = pagy(@videoj, items: 6)
+    @pagy, @videoj = pagy(@videoj, limit: 6)
   end
 
   def new

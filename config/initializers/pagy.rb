@@ -1,13 +1,8 @@
 # frozen_string_literal: true
 
-# Pagy DEFAULT Variables
-Pagy::DEFAULT[:items] = 15
-Pagy::DEFAULT[:page_param] = :pagho
+# Pagy OPTIONS (replaces Pagy::DEFAULT since pagy 43)
+Pagy::OPTIONS[:limit] = 15
+Pagy::OPTIONS[:page_key] = "pagho"
 
-# Extras
-require "pagy/extras/array"
-require "pagy/extras/bootstrap"
-require "pagy/extras/trim"
-
-# When you are done setting your own default freeze it, so it will not get changed accidentally
-Pagy::DEFAULT.freeze
+# When you are done setting your own options freeze it, so it will not get changed accidentally
+Pagy::OPTIONS.freeze

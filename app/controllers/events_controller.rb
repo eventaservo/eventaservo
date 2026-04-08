@@ -323,7 +323,7 @@ class EventsController < ApplicationController
     end
 
     # Apply pagination to cached data
-    @pagy, @versions = pagy_array(cached_data[:versions], items: 15)
+    @pagy, @versions = pagy(cached_data[:versions], limit: 15)
     @users_cache = cached_data[:users_cache]
     @countries_cache = cached_data[:countries_cache]
   end
