@@ -191,9 +191,6 @@ GEM
       faraday-net_http (>= 2.0, < 3.5)
       json
       logger
-    faraday-gzip (3.1.0)
-      faraday (>= 2.0, < 3)
-      zlib (~> 3.0)
     faraday-net_http (3.4.2)
       net-http (~> 0.5)
     ffi (1.17.3-aarch64-linux-gnu)
@@ -313,14 +310,6 @@ GEM
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     logger (1.7.0)
-    lokalise_manager (7.0.0)
-      base64 (~> 0.3.0)
-      ruby-lokalise-api (~> 9.3)
-      rubyzip (>= 2.3, < 4.0)
-      zeitwerk (~> 2.4)
-    lokalise_rails (9.1.0)
-      lokalise_manager (~> 7.0)
-      zeitwerk (~> 2.4)
     loofah (2.25.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -554,12 +543,6 @@ GEM
       lint_roller (~> 1.1)
       rubocop (>= 1.75.0, < 2.0)
       rubocop-ast (>= 1.47.1, < 2.0)
-    ruby-lokalise-api (9.7.0)
-      addressable (~> 2.5)
-      faraday (~> 2.0)
-      faraday-gzip (>= 2, < 4)
-      json (~> 2)
-      zeitwerk (~> 2.4)
     ruby-progressbar (1.13.0)
     ruby-vips (2.2.5)
       ffi (~> 1.12)
@@ -670,7 +653,6 @@ GEM
       nokogiri (~> 1.8)
     yard (0.9.38)
     zeitwerk (2.7.5)
-    zlib (3.2.3)
 
 PLATFORMS
   aarch64-linux
@@ -712,7 +694,6 @@ DEPENDENCIES
   jwt (~> 2.2)
   letter_opener_web (~> 3)
   listen
-  lokalise_rails (~> 9.1)
   lookbook (>= 2.3.4)
   mini_magick (~> 4.10)
   minitest (~> 6.0)
