@@ -405,7 +405,10 @@ GEM
     orm_adapter (0.5.0)
     os (1.1.4)
     ostruct (0.6.3)
-    pagy (7.0.11)
+    pagy (43.5.0)
+      json
+      uri
+      yaml
     paper_trail (17.0.0)
       activerecord (>= 7.1)
       request_store (~> 1.4)
@@ -654,6 +657,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
+    yaml (0.4.0)
     yard (0.9.38)
     zeitwerk (2.7.5)
 
@@ -706,7 +710,7 @@ DEPENDENCIES
   omniauth-facebook (~> 10.0)
   omniauth-google-oauth2 (~> 1.2)
   omniauth-rails_csrf_protection
-  pagy (~> 7.0)
+  pagy (~> 43.5)
   paper_trail (~> 17.0)
   paper_trail-association_tracking (~> 2.2)
   pg (~> 1.1, >= 1.1.3)

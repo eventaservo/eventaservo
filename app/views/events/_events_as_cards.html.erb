@@ -14,10 +14,4 @@
   </div>
 <% end %>
 
-<% if defined?(@pagy) %>
-  <% if @pagy.try(:pages) > 1 %>
-    <div class="d-flex justify-content-center small">
-      <%= raw pagy_bootstrap_nav(@pagy) %>
-    </div>
-  <% end %>
-<% end %>
+<%= render "shared/pagination", pagy: @pagy %>

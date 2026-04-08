@@ -26,7 +26,7 @@ class OrganizationsController < ApplicationController
     @future_events = eventoj.venontaj
     @past_events = eventoj.pasintaj.order(date_start: :desc)
 
-    @pagy, @past_events = pagy(@past_events, items: 10)
+    @pagy, @past_events = pagy(@past_events, limit: 10)
 
     if params["iframe"].present?
       render :show, layout: "iframe"

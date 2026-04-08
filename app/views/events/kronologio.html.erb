@@ -45,11 +45,7 @@
       </div>
     <% end %>
 
-    <% if @pagy.pages > 1 %>
-      <div class="text-center mt-3">
-        <%= raw pagy_bootstrap_nav(@pagy) %>
-      </div>
-    <% end %>
+    <%= render "shared/pagination", pagy: @pagy %>
   <% else %>
     <div class="text-center text-muted mt-4">
       <p>Neniu ŝanĝo troviĝis en la kronologio.</p>

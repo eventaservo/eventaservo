@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   include Constants
-  include Pagy::Backend
+  include Pagy::Method
   include Internationalization
 
   before_action :set_paper_trail_whodunnit
