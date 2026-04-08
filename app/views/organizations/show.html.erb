@@ -69,7 +69,7 @@
         <% end %>
         <% if @pagy.last > 1 %>
           <div class="d-flex justify-content-center small pt-3">
-            <%= @pagy.series_nav(:bootstrap) %>
+            <%= @pagy.series_nav(:bootstrap).html_safe %>
           </div>
         <% end %>
       </div>

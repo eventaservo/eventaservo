@@ -17,7 +17,7 @@
 <% if defined?(@pagy) %>
   <% if @pagy.try(:last) > 1 %>
     <div class="d-flex justify-content-center small">
-      <%= @pagy.series_nav(:bootstrap) %>
+      <%= @pagy.series_nav(:bootstrap).html_safe %>
     </div>
   <% end %>
 <% end %>

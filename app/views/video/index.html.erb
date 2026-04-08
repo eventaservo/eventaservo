@@ -7,7 +7,7 @@
   </div>
   <% if @pagy.last > 1 %>
     <div class="d-flex justify-content-center">
-      <%= @pagy.series_nav(:bootstrap) %>
+      <%= @pagy.series_nav(:bootstrap).html_safe %>
     </div>
   <% end %>
 </div>
