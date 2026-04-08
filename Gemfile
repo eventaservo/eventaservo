@@ -99,7 +99,7 @@ gem "rollups", "~> 0.3.2"
 
 # For localization
 # https://lokalise.com
-gem "lokalise_rails", "~> 7.0"
+gem "lokalise_rails", "~> 9.1"
 
 # For connecting to Google Drive
 gem "google-api-client", "~> 0.53.0"
