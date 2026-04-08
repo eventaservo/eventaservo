@@ -5,9 +5,5 @@
   <div class="d-flex justify-content-between flex-wrap">
       <%= render partial: @videoj, locals: { user: @current_user, show_event_details: true } %>
   </div>
-  <% if @pagy.last > 1 %>
-    <div class="d-flex justify-content-center">
-      <%= @pagy.series_nav(:bootstrap).html_safe %>
-    </div>
-  <% end %>
+  <%= render "shared/pagination", pagy: @pagy %>
 </div>

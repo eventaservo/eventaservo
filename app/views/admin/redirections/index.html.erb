@@ -51,9 +51,5 @@
     <% end %>
   </div>
 
-  <% if @pagy.last > 1 %>
-    <div class="d-flex justify-content-center mt-3">
-      <%= @pagy.series_nav(:bootstrap).html_safe %>
-    </div>
-  <% end %>
+  <%= render "shared/pagination", pagy: @pagy %>
 </div>

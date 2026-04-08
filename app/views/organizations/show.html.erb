@@ -67,11 +67,7 @@
             <div class="col <%= "cancelled" if e.cancelled %>"><%= e.title %></div>
           <% end %>
         <% end %>
-        <% if @pagy.last > 1 %>
-          <div class="d-flex justify-content-center small pt-3">
-            <%= @pagy.series_nav(:bootstrap).html_safe %>
-          </div>
-        <% end %>
+        <%= render "shared/pagination", pagy: @pagy %>
       </div>
     <% end %>
   </div>
