@@ -81,7 +81,7 @@ class ApplicationHelperTest < ActionView::TestCase
     event.update!(date_end: Time.new(2018, 7, 21, 12, 0, 0).in_time_zone(event.time_zone))
     assert_equal "17 - 21 julio 2018", event_date(event)
 
-    # malsammonata evento
+    # sammonata evento
     event.update!(date_end: Time.new(2018, 8, 21, 12, 0, 0).in_time_zone(event.time_zone))
     assert_equal "17 julio - 21 aŭgusto 2018", event_date(event)
 
@@ -144,7 +144,7 @@ class ApplicationHelperTest < ActionView::TestCase
   end
 
   # rss_enclosure tests
-  test "rss_enclosure should use rails_storage_proxy_url for images" do
+  test "rss_enclosure should use rails_blob_representation_proxy_url for images" do
     event = events(:valid_event)
 
     blob_mock = Minitest::Mock.new
@@ -161,7 +161,7 @@ class ApplicationHelperTest < ActionView::TestCase
     def upload_mock.blob=(b)
       @blob = b
     end
-
+    upload_mock.blob = blob_mock
     def upload_mock.variant(args)
       @variant_args = args
       @variant_mock
@@ -170,7 +170,7 @@ class ApplicationHelperTest < ActionView::TestCase
     def upload_mock.variant_mock=(v)
       @variant_mock = v
     end
-
+    upload_mock.variant_mock = variant_mock
     def upload_mock.variant_args
       @variant_args
     end
@@ -182,9 +182,6 @@ class ApplicationHelperTest < ActionView::TestCase
     def upload_mock.content_type
       "image/jpeg"
     end
-
-    upload_mock.blob = blob_mock
-    upload_mock.variant_mock = variant_mock
 
     uploads_mock = Minitest::Mock.new
     uploads_mock.expect :attached?, true
@@ -199,17 +196,15 @@ class ApplicationHelperTest < ActionView::TestCase
       @enclosure_kwargs
     end
 
-    Sentry.stub :capture_exception, ->(e) { @captured_exception = e } do
-      # Helper methods like rails_storage_proxy_url are on self in ActionView::TestCase
-      stub(:rails_storage_proxy_url, "http://test.host/proxy") do
-        event.stub :uploads, uploads_mock do
-          rss_enclosure(xml_mock, event)
-        end
+    stub(:rails_blob_representation_proxy_url, "http://test.host/proxy") do
+      event.stub :uploads, uploads_mock do
+        rss_enclosure(xml_mock, event)
       end
     end
 
     assert_equal({url: "http://test.host/proxy", length: 100, type: "image/jpeg"}, xml_mock.enclosure_kwargs)
     assert_equal({resize_to_limit: [150, 150]}, upload_mock.variant_args)
+
     blob_mock.verify
     variant_mock.verify
     uploads_mock.verify
