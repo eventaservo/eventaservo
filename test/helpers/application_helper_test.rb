@@ -144,7 +144,7 @@ class ApplicationHelperTest < ActionView::TestCase
   end
 
   # rss_enclosure tests
-  test "rss_enclosure should use rails_blob_representation_proxy_url for images" do
+  test "rss_enclosure should use url_for for images" do
     event = events(:valid_event)
 
     blob_mock = Minitest::Mock.new
@@ -196,7 +196,7 @@ class ApplicationHelperTest < ActionView::TestCase
       @enclosure_kwargs
     end
 
-    stub(:rails_blob_representation_proxy_url, "http://test.host/proxy") do
+    stub(:url_for, "http://test.host/proxy") do
       event.stub :uploads, uploads_mock do
         rss_enclosure(xml_mock, event)
       end
