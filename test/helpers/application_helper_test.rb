@@ -196,11 +196,18 @@ class ApplicationHelperTest < ActionView::TestCase
       @enclosure_kwargs
     end
 
-    stub(:url_for, "http://test.host/proxy") do
+    url_for_arg = nil
+    stub(:url_for, ->(arg) {
+      url_for_arg = arg
+      "http://test.host/proxy"
+    }) do
       event.stub :uploads, uploads_mock do
         rss_enclosure(xml_mock, event)
       end
     end
+
+    assert_equal variant_mock.object_id, url_for_arg.object_id,
+      "url_for should receive the processed variant"
 
     assert_equal({url: "http://test.host/proxy", length: 100, type: "image/jpeg"}, xml_mock.enclosure_kwargs)
     assert_equal({resize_to_limit: [150, 150]}, upload_mock.variant_args)

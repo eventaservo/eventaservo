@@ -1,5 +1,7 @@
 {
-  "experimental": {},
+  "experimental": {
+    "plan": true
+  },
   "mcpServers": {
     "Sentry": {
       "url": "https://mcp.sentry.dev/mcp"
@@ -7,13 +9,5 @@
   },
   "ide": {
     "enabled": true
-  },
-  "general": {
-    "plan": {
-      "enabled": true
-    }
-  },
-  "agents": {
-    "overrides": {}
   }
 }
