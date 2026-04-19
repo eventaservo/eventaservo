@@ -260,10 +260,10 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def valid_time_zone(tz)
-    return self.time_zone unless tz
+    return time_zone unless tz
 
     result = TimeZone::Normalize.call(tz)
-    result.success? ? result.payload : self.time_zone
+    result.success? ? result.payload : time_zone
   end
 
   def komenca_dato(horzono: nil)
