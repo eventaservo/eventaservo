@@ -259,50 +259,47 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     latitude.present? && longitude.present?
   end
 
+  def valid_time_zone(tz)
+    return self.time_zone unless tz
+
+    result = TimeZone::Normalize.call(tz)
+    result.success? ? result.payload : self.time_zone
+  end
+
   def komenca_dato(horzono: nil)
-    date_start.in_time_zone(horzono || time_zone)
+    date_start.in_time_zone(valid_time_zone(horzono))
   end
 
   def fina_dato(horzono: nil)
-    date_end.in_time_zone(horzono || time_zone)
+    date_end.in_time_zone(valid_time_zone(horzono))
   end
 
   def komenca_tago(horzono: nil)
     return unless date_start
 
-    time_zone = horzono if horzono
-    date_start.in_time_zone(time_zone).strftime("%d/%m/%Y")
+    date_start.in_time_zone(valid_time_zone(horzono)).strftime("%d/%m/%Y")
   end
 
   def fina_tago(horzono: nil)
     return unless date_end
 
-    time_zone = horzono if horzono
-    date_end.in_time_zone(time_zone).strftime("%d/%m/%Y")
+    date_end.in_time_zone(valid_time_zone(horzono)).strftime("%d/%m/%Y")
   end
 
   def komenca_horo(horzono: nil)
     return unless date_start
 
-    time_zone =
-      horzono || self.time_zone
-    date_start.in_time_zone(time_zone).strftime("%H:%M")
+    date_start.in_time_zone(valid_time_zone(horzono)).strftime("%H:%M")
   end
 
   def fina_horo(horzono: nil)
     return unless date_end
 
-    time_zone =
-      horzono || self.time_zone
-    date_end.in_time_zone(time_zone).strftime("%H:%M")
+    date_end.in_time_zone(valid_time_zone(horzono)).strftime("%H:%M")
   end
 
   def multtaga?(horzono: nil)
-    if horzono
-      fina_tago(horzono: horzono).to_date > komenca_tago(horzono: horzono).to_date
-    else
-      fina_tago(horzono: time_zone).to_date > komenca_tago(horzono: time_zone).to_date
-    end
+    fina_tago(horzono: horzono).to_date > komenca_tago(horzono: horzono).to_date
   end
 
   def samtaga?
