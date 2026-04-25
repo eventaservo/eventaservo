@@ -38,7 +38,7 @@ module Api
         end
 
         begin
-          decoded = ::JWT.decode token, Rails.application.credentials.dig(:jwt, :secret)
+          decoded = ::JWT.decode(token, Rails.application.credentials.dig(:jwt, :secret), true, algorithm: "HS256")
         rescue JWT::DecodeError
           ahoy.track "Token invalid", kind: "api"
           render json: {eraro: I18n.t("api.v2.errors.token_invalid")}, status: :unauthorized and return
