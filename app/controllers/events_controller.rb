@@ -89,6 +89,7 @@ class EventsController < ApplicationController
       NovaEventaSciigoJob.perform_later(@event)
       ahoy.track "Create event", event_url: @event.short_url
       Logs::Create.call(text: "Event created", user: current_user, loggable: @event)
+      flash[:alert] = time_zone_detection_alert if @event.time_zone_detection_status == :failed
       redirect_to event_path(code: @event.ligilo), flash: {notice: "Evento sukcese kreita."}
     else
       render :new
@@ -144,6 +145,7 @@ class EventsController < ApplicationController
       set_event_format(@event)
       ahoy.track "Update event", event_url: @event.short_url
       Logs::Create.call(text: "Event updated", user: current_user, loggable: @event)
+      flash[:alert] = time_zone_detection_alert if @event.time_zone_detection_status == :failed
       redirect_to event_path(code: @event.ligilo), notice: "Evento sukcese ĝisdatigita"
     else
       render :edit
@@ -153,6 +155,7 @@ class EventsController < ApplicationController
     PaperTrail.request.disable_model(Event)
     @event.update(event_params)
     PaperTrail.request.enable_model(Event)
+    flash[:alert] = time_zone_detection_alert if @event.time_zone_detection_status == :failed
     redirect_to event_path(code: @event.ligilo), notice: "Evento sukcese ĝisdatigita"
   end
 
@@ -453,6 +456,16 @@ class EventsController < ApplicationController
   # @return [void]
   def mark_dates_from_form
     @event.dates_from_form = true if params[:time_start].present?
+  end
+
+  # User-facing flash message when automatic time-zone detection failed and
+  # the country provided no fallback. Asks the user to verify rather than
+  # claiming UTC was applied — the model keeps whatever +time_zone+ the
+  # event had when the country fallback could not produce one.
+  #
+  # @return [String]
+  def time_zone_detection_alert
+    "Ne eblis aŭtomate detekti la horzonon de la evento. Bonvolu kontroli la horzonon de la evento."
   end
 
   def spam_detected

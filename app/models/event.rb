@@ -58,6 +58,15 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   # regardless of the underlying UTC representation.
   attr_accessor :dates_from_form
 
+  # Transient flag set during +format_event_data+ so the controller can
+  # surface user-facing flashes about the time-zone detection outcome of the
+  # current save. Possible values:
+  #   :geocoded         — coordinates resolved and timezone derived from them
+  #   :country_fallback — geocoding produced no coordinates; country default used
+  #   :failed           — both geocoding and country fallback unavailable
+  #   nil               — no detection attempted on this save
+  attr_accessor :time_zone_detection_status
+
   has_many_attached :uploads
   validate :verify_upload_content_type
 
@@ -475,6 +484,8 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   # Formatas la eventon laŭ normala formato
   def format_event_data
+    self.time_zone_detection_status = nil
+
     self.title = TitleNormalizer.new(title).call if new_record?
 
     convert_x_characters if new_record?
@@ -491,13 +502,9 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
       self.longitude = nil
     end
 
-    if latitude_changed? || longitude_changed?
-      begin
-        self.time_zone = Timezone.lookup(latitude, longitude).name unless latitude.nil?
-      rescue
-        self.time_zone = "Etc/UTC"
-      end
-    end
+    detection = TimeZone::Detect.call(event: self)
+    self.time_zone = detection.payload[:time_zone]
+    self.time_zone_detection_status = detection.payload[:status]
 
     result = TimeZone::Normalize.call(time_zone)
     self.time_zone = result.success? ? result.payload : "Etc/UTC"
