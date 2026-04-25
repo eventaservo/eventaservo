@@ -32,6 +32,30 @@ class TimeZone::NormalizeTest < ActiveSupport::TestCase
     assert Time.find_zone(result.payload), "Expected payload to be a valid ActiveSupport timezone"
   end
 
+  test "normalizes Europe/Kiev to Europe/Kyiv" do
+    result = TimeZone::Normalize.call("Europe/Kiev")
+
+    assert result.success?
+    assert_equal "Europe/Kyiv", result.payload
+    assert Time.find_zone(result.payload)
+  end
+
+  test "normalizes America/Buenos_Aires to America/Argentina/Buenos_Aires" do
+    result = TimeZone::Normalize.call("America/Buenos_Aires")
+
+    assert result.success?
+    assert_equal "America/Argentina/Buenos_Aires", result.payload
+    assert Time.find_zone(result.payload)
+  end
+
+  test "normalizes Asia/Katmandu to Asia/Kathmandu" do
+    result = TimeZone::Normalize.call("Asia/Katmandu")
+
+    assert result.success?
+    assert_equal "Asia/Kathmandu", result.payload
+    assert Time.find_zone(result.payload)
+  end
+
   test "always normalizes legacy zones to their canonical form" do
     TimeZone::Normalize::LEGACY_ZONES.each do |legacy, canonical|
       result = TimeZone::Normalize.call(legacy)
