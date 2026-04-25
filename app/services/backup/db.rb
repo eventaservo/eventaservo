@@ -9,7 +9,7 @@ module Backup
       @output_file = File.join(Rails.root, "tmp", filename)
       Rails.logger.info "Exportando base de dados #{ENV["DB_NAME"]} para #{@output_file}"
 
-      env = { "PGPASSWORD" => ENV["DB_PASSWORD"] }
+      env = {"PGPASSWORD" => ENV["DB_PASSWORD"]}
       command = [
         "/usr/bin/pg_dump",
         "--username=#{ENV["DB_USERNAME"]}",
