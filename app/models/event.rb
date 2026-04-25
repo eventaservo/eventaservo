@@ -51,6 +51,13 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   store_accessor :metadata, :event_reminder_job_ids
 
+  # Transient flag the controller sets when the user submitted wall-clock
+  # +time_start+/+time_end+ values from the event form. Triggers
+  # reinterpretation of those wall-clock components in the event's time zone
+  # during +format_event_data+, so that the typed hour is preserved
+  # regardless of the underlying UTC representation.
+  attr_accessor :dates_from_form
+
   has_many_attached :uploads
   validate :verify_upload_content_type
 
@@ -495,10 +502,9 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     result = TimeZone::Normalize.call(time_zone)
     self.time_zone = result.success? ? result.payload : "Etc/UTC"
 
-    if date_start_changed?
-      tz = TZInfo::Timezone.get(time_zone)
-      self.date_start = tz.local_to_utc(Time.new(date_start.year, date_start.month, date_start.day, date_start.hour, date_start.min)).in_time_zone(time_zone)
-      self.date_end = tz.local_to_utc(Time.new(date_end.year, date_end.month, date_end.day, date_end.hour, date_end.min)).in_time_zone(time_zone)
+    if dates_from_form && date_start.present? && date_end.present?
+      self.date_start = TimeZone::WallClockToUtc.call(time_zone:, datetime: date_start).payload.in_time_zone(time_zone)
+      self.date_end = TimeZone::WallClockToUtc.call(time_zone:, datetime: date_end).payload.in_time_zone(time_zone)
     end
   end
 

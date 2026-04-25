@@ -65,6 +65,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.user_id ||= current_user.id
+    mark_dates_from_form
 
     if @event.save
       # Process categories tags
@@ -95,6 +96,8 @@ class EventsController < ApplicationController
   end
 
   def update # rubocop:disable Metrics/MethodLength, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+    mark_dates_from_form
+
     if dosier_alshutado
       if params[:event].nil?
         redirect_to(event_url(code: @event.ligilo),
@@ -440,6 +443,16 @@ class EventsController < ApplicationController
     # DateTime.strptime("#{date} #{time}", '%d/%m/%Y %H:%M')
     # "#{date} #{time}".in_time_zone(time_zone)
     "#{date} #{time}"
+  end
+
+  # Marks the event so the model reinterprets its wall-clock date components
+  # in the event's time zone during save. Only flips on when the form
+  # submitted +time_start+, which is the signal that the user typed a
+  # wall-clock value the model must preserve.
+  #
+  # @return [void]
+  def mark_dates_from_form
+    @event.dates_from_form = true if params[:time_start].present?
   end
 
   def spam_detected
