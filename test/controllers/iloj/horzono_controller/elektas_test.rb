@@ -40,4 +40,20 @@ class Iloj::HorzonoController::ElektasTest < ActionDispatch::IntegrationTest
     assert_nil response.cookies["horzono"]
     assert_equal "Nevalida horzono", flash[:error]
   end
+
+  test "falls back to root_url on success when no referrer is present" do
+    post "/iloj/elektas_horzonon", params: {horzono: "Europe/Berlin"},
+      headers: {"HTTPS" => "on"}
+
+    assert_redirected_to root_url
+    assert_equal "Europe/Berlin", response.cookies["horzono"]
+  end
+
+  test "falls back to root_url on rejection when no referrer is present" do
+    post "/iloj/elektas_horzonon", params: {horzono: "Invalid/Timezone"},
+      headers: {"HTTPS" => "on"}
+
+    assert_redirected_to root_url
+    assert_equal "Nevalida horzono", flash[:error]
+  end
 end

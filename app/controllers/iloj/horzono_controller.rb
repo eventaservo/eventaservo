@@ -22,7 +22,7 @@ module Iloj
       cookies[:horzono] = {
         value: result.payload, expires: 1.year, secure: true
       }
-      redirect_to request.referrer,
+      redirect_to request.referrer || root_url,
         flash: {success: "Horzono elektita sukcese"}
     end
 
