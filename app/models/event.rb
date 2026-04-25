@@ -387,9 +387,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
     return header_image.url if header_image.is_a? ActionText::Attachment
 
-    Rails.application.routes.url_helpers.rails_storage_proxy_representation_url(
-      header_image.variant(resize_to_limit: [400, 400]).processed
-    )
+    header_image.variant(resize_to_limit: [400, 400]).processed.url
   rescue => e
     Sentry.capture_exception(e)
     false
