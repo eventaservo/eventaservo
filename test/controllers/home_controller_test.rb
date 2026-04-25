@@ -8,6 +8,21 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "renders index when visitor has a legacy timezone cookie" do
+    cookies[:horzono] = "America/Buenos_Aires"
+
+    get root_url
+    assert_response :success
+  end
+
+  test "deletes the cookie when visitor has an invalid timezone" do
+    cookies[:horzono] = "Invalid/Timezone"
+
+    get root_url
+    assert_response :success
+    assert_nil response.cookies["horzono"]
+  end
+
   test "should get instruantoj kaj prelegantoj" do
     get instruantoj_kaj_prelegantoj_url
     assert_response :success

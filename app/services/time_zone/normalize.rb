@@ -19,6 +19,9 @@ module TimeZone
     # Maps deprecated names to their current canonical equivalents.
     LEGACY_ZONES = {
       "Asia/Saigon" => "Asia/Ho_Chi_Minh",
+      "Asia/Katmandu" => "Asia/Kathmandu",
+      "Europe/Kiev" => "Europe/Kyiv",
+      "America/Buenos_Aires" => "America/Argentina/Buenos_Aires",
       "US/Eastern" => "America/New_York",
       "US/Central" => "America/Chicago",
       "US/Mountain" => "America/Denver",
