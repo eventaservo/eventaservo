@@ -12,7 +12,13 @@ class TimeZone::DetectTest < ActiveSupport::TestCase
       longitude: -0.1278
     )
 
-    result = TimeZone::Detect.call(event: event)
+    # Stub the timezone gem inline so the test does not depend on the
+    # backend the +timezone+ gem is configured with at boot.
+    lookup_double = Struct.new(:name).new("Europe/London")
+    result = nil
+    Timezone.stub(:lookup, ->(_lat, _lng) { lookup_double }) do
+      result = TimeZone::Detect.call(event: event)
+    end
 
     assert result.success?
     assert_equal "Europe/London", result.payload[:time_zone]

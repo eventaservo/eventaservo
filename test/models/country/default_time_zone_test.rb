@@ -8,7 +8,7 @@ class Country::DefaultTimeZoneTest < ActiveSupport::TestCase
     expected = TZInfo::Country.get("NL").zone_identifiers.first
 
     assert_equal expected, netherlands.default_time_zone
-    assert ActiveSupport::TimeZone.new(netherlands.default_time_zone),
+    assert ActiveSupport::TimeZone[netherlands.default_time_zone],
       "Expected TZInfo identifier to be a recognized ActiveSupport::TimeZone"
   end
 

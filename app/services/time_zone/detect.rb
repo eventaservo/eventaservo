@@ -72,8 +72,8 @@ module TimeZone
         level: :warning,
         extra: {
           event_id: event.id,
-          full_address: event.full_address,
-          country_code: event.country&.code
+          country_code: event.country&.code,
+          city: event.city
         }
       )
       country_fallback
