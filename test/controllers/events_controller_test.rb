@@ -82,6 +82,16 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
       assert_equal reason, @event.cancel_reason
     end
 
+    test "cancels the event with tracking" do
+      sign_in @user
+      reason = "Weather conditions"
+      assert_difference("Ahoy::Event.count", 1) do
+        post event_nuligi_path(event_code: @event.code), params: {cancel_reason: reason}
+      end
+
+      assert_redirected_to event_path(code: @event.code)
+    end
+
     test "nuligi requires authentication" do
       post event_nuligi_path(event_code: @event.code)
       assert_redirected_to new_user_session_path
@@ -113,6 +123,15 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
       @event.reload
       assert_not @event.cancelled?
       assert_nil @event.cancel_reason
+    end
+
+    test "uncancels the event with tracking" do
+      sign_in @user
+      assert_difference("Ahoy::Event.count", 1) do
+        get event_malnuligi_path(event_code: @event.code)
+      end
+
+      assert_redirected_to event_path(code: @event.code)
     end
 
     test "malnuligi requires authentication" do
@@ -177,6 +196,27 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
 
       delete event_path(code: @event.code)
       assert_redirected_to new_user_session_path
+    end
+  end
+
+  # DELETE #delete_file tests
+  class DeleteFileTest < EventsControllerTest
+    setup do
+      @user = create(:user)
+      @event = create(:event, user: @user)
+    end
+
+    test "delete_file requires authentication" do
+      delete event_delete_file_path(event_code: @event.code, file_id: 1)
+      assert_redirected_to new_user_session_path
+    end
+
+    test "delete_file requires authorization" do
+      other_user = create(:user)
+      sign_in other_user
+      delete event_delete_file_path(event_code: @event.code, file_id: 1)
+      assert_redirected_to root_url
+      assert_equal "Vi ne rajtas", flash[:error]
     end
   end
 end
