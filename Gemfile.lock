@@ -559,7 +559,7 @@ GEM
     seed_dump (3.4.1)
       activerecord (>= 4)
       activesupport (>= 4)
-    selenium-webdriver (4.41.0)
+    selenium-webdriver (4.43.0)
       base64 (~> 0.2)
       logger (~> 1.4)
       rexml (~> 3.2, >= 3.2.5)
