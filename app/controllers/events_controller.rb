@@ -8,10 +8,10 @@ class EventsController < ApplicationController
   end
   include Webcal
 
-  before_action :authenticate_user!, only: %i[index new create edit update destroy nova_importado importi kontakti_organizanton]
+  before_action :authenticate_user!, only: %i[index new create edit update destroy nova_importado importi kontakti_organizanton nuligi malnuligi]
   before_action :redirect_old_link, only: %i[show edit]
-  before_action :set_event, only: %i[show edit update destroy kronologio]
-  before_action :authorize_user, only: %i[edit update destroy]
+  before_action :set_event, only: %i[show edit update destroy kronologio nuligi malnuligi]
+  before_action :authorize_user, only: %i[edit update destroy nuligi malnuligi]
   before_action :validate_continent, only: %i[by_continent by_country by_city]
   before_action :set_country, only: %i[by_country by_city]
   before_action :sanitize_params
@@ -167,17 +167,15 @@ class EventsController < ApplicationController
   end
 
   def nuligi
-    e = Event.by_link(params[:event_code])
-    e.update(cancelled: true, cancel_reason: params[:cancel_reason])
-    ahoy.track "Cancelled event", event_url: e.short_url
+    @event.update(cancelled: true, cancel_reason: params[:cancel_reason])
+    ahoy.track "Cancelled event", event_url: @event.short_url
 
     redirect_to event_url(code: params[:event_code]), flash: {notice: "Evento nuligita"}
   end
 
   def malnuligi
-    e = Event.by_link(params[:event_code])
-    e.update(cancelled: false, cancel_reason: nil)
-    ahoy.track "Un-cancelled event", event_url: e.short_url
+    @event.update(cancelled: false, cancel_reason: nil)
+    ahoy.track "Un-cancelled event", event_url: @event.short_url
 
     redirect_to event_url(code: params[:event_code]), flash: {notice: "Evento malnuligita"}
   end

@@ -67,10 +67,10 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     setup do
       @user = create(:user)
       @event = create(:event, user: @user)
-      sign_in @user
     end
 
     test "cancels the event with a reason" do
+      sign_in @user
       reason = "Weather conditions"
       post event_nuligi_path(event_code: @event.code), params: {cancel_reason: reason}
 
@@ -81,6 +81,19 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
       assert @event.cancelled?
       assert_equal reason, @event.cancel_reason
     end
+
+    test "nuligi requires authentication" do
+      post event_nuligi_path(event_code: @event.code)
+      assert_redirected_to new_user_session_path
+    end
+
+    test "nuligi requires authorization" do
+      other_user = create(:user)
+      sign_in other_user
+      post event_nuligi_path(event_code: @event.code)
+      assert_redirected_to root_url
+      assert_equal "Vi ne rajtas", flash[:error]
+    end
   end
 
   # GET #malnuligi tests
@@ -88,10 +101,10 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     setup do
       @user = create(:user)
       @event = create(:event, user: @user, cancelled: true, cancel_reason: "Weather conditions")
-      sign_in @user
     end
 
     test "uncancels the event and clears the reason" do
+      sign_in @user
       get event_malnuligi_path(event_code: @event.code)
 
       assert_redirected_to event_path(code: @event.code)
@@ -100,6 +113,19 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
       @event.reload
       assert_not @event.cancelled?
       assert_nil @event.cancel_reason
+    end
+
+    test "malnuligi requires authentication" do
+      get event_malnuligi_path(event_code: @event.code)
+      assert_redirected_to new_user_session_path
+    end
+
+    test "malnuligi requires authorization" do
+      other_user = create(:user)
+      sign_in other_user
+      get event_malnuligi_path(event_code: @event.code)
+      assert_redirected_to root_url
+      assert_equal "Vi ne rajtas", flash[:error]
     end
   end
 
