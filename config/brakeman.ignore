@@ -1,28 +1,4 @@
 {
-  "ignored_warnings": [
-    {
-      "warning_type": "Command Injection",
-      "warning_code": 14,
-      "fingerprint": "190c167d1dd0abea9b64ac45b65317c1444270e79e431bf5c3d2e3bb7de32077",
-      "check_name": "Execute",
-      "message": "Possible command injection",
-      "file": "app/services/backup/db.rb",
-      "line": 21,
-      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
-      "code": "system(\"PGPASSWORD=#{ENV[\"DB_PASSWORD\"]} /usr/bin/pg_dump --username=#{ENV[\"DB_USERNAME\"]} --dbname=#{ENV[\"DB_NAME\"]} --host=#{ENV[\"DB_HOST\"]} --format custom --file #{File.join(Rails.root, \"tmp\", \"#{Date.today.strftime(\"%Y-%m-%d\")}-#{ENV[\"DB_NAME\"]}_#{Rails.env}.backup\")}\\n\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Backup::Db",
-        "method": "dump"
-      },
-      "user_input": "ENV[\"DB_PASSWORD\"]",
-      "confidence": "Medium",
-      "cwe_id": [
-        77
-      ],
-      "note": ""
-    }
-  ],
+  "ignored_warnings": [],
   "brakeman_version": "7.1.0"
 }

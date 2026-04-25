@@ -1,0 +1,4 @@
+## 2026-04-25 - Sentinel: Fix command injection in database backup
+**Vulnerability:** A shell command injection existed in `app/services/backup/db.rb` because `pg_dump` arguments (including `ENV["DB_PASSWORD"]`) were being directly interpolated into a string and executed with `system()`.
+**Learning:** Using `system(command_string)` is dangerous when incorporating untrusted input, even if that input comes from local ENV variables that could be attacker-controlled. The `config/brakeman.ignore` file was hiding this valid security finding.
+**Prevention:** Pass arguments to `system` as an array (e.g. `system(*command_array)`) so they are passed directly to the executable using `execve`, bypassing shell interpolation entirely. In Ruby, setting temporary environment variables safely is accomplished by passing an environment hash as the first argument to `system` (e.g., `system(env_hash, *command_array)`). Don't ignore valid warnings in `brakeman.ignore`.
