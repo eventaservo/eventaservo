@@ -504,9 +504,33 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
     if dates_from_form && date_start.present? && date_end.present?
       tz = TZInfo::Timezone.get(time_zone)
-      self.date_start = tz.local_to_utc(Time.new(date_start.year, date_start.month, date_start.day, date_start.hour, date_start.min)).in_time_zone(time_zone)
-      self.date_end = tz.local_to_utc(Time.new(date_end.year, date_end.month, date_end.day, date_end.hour, date_end.min)).in_time_zone(time_zone)
+      self.date_start = wall_clock_to_utc(tz, date_start).in_time_zone(time_zone)
+      self.date_end = wall_clock_to_utc(tz, date_end).in_time_zone(time_zone)
     end
+  end
+
+  # Converts a wall-clock datetime (year/month/day/hour/min taken from
+  # +datetime+) into UTC under the given time zone, applying deterministic
+  # policies for DST boundaries:
+  #
+  # * Ambiguous local time (fall-back overlap) — picks the DST occurrence
+  #   (first occurrence, summer-time offset). Reasoning: the form shows the
+  #   user a single wall-clock value, and choosing DST matches what the
+  #   form would round-trip back to them.
+  # * Non-existent local time (spring-forward gap) — shifts the input
+  #   forward by one hour, landing the event right after the gap rather
+  #   than failing the save.
+  #
+  # @param tz [TZInfo::Timezone]
+  # @param datetime [Time, ActiveSupport::TimeWithZone]
+  # @return [Time] UTC time
+  def wall_clock_to_utc(tz, datetime)
+    local = Time.new(datetime.year, datetime.month, datetime.day, datetime.hour, datetime.min)
+    tz.local_to_utc(local)
+  rescue TZInfo::AmbiguousTime
+    tz.local_to_utc(local, true)
+  rescue TZInfo::PeriodNotFound
+    tz.local_to_utc(local + 3600)
   end
 
   # Remove the X characters from the title, description and body

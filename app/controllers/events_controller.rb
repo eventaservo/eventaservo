@@ -151,7 +151,6 @@ class EventsController < ApplicationController
   rescue ActionView::Template::Error => e
     Sentry.capture_exception(e)
     PaperTrail.request.disable_model(Event)
-    mark_dates_from_form
     @event.update(event_params)
     PaperTrail.request.enable_model(Event)
     redirect_to event_path(code: @event.ligilo), notice: "Evento sukcese ĝisdatigita"
