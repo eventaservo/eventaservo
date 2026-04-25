@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_paper_trail_whodunnit
   before_action :set_sentry_user
+  before_action :normalize_horzono_cookie
 
   def user_is_owner_or_admin(event)
     user_signed_in? &&
@@ -55,6 +56,25 @@ class ApplicationController < ActionController::Base
       Sentry.set_user(id: current_user.id, username: current_user.username, email: current_user.email)
     else
       Sentry.set_user({})
+    end
+  end
+
+  # Self-heals the `horzono` timezone cookie before the action runs.
+  # Rewrites legacy IANA identifiers (e.g. "Europe/Kiev") to their canonical
+  # form (e.g. "Europe/Kyiv") and deletes the cookie when the stored value
+  # cannot be resolved to any valid timezone, preventing downstream
+  # `ActiveSupport::TimeZone[]` lookups from raising `ArgumentError`.
+  #
+  # @return [void]
+  def normalize_horzono_cookie
+    raw = cookies[:horzono]
+    return if raw.blank?
+
+    result = TimeZone::Normalize.call(raw)
+    if result.failure?
+      cookies.delete(:horzono)
+    elsif result.payload != raw
+      cookies[:horzono] = {value: result.payload, expires: 1.year, secure: true}
     end
   end
 end
