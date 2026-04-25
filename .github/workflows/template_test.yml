@@ -36,7 +36,7 @@ jobs:
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v4
 
       - name: Ruby e Bundler
         uses: ruby/setup-ruby@v1
@@ -62,6 +62,62 @@ jobs:
 
       - name: Run Minitest
         run: bundle exec rails test
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+  system_tests:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:15.7
+        env:
+          POSTGRES_DB: eventaservo_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d eventaservo_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      RAILS_ENV: test
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ruby e Bundler
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "yarn"
+
+      - name: Yarn
+        run: yarn install --frozen-lockfile
+
+      - name: Precompile assets
+        run: SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+
+      - name: Prepare Test
+        run: |
+          bundle exec rails db:test:prepare
 
       - name: Run System Tests
         run: bundle exec rails test:system
