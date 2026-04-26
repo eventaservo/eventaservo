@@ -46,4 +46,21 @@ class Country < ApplicationRecord
   def to_combobox_display
     name # or `title`, `to_s`, etc.
   end
+
+  # Returns a sensible default IANA time zone for the country, used as a
+  # fallback when geocoding fails to produce coordinates.
+  #
+  # Looks up the country by ISO code via TZInfo. For multi-timezone countries
+  # (USA, Brazil, Russia, etc.) returns the first identifier listed by TZInfo,
+  # which is acceptable as a best-effort fallback.
+  #
+  # @return [String, nil] IANA time zone identifier, or nil when the country
+  #   has no valid ISO code (e.g., the synthetic "online" country).
+  def default_time_zone
+    return nil if code.blank?
+
+    TZInfo::Country.get(code.upcase).zone_identifiers.first
+  rescue TZInfo::InvalidCountryCode
+    nil
+  end
 end
