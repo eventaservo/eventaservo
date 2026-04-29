@@ -28,7 +28,8 @@ module TimeZone
       "US/Pacific" => "America/Los_Angeles",
       "US/Alaska" => "America/Anchorage",
       "US/Hawaii" => "Pacific/Honolulu",
-      "US/Arizona" => "America/Phoenix"
+      "US/Arizona" => "America/Phoenix",
+      "Europe/Kiev" => "Europe/Kyiv"
     }.freeze
 
     attr_reader :tz
