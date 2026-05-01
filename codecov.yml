@@ -9,6 +9,15 @@ coverage:
       default:
         target: auto
         threshold: 1%
+  flags:
+    minitest:
+      paths:
+        - "app/"
+        - "test/"
+    system_tests:
+      paths:
+        - "app/"
+        - "test/"
   ignore:
     - lib
     - config
