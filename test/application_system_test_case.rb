@@ -2,6 +2,13 @@
 
 require "test_helper"
 
+if ENV["CI"]
+  require "simplecov"
+  require "simplecov-cobertura"
+
+  SimpleCov.command_name "system_tests"
+end
+
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   Capybara.register_driver :remote_chrome do |app|
     chrome_options = Selenium::WebDriver::Chrome::Options.new
