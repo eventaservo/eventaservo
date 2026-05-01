@@ -4,8 +4,6 @@ if ENV["CI"]
   require "simplecov"
   require "simplecov-cobertura"
 
-  SimpleCov.command_name "minitest"
-
   SimpleCov.start "rails" do
     add_filter "/test/"
     add_filter "/config/"
