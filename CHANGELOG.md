@@ -1,5 +1,69 @@
 # Changelog
 
+## [3.0.2](https://github.com/eventaservo/eventaservo/compare/v3.0.1...v3.0.2) (2026-05-01)
+
+
+### Features
+
+* **a11y:** add aria-labels to icon-only dropdown toggles ([763b385](https://github.com/eventaservo/eventaservo/commit/763b385966486495cc10cdff6ef05d5c1b1babc1))
+
+
+### Bug Fixes
+
+* **ActiveStorage:** correct storage proxy helper and add regression tests ([#1143](https://github.com/eventaservo/eventaservo/issues/1143)) ([d5bd848](https://github.com/eventaservo/eventaservo/commit/d5bd8485d5f975d1914608ca08ed63637315c29e))
+* **ActiveStorage:** use idiomatic .url for proxy representations ([#1144](https://github.com/eventaservo/eventaservo/issues/1144)) ([b8c46b7](https://github.com/eventaservo/eventaservo/commit/b8c46b7ab9387dbfcafec760a4eacdcf2be924dc))
+* normalize legacy IANA timezone identifiers ([#1149](https://github.com/eventaservo/eventaservo/issues/1149)) ([d3f220d](https://github.com/eventaservo/eventaservo/commit/d3f220db3095d852d2ad8e1276e16483312fd825))
+* normalize legacy IANA timezones and improve international calendar UI ([#1118](https://github.com/eventaservo/eventaservo/issues/1118)) ([3328318](https://github.com/eventaservo/eventaservo/commit/3328318df23fcf8515d35d5723c244cfd78f4e92))
+* preserve typed wall-clock times on event save ([#1153](https://github.com/eventaservo/eventaservo/issues/1153)) ([3e42860](https://github.com/eventaservo/eventaservo/commit/3e428608c8ee88dfdb97c4493ec730cd36e663aa))
+
+
+### Code Refactoring
+
+* extract event filtering and counting into Query Objects ([#1124](https://github.com/eventaservo/eventaservo/issues/1124)) ([b3de79f](https://github.com/eventaservo/eventaservo/commit/b3de79fac245fce2b498ff784dba0308aca9a831))
+
+
+### Continuous Integration
+
+* split minitest and system tests workflows ([#1151](https://github.com/eventaservo/eventaservo/issues/1151)) ([75db73b](https://github.com/eventaservo/eventaservo/commit/75db73bedba2b1187dbed93af8aa8489dbb2c15c))
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump binding_of_caller from 1.0.1 to 2.0.0 ([6bfa626](https://github.com/eventaservo/eventaservo/commit/6bfa626f054b858a599259e7f817b9303f2c8e9f))
+* **deps-dev:** bump selenium-webdriver from 4.41.0 to 4.43.0 ([#1141](https://github.com/eventaservo/eventaservo/issues/1141)) ([2743090](https://github.com/eventaservo/eventaservo/commit/27430900f0443ed4d7df3083a69c58e2a1db16fe))
+* **deps:** bump actions/checkout from 4 to 6 ([135e0ea](https://github.com/eventaservo/eventaservo/commit/135e0ea443447bce60537931a3d7d04557e61f0c))
+* **deps:** bump actions/setup-node from 4 to 6 ([#1133](https://github.com/eventaservo/eventaservo/issues/1133)) ([9e59bb9](https://github.com/eventaservo/eventaservo/commit/9e59bb932a8c94366d5f0446a5c5341f3fd02466))
+* **deps:** bump actions/setup-node from 4 to 6 ([#1159](https://github.com/eventaservo/eventaservo/issues/1159)) ([56ece1d](https://github.com/eventaservo/eventaservo/commit/56ece1d63f4b2970d79ce8e096b44e38736d2ad1))
+* **deps:** bump ahoy_matey from 5.4.2 to 5.5.0 ([#1140](https://github.com/eventaservo/eventaservo/issues/1140)) ([81b1873](https://github.com/eventaservo/eventaservo/commit/81b1873d1e1c34f6c21dd74e3ea2848780e9fa66))
+* **deps:** bump aws-sdk-s3 from 1.211.0 to 1.217.0 ([c8b9a37](https://github.com/eventaservo/eventaservo/commit/c8b9a37086a701d1cc8488d15a301024d87ea181))
+* **deps:** bump bullet from 8.1.0 to 8.1.1 ([#1163](https://github.com/eventaservo/eventaservo/issues/1163)) ([55c9066](https://github.com/eventaservo/eventaservo/commit/55c906638adaacbb5e5c52fcf21c6992b03faf82))
+* **deps:** bump codecov/codecov-action from 4 to 5 ([a9446f6](https://github.com/eventaservo/eventaservo/commit/a9446f6597cf0ed542bbadc78e74f5af00890691))
+* **deps:** bump codecov/codecov-action from 5 to 6 ([#1136](https://github.com/eventaservo/eventaservo/issues/1136)) ([07cc4b5](https://github.com/eventaservo/eventaservo/commit/07cc4b59a75205480b807d031bda1c4e046dd8d2))
+* **deps:** bump codecov/codecov-action from 5 to 6 ([#1160](https://github.com/eventaservo/eventaservo/issues/1160)) ([d3cec96](https://github.com/eventaservo/eventaservo/commit/d3cec965f031dca665f43f21a94c69f82de4a381))
+* **deps:** bump docker/build-push-action from 6 to 7 ([#1137](https://github.com/eventaservo/eventaservo/issues/1137)) ([2b89c96](https://github.com/eventaservo/eventaservo/commit/2b89c96ed9f1bac2ea89932f371dac0c59671914))
+* **deps:** bump docker/login-action from 3 to 4 ([#1135](https://github.com/eventaservo/eventaservo/issues/1135)) ([6af2486](https://github.com/eventaservo/eventaservo/commit/6af24864bf7eebd51967839e75c43b84e2510efa))
+* **deps:** bump docker/setup-buildx-action from 3 to 4 ([af898d7](https://github.com/eventaservo/eventaservo/commit/af898d70df1d991d8cc61da461133dafbbb85202))
+* **deps:** bump docker/setup-qemu-action from 3 to 4 ([#1132](https://github.com/eventaservo/eventaservo/issues/1132)) ([36efe13](https://github.com/eventaservo/eventaservo/commit/36efe13800ebe0b0804715de939af57d4a6fddfb))
+* **deps:** bump erb from 6.0.2 to 6.0.4 in the bundler group across 1 directory ([#1150](https://github.com/eventaservo/eventaservo/issues/1150)) ([18c6372](https://github.com/eventaservo/eventaservo/commit/18c63724485f1eb7db46374988432caa30da58d7))
+* **deps:** bump erb in the bundler group across 1 directory ([18c6372](https://github.com/eventaservo/eventaservo/commit/18c63724485f1eb7db46374988432caa30da58d7))
+* **deps:** bump getsentry/action-release from 1 to 3 ([a919bda](https://github.com/eventaservo/eventaservo/commit/a919bda7b2fc449f988bb4d97e3761a246587b85))
+* **deps:** bump github/codeql-action from 3 to 4 ([fe0af40](https://github.com/eventaservo/eventaservo/commit/fe0af4090e28217dbb2a422b0ee3f74e51a98a38))
+* **deps:** bump googleapis/release-please-action from 4 to 5 ([#1158](https://github.com/eventaservo/eventaservo/issues/1158)) ([7a152bf](https://github.com/eventaservo/eventaservo/commit/7a152bf48eb1a1555d503a5d3c5854f560508d0d))
+* **deps:** bump jwt from 2.10.2 to 3.1.2 ([#1152](https://github.com/eventaservo/eventaservo/issues/1152)) ([bad2463](https://github.com/eventaservo/eventaservo/commit/bad24633dd63378c9370b5fbe29bff657b6e7328))
+* **deps:** bump lokalise_rails from 7.1.0 to 9.1.0 ([8189708](https://github.com/eventaservo/eventaservo/commit/818970853a49862b65a4cb4339ae7676c4d1b8f5))
+* **deps:** bump pagy from 43.5.0 to 43.5.3 ([#1161](https://github.com/eventaservo/eventaservo/issues/1161)) ([1d29a8b](https://github.com/eventaservo/eventaservo/commit/1d29a8b5498f7859906b6376cfbf8a710a6e6381))
+* **deps:** bump picomatch in the npm_and_yarn group across 1 directory ([c5e052a](https://github.com/eventaservo/eventaservo/commit/c5e052a61f8925bfaf78a6746e77ae70da538167))
+* **deps:** bump solid_queue from 1.2.4 to 1.4.0 ([5da6ed0](https://github.com/eventaservo/eventaservo/commit/5da6ed0f1683c7d447d83ed7f55b6fa3869c8a80))
+* **deps:** bump trix from 2.1.17 to 2.1.18 in the npm_and_yarn group across 1 directory ([#1131](https://github.com/eventaservo/eventaservo/issues/1131)) ([5977ff3](https://github.com/eventaservo/eventaservo/commit/5977ff3644908a6b1960e856988874914e3aba3c))
+* **deps:** bump trix in the npm_and_yarn group across 1 directory ([5977ff3](https://github.com/eventaservo/eventaservo/commit/5977ff3644908a6b1960e856988874914e3aba3c))
+* **deps:** bump yard from 0.9.38 to 0.9.42 in the bundler group across 1 directory ([#1145](https://github.com/eventaservo/eventaservo/issues/1145)) ([4d0f68a](https://github.com/eventaservo/eventaservo/commit/4d0f68a8efbf50b47b0b0110e4f07ac334be25c3))
+* **deps:** bump yard from 0.9.42 to 0.9.43 ([#1162](https://github.com/eventaservo/eventaservo/issues/1162)) ([998ad01](https://github.com/eventaservo/eventaservo/commit/998ad0135a693ce8b14829612b9f83bf9f7257fd))
+* **deps:** bump yard in the bundler group across 1 directory ([4d0f68a](https://github.com/eventaservo/eventaservo/commit/4d0f68a8efbf50b47b0b0110e4f07ac334be25c3))
+* remove Lokalise integration ([#1127](https://github.com/eventaservo/eventaservo/issues/1127)) ([5f197b8](https://github.com/eventaservo/eventaservo/commit/5f197b8daa2c5faf0ba043f7c4062ab56ae2f932))
+* update omniauth-facebook to 10.0.0 ([#1129](https://github.com/eventaservo/eventaservo/issues/1129)) ([da18490](https://github.com/eventaservo/eventaservo/commit/da184905588d2fbdb21d3c4979523dd4df7fb5c0))
+* update Rails and dependencies ([#1128](https://github.com/eventaservo/eventaservo/issues/1128)) ([e4a5f9d](https://github.com/eventaservo/eventaservo/commit/e4a5f9d918ff910bcb1575c2b911b3c2c7b03273))
+* upgrade pagy to 43.5 ([#1130](https://github.com/eventaservo/eventaservo/issues/1130)) ([7006e07](https://github.com/eventaservo/eventaservo/commit/7006e07f052098bf891d83ed266869aefb261dcd))
+
 ## [3.0.1](https://github.com/eventaservo/eventaservo/compare/v3.0.0...v3.0.1) (2026-03-22)
 
 
