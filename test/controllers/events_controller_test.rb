@@ -92,6 +92,17 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
       assert_redirected_to event_path(code: @event.code)
     end
 
+    test "cancels the event using short_url" do
+      sign_in @user
+      reason = "Weather conditions"
+      post event_nuligi_path(event_code: @event.short_url), params: {cancel_reason: reason}
+
+      assert_redirected_to event_path(code: @event.short_url)
+      @event.reload
+      assert @event.cancelled?
+      assert_equal reason, @event.cancel_reason
+    end
+
     test "nuligi requires authentication" do
       post event_nuligi_path(event_code: @event.code)
       assert_redirected_to new_user_session_path
@@ -199,11 +210,53 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  # POST #kontakti_organizanton tests
+  class KontaktiOrganizantonTest < EventsControllerTest
+    setup do
+      @user = create(:user)
+      @event = create(:event)
+      sign_in @user
+    end
+
+    test "successfully sends a message to the organizer" do
+      message = "Saluton, mi havas demandojn."
+      assert_enqueued_emails 1 do
+        post event_kontakti_organizanton_path(event_code: @event.code), params: {message: message}
+      end
+
+      assert_redirected_to event_url(code: @event.code)
+      assert_equal "Mesaĝo sendita", flash[:info]
+    end
+
+    test "kontakti_organizanton requires authentication" do
+      sign_out @user
+      post event_kontakti_organizanton_path(event_code: @event.code)
+      assert_redirected_to new_user_session_path
+    end
+  end
+
   # DELETE #delete_file tests
   class DeleteFileTest < EventsControllerTest
     setup do
       @user = create(:user)
       @event = create(:event, user: @user)
+    end
+
+    test "successfully deletes a file" do
+      sign_in @user
+      @event.uploads.attach(
+        io: File.open(Rails.root.join("test", "fixtures", "files", "jes.png")),
+        filename: "jes.png",
+        content_type: "image/png"
+      )
+      upload = @event.uploads.last
+
+      assert_difference("@event.uploads.count", -1) do
+        delete event_delete_file_path(event_code: @event.code, file_id: upload.id)
+      end
+
+      assert_redirected_to event_path(code: @event.ligilo)
+      assert_equal "Dosiero sukcese forigita", flash[:success]
     end
 
     test "delete_file requires authentication" do
