@@ -8,10 +8,10 @@ class EventsController < ApplicationController
   end
   include Webcal
 
-  before_action :authenticate_user!, only: %i[index new create edit update destroy nova_importado importi kontakti_organizanton]
+  before_action :authenticate_user!, only: %i[index new create edit update destroy nova_importado importi kontakti_organizanton nuligi malnuligi delete_file]
   before_action :redirect_old_link, only: %i[show edit]
-  before_action :set_event, only: %i[show edit update destroy kronologio]
-  before_action :authorize_user, only: %i[edit update destroy]
+  before_action :set_event, only: %i[show edit update destroy kronologio nuligi malnuligi kontakti_organizanton delete_file]
+  before_action :authorize_user, only: %i[edit update destroy nuligi malnuligi delete_file]
   before_action :validate_continent, only: %i[by_continent by_country by_city]
   before_action :set_country, only: %i[by_country by_city]
   before_action :sanitize_params
@@ -167,17 +167,15 @@ class EventsController < ApplicationController
   end
 
   def nuligi
-    e = Event.by_link(params[:event_code])
-    e.update(cancelled: true, cancel_reason: params[:cancel_reason])
-    ahoy.track "Cancelled event", event_url: e.short_url
+    @event.update(cancelled: true, cancel_reason: params[:cancel_reason])
+    ahoy.track "Cancelled event", event_url: @event.short_url
 
     redirect_to event_url(code: params[:event_code]), flash: {notice: "Evento nuligita"}
   end
 
   def malnuligi
-    e = Event.by_link(params[:event_code])
-    e.update(cancelled: false, cancel_reason: nil)
-    ahoy.track "Un-cancelled event", event_url: e.short_url
+    @event.update(cancelled: false, cancel_reason: nil)
+    ahoy.track "Un-cancelled event", event_url: @event.short_url
 
     redirect_to event_url(code: params[:event_code]), flash: {notice: "Evento malnuligita"}
   end
@@ -201,9 +199,8 @@ class EventsController < ApplicationController
   end
 
   def delete_file
-    event = Event.by_code(params[:event_code])
-    event.uploads.find(params[:file_id]).purge_later
-    redirect_to event_path(code: event.ligilo), flash: {success: "Dosiero sukcese forigita"}
+    @event.uploads.find(params[:file_id]).purge_later
+    redirect_to event_path(code: @event.ligilo), flash: {success: "Dosiero sukcese forigita"}
   end
 
   def by_continent
@@ -305,18 +302,14 @@ class EventsController < ApplicationController
   end
 
   def kontakti_organizanton
-    event = Event.by_code(params[:event_code])
     message = params[:message]
 
-    EventMailer.kontakti_organizanton(event:, user: current_user, message:).deliver_later
+    EventMailer.kontakti_organizanton(event: @event, user: current_user, message:).deliver_later
 
     redirect_to event_url(code: params[:event_code]), flash: {info: "Mesaĝo sendita"}
   end
 
   def kronologio
-    @event = Event.by_link(params[:event_code])
-    redirect_to root_path, flash: {error: "Evento ne ekzistas"} and return unless @event
-
     # Cache key based on event and last version update
     cache_key = "kronologio_#{@event.id}_#{@event.updated_at.to_i}"
 
