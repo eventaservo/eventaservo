@@ -62,7 +62,7 @@
           <div class="col fw-medium text-truncate"><%= event.title %></div>
           <div class="col-3 text-body-secondary text-truncate"><%= event_flag(event) %> <%= event.city %></div>
           <div class="col-auto" style="width:40px">
-            <%= link_to icon('fas', 'trash-restore'), admin_recover_event_path(event.ligilo), method: :patch, class: "fg-color-green", title: "Restaŭri" %>
+            <%= link_to icon('fas', 'trash-restore'), admin_recover_event_path(event.ligilo), method: :patch, class: "fg-color-green", title: "Restaŭri", aria: { label: "Restaŭri" } %>
           </div>
         </div>
       <% else %>
