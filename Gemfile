@@ -120,7 +120,7 @@ group :development do
   gem "annotaterb", require: false
   gem "better_errors"
   gem "binding_of_caller"
-  gem "herb", "~> 0.9.0"
+  gem "herb", "~> 0.10.1"
   gem "htmlbeautifier", "~> 1.4"
   gem "letter_opener_web", "~> 3"
   gem "pry-rails", "~> 0.3.4"
