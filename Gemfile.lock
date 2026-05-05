@@ -336,7 +336,8 @@ GEM
     marcel (1.1.0)
     matrix (0.4.3)
     method_source (1.1.0)
-    mini_magick (4.13.2)
+    mini_magick (5.3.1)
+      logger
     mini_mime (1.1.5)
     minitest (6.0.3)
       drb (~> 2.0)
@@ -702,7 +703,7 @@ DEPENDENCIES
   letter_opener_web (~> 3)
   listen
   lookbook (>= 2.3.4)
-  mini_magick (~> 4.10)
+  mini_magick (~> 5.3)
   minitest (~> 6.0)
   minitest-mock (~> 5.27)
   mission_control-jobs
