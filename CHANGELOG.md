@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.0.3](https://github.com/eventaservo/eventaservo/compare/v3.0.2...v3.0.3) (2026-05-05)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump net-imap from 0.6.3 to 0.6.4 in the bundler group across 1 directory ([#1175](https://github.com/eventaservo/eventaservo/issues/1175)) ([14a980a](https://github.com/eventaservo/eventaservo/commit/14a980ae0224ce8e635ebb5cedb5b5a1427fec28))
+* **deps:** bump net-imap in the bundler group across 1 directory ([14a980a](https://github.com/eventaservo/eventaservo/commit/14a980ae0224ce8e635ebb5cedb5b5a1427fec28))
+
 ## [3.0.2](https://github.com/eventaservo/eventaservo/compare/v3.0.1...v3.0.2) (2026-05-01)
 
 
