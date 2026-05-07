@@ -145,4 +145,10 @@ Rails.application.configure do
   config.active_job.default_url_options = {host: "eventaservo.org", protocol: :https}
   Rails.application.routes.default_url_options[:host] = "eventaservo.org"
   Rails.application.routes.default_url_options[:protocol] = :https
+
+  # BetterStack log forwarding
+  config.logger = Logtail::Logger.create_default_logger(
+    Rails.application.credentials.dig(:betterstack, :rails_log_source_token),
+    ingesting_host: "s2420255.eu-fsn-3.betterstackdata.com"
+  )
 end
