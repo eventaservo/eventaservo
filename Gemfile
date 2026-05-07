@@ -100,9 +100,6 @@ gem "rollups", "~> 0.3.2"
 # For connecting to Google Drive
 gem "google-api-client", "~> 0.53.0"
 
-# BetterStack log forwarding
-gem "logtail-rails", "~> 0.2.12"
-
 # New Relic
 gem "newrelic_rpm"
 
