@@ -112,10 +112,4 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
 
   # Email interceptor for Staging
   config.action_mailer.interceptors = %w[StagingEmailInterceptor]
-
-  # BetterStack log forwarding
-  config.logger = Logtail::Logger.create_default_logger(
-    Rails.application.credentials.dig(:betterstack, :rails_log_source_token),
-    ingesting_host: "s2420255.eu-fsn-3.betterstackdata.com"
-  )
 end

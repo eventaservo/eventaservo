@@ -312,17 +312,6 @@ GEM
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     logger (1.7.0)
-    logtail (0.1.17)
-      msgpack (~> 1.0)
-    logtail-rack (0.2.6)
-      logtail (~> 0.1)
-      rack (>= 1.2, < 4.0)
-    logtail-rails (0.2.12)
-      actionpack (>= 5.0.0)
-      activerecord (>= 5.0.0)
-      logtail (~> 0.1, >= 0.1.14)
-      logtail-rack (~> 0.1)
-      railties (>= 5.0.0)
     loofah (2.25.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -379,6 +368,8 @@ GEM
       timeout
     net-smtp (0.5.1)
       net-protocol
+    newrelic_rpm (10.4.0)
+      logger
     nio4r (2.7.5)
     nokogiri (1.19.3-aarch64-linux-gnu)
       racc (~> 1.4)
@@ -712,12 +703,12 @@ DEPENDENCIES
   jwt (~> 3.1)
   letter_opener_web (~> 3)
   listen
-  logtail-rails (~> 0.2.12)
   lookbook (>= 2.3.4)
   mini_magick (~> 4.10)
   minitest (~> 6.0)
   minitest-mock (~> 5.27)
   mission_control-jobs
+  newrelic_rpm
   nokogiri (>= 1.10.4)
   omniauth-facebook (~> 10.0)
   omniauth-google-oauth2 (~> 1.2)
