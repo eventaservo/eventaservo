@@ -1,0 +1,36 @@
+name: New Relic Change Tracking
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+    secrets:
+      new_relic_api_key:
+        required: true
+      new_relic_deployment_entity_guid:
+        required: true
+
+jobs:
+  marker:
+    runs-on: ubuntu-22.04
+    name: New Relic
+    permissions:
+      contents: read
+    environment: ${{ inputs.environment }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Read VERSION file
+        id: getversion
+        run: |
+          echo "VERSION=$(cat config/initializers/version.rb | grep VERSION | cut -d '"' -f2)" >> "$GITHUB_OUTPUT"
+
+      - name: Create New Relic Change Tracking Marker
+        uses: newrelic/deployment-marker-action@v2.3.0
+        with:
+          apiKey: ${{ secrets.new_relic_api_key }}
+          guid: ${{ secrets.new_relic_deployment_entity_guid }}
+          version: "${{ steps.getversion.outputs.VERSION }}"
+          user: "${{ github.actor }}"
