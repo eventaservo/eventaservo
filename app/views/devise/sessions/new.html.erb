@@ -5,7 +5,7 @@
       <p class="fg-color-grayDark fw-bold">Ensalutu por krei novajn eventojn.</p>
     </div>
 
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {data: {turbo: false}}) do |f| %>
       <div class="mb-3">
         <%= f.email_field :email, autocomplete: 'email', class: 'form-control', autofocus: true, placeholder: 'Retpoŝtadreso' %>
       </div>
