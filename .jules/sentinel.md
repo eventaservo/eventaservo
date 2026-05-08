@@ -1,0 +1,4 @@
+## 2026-05-02 - [High] Cross-Site Scripting (XSS) in Video Controller
+**Vulnerability:** The `VideoController#create` method incorrectly called `.html_safe` on user-supplied parameters (`params[:title]` and `params[:description]`) before saving them to the database.
+**Learning:** This bypasses Rails' default automatic HTML escaping mechanisms. When these attributes were later rendered in the views (e.g. `_video.html.erb`), any malicious HTML or JavaScript strings input by a user would be executed within the browser of any user viewing the page. Calling `.html_safe` should never be used on un-trusted user input directly.
+**Prevention:** Avoid calling `.html_safe` on parameters. Rely on Rails' default escaping in views, or use the `sanitize` helper in views if specific HTML tags are explicitly intended to be allowed.

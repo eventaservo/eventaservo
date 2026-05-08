@@ -16,8 +16,8 @@ class VideoController < ApplicationController
     params.permit(:event_code, :video_link, :title, :description, :image)
     new_video = Video.create(evento: event,
       url: params[:video_link],
-      title: params[:title].html_safe,
-      description: params[:description].html_safe)
+      title: params[:title],
+      description: params[:description])
     if params[:image].present?
       new_video.bildo.attach(params[:image])
     end
