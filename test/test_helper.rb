@@ -25,12 +25,7 @@ require_relative "support/geocoder_stub"
 require_relative "support/timezone_stub"
 
 class ActiveSupport::TestCase
-  # Parallelization disabled on macOS due to fork() incompatibility with PostgreSQL/GSS
-  # On Linux (CI), processes work fine. On macOS, fork() crashes with "multi-threaded process forked"
-  # See: https://github.com/rails/rails/issues/31991
-  if !RUBY_PLATFORM.include?("darwin")
-    parallelize(workers: :number_of_processors)
-  end
+  parallelize(workers: :number_of_processors)
 
   fixtures :all
   include FactoryBot::Syntax::Methods
