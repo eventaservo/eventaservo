@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.0.4](https://github.com/eventaservo/eventaservo/compare/v3.0.3...v3.0.4) (2026-05-08)
+
+
+### Bug Fixes
+
+* restore visual feedback on failed sign-in ([#1181](https://github.com/eventaservo/eventaservo/issues/1181)) ([fa0fdd3](https://github.com/eventaservo/eventaservo/commit/fa0fdd3ae328ead7a8c8c1df26f6bee9eec73a1a))
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump faker from 3.6.1 to 3.8.0 ([#1171](https://github.com/eventaservo/eventaservo/issues/1171)) ([dd61d98](https://github.com/eventaservo/eventaservo/commit/dd61d989ea193192527ce46b0d66b318a05d2b83))
+* **deps-dev:** bump herb from 0.9.5 to 0.10.1 ([#1169](https://github.com/eventaservo/eventaservo/issues/1169)) ([12c45d0](https://github.com/eventaservo/eventaservo/commit/12c45d0cfdd7307da07bb06c15254003f59fb154))
+* **deps:** bump css_parser from 2.0.0 to 2.1.0 in the bundler group across 1 directory ([#1177](https://github.com/eventaservo/eventaservo/issues/1177)) ([5289e1c](https://github.com/eventaservo/eventaservo/commit/5289e1ca42ae1d4b007583c63aad93d380d9b300))
+* **deps:** bump css_parser in the bundler group across 1 directory ([5289e1c](https://github.com/eventaservo/eventaservo/commit/5289e1ca42ae1d4b007583c63aad93d380d9b300))
+* improve accessibility of icon-only elements in admin views ([#1174](https://github.com/eventaservo/eventaservo/issues/1174)) ([01da9be](https://github.com/eventaservo/eventaservo/commit/01da9bebe6b375d61cbc7b85968b9bdc0c2b1bea))
+
 ## [3.0.3](https://github.com/eventaservo/eventaservo/compare/v3.0.2...v3.0.3) (2026-05-07)
 
 
