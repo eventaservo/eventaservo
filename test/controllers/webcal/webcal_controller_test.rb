@@ -7,7 +7,7 @@ class Webcal::WebcalControllerTest < ActionDispatch::IntegrationTest
     get webcal_user_url(webcal_token: "invalid_token")
 
     assert_redirected_to root_url
-    assert_equal "Uzanto ne ekzisstas", flash[:error]
+    assert_equal "Uzanto ne ekzistas", flash[:error]
   end
 
   test "user webcal returns ics format for valid user" do

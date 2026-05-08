@@ -40,7 +40,7 @@ module Webcal
     # @return [ICS file]
     def user
       user = User.find_by(webcal_token: params[:webcal_token])
-      redirect_to root_url, flash: {error: "Uzanto ne ekzisstas"} and return if user.nil?
+      redirect_to root_url, flash: {error: "Uzanto ne ekzistas"} and return if user.nil?
 
       events = (user.events.includes([:country]) + user.interested_events.includes([:country])).uniq
 
