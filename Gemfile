@@ -95,7 +95,7 @@ gem "bullet", "~> 8"
 
 # For statistics
 gem "ahoy_matey", "~> 5"
-gem "rollups", "~> 0.3.2"
+gem "rollups", "~> 0.6.0"
 
 # For connecting to Google Drive
 gem "google-api-client", "~> 0.53.0"
