@@ -102,7 +102,18 @@ class Importilo
       .filter { |a| a if a != "" && a.downcase != "where" }
       .join(", ")
 
-    geo_sercxo = Geocoder.search(adreso).first
+    geo_sercxo = begin
+      Geocoder.search(adreso).first
+    rescue Geocoder::Error, SocketError, Timeout::Error => e
+      Rails.logger.error "Geocoding error during Duolingo import: #{e.message}"
+      Sentry.capture_exception(e, extra: {import_url: url, address: adreso})
+      nil
+    end
+
+    if geo_sercxo.nil?
+      return evento, "importado ne sukcesis: ne eblis trovi koordinatojn por la adreso"
+    end
+
     lando = (geo_sercxo.country == "Unuiĝinta Reĝlando") ? "Britio" : geo_sercxo.country
     koordinatoj = geo_sercxo.coordinates
 
