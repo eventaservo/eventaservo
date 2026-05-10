@@ -8,7 +8,7 @@ class EventsController < ApplicationController
   end
   include Webcal
 
-  before_action :authenticate_user!, only: %i[index new create edit update destroy nova_importado importi kontakti_organizanton nuligi malnuligi delete_file]
+  before_action :authenticate_user!, only: %i[index new create edit update destroy kontakti_organizanton nuligi malnuligi delete_file]
   before_action :redirect_old_link, only: %i[show edit]
   before_action :set_event, only: %i[show edit update destroy kronologio nuligi malnuligi kontakti_organizanton delete_file]
   before_action :authorize_user, only: %i[edit update destroy nuligi malnuligi delete_file]
@@ -178,24 +178,6 @@ class EventsController < ApplicationController
     ahoy.track "Un-cancelled event", event_url: @event.short_url
 
     redirect_to event_url(code: params[:event_code]), flash: {notice: "Evento malnuligita"}
-  end
-
-  def nova_importado
-  end
-
-  def importi
-    datumoj = Importilo.new(params[:url]).datumoj
-    if datumoj # Signifas ke la importado sukcesi kolekti informojn kaj eraroj ne troviĝis
-      evento = Event.new(datumoj)
-      evento.user_id = current_user.id
-      evento.specolisto = "Alia"
-      evento.import_url = params[:url]
-      evento.save!
-      redirect_to event_url(code: evento.code)
-    else
-      # Eraro okazis
-      redirect_to importi_url, flash: {error: "Importado malsukcesis"}
-    end
   end
 
   def delete_file
