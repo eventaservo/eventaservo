@@ -99,6 +99,12 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   geocoded_by :full_address
 
+  # Collects coordinates using the Geocoder gem.
+  #
+  # Overrides the default geocode method to handle and report errors
+  # from the Google Maps API or network issues.
+  #
+  # @return [void]
   def geocode
     super
   rescue Geocoder::Error, SocketError, Timeout::Error => e
