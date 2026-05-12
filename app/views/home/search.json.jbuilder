@@ -1,7 +1,7 @@
-json.eventKvanto @eventoj.size
-json.organizKvanto @organizoj.size
+json.eventKvanto @events.size
+json.organizKvanto @organizations.size
 json.eventoj do
-  json.array! @eventoj do |evento|
+  json.array! @events do |evento|
     json.id evento.id
 
     fajro = "🔥 " if evento.participants.size > Constants::FAJRA_EVENTO_PARTOPRENONTOJ
@@ -17,7 +17,7 @@ json.eventoj do
 end
 
 json.organizoj do
-  json.array! @organizoj do |organizo|
+  json.array! @organizations do |organizo|
     json.id organizo.id
 
     flago = montras_flagon(organizo.country) unless organizo.country.nil?
@@ -28,7 +28,7 @@ json.organizoj do
 end
 
 json.uzantoj do
-  json.array! @uzantoj do |uzanto|
+  json.array! @users do |uzanto|
     json.nomo uzanto.name
     json.uzantnomo uzanto.username
     json.lando uzanto.country.name
@@ -36,7 +36,7 @@ json.uzantoj do
 end
 
 json.videoj do
-  json.array! @videoj do |video|
+  json.array! @videos do |video|
     json.id video.id
     json.titolo video.title
     json.priskribo video.description

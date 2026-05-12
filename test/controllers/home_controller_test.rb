@@ -38,4 +38,12 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     get instruantoj_kaj_prelegantoj_url, params: {name: "Test", country_id: 1, level: "Baza", keyword: "lingvo"}
     assert_response :success
   end
+
+  test "should get search in JSON format" do
+    get "/search.json", params: {query: "Esperanto"}
+    assert_response :success
+    json_response = JSON.parse(response.body)
+    assert json_response.key?("eventoj")
+    assert json_response.key?("organizoj")
+  end
 end
