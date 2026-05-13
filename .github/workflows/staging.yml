@@ -61,6 +61,6 @@ jobs:
           key: ${{ secrets.SSH_STAGING_KEY }}
           script_stop: true
           script: |
-            cd /home/shayani/docker/eventaservo-staging
-            docker pull eventaservo/backend:staging
-            docker stack deploy -c docker-compose.yml eventaservo-staging
+            cd /home/shayani/docker/eventaservo-staging && \
+              docker pull eventaservo/backend:staging && \
+              docker stack deploy -c docker-compose.yml eventaservo-staging
