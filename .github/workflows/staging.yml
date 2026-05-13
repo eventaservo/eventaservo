@@ -41,12 +41,18 @@ jobs:
       new_relic_api_key: ${{ secrets.NEW_RELIC_API_KEY }}
       new_relic_deployment_entity_guid: ${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}
 
-  Portainer:
+  deploy:
     needs: docker
     runs-on: ubuntu-22.04
-    permissions:
-      contents: none
     steps:
-      - name: Update Docker Swarm on Portainer
-        run: |
-          curl -k -X POST ${{ secrets.PORTAINER_WEBHOOK_STAGING }}
+      - name: Deploy to staging server via SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_STAGING_HOST }}
+          port: ${{ secrets.SSH_STAGING_PORT }}
+          username: ${{ secrets.SSH_STAGING_USER }}
+          key: ${{ secrets.SSH_STAGING_KEY }}
+          script: |
+            cd /home/shayani/docker/eventaservo-staging
+            docker pull eventaservo/backend:staging
+            docker stack deploy -c docker-compose.yml eventaservo-staging
