@@ -53,7 +53,7 @@ jobs:
       contents: none
     steps:
       - name: Deploy to staging server via SSH
-        uses: appleboy/ssh-action@036a6e9a3a62f5399e2e65b4f4c8e36aefa91f4c  # v1.2.0
+        uses: appleboy/ssh-action@7eaf76671a0d7eec5d98ee897acda4f968735a17  # v1.2.0
         with:
           host: ${{ secrets.SSH_STAGING_HOST }}
           port: ${{ secrets.SSH_STAGING_PORT }}
