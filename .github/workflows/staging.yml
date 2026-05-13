@@ -8,6 +8,9 @@ on:
       - staging
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -57,6 +60,7 @@ jobs:
           username: ${{ secrets.SSH_STAGING_USER }}
           key: ${{ secrets.SSH_STAGING_KEY }}
           fingerprint: SHA256:hmMSyO8kEcLNXHGl45MnTInKWPS7q4GKC4cUXDCpllg
+          script_stop: true
           script: |
             cd /home/shayani/docker/eventaservo-staging
             docker pull eventaservo/backend:staging
