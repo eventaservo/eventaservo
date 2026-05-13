@@ -6,6 +6,10 @@ on:
       - staging
     tags:
       - staging
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -25,7 +29,7 @@ jobs:
       IPINFO_KEY: ${{ secrets.IPINFO_KEY }}
 
   sentry:
-    needs: docker
+    needs: deploy_stack_to_server
     uses: ./.github/workflows/sentry.yml
     with:
       environment: staging
@@ -33,7 +37,7 @@ jobs:
       sentry_auth_token: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
   new_relic:
-    needs: docker
+    needs: deploy_stack_to_server
     uses: ./.github/workflows/new-relic-change-tracking.yml
     with:
       environment: staging
@@ -41,12 +45,23 @@ jobs:
       new_relic_api_key: ${{ secrets.NEW_RELIC_API_KEY }}
       new_relic_deployment_entity_guid: ${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}
 
-  Portainer:
+  deploy_stack_to_server:
+    name: Deploy / Stack to Server
     needs: docker
     runs-on: ubuntu-22.04
     permissions:
       contents: none
     steps:
-      - name: Update Docker Swarm on Portainer
-        run: |
-          curl -k -X POST ${{ secrets.PORTAINER_WEBHOOK_STAGING }}
+      - name: Deploy to staging server via SSH
+        uses: appleboy/ssh-action@036a6e9a3a62f5399e2e65b4f4c8e36aefa91f4c  # v1.2.0
+        with:
+          host: ${{ secrets.SSH_STAGING_HOST }}
+          port: ${{ secrets.SSH_STAGING_PORT }}
+          username: ${{ secrets.SSH_STAGING_USER }}
+          key: ${{ secrets.SSH_STAGING_KEY }}
+          fingerprint: SHA256:hmMSyO8kEcLNXHGl45MnTInKWPS7q4GKC4cUXDCpllg
+          script_stop: true
+          script: |
+            cd /home/shayani/docker/eventaservo-staging
+            docker pull eventaservo/backend:staging
+            docker stack deploy -c docker-compose.yml eventaservo-staging
