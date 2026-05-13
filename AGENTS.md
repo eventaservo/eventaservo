@@ -188,6 +188,7 @@ That document contains:
 ### Mandatory Checklist Before Writing Tests
 
 - [ ] Read [TEST_ARCHITECTURE.md](TEST_ARCHITECTURE.md) Section 9 (AI Agent Instructions)
+- [ ] Reproduce the bug with a test case before applying a fix
 - [ ] Check if fixtures exist for the data you need
 - [ ] Verify the correct directory structure
 - [ ] Use the appropriate template from the guidelines
@@ -197,5 +198,7 @@ That document contains:
 
 - Do not create branches, commits, or PRs without explicit user permission
 - Error tracking via Sentry (`Sentry.capture_exception(e)`)
+- **StandardRB**: Always run `bundle exec standardrb --fix` on modified Ruby files before committing or creating a Pull Request.
+- **Sentry automation**: Include Sentry issue IDs in commit messages (e.g., `Fixes EVENTA-SERVO-1WY`) to automatically resolve the issue when merged.
 - **Database**: The project uses PostgreSQL, configured in `docker-compose.yml`.
 - **Commit Pattern**: All commits must follow the **Conventional Commits** specification (e.g., `feat:`, `fix:`, `chore:`, `docs:`) and must be in **English**.

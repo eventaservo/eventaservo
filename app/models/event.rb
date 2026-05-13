@@ -99,6 +99,19 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   geocoded_by :full_address
 
+  # Collects coordinates using the Geocoder gem.
+  #
+  # Overrides the default geocode method to handle and report errors
+  # from the Google Maps API or network issues.
+  #
+  # @return [void]
+  def geocode
+    super
+  rescue Geocoder::Error, SocketError, Timeout::Error => e
+    Rails.logger.error "Google API geocoding error for event \"#{title}\": #{e.message}"
+    Sentry.capture_exception(e, extra: {event_id: id, event_title: title})
+  end
+
   default_scope { where(deleted: false) }
   scope :deleted, -> { unscoped.where(deleted: true) }
   scope :venontaj, -> { where("date_start >= :date OR date_end >= :date", date: Time.zone.today.beginning_of_day) }

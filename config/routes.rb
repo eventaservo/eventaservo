@@ -18,7 +18,6 @@ Rails.application.routes.draw do
   get "/rss.xml", to: "home#feed", as: "events_rss"
   get "/events.json", to: "home#events"
   get "/serchilo", to: "home#search"
-  get "/search.json", to: "home#search", format: :json
   get "/versio", to: "home#versio", format: :json
   get "/dev/error", to: "home#error"
 
