@@ -8,7 +8,7 @@ ruby "~> 3.4.9"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 8.1.0"
 # Use Puma as the app server
-gem "puma", "~> 7"
+gem "puma", "~> 8"
 gem "thruster", "~> 0.1.7"
 gem "propshaft"
 
@@ -47,7 +47,7 @@ gem "jbuilder", "~> 2.14"
 gem "rack-attack", "~> 6.2"
 gem "rack-cors", "~> 3.0", require: "rack/cors"
 
-gem "aws-sdk-s3", "~> 1.217"
+gem "aws-sdk-s3", "~> 1.222"
 gem "browser", "~> 6"
 gem "chartkick", "~> 5.0"
 gem "diffy", "~> 3.4"
