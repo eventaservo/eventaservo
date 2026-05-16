@@ -63,7 +63,6 @@ gem "premailer-rails", "~> 1.11"
 gem "redcarpet", "~> 3.5"
 gem "sitemap_generator", "~> 6.1"
 gem "timezone", "~> 1.0"
-gem "view_component", "~> 3.10"
 # gem 'trix-rails', require: 'trix'
 gem "httparty", "~> 0.18"
 gem "nokogiri", ">= 1.10.4"
@@ -111,7 +110,6 @@ group :development, :test do
   gem "debug", ">= 1.0.0", require: false
   gem "dotenv-rails"
   gem "hotwire-spark"
-  gem "lookbook", ">= 2.3.4"
   gem "rake"
 end
 
