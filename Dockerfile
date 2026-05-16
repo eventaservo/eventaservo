@@ -130,8 +130,9 @@ USER rails
 
 RUN gem install htmlbeautifier
 
-# Git configuration
-RUN git config --global --add safe.directory /eventaservo
+# Git and gh configuration
+RUN git config --global --add safe.directory /eventaservo && \
+  gh auth setup-git 2>/dev/null || true
 
 # Installs Oh-My-Zsh and plugins
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && \
