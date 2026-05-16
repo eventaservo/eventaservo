@@ -19,6 +19,7 @@ RUN apt update && apt install -y --no-install-recommends \
   btop \
   g++ \
   gcc \
+  git \
   imagemagick \
   iputils-ping \
   libavahi-compat-libdnssd-dev \
@@ -113,7 +114,6 @@ RUN apt update \
   chromium-driver \
   fish \
   gh \
-  git \
   openssh-client \
   sudo \
   zsh \
