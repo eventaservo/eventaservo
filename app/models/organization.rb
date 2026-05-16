@@ -103,7 +103,7 @@ class Organization < ApplicationRecord
     value = super
     return value unless value&.encoding == Encoding::BINARY
 
-    value.force_encoding(Encoding::UTF_8).scrub
+    value.dup.force_encoding(Encoding::UTF_8).scrub
   end
 
   # Uses short_name for URLs instead of ID.

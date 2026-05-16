@@ -12,7 +12,7 @@ class Organization::NameEncodingTest < ActiveSupport::TestCase
 
   test "normalizes BINARY encoding to UTF-8 on read" do
     organization = build(:organization)
-    organization.name = "AERĴ".force_encoding(Encoding::BINARY)
+    organization.name = (+"AERĴ").force_encoding(Encoding::BINARY)
 
     assert_equal "AERĴ", organization.name
     assert_equal Encoding::UTF_8, organization.name.encoding
@@ -20,7 +20,7 @@ class Organization::NameEncodingTest < ActiveSupport::TestCase
 
   test "scrubs invalid byte sequences when normalizing from BINARY" do
     organization = build(:organization)
-    organization.name = "\xFF".force_encoding(Encoding::BINARY)
+    organization.name = (+"\xFF").force_encoding(Encoding::BINARY)
 
     assert organization.name.encoding == Encoding::UTF_8
     assert_equal "\uFFFD", organization.name
