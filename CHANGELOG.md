@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.0.6](https://github.com/eventaservo/eventaservo/compare/v3.0.5...v3.0.6) (2026-05-16)
+
+
+### Code Refactoring
+
+* inline admin graph components and extract chart partials (Action Point 2 of [#1203](https://github.com/eventaservo/eventaservo/issues/1203)) ([2f3df84](https://github.com/eventaservo/eventaservo/commit/2f3df84fde34fa08024b1a608679d8347f4cd40f))
+* inline admin graph components into statistics view ([#1206](https://github.com/eventaservo/eventaservo/issues/1206)) ([2f3df84](https://github.com/eventaservo/eventaservo/commit/2f3df84fde34fa08024b1a608679d8347f4cd40f))
+* replace InternationalEventBadgeComponent with a partial ([#1204](https://github.com/eventaservo/eventaservo/issues/1204)) ([d2e0b5f](https://github.com/eventaservo/eventaservo/commit/d2e0b5fd7933f19444caa312e0ff41ce8c29eaa8))
+
+
+### Miscellaneous Chores
+
+* remove view_component and lookbook gems ([#1207](https://github.com/eventaservo/eventaservo/issues/1207)) ([85a7654](https://github.com/eventaservo/eventaservo/commit/85a76547678677fee676d7e71e2f605e7ab32ad6))
+* remove view_component and lookbook gems (Action Point 3 of [#1203](https://github.com/eventaservo/eventaservo/issues/1203)) ([85a7654](https://github.com/eventaservo/eventaservo/commit/85a76547678677fee676d7e71e2f605e7ab32ad6))
+
 ## [3.0.5](https://github.com/eventaservo/eventaservo/compare/v3.0.4...v3.0.5) (2026-05-16)
 
 
