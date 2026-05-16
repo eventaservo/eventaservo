@@ -25,4 +25,10 @@ class Organization::NameEncodingTest < ActiveSupport::TestCase
     assert organization.name.encoding == Encoding::UTF_8
     assert_equal "\uFFFD", organization.name
   end
+
+  test "returns nil when name is not set" do
+    organization = Organization.new
+
+    assert_nil organization.name
+  end
 end

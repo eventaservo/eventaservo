@@ -101,7 +101,7 @@ class Organization < ApplicationRecord
   # @return [String]
   def name
     value = super
-    return value unless value.encoding == Encoding::BINARY
+    return value unless value&.encoding == Encoding::BINARY
 
     value.force_encoding(Encoding::UTF_8).scrub
   end
