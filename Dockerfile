@@ -26,6 +26,7 @@ RUN apt update && apt install -y --no-install-recommends \
   libmagick++-dev \
   libssl-dev \
   libvips42 \
+  libyaml-dev \
   make \
   nodejs \
   poppler-utils \
