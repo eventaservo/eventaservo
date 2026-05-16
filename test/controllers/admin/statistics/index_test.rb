@@ -21,6 +21,7 @@ class Admin::StatisticsController::IndexTest < ActionDispatch::IntegrationTest
     assert_select "input#end_date" do
       assert_select "[value=?]", expected_end.to_s
     end
+    assert_select "h1", text: "Statistikoj"
   end
 
   test "should get index with custom range" do
@@ -54,7 +55,6 @@ class Admin::StatisticsController::IndexTest < ActionDispatch::IntegrationTest
   end
 
   test "should fallback to default range on invalid date" do
-    # Use two invalid dates to trigger full default range
     get admin_statistics_url, params: {start_date: "invalid", end_date: "invalid"}
     assert_response :success
 
@@ -67,6 +67,13 @@ class Admin::StatisticsController::IndexTest < ActionDispatch::IntegrationTest
     assert_select "input#end_date" do
       assert_select "[value=?]", expected_end.to_s
     end
+  end
+
+  test "renders chart partials" do
+    get admin_statistics_url
+    assert_response :success
+    assert_match "Novaj uzantoj monate", @response.body
+    assert_match "Eventoj kreitaj monate", @response.body
   end
 
   test "should deny access to non-admin" do

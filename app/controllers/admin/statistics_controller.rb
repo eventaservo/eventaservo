@@ -5,6 +5,8 @@ module Admin
     before_action :authenticate_user!
     before_action :authenticate_admin!
 
+    helper_method :new_users_by_month, :total_users_by_month
+
     def index
       @start_date = parse_date(params[:start_date])
       @end_date = parse_date(params[:end_date])
@@ -26,6 +28,20 @@ module Admin
     end
 
     private
+
+    # @return [Hash{Date => Integer}] new user registrations by month
+    def new_users_by_month
+      @new_users_by_month ||= Rollup.where(time: @range).series("New users by month", interval: "month")
+    end
+
+    # @return [Hash{Date => Integer}] cumulative total users by month
+    def total_users_by_month
+      total = User.where("created_at < ?", @range.first.beginning_of_month).count
+      new_users_by_month.transform_values { |v|
+        total += v
+        total
+      }
+    end
 
     # Parses a date string safely.
     #
