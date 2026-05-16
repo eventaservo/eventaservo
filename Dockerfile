@@ -113,6 +113,7 @@ RUN apt update \
   fish \
   gh \
   git \
+  openssh-client \
   sudo \
   zsh \
   && rm -rf /var/lib/apt/lists/*
