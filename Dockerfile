@@ -7,7 +7,8 @@ RUN apt update && apt install -y --no-install-recommends \
   ca-certificates \
   curl \
   gnupg \
-  && rm -rf /var/lib/apt/lists/*
+  && rm -rf /var/lib/apt/lists/* \
+  && mkdir -p /etc/apt/keyrings
 
 # Adds NodeJS and Yarn repositories
 ENV NODE_MAJOR=20
