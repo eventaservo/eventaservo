@@ -31,7 +31,7 @@ You must analyze **all** work done on the current branch relative to the base:
 ## Step 3: Apply Review Guidelines (AGENTS.md)
 
 Rigorously validate:
-1. **Ruby/Rails Patterns:** Ruby 3.4.8, Rails 8.1, `ApplicationService` pattern, YARD documentation for all methods.
+1. **Ruby/Rails Patterns:** Ruby 3.4.9, Rails 8.1, `ApplicationService` pattern, YARD documentation for all methods.
 2. **Documentation:** YARD in English for all new/modified methods/classes.
 3. **Security:** Proper use of authorizations and data protection.
 4. **UI/UX:** Compliance with patterns in `app/views/admin/mockups/`. **Exclusive use of Bootstrap 5.3.** Tailwind CSS is forbidden.
