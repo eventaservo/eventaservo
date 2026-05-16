@@ -36,17 +36,14 @@ module ApplicationHelper
   def error_handling(record)
     return unless record.errors.any?
 
-    return_html = "<div class='error-handling'>"
-    return_html += "<h5>Troviĝas eraro en la formularo</h5>"
-    return_html += "<ul>"
-
-    record.errors.full_messages.each do |msg|
-      return_html += "<li>#{msg}</li>"
+    content_tag(:div, class: "error-handling") do
+      safe_join([
+        content_tag(:h5, "Troviĝas eraro en la formularo"),
+        content_tag(:ul) do
+          safe_join(record.errors.full_messages.map { |msg| content_tag(:li, msg) })
+        end
+      ])
     end
-
-    return_html += "</ul></div>"
-
-    raw return_html
   end
 
   # Formats a date according to the given style.
