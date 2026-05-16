@@ -112,6 +112,7 @@ RUN apt update \
   chromium-driver \
   fish \
   gh \
+  git \
   sudo \
   zsh \
   && rm -rf /var/lib/apt/lists/*
