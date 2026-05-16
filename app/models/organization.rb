@@ -92,6 +92,20 @@ class Organization < ApplicationRecord
     adr.compact.join(", ")
   end
 
+  # Overrides the +name+ getter to normalize BINARY encoding to UTF-8.
+  #
+  # Legacy data may store valid UTF-8 bytes with a BINARY (ASCII-8BIT)
+  # encoding tag, which raises Encoding::CompatibilityError when the
+  # string is concatenated into a UTF-8 ERB template buffer.
+  #
+  # @return [String]
+  def name
+    value = super
+    return value unless value.encoding == Encoding::BINARY
+
+    value.force_encoding(Encoding::UTF_8).scrub
+  end
+
   # Uses short_name for URLs instead of ID.
   #
   # @return [String]
