@@ -1,4 +1,4 @@
-FROM ruby:3.4.8-trixie as base
+FROM ruby:3.4.8-trixie-slim as base
 
 WORKDIR /eventaservo
 
@@ -9,8 +9,11 @@ RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesourc
 
 RUN apt update && apt install -y --no-install-recommends \
   btop \
+  ca-certificates \
+  curl \
   g++ \
   gcc \
+  gnupg \
   imagemagick \
   iputils-ping \
   libavahi-compat-libdnssd-dev \
