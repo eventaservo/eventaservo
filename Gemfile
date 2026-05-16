@@ -8,7 +8,7 @@ ruby "~> 3.4.9"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 8.1.0"
 # Use Puma as the app server
-gem "puma", "~> 7"
+gem "puma", "~> 8"
 gem "thruster", "~> 0.1.7"
 gem "propshaft"
 
