@@ -6,6 +6,7 @@ pt_BR:
       local.
     select_timezone: Selecionar fuso horário
     timezone: Fuso horário
+    utc_label: UTC (Tempo Universal)
   timezones:
     Africa/Abidjan: Afriko/Abiĝano
     Africa/Accra: Afriko/Akrao
