@@ -217,7 +217,6 @@ class ApplicationHelperTest < ActionView::TestCase
     uploads_mock.verify
   end
 
-
   test "error_handling escapes malicious error messages" do
     event = Event.new(title: "<script>alert('xss')</script>")
     event.valid? # trigger validations
