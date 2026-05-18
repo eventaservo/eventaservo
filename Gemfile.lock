@@ -292,7 +292,7 @@ GEM
     jsbundling-rails (1.3.1)
       railties (>= 6.0.0)
     json (2.19.5)
-    jwt (3.1.2)
+    jwt (3.2.0)
       base64
     language_server-protocol (3.17.0.5)
     launchy (3.1.1)
@@ -684,7 +684,7 @@ DEPENDENCIES
   image_processing (>= 1.2)
   jbuilder (~> 2.14)
   jsbundling-rails (~> 1.1)
-  jwt (~> 3.1)
+  jwt (~> 3.2)
   letter_opener_web (~> 3)
   listen
   mini_magick (~> 4.10)
