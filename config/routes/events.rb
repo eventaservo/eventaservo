@@ -1,3 +1,5 @@
+get "/importi", to: "events#nova_importado", as: "importi_eventon"
+post "/importi", to: "events#importi"
 resources :events, path: "e", param: "code" do
   get "partopreni", to: "participants#event", as: "toggle_participant"
   get "follow", to: "followers#event", as: "toggle_follow"

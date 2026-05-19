@@ -5,7 +5,6 @@
     </div>
     <div>
       <%= I18n.t tz, scope: :timezones %>
-      <%= content_tag(:small, t("timezone.utc_label"), class: "text-secondary fw-normal") if tz == "Etc/UTC" %>
       <%= icon('fas', 'sun', data: { bs_toggle: 'tooltip', bs_placement: 'top', title: 'Somera/Vintra tempo' }) if @event.dst? %>
     </div>
   </div>

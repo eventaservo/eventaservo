@@ -21,10 +21,18 @@
 			"extensions": [
 				"aliariff.vscode-erb-beautify",
 				"eamodio.gitlens",
+				"jemmyw.rails-fast-nav",
 				"KoichiSasada.vscode-rdbg",
 				"mhutchie.git-graph",
+				"ms-azuretools.vscode-docker",
+				"noku.rails-run-spec-vscode",
 				"Shopify.ruby-lsp",
-				"testdouble.vscode-standard-ruby"
+				"testdouble.vscode-standard-ruby",
+				"humao.rest-client",
+				"GitHub.copilot",
+				"GitHub.copilot-chat",
+				"Thadeu.vscode-run-rspec-file",
+				"Anthropic.claude-code"
 			]
 		}
 	},

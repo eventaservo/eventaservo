@@ -28,7 +28,7 @@ jobs:
           echo "VERSION=$(cat config/initializers/version.rb | grep VERSION | cut -d '"' -f2)" >> "$GITHUB_OUTPUT"
 
       - name: Create New Relic Change Tracking Marker
-        uses: newrelic/deployment-marker-action@v2.6.2
+        uses: newrelic/deployment-marker-action@v2.3.0
         with:
           apiKey: ${{ secrets.new_relic_api_key }}
           guid: ${{ secrets.new_relic_deployment_entity_guid }}
