@@ -507,7 +507,9 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     if latitude_changed? || longitude_changed?
       begin
         self.time_zone = Timezone.lookup(latitude, longitude).name unless latitude.nil?
-      rescue
+      rescue => e
+        Rails.logger.error "Timezone lookup error for event \"#{title}\" (#{latitude}, #{longitude}): #{e.message}"
+        Sentry.capture_exception(e, extra: {event_id: id, event_title: title, lat: latitude, lon: longitude})
         self.time_zone = "Etc/UTC"
       end
     end
