@@ -1,14 +1,6 @@
-FROM ruby:3.4.9-slim-trixie as base
+FROM ruby:3.4.8-trixie as base
 
 WORKDIR /eventaservo
-
-# Install minimal tools needed to add external repositories
-RUN apt update && apt install -y --no-install-recommends \
-  ca-certificates \
-  curl \
-  gnupg \
-  && rm -rf /var/lib/apt/lists/* \
-  && mkdir -p /etc/apt/keyrings
 
 # Adds NodeJS and Yarn repositories
 ENV NODE_MAJOR=20
@@ -19,14 +11,12 @@ RUN apt update && apt install -y --no-install-recommends \
   btop \
   g++ \
   gcc \
-  git \
   imagemagick \
   iputils-ping \
   libavahi-compat-libdnssd-dev \
   libmagick++-dev \
   libssl-dev \
   libvips42 \
-  libyaml-dev \
   make \
   nodejs \
   poppler-utils \
@@ -115,7 +105,6 @@ RUN apt update \
   chromium-driver \
   fish \
   gh \
-  openssh-client \
   sudo \
   zsh \
   && rm -rf /var/lib/apt/lists/*
@@ -131,9 +120,8 @@ USER rails
 
 RUN gem install htmlbeautifier
 
-# Git and gh configuration
-RUN git config --global --add safe.directory /eventaservo && \
-  gh auth setup-git 2>/dev/null || true
+# Git configuration
+RUN git config --global --add safe.directory /eventaservo
 
 # Installs Oh-My-Zsh and plugins
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && \

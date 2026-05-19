@@ -19,11 +19,11 @@
 
   <div class="row">
     <div class="col-12 mb-4">
-      <%= render "new_users_chart" %>
+      <%= render(Graphs::NewUsersByMonthComponent.new(range: @range)) %>
     </div>
 
     <div class="col-12 mb-4">
-      <%= render "events_chart" %>
+      <%= area_chart @event_created_by_month, stacked: true, title: "Eventoj kreitaj monate" %>
     </div>
   </div>
 

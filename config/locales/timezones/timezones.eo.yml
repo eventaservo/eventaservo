@@ -5,7 +5,6 @@ eo:
     current_timezone_text: Vi vidas la eventojn laŭ ilia loka horzono.
     select_timezone: Elekti horzonon
     timezone: Horzono
-    utc_label: (Universala Tempo)
   timezones:
     Africa/Abidjan: Afriko/Abiĝano
     Africa/Accra: Afriko/Akrao
