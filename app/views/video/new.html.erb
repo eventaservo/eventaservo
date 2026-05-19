@@ -1,4 +1,4 @@
-<div class="row" data-controller="video" data-video-apikey="<%= Rails.application.credentials.google_api_key %>">
+<div class="row" data-controller="video" data-video-apikey="<%= Rails.application.credentials.dig(:google, :youtube_api_key) || ENV["GOOGLE_YOUTUBE_API_KEY"] %>">
   <div class="col-12 col-lg-8 offset-lg-2">
     <div class="box-white">
       <%= form_with(action: event_new_video_path, method: :post) do |form| %>
