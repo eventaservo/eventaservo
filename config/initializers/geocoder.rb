@@ -1,9 +1,15 @@
+# Configures the Geocoder gem to convert addresses into coordinates.
+# To use the Google provider, you need an API key with the "Geocoding API" enabled.
+# In the Google Cloud Console, it is recommended to restrict this key to the "Geocoding API" only.
+#
+# Documentation: https://github.com/alexreisner/geocoder
+
 Geocoder.configure(
   # Geocoding options
   # timeout: 3,                 # geocoding service timeout (secs)
   # lookup: :nominatim,         # name of geocoding service (symbol)
   google: {
-    api_key: Rails.application.credentials.google_maps_key || ENV["GOOGLE_MAPS_KEY"]
+    api_key: Rails.application.credentials.dig(:google, :geocoding_api_key) || ENV["GOOGLE_GEOCODING_API_KEY"]
   },
   ipinfo_io: {
     api_key: Rails.application.credentials.ipinfo_key || ENV["IPINFO_KEY"]
