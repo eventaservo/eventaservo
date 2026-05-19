@@ -1,5 +1,28 @@
 # Changelog
 
+## [3.0.7](https://github.com/eventaservo/eventaservo/compare/v3.0.6...v3.0.7) (2026-05-19)
+
+
+### Features
+
+* show UTC (Universala Tempo) label for UTC events ([54ec822](https://github.com/eventaservo/eventaservo/commit/54ec8224172b78aee398fcfede3f83cd727d92f8))
+
+
+### Bug Fixes
+
+* log timezone lookup errors to Sentry and Rails ([#1219](https://github.com/eventaservo/eventaservo/issues/1219)) ([d453ed2](https://github.com/eventaservo/eventaservo/commit/d453ed2a46167ef99a59d360308cb65564ed0b77))
+* remove duplicate UTC from UTC timezone label ([6488312](https://github.com/eventaservo/eventaservo/commit/648831238841a2c2c2f9c2737aba0f75a98c4149))
+
+
+### Miscellaneous Chores
+
+* **deps:** bump aws-sdk-s3 from 1.219.0 to 1.222.0 ([#1211](https://github.com/eventaservo/eventaservo/issues/1211)) ([45f6c1f](https://github.com/eventaservo/eventaservo/commit/45f6c1f96cc863fecae932ab3835d18fa51c91db))
+* **deps:** bump bootsnap from 1.23.0 to 1.24.4 ([#1210](https://github.com/eventaservo/eventaservo/issues/1210)) ([ff3a35c](https://github.com/eventaservo/eventaservo/commit/ff3a35c0c5ce88896208df123481a80a0017d931))
+* **deps:** bump faraday in the bundler group across 1 directory ([343810b](https://github.com/eventaservo/eventaservo/commit/343810b1d86e2ed644cebd9abc5105ec134c7b24))
+* **deps:** bump puma from 7.2.0 to 8.0.1 ([#1209](https://github.com/eventaservo/eventaservo/issues/1209)) ([a3ba806](https://github.com/eventaservo/eventaservo/commit/a3ba80628b28bfa54315bbf3af8c3b466588349a))
+* reorganize Google API keys and improve timezone logging ([#1222](https://github.com/eventaservo/eventaservo/issues/1222)) ([b394453](https://github.com/eventaservo/eventaservo/commit/b3944538d8604e1a92c302d1da6fdc78f355c61c))
+* update production and staging credentials ([b17540f](https://github.com/eventaservo/eventaservo/commit/b17540f787c1c15f50abe285c1de5eba5ca90366))
+
 ## [3.0.6](https://github.com/eventaservo/eventaservo/compare/v3.0.5...v3.0.6) (2026-05-16)
 
 
