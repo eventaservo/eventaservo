@@ -5,7 +5,7 @@
     crossorigin="anonymous">
   </script>
 
-  <script>
+  <script nonce="<%= content_security_policy_nonce %>">
     Sentry.init({
       dsn: "<%= Rails.application.credentials.dig(:sentry, :dsn) %>",
       replaysSessionSampleRate: 0.1,
