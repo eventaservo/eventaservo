@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.0.8](https://github.com/eventaservo/eventaservo/compare/v3.0.7...v3.0.8) (2026-05-21)
+
+
+### Features
+
+* add initial opencode configuration for Sentry and PostgreSQL ([7f8fe54](https://github.com/eventaservo/eventaservo/commit/7f8fe540427cfcb012605c01539688f223956610))
+
+
+### Bug Fixes
+
+* add missing mapping for legacy timezone "Asia/Calcutta" to "Asia/Kolkata" ([f2b7ebe](https://github.com/eventaservo/eventaservo/commit/f2b7ebe851a68145258a1dfa41696c40c83e9b44))
+* **deps:** update jwt to 3.2.0 to fix CVE-2026-45363 ([6f8c469](https://github.com/eventaservo/eventaservo/commit/6f8c469e0d03de51fed25c7dddc4a203401100b2))
+
+
+### Code Refactoring
+
+* remove ransackable methods from multiple models for cleanup ([088f341](https://github.com/eventaservo/eventaservo/commit/088f3417a260e28b9a44bd461ef8736ce23ba1e9))
+
 ## [3.0.7](https://github.com/eventaservo/eventaservo/compare/v3.0.6...v3.0.7) (2026-05-19)
 
 
