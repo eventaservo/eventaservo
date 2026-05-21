@@ -18,6 +18,7 @@ module TimeZone
     # Legacy IANA identifiers that some tzdata versions no longer recognize.
     # Maps deprecated names to their current canonical equivalents.
     LEGACY_ZONES = {
+      "Asia/Calcutta" => "Asia/Kolkata",
       "Asia/Saigon" => "Asia/Ho_Chi_Minh",
       "Asia/Katmandu" => "Asia/Kathmandu",
       "Europe/Kiev" => "Europe/Kyiv",

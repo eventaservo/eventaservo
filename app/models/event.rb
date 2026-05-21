@@ -420,18 +420,6 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     date_end < Time.zone.yesterday.end_of_day
   end
 
-  def self.ransackable_associations(auth_object = nil)
-    ["country", "organization_events", "organizations", "participants", "participants_records", "reports",
-      "rich_text_enhavo", "uploads_attachments", "uploads_blobs", "user", "versions", "videoj"]
-  end
-
-  def self.ransackable_attributes(auth_object = nil)
-    ["address", "cancel_reason", "cancelled", "city", "code", "content", "country_id", "created_at", "date_end",
-      "date_start", "deleted", "description", "display_flag", "email", "id", "import_url", "international_calendar",
-      "latitude", "longitude", "metadata", "online", "participants_count", "short_url", "site", "specolisto",
-      "time_zone", "title", "updated_at", "user_id", "uuid"]
-  end
-
   # Métodos auxiliares para acessar tags agrupadas
   def main_categories
     tags.where(group_name: "category")
@@ -507,7 +495,9 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     if latitude_changed? || longitude_changed?
       begin
         self.time_zone = Timezone.lookup(latitude, longitude).name unless latitude.nil?
-      rescue
+      rescue => e
+        Rails.logger.error "Timezone lookup error for event \"#{title}\" (#{latitude}, #{longitude}): #{e.message}"
+        Sentry.capture_exception(e, extra: {event_id: id || "new record", event_title: title, lat: latitude, lon: longitude})
         self.time_zone = "Etc/UTC"
       end
     end

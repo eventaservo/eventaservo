@@ -28,12 +28,4 @@ class Tag < ApplicationRecord
   scope :categories, -> { where(group_name: "category") }
   scope :characteristics, -> { where(group_name: "characteristic") }
   scope :times, -> { where(group_name: "time") }
-
-  def self.ransackable_attributes(auth_object = nil)
-    ["group_name", "name", "sort_order", "display_in_filters"]
-  end
-
-  def self.ransackable_associations(auth_object = nil)
-    ["taggings"]
-  end
 end

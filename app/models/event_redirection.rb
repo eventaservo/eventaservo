@@ -11,8 +11,4 @@
 #
 class EventRedirection < ApplicationRecord
   validates_presence_of :old_short_url, :new_short_url
-
-  def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "hits", "id", "new_short_url", "old_short_url", "updated_at"]
-  end
 end

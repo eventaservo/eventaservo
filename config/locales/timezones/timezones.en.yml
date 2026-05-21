@@ -5,6 +5,7 @@ en:
     current_timezone_text: You see the events according to their local time zone.
     select_timezone: Select time zone
     timezone: Timezone
+    utc_label: (Universal Time)
   timezones:
     Africa/Abidjan: Afriko/Abiĝano
     Africa/Accra: Afriko/Akrao
