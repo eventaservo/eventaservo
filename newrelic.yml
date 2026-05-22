@@ -66,6 +66,7 @@ test:
 staging:
   <<: *default_settings
   app_name: 'EventaServo (Staging)'
+  monitor_mode: false
 
 production:
   <<: *default_settings
