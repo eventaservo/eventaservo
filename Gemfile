@@ -102,6 +102,9 @@ gem "google-api-client", "~> 0.53.0"
 # New Relic
 gem "newrelic_rpm"
 
+# Maintenance Tasks
+gem "maintenance_tasks", "~> 2.16"
+
 group :development, :test, :staging do
   gem "faker"
 end
