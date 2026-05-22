@@ -105,6 +105,16 @@
         </div>
       </div>
     <% end %>
+
+    <%= link_to "/maintenance_tasks", class: "list-group-item list-group-item-action border-0 px-2 py-2" do %>
+      <div class="d-flex align-items-center gap-3">
+        <span class="text-secondary fs-5"><%= icon('fas', 'tools') %></span>
+        <div>
+          <div class="fw-semibold small">Maintenance Tasks <span class="badge bg-light text-body-secondary fw-normal border">engine</span></div>
+          <div class="text-body-secondary" style="font-size:12px">Data migrations and backfills</div>
+        </div>
+      </div>
+    <% end %>
   </div>
 
   <%# ── Development ────────────────────────────────────── %>

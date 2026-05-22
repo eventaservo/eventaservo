@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   authenticated :user, ->(user) { user.admin? } do
     mount MissionControl::Jobs::Engine, at: "/jobs"
+    mount MaintenanceTasks::Engine, at: "/maintenance_tasks"
   end
 
   devise_for :users, controllers: {sessions: "users/sessions",
