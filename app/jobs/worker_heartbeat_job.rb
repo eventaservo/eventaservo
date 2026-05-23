@@ -2,8 +2,8 @@
 
 class WorkerHeartbeatJob < ApplicationJob
   queue_as :low
-  retry_on SocketError, wait: 1.minute, attempts: 5
-  sentry_monitor_check_ins slug: "worker-heartbeat"
+  sentry_monitor_check_ins slug: "worker-heartbeat",
+    monitor_config: Sentry::Cron::MonitorConfig.from_crontab("0 * * * *")
 
   # Sends heartbeat pings to Better Uptime to confirm the background
   # worker is alive. Sentry cron monitoring is handled automatically

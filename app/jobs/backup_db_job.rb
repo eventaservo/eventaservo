@@ -2,7 +2,8 @@
 
 class BackupDbJob < ApplicationJob
   queue_as :low
-  sentry_monitor_check_ins slug: "backup-db"
+  sentry_monitor_check_ins slug: "backup-db",
+    monitor_config: Sentry::Cron::MonitorConfig.from_crontab("0 5 * * *")
 
   # Executes a database backup and uploads it to Google Drive.
   #
