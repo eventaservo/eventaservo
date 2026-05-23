@@ -106,6 +106,10 @@ eo:
   events:
     calendar:
       jump_to_month: Monato
+    show_past: Pasintaj eventoj
+    past_events_count:
+      one: "%{count} pasinta evento"
+      other: "%{count} pasintaj eventoj"
   navbar:
     add_event: Aldoni eventon
     log_in_sign_up: Ensaluti / Registriĝi

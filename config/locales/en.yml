@@ -106,6 +106,10 @@ en:
   events:
     calendar:
       jump_to_month: Month
+    show_past: Past events
+    past_events_count:
+      one: "%{count} past event"
+      other: "%{count} past events"
   navbar:
     add_event: Add event
     log_in_sign_up: Login / Signup

@@ -106,6 +106,10 @@ pt_BR:
   events:
     calendar:
       jump_to_month: Mês
+    show_past: Eventos passados
+    past_events_count:
+      one: "%{count} evento passado"
+      other: "%{count} eventos passados"
   navbar:
     add_event: Adicionar evento
     log_in_sign_up: Entrar / Cadastrar
