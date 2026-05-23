@@ -24,7 +24,10 @@ class WorkerHeartbeatJobTest < ActiveJob::TestCase
     called = false
 
     Rails.application.credentials.stub(:dig, url, [:better_uptime, :background_worker_heartbeat]) do
-      HTTParty.stub(:get, ->(arg) { called = true; assert_equal url, arg }) do
+      HTTParty.stub(:get, ->(arg) {
+        called = true
+        assert_equal url, arg
+      }) do
         WorkerHeartbeatJob.perform_now
       end
     end
