@@ -25,7 +25,7 @@
     "leaflet": "^1.9.4",
     "leaflet.markercluster": "^1.5.3",
     "sass": "^1.97.2",
-    "slim-select": "^2.13.1",
+    "slim-select": "^3.4.3",
     "trix": "^2.1.18"
   },
   "optionalDependencies": {
