@@ -1,5 +1,52 @@
 # Changelog
 
+## [3.0.8](https://github.com/eventaservo/eventaservo/compare/v3.0.7...v3.0.8) (2026-05-25)
+
+
+### Features
+
+* add initial opencode configuration for Sentry and PostgreSQL ([7f8fe54](https://github.com/eventaservo/eventaservo/commit/7f8fe540427cfcb012605c01539688f223956610))
+* Add task to normalize legacy timezones via maintenance_tasks ([#1226](https://github.com/eventaservo/eventaservo/issues/1226)) ([812bb47](https://github.com/eventaservo/eventaservo/commit/812bb478304697caa6f089d86abcad3fe3abd74a))
+* integrate Shopify maintenance_tasks gem for data migrations ([60daef4](https://github.com/eventaservo/eventaservo/commit/60daef4a13dca7e91f771cb071cb60460c45276a))
+* integrate Shopify maintenance_tasks gem for data migrations ([60daef4](https://github.com/eventaservo/eventaservo/commit/60daef4a13dca7e91f771cb071cb60460c45276a))
+* integrate Shopify maintenance_tasks gem for data migrations ([827feda](https://github.com/eventaservo/eventaservo/commit/827fedace8fc5f1b63013f9ef12321dd1f856615))
+
+
+### Bug Fixes
+
+* add missing mapping for legacy timezone "Asia/Calcutta" to "Asia/Kolkata" ([f2b7ebe](https://github.com/eventaservo/eventaservo/commit/f2b7ebe851a68145258a1dfa41696c40c83e9b44))
+* **deps:** update jwt to 3.2.0 to fix CVE-2026-45363 ([6f8c469](https://github.com/eventaservo/eventaservo/commit/6f8c469e0d03de51fed25c7dddc4a203401100b2))
+* migrate Sentry cron monitoring to official SDK MonitorCheckIns ([#1229](https://github.com/eventaservo/eventaservo/issues/1229)) ([4545e43](https://github.com/eventaservo/eventaservo/commit/4545e43b40991d78d78b97dcf47cf2f058a991cb))
+* normalize legacy timezones via maintenance_tasks ([812bb47](https://github.com/eventaservo/eventaservo/commit/812bb478304697caa6f089d86abcad3fe3abd74a))
+* prevent OOM SIGKILL on db backup by isolating to dedicated queue and using Tempfile ([#1235](https://github.com/eventaservo/eventaservo/issues/1235)) ([df3b2a4](https://github.com/eventaservo/eventaservo/commit/df3b2a40b18f8c44a4f0e887e50d1077942b7bc2))
+* sample New Relic traces for Ahoy geocoding jobs ([1db6490](https://github.com/eventaservo/eventaservo/commit/1db6490e539ff574f0642b5edc42a8559d97c8c0))
+
+
+### Code Refactoring
+
+* remove ransackable methods from multiple models for cleanup ([088f341](https://github.com/eventaservo/eventaservo/commit/088f3417a260e28b9a44bd461ef8736ce23ba1e9))
+
+
+### Miscellaneous Chores
+
+* add dependabot for github-actions and docker ([7a8457b](https://github.com/eventaservo/eventaservo/commit/7a8457b591b1cee2e4b75d9eaa029738857efb9b))
+* add npm ecosystem to dependabot config ([102043b](https://github.com/eventaservo/eventaservo/commit/102043b8e23a0613dd8a795c624fb979993fcaa2))
+* **deps-dev:** bump rake from 13.3.1 to 13.4.2 ([c792adc](https://github.com/eventaservo/eventaservo/commit/c792adc36f6e5699030e714b4820727edd4d78f6))
+* **deps:** bump aws-sdk-s3 from 1.222.0 to 1.224.0 ([d6de775](https://github.com/eventaservo/eventaservo/commit/d6de775a2aa6c1d11a31a058524cd2678e45051e))
+* **deps:** bump aws-sdk-s3 from 1.222.0 to 1.224.0 ([d6de775](https://github.com/eventaservo/eventaservo/commit/d6de775a2aa6c1d11a31a058524cd2678e45051e))
+* **deps:** bump aws-sdk-s3 from 1.222.0 to 1.224.0 ([cd5f179](https://github.com/eventaservo/eventaservo/commit/cd5f1794766932fa963ccfb42508c756a8d5b3aa))
+* **deps:** bump newrelic_rpm from 10.4.0 to 10.5.0 ([9e37b51](https://github.com/eventaservo/eventaservo/commit/9e37b5143252f42a98c6ce6d04016ab28359f33c))
+* **deps:** bump pagy from 43.5.3 to 43.5.4 ([14f26df](https://github.com/eventaservo/eventaservo/commit/14f26dfce3b7506364c55a5c43410a8a2303989a))
+* **deps:** bump pagy from 43.5.4 to 43.5.5 ([3e4ada0](https://github.com/eventaservo/eventaservo/commit/3e4ada08c70dbd79ab562a531cf183d29f585bdc))
+* **deps:** bump pagy from 43.5.4 to 43.5.5 ([3e4ada0](https://github.com/eventaservo/eventaservo/commit/3e4ada08c70dbd79ab562a531cf183d29f585bdc))
+* **deps:** bump pagy from 43.5.4 to 43.5.5 ([f8ccac0](https://github.com/eventaservo/eventaservo/commit/f8ccac0f5003b5aeb16a8f0625911ab9b3838c83))
+* **deps:** bump trix from 2.1.18 to 2.1.19 ([869ffd9](https://github.com/eventaservo/eventaservo/commit/869ffd98739866c5bf3c9185b6a0e364a4ef9d4e))
+* **deps:** bump trix from 2.1.18 to 2.1.19 ([869ffd9](https://github.com/eventaservo/eventaservo/commit/869ffd98739866c5bf3c9185b6a0e364a4ef9d4e))
+* **deps:** bump trix from 2.1.18 to 2.1.19 ([ca30e61](https://github.com/eventaservo/eventaservo/commit/ca30e61100b48d978a72c93a46bd1fff7cb9ab88))
+* remove dependabot config, keep only security updates ([ebaa410](https://github.com/eventaservo/eventaservo/commit/ebaa4102de377a51573cc7d50cb04318af45bc52))
+* remove New Relic job from staging workflow and update New Relic config for staging environment ([5275075](https://github.com/eventaservo/eventaservo/commit/52750755bf80bd7a0ba708ba62fc507e270ddb8d))
+* update bootsnap to 1.24.5 ([099a2e2](https://github.com/eventaservo/eventaservo/commit/099a2e27ea157baa1ab5f3d29591f9563a6f7233))
+
 ## [3.0.7](https://github.com/eventaservo/eventaservo/compare/v3.0.6...v3.0.7) (2026-05-19)
 
 
