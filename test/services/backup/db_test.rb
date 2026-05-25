@@ -6,16 +6,14 @@ class BackupDbTest < ActiveSupport::TestCase
     dump_called = false
     upload_called = false
 
-    # Because methods might not be defined for mocking, we just redefine them for the instance
-    backup.define_singleton_method(:dump) do
+    backup.define_singleton_method(:dump) { |*|
       dump_called = true
       true
-    end
-
-    backup.define_singleton_method(:upload) do
+    }
+    backup.define_singleton_method(:upload) { |*|
       upload_called = true
       true
-    end
+    }
 
     assert backup.call
 
@@ -31,8 +29,6 @@ class BackupDbTest < ActiveSupport::TestCase
     ENV["DB_PASSWORD"] = "test_password"
     ENV["DB_HOST"] = "localhost"
 
-    expected_file = File.join(Rails.root, "tmp", "#{Date.today.strftime("%Y-%m-%d")}-test_db_test.backup")
-
     system_called = false
     passed_args = []
 
@@ -42,7 +38,7 @@ class BackupDbTest < ActiveSupport::TestCase
       true
     end
 
-    backup.dump
+    backup.send(:dump, "/tmp/test_dump.backup")
 
     assert system_called
     assert_equal [
@@ -52,7 +48,7 @@ class BackupDbTest < ActiveSupport::TestCase
       "--dbname=test_db",
       "--host=localhost",
       "--format=custom",
-      "--file=#{expected_file}"
+      "--file=/tmp/test_dump.backup"
     ], passed_args
   end
 
@@ -60,7 +56,7 @@ class BackupDbTest < ActiveSupport::TestCase
     backup = Backup::Db.new
 
     client_mock = Minitest::Mock.new
-    client_mock.expect(:upload_file, true, [String])
+    client_mock.expect(:upload_file, true, [String, String])
 
     google_drive_mock = Minitest::Mock.new
     google_drive_mock.expect(:new, client_mock)
@@ -71,8 +67,7 @@ class BackupDbTest < ActiveSupport::TestCase
     begin
       Object.const_set(:GoogleDrive, Module.new { const_set(:Client, google_drive_mock) })
 
-      backup.instance_variable_set(:@output_file, "dummy.backup")
-      backup.upload
+      backup.send(:upload, "dummy.backup", "test.backup")
 
       assert_mock client_mock
       assert_mock google_drive_mock
