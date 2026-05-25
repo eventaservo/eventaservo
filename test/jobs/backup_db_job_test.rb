@@ -3,8 +3,8 @@
 require "test_helper"
 
 class BackupDbJobTest < ActiveJob::TestCase
-  test "enqueues job with low priority" do
-    assert_enqueued_with(job: BackupDbJob, queue: "low") do
+  test "enqueues job on backup queue" do
+    assert_enqueued_with(job: BackupDbJob, queue: "backup") do
       BackupDbJob.perform_later
     end
   end

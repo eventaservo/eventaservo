@@ -8,6 +8,11 @@ default: &default
       threads: 1
       processes: 1
       polling_interval: 30
+    # Dedicated worker for heavy jobs like database backup
+    - queues: [backup]
+      threads: 1
+      processes: 1
+      polling_interval: 15
     # Worker for all other queues
     - queues: "*"
       threads: 2

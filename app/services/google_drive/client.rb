@@ -9,11 +9,16 @@ module GoogleDrive
       @service.authorization = authorize
     end
 
-    def upload_file(file_path)
+    # Uploads a file to Google Drive.
+    #
+    # @param file_path [String] path to the file on disk
+    # @param filename [String, nil] optional display name on Google Drive (defaults to basename of file_path)
+    # @return [Boolean] true if the upload succeeded
+    def upload_file(file_path, filename = nil)
       return false unless File.exist?(file_path)
 
       file_metadata = {
-        name: File.basename(file_path),
+        name: filename || File.basename(file_path),
         parents: [Rails.application.credentials.dig(:google_drive, :folder_id)]
       }
 
