@@ -2421,7 +2421,14 @@ CREATE INDEX index_participants_on_user_id ON public.participants USING btree (u
 
 
 --
--- Name: index_rollups_on_name_and_interval_and_time_and_dimensions; Type: INDEX; Schema: public; Owner: -
+-- Name: index_participants_on_event_id_and_user_id; Type: INDEX; Schema: public; Owner: --
+--
+
+CREATE UNIQUE INDEX index_participants_on_event_id_and_user_id ON public.participants USING btree (event_id, user_id);
+
+
+--
+-- Name: index_rollups_on_name_and_interval_and_time_and_dimensions; Type: INDEX; Schema: public; Owner: --
 --
 
 CREATE UNIQUE INDEX index_rollups_on_name_and_interval_and_time_and_dimensions ON public.rollups USING btree (name, "interval", "time", dimensions);
@@ -2815,6 +2822,7 @@ ALTER TABLE ONLY public.solid_queue_scheduled_executions
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20260528220136'),
 ('20260522090552'),
 ('20260522090551'),
 ('20260522090550'),
