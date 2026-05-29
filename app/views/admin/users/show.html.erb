@@ -1,0 +1,214 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb small mb-2">
+    <li class="breadcrumb-item"><%= link_to "Admin", admin_root_path %></li>
+    <li class="breadcrumb-item"><%= link_to "Users", admin_users_path %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= @user.name %></li>
+  </ol>
+</nav>
+
+<%# ── Header Card ─────────────────────────────────────────── %>
+<div class="box-white mb-3 p-0 overflow-hidden">
+  <div class="<%= @user.disabled? ? "bg-danger" : "bg-success" %> bg-opacity-10 border-bottom px-4 py-4">
+    <div class="d-flex align-items-center gap-3">
+      <div class="bg-secondary-subtle rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+           style="width:64px;height:64px">
+        <i class="fas fa-user fa-lg text-secondary"></i>
+      </div>
+      <div class="flex-grow-1">
+        <div class="d-flex align-items-center gap-2 mb-1">
+          <h5 class="fw-bold mb-0"><%= @user.name %></h5>
+          <% if @user.admin? %>
+            <span class="badge bg-warning text-dark">Admin</span>
+          <% end %>
+          <% if @user.disabled? %>
+            <span class="badge bg-danger">Disabled</span>
+          <% end %>
+          <% if @user.active? %>
+            <span class="badge bg-success-subtle text-success">Active</span>
+          <% else %>
+            <span class="badge bg-danger-subtle text-danger">Inactive</span>
+          <% end %>
+        </div>
+        <div class="text-body-secondary small">
+          @<%= @user.username %>
+          <span class="mx-1">&middot;</span>
+          <%= @user.email %>
+          <span class="mx-1">&middot;</span>
+          <%= montras_flagon(@user.country) %> <%= @user.country&.name %>
+        </div>
+      </div>
+      <div class="d-flex gap-2 flex-shrink-0">
+        <%= link_to events_by_username_path(@user.username), target: "_blank", rel: "noopener", class: "btn btn-outline-secondary btn-sm" do %>
+          <%= icon('fas', 'external-link-alt') %> Profile
+        <% end %>
+        <%= link_to edit_admin_user_path(@user), class: "btn btn-success btn-sm" do %>
+          <%= icon('fas', 'edit') %> Edit
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <%# ── Quick Stats ──────────────────────────────────────── %>
+  <div class="d-flex border-bottom">
+    <div class="flex-fill text-center py-3 border-end">
+      <div class="fs-4 fw-bold text-success"><%= @user.events_count %></div>
+      <div class="text-uppercase text-body-tertiary fw-semibold" style="font-size:0.7rem;letter-spacing:0.05em">Events</div>
+    </div>
+    <div class="flex-fill text-center py-3 border-end">
+      <div class="fs-4 fw-bold text-success"><%= @user.organizations.count %></div>
+      <div class="text-uppercase text-body-tertiary fw-semibold" style="font-size:0.7rem;letter-spacing:0.05em">Organizations</div>
+    </div>
+    <div class="flex-fill text-center py-3 border-end">
+      <div class="fs-4 fw-bold text-success"><%= @user.sign_in_count %></div>
+      <div class="text-uppercase text-body-tertiary fw-semibold" style="font-size:0.7rem;letter-spacing:0.05em">Sign-ins</div>
+    </div>
+    <div class="flex-fill text-center py-3">
+      <div class="fs-6 fw-bold text-body-secondary"><%= @user.created_at.present? ? l(@user.created_at, format: :short) : "—" %></div>
+      <div class="text-uppercase text-body-tertiary fw-semibold" style="font-size:0.7rem;letter-spacing:0.05em">Joined</div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3">
+  <%# ── Personal Information ────────────────────────────────── %>
+  <div class="col-md-6">
+    <div class="box-white h-100">
+      <div class="text-uppercase text-body-tertiary fw-semibold small mb-3" style="font-size:0.7rem;letter-spacing:0.05em">
+        <i class="fas fa-id-card me-1"></i>Personal Information
+      </div>
+
+      <table class="table table-sm table-borderless mb-0 small">
+        <tbody>
+          <tr>
+            <td class="text-body-secondary fw-semibold" style="width:130px">ID</td>
+            <td><%= @user.id %></td>
+          </tr>
+          <tr>
+            <td class="text-body-secondary fw-semibold">Email</td>
+            <td><%= @user.email %></td>
+          </tr>
+          <tr>
+            <td class="text-body-secondary fw-semibold">Username</td>
+            <td>@<%= @user.username %></td>
+          </tr>
+          <tr>
+            <td class="text-body-secondary fw-semibold">City</td>
+            <td><%= @user.city.presence || "—" %></td>
+          </tr>
+          <tr>
+            <td class="text-body-secondary fw-semibold">Country</td>
+            <td><%= montras_flagon(@user.country) %> <%= @user.country&.name || "—" %></td>
+          </tr>
+          <tr>
+            <td class="text-body-secondary fw-semibold">Birthday</td>
+            <td><%= @user.birthday.present? ? l(@user.birthday, format: :long) : "—" %></td>
+          </tr>
+          <tr>
+            <td class="text-body-secondary fw-semibold">UEA Code</td>
+            <td><%= @user.ueacode.presence || "—" %></td>
+          </tr>
+          <tr>
+            <td class="text-body-secondary fw-semibold">About</td>
+            <td><%= @user.about.presence || "—" %></td>
+          </tr>
+          <tr>
+            <td class="text-body-secondary fw-semibold">Webcal Token</td>
+            <td><code class="text-body-secondary"><%= @user.webcal_token %></code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <%# ── Account & Organizations ─────────────────────────────── %>
+  <div class="col-md-6">
+    <div class="box-white mb-3">
+      <div class="text-uppercase text-body-tertiary fw-semibold small mb-3" style="font-size:0.7rem;letter-spacing:0.05em">
+        <i class="fas fa-shield-alt me-1"></i>Account Status
+      </div>
+
+      <table class="table table-sm table-borderless mb-0 small">
+        <tbody>
+          <tr>
+            <td class="text-body-secondary fw-semibold" style="width:130px">Confirmed at</td>
+            <td>
+              <% if @user.confirmed_at.present? %>
+                <%= l(@user.confirmed_at, format: :long) %>
+              <% else %>
+                <span class="badge bg-danger-subtle text-danger">Not confirmed</span>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-body-secondary fw-semibold">Last sign in</td>
+            <td><%= @user.last_sign_in_at.present? ? l(@user.last_sign_in_at, format: :long) : "—" %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <% if @user.organizations.any? %>
+      <div class="box-white mb-3">
+        <div class="text-uppercase text-body-tertiary fw-semibold small mb-3" style="font-size:0.7rem;letter-spacing:0.05em">
+          <i class="fas fa-sitemap me-1"></i>Organizations
+        </div>
+
+        <div class="d-flex flex-wrap gap-2">
+          <% @user.organizations.each do |org| %>
+            <%= link_to organization_path(org.short_name), target: "_blank",
+              class: "badge bg-success-subtle text-success text-decoration-none px-3 py-2" do %>
+              <%= icon('fas', 'building', class: 'me-1') %><%= org.name %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%# ── Actions ───────────────────────────────────────────── %>
+<div class="box-white mt-3">
+  <div class="text-uppercase text-body-tertiary fw-semibold small mb-3" style="font-size:0.7rem;letter-spacing:0.05em">
+    <i class="fas fa-bolt me-1"></i>Actions
+  </div>
+
+  <div class="d-flex flex-wrap gap-2">
+    <% if @user.confirmed_at.nil? %>
+      <%= link_to confirm_admin_user_path(@user),
+        method: :patch,
+        data: { confirm: "This will confirm the user's email. Are you sure?" },
+        class: "btn btn-outline-primary btn-sm" do %>
+        <%= icon('fas', 'check-circle') %> Confirm email
+      <% end %>
+    <% end %>
+
+    <% if @user.disabled? %>
+      <%= link_to enable_admin_user_path(@user),
+        method: :patch,
+        data: { confirm: "Re-enable this deleted user. Are you sure?" },
+        class: "btn btn-outline-success btn-sm" do %>
+        <%= icon('fas', 'user-check') %> Enable
+      <% end %>
+    <% end %>
+
+    <% unless @user.disabled? %>
+      <%= link_to deactivate_admin_user_path(@user),
+        method: :patch,
+        data: { confirm: "This will remove the user from organizations, move all events to system account and disable the user. Are you sure?" },
+        class: "btn btn-outline-danger btn-sm" do %>
+        <%= icon('fas', 'user-slash') %> Deactivate
+      <% end %>
+    <% end %>
+
+    <%= link_to merge_admin_user_path(@user), class: "btn btn-outline-warning btn-sm" do %>
+      <%= icon('fas', 'object-group') %> Merge
+    <% end %>
+
+    <%= link_to reset_password_admin_user_path(@user),
+      method: :patch,
+      data: { confirm: "This will change the user's password. Are you sure?" },
+      class: "btn btn-outline-danger btn-sm" do %>
+      <%= icon('fas', 'key') %> Reset password
+    <% end %>
+  </div>
+</div>

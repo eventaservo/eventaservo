@@ -1,0 +1,1272 @@
+# Changelog
+
+## [3.0.8](https://github.com/eventaservo/eventaservo/compare/v3.0.7...v3.0.8) (2026-05-25)
+
+
+### Features
+
+* add initial opencode configuration for Sentry and PostgreSQL ([7f8fe54](https://github.com/eventaservo/eventaservo/commit/7f8fe540427cfcb012605c01539688f223956610))
+* Add task to normalize legacy timezones via maintenance_tasks ([#1226](https://github.com/eventaservo/eventaservo/issues/1226)) ([812bb47](https://github.com/eventaservo/eventaservo/commit/812bb478304697caa6f089d86abcad3fe3abd74a))
+* integrate Shopify maintenance_tasks gem for data migrations ([60daef4](https://github.com/eventaservo/eventaservo/commit/60daef4a13dca7e91f771cb071cb60460c45276a))
+* integrate Shopify maintenance_tasks gem for data migrations ([60daef4](https://github.com/eventaservo/eventaservo/commit/60daef4a13dca7e91f771cb071cb60460c45276a))
+* integrate Shopify maintenance_tasks gem for data migrations ([827feda](https://github.com/eventaservo/eventaservo/commit/827fedace8fc5f1b63013f9ef12321dd1f856615))
+
+
+### Bug Fixes
+
+* add missing mapping for legacy timezone "Asia/Calcutta" to "Asia/Kolkata" ([f2b7ebe](https://github.com/eventaservo/eventaservo/commit/f2b7ebe851a68145258a1dfa41696c40c83e9b44))
+* **deps:** update jwt to 3.2.0 to fix CVE-2026-45363 ([6f8c469](https://github.com/eventaservo/eventaservo/commit/6f8c469e0d03de51fed25c7dddc4a203401100b2))
+* migrate Sentry cron monitoring to official SDK MonitorCheckIns ([#1229](https://github.com/eventaservo/eventaservo/issues/1229)) ([4545e43](https://github.com/eventaservo/eventaservo/commit/4545e43b40991d78d78b97dcf47cf2f058a991cb))
+* normalize legacy timezones via maintenance_tasks ([812bb47](https://github.com/eventaservo/eventaservo/commit/812bb478304697caa6f089d86abcad3fe3abd74a))
+* prevent OOM SIGKILL on db backup by isolating to dedicated queue and using Tempfile ([#1235](https://github.com/eventaservo/eventaservo/issues/1235)) ([df3b2a4](https://github.com/eventaservo/eventaservo/commit/df3b2a40b18f8c44a4f0e887e50d1077942b7bc2))
+* sample New Relic traces for Ahoy geocoding jobs ([1db6490](https://github.com/eventaservo/eventaservo/commit/1db6490e539ff574f0642b5edc42a8559d97c8c0))
+
+
+### Code Refactoring
+
+* remove ransackable methods from multiple models for cleanup ([088f341](https://github.com/eventaservo/eventaservo/commit/088f3417a260e28b9a44bd461ef8736ce23ba1e9))
+
+
+### Miscellaneous Chores
+
+* add dependabot for github-actions and docker ([7a8457b](https://github.com/eventaservo/eventaservo/commit/7a8457b591b1cee2e4b75d9eaa029738857efb9b))
+* add npm ecosystem to dependabot config ([102043b](https://github.com/eventaservo/eventaservo/commit/102043b8e23a0613dd8a795c624fb979993fcaa2))
+* **deps-dev:** bump rake from 13.3.1 to 13.4.2 ([c792adc](https://github.com/eventaservo/eventaservo/commit/c792adc36f6e5699030e714b4820727edd4d78f6))
+* **deps:** bump aws-sdk-s3 from 1.222.0 to 1.224.0 ([d6de775](https://github.com/eventaservo/eventaservo/commit/d6de775a2aa6c1d11a31a058524cd2678e45051e))
+* **deps:** bump aws-sdk-s3 from 1.222.0 to 1.224.0 ([d6de775](https://github.com/eventaservo/eventaservo/commit/d6de775a2aa6c1d11a31a058524cd2678e45051e))
+* **deps:** bump aws-sdk-s3 from 1.222.0 to 1.224.0 ([cd5f179](https://github.com/eventaservo/eventaservo/commit/cd5f1794766932fa963ccfb42508c756a8d5b3aa))
+* **deps:** bump newrelic_rpm from 10.4.0 to 10.5.0 ([9e37b51](https://github.com/eventaservo/eventaservo/commit/9e37b5143252f42a98c6ce6d04016ab28359f33c))
+* **deps:** bump pagy from 43.5.3 to 43.5.4 ([14f26df](https://github.com/eventaservo/eventaservo/commit/14f26dfce3b7506364c55a5c43410a8a2303989a))
+* **deps:** bump pagy from 43.5.4 to 43.5.5 ([3e4ada0](https://github.com/eventaservo/eventaservo/commit/3e4ada08c70dbd79ab562a531cf183d29f585bdc))
+* **deps:** bump pagy from 43.5.4 to 43.5.5 ([3e4ada0](https://github.com/eventaservo/eventaservo/commit/3e4ada08c70dbd79ab562a531cf183d29f585bdc))
+* **deps:** bump pagy from 43.5.4 to 43.5.5 ([f8ccac0](https://github.com/eventaservo/eventaservo/commit/f8ccac0f5003b5aeb16a8f0625911ab9b3838c83))
+* **deps:** bump trix from 2.1.18 to 2.1.19 ([869ffd9](https://github.com/eventaservo/eventaservo/commit/869ffd98739866c5bf3c9185b6a0e364a4ef9d4e))
+* **deps:** bump trix from 2.1.18 to 2.1.19 ([869ffd9](https://github.com/eventaservo/eventaservo/commit/869ffd98739866c5bf3c9185b6a0e364a4ef9d4e))
+* **deps:** bump trix from 2.1.18 to 2.1.19 ([ca30e61](https://github.com/eventaservo/eventaservo/commit/ca30e61100b48d978a72c93a46bd1fff7cb9ab88))
+* remove dependabot config, keep only security updates ([ebaa410](https://github.com/eventaservo/eventaservo/commit/ebaa4102de377a51573cc7d50cb04318af45bc52))
+* remove New Relic job from staging workflow and update New Relic config for staging environment ([5275075](https://github.com/eventaservo/eventaservo/commit/52750755bf80bd7a0ba708ba62fc507e270ddb8d))
+* update bootsnap to 1.24.5 ([099a2e2](https://github.com/eventaservo/eventaservo/commit/099a2e27ea157baa1ab5f3d29591f9563a6f7233))
+
+## [3.0.7](https://github.com/eventaservo/eventaservo/compare/v3.0.6...v3.0.7) (2026-05-19)
+
+
+### Features
+
+* show UTC (Universala Tempo) label for UTC events ([54ec822](https://github.com/eventaservo/eventaservo/commit/54ec8224172b78aee398fcfede3f83cd727d92f8))
+
+
+### Bug Fixes
+
+* log timezone lookup errors to Sentry and Rails ([#1219](https://github.com/eventaservo/eventaservo/issues/1219)) ([d453ed2](https://github.com/eventaservo/eventaservo/commit/d453ed2a46167ef99a59d360308cb65564ed0b77))
+* remove duplicate UTC from UTC timezone label ([6488312](https://github.com/eventaservo/eventaservo/commit/648831238841a2c2c2f9c2737aba0f75a98c4149))
+
+
+### Miscellaneous Chores
+
+* **deps:** bump aws-sdk-s3 from 1.219.0 to 1.222.0 ([#1211](https://github.com/eventaservo/eventaservo/issues/1211)) ([45f6c1f](https://github.com/eventaservo/eventaservo/commit/45f6c1f96cc863fecae932ab3835d18fa51c91db))
+* **deps:** bump bootsnap from 1.23.0 to 1.24.4 ([#1210](https://github.com/eventaservo/eventaservo/issues/1210)) ([ff3a35c](https://github.com/eventaservo/eventaservo/commit/ff3a35c0c5ce88896208df123481a80a0017d931))
+* **deps:** bump faraday in the bundler group across 1 directory ([343810b](https://github.com/eventaservo/eventaservo/commit/343810b1d86e2ed644cebd9abc5105ec134c7b24))
+* **deps:** bump puma from 7.2.0 to 8.0.1 ([#1209](https://github.com/eventaservo/eventaservo/issues/1209)) ([a3ba806](https://github.com/eventaservo/eventaservo/commit/a3ba80628b28bfa54315bbf3af8c3b466588349a))
+* reorganize Google API keys and improve timezone logging ([#1222](https://github.com/eventaservo/eventaservo/issues/1222)) ([b394453](https://github.com/eventaservo/eventaservo/commit/b3944538d8604e1a92c302d1da6fdc78f355c61c))
+* update production and staging credentials ([b17540f](https://github.com/eventaservo/eventaservo/commit/b17540f787c1c15f50abe285c1de5eba5ca90366))
+
+## [3.0.6](https://github.com/eventaservo/eventaservo/compare/v3.0.5...v3.0.6) (2026-05-16)
+
+
+### Code Refactoring
+
+* inline admin graph components and extract chart partials (Action Point 2 of [#1203](https://github.com/eventaservo/eventaservo/issues/1203)) ([2f3df84](https://github.com/eventaservo/eventaservo/commit/2f3df84fde34fa08024b1a608679d8347f4cd40f))
+* inline admin graph components into statistics view ([#1206](https://github.com/eventaservo/eventaservo/issues/1206)) ([2f3df84](https://github.com/eventaservo/eventaservo/commit/2f3df84fde34fa08024b1a608679d8347f4cd40f))
+* replace InternationalEventBadgeComponent with a partial ([#1204](https://github.com/eventaservo/eventaservo/issues/1204)) ([d2e0b5f](https://github.com/eventaservo/eventaservo/commit/d2e0b5fd7933f19444caa312e0ff41ce8c29eaa8))
+
+
+### Miscellaneous Chores
+
+* remove view_component and lookbook gems ([#1207](https://github.com/eventaservo/eventaservo/issues/1207)) ([85a7654](https://github.com/eventaservo/eventaservo/commit/85a76547678677fee676d7e71e2f605e7ab32ad6))
+* remove view_component and lookbook gems (Action Point 3 of [#1203](https://github.com/eventaservo/eventaservo/issues/1203)) ([85a7654](https://github.com/eventaservo/eventaservo/commit/85a76547678677fee676d7e71e2f605e7ab32ad6))
+
+## [3.0.5](https://github.com/eventaservo/eventaservo/compare/v3.0.4...v3.0.5) (2026-05-16)
+
+
+### Features
+
+* remove legacy search.json endpoint and update project guidelines ([#1193](https://github.com/eventaservo/eventaservo/issues/1193)) ([6891187](https://github.com/eventaservo/eventaservo/commit/6891187f13d04ce1515701cd74357753d32bd64c))
+* replace Portainer webhook with SSH deploy for staging ([#1195](https://github.com/eventaservo/eventaservo/issues/1195)) ([21bee41](https://github.com/eventaservo/eventaservo/commit/21bee41054e162e6f333e9dbccfc52d6cf23f966))
+* report geocoding failures to Sentry and logs ([#1191](https://github.com/eventaservo/eventaservo/issues/1191)) ([c433186](https://github.com/eventaservo/eventaservo/commit/c43318657039169958928b6862b030a4c41f0d61))
+
+
+### Bug Fixes
+
+* normalize BINARY encoding on Organization#name getter ([#1200](https://github.com/eventaservo/eventaservo/issues/1200)) ([7ff605a](https://github.com/eventaservo/eventaservo/commit/7ff605a14aa79ffb9fae20f43177ad18089e1c20))
+* remove html_safe from video title and description in controller ([f3dbd49](https://github.com/eventaservo/eventaservo/commit/f3dbd49febd961a5fe62a01a3ce5b07d395384f9))
+* replace appleboy/ssh-action with raw SSH for staging deploy ([370f8d5](https://github.com/eventaservo/eventaservo/commit/370f8d515531b677c06e6ab0b0c3780cf2b72680))
+* **security:** 🛡️ Sentinel: [HIGH] Fix XSS in Video Controller ([#1172](https://github.com/eventaservo/eventaservo/issues/1172)) ([f3dbd49](https://github.com/eventaservo/eventaservo/commit/f3dbd49febd961a5fe62a01a3ce5b07d395384f9))
+
+
+### Documentation
+
+* add Revuo Esperanto majo 2026 article to /prie and fix PDF paths ([b5fdb11](https://github.com/eventaservo/eventaservo/commit/b5fdb11489add35ca3b25be15e0cadbe80046796))
+
+
+### Security
+
+* 🛡️ Sentinel: [HIGH] Fix CSRF Vulnerability on Video Deletion ([#1189](https://github.com/eventaservo/eventaservo/issues/1189)) ([3fe2ddd](https://github.com/eventaservo/eventaservo/commit/3fe2ddd31e72bcf79b1e25d855b74849f7f469d7))
+
+
+### Miscellaneous Chores
+
+* **deps:** bump devise from 5.0.3 to 5.0.4 in the bundler group across 1 directory ([#1184](https://github.com/eventaservo/eventaservo/issues/1184)) ([0d2ec0f](https://github.com/eventaservo/eventaservo/commit/0d2ec0f7c13a4580822a049ec7640c4498386e5e))
+* **deps:** bump devise in the bundler group across 1 directory ([0d2ec0f](https://github.com/eventaservo/eventaservo/commit/0d2ec0f7c13a4580822a049ec7640c4498386e5e))
+* **deps:** bump dompurify in the npm_and_yarn group across 1 directory ([2db67d2](https://github.com/eventaservo/eventaservo/commit/2db67d203cb49e5679b64b671d749a68e20a8ac0))
+* **deps:** bump newrelic/deployment-marker-action from 2.3.0 to 2.6.2 ([608d618](https://github.com/eventaservo/eventaservo/commit/608d618bf3010a310cd72e1604ee3e557e26c9b6))
+* **deps:** bump rollups from 0.3.2 to 0.6.0 ([4c0df54](https://github.com/eventaservo/eventaservo/commit/4c0df54fc52ec65d4c3768e37eea0546525157a7))
+* remove requests/ directory with HTTP scratch files ([afb0fa5](https://github.com/eventaservo/eventaservo/commit/afb0fa5bd01397450b71f7cf237efd32c72a0064))
+* remove unused google analytics partial ([10e57d7](https://github.com/eventaservo/eventaservo/commit/10e57d707fa7ebee64dca7af40e66212bc68d8ed))
+* remove unused Importilo service ([#1192](https://github.com/eventaservo/eventaservo/issues/1192)) ([edae6e0](https://github.com/eventaservo/eventaservo/commit/edae6e0fb8637f475835c7d49bd8cb8288e7b36b))
+* update icalendar gem to 2.12.3 ([#1199](https://github.com/eventaservo/eventaservo/issues/1199)) ([d72a56b](https://github.com/eventaservo/eventaservo/commit/d72a56b6d6b96ec122faea296930ba0c4d404a28))
+* upgrade Docker image to Ruby 3.4.9 on Debian Trixie slim ([#1201](https://github.com/eventaservo/eventaservo/issues/1201)) ([42faff2](https://github.com/eventaservo/eventaservo/commit/42faff24fe006b68ae00184b610a8ff278d7e1ab))
+
+## [3.0.4](https://github.com/eventaservo/eventaservo/compare/v3.0.3...v3.0.4) (2026-05-08)
+
+
+### Bug Fixes
+
+* restore visual feedback on failed sign-in ([#1181](https://github.com/eventaservo/eventaservo/issues/1181)) ([fa0fdd3](https://github.com/eventaservo/eventaservo/commit/fa0fdd3ae328ead7a8c8c1df26f6bee9eec73a1a))
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump faker from 3.6.1 to 3.8.0 ([#1171](https://github.com/eventaservo/eventaservo/issues/1171)) ([dd61d98](https://github.com/eventaservo/eventaservo/commit/dd61d989ea193192527ce46b0d66b318a05d2b83))
+* **deps-dev:** bump herb from 0.9.5 to 0.10.1 ([#1169](https://github.com/eventaservo/eventaservo/issues/1169)) ([12c45d0](https://github.com/eventaservo/eventaservo/commit/12c45d0cfdd7307da07bb06c15254003f59fb154))
+* **deps:** bump css_parser from 2.0.0 to 2.1.0 in the bundler group across 1 directory ([#1177](https://github.com/eventaservo/eventaservo/issues/1177)) ([5289e1c](https://github.com/eventaservo/eventaservo/commit/5289e1ca42ae1d4b007583c63aad93d380d9b300))
+* **deps:** bump css_parser in the bundler group across 1 directory ([5289e1c](https://github.com/eventaservo/eventaservo/commit/5289e1ca42ae1d4b007583c63aad93d380d9b300))
+* improve accessibility of icon-only elements in admin views ([#1174](https://github.com/eventaservo/eventaservo/issues/1174)) ([01da9be](https://github.com/eventaservo/eventaservo/commit/01da9bebe6b375d61cbc7b85968b9bdc0c2b1bea))
+
+## [3.0.3](https://github.com/eventaservo/eventaservo/compare/v3.0.2...v3.0.3) (2026-05-07)
+
+
+### Features
+
+* Adds NewRelic integration ([#1178](https://github.com/eventaservo/eventaservo/issues/1178)) ([8d83de0](https://github.com/eventaservo/eventaservo/commit/8d83de08a219cad92215adae5eb06f090d4b85cf))
+
+
+### Continuous Integration
+
+* run New Relic change tracking after Docker deploy ([#1179](https://github.com/eventaservo/eventaservo/issues/1179)) ([90e3d95](https://github.com/eventaservo/eventaservo/commit/90e3d959c2db8bc9abecba60713ffce43f52dacf))
+* trigger New Relic change tracking after Docker deploy ([90e3d95](https://github.com/eventaservo/eventaservo/commit/90e3d959c2db8bc9abecba60713ffce43f52dacf))
+
+
+### Miscellaneous Chores
+
+* **deps:** bump net-imap from 0.6.3 to 0.6.4 in the bundler group across 1 directory ([#1175](https://github.com/eventaservo/eventaservo/issues/1175)) ([14a980a](https://github.com/eventaservo/eventaservo/commit/14a980ae0224ce8e635ebb5cedb5b5a1427fec28))
+* **deps:** bump net-imap in the bundler group across 1 directory ([14a980a](https://github.com/eventaservo/eventaservo/commit/14a980ae0224ce8e635ebb5cedb5b5a1427fec28))
+
+## [3.0.2](https://github.com/eventaservo/eventaservo/compare/v3.0.1...v3.0.2) (2026-05-01)
+
+
+### Features
+
+* **a11y:** add aria-labels to icon-only dropdown toggles ([763b385](https://github.com/eventaservo/eventaservo/commit/763b385966486495cc10cdff6ef05d5c1b1babc1))
+
+
+### Bug Fixes
+
+* **ActiveStorage:** correct storage proxy helper and add regression tests ([#1143](https://github.com/eventaservo/eventaservo/issues/1143)) ([d5bd848](https://github.com/eventaservo/eventaservo/commit/d5bd8485d5f975d1914608ca08ed63637315c29e))
+* **ActiveStorage:** use idiomatic .url for proxy representations ([#1144](https://github.com/eventaservo/eventaservo/issues/1144)) ([b8c46b7](https://github.com/eventaservo/eventaservo/commit/b8c46b7ab9387dbfcafec760a4eacdcf2be924dc))
+* normalize legacy IANA timezone identifiers ([#1149](https://github.com/eventaservo/eventaservo/issues/1149)) ([d3f220d](https://github.com/eventaservo/eventaservo/commit/d3f220db3095d852d2ad8e1276e16483312fd825))
+* normalize legacy IANA timezones and improve international calendar UI ([#1118](https://github.com/eventaservo/eventaservo/issues/1118)) ([3328318](https://github.com/eventaservo/eventaservo/commit/3328318df23fcf8515d35d5723c244cfd78f4e92))
+* preserve typed wall-clock times on event save ([#1153](https://github.com/eventaservo/eventaservo/issues/1153)) ([3e42860](https://github.com/eventaservo/eventaservo/commit/3e428608c8ee88dfdb97c4493ec730cd36e663aa))
+
+
+### Code Refactoring
+
+* extract event filtering and counting into Query Objects ([#1124](https://github.com/eventaservo/eventaservo/issues/1124)) ([b3de79f](https://github.com/eventaservo/eventaservo/commit/b3de79fac245fce2b498ff784dba0308aca9a831))
+
+
+### Continuous Integration
+
+* split minitest and system tests workflows ([#1151](https://github.com/eventaservo/eventaservo/issues/1151)) ([75db73b](https://github.com/eventaservo/eventaservo/commit/75db73bedba2b1187dbed93af8aa8489dbb2c15c))
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump binding_of_caller from 1.0.1 to 2.0.0 ([6bfa626](https://github.com/eventaservo/eventaservo/commit/6bfa626f054b858a599259e7f817b9303f2c8e9f))
+* **deps-dev:** bump selenium-webdriver from 4.41.0 to 4.43.0 ([#1141](https://github.com/eventaservo/eventaservo/issues/1141)) ([2743090](https://github.com/eventaservo/eventaservo/commit/27430900f0443ed4d7df3083a69c58e2a1db16fe))
+* **deps:** bump actions/checkout from 4 to 6 ([135e0ea](https://github.com/eventaservo/eventaservo/commit/135e0ea443447bce60537931a3d7d04557e61f0c))
+* **deps:** bump actions/setup-node from 4 to 6 ([#1133](https://github.com/eventaservo/eventaservo/issues/1133)) ([9e59bb9](https://github.com/eventaservo/eventaservo/commit/9e59bb932a8c94366d5f0446a5c5341f3fd02466))
+* **deps:** bump actions/setup-node from 4 to 6 ([#1159](https://github.com/eventaservo/eventaservo/issues/1159)) ([56ece1d](https://github.com/eventaservo/eventaservo/commit/56ece1d63f4b2970d79ce8e096b44e38736d2ad1))
+* **deps:** bump ahoy_matey from 5.4.2 to 5.5.0 ([#1140](https://github.com/eventaservo/eventaservo/issues/1140)) ([81b1873](https://github.com/eventaservo/eventaservo/commit/81b1873d1e1c34f6c21dd74e3ea2848780e9fa66))
+* **deps:** bump aws-sdk-s3 from 1.211.0 to 1.217.0 ([c8b9a37](https://github.com/eventaservo/eventaservo/commit/c8b9a37086a701d1cc8488d15a301024d87ea181))
+* **deps:** bump bullet from 8.1.0 to 8.1.1 ([#1163](https://github.com/eventaservo/eventaservo/issues/1163)) ([55c9066](https://github.com/eventaservo/eventaservo/commit/55c906638adaacbb5e5c52fcf21c6992b03faf82))
+* **deps:** bump codecov/codecov-action from 4 to 5 ([a9446f6](https://github.com/eventaservo/eventaservo/commit/a9446f6597cf0ed542bbadc78e74f5af00890691))
+* **deps:** bump codecov/codecov-action from 5 to 6 ([#1136](https://github.com/eventaservo/eventaservo/issues/1136)) ([07cc4b5](https://github.com/eventaservo/eventaservo/commit/07cc4b59a75205480b807d031bda1c4e046dd8d2))
+* **deps:** bump codecov/codecov-action from 5 to 6 ([#1160](https://github.com/eventaservo/eventaservo/issues/1160)) ([d3cec96](https://github.com/eventaservo/eventaservo/commit/d3cec965f031dca665f43f21a94c69f82de4a381))
+* **deps:** bump docker/build-push-action from 6 to 7 ([#1137](https://github.com/eventaservo/eventaservo/issues/1137)) ([2b89c96](https://github.com/eventaservo/eventaservo/commit/2b89c96ed9f1bac2ea89932f371dac0c59671914))
+* **deps:** bump docker/login-action from 3 to 4 ([#1135](https://github.com/eventaservo/eventaservo/issues/1135)) ([6af2486](https://github.com/eventaservo/eventaservo/commit/6af24864bf7eebd51967839e75c43b84e2510efa))
+* **deps:** bump docker/setup-buildx-action from 3 to 4 ([af898d7](https://github.com/eventaservo/eventaservo/commit/af898d70df1d991d8cc61da461133dafbbb85202))
+* **deps:** bump docker/setup-qemu-action from 3 to 4 ([#1132](https://github.com/eventaservo/eventaservo/issues/1132)) ([36efe13](https://github.com/eventaservo/eventaservo/commit/36efe13800ebe0b0804715de939af57d4a6fddfb))
+* **deps:** bump erb from 6.0.2 to 6.0.4 in the bundler group across 1 directory ([#1150](https://github.com/eventaservo/eventaservo/issues/1150)) ([18c6372](https://github.com/eventaservo/eventaservo/commit/18c63724485f1eb7db46374988432caa30da58d7))
+* **deps:** bump erb in the bundler group across 1 directory ([18c6372](https://github.com/eventaservo/eventaservo/commit/18c63724485f1eb7db46374988432caa30da58d7))
+* **deps:** bump getsentry/action-release from 1 to 3 ([a919bda](https://github.com/eventaservo/eventaservo/commit/a919bda7b2fc449f988bb4d97e3761a246587b85))
+* **deps:** bump github/codeql-action from 3 to 4 ([fe0af40](https://github.com/eventaservo/eventaservo/commit/fe0af4090e28217dbb2a422b0ee3f74e51a98a38))
+* **deps:** bump googleapis/release-please-action from 4 to 5 ([#1158](https://github.com/eventaservo/eventaservo/issues/1158)) ([7a152bf](https://github.com/eventaservo/eventaservo/commit/7a152bf48eb1a1555d503a5d3c5854f560508d0d))
+* **deps:** bump jwt from 2.10.2 to 3.1.2 ([#1152](https://github.com/eventaservo/eventaservo/issues/1152)) ([bad2463](https://github.com/eventaservo/eventaservo/commit/bad24633dd63378c9370b5fbe29bff657b6e7328))
+* **deps:** bump lokalise_rails from 7.1.0 to 9.1.0 ([8189708](https://github.com/eventaservo/eventaservo/commit/818970853a49862b65a4cb4339ae7676c4d1b8f5))
+* **deps:** bump pagy from 43.5.0 to 43.5.3 ([#1161](https://github.com/eventaservo/eventaservo/issues/1161)) ([1d29a8b](https://github.com/eventaservo/eventaservo/commit/1d29a8b5498f7859906b6376cfbf8a710a6e6381))
+* **deps:** bump picomatch in the npm_and_yarn group across 1 directory ([c5e052a](https://github.com/eventaservo/eventaservo/commit/c5e052a61f8925bfaf78a6746e77ae70da538167))
+* **deps:** bump solid_queue from 1.2.4 to 1.4.0 ([5da6ed0](https://github.com/eventaservo/eventaservo/commit/5da6ed0f1683c7d447d83ed7f55b6fa3869c8a80))
+* **deps:** bump trix from 2.1.17 to 2.1.18 in the npm_and_yarn group across 1 directory ([#1131](https://github.com/eventaservo/eventaservo/issues/1131)) ([5977ff3](https://github.com/eventaservo/eventaservo/commit/5977ff3644908a6b1960e856988874914e3aba3c))
+* **deps:** bump trix in the npm_and_yarn group across 1 directory ([5977ff3](https://github.com/eventaservo/eventaservo/commit/5977ff3644908a6b1960e856988874914e3aba3c))
+* **deps:** bump yard from 0.9.38 to 0.9.42 in the bundler group across 1 directory ([#1145](https://github.com/eventaservo/eventaservo/issues/1145)) ([4d0f68a](https://github.com/eventaservo/eventaservo/commit/4d0f68a8efbf50b47b0b0110e4f07ac334be25c3))
+* **deps:** bump yard from 0.9.42 to 0.9.43 ([#1162](https://github.com/eventaservo/eventaservo/issues/1162)) ([998ad01](https://github.com/eventaservo/eventaservo/commit/998ad0135a693ce8b14829612b9f83bf9f7257fd))
+* **deps:** bump yard in the bundler group across 1 directory ([4d0f68a](https://github.com/eventaservo/eventaservo/commit/4d0f68a8efbf50b47b0b0110e4f07ac334be25c3))
+* remove Lokalise integration ([#1127](https://github.com/eventaservo/eventaservo/issues/1127)) ([5f197b8](https://github.com/eventaservo/eventaservo/commit/5f197b8daa2c5faf0ba043f7c4062ab56ae2f932))
+* update omniauth-facebook to 10.0.0 ([#1129](https://github.com/eventaservo/eventaservo/issues/1129)) ([da18490](https://github.com/eventaservo/eventaservo/commit/da184905588d2fbdb21d3c4979523dd4df7fb5c0))
+* update Rails and dependencies ([#1128](https://github.com/eventaservo/eventaservo/issues/1128)) ([e4a5f9d](https://github.com/eventaservo/eventaservo/commit/e4a5f9d918ff910bcb1575c2b911b3c2c7b03273))
+* upgrade pagy to 43.5 ([#1130](https://github.com/eventaservo/eventaservo/issues/1130)) ([7006e07](https://github.com/eventaservo/eventaservo/commit/7006e07f052098bf891d83ed266869aefb261dcd))
+
+## [3.0.1](https://github.com/eventaservo/eventaservo/compare/v3.0.0...v3.0.1) (2026-03-22)
+
+
+### Features
+
+* :sparkles: add month navigation to calendar toolbar ([#1111](https://github.com/eventaservo/eventaservo/issues/1111)) ([c9e3614](https://github.com/eventaservo/eventaservo/commit/c9e36141928b493b79118b959e73a8466c46f849))
+
+
+### Miscellaneous Chores
+
+* update release-please configuration to enhance versioning and changelog structure ([9240826](https://github.com/eventaservo/eventaservo/commit/9240826701e6b6c53819cc2daa4d4abe1d6ae177))
+* upgrade Minitest 6 and refresh dependencies ([#1109](https://github.com/eventaservo/eventaservo/issues/1109)) ([bd072e8](https://github.com/eventaservo/eventaservo/commit/bd072e82d36eed517291ed38ad4c2541e9b1125b))
+
+## [3.0.0](https://github.com/eventaservo/eventaservo/compare/v2.85.0...v3.0.0) (2026-03-21)
+
+
+### Features
+
+* **a11y:** add aria-labels to icon-only links in navbar tools ([#1084](https://github.com/eventaservo/eventaservo/issues/1084)) ([28d08b7](https://github.com/eventaservo/eventaservo/commit/28d08b713a58f80171be9fab7717ed0e4edbef8c))
+* Add ARIA labels to icon-only buttons for accessibility ([a7c079f](https://github.com/eventaservo/eventaservo/commit/a7c079f0091eafb35cc075b280075dce5d8162d3))
+* add eventaservo-code-review skill and update skillshare manifests ([93b59aa](https://github.com/eventaservo/eventaservo/commit/93b59aa37382aec489305513723dbf06947ea4b5))
+* add filters and new card design to Instruantoj directory page ([#1068](https://github.com/eventaservo/eventaservo/issues/1068)) ([386981d](https://github.com/eventaservo/eventaservo/commit/386981d4f2d92fb2a66cee623445104bd473030a))
+* add mockups feature with compact and detailed row views, including admin access control ([4c0b033](https://github.com/eventaservo/eventaservo/commit/4c0b03399cc9c38ad7413254c123f878802b77df))
+* **Admin:** add administration dashboard ([#1066](https://github.com/eventaservo/eventaservo/issues/1066)) ([540af19](https://github.com/eventaservo/eventaservo/commit/540af199b24c5d1e98f6a0e7b92bd8071dc07036))
+* **Admin:** Add button design system with mockups ([#1082](https://github.com/eventaservo/eventaservo/issues/1082)) ([6db87a1](https://github.com/eventaservo/eventaservo/commit/6db87a1d2b76c5def5b9ec9228b60db08ab1dbac))
+* **Admin:** enhance event management with filtering options and improved UI ([852252b](https://github.com/eventaservo/eventaservo/commit/852252bbf762f8dbf290543d990a5005156c5502))
+* **Admin:** Migrate event redirections management to new admin panel ([#1079](https://github.com/eventaservo/eventaservo/issues/1079)) ([486b5c5](https://github.com/eventaservo/eventaservo/commit/486b5c5ea2726fe66c49d2f9fb56ce7b38baa264))
+* **Admin:** Migrate event reports management to new admin panel ([#1076](https://github.com/eventaservo/eventaservo/issues/1076)) ([2613d62](https://github.com/eventaservo/eventaservo/commit/2613d624f860967428348ed3cedf9c9636594999))
+* **admin:** migrate logs from ActiveAdmin to custom admin panel ([#1074](https://github.com/eventaservo/eventaservo/issues/1074)) ([6db57c0](https://github.com/eventaservo/eventaservo/commit/6db57c062a9cc0fe9ebd1eb72b580a9675a2f971))
+* **admin:** migrate organizations from ActiveAdmin to custom admin panel ([#1075](https://github.com/eventaservo/eventaservo/issues/1075)) ([4ceb8b4](https://github.com/eventaservo/eventaservo/commit/4ceb8b4547c6cebf2fa733814cd663ad184bdb53))
+* **Admin:** Migrate users management to new admin panel ([#1080](https://github.com/eventaservo/eventaservo/issues/1080)) ([da94374](https://github.com/eventaservo/eventaservo/commit/da94374c6b5f3f989c19a28796615d9b86d779d9))
+* **Admin:** Redirect admin organizations to public view ([#1078](https://github.com/eventaservo/eventaservo/issues/1078)) ([a28e9cd](https://github.com/eventaservo/eventaservo/commit/a28e9cd52d37ea136c9444cc8c0a92277d5dd34b))
+* **Mockups:** add teacher and speaker card mockups ([#1067](https://github.com/eventaservo/eventaservo/issues/1067)) ([0511e45](https://github.com/eventaservo/eventaservo/commit/0511e45b7178b7957365475550242e5889ad9bd6))
+* **Queries:** implement TeachersAndSpeakersQuery for filtering teach… ([#1069](https://github.com/eventaservo/eventaservo/issues/1069)) ([f8f80f2](https://github.com/eventaservo/eventaservo/commit/f8f80f2bba284ddf0fe1bc01c7e99b3030e88f7b))
+
+
+### Bug Fixes
+
+* About Us page paragraph spacing ([6a05525](https://github.com/eventaservo/eventaservo/commit/6a05525a21a613ff493370dc5e5ddd666775a055))
+* **ActiveStorage:** switch from redirect to proxy mode for CDN caching ([#1073](https://github.com/eventaservo/eventaservo/issues/1073)) ([db16ba5](https://github.com/eventaservo/eventaservo/commit/db16ba51b5d690edcc98bb6667c6249d638510ab))
+* **Admin:** Fix user view page ([574cddd](https://github.com/eventaservo/eventaservo/commit/574cddd19054cf0503de7f7c6addf66f44c1cfe0))
+* **Navbar:** add padding to the navbar for improved layout ([92390fd](https://github.com/eventaservo/eventaservo/commit/92390fd4fea7fa599335776404dfcbce6e999deb))
+* **Navbar:** adjust container structure for improved layout and alignment ([e702b6d](https://github.com/eventaservo/eventaservo/commit/e702b6d2e62bfc4a3af64dbca948e87b89ba1c08))
+* **Navbar:** align toggler icon to far right on small screens ([288db2b](https://github.com/eventaservo/eventaservo/commit/288db2b1ca8e9be52338db4814248143d2368e81))
+* Parallel tests ([#1088](https://github.com/eventaservo/eventaservo/issues/1088)) ([6764332](https://github.com/eventaservo/eventaservo/commit/676433281b0835d3fc87fdde94e2e19b17ead132))
+* **RackAttack:** safelist Active Storage proxy paths from rate limiting ([f3367a5](https://github.com/eventaservo/eventaservo/commit/f3367a5a1b4144eacdf8abadfd86b6d04b85e14c))
+
+
+### Miscellaneous Chores
+
+* release 3.0.0 ([4bced54](https://github.com/eventaservo/eventaservo/commit/4bced54a383272c18c61e47c135140baffd74b93))
+
+## [2.85.0](https://github.com/eventaservo/eventaservo/compare/v2.84.0...v2.85.0) (2026-03-07)
+
+
+### Features
+
+* Enhance admin statistics and remove unreliable visitors chart ([#1059](https://github.com/eventaservo/eventaservo/issues/1059)) ([9343643](https://github.com/eventaservo/eventaservo/commit/9343643099bc908d382984029dc6e50d5aec1a45))
+
+
+### Bug Fixes
+
+* refactor timezone selection to use cached method for improved performance ([8fe351d](https://github.com/eventaservo/eventaservo/commit/8fe351d5ee524d1b0620fa8c3c844e1a901623ec))
+* remove self-closing tags in HTML for better compatibility ([e7d0dde](https://github.com/eventaservo/eventaservo/commit/e7d0dded7a7d16d91ff8afc4303e2756343d6e3d))
+* remove unused ad factory file to clean up test suite ([6c3afe7](https://github.com/eventaservo/eventaservo/commit/6c3afe7103c3b37aaeb92fa8a7e60fc9283b54c3))
+* update gem versions for improved compatibility and security ([bdbb8ae](https://github.com/eventaservo/eventaservo/commit/bdbb8aebfaa47fcbfa034b917bd261bb33c47ed2))
+
+
+### Performance Improvements
+
+* Optimize N+1 queries in HomeController#search ([#1037](https://github.com/eventaservo/eventaservo/issues/1037)) ([8297ce5](https://github.com/eventaservo/eventaservo/commit/8297ce5b1f1dbbcb86d91104f4cd62dc7caa10a1))
+
+## [2.84.0](https://github.com/eventaservo/eventaservo/compare/v2.83.0...v2.84.0) (2026-02-20)
+
+
+### Features
+
+* improve accessibility of organization form help text ([811f3db](https://github.com/eventaservo/eventaservo/commit/811f3db203ffc93a7543e56bfb791df2347c9cc2))
+* **Users:** implement API token regeneration functionality for users ([#941](https://github.com/eventaservo/eventaservo/issues/941)) ([be2b371](https://github.com/eventaservo/eventaservo/commit/be2b371c9367f1b41539ce97277ad000628cdae2))
+
+
+### Bug Fixes
+
+* Correct typo in article link description ([3fceccc](https://github.com/eventaservo/eventaservo/commit/3fceccc14d02428b5e7f7c829cf9811a7fc95276))
+* minify JS bundle in production to prevent asset truncation ([#995](https://github.com/eventaservo/eventaservo/issues/995)) ([7e95b30](https://github.com/eventaservo/eventaservo/commit/7e95b3067155fce54eb1667a5e9b7abf30538043))
+* pin @redocly/cli to v1.0.2 to fix Docker build ([#992](https://github.com/eventaservo/eventaservo/issues/992)) ([0ea16ff](https://github.com/eventaservo/eventaservo/commit/0ea16ff5db5d591228d23e2ab74b5e78db5889e6))
+* remove duplicate Sentry loader script causing replayIntegration error ([e5e74fe](https://github.com/eventaservo/eventaservo/commit/e5e74fef0b42a1839de61a37b0824595fa1f3456))
+* remove extra commas in full_address when fields are empty ([554d8b6](https://github.com/eventaservo/eventaservo/commit/554d8b6a9192cf56912662b1b127f8ed8be729d8))
+
+
+### Performance Improvements
+
+* add functional indexes to speed up EventsController#by_continent ([#996](https://github.com/eventaservo/eventaservo/issues/996)) ([5083a56](https://github.com/eventaservo/eventaservo/commit/5083a56668cba33ca34f20b87e07174b9642b300))
+* Optimize ads loading in HomeController ([#988](https://github.com/eventaservo/eventaservo/issues/988)) ([190aecb](https://github.com/eventaservo/eventaservo/commit/190aecb5b5d98808619c954344345ed7d529bec5))
+
+## [2.83.0](https://github.com/eventaservo/eventaservo/compare/v2.82.0...v2.83.0) (2026-01-17)
+
+
+### Features
+
+* Add MCP server configurations for Sentry, GitHub, and Postgres. ([8b5f920](https://github.com/eventaservo/eventaservo/commit/8b5f920a49b8e6212040a14e949f0249ee072427))
+* add RSS feeds for country and continent pages ([#925](https://github.com/eventaservo/eventaservo/issues/925)) ([f10ac62](https://github.com/eventaservo/eventaservo/commit/f10ac6218f5239062bbddcde023a8ba40a936113))
+* Add support for Anthropic Claude in dev container and workspace ([30ca731](https://github.com/eventaservo/eventaservo/commit/30ca731e19d7d6d7527af87cb41dbdcf06db4123))
+* **Ahoy:** enable bot tracking in Ahoy configuration ([f580eb4](https://github.com/eventaservo/eventaservo/commit/f580eb45a271742f3381efd26fcd9d3a55491cef))
+* allow only authenticated users to send message to event owner ([78dddad](https://github.com/eventaservo/eventaservo/commit/78dddad6b052977c5ef0ea2c6754ea7c3c16f19e))
+* **api:** add friendly 404 response for invalid API v2 endpoints ([bd7bf25](https://github.com/eventaservo/eventaservo/commit/bd7bf25e83613ed45a60e175ce9867a2a0f98a3d))
+* **Event:** enhance event duplication by preserving tags and characteristics ([#911](https://github.com/eventaservo/eventaservo/issues/911)) ([75d447c](https://github.com/eventaservo/eventaservo/commit/75d447ce06ed16d2f86b2c3d218bdb11115b49a2))
+* **Gemfile.lock:** add aarch64-linux support for various gems ([9949630](https://github.com/eventaservo/eventaservo/commit/9949630040762b66a5a927ef01bce664d98439f5))
+* **queue:** add dedicated worker for ahoy queue ([50b8eb2](https://github.com/eventaservo/eventaservo/commit/50b8eb2cf7f34f2057ba76316b01d41b010acb42))
+* **Rack::Attack:** add blocklist for specific IPs in request headers ([2bfe88b](https://github.com/eventaservo/eventaservo/commit/2bfe88b2e33a3237825aa00fccdb3bb9e71fe817))
+* **Rack::Attack:** enhance IP handling for throttling and blocking ([de90520](https://github.com/eventaservo/eventaservo/commit/de905209bff26f45c5c9f4d2e29490da8ce97993))
+* **Rack::Attack:** enhance throttling and blocking mechanisms ([0d09a1a](https://github.com/eventaservo/eventaservo/commit/0d09a1ae9184c1675b523d8f41361658e87c4f42))
+* Update dev container setup and add AI tools support ([87e3bd2](https://github.com/eventaservo/eventaservo/commit/87e3bd281730b2d7caa008d397c15c44f59080c4))
+
+
+### Bug Fixes
+
+* **Event:** Correct timezone conversion in Google Calendar export ([#928](https://github.com/eventaservo/eventaservo/issues/928)) ([56746ad](https://github.com/eventaservo/eventaservo/commit/56746ad117cfff3d03f8b0a428b2e4c8ec4f240a))
+* optimize EventsController#by_continent to resolve slow DB queries ([#904](https://github.com/eventaservo/eventaservo/issues/904)) ([b868b6d](https://github.com/eventaservo/eventaservo/commit/b868b6dec45cc77c187ae7632da8d66fb4cbcdf4))
+* prevent Stimulus error when organizations target is missing ([#906](https://github.com/eventaservo/eventaservo/issues/906)) ([53d0b6b](https://github.com/eventaservo/eventaservo/commit/53d0b6b291cb34c90fef8173ee3c3ddba5209558))
+* **Rack::Attack:** improve logging for throttled requests ([d109c23](https://github.com/eventaservo/eventaservo/commit/d109c23a20f41b7c17694a29d8a638c68f1e3930))
+* **Rack::Attack:** update blocklist description for clarity ([8177088](https://github.com/eventaservo/eventaservo/commit/8177088d9eced97b846ee07909de572a70e95967))
+* remove duplicate timezone entries and display UTC instead of Etc/UTC ([405c4c8](https://github.com/eventaservo/eventaservo/commit/405c4c8a12d5d8776de688143db6c9a467c1f5ee))
+* update javascript dependencies and resolve security vulnerability in trix ([#939](https://github.com/eventaservo/eventaservo/issues/939)) ([bd6a009](https://github.com/eventaservo/eventaservo/commit/bd6a0095b4114f4d2838aa969bf9d4898cb3d59c))
+
+## [2.82.0](https://github.com/eventaservo/eventaservo/compare/v2.81.0...v2.82.0) (2025-08-23)
+
+
+### Features
+
+* **cursor:** add MCP configuration for development tools ([#895](https://github.com/eventaservo/eventaservo/issues/895)) ([3857eb2](https://github.com/eventaservo/eventaservo/commit/3857eb2d896115294dcc584d01c1e18c6efadaf0))
+* remove contents and announcements from main page ([#887](https://github.com/eventaservo/eventaservo/issues/887)) ([2ea5d26](https://github.com/eventaservo/eventaservo/commit/2ea5d26157a086139baa67d3eea6944fec61ca7b))
+
+
+### Bug Fixes
+
+* Add database index to improve kronologio performance ([#888](https://github.com/eventaservo/eventaservo/issues/888)) ([53aa656](https://github.com/eventaservo/eventaservo/commit/53aa6560aac9466bc468c72f4d090a48d704198f))
+* **Event:** Display of Announcements & Contests ([eaefc16](https://github.com/eventaservo/eventaservo/commit/eaefc16ed9709742db1b55279d51d1b104525be4))
+* **Events:** optimize version retrieval with eager loading ([a789c9c](https://github.com/eventaservo/eventaservo/commit/a789c9cdf44b48e8f6a20ed2053d0f90269067c1))
+* **events:** prevent NoMethodError when tags_categories is nil ([4844848](https://github.com/eventaservo/eventaservo/commit/48448486f47dba20f23c302f500de6e0e2dd1a86))
+* ReferenceError ([333eae5](https://github.com/eventaservo/eventaservo/commit/333eae50dc3ac0dd1a4536ba7669519a85c98ea3))
+* **Video:** Thumbnail for Youtube Shorts ([5211fdf](https://github.com/eventaservo/eventaservo/commit/5211fdfc60d1f3427d688689dc1fd4d4e77b9c21))
+
+
+### Performance Improvements
+
+* 🚀 Comprehensive Performance Optimization for Kronologio Action ([#889](https://github.com/eventaservo/eventaservo/issues/889)) ([869b2f7](https://github.com/eventaservo/eventaservo/commit/869b2f72bfb33b5563f598bb3dd4b45151c8d3b6))
+
+## [2.81.0](https://github.com/eventaservo/eventaservo/compare/v2.80.1...v2.81.0) (2025-05-26)
+
+
+### Features
+
+* **Event:** :sparkles: New tag system and "Por Junuloj" tag ([#883](https://github.com/eventaservo/eventaservo/issues/883)) ([4a74ab5](https://github.com/eventaservo/eventaservo/commit/4a74ab5df6595a44d37e60f05be6528e1da2a5e4))
+
+## [2.80.1](https://github.com/eventaservo/eventaservo/compare/v2.80.0...v2.80.1) (2025-04-30)
+
+
+### Bug Fixes
+
+* **Search:** Link to City name on event breadcrumb ([2e4cb3b](https://github.com/eventaservo/eventaservo/commit/2e4cb3b638beebf556077f27565a0c0dec5a50cc))
+* **workflow:** set SECRET_KEY_BASE_DUMMY for asset precompilation in CI ([225842c](https://github.com/eventaservo/eventaservo/commit/225842cd029d0621cb782e73b90e2d710bfd7269))
+
+## [2.80.0](https://github.com/eventaservo/eventaservo/compare/v2.79.1...v2.80.0) (2025-04-30)
+
+
+### Features
+
+* :sparkling: Adds Google Authentication ([#850](https://github.com/eventaservo/eventaservo/issues/850)) ([1f43876](https://github.com/eventaservo/eventaservo/commit/1f43876f475abe82883ccef27f5bc147721fee39))
+* Add icons and rename homepage links ([#860](https://github.com/eventaservo/eventaservo/issues/860)) ([7f4c254](https://github.com/eventaservo/eventaservo/commit/7f4c254d10fd003ee0b50ea87b6cbe662994ae91))
+* **API:** Allow token retrieval from query string in addition to Authorization header ([244e6e3](https://github.com/eventaservo/eventaservo/commit/244e6e3cfcd74912f9d987b26ed1d1d9baf9dffe))
+* **Event:** :sparkles: Add to Calendar links on event page ([#852](https://github.com/eventaservo/eventaservo/issues/852)) ([764a4ac](https://github.com/eventaservo/eventaservo/commit/764a4ac7e02dac7be7c1393c514ba6df4fb1398f)), closes [#836](https://github.com/eventaservo/eventaservo/issues/836)
+* **Event:** Move "Cancel event" button to edit form ([#868](https://github.com/eventaservo/eventaservo/issues/868)) ([80ded7c](https://github.com/eventaservo/eventaservo/commit/80ded7c23705c9c36bf3197bcf13f657bbc183c2))
+* **Event:** Removes "Loka" tag ([#861](https://github.com/eventaservo/eventaservo/issues/861)) ([acae4be](https://github.com/eventaservo/eventaservo/commit/acae4be94e401a42535b1a40487124d3b2ab4cc2))
+* **Events:** Adds location to indexing data ([9f10141](https://github.com/eventaservo/eventaservo/commit/9f101410b51605e7a42536e7399facb8aec0a15b))
+* **Events:** Show International event badge on event card ([#864](https://github.com/eventaservo/eventaservo/issues/864)) ([7cf9fc2](https://github.com/eventaservo/eventaservo/commit/7cf9fc21e35573d8b6e45fb2174e4bb9fd886aaa))
+* **User:** New social links box layout ([#853](https://github.com/eventaservo/eventaservo/issues/853)) ([7f093a2](https://github.com/eventaservo/eventaservo/commit/7f093a2d4a126c6340658d46ac9480b0eba6f20a))
+
+
+### Bug Fixes
+
+* **Events:** Adds location details do indexing data ([a799d00](https://github.com/eventaservo/eventaservo/commit/a799d00bbd4ed7e63bb693cef19e53249c761c0c))
+* **Search:** Link to City name on event breadcrumb when coming from the Search page ([c9ca138](https://github.com/eventaservo/eventaservo/commit/c9ca13841aa51fd6a21a8f327caba19fb755880b))
+
+## [2.79.1](https://github.com/eventaservo/eventaservo/compare/v2.79.0...v2.79.1) (2024-11-10)
+
+
+### Bug Fixes
+
+* :bug: Logs password reset request ([#846](https://github.com/eventaservo/eventaservo/issues/846)) ([32502cd](https://github.com/eventaservo/eventaservo/commit/32502cdb483c16b6251a495709e6073a80f1094c))
+* FullCalendar dataset presence ([d75173f](https://github.com/eventaservo/eventaservo/commit/d75173fd1292f5f8d2d597a15122f006a60cc294))
+* **Users:** :bug: Fix username uniqueness validation ([131b422](https://github.com/eventaservo/eventaservo/commit/131b422640b36972bc7df2fdbc45bf7fd71f7e98))
+
+## [2.79.0](https://github.com/eventaservo/eventaservo/compare/v2.78.0...v2.79.0) (2024-10-15)
+
+
+### Features
+
+* adds CodeCov badge to README ([#827](https://github.com/eventaservo/eventaservo/issues/827)) ([a867b71](https://github.com/eventaservo/eventaservo/commit/a867b71b51c643f5404ef9d5aa9b365bfc049641))
+
+
+### Bug Fixes
+
+* **Event:** Add to calendar link when not logged in ([#830](https://github.com/eventaservo/eventaservo/issues/830)) ([d4cfeba](https://github.com/eventaservo/eventaservo/commit/d4cfeba1509205d34a1ddd622f989d34883b0266))
+
+## [2.78.0](https://github.com/eventaservo/eventaservo/compare/v2.77.0...v2.78.0) (2024-10-02)
+
+
+### Features
+
+* **API:** :sparkles: List organizations ([#811](https://github.com/eventaservo/eventaservo/issues/811)) ([879bf50](https://github.com/eventaservo/eventaservo/commit/879bf50359624e8ad5df6c65667793134561d706))
+
+
+### Bug Fixes
+
+* **Event:** City validation phrase ([#809](https://github.com/eventaservo/eventaservo/issues/809)) ([3156da7](https://github.com/eventaservo/eventaservo/commit/3156da7f0afac9e5cec6f5174d294f470432b767))
+* timezone translation ([#822](https://github.com/eventaservo/eventaservo/issues/822)) ([06ded64](https://github.com/eventaservo/eventaservo/commit/06ded64f3913a01a86f7a7f5045e7b611b45b9f4))
+
+## [2.77.0](https://github.com/eventaservo/eventaservo/compare/v2.76.1...v2.77.0) (2024-09-23)
+
+
+### Features
+
+* Validates city name ([#806](https://github.com/eventaservo/eventaservo/issues/806)) ([a0cc403](https://github.com/eventaservo/eventaservo/commit/a0cc403274276dbce069fae76069f589c9b8dade))
+
+
+### Bug Fixes
+
+* datepicker start day of week ([#803](https://github.com/eventaservo/eventaservo/issues/803)) ([5ac6e8c](https://github.com/eventaservo/eventaservo/commit/5ac6e8ceda020a1cfbe9427f5622d802e334fd47))
+* standard warnings ([#804](https://github.com/eventaservo/eventaservo/issues/804)) ([5e3c23c](https://github.com/eventaservo/eventaservo/commit/5e3c23cf634eb217f2a891339875e0e29f212847))
+
+## [2.76.1](https://github.com/eventaservo/eventaservo/compare/v2.76.0...v2.76.1) (2024-08-31)
+
+
+### Bug Fixes
+
+* typo ([0278d2f](https://github.com/eventaservo/eventaservo/commit/0278d2fc8ef26f4d579d1bf691670210970d1d0b))
+
+
+### Performance Improvements
+
+* run Rspec in parallel in GitHub Actions ([#801](https://github.com/eventaservo/eventaservo/issues/801)) ([aab8205](https://github.com/eventaservo/eventaservo/commit/aab82051d962b4399aa05f4908dd645c422019d3))
+
+## [2.76.0](https://github.com/eventaservo/eventaservo/compare/v2.75.1...v2.76.0) (2024-08-08)
+
+
+### Features
+
+* Searches user by his organization name ([52e457a](https://github.com/eventaservo/eventaservo/commit/52e457ac629231f159f84b204bbbd6f67fd8249b))
+
+
+### Bug Fixes
+
+* **Event:** Enables search for organization when editing ([9f9adae](https://github.com/eventaservo/eventaservo/commit/9f9adaef5bfdc854edcf70bca0168b97b6e4c78a))
+
+## [2.75.1](https://github.com/eventaservo/eventaservo/compare/v2.75.0...v2.75.1) (2024-07-31)
+
+
+### Performance Improvements
+
+* applies `slim-select` on timezone selector ([#788](https://github.com/eventaservo/eventaservo/issues/788)) ([aab6730](https://github.com/eventaservo/eventaservo/commit/aab6730954deadf667d7e69eedaf74983d5be674))
+* applies `slim-select` to event organization selection ([#791](https://github.com/eventaservo/eventaservo/issues/791)) ([caad570](https://github.com/eventaservo/eventaservo/commit/caad5706f657ca8d5b438192e8f11b0b890f7466))
+* **Combobox:** Apply for event admin selection ([#785](https://github.com/eventaservo/eventaservo/issues/785)) ([42a218b](https://github.com/eventaservo/eventaservo/commit/42a218b53da0260047684958a30d77dadd78a147))
+* **Combobox:** apply on event country and timezone ([#784](https://github.com/eventaservo/eventaservo/issues/784)) ([910aac6](https://github.com/eventaservo/eventaservo/commit/910aac6895bf38027f1c9f5b467eade3595c4ecc))
+* **Combobox:** apply on organization pages ([#783](https://github.com/eventaservo/eventaservo/issues/783)) ([a64b9b5](https://github.com/eventaservo/eventaservo/commit/a64b9b5bda7ba8e59812bbafe7f91a6b9730a0fa))
+* **Combobox:** apply on registration page ([#782](https://github.com/eventaservo/eventaservo/issues/782)) ([d75df5a](https://github.com/eventaservo/eventaservo/commit/d75df5aaff67b7f47d57f75d80e318ec3a7c0e39))
+* Removes `coffee-rails` gem dependency ([#779](https://github.com/eventaservo/eventaservo/issues/779)) ([529bb3e](https://github.com/eventaservo/eventaservo/commit/529bb3eec3bd4d2f82af628f2f086789d37ed070))
+* Use `thurster` gem ([#773](https://github.com/eventaservo/eventaservo/issues/773)) ([54f4011](https://github.com/eventaservo/eventaservo/commit/54f4011c6316fceab5872a9846f4b9e407cdf1a0))
+* Use stimullus controller for Flash messages ([#776](https://github.com/eventaservo/eventaservo/issues/776)) ([dbc2b71](https://github.com/eventaservo/eventaservo/commit/dbc2b71b17ed87483190eb68c750314c92dd0ba4))
+* Use stimullus controller for report problem modal ([#777](https://github.com/eventaservo/eventaservo/issues/777)) ([0d591b7](https://github.com/eventaservo/eventaservo/commit/0d591b782938b49b12ff374585fbc9a3ef9a75e8))
+
+## [2.75.0](https://github.com/eventaservo/eventaservo/compare/v2.74.0...v2.75.0) (2024-07-24)
+
+
+### Features
+
+* **Admin:** option to enable disabled user ([5f3c970](https://github.com/eventaservo/eventaservo/commit/5f3c970153ee357bbd7bbf7330819c6eb4c516d8))
+* Renames `Luksemburgo` to `Luksemburgio` ([66ad09b](https://github.com/eventaservo/eventaservo/commit/66ad09bfcd80106c5c9b68a7497962b6413051d9))
+
+
+### Bug Fixes
+
+* Patch ActionText edits with attachments ([ad421bd](https://github.com/eventaservo/eventaservo/commit/ad421bdef91804a70a2d0b2b982a98401413f17e))
+
+## [2.74.0](https://github.com/eventaservo/eventaservo/compare/v2.73.2...v2.74.0) (2024-07-05)
+
+
+### Features
+
+* adds technical page views statistics ([#763](https://github.com/eventaservo/eventaservo/issues/763)) ([033e8b2](https://github.com/eventaservo/eventaservo/commit/033e8b2394b6ad352823bd6ac643e2b899ca5d70))
+* create a housekeeping job ([#762](https://github.com/eventaservo/eventaservo/issues/762)) ([24af219](https://github.com/eventaservo/eventaservo/commit/24af219e9e6574168b11721c742380a0347b2f3a))
+* **Statistics:** filter use by category graph ([#761](https://github.com/eventaservo/eventaservo/issues/761)) ([e4b8e67](https://github.com/eventaservo/eventaservo/commit/e4b8e676ef64d9ffd13a1021ef7743d7e3c2173c))
+
+
+### Bug Fixes
+
+* :bug: breadcrumb links ([#752](https://github.com/eventaservo/eventaservo/issues/752)) ([d4903bd](https://github.com/eventaservo/eventaservo/commit/d4903bdbf29fc44897d9431c72a7c8918e10565f))
+* :bug: breadcrumb links downcase ([c8a77fd](https://github.com/eventaservo/eventaservo/commit/c8a77fd43ac079c61e1dcd286cf4391e262d9550))
+* :bug: Sitemap refresh periodically ([#755](https://github.com/eventaservo/eventaservo/issues/755)) ([df609b5](https://github.com/eventaservo/eventaservo/commit/df609b524cfc808b4ef19bb45461e2317dc57538))
+* downgrade Rails to 7.1.3.3 ([#765](https://github.com/eventaservo/eventaservo/issues/765)) ([3954533](https://github.com/eventaservo/eventaservo/commit/3954533ebb8d12fadec51270ad1e86fb692f4eb8))
+* **Event:** :bug: delete uploaded file ([#760](https://github.com/eventaservo/eventaservo/issues/760)) ([1e1b29e](https://github.com/eventaservo/eventaservo/commit/1e1b29ecc452f9b8d9438d20d4468e555b3c4999))
+* technical page view statistics ([27c597c](https://github.com/eventaservo/eventaservo/commit/27c597c3460774a680885bc296c32fbd05c2218a))
+
+
+### Performance Improvements
+
+* do not run geocoder on event factory ([#743](https://github.com/eventaservo/eventaservo/issues/743)) ([8052d6a](https://github.com/eventaservo/eventaservo/commit/8052d6abc716ca62c5e74fc178d2ac13c7f5aaa5))
+
+## [2.73.2](https://github.com/eventaservo/eventaservo/compare/v2.73.1...v2.73.2) (2024-06-29)
+
+
+### Bug Fixes
+
+* :bug: redirect to root_url when event is not found ([cf9bd19](https://github.com/eventaservo/eventaservo/commit/cf9bd1995d700658ca6823bedc1ceb942f794c71))
+
+## [2.73.1](https://github.com/eventaservo/eventaservo/compare/v2.73.0...v2.73.1) (2024-06-29)
+
+
+### Bug Fixes
+
+* Timezone translation ([5d1ce60](https://github.com/eventaservo/eventaservo/commit/5d1ce600f97238c917bb4dd2f758cb7d7fc67a6f))
+
+## [2.73.0](https://github.com/eventaservo/eventaservo/compare/v2.72.2...v2.73.0) (2024-05-14)
+
+
+### Features
+
+* :sparkles: Re-enable Facebook integration ([#696](https://github.com/eventaservo/eventaservo/issues/696)) ([23da60e](https://github.com/eventaservo/eventaservo/commit/23da60e150e8525a1534347297c53860aeb611b4))
+* **Admin:** Reset user password ([9076588](https://github.com/eventaservo/eventaservo/commit/9076588eb62a7ca58759ed54102e75419e6d135c))
+* Copy Facebook picture to user profile ([#697](https://github.com/eventaservo/eventaservo/issues/697)) ([97e3f85](https://github.com/eventaservo/eventaservo/commit/97e3f853e1bd2b83f37d171ea84c5b1705404283))
+* **User:** Option to clear profile picture ([#698](https://github.com/eventaservo/eventaservo/issues/698)) ([d9b77e7](https://github.com/eventaservo/eventaservo/commit/d9b77e71e91a7b8ed318cb5406b4a65e66fac0f7))
+
+## [2.72.2](https://github.com/eventaservo/eventaservo/compare/v2.72.1...v2.72.2) (2024-05-07)
+
+
+### Bug Fixes
+
+* :bug: Merge users ([04c990a](https://github.com/eventaservo/eventaservo/commit/04c990aea0df3703fb463e81015414c93f593206))
+* Privacy policy links ([f59e6d3](https://github.com/eventaservo/eventaservo/commit/f59e6d33eb311a17926610e9d471be5127007fd3))
+
+## [2.72.1](https://github.com/eventaservo/eventaservo/compare/v2.72.0...v2.72.1) (2024-04-30)
+
+
+### Bug Fixes
+
+* **International Calendar:** :bug: Broken page ([13ae9a3](https://github.com/eventaservo/eventaservo/commit/13ae9a3fd7368934c66f16fdafc492dd5cea517b))
+
+## [2.72.0](https://github.com/eventaservo/eventaservo/compare/v2.71.0...v2.72.0) (2024-04-19)
+
+
+### Features
+
+* :boom: Disables Facebook login and registration ([d6346c1](https://github.com/eventaservo/eventaservo/commit/d6346c11ae10b2807df7be648c2d3371da91b3d4))
+* **Administration:** Allow deletion of events ([#670](https://github.com/eventaservo/eventaservo/issues/670)) ([e5450cc](https://github.com/eventaservo/eventaservo/commit/e5450cc091cc9f2f63609aabdf064dc80527cf30))
+
+
+### Bug Fixes
+
+* **Events:** :bug: access events on continents filtered by organization ([00a1940](https://github.com/eventaservo/eventaservo/commit/00a1940d4206d84f9d935f699ffacbc90b2c6c1b))
+* **Events:** :bug: History ([76ba83d](https://github.com/eventaservo/eventaservo/commit/76ba83da88badd6ae1f2bdb54f7dbbb29147ad36))
+* new users statistics graph ([f2af74b](https://github.com/eventaservo/eventaservo/commit/f2af74b7a0af3d481d7388233fcc99c41aa2a6ef))
+* Typo ([bd8fdc4](https://github.com/eventaservo/eventaservo/commit/bd8fdc4bf6588d8d4ff7679a91219380f6b71816))
+
+## [2.71.0](https://github.com/eventaservo/eventaservo/compare/v2.70.0...v2.71.0) (2024-02-02)
+
+
+### Features
+
+* **Event:** Titleize the title only for new events ([#629](https://github.com/eventaservo/eventaservo/issues/629)) ([f0a2a25](https://github.com/eventaservo/eventaservo/commit/f0a2a252ced839ad50f6f6001344d8237d96ee38))
+
+## [2.70.0](https://github.com/eventaservo/eventaservo/compare/v2.69.1...v2.70.0) (2024-01-28)
+
+
+### Features
+
+* Add ActiveAdmin pages for SolidQueue ([#622](https://github.com/eventaservo/eventaservo/issues/622)) ([cba8d89](https://github.com/eventaservo/eventaservo/commit/cba8d894facfc4f228a3f8ca512f36134852e9ca))
+* Do not search with less than 3 characters ([a3065e5](https://github.com/eventaservo/eventaservo/commit/a3065e50a9690352f3372489bda55d355d31557d))
+* Replace Sidekiq for Solid Queue ([#620](https://github.com/eventaservo/eventaservo/issues/620)) ([541f3a0](https://github.com/eventaservo/eventaservo/commit/541f3a0fbe1961724cd931b09928d4de086927fb))
+
+
+### Bug Fixes
+
+* **Admin:** create sample events job ([5a3bd42](https://github.com/eventaservo/eventaservo/commit/5a3bd427113222b70ef0dbfe5ea76b57e7ca1842))
+* Force environment for tests ([#624](https://github.com/eventaservo/eventaservo/issues/624)) ([e0ba2d6](https://github.com/eventaservo/eventaservo/commit/e0ba2d6bb03e1dcc56578aa1f9b8af55a8ae44a6))
+* N+1 queries ([#616](https://github.com/eventaservo/eventaservo/issues/616)) ([8a692f5](https://github.com/eventaservo/eventaservo/commit/8a692f5afcb5c678bbc23eef4378061d77cf118c))
+* remove debugger ([3e55f9a](https://github.com/eventaservo/eventaservo/commit/3e55f9afe2cb095f9b69741637b5c448849d6f01))
+
+## [2.69.1](https://github.com/eventaservo/eventaservo/compare/v2.69.0...v2.69.1) (2024-01-14)
+
+
+### Bug Fixes
+
+* ActiveAdmin Ransack methods ([0e667bc](https://github.com/eventaservo/eventaservo/commit/0e667bc97006ddb74e04f03fd53fef5f5b86f8c0))
+* **Events:** Validate start and end date/time for new events ([#615](https://github.com/eventaservo/eventaservo/issues/615)) ([74bcf94](https://github.com/eventaservo/eventaservo/commit/74bcf9429c8f68dd0879c6fa46461b4f3f5b8ec6))
+
+## [2.69.0](https://github.com/eventaservo/eventaservo/compare/v2.68.0...v2.69.0) (2024-01-11)
+
+
+### Features
+
+* Upgrade Rails to 7.1 ([#610](https://github.com/eventaservo/eventaservo/issues/610)) ([8926a4a](https://github.com/eventaservo/eventaservo/commit/8926a4ac4f1e4872561827c08f9aded85fd06403))
+
+## [2.68.0](https://github.com/eventaservo/eventaservo/compare/v2.67.0...v2.68.0) (2024-01-07)
+
+
+### Features
+
+* **Administration:** Batch change report user ([1617a2b](https://github.com/eventaservo/eventaservo/commit/1617a2b35d593aff881e32deb24372dc3f8d0cf7))
+
+
+### Bug Fixes
+
+* User navbar doesn't open on About page ([2205ad3](https://github.com/eventaservo/eventaservo/commit/2205ad39c1375660f33af8ff39c3fcc0458f50f6))
+
+## [2.67.0](https://github.com/eventaservo/eventaservo/compare/v2.66.1...v2.67.0) (2023-12-25)
+
+
+### Features
+
+* **Administration:** Confirm user's email mannually ([14006a0](https://github.com/eventaservo/eventaservo/commit/14006a0649eea4aa52bd56db52a25804c606f901))
+* **Event Reports:** Increase the list of reports from 10 to 25 ([39d76e7](https://github.com/eventaservo/eventaservo/commit/39d76e77b2b4a43bd3bfa15a1a9d3b9e51f28c94))
+* Search events return also just finished ones (15 days) ([76e8bd4](https://github.com/eventaservo/eventaservo/commit/76e8bd4b4f6d3daeb6989d47b66eda513bf760bc))
+
+## [2.66.1](https://github.com/eventaservo/eventaservo/compare/v2.66.0...v2.66.1) (2023-12-02)
+
+
+### Bug Fixes
+
+* Send user feedback when error occurs ([2ef962a](https://github.com/eventaservo/eventaservo/commit/2ef962a4b1bca5a9900c09c05ab6d228bfc91d49))
+
+## [2.66.0](https://github.com/eventaservo/eventaservo/compare/v2.65.0...v2.66.0) (2023-11-27)
+
+
+### Features
+
+* **Events:** Change button label from "Raporti" to "Eraro?" ([6245f24](https://github.com/eventaservo/eventaservo/commit/6245f2443cca93b8407396d4491dd643588f9064))
+* **Events:** Validates report URL format before saving ([d995c97](https://github.com/eventaservo/eventaservo/commit/d995c976374b7267aadeaefd3143fb0d4bebedab))
+* NOVA: Raportoj ([35736ac](https://github.com/eventaservo/eventaservo/commit/35736ac3ce237d1ca00b6486fe125ddd09f8b935))
+
+
+### Bug Fixes
+
+* **Events:** :bug: Add event website address with special characters ([9d83807](https://github.com/eventaservo/eventaservo/commit/9d8380741198ab5ef527d948bf80b2d460a8a568))
+
+## [2.65.0](https://github.com/eventaservo/eventaservo/compare/v2.64.0...v2.65.0) (2023-11-13)
+
+
+### Features
+
+* :sparkles: Re-add basic statistics page for Admins ([#584](https://github.com/eventaservo/eventaservo/issues/584)) ([f279d29](https://github.com/eventaservo/eventaservo/commit/f279d29327b569642397faf940a938b35b076ab9))
+* **Administration:** List abandoned users ([a0a0825](https://github.com/eventaservo/eventaservo/commit/a0a0825cb8e13426eca85ec2f73e50c25f53e5d6))
+* Transliterate continent names ([#590](https://github.com/eventaservo/eventaservo/issues/590)) ([c5863f4](https://github.com/eventaservo/eventaservo/commit/c5863f441e61bc2aa90a08dd437c5c94ca3c35d5)), closes [#588](https://github.com/eventaservo/eventaservo/issues/588)
+
+
+### Performance Improvements
+
+* Improves loading performance of events by continents ([c8a2801](https://github.com/eventaservo/eventaservo/commit/c8a28015ba100c85f8753a1d47da91423f4f52c7))
+
+## [2.64.0](https://github.com/eventaservo/eventaservo/compare/v2.63.0...v2.64.0) (2023-10-30)
+
+
+### Features
+
+* Remove old analytics ([#582](https://github.com/eventaservo/eventaservo/issues/582)) ([ae3caab](https://github.com/eventaservo/eventaservo/commit/ae3caab573e221e1ea2eb9b58d09c9452e8f039a))
+
+
+### Performance Improvements
+
+* Migrate DelayedJob to Sidekiq ([#581](https://github.com/eventaservo/eventaservo/issues/581)) ([396ecb1](https://github.com/eventaservo/eventaservo/commit/396ecb1aaf0c13e38add1547d0c2c6d4f4b33f1e))
+* Update Ruby to 3.2.2 ([#578](https://github.com/eventaservo/eventaservo/issues/578)) ([a77f521](https://github.com/eventaservo/eventaservo/commit/a77f521360e17a42273b420552bbf603e0f5d642))
+
+## [2.63.0](https://github.com/eventaservo/eventaservo/compare/v2.62.1...v2.63.0) (2023-10-22)
+
+
+### Features
+
+* **Events:** :sparkles: Redirects user from old event link to new ([febf12d](https://github.com/eventaservo/eventaservo/commit/febf12d1cfafe0d9337c322557ffcaf1a14bbaef))
+* **Replay:** Use Sentry's replay function to track errors ([f000c07](https://github.com/eventaservo/eventaservo/commit/f000c073a84775b39707d2a96771eeb162f5bffb)), closes [#565](https://github.com/eventaservo/eventaservo/issues/565)
+
+
+### Bug Fixes
+
+* **Sentry:** DSN for Replay ([9e4ed85](https://github.com/eventaservo/eventaservo/commit/9e4ed855e7b6dae9ed857531335ede02ba5a4f10))
+
+## [2.62.1](https://github.com/eventaservo/eventaservo/compare/v2.62.0...v2.62.1) (2023-10-09)
+
+
+### Bug Fixes
+
+* **Events:** Rake task to refresh trix attachments on demand ([9b16c52](https://github.com/eventaservo/eventaservo/commit/9b16c523398f6a8b8d6546ced1439a23c5801ed8))
+* **Events:** Rescue from errors when images cannot be processed through VIPS ([bef0dfe](https://github.com/eventaservo/eventaservo/commit/bef0dfe0563fede05b06d39f4adb18d97ad8e5a3)), closes [#562](https://github.com/eventaservo/eventaservo/issues/562)
+
+## [2.62.0](https://github.com/eventaservo/eventaservo/compare/v2.61.0...v2.62.0) (2023-10-08)
+
+
+### Features
+
+* Add `release_please` Github Action workflow ([#556](https://github.com/eventaservo/eventaservo/issues/556)) ([59ce335](https://github.com/eventaservo/eventaservo/commit/59ce3356dada17cc032bba794ddc9324e7025e9c))
+* **Admin:** add filters to log page [#516](https://github.com/eventaservo/eventaservo/issues/516) ([7baf147](https://github.com/eventaservo/eventaservo/commit/7baf14773c647a91b695ff63f2f3aea1dc3cb79a))
+* **Ads:** improve logic ([42cba75](https://github.com/eventaservo/eventaservo/commit/42cba757d2050435199352c77004da3854272dc5))
+* **dev:** :sparkles: Replaces `mailcatcher` with `letter_opener_web` ([dbac88f](https://github.com/eventaservo/eventaservo/commit/dbac88f37981bcafccdf1fa751dfa019f73613da))
+* **Event:** :sparkles: limit event title to 100 characters [#511](https://github.com/eventaservo/eventaservo/issues/511) ([cb2bbf5](https://github.com/eventaservo/eventaservo/commit/cb2bbf5b4f3d3dd33dd79c5a31408d70b2d2a482))
+* **Reports:** :lipstick: Display frase if there's no report yet ([2beb15e](https://github.com/eventaservo/eventaservo/commit/2beb15eb65211f68136224d4414ab0feed215e97))
+
+
+### Bug Fixes
+
+* **Admin:** Show user's username ([77373fc](https://github.com/eventaservo/eventaservo/commit/77373fcc9529596b0f818cd526d8e55076a3c314))
+* **Event:** check if short_url is available during event creation [#508](https://github.com/eventaservo/eventaservo/issues/508) ([e273692](https://github.com/eventaservo/eventaservo/commit/e2736923cf60178e823a8a6da51d45212d7f16c7))
+* send event reminder emails in different background jobs [#516](https://github.com/eventaservo/eventaservo/issues/516) ([2dd226f](https://github.com/eventaservo/eventaservo/commit/2dd226f8e71f15254c3e7f2626ce1d66d0f46512))
+* Typo ([904e6e4](https://github.com/eventaservo/eventaservo/commit/904e6e41c63a92e01b2592d1d1085679bfd60aa7))
+* Validi mallongan ligilon [#429](https://github.com/eventaservo/eventaservo/issues/429) ([cb3fa76](https://github.com/eventaservo/eventaservo/commit/cb3fa767b839e6b6029fa46971eb11fe28570106))
+
+## [v2.60.0](https://github.com/eventaservo/eventaservo/tree/v2.60.0) (2023-03-08)
+
+[Full Changelog](https://github.com/eventaservo/eventaservo/compare/es-without-stimulus...v2.60.0)
+
+**Merged pull requests:**
+
+- Migrate from Webpacker to JSBundling-rails [\#500](https://github.com/eventaservo/eventaservo/pull/500) ([shayani](https://github.com/shayani))
+
+## [es-without-stimulus](https://github.com/eventaservo/eventaservo/tree/es-without-stimulus) (2023-03-03)
+
+[Full Changelog](https://github.com/eventaservo/eventaservo/compare/v2.52...es-without-stimulus)
+
+## [v2.52](https://github.com/eventaservo/eventaservo/tree/v2.52) (2023-03-03)
+
+[Full Changelog](https://github.com/eventaservo/eventaservo/compare/v2.48...v2.52)
+
+**Closed issues:**
+
+- Require event form to fullfill start and end date [\#489](https://github.com/eventaservo/eventaservo/issues/489)
+- Option to do not display flag on events and organizations [\#483](https://github.com/eventaservo/eventaservo/issues/483)
+- NoMethodError: undefined method `without\_papertrail' for \#\<EventsController:0x000000000257b0\> [\#481](https://github.com/eventaservo/eventaservo/issues/481)
+- Ebligi redakti reklam-ligilon [\#457](https://github.com/eventaservo/eventaservo/issues/457)
+- BUG kiam oni redaktas specifan eventon [\#432](https://github.com/eventaservo/eventaservo/issues/432)
+- UTC horzono aperante kiam ne devas [\#416](https://github.com/eventaservo/eventaservo/issues/416)
+- Serĉilo: ĝi montru ankaŭ uzantojn \(nur por admin\) [\#346](https://github.com/eventaservo/eventaservo/issues/346)
+- Evento malaperiĝis? [\#341](https://github.com/eventaservo/eventaservo/issues/341)
+- Alinome Reta Eventa al Reta/Hibrida evento [\#338](https://github.com/eventaservo/eventaservo/issues/338)
+- MET horzono [\#323](https://github.com/eventaservo/eventaservo/issues/323)
+- Ne aperu dua horzono, se ĝi estas sama [\#289](https://github.com/eventaservo/eventaservo/issues/289)
+- Aldoni naskiĝdaton al uzantprofilo [\#236](https://github.com/eventaservo/eventaservo/issues/236)
+- Organizo: logoo dosier-formato [\#229](https://github.com/eventaservo/eventaservo/issues/229)
+- Ĉu aldoni bazajn datumojn ĉe organizo? [\#161](https://github.com/eventaservo/eventaservo/issues/161)
+- Aldoni kopieblon/eksporteblon de retpoŝtadresoj de uzantoj [\#130](https://github.com/eventaservo/eventaservo/issues/130)
+- Google Calendar: la ligilo al la evento en ES ne estas alklakebla [\#117](https://github.com/eventaservo/eventaservo/issues/117)
+- Aldonado de horoj ŝajnas funkcii malpli flue ol antaŭe [\#116](https://github.com/eventaservo/eventaservo/issues/116)
+- Kartara vido: ĉu aldoni la komencan horon? [\#115](https://github.com/eventaservo/eventaservo/issues/115)
+- Ĉu aldoni la eblon afiŝi malnovajn eventojn, celante ilin duobligi? [\#91](https://github.com/eventaservo/eventaservo/issues/91)
+- Elekti lokon en mapo: ĉu ebligi korekteblon se Google Geocode eraras? [\#63](https://github.com/eventaservo/eventaservo/issues/63)
+
+**Merged pull requests:**
+
+- 483 option to do not display flag on events and organizations [\#485](https://github.com/eventaservo/eventaservo/pull/485) ([shayani](https://github.com/shayani))
+- Multiples tasks [\#482](https://github.com/eventaservo/eventaservo/pull/482) ([shayani](https://github.com/shayani))
+- Update bundler and removes mini\_racer [\#480](https://github.com/eventaservo/eventaservo/pull/480) ([shayani](https://github.com/shayani))
+- Upgrade to Rails 7.0 [\#479](https://github.com/eventaservo/eventaservo/pull/479) ([shayani](https://github.com/shayani))
+- Bump http-cache-semantics from 4.1.0 to 4.1.1 [\#478](https://github.com/eventaservo/eventaservo/pull/478) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump globalid from 1.0.0 to 1.0.1 [\#476](https://github.com/eventaservo/eventaservo/pull/476) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.5 to 2.2.6.2 [\#475](https://github.com/eventaservo/eventaservo/pull/475) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Updates Brakeman workflow [\#474](https://github.com/eventaservo/eventaservo/pull/474) ([shayani](https://github.com/shayani))
+- feat: My calendar \(ES peronsa kalendaro\) [\#473](https://github.com/eventaservo/eventaservo/pull/473) ([shayani](https://github.com/shayani))
+- Upgrade Rails 6.1 to 7.0 [\#472](https://github.com/eventaservo/eventaservo/pull/472) ([shayani](https://github.com/shayani))
+- Bump json5 from 1.0.1 to 1.0.2 [\#467](https://github.com/eventaservo/eventaservo/pull/467) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v2.48](https://github.com/eventaservo/eventaservo/tree/v2.48) (2023-01-14)
+
+[Full Changelog](https://github.com/eventaservo/eventaservo/compare/v2.47...v2.48)
+
+## [v2.47](https://github.com/eventaservo/eventaservo/tree/v2.47) (2023-01-11)
+
+[Full Changelog](https://github.com/eventaservo/eventaservo/compare/v2.44...v2.47)
+
+**Closed issues:**
+
+- PES109 kompletigi eventaservo.org/prie [\#469](https://github.com/eventaservo/eventaservo/issues/469)
+- Add pagination to list of past events for Organization [\#450](https://github.com/eventaservo/eventaservo/issues/450)
+- Integrate WeatherAPI to events [\#415](https://github.com/eventaservo/eventaservo/issues/415)
+- 2 lingvaj informoj [\#374](https://github.com/eventaservo/eventaservo/issues/374)
+- retservo \(webservice\) [\#363](https://github.com/eventaservo/eventaservo/issues/363)
+- Aldoni informon pri "regiono/gubernio/..." por evento [\#362](https://github.com/eventaservo/eventaservo/issues/362)
+- Raporti - admin: elekti el listo de pretaj respondoj [\#351](https://github.com/eventaservo/eventaservo/issues/351)
+- Ĉu anoncecaj afiŝoj afiŝiĝu nur dum semajno kaj poste plu aperu nur sub /anoncoj? [\#349](https://github.com/eventaservo/eventaservo/issues/349)
+- Ĉu aldoni duan - regionan - flageton al ES? [\#344](https://github.com/eventaservo/eventaservo/issues/344)
+- Redakti la landon de ES-uzanto + statistikoj [\#343](https://github.com/eventaservo/eventaservo/issues/343)
+- Subdomajnoj [\#342](https://github.com/eventaservo/eventaservo/issues/342)
+- +Google Calendar-butono [\#337](https://github.com/eventaservo/eventaservo/issues/337)
+- Komuniki kun eniginto de evento: kunsendi bildon/dosieron [\#335](https://github.com/eventaservo/eventaservo/issues/335)
+- Aldoni detalan programon de evento al ES [\#331](https://github.com/eventaservo/eventaservo/issues/331)
+- Aldoni X-konvertilon por la enhavo [\#326](https://github.com/eventaservo/eventaservo/issues/326)
+- Ebligi aldoni dosierojn al organizo [\#314](https://github.com/eventaservo/eventaservo/issues/314)
+- Unuopaj eventoj - kalendaro: aldoni distingon inter retaj programoj kaj poŝtelefonoj [\#311](https://github.com/eventaservo/eventaservo/issues/311)
+- Registriĝi \(kaj ensaluti\) per kromaj servoj \(Google, Apple, Amikumu\) [\#306](https://github.com/eventaservo/eventaservo/issues/306)
+- Movi la butonon 'Redakti organizon' supren [\#304](https://github.com/eventaservo/eventaservo/issues/304)
+- Ĉu aldoni Esperantan flagon al ES por tutmondaj eventoj? [\#300](https://github.com/eventaservo/eventaservo/issues/300)
+- Twitter-konto [\#297](https://github.com/eventaservo/eventaservo/issues/297)
+- Se organiza nomo estas tre longa, ĉu vi povas aperigi ĝin sur du aŭ tri linioj? [\#296](https://github.com/eventaservo/eventaservo/issues/296)
+- Mi ne plu povas elekti landon per tab + sagoj. Ĉu vi povas korekti tion? [\#293](https://github.com/eventaservo/eventaservo/issues/293)
+- Ne ĉiam temas pri eraro aŭ korektindaĵo: ĉu aldoni administran butonon 'Atentigi'? [\#288](https://github.com/eventaservo/eventaservo/issues/288)
+- Ne eblas aldoni unuopan eventon al Google Calendar en Android 9-10 [\#279](https://github.com/eventaservo/eventaservo/issues/279)
+- Organizo: nomo foje tro longas + nacilingvaj nomoj [\#275](https://github.com/eventaservo/eventaservo/issues/275)
+- Semajna vido: eta problemo en poŝtelefono + uskleca unuecigo [\#270](https://github.com/eventaservo/eventaservo/issues/270)
+- Retaj eventoj: ĉu ligi rekte defaŭlte al la semajna kalendara vido? [\#267](https://github.com/eventaservo/eventaservo/issues/267)
+- Aldoni ligilon al listo de horzonoj [\#261](https://github.com/eventaservo/eventaservo/issues/261)
+- Matene aperas hieraŭaj eventoj sur ĉefpaĝo de ES, vespere morgaŭaj... [\#257](https://github.com/eventaservo/eventaservo/issues/257)
+- Horzono: ĉu ebligi indiki tion ĉe la profilo? [\#254](https://github.com/eventaservo/eventaservo/issues/254)
+- Eventoj kun elektita nombro de liberaj lokoj [\#238](https://github.com/eventaservo/eventaservo/issues/238)
+- Env-variablo por igi la retejon nurlega [\#234](https://github.com/eventaservo/eventaservo/issues/234)
+- Organizoj: ankaŭ kiam nova organizo estas kreita, pri tio aperu mesaĝo en ES Administraĵoj [\#230](https://github.com/eventaservo/eventaservo/issues/230)
+- Organizoj: aldoni butonon 'Mesaĝi' [\#228](https://github.com/eventaservo/eventaservo/issues/228)
+- Aldoni ES al Instigo-LiberaPay post aprobo de la estraro de UEA [\#224](https://github.com/eventaservo/eventaservo/issues/224)
+- Administraj kaj juraj detaloj [\#222](https://github.com/eventaservo/eventaservo/issues/222)
+- Ne aperis evento en ES Administraĵoj pro citiloj [\#220](https://github.com/eventaservo/eventaservo/issues/220)
+- Aŭtomata semajna/monata/trimonata dissendolisto [\#219](https://github.com/eventaservo/eventaservo/issues/219)
+- Ne eblas importi ĉi tiun Meetup-eventon: HTTP ERROR 500 [\#218](https://github.com/eventaservo/eventaservo/issues/218)
+- Ĉu montri pli da rezultoj en 1 paĝo ol nur 15? [\#217](https://github.com/eventaservo/eventaservo/issues/217)
+- ES Administraĵoj: ankau informi pri forigo de evento [\#215](https://github.com/eventaservo/eventaservo/issues/215)
+- Okazas hodiaŭ: foje aperas eventoj kiuj... okazis hieraŭ [\#211](https://github.com/eventaservo/eventaservo/issues/211)
+- Organizo - pasintaj eventoj: ĉu montri nur la lastajn dek? [\#208](https://github.com/eventaservo/eventaservo/issues/208)
+- Ĉu eblus aldoni minuskligi-butonojn ĉe la titolo kaj la priskribo? \(nur por administrantoj\) [\#206](https://github.com/eventaservo/eventaservo/issues/206)
+- Ĉu per skripto duobligi semajnajn eventojn? [\#204](https://github.com/eventaservo/eventaservo/issues/204)
+- Sciigoj pri nova evento de organizo [\#199](https://github.com/eventaservo/eventaservo/issues/199)
+- Organizoj: ĉu aldoni ligilojn al raportoj? [\#198](https://github.com/eventaservo/eventaservo/issues/198)
+- Admin: ellabori uzantopaĝon [\#194](https://github.com/eventaservo/eventaservo/issues/194)
+- Strangaj signoj aperas ĉe paĝokapoj de retumilo [\#190](https://github.com/eventaservo/eventaservo/issues/190)
+- Afiŝado de bildoj: foje ili ne aperas sur iPad [\#189](https://github.com/eventaservo/eventaservo/issues/189)
+- Organizoj - pasintaj eventoj [\#187](https://github.com/eventaservo/eventaservo/issues/187)
+- Ĉu alŝutilo ankaŭ ĉe organizoj? [\#186](https://github.com/eventaservo/eventaservo/issues/186)
+- URL de eventoj: ĉu defaŭlte sen diakritaj signoj? [\#177](https://github.com/eventaservo/eventaservo/issues/177)
+- Ĉu faciligi aldonadon de nacilingvaj titoloj? [\#175](https://github.com/eventaservo/eventaservo/issues/175)
+- Post ensalutado oni ne saltu al la ĉefpaĝo, sed al la \(antaŭ\)lasta loko en la retejo  [\#170](https://github.com/eventaservo/eventaservo/issues/170)
+- Tut-monata evento poluas kalenadaron [\#169](https://github.com/eventaservo/eventaservo/issues/169)
+- Pli efikigi la duobligon de eventoj [\#166](https://github.com/eventaservo/eventaservo/issues/166)
+- Ne eblas forigi organizon [\#162](https://github.com/eventaservo/eventaservo/issues/162)
+- Ne funkcias importado de Meetup-evento [\#158](https://github.com/eventaservo/eventaservo/issues/158)
+- Deziro: filtri eventojn laŭ tempoperiodo \(ekz. propraj ferioj\) [\#154](https://github.com/eventaservo/eventaservo/issues/154)
+- Nova evento: ĉu aldoni la eblon afiŝi klavareton kun nekutimaj literoj kaj simboloj? [\#145](https://github.com/eventaservo/eventaservo/issues/145)
+- Kampo kun informoj/ligiloj nur por eventa administranto [\#133](https://github.com/eventaservo/eventaservo/issues/133)
+- Kalendaro: nur 4 semajnoj estas montrataj [\#93](https://github.com/eventaservo/eventaservo/issues/93)
+- Post ensalutado reveni al la sama URL [\#78](https://github.com/eventaservo/eventaservo/issues/78)
+- Datumbazo pri nomoj de urboj en Esperanto kaj en gepatra lingvo [\#75](https://github.com/eventaservo/eventaservo/issues/75)
+- Kunigi la diversajn nomojn por la sama urbo [\#67](https://github.com/eventaservo/eventaservo/issues/67)
+- Grupigi eventojn laŭ regionoj [\#53](https://github.com/eventaservo/eventaservo/issues/53)
+- Afiŝado de horoj: ĉu permesi agordadon al preferata sistemo? [\#51](https://github.com/eventaservo/eventaservo/issues/51)
+- Ĉu proponi servojn per ES? \(Ŝablono por aliĝilo, pagoj,...\) [\#45](https://github.com/eventaservo/eventaservo/issues/45)
+- Aŭtomata diskonigo de eventoj per retpoŝto [\#25](https://github.com/eventaservo/eventaservo/issues/25)
+- Google Calendar-nomoj de landaj kalendaroj [\#19](https://github.com/eventaservo/eventaservo/issues/19)
+- Ebleco krei eventojn, kiuj ripetiĝas dum intertempo [\#17](https://github.com/eventaservo/eventaservo/issues/17)
+- Recenzoj por eventoj [\#13](https://github.com/eventaservo/eventaservo/issues/13)
+- Komentoj en eventoj [\#10](https://github.com/eventaservo/eventaservo/issues/10)
+
+**Merged pull requests:**
+
+- Bump rails-html-sanitizer from 1.4.3 to 1.4.4 [\#464](https://github.com/eventaservo/eventaservo/pull/464) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump loofah from 2.19.0 to 2.19.1 [\#463](https://github.com/eventaservo/eventaservo/pull/463) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump nokogiri from 1.13.9 to 1.13.10 [\#462](https://github.com/eventaservo/eventaservo/pull/462) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v2.44](https://github.com/eventaservo/eventaservo/tree/v2.44) (2022-12-04)
+
+[Full Changelog](https://github.com/eventaservo/eventaservo/compare/v2.42...v2.44)
+
+**Merged pull requests:**
+
+- Bump decode-uri-component from 0.2.0 to 0.2.2 [\#461](https://github.com/eventaservo/eventaservo/pull/461) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v2.42](https://github.com/eventaservo/eventaservo/tree/v2.42) (2022-12-04)
+
+[Full Changelog](https://github.com/eventaservo/eventaservo/compare/v2.41...v2.42)
+
+**Closed issues:**
+
+- Ebligi "malebligi" reklamon anstataŭ forviŝi ĝin [\#456](https://github.com/eventaservo/eventaservo/issues/456)
+- Whole-day events should not appear as Mult-day events [\#444](https://github.com/eventaservo/eventaservo/issues/444)
+- Deziro: Eksportebleco kiel KML/KMZ [\#153](https://github.com/eventaservo/eventaservo/issues/153)
+- Konvertilo de x-igita teksto [\#149](https://github.com/eventaservo/eventaservo/issues/149)
+- Ellabori la publikan uzanto-paĝon [\#147](https://github.com/eventaservo/eventaservo/issues/147)
+- Okazinta evento ne aperu en ES [\#127](https://github.com/eventaservo/eventaservo/issues/127)
+- Ĉu ekzistas bona malfermitkoda alternativo por GC [\#125](https://github.com/eventaservo/eventaservo/issues/125)
+- Ĉu aldoni priskribon al hodiaŭaj eventoj?  [\#124](https://github.com/eventaservo/eventaservo/issues/124)
+- Kalendara vido: se oni alklakas la reen-butono post kiam oni afiŝis eventon, ne aperas la antaŭa paĝo, sed la ĉefpaĝo [\#123](https://github.com/eventaservo/eventaservo/issues/123)
+- Aldoni malgarantian tekston al la retejo [\#44](https://github.com/eventaservo/eventaservo/issues/44)
+- Ĉu aldoni la eblon aldoni pliajn ligilojn al evento? [\#42](https://github.com/eventaservo/eventaservo/issues/42)
+- Multlingvaj informoj pri la eventoj [\#34](https://github.com/eventaservo/eventaservo/issues/34)
+- Eblas nur serĉi sur la ĉefpaĝo : kial? [\#33](https://github.com/eventaservo/eventaservo/issues/33)
+- Ĉu proponi helpon al kreantoj kaj administrantoj de retejoj afiŝi eventojn per iframe aŭ widget? [\#29](https://github.com/eventaservo/eventaservo/issues/29)
+- Aŭtomate anstataŭigi X per ĉapelitaj literoj dum tajpado [\#21](https://github.com/eventaservo/eventaservo/issues/21)
+
+**Merged pull requests:**
+
+- Upgrades Ruby 2.7 to 3.0 [\#460](https://github.com/eventaservo/eventaservo/pull/460) ([shayani](https://github.com/shayani))
+- Ebligi "malebligi" reklamon \#456 [\#458](https://github.com/eventaservo/eventaservo/pull/458) ([shayani](https://github.com/shayani))
+- Bump sinatra from 2.2.1 to 3.0.4 [\#455](https://github.com/eventaservo/eventaservo/pull/455) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v2.41](https://github.com/eventaservo/eventaservo/tree/v2.41) (2022-11-29)
+
+[Full Changelog](https://github.com/eventaservo/eventaservo/compare/v2.40...v2.41)
+
+**Merged pull requests:**
+
+- Updates some Yarn dependencies [\#453](https://github.com/eventaservo/eventaservo/pull/453) ([shayani](https://github.com/shayani))
+
+## [v2.40](https://github.com/eventaservo/eventaservo/tree/v2.40) (2022-11-27)
+
+[Full Changelog](https://github.com/eventaservo/eventaservo/compare/v2.39.1...v2.40)
+
+**Closed issues:**
+
+- Dosierligilo aperas en diskonigilo [\#417](https://github.com/eventaservo/eventaservo/issues/417)
+- Twitter-ligilo ĉe profiloj [\#322](https://github.com/eventaservo/eventaservo/issues/322)
+
+**Merged pull requests:**
+
+- Add Twitter account for user profile \#322 [\#451](https://github.com/eventaservo/eventaservo/pull/451) ([shayani](https://github.com/shayani))
+- Bump loader-utils from 1.4.0 to 1.4.2 [\#447](https://github.com/eventaservo/eventaservo/pull/447) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v2.39.1](https://github.com/eventaservo/eventaservo/tree/v2.39.1) (2022-11-17)
+
+[Full Changelog](https://github.com/eventaservo/eventaservo/compare/v1.5...v2.39.1)
+
+**Closed issues:**
+
+- BUG: Returning to root page after selecting "Mi interesighas" [\#443](https://github.com/eventaservo/eventaservo/issues/443)
+- NoMethodError: undefined method `participants' for nil:NilClass [\#441](https://github.com/eventaservo/eventaservo/issues/441)
+- Make International Calendar link more prominent and Ad [\#439](https://github.com/eventaservo/eventaservo/issues/439)
+- Add Ad link to specific URLs [\#438](https://github.com/eventaservo/eventaservo/issues/438)
+- Automatic resize and compress images for Ads [\#437](https://github.com/eventaservo/eventaservo/issues/437)
+- Internacia Kalendaro: Listigi venontajn eventojn [\#433](https://github.com/eventaservo/eventaservo/issues/433)
+- Aldoni Sentry.io Error Form [\#430](https://github.com/eventaservo/eventaservo/issues/430)
+- Kreas "aldoni al Internacia Kalendaro" butonon al administrantoj [\#427](https://github.com/eventaservo/eventaservo/issues/427)
+- Add ActiveAdmin to EventaServo [\#420](https://github.com/eventaservo/eventaservo/issues/420)
+- \[Airbrake\] \[Production\] The stream provided: '\[\#\<Mail::Field 0x28438 @name="message-stream" @unparsed\_value="event-rememorigoj" @charset="UTF-8" @field\_order\_id=100 @field=\#\<Mail::OptionalField:0x00007fbec1eb4128 @errors=\[\], @charset="UTF-8", @name="me... [\#419](https://github.com/eventaservo/eventaservo/issues/419)
+- Ŝanĝi “Partoprenontoj tra Eventa Servo” al 3 rememorigajn mesaĝojn [\#418](https://github.com/eventaservo/eventaservo/issues/418)
+- Disponebli Bearer Token [\#413](https://github.com/eventaservo/eventaservo/issues/413)
+- \[Airbrake\] \[Production\] Unable to serialize User without an id. \(Maybe you forgot to call save?\) [\#412](https://github.com/eventaservo/eventaservo/issues/412)
+- Eblu elekti UTC kiam selektas horozon [\#411](https://github.com/eventaservo/eventaservo/issues/411)
+- Mi volas partopreni -\> Mi ŝatas [\#410](https://github.com/eventaservo/eventaservo/issues/410)
+- Bildo ĉe diskonigita evento [\#402](https://github.com/eventaservo/eventaservo/issues/402)
+- Faru pli klara la indikon de nuntempaj eventoj [\#400](https://github.com/eventaservo/eventaservo/issues/400)
+- Bildo ĉe evento en Facebook kaj Telegram [\#398](https://github.com/eventaservo/eventaservo/issues/398)
+- Ebligi uzantojn forviŝi sian konton [\#396](https://github.com/eventaservo/eventaservo/issues/396)
+- Setup Airbrake for your Rails application [\#395](https://github.com/eventaservo/eventaservo/issues/395)
+- Limigi la longon de mallonga ligilo [\#352](https://github.com/eventaservo/eventaservo/issues/352)
+- Alŝuti reklamon: malebligi la aperigon de nuligitaj eventoj [\#350](https://github.com/eventaservo/eventaservo/issues/350)
+- Ŝanĝi sekurfrazan tekston [\#348](https://github.com/eventaservo/eventaservo/issues/348)
+- Malebligu uzantnomon kun signo "/" [\#347](https://github.com/eventaservo/eventaservo/issues/347)
+- Defaŭlta antaŭvido de ligilo en Telegram kaj Facebook: ni ekuzu la bildon de organizo, ne plu tiun de ES [\#345](https://github.com/eventaservo/eventaservo/issues/345)
+- Aŭtomata alklakebligo de ligiloj en la tekstujo [\#340](https://github.com/eventaservo/eventaservo/issues/340)
+- Subpaĝo 'Registritaj prelegoj' [\#339](https://github.com/eventaservo/eventaservo/issues/339)
+- Horzonoj: traduki [\#336](https://github.com/eventaservo/eventaservo/issues/336)
+- Mi ne plu povas alklaki mailto-ligilon [\#334](https://github.com/eventaservo/eventaservo/issues/334)
+- Se mi per tabo iras de la Urbo al Lando, mi ne povas ekserĉi landon ĝin tajpante. [\#333](https://github.com/eventaservo/eventaservo/issues/333)
+- La api ne donas la samajn rezultojn kiel la retejo [\#329](https://github.com/eventaservo/eventaservo/issues/329)
+- API : {'error': 'Vi bezonas ensaluti por fari tion'} [\#328](https://github.com/eventaservo/eventaservo/issues/328)
+- Aboni la tutan kalendaron per iCal [\#327](https://github.com/eventaservo/eventaservo/issues/327)
+- Malebligi alŝuti bildojn en dosierformo kiujn ni ne akceptas [\#321](https://github.com/eventaservo/eventaservo/issues/321)
+- Aspekto de la retejo: menuoj aperas tro flanke en granda ekrano [\#320](https://github.com/eventaservo/eventaservo/issues/320)
+- Listigi prelegantojn kaj instruistojn [\#315](https://github.com/eventaservo/eventaservo/issues/315)
+- Alia priskribo ĉe la registriĝo-paĝo [\#313](https://github.com/eventaservo/eventaservo/issues/313)
+- Ĉu prezenti la paĝo-posedanton pli diskrete? [\#312](https://github.com/eventaservo/eventaservo/issues/312)
+- Sciigo uzanton kiam la evento komenciĝas [\#310](https://github.com/eventaservo/eventaservo/issues/310)
+- Ĉu krei 2 novajn servojn 'prelegservo' kaj 'kursoservo'?  [\#309](https://github.com/eventaservo/eventaservo/issues/309)
+- Aldoni la eblon aldoni dosierojn al organizoj [\#308](https://github.com/eventaservo/eventaservo/issues/308)
+- Kelkfoje oni ne kapablas redakti la horojn [\#303](https://github.com/eventaservo/eventaservo/issues/303)
+- Reklamrubandoj [\#301](https://github.com/eventaservo/eventaservo/issues/301)
+- Ĉu pravaj sugestoj? [\#299](https://github.com/eventaservo/eventaservo/issues/299)
+- Se kunveno estas kaj ĉeesta kaj reta, ĝi ne aperas en www.eventaservo.org/reta [\#298](https://github.com/eventaservo/eventaservo/issues/298)
+- Raporti: nova teksto \(Informo pri via evento en Eventa Servo\) [\#295](https://github.com/eventaservo/eventaservo/issues/295)
+- Necesas foje kontroli kiu nova uzanto aliĝas; ĉu vi tial povas aldoni ligilon al "ES administraĵoj" [\#294](https://github.com/eventaservo/eventaservo/issues/294)
+- Nova organizo: kial devigo elekti landon? [\#292](https://github.com/eventaservo/eventaservo/issues/292)
+- Ĉu ĉiuj novaj uzantoj kiuj registriĝas per FB loĝas en Afganio? [\#291](https://github.com/eventaservo/eventaservo/issues/291)
+- Ĉu ni aldonu memorigilon al la retejo? [\#287](https://github.com/eventaservo/eventaservo/issues/287)
+- Aldono de evento-skemo al ĉiu paĝo pri evento [\#286](https://github.com/eventaservo/eventaservo/issues/286)
+- Mesaĝo aperas, kiu ne aperu [\#285](https://github.com/eventaservo/eventaservo/issues/285)
+- Ligi retan eventon al lando [\#284](https://github.com/eventaservo/eventaservo/issues/284)
+- Revenis cimo pri la horzonoj: mi ne povas aldoni/ŝanĝi eventon en alia horzono 00:00 [\#282](https://github.com/eventaservo/eventaservo/issues/282)
+- Ne eblas aldoni retan eventon, se oni ne entajpis urbonomon [\#280](https://github.com/eventaservo/eventaservo/issues/280)
+- Horzonoj: agordi ĉe la uzanto, ne ĉe evento [\#278](https://github.com/eventaservo/eventaservo/issues/278)
+- Kartara vido: aldoni horojn [\#277](https://github.com/eventaservo/eventaservo/issues/277)
+- Hodiaŭaj eventoj nur en la unua paĝo [\#274](https://github.com/eventaservo/eventaservo/issues/274)
+- Ne funkcias la filtrilo 'plurtaga' en la vidmaniero 'kalendaro' [\#273](https://github.com/eventaservo/eventaservo/issues/273)
+- Aldoni al https://eventaservo.org/prie [\#272](https://github.com/eventaservo/eventaservo/issues/272)
+- Nova speco Konkursoj [\#271](https://github.com/eventaservo/eventaservo/issues/271)
+- Semajno vido estas tre malrapida [\#269](https://github.com/eventaservo/eventaservo/issues/269)
+- Foje iom daŭras antaŭ ol afiŝiĝas eventoj en vidmaniero Kalendaro [\#268](https://github.com/eventaservo/eventaservo/issues/268)
+- Vidmaniero Listo: ankaŭ tie montri nuligitajn eventojn ruĝe kaj trastrekite [\#266](https://github.com/eventaservo/eventaservo/issues/266)
+- Vidmaniero Listo: ĉu montri eventojn laŭ horzono kiun uzanto agordis? [\#265](https://github.com/eventaservo/eventaservo/issues/265)
+- Vidmaniero Kalendaro: ĉu defaŭlto estu la semajna? [\#263](https://github.com/eventaservo/eventaservo/issues/263)
+- "Enreta" kiel lando ĉe profilo [\#262](https://github.com/eventaservo/eventaservo/issues/262)
+- Statistikoj pri neretaj kaj retaj eventoj [\#259](https://github.com/eventaservo/eventaservo/issues/259)
+- Nova registrito: ne estas mesaĝo en ES Administraĵoj, se oni registriĝas per FB [\#258](https://github.com/eventaservo/eventaservo/issues/258)
+- Mallongaj ligiloj: malkoheraĵo [\#256](https://github.com/eventaservo/eventaservo/issues/256)
+- Retaj eventoj: ĉu indiki la horojn kaj ordigi ilin laŭe? [\#255](https://github.com/eventaservo/eventaservo/issues/255)
+- "Enreta" ne estu elektebla kiel lando [\#253](https://github.com/eventaservo/eventaservo/issues/253)
+- Reta eventoj ne aperu en la jar-superrigardo [\#251](https://github.com/eventaservo/eventaservo/issues/251)
+- Reta urbo -\> Reta kunveno [\#248](https://github.com/eventaservo/eventaservo/issues/248)
+- Tekstoredaktilo Trix ankoraŭ estas anglalingva [\#247](https://github.com/eventaservo/eventaservo/issues/247)
+- Nuligitaj eventoj: ĉu ne ankaŭ indiki tion ĉe la Organizoj? [\#245](https://github.com/eventaservo/eventaservo/issues/245)
+- Nefunkciantaj bildoj sur la mapo [\#243](https://github.com/eventaservo/eventaservo/issues/243)
+- Nuligitaj eventoj ne estu enkalkulitaj [\#242](https://github.com/eventaservo/eventaservo/issues/242)
+- Ĉu emfazi la butonon "Aldoni eventon"? [\#241](https://github.com/eventaservo/eventaservo/issues/241)
+- Afiŝi longan nomon de administranto\(j\) [\#240](https://github.com/eventaservo/eventaservo/issues/240)
+- Serĉado: ĉe organizoj funkciu kiel en la ĉefpaĝo - per tujserĉado [\#239](https://github.com/eventaservo/eventaservo/issues/239)
+- Ne aperas ruĝa koloro kaj trastreko por nuligitaj eventoj en la internacia kalendaro [\#237](https://github.com/eventaservo/eventaservo/issues/237)
+- Nuligo de eventoj [\#235](https://github.com/eventaservo/eventaservo/issues/235)
+- Io malĝustas tie. Brita evento en Usono? [\#233](https://github.com/eventaservo/eventaservo/issues/233)
+- Kunvenoj en UEA Facila: montri nur internaciajn tie [\#232](https://github.com/eventaservo/eventaservo/issues/232)
+- Urbo/loko: decidota [\#231](https://github.com/eventaservo/eventaservo/issues/231)
+- Eblo rekrei API-ŝlosilon [\#227](https://github.com/eventaservo/eventaservo/issues/227)
+- Varbado por ES [\#226](https://github.com/eventaservo/eventaservo/issues/226)
+- Savkopio / Backup [\#225](https://github.com/eventaservo/eventaservo/issues/225)
+- Mankas ĝusta atribuo al OpenStreetMap [\#223](https://github.com/eventaservo/eventaservo/issues/223)
+- Ne plu funkcias la enhava ilobreto [\#221](https://github.com/eventaservo/eventaservo/issues/221)
+- Spamo: kion ni povas fari kontraŭ fi-trudistoj? [\#216](https://github.com/eventaservo/eventaservo/issues/216)
+- Titoloj kun ' signo rompas la fasadaon [\#214](https://github.com/eventaservo/eventaservo/issues/214)
+- Eventoj kun stelo ne aperas en ES Administraĵoj \(Telegram\) [\#213](https://github.com/eventaservo/eventaservo/issues/213)
+- Okazas hodiaŭ: alia cimo aperis [\#212](https://github.com/eventaservo/eventaservo/issues/212)
+- Organizoj - venontaj eventoj: problemo pri dato  [\#210](https://github.com/eventaservo/eventaservo/issues/210)
+- Organizoj: ĉu kunlabori kun Esperanto.net? [\#209](https://github.com/eventaservo/eventaservo/issues/209)
+- Google-serĉado SEO [\#207](https://github.com/eventaservo/eventaservo/issues/207)
+- Ĉu plifaciligi la integrigon de ES en aliaj retejoj? [\#205](https://github.com/eventaservo/eventaservo/issues/205)
+- Ŝajnas esti problemo pri serĉado [\#203](https://github.com/eventaservo/eventaservo/issues/203)
+- Malstriktigi la regulojn pri mallonga organiza nomo [\#202](https://github.com/eventaservo/eventaservo/issues/202)
+- Statistikoj: mankas nomoj de landoj [\#197](https://github.com/eventaservo/eventaservo/issues/197)
+- Mallongigilo de eventaj retejaj adresoj [\#196](https://github.com/eventaservo/eventaservo/issues/196)
+- Kiam pluraj organizoj estas aldonitaj al evento, foje aspektas ne tre bone [\#195](https://github.com/eventaservo/eventaservo/issues/195)
+- Ĉu mallongigi la nomojn de monatoj ĉe la organizoj? [\#193](https://github.com/eventaservo/eventaservo/issues/193)
+- Mapa vido: ĉu aperigi malpli multe da eventoj? [\#192](https://github.com/eventaservo/eventaservo/issues/192)
+- Organizo: aldoni kampon 'telefonnumero' [\#188](https://github.com/eventaservo/eventaservo/issues/188)
+- Ĉefpaĝo: informoj sur du linioj anstataŭ tri [\#184](https://github.com/eventaservo/eventaservo/issues/184)
+- Malnovaj informoj aperas kiam oni diskonigas eventon per Telegram [\#183](https://github.com/eventaservo/eventaservo/issues/183)
+- Alŝutante bildon, ĝi ne estas aldonita, sed anstataŭas antaŭe alŝutitan bildon [\#182](https://github.com/eventaservo/eventaservo/issues/182)
+- Alŝutante bildon, organizo malaperas de evento [\#181](https://github.com/eventaservo/eventaservo/issues/181)
+- Ĉu okazaĵoj anstataŭ eventoj [\#179](https://github.com/eventaservo/eventaservo/issues/179)
+- mallongigi kaj malangligi nomojn de URL-oj [\#178](https://github.com/eventaservo/eventaservo/issues/178)
+- Konigo de organizo per Facebook Messenger kaj Telegram: bildo [\#176](https://github.com/eventaservo/eventaservo/issues/176)
+- Administranto havu la rajton aldoni iun ajn organizon [\#174](https://github.com/eventaservo/eventaservo/issues/174)
+- Ikono-miniaturoj de organizoj: Iuj ne bone aperas  [\#173](https://github.com/eventaservo/eventaservo/issues/173)
+- Kalendara vido: kial semajno komenciĝas je dimanĉo? [\#172](https://github.com/eventaservo/eventaservo/issues/172)
+- Malpli longigi retejajn adresojn de unuopaj ES-eventoj [\#171](https://github.com/eventaservo/eventaservo/issues/171)
+- Eksporto al .ics kreas 3 eventojn por 1 plurtaga evento [\#168](https://github.com/eventaservo/eventaservo/issues/168)
+- Organizaj administrantoj ne kapablas forigi eventojn [\#167](https://github.com/eventaservo/eventaservo/issues/167)
+- Nomoj kaj retpoŝtadresaj videblaj [\#165](https://github.com/eventaservo/eventaservo/issues/165)
+- Aldoni la eblon traserĉi organizojn [\#164](https://github.com/eventaservo/eventaservo/issues/164)
+- Malĝusta kalkulo unutagaj/plurtagaj eventoj [\#163](https://github.com/eventaservo/eventaservo/issues/163)
+- Ĉu aldoni la eblon 'dato ankoraŭ ne konata'? [\#159](https://github.com/eventaservo/eventaservo/issues/159)
+- Organizoj: alfabeta lista vido [\#152](https://github.com/eventaservo/eventaservo/issues/152)
+- Aldonado de membro de organizo: pli praktikigi [\#151](https://github.com/eventaservo/eventaservo/issues/151)
+- Ĉu eblas iom plilarĝigi la dato-kolumnon, por ke '2019' aperu dekstre de 'septembro'? [\#150](https://github.com/eventaservo/eventaservo/issues/150)
+- Ĉu eblas facile traduki ĉi tiaj URL-nomojn? [\#148](https://github.com/eventaservo/eventaservo/issues/148)
+- Kial aperas '0 venontaj' se tamen estas 3? [\#146](https://github.com/eventaservo/eventaservo/issues/146)
+- Malebligi spacon post nomo de urbo aŭ loko [\#141](https://github.com/eventaservo/eventaservo/issues/141)
+- Raporti malĝustan informon - du solvindaĵoj [\#140](https://github.com/eventaservo/eventaservo/issues/140)
+- Kolora teksto en konfirma mesaĝo al eventa administranto [\#139](https://github.com/eventaservo/eventaservo/issues/139)
+- Analizado-paĝo: 'Laŭ plataformoj' estu 'Laŭ platformo' & 'Laŭ retumiloj' estu 'Laŭ retumilo' [\#138](https://github.com/eventaservo/eventaservo/issues/138)
+- Kalendaro: datoj prefere estu en sama datformo/aranĝo [\#137](https://github.com/eventaservo/eventaservo/issues/137)
+- Kalendaro: + 1 pliaj estu + 1 plia [\#136](https://github.com/eventaservo/eventaservo/issues/136)
+- Eventaj administrantoj: nomo de organizo aperu sub 'Administranto' ĉe unuopaj eventoj se ĝi ekzistas [\#135](https://github.com/eventaservo/eventaservo/issues/135)
+- Paging: plirapidigi la retejon [\#134](https://github.com/eventaservo/eventaservo/issues/134)
+- Nur unu elekto pri speco sufiĉas [\#132](https://github.com/eventaservo/eventaservo/issues/132)
+- Kiam mi elektas Mondo \> Eŭropo, ambaŭ Kartaro kaj kalendaro bluas. [\#131](https://github.com/eventaservo/eventaservo/issues/131)
+- Statistika paĝo: lingvaj eraretoj [\#129](https://github.com/eventaservo/eventaservo/issues/129)
+- Retry later [\#128](https://github.com/eventaservo/eventaservo/issues/128)
+- Kiam mi algluas eventan ligilon, aperas malĝusta dato [\#126](https://github.com/eventaservo/eventaservo/issues/126)
+- \[ES estraro\] Evento ĝisdatiĝita -\> \[ES estraro\] Evento ĝisdatigita [\#122](https://github.com/eventaservo/eventaservo/issues/122)
+- Evento ne rajtas finiĝi en -1 tago [\#120](https://github.com/eventaservo/eventaservo/issues/120)
+- Retmesaĝoj al administrantoj: ni ricevas tro da ili [\#119](https://github.com/eventaservo/eventaservo/issues/119)
+- Kiam mi duobligas eventon, estas problemo pri la eventa administranto [\#118](https://github.com/eventaservo/eventaservo/issues/118)
+- Specojn: ĉu ilin duobligi ankaŭ? [\#114](https://github.com/eventaservo/eventaservo/issues/114)
+- Kalendara vido: plilarĝigi la fenestro kiu aperas kiam oni alklakas detalon de tago [\#113](https://github.com/eventaservo/eventaservo/issues/113)
+- Ligilo al organizo el uzanta paĝo ne funkcias [\#112](https://github.com/eventaservo/eventaservo/issues/112)
+- Eraro aperas kiam oni alklakas uzantnomon kaj uzas mapan vidmanieron [\#111](https://github.com/eventaservo/eventaservo/issues/111)
+- " 0 venontaj" iom strangas. Eble aperu io alia. [\#110](https://github.com/eventaservo/eventaservo/issues/110)
+- retadresoj: protekto kontraŭ spamo estas bone, sed eble alia solvo eblas?  [\#109](https://github.com/eventaservo/eventaservo/issues/109)
+- Staging: kiam mi alklakas 'Aldoni eventon', aperas dato de hieraŭ + 10:00 - 10:00 [\#108](https://github.com/eventaservo/eventaservo/issues/108)
+- Kiam oni serĉas eventon laŭ ŝlosilvorto, estas problemo pri la afiŝita dato [\#107](https://github.com/eventaservo/eventaservo/issues/107)
+- Turbolink-problemo: butono restas elektita \(koloro\) [\#106](https://github.com/eventaservo/eventaservo/issues/106)
+- Aldoni aŭtomatan ŝargadon de pliaj se oni rulumas suben [\#105](https://github.com/eventaservo/eventaservo/issues/105)
+- Kreu konton -\> Registriĝu [\#104](https://github.com/eventaservo/eventaservo/issues/104)
+- Eventoj kun "horzonaj problemoj" kiujn Yves ne kapablas ripari [\#103](https://github.com/eventaservo/eventaservo/issues/103)
+- Pri-paĝo: restas du eraretoj [\#102](https://github.com/eventaservo/eventaservo/issues/102)
+- Admin: sendi mesaĝon ankaŭ kiam iu kreas konton [\#101](https://github.com/eventaservo/eventaservo/issues/101)
+- Minuskloj: ĉu eblas "respekti" usklecon de nomoj de lokoj? [\#100](https://github.com/eventaservo/eventaservo/issues/100)
+- Horzono: kial aperas foje Etc/UTC kaj foje ne por sama loko? [\#99](https://github.com/eventaservo/eventaservo/issues/99)
+- Evento kiu komenciĝas la 1-an de majo ne aperu ĉe aprilo [\#98](https://github.com/eventaservo/eventaservo/issues/98)
+- Ĉu ne troa emfazo je ES anstataŭ je la evento kiam oni ĝin konigas? [\#97](https://github.com/eventaservo/eventaservo/issues/97)
+- Necesas ĉiam denove ensaluti sur iPad - mi plu esploris [\#96](https://github.com/eventaservo/eventaservo/issues/96)
+- Aperas dufoje Lyon - kial? [\#95](https://github.com/eventaservo/eventaservo/issues/95)
+- Kvankam Kartvelio estas azia lando, ĝi aperas ĉe Eŭropo en la mapo [\#94](https://github.com/eventaservo/eventaservo/issues/94)
+- Turkio estas parte eŭropa kaj parte azia lando [\#92](https://github.com/eventaservo/eventaservo/issues/92)
+- Aldoni komencan horan de evento sen devi aldoni finan horon [\#90](https://github.com/eventaservo/eventaservo/issues/90)
+- Konto Yves2: kreado de evento sen aldono de horoj donas problemon [\#89](https://github.com/eventaservo/eventaservo/issues/89)
+- Kopii ligilon de landa aŭ organiza kalendaro ne funkcias sur iPad [\#88](https://github.com/eventaservo/eventaservo/issues/88)
+- Organizoj: uzantojn oni povas aldoni, sed ankoraŭ ne forigi. [\#87](https://github.com/eventaservo/eventaservo/issues/87)
+- Aŭtomata sendado de retmesaĝo al eventa administranto [\#86](https://github.com/eventaservo/eventaservo/issues/86)
+- Kreinto/Eniginto -\> Eventa administranto [\#85](https://github.com/eventaservo/eventaservo/issues/85)
+- Aboni filtritajn eventojn [\#84](https://github.com/eventaservo/eventaservo/issues/84)
+- filtroj -\> filtriloj [\#83](https://github.com/eventaservo/eventaservo/issues/83)
+- organizoj -\> organizo [\#82](https://github.com/eventaservo/eventaservo/issues/82)
+- Nova evento -\> Nova evento, kunveno aŭ okazaĵo [\#81](https://github.com/eventaservo/eventaservo/issues/81)
+- Ĉu krei "legilon" por Facebook- kaj Meetup-eventoj? [\#80](https://github.com/eventaservo/eventaservo/issues/80)
+- API: Ne ordigas laŭ komenca\_dato [\#79](https://github.com/eventaservo/eventaservo/issues/79)
+- Krei novan eventon kaj poste ŝanĝi ĝian "respondeculon" [\#77](https://github.com/eventaservo/eventaservo/issues/77)
+- URL de nova eventoj: "nova", ne "new" [\#76](https://github.com/eventaservo/eventaservo/issues/76)
+- Dissendado de retmesaĝo post kreado de nova evento: ĉu iom atendi? [\#74](https://github.com/eventaservo/eventaservo/issues/74)
+- Horoj ŝanĝiĝas post alŝutado de dosiero al evento! [\#73](https://github.com/eventaservo/eventaservo/issues/73)
+- Nova mesaĝo pri ŝanĝoj al eventoj [\#72](https://github.com/eventaservo/eventaservo/issues/72)
+- Semajna/Monata mesaĝo al lando-abonintoj [\#71](https://github.com/eventaservo/eventaservo/issues/71)
+- Eventoj sen indikoj pri horoj: problemo pri horzono [\#70](https://github.com/eventaservo/eventaservo/issues/70)
+- No results found: traduki [\#69](https://github.com/eventaservo/eventaservo/issues/69)
+- Malebligi aldonadon de nerilata teksto al URL [\#68](https://github.com/eventaservo/eventaservo/issues/68)
+- Se ne estas horoj enigitaj, ĉu eblus ne montri 00:00 - 00:00 kaj la nomon de la horzono? [\#66](https://github.com/eventaservo/eventaservo/issues/66)
+- URL de evento: ĉu ebligi pli facilan tajpadon? [\#65](https://github.com/eventaservo/eventaservo/issues/65)
+- Vidu la eventon rekte -\> Vidi la eventon en la retejo [\#64](https://github.com/eventaservo/eventaservo/issues/64)
+- Plibeligo de la retmesaĝoj pri novaj eventoj [\#62](https://github.com/eventaservo/eventaservo/issues/62)
+- Malrapidiĝo subita \(ĉu pro la flago de Domingo?\) [\#61](https://github.com/eventaservo/eventaservo/issues/61)
+- Enigi nomon de lando per Tab-klavo [\#60](https://github.com/eventaservo/eventaservo/issues/60)
+- Horzonoj: la listoj ŝajne ne konsideras ilin [\#59](https://github.com/eventaservo/eventaservo/issues/59)
+- Horzonoj: traduki la nomojn [\#58](https://github.com/eventaservo/eventaservo/issues/58)
+- Malaboni landajn kalendarojn: ĉu ie ĉe la profilo de uzanto? [\#57](https://github.com/eventaservo/eventaservo/issues/57)
+- Evento forigenda [\#56](https://github.com/eventaservo/eventaservo/issues/56)
+- Mi ne sukcesas aldoni finan horon [\#55](https://github.com/eventaservo/eventaservo/issues/55)
+- Kial aperas dufoje Kampinagrando? [\#54](https://github.com/eventaservo/eventaservo/issues/54)
+- Eble ŝanĝu 'Urbo' al 'Loko', ne ĉiuj lokoj estas urboj [\#52](https://github.com/eventaservo/eventaservo/issues/52)
+- Cimo: somera/vintra horo. [\#50](https://github.com/eventaservo/eventaservo/issues/50)
+- Duobligo de evento: horoj restu samaj [\#49](https://github.com/eventaservo/eventaservo/issues/49)
+- Plibonigo de la aspekto: Tim Owen proponas helpi [\#48](https://github.com/eventaservo/eventaservo/issues/48)
+- Irlando ne troviĝas en Azio [\#47](https://github.com/eventaservo/eventaservo/issues/47)
+- Aldoni eventon al kalendaro: nur funkcias per iOS + Safari [\#46](https://github.com/eventaservo/eventaservo/issues/46)
+- Ebleco filtri plurtagojn eventojn [\#43](https://github.com/eventaservo/eventaservo/issues/43)
+- Aŭtomate transpreni eventojn de Duolingo / Meetup [\#41](https://github.com/eventaservo/eventaservo/issues/41)
+- Traduki "You are already signed in" [\#40](https://github.com/eventaservo/eventaservo/issues/40)
+- WebCal: abonita kalendaro estas privata; ĉu eblas igi ĝin publika? [\#39](https://github.com/eventaservo/eventaservo/issues/39)
+- Ebligi duobligi eventojn enigitajn de aliaj [\#38](https://github.com/eventaservo/eventaservo/issues/38)
+- Limigi la priskriban longeco al 140 karakteroj [\#37](https://github.com/eventaservo/eventaservo/issues/37)
+- "Forigu eventon" estu "Forigi eventon" [\#36](https://github.com/eventaservo/eventaservo/issues/36)
+- Diskonigilo: ne estas en ordo en poŝtelefono [\#35](https://github.com/eventaservo/eventaservo/issues/35)
+- Tro ofte oni devas ensaluti: ĉu ŝanĝi la agordoj? [\#32](https://github.com/eventaservo/eventaservo/issues/32)
+- Atentigi aldoninton de evento pri eraro aŭ plibonigeblo [\#31](https://github.com/eventaservo/eventaservo/issues/31)
+- Ĉu faciligi la aldonadon de bildoj ĉe la teksto anstataŭ kiel aparte alŝutita dosiero? [\#30](https://github.com/eventaservo/eventaservo/issues/30)
+- Mesaĝo 'Nova evento aldoniĝis': ĉu minuskligi la titolon? [\#28](https://github.com/eventaservo/eventaservo/issues/28)
+- Aldono de evento: URL aŭ retpoŝtadreso estu deviga kampo [\#27](https://github.com/eventaservo/eventaservo/issues/27)
+- Diskonigilo: ĉu pligrandigi la butonojn? [\#26](https://github.com/eventaservo/eventaservo/issues/26)
+- Komenca kaj fina horoj de evento [\#24](https://github.com/eventaservo/eventaservo/issues/24)
+- Abonoj al landaj kalendaroj: nova teksto. "Malabonitu" ne estas bona Esperanto [\#23](https://github.com/eventaservo/eventaservo/issues/23)
+- Aldoni butonon por informi pri eraroj en eventoj [\#22](https://github.com/eventaservo/eventaservo/issues/22)
+- Rusio estas parte eŭropa kaj parte azia lando [\#20](https://github.com/eventaservo/eventaservo/issues/20)
+- Aperas teksto en la portugala se oni ne enigas informojn en deviga kampo [\#18](https://github.com/eventaservo/eventaservo/issues/18)
+- Kiam oni pligrandigas foton, la kalendaro plu aperas. [\#16](https://github.com/eventaservo/eventaservo/issues/16)
+- Krei organizaĵojn por konigi kaj ĝisdatigi diversajn eventojn [\#15](https://github.com/eventaservo/eventaservo/issues/15)
+- https://eventaservo.org/Eŭropo alternativaj ligiloj kiuj plusendas [\#14](https://github.com/eventaservo/eventaservo/issues/14)
+- Kalendaro en eventa paĝo estas en la angla [\#11](https://github.com/eventaservo/eventaservo/issues/11)
+- Krei rolon por organizatioj kiu regule organizas eventojn [\#9](https://github.com/eventaservo/eventaservo/issues/9)
+- API por aliri liston de eventoj [\#7](https://github.com/eventaservo/eventaservo/issues/7)
+
+**Merged pull requests:**
+
+- \#438 add ad link to specific urls [\#440](https://github.com/eventaservo/eventaservo/pull/440) ([shayani](https://github.com/shayani))
+- 396 ebligi uzantojn forviŝi sian konton [\#436](https://github.com/eventaservo/eventaservo/pull/436) ([shayani](https://github.com/shayani))
+- 433 internacia kalendaro listigi venontajn eventojn [\#434](https://github.com/eventaservo/eventaservo/pull/434) ([shayani](https://github.com/shayani))
+- 430 Add Sentry.io user feedback form [\#431](https://github.com/eventaservo/eventaservo/pull/431) ([shayani](https://github.com/shayani))
+- Aldonas international\_calendar al Events [\#428](https://github.com/eventaservo/eventaservo/pull/428) ([shayani](https://github.com/shayani))
+- Send 3 event reminder messages for the user [\#426](https://github.com/eventaservo/eventaservo/pull/426) ([shayani](https://github.com/shayani))
+- Gitpod [\#424](https://github.com/eventaservo/eventaservo/pull/424) ([shayani](https://github.com/shayani))
+- Backend docker develpment container [\#423](https://github.com/eventaservo/eventaservo/pull/423) ([shayani](https://github.com/shayani))
+- Gitpod dockerfile [\#422](https://github.com/eventaservo/eventaservo/pull/422) ([shayani](https://github.com/shayani))
+- Install ActiveAdmin [\#421](https://github.com/eventaservo/eventaservo/pull/421) ([shayani](https://github.com/shayani))
+- Ŝanĝi sekurfrazan tekston [\#409](https://github.com/eventaservo/eventaservo/pull/409) ([shayani](https://github.com/shayani))
+- Bump moment from 2.29.2 to 2.29.4 [\#408](https://github.com/eventaservo/eventaservo/pull/408) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails-html-sanitizer from 1.4.2 to 1.4.3 [\#405](https://github.com/eventaservo/eventaservo/pull/405) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Devops changes [\#404](https://github.com/eventaservo/eventaservo/pull/404) ([shayani](https://github.com/shayani))
+- Faru pli klara la indikon de nuntempaj eventoj [\#401](https://github.com/eventaservo/eventaservo/pull/401) ([shayani](https://github.com/shayani))
+- Bump rack from 2.2.3 to 2.2.4 [\#399](https://github.com/eventaservo/eventaservo/pull/399) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump diffy from 3.4.0 to 3.4.1 [\#397](https://github.com/eventaservo/eventaservo/pull/397) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump eventsource from 1.0.7 to 1.1.1 [\#394](https://github.com/eventaservo/eventaservo/pull/394) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump nokogiri from 1.13.5 to 1.13.6 [\#392](https://github.com/eventaservo/eventaservo/pull/392) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump sinatra from 2.1.0 to 2.2.0 [\#391](https://github.com/eventaservo/eventaservo/pull/391) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump axios from 0.21.1 to 0.21.2 [\#390](https://github.com/eventaservo/eventaservo/pull/390) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump async from 2.6.3 to 2.6.4 [\#389](https://github.com/eventaservo/eventaservo/pull/389) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump nokogiri from 1.13.3 to 1.13.4 [\#388](https://github.com/eventaservo/eventaservo/pull/388) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump minimist from 1.2.5 to 1.2.6 [\#387](https://github.com/eventaservo/eventaservo/pull/387) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump moment from 2.29.1 to 2.29.2 [\#386](https://github.com/eventaservo/eventaservo/pull/386) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump puma from 5.6.2 to 5.6.4 [\#385](https://github.com/eventaservo/eventaservo/pull/385) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump nanoid from 3.1.20 to 3.3.1 [\#384](https://github.com/eventaservo/eventaservo/pull/384) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Gemfile update [\#383](https://github.com/eventaservo/eventaservo/pull/383) ([shayani](https://github.com/shayani))
+- Bump image\_processing from 1.12.1 to 1.12.2 [\#382](https://github.com/eventaservo/eventaservo/pull/382) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump url-parse from 1.5.1 to 1.5.10 [\#381](https://github.com/eventaservo/eventaservo/pull/381) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump postcss from 7.0.35 to 7.0.39 [\#378](https://github.com/eventaservo/eventaservo/pull/378) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump color-string from 1.5.4 to 1.6.0 [\#370](https://github.com/eventaservo/eventaservo/pull/370) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump path-parse from 1.0.6 to 1.0.7 [\#367](https://github.com/eventaservo/eventaservo/pull/367) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump addressable from 2.7.0 to 2.8.0 [\#366](https://github.com/eventaservo/eventaservo/pull/366) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ws from 6.2.1 to 6.2.2 [\#364](https://github.com/eventaservo/eventaservo/pull/364) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump dns-packet from 1.3.1 to 1.3.4 [\#361](https://github.com/eventaservo/eventaservo/pull/361) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump browserslist from 4.16.0 to 4.16.6 [\#360](https://github.com/eventaservo/eventaservo/pull/360) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump nokogiri from 1.11.3 to 1.11.4 [\#359](https://github.com/eventaservo/eventaservo/pull/359) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump puma from 5.2.2 to 5.3.1 [\#358](https://github.com/eventaservo/eventaservo/pull/358) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump hosted-git-info from 2.8.8 to 2.8.9 [\#357](https://github.com/eventaservo/eventaservo/pull/357) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump lodash from 4.17.20 to 4.17.21 [\#356](https://github.com/eventaservo/eventaservo/pull/356) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump url-parse from 1.4.7 to 1.5.1 [\#355](https://github.com/eventaservo/eventaservo/pull/355) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ssri from 6.0.1 to 6.0.2 [\#354](https://github.com/eventaservo/eventaservo/pull/354) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump elliptic from 6.5.3 to 6.5.4 [\#353](https://github.com/eventaservo/eventaservo/pull/353) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump http-proxy from 1.18.0 to 1.18.1 [\#319](https://github.com/eventaservo/eventaservo/pull/319) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump lodash from 4.17.15 to 4.17.20 [\#318](https://github.com/eventaservo/eventaservo/pull/318) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump elliptic from 6.5.2 to 6.5.3 [\#317](https://github.com/eventaservo/eventaservo/pull/317) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Tradukis Trix butonojn [\#307](https://github.com/eventaservo/eventaservo/pull/307) ([johnu](https://github.com/johnu))
+- Frazo korektita [\#305](https://github.com/eventaservo/eventaservo/pull/305) ([RobinvanderVliet](https://github.com/RobinvanderVliet))
+- Ebligu agordi ene de Dockerujo [\#302](https://github.com/eventaservo/eventaservo/pull/302) ([alejandrosame](https://github.com/alejandrosame))
+- Subtenbutono ankaŭ en GitHub [\#290](https://github.com/eventaservo/eventaservo/pull/290) ([RobinvanderVliet](https://github.com/RobinvanderVliet))
+- Travis [\#283](https://github.com/eventaservo/eventaservo/pull/283) ([shayani](https://github.com/shayani))
+- "API kodo" estu "API-ŝlosilo" [\#281](https://github.com/eventaservo/eventaservo/pull/281) ([RobinvanderVliet](https://github.com/RobinvanderVliet))
+- Add .circleci/config.yml [\#276](https://github.com/eventaservo/eventaservo/pull/276) ([shayani](https://github.com/shayani))
+- "Enrete" estu "Reta", akuzativa finaĵo aldonita [\#264](https://github.com/eventaservo/eventaservo/pull/264) ([RobinvanderVliet](https://github.com/RobinvanderVliet))
+- "Eventoj" estu "Uzantoj" ĉe statistikoj [\#260](https://github.com/eventaservo/eventaservo/pull/260) ([RobinvanderVliet](https://github.com/RobinvanderVliet))
+- Ŝanĝis "Enreta" al "Reta" [\#252](https://github.com/eventaservo/eventaservo/pull/252) ([RobinvanderVliet](https://github.com/RobinvanderVliet))
+- "Reta urbo" estu simple "Reta" [\#250](https://github.com/eventaservo/eventaservo/pull/250) ([RobinvanderVliet](https://github.com/RobinvanderVliet))
+- "tempozono" estu "horzono" [\#249](https://github.com/eventaservo/eventaservo/pull/249) ([RobinvanderVliet](https://github.com/RobinvanderVliet))
+- "Close" estu "Fermi" [\#246](https://github.com/eventaservo/eventaservo/pull/246) ([RobinvanderVliet](https://github.com/RobinvanderVliet))
+- Plibonigi la supran menuon [\#244](https://github.com/eventaservo/eventaservo/pull/244) ([RobinvanderVliet](https://github.com/RobinvanderVliet))
+- Bump loofah from 2.3.0 to 2.3.1 [\#185](https://github.com/eventaservo/eventaservo/pull/185) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Aldonas provkodo por importilo [\#155](https://github.com/eventaservo/eventaservo/pull/155) ([alejandrosame](https://github.com/alejandrosame))
+- Importas eventojn el Duolingo [\#144](https://github.com/eventaservo/eventaservo/pull/144) ([alejandrosame](https://github.com/alejandrosame))
+- Importas eventojn el Meetup [\#143](https://github.com/eventaservo/eventaservo/pull/143) ([alejandrosame](https://github.com/alejandrosame))
+
+## [v1.5](https://github.com/eventaservo/eventaservo/tree/v1.5) (2019-02-05)
+
+[Full Changelog](https://github.com/eventaservo/eventaservo/compare/v1.0...v1.5)
+
+**Closed issues:**
+
+- Anstataŭi Google Maps per OSM [\#6](https://github.com/eventaservo/eventaservo/issues/6)
+
+**Merged pull requests:**
+
+- Ŝanĝis HTML-lingvon al Esperanto, aldonis koloron [\#5](https://github.com/eventaservo/eventaservo/pull/5) ([RobinvanderVliet](https://github.com/RobinvanderVliet))
+- Minuskligis monatonomojn kaj riparis tajperaron [\#4](https://github.com/eventaservo/eventaservo/pull/4) ([RobinvanderVliet](https://github.com/RobinvanderVliet))
+- Ŝanĝi permesilon al AGPLv3+  [\#3](https://github.com/eventaservo/eventaservo/pull/3) ([RobinvanderVliet](https://github.com/RobinvanderVliet))
+- Lingvaj korektoj [\#1](https://github.com/eventaservo/eventaservo/pull/1) ([RobinvanderVliet](https://github.com/RobinvanderVliet))
+
+## [v1.0](https://github.com/eventaservo/eventaservo/tree/v1.0) (2018-11-16)
+
+[Full Changelog](https://github.com/eventaservo/eventaservo/compare/67bbd62037c0a73aed21895fe93f960475ec8c77...v1.0)
+
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*

@@ -1,0 +1,26 @@
+<div class="box-white">
+  <div class="box-header">Uzantoj</div>
+  <% if users.empty? %>
+    <p>Neniu uzanto trovita</p>
+  <% else %>
+    <h5><%= pluralize(users.count, 'uzanto trovita', 'uzantoj trovitaj') %></h5>
+    <div class="table-responsive">
+      <table class="table table-sm table-hover">
+        <thead>
+          <tr>
+            <th>Nomo</th>
+            <th>Lando</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% users.each do |user| %>
+            <tr class="small pointer" onclick="window.location.href = '<%= events_by_username_path(user.username) %>'">
+              <td><%= user.name %></td>
+              <td><%= montras_flagon(user.country) + " #{user.country.name}" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>

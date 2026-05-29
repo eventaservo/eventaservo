@@ -1,0 +1,33 @@
+<%- if Rails.application.credentials.dig(:sentry, :dsn) %>
+  <script
+    src="https://browser.sentry-cdn.com/7.113.0/bundle.tracing.replay.min.js"
+    integrity="sha384-wXgzLdc+RJ2eAiFpbvC5qUGzPUApNnMOI/DBvb1hSu8Zo4J/7NkxmP4DvBmNvWbQ"
+    crossorigin="anonymous">
+  </script>
+
+  <script>
+    Sentry.init({
+      dsn: "<%= Rails.application.credentials.dig(:sentry, :dsn) %>",
+      replaysSessionSampleRate: 0.1,
+      replaysOnErrorSampleRate: 1.0,
+      environment: "<%= Rails.env %>",
+      release: "<%= Eventaservo::Application::VERSION %>",
+      integrations: [
+        Sentry.replayIntegration({
+          maskAllText: false,
+          maskAllInputs: false,
+          blockAllMedia: false,
+        }),
+      ],
+    });
+
+    <%- if @current_user %>
+      Sentry.setUser(
+        {
+          username: '<%= @current_user.name %>',
+          email: '<%= @current_user.email %>'
+        }
+      )
+    <% end %>
+  </script>
+<% end %>

@@ -1,0 +1,9 @@
+<div class="box-white">
+  <div class="lead">
+    Eventoj kun raportoj
+  </div>
+
+  <%= render "events_with_report_list", events: @events %>
+
+  <%= render "shared/pagination", pagy: @pagy %>
+</div>

@@ -1,0 +1,66 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id                     :bigint           not null, primary key
+#  address                :string           indexed
+#  cancel_reason          :text
+#  cancelled              :boolean          default(FALSE), indexed
+#  city                   :text             indexed
+#  code                   :string           not null
+#  content                :text
+#  date_end               :datetime         indexed
+#  date_start             :datetime         not null, indexed
+#  deleted                :boolean          default(FALSE), not null, indexed
+#  description            :string(400)      indexed
+#  display_flag           :boolean          default(TRUE)
+#  email                  :string
+#  format                 :string           indexed
+#  import_url             :string(400)
+#  international_calendar :boolean          default(FALSE)
+#  latitude               :float
+#  longitude              :float
+#  metadata               :jsonb
+#  online                 :boolean          default(FALSE), indexed
+#  participants_count     :integer          default(0), indexed
+#  short_url              :string
+#  site                   :string
+#  specolisto             :string           default("Kunveno"), indexed
+#  time_zone              :string           default("Etc/UTC"), not null
+#  title                  :string           not null, indexed
+#  uuid                   :uuid
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null, indexed
+#  country_id             :integer          not null, indexed
+#  user_id                :integer          not null, indexed
+#
+# This fixture provides sample events for testing purposes.
+# All events use existing user and country fixtures.
+
+valid_event:
+  title: "Rails Conference 2024"
+  description: "Annual Rails conference for developers"
+  city: "New York"
+  country_id: 1
+  date_start: <%= 1.month.from_now %>
+  date_end: <%= 1.month.from_now + 3.days %>
+  code: "rails2024"
+  site: "https://railsconf.example.com"
+  email: "info@railsconf.example.com"
+  latitude: 40.7128
+  longitude: -74.0060
+  user: user
+
+esperanto_meetup:
+  title: "Esperanto Meetup"
+  description: "Monthly Esperanto language meetup"
+  city: "San Francisco"
+  country_id: 1
+  date_start: <%= 2.weeks.from_now %>
+  date_end: <%= 2.weeks.from_now + 4.hours %>
+  code: "eomeetup"
+  site: "https://esperanto-meetup.example.com"
+  email: "contact@esperanto.example.com"
+  latitude: 37.7749
+  longitude: -122.4194
+  user: user

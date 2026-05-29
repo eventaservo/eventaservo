@@ -1,0 +1,39 @@
+.event
+  display: flex !important
+  background-color: white
+
+  &--list
+    border-bottom: 2px solid $esperantoGreen
+
+    &:hover
+      background-color: $grayLight
+
+    &:nth-of-type(odd)
+      background: $grayLightRow
+
+.event-color-today
+  border-left: 3px solid $evento-hodiaua
+
+.event-color-7days
+  border-left: 3px solid $evento-p7_tagojn
+
+.event-color-30days
+  border-left: 3px solid $evento-p30_tagojn
+
+.event-color-future
+  border-left: 3px solid $evento-estontece
+
+.event-color-past
+  border-left: 3px solid $evento-pasinta
+
+.okazantaj-eventoj
+  margin-top: 10px
+  margin-bottom: 10px
+
+.event-tags
+  display: inline-flex
+  font-size: 0.9em
+
+.cancelled
+  color: red
+  text-decoration: line-through

@@ -1,0 +1,12 @@
+<% content_for :title do %>
+  <%= "#{params[:city_name]} (#{params[:country_name]})" %>
+<% end %>
+
+<div class="box-white">
+  <%= render partial: 'layouts/breadcrumb' %>
+  <%= render partial: 'home/view_style_chooser', locals: { kartaro: true, kalendaro: false, mapo: true } %>
+  <%#= render partial: 'events/events_count' %>
+  <%= render partial: 'home/filters' %>
+  <%= render partial: 'events/okazantaj' %>
+  <%= display_events_by_style %>
+</div>

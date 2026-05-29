@@ -1,0 +1,19 @@
+<div class="box-white">
+  <div class="box-header">Organizoj</div>
+  <% if organizations.empty? %>
+    <p>Neniu organizo trovita</p>
+  <% else %>
+    <h5><%= pluralize(organizations.count, 'organizo trovita', 'organizoj trovitaj') %></h5>
+    <div class="table-responsive">
+      <table class="table table-sm table-hover">
+        <tbody>
+          <% organizations.each do |organizo| %>
+            <tr class="small pointer" onclick="window.location.href='<%= organization_path(organizo.short_name) %>'">
+              <td><%= montras_flagon(organizo.country) if organizo.display_flag %> <%= organizo.name %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>

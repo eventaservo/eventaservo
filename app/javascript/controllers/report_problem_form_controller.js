@@ -1,0 +1,23 @@
+import { Controller } from "@hotwired/stimulus"
+
+// Connects to data-controller="report-problem-form"
+export default class extends Controller {
+  static targets = ["name", "message"]
+
+  connect() {
+    this.handleModalShown = this.handleModalShown.bind(this)
+    this.element.addEventListener('shown.bs.modal', this.handleModalShown)
+  }
+
+  disconnect() {
+    this.element.removeEventListener('shown.bs.modal', this.handleModalShown)
+  }
+
+  handleModalShown() {
+    if (this.hasNameTarget && this.nameTarget.value === "") {
+      this.nameTarget.focus()
+    } else if (this.hasMessageTarget) {
+      this.messageTarget.focus()
+    }
+  }
+}

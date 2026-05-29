@@ -1,0 +1,137 @@
+@use "sass:color"
+
+$esperantoGreen: #28a745
+$blue: #4285F4
+
+body
+  font-family: Helvetica, Arial, sans-serif
+
+  a
+    text-decoration: none
+
+    &:visited
+      color: blue
+
+.header
+  text-decoration: none
+  background-color: $esperantoGreen
+  border-radius: 5px
+  text-align: center
+  margin: 0 10px 0 10px
+  padding: 1px
+  color: white
+
+  .links
+    text-decoration: none
+    color: white
+
+.bold
+  font-weight: bold
+
+.small
+  font-size: small
+
+.text-center
+  text-align: center
+
+table
+  max-width: 800px
+  width: 95%
+
+  margin-left: auto
+  margin-right: auto
+  border-collapse: collapse
+  border: 1px solid whitesmoke
+  border-top: 8px solid green
+  background-color: #FAFAFA
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .15)
+
+  &.stripped
+    tr:nth-child(odd)
+      background-color: #f2f2f2
+
+  &.bordered
+    border: 1px solid lightgrey
+
+  tbody
+    tr
+      border-bottom: 1px solid lightgrey
+
+      td
+        padding: 20px
+
+        &.title
+          font-weight: bold
+          font-size: 1.5em
+          text-align: center
+
+          span.sub-title
+            font-size: small
+            font-weight: normal
+
+        &.content
+          img
+            max-width: 100%
+            height: auto
+
+      &.footer
+        text-align: center
+        font-size: small
+        color: gray
+
+        img
+          float: left
+          border-radius: 50%
+
+
+      &.row-header
+        background-color: lightgray !important
+        font-weight: bold
+
+
+.event
+
+  .date-and-city
+    font-weight: bold
+    margin-bottom: 5px
+
+  .title
+    margin-bottom: 5px
+
+.email-footer
+  @extend .text-center
+  font-size: small
+  color: gray
+  padding: 5px
+  border-radius: 3px
+
+.button-blue
+  a
+    background-color: $blue
+    padding: 10px
+    display: inline-block
+    border-radius: 3px
+    color: white
+    font-weight: bold
+    min-width: 9em
+
+    &:visited
+      color: white
+
+    &:hover
+      background-color: color.adjust($blue, $lightness: 10%) !important
+
+.tag
+  font-size: 0.8em
+  padding: 2px 5px 2px 5px
+  border-radius: 10px
+  display: inline
+  color: white
+  font-weight: bold
+  background-color: #17a2b8
+
+.block-quote
+  background-color: white
+  border: 1px solid lightgrey
+  padding: 10px
+  border-radius: 5px

@@ -1,0 +1,120 @@
+---
+pt_BR:
+  activerecord:
+    attributes:
+      event/report:
+        title: Título
+        url: Link
+      event:
+        city: Cidade
+        country_id: País
+        date_end: Data final
+        date_start: Data inicial
+        description: Descrição
+        short_url: URL curta
+        title: Título
+      organization:
+        city: Cidade
+        country_id: País
+        email: E-mail
+        logo: Logo
+        name: Nome
+        short_name: Nome curto
+      user:
+        name: Nome
+        email: E-mail
+        city: Cidade
+        country_id: País
+    errors:
+      messages:
+        record_invalid: 'Validação falhou: %{errors}'
+      models:
+        event:
+          attributes:
+            country:
+              required: é obrigatório
+            user:
+              required: é obrigatório
+        user:
+          attributes:
+            country:
+              required: é obrigatório
+    models:
+      event: Eventos
+    registrations:
+      regenerate_token: Regenerar token
+      regenerate_token_confirmation: Tem certeza que deseja regenerar seu token de API? O token antigo deixará de funcionar imediatamente.
+      token_regenerated: Token de API regenerado com sucesso.
+      token_regeneration_error: "Erro ao regenerar token de API: %{error}"
+  api:
+    v2:
+      errors:
+        token_missing: Token faltando
+        token_invalid: Token inválido
+        token_expired: Token expirado
+  buttons:
+    add_video: Vídeo
+    duplicate: Duplicar
+    edit: Editar
+    share: Compartilhar
+    cancel: Cancelar
+    change: Alterar
+    close: Fechar
+    select: Selecionar
+    send: Enviar
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: deve ser aceito
+      blank: não pode ficar em branco
+      confirmation: não confere com a confirmação
+      empty: não pode ficar vazio
+      equal_to: deve ser igual a %{count}
+      even: deve ser par
+      exclusion: está reservado
+      greater_than: deve ser maior que %{count}
+      greater_than_or_equal_to: deve ser maior ou igual a %{count}
+      inclusion: não está incluído na lista
+      invalid: é inválido
+      less_than: deve ser menor que %{count}
+      less_than_or_equal_to: deve ser menor ou igual a %{count}
+      not_a_number: não é um número
+      not_an_integer: deve ser um número inteiro
+      odd: deve ser ímpar
+      taken: já está em uso
+      too_long: é muito longo (máximo de %{count} caracteres)
+      too_short: é muito curto (mínimo de %{count} caracteres)
+      wrong_length: não possui o tamanho correto (deve ter %{count} caracteres)
+    template:
+      body: 'Por favor, verifique os seguintes campos:'
+      header:
+        one: 'Não foi possível salvar este %{model}: 1 erro'
+        other: 'Não foi possível salvar este %{model}: %{count} erros'
+  helpers:
+    select:
+      prompt: Por favor, selecione
+    submit:
+      create: Criar %{model}
+      submit: Salvar este %{model}
+      update: Atualizar este %{model}
+  links:
+    announcements_and_contests: Anúncios e Concursos
+    international_calendar: Calendário Internacional
+    presentations: Apresentações
+    reports: Relatórios
+    teachers_and_lecturers: Professores
+  events:
+    calendar:
+      jump_to_month: Mês
+  navbar:
+    add_event: Adicionar evento
+    log_in_sign_up: Entrar / Cadastrar
+    organizations: Organizações
+  support:
+    array:
+      last_word_connector: " e "
+      two_words_connector: " e "
+      words_connector: ", "
+  tagline: Compartilhe eventos de Esperanto em todo o mundo!
+  video:
+    presentations: Apresentações

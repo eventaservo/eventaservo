@@ -1,0 +1,120 @@
+---
+en:
+  activerecord:
+    attributes:
+      event/report:
+        title: Title
+        url: Link
+      event:
+        city: City
+        country_id: Country
+        date_end: End date
+        date_start: Start date
+        description: Description
+        short_url: Short URL
+        title: Title
+      organization:
+        city: City
+        country_id: Country
+        email: Email
+        logo: Logo
+        name: Name
+        short_name: Short name
+      user:
+        name: Name
+        email: Email
+        city: City
+        country_id: Country
+    errors:
+      messages:
+        record_invalid: 'Validation failed: %{errors}'
+      models:
+        event:
+          attributes:
+            country:
+              required: is required
+            user:
+              required: is required
+        user:
+          attributes:
+            country:
+              required: is required
+    models:
+      event: Events
+    registrations:
+      regenerate_token: Regenerate Token
+      regenerate_token_confirmation: Are you sure you want to regenerate your API token? The old token will stop working immediately.
+      token_regenerated: API token successfully regenerated.
+      token_regeneration_error: "Error regenerating API token: %{error}"
+  api:
+    v2:
+      errors:
+        token_missing: Token missing
+        token_invalid: Token invalid
+        token_expired: Token expired
+  buttons:
+    add_video: Video
+    duplicate: Duplicate
+    edit: Edit
+    share: Share
+    cancel: Cancel
+    change: Change
+    close: Close
+    select: Select
+    send: Send
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: must be accepted
+      blank: can't be blank
+      confirmation: doesn't match confirmation
+      empty: can't be empty
+      equal_to: must be equal to %{count}
+      even: must be even
+      exclusion: is reserved
+      greater_than: must be greater than %{count}
+      greater_than_or_equal_to: must be greater than or equal to %{count}
+      inclusion: is not included in the list
+      invalid: is invalid
+      less_than: must be less than %{count}
+      less_than_or_equal_to: must be less than or equal to %{count}
+      not_a_number: is not a number
+      not_an_integer: must be an integer
+      odd: must be odd
+      taken: has already been taken
+      too_long: is too long (maximum is %{count} characters)
+      too_short: is too short (minimum is %{count} characters)
+      wrong_length: is the wrong length (should be %{count} characters)
+    template:
+      body: 'Please review the following fields:'
+      header:
+        one: 'Cannot save this %{model}: 1 error'
+        other: 'Cannot save this %{model}: %{count} errors'
+  helpers:
+    select:
+      prompt: Please select
+    submit:
+      create: Create %{model}
+      submit: Save this %{model}
+      update: Update this %{model}
+  links:
+    announcements_and_contests: Announcements & Contests
+    international_calendar: International Calendar
+    presentations: Presentations
+    reports: Reports
+    teachers_and_lecturers: Teachers
+  events:
+    calendar:
+      jump_to_month: Month
+  navbar:
+    add_event: Add event
+    log_in_sign_up: Login / Signup
+    organizations: Organizations
+  support:
+    array:
+      last_word_connector: " and "
+      two_words_connector: " and "
+      words_connector: ", "
+  tagline: Share Esperanto events worldwide!
+  video:
+    presentations: Presentations

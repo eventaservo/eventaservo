@@ -1,0 +1,17 @@
+:root {
+  --hw-combobox-width: 100%;
+  --hw-border-radius: 0.2rem;
+  --hw-padding--slim: 0.1rem;
+}
+
+.hw-combobox {
+  display: inherit;
+}
+
+.hw-combobox__input {
+  font-size: 0.9em;
+}
+
+.hw-combobox__option {
+  font-size: 0.9em;
+}

@@ -1,0 +1,12 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb small mb-2">
+    <li class="breadcrumb-item"><%= link_to "Admin", admin_root_path %></li>
+    <li class="breadcrumb-item"><%= link_to "Redirektoj", admin_redirections_path %></li>
+    <li class="breadcrumb-item active" aria-current="page">Redakti</li>
+  </ol>
+</nav>
+
+<div class="box-white">
+  <div class="lead mb-3">Redakti Redirekton</div>
+  <%= render "form", redirection: @redirection %>
+</div>

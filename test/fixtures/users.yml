@@ -1,0 +1,142 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :bigint           not null, primary key
+#  about                  :string
+#  admin                  :boolean          default(FALSE)
+#  authentication_token   :string(30)       uniquely indexed
+#  avatar                 :string
+#  birthday               :date
+#  city                   :string
+#  confirmation_sent_at   :datetime
+#  confirmation_token     :string           uniquely indexed
+#  confirmed_at           :datetime
+#  current_sign_in_at     :datetime
+#  current_sign_in_ip     :inet
+#  disabled               :boolean          default(FALSE), indexed
+#  email                  :string           default(""), not null, uniquely indexed
+#  encrypted_password     :string           default(""), not null
+#  events_count           :integer          default(0), indexed
+#  failed_attempts        :integer          default(0), not null
+#  image                  :string
+#  instruo                :jsonb            not null
+#  jwt_token              :string
+#  last_sign_in_at        :datetime
+#  last_sign_in_ip        :inet
+#  ligiloj                :jsonb            not null
+#  locked_at              :datetime
+#  mailings               :jsonb
+#  name                   :string
+#  prelego                :jsonb            not null
+#  provider               :string
+#  remember_created_at    :datetime
+#  reset_password_sent_at :datetime
+#  reset_password_token   :string           uniquely indexed
+#  sign_in_count          :integer          default(0), not null
+#  system_account         :boolean          default(FALSE)
+#  ueacode                :string
+#  uid                    :string
+#  unconfirmed_email      :string
+#  unlock_token           :string           uniquely indexed
+#  username               :string
+#  webcal_token           :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  country_id             :integer
+#
+user:
+  admin: false
+  authentication_token: _bfXEu9FayHUNQRd9pxg
+  birthday: "1978-07-17"
+  city: New York
+  confirmed_at: "2019-01-01 00:00:00"
+  country_id: 1
+  disabled: false
+  email: standard@user.com
+  name: Standard user
+  username: standard_user
+  system_account: false
+  webcal_token: standardUserWebcalToken123
+
+system_user:
+  admin: false
+  authentication_token: _systemAccountToken123
+  confirmed_at: "2019-01-01 00:00:00"
+  country_id: 1
+  disabled: false
+  email: system@eventaservo.org
+  name: System Account
+  username: system_account
+  system_account: true
+  webcal_token: systemAccountWebcalToken456
+
+admin_user:
+  admin: true
+  authentication_token: _adminUserToken123
+  birthday: "1980-01-01"
+  city: Admin City
+  confirmed_at: "2019-01-01 00:00:00"
+  country_id: 1
+  disabled: false
+  email: admin@example.com
+  name: Admin User
+  username: admin_user
+  system_account: false
+  webcal_token: adminUserWebcalToken789
+
+teacher:
+  admin: false
+  authentication_token: _teacherToken123
+  confirmed_at: "2019-01-01 00:00:00"
+  country_id: 30
+  disabled: false
+  email: teacher@example.com
+  name: Ana Instruisto
+  username: teacher_user
+  system_account: false
+  webcal_token: teacherWebcalToken123
+  instruo: <%= {instruisto: "true", nivelo: ["baza"], sperto: "gramatiko kaj vortprovizo"}.to_json %>
+  prelego: <%= {preleganto: "false"}.to_json %>
+
+speaker:
+  admin: false
+  authentication_token: _speakerToken123
+  confirmed_at: "2019-01-01 00:00:00"
+  country_id: 30
+  disabled: false
+  email: speaker@example.com
+  name: Bruno Preleganto
+  username: speaker_user
+  system_account: false
+  webcal_token: speakerWebcalToken123
+  instruo: <%= {instruisto: "false"}.to_json %>
+  prelego: <%= {preleganto: "true", temoj: "lingvistiko kaj kulturo"}.to_json %>
+
+teacher_and_speaker:
+  admin: false
+  authentication_token: _teacherSpeakerToken123
+  confirmed_at: "2019-01-01 00:00:00"
+  country_id: 1
+  disabled: false
+  email: teacher_speaker@example.com
+  name: Carla Ambaŭ
+  username: teacher_speaker_user
+  system_account: false
+  webcal_token: teacherSpeakerWebcalToken123
+  instruo: <%= {instruisto: "true", nivelo: ["meza"], sperto: "literaturo"}.to_json %>
+  prelego: <%= {preleganto: "true", temoj: "esperanta literaturo"}.to_json %>
+
+like_escaped_teacher:
+  admin: false
+  authentication_token: _likeEscapedToken123
+  confirmed_at: "2019-01-01 00:00:00"
+  country_id: 1
+  disabled: false
+  email: like_escaped@example.com
+  name: Test%User
+  username: like_escaped_user
+  system_account: false
+  webcal_token: likeEscapedWebcalToken123
+  instruo: <%= {instruisto: "true", nivelo: ["baza"], sperto: "test"}.to_json %>
+  prelego: <%= {preleganto: "false"}.to_json %>

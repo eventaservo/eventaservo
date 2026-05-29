@@ -1,0 +1,65 @@
+x-app: &backend-app
+  environment:
+    - DB_HOST=db
+    - DB_PASSWORD=postgres
+    - DB_USERNAME=postgres
+    - PORT=3000
+    - RAILS_ENV=${RAILS_ENV:-development}
+    - RAILS_SERVE_STATIC_FILES=${RAILS_SERVE_STATIC_FILES:-false}
+    - SELENIUM_REMOTE=true
+
+services:
+  backend:
+    <<: *backend-app
+    image: eventaservo-dev
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+      target: development
+      args:
+        RAILS_MASTER_KEY: "${RAILS_MASTER_KEY}"
+    tty: true
+    # ports:
+    # - 3000:3000
+    volumes:
+      - ./:/eventaservo:cached
+      - home-folder:/home/rails
+      - bundle_gems:/usr/local/bundle
+
+    # Overrides default command so things don"t shut down after the process ends.
+    command: sleep infinity
+    depends_on:
+      - db
+
+  solid_queue:
+    <<: *backend-app
+    image: eventaservo-dev
+    command: bundle exec rails solid_queue:start
+    volumes:
+      - ./:/eventaservo:cached
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15.7
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=eventaservo_devel
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  selenium:
+    image: selenium/standalone-chromium
+    container_name: eventaservo-selenium
+    environment:
+      - SE_VNC_NO_PASSWORD=1
+    ports:
+      - 7900:7900
+    shm_size: "2gb"
+    restart: unless-stopped
+
+volumes:
+  postgres:
+  home-folder:
+  bundle_gems:

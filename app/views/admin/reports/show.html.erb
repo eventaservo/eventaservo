@@ -1,0 +1,58 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb small mb-2">
+    <li class="breadcrumb-item"><%= link_to "Admin", admin_root_path %></li>
+    <li class="breadcrumb-item"><%= link_to "Raportoj", admin_reports_path %></li>
+    <li class="breadcrumb-item active" aria-current="page">Detaloj</li>
+  </ol>
+</nav>
+
+<div class="box-white">
+  <div class="lead mb-4">Raportaj Detaloj</div>
+
+  <div class="row g-4">
+    <div class="col-md-8">
+      <div class="mb-4">
+        <label class="form-label small text-uppercase fw-bold text-body-secondary mb-1">Titolo</label>
+        <div class="fs-5 fw-semibold"><%= @report.title %></div>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label small text-uppercase fw-bold text-body-secondary mb-1">URL</label>
+        <div><%= link_to @report.url, @report.url, target: "_blank", class: "text-break" %></div>
+      </div>
+      
+      <div class="mb-4">
+        <label class="form-label small text-uppercase fw-bold text-body-secondary mb-1">Evento</label>
+        <div>
+          <%= link_to @report.event.title, event_path(code: @report.event.ligilo), target: "_blank", class: "fw-medium" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 border-start">
+      <div class="mb-4">
+        <label class="form-label small text-uppercase fw-bold text-body-secondary mb-1">Raportanto</label>
+        <div class="d-flex align-items-center gap-2">
+          <%= @report.user&.name %>
+          <span class="text-body-secondary small">(<%= @report.user&.username %>)</span>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label small text-uppercase fw-bold text-body-secondary mb-1">Kreita je</label>
+        <div class="text-body-secondary small">
+          <%= l(@report.created_at, format: :long) %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5 pt-3 border-top d-flex justify-content-between align-items-center">
+    <%= link_to edit_admin_report_path(@report), class: "btn btn-success" do %>
+      <%= icon('fas', 'edit', 'Redakti') %>
+    <% end %>
+    <%= link_to admin_report_path(@report), data: { method: :delete, confirm: "Ĉu vi estas certa?" }, class: "btn btn-outline-danger" do %>
+      <%= icon('fas', 'trash', 'Forigi') %>
+    <% end %>
+  </div>
+</div>

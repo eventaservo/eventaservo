@@ -1,0 +1,238 @@
+<%= render partial: 'cancel_event_modal' %>
+
+<div class="row">
+  <div class="col-lg-8 offset-lg-2">
+    <div class="box-white">
+      <div class="lead">
+        <% if params[:action] == 'new' %>
+          Nova evento, kunveno aŭ okazaĵo
+        <% else %>
+          Redakti
+        <% end %>
+      </div>
+
+      <div class="alert alert-info small">
+        Skribu esperante. Povu ĉiuj scii, kio okazas en Esperantujo tutmonde!
+      </div>
+
+      <%= form_for(@event, url: (event_path(code: @event.code) if params[:action].in? %w(edit update)),
+          data: { controller: 'event--form', action: 'submit->event--form#validateCategories'}) do |form| %>
+        <%= error_handling(@event) %>
+
+        <div class="mb-3">
+          <%= form.label :title, 'Titolo *' %>
+          <%= form.text_field :title, class: 'form-control', autofocus: true, required: true, aria: { describedby: 'title-characters-count' } %>
+          <small class="form-text text-muted" id="title-characters-count">
+            Maksimume 100 signoj
+          </small>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :description, 'Priskribo *' %>
+          <%= form.text_field :description, class: 'form-control', required: true, aria: { describedby: 'description-help' } %>
+          <small class="form-text text-muted" id="description-help">
+            Maksimume 140 signoj
+          </small>
+        </div>
+
+        <% if Organization.by_user(current_user).any? %>
+          <div class="mb-3">
+            <%= label_tag :organization_id, 'Organizo(j)' %>
+            <%= select_tag 'organization_ids[]',
+              options_from_collection_for_select(Organization.by_user(current_user), 'id', 'full_name', @event_organization_ids),
+              multiple: true,
+              data: { 'event--form-target': 'organizations'},
+              aria: { describedby: 'organization-help' } %>
+            <small class="form-text text-muted" id="organization-help">
+              Lasu malplena se la evento ne apartenas al organizo
+            </small>
+          </div>
+        <% end %>
+
+        <div class="row g-3">
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <%= form.label :date_start, 'Komenca dato' %>
+              <div class="row g-3">
+                <div class="col-8" data-controller="datepicker"
+                     data-action="datepicker:complete->event--form#syncEndDate">
+                  <input type="hidden" name="event[date_start]" data-datepicker-target="hidden">
+                  <input type="date" id="event_date_start" class="form-control"
+                         data-datepicker-target="input"
+                         data-action="change->datepicker#sync blur->datepicker#complete"
+                         data-initial="<%= @event.komenca_tago(horzono: @event.time_zone) %>">
+                </div>
+                <div class="col-4">
+                  <%= text_field_tag(:time_start, @event.komenca_horo, class: 'timemask form-control', required: true, aria: { label: 'Komenca horo' }, data: { controller: 'mask', mask_pattern_value: 'time', 'event--form-target': 'timeStart' }) %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <%= form.label :date_end, 'Fina dato' %>
+              <div class="row g-3">
+                <div class="col-8" data-controller="datepicker"
+                     data-action="datepicker:complete->event--form#focusEndTime">
+                  <input type="hidden" name="event[date_end]" data-datepicker-target="hidden" data-event--form-target="endDateHidden">
+                  <input type="date" id="event_date_end" class="form-control"
+                         data-datepicker-target="input"
+                         data-action="change->datepicker#sync blur->datepicker#complete"
+                         data-initial="<%= @event.fina_tago(horzono: @event.time_zone) %>"
+                         data-event--form-target="endDateInput">
+                </div>
+                <div class="col-4">
+                  <%= text_field_tag(:time_end, @event.fina_horo, class: 'timemask form-control', required: true, aria: { label: 'Fina horo' }, data: { controller: 'mask', mask_pattern_value: 'time', 'event--form-target': 'timeEnd' }) %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <div class="text-center" id="tags-categories" data-event--form-target="tagsCategories">
+            <%
+              # Use copied tags if available (for duplication) or event's tags (for editing)
+              event_categories = @copied_tags&.categories || @event.tags.categories
+              event_category_ids = event_categories.pluck(:id)
+            %>
+            <% Tag.categories.order(:sort_order).each do |tag| %>
+              <div class="btn-group mb-1">
+                <%= check_box_tag "tags_categories[]", tag.id, event_categories.include?(tag), id: "tag_#{tag.id}", class: "btn-check", autocomplete: "off" %>
+                <label class="btn tag-check tag-check--blue" for="tag_<%= tag.id %>">
+                  <%= tag.name %>
+                </label>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="text-center" id="tags-characteristics">
+            <%
+              # Use copied tags if available (for duplication) or event's characteristics (for editing)
+              event_characteristics = @copied_tags&.characteristics || @event.characteristics
+              event_characteristic_ids = event_characteristics.pluck(:id)
+            %>
+            <% Tag.characteristics.order(:sort_order).each do |tag| %>
+              <div class="btn-group">
+                <%= check_box_tag "tags_characteristics[]", tag.id, event_characteristics.include?(tag), id: "tag_#{tag.id}", class: "btn-check", autocomplete: "off" %>
+                <label class="btn tag-check tag-check--orange" for="tag_<%= tag.id %>">
+                  <%= tag.name %>
+                </label>
+              </div>
+            <% end %>
+            <br>
+            <small class="form-text text-muted">
+              Anoncoj kaj konkursoj ne aperos en la ĉefpaĝo.
+              <br>
+              Ĉu evento estas aldonita al la
+              <%= link_to "Internacia Kalendaro", international_calendar_path, target: :_blank %>
+              de ĉefaj tutmondaj Esperanto-eventoj, tion decidas la redakcio de ES.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :enhavo, 'Enhavo' %>
+          <%= form.rich_text_area :enhavo, style: 'height: 24em; overflow-y: auto;' %>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <%= form.label :site, 'Retpaĝo' %>
+              <%= form.text_field :site, class: 'form-control', required: @event.email.blank?, data: { 'event--form-target': 'site', action: 'input->event--form#crossValidateSiteEmail' } %>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <%= form.label :email, 'Retpoŝtadreso por kontakto' %>
+              <%= form.email_field :email, class: 'form-control', required: @event.site.blank?, data: { 'event--form-target': 'email', action: 'input->event--form#crossValidateSiteEmail' } %>
+            </div>
+          </div>
+        </div>
+
+        <%= render partial: 'events/form/short_url', locals: { form: form, event: @event } %>
+
+        <div class="mb-3 form-check">
+          <%= form.check_box :online, class: 'form-check-input', data: { 'event--form-target': 'online', action: 'change->event--form#toggleOnline' } %>
+          <%= form.label :online, "🖥 Reta aŭ hibrida evento", class: 'form-check-label' %>
+        </div>
+
+        <div id="retaj_informoj" data-event--form-target="onlineInfo">
+          <div class="mb-3">
+            <%= check_box_tag 'universala', "1", @event.universala?, data: { 'event--form-target': 'universala', action: 'change->event--form#toggleUniversala' } %>
+            <%= label_tag 'universala', 'Elekti horzonon anstataŭ adreson/landon', class: 'form-check-label' %>
+          </div>
+        </div>
+
+        <div id="horzono" data-event--form-target="timezone">
+          <div class="mb-3">
+            <%= form.label :time_zone, 'Horzono' %>
+            <%= form.combobox("time_zone", Horzono.for_select) %>
+          </div>
+        </div>
+
+        <div id="malretaj_informoj" data-event--form-target="offlineInfo">
+          <div class="mb-3">
+            <%= form.label :address, 'Loka adreso de la evento' %>
+            <%= form.text_field :address, class: 'form-control', aria: { describedby: 'address-help' } %>
+            <small class="form-text text-muted" id="address-help">
+              Aldonu la strat-nomon por precizigi la eventlokon en la mapo
+            </small>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="mb-3">
+                <%= form.label :city, 'Urbo (aŭ loko)' %>
+                <%= form.text_field :city, class: 'form-control', required: true, data: { 'event--form-target': 'city' } %>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="mb-3">
+                <%= form.label :country_id, 'Lando' %>
+                <%= form.combobox("country_id", Country.not_online) %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <% if current_user.admin? %>
+          <div class="box-white border border-danger rounded">
+            <div class="lead">
+              Administraj funkcioj
+            </div>
+            <div class="mb-3 form-check">
+              <%= form.check_box :international_calendar, class: 'form-check-input' %>
+              <%= form.label :international_calendar, '📅 Aldoni al Internacia Kalendaro', class: 'form-check-label' %>
+            </div>
+            <div class="mb-3">
+              <%= label_tag :user_id, 'Eventa administranto' %>
+              <%= form.combobox("user_id", combobox_users_with_username_path, value: (@event.user_id || current_user.id)) %>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="buttons-footer">
+          <% if params[:action] == 'edit' %>
+            <%= link_to 'Ne registri', :back, class: 'button-cancel' %>
+            <%= link_to 'Forigi', event_path(code: @event.ligilo), class: 'button-outline-red float-start', method: :delete, data: { confirm: 'Ĉu vi certas? Vi ne kapablos malfari tion.' } %>
+
+            <% if @event.cancelled %>
+              <%= link_to t("pages.event.uncancel_event"), event_malnuligi_url(event_code: @event.code), class: 'btn btn-sm btn-outline-success float-start ms-2' %>
+            <% else %>
+              <a href="#" class="button-outline-red float-start ms-2" data-bs-target="#nuligiloModal" data-bs-toggle="modal">
+                <%= t("pages.event.cancel_event") %>
+              </a>
+            <% end %>
+
+          <% end %>
+          <% if params[:action] == 'new' %>
+            <%= link_to 'Ne registri', root_path, class: 'button-cancel' %>
+          <% end %>
+          <%= form.submit 'Registri', class: 'button-submit' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

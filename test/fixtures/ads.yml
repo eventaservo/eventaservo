@@ -1,0 +1,26 @@
+# == Schema Information
+#
+# Table name: ads
+#
+#  id         :bigint           not null, primary key
+#  active     :boolean          default(TRUE)
+#  url        :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  event_id   :bigint           indexed
+#
+jes:
+  url: <%= Rails.application.routes.url_helpers.international_calendar_url %>
+  active: true
+
+printempas:
+  url: <%= Rails.application.routes.url_helpers.international_calendar_url %>
+  active: true
+
+international_calendar:
+  url: <%= Rails.application.routes.url_helpers.international_calendar_url %>
+  active: true
+
+himalaja_rekontigho:
+  url: <%= Rails.application.routes.url_helpers.international_calendar_url %>
+  active: true

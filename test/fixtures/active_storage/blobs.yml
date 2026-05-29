@@ -1,0 +1,4 @@
+international_calendar: <%= ActiveStorage::FixtureSet.blob filename: "international_calendar.png", service_name: "test" %>
+himalaja_rekontigho: <%= ActiveStorage::FixtureSet.blob filename: "himalaja_rekontigho.jpg", service_name: "test" %>
+printempas: <%= ActiveStorage::FixtureSet.blob filename: "printempas.jpg", service_name: "test" %>
+jes: <%= ActiveStorage::FixtureSet.blob filename: "jes.png", service_name: "test" %>

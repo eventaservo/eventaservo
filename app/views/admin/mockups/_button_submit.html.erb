@@ -1,0 +1,100 @@
+<div class="mb-5">
+  <h6 class="text-uppercase fw-bold text-body-secondary mb-2 small">Primary action — <code>.button-submit</code></h6>
+  <p class="text-body-secondary small mb-3">
+    Extends <code>.btn-primary</code>. Use for any confirming action: Save, Confirm, Process, Apply, etc.
+  </p>
+
+  <div class="border rounded p-3 mb-2 bg-body-tertiary">
+    <div class="d-flex flex-wrap align-items-center gap-3">
+      <div class="text-center">
+        <button class="button-submit">Save</button>
+        <div class="text-body-secondary mt-1" style="font-size:11px">normal</div>
+      </div>
+      <div class="text-center">
+        <button class="button-submit" style="background-color:#1a6fd4;border-color:#1a6fd4;">Save</button>
+        <div class="text-body-secondary mt-1" style="font-size:11px">hover</div>
+      </div>
+      <div class="text-center">
+        <button class="button-submit" style="outline:0;box-shadow:0 0 0 3px rgba(45,137,239,0.30);">Save</button>
+        <div class="text-body-secondary mt-1" style="font-size:11px">focus</div>
+      </div>
+      <div class="text-center">
+        <button class="button-submit" disabled>Save</button>
+        <div class="text-body-secondary mt-1" style="font-size:11px">disabled</div>
+      </div>
+    </div>
+  </div>
+  <div class="text-body-secondary mb-3" style="font-size:11px">
+    Normal: <code>#2D89EF</code> &nbsp;·&nbsp; Hover: <code>#1a6fd4</code> &nbsp;·&nbsp; Focus ring: <code>rgba(45,137,239,0.30)</code> &nbsp;·&nbsp; Disabled: <code>#6c757d</code> (Bootstrap default)
+  </div>
+
+  <p class="text-body-secondary small mb-2">Common labels for this button:</p>
+  <div class="d-flex flex-wrap gap-2 mb-3">
+    <button class="button-submit">Save</button>
+    <button class="button-submit">Confirm</button>
+    <button class="button-submit">Process</button>
+    <button class="button-submit">Apply</button>
+    <button class="button-submit">Submit</button>
+    <button class="button-submit">Filter</button>
+  </div>
+
+  <%# ── Button ordering rule ── %>
+  <div class="alert alert-info small mb-3 py-2">
+    <strong>Button ordering rule — <code>.buttons-footer</code></strong><br>
+    Delete (if present) is always flush <strong>left</strong> via <code>me-auto</code>.
+    Cancel sits immediately left of the primary action. Submit/Save/Confirm is always the rightmost button.
+    <br><code>[Delete · · · · · · Cancel · Submit]</code>
+  </div>
+
+  <p class="text-body-secondary small mb-1">Edit form — without delete</p>
+  <div class="border rounded p-3 mb-3 bg-body-tertiary" style="max-width:480px">
+    <div class="mb-3">
+      <label class="form-label small fw-semibold">Event name</label>
+      <input type="text" class="form-control form-control-sm" value="Esperanto Summer School" readonly>
+    </div>
+    <div class="mb-3">
+      <label class="form-label small fw-semibold">City</label>
+      <input type="text" class="form-control form-control-sm" value="Berlin" readonly>
+    </div>
+    <div class="buttons-footer">
+      <button class="button-cancel">Cancel</button>
+      <button class="button-submit">Save</button>
+    </div>
+  </div>
+
+  <p class="text-body-secondary small mb-1">Edit form — with delete</p>
+  <div class="border rounded p-3 mb-3 bg-body-tertiary" style="max-width:480px">
+    <div class="mb-3">
+      <label class="form-label small fw-semibold">Event name</label>
+      <input type="text" class="form-control form-control-sm" value="Esperanto Summer School" readonly>
+    </div>
+    <div class="buttons-footer">
+      <button class="button-delete me-auto">Delete</button>
+      <button class="button-cancel">Cancel</button>
+      <button class="button-submit">Save</button>
+    </div>
+  </div>
+
+  <p class="text-body-secondary small mb-1">Search / filter form</p>
+  <div class="border rounded p-3 mb-3 bg-body-tertiary" style="max-width:480px">
+    <div class="row g-2 align-items-end">
+      <div class="col">
+        <label class="form-label small fw-semibold">City</label>
+          <input type="text" class="form-control form-control-sm" placeholder="Search..." autocomplete="off" readonly>
+      </div>
+      <div class="col-auto d-flex gap-2">
+        <button class="button-cancel">Clear</button>
+        <button class="button-submit">Filter</button>
+      </div>
+    </div>
+  </div>
+
+  <p class="text-body-secondary small mb-1">Confirmation dialog</p>
+  <div class="border rounded p-3 mb-2 bg-body-tertiary" style="max-width:480px">
+    <p class="small mb-3">Are you sure you want to process this report? This action cannot be undone.</p>
+    <div class="buttons-footer">
+      <button class="button-cancel">Discard</button>
+      <button class="button-submit">Confirm</button>
+    </div>
+  </div>
+</div>

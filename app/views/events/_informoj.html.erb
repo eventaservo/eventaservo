@@ -1,0 +1,33 @@
+<div class="box-white">
+  <div class="box-header">Informoj</div>
+  <div class="box-body">
+    <p style="line-height: 1.8em;">
+      <%= montras_retpaghon(@event.site) + raw('<br/>') if @event.site.present? %>
+      <%= montras_retposhtadreson(@event.email) + raw('<br/>') if @event.email.present? %>
+      <% unless @event.online && @event.city == 'Reta' %>
+        <%= montras_adreson(@event.full_address, text: @event.address) unless @event.address.blank? %>
+        <%= render partial: 'event_map', locals: { event: @event } if @event.location_defined? %>
+      <% end %>
+    </p>
+
+    <%= render partial: 'partoprenontoj', locals: { event: @event, interested: @partoprenontoj } %>
+
+    <p>
+      <div class="text-divider">Administranto</div>
+      <% if @event.organizations.any? %>
+        <div class="text-center" style="font-size: 1.3em;">
+          <% @event.organizations.each do |o| %>
+            <div class="organization-tags">
+              <%= link_to o.name, organization_url(o.short_name), class: 'tag text-truncate' %>
+            </div>
+            <br>
+          <% end %>
+        </div>
+      <% else %>
+        <%= link_to display_user(@event.user), events_by_username_path(@event.user.username), class: 'btn btn-sm btn-outline-link' %>
+      <% end %>
+    </p>
+
+    <%= render partial: 'alshutilo' %>
+  </div>
+</div>

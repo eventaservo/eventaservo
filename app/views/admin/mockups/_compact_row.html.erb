@@ -1,0 +1,19 @@
+<div class="mb-5">
+  <div class="lead">Compact Row</div>
+
+  <div class="border rounded overflow-hidden small">
+    <div class="row g-0 align-items-center bg-success text-white text-uppercase fw-bold px-2 py-2 smaller">
+      <div class="col-2">Date</div>
+      <div class="col">Event</div>
+      <div class="col-3">Location</div>
+    </div>
+
+    <% @events.each_with_index do |event, i| %>
+      <div class="row g-0 align-items-center px-2 py-1 small hover-row <%= 'border-bottom' unless i == @events.size - 1 %> <%= 'bg-body-tertiary' if i.odd? %>">
+        <div class="col-2 fw-semibold text-success-emphasis small"><%= event[:date] %></div>
+        <div class="col fw-medium text-truncate"><%= event[:title] %></div>
+        <div class="col-3 text-body-secondary text-truncate"><%= flag_icon(event[:country_code]) if event[:country_code] %> <%= event[:location] %></div>
+      </div>
+    <% end %>
+  </div>
+</div>

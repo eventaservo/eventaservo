@@ -1,0 +1,18 @@
+# == Schema Information
+#
+# Table name: videos
+#
+#  id          :bigint           not null, primary key
+#  description :string
+#  title       :string
+#  url         :string           not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  event_id    :integer          not null
+#
+
+rails_conference_video:
+  title: "Introduction to Rails"
+  description: "A great talk about Rails"
+  url: "https://www.youtube.com/watch?v=123456"
+  evento: valid_event

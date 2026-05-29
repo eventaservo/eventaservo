@@ -1,0 +1,37 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb small mb-2">
+    <li class="breadcrumb-item"><%= link_to "Admin", admin_root_path %></li>
+    <li class="breadcrumb-item"><%= link_to "Mockups", admin_mockups_path %></li>
+    <li class="breadcrumb-item active" aria-current="page">Buttons</li>
+  </ol>
+</nav>
+
+<div class="box-white">
+  <div class="lead">Buttons</div>
+  <p class="text-body-secondary small mb-4">
+    Button variants used in admin forms and pages. Each section shows all interactive states,
+    common labels, and placement in context.
+  </p>
+
+  <%= render "admin/mockups/button_submit" %>
+  <%= render "admin/mockups/button_cancel" %>
+  <%= render "admin/mockups/button_back" %>
+  <%= render "admin/mockups/button_new" %>
+  <%= render "admin/mockups/button_delete" %>
+
+  <%# ── USAGE (ERB) ───────────────────────────────────── %>
+  <h6 class="text-uppercase fw-bold text-body-secondary mb-2 small">Usage (ERB)</h6>
+  <div class="border rounded p-3 bg-body-tertiary">
+<pre class="mb-0 small"><code>&lt;%# Index page — new record link %&gt;
+&lt;%= link_to "New Event", new_admin_event_path, class: "button-new" %&gt;
+
+&lt;%# Detail page — back navigation %&gt;
+&lt;%= link_to "Back", admin_events_path, class: "button-back" %&gt;
+
+&lt;%# Form footer %&gt;
+&lt;div class="buttons-footer"&gt;
+  &lt;%= link_to "Cancel", your_cancel_path, class: "button-cancel" %&gt;
+  &lt;%= f.submit "Save", class: "button-submit" %&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<!-- /eventaservo/app/views/events/_share_button_modal.html.erb -->
+<div id="shareModal" class="modal fade" aria-hidden="true" aria-labelledby="shareModalCenterTitle" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 id="shareModalCenterTitle" class="modal-title">Diskonigilo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermi"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="text-center">
+          <p>Elektu kiel diskonigi la eventon</p>
+          <% encoded_url = CGI.escape(request.url) %>
+          <% encoded_title = CGI.escape(@event.title.to_s) %>
+          <% twitter_text = CGI.escape("#{@event.title} #eventaservo") %>
+          <a href="mailto:?subject=<%= encoded_title %>&body=<%= encoded_url %>" class="btn btn-outline-secondary m-1" title="Email"
+             aria-label="Diskonigi per retpoŝto">
+            <%= icon('fas', 'envelope') %>
+          </a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=<%= encoded_url %>" class="btn btn-outline-secondary m-1" title="Facebook" target="_blank" rel="noopener noreferrer"
+             aria-label="Diskonigi en Facebook">
+            <%= icon('fab', 'facebook') %>
+          </a>
+          <a href="https://twitter.com/intent/tweet?url=<%= encoded_url %>&text=<%= twitter_text %>" class="btn btn-outline-secondary m-1" title="Twitter" target="_blank" rel="noopener noreferrer"
+             aria-label="Diskonigi en Twitter">
+            <%= icon('fab', 'twitter') %>
+          </a>
+          <a href="whatsapp://send?text=<%= encoded_title %>%0A<%= encoded_url %>" class="btn btn-outline-secondary m-1" title="WhatsApp" target="_blank" rel="noopener noreferrer"
+             aria-label="Diskonigi per WhatsApp">
+            <%= icon('fab', 'whatsapp') %>
+          </a>
+          <a href="https://telegram.me/share/url?text=<%= encoded_title %>&url=<%= encoded_url %>" class="btn btn-outline-secondary m-1" title="Telegram" target="_blank" rel="noopener noreferrer"
+             aria-label="Diskonigi en Telegram">
+            <%= icon('fab', 'telegram') %>
+          </a>
+          <a href="https://www.pinterest.com/pin/create/button/?url=<%= encoded_url %>&description=<%= encoded_title %>" class="btn btn-outline-secondary m-1" title="Pinterest" target="_blank" rel="noopener noreferrer"
+             aria-label="Diskonigi en Pinterest">
+            <%= icon('fab', 'pinterest') %>
+          </a>
+          <a href="https://vk.com/share.php?url=<%= encoded_url %>&title=<%= encoded_title %>" class="btn btn-outline-secondary m-1" title="VKontakte" target="_blank" rel="noopener noreferrer"
+             aria-label="Diskonigi en VKontakte">
+            <%= icon('fab', 'vk') %>
+          </a>
+          <a href="https://www.reddit.com/submit?url=<%= encoded_url %>&newwindow=1" class="btn btn-outline-secondary m-1" title="Reddit" target="_blank" rel="noopener noreferrer"
+             aria-label="Diskonigi en Reddit">
+            <%= icon('fab', 'reddit') %>
+          </a>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Fermi</button>
+      </div>
+
+    </div>
+  </div>
+</div>

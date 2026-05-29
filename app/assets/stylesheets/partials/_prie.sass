@@ -1,0 +1,19 @@
+.full_rectangle
+  @extend .d-flex
+  @extend .justify-content-around
+  @extend .flex-wrap
+  @extend .text-center
+  padding: 20px
+  min-height: 400px
+  margin-left: -15px
+  margin-right: -15px
+
+  .title
+    color: $esperantoGreen
+    font-weight: bold
+
+  .screen-shot
+    @extend .img-fluid
+    max-height: 400px
+    &.border
+      border: 1px solid lightgrey

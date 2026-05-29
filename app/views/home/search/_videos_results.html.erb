@@ -1,0 +1,28 @@
+<div class="box-white">
+  <div class="box-header">Registritaj prezentoj</div>
+  <% if videos.empty? %>
+    <p>Neniu registrita prezento trovita</p>
+  <% else %>
+    <h5><%= pluralize(videos.count, 'registrita prezento trovita', 'registritaj prezentoj trovitaj') %></h5>
+    <div class="table-responsive">
+      <table class="table table-sm table-hover">
+        <thead>
+          <tr>
+            <th>Titolo</th>
+            <th>Evento</th>
+            <th>Dato</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% videos.each do |video| %>
+            <tr class="small pointer" onclick="window.location.href='<%= video.url %>'">
+              <td><%= video.title %></td>
+              <td><%= video.evento.title %></td>
+              <td><%= format_date(video.evento.komenca_dato, style: :month_year).downcase %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,32 @@
+namespace :admin do
+  root "dashboard#index"
+  get "events", controller: "events", action: :index
+  patch "events/recover/:event_code", controller: "events", action: :recover, as: "recover_event"
+
+  resources :logs, only: [:index]
+  resources :organizations, only: [:index]
+  resources :redirections, except: [:show]
+  resources :reports, except: [:new, :create]
+
+  resources :users, only: %i[index show edit update] do
+    member do
+      patch :confirm
+      patch :enable
+      patch :deactivate
+      get :merge
+      post :merge
+      patch :reset_password
+    end
+  end
+
+  get "statistics", controller: "statistics", action: :index
+  get "mockups", controller: "mockups", action: :index
+  get "mockups/breadcrumbs", controller: "mockups", action: :breadcrumbs, as: "mockups_breadcrumbs"
+  get "mockups/buttons", controller: "mockups", action: :buttons, as: "mockups_buttons"
+  get "mockups/calendar", controller: "mockups", action: :calendar, as: "mockups_calendar"
+  get "mockups/cards", controller: "mockups", action: :cards, as: "mockups_cards"
+  get "mockups/tables", controller: "mockups", action: :tables, as: "mockups_tables"
+  resources :reklamoj do
+    get "toggle_active"
+  end
+end

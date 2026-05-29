@@ -1,0 +1,22 @@
+.shanghoj {
+  li {
+    font-size: 0.9em;
+  }
+
+  .versio {
+    font-size: 1.1em;
+    font-weight: bold;
+    border-bottom: 1px solid lightgrey;
+    margin-bottom: 5px;
+    margin-top: 2em;
+  }
+
+  .novo {
+    color: green;
+    font-weight: bold;
+  }
+
+  .riparo {
+    color: darkred;
+  }
+}

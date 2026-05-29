@@ -1,0 +1,15 @@
+codecov:
+  branch: main
+  notify:
+    wait_for_ci: false
+coverage:
+  status:
+    project: true
+    project:
+      default:
+        target: auto
+        threshold: 1%
+  ignore:
+    - lib
+    - config
+    - spec

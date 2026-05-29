@@ -1,0 +1,38 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ruby-rails-postgres
+{
+	"name": "EventaServo",
+	"dockerComposeFile": [
+		"../docker-compose.yml"
+	],
+	"service": "backend",
+	"runServices": [
+		"backend",
+		"db"
+		// "selenium",
+		// 	"solid_queue"
+	],
+	// "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"workspaceFolder": "/eventaservo",
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"aliariff.vscode-erb-beautify",
+				"eamodio.gitlens",
+				"KoichiSasada.vscode-rdbg",
+				"mhutchie.git-graph",
+				"Shopify.ruby-lsp",
+				"testdouble.vscode-standard-ruby"
+			]
+		}
+	},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// This can be used to network with other containers or the host.
+	// "forwardPorts": [3000, 5432],
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "bin/setup",
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	"remoteUser": "rails"
+}

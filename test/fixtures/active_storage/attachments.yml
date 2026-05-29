@@ -1,0 +1,19 @@
+jes:
+  name: image
+  record: jes (Ad)
+  blob: jes
+
+printempas:
+  name: image
+  record: printempas (Ad)
+  blob: printempas
+
+international_calendar:
+  name: image
+  record: international_calendar (Ad)
+  blob: international_calendar
+
+ad_himalaja_rekontigho_image:
+  name: image
+  record: himalaja_rekontigho (Ad)
+  blob: himalaja_rekontigho

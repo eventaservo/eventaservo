@@ -1,0 +1,7 @@
+### List events by date
+GET {{$dotenv API_ADDRESS}}/eventoj
+  ?komenca_dato=2024-01-01
+  &fina_dato=2024-12-31
+  &o=UEA
+Content-Type: application/json
+Authorization: Bearer {{$dotenv API_TOKEN}}

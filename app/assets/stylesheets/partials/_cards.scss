@@ -1,0 +1,12 @@
+// Subtle hover effect for clickable cards.
+// Smoothly transitions the border to a darker gray on mouse over,
+// signaling interactivity without requiring explicit link text.
+//
+// Usage: <div class="card card-hover">
+.card-hover {
+  transition: border-color 0.2s ease-in-out;
+
+  &:hover {
+    border-color: var(--bs-gray-500) !important;
+  }
+}

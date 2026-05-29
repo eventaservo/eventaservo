@@ -1,0 +1,10 @@
+### List organizations
+GET {{$dotenv API_ADDRESS}}/organizations
+Content-Type: application/json
+Authorization: Bearer {{$dotenv API_TOKEN}}
+
+### List organizations filtering by country
+GET {{$dotenv API_ADDRESS}}/organizations
+  ?country_code=nl
+Content-Type: application/json
+Authorization: Bearer {{$dotenv API_TOKEN}}

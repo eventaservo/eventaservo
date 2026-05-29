@@ -1,0 +1,31 @@
+<div class="header">
+  <%= link_to 'https://eventaservo.org', class: 'links' do %>
+    <h1>Eventa Servo</h1>
+  <% end %>
+</div>
+
+<h3 class="text-center">
+  Eventoj kiuj okazos inter<br>
+  <%= event_date(Event.new(date_start: Time.zone.today, date_end: Time.zone.today + 7.days)).gsub(' - ',' kaj ') %>
+</h3>
+
+<% if @events.empty? %>
+  <%= render partial: 'no_events' %>
+<% else %>
+  <%= render partial: 'event_list' %>
+<% end %>
+
+<br>
+
+<div class="text-center">
+  <div class="button-blue">
+    <%= link_to 'Diskonigi mian eventon', new_event_url %>
+  </div>
+</div>
+
+<br>
+
+<div class="text-center small">
+  <br>
+  Se vi ne plu volas ricevi la Semajnan Resumon, eblas <%= link_to 'malaboni', edit_user_registration_url %>.
+</div>

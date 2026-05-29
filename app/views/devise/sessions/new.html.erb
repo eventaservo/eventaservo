@@ -1,0 +1,34 @@
+<div class="col-12 col-lg-4 offset-lg-4 col-sm-8 offset-sm-2">
+  <div class="box-white">
+    <div class="text-center">
+      <h3>Eventa Servo</h3>
+      <p class="fg-color-grayDark fw-bold">Ensalutu por krei novajn eventojn.</p>
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {data: {turbo: false}}) do |f| %>
+      <div class="mb-3">
+        <%= f.email_field :email, autocomplete: 'email', class: 'form-control', autofocus: true, placeholder: 'Retpoŝtadreso' %>
+      </div>
+      <div class="mb-3">
+        <%= f.password_field :password, autocomplete: 'current-password', class: 'form-control', placeholder: 'Pasvorto' %>
+        <small class="form-text text-end">
+          <%= link_to 'Mi forgesis mian pasvorton', new_password_path(resource_name) %>
+        </small>
+      </div>
+
+      <%= f.submit 'Ensaluti', class: 'button-submit col-12' %>
+    <% end %>
+
+    <br>
+    <div class="text-divider fw-bold fg-color-grayDark">AŬ</div>
+    <br>
+    <%= button_to 'Ensaluti per Google', user_google_oauth2_omniauth_authorize_path,
+          data: {turbo: "false"},
+          class: 'google-button mb-1' %>
+    <%= button_to "Ensaluti per Facebook", user_facebook_omniauth_authorize_path,
+          data: { turbo: false },
+          class: 'facebook-button' %>
+  </div>
+
+  <%= render partial: 'devise/shared/links' %>
+</div>

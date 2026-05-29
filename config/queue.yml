@@ -1,0 +1,29 @@
+default: &default
+  dispatchers:
+    - polling_interval: 15
+      batch_size: 500
+  workers:
+    # Dedicated worker for ahoy queue - limited to 1 thread to avoid overload
+    - queues: [ahoy]
+      threads: 1
+      processes: 1
+      polling_interval: 30
+    # Dedicated worker for heavy jobs like database backup
+    - queues: [backup]
+      threads: 1
+      processes: 1
+      polling_interval: 15
+    # Worker for all other queues
+    - queues: "*"
+      threads: 2
+      processes: <%= ENV.fetch("JOB_CONCURRENCY", 1) %>
+      polling_interval: 10
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

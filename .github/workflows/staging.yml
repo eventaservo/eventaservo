@@ -1,0 +1,60 @@
+name: Deploy to staging
+
+on:
+  push:
+    branches:
+      - staging
+    tags:
+      - staging
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  docker:
+    uses: ./.github/workflows/docker.yml
+    with:
+      environment: staging
+      tag: staging
+    secrets:
+      dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
+      dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      GOOGLE_MAPS_KEY: ${{ secrets.GOOGLE_MAPS_KEY }}
+      IPINFO_KEY: ${{ secrets.IPINFO_KEY }}
+
+  sentry:
+    needs: deploy_stack_to_server
+    uses: ./.github/workflows/sentry.yml
+    with:
+      environment: staging
+    secrets:
+      sentry_auth_token: ${{ secrets.SENTRY_AUTH_TOKEN }}
+
+  deploy_stack_to_server:
+    name: Deploy / Stack to Server
+    needs: docker
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: none
+    steps:
+      - name: Set up SSH agent and deploy
+        env:
+          SSH_HOST: ${{ secrets.SSH_STAGING_HOST }}
+          SSH_PORT: ${{ secrets.SSH_STAGING_PORT }}
+          SSH_USER: ${{ secrets.SSH_STAGING_USER }}
+          SSH_KEY: ${{ secrets.SSH_STAGING_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p $SSH_PORT $SSH_HOST >> ~/.ssh/known_hosts 2>/dev/null
+          ssh -p $SSH_PORT -i ~/.ssh/deploy_key $SSH_USER@$SSH_HOST \
+            "cd /home/shayani/docker/eventaservo-staging && \
+             docker pull eventaservo/backend:staging && \
+             docker stack deploy -c docker-compose.yml eventaservo-staging"

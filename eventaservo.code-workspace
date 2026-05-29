@@ -1,0 +1,72 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"[ruby]": {
+			"editor.defaultFormatter": "Shopify.ruby-lsp"
+		},
+		"rubyLsp.formatter": "standard",
+		"conventionalCommits.scopes": [
+			"API",
+			"Events",
+			"GitHub Actions",
+			"Organizations",
+			"Accessibility",
+			"Administration",
+			"Event Reports",
+			"Gems"
+		],
+		"editor.formatOnSave": true,
+		"ruby.testCommand": "bin/rails test",
+		"mcp": {
+			"servers": {
+				"Sentry": {
+					"url": "https://mcp.sentry.dev/mcp",
+					"type": "http"
+				},
+				"github": {
+					"type": "http",
+					"url": "https://api.githubcopilot.com/mcp/"
+				},
+				"postgres": {
+					"type": "stdio",
+					"command": "npx",
+					"args": [
+						"-y",
+						"@modelcontextprotocol/server-postgres",
+						"postgresql://postgres:postgres@db/eventaservo_devel"
+					]
+				}
+			},
+		}
+	},
+	"extensions": {
+		"recommendations": [
+			"shopify.ruby-lsp",
+			"anthropic.claude-code"
+		]
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "Run tests (except system ones)",
+				"type": "shell",
+				"command": "bundle exec rails test"
+			},
+			{
+				"label": "Run ALL tests",
+				"type": "shell",
+				"command": "bundle exec rails test test/system && bundle exec rails test"
+			},
+			{
+				"label": "Run System tests",
+				"type": "shell",
+				"command": "bundle exec rails test:system"
+			}
+		]
+	}
+}

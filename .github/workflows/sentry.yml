@@ -1,0 +1,34 @@
+name: Sentry
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+    secrets:
+      sentry_auth_token:
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Read VERSION file
+        id: getversion
+        run: |
+          echo "VERSION=$(cat config/initializers/version.rb | grep VERSION | cut -d '"' -f2)" >> "$GITHUB_OUTPUT"
+
+      - name: Create Sentry release
+        uses: getsentry/action-release@v3
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.sentry_auth_token }}
+          SENTRY_ORG: esperanto
+          SENTRY_PROJECT: eventa-servo
+        with:
+          environment: ${{ inputs.environment }}
+          version: ${{ steps.getversion.outputs.VERSION }}

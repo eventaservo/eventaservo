@@ -1,0 +1,13 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb small mb-2">
+    <li class="breadcrumb-item"><%= link_to "Admin", admin_root_path %></li>
+    <li class="breadcrumb-item"><%= link_to "Users", admin_users_path %></li>
+    <li class="breadcrumb-item"><%= link_to @user.name, admin_user_path(@user) %></li>
+    <li class="breadcrumb-item active" aria-current="page">Edit</li>
+  </ol>
+</nav>
+
+<div class="box-white">
+  <div class="lead mb-3">Edit User</div>
+  <%= render "form", user: @user %>
+</div>

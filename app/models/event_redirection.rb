@@ -1,0 +1,14 @@
+# == Schema Information
+#
+# Table name: event_redirections
+#
+#  id            :bigint           not null, primary key
+#  hits          :integer          default(0), not null
+#  new_short_url :string           not null
+#  old_short_url :string           not null, uniquely indexed
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+class EventRedirection < ApplicationRecord
+  validates_presence_of :old_short_url, :new_short_url
+end

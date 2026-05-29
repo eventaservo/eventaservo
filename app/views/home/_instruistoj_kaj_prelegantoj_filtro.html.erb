@@ -1,0 +1,36 @@
+<div class="bg-body-tertiary rounded-3 p-3 mb-4">
+  <%= form_tag instruantoj_kaj_prelegantoj_path, method: :get do %>
+    <div class="row g-2 align-items-end">
+      <div class="col-12 col-md-3">
+        <%= label_tag :name, "Nomo", class: "form-label small fw-semibold mb-1" %>
+        <%= text_field_tag :name, params[:name], class: "form-control form-control-sm",
+              placeholder: "Serĉu laŭ nomo..." %>
+      </div>
+      <div class="col-12 col-md-3">
+        <%= label_tag :country_id, "Lando", class: "form-label small fw-semibold mb-1" %>
+        <%= select_tag :country_id,
+              options_from_collection_for_select(@countries, :id, :name, params[:country_id]),
+              include_blank: "Ĉiuj landoj",
+              class: "form-select form-select-sm" %>
+      </div>
+      <div class="col-12 col-md-2">
+        <%= label_tag :level, "Nivelo", class: "form-label small fw-semibold mb-1" %>
+        <%= select_tag :level,
+              options_for_select([["Baza", "baza"], ["Meza", "meza"], ["Supera", "supera"]], params[:level]),
+              include_blank: "Ĉiuj niveloj",
+              class: "form-select form-select-sm" %>
+      </div>
+      <div class="col-12 col-md-2">
+        <%= label_tag :keyword, "Sperto / Temoj", class: "form-label small fw-semibold mb-1" %>
+        <%= text_field_tag :keyword, params[:keyword], class: "form-control form-control-sm",
+              placeholder: "Ŝlosilvorto..." %>
+      </div>
+      <div class="col-12 col-md-2 d-flex gap-2">
+        <%= submit_tag "Serĉi", class: "btn btn-primary btn-sm flex-grow-1" %>
+        <% if @filtering %>
+          <%= link_to "Nuligi", instruantoj_kaj_prelegantoj_path, class: "btn btn-outline-secondary btn-sm" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
