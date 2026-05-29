@@ -93,7 +93,8 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   after_validation :geocode, if: :require_geocode?
   before_save :format_event_data
-  after_commit :schedule_users_reminders_jobs
+  after_commit :schedule_users_reminders_jobs, on: :create
+  after_commit :schedule_users_reminders_jobs, on: :update, if: :schedule_reminder_on_update?
   after_update :create_redirection, if: :saved_change_to_short_url?
   after_save :update_duration_tags
 
@@ -519,6 +520,10 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   def schedule_users_reminders_jobs
     EventServices::ScheduleReminders.new(self).call
+  end
+
+  def schedule_reminder_on_update?
+    saved_change_to_date_start? || saved_change_to_date_end?
   end
 
   def create_redirection
