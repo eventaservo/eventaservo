@@ -9,13 +9,25 @@ class BackupDbJobTest < ActiveJob::TestCase
     end
   end
 
-  test "calls Backup::Db when performed" do
+  test "calls Backup::Db when performed in production" do
+    called = false
+
+    Backup::Db.stub(:new, -> { Object.new.tap { |o| o.define_singleton_method(:call) { called = true } } }) do
+      Rails.stub(:env, ActiveSupport::StringInquirer.new("production")) do
+        BackupDbJob.perform_now
+      end
+    end
+
+    assert called
+  end
+
+  test "does not call Backup::Db when not in production" do
     called = false
 
     Backup::Db.stub(:new, -> { Object.new.tap { |o| o.define_singleton_method(:call) { called = true } } }) do
       BackupDbJob.perform_now
     end
 
-    assert called
+    assert_not called
   end
 end

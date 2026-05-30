@@ -9,6 +9,8 @@ class BackupDbJob < ApplicationJob
   #
   # @return [void]
   def perform
+    return unless Rails.env.production?
+
     Backup::Db.new.call
   end
 end
