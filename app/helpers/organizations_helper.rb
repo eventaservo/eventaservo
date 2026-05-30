@@ -2,7 +2,7 @@
 
 module OrganizationsHelper
   def organization_logo(organization, size: :small, html_class: nil)
-    return unless organization.logo.attached? && organization.persisted?
+    return unless organization.persisted? && organization.logo.attached?
 
     size =
       case size
