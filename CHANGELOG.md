@@ -1,5 +1,29 @@
 # Changelog
 
+## [3.0.9](https://github.com/eventaservo/eventaservo/compare/v3.0.8...v3.0.9) (2026-05-30)
+
+
+### Features
+
+* Aldoni subtenon por vidi pasintajn eventojn ([#1244](https://github.com/eventaservo/eventaservo/issues/1244)) ([98c0afd](https://github.com/eventaservo/eventaservo/commit/98c0afd1aefac16c1aa854af9654bf48ae7a9dd2))
+
+
+### Bug Fixes
+
+* Fix duplicate reminder notifications ([#1246](https://github.com/eventaservo/eventaservo/issues/1246)) ([0e51f6c](https://github.com/eventaservo/eventaservo/commit/0e51f6cddf420eb4c7c5732e47b5a7eb23a79e8d))
+
+
+### Code Refactoring
+
+* extract by_continent, by_country, by_city into dedicated controllers ([#1250](https://github.com/eventaservo/eventaservo/issues/1250)) ([be408e8](https://github.com/eventaservo/eventaservo/commit/be408e881b0411ad21c86474f018f167d1cc38a1))
+
+
+### Miscellaneous Chores
+
+* add eventaservo- prefix to all skills and remove Portuguese triggers ([7d00264](https://github.com/eventaservo/eventaservo/commit/7d002640db61224cfdff0f899edddbc3a2d36b01))
+* consolidate AI agent skills into .agents/ directory ([2f2ae2d](https://github.com/eventaservo/eventaservo/commit/2f2ae2d9cec0530067949d3728975b7e8f5f69db))
+* remove Stoplight/Spectral references ([de6b291](https://github.com/eventaservo/eventaservo/commit/de6b2919cedda8b65366f8b4afce191b1fb70943))
+
 ## [3.0.8](https://github.com/eventaservo/eventaservo/compare/v3.0.7...v3.0.8) (2026-05-25)
 
 
