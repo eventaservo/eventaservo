@@ -4,13 +4,13 @@ require "test_helper"
 
 class Event::AddressTest < ActiveSupport::TestCase
   test "full_address should not have leading comma if address is empty" do
-    country = countries(:country_58)
+    country = countries(:france)
     event = Event.new(address: "", city: "Parizo", country: country)
     assert_equal "Parizo, FR", event.full_address
   end
 
   test "full_address should not have extra commas if address is nil" do
-    country = countries(:country_58)
+    country = countries(:france)
     event = Event.new(address: nil, city: "Parizo", country: country)
     assert_equal "Parizo, FR", event.full_address
   end
@@ -21,7 +21,7 @@ class Event::AddressTest < ActiveSupport::TestCase
   end
 
   test "full_address should handle all fields present" do
-    country = countries(:country_58)
+    country = countries(:france)
     event = Event.new(address: "123 Strato", city: "Parizo", country: country)
     assert_equal "123 Strato, Parizo, FR", event.full_address
   end

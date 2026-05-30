@@ -117,7 +117,7 @@ class ApplicationHelperTest < ActionView::TestCase
 
   # montras_flagon tests
   test "montras_flagon renders flag for a country" do
-    country = countries(:country_1)
+    country = countries(:afghanistan)
 
     result = montras_flagon(country)
 

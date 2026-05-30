@@ -6,7 +6,7 @@ class Admin::OrganizationsController::IndexTest < ActionDispatch::IntegrationTes
   setup do
     @admin = users(:admin_user)
     sign_in @admin
-    @org = Organization.create!(name: "UEA", short_name: "uea", country: countries(:country_1))
+    @org = Organization.create!(name: "UEA", short_name: "uea", country: countries(:afghanistan))
   end
 
   test "should get index" do

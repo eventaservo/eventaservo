@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class EventsController::ByContinentTest < ActionDispatch::IntegrationTest
+class Events::ByContinentController::ShowTest < ActionDispatch::IntegrationTest
   test "renders calendar for reta continent" do
     get events_by_continent_url(continent: "reta")
     assert_response :success
@@ -54,5 +54,53 @@ class EventsController::ByContinentTest < ActionDispatch::IntegrationTest
     get events_by_continent_url(continent: "europo", pasintaj: 1)
     assert_response :success
     assert_no_match "okazas nuntempe", response.body
+  end
+
+  test "redirects to root with notice for invalid continent" do
+    get events_by_continent_url(continent: "atlantido")
+    assert_redirected_to root_path
+    assert_equal "Ne estas eventoj en tiu kontinento", flash[:notice]
+  end
+
+  test "redirects to normalized continent path" do
+    get events_by_continent_url(continent: "Europo")
+    assert_redirected_to controller: "events/by_continent", action: "show", continent: "europo"
+  end
+
+  test "renders RSS feed for continent" do
+    get events_by_continent_url(continent: "europo", format: :xml)
+    assert_response :success
+    assert_equal "application/xml", response.media_type
+  end
+
+  test "renders default kartaro view for non-reta continent with future events" do
+    get events_by_continent_url(continent: "azio"),
+      headers: {"HTTP_COOKIE" => "vidmaniero=kartaro"}
+    assert_response :success
+    assert_match events(:valid_event).title, response.body
+  end
+
+  test "renders with hodiau periodo filter" do
+    get events_by_continent_url(continent: "azio", periodo: "hodiau"),
+      headers: {"HTTP_COOKIE" => "vidmaniero=kartaro"}
+    assert_response :success
+  end
+
+  test "renders with estontece periodo filter" do
+    get events_by_continent_url(continent: "azio", periodo: "estontece"),
+      headers: {"HTTP_COOKIE" => "vidmaniero=kartaro"}
+    assert_response :success
+  end
+
+  test "renders with p7_tagojn periodo filter" do
+    get events_by_continent_url(continent: "azio", periodo: "p7_tagojn"),
+      headers: {"HTTP_COOKIE" => "vidmaniero=kartaro"}
+    assert_response :success
+  end
+
+  test "renders with p30_tagojn periodo filter" do
+    get events_by_continent_url(continent: "azio", periodo: "p30_tagojn"),
+      headers: {"HTTP_COOKIE" => "vidmaniero=kartaro"}
+    assert_response :success
   end
 end

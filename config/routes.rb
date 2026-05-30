@@ -90,8 +90,8 @@ Rails.application.routes.draw do
     post "users/regenerate_api_token", to: "users#regenerate_api_token", as: :regenerate_api_token
 
     # Countries and cities
-    get "/:continent", to: "events#by_continent", as: "events_by_continent"
-    get "/:continent/:country_name", controller: "events", action: "by_country", as: "events_by_country"
-    get "/:continent/:country_name/:city_name", controller: "events", action: "by_city", as: "events_by_city"
+    get "/:continent", to: "events/by_continent#show", as: "events_by_continent"
+    get "/:continent/:country_name", to: "events/by_country#show", as: "events_by_country"
+    get "/:continent/:country_name/:city_name", to: "events/by_city#show", as: "events_by_city"
   end
 end

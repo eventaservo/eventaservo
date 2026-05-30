@@ -2,14 +2,9 @@
 
 require "test_helper"
 
-class EventsController::ByCountryTest < ActionDispatch::IntegrationTest
-  # Regression test for Sentry issue EVENTA-SERVO-1SJ:
-  # a visitor arriving with a legacy IANA identifier in the `horzono` cookie
-  # caused `ActiveSupport::TimeZone[]` to raise during partial rendering.
-  # The ApplicationController before_action now rewrites the cookie so the
-  # page renders normally.
+class Events::ByCountryController::ShowTest < ActionDispatch::IntegrationTest
   test "renders by_country page when visitor has a legacy timezone cookie" do
-    country = Country.find(41) # Danio (Eŭropo)
+    country = countries(:denmark)
 
     get events_by_country_url(continent: country.continent.normalized,
       country_name: country.name.normalized),
@@ -23,7 +18,7 @@ class EventsController::ByCountryTest < ActionDispatch::IntegrationTest
   end
 
   test "pasintaj=1 lists past events for the country" do
-    country = Country.find(41) # Danio
+    country = countries(:denmark)
     recent = events(:past_event_danio_recent)
     older = events(:past_event_danio_older)
 
@@ -36,7 +31,7 @@ class EventsController::ByCountryTest < ActionDispatch::IntegrationTest
   end
 
   test "pasintaj=1 orders past events newest first" do
-    country = Country.find(41) # Danio
+    country = countries(:denmark)
     recent = events(:past_event_danio_recent)
     older = events(:past_event_danio_older)
 
@@ -49,7 +44,7 @@ class EventsController::ByCountryTest < ActionDispatch::IntegrationTest
   end
 
   test "without pasintaj param the past events do not appear" do
-    country = Country.find(41) # Danio
+    country = countries(:denmark)
     older = events(:past_event_danio_older)
 
     get events_by_country_url(continent: country.continent.normalized,
@@ -58,5 +53,25 @@ class EventsController::ByCountryTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_no_match older.title, response.body
+  end
+
+  test "redirects to root when country does not exist" do
+    get events_by_country_url(continent: "europo", country_name: "neekzistas")
+    assert_redirected_to root_path
+    assert_equal "Lando ne ekzistas en la datumbazo", flash[:error]
+  end
+
+  test "redirects to root for invalid continent" do
+    get events_by_country_url(continent: "atlantido", country_name: "danio")
+    assert_redirected_to root_path
+    assert_equal "Ne estas eventoj en tiu kontinento", flash[:notice]
+  end
+
+  test "renders RSS feed for country" do
+    country = countries(:denmark)
+    get events_by_country_url(continent: country.continent.normalized,
+      country_name: country.name.normalized, format: :xml)
+    assert_response :success
+    assert_equal "application/xml", response.media_type
   end
 end

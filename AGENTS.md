@@ -185,14 +185,25 @@ That document contains:
   - Services: `Events::SoftDeleteTest`
   - Queries: `Users::TeachersAndSpeakersQueryTest`
 
-### Mandatory Checklist Before Writing Tests
+### Mandatory Checklist Before Writing or Modifying Tests
 
+- [ ] Load the `eventaservo-test-builder` skill **before** creating or modifying any test
 - [ ] Read [TEST_ARCHITECTURE.md](TEST_ARCHITECTURE.md) Section 9 (AI Agent Instructions)
 - [ ] Reproduce the bug with a test case before applying a fix
 - [ ] Check if fixtures exist for the data you need
 - [ ] Verify the correct directory structure
 - [ ] Use the appropriate template from the guidelines
 - [ ] Use fixtures unless there's a justified reason for FactoryBot
+
+### Namespaced Controllers Note
+
+Namespaced controllers (e.g., `Events::ByContinentController`, `Events::ByCountryController`, `Events::ByCityController`) follow the same per-action pattern:
+- **File**: `test/controllers/<namespace>/<controller>/<action>_test.rb`
+  - Example: `test/controllers/events/by_continent/show_test.rb`
+- **Class**: `<Namespace>::<Controller>Controller::<Action>Test`
+  - Example: `Events::ByContinentController::ShowTest`
+- **Inherits from**: `ActionDispatch::IntegrationTest`
+- **Directory**: Create one subdirectory per controller under `test/controllers/<namespace>/`
 
 ## Skills
 
