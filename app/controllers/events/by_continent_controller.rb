@@ -14,7 +14,7 @@ class Events::ByContinentController < ApplicationController
 
   def show
     if params[:continent] != params[:continent].normalized
-      redirect_to events_by_continent_path(params[:continent].normalized) and return
+      redirect_to events_by_continent_path(continent: params[:continent].normalized) and return
     end
 
     respond_to do |format|
