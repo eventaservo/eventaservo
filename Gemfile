@@ -47,7 +47,7 @@ gem "jbuilder", "~> 2.14"
 gem "rack-attack", "~> 6.2"
 gem "rack-cors", "~> 3.0", require: "rack/cors"
 
-gem "aws-sdk-s3", "~> 1.222"
+gem "aws-sdk-s3", "~> 1.224"
 gem "browser", "~> 6"
 gem "chartkick", "~> 5.0"
 gem "diffy", "~> 3.4"
@@ -101,6 +101,9 @@ gem "google-api-client", "~> 0.53.0"
 
 # New Relic
 gem "newrelic_rpm"
+
+# Maintenance Tasks
+gem "maintenance_tasks", "~> 2.16"
 
 group :development, :test, :staging do
   gem "faker"

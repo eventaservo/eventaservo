@@ -55,7 +55,7 @@ COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UU
 -- Name: immutable_unaccent(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
-CREATE OR REPLACE FUNCTION public.immutable_unaccent(text) RETURNS text
+CREATE FUNCTION public.immutable_unaccent(text) RETURNS text
     LANGUAGE sql IMMUTABLE STRICT PARALLEL SAFE
     AS $_$ SELECT public.unaccent($1) $_$;
 
@@ -585,6 +585,52 @@ CREATE SEQUENCE public.logs_id_seq
 --
 
 ALTER SEQUENCE public.logs_id_seq OWNED BY public.logs.id;
+
+
+--
+-- Name: maintenance_tasks_runs; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.maintenance_tasks_runs (
+    id bigint NOT NULL,
+    task_name character varying NOT NULL,
+    started_at timestamp(6) without time zone,
+    ended_at timestamp(6) without time zone,
+    time_running double precision DEFAULT 0.0 NOT NULL,
+    tick_count bigint DEFAULT 0 NOT NULL,
+    tick_total bigint,
+    job_id character varying,
+    cursor character varying,
+    status character varying DEFAULT 'enqueued'::character varying NOT NULL,
+    error_class character varying,
+    error_message character varying,
+    backtrace text,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    arguments text,
+    lock_version integer DEFAULT 0 NOT NULL,
+    metadata text,
+    cursor_is_json boolean DEFAULT false NOT NULL
+);
+
+
+--
+-- Name: maintenance_tasks_runs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.maintenance_tasks_runs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: maintenance_tasks_runs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.maintenance_tasks_runs_id_seq OWNED BY public.maintenance_tasks_runs.id;
 
 
 --
@@ -1509,6 +1555,13 @@ ALTER TABLE ONLY public.logs ALTER COLUMN id SET DEFAULT nextval('public.logs_id
 
 
 --
+-- Name: maintenance_tasks_runs id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.maintenance_tasks_runs ALTER COLUMN id SET DEFAULT nextval('public.maintenance_tasks_runs_id_seq'::regclass);
+
+
+--
 -- Name: organization_events id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1787,6 +1840,14 @@ ALTER TABLE ONLY public.likes
 
 ALTER TABLE ONLY public.logs
     ADD CONSTRAINT logs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: maintenance_tasks_runs maintenance_tasks_runs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.maintenance_tasks_runs
+    ADD CONSTRAINT maintenance_tasks_runs_pkey PRIMARY KEY (id);
 
 
 --
@@ -2283,6 +2344,13 @@ CREATE INDEX index_logs_on_user_id ON public.logs USING btree (user_id);
 
 
 --
+-- Name: index_maintenance_tasks_runs; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_maintenance_tasks_runs ON public.maintenance_tasks_runs USING btree (task_name, status, created_at DESC);
+
+
+--
 -- Name: index_organization_events_on_event_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2353,7 +2421,14 @@ CREATE INDEX index_participants_on_user_id ON public.participants USING btree (u
 
 
 --
--- Name: index_rollups_on_name_and_interval_and_time_and_dimensions; Type: INDEX; Schema: public; Owner: -
+-- Name: index_participants_on_event_id_and_user_id; Type: INDEX; Schema: public; Owner: --
+--
+
+CREATE UNIQUE INDEX index_participants_on_event_id_and_user_id ON public.participants USING btree (event_id, user_id);
+
+
+--
+-- Name: index_rollups_on_name_and_interval_and_time_and_dimensions; Type: INDEX; Schema: public; Owner: --
 --
 
 CREATE UNIQUE INDEX index_rollups_on_name_and_interval_and_time_and_dimensions ON public.rollups USING btree (name, "interval", "time", dimensions);
@@ -2747,6 +2822,16 @@ ALTER TABLE ONLY public.solid_queue_scheduled_executions
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20260528220136'),
+('20260522090552'),
+('20260522090551'),
+('20260522090550'),
+('20260522090549'),
+('20260522090548'),
+('20260522090547'),
+('20260522090546'),
+('20260522090545'),
+('20260522090544'),
 ('20260322125025'),
 ('20260315122454'),
 ('20260314101500'),

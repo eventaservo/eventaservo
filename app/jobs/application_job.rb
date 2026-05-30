@@ -2,6 +2,7 @@
 
 class ApplicationJob < ActiveJob::Base
   include Rails.application.routes.url_helpers
+  include Sentry::Cron::MonitorCheckIns
 
   # Normalizes the serialized timezone so that legacy IANA identifiers
   # (e.g. "Asia/Katmandu", "Europe/Kiev") persisted by older enqueues

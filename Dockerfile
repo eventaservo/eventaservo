@@ -115,7 +115,9 @@ RUN apt update \
   chromium-driver \
   fish \
   gh \
+  jq \
   openssh-client \
+  ripgrep \
   sudo \
   zsh \
   && rm -rf /var/lib/apt/lists/*

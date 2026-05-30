@@ -93,7 +93,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   after_validation :geocode, if: :require_geocode?
   before_save :format_event_data
-  after_commit :schedule_users_reminders_jobs
+  after_commit :schedule_users_reminders_jobs, if: :schedule_on_create_or_dates_changed?
   after_update :create_redirection, if: :saved_change_to_short_url?
   after_save :update_duration_tags
 
@@ -518,8 +518,22 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     self.description = Tools.convert_X_characters(description)
   end
 
+  # Schedules reminder jobs for all participants of the event.
+  # Deletes existing enqueued jobs first to prevent duplicate reminders.
+  #
+  # @return [void]
   def schedule_users_reminders_jobs
     EventServices::ScheduleReminders.new(self).call
+  end
+
+  # Determines whether reminder jobs should be scheduled.
+  #
+  # Schedules reminders on create, or on update only when the event
+  # start or end date has changed.
+  #
+  # @return [Boolean]
+  def schedule_on_create_or_dates_changed?
+    previous_changes.key?(:id) || saved_change_to_date_start? || saved_change_to_date_end?
   end
 
   def create_redirection

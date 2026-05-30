@@ -207,8 +207,6 @@ paths:
                 type: object
                 $ref: '#/components/schemas/Organization'
       operationId: get-organizations
-      x-stoplight:
-        id: fp4bvm6y9yp10
       description: List organizations and its details.
       parameters:
         - schema:

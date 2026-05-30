@@ -36,15 +36,6 @@ jobs:
     secrets:
       sentry_auth_token: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
-  new_relic:
-    needs: deploy_stack_to_server
-    uses: ./.github/workflows/new-relic-change-tracking.yml
-    with:
-      environment: staging
-    secrets:
-      new_relic_api_key: ${{ secrets.NEW_RELIC_API_KEY }}
-      new_relic_deployment_entity_guid: ${{ secrets.NEW_RELIC_DEPLOYMENT_ENTITY_GUID }}
-
   deploy_stack_to_server:
     name: Deploy / Stack to Server
     needs: docker

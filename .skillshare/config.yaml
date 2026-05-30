@@ -1,17 +1,20 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/runkids/skillshare/main/schemas/project-config.schema.json
 targets:
   - agents:
-      mode: symlink
+      mode: copy
     name: opencode
     skills:
-      mode: symlink
+      mode: copy
   - agents:
-      mode: symlink
+      mode: copy
     name: claude
     skills:
-      mode: symlink
+      mode: copy
   - name: antigravity
     skills:
-      mode: symlink
+      mode: copy
+  - name: copilot
+    skills:
+      mode: copy
 audit:
   block_threshold: CRITICAL
