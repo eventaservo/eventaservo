@@ -6,20 +6,24 @@
   </script>
 
   <script>
-    Sentry.init({
-      dsn: "<%= Rails.application.credentials.dig(:sentry, :dsn) %>",
-      replaysSessionSampleRate: 0.1,
-      replaysOnErrorSampleRate: 1.0,
-      environment: "<%= Rails.env %>",
-      release: "<%= Eventaservo::Application::VERSION %>",
-      integrations: [
-        Sentry.replayIntegration({
-          maskAllText: false,
-          maskAllInputs: false,
-          blockAllMedia: false,
-        }),
-      ],
-    });
+    if (!window.__SENTRY_INITIALIZED) {
+      Sentry.init({
+        dsn: "<%= Rails.application.credentials.dig(:sentry, :dsn) %>",
+        replaysSessionSampleRate: 0.1,
+        replaysOnErrorSampleRate: 1.0,
+        environment: "<%= Rails.env %>",
+        release: "<%= Eventaservo::Application::VERSION %>",
+        integrations: [
+          Sentry.replayIntegration({
+            maskAllText: false,
+            maskAllInputs: false,
+            blockAllMedia: false,
+          }),
+        ],
+      });
+
+      window.__SENTRY_INITIALIZED = true;
+    }
 
     <%- if @current_user %>
       Sentry.setUser(
