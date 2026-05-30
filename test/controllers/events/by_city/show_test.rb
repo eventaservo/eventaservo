@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class EventsController::ByCityTest < ActionDispatch::IntegrationTest
+class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
   test "pasintaj=1 lists past events for the city" do
     country = Country.find(41) # Danio
     recent = events(:past_event_danio_recent)

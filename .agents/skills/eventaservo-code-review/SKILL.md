@@ -36,7 +36,22 @@ Rigorously validate:
 3. **Security:** Proper use of authorizations and data protection.
 4. **UI/UX:** Compliance with patterns in `app/views/admin/mockups/`. **Exclusive use of Bootstrap 5.3.** Tailwind CSS is forbidden.
 5. **Language:** Everything (variables, methods, comments, documentation) must be in **English**.
-6. **Testing:** Verify if tests follow `TEST_ARCHITECTURE.md` (fixtures over FactoryBot, proper namespacing).
+6. **Test Architecture Compliance:** Use `TEST_ARCHITECTURE.md` Section 7 (Code Review Checklist) to validate every changed or new test file:
+
+   - [ ] **Directory**: File is in the correct directory per Section 2 (models, controllers, services, queries)?
+     - Controllers: `test/controllers/<controller_name>/<action>_test.rb`
+     - Namespaced controllers: `test/controllers/<namespace>/<controller>/<action>_test.rb` (e.g. `test/controllers/events/by_continent/show_test.rb`)
+   - [ ] **Naming**: Class uses the correct namespace matching the file path?
+     - Simple controllers: `EventsController::IndexTest`
+     - Namespaced controllers: `Events::ByContinentController::ShowTest`
+     - Inherits from `ActionDispatch::IntegrationTest` for controllers
+   - [ ] **Data**: Uses fixtures instead of FactoryBot (unless justified)? Check `test/fixtures/` for existing fixtures.
+   - [ ] **Test names**: Descriptive — clearly explain expected behavior?
+   - [ ] **Assertions**: Specific and clear (e.g. `assert_redirected_to`, `assert_select`, not `assert_response 302`)?
+   - [ ] **Responsibility**: Each file has ONE responsibility (one action per file)?
+   - [ ] **Migration**: If migrating existing tests, follows Section 10 (migrate gradually, remove old file only after new one works)?
+
+   Use `glob('test/**/*')` to list changed/new test files, then read them to verify.
 
 ## Step 4: Produce the Report
 
@@ -70,6 +85,17 @@ Present the report EXCLUSIVELY in English.
 - **New behavior covered?** `<Yes/No/Partial>`
 - **Missing tests:** `<list of files/scenarios>`
 
+### 📐 Test Architecture Compliance
+
+Checklist based on `TEST_ARCHITECTURE.md` Section 7:
+
+- **Directory structure** ✅/❌ — e.g., `test/controllers/events/by_city/show_test.rb` exists as a per-action file
+- **Class naming** ✅/❌ — e.g., `Events::ByCityController::ShowTest`
+- **Fixtures over FactoryBot** ✅/❌ — list any unjustified `create(:...)` calls
+- **Descriptive test names** ✅/❌ — flag generic names
+- **Specific assertions** ✅/❌ — flag `assert_response 302`, `assert events.any?`
+- **Single responsibility per file** ✅/❌
+
 ---
 
 ## 🏁 CONCLUSIONS (MANDATORY)
@@ -92,3 +118,4 @@ Present the report EXCLUSIVELY in English.
 3. **Detect stacked branches**: If the base is a branch other than `main`, make sure to compare only the delta of the current branch using the merge base point.
 4. **Consult Mockups**: Before criticizing UI, check if the code follows the patterns in `app/views/admin/mockups/`.
 5. **Be specific**: Reference files and lines.
+6. **Validate test architecture**: Always use `glob('test/**/*')` to find changed/new test files, read them, and cross-check each against the Step 3.6 checklist. Do NOT skip this step even if the diff is small.

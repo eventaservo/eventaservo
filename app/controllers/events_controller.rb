@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class EventsController < ApplicationController
-  include CalendarData
-
   rescue_from ActionController::UnknownFormat do |_e|
     redirect_to root_url, flash: {error: "Formato ne ekzistas."}
   end
@@ -12,9 +10,6 @@ class EventsController < ApplicationController
   before_action :redirect_old_link, only: %i[show edit]
   before_action :set_event, only: %i[show edit update destroy kronologio nuligi malnuligi kontakti_organizanton delete_file]
   before_action :authorize_user, only: %i[edit update destroy nuligi malnuligi delete_file]
-  before_action :validate_continent, only: %i[by_continent by_country by_city]
-  before_action :set_country, only: %i[by_country by_city]
-  before_action :sanitize_params
 
   # Montras la uzantajn eventojn
   # This action is probable deprecated and it is required to explore if can be removed
@@ -185,106 +180,6 @@ class EventsController < ApplicationController
     redirect_to event_path(code: @event.ligilo), flash: {success: "Dosiero sukcese forigita"}
   end
 
-  def by_continent
-    if params[:continent] != params[:continent].normalized
-      redirect_to events_by_continent_path(params[:continent].normalized) and return
-    end
-
-    respond_to do |format|
-      format.xml do
-        ahoy.track "RSS feed by continent", continent: params[:continent]
-        render_rss_feed(scope: Event.by_continent(params[:continent]))
-      end
-
-      format.html do
-        if params[:pasintaj].present?
-          render_pasintaj_by_continent
-        else
-          # Se la "kontinento" estas Reta, montru la eventojn per Kalendara vido
-          # Se estas aliaj kontinentoj, montru per Kartaro aŭ Map
-          if params[:continent] == "reta" && cookies[:vidmaniero] != "kalendaro"
-            cookies[:vidmaniero] = {value: "kalendaro", expires: 2.weeks, secure: true}
-          elsif params[:continent] != "reta"
-            unless cookies[:vidmaniero].in? %w[kartaro mapo]
-              cookies[:vidmaniero] = {value: "kartaro", expires: 2.weeks, secure: true}
-            end
-          end
-
-          @events = build_events_scope
-          continent_events_base = @events.by_continent(params[:continent])
-
-          @future_events = continent_events_base.venontaj
-          # Sidebar counts always show future events, regardless of the active periodo filter.
-          @countries = Events::CountryCountsQuery.new(scope: continent_events_base.venontaj).call
-          @today_events = continent_events_base.today.includes(:country)
-          @events = continent_events_base.not_today.includes(:country, :organizations)
-
-          if cookies[:vidmaniero] == "kalendaro"
-            # Reassign @events without not_today so the calendar includes today's events.
-            # prepare_calendar_data reads @events as the base relation for the 7-day window.
-            @events = continent_events_base.includes(:country, :organizations)
-            prepare_calendar_data
-          end
-
-          kreas_paghadon_por_karta_vidmaniero if cookies[:vidmaniero] == "kartaro"
-        end
-      end
-    end
-  end
-
-  def by_country
-    redirect_to(root_path, flash: {error: "Lando ne ekzistas en la datumbazo"}) && return if @country.nil?
-
-    respond_to do |format|
-      format.xml do
-        ahoy.track "RSS feed by country", country: @country.code
-        render_rss_feed(scope: Event.by_country_id(@country.id))
-      end
-
-      format.html do
-        if params[:pasintaj].present?
-          render_pasintaj_by_country
-        else
-          unless cookies[:vidmaniero].in? %w[kartaro mapo]
-            cookies[:vidmaniero] = {value: "kartaro", expires: 2.weeks, secure: true}
-            redirect_to events_by_country_url(continent: @country.continent.normalized, country_name: @country.name.normalized)
-          end
-
-          @events = build_events_scope
-          @future_events = Event.includes(:country).by_country_id(@country.id).venontaj
-          # Sidebar counts always show future events, regardless of the active periodo filter.
-          @cities = Events::CityCountsQuery.new(scope: @events.venontaj.by_country_id(@country.id)).call
-          @today_events = @events.today.includes(:country).by_country_id(@country.id)
-          @events = @events.not_today.includes(:country).by_country_id(@country.id)
-
-          kreas_paghadon_por_karta_vidmaniero
-        end
-      end
-    end
-  end
-
-  # Listigas la eventoj laŭ urboj
-  def by_city
-    redirect_to root_url, flash: {error: "Lando ne ekzistas"} and return if @country.nil?
-
-    if params[:pasintaj].present?
-      render_pasintaj_by_city
-      return
-    end
-
-    unless cookies[:vidmaniero].in? %w[kartaro mapo]
-      cookies[:vidmaniero] = {value: "kartaro", expires: 2.weeks, secure: true}
-      redirect_to events_by_city_url(continent: params[:continent].normalized, country_name: params[:country_name].downcase, city_name: params[:city_name].downcase)
-    end
-
-    @events = build_events_scope
-    @future_events = Event.by_city(params[:city_name]).venontaj
-    @today_events = @events.today.includes(:country).by_city(params[:city_name])
-    @events = @events.not_today.by_city(params[:city_name])
-
-    kreas_paghadon_por_karta_vidmaniero
-  end
-
   def by_username
     @uzanto = User.find_by(username: params[:username])
     redirect_to root_path, flash: {error: "Uzantnomo ne ekzistas"} and return if @uzanto.nil?
@@ -321,116 +216,10 @@ class EventsController < ApplicationController
 
   private
 
-  # Sets up assigns for the past-events view on +by_continent+.
-  # Skips the kartaro/mapo cookie dance and forces a cards-style render
-  # ordered newest-first with pagination.
-  def render_pasintaj_by_continent
-    @past_mode = true
-    @events = build_events_scope
-    continent_events_base = @events.by_continent(params[:continent])
-    @future_events = Event.none
-    @today_events = Event.none
-    @countries = Events::CountryCountsQuery.new(
-      scope: Event.pasintaj.by_continent(params[:continent])
-    ).call
-    @pagy, @events = pagy(
-      continent_events_base.includes(:country, :organizations).order(date_start: :desc)
-    )
-  end
-
-  # Sets up assigns for the past-events view on +by_country+.
-  def render_pasintaj_by_country
-    @past_mode = true
-    @events = build_events_scope
-    @future_events = Event.none
-    @today_events = Event.none
-    @cities = Events::CityCountsQuery.new(
-      scope: Event.pasintaj.by_country_id(@country.id)
-    ).call
-    @pagy, @events = pagy(
-      @events.by_country_id(@country.id).includes(:country).order(date_start: :desc)
-    )
-  end
-
-  # Sets up assigns for the past-events view on +by_city+.
-  def render_pasintaj_by_city
-    @past_mode = true
-    @events = build_events_scope
-    @future_events = Event.none
-    @today_events = Event.none
-    @pagy, @events = pagy(
-      @events.by_city(params[:city_name]).includes(:country).order(date_start: :desc)
-    )
-  end
-
-  # Builds the base +@events+ scope for event listing pages.
-  #
-  # Calendar mode uses a broader scope (non-cancelled, no date restriction)
-  # so that past-week navigation works. Other view modes use +venontaj+.
-  # The +periodo+ param overrides both when present.
-  #
-  # Reads +params[:periodo]+, +params[:o]+, +params[:s]+, +params[:t]+,
-  # and +cookies[:vidmaniero]+ to compose the scope.
-  #
-  # @note Duplicated in {HomeController} — keep both in sync.
-  # @return [ActiveRecord::Relation]
-  def build_events_scope
-    base = if params[:pasintaj].present?
-      Event.pasintaj
-    else
-      case params[:periodo]
-      when "hodiau" then Event.today
-      when "p7_tagojn" then Event.in_7days
-      when "p30_tagojn" then Event.in_30days
-      when "estontece" then Event.after_30days
-      else
-        (cookies[:vidmaniero] == "kalendaro") ? Event.ne_nuligitaj : Event.venontaj
-      end
-    end
-
-    Events::FilterQuery.new(
-      scope: base.includes(:organization_events).chefaj,
-      organization: params[:o],
-      tag_ids: params[:s]&.split(",")&.map(&:to_i) || [],
-      duration_type: params[:t]
-    ).call
-  end
-
-  # Renders RSS feed for events filtered by a given scope.
-  #
-  # @param scope [ActiveRecord::Relation] the filtered events scope
-  def render_rss_feed(scope:)
-    @events = Event.includes([:country, [uploads_attachments: :blob]])
-      .merge(scope)
-      .venontaj
-      .ne_nuligitaj
-      .order(:date_start)
-
-    render layout: false
-  end
-
-  # La karta vidmaniero uzas paĝadon. La aliaj ne. Tial necesas krei la variablojn
-  # +@kvanto_venontaj_eventoj+ kaj +@pagy+
-  #
-  def kreas_paghadon_por_karta_vidmaniero
-    return unless cookies[:vidmaniero].in?(%w[kartoj kartaro])
-
-    @kvanto_venontaj_eventoj = @events.count
-    @pagy, @events = pagy(@events.not_today.includes(%i[country organizations]))
-  end
-
   # Use callbacks to share common setup or constraints between actions.
   def set_event
     @event = Event.by_link(params[:code] || params[:event_code])
     redirect_to root_path, flash: {error: "Evento ne ekzistas"} if @event.nil?
-  end
-
-  def set_country
-    @country = Country.by_name(params[:country_name])
-  end
-
-  def sanitize_params
-    params.delete(:pagho) if params[:pagho].to_i < 1
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
@@ -460,16 +249,6 @@ class EventsController < ApplicationController
   def authorize_user
     unless user_can_edit_event?(user: current_user, event: @event)
       redirect_to root_url, flash: {error: "Vi ne rajtas"}
-    end
-  end
-
-  def validate_continent
-    continent_names = Country.pluck(:continent).uniq
-
-    if params[:continent].normalized.in? continent_names.map(&:normalized)
-      @continent = Country.continent_name(params[:continent])
-    else
-      redirect_to root_url, flash: {notice: "Ne estas eventoj en tiu kontinento"}
     end
   end
 

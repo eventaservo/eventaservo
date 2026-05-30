@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class EventsController::ByContinentTest < ActionDispatch::IntegrationTest
+class Events::ByContinentController::ShowTest < ActionDispatch::IntegrationTest
   test "renders calendar for reta continent" do
     get events_by_continent_url(continent: "reta")
     assert_response :success
@@ -54,5 +54,11 @@ class EventsController::ByContinentTest < ActionDispatch::IntegrationTest
     get events_by_continent_url(continent: "europo", pasintaj: 1)
     assert_response :success
     assert_no_match "okazas nuntempe", response.body
+  end
+
+  test "redirects to root with notice for invalid continent" do
+    get events_by_continent_url(continent: "atlantido")
+    assert_redirected_to root_path
+    assert_equal "Ne estas eventoj en tiu kontinento", flash[:notice]
   end
 end
