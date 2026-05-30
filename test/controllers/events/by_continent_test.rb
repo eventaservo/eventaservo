@@ -38,4 +38,21 @@ class EventsController::ByContinentTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "[data-controller='events-calendar']", count: 0
   end
+
+  test "pasintaj=1 lists past events on the continent" do
+    recent = events(:past_event_danio_recent)
+    older = events(:past_event_danio_older)
+
+    get events_by_continent_url(continent: "europo", pasintaj: 1)
+
+    assert_response :success
+    assert_match recent.title, response.body
+    assert_match older.title, response.body
+  end
+
+  test "pasintaj=1 hides the okazantaj/today section" do
+    get events_by_continent_url(continent: "europo", pasintaj: 1)
+    assert_response :success
+    assert_no_match "okazas nuntempe", response.body
+  end
 end

@@ -4,9 +4,17 @@
 
 <div class="box-white">
   <%= render partial: 'layouts/breadcrumb' %>
-  <%= render partial: 'home/view_style_chooser', locals: { kartaro: true, kalendaro: false, mapo: true } %>
-  <%#= render partial: 'events/events_count' %>
-  <%= render partial: 'home/filters' %>
-  <%= render partial: 'events/okazantaj' %>
-  <%= display_events_by_style %>
+
+  <% if @past_mode %>
+    <%= render partial: "events/events_as_cards_pasintaj", locals: {events: @events} %>
+  <% else %>
+    <%= render partial: 'home/view_style_chooser', locals: { kartaro: true, kalendaro: false, mapo: true } %>
+    <%#= render partial: 'events/events_count' %>
+    <%= render partial: 'home/filters' %>
+    <%= render partial: 'events/okazantaj' %>
+    <%= display_events_by_style %>
+    <%= render partial: "events/past_events_toggle", locals: {
+      past_url: events_by_city_path(continent: params[:continent], country_name: params[:country_name], city_name: params[:city_name], pasintaj: 1)
+    } %>
+  <% end %>
 </div>

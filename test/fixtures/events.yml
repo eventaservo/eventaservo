@@ -64,3 +64,29 @@ esperanto_meetup:
   latitude: 37.7749
   longitude: -122.4194
   user: user
+
+# Past events in Danio (country_id: 41, continent: Eŭropo)
+# Used to verify the ?pasintaj=1 listing pages.
+past_event_danio_recent:
+  title: "Kopenhaga Esperanto-kunveno"
+  description: "Pasinta evento por testado"
+  city: "Kopenhago"
+  country_id: 41
+  date_start: <%= 1.month.ago %>
+  date_end: <%= 1.month.ago + 1.day %>
+  code: "kopenhago1mago"
+  site: "https://example.org/k1"
+  email: "k1@example.org"
+  user: user
+
+past_event_danio_older:
+  title: "Aarhusa Renkontiĝo"
+  description: "Pli malnova pasinta evento por testado"
+  city: "Aarhuso"
+  country_id: 41
+  date_start: <%= 6.months.ago %>
+  date_end: <%= 6.months.ago + 2.days %>
+  code: "aarhus6mago"
+  site: "https://example.org/k2"
+  email: "k2@example.org"
+  user: user

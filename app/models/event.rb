@@ -194,14 +194,15 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   # Groups events by their starting month, respecting each event's timezone.
   #
+  # @param direction [Symbol] +:asc+ (default) or +:desc+ ordering of months and events within them
   # @return [Hash{Date => Array<Event>}]
-  def self.grouped_by_months
+  def self.grouped_by_months(direction: :asc)
     tz_cache = Hash.new do |h, k|
       result = TimeZone::Normalize.call(k)
       h[k] = result.success? ? result.payload : "Etc/UTC"
     end
 
-    order(:date_start).group_by do |m|
+    order(date_start: direction).group_by do |m|
       m.date_start.in_time_zone(tz_cache[m.time_zone]).beginning_of_month.to_date
     end
   end

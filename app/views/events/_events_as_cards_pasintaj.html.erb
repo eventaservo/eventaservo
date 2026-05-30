@@ -1,0 +1,17 @@
+<h5 class="text-center fw-bold">
+  <%= t("events.past_events_count", count: @pagy.count) if events.any? %>
+</h5>
+
+<% events.grouped_by_months(direction: :desc).each do |date, events_in_month| %>
+  <br>
+  <h3 class="text-divider"><%= l(date, format: "%B %Y") %></h3>
+  <div class="row">
+    <% events_in_month.each do |event| %>
+      <div class="col-12 col-md-4">
+        <%= render partial: "events/card", locals: {event: event} %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<%= render "shared/pagination", pagy: @pagy %>
