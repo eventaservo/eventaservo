@@ -194,6 +194,16 @@ That document contains:
 - [ ] Use the appropriate template from the guidelines
 - [ ] Use fixtures unless there's a justified reason for FactoryBot
 
+## Skills
+
+Skills are located in `.agents/skills/` and are loaded automatically by opencode, Claude Code, and compatible agents:
+
+- `yard-docs` — Creates/updates YARD documentation for Ruby classes and methods
+- `test-builder` — Creates tests following the project architecture (TEST_ARCHITECTURE.md)
+- `github-issue-creator` — Creates GitHub Issues interactively
+- `eventaservo-pr-creator` — Prepares branches, commits, and creates PRs
+- `eventaservo-code-review` — Reviews PRs or local changes before opening a PR
+
 ## Important Notes
 
 - Do not create branches, commits, or PRs without explicit user permission
