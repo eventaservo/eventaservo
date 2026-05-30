@@ -198,9 +198,9 @@ That document contains:
 
 Skills are located in `.agents/skills/` and are loaded automatically by opencode, Claude Code, and compatible agents:
 
-- `yard-docs` — Creates/updates YARD documentation for Ruby classes and methods
-- `test-builder` — Creates tests following the project architecture (TEST_ARCHITECTURE.md)
-- `github-issue-creator` — Creates GitHub Issues interactively
+- `eventaservo-yard-docs` — Creates/updates YARD documentation for Ruby classes and methods
+- `eventaservo-test-builder` — Creates tests following the project architecture (TEST_ARCHITECTURE.md)
+- `eventaservo-github-issue-creator` — Creates GitHub Issues interactively
 - `eventaservo-pr-creator` — Prepares branches, commits, and creates PRs
 - `eventaservo-code-review` — Reviews PRs or local changes before opening a PR
 

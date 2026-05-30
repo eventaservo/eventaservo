@@ -1,6 +1,6 @@
 ---
-name: yard-docs
-description: Creates or updates YARD documentation for Ruby classes and methods per project rules. Use when the user asks for YARD docs, Ruby docstrings, or when adding or changing classes or methods that need documentation. Triggers on keywords like "YARD", "documentação", "documentation", "criar classe", "novo service", "nova factory". All YARD text must be in English.
+name: eventaservo-yard-docs
+description: Creates or updates YARD documentation for Ruby classes and methods per project rules. Use when the user asks for YARD docs, Ruby docstrings, or when adding or changing classes or methods that need documentation. All YARD text must be in English.
 ---
 
 # YARD Documentation in Eventaservo

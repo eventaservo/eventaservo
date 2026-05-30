@@ -1,6 +1,6 @@
 ---
-name: github-issue-creator
-description: Creates GitHub Issues for the Eventaservo project interactively. Use this skill whenever the user mentions creating a new issue or story — even casual requests like vamos criar uma issue or nova story. A story is a user story (Como [usuário], quero [ação] para [benefício]); an issue is any other GitHub issue (bug, chore, enhancement, etc.). The skill interviews the user, infers type and labels, drafts the full body, shows a preview for approval, then creates it via the GitHub CLI. Always use this skill for new issue creation.
+name: eventaservo-github-issue-creator
+description: Creates GitHub Issues for the Eventaservo project interactively. Use this skill whenever the user mentions creating a new issue or story — even casual requests. A story is a user story (e.g., "As a user, I want to..."); an issue is any other GitHub issue (bug, chore, enhancement, etc.). The skill interviews the user, infers type and labels, drafts the full body, shows a preview for approval, then creates it via the GitHub CLI. Always use this skill for new issue creation.
 ---
 
 # GitHub Issue Creator

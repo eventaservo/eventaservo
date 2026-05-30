@@ -5,8 +5,7 @@ description: >-
   `gh pr create` or updates title/body with `gh pr edit` when a PR already exists for
   the branch. PR descriptions are a short why-first executive summary in English (no
   technical changelog); emojis allowed. Use when the user asks to open or create a PR,
-  update a PR description, refresh pull request text, or similar (including Portuguese
-  phrases like criar PR, abrir pull request, atualizar descrição da PR). Follows
+  update a PR description, or refresh pull request text. Follows
   Eventaservo AGENTS.md (Conventional Commits, English PR text, explicit confirmation
   before push or remote edits).
 ---

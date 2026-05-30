@@ -1,6 +1,6 @@
 ---
-name: test-builder
-description: Create tests following project architecture guidelines. Use when creating tests for models, controllers, services, or any component. Triggers on keywords like "test", "teste", "spec", "create test", "add test", "test coverage".
+name: eventaservo-test-builder
+description: Create tests following project architecture guidelines. Use when creating tests for models, controllers, services, or any component.
 ---
 
 # Test Builder Skill
