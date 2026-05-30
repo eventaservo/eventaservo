@@ -5,8 +5,8 @@ require "test_helper"
 module Organizations
   class SearchQueryTest < ActiveSupport::TestCase
     setup do
-      @country1 = countries(:country_1)
-      @country2 = countries(:country_2)
+      @country1 = countries(:afghanistan)
+      @country2 = countries(:aland_islands)
 
       @org1 = Organization.create!(
         name: "UEA",

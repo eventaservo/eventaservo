@@ -6,8 +6,8 @@ require "test_helper"
 class EventsRssControllerTest < ActionDispatch::IntegrationTest
   setup do
     @brazil = countries(:brazil)
-    @montenegro = countries(:country_146)
-    @online_country = countries(:country_99999)
+    @montenegro = countries(:montenegro)
+    @online_country = countries(:online)
   end
 
   # Tests for RSS feed by country

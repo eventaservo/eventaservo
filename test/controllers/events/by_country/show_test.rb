@@ -4,7 +4,7 @@ require "test_helper"
 
 class Events::ByCountryController::ShowTest < ActionDispatch::IntegrationTest
   test "renders by_country page when visitor has a legacy timezone cookie" do
-    country = countries(:country_41)
+    country = countries(:denmark)
 
     get events_by_country_url(continent: country.continent.normalized,
       country_name: country.name.normalized),
@@ -18,7 +18,7 @@ class Events::ByCountryController::ShowTest < ActionDispatch::IntegrationTest
   end
 
   test "pasintaj=1 lists past events for the country" do
-    country = countries(:country_41)
+    country = countries(:denmark)
     recent = events(:past_event_danio_recent)
     older = events(:past_event_danio_older)
 
@@ -31,7 +31,7 @@ class Events::ByCountryController::ShowTest < ActionDispatch::IntegrationTest
   end
 
   test "pasintaj=1 orders past events newest first" do
-    country = countries(:country_41)
+    country = countries(:denmark)
     recent = events(:past_event_danio_recent)
     older = events(:past_event_danio_older)
 
@@ -44,7 +44,7 @@ class Events::ByCountryController::ShowTest < ActionDispatch::IntegrationTest
   end
 
   test "without pasintaj param the past events do not appear" do
-    country = countries(:country_41)
+    country = countries(:denmark)
     older = events(:past_event_danio_older)
 
     get events_by_country_url(continent: country.continent.normalized,
@@ -68,7 +68,7 @@ class Events::ByCountryController::ShowTest < ActionDispatch::IntegrationTest
   end
 
   test "renders RSS feed for country" do
-    country = countries(:country_41)
+    country = countries(:denmark)
     get events_by_country_url(continent: country.continent.normalized,
       country_name: country.name.normalized, format: :xml)
     assert_response :success
