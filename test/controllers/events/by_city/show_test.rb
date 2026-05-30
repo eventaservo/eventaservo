@@ -4,7 +4,7 @@ require "test_helper"
 
 class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
   test "pasintaj=1 lists past events for the city" do
-    country = Country.find(41) # Danio
+    country = countries(:country_41)
     recent = events(:past_event_danio_recent)
 
     get events_by_city_url(continent: country.continent.normalized,
@@ -17,7 +17,7 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
   end
 
   test "pasintaj=1 excludes events from other cities" do
-    country = Country.find(41) # Danio
+    country = countries(:country_41)
     recent = events(:past_event_danio_recent)
     older = events(:past_event_danio_older) # in a different city
 
