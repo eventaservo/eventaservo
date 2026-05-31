@@ -39,7 +39,7 @@ class Organization < ApplicationRecord
 
   validates :name, :short_name, presence: true
   validates :short_name, uniqueness: {case_sensitive: false}
-  validates :short_name, format: {with: /\A[a-zA-Z0-9_\-ĈĉĴĵĜĝĤĥŜŝŬŭÜüÀàÁáÂâÄäÅåÈèÉéÊêĘęėëÍíÎîìïÇçĆćČčŁłÓóÔôÖöØøòõōŚśŠšßÚúùûÝýŹźŻżŽž]*\z/, message: "enhavas spaco(j)n aŭ nevalida(j)n signo(j)n"}
+  validates :short_name, format: {with: /\A[a-zA-Z0-9_\-ĈĉĴĵĜĝĤĥŜŝŬŭÜüÀàÁáÂâÄäÅåÈèÉéÊêĘęėëÍíÎîìïÇçĆćČčŁłÓóÔôÖöØøòõōŚśŠšßÚúùûÝýŹźŻżŽž]*\z/, message: "enhavas nevalidan signon"}
 
   # Mains organizations are UEA and TEJO
   scope :mains, -> { where(major: true) }
