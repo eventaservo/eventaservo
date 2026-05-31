@@ -39,11 +39,25 @@ class OrganizationTest < ActiveSupport::TestCase
   end
 
   test "validated the format of short_name" do
+    # Spaces are now auto-converted to underscores by normalize_short_name
     organization = build(:organization, short_name: "organizo kun spacoj")
-    assert_not organization.valid?
+    organization.valid?
+    assert_equal "organizo_kun_spacoj", organization.short_name
 
     organization = build(:organization, short_name: "organizo,kun.signoj*divers@aj")
     assert_not organization.valid?
+  end
+
+  test "normalizes short_name by replacing spaces with underscores" do
+    organization = build(:organization, short_name: "  Nova Organizo  ")
+    organization.valid?
+    assert_equal "Nova_Organizo", organization.short_name
+  end
+
+  test "normalizes short_name by stripping leading and trailing whitespace" do
+    organization = build(:organization, short_name: "  UEA  ")
+    organization.valid?
+    assert_equal "UEA", organization.short_name
   end
 
   test "should have one attached logo" do
