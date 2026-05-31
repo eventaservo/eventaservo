@@ -34,6 +34,7 @@ class Organization < ApplicationRecord
   has_many :eventoj, through: :organization_events, source: :event # @deprecated use .events
   belongs_to :country
 
+  before_validation :normalize_short_name
   before_validation :normalize_urls
 
   validates :name, :short_name, presence: true
@@ -111,6 +112,14 @@ class Organization < ApplicationRecord
   # @return [String]
   def to_param
     short_name
+  end
+
+  # Normalizes the short_name by stripping whitespace and replacing
+  # internal spaces with underscores to prevent invalid URL slugs.
+  #
+  # @return [void]
+  def normalize_short_name
+    self.short_name = short_name&.strip&.gsub(/\s+/, "_")
   end
 
   def normalize_urls
