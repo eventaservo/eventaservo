@@ -17,9 +17,8 @@ Rails.application.routes.draw do
   get "/versio", to: "home#versio", format: :json
   get "/dev/error", to: "home#error"
 
-  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
-
   authenticated :user, ->(user) { user.admin? } do
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
     mount MissionControl::Jobs::Engine, at: "/jobs"
     mount MaintenanceTasks::Engine, at: "/maintenance_tasks"
   end
