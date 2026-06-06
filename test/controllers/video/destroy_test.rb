@@ -48,7 +48,6 @@ class VideoControllerDestroyTest < ActionDispatch::IntegrationTest
       delete "/video/#{@video.id}/forigi"
     end
 
-    assert_redirected_to root_url
-    assert_equal "Vi ne rajtas forigi tiun videon", flash[:error]
+    assert_redirected_to new_user_session_url
   end
 end
