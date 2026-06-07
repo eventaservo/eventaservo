@@ -13,6 +13,7 @@
             value="<%= @search_term %>"
             name="query"
             placeholder="Serĉi eventojn aŭ organizojn... (minimume 3 signoj)"
+            aria-label="Serĉofrazo"
             class="form-control <%= 'is-invalid' unless @search_is_valid %>"
             >
             <%= form.submit '🔎', class: 'btn btn-outline-primary' %>
