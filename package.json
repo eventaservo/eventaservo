@@ -24,7 +24,7 @@
     "jquery-ui-dist": "^1.13.3",
     "leaflet": "^1.9.4",
     "leaflet.markercluster": "^1.5.3",
-    "sass": "^1.97.2",
+    "sass": "^1.97.3",
     "slim-select": "^2.13.1",
     "trix": "^2.1.19"
   },
