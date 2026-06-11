@@ -1,5 +1,27 @@
 # Changelog
 
+## [3.0.10](https://github.com/eventaservo/eventaservo/compare/v3.0.9...v3.0.10) (2026-06-11)
+
+
+### Bug Fixes
+
+* evitar inicialização dupla do Sentry Session Replay com Turbo Drive ([4983c8d](https://github.com/eventaservo/eventaservo/commit/4983c8df1ba453a55f1f1acf2055bc2df2916c25))
+* normalize organization short_name by replacing spaces with underscores ([#1255](https://github.com/eventaservo/eventaservo/issues/1255)) ([69b7e7d](https://github.com/eventaservo/eventaservo/commit/69b7e7d7edd833cbfc019fad70d17ba3fe77cb13))
+* prevent signed_id error on new organization logo ([#1251](https://github.com/eventaservo/eventaservo/issues/1251)) ([2e552e9](https://github.com/eventaservo/eventaservo/commit/2e552e9686976d8b1c8e1e589ec847232b366b6c))
+
+
+### Miscellaneous Chores
+
+* **deps:** bump net-imap in the bundler group across 1 directory ([f46b3bf](https://github.com/eventaservo/eventaservo/commit/f46b3bf72a6f58af6bf1dcae40be015ca8af1f1d))
+* **deps:** configure Dependabot for weekly patch-only gem and npm updates ([6874c48](https://github.com/eventaservo/eventaservo/commit/6874c486776febcb8c4f0369425ad94130c5b63d))
+* **deps:** update Rails npm packages to latest patch versions ([cb33dac](https://github.com/eventaservo/eventaservo/commit/cb33daca8674ed5a94c5d106d06a16546e89ee9b))
+* **deps:** update thruster and patch-level gem dependencies ([594ae60](https://github.com/eventaservo/eventaservo/commit/594ae60ebf96e288101791849ea4f01eceae59d9))
+* enable LetterOpenerWeb on staging, disable SendGrid ([ea28448](https://github.com/eventaservo/eventaservo/commit/ea2844822e853c68e7578a87758fc8c04ae16e7a))
+* extract email footer to partial, update donation details ([550f891](https://github.com/eventaservo/eventaservo/commit/550f891ebbd3d2025150d7ef34574894d8084c5e))
+* simplify footer text, move IBAN details to target page ([4e6973c](https://github.com/eventaservo/eventaservo/commit/4e6973c4406ed196b37fca10d86ab7f5d04e7f67))
+* update Subteni navbar link to nevelsteen.info/instigo ([0d08842](https://github.com/eventaservo/eventaservo/commit/0d088427693ace1fb177bb7b69fc1031a0af11da))
+* upgrade Ruby to 4.0.5 and update Docker image ([15c03fb](https://github.com/eventaservo/eventaservo/commit/15c03fb397e4e7d831a93832e70d09ca7a545877))
+
 ## [3.0.9](https://github.com/eventaservo/eventaservo/compare/v3.0.8...v3.0.9) (2026-05-30)
 
 
