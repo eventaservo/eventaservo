@@ -119,6 +119,7 @@ GEM
       aws-eventstream (~> 1, >= 1.0.2)
     base64 (0.3.0)
     bcrypt (3.1.22)
+    benchmark (0.5.0)
     better_errors (2.10.1)
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
@@ -126,7 +127,7 @@ GEM
     bigdecimal (4.1.2)
     binding_of_caller (2.0.0)
       debug_inspector (>= 1.2.0)
-    bootsnap (1.24.5)
+    bootsnap (1.24.6)
       msgpack (~> 1.2)
     brakeman (8.0.4)
       racc
@@ -359,7 +360,7 @@ GEM
     mutex_m (0.3.0)
     net-http (0.9.1)
       uri (>= 0.11.1)
-    net-imap (0.6.4)
+    net-imap (0.6.4.1)
       date
       net-protocol
     net-pop (0.1.2)
@@ -408,7 +409,7 @@ GEM
     orm_adapter (0.5.0)
     os (1.1.4)
     ostruct (0.6.3)
-    pagy (43.5.5)
+    pagy (43.5.6)
       json
       uri
       yaml
@@ -586,7 +587,7 @@ GEM
       docile (~> 1.1)
       simplecov-html (~> 0.11)
       simplecov_json_formatter (~> 0.1)
-    simplecov-cobertura (3.1.0)
+    simplecov-cobertura (3.1.2)
       rexml
       simplecov (~> 0.19)
     simplecov-html (0.13.2)
@@ -669,6 +670,7 @@ DEPENDENCIES
   ahoy_matey (~> 5)
   annotaterb
   aws-sdk-s3 (~> 1.224)
+  benchmark
   better_errors
   binding_of_caller
   bootsnap
@@ -746,7 +748,7 @@ DEPENDENCIES
   yard
 
 RUBY VERSION
-   ruby 3.4.9
+  ruby 4.0.5
 
 BUNDLED WITH
-   2.4.6
+  4.0.14
