@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.0.11](https://github.com/eventaservo/eventaservo/compare/v3.0.10...v3.0.11) (2026-06-12)
+
+
+### Bug Fixes
+
+* **a11y:** localize and add missing aria-labels to search form inputs ([919bc88](https://github.com/eventaservo/eventaservo/commit/919bc88422d01be4e07d5b509b0a843e76abb384))
+* **security:** Fix CSRF vulnerability in organization admin management ([8ed2b3e](https://github.com/eventaservo/eventaservo/commit/8ed2b3e3ea23059c858b2eb8094372ecb09fb21e))
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump simplecov-cobertura from 3.1.0 to 3.1.2 ([b8ffec8](https://github.com/eventaservo/eventaservo/commit/b8ffec8f9463c01814af7787624545bfa6dc7e5f))
+* **deps:** bump codecov/codecov-action from 6 to 7 ([ab004e0](https://github.com/eventaservo/eventaservo/commit/ab004e058dccdf5102e80b452548d06773511953))
+* **deps:** bump pagy from 43.5.5 to 43.5.6 ([cce5bdc](https://github.com/eventaservo/eventaservo/commit/cce5bdc38133844b9c666210b7d1d1916370c847))
+* **deps:** bump sass from 1.97.2 to 1.97.3 ([bf7ec65](https://github.com/eventaservo/eventaservo/commit/bf7ec6556bff0d75a989d5ed4e8eec9c3e7db540))
+
 ## [3.0.10](https://github.com/eventaservo/eventaservo/compare/v3.0.9...v3.0.10) (2026-06-11)
 
 
