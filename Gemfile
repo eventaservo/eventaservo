@@ -3,7 +3,10 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "~> 3.4.9"
+ruby "~> 4.0.5"
+
+# Ruby 4.0 removed several stdlib gems from defaults
+gem "benchmark"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 8.1.0"
@@ -38,6 +41,7 @@ gem "simple_token_authentication", github: "gonzalo-bulnes/simple_token_authenti
 # gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder", "~> 2.14"
+gem "letter_opener_web", "~> 3"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -126,7 +130,6 @@ group :development do
   gem "binding_of_caller"
   gem "herb", "~> 0.10.1"
   gem "htmlbeautifier", "~> 1.4"
-  gem "letter_opener_web", "~> 3"
   gem "pry-rails", "~> 0.3.4"
   gem "seed_dump" # Por rekrei la seeds.db dosieron
   gem "standard"

@@ -67,19 +67,8 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
 
   config.action_mailer.perform_caching = false
   config.action_mailer.perform_deliveries = true
-
-  # Sendgrid
-  config.action_mailer.smtp_settings = {
-    address: "smtp.sendgrid.net",
-    port: "587",
-    user_name: "apikey",
-    password: Rails.application.credentials.dig(:email, :sendgrid, :password),
-    enable_starttls_auto: true
-  }
-
-  # Ignore bad email addresses and do not raise email delivery errors.
-  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.delivery_method = :letter_opener_web
+  config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.default_url_options = {host: "testservilo.eventaservo.org", protocol: "https"}
 
@@ -109,7 +98,4 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
   config.active_job.default_url_options = {host: "testservilo.eventaservo.org", protocol: :https}
   Rails.application.routes.default_url_options[:host] = "testservilo.eventaservo.org"
   Rails.application.routes.default_url_options[:protocol] = :https
-
-  # Email interceptor for Staging
-  config.action_mailer.interceptors = %w[StagingEmailInterceptor]
 end
