@@ -3,7 +3,10 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "~> 3.4.9"
+ruby "~> 4.0.5"
+
+# Ruby 4.0 removed several stdlib gems from defaults
+gem "benchmark"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 8.1.0"
