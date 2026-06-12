@@ -1,0 +1,3 @@
+## 2024-06-07 - Add missing aria-labels to search form inputs
+**Learning:** Found an accessibility issue where search input fields were lacking context for screen readers. In one case, the main search form input lacked an `aria-label` completely. In another case, the `aria-label` used was in English ("Search") instead of matching the primary language of the application ("Serĉi" - Esperanto), leading to confusing screen reader announcements.
+**Action:** Always ensure search input forms have matching semantic labels (`aria-label` or `<label>`) and properly translate any `aria-` properties to match the native UI language.
