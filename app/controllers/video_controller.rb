@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class VideoController < ApplicationController
+  before_action :authenticate_user!, only: %i[new create destroy]
+
   def index
     ahoy.track "Visit Registritaj prezentoj page"
     @videoj = ::Video.joins(:evento).order("events.date_start DESC")
@@ -9,10 +11,19 @@ class VideoController < ApplicationController
 
   def new
     @evento = Event.by_link(params[:event_code])
+    unless user_can_edit_event?(user: current_user, event: @evento)
+      redirect_to root_url, flash: {error: "Vi ne rajtas"}
+      return
+    end
   end
 
   def create
     event = Event.by_link(params[:event_code])
+    unless user_can_edit_event?(user: current_user, event: event)
+      redirect_to root_url, flash: {error: "Vi ne rajtas"}
+      return
+    end
+
     params.permit(:event_code, :video_link, :title, :description, :image)
     new_video = Video.create(evento: event,
       url: params[:video_link],
@@ -28,7 +39,7 @@ class VideoController < ApplicationController
 
   def destroy
     video = Video.find(params[:id])
-    if user_can_edit_event?(user: @current_user, event: video.evento)
+    if user_can_edit_event?(user: current_user, event: video.evento)
       video.destroy
       ahoy.track "Delete video from event", event_url: video.evento.short_url, video_url: video.url
       flash[:success] = "Video forigita"
