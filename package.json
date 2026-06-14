@@ -15,7 +15,7 @@
     "@rails/ujs": "^7.1.600",
     "bootstrap": "^5.3",
     "chartkick": "^5.0.1",
-    "esbuild": "^0.25.12",
+    "esbuild": "^0.28.1",
     "flag-icons": "^7.5.0",
     "glightbox": "^3.3.1",
     "highcharts": "^11.4.8",
