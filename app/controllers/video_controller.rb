@@ -11,8 +11,9 @@ class VideoController < ApplicationController
 
   def new
     @evento = Event.by_link(params[:event_code])
-    if !user_can_edit_event?(user: current_user, event: @evento)
+    unless user_can_edit_event?(user: current_user, event: @evento)
       redirect_to root_url, flash: {error: "Vi ne rajtas"}
+      return
     end
   end
 
