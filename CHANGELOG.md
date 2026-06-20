@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.12](https://github.com/eventaservo/eventaservo/compare/v3.0.11...v3.0.12) (2026-06-20)
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump brakeman from 8.0.4 to 8.0.5 ([b78be0a](https://github.com/eventaservo/eventaservo/commit/b78be0abfca8d00258d52aed4789890344ba1738))
+* **deps:** bump esbuild from 0.25.12 to 0.28.1 in the npm_and_yarn group across 1 directory ([#1278](https://github.com/eventaservo/eventaservo/issues/1278)) ([b340761](https://github.com/eventaservo/eventaservo/commit/b3407615cca11e0674367a3cae2a3cbf5243f7e1))
+* **deps:** bump esbuild in the npm_and_yarn group across 1 directory ([b340761](https://github.com/eventaservo/eventaservo/commit/b3407615cca11e0674367a3cae2a3cbf5243f7e1))
+* **deps:** bump the bundler group across 1 directory with 3 updates ([5964d7b](https://github.com/eventaservo/eventaservo/commit/5964d7b3c7d8496f7f47bb8990b5aecbf7f10be1))
+* **deps:** update nokogiri to 1.19.4 ([#1280](https://github.com/eventaservo/eventaservo/issues/1280)) ([b17f7b9](https://github.com/eventaservo/eventaservo/commit/b17f7b9d064b0ca85b98f156b0a9a4a67af88695))
+
 ## [3.0.11](https://github.com/eventaservo/eventaservo/compare/v3.0.10...v3.0.11) (2026-06-12)
 
 
