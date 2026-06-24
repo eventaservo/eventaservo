@@ -388,8 +388,18 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   # aldonas +user+ kiel partoprenanto de la evento
+  #
+  # @note Uses +create_or_find_by+ to handle race conditions when duplicate
+  #   toggle requests arrive concurrently. The database unique constraint on
+  #   +(event_id, user_id)+ ensures only one participant record per user per event.
+  #
+  # @param user [User]
+  # @param public [Boolean] whether the participant shows in the public list
+  # @return [Participant]
   def add_participant(user, public: false)
-    Participant.create(event_id: id, user_id: user.id, public: public)
+    Participant.create_or_find_by(event_id: id, user_id: user.id) do |p|
+      p.public = public
+    end
   end
 
   # Forviŝas la +user+ el la evento

@@ -287,4 +287,16 @@ class EventTest < ActiveSupport::TestCase
     # The actual conversion is tested implicitly by other tests
     assert true
   end
+
+  test "add_participant should not raise when participant already exists (race condition)" do
+    event = create(:event)
+    user = create(:user)
+    Participant.create(event_id: event.id, user_id: user.id, public: false)
+
+    assert_nothing_raised do
+      event.add_participant(user)
+    end
+
+    assert_equal 1, event.participants.count
+  end
 end
