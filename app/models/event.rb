@@ -437,7 +437,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def first_body_image
-    enhavo.body&.attachments&.find { |attachment| attachment.content_type == "image" }
+    enhavo.body&.attachments&.find { |attachment| attachment.attachable.try(:content_type)&.start_with?("image") }
   end
 
   def organization_logo
