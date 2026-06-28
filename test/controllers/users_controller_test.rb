@@ -27,4 +27,22 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_equal edit_user_registration_path, path
     assert_select ".alert-primary", /#{I18n.t("activerecord.registrations.token_regenerated")}/
   end
+
+  test "regenerate_api_token handles failure" do
+    # Stub the service call to return a failure result
+    result = Struct.new(:success?, :error).new(false, "Test Error")
+
+    Users::RegenerateApiToken.stub(:call, result) do
+      post regenerate_api_token_path, headers: {"HTTP_REFERER" => edit_user_registration_url}
+    end
+
+    # Check redirect (303 See Other)
+    assert_redirected_to edit_user_registration_path
+    assert_response :see_other
+
+    follow_redirect!
+    assert_response :success
+    assert_equal edit_user_registration_path, path
+    assert_select ".alert-danger", /Test Error/
+  end
 end
