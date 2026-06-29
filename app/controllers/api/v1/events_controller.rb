@@ -27,12 +27,12 @@ module Api
       #   uuid
       def validate_index_params
         if (params[:komenca_dato].blank? || params[:fina_dato].blank?) && params[:uuid].blank?
-          render json: {eraro: "Mankas datoj aŭ eventa uuid"}, status: 400 and return
+          render json: {eraro: "Mankas datoj aŭ eventa uuid"}, status: :bad_request and return
         end
 
         date_string = /\d{4}-\d{2}-\d{2}/
         return true if params[:uuid].present?
-        render json: {eraro: "Data formato malĝustas"}, status: 400 and return unless params[:komenca_dato] =~ date_string && params[:fina_dato] =~ date_string
+        render json: {eraro: "Data formato malĝustas"}, status: :bad_request and return unless params[:komenca_dato] =~ date_string && params[:fina_dato] =~ date_string
       end
 
       def validate_date(date)
