@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.0.13](https://github.com/eventaservo/eventaservo/compare/v3.0.12...v3.0.13) (2026-06-29)
+
+
+### Bug Fixes
+
+* ensure ahoy_visits has a primary key constraint ([6092755](https://github.com/eventaservo/eventaservo/commit/60927554c337ce1cc375fb61d744f0ee7b7fffee))
+* handle ActionText::Attachment in first_body_image ([7648596](https://github.com/eventaservo/eventaservo/commit/76485969d1f33effdb25888827f13ce610e33e85))
+* handle duplicate participant race condition in add_participant ([32b003a](https://github.com/eventaservo/eventaservo/commit/32b003a89646933d69540b5e935d497363ae8e5a))
+* robust PK detection in ahoy_visits migration (ntuples) ([87da82f](https://github.com/eventaservo/eventaservo/commit/87da82f77e155fc997d1557cacba203ec0f1a6d3))
+
+
+### Miscellaneous Chores
+
+* **deps:** bump dompurify in the npm_and_yarn group across 1 directory ([17aaf8f](https://github.com/eventaservo/eventaservo/commit/17aaf8ffb11d53df948e823d61f3bd5711b2d785))
+
 ## [3.0.12](https://github.com/eventaservo/eventaservo/compare/v3.0.11...v3.0.12) (2026-06-20)
 
 
