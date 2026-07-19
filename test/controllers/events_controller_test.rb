@@ -45,6 +45,33 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  # GET #edit tests
+  class EditTest < EventsControllerTest
+    setup do
+      @user = create(:user)
+      @event = create(:event, user: @user)
+    end
+
+    test "edit requires authentication" do
+      get edit_event_path(code: @event.code)
+      assert_redirected_to new_user_session_path
+    end
+
+    test "edit returns http success for owner" do
+      sign_in @user
+      get edit_event_path(code: @event.code)
+      assert_response :success
+    end
+
+    test "edit redirects for unauthorized user" do
+      other_user = create(:user)
+      sign_in other_user
+      get edit_event_path(code: @event.code)
+      assert_redirected_to root_url
+      assert_equal "Vi ne rajtas", flash[:error]
+    end
+  end
+
   # GET #kronologio tests
   class KronologioTest < EventsControllerTest
     test "kronologio returns http success" do
