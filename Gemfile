@@ -128,7 +128,7 @@ group :development do
   gem "annotaterb", require: false
   gem "better_errors"
   gem "binding_of_caller"
-  gem "herb", "~> 0.10.1"
+  gem "herb", "~> 0.10.2"
   gem "htmlbeautifier", "~> 1.4"
   gem "pry-rails", "~> 0.3.4"
   gem "seed_dump" # Por rekrei la seeds.db dosieron
