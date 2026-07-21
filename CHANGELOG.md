@@ -1,5 +1,29 @@
 # Changelog
 
+## [3.0.13](https://github.com/eventaservo/eventaservo/compare/v3.0.12...v3.0.13) (2026-07-21)
+
+
+### Bug Fixes
+
+* ensure ahoy_visits has a primary key constraint ([6092755](https://github.com/eventaservo/eventaservo/commit/60927554c337ce1cc375fb61d744f0ee7b7fffee))
+* handle ActionText::Attachment in first_body_image ([7648596](https://github.com/eventaservo/eventaservo/commit/76485969d1f33effdb25888827f13ce610e33e85))
+* handle duplicate participant race condition in add_participant ([32b003a](https://github.com/eventaservo/eventaservo/commit/32b003a89646933d69540b5e935d497363ae8e5a))
+* robust PK detection in ahoy_visits migration (ntuples) ([87da82f](https://github.com/eventaservo/eventaservo/commit/87da82f77e155fc997d1557cacba203ec0f1a6d3))
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump herb from 0.10.1 to 0.10.2 ([0483207](https://github.com/eventaservo/eventaservo/commit/0483207078fc0aa357670ad63704058cb5929ed3))
+* **deps:** bump actions/checkout from 4 to 7 ([#1291](https://github.com/eventaservo/eventaservo/issues/1291)) ([86e9ff2](https://github.com/eventaservo/eventaservo/commit/86e9ff2d035c1a0c186373ea8d6a0353ee75dc04))
+* **deps:** bump css_parser from 2.1.0 to 3.0.0 in the bundler group across 1 directory ([#1296](https://github.com/eventaservo/eventaservo/issues/1296)) ([df29479](https://github.com/eventaservo/eventaservo/commit/df29479ba70f6be2f5928d7012cea4d37ca04cd0))
+* **deps:** bump css_parser in the bundler group across 1 directory ([df29479](https://github.com/eventaservo/eventaservo/commit/df29479ba70f6be2f5928d7012cea4d37ca04cd0))
+* **deps:** bump dompurify in the npm_and_yarn group across 1 directory ([17aaf8f](https://github.com/eventaservo/eventaservo/commit/17aaf8ffb11d53df948e823d61f3bd5711b2d785))
+* **deps:** bump thruster from 0.1.21 to 0.1.22 ([#1293](https://github.com/eventaservo/eventaservo/issues/1293)) ([7983389](https://github.com/eventaservo/eventaservo/commit/798338997e4be66e5503f8312ecb2e70c068df45))
+* **deps:** bump thruster from 0.1.22 to 0.1.23 ([30114a3](https://github.com/eventaservo/eventaservo/commit/30114a3cd354d38ff06942bdd793951b0c179c89))
+* **deps:** bump yard from 0.9.44 to 0.9.45 ([c5a8a08](https://github.com/eventaservo/eventaservo/commit/c5a8a08ad5feac69edb9b8271c54d75bca411330))
+* **deps:** patch security vulnerabilities in crass, loofah, msgpack, oauth2, rails-html-sanitizer, websocket-driver ([#1303](https://github.com/eventaservo/eventaservo/issues/1303)) ([86fc2f3](https://github.com/eventaservo/eventaservo/commit/86fc2f372b4cf798adf8b2c27b4ebddb152c2022))
+* **deps:** update mail gem to version 2.9.1 ([#1294](https://github.com/eventaservo/eventaservo/issues/1294)) ([b97956d](https://github.com/eventaservo/eventaservo/commit/b97956df3d75db752f97a9703a66f9a1644f2e54))
+
 ## [3.0.12](https://github.com/eventaservo/eventaservo/compare/v3.0.11...v3.0.12) (2026-06-20)
 
 
