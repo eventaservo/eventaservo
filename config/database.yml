@@ -1,6 +1,6 @@
 default: &default
   adapter: postgresql
-  pool: <%= ENV.fetch("DB_POOL") { 5 }.to_i %>
+  pool: <%= ENV.fetch("DB_POOL") { 20 }.to_i %>
   timeout: <%= ENV.fetch("DB_TIMEOUT") { 5000 }.to_i %>
   checkout_timeout: <%= ENV.fetch("DB_CHECKOUT_TIMEOUT") { 10 }.to_i %>
   reconnect: true
