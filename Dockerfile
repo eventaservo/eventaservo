@@ -72,6 +72,10 @@ RUN yarn install
 
 COPY . .
 
+# Download GeoLite2 offline IP geocoding database
+RUN curl -fSL -o /eventaservo/GeoLite2-City.mmdb \
+  https://cdn.jsdelivr.net/npm/geolite2-city@1.0.0/GeoLite2-City.mmdb
+
 ARG RAILS_MASTER_KEY
 ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
 
