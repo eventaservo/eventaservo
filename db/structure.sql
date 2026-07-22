@@ -10,13 +10,6 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: public; Type: SCHEMA; Schema: -; Owner: -
---
-
--- *not* creating schema, since initdb creates it
-
-
---
 -- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: -
 --
 
@@ -2120,6 +2113,13 @@ CREATE INDEX index_ahoy_events_on_visit_id ON public.ahoy_events USING btree (vi
 
 
 --
+-- Name: index_ahoy_visits_on_started_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_ahoy_visits_on_started_at ON public.ahoy_visits USING btree (started_at);
+
+
+--
 -- Name: index_ahoy_visits_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2407,6 +2407,13 @@ CREATE INDEX index_participants_on_event_id ON public.participants USING btree (
 
 
 --
+-- Name: index_participants_on_event_id_and_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_participants_on_event_id_and_user_id ON public.participants USING btree (event_id, user_id);
+
+
+--
 -- Name: index_participants_on_public; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2421,14 +2428,7 @@ CREATE INDEX index_participants_on_user_id ON public.participants USING btree (u
 
 
 --
--- Name: index_participants_on_event_id_and_user_id; Type: INDEX; Schema: public; Owner: --
---
-
-CREATE UNIQUE INDEX index_participants_on_event_id_and_user_id ON public.participants USING btree (event_id, user_id);
-
-
---
--- Name: index_rollups_on_name_and_interval_and_time_and_dimensions; Type: INDEX; Schema: public; Owner: --
+-- Name: index_rollups_on_name_and_interval_and_time_and_dimensions; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_rollups_on_name_and_interval_and_time_and_dimensions ON public.rollups USING btree (name, "interval", "time", dimensions);
@@ -2822,6 +2822,7 @@ ALTER TABLE ONLY public.solid_queue_scheduled_executions
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20260722080000'),
 ('20260625220000'),
 ('20260528220136'),
 ('20260522090552'),
