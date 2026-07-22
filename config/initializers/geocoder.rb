@@ -8,9 +8,9 @@
 # Documentation: https://github.com/alexreisner/geocoder
 
 Geocoder.configure(
-  # IP address geocoding using the MaxMind offline database
-  ip_lookup: :maxmind_local,
-  maxmind_local: {
+  # IP address geocoding using the MaxMind offline database (.mmdb format)
+  ip_lookup: :maxminddb,
+  maxminddb: {
     file: Rails.root.join("GeoLite2-City.mmdb").to_s
   },
 
