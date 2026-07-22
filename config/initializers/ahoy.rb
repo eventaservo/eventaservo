@@ -11,8 +11,8 @@ Ahoy.api = false
 # Track bots
 Ahoy.track_bots = true
 
-# set to true for geocoding (and add the geocoder gem to your Gemfile)
-# we recommend configuring local geocoding as well
+# set to true for IP geocoding via the geocoder gem (configured below)
+# Uses MaxMind GeoLite2 local database (no external API calls).
 # see https://github.com/ankane/ahoy#geocoding
 Ahoy.geocode = true if Rails.env.production?
 

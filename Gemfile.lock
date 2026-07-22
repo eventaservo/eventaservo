@@ -339,6 +339,7 @@ GEM
       zeitwerk (>= 2.6.2)
     marcel (1.1.0)
     matrix (0.4.3)
+    maxminddb (0.1.22)
     method_source (1.1.0)
     mini_magick (4.13.2)
     mini_mime (1.1.5)
@@ -708,6 +709,7 @@ DEPENDENCIES
   letter_opener_web (~> 3)
   listen
   maintenance_tasks (~> 2.16)
+  maxminddb (~> 0.1)
   mini_magick (~> 4.10)
   minitest (~> 6.0)
   minitest-mock (~> 5.27)
