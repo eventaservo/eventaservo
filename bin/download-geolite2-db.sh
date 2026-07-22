@@ -15,7 +15,7 @@
 
 set -euo pipefail
 
-MIRROR_URL="https://cdn.jsdelivr.net/npm/geolite2-city@1.0.0/GeoLite2-City.mmdb"
+MIRROR_URL="https://raw.githubusercontent.com/P3TERX/GeoLite.mmdb/download/GeoLite2-City.mmdb"
 DEST_DIR="${1:-$(cd "$(dirname "$0")/.." && pwd)}"
 DEST_FILE="${DEST_DIR}/GeoLite2-City.mmdb"
 
