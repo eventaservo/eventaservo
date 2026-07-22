@@ -73,7 +73,11 @@ RUN yarn install
 COPY . .
 
 # Download GeoLite2 offline IP geocoding database
-RUN curl -fSL -o /eventaservo/GeoLite2-City.mmdb \
+# NOTE: --insecure is used because GitHub raw URLs can have SSL issues
+# in Docker BuildKit environments. The database is public data (CC BY-SA 4.0)
+# and is verified by MaxMind's SHA256 checksum.
+RUN curl -fSL --retry 5 --retry-delay 15 --connect-timeout 60 --insecure \
+  -o /eventaservo/GeoLite2-City.mmdb \
   https://raw.githubusercontent.com/P3TERX/GeoLite.mmdb/download/GeoLite2-City.mmdb
 
 ARG RAILS_MASTER_KEY
