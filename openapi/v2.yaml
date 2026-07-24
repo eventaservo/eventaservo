@@ -3,15 +3,17 @@ info:
   title: EventaServo API
   version: '2.0'
   contact:
-    name: Fernando
+    name: Fernando Shayani
     url: 'https://github.com/eventaservo'
     email: fernando@eventaservo.org
   termsOfService: 'https://eventaservo.org/LICENSE'
   license:
-    name: AGPL-3
+    name: AGPL-3.0
     url: 'https://github.com/eventaservo/eventaservo/blob/main/LICENSE'
-  summary: EventaServo API Documentation
-  description: EventaServo API Documentation
+  summary: EventaServo API v2
+  description: |
+    EventaServo is a platform for organizing and publicizing Esperanto events worldwide.
+    This API v2 provides programmatic access to events and organizations.
 servers:
   - url: 'https://eventaservo.org/api/v2'
     description: Production
@@ -21,88 +23,60 @@ paths:
   /eventoj:
     get:
       summary: List events
+      description: >
+        List events by date range, country, or organization.
+        You must provide either `komenca_dato` + `fina_dato` **or** `uuid`.
       tags:
-        - Eventoj
+        - Events
+      operationId: get-events-index
+      parameters:
+        - name: komenca_dato
+          in: query
+          required: false
+          description: Start date of the filter period (YYYY-MM-DD). Required when `uuid` is not provided.
+          schema:
+            type: string
+            format: date
+            example: '2026-01-01'
+        - name: fina_dato
+          in: query
+          required: false
+          description: End date of the filter period (YYYY-MM-DD). Required when `uuid` is not provided.
+          schema:
+            type: string
+            format: date
+            example: '2026-12-31'
+        - name: uuid
+          in: query
+          required: false
+          description: UUID of a specific event. When provided, `komenca_dato` and `fina_dato` are not needed.
+          schema:
+            type: string
+            format: uuid
+            example: e567bdc3-0ea2-46cc-8a83-3b11facbe16c
+        - name: landa_kodo
+          in: query
+          required: false
+          description: Filter by 2-letter country code. Case-insensitive (e.g. `BR`, `br`, `Fr`).
+          schema:
+            type: string
+            example: BR
+        - name: o
+          in: query
+          required: false
+          description: Filter by organization short name (e.g. `UEA`).
+          schema:
+            type: string
+            example: UEA
       responses:
         '200':
-          description: OK
+          description: A list of events matching the filter criteria.
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    uuid:
-                      type: string
-                      example: 206da237-65ee-4b86-96f6-5bd4cc3bd210
-                      format: uuid
-                    kodo:
-                      type: string
-                      example: ab6712d
-                    titolo:
-                      type: string
-                      example: 1-a Universala Kongreso
-                    priskribo:
-                      type: string
-                      example: La unua Universala Kongreso de Esperanto!
-                    enhavo:
-                      type: string
-                      example: Detalaj informoj pri la evento
-                    komenca_dato:
-                      type: string
-                      example: '1905-08-05'
-                    fina_dato:
-                      type: string
-                      example: '1905-08-12'
-                    retpagho:
-                      type: string
-                      example: 'https://uea.org'
-                    retposhtadreso:
-                      type: string
-                      example: kontakto@uea.org
-                    organizoj:
-                      type: array
-                      items:
-                        type: string
-                        example: '["UEA"]'
-                    specoj:
-                      type: array
-                      items:
-                        type: string
-                        example: '["Kongreso"]'
-                    nuligita:
-                      type: boolean
-                    nuligkialo:
-                      type:
-                        - string
-                        - 'null'
-                    reta:
-                      type: boolean
-                    loko:
-                      type: object
-                      properties:
-                        adreso:
-                          type: string
-                          example: Stratnomo
-                        urbo:
-                          type: string
-                          example: Bulonjo ĉe maro
-                        lando:
-                          type: string
-                          example: Francio
-                        landokodo:
-                          type: string
-                          example: FR
-                        latitudo:
-                          type: number
-                          example: 50.725231
-                        longitudo:
-                          type: number
-                          example: 1.613334
-                    administranto:
-                      type: string
-                      example: '"Universala Esperanto-Asocio"'
+                  $ref: '#/components/schemas/Event'
               examples:
                 Example 1:
                   value:
@@ -116,9 +90,9 @@ paths:
                       retpagho: 'https://uea.org'
                       retposhtadreso: kontakto@uea.org
                       organizoj:
-                        - '["UEA"]'
+                        - UEA
                       specoj:
-                        - '["Kongreso"]'
+                        - Kongreso
                       nuligita: true
                       nuligkialo: null
                       reta: true
@@ -127,11 +101,12 @@ paths:
                         urbo: Bulonjo ĉe maro
                         lando: Francio
                         landokodo: FR
+                        kontinento: Eŭropo
                         latitudo: 50.725231
                         longitudo: 1.613334
-                      administranto: '"Universala Esperanto-Asocio"'
+                      administranto: Universala Esperanto-Asocio
         '400':
-          description: UUID aŭ Komenca/Fina datoj mankas
+          description: Missing or invalid parameters.
           content:
             application/json:
               schema:
@@ -139,138 +114,166 @@ paths:
                 properties:
                   eraro:
                     type: string
+                    description: Error message in Esperanto.
                     example: Mankas komenca_dato kaj fina_dato aŭ eventa UUID
-          headers: {}
-      operationId: get-events-index
-      parameters:
-        - schema:
-            type: string
-            example: '2022-01-01'
-            format: date
-          in: query
-          name: komenca_dato
-          required: true
-          description: Filtrila komenca dato
-        - schema:
-            type: string
-            example: '2022-01-31'
-            format: date
-          in: query
-          name: fina_dato
-          required: true
-          description: Filtrila fina dato
-        - schema:
-            type: string
-            format: uuid
-            example: e567bdc3-0ea2-46cc-8a83-3b11facbe16c
-          in: query
-          name: uuid
-          allowEmptyValue: true
-          description: 'UUID de especifa evento (se oni uzas UUID filtrilon, ne bezonas informi komenca kaj fina dato)'
-        - schema:
-            type: string
-            example: BR
-          in: query
-          name: landa_kodo
-          description: 2 signoj landa-kodo
-        - schema:
-            type: string
-            example: UEA
-          in: query
-          name: o
-          description: Organiza mallonga nomo
-        - schema:
-            type: string
-            enum:
-              - kurso
-              - Kunveno/Evento
-              - Alia
-              - Anonco
-              - Konkurso
-            example: kurso
-          in: query
-          name: speco
-          description: Eventa speco
-      description: 'List events by date period, filtering by country code or organization; or fetch a specific event by its UUID.'
-    servers: []
   /organizations:
     get:
       summary: List organizations
+      description: List all organizations, optionally filtered by country code.
       tags:
         - Organizations
+      operationId: get-organizations
+      parameters:
+        - name: country_code
+          in: query
+          required: false
+          description: Filter by 2-letter country code (e.g. `BR`, `NL`).
+          schema:
+            type: string
+            example: BR
       responses:
         '200':
-          description: OK
+          description: A list of organizations with total count.
           content:
             application/json:
               schema:
                 type: object
-                $ref: '#/components/schemas/Organization'
-      operationId: get-organizations
-      description: List organizations and its details.
-      parameters:
-        - schema:
-            type: string
-            example: br
-          in: query
-          name: country_code
-          description: The 2-letter country code to fiter the organizations
+                required:
+                  - count
+                  - organizations
+                properties:
+                  count:
+                    type: integer
+                    description: Total number of organizations matching the filter.
+                    example: 5
+                  organizations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Organization'
 components:
+  securitySchemes:
+    JWTToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        JWT token obtained from your account settings at
+        https://eventaservo.org/uzanto/redaktu.
+        Send as: `Authorization: Bearer ***`
+    UserToken:
+      type: apiKey
+      in: query
+      name: user_token
+      description: |
+        Alternative to the Bearer header. Pass the JWT token as a query parameter.
   schemas:
     Event:
-      description: Detalaj informoj pri la evento
       type: object
-      title: Evento
-      x-internal: false
-      examples: []
+      description: An Esperanto event with details.
       properties:
         uuid:
           type: string
-          minLength: 1
+          format: uuid
+          description: Unique event identifier.
+          example: 206da237-65ee-4b86-96f6-5bd4cc3bd210
         kodo:
           type: string
-          minLength: 1
+          description: Short event code.
+          example: ab6712d
         titolo:
           type: string
-          minLength: 1
+          description: Event title.
+          example: 1-a Universala Kongreso
         priskribo:
           type: string
-          minLength: 1
+          description: Short event description.
+          example: La unua Universala Kongreso de Esperanto!
         enhavo:
           type: string
-          example: Pli detalaj informoj pri la evento
+          nullable: true
+          description: Full event description.
+          example: Detalaj informoj pri la evento
         komenca_dato:
           type: string
-          minLength: 1
+          format: date
+          description: Event start date.
+          example: '1905-08-05'
         fina_dato:
           type: string
-          minLength: 1
-        retpaĝo:
+          format: date
+          description: Event end date.
+          example: '1905-08-12'
+        retpagho:
           type: string
-          minLength: 1
+          nullable: true
+          format: uri
+          description: Event website URL.
+          example: 'https://uea.org'
+        retposhtadreso:
+          type: string
+          nullable: true
+          format: email
+          description: Contact email for the event.
+          example: kontakto@uea.org
         organizoj:
           type: array
+          description: List of organizing Esperanto organizations. Only present when the event has organizations.
           items:
             type: string
-            example: Universala Esperanto-Asocio
+            example: UEA
         specoj:
           type: array
+          description: Event type classifications.
           items:
             type: string
-            example: Internacia
-        retpoŝtadreso:
-          type: string
-          format: email
-          example: uea@uea.com
+            example: Kongreso
         nuligita:
           type: boolean
+          description: Whether the event has been cancelled.
+          example: true
         nuligkialo:
           type: string
+          nullable: true
+          description: Reason for cancellation, if any.
+          example: null
         reta:
           type: boolean
-          description: Reta evento?
+          description: Whether the event is online-only.
+          example: true
         loko:
           type: object
+          description: Event location. Null for online-only events.
+          nullable: true
+          properties:
+            adreso:
+              type: string
+              nullable: true
+              description: Street address.
+              example: Stratnomo
+            urbo:
+              type: string
+              description: City name.
+              example: Bulonjo ĉe maro
+            lando:
+              type: string
+              description: Country name.
+              example: Francio
+            landokodo:
+              type: string
+              description: 2-letter country code.
+              example: FR
+            kontinento:
+              type: string
+              description: Continent name.
+              example: Eŭropo
+            latitudo:
+              type: number
+              description: Latitude coordinate.
+              example: 50.725231
+            longitudo:
+              type: number
+              description: Longitude coordinate.
+              example: 1.613334
           required:
             - urbo
             - lando
@@ -278,28 +281,10 @@ components:
             - kontinento
             - latitudo
             - longitudo
-          properties:
-            adreso:
-              type: string
-            urbo:
-              type: string
-              minLength: 1
-            lando:
-              type: string
-              minLength: 1
-            landokodo:
-              type: string
-              minLength: 1
-            kontinento:
-              type: string
-              minLength: 1
-            latitudo:
-              type: number
-            longitudo:
-              type: number
         administranto:
           type: string
-          minLength: 1
+          description: Name of the event organizer/admin user.
+          example: Universala Esperanto-Asocio
       required:
         - uuid
         - kodo
@@ -307,8 +292,7 @@ components:
         - priskribo
         - komenca_dato
         - fina_dato
-        - retpaĝo
-        - organizoj
+        - retpagho
         - specoj
         - nuligita
         - reta
@@ -316,87 +300,78 @@ components:
         - administranto
     Organization:
       type: object
-      x-examples:
-        Example 1:
-          name: Universala Esperanto Asocio
-          short_name: UEA
-          address: null
-          city: Rotterdam
-          country: Nederlando
-          country_code: nl
-          contact:
-            email: uea@uea.org
-            phone: null
-            url: null
-            youtube: 'https://www.youtube.com/user/UEAviva'
-          updated_at: '2024-08-31T16:54:32.114Z'
+      description: An Esperanto organization with contact details.
+      required:
+        - name
+        - short_name
+        - contact
+        - updated_at
       properties:
         name:
           type: string
+          description: Full organization name.
           example: Universala Esperanto Asocio
         short_name:
           type: string
+          description: Organization abbreviation or short name.
           example: UEA
         address:
-          type:
-            - string
-            - 'null'
+          type: string
+          nullable: true
+          description: Physical address.
           example: 'Nieuwe Binnenweg 176, 3015 BJ Rotterdam'
         city:
           type: string
+          nullable: true
+          description: City where the organization is based.
           example: Rotterdam
         country:
           type: string
+          nullable: true
+          description: Country name.
           example: Nederlando
         country_code:
           type: string
+          nullable: true
+          description: 2-letter country code.
           example: NL
         contact:
           type: object
+          description: Organization contact information.
           properties:
             email:
               type: string
+              format: email
+              nullable: true
+              description: Contact email.
               example: info@uea.org
             phone:
-              type:
-                - string
-                - 'null'
-              example: +31 10 436 1044
+              type: string
+              nullable: true
+              description: Contact phone number.
+              example: '+31 10 436 1044'
             url:
-              type:
-                - string
-                - 'null'
+              type: string
+              format: uri
+              nullable: true
+              description: Organization website.
               example: 'https://uea.org'
             youtube:
               type: string
+              format: uri
+              nullable: true
+              description: YouTube channel URL.
               example: 'https://www.youtube.com/user/UEAviva'
         updated_at:
           type: string
           format: date-time
+          description: Last update timestamp.
           example: '2024-08-31T16:54:32.114Z'
-      examples:
-        - name: Universala Esperanto Asocio
-          short_name: UEA
-          address: 'Nieuwe Binnenweg 176, 3015 BJ Rotterdam'
-          city: Rotterdam
-          country: Nederlando
-          country_code: NL
-          contact:
-            email: info@uea.org
-            phone: +31 10 436 1044
-            url: 'https://uea.org'
-            youtube: 'https://www.youtube.com/user/UEAviva'
-          updated_at: '2024-08-31T16:54:32.114Z'
-      title: Organization
-      description: Information about an organization
-  securitySchemes:
-    JWTToken:
-      type: http
-      scheme: bearer
 tags:
-  - name: Eventoj
-    description: Events
+  - name: Events
+    description: Event-related endpoints
   - name: Organizations
-    description: Organizations
+    description: Organization-related endpoints
 security:
   - JWTToken: []
+  - UserToken: []

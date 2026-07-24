@@ -79,3 +79,4 @@ http-requests/.env
 bun.lock
 
 .antigravitycli/
+public/docs/api/v2/
