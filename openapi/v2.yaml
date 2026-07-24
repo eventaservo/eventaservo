@@ -158,7 +158,7 @@ components:
       bearerFormat: JWT
       description: |
         JWT token obtained from your account settings at
-        https://eventaservo.org/uzanto/redaktu.
+        https://eventaservo.org/users/edit.
         Send as: `Authorization: Bearer ***`
     UserToken:
       type: apiKey
