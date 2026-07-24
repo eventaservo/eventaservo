@@ -393,6 +393,11 @@ components:
     JWTToken:
       type: http
       scheme: bearer
+      bearerFormat: JWT
+      description: |
+        JWT token obtained from your account settings at
+        https://eventaservo.org/users/edit.
+        Send as: `Authorization: Bearer ***`
 tags:
   - name: Eventoj
     description: Events
