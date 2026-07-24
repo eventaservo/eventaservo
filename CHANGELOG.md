@@ -1,5 +1,29 @@
 # Changelog
 
+## [3.0.14](https://github.com/eventaservo/eventaservo/compare/v3.0.13...v3.0.14) (2026-07-24)
+
+
+### Features
+
+* expand housekeeping to clean old Ahoy visits and orphaned events ([7cd2095](https://github.com/eventaservo/eventaservo/commit/7cd2095114795a10d27aad73e3619017f252a8f0))
+
+
+### Bug Fixes
+
+* add retry and --insecure to GeoLite2 download in Dockerfile ([6c7e829](https://github.com/eventaservo/eventaservo/commit/6c7e8298fce66661211807e447b21997cb9e8e40))
+* use :geoip2 adapter for MaxMind .mmdb files ([92b1a54](https://github.com/eventaservo/eventaservo/commit/92b1a54cbed4bf8326d255b7004a7e61659825a1))
+* use correct adapter for GeoLite2 .mmdb format ([ba9c0e2](https://github.com/eventaservo/eventaservo/commit/ba9c0e27b066623adeab5caefc713d8f8064af73))
+* use working URL for GeoLite2 database download ([5e9d5a2](https://github.com/eventaservo/eventaservo/commit/5e9d5a2c98e5585261b5f11f6a410ff5b7df881d))
+
+
+### Miscellaneous Chores
+
+* add robots.txt to block aggressive crawlers ([#1313](https://github.com/eventaservo/eventaservo/issues/1313)) ([554e8d4](https://github.com/eventaservo/eventaservo/commit/554e8d4e97699b7a78b39e7c582b5759c595aded))
+* **deps:** bump the npm_and_yarn group across 1 directory with 2 updates ([#1306](https://github.com/eventaservo/eventaservo/issues/1306)) ([191c70e](https://github.com/eventaservo/eventaservo/commit/191c70e23e599e3dbbced20d9428551b21b98acf))
+* increase ActiveRecord connection pool from 5 to 20 ([8ffb6bd](https://github.com/eventaservo/eventaservo/commit/8ffb6bd12a6e326a23264fd1a63c872d92ad7d52))
+* switch Ahoy IP geocoding from ipinfo_io to MaxMind GeoLite2 local database ([678ca17](https://github.com/eventaservo/eventaservo/commit/678ca174d355ca7a4d75c990cbb159f97b322456))
+* update API v2 OpenAPI spec ([#1314](https://github.com/eventaservo/eventaservo/issues/1314)) ([597de3e](https://github.com/eventaservo/eventaservo/commit/597de3e7c54e14ed4cab24d3b250e753748da748))
+
 ## [3.0.13](https://github.com/eventaservo/eventaservo/compare/v3.0.12...v3.0.13) (2026-07-21)
 
 
