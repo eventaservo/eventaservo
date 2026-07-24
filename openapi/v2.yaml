@@ -28,7 +28,7 @@ paths:
         You must provide either `komenca_dato` + `fina_dato` **or** `uuid`.
       tags:
         - Events
-      operationId: list-events
+      operationId: get-events-index
       parameters:
         - name: komenca_dato
           in: query
@@ -122,7 +122,7 @@ paths:
       description: List all organizations, optionally filtered by country code.
       tags:
         - Organizations
-      operationId: list-organizations
+      operationId: get-organizations
       parameters:
         - name: country_code
           in: query
@@ -138,6 +138,9 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - count
+                  - organizations
                 properties:
                   count:
                     type: integer
@@ -156,7 +159,13 @@ components:
       description: |
         JWT token obtained from your account settings at
         https://eventaservo.org/uzanto/redaktu.
-        Send as `Authorization: Bearer ***` OR as query parameter `user_token`.
+        Send as: `Authorization: Bearer ***`
+    UserToken:
+      type: apiKey
+      in: query
+      name: user_token
+      description: |
+        Alternative to the Bearer header. Pass the JWT token as a query parameter.
   schemas:
     Event:
       type: object
@@ -292,6 +301,11 @@ components:
     Organization:
       type: object
       description: An Esperanto organization with contact details.
+      required:
+        - name
+        - short_name
+        - contact
+        - updated_at
       properties:
         name:
           type: string
@@ -360,3 +374,4 @@ tags:
     description: Organization-related endpoints
 security:
   - JWTToken: []
+  - UserToken: []
