@@ -11,6 +11,19 @@ class ApplicationController < ActionController::Base
   before_action :set_sentry_user
   before_action :normalize_horzono_cookie
 
+  # When the DB connection pool is exhausted ActiveRecord raises this error
+  # after checkout_timeout seconds. Capture it explicitly so Sentry records
+  # the trace — the exceptions_app routing via ErrorsController may lose it
+  # when the error page itself depends on the database.
+  rescue_from ActiveRecord::ConnectionTimeoutError do |exception|
+    Sentry.capture_exception(exception)
+    respond_to do |format|
+      format.html { render "errors/internal_error", status: :service_unavailable }
+      format.json { render json: {error: "Database connection timeout"}, status: :service_unavailable }
+      format.all  { head :service_unavailable }
+    end
+  end
+
   def user_is_owner_or_admin(event)
     user_signed_in? &&
       (current_user.owner_of?(event) || current_user.organiza_membro_de_evento(event) || current_user.admin?)
