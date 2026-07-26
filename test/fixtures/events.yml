@@ -18,8 +18,8 @@
 #  format                 :string           indexed
 #  import_url             :string(400)
 #  international_calendar :boolean          default(FALSE)
-#  latitude               :float
-#  longitude              :float
+#  latitude               :float            indexed => [longitude]
+#  longitude              :float            indexed => [latitude]
 #  metadata               :jsonb
 #  online                 :boolean          default(FALSE), indexed
 #  participants_count     :integer          default(0), indexed
@@ -89,4 +89,49 @@ past_event_danio_older:
   code: "aarhus6mago"
   site: "https://example.org/k2"
   email: "k2@example.org"
+  user: user
+
+# Future geo-located events used to verify the nearby-cities feature.
+# Copenhagen (Danio) and Malmö (Svedio) are ~28km apart across the border;
+# Aarhus (Danio) is ~157km away and must not count as nearby.
+copenhagen_future:
+  title: "Kopenhaga Estonta Kunveno"
+  description: "Estonta evento en Kopenhago"
+  city: "Kopenhago"
+  country_id: 41
+  date_start: <%= 1.month.from_now %>
+  date_end: <%= 1.month.from_now + 1.day %>
+  code: "kopenhagoestonta"
+  site: "https://example.org/cph"
+  email: "cph@example.org"
+  latitude: 55.6761
+  longitude: 12.5683
+  user: user
+
+malmo_future:
+  title: "Malmöa Estonta Renkontiĝo"
+  description: "Estonta evento en Malmö"
+  city: "Malmö"
+  country_id: 212
+  date_start: <%= 1.month.from_now %>
+  date_end: <%= 1.month.from_now + 1.day %>
+  code: "malmoestonta"
+  site: "https://example.org/malmo"
+  email: "malmo@example.org"
+  latitude: 55.6050
+  longitude: 13.0038
+  user: user
+
+aarhus_future:
+  title: "Aarhusa Estonta Festo"
+  description: "Estonta evento en Aarhuso, tro malproksima"
+  city: "Aarhuso"
+  country_id: 41
+  date_start: <%= 1.month.from_now %>
+  date_end: <%= 1.month.from_now + 1.day %>
+  code: "aarhusestonta"
+  site: "https://example.org/aarhus"
+  email: "aarhus@example.org"
+  latitude: 56.1629
+  longitude: 10.2039
   user: user

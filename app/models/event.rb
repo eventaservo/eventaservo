@@ -20,8 +20,8 @@
 #  format                 :string           indexed
 #  import_url             :string(400)
 #  international_calendar :boolean          default(FALSE)
-#  latitude               :float
-#  longitude              :float
+#  latitude               :float            indexed => [longitude]
+#  longitude              :float            indexed => [latitude]
 #  metadata               :jsonb
 #  online                 :boolean          default(FALSE), indexed
 #  participants_count     :integer          default(0), indexed
@@ -219,6 +219,21 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   def self.by_city(city_name)
     where("lower(unaccent(events.city)) in (?, ?)", city_name.normalized, city_name.downcase)
   end
+
+  # Matches events belonging to any of the given [city, country_id] pairs.
+  #
+  # Mirrors the accent/x-system handling of {by_city} so that each pair matches
+  # both the normalized and downcased forms of the city name.
+  #
+  # @param pairs [Array<Array(String, Integer)>] [city, country_id] pairs
+  # @return [ActiveRecord::Relation]
+  scope :in_cities, ->(pairs) {
+    return none if pairs.blank?
+
+    clause = pairs.map { "(lower(unaccent(events.city)) IN (?, ?) AND events.country_id = ?)" }.join(" OR ")
+    binds = pairs.flat_map { |city, country_id| [city.normalized, city.downcase, country_id] }
+    where(clause, *binds)
+  }
 
   def self.grouped_by_countries
     not_online.joins(:country).order("countries.name, events.date_start").group_by { |c| c.country.name }

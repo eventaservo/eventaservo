@@ -20,8 +20,8 @@
 #  format                 :string           indexed
 #  import_url             :string(400)
 #  international_calendar :boolean          default(FALSE)
-#  latitude               :float
-#  longitude              :float
+#  latitude               :float            indexed => [longitude]
+#  longitude              :float            indexed => [latitude]
 #  metadata               :jsonb
 #  online                 :boolean          default(FALSE), indexed
 #  participants_count     :integer          default(0), indexed
