@@ -114,6 +114,7 @@ eo:
     add_event: Aldoni eventon
     log_in_sign_up: Ensaluti / Registriĝi
     organizations: Organizoj
+    toggle_navigation: Baskuligi la navigadon
   support:
     array:
       last_word_connector: " kaj "
