@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
     respond_to do |format|
       format.html { render "errors/internal_error", status: :service_unavailable }
       format.json { render json: {error: "Database connection timeout"}, status: :service_unavailable }
-      format.all  { head :service_unavailable }
+      format.all { head :service_unavailable }
     end
   end
 
