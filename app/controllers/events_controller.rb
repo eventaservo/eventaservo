@@ -218,7 +218,7 @@ class EventsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_event
-    @event = Event.by_link(params[:code] || params[:event_code])
+    @event = Event.includes(:organizations, :tags).by_link(params[:code] || params[:event_code])
     redirect_to root_path, flash: {error: "Evento ne ekzistas"} if @event.nil?
   end
 
