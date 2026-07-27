@@ -4,11 +4,19 @@ class ErrorsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:not_found]
 
   def not_found
-    respond_to do |format|
-      format.html { render status: :not_found }
-      format.js { render plain: "/* 404 Not Found */", status: :not_found, content_type: "application/javascript" }
-      format.css { render plain: "/* 404 Not Found */", status: :not_found, content_type: "text/css" }
-      format.all { render plain: "404 Not Found", status: :not_found }
+    orig_path = request.env["action_dispatch.original_path"] || request.original_fullpath || ""
+
+    if orig_path.match?(/\.js(\?.*)?$/)
+      render plain: "/* 404 Not Found */", status: :not_found, content_type: "application/javascript"
+    elsif orig_path.match?(/\.css(\?.*)?$/) || orig_path.match?(/\.css\.map(\?.*)?$/)
+      render plain: "/* 404 Not Found */", status: :not_found, content_type: "text/css"
+    else
+      respond_to do |format|
+        format.html { render status: :not_found }
+        format.js { render plain: "/* 404 Not Found */", status: :not_found, content_type: "application/javascript" }
+        format.css { render plain: "/* 404 Not Found */", status: :not_found, content_type: "text/css" }
+        format.all { render plain: "404 Not Found", status: :not_found }
+      end
     end
   end
 

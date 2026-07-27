@@ -30,6 +30,26 @@ class ErrorsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "404 Not Found", response.body
   end
 
+  test "should return js comment for 404 redirected exceptions on js assets" do
+    # Simulate Rails internal routing for a missing asset file
+    get "/404", headers: {
+      "action_dispatch.original_path" => "/assets/application-oldhash.js"
+    }
+    assert_response :not_found
+    assert_equal "/* 404 Not Found */", response.body
+    assert_equal "application/javascript; charset=utf-8", response.headers["Content-Type"]
+  end
+
+  test "should return css comment for 404 redirected exceptions on css assets" do
+    # Simulate Rails internal routing for a missing css asset file
+    get "/404", headers: {
+      "action_dispatch.original_path" => "/assets/cssbundling-oldhash.css"
+    }
+    assert_response :not_found
+    assert_equal "/* 404 Not Found */", response.body
+    assert_equal "text/css; charset=utf-8", response.headers["Content-Type"]
+  end
+
   test "should get unacceptable" do
     get "/422"
     assert_response :unprocessable_entity
