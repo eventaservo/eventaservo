@@ -122,13 +122,17 @@ class HomeController < ApplicationController
   def feed
     ahoy.track "Rendered feed"
 
-    @events = Event.includes([:country, [uploads_attachments: :blob]])
-      .venontaj
-      .ne_nuligitaj
-      .where(cancelled: false)
-      .order(:date_start)
-
-    render layout: false
+    respond_to do |format|
+      format.xml do
+        @events = Event.includes([:country, [uploads_attachments: :blob]])
+          .venontaj
+          .ne_nuligitaj
+          .where(cancelled: false)
+          .order(:date_start)
+        render layout: false
+      end
+      format.all { head :not_acceptable }
+    end
   end
 
   def view_style

@@ -14,13 +14,13 @@ class ErrorsController < ApplicationController
     elsif clean_path.end_with?(".css")
       request.format = :text
       render plain: "/* 404 Not Found */", status: :not_found, content_type: "text/css"
-    elsif clean_path.end_with?(".js.map") || clean_path.end_with?(".css.map")
+    elsif clean_path.end_with?(".js.map", ".css.map")
       request.format = :text
       render json: {}, status: :not_found
     else
       respond_to do |format|
         format.html { render status: :not_found }
-        format.json { render json: { error: "Not Found" }, status: :not_found }
+        format.json { render json: {error: "Not Found"}, status: :not_found }
         format.js do
           request.format = :text
           render plain: "/* 404 Not Found */", status: :not_found, content_type: "application/javascript"
