@@ -7,27 +7,28 @@ class ErrorsControllerTest < ActionDispatch::IntegrationTest
   test "should get not_found" do
     get "/404"
     assert_response :not_found
-    assert_match "<!DOCTYPE html>", response.body
+    assert_equal "text/html", response.media_type
   end
 
   test "should get not_found for js format" do
     get "/404.js"
     assert_response :not_found
     assert_equal "/* 404 Not Found */", response.body
-    assert_equal "application/javascript; charset=utf-8", response.headers["Content-Type"]
+    assert_equal "application/javascript", response.media_type
   end
 
   test "should get not_found for css format" do
     get "/404.css"
     assert_response :not_found
     assert_equal "/* 404 Not Found */", response.body
-    assert_equal "text/css; charset=utf-8", response.headers["Content-Type"]
+    assert_equal "text/css", response.media_type
   end
 
-  test "should get not_found for other formats" do
+  test "should get not_found for JSON format" do
     get "/404.json"
     assert_response :not_found
-    assert_equal "404 Not Found", response.body
+    assert_equal "application/json", response.media_type
+    assert_equal "Not Found", JSON.parse(response.body)["error"]
   end
 
   test "should return js comment for 404 redirected exceptions on js assets" do
@@ -37,7 +38,7 @@ class ErrorsControllerTest < ActionDispatch::IntegrationTest
     }
     assert_response :not_found
     assert_equal "/* 404 Not Found */", response.body
-    assert_equal "application/javascript; charset=utf-8", response.headers["Content-Type"]
+    assert_equal "application/javascript", response.media_type
   end
 
   test "should return css comment for 404 redirected exceptions on css assets" do
@@ -47,7 +48,16 @@ class ErrorsControllerTest < ActionDispatch::IntegrationTest
     }
     assert_response :not_found
     assert_equal "/* 404 Not Found */", response.body
-    assert_equal "text/css; charset=utf-8", response.headers["Content-Type"]
+    assert_equal "text/css", response.media_type
+  end
+
+  test "should return empty json for 404 redirected exceptions on source maps" do
+    get "/404", headers: {
+      "action_dispatch.original_path" => "/assets/application.js.map"
+    }
+    assert_response :not_found
+    assert_equal "application/json", response.media_type
+    assert_equal({}, JSON.parse(response.body))
   end
 
   test "should get unacceptable" do
