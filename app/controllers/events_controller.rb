@@ -18,11 +18,11 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.includes(:organizations, :tags).by_link(params[:code] || params[:event_code])
+    @event = Event.includes(:organizations, :tags, :user, uploads_attachments: :blob).by_link(params[:code] || params[:event_code])
     redirect_to root_path, flash: {error: "Evento ne ekzistas"} and return if @event.nil?
 
     @horzono = cookies[:horzono] || params[:horzono] || @event.time_zone
-    @partoprenontoj = @event.participants
+    @partoprenontoj = @event.participants.includes(user: {picture_attachment: :blob})
 
     respond_to do |format|
       format.html
