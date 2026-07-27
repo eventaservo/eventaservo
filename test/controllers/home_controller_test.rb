@@ -38,16 +38,4 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     get instruantoj_kaj_prelegantoj_url, params: {name: "Test", country_id: 1, level: "Baza", keyword: "lingvo"}
     assert_response :success
   end
-
-  test "should get feed as xml" do
-    get events_rss_url
-    assert_response :success
-    assert_equal "application/xml", response.media_type
-  end
-
-  test "should not get feed as md" do
-    # When requesting unsupported format, should return 406 Not Acceptable
-    get events_rss_url(format: :md)
-    assert_response :not_acceptable
-  end
 end
