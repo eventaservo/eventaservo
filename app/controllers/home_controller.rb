@@ -128,7 +128,9 @@ class HomeController < ApplicationController
       .where(cancelled: false)
       .order(:date_start)
 
-    render layout: false
+    respond_to do |format|
+      format.xml { render layout: false }
+    end
   end
 
   def view_style
