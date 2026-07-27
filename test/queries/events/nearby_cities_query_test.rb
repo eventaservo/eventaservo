@@ -15,6 +15,12 @@ class Events::NearbyCitiesQueryTest < ActiveSupport::TestCase
     assert_not_includes result, ["Aarhuso", countries(:denmark).id]
   end
 
+  test "excludes bounding-box corner cities beyond the radius via Haversine" do
+    result = Events::NearbyCitiesQuery.new(city_name: "Kopenhago", country_id: countries(:denmark).id).call
+
+    assert_not_includes result, ["Angulurbo", countries(:sweden).id]
+  end
+
   test "excludes the target city itself" do
     result = Events::NearbyCitiesQuery.new(city_name: "Kopenhago", country_id: countries(:denmark).id).call
 

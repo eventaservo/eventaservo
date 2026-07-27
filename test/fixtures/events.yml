@@ -135,3 +135,19 @@ aarhus_future:
   latitude: 56.1629
   longitude: 10.2039
   user: user
+
+# ~62km from Copenhagen along the diagonal: inside the bounding box but beyond
+# the 50km radius, so only the Haversine step (not the box) excludes it.
+corner_future:
+  title: "Angulurba Estonta Kunsido"
+  description: "Estonta evento en angulo de la limkesto"
+  city: "Angulurbo"
+  country_id: 212
+  date_start: <%= 1.month.from_now %>
+  date_end: <%= 1.month.from_now + 1.day %>
+  code: "angulurboestonta"
+  site: "https://example.org/angulo"
+  email: "angulo@example.org"
+  latitude: 56.05
+  longitude: 13.30
+  user: user
