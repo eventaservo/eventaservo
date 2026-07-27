@@ -21,6 +21,6 @@ class OrganizationEvent < ApplicationRecord
   private
 
   def invalidate_calendar_cache
-    Rails.cache.write("calendar_cache_version_v1", Time.current.to_i)
+    Rails.cache.write("calendar_cache_version_v1", SecureRandom.uuid)
   end
 end

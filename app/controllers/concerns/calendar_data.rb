@@ -31,7 +31,7 @@ module CalendarData
     build_navigation_paths
     build_calendar_month_navigation_options
 
-    cache_version = Rails.cache.fetch("calendar_cache_version_v1") { Time.current.to_i }
+    cache_version = Rails.cache.fetch("calendar_cache_version_v1") { SecureRandom.uuid }
 
     cache_key = [
       "calendar_events_by_day",
