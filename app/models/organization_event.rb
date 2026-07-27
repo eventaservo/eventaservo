@@ -14,5 +14,13 @@ class OrganizationEvent < ApplicationRecord
   has_paper_trail
 
   belongs_to :organization
-  belongs_to :event
+  belongs_to :event, touch: true
+
+  after_commit :invalidate_calendar_cache
+
+  private
+
+  def invalidate_calendar_cache
+    Rails.cache.write("calendar_cache_version_v1", Time.current.to_i)
+  end
 end

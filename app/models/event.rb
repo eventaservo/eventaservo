@@ -96,6 +96,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   after_commit :schedule_users_reminders_jobs, if: :schedule_on_create_or_dates_changed?
   after_update :create_redirection, if: :saved_change_to_short_url?
   after_save :update_duration_tags
+  after_commit :invalidate_calendar_cache
 
   geocoded_by :full_address
 
@@ -568,5 +569,9 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
       tag_to_add = Tag.find_or_create_by!(name: duration_tag_name, group_name: "time")
       tags << tag_to_add unless tags.include?(tag_to_add)
     end
+  end
+
+  def invalidate_calendar_cache
+    Rails.cache.write("calendar_cache_version_v1", Time.current.to_i)
   end
 end

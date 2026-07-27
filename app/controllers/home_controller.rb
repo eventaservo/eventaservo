@@ -19,14 +19,15 @@ class HomeController < ApplicationController
       # Sidebar counts always show future events, regardless of the active periodo filter.
       Events::ContinentCountsQuery.new(scope: @events.venontaj).call
     end
-    @today_events = @events.today.includes(:country, :organizations, :tags)
 
     if cookies[:vidmaniero] == "kalendaro"
-      @events = @events.includes(:country, :organizations, :tags)
+      @events = @events.includes(:country, :organizations)
       prepare_calendar_data
+    else
+      @today_events = @events.today.includes(:country, :organizations, :tags)
+      @events = @events.not_today.includes(:country, :organizations, :tags)
     end
 
-    @events = @events.not_today.includes(:country, :organizations, :tags) unless cookies[:vidmaniero] == "kalendaro"
     @ads = Ad.with_attached_image.active.order(Arel.sql("RANDOM()")).limit(4)
 
     return if cookies[:vidmaniero].in? %w[kalendaro mapo]

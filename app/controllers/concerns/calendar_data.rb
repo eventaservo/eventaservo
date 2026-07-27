@@ -31,11 +31,15 @@ module CalendarData
     build_navigation_paths
     build_calendar_month_navigation_options
 
+    cache_version = Rails.cache.fetch("calendar_cache_version_v1") { Time.current.to_i }
+
     cache_key = [
       "calendar_events_by_day",
       @calendar_date.iso8601,
       calendar_navigation_filter_params.to_h,
-      Event.maximum(:updated_at)
+      params[:periodo],
+      cookies[:horzono].presence,
+      cache_version
     ]
 
     @events_by_day = Rails.cache.fetch(cache_key, expires_in: 30.minutes) do
