@@ -1,8 +1,15 @@
 # frozen_string_literal: true
 
 class ErrorsController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:not_found]
+
   def not_found
-    render status: 404
+    respond_to do |format|
+      format.html { render status: :not_found }
+      format.js { render plain: "/* 404 Not Found */", status: :not_found, content_type: "application/javascript" }
+      format.css { render plain: "/* 404 Not Found */", status: :not_found, content_type: "text/css" }
+      format.all { render plain: "404 Not Found", status: :not_found }
+    end
   end
 
   def unacceptable

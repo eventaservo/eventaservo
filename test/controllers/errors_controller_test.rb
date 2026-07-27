@@ -7,6 +7,27 @@ class ErrorsControllerTest < ActionDispatch::IntegrationTest
   test "should get not_found" do
     get "/404"
     assert_response :not_found
+    assert_match "<!DOCTYPE html>", response.body
+  end
+
+  test "should get not_found for js format" do
+    get "/404.js"
+    assert_response :not_found
+    assert_equal "/* 404 Not Found */", response.body
+    assert_equal "application/javascript; charset=utf-8", response.headers["Content-Type"]
+  end
+
+  test "should get not_found for css format" do
+    get "/404.css"
+    assert_response :not_found
+    assert_equal "/* 404 Not Found */", response.body
+    assert_equal "text/css; charset=utf-8", response.headers["Content-Type"]
+  end
+
+  test "should get not_found for other formats" do
+    get "/404.json"
+    assert_response :not_found
+    assert_equal "404 Not Found", response.body
   end
 
   test "should get unacceptable" do
