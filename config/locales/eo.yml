@@ -111,8 +111,8 @@ eo:
       one: "%{count} pasinta evento"
       other: "%{count} pasintaj eventoj"
     nearby: Proksima
-    hide_nearby: Kaŝu proksimajn eventojn
-    show_nearby: Montru proksimajn eventojn
+    hide_nearby: Kaŝi proksimajn eventojn
+    show_nearby: Montri proksimajn eventojn
   navbar:
     add_event: Aldoni eventon
     log_in_sign_up: Ensaluti / Registriĝi
