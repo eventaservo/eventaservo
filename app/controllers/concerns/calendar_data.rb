@@ -31,12 +31,25 @@ module CalendarData
     build_navigation_paths
     build_calendar_month_navigation_options
 
-    @events_by_day = Events::ByDatesQuery.new(
-      from: @calendar_date,
-      to: @calendar_date + 6.days,
-      scope: @events,
-      timezone: cookies[:horzono].presence
-    ).call
+    cache_version = Rails.cache.fetch("calendar_cache_version_v1") { SecureRandom.uuid }
+
+    cache_key = [
+      "calendar_events_by_day",
+      @calendar_date.iso8601,
+      calendar_navigation_filter_params.to_h,
+      params[:periodo],
+      cookies[:horzono].presence,
+      cache_version
+    ]
+
+    @events_by_day = Rails.cache.fetch(cache_key, expires_in: 30.minutes) do
+      Events::ByDatesQuery.new(
+        from: @calendar_date,
+        to: @calendar_date + 6.days,
+        scope: @events,
+        timezone: cookies[:horzono].presence
+      ).call
+    end
   end
 
   # Parses the date parameter from the request, defaulting to today.

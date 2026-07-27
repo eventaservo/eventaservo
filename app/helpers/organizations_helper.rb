@@ -37,7 +37,13 @@ module OrganizationsHelper
 
   def display_event_tags(event)
     content_tag(:div, class: "event-tags") do
-      event.tags.order(:group_name, :sort_order).each do |tag|
+      tags = if event.tags.loaded?
+        event.tags.sort_by { |t| [t.group_name.to_s, t.sort_order.to_i] }
+      else
+        event.tags.order(:group_name, :sort_order)
+      end
+
+      tags.each do |tag|
         next unless tag.category? || tag.characteristic?
 
         tag_color =
