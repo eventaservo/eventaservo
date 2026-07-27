@@ -9,6 +9,7 @@ const config = {
   publicPath: "assets",
   minify: isProduction,
   logLevel: "info",
+  target: ["es2018"],
 }
 
 if (isWatch) {
