@@ -19,6 +19,11 @@ module Events
     # Approximate kilometers per degree of latitude.
     KM_PER_DEGREE_LAT = 111.0
 
+    # How long a computed nearby-cities list stays cached. The relationship
+    # only changes when events appear/disappear near the city, so a stale entry
+    # is harmless for a few hours.
+    CACHE_TTL = 12.hours
+
     # @param city_name [String] the target city name
     # @param country_id [Integer] the target city's country id
     def initialize(city_name:, country_id:)
@@ -29,8 +34,25 @@ module Events
     # Returns the [city, country_id] pairs of cities within {RADIUS_KM} of the
     # target city, excluding the target city itself and online events.
     #
+    # The result is cached per (country_id, normalized city) since it is stable
+    # and recomputed on every city-page request.
+    #
     # @return [Array<Array(String, Integer)>] nearby [city, country_id] pairs
     def call
+      Rails.cache.fetch(cache_key, expires_in: CACHE_TTL) { compute }
+    end
+
+    private
+
+    # @return [String] the cache key for this city
+    def cache_key
+      "events/nearby_cities/#{@country_id}/#{@city_name.normalized}"
+    end
+
+    # Computes the nearby [city, country_id] pairs without caching.
+    #
+    # @return [Array<Array(String, Integer)>]
+    def compute
       origin = reference_coordinates
       return [] if origin.nil?
 
@@ -39,8 +61,6 @@ module Events
         [city, country_id] if distance <= RADIUS_KM
       end
     end
-
-    private
 
     # Coordinates of the first event in the target city.
     #
