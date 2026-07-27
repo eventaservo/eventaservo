@@ -152,8 +152,8 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :plurtagaj, -> { joins(:tags).where(tags: {name: "Plurtaga", group_name: "characteristic"}) }
   scope :nuligitaj, -> { where(cancelled: true) }
   scope :ne_nuligitaj, -> { where(cancelled: false) }
-  scope :konkursoj, -> { with_tags([Tag.find_by(name: "Konkurso", group_name: "characteristic").id]) }
-  scope :anoncoj, -> { with_tags([Tag.find_by(name: "Anonco", group_name: "characteristic").id]) }
+  scope :konkursoj, -> { joins(:tags).where(tags: {name: "Konkurso", group_name: "characteristic"}).distinct }
+  scope :anoncoj, -> { joins(:tags).where(tags: {name: "Anonco", group_name: "characteristic"}).distinct }
   # TODO: Move this scope to a query object at app/queries/events/chefaj_query.rb
   scope :chefaj, -> {
     excluded = Tag.where(name: %w[Konkurso Anonco])
