@@ -81,7 +81,12 @@ class Organization < ApplicationRecord
 
   # Serĉas laŭ vorto la organizojn
   #
+  # @param vorto [String, nil] la serĉota vorto
+  # @return [ActiveRecord::Relation]
+  #
   def self.serchi(vorto)
+    return all if vorto.blank?
+
     where("unaccent(name) ilike unaccent(:v) OR unaccent(short_name) ilike unaccent(:v)", v: "%#{vorto.tr("''", "")}%")
   end
 
