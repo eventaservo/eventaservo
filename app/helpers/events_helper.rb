@@ -28,6 +28,20 @@ module EventsHelper
     end
   end
 
+  # Whether the event belongs to a nearby city (not the page's own city).
+  #
+  # Only meaningful on the by-city page, where the card list contains the
+  # target city plus nearby cities; any event whose city differs from
+  # +params[:city_name]+ is therefore nearby.
+  #
+  # @param event [Event]
+  # @return [Boolean]
+  def event_nearby?(event)
+    return false if params[:city_name].blank?
+
+    event.city.present? && event.city.normalized != params[:city_name].normalized
+  end
+
   def event_flag(event)
     return unless event.country.code
     return if event.organizations.any? { |o| o.display_flag == false }

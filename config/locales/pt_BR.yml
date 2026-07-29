@@ -110,6 +110,9 @@ pt_BR:
     past_events_count:
       one: "%{count} evento passado"
       other: "%{count} eventos passados"
+    nearby: Próximo
+    hide_nearby: Ocultar eventos próximos
+    show_nearby: Mostrar eventos próximos
   navbar:
     add_event: Adicionar evento
     log_in_sign_up: Entrar / Cadastrar
