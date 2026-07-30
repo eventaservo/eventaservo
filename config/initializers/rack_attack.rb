@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 class Rack::Attack
-  # Ensure a cache store for counters used in behavioral blocking.
-  # Production uses :memory_store by default (sufficient for single-worker Puma).
+  # Ensure a proper cache store for counters.
+  # Rails.cache defaults to :memory_store in production,
+  # but Rack::Attack needs its own store for atomic counters.
+  Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new
   # -------------------------------------------------------------------
   # Extract real visitor IP from Cloudflare header
   # Falls back to req.ip if header not present (e.g., in development)
@@ -64,7 +66,7 @@ class Rack::Attack
         Rails.logger.warn "[Rack::Attack] Blocked (already banned) #{ip} - #{req.path}"
         true
       else
-        count = Rack::Attack.cache.count("scan:#{ip}", 10.minutes)
+        count = Rack::Attack.cache.count("scan:#{ip}", 10.minutes).to_i
         visited_event = Rack::Attack.cache.read("ev:#{ip}")
         if count >= 30 && !visited_event
           # Persist 1-hour ban so it survives the counter window rolling over
