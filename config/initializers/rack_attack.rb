@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Rack::Attack
+  # Ensure a cache store for counters used in behavioral blocking.
+  # Production uses :memory_store by default (sufficient for single-worker Puma).
+  # -------------------------------------------------------------------
   # Extract real visitor IP from Cloudflare header
   # Falls back to req.ip if header not present (e.g., in development)
   #
@@ -36,6 +39,49 @@ class Rack::Attack
     end
   rescue IPAddr::InvalidAddressError
     false
+  end
+
+  # ============================================
+  # Behavioral blocking: home-only scanners
+  # ============================================
+  #
+  # Bots systematically scrape the calendar by hitting the home page
+  # with varied ?date=&o=&s= parameters but NEVER visit event detail
+  # pages (/e/<hash>). Real humans always browse to events after
+  # scanning the calendar.
+  #
+  # This rule detects that pattern:
+  # - If an IP makes 30+ home requests in 10 minutes without ever
+  #   visiting an /e/ page, it gets blocked for 1 hour.
+  # - Visiting any /e/ page clears the suspicion for 1 hour.
+  #
+  blocklist("block home scanners without event visits") do |req|
+    ip = real_ip(req)
+
+    if req.path == "/" && req.params.key?("date")
+      # Check active ban first (persists 1h independently of the 10min counter)
+      if Rack::Attack.cache.read("banned:#{ip}")
+        Rails.logger.warn "[Rack::Attack] Blocked (already banned) #{ip} - #{req.path}"
+        true
+      else
+        count = Rack::Attack.cache.count("scan:#{ip}", 10.minutes)
+        visited_event = Rack::Attack.cache.read("ev:#{ip}")
+        if count >= 30 && !visited_event
+          # Persist 1-hour ban so it survives the counter window rolling over
+          Rack::Attack.cache.write("banned:#{ip}", true, expires_in: 1.hour)
+          Rails.logger.warn "[Rack::Attack] Blocked (scanner threshold) #{ip} - #{count} home requests, no event visit - banned for 1h"
+          true
+        end
+      end
+    elsif req.path.match?(/\A\/e\/[^\/]+\z/)
+      # Grant exemption for any valid event path: /e/<code> where code is
+      # a short hash (e.g. /e/2053c2) or a named slug (e.g. /e/nome-do-evento).
+      # Resources :events, path: "e", param: "code" in config/routes/events.rb
+      # If the IP was banned, visiting an event page clears the ban
+      Rack::Attack.cache.delete("banned:#{ip}")
+      Rack::Attack.cache.write("ev:#{ip}", true, expires_in: 1.hour)
+      false
+    end
   end
 
   # ============================================
