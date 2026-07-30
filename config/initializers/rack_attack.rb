@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 class Rack::Attack
-  # Ensure a proper cache store for counters.
-  # Rails.cache defaults to :memory_store in production,
-  # but Rack::Attack needs its own store for atomic counters.
-  Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new
   # -------------------------------------------------------------------
   # Extract real visitor IP from Cloudflare header
   # Falls back to req.ip if header not present (e.g., in development)
@@ -62,26 +58,23 @@ class Rack::Attack
 
     if req.path == "/" && req.params.key?("date")
       # Check active ban first (persists 1h independently of the 10min counter)
-      if Rack::Attack.cache.read("banned:#{ip}")
+      if Rails.cache.read("banned:#{ip}")
         Rails.logger.warn "[Rack::Attack] Blocked (already banned) #{ip} - #{req.path}"
         true
       else
-        count = Rack::Attack.cache.count("scan:#{ip}", 10.minutes).to_i
-        visited_event = Rack::Attack.cache.read("ev:#{ip}")
+        count = Rails.cache.increment("scan:#{ip}", 1, expires_in: 10.minutes) || 1
+        visited_event = Rails.cache.read("ev:#{ip}")
         if count >= 30 && !visited_event
           # Persist 1-hour ban so it survives the counter window rolling over
-          Rack::Attack.cache.write("banned:#{ip}", true, expires_in: 1.hour)
+          Rails.cache.write("banned:#{ip}", true, expires_in: 1.hour)
           Rails.logger.warn "[Rack::Attack] Blocked (scanner threshold) #{ip} - #{count} home requests, no event visit - banned for 1h"
           true
         end
       end
     elsif req.path.match?(/\A\/e\/[^\/]+\z/)
-      # Grant exemption for any valid event path: /e/<code> where code is
-      # a short hash (e.g. /e/2053c2) or a named slug (e.g. /e/nome-do-evento).
-      # Resources :events, path: "e", param: "code" in config/routes/events.rb
       # If the IP was banned, visiting an event page clears the ban
-      Rack::Attack.cache.delete("banned:#{ip}")
-      Rack::Attack.cache.write("ev:#{ip}", true, expires_in: 1.hour)
+      Rails.cache.delete("banned:#{ip}")
+      Rails.cache.write("ev:#{ip}", true, expires_in: 1.hour)
       false
     end
   end
