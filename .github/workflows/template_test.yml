@@ -45,7 +45,7 @@ jobs:
           bundler-cache: true
 
       - name: Node 20
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: 20
           cache: "yarn"
@@ -104,7 +104,7 @@ jobs:
           bundler-cache: true
 
       - name: Node 20
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: 20
           cache: "yarn"
