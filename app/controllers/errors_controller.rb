@@ -1,8 +1,34 @@
 # frozen_string_literal: true
 
 class ErrorsController < ApplicationController
+  # Permite requisições de assets (que vêm sem CSRF token) de origens diversas
+  skip_forgery_protection only: [:not_found]
+
   def not_found
-    render status: 404
+    orig_path = request.env["action_dispatch.original_path"] || request.original_fullpath || ""
+    clean_path = orig_path.split("?").first || ""
+
+    if clean_path.end_with?(".js")
+      request.format = :text
+      render plain: "/* 404 Not Found */", status: :not_found, content_type: "application/javascript"
+    elsif clean_path.end_with?(".css")
+      request.format = :text
+      render plain: "/* 404 Not Found */", status: :not_found, content_type: "text/css"
+    elsif clean_path.end_with?(".js.map", ".css.map")
+      request.format = :text
+      render json: {}, status: :not_found
+    else
+      respond_to do |format|
+        format.html { render status: :not_found }
+        format.json { render json: {error: "Not Found"}, status: :not_found }
+        format.js do
+          request.format = :text
+          render plain: "/* 404 Not Found */", status: :not_found, content_type: "application/javascript"
+        end
+        format.css { render plain: "/* 404 Not Found */", status: :not_found, content_type: "text/css" }
+        format.all { render plain: "404 Not Found", status: :not_found }
+      end
+    end
   end
 
   def unacceptable
