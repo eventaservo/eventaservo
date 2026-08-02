@@ -8,7 +8,7 @@ class EventsController < ApplicationController
 
   before_action :authenticate_user!, only: %i[index new create edit update destroy kontakti_organizanton nuligi malnuligi delete_file]
   before_action :redirect_old_link, only: %i[show edit]
-  before_action :set_event, only: %i[show edit update destroy kronologio nuligi malnuligi kontakti_organizanton delete_file]
+  before_action :set_event, only: %i[edit update destroy kronologio nuligi malnuligi kontakti_organizanton delete_file]
   before_action :authorize_user, only: %i[edit update destroy nuligi malnuligi delete_file]
 
   # Montras la uzantajn eventojn
@@ -18,10 +18,11 @@ class EventsController < ApplicationController
   end
 
   def show
-    # ahoy.track "Show event", event_url: @event.short_url
+    @event = Event.includes(:organizations, :tags, :user, uploads_attachments: :blob).by_link(params[:code] || params[:event_code])
+    redirect_to root_path, flash: {error: "Evento ne ekzistas"} and return if @event.nil?
 
     @horzono = cookies[:horzono] || params[:horzono] || @event.time_zone
-    @partoprenontoj = @event.participants
+    @partoprenontoj = @event.participants.includes(user: {picture_attachment: :blob})
 
     respond_to do |format|
       format.html

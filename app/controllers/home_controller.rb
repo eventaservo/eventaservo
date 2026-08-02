@@ -19,14 +19,15 @@ class HomeController < ApplicationController
       # Sidebar counts always show future events, regardless of the active periodo filter.
       Events::ContinentCountsQuery.new(scope: @events.venontaj).call
     end
-    @today_events = @events.today.includes(:country, :organizations)
 
     if cookies[:vidmaniero] == "kalendaro"
       @events = @events.includes(:country, :organizations)
       prepare_calendar_data
+    else
+      @today_events = @events.today.includes(:country, :organizations, :tags)
+      @events = @events.not_today.includes(:country, :organizations, :tags)
     end
 
-    @events = @events.not_today.includes(:country, :organizations) unless cookies[:vidmaniero] == "kalendaro"
     @ads = Ad.with_attached_image.active.order(Arel.sql("RANDOM()")).limit(4)
 
     return if cookies[:vidmaniero].in? %w[kalendaro mapo]
@@ -122,13 +123,17 @@ class HomeController < ApplicationController
   def feed
     ahoy.track "Rendered feed"
 
-    @events = Event.includes([:country, [uploads_attachments: :blob]])
-      .venontaj
-      .ne_nuligitaj
-      .where(cancelled: false)
-      .order(:date_start)
-
-    render layout: false
+    respond_to do |format|
+      format.xml do
+        @events = Event.includes([:country, [uploads_attachments: :blob]])
+          .venontaj
+          .ne_nuligitaj
+          .where(cancelled: false)
+          .order(:date_start)
+        render layout: false
+      end
+      format.all { head :not_acceptable }
+    end
   end
 
   def view_style

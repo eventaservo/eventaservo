@@ -21,6 +21,21 @@ class OrganizationsHelperTest < ActionView::TestCase
     assert_match(/badge rounded-pill/, result)
   end
 
+  test "display_event_tags ignores and excludes time duration tags" do
+    event = create(:event)
+
+    category_tag = Tag.find_or_create_by!(name: "Kategorio", group_name: "category")
+    time_tag = Tag.find_or_create_by!(name: "Unutaga", group_name: "time")
+
+    event.tags << category_tag
+    event.tags << time_tag
+
+    result = display_event_tags(event)
+
+    assert_match(/Kategorio/, result)
+    refute_match(/Unutaga/, result)
+  end
+
   test "display_event_days_left returns correct text" do
     event = create(:event, date_start: Time.zone.now, date_end: 1.day.from_now)
     assert_equal "| finiĝos morgaŭ", display_event_days_left(event)
