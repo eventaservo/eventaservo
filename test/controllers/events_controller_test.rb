@@ -3,6 +3,20 @@
 require "test_helper"
 
 class EventsControllerTest < ActionDispatch::IntegrationTest
+  # GET #by_username tests
+  class ByUsernameTest < EventsControllerTest
+    test "by_username returns http success" do
+      get events_by_username_path(username: users(:user).username)
+      assert_response :success
+    end
+
+    test "by_username redirects to root with error when username does not exist" do
+      get events_by_username_path(username: "nonexistent")
+      assert_redirected_to root_path
+      assert_equal "Uzantnomo ne ekzistas", flash[:error]
+    end
+  end
+
   # Empty parent class - tests are in nested classes to avoid inheritance issues
 
   # GET #index tests
