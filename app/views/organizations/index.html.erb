@@ -15,7 +15,7 @@
     </h4>
 
     <%= form_tag organization_search_url, method: :get, remote: true, class: 'mb-3', data: { controller: 'org-search', action: 'keyup->org-search#search' } do %>
-      <%= text_field_tag :serchi, nil, class: 'form-control col-12', autofocus: true, placeholder: 'Serĉi organizon' %>
+      <%= text_field_tag :serchi, nil, class: 'form-control col-12', autofocus: true, placeholder: 'Serĉi organizon', aria: { label: 'Serĉi organizon' } %>
     <% end %>
 
     <% if params[:serchi].present? %>
