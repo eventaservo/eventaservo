@@ -114,6 +114,7 @@ en:
     add_event: Add event
     log_in_sign_up: Login / Signup
     organizations: Organizations
+    toggle_navigation: Toggle navigation
   support:
     array:
       last_word_connector: " and "
