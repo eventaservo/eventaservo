@@ -15,7 +15,7 @@ sitemap_refresh:
   schedule: every 6 hours
 backup_db:
   class: BackupDbJob
-  schedule: every day at 5am
+  schedule: every day at 0am
 generate_statistics:
   class: GenerateStatisticsJob
   schedule: every day at 1am
