@@ -110,6 +110,9 @@ en:
     past_events_count:
       one: "%{count} past event"
       other: "%{count} past events"
+    nearby: Nearby
+    hide_nearby: Hide nearby events
+    show_nearby: Show nearby events
   navbar:
     add_event: Add event
     log_in_sign_up: Login / Signup
