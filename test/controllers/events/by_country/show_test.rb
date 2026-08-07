@@ -10,11 +10,18 @@ class Events::ByCountryController::ShowTest < ActionDispatch::IntegrationTest
       country_name: country.name.normalized),
       headers: {"HTTP_COOKIE" => "horzono=Europe/Kiev"}
 
-    # The before_action rewrites the legacy zone before any view rendering,
-    # so the request must not raise even when the page also redirects to
-    # set the default view-mode cookie on first visit.
-    assert_includes [200, 302], response.status
+    assert_response :success
     assert_equal "Europe/Kyiv", response.cookies["horzono"]
+  end
+
+  test "sets default view cookie on first visit without redirect" do
+    country = countries(:denmark)
+
+    get events_by_country_url(continent: country.continent.normalized,
+      country_name: country.name.normalized)
+
+    assert_response :success
+    assert_equal "kartaro", response.cookies["vidmaniero"]
   end
 
   test "pasintaj=1 lists past events for the country" do

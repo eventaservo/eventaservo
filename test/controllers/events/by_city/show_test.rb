@@ -51,11 +51,11 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
     assert_match events(:valid_event).title, response.body
   end
 
-  test "redirects to set default view cookie on first visit" do
+  test "sets default view cookie on first visit" do
     get events_by_city_url(continent: "azio",
       country_name: "afganio",
       city_name: "new york")
-    assert_response :redirect
-    assert_includes CGI.unescape(response.location), "new york"
+    assert_response :success
+    assert_equal "kartaro", response.cookies["vidmaniero"]
   end
 end

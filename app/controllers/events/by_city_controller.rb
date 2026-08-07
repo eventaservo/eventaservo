@@ -22,7 +22,6 @@ class Events::ByCityController < ApplicationController
 
     unless cookies[:vidmaniero].in? %w[kartaro mapo]
       cookies[:vidmaniero] = {value: "kartaro", expires: 2.weeks, secure: true}
-      redirect_to events_by_city_url(continent: params[:continent].normalized, country_name: params[:country_name].downcase, city_name: params[:city_name].downcase) and return
     end
 
     @events = build_events_scope
