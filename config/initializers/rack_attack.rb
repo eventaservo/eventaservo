@@ -116,13 +116,21 @@ class Rack::Attack
   # ============================================
   # Login throttling
   # ============================================
+  #
+  # The email-based throttle is KEPT: the discriminator is the account
+  # email, not the IP, so it is not affected by the CDN PoP IP collision.
+  # It protects against brute-force password guessing per account.
+  #
+  # NOTE: the Devise sign-in form posts `user[email]` (nested params), so
+  # `req.params["email"]` is always nil. The nested lookup must come first.
 
-  # throttle("limit logins per email", limit: 3, period: 60) do |req|
-  #   if req.path == "/users/sign_in" && req.post?
-  #     req.params["email"]
-  #   end
-  # end
+  throttle("limit logins per email", limit: 3, period: 60) do |req|
+    if req.path == "/users/sign_in" && req.post?
+      req.params.dig("user", "email") || req.params["email"]
+    end
+  end
 
+  # Disabled: IP-based, suffers from the CDN PoP IP collision.
   # throttle("limit logins per IP", limit: 5, period: 60) do |req|
   #   real_ip(req) if req.path == "/users/sign_in" && req.post?
   # end
