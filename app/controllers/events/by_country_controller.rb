@@ -27,7 +27,6 @@ class Events::ByCountryController < ApplicationController
         else
           unless cookies[:vidmaniero].in? %w[kartaro mapo]
             cookies[:vidmaniero] = {value: "kartaro", expires: 2.weeks, secure: true}
-            redirect_to events_by_country_url(continent: @country.continent.normalized, country_name: @country.name.normalized) and return
           end
 
           @events = build_events_scope
