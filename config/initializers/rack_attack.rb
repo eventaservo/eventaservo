@@ -82,39 +82,50 @@ class Rack::Attack
   # ============================================
   # Throttle by individual IP
   # ============================================
+  #
+  # NOTE: All IP-based throttles are DISABLED because the site is served
+  # behind a CDN (G-Core). The CDN edge PoPs terminate client connections,
+  # so `real_ip` (and even `req.ip`) resolves to the PoP IP address, not the
+  # visitor's. Thousands of real visitors share a single PoP IP, so any
+  # per-IP throttle causes mass 429 responses (observed: ~400 throttles in
+  # 2h, all from PoP 93.123.17.151). Rate limiting is now handled at the
+  # WAF layer (BunkerWeb), which sits in front of the origin.
+  #
+  # Re-enable only if the app moves to a setup where the visitor IP is
+  # available (direct origin access or CDN real-IP header support).
 
   # General limit: 5 requests per second per IP
-  throttle("requests by IP", limit: 5, period: 1) do |req|
-    real_ip(req)
-  end
+  # throttle("requests by IP", limit: 5, period: 1) do |req|
+  #   real_ip(req)
+  # end
 
   # Longer limit: 120 requests per minute per IP
   # Allows real users to navigate the calendar (up to ~35 week clicks + overhead)
-  throttle("requests by IP per minute", limit: 120, period: 60) do |req|
-    real_ip(req)
-  end
+  # throttle("requests by IP per minute", limit: 120, period: 60) do |req|
+  #   real_ip(req)
+  # end
 
   # ============================================
   # API throttling
   # ============================================
 
-  throttle("limit API requests per IP", limit: 2, period: 10) do |req|
-    real_ip(req) if req.path == "/api/v2/organizations"
-  end
+  # throttle("limit API requests per IP", limit: 2, period: 10) do |req|
+  #   real_ip(req) if req.path == "/api/v2/organizations"
+  # end
 
   # ============================================
   # Login throttling
   # ============================================
 
-  throttle("limit logins per email", limit: 3, period: 60) do |req|
-    if req.path == "/users/sign_in" && req.post?
-      req.params["email"]
-    end
-  end
+  # throttle("limit logins per email", limit: 3, period: 60) do |req|
+  #   if req.path == "/users/sign_in" && req.post?
+  #     req.params["email"]
+  #   end
+  # end
 
-  throttle("limit logins per IP", limit: 5, period: 60) do |req|
-    real_ip(req) if req.path == "/users/sign_in" && req.post?
-  end
+  # throttle("limit logins per IP", limit: 5, period: 60) do |req|
+  #   real_ip(req) if req.path == "/users/sign_in" && req.post?
+  # end
 end
 
 # ============================================
