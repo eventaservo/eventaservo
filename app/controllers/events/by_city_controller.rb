@@ -13,7 +13,7 @@ class Events::ByCityController < ApplicationController
   before_action :set_country
 
   def show
-    redirect_to root_url, flash: {error: "Lando ne ekzistas"} and return if @country.nil?
+    redirect_to root_path, flash: {error: "Lando ne ekzistas"} and return if @country.nil?
 
     if params[:pasintaj].present?
       render_pasintaj_by_city

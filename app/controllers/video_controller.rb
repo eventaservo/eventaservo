@@ -11,13 +11,13 @@ class VideoController < ApplicationController
 
   def new
     @evento = Event.by_link(params[:event_code])
-    redirect_to(root_url, flash: {error: "Vi ne rajtas"}) unless user_can_edit_event?(user: current_user, event: @evento)
+    redirect_to(root_path, flash: {error: "Vi ne rajtas"}) unless user_can_edit_event?(user: current_user, event: @evento)
   end
 
   def create
     event = Event.by_link(params[:event_code])
     unless user_can_edit_event?(user: current_user, event: event)
-      redirect_to root_url, flash: {error: "Vi ne rajtas"}
+      redirect_to root_path, flash: {error: "Vi ne rajtas"}
       return
     end
 
@@ -43,6 +43,6 @@ class VideoController < ApplicationController
     else
       flash[:error] = "Vi ne rajtas forigi tiun videon"
     end
-    redirect_back fallback_location: root_url
+    redirect_back fallback_location: root_path
   end
 end

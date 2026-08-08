@@ -23,10 +23,10 @@ module Webcal
     #   params[:short_name]
     #
     def organizo
-      redirect_to root_url if params[:short_name].blank?
+      redirect_to root_path if params[:short_name].blank?
 
       o = Organization.find_by(short_name: params[:short_name])
-      redirect_to root_url, flash: {error: "Organizo ne ekzistas"} and return if o.nil?
+      redirect_to root_path, flash: {error: "Organizo ne ekzistas"} and return if o.nil?
 
       eventoj = Event.lau_organizo(o.short_name).for_webcal
 
@@ -40,7 +40,7 @@ module Webcal
     # @return [ICS file]
     def user
       user = User.find_by(webcal_token: params[:webcal_token])
-      redirect_to root_url, flash: {error: "Uzanto ne ekzistas"} and return if user.nil?
+      redirect_to root_path, flash: {error: "Uzanto ne ekzistas"} and return if user.nil?
 
       events = (user.events.includes([:country]) + user.interested_events.includes([:country])).uniq
 
@@ -55,10 +55,10 @@ module Webcal
     private
 
     def definas_landon
-      redirect_to root_url if params[:landa_kodo].blank?
+      redirect_to root_path if params[:landa_kodo].blank?
 
       @lando = Country.find_by(code: params[:landa_kodo])
-      redirect_to root_url, flash: {notice: "Landa kodo ne ekzistas"} if @lando.nil?
+      redirect_to root_path, flash: {notice: "Landa kodo ne ekzistas"} if @lando.nil?
     end
   end
 end

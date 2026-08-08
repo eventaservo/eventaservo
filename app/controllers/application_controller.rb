@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
   helper_method :last_12_months_label
 
   def authenticate_admin
-    redirect_to root_url unless user_signed_in? && current_user.admin?
+    redirect_to root_path unless user_signed_in? && current_user.admin?
   end
 
   private

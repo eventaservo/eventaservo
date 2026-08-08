@@ -46,7 +46,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     UserServices::Disable.call(resource)
     sign_out(@user)
 
-    redirect_to root_url, notice: "Via konto estas forviŝita."
+    redirect_to root_path, notice: "Via konto estas forviŝita."
   end
 
   # GET /resource/cancel

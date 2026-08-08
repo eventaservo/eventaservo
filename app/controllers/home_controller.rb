@@ -33,7 +33,7 @@ class HomeController < ApplicationController
     return if cookies[:vidmaniero].in? %w[kalendaro mapo]
 
     cookies[:vidmaniero] = {value: "kalendaro", expires: 2.weeks, secure: true}
-    redirect_to root_url(params.permit(:date))
+    redirect_to root_path(params.permit(:date))
   end
 
   def anoncoj
@@ -103,7 +103,7 @@ class HomeController < ApplicationController
   # Listigas la eventojn por montri per la kalendara vidmaniero
   #
   def events
-    redirect_to root_url unless access_from_server
+    redirect_to root_path unless access_from_server
 
     @horzono = cookies[:horzono]
     @events = Event.ne_nuligitaj.chefaj.includes(:country)
@@ -138,7 +138,7 @@ class HomeController < ApplicationController
 
   def view_style
     cookies[:vidmaniero] = {value: params[:view_style], expires: 1.year, secure: true}
-    redirect_to root_url
+    redirect_to root_path
   end
 
   def search

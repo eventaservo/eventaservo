@@ -2,7 +2,7 @@
 
 class EventsController < ApplicationController
   rescue_from ActionController::UnknownFormat do |_e|
-    redirect_to root_url, flash: {error: "Formato ne ekzistas."}
+    redirect_to root_path, flash: {error: "Formato ne ekzistas."}
   end
   include Webcal
 
@@ -30,7 +30,7 @@ class EventsController < ApplicationController
     end
   rescue ActionView::Template::Error => e
     Sentry.capture_exception(e)
-    redirect_to root_url, flash: {error: "Eraro okazis montrante tiun eventon"}
+    redirect_to root_path, flash: {error: "Eraro okazis montrante tiun eventon"}
   end
 
   def new
@@ -156,7 +156,7 @@ class EventsController < ApplicationController
     result = Events::SoftDelete.call(event: @event, user: current_user)
 
     if result.success?
-      redirect_to root_url, flash: {notice: "Evento sukcese forigita"}
+      redirect_to root_path, flash: {notice: "Evento sukcese forigita"}
     else
       redirect_to event_path(code: @event.ligilo), flash: {error: result.error}
     end
@@ -249,7 +249,7 @@ class EventsController < ApplicationController
   # Nur la permesataj uzantoj povas redakti, ĝisdatiĝi kaj foriĝi la eventon
   def authorize_user
     unless user_can_edit_event?(user: current_user, event: @event)
-      redirect_to root_url, flash: {error: "Vi ne rajtas"}
+      redirect_to root_path, flash: {error: "Vi ne rajtas"}
     end
   end
 

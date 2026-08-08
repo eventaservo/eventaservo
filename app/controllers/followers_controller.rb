@@ -5,7 +5,7 @@ class FollowersController < ApplicationController
 
   def event
     event = Event.by_code(params[:event_code])
-    return redirect_back fallback_location: root_url, alert: "Event not found" unless event
+    return redirect_back fallback_location: root_path, alert: "Event not found" unless event
 
     follower = event.followers.find_by(user_id: current_user.id)
 
@@ -15,6 +15,6 @@ class FollowersController < ApplicationController
       event.followers.create!(user: current_user)
     end
 
-    redirect_back fallback_location: root_url
+    redirect_back fallback_location: root_path
   end
 end
