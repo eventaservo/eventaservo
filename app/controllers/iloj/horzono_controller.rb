@@ -14,7 +14,7 @@ module Iloj
       result = TimeZone::Normalize.call(raw)
 
       if raw.blank? || result.failure?
-        redirect_to(request.referrer || root_url,
+        redirect_to(request.referrer || root_path,
           flash: {error: "Nevalida horzono"})
         return
       end
@@ -22,7 +22,7 @@ module Iloj
       cookies[:horzono] = {
         value: result.payload, expires: 1.year, secure: true
       }
-      redirect_to request.referrer || root_url,
+      redirect_to request.referrer || root_path,
         flash: {success: "Horzono elektita sukcese"}
     end
 
@@ -37,7 +37,7 @@ module Iloj
         redirect_to request.referrer,
           flash: {success: "Horzona informo forviŝita sukcese"}
       else
-        redirect_to root_url
+        redirect_to root_path
       end
     end
   end

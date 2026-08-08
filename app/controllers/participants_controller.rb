@@ -4,7 +4,7 @@ class ParticipantsController < ApplicationController
   def event
     event = Event.by_link(params[:event_code])
 
-    redirect_to root_url and return if event.nil?
+    redirect_to root_path and return if event.nil?
 
     participant = event.participants.find_by(user_id: current_user.id)
 

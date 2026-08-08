@@ -71,7 +71,7 @@ module EventBrowsing
     if params[:continent].normalized.in? continent_names.map(&:normalized)
       @continent = Country.continent_name(params[:continent])
     else
-      redirect_to root_url, flash: {notice: "Ne estas eventoj en tiu kontinento"}
+      redirect_to root_path, flash: {notice: "Ne estas eventoj en tiu kontinento"}
     end
   end
 
