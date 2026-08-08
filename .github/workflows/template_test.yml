@@ -37,6 +37,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Ruby e Bundler
         uses: ruby/setup-ruby@v1
@@ -96,6 +98,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Ruby e Bundler
         uses: ruby/setup-ruby@v1
