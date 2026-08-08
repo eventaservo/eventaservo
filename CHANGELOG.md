@@ -1,5 +1,41 @@
 # Changelog
 
+## [3.0.15](https://github.com/eventaservo/eventaservo/compare/v3.0.14...v3.0.15) (2026-08-08)
+
+
+### Bug Fixes
+
+* **errors:** prevent client-side JS SyntaxError when loading expired assets (404) ([#1324](https://github.com/eventaservo/eventaservo/issues/1324)) ([b2b17b1](https://github.com/eventaservo/eventaservo/commit/b2b17b1d44d671e6da32e1c365b220d216e10c90))
+* **event:** resolve N plus 1 query on event show participants and attachments ([2de3f8e](https://github.com/eventaservo/eventaservo/commit/2de3f8ebd120a99f4e0bda103efffb9e3534041b))
+* **home:** restrict HomeController#feed endpoint to XML format only ([#1326](https://github.com/eventaservo/eventaservo/issues/1326)) ([ee5c763](https://github.com/eventaservo/eventaservo/commit/ee5c7635d9d5f7c936bc3e414b2f7795e3c4595c))
+* initialize Rack::Attack cache store and guard count with to_i ([#1332](https://github.com/eventaservo/eventaservo/issues/1332)) ([7cfd202](https://github.com/eventaservo/eventaservo/commit/7cfd202359cdf3fbbece964dbfadb81ba7b24895))
+* keep email-based login throttle, disable only IP-based ([#1342](https://github.com/eventaservo/eventaservo/issues/1342)) ([44d9fcc](https://github.com/eventaservo/eventaservo/commit/44d9fcc082e12584b2b6a78ff2200e629b32d7c5))
+* prevent NoMethodError on organization search when query is nil ([791b916](https://github.com/eventaservo/eventaservo/commit/791b916aef7cfc6dd4057c81ffff01e333f0397c))
+* remove unnecessary self-redirect on first visit in country and city controllers ([#1343](https://github.com/eventaservo/eventaservo/issues/1343)) ([b1f444a](https://github.com/eventaservo/eventaservo/commit/b1f444a78afeb198ac7f4bf0f7b93ed018bdee09))
+* replace Rack::Attack::Cache with Rails.cache to avoid NoMethodError ([#1333](https://github.com/eventaservo/eventaservo/issues/1333)) ([ba85db3](https://github.com/eventaservo/eventaservo/commit/ba85db32beb11719368fb97fd64298f19935e009))
+* resolve N+1 queries on event show for participants and attachments ([#1328](https://github.com/eventaservo/eventaservo/issues/1328)) ([2de3f8e](https://github.com/eventaservo/eventaservo/commit/2de3f8ebd120a99f4e0bda103efffb9e3534041b))
+
+
+### Performance Improvements
+
+* cache calendar queries and resolve association N+1 ([#1327](https://github.com/eventaservo/eventaservo/issues/1327)) ([d1ed158](https://github.com/eventaservo/eventaservo/commit/d1ed1588fb90e1991fb06f5f386503fa741881ae))
+
+
+### Miscellaneous Chores
+
+* **a11y:** localize hardcoded aria-labels in layout elements ([61d74b9](https://github.com/eventaservo/eventaservo/commit/61d74b9944e8290fc18da8e8e56fd2e4c1c0739c))
+* block home-only scanners via behavioral Rack::Attack rule ([#1331](https://github.com/eventaservo/eventaservo/issues/1331)) ([f9e162d](https://github.com/eventaservo/eventaservo/commit/f9e162d340cb6ddaec89e279217944ecad997fc8))
+* **ci:** harden GitHub Actions credential handling and permissions ([#1352](https://github.com/eventaservo/eventaservo/issues/1352)) ([897d5dc](https://github.com/eventaservo/eventaservo/commit/897d5dca0bc97491ff6653a0b636da390aaa3046))
+* **ci:** pin third-party GitHub Actions to commit SHAs ([#1351](https://github.com/eventaservo/eventaservo/issues/1351)) ([cf08c13](https://github.com/eventaservo/eventaservo/commit/cf08c1350370b728fe2255d6023fc29f7aa300ad))
+* **deps-dev:** bump herb from 0.10.2 to 0.10.3 ([#1348](https://github.com/eventaservo/eventaservo/issues/1348)) ([31fdddb](https://github.com/eventaservo/eventaservo/commit/31fdddb9d4f8ebf080ec9289fd72a086ad966a5b))
+* **deps:** bump actions/setup-node from 6 to 7 ([#1336](https://github.com/eventaservo/eventaservo/issues/1336)) ([4c5567a](https://github.com/eventaservo/eventaservo/commit/4c5567ac99c09e7256a54c921629f37ecaf394a4))
+* **deps:** bump github/codeql-action from 4 to 4.37.3 ([#1337](https://github.com/eventaservo/eventaservo/issues/1337)) ([4aaeac8](https://github.com/eventaservo/eventaservo/commit/4aaeac8af687d64f8a22e6d4b12ca481a2fa0575))
+* **deps:** bump rails from 8.1.3 to 8.1.3.1 ([#1345](https://github.com/eventaservo/eventaservo/issues/1345)) ([81903c9](https://github.com/eventaservo/eventaservo/commit/81903c93e403df8c12a869970aa00ebed7e6cf79))
+* **deps:** bump the bundler group across 1 directory with 2 updates ([#1349](https://github.com/eventaservo/eventaservo/issues/1349)) ([35f257d](https://github.com/eventaservo/eventaservo/commit/35f257dbbfd9490a0fd4431e6863dc7e53a3b722))
+* **deps:** update concurrent-ruby to 1.3.8 ([ee04151](https://github.com/eventaservo/eventaservo/commit/ee04151797aaf174ec5418120ca263cda2336724))
+* disable Rack::Attack IP-based throttles behind CDN ([#1341](https://github.com/eventaservo/eventaservo/issues/1341)) ([cd3d0f5](https://github.com/eventaservo/eventaservo/commit/cd3d0f54c2d52a56cfbaa5fa900c4f189a6fdaa8))
+* enable puma clustered mode and move daily backup to midnight UTC ([4193c5d](https://github.com/eventaservo/eventaservo/commit/4193c5da3a8a7f7f54925a731d34b989cb221a6d))
+
 ## [3.0.14](https://github.com/eventaservo/eventaservo/compare/v3.0.13...v3.0.14) (2026-07-27)
 
 
