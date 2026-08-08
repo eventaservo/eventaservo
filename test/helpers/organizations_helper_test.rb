@@ -11,8 +11,7 @@ class OrganizationsHelperTest < ActionView::TestCase
     category_tag = Tag.find_or_create_by!(name: "Kategorio", group_name: "category")
     characteristic_tag = Tag.find_or_create_by!(name: "Karakterizo", group_name: "characteristic")
 
-    event.tags << category_tag
-    event.tags << characteristic_tag
+    event.tags = [category_tag, characteristic_tag]
 
     result = display_event_tags(event)
 
@@ -27,8 +26,7 @@ class OrganizationsHelperTest < ActionView::TestCase
     category_tag = Tag.find_or_create_by!(name: "Kategorio", group_name: "category")
     time_tag = Tag.find_or_create_by!(name: "Unutaga", group_name: "time")
 
-    event.tags << category_tag
-    event.tags << time_tag
+    event.tags = [category_tag, time_tag]
 
     result = display_event_tags(event)
 
