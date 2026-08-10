@@ -55,6 +55,6 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -p $SSH_PORT $SSH_HOST >> ~/.ssh/known_hosts 2>/dev/null
           ssh -p $SSH_PORT -i ~/.ssh/deploy_key $SSH_USER@$SSH_HOST \
-            "cd /home/shayani/docker/eventaservo-staging && \
+            "cd ~/docker/eventaservo_staging && \
              docker pull eventaservo/backend:staging && \
-             docker stack deploy -c docker-compose.yml eventaservo-staging"
+             docker stack deploy -c docker-compose.yml eventaservo_staging"
