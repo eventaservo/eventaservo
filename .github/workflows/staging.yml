@@ -56,5 +56,5 @@ jobs:
           ssh-keyscan -p $SSH_PORT $SSH_HOST >> ~/.ssh/known_hosts 2>/dev/null
           ssh -p $SSH_PORT -i ~/.ssh/deploy_key $SSH_USER@$SSH_HOST \
             "cd ~/docker/eventaservo_staging && \
-             docker pull eventaservo/backend:staging && \
+             for i in 1 2 3; do docker pull eventaservo/backend:staging && break || sleep 5; done && \
              docker stack deploy -c docker-compose.yml eventaservo_staging"
