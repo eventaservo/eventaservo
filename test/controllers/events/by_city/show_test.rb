@@ -58,4 +58,59 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal "kartaro", response.cookies["vidmaniero"]
   end
+
+  test "card view shows nearby events from neighbouring cities marked as nearby" do
+    get_kopenhago
+    assert_response :success
+    assert_match events(:malmo_future).title, response.body
+    assert_match I18n.t("events.nearby"), response.body
+  end
+
+  test "card view excludes cities farther than the radius" do
+    get_kopenhago
+    assert_response :success
+    assert_no_match events(:aarhus_future).title, response.body
+  end
+
+  test "proksimaj=0 hides nearby events" do
+    get_kopenhago(proksimaj: 0)
+    assert_response :success
+    assert_match events(:copenhagen_future).title, response.body
+    assert_no_match events(:malmo_future).title, response.body
+  end
+
+  test "card view shows a link to hide nearby events with proksimaj=0" do
+    get_kopenhago
+    assert_response :success
+    assert_match I18n.t("events.hide_nearby"), response.body
+    assert_match "proksimaj=0", response.body
+  end
+
+  test "proksimaj=0 shows a link to reveal nearby events" do
+    get_kopenhago(proksimaj: 0)
+    assert_response :success
+    assert_match I18n.t("events.show_nearby"), response.body
+  end
+
+  test "map view does not include nearby events" do
+    get_kopenhago(vidmaniero: "mapo")
+    assert_response :success
+    assert_no_match events(:malmo_future).title, response.body
+  end
+
+  test "past events view does not include nearby events" do
+    get_kopenhago(pasintaj: 1)
+    assert_response :success
+    assert_no_match events(:malmo_future).title, response.body
+  end
+
+  private
+
+  def get_kopenhago(vidmaniero: "kartaro", **params)
+    country = countries(:denmark)
+    get events_by_city_url(continent: country.continent.normalized,
+      country_name: country.name.normalized,
+      city_name: "kopenhago", **params),
+      headers: {"HTTP_COOKIE" => "vidmaniero=#{vidmaniero}"}
+  end
 end

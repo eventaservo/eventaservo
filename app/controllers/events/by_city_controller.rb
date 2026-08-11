@@ -24,10 +24,17 @@ class Events::ByCityController < ApplicationController
       cookies[:vidmaniero] = {value: "kartaro", expires: 2.weeks, secure: true}
     end
 
+    @include_nearby = params[:proksimaj] != "0"
+    @card_view = cookies[:vidmaniero].in?(%w[kartaro kartoj])
+    @nearby_cities = Events::NearbyCitiesQuery.new(city_name: params[:city_name], country_id: @country.id).call
+
+    target = [[params[:city_name], @country.id]]
+    cities = (@card_view && @include_nearby) ? target + @nearby_cities : target
+
     @events = build_events_scope
-    @future_events = Event.by_city(params[:city_name]).venontaj
-    @today_events = @events.today.includes(:country).by_city(params[:city_name])
-    @events = @events.not_today.by_city(params[:city_name])
+    @future_events = Event.in_cities(cities).venontaj
+    @today_events = @events.today.includes(:country).in_cities(cities)
+    @events = @events.not_today.in_cities(cities)
 
     setup_card_pagination
   end

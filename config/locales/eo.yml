@@ -110,6 +110,9 @@ eo:
     past_events_count:
       one: "%{count} pasinta evento"
       other: "%{count} pasintaj eventoj"
+    nearby: Proksima
+    hide_nearby: Kaŝi proksimajn eventojn
+    show_nearby: Montri proksimajn eventojn
   navbar:
     add_event: Aldoni eventon
     log_in_sign_up: Ensaluti / Registriĝi

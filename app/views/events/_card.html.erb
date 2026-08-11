@@ -11,6 +11,9 @@
     <div class="card-text text-muted">
       <%= display_organizations_for_event(event, limited: true) %>
       <%= render "events/international_badge", event: %>
+      <% if event_nearby?(event) %>
+        <div class="badge text-bg-secondary"><%= t("events.nearby") %></div>
+      <% end %>
       <%= display_event_tags(event) %>
       <p class="small">
         <%= event.komenca_horo(horzono: (cookies[:horzono] || event.time_zone)) unless (event.multtaga? or event.tuttaga?) %>
