@@ -15,6 +15,10 @@ ENV NODE_MAJOR=20
 RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
 RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
 
+# Adds PostgreSQL repository for pg_dump 18 client tools
+RUN curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor -o /etc/apt/keyrings/postgresql.gpg
+RUN echo "deb [signed-by=/etc/apt/keyrings/postgresql.gpg] http://apt.postgresql.org/pub/repos/apt/ trixie-pgdg main" | tee /etc/apt/sources.list.d/pgdg.list
+
 RUN apt update && apt install -y --no-install-recommends \
   btop \
   g++ \
@@ -30,6 +34,7 @@ RUN apt update && apt install -y --no-install-recommends \
   make \
   nodejs \
   poppler-utils \
+  postgresql-client-18 \
   postgresql-server-dev-all \
   telnet \
   vim \
