@@ -9,7 +9,7 @@ end
 Ahoy.api = false
 
 # Track bots
-Ahoy.track_bots = false
+Ahoy.track_bots = Rails.env.test?
 
 # set to true for IP geocoding via the geocoder gem (configured below)
 # Uses MaxMind GeoLite2 local database (no external API calls).
