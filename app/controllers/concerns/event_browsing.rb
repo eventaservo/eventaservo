@@ -16,7 +16,7 @@ module EventBrowsing
   # Builds the base +@events+ scope for event listing pages.
   #
   # Calendar mode uses a broader scope (non-cancelled, no date restriction)
-  # so that past-week navigation works. Other view modes use +venontaj+.
+  # so that past-week navigation works. Other view modes use +discoverable+.
   # The +periodo+ param overrides both when present.
   #
   # Reads +params[:periodo]+, +params[:o]+, +params[:s]+, +params[:t]+,
@@ -34,7 +34,7 @@ module EventBrowsing
       when "p30_tagojn" then Event.in_30days
       when "estontece" then Event.after_30days
       else
-        (cookies[:vidmaniero] == "kalendaro") ? Event.ne_nuligitaj : Event.venontaj
+        (cookies[:vidmaniero] == "kalendaro") ? Event.ne_nuligitaj : Event.discoverable
       end
     end
 

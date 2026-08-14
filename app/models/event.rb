@@ -115,6 +115,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   default_scope { where(deleted: false) }
   scope :deleted, -> { unscoped.where(deleted: true) }
+  scope :discoverable, -> { where("date_start >= :date OR date_end >= :date", date: (Time.zone.now - 4.hours).beginning_of_day) }
   scope :venontaj, -> { where("date_start >= :date OR date_end >= :date", date: Time.zone.today.beginning_of_day) }
   scope :future_and_just_finished, -> { where("date_start >= :date OR date_end >= :date", date: Time.zone.today - 15.days) }
   scope :pasintaj, -> { where("date_end < ?", Time.zone.yesterday.end_of_day) }
