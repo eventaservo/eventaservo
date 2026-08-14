@@ -122,7 +122,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :not_today, ->(tz = nil) { by_not_dates(from: klass.send(:day_in_tz, tz), to: klass.send(:day_in_tz, tz).end_of_day) }
   scope :lau_jaro, ->(jaro) { where("extract(year from date_start) = ?", jaro) }
   scope :in_7days,
-    ->(tz = nil) {
+    lambda { |tz = nil|
       where(
         "date_start BETWEEN ? and ?",
         klass.send(:day_in_tz, tz) + 1.day,
@@ -130,7 +130,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
       )
     }
   scope :in_30days,
-    ->(tz = nil) {
+    lambda { |tz = nil|
       where(
         "date_start BETWEEN ? and ?",
         klass.send(:day_in_tz, tz) + 7.days,
