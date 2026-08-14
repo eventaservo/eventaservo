@@ -58,4 +58,31 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal "kartaro", response.cookies["vidmaniero"]
   end
+
+  test "hodiau filter includes evening event for New York visitor" do
+    travel_to Time.utc(2026, 8, 14, 12, 0) do
+      country = countries(:denmark)
+      Event.create!(
+        title: "Evening Event Copenhagen",
+        description: "Test",
+        city: "Kopenhago",
+        country: country,
+        format: :onsite,
+        date_start: Time.zone.parse("2026-08-14 20:00:00"),
+        date_end: Time.zone.parse("2026-08-14 21:00:00"),
+        time_zone: "America/New_York",
+        code: SecureRandom.hex(6),
+        site: "https://test.example.com",
+        user: users(:user)
+      )
+
+      cookies[:horzono] = "America/New_York"
+      cookies[:vidmaniero] = "kartoj"
+      get events_by_city_url(continent: country.continent.normalized, country_name: country.name.normalized,
+        city_name: "kopenhago", periodo: "hodiau")
+
+      assert_response :success
+      assert_match(/Evening Event Copenhagen/, response.body)
+    end
+  end
 end

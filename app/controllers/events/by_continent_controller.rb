@@ -38,10 +38,10 @@ class Events::ByContinentController < ApplicationController
           @events = build_events_scope
           continent_events_base = @events.by_continent(params[:continent])
 
-          @future_events = continent_events_base.discoverable
-          @countries = Events::CountryCountsQuery.new(scope: continent_events_base.discoverable).call
-          @today_events = continent_events_base.today.includes(:country)
-          @events = continent_events_base.not_today.includes(:country, :organizations)
+          @future_events = continent_events_base.venontaj(current_timezone)
+          @countries = Events::CountryCountsQuery.new(scope: continent_events_base.venontaj(current_timezone)).call
+          @today_events = continent_events_base.today(current_timezone).includes(:country)
+          @events = continent_events_base.not_today(current_timezone).includes(:country, :organizations)
 
           if cookies[:vidmaniero] == "kalendaro"
             @events = continent_events_base.includes(:country, :organizations)
