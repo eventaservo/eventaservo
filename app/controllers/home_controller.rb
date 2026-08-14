@@ -181,7 +181,7 @@ class HomeController < ApplicationController
   # Builds the base +@events+ scope for the home page.
   #
   # Calendar mode uses a broader scope (non-cancelled, no date restriction)
-  # so that past-week navigation works. Other view modes use +discoverable+.
+  # so that past-week navigation works. Other view modes use +venontaj+.
   # The +periodo+ param overrides both when present.
   #
   # Reads +params[:periodo]+, +params[:o]+, +params[:s]+, +params[:t]+,
