@@ -9,15 +9,16 @@ class HomeController < ApplicationController
     ahoy.track "Homepage"
 
     @events = build_events_scope
-    @future_events = Event.venontaj
+    @future_events = Event.discoverable
     if params[:o].present?
       @future_events = @future_events.joins(:organizations).where("organizations.short_name = ?", params[:o])
     end
 
-    cache_key = ["continent_counts", params.permit(:o, :s, :t, :periodo).to_h, Event.maximum(:updated_at)]
+    cache_key = ["continent_counts", params.permit(:o, :s, :t, :periodo).to_h, Event.maximum(:updated_at),
+      (Time.zone.now - 4.hours).beginning_of_day]
     @continents = Rails.cache.fetch(cache_key, expires_in: 1.hour) do
-      # Sidebar counts always show future events, regardless of the active periodo filter.
-      Events::ContinentCountsQuery.new(scope: @events.venontaj).call
+      # Sidebar counts always show future/discoverable events, regardless of the active periodo filter.
+      Events::ContinentCountsQuery.new(scope: @events.discoverable).call
     end
 
     if cookies[:vidmaniero] == "kalendaro"
@@ -180,7 +181,7 @@ class HomeController < ApplicationController
   # Builds the base +@events+ scope for the home page.
   #
   # Calendar mode uses a broader scope (non-cancelled, no date restriction)
-  # so that past-week navigation works. Other view modes use +venontaj+.
+  # so that past-week navigation works. Other view modes use +discoverable+.
   # The +periodo+ param overrides both when present.
   #
   # Reads +params[:periodo]+, +params[:o]+, +params[:s]+, +params[:t]+,
@@ -195,7 +196,7 @@ class HomeController < ApplicationController
     when "p30_tagojn" then Event.in_30days
     when "estontece" then Event.after_30days
     else
-      (cookies[:vidmaniero] == "kalendaro") ? Event.ne_nuligitaj : Event.venontaj
+      (cookies[:vidmaniero] == "kalendaro") ? Event.ne_nuligitaj : Event.discoverable
     end
 
     Events::FilterQuery.new(

@@ -38,8 +38,8 @@ class Events::ByContinentController < ApplicationController
           @events = build_events_scope
           continent_events_base = @events.by_continent(params[:continent])
 
-          @future_events = continent_events_base.venontaj
-          @countries = Events::CountryCountsQuery.new(scope: continent_events_base.venontaj).call
+          @future_events = continent_events_base.discoverable
+          @countries = Events::CountryCountsQuery.new(scope: continent_events_base.discoverable).call
           @today_events = continent_events_base.today.includes(:country)
           @events = continent_events_base.not_today.includes(:country, :organizations)
 
