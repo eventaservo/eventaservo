@@ -3,35 +3,54 @@
 require "test_helper"
 
 class Event::ScopeTest < ActiveSupport::TestCase
-  test "discoverable includes events from the previous UTC day before 04:00 UTC" do
-    travel_to Time.zone.parse("2026-08-15 03:59:00") do
-      event = create_event_ending_at("2026-08-14 23:59:00")
+  test "venontaj with New York tz includes event ending on the previous UTC day" do
+    travel_to Time.zone.parse("2026-08-15 03:00:00") do
+      event = create_event_ending_at("2026-08-14 23:00:00")
 
-      assert_includes Event.discoverable, event
+      assert_includes Event.venontaj("America/New_York"), event
+      assert_not_includes Event.venontaj, event
     end
   end
 
-  test "discoverable excludes events from the previous UTC day at 04:00 UTC" do
-    travel_to Time.zone.parse("2026-08-15 04:00:00") do
-      event = create_event_ending_at("2026-08-14 23:59:00")
+  test "today with New York tz includes event at 20:00 EDT that is 00:00 UTC next day" do
+    travel_to Time.zone.parse("2026-08-14 12:00:00") do
+      event = create(
+        :event,
+        date_start: Time.zone.parse("2026-08-15 00:00:00"),
+        date_end: Time.zone.parse("2026-08-15 01:00:00"),
+        time_zone: "America/New_York"
+      )
 
-      assert_not_includes Event.discoverable, event
+      assert_includes Event.today("America/New_York"), event
+      assert_not_includes Event.today, event
     end
   end
 
-  test "discoverable includes events ending on the current UTC day" do
-    travel_to Time.zone.parse("2026-08-15 04:00:00") do
-      event = create_event_ending_at("2026-08-15 00:00:00")
+  test "today without tz keeps UTC behavior" do
+    travel_to Time.zone.parse("2026-08-14 12:00:00") do
+      event = create(
+        :event,
+        date_start: Time.zone.parse("2026-08-14 23:00:00"),
+        date_end: Time.zone.parse("2026-08-14 23:30:00"),
+        time_zone: "America/New_York"
+      )
 
-      assert_includes Event.discoverable, event
+      assert_includes Event.today, event
+      assert_includes Event.today("America/New_York"), event
     end
   end
 
-  test "discoverable excludes events that ended before the previous UTC day" do
-    travel_to Time.zone.parse("2026-08-15 03:59:00") do
-      event = create_event_ending_at("2026-08-13 23:59:00")
+  test "not_today with New York tz excludes event that is already next day in UTC" do
+    travel_to Time.zone.parse("2026-08-14 12:00:00") do
+      event = create(
+        :event,
+        date_start: Time.zone.parse("2026-08-15 00:00:00"),
+        date_end: Time.zone.parse("2026-08-15 01:00:00"),
+        time_zone: "America/New_York"
+      )
 
-      assert_not_includes Event.discoverable, event
+      assert_not_includes Event.not_today("America/New_York"), event
+      assert_includes Event.not_today, event
     end
   end
 

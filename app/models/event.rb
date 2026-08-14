@@ -115,30 +115,29 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   default_scope { where(deleted: false) }
   scope :deleted, -> { unscoped.where(deleted: true) }
-  scope :discoverable, -> { where("date_start >= :date OR date_end >= :date", date: (Time.zone.now - 4.hours).beginning_of_day) }
-  scope :venontaj, -> { where("date_start >= :date OR date_end >= :date", date: Time.zone.today.beginning_of_day) }
+  scope :venontaj, ->(tz = nil) { where("date_start >= :date OR date_end >= :date", date: klass.send(:day_in_tz, tz)) }
   scope :future_and_just_finished, -> { where("date_start >= :date OR date_end >= :date", date: Time.zone.today - 15.days) }
   scope :pasintaj, -> { where("date_end < ?", Time.zone.yesterday.end_of_day) }
-  scope :today, -> { by_dates(from: Time.zone.today.beginning_of_day, to: Time.zone.today.end_of_day) }
-  scope :not_today, -> { by_not_dates(from: Time.zone.today.beginning_of_day, to: Time.zone.today.end_of_day) }
+  scope :today, ->(tz = nil) { by_dates(from: klass.send(:day_in_tz, tz), to: klass.send(:day_in_tz, tz).end_of_day) }
+  scope :not_today, ->(tz = nil) { by_not_dates(from: klass.send(:day_in_tz, tz), to: klass.send(:day_in_tz, tz).end_of_day) }
   scope :lau_jaro, ->(jaro) { where("extract(year from date_start) = ?", jaro) }
   scope :in_7days,
-    lambda {
+    ->(tz = nil) {
       where(
         "date_start BETWEEN ? and ?",
-        (Time.zone.today + 1.day).beginning_of_day,
-        (Time.zone.today + 7.days).end_of_day
+        klass.send(:day_in_tz, tz) + 1.day,
+        (klass.send(:day_in_tz, tz) + 7.days).end_of_day
       )
     }
   scope :in_30days,
-    lambda {
+    ->(tz = nil) {
       where(
         "date_start BETWEEN ? and ?",
-        (Time.zone.today + 7.days).beginning_of_day,
-        (Time.zone.today + 30.days).end_of_day
+        klass.send(:day_in_tz, tz) + 7.days,
+        (klass.send(:day_in_tz, tz) + 30.days).end_of_day
       )
     }
-  scope :after_30days, -> { where("date_start > ?", (Time.zone.today + 30.days).end_of_day) }
+  scope :after_30days, ->(tz = nil) { where("date_start > ?", (klass.send(:day_in_tz, tz) + 30.days).end_of_day) }
   scope :lau_lando, ->(lando) { joins(:country).where(country: lando) }
   scope :by_country_id, ->(id) { where(country_id: id) }
   scope :by_country_name, ->(name) { joins(:country).where(countries: {name: name}) }
@@ -233,6 +232,16 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   def self.by_not_dates(from:, to:)
     where.not("(date_start>=:from AND date_start<=:to) OR (date_start<=:from AND date_end>=:from)", from: from, to: to)
   end
+
+  # Current-day boundary in the given timezone (UTC when tz is nil).
+  #
+  # @param tz [String, nil] IANA timezone (e.g. "America/New_York")
+  #
+  # @return [ActiveSupport::TimeWithZone] current-day boundary
+  def self.day_in_tz(tz = nil)
+    tz ? Time.current.in_time_zone(tz).beginning_of_day : Time.zone.today.beginning_of_day
+  end
+  private_class_method :day_in_tz
 
   # Serĉas eventojn laŭ organizoj
   #
