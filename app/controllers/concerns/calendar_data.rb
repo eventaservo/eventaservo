@@ -58,7 +58,15 @@ module CalendarData
   def parse_calendar_date
     Date.iso8601(params[:date])
   rescue ArgumentError, TypeError
-    Date.current
+    current_visitor_date
+  end
+
+  # Today's date in the visitor's timezone, or the server timezone when unset.
+  #
+  # @return [Date] visitor's current date
+  def current_visitor_date
+    tz = current_timezone
+    tz ? Time.current.in_time_zone(tz).to_date : Date.current
   end
 
   # Permitted query params preserved on calendar navigation URLs.
@@ -74,7 +82,7 @@ module CalendarData
   # @return [void]
   def build_navigation_paths
     filter_params = calendar_navigation_filter_params
-    @calendar_today_path = url_for(filter_params.merge(date: Date.current.iso8601))
+    @calendar_today_path = url_for(filter_params.merge(date: current_visitor_date.iso8601))
     @calendar_prev_path = url_for(filter_params.merge(date: (@calendar_date - 7.days).iso8601))
     @calendar_next_path = url_for(filter_params.merge(date: (@calendar_date + 7.days).iso8601))
   end
@@ -85,7 +93,7 @@ module CalendarData
   # @return [void]
   def build_calendar_month_navigation_options
     filter_params = calendar_navigation_filter_params
-    anchor = Time.zone.today.beginning_of_month.advance(months: 1)
+    anchor = current_visitor_date.beginning_of_month.advance(months: 1)
     @calendar_month_navigation_options = (0..11).map do |i|
       month_start = anchor.advance(months: i)
       label = I18n.l(month_start, format: :month_navigation).capitalize
