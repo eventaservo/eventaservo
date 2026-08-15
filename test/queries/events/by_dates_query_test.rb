@@ -232,6 +232,73 @@ class Events::ByDatesQueryTest < ActiveSupport::TestCase
     assert_not_includes result[Date.new(2025, 1, 1)], past_event
   end
 
+  test "event at 00:00 UTC after window end appears on last day for New York visitor" do
+    event = create_event(
+      title: "NY Evening",
+      date_start: Time.utc(2026, 3, 22, 0, 0),
+      date_end: Time.utc(2026, 3, 22, 1, 0),
+      time_zone: "America/New_York"
+    )
+
+    result = query(timezone: "America/New_York").call
+
+    assert_includes result[Date.new(2026, 3, 21)], event
+  end
+
+  test "event at 00:00 UTC after window end is excluded for UTC visitor" do
+    event = create_event(
+      title: "UTC Excluded",
+      date_start: Time.utc(2026, 3, 22, 0, 0),
+      date_end: Time.utc(2026, 3, 22, 1, 0),
+      time_zone: "America/New_York"
+    )
+
+    result = query(timezone: "Etc/UTC").call
+
+    assert_not_includes result[Date.new(2026, 3, 21)], event
+  end
+
+  test "event at visual window start for Tokyo visitor is fetched from previous UTC day" do
+    event = create_event(
+      title: "Tokyo Morning",
+      date_start: Time.utc(2026, 3, 14, 23, 0),
+      date_end: Time.utc(2026, 3, 15, 1, 0),
+      time_zone: "Asia/Tokyo"
+    )
+
+    result = query(timezone: "Asia/Tokyo").call
+
+    assert_includes result[Date.new(2026, 3, 15)], event
+  end
+
+  test "multi-day event spanning into window appears on its days" do
+    event = create_event(
+      title: "Started Before New York",
+      date_start: Time.utc(2026, 3, 13, 15, 0),
+      date_end: Time.utc(2026, 3, 17, 10, 0),
+      time_zone: "Etc/UTC"
+    )
+
+    result = query(timezone: "America/New_York").call
+
+    assert_includes result[Date.new(2026, 3, 15)], event
+    assert_includes result[Date.new(2026, 3, 16)], event
+    assert_includes result[Date.new(2026, 3, 17)], event
+  end
+
+  test "invalid timezone falls back to UTC window" do
+    event = create_event(
+      title: "Fallback",
+      date_start: Time.utc(2026, 3, 17, 10, 0),
+      date_end: Time.utc(2026, 3, 17, 12, 0),
+      time_zone: "Etc/UTC"
+    )
+
+    result = query(timezone: "Invalid/Timezone").call
+
+    assert_includes result[Date.new(2026, 3, 17)], event
+  end
+
   private
 
   def query(timezone: nil)

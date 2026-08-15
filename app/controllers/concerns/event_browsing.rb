@@ -16,7 +16,7 @@ module EventBrowsing
   # Builds the base +@events+ scope for event listing pages.
   #
   # Calendar mode uses a broader scope (non-cancelled, no date restriction)
-  # so that past-week navigation works. Other view modes use +discoverable+.
+  # so that past-week navigation works. Other view modes use +venontaj+.
   # The +periodo+ param overrides both when present.
   #
   # Reads +params[:periodo]+, +params[:o]+, +params[:s]+, +params[:t]+,
@@ -29,12 +29,12 @@ module EventBrowsing
       Event.pasintaj
     else
       case params[:periodo]
-      when "hodiau" then Event.today
-      when "p7_tagojn" then Event.in_7days
-      when "p30_tagojn" then Event.in_30days
-      when "estontece" then Event.after_30days
+      when "hodiau" then Event.today(current_timezone)
+      when "p7_tagojn" then Event.in_7days(current_timezone)
+      when "p30_tagojn" then Event.in_30days(current_timezone)
+      when "estontece" then Event.after_30days(current_timezone)
       else
-        (cookies[:vidmaniero] == "kalendaro") ? Event.ne_nuligitaj : Event.discoverable
+        (cookies[:vidmaniero] == "kalendaro") ? Event.ne_nuligitaj : Event.venontaj(current_timezone)
       end
     end
 
@@ -57,7 +57,7 @@ module EventBrowsing
     return unless cookies[:vidmaniero].in?(%w[kartoj kartaro])
 
     @kvanto_venontaj_eventoj = @events.count
-    @pagy, @events = pagy(@events.not_today.includes(%i[country organizations]))
+    @pagy, @events = pagy(@events.not_today(current_timezone).includes(%i[country organizations]))
   end
 
   # Validates the +:continent+ param and sets +@continent+.

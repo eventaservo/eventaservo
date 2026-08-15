@@ -30,10 +30,10 @@ class Events::ByCountryController < ApplicationController
           end
 
           @events = build_events_scope
-          @future_events = Event.includes(:country).by_country_id(@country.id).discoverable
-          @cities = Events::CityCountsQuery.new(scope: @events.discoverable.by_country_id(@country.id)).call
-          @today_events = @events.today.includes(:country).by_country_id(@country.id)
-          @events = @events.not_today.includes(:country).by_country_id(@country.id)
+          @future_events = Event.includes(:country).by_country_id(@country.id).venontaj(current_timezone)
+          @cities = Events::CityCountsQuery.new(scope: @events.venontaj(current_timezone).by_country_id(@country.id)).call
+          @today_events = @events.today(current_timezone).includes(:country).by_country_id(@country.id)
+          @events = @events.not_today(current_timezone).includes(:country).by_country_id(@country.id)
 
           setup_card_pagination
         end

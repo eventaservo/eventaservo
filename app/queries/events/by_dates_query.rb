@@ -52,9 +52,29 @@ module Events
     # @return [Array<Event>]
     def fetch_events
       scope
-        .by_dates(from: from.beginning_of_day, to: to.end_of_day)
+        .by_dates(from: fetch_from, to: fetch_to)
         .order(:date_start)
         .to_a
+    end
+
+    # Window start in UTC, based on the visitor's local visual day.
+    #
+    # @return [Time] UTC start of the fetch window
+    def fetch_from
+      boundary = timezone ? from.in_time_zone(timezone).beginning_of_day : from.beginning_of_day
+      boundary.utc
+    rescue ArgumentError, TZInfo::InvalidTimezoneIdentifier
+      from.beginning_of_day.utc
+    end
+
+    # Window end in UTC, inclusive of the visitor's final visual day.
+    #
+    # @return [Time] UTC end of the fetch window
+    def fetch_to
+      boundary = timezone ? (to + 1.day).in_time_zone(timezone).beginning_of_day : to.end_of_day
+      boundary.utc
+    rescue ArgumentError, TZInfo::InvalidTimezoneIdentifier
+      to.end_of_day.utc
     end
 
     # Pre-resolves each event's start/end dates once, then distributes

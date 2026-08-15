@@ -73,4 +73,29 @@ class HomeController::CalendarTest < ActionDispatch::IntegrationTest
       assert_select ".dropdown-menu a[href*='date=2027-03-01']"
     end
   end
+
+  test "calendar shows evening event in visitor timezone at week boundary" do
+    travel_to Time.zone.parse("2026-08-14 12:00:00") do
+      Rails.cache.clear
+      Event.create!(
+        title: "Bonkora Babilado",
+        description: "Test",
+        city: "Reta",
+        country_id: 1,
+        online: true,
+        date_start: Time.zone.parse("2026-08-21 00:00:00"),
+        date_end: Time.zone.parse("2026-08-21 01:00:00"),
+        time_zone: "America/New_York",
+        code: SecureRandom.hex(6),
+        site: "https://test.example.com",
+        user: users(:user)
+      )
+
+      get root_url, params: {date: "2026-08-14"}, headers: {Cookie: "horzono=America/New_York"}
+
+      assert_response :success
+      assert_select "turbo-frame[data-date='2026-08-14']"
+      assert_match(/Bonkora Babilado/, response.body)
+    end
+  end
 end

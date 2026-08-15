@@ -25,9 +25,9 @@ class Events::ByCityController < ApplicationController
     end
 
     @events = build_events_scope
-    @future_events = Event.by_city(params[:city_name]).discoverable
-    @today_events = @events.today.includes(:country).by_city(params[:city_name])
-    @events = @events.not_today.by_city(params[:city_name])
+    @future_events = Event.by_city(params[:city_name]).venontaj(current_timezone)
+    @today_events = @events.today(current_timezone).includes(:country).by_city(params[:city_name])
+    @events = @events.not_today(current_timezone).by_city(params[:city_name])
 
     setup_card_pagination
   end
