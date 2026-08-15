@@ -628,9 +628,9 @@ GEM
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
     thor (1.5.0)
-    thruster (0.1.23-aarch64-linux)
-    thruster (0.1.23-arm64-darwin)
-    thruster (0.1.23-x86_64-linux)
+    thruster (0.1.25-aarch64-linux)
+    thruster (0.1.25-arm64-darwin)
+    thruster (0.1.25-x86_64-linux)
     timeout (0.6.1)
     timezone (1.3.30)
       base64 (~> 0.2)
@@ -748,7 +748,7 @@ DEPENDENCIES
   stackprof
   standard
   stimulus-rails (~> 1.2)
-  thruster (~> 0.1.23)
+  thruster (~> 0.1.25)
   timezone (~> 1.0)
   turbo-rails (~> 2)
   vcr
