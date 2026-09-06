@@ -1,4 +1,28 @@
 {
-  "ignored_warnings": [],
-  "brakeman_version": "7.1.0"
+  "ignored_warnings": [
+    {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "595e68887492c2a9cbcdbe215d85ad296344cff84cb61f01a950ca6dd8f848cd",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "app/services/backup/db.rb",
+      "line": 33,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "system(\"PGPASSWORD\" => ENV[\"DB_PASSWORD\"], *[\"/usr/bin/pg_dump\", \"--username=#{ENV[\"DB_USERNAME\"]}\", \"--dbname=#{ENV[\"DB_NAME\"]}\", \"--host=#{ENV[\"DB_HOST\"]}\", \"--format=custom\", \"--file=#{output_path}\"])",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Backup::Db",
+        "method": "dump"
+      },
+      "user_input": "ENV[\"DB_USERNAME\"]",
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ],
+      "note": "False positive from Brakeman 8.0.6: system(env, *array) with execve/no shell; ENV interpolation in array elements is not shell-injectable. See #1155 (safe pattern)."
+    }
+  ],
+  "brakeman_version": "8.0.6"
 }
