@@ -23,10 +23,10 @@
     <div class="text-divider fw-bold fg-color-grayDark">AŬ</div>
     <br>
     <%= button_to 'Ensaluti per Google', user_google_oauth2_omniauth_authorize_path,
-          data: {turbo: "false"},
+          form: { data: { turbo: false } },
           class: 'google-button mb-1' %>
     <%= button_to "Ensaluti per Facebook", user_facebook_omniauth_authorize_path,
-          data: { turbo: false },
+          form: { data: { turbo: false } },
           class: 'facebook-button' %>
   </div>
 
