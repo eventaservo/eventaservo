@@ -3,7 +3,7 @@
 class InternationalCalendarController < ApplicationController
   def index
     ahoy.track "Internacia Kalendaro"
-    @events = Event.includes([:organizations, :country]).venontaj.international_calendar.order(:date_start)
+    @events = Event.includes([:organizations, :country]).venontaj(current_timezone).international_calendar.order(:date_start)
   end
 
   def year_list

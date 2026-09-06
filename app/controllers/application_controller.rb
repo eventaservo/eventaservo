@@ -60,6 +60,14 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # Timezone selected by the visitor via the `horzono` cookie, if any.
+  #
+  # @return [String, nil] IANA timezone name
+  def current_timezone
+    cookies[:horzono].presence
+  end
+  helper_method :current_timezone
+
   def authenticate_admin!
     redirect_to root_path unless current_user.admin?
   end

@@ -31,4 +31,25 @@ class InternationalCalendarControllerTest < ActionDispatch::IntegrationTest
     get international_calendar_year_path(year: 1800)
     assert_redirected_to root_url
   end
+
+  test "New York visitor sees an international event still on their current day" do
+    travel_to Time.utc(2026, 8, 15, 3, 0) do
+      event = create(
+        :event,
+        :international_calendar,
+        title: "New York Evening International",
+        date_start: Time.zone.parse("2026-08-14 18:00:00"),
+        date_end: Time.zone.parse("2026-08-14 19:00:00"),
+        time_zone: "America/New_York"
+      )
+
+      assert_includes Event.venontaj("America/New_York").international_calendar, event
+
+      cookies[:horzono] = "America/New_York"
+      get international_calendar_path
+
+      assert_response :success
+      assert_match event.title, response.body
+    end
+  end
 end

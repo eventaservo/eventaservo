@@ -103,4 +103,30 @@ class Events::ByContinentController::ShowTest < ActionDispatch::IntegrationTest
       headers: {"HTTP_COOKIE" => "vidmaniero=kartaro"}
     assert_response :success
   end
+
+  test "hodiau filter includes evening event for New York visitor" do
+    travel_to Time.utc(2026, 8, 14, 12, 0) do
+      Event.create!(
+        title: "Evening Event NA",
+        description: "Test",
+        city: "Reta",
+        country_id: 1,
+        online: true,
+        format: :online,
+        date_start: Time.zone.parse("2026-08-14 20:00:00"),
+        date_end: Time.zone.parse("2026-08-14 21:00:00"),
+        time_zone: "America/New_York",
+        code: SecureRandom.hex(6),
+        site: "https://test.example.com",
+        user: users(:user)
+      )
+
+      cookies[:horzono] = "America/New_York"
+      cookies[:vidmaniero] = "kartoj"
+      get events_by_continent_url(continent: "reta", periodo: "hodiau")
+
+      assert_response :success
+      assert_match(/Evening Event NA/, response.body)
+    end
+  end
 end

@@ -10,4 +10,4 @@ jobs:
       contents: read
     steps:
       - name: Standard Ruby
-        uses: standardrb/standard-ruby-action@eecb3f730879f5b8830705348c2961e5aa26de78 # v1
+        uses: standardrb/standard-ruby-action@df5152f6106147e13feb6ee0fa820b0d435cb8cd # v1
