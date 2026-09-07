@@ -7,17 +7,16 @@ export default class extends Controller {
   connect() {}
 
   goToSearchPage(event) {
-    const searchTerm = this.searchTermTarget.value
-    const url = `/serchilo?query=${searchTerm}`
+    const searchTerm = this.searchTermTarget.value.trim()
 
     clearTimeout(this._timer)
 
-    if (event.keyCode === 13) {
-      window.location.href = url
+    if (event.keyCode === 13 && searchTerm) {
+      window.location.href = `/serchilo?query=${encodeURIComponent(searchTerm)}`
+    } else if (searchTerm) {
+      this._timer = setTimeout(() => {
+        window.location.href = `/serchilo?query=${encodeURIComponent(searchTerm)}`
+      }, 2500)
     }
-
-    this._timer = setTimeout(() => {
-      window.location.href = url
-    }, 2500)
   }
 }
