@@ -364,8 +364,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   # @return [Hash]
   def tagoj
     total = (fina_tago.to_date - komenca_tago.to_date).to_i + 1
-    Time.zone = time_zone
-    parcial = (Time.zone.today - komenca_tago.to_date).to_i + 1
+    parcial = Time.use_zone(time_zone) { (Time.zone.today - komenca_tago.to_date).to_i + 1 }
     restanta = total - parcial
     percent = (parcial.to_f / total.to_f).to_f * 100
     {total: total, parcial: parcial, restanta: restanta, percent: percent.to_i}
