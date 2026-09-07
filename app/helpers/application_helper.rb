@@ -184,6 +184,13 @@ module ApplicationHelper
     icon("fas", "globe", class: "fg-color-link me-1") + link_to(text, url, target: :_blank)
   end
 
+  # Returns the absolute URL for the logo used in email messages.
+  #
+  # @return [String] the environment-specific public logo URL
+  def eventa_servo_logo_url
+    ActionDispatch::Http::URL.url_for(ActionMailer::Base.default_url_options) + "/eventa_servo_logo.png"
+  end
+
   def montras_adreson(adreso, text: adreso)
     icon("fas", "map-marker-alt fg-color-link me-1") +
       link_to(text, "https://www.google.com/maps/search/?api=1&query=#{adreso}", target: :_blank)
