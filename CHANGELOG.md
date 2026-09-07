@@ -1,5 +1,73 @@
 # Changelog
 
+## [3.0.15](https://github.com/eventaservo/eventaservo/compare/v3.0.14...v3.0.15) (2026-09-07)
+
+
+### Features
+
+* keep events visible on discovery pages for 4 extra hours ([dc42251](https://github.com/eventaservo/eventaservo/commit/dc422518be9d624ad8fbe55df9a893e679db1467))
+* keep today's events on discovery pages for 4 extra hours ([#1358](https://github.com/eventaservo/eventaservo/issues/1358)) ([dc42251](https://github.com/eventaservo/eventaservo/commit/dc422518be9d624ad8fbe55df9a893e679db1467))
+* use visitor timezone to define event lists and calendar ([#1359](https://github.com/eventaservo/eventaservo/issues/1359)) ([4d6e592](https://github.com/eventaservo/eventaservo/commit/4d6e5922541e6e8446c815d4e5a6a806c70affa3))
+
+
+### Bug Fixes
+
+* **ahoy:** enable track_bots in test environment to fix minitest failures ([#1357](https://github.com/eventaservo/eventaservo/issues/1357)) ([49d13e3](https://github.com/eventaservo/eventaservo/commit/49d13e3077524da2ea51104f82172d6762534e2f))
+* disable Turbo on OAuth forms ([8075d4e](https://github.com/eventaservo/eventaservo/commit/8075d4e99b7786cb6d9257e84f1facbb2d48f9fd))
+* **errors:** prevent client-side JS SyntaxError when loading expired assets (404) ([#1324](https://github.com/eventaservo/eventaservo/issues/1324)) ([b2b17b1](https://github.com/eventaservo/eventaservo/commit/b2b17b1d44d671e6da32e1c365b220d216e10c90))
+* **event:** resolve N plus 1 query on event show participants and attachments ([2de3f8e](https://github.com/eventaservo/eventaservo/commit/2de3f8ebd120a99f4e0bda103efffb9e3534041b))
+* **home:** restrict HomeController#feed endpoint to XML format only ([#1326](https://github.com/eventaservo/eventaservo/issues/1326)) ([ee5c763](https://github.com/eventaservo/eventaservo/commit/ee5c7635d9d5f7c936bc3e414b2f7795e3c4595c))
+* initialize Rack::Attack cache store and guard count with to_i ([#1332](https://github.com/eventaservo/eventaservo/issues/1332)) ([7cfd202](https://github.com/eventaservo/eventaservo/commit/7cfd202359cdf3fbbece964dbfadb81ba7b24895))
+* keep email-based login throttle, disable only IP-based ([#1342](https://github.com/eventaservo/eventaservo/issues/1342)) ([44d9fcc](https://github.com/eventaservo/eventaservo/commit/44d9fcc082e12584b2b6a78ff2200e629b32d7c5))
+* prevent NoMethodError on organization search when query is nil ([791b916](https://github.com/eventaservo/eventaservo/commit/791b916aef7cfc6dd4057c81ffff01e333f0397c))
+* remove unnecessary self-redirect on first visit in country and city controllers ([#1343](https://github.com/eventaservo/eventaservo/issues/1343)) ([b1f444a](https://github.com/eventaservo/eventaservo/commit/b1f444a78afeb198ac7f4bf0f7b93ed018bdee09))
+* replace Rack::Attack::Cache with Rails.cache to avoid NoMethodError ([#1333](https://github.com/eventaservo/eventaservo/issues/1333)) ([ba85db3](https://github.com/eventaservo/eventaservo/commit/ba85db32beb11719368fb97fd64298f19935e009))
+* resolve N+1 queries on event show for participants and attachments ([#1328](https://github.com/eventaservo/eventaservo/issues/1328)) ([2de3f8e](https://github.com/eventaservo/eventaservo/commit/2de3f8ebd120a99f4e0bda103efffb9e3534041b))
+* use relative paths for root redirects ([#1353](https://github.com/eventaservo/eventaservo/issues/1353)) ([47dd677](https://github.com/eventaservo/eventaservo/commit/47dd67759abb1a722a7bc4c05bdb6b1c38d90719))
+
+
+### Performance Improvements
+
+* **ahoy:** disable bot tracking to prevent solid queue overload ([#1356](https://github.com/eventaservo/eventaservo/issues/1356)) ([bfaed2a](https://github.com/eventaservo/eventaservo/commit/bfaed2a5cb42b81d061b59892bd6e00570e1b3ab))
+* cache calendar queries and resolve association N+1 ([#1327](https://github.com/eventaservo/eventaservo/issues/1327)) ([d1ed158](https://github.com/eventaservo/eventaservo/commit/d1ed1588fb90e1991fb06f5f386503fa741881ae))
+* **queue:** configure 30s Solid Queue polling interval for staging ([#1354](https://github.com/eventaservo/eventaservo/issues/1354)) ([d037f75](https://github.com/eventaservo/eventaservo/commit/d037f758a01f7baca897e4fdc3cb33244788b5df))
+
+
+### Continuous Integration
+
+* retrigger checks (flaky minitest run) ([7c4e9b3](https://github.com/eventaservo/eventaservo/commit/7c4e9b39f7e64d6f42dd93759a58232281cc6933))
+
+
+### Miscellaneous Chores
+
+* **a11y:** localize hardcoded aria-labels in layout elements ([61d74b9](https://github.com/eventaservo/eventaservo/commit/61d74b9944e8290fc18da8e8e56fd2e4c1c0739c))
+* block home-only scanners via behavioral Rack::Attack rule ([#1331](https://github.com/eventaservo/eventaservo/issues/1331)) ([f9e162d](https://github.com/eventaservo/eventaservo/commit/f9e162d340cb6ddaec89e279217944ecad997fc8))
+* **ci:** harden GitHub Actions credential handling and permissions ([#1352](https://github.com/eventaservo/eventaservo/issues/1352)) ([897d5dc](https://github.com/eventaservo/eventaservo/commit/897d5dca0bc97491ff6653a0b636da390aaa3046))
+* **ci:** pin third-party GitHub Actions to commit SHAs ([#1351](https://github.com/eventaservo/eventaservo/issues/1351)) ([cf08c13](https://github.com/eventaservo/eventaservo/commit/cf08c1350370b728fe2255d6023fc29f7aa300ad))
+* **deps-dev:** bump brakeman from 8.0.5 to 8.0.6 and fix CI flake ([9fffd86](https://github.com/eventaservo/eventaservo/commit/9fffd8660cdfa77a80ade45b1b8a18aa76930885))
+* **deps-dev:** bump herb from 0.10.2 to 0.10.3 ([#1348](https://github.com/eventaservo/eventaservo/issues/1348)) ([31fdddb](https://github.com/eventaservo/eventaservo/commit/31fdddb9d4f8ebf080ec9289fd72a086ad966a5b))
+* **deps-dev:** bump webmock from 3.26.2 to 3.26.4 ([#1369](https://github.com/eventaservo/eventaservo/issues/1369)) ([74d75c1](https://github.com/eventaservo/eventaservo/commit/74d75c11f2b4f34a284121802f3776d402994149))
+* **deps:** bump @rails/actioncable from 7.2.301 to 7.2.302 ([#1346](https://github.com/eventaservo/eventaservo/issues/1346)) ([b8e6b91](https://github.com/eventaservo/eventaservo/commit/b8e6b91cfaba24847e2ad9f635802d25d04d5714))
+* **deps:** bump @rails/actiontext from 7.2.301 to 7.2.302 ([#1344](https://github.com/eventaservo/eventaservo/issues/1344)) ([d95f74d](https://github.com/eventaservo/eventaservo/commit/d95f74d06dc2007ef3e027026ce44fd1c66e353f))
+* **deps:** bump @rails/activestorage from 7.2.301 to 7.2.302 ([#1347](https://github.com/eventaservo/eventaservo/issues/1347)) ([94805f5](https://github.com/eventaservo/eventaservo/commit/94805f508ced240e14251451c611cbbad4fe02ca))
+* **deps:** bump actions/setup-node from 6 to 7 ([#1336](https://github.com/eventaservo/eventaservo/issues/1336)) ([4c5567a](https://github.com/eventaservo/eventaservo/commit/4c5567ac99c09e7256a54c921629f37ecaf394a4))
+* **deps:** bump docker/setup-buildx-action from 4.2.0 to 4.3.0 ([a821cec](https://github.com/eventaservo/eventaservo/commit/a821cecaa4941ed9ebf76899d479098369929099))
+* **deps:** bump dompurify from 3.4.12 to 3.4.13 in the npm_and_yarn group across 1 directory ([#1350](https://github.com/eventaservo/eventaservo/issues/1350)) ([4929b4f](https://github.com/eventaservo/eventaservo/commit/4929b4fdfc58491f598c0dfb5a9aa2f424468d81))
+* **deps:** bump dompurify in the npm_and_yarn group across 1 directory ([4929b4f](https://github.com/eventaservo/eventaservo/commit/4929b4fdfc58491f598c0dfb5a9aa2f424468d81))
+* **deps:** bump esbuild from 0.28.1 to 0.28.2 ([#1361](https://github.com/eventaservo/eventaservo/issues/1361)) ([a24da61](https://github.com/eventaservo/eventaservo/commit/a24da61c1329b833c6ca6d33db47dec03210b076))
+* **deps:** bump github/codeql-action from 4 to 4.37.3 ([#1337](https://github.com/eventaservo/eventaservo/issues/1337)) ([4aaeac8](https://github.com/eventaservo/eventaservo/commit/4aaeac8af687d64f8a22e6d4b12ca481a2fa0575))
+* **deps:** bump github/codeql-action from 4.37.3 to 4.37.9 ([#1365](https://github.com/eventaservo/eventaservo/issues/1365)) ([b603b49](https://github.com/eventaservo/eventaservo/commit/b603b49dd8b8e8de7648f0c50f04341caed0d4f9))
+* **deps:** bump omniauth-google-oauth2 from 1.2.2 to 1.2.3 ([#1368](https://github.com/eventaservo/eventaservo/issues/1368)) ([089272e](https://github.com/eventaservo/eventaservo/commit/089272e56cc546f2272185f55abe18da1171c83a))
+* **deps:** bump rails from 8.1.3 to 8.1.3.1 ([#1345](https://github.com/eventaservo/eventaservo/issues/1345)) ([81903c9](https://github.com/eventaservo/eventaservo/commit/81903c93e403df8c12a869970aa00ebed7e6cf79))
+* **deps:** bump ruby from 4.0.5-slim-trixie to 4.0.6-slim-trixie ([#1335](https://github.com/eventaservo/eventaservo/issues/1335)) ([c3eb5f5](https://github.com/eventaservo/eventaservo/commit/c3eb5f5fefca54ce741345764febf7df878bd001))
+* **deps:** bump standardrb/standard-ruby-action from 1.5.0 to 1.6.0 ([#1367](https://github.com/eventaservo/eventaservo/issues/1367)) ([fcbc36c](https://github.com/eventaservo/eventaservo/commit/fcbc36c7526483f2541c9a8c247059cdca56f7a5))
+* **deps:** bump the bundler group across 1 directory with 2 updates ([#1349](https://github.com/eventaservo/eventaservo/issues/1349)) ([35f257d](https://github.com/eventaservo/eventaservo/commit/35f257dbbfd9490a0fd4431e6863dc7e53a3b722))
+* **deps:** bump thruster from 0.1.23 to 0.1.26 ([#1364](https://github.com/eventaservo/eventaservo/issues/1364)) ([cff2766](https://github.com/eventaservo/eventaservo/commit/cff2766755da3fc8824dbf4fafa5d1bb7fdfca28))
+* **deps:** update concurrent-ruby to 1.3.8 ([ee04151](https://github.com/eventaservo/eventaservo/commit/ee04151797aaf174ec5418120ca263cda2336724))
+* disable Rack::Attack IP-based throttles behind CDN ([#1341](https://github.com/eventaservo/eventaservo/issues/1341)) ([cd3d0f5](https://github.com/eventaservo/eventaservo/commit/cd3d0f54c2d52a56cfbaa5fa900c4f189a6fdaa8))
+* **docker:** add postgresql-client-18 to support PG18 database backups ([#1355](https://github.com/eventaservo/eventaservo/issues/1355)) ([1226507](https://github.com/eventaservo/eventaservo/commit/1226507c4fff55c599b93b2064130a4caa575fd4))
+* enable puma clustered mode and move daily backup to midnight UTC ([4193c5d](https://github.com/eventaservo/eventaservo/commit/4193c5da3a8a7f7f54925a731d34b989cb221a6d))
+
 ## [3.0.14](https://github.com/eventaservo/eventaservo/compare/v3.0.13...v3.0.14) (2026-07-27)
 
 
