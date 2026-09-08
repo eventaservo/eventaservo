@@ -27,4 +27,11 @@ class HomeSystemTest < ApplicationSystemTestCase
     sleep 4
     assert_equal "/serchilo", current_path
   end
+
+  test "toggling the past events switch on search page submits the form automatically" do
+    visit serchilo_path(query: "Esperanto")
+    find("input#pasintaj").click
+
+    assert_current_path %r{/serchilo\?.*pasintaj=true}
+  end
 end

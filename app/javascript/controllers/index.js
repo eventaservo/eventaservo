@@ -43,6 +43,9 @@ application.register("report-problem-form", ReportProblemFormController)
 import SearchController from "./search_controller"
 application.register("search", SearchController)
 
+import SearchFiltersController from "./search_filters_controller"
+application.register("search-filters", SearchFiltersController)
+
 import ShortUrlController from "./short_url_controller"
 application.register("short-url", ShortUrlController)
 
