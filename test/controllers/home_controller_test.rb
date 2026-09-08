@@ -39,16 +39,16 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'search renders the past events switch with automatic submission' do
-    get serchilo_url, params: { query: 'eventoj', pasintaj: 1 }
+  test "search renders the past events switch with automatic submission" do
+    get serchilo_url, params: {query: "eventoj", pasintaj: 1}
 
     assert_response :success
     assert_select "form[data-controller='search-filters']"
     assert_select "input[name='pasintaj'][data-action='change->search-filters#submit']"
   end
 
-  test 'search renders the cancelled events switch with automatic submission' do
-    get serchilo_url, params: { query: 'eventoj', nuligitaj: 1 }
+  test "search renders the cancelled events switch with automatic submission" do
+    get serchilo_url, params: {query: "eventoj", nuligitaj: 1}
 
     assert_response :success
     assert_select "input[name='nuligitaj'][data-action='change->search-filters#submit']"
