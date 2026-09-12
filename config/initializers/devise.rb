@@ -263,8 +263,8 @@ Devise.setup do |config|
     scope: "email,public_profile",
     secure_image_url: true,
     client_options: {
-      site: "https://graph.facebook.com/v19.0",
-      authorize_url: "https://www.facebook.com/v19.0/dialog/oauth"
+      site: "https://graph.facebook.com/v26.0",
+      authorize_url: "https://www.facebook.com/v26.0/dialog/oauth"
     }
 
   config.omniauth :google_oauth2,
