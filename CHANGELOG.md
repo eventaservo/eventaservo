@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.0.16](https://github.com/eventaservo/eventaservo/compare/v3.0.15...v3.0.16) (2026-09-12)
+
+
+### Features
+
+* auto-submit search form when toggling past or cancelled filters ([#1374](https://github.com/eventaservo/eventaservo/issues/1374)) ([6d49478](https://github.com/eventaservo/eventaservo/commit/6d49478d1a13c5b9dcf868a34fc8b3923f2a218c))
+
+
+### Bug Fixes
+
+* prevent navbar search redirecting with empty query ([#1373](https://github.com/eventaservo/eventaservo/issues/1373)) ([f8de083](https://github.com/eventaservo/eventaservo/commit/f8de0837dd339bd5ee284286bfb75f6d88e25e60))
+* upgrade facebook graph api version to v26.0 ([#1375](https://github.com/eventaservo/eventaservo/issues/1375)) ([4c67d66](https://github.com/eventaservo/eventaservo/commit/4c67d666318f6a773c9b433fc3237ff914d927ac))
+* use environment-specific email logo URLs ([#1371](https://github.com/eventaservo/eventaservo/issues/1371)) ([3b6673d](https://github.com/eventaservo/eventaservo/commit/3b6673de8bae23526a9d0c05118a796240d2a21f))
+
 ## [3.0.15](https://github.com/eventaservo/eventaservo/compare/v3.0.14...v3.0.15) (2026-09-07)
 
 
