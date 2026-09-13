@@ -14,7 +14,7 @@ module Webcal
       end
 
       respond_to do |format|
-        format.ics { kreas_webcal(eventoj.includes(:country), title: "#{@lando.code.upcase} Esperantaj eventoj") }
+        format.ics { kreas_webcal(eventoj.includes(:country, :versions, :tags), title: "#{@lando.code.upcase} Esperantaj eventoj") }
       end
     end
 
@@ -28,7 +28,7 @@ module Webcal
       o = Organization.find_by(short_name: params[:short_name])
       redirect_to root_path, flash: {error: "Organizo ne ekzistas"} and return if o.nil?
 
-      eventoj = Event.lau_organizo(o.short_name).for_webcal
+      eventoj = Event.lau_organizo(o.short_name).for_webcal.includes(:versions, :tags)
 
       respond_to do |format|
         format.ics { kreas_webcal(eventoj, title: "#{o.short_name} Esperantaj eventoj") }
@@ -42,7 +42,7 @@ module Webcal
       user = User.find_by(webcal_token: params[:webcal_token])
       redirect_to root_path, flash: {error: "Uzanto ne ekzistas"} and return if user.nil?
 
-      events = (user.events.includes([:country]) + user.interested_events.includes([:country])).uniq
+      events = (user.events.includes([:country, :versions, :tags]) + user.interested_events.includes([:country, :versions, :tags])).uniq
 
       ahoy = Ahoy::Tracker.new(controller: self, user: user)
       ahoy.track "Personal calendar"

@@ -22,6 +22,7 @@ module Webcal
       create_whole_day_event(icalendar, evento)
     else
       icalendar.event do |e|
+        e.uid = "#{evento.uuid}@eventaservo.org"
         e.dtstart = Icalendar::Values::DateOrDateTime.new(
           evento.date_start.in_time_zone(evento.time_zone),
           tzid: evento.time_zone
@@ -33,12 +34,16 @@ module Webcal
         e.summary = evento.title
         e.description = evento.description + '\n\n' + event_url(code: evento.ligilo)
         e.location = evento.full_address
+        e.last_modified = evento.updated_at.utc
+        e.sequence = evento.versions.size
+        e.categories = evento.tags.categories.map(&:name)
       end
     end
   end
 
   def kreas_multtagan_eventon(icalendar, evento)
     icalendar.event do |e|
+      e.uid = "#{evento.uuid}@eventaservo.org"
       e.dtstart = Icalendar::Values::DateOrDateTime.new(
         evento.date_start.in_time_zone(evento.time_zone).strftime("%Y%m%d"),
         tzid: evento.time_zone
@@ -50,6 +55,9 @@ module Webcal
       e.summary = evento.title
       e.description = evento.description + '\n\n' + event_url(code: evento.ligilo)
       e.location = evento.full_address
+      e.last_modified = evento.updated_at.utc
+      e.sequence = evento.versions.size
+      e.categories = evento.tags.categories.map(&:name)
     end
   end
 
@@ -61,6 +69,7 @@ module Webcal
   # @return [Icalendar::Event]
   def create_whole_day_event(icalendar, event)
     icalendar.event do |e|
+      e.uid = "#{event.uuid}@eventaservo.org"
       e.dtstart = Icalendar::Values::DateOrDateTime.new(
         event.date_start.in_time_zone(event.time_zone).strftime("%Y%m%d"), tzid: event.time_zone
       ).call
@@ -70,6 +79,9 @@ module Webcal
       e.summary = event.title
       e.description = "#{event.description}\n\n#{event_url(code: event.ligilo)}"
       e.location = event.full_address
+      e.last_modified = event.updated_at.utc
+      e.sequence = event.versions.size
+      e.categories = event.tags.categories.map(&:name)
     end
   end
 end
