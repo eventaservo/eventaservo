@@ -20,4 +20,16 @@ class Tagging < ApplicationRecord
   belongs_to :taggable, polymorphic: true
 
   validates :tag_id, uniqueness: {scope: [:taggable_id, :taggable_type], message: "tag already associated with this item"}
+
+  after_save :touch_event_category_change, if: -> { taggable_type == "Event" && tag&.category? }
+  after_destroy :touch_event_category_change, if: -> { taggable_type == "Event" && tag&.category? }
+
+  private
+
+  # Touch the event so LAST-MODIFIED and SEQUENCE reflect category changes.
+  #
+  # @return [void]
+  def touch_event_category_change
+    taggable&.update_column(:updated_at, Time.current)
+  end
 end
