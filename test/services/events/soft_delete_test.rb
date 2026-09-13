@@ -56,14 +56,15 @@ class Events::SoftDeleteTest < ActiveSupport::TestCase
   end
 
   test "returns success when user is a member of event's organization" do
-    create(:organization)
     other_user = create(:user)
+    organization = create(:organization)
     event = create(:event, deleted: false, user: other_user)
+    event.organizations << organization
+    create(:organization_user, organization: organization, user: @user)
 
-    @user.stub(:organiza_membro_de_evento, true) do
-      service = Events::SoftDelete.new(event: event, user: @user).call
-      assert service.success?
-    end
+    service = Events::SoftDelete.new(event: event, user: @user).call
+
+    assert service.success?
   end
 
   test "returns failure when user is not authorized" do
