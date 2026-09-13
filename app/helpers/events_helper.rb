@@ -96,12 +96,22 @@ module EventsHelper
     end
   end
 
-  def speconomo_plurale(tag)
-    case tag
+  # Returns the plural display name of a tag.
+  #
+  # Some tag names have an Esperanto plural form that differs from the singular
+  # name stored in the database, so tag badges are rendered in the plural
+  # (e.g. "Kunvenoj/Eventoj" instead of "Kunveno/Evento"). Names without a
+  # known plural are returned unchanged.
+  #
+  # @param tag_name [String] the singular tag name
+  #
+  # @return [String] the plural tag name, or the given name when it has no known plural
+  def tag_plural_name(tag_name)
+    case tag_name
     when "Kunveno/Evento" then "Kunvenoj/Eventoj"
     when "Kurso" then "Kursoj"
     when "Alia" then "Aliaj"
-    else tag
+    else tag_name
     end
   end
 end
