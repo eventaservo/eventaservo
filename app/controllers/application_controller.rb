@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   def user_is_owner_or_admin(event)
     user_signed_in? &&
       (current_user.owner_of?(event) ||
-        Users::MemberOfEventOrganizationsQuery.new(user: current_user, event:).call ||
+        Users::MemberOfEventOrganizationsQuery.new(user: current_user, event:).call.exists? ||
         current_user.admin?)
   end
   helper_method :user_is_owner_or_admin
