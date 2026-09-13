@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Events
   class SoftDelete < ApplicationService
     attr_reader :event, :user
@@ -24,7 +26,9 @@ module Events
     private
 
     def user_can_delete_event?
-      user.owner_of?(event) || user.organiza_membro_de_evento(event) || user.admin?
+      user.owner_of?(event) ||
+        Users::MemberOfEventOrganizationsQuery.new(user:, event:).call ||
+        user.admin?
     end
 
     def set_deleted_attribute_to_true
