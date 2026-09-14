@@ -170,7 +170,12 @@ module ApplicationHelper
     end
   end
 
-  def montras_telefonnumeron(phone)
+  # Renders a phone icon followed by a tel: link for the given phone number.
+  #
+  # @param phone [String, nil] the phone number to display and link
+  #
+  # @return [ActiveSupport::SafeBuffer, nil] the phone icon and tel: link HTML, or nil if phone is blank
+  def phone_link(phone)
     return if phone.blank?
 
     icon("fas", "phone", class: "fg-color-link me-1") + link_to(phone, "tel:#{phone}")

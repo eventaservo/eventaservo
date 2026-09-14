@@ -130,6 +130,19 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_nil result
   end
 
+  # phone_link tests
+  test "phone_link renders phone icon and tel link when phone is present" do
+    result = phone_link("+55 11 99999-9999")
+
+    assert_equal '<i class="fas fa-phone fg-color-link me-1" aria-hidden="true"></i><a href="tel:+55 11 99999-9999">+55 11 99999-9999</a>', result
+  end
+
+  test "phone_link returns nil when phone is blank" do
+    assert_nil phone_link(nil)
+    assert_nil phone_link("")
+    assert_nil phone_link("   ")
+  end
+
   # event_full_description tests
   test "event_full_description should return the full address for RSS" do
     event = create(:event, :brazila)
