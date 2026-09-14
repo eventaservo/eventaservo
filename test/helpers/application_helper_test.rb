@@ -228,4 +228,39 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_no_match(/<script>alert\('xss'\)<\/script>/, html)
     assert_match(/&lt;script&gt;alert\(&#39;xss&#39;\)&lt;\/script&gt;/, html)
   end
+
+  # link_to_website tests
+  test "link_to_website returns nil when url is nil or blank" do
+    assert_nil link_to_website(nil)
+    assert_nil link_to_website("")
+    assert_nil link_to_website("   ")
+  end
+
+  test "link_to_website renders link with globe icon and strips https protocol from anchor text" do
+    url = "https://example.org"
+    expected = '<i class="fas fa-globe fg-color-link me-1" aria-hidden="true"></i><a target="_blank" href="https://example.org">example.org</a>'
+
+    assert_equal expected, link_to_website(url)
+  end
+
+  test "link_to_website strips http protocol from anchor text" do
+    url = "http://example.com/page"
+    expected = '<i class="fas fa-globe fg-color-link me-1" aria-hidden="true"></i><a target="_blank" href="http://example.com/page">example.com/page</a>'
+
+    assert_equal expected, link_to_website(url)
+  end
+
+  test "link_to_website preserves url without protocol in anchor text" do
+    url = "example.com"
+    expected = '<i class="fas fa-globe fg-color-link me-1" aria-hidden="true"></i><a target="_blank" href="example.com">example.com</a>'
+
+    assert_equal expected, link_to_website(url)
+  end
+
+  test "link_to_website truncates url exceeding 40 characters" do
+    url = "https://example.com/very/long/path/to/an/article"
+    expected = '<i class="fas fa-globe fg-color-link me-1" aria-hidden="true"></i><a target="_blank" href="https://example.com/very/long/path/to/an/article">example.com/very/long/path/to/an/...</a>'
+
+    assert_equal expected, link_to_website(url)
+  end
 end

@@ -176,7 +176,23 @@ module ApplicationHelper
     icon("fas", "phone", class: "fg-color-link me-1") + link_to(phone, "tel:#{phone}")
   end
 
-  def montras_retpaghon(url)
+  # Renders an external website link with a globe icon and truncated text.
+  #
+  # Truncates URLs longer than 40 characters to 41 characters followed by an
+  # ellipsis, removes the "http://" or "https://" prefix from the anchor text,
+  # and opens the link in a new browser tab.
+  #
+  # @example Short URL
+  #   link_to_website("https://example.org")
+  #   # => <i class="fas fa-globe fg-color-link me-1" aria-hidden="true"></i><a target="_blank" href="https://example.org">example.org</a>
+  #
+  # @example Long URL
+  #   link_to_website("https://example.org/very/long/path/to/something/interesting")
+  #
+  # @param url [String, nil] the target website URL
+  #
+  # @return [ActiveSupport::SafeBuffer, nil] HTML link with globe icon, or nil if url is blank
+  def link_to_website(url)
     return if url.blank?
 
     text = (url.length > 40) ? url[0..40] + "..." : url
