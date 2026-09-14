@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.0.17](https://github.com/eventaservo/eventaservo/compare/v3.0.16...v3.0.17) (2026-09-14)
+
+
+### Bug Fixes
+
+* add missing end to ApplicationHelperTest class ([f66fa77](https://github.com/eventaservo/eventaservo/commit/f66fa77b94f6855c0a19afb1f4c4185f59204bbb))
+* add missing end to ApplicationHelperTest class ([327b052](https://github.com/eventaservo/eventaservo/commit/327b052ef7f08cdc68434f5bef765a09bfc3aefc))
+* eager load reports and users in report index ([6adb372](https://github.com/eventaservo/eventaservo/commit/6adb372c8aead150250cdf1b0db8ec5fb493e9ca))
+
+
+### Code Refactoring
+
+* rename montras_adreson helper to address_link ([662ad2a](https://github.com/eventaservo/eventaservo/commit/662ad2ae02d44ac0da9ad8af34af69a27534fab3))
+* rename montras_retpaghon to link_to_website ([cdd0e72](https://github.com/eventaservo/eventaservo/commit/cdd0e72587ee29595a325f0b6660c23db0de9dc4))
+* rename montras_telefonnumeron helper to phone_link ([36419df](https://github.com/eventaservo/eventaservo/commit/36419df1a23cfa6fa63f31c6a74db77a7921744a))
+
 ## [3.0.16](https://github.com/eventaservo/eventaservo/compare/v3.0.15...v3.0.16) (2026-09-13)
 
 
