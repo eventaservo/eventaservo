@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Event
   class ReportController < ApplicationController
     before_action :authenticate_user!, only: %i[new create destroy]
@@ -5,7 +7,7 @@ class Event
     before_action :set_report, only: %i[destroy]
 
     def index
-      @events = Event.with_reports.order(date_start: :desc)
+      @events = Event.with_reports.includes(reports: :user).order(date_start: :desc)
       @pagy, @events = pagy(@events, limit: 25)
     end
 
