@@ -207,9 +207,21 @@ module ApplicationHelper
     ActionDispatch::Http::URL.url_for(ActionMailer::Base.default_url_options) + "/eventa_servo_logo.png"
   end
 
-  def montras_adreson(adreso, text: adreso)
+  # Renders a map marker icon and a link to Google Maps for a given address.
+  #
+  # @example With default text
+  #   address_link("Zamenhofa 1, Bialystok")
+  #
+  # @example With custom link text
+  #   address_link("Zamenhofa 1, Bialystok", text: "Bialystok")
+  #
+  # @param address [String] the address to query on Google Maps
+  # @param text [String] the link text to display, defaulting to the address
+  #
+  # @return [ActiveSupport::SafeBuffer] HTML containing the map marker icon and Google Maps link
+  def address_link(address, text: address)
     icon("fas", "map-marker-alt fg-color-link me-1") +
-      link_to(text, "https://www.google.com/maps/search/?api=1&query=#{adreso}", target: :_blank)
+      link_to(text, "https://www.google.com/maps/search/?api=1&query=#{address}", target: :_blank)
   end
 
   def article_link(text, link, description)

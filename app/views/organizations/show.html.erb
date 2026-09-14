@@ -32,7 +32,7 @@
           <br>
         <% end %>
         <% if @organizo.country.present? && (@organizo.country_id != 99999) %>
-          <%= montras_adreson(@organizo.full_address) %>
+          <%= address_link(@organizo.full_address) %>
         <% end %>
       </p>
 
