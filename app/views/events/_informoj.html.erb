@@ -5,7 +5,7 @@
       <%= link_to_website(@event.site) + raw('<br/>') if @event.site.present? %>
       <%= montras_retposhtadreson(@event.email) + raw('<br/>') if @event.email.present? %>
       <% unless @event.online && @event.city == 'Reta' %>
-        <%= montras_adreson(@event.full_address, text: @event.address) unless @event.address.blank? %>
+        <%= address_link(@event.full_address, text: @event.address) unless @event.address.blank? %>
         <%= render partial: 'event_map', locals: { event: @event } if @event.location_defined? %>
       <% end %>
     </p>
