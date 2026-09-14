@@ -242,7 +242,6 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_match(/&lt;script&gt;alert\(&#39;xss&#39;\)&lt;\/script&gt;/, html)
   end
 
-
   # link_to_website tests
   test "link_to_website returns nil when url is nil or blank" do
     assert_nil link_to_website(nil)
@@ -296,3 +295,4 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_includes result, '<i class="fas fa-map-marker-alt fg-color-link me-1" aria-hidden="true"></i>'
     assert_includes result, %(<a target="_blank" href="https://www.google.com/maps/search/?api=1&amp;query=#{address}">Bialystok</a>)
   end
+end
