@@ -86,15 +86,15 @@ class Organization < ApplicationRecord
     "#{name} (#{short_name})"
   end
 
-  # Serĉas laŭ vorto la organizojn
+  # Searches organizations by name or short name using an accent-insensitive partial match.
   #
-  # @param vorto [String, nil] la serĉota vorto
-  # @return [ActiveRecord::Relation]
+  # @param word [String, nil] the search term; single quotes are stripped from it
   #
-  def self.serchi(vorto)
-    return all if vorto.blank?
+  # @return [ActiveRecord::Relation] the matching organizations, or all organizations when the term is blank
+  def self.search(word)
+    return all if word.blank?
 
-    where("unaccent(name) ilike unaccent(:v) OR unaccent(short_name) ilike unaccent(:v)", v: "%#{vorto.tr("''", "")}%")
+    where("unaccent(name) ilike unaccent(:v) OR unaccent(short_name) ilike unaccent(:v)", v: "%#{word.tr("''", "")}%")
   end
 
   def full_address

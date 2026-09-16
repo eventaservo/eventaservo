@@ -27,8 +27,15 @@
 # organization counts have to be relative to the table (Organization.count)
 # instead of hardcoded.
 #
-# Names are kept after "FEJ" and "UEA" in alphabetical order so that
-# organization ordering assertions do not change.
+# The names and short names are also deliberately different from the ones used
+# by the factories and by the tests that create organizations inline ("uea",
+# "bejo", "tejo", "fej", "testorg", ...): short_name has a unique index and
+# those tests use Organization.create!, so reusing a value would break them.
+#
+# Names are kept after "FEJ" in alphabetical order so that organization
+# ordering assertions do not change (Organizations::SearchQueryTest expects
+# "FEJ" to be the first result when every organization is returned), and the
+# countries are not the "nl" the API test filters by.
 
 rotterdam_centre:
   name: Rotterdam Esperanto Centre
@@ -50,3 +57,19 @@ tokyo_society:
   city: Tokyo
   country: brazil
   email: tokyo@example.org
+
+ilei:
+  name: Internacia Ligo de Esperantistaj Instruistoj
+  short_name: ILEI
+  city: Parizo
+  email: ilei@example.com
+  url: https://www.ilei.info
+  country: france
+
+sat:
+  name: Sennacieca Asocio Tutmonda
+  short_name: SAT
+  city: Parizo
+  email: sat@example.com
+  url: https://www.satesperanto.org
+  country: france
