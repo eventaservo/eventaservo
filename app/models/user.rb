@@ -158,7 +158,7 @@ class User < ApplicationRecord
   # @return [Boolean] se la uzanto estas administranto
   # @note Ĉiam respondas +true+ se la uzanto estas ES-Admin.
   def administranto?(organizo)
-    (in? organizo.administrantoj) || admin
+    (in? organizo.admins) || admin
   end
 
   # Checks if the user has any public contact information fullfilled
