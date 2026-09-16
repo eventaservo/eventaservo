@@ -115,17 +115,17 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_equal '<span class="fi fi-br fis"></span>', result
   end
 
-  # montras_flagon tests
-  test "montras_flagon renders flag for a country" do
+  # display_flag tests
+  test "display_flag renders the flag for a country" do
     country = countries(:afghanistan)
 
-    result = montras_flagon(country)
+    result = display_flag(country)
 
     assert_equal '<span class="fi fi-af"></span>', result
   end
 
-  test "montras_flagon returns nil when country is nil" do
-    result = montras_flagon(nil)
+  test "display_flag returns nil when country is nil" do
+    result = display_flag(nil)
 
     assert_nil result
   end

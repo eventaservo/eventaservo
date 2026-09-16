@@ -65,7 +65,7 @@
         <div class="col-3 fw-medium text-truncate"><%= user.name %></div>
         <div class="col-3 text-body-secondary text-truncate"><%= user.email %></div>
         <div class="col-1 text-body-secondary text-truncate"><%= user.city %></div>
-        <div class="col-2 text-body-secondary text-truncate"><%= montras_flagon(user.country) %> <%= user.country&.name %></div>
+        <div class="col-2 text-body-secondary text-truncate"><%= display_flag(user.country) %> <%= user.country&.name %></div>
         <div class="col-1 text-body-secondary text-truncate"><%= user.username %></div>
         <div class="col-1 text-body-secondary"><%= user.events_count %></div>
         <div class="col-1">

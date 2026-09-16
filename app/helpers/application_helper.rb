@@ -149,14 +149,22 @@ module ApplicationHelper
     content_tag(:span, nil, class: classes.join(" "))
   end
 
-  # Renders the flag icon for a country object (Esperanto: montras flagon).
+  # Renders the flag icon for a country, delegating to #flag_icon.
   #
-  # @param lando [Country, nil] a country object responding to `#code`
+  # @example Country with a code
+  #   display_flag(countries(:afghanistan))
+  #   # => <span class="fi fi-af"></span>
   #
-  # @return [ActiveSupport::SafeBuffer, nil] flag icon HTML, or nil if lando is nil
-  def montras_flagon(lando)
-    return if lando.nil?
-    flag_icon(lando.code)
+  # @example Missing country
+  #   display_flag(nil)
+  #   # => nil
+  #
+  # @param country [Country, nil] a country object responding to `#code`
+  #
+  # @return [ActiveSupport::SafeBuffer, nil] flag icon HTML, or nil when country is nil
+  def display_flag(country)
+    return if country.nil?
+    flag_icon(country.code)
   end
 
   # Protektas la retadreson kontaŭ spamoj

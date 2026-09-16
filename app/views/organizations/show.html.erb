@@ -8,7 +8,7 @@
   <div class="col-lg-8">
     <div class="box-white">
       <div class="lead">
-        <%= montras_flagon(@organizo.country) if @organizo.country.present? && @organizo.display_flag? %>
+        <%= display_flag(@organizo.country) if @organizo.country.present? && @organizo.display_flag? %>
         <%= @organizo.name %>
         <span class="float-end">
           <%= link_to icon('far', 'calendar-alt'),
