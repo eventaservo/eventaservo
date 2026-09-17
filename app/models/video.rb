@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: videos
@@ -32,12 +34,22 @@ class Video < ApplicationRecord
     end
   end
 
-  def self.serchi(teksto)
+  # Searches videos by title or description using an accent-insensitive partial match.
+  #
+  # Spaces in the term are treated as wildcards.
+  #
+  # @param text [String, nil] the search term
+  #
+  # @return [ActiveRecord::Relation] the matching videos ordered by the most recent event first,
+  #   or all videos when the term is blank
+  def self.search(text)
+    return all if text.blank?
+
     Video
       .joins(:evento)
       .where(
         "unaccent(videos.title) ilike unaccent(:search) OR unaccent(videos.description) ilike unaccent(:search)",
-        search: "%#{teksto.strip.tr(" ", "%").downcase}%"
+        search: "%#{text.strip.tr(" ", "%").downcase}%"
       ).order("events.date_start DESC")
   end
 

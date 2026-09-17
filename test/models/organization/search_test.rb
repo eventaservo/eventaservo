@@ -3,36 +3,39 @@
 require "test_helper"
 
 class Organization::SearchTest < ActiveSupport::TestCase
-  test "serchi finds matching organizations by name or short_name" do
-    create(:organization, name: "Esperanto Asocio de Brazilo", short_name: "EAB")
-    create(:organization, name: "Universala Esperanto-Asocio", short_name: "UEA")
+  test "finds organizations by a partial name match" do
+    results = Organization.search("Esperantistaj")
 
-    results = Organization.serchi("Brazilo")
-    assert_includes results.map(&:short_name), "EAB"
-    refute_includes results.map(&:short_name), "UEA"
-
-    results = Organization.serchi("UEA")
-    assert_includes results.map(&:short_name), "UEA"
-    refute_includes results.map(&:short_name), "EAB"
+    assert_includes results, organizations(:ilei)
+    assert_not_includes results, organizations(:sat)
   end
 
-  test "serchi returns all organizations when the query is nil" do
-    create(:organization, name: "Esperanto Asocio de Brazilo", short_name: "EAB")
-    create(:organization, name: "Universala Esperanto-Asocio", short_name: "UEA")
+  test "finds organizations by a partial short name match" do
+    results = Organization.search("SAT")
 
-    results = Organization.serchi(nil)
-    assert_equal Organization.count, results.count
-    assert_includes results.map(&:short_name), "EAB"
-    assert_includes results.map(&:short_name), "UEA"
+    assert_includes results, organizations(:sat)
+    assert_not_includes results, organizations(:ilei)
   end
 
-  test "serchi returns all organizations when the query is blank" do
-    create(:organization, name: "Esperanto Asocio de Brazilo", short_name: "EAB")
-    create(:organization, name: "Universala Esperanto-Asocio", short_name: "UEA")
+  test "returns every organization when the query is nil" do
+    results = Organization.search(nil)
 
-    results = Organization.serchi("   ")
     assert_equal Organization.count, results.count
-    assert_includes results.map(&:short_name), "EAB"
-    assert_includes results.map(&:short_name), "UEA"
+    assert_includes results, organizations(:ilei)
+    assert_includes results, organizations(:sat)
+  end
+
+  test "returns every organization when the query is blank" do
+    results = Organization.search("   ")
+
+    assert_equal Organization.count, results.count
+    assert_includes results, organizations(:ilei)
+    assert_includes results, organizations(:sat)
+  end
+
+  test "returns an empty relation when no organization matches" do
+    results = Organization.search("NeniuOrganizo")
+
+    assert_empty results
   end
 end

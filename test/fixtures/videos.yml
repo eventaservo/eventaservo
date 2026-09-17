@@ -16,3 +16,9 @@ rails_conference_video:
   description: "A great talk about Rails"
   url: "https://www.youtube.com/watch?v=123456"
   evento: valid_event
+
+esperanto_meetup_video:
+  title: "Esperanta Renkontiĝo"
+  description: "Registraĵo de la monata renkontiĝo"
+  url: "https://www.youtube.com/watch?v=654321"
+  evento: esperanto_meetup
