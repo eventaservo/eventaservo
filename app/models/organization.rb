@@ -57,10 +57,17 @@ class Organization < ApplicationRecord
     end
   end
 
-  # Listigas la uzantojn kiu ESTAS administrantoj de la Organizo
-  def administrantoj
-    users_ids = organization_users.where(admin: true).pluck(:user_id)
-    User.where(id: users_ids)
+  # Lists the users who are administrators of the organization.
+  #
+  # Reads the +admin+ flag from the organization_users join records and returns
+  # the matching User records. Returns an empty relation when the organization
+  # has no administrators.
+  #
+  # @return [ActiveRecord::Relation<User>] the users marked as administrators
+  #
+  def admins
+    user_ids = organization_users.where(admin: true).pluck(:user_id)
+    User.where(id: user_ids)
   end
 
   # Listigas la uzantojn kiu NE estas administrantoj de la Organizo

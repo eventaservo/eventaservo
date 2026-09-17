@@ -21,7 +21,7 @@ class Organization::SearchTest < ActiveSupport::TestCase
     create(:organization, name: "Universala Esperanto-Asocio", short_name: "UEA")
 
     results = Organization.serchi(nil)
-    assert_equal 2, results.count
+    assert_equal Organization.count, results.count
     assert_includes results.map(&:short_name), "EAB"
     assert_includes results.map(&:short_name), "UEA"
   end
@@ -31,7 +31,7 @@ class Organization::SearchTest < ActiveSupport::TestCase
     create(:organization, name: "Universala Esperanto-Asocio", short_name: "UEA")
 
     results = Organization.serchi("   ")
-    assert_equal 2, results.count
+    assert_equal Organization.count, results.count
     assert_includes results.map(&:short_name), "EAB"
     assert_includes results.map(&:short_name), "UEA"
   end

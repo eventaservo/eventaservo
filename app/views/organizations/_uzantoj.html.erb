@@ -7,7 +7,7 @@
       Ĉefadministranto rajtas aldoni novan administranton
     </p>
 
-    <% @organizo.administrantoj.order(:name).each do |u| %>
+    <% @organizo.admins.order(:name).each do |u| %>
       <br>
       <%= link_to display_user(u), events_by_username_path(u.username) %>
       <% if user_signed_in? && current_user.administranto?(@organizo) %>
