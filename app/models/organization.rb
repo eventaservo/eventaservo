@@ -70,10 +70,17 @@ class Organization < ApplicationRecord
     User.where(id: user_ids)
   end
 
-  # Listigas la uzantojn kiu NE estas administrantoj de la Organizo
-  def ne_estroj
-    users_ids = organization_users.where(admin: false).pluck(:user_id)
-    User.where(id: users_ids)
+  # Lists the users who are not administrators of the organization.
+  #
+  # Reads the +admin+ flag from the organization_users join records and returns
+  # the matching User records. Returns an empty relation when the organization
+  # has no non-administrator members.
+  #
+  # @return [ActiveRecord::Relation<User>] the users not marked as administrators
+  #
+  def non_administrators
+    user_ids = organization_users.where(admin: false).pluck(:user_id)
+    User.where(id: user_ids)
   end
 
   # Listigas ĉiujn membrojn el organizo (administrantoj kaj ne-administrantoj)
