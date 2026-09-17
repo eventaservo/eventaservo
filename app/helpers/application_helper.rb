@@ -159,14 +159,29 @@ module ApplicationHelper
     flag_icon(lando.code)
   end
 
-  # Protektas la retadreson kontaŭ spamoj
-  def montras_retposhtadreson(retposhtadreso)
-    return if retposhtadreso.blank?
+  # Renders an email address protected against spam harvesting.
+  #
+  # Signed-in users get the plain address inside a click-to-copy icon; anonymous
+  # visitors get the address obfuscated, with "@" replaced by the Esperanto
+  # "(ĉe)" marker, so automated crawlers cannot collect it.
+  #
+  # @example Signed-in user
+  #   display_email("espero@eventaservo.org")
+  #
+  # @example Anonymous visitor
+  #   display_email("espero@eventaservo.org")
+  #   # => address rendered as "espero(ĉe)eventaservo.org"
+  #
+  # @param email [String, nil] the email address to render
+  #
+  # @return [ActiveSupport::SafeBuffer, nil] the email icon HTML, or nil when email is blank
+  def display_email(email)
+    return if email.blank?
 
     if user_signed_in?
-      icon("fas", "at", retposhtadreso, data: {controller: "clipboard", clipboard_text_value: retposhtadreso, action: "click->clipboard#copy"})
+      icon("fas", "at", email, data: {controller: "clipboard", clipboard_text_value: email, action: "click->clipboard#copy"})
     else
-      icon("fas", "at", retposhtadreso.gsub("@", "(ĉe)"))
+      icon("fas", "at", email.gsub("@", "(ĉe)"))
     end
   end
 
