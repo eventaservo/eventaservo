@@ -9,7 +9,7 @@
         <tbody>
           <% organizations.each do |organizo| %>
             <tr class="small pointer" onclick="window.location.href='<%= organization_path(organizo.short_name) %>'">
-              <td><%= montras_flagon(organizo.country) if organizo.display_flag %> <%= organizo.name %></td>
+              <td><%= display_flag(organizo.country) if organizo.display_flag %> <%= organizo.name %></td>
             </tr>
           <% end %>
         </tbody>
