@@ -169,8 +169,17 @@ class User < ApplicationRecord
       facebook.present? || vk.present?
   end
 
-  # Serĉas uzanton laŭ teksto
-  def self.serchi(teksto)
+  # Searches users by name, username or the name and short name of their organizations.
+  #
+  # The match is accent-insensitive and partial; spaces in the term are treated as
+  # wildcards, so "Ana Instruisto" also matches "Ana Maria Instruisto".
+  #
+  # @param text [String, nil] the search term
+  #
+  # @return [ActiveRecord::Relation] the matching users ordered by name, or all users when the term is blank
+  def self.search(text)
+    return all if text.blank?
+
     User
       .left_joins(:organizations)
       .distinct
@@ -178,7 +187,7 @@ class User < ApplicationRecord
               unaccent(users.username) ilike unaccent(:search) OR
               unaccent(organizations.name) ilike unaccent(:search) OR
               unaccent(organizations.short_name) ilike unaccent(:search)',
-        search: "%#{teksto.strip.tr(" ", "%").downcase}%")
+        search: "%#{text.strip.tr(" ", "%").downcase}%")
       .order("users.name")
   end
 

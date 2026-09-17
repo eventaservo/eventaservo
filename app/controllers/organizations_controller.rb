@@ -8,7 +8,7 @@ class OrganizationsController < ApplicationController
   def index
     @organizoj = Organization.includes(:logo_attachment).order(:name)
 
-    @organizoj = @organizoj.serchi(params[:serchi]) if params[:serchi].present?
+    @organizoj = @organizoj.search(params[:serchi]) if params[:serchi].present?
 
     @pagy, @organizoj = pagy(@organizoj)
   end
@@ -16,7 +16,7 @@ class OrganizationsController < ApplicationController
   def search
     respond_to :js
     @organizoj = Organization.includes(:logo_attachment).order(:name)
-    @organizoj = @organizoj.serchi(params[:serchi])
+    @organizoj = @organizoj.search(params[:serchi])
     @pagy, @organizoj = pagy(@organizoj)
   end
 
