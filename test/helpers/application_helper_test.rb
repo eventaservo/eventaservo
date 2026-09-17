@@ -10,16 +10,12 @@ class ApplicationHelperTest < ActionView::TestCase
     @output_buffer = ActionView::OutputBuffer.new
   end
 
-  private
-
   # Forwards Devise's signed-in predicate from the test controller to the helper.
   #
   # @return [Boolean] true when a user session is stubbed via `sign_in`
   def user_signed_in?
     controller.user_signed_in?
   end
-
-  public
 
   # format_date tests
   test "format_date should default format date to long" do
