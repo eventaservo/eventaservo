@@ -1,11 +1,26 @@
 # frozen_string_literal: true
 
+# View helpers for the event filter bar rendered by the home and event
+# listing pages.
+#
+# @see HomeController
 module HomeHelper
-  def aktivaj_filtroj?
+  # Checks whether the request carries at least one of the supported event
+  # filters.
+  #
+  # @return [Boolean] +true+ when the +o+, +periodo+ or +s+ param is present
+  def active_filters?
     params[:periodo].present? || params[:o].present? || params[:s].present?
   end
 
-  def aktivaj_filtroj
+  # Returns the event filters supported by the filter bar.
+  #
+  # Only the whitelisted params are returned, so the result is safe to hand
+  # back to the URL helpers (for example to keep the current filters while
+  # dropping one of them).
+  #
+  # @return [ActionController::Parameters] permitted +o+, +periodo+ and +s+ params
+  def active_filters
     params.permit(:o, :periodo, :s)
   end
 
