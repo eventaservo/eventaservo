@@ -1,0 +1,52 @@
+# == Schema Information
+#
+# Table name: organizations
+#
+#  id           :bigint           not null, primary key
+#  address      :string
+#  city         :string
+#  display_flag :boolean          default(TRUE)
+#  email        :string
+#  logo         :string
+#  major        :boolean          default(FALSE)
+#  name         :string           not null, indexed
+#  official     :boolean          default(FALSE)
+#  partner      :boolean          default(FALSE)
+#  phone        :string
+#  short_name   :string           not null, indexed
+#  url          :string
+#  youtube      :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  country_id   :integer          default(99999)
+#
+# This fixture provides organizations for membership scenarios.
+# The memberships themselves live in organization_users.yml.
+#
+# These organizations are loaded for every test, so assertions on absolute
+# organization counts have to be relative to the table (Organization.count)
+# instead of hardcoded.
+#
+# Names are kept after "FEJ" and "UEA" in alphabetical order so that
+# organization ordering assertions do not change.
+
+rotterdam_centre:
+  name: Rotterdam Esperanto Centre
+  short_name: rotterdam_centre
+  city: Rotterdam
+  country: brazil
+  email: rotterdam@example.org
+
+sao_paulo_klubo:
+  name: Sao Paulo Esperanto Club
+  short_name: sao_paulo_klubo
+  city: Sao Paulo
+  country: brazil
+  email: saopaulo@example.org
+
+tokyo_society:
+  name: Tokyo Esperanto Society
+  short_name: tokyo_society
+  city: Tokyo
+  country: brazil
+  email: tokyo@example.org

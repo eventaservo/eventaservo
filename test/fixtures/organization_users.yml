@@ -1,0 +1,37 @@
+# == Schema Information
+#
+# Table name: organization_users
+#
+#  id              :bigint           not null, primary key
+#  admin           :boolean          default(FALSE), indexed
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  organization_id :bigint           indexed
+#  user_id         :bigint           indexed
+#
+# This fixture provides organization memberships for the organizations in
+# organizations.yml. None of them uses the users(:user) fixture, which other
+# tests rely on when counting how many organizations a user belongs to.
+#
+# Rotterdam Esperanto Centre: one administrator and one regular member.
+# Sao Paulo Esperanto Club: two administrators.
+
+rotterdam_centre_admin:
+  organization: rotterdam_centre
+  user: teacher
+  admin: true
+
+rotterdam_centre_member:
+  organization: rotterdam_centre
+  user: speaker
+  admin: false
+
+sao_paulo_klubo_first_admin:
+  organization: sao_paulo_klubo
+  user: teacher_and_speaker
+  admin: true
+
+sao_paulo_klubo_second_admin:
+  organization: sao_paulo_klubo
+  user: admin_user
+  admin: true

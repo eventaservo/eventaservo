@@ -32,6 +32,6 @@ class Api::V2::OrganizationsControllerTest < ActionDispatch::IntegrationTest
 
   test "index returns all organizations when country code is not provided" do
     get "/api/v2/organizations", headers: {"Authorization" => "Bearer #{@token}"}
-    assert_equal 2, JSON.parse(response.body)["organizations"].count
+    assert_equal Organization.count, JSON.parse(response.body)["organizations"].count
   end
 end

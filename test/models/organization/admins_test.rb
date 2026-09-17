@@ -4,48 +4,35 @@ require "test_helper"
 
 class Organization::AdminsTest < ActiveSupport::TestCase
   test "returns only the users marked as admin of the organization" do
-    organization = create(:organization)
-    admin = create(:user)
-    regular_member = create(:user)
-    create(:organization_user, organization: organization, user: admin, admin: true)
-    create(:organization_user, organization: organization, user: regular_member, admin: false)
+    organization = organizations(:rotterdam_centre)
 
     admins = organization.admins
 
-    assert_includes admins, admin
-    assert_not_includes admins, regular_member
+    assert_includes admins, users(:teacher)
+    assert_not_includes admins, users(:speaker)
   end
 
   test "returns every admin of the organization" do
-    organization = create(:organization)
-    first_admin = create(:user)
-    second_admin = create(:user)
-    create(:organization_user, organization: organization, user: first_admin, admin: true)
-    create(:organization_user, organization: organization, user: second_admin, admin: true)
+    organization = organizations(:sao_paulo_klubo)
 
     admins = organization.admins
 
     assert_equal 2, admins.count
-    assert_includes admins, first_admin
-    assert_includes admins, second_admin
+    assert_includes admins, users(:teacher_and_speaker)
+    assert_includes admins, users(:admin_user)
   end
 
   test "does not return users that are admin of another organization" do
-    organization = create(:organization)
-    other_organization = create(:organization)
-    other_organization_admin = create(:user)
-    create(:organization_user, organization: other_organization, user: other_organization_admin, admin: true)
+    organization = organizations(:tokyo_society)
 
     admins = organization.admins
 
     assert_empty admins
-    assert_includes other_organization.admins, other_organization_admin
+    assert_includes organizations(:sao_paulo_klubo).admins, users(:teacher_and_speaker)
   end
 
   test "returns an empty relation when the organization has no admins" do
-    organization = create(:organization)
-
-    admins = organization.admins
+    admins = organizations(:tokyo_society).admins
 
     assert_kind_of ActiveRecord::Relation, admins
     assert_empty admins
