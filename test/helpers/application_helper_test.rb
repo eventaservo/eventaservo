@@ -3,6 +3,20 @@
 require "test_helper"
 
 class ApplicationHelperTest < ActionView::TestCase
+  include Devise::Test::ControllerHelpers
+  include ApplicationHelper
+
+  setup do
+    @output_buffer = ActionView::OutputBuffer.new
+  end
+
+  # Forwards Devise's signed-in predicate from the test controller to the helper.
+  #
+  # @return [Boolean] true when a user session is stubbed via `sign_in`
+  def user_signed_in?
+    controller.user_signed_in?
+  end
+
   # format_date tests
   test "format_date should default format date to long" do
     date = Date.new(1978, 7, 17)
@@ -128,6 +142,36 @@ class ApplicationHelperTest < ActionView::TestCase
     result = montras_flagon(nil)
 
     assert_nil result
+  end
+
+  # display_email tests
+  test "display_email returns nil when email is nil or blank" do
+    assert_nil display_email(nil)
+    assert_nil display_email("")
+    assert_nil display_email("   ")
+  end
+
+  test "display_email renders a click-to-copy icon for signed-in users" do
+    email = "standard@user.com"
+    sign_in users(:user)
+
+    result = display_email(email)
+
+    assert_instance_of ActiveSupport::SafeBuffer, result
+    assert_includes result, 'class="fas fa-at"'
+    assert_includes result, %(data-controller="clipboard")
+    assert_includes result, %(data-clipboard-text-value="#{email}")
+    assert_includes result, %(data-action="click-&gt;clipboard#copy")
+    assert_includes result, email
+  end
+
+  test "display_email obfuscates the address for anonymous visitors" do
+    result = display_email("espero@eventaservo.org")
+
+    assert_instance_of ActiveSupport::SafeBuffer, result
+    assert_includes result, "espero(ĉe)eventaservo.org"
+    assert_not_includes result, "espero@eventaservo.org"
+    assert_not_includes result, "clipboard"
   end
 
   # phone_link tests
