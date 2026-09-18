@@ -83,9 +83,19 @@ class Organization < ApplicationRecord
     User.where(id: user_ids)
   end
 
-  # Listigas ĉiujn membrojn el organizo (administrantoj kaj ne-administrantoj)
-  # @deprecated use .users
-  def membroj
+  # Lists every member of the organization, administrators and
+  # non-administrators alike.
+  #
+  # Reads the user ids from the +organization_users+ join records and returns
+  # the matching User records. Returns an empty relation when the organization
+  # has no members.
+  #
+  # @return [ActiveRecord::Relation<User>] the users that belong to the organization
+  #
+  # @deprecated Use {#users} instead.
+  # @see #admins
+  # @see #non_administrators
+  def members
     User.where(id: organization_users.pluck(:user_id))
   end
 
