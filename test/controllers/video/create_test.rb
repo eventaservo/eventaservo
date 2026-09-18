@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "test_helper"
 
 class VideoController::CreateTest < ActionDispatch::IntegrationTest
@@ -43,6 +45,28 @@ class VideoController::CreateTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to event_url(code: @event.code)
+  end
+
+  test "should create video when user is a member of an organization of the event" do
+    event = events(:valid_event)
+    member = users(:speaker)
+    organization = create(:organization)
+    event.organizations << organization
+    create(:organization_user, organization:, user: member)
+
+    sign_in member
+
+    URI.stub(:open, StringIO.new) do
+      assert_difference("Video.count") do
+        post event_new_video_url(event_code: event.code), params: {
+          video_link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          title: "Test Video",
+          description: "This is a test video"
+        }
+      end
+    end
+
+    assert_redirected_to event_url(code: event.code)
   end
 
   test "should not create video when user cannot edit event" do
