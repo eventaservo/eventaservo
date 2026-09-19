@@ -1,5 +1,25 @@
 # Changelog
 
+## [3.0.17](https://github.com/eventaservo/eventaservo/compare/v3.0.16...v3.0.17) (2026-09-19)
+
+
+### Bug Fixes
+
+* add missing end to ApplicationHelperTest class ([f66fa77](https://github.com/eventaservo/eventaservo/commit/f66fa77b94f6855c0a19afb1f4c4185f59204bbb))
+* add missing end to ApplicationHelperTest class ([327b052](https://github.com/eventaservo/eventaservo/commit/327b052ef7f08cdc68434f5bef765a09bfc3aefc))
+* eager load reports and users in report index ([6adb372](https://github.com/eventaservo/eventaservo/commit/6adb372c8aead150250cdf1b0db8ec5fb493e9ca))
+
+
+### Code Refactoring
+
+* rename aktivaj_filtroj helper to active_filters ([2c9e891](https://github.com/eventaservo/eventaservo/commit/2c9e89174990e7760761adffc518fd8e44d890ff))
+* rename montras_adreson helper to address_link ([662ad2a](https://github.com/eventaservo/eventaservo/commit/662ad2ae02d44ac0da9ad8af34af69a27534fab3))
+* rename montras_flagon helper to display_flag ([58a74a5](https://github.com/eventaservo/eventaservo/commit/58a74a58be6b128a539638b7551343d149f1d626))
+* rename montras_retpaghon to link_to_website ([cdd0e72](https://github.com/eventaservo/eventaservo/commit/cdd0e72587ee29595a325f0b6660c23db0de9dc4))
+* rename montras_telefonnumeron helper to phone_link ([36419df](https://github.com/eventaservo/eventaservo/commit/36419df1a23cfa6fa63f31c6a74db77a7921744a))
+* rename Organization#ne_estroj to #non_administrators ([1af20ab](https://github.com/eventaservo/eventaservo/commit/1af20ab5a194396b6c5a8501a4ee329663d14726))
+* rename serchi to search across models ([b924b1c](https://github.com/eventaservo/eventaservo/commit/b924b1ceb8c19b4d81709594f312375105899f37))
+
 ## [3.0.16](https://github.com/eventaservo/eventaservo/compare/v3.0.15...v3.0.16) (2026-09-13)
 
 
