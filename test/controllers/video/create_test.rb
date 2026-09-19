@@ -48,17 +48,14 @@ class VideoController::CreateTest < ActionDispatch::IntegrationTest
   end
 
   test "should create video when user is a member of an organization of the event" do
-    event = events(:valid_event)
     member = users(:speaker)
-    organization = create(:organization)
-    event.organizations << organization
-    create(:organization_user, organization:, user: member)
+    @event.organizations << organizations(:rotterdam_centre)
 
     sign_in member
 
     URI.stub(:open, StringIO.new) do
       assert_difference("Video.count") do
-        post event_new_video_url(event_code: event.code), params: {
+        post event_new_video_url(event_code: @event.code), params: {
           video_link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
           title: "Test Video",
           description: "This is a test video"
@@ -66,7 +63,7 @@ class VideoController::CreateTest < ActionDispatch::IntegrationTest
       end
     end
 
-    assert_redirected_to event_url(code: event.code)
+    assert_redirected_to event_url(code: @event.code)
   end
 
   test "should not create video when user cannot edit event" do
