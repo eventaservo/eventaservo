@@ -144,7 +144,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  # GET #malnuligi tests
+  # POST #malnuligi tests
   class MalnuligiTest < EventsControllerTest
     setup do
       @user = create(:user)
@@ -153,7 +153,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
 
     test "uncancels the event and clears the reason" do
       sign_in @user
-      get event_malnuligi_path(event_code: @event.code)
+      post event_malnuligi_path(event_code: @event.code)
 
       assert_redirected_to event_path(code: @event.code)
       assert_equal "Evento malnuligita", flash[:notice]
@@ -166,23 +166,40 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     test "uncancels the event with tracking" do
       sign_in @user
       assert_difference("Ahoy::Event.count", 1) do
-        get event_malnuligi_path(event_code: @event.code)
+        post event_malnuligi_path(event_code: @event.code)
       end
 
       assert_redirected_to event_path(code: @event.code)
     end
 
     test "malnuligi requires authentication" do
-      get event_malnuligi_path(event_code: @event.code)
+      post event_malnuligi_path(event_code: @event.code)
       assert_redirected_to new_user_session_path
     end
 
     test "malnuligi requires authorization" do
       other_user = create(:user)
       sign_in other_user
-      get event_malnuligi_path(event_code: @event.code)
+      post event_malnuligi_path(event_code: @event.code)
       assert_redirected_to root_url
       assert_equal "Vi ne rajtas", flash[:error]
+    end
+
+    test "GET cannot uncancel the event because the route only accepts POST" do
+      sign_in @user
+      path = event_malnuligi_path(event_code: @event.code)
+
+      assert_equal "POST", Rails.application.routes.named_routes[:event_malnuligi].verb
+
+      # The route is POST-only, so a GET on this path never reaches
+      # EventsController#malnuligi and must not change the state of the event.
+      get path
+
+      assert_not_equal "Evento malnuligita", flash[:notice]
+
+      @event.reload
+      assert @event.cancelled?
+      assert_equal "Weather conditions", @event.cancel_reason
     end
   end
 
