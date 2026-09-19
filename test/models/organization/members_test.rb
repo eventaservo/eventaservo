@@ -2,6 +2,10 @@
 
 require "test_helper"
 
+# Tests for the deprecated +Organization#members+ compatibility reader.
+#
+# Covers the full membership list including administrators, the isolation
+# between organizations, and the empty relation case.
 class Organization::MembersTest < ActiveSupport::TestCase
   test "returns every member of the organization, administrators included" do
     members = organizations(:rotterdam_centre).members
