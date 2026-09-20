@@ -259,7 +259,10 @@ class HomeController < ApplicationController
     {monatoj: last_12_months_label, kvantoj: quantity}
   end
 
-  def kalkulas_eventojn_lau_monatoj
+  # Counts events for each calendar month based on their start or end date.
+  #
+  # @return [Hash{Symbol => Array<String, Integer>}] month labels and their event counts
+  def events_by_month_counts
     monatoj = %w[
       Jan
       Feb
