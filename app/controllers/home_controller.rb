@@ -149,9 +149,9 @@ class HomeController < ApplicationController
     else
       @search_is_valid = true
 
-      @organizations = Organization.includes(:country).serchi(@search_term).order(:name)
-      @users = User.includes(:country).serchi(@search_term)
-      @videos = Video.includes(:evento).serchi(@search_term)
+      @organizations = Organization.includes(:country).search(@search_term).order(:name)
+      @users = User.includes(:country).search(@search_term)
+      @videos = Video.includes(:evento).search(@search_term)
 
       @events = Event.includes(%i[country participants organizations]).search(@search_term)
       @events = @events.future_and_just_finished if params[:pasintaj].nil?
@@ -241,7 +241,15 @@ class HomeController < ApplicationController
     {monatoj: last_12_months_label, kvantoj: quantity}
   end
 
-  def kalkulas_kvanton_registritaj_eventoj
+  # Builds the registered events chart data: cumulative counts per month.
+  #
+  # Each position counts the events created up to that month's last day, so the
+  # series is cumulative and the last position is the total number of events. The
+  # +:monatoj+/+:kvantoj+ keys are the chart data contract and are kept as is.
+  #
+  # @return [Hash{Symbol => Array<String>, Array<Integer>}] +:monatoj+ with the
+  #   twelve month labels and +:kvantoj+ with the cumulative counts
+  def registered_events_counts
     quantity = []
     quantity << Event.where("created_at <= ?", (Time.zone.today - 11.months).end_of_month).count
     quantity << Event.where("created_at <= ?", (Time.zone.today - 10.months).end_of_month).count

@@ -26,10 +26,10 @@
     <% end %>
   </div>
 
-  <% if aktivaj_filtroj? %>
-    <% if aktivaj_filtroj.include? 'o' %>
+  <% if active_filters? %>
+    <% if active_filters.include? 'o' %>
       <div class="text-center m-2">
-        <%= link_to(icon('fas', 'times', params[:o]), aktivaj_filtroj.except(:o), class: 'button-filters') %>
+        <%= link_to(icon('fas', 'times', params[:o]), active_filters.except(:o), class: 'button-filters') %>
       </div>
     <% end %>
   <% end %>

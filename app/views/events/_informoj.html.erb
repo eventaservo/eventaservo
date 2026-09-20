@@ -3,7 +3,7 @@
   <div class="box-body">
     <p style="line-height: 1.8em;">
       <%= link_to_website(@event.site) + raw('<br/>') if @event.site.present? %>
-      <%= montras_retposhtadreson(@event.email) + raw('<br/>') if @event.email.present? %>
+      <%= display_email(@event.email) + raw('<br/>') if @event.email.present? %>
       <% unless @event.online && @event.city == 'Reta' %>
         <%= address_link(@event.full_address, text: @event.address) unless @event.address.blank? %>
         <%= render partial: 'event_map', locals: { event: @event } if @event.location_defined? %>

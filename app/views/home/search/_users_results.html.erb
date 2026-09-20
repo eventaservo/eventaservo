@@ -16,7 +16,7 @@
           <% users.each do |user| %>
             <tr class="small pointer" onclick="window.location.href = '<%= events_by_username_path(user.username) %>'">
               <td><%= user.name %></td>
-              <td><%= montras_flagon(user.country) + " #{user.country.name}" %></td>
+              <td><%= display_flag(user.country) + " #{user.country.name}" %></td>
             </tr>
           <% end %>
         </tbody>

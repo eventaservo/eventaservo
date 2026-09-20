@@ -32,6 +32,22 @@ class ApplicationController < ActionController::Base
   end
   helper_method :user_is_owner_or_admin
 
+  # Checks whether the given user may edit the given event.
+  #
+  # Administrators and the event owner are always allowed. Any other user only
+  # qualifies when they are a member of at least one of the organizations of
+  # the event.
+  #
+  # The check depends on the ambient +current_user+ provided by Devise: when no
+  # user is signed in it short-circuits to +false+, even if +user+ owns the
+  # event. Call this helper only from an authenticated context (controllers and
+  # views reached after +authenticate_user!+), where the supplied +user+ is the
+  # ambient user.
+  #
+  # @param user [User] the user whose permission is checked
+  # @param event [Event] the event being edited
+  #
+  # @return [Boolean] true when the user may edit the event, false otherwise
   def user_can_edit_event?(user:, event:)
     return false unless current_user
     return true if user.admin?
@@ -39,7 +55,7 @@ class ApplicationController < ActionController::Base
 
     if event.organizations.any?
       event.organizations.each do |o|
-        return true if user.in? o.membroj
+        return true if user.in? o.users
       end
     end
 
