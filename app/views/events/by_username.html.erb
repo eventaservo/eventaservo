@@ -14,7 +14,7 @@
           aria: { label: 'Aboni personan kalendaron' } %>
       </div>
 
-      <%= montras_flagon(@uzanto.country) %>
+      <%= display_flag(@uzanto.country) %>
       <%= @uzanto.country.name if @uzanto.country %>
       (<%= @uzanto.city %>)
       <p class="small"><%= simple_format(@uzanto.about) %></p>

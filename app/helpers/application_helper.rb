@@ -149,24 +149,47 @@ module ApplicationHelper
     content_tag(:span, nil, class: classes.join(" "))
   end
 
-  # Renders the flag icon for a country object (Esperanto: montras flagon).
+  # Renders the flag icon for a country, delegating to #flag_icon.
   #
-  # @param lando [Country, nil] a country object responding to `#code`
+  # @example Country with a code
+  #   display_flag(countries(:afghanistan))
+  #   # => <span class="fi fi-af"></span>
   #
-  # @return [ActiveSupport::SafeBuffer, nil] flag icon HTML, or nil if lando is nil
-  def montras_flagon(lando)
-    return if lando.nil?
-    flag_icon(lando.code)
+  # @example Missing country
+  #   display_flag(nil)
+  #   # => nil
+  #
+  # @param country [Country, nil] a country object responding to `#code`
+  #
+  # @return [ActiveSupport::SafeBuffer, nil] flag icon HTML, or nil when country is nil
+  def display_flag(country)
+    return if country.nil?
+    flag_icon(country.code)
   end
 
-  # Protektas la retadreson kontaŭ spamoj
-  def montras_retposhtadreson(retposhtadreso)
-    return if retposhtadreso.blank?
+  # Renders an email address protected against spam harvesting.
+  #
+  # Signed-in users get the plain address inside a click-to-copy icon; anonymous
+  # visitors get the address obfuscated, with "@" replaced by the Esperanto
+  # "(ĉe)" marker, so automated crawlers cannot collect it.
+  #
+  # @example Signed-in user
+  #   display_email("espero@eventaservo.org")
+  #
+  # @example Anonymous visitor
+  #   display_email("espero@eventaservo.org")
+  #   # => address rendered as "espero(ĉe)eventaservo.org"
+  #
+  # @param email [String, nil] the email address to render
+  #
+  # @return [ActiveSupport::SafeBuffer, nil] the email icon HTML, or nil when email is blank
+  def display_email(email)
+    return if email.blank?
 
     if user_signed_in?
-      icon("fas", "at", retposhtadreso, data: {controller: "clipboard", clipboard_text_value: retposhtadreso, action: "click->clipboard#copy"})
+      icon("fas", "at", email, data: {controller: "clipboard", clipboard_text_value: email, action: "click->clipboard#copy"})
     else
-      icon("fas", "at", retposhtadreso.gsub("@", "(ĉe)"))
+      icon("fas", "at", email.gsub("@", "(ĉe)"))
     end
   end
 

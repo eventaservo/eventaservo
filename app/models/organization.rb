@@ -57,21 +57,45 @@ class Organization < ApplicationRecord
     end
   end
 
-  # Listigas la uzantojn kiu ESTAS administrantoj de la Organizo
-  def administrantoj
-    users_ids = organization_users.where(admin: true).pluck(:user_id)
-    User.where(id: users_ids)
+  # Lists the users who are administrators of the organization.
+  #
+  # Reads the +admin+ flag from the organization_users join records and returns
+  # the matching User records. Returns an empty relation when the organization
+  # has no administrators.
+  #
+  # @return [ActiveRecord::Relation<User>] the users marked as administrators
+  #
+  def admins
+    user_ids = organization_users.where(admin: true).pluck(:user_id)
+    User.where(id: user_ids)
   end
 
-  # Listigas la uzantojn kiu NE estas administrantoj de la Organizo
-  def ne_estroj
-    users_ids = organization_users.where(admin: false).pluck(:user_id)
-    User.where(id: users_ids)
+  # Lists the users who are not administrators of the organization.
+  #
+  # Reads the +admin+ flag from the organization_users join records and returns
+  # the matching User records. Returns an empty relation when the organization
+  # has no non-administrator members.
+  #
+  # @return [ActiveRecord::Relation<User>] the users not marked as administrators
+  #
+  def non_administrators
+    user_ids = organization_users.where(admin: false).pluck(:user_id)
+    User.where(id: user_ids)
   end
 
-  # Listigas ĉiujn membrojn el organizo (administrantoj kaj ne-administrantoj)
-  # @deprecated use .users
-  def membroj
+  # Lists every member of the organization, administrators and
+  # non-administrators alike.
+  #
+  # Reads the user ids from the +organization_users+ join records and returns
+  # the matching User records. Returns an empty relation when the organization
+  # has no members.
+  #
+  # @return [ActiveRecord::Relation<User>] the users that belong to the organization
+  #
+  # @deprecated Use {#users} instead.
+  # @see #admins
+  # @see #non_administrators
+  def members
     User.where(id: organization_users.pluck(:user_id))
   end
 
@@ -79,15 +103,15 @@ class Organization < ApplicationRecord
     "#{name} (#{short_name})"
   end
 
-  # Serĉas laŭ vorto la organizojn
+  # Searches organizations by name or short name using an accent-insensitive partial match.
   #
-  # @param vorto [String, nil] la serĉota vorto
-  # @return [ActiveRecord::Relation]
+  # @param word [String, nil] the search term; single quotes are stripped from it
   #
-  def self.serchi(vorto)
-    return all if vorto.blank?
+  # @return [ActiveRecord::Relation] the matching organizations, or all organizations when the term is blank
+  def self.search(word)
+    return all if word.blank?
 
-    where("unaccent(name) ilike unaccent(:v) OR unaccent(short_name) ilike unaccent(:v)", v: "%#{vorto.tr("''", "")}%")
+    where("unaccent(name) ilike unaccent(:v) OR unaccent(short_name) ilike unaccent(:v)", v: "%#{word.tr("''", "")}%")
   end
 
   def full_address

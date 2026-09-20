@@ -34,7 +34,7 @@
           <span class="mx-1">&middot;</span>
           <%= @user.email %>
           <span class="mx-1">&middot;</span>
-          <%= montras_flagon(@user.country) %> <%= @user.country&.name %>
+          <%= display_flag(@user.country) %> <%= @user.country&.name %>
         </div>
       </div>
       <div class="d-flex gap-2 flex-shrink-0">
@@ -97,7 +97,7 @@
           </tr>
           <tr>
             <td class="text-body-secondary fw-semibold">Country</td>
-            <td><%= montras_flagon(@user.country) %> <%= @user.country&.name || "—" %></td>
+            <td><%= display_flag(@user.country) %> <%= @user.country&.name || "—" %></td>
           </tr>
           <tr>
             <td class="text-body-secondary fw-semibold">Birthday</td>
