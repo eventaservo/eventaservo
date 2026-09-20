@@ -241,7 +241,15 @@ class HomeController < ApplicationController
     {monatoj: last_12_months_label, kvantoj: quantity}
   end
 
-  def kalkulas_kvanton_registritaj_eventoj
+  # Builds the registered events chart data: cumulative counts per month.
+  #
+  # Each position counts the events created up to that month's last day, so the
+  # series is cumulative and the last position is the total number of events. The
+  # +:monatoj+/+:kvantoj+ keys are the chart data contract and are kept as is.
+  #
+  # @return [Hash{Symbol => Array<String>, Array<Integer>}] +:monatoj+ with the
+  #   twelve month labels and +:kvantoj+ with the cumulative counts
+  def registered_events_counts
     quantity = []
     quantity << Event.where("created_at <= ?", (Time.zone.today - 11.months).end_of_month).count
     quantity << Event.where("created_at <= ?", (Time.zone.today - 10.months).end_of_month).count
