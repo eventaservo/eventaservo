@@ -223,22 +223,18 @@ class HomeController < ApplicationController
     {landoj: countries, kvantoj: quantity}
   end
 
-  def kalkulas_kvanton_registritaj_uzantoj
-    quantity = []
-    quantity << User.where("created_at <= ?", (Time.zone.today - 11.months).end_of_month).count
-    quantity << User.where("created_at <= ?", (Time.zone.today - 10.months).end_of_month).count
-    quantity << User.where("created_at <= ?", (Time.zone.today - 9.months).end_of_month).count
-    quantity << User.where("created_at <= ?", (Time.zone.today - 8.months).end_of_month).count
-    quantity << User.where("created_at <= ?", (Time.zone.today - 7.months).end_of_month).count
-    quantity << User.where("created_at <= ?", (Time.zone.today - 6.months).end_of_month).count
-    quantity << User.where("created_at <= ?", (Time.zone.today - 5.months).end_of_month).count
-    quantity << User.where("created_at <= ?", (Time.zone.today - 4.months).end_of_month).count
-    quantity << User.where("created_at <= ?", (Time.zone.today - 3.months).end_of_month).count
-    quantity << User.where("created_at <= ?", (Time.zone.today - 2.months).end_of_month).count
-    quantity << User.where("created_at <= ?", (Time.zone.today - 1.month).end_of_month).count
-    quantity << User.where("created_at <= ?", Time.zone.today.end_of_month).count
-
-    {monatoj: last_12_months_label, kvantoj: quantity}
+  # Cumulative registered users at the end of each of the last twelve months.
+  #
+  # The calculation lives in +Users::RegisteredCountsCalculator+ so that the
+  # growth series is a unit of its own instead of another private step of this
+  # controller.
+  #
+  # @return [Hash{Symbol => Array}] +:months+ with the chart labels and
+  #   +:counts+ with the cumulative user counts
+  #
+  # @see Users::RegisteredCountsCalculator
+  def registered_users_counts
+    Users::RegisteredCountsCalculator.new.call
   end
 
   def kalkulas_kvanton_registritaj_eventoj
