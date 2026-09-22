@@ -31,8 +31,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # PUT /resource
+  #
+  # Updates the current user's account. Persists the teaching and speaking
+  # profiles and optionally removes the profile picture before delegating to
+  # the Devise update.
+  #
+  # @return [void]
   def update
-    registras_instru_informojn
+    Users::SaveTeachingInfo.call(user: resource, params: params)
     registras_preleg_informojn
 
     if params[:remove_picture] == "1"
@@ -91,21 +97,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   private
-
-  def registras_instru_informojn
-    if params[:user][:instruisto] == "true"
-      resource.instruisto = true
-
-      resource.instruo["nivelo"] = params[:nivelo].present? ? params[:nivelo].keys : ["baza"]
-
-      resource.instruo["sperto"] = params[:instru_sperto]
-    else
-      resource.instruo.delete("instruisto")
-      resource.instruo.delete("nivelo")
-      resource.instruo.delete("sperto")
-    end
-    resource.save
-  end
 
   def registras_preleg_informojn
     if params[:user][:preleganto] == "true"
