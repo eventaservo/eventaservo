@@ -3,7 +3,7 @@
 class HomeController < ApplicationController
   include CalendarData
 
-  before_action :definas_kuketojn, only: :index
+  before_action :set_default_view_mode, only: :index
 
   def index
     ahoy.track "Homepage"
@@ -207,10 +207,17 @@ class HomeController < ApplicationController
     ).call
   end
 
-  def definas_kuketojn
+  # Sets the default view mode cookie when the visitor has none or an invalid one.
+  #
+  # Keeps the +vidmaniero+ cookie untouched when it already holds one of the
+  # accepted values (+kartoj+, +kalendaro+, +mapo+); otherwise defaults it to
+  # +kalendaro+ for two weeks. Runs as a before action on the home index.
+  #
+  # @return [void]
+  def set_default_view_mode
     return if cookies[:vidmaniero].in? %w[kartoj kalendaro mapo]
 
-    cookies[:vidmaniero] = {value: "kalendaro", expires: 2.weeks, secure: true} # Normala vidmaniero
+    cookies[:vidmaniero] = {value: "kalendaro", expires: 2.weeks, secure: true}
   end
 
   def kalkulas_registritajn_eventojn
