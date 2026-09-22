@@ -3,7 +3,7 @@
 class HomeController < ApplicationController
   include CalendarData
 
-  before_action :definas_kuketojn, only: :index
+  before_action :set_default_view_mode, only: :index
 
   def index
     ahoy.track "Homepage"
@@ -207,10 +207,17 @@ class HomeController < ApplicationController
     ).call
   end
 
-  def definas_kuketojn
+  # Sets the default view mode cookie when the visitor has none or an invalid one.
+  #
+  # Keeps the +vidmaniero+ cookie untouched when it already holds one of the
+  # accepted values (+kartoj+, +kalendaro+, +mapo+); otherwise defaults it to
+  # +kalendaro+ for two weeks. Runs as a before action on the home index.
+  #
+  # @return [void]
+  def set_default_view_mode
     return if cookies[:vidmaniero].in? %w[kartoj kalendaro mapo]
 
-    cookies[:vidmaniero] = {value: "kalendaro", expires: 2.weeks, secure: true} # Normala vidmaniero
+    cookies[:vidmaniero] = {value: "kalendaro", expires: 2.weeks, secure: true}
   end
 
   def kalkulas_registritajn_eventojn
@@ -223,25 +230,29 @@ class HomeController < ApplicationController
     {landoj: countries, kvantoj: quantity}
   end
 
-  def kalkulas_kvanton_registritaj_uzantoj
-    quantity = []
-    quantity << User.where("created_at <= ?", (Time.zone.today - 11.months).end_of_month).count
-    quantity << User.where("created_at <= ?", (Time.zone.today - 10.months).end_of_month).count
-    quantity << User.where("created_at <= ?", (Time.zone.today - 9.months).end_of_month).count
-    quantity << User.where("created_at <= ?", (Time.zone.today - 8.months).end_of_month).count
-    quantity << User.where("created_at <= ?", (Time.zone.today - 7.months).end_of_month).count
-    quantity << User.where("created_at <= ?", (Time.zone.today - 6.months).end_of_month).count
-    quantity << User.where("created_at <= ?", (Time.zone.today - 5.months).end_of_month).count
-    quantity << User.where("created_at <= ?", (Time.zone.today - 4.months).end_of_month).count
-    quantity << User.where("created_at <= ?", (Time.zone.today - 3.months).end_of_month).count
-    quantity << User.where("created_at <= ?", (Time.zone.today - 2.months).end_of_month).count
-    quantity << User.where("created_at <= ?", (Time.zone.today - 1.month).end_of_month).count
-    quantity << User.where("created_at <= ?", Time.zone.today.end_of_month).count
-
-    {monatoj: last_12_months_label, kvantoj: quantity}
+  # Cumulative registered users at the end of each of the last twelve months.
+  #
+  # The calculation lives in +Users::RegisteredCountsCalculator+ so that the
+  # growth series is a unit of its own instead of another private step of this
+  # controller.
+  #
+  # @return [Hash{Symbol => Array}] +:months+ with the chart labels and
+  #   +:counts+ with the cumulative user counts
+  #
+  # @see Users::RegisteredCountsCalculator
+  def registered_users_counts
+    Users::RegisteredCountsCalculator.new.call
   end
 
-  def kalkulas_kvanton_registritaj_eventoj
+  # Builds the registered events chart data: cumulative counts per month.
+  #
+  # Each position counts the events created up to that month's last day, so the
+  # series is cumulative and the last position is the total number of events. The
+  # +:monatoj+/+:kvantoj+ keys are the chart data contract and are kept as is.
+  #
+  # @return [Hash{Symbol => Array<String>, Array<Integer>}] +:monatoj+ with the
+  #   twelve month labels and +:kvantoj+ with the cumulative counts
+  def registered_events_counts
     quantity = []
     quantity << Event.where("created_at <= ?", (Time.zone.today - 11.months).end_of_month).count
     quantity << Event.where("created_at <= ?", (Time.zone.today - 10.months).end_of_month).count
@@ -259,7 +270,10 @@ class HomeController < ApplicationController
     {monatoj: last_12_months_label, kvantoj: quantity}
   end
 
-  def kalkulas_eventojn_lau_monatoj
+  # Counts events for each calendar month based on their start or end date.
+  #
+  # @return [Hash{Symbol => Array<String, Integer>}] month labels and their event counts
+  def events_by_month_counts
     monatoj = %w[
       Jan
       Feb

@@ -19,7 +19,7 @@ class Video < ApplicationRecord
 
   belongs_to :evento, class_name: "Event", foreign_key: "event_id"
 
-  before_save :validas_ligilon
+  before_save :ensure_https_url
   after_save :save_thumbnail
 
   def youtube?
@@ -55,8 +55,13 @@ class Video < ApplicationRecord
 
   private
 
-  # Kontrolas ĉu la ligilo komencas per https
-  def validas_ligilon
+  # Ensures the URL always begins with an http(s) scheme before saving.
+  #
+  # When the URL already has an http:// or https:// scheme it is stripped of
+  # surrounding whitespace as-is; otherwise the https:// scheme is prepended.
+  #
+  # @return [void]
+  def ensure_https_url
     self.url = if url[%r{\Ahttp://}] || url[%r{\Ahttps://}]
       url.strip
     else
