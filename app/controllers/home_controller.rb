@@ -220,14 +220,18 @@ class HomeController < ApplicationController
     cookies[:vidmaniero] = {value: "kalendaro", expires: 2.weeks, secure: true}
   end
 
-  def kalkulas_registritajn_eventojn
-    countries = []
-    quantity = []
-    Event.joins(:country).group("countries.name").order("count_id DESC, countries.name ASC").limit(15).count(:id).map do |country, qtd|
-      countries << country
-      quantity << qtd
-    end
-    {landoj: countries, kvantoj: quantity}
+  # Returns the fifteen countries with the most registered events.
+  #
+  # The aggregation lives in +Events::TopCountriesCountQuery+ so the chart
+  # series is a unit of its own instead of another private step of this
+  # controller.
+  #
+  # @return [Hash{Symbol => Array<String>, Array<Integer>}] +:countries+ with
+  #   the country names and +:counts+ with the matching event counts
+  #
+  # @see Events::TopCountriesCountQuery
+  def top_countries_event_counts
+    Events::TopCountriesCountQuery.new.call
   end
 
   # Cumulative registered users at the end of each of the last twelve months.
