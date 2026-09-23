@@ -39,7 +39,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # @return [void]
   def update
     Users::SaveTeachingInfo.call(user: resource, params: params)
-    registras_preleg_informojn
+    Users::SaveSpeakingInfo.call(user: resource, params: params)
 
     if params[:remove_picture] == "1"
       ::UserServices::RemoveProfilePicture.call(user: resource)
@@ -94,18 +94,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # Alidirektas la uzanton al sia profila paĝo
   def after_update_path_for(resource)
     events_by_username_path(resource.username)
-  end
-
-  private
-
-  def registras_preleg_informojn
-    if params[:user][:preleganto] == "true"
-      resource.preleganto = true
-      resource.prelego["temoj"] = params[:preleg_temoj]
-    else
-      resource.prelego.delete("preleganto")
-      resource.prelego.delete("temoj")
-    end
-    resource.save
   end
 end
