@@ -302,19 +302,18 @@ class HomeController < ApplicationController
     {monatoj: monatoj, kvantoj: quantity}
   end
 
-  def kalkulas_eventojn_retajn_kaj_fizikajn
-    eventoj = []
-    retaj = []
-    fizikaj = []
-
-    11.downto(0) do |m|
-      retaj << Event.online.where(created_at: (Date.today - m.month).all_month).count
-      fizikaj << Event.not_online.where(created_at: (Date.today - m.month).all_month).count
-    end
-
-    eventoj << {name: "Fizikaj", data: fizikaj}
-    eventoj << {name: "Retaj", data: retaj}
-
-    {eventoj: eventoj, x_axis: last_12_months_label}
+  # Builds the monthly online and offline event count series for the last
+  # twelve months.
+  #
+  # The calculation lives in +Events::OnlineOfflineCountsCalculator+ so that
+  # the chart series stays a unit of its own instead of a private step of this
+  # controller.
+  #
+  # @return [Hash{Symbol => Array}] +:events+ with one entry per event format
+  #   and +:x_axis+ with the twelve month labels
+  #
+  # @see Events::OnlineOfflineCountsCalculator
+  def online_offline_events_counts
+    Events::OnlineOfflineCountsCalculator.new.call
   end
 end
