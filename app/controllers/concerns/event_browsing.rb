@@ -34,7 +34,7 @@ module EventBrowsing
       when "p30_tagojn" then Event.in_30days(current_timezone)
       when "estontece" then Event.after_30days(current_timezone)
       else
-        (cookies[:vidmaniero] == "kalendaro") ? Event.ne_nuligitaj : Event.venontaj(current_timezone)
+        (cookies[:vidmaniero] == "kalendaro") ? Event.not_cancelled : Event.venontaj(current_timezone)
       end
     end
 
@@ -99,7 +99,7 @@ module EventBrowsing
     @events = Event.includes([:country, [uploads_attachments: :blob]])
       .merge(scope)
       .venontaj
-      .ne_nuligitaj
+      .not_cancelled
       .order(:date_start)
 
     render layout: false

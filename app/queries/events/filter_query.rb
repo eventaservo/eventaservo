@@ -12,7 +12,7 @@ module Events
   #
   # @example Calendar mode (no temporal restriction)
   #   Events::FilterQuery.new(
-  #     scope: Event.ne_nuligitaj.chefaj,
+  #     scope: Event.not_cancelled.chefaj,
   #     tag_ids: [1, 3]
   #   ).call
   #

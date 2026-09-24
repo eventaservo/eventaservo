@@ -62,6 +62,16 @@ class Event::ScopeTest < ActiveSupport::TestCase
     end
   end
 
+  test "not_cancelled returns only events that have not been cancelled" do
+    cancelled = create(:event, cancelled: true)
+    active = create(:event, cancelled: false)
+
+    result = Event.not_cancelled
+
+    assert_includes result, active
+    assert_not_includes result, cancelled
+  end
+
   test "venontaj excludes events from the previous UTC day" do
     Time.use_zone("UTC") do
       travel_to Time.zone.parse("2026-08-15 03:59:00") do

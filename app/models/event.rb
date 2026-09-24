@@ -152,7 +152,10 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :unutagaj, -> { joins(:tags).where(tags: {name: "Unutaga", group_name: "characteristic"}) }
   scope :plurtagaj, -> { joins(:tags).where(tags: {name: "Plurtaga", group_name: "characteristic"}) }
   scope :nuligitaj, -> { where(cancelled: true) }
-  scope :ne_nuligitaj, -> { where(cancelled: false) }
+  # Filters the relation to events that have not been cancelled.
+  #
+  # @return [ActiveRecord::Relation<Event>] events with +cancelled+ set to false
+  scope :not_cancelled, -> { where(cancelled: false) }
   scope :konkursoj, -> { joins(:tags).where(tags: {name: "Konkurso", group_name: "characteristic"}).distinct }
   scope :anoncoj, -> { joins(:tags).where(tags: {name: "Anonco", group_name: "characteristic"}).distinct }
   # TODO: Move this scope to a query object at app/queries/events/chefaj_query.rb
