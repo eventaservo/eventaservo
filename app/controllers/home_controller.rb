@@ -52,7 +52,7 @@ class HomeController < ApplicationController
   def instruistoj_kaj_prelegantoj
     ahoy.track "Visit Instruantoj kaj Prelegantoj"
 
-    @countries = Country.joins(:users).merge(User.instruistoj.or(User.prelegantoj)).distinct.order(:name)
+    @countries = Country.joins(:users).merge(User.teachers.or(User.prelegantoj)).distinct.order(:name)
 
     result = Users::TeachersAndSpeakersQuery.new(
       name: params[:name], country_id: params[:country_id],

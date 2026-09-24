@@ -89,7 +89,10 @@ class User < ApplicationRecord
 
   scope :receives_weekly_summary, -> { where("mailings @> ?", {weekly_summary: "1"}.to_json) }
   scope :admins, -> { where(admin: true) }
-  scope :instruistoj, -> { where("instruo ->> 'instruisto' = 'true'") }
+  # Returns users who have marked themselves as Esperanto teachers.
+  #
+  # @return [ActiveRecord::Relation<User>] users whose instruction profile marks them as teachers
+  scope :teachers, -> { where("instruo ->> 'instruisto' = 'true'") }
   scope :prelegantoj, -> { where("prelego ->> 'preleganto' = 'true'") }
   scope :enabled, -> { where(disabled: false) }
   scope :disabled, -> { unscoped.where(disabled: true) }
