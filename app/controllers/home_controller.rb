@@ -107,7 +107,7 @@ class HomeController < ApplicationController
     redirect_to root_path unless access_from_server
 
     @horzono = cookies[:horzono]
-    @events = Event.ne_nuligitaj.chefaj.includes(:country)
+    @events = Event.not_cancelled.chefaj.includes(:country)
     @events = @events.by_dates(from: params[:start], to: params[:end])
     @events = @events.by_continent(params[:continent]) if params[:continent].present?
     @events = @events.by_country_name(params[:country]) if params[:country].present?
@@ -128,7 +128,7 @@ class HomeController < ApplicationController
       format.xml do
         @events = Event.includes([:country, [uploads_attachments: :blob]])
           .venontaj
-          .ne_nuligitaj
+          .not_cancelled
           .where(cancelled: false)
           .order(:date_start)
         render layout: false
@@ -155,7 +155,7 @@ class HomeController < ApplicationController
 
       @events = Event.includes(%i[country participants organizations]).search(@search_term)
       @events = @events.future_and_just_finished if params[:pasintaj].nil?
-      @events = @events.ne_nuligitaj if params[:nuligitaj].nil?
+      @events = @events.not_cancelled if params[:nuligitaj].nil?
       @events = @events.order(date_start: :desc)
     end
   end
@@ -196,7 +196,7 @@ class HomeController < ApplicationController
     when "p30_tagojn" then Event.in_30days(current_timezone)
     when "estontece" then Event.after_30days(current_timezone)
     else
-      (cookies[:vidmaniero] == "kalendaro") ? Event.ne_nuligitaj : Event.venontaj(current_timezone)
+      (cookies[:vidmaniero] == "kalendaro") ? Event.not_cancelled : Event.venontaj(current_timezone)
     end
 
     Events::FilterQuery.new(

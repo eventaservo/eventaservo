@@ -1,7 +1,7 @@
 <% if cookies[:vidmaniero].in?(%w[kartoj kartaro]) && params[:pagho].nil? %>
   <% if @today_events.any? %>
     <br>
-    <h5 class="text-center fw-bold"><%= @today_events.ne_nuligitaj.length %> okazas nuntempe</h5>
+    <h5 class="text-center fw-bold"><%= @today_events.not_cancelled.length %> okazas nuntempe</h5>
     <div class="row">
       <% @today_events.order(:date_start).each do |evento| %>
         <div class="col-12 col-md-6">

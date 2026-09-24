@@ -190,7 +190,7 @@ class Events::ByDatesQueryTest < ActiveSupport::TestCase
     result = Events::ByDatesQuery.new(
       from: @window_start,
       to: @window_end,
-      scope: Event.ne_nuligitaj
+      scope: Event.not_cancelled
     ).call
 
     assert_not_includes result[Date.new(2026, 3, 17)], event
