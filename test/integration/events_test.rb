@@ -32,7 +32,7 @@ class EventsIntegrationTest < ActionDispatch::IntegrationTest
     evento = Event.last
     assert_equal "Ĵoan-Pesoo", evento.city
     assert_equal "America/Fortaleza", evento.time_zone
-    assert_equal "17/07/2019", evento.komenca_tago
+    assert_equal "17/07/2019", evento.start_date_label
     assert_equal "14:00", evento.komenca_horo
     assert_equal "17/07/2019", evento.fina_tago
     assert_equal "16:00", evento.fina_horo

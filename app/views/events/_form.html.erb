@@ -60,7 +60,7 @@
                   <input type="date" id="event_date_start" class="form-control"
                          data-datepicker-target="input"
                          data-action="change->datepicker#sync blur->datepicker#complete"
-                         data-initial="<%= @event.komenca_tago(horzono: @event.time_zone) %>">
+                         data-initial="<%= @event.start_date_label(horzono: @event.time_zone) %>">
                 </div>
                 <div class="col-4">
                   <%= text_field_tag(:time_start, @event.komenca_horo, class: 'timemask form-control', required: true, aria: { label: 'Komenca horo' }, data: { controller: 'mask', mask_pattern_value: 'time', 'event--form-target': 'timeStart' }) %>
