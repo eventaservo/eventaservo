@@ -6,13 +6,13 @@ module Events
   #
   # @example Basic usage with future events
   #   Events::FilterQuery.new(
-  #     scope: Event.venontaj.chefaj,
+  #     scope: Event.venontaj.regular,
   #     organization: "UEA"
   #   ).call
   #
   # @example Calendar mode (no temporal restriction)
   #   Events::FilterQuery.new(
-  #     scope: Event.not_cancelled.chefaj,
+  #     scope: Event.not_cancelled.regular,
   #     tag_ids: [1, 3]
   #   ).call
   #

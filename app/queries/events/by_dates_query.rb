@@ -18,7 +18,7 @@ module Events
   #   result = Events::ByDatesQuery.new(
   #     from: Date.current,
   #     to: Date.current,
-  #     scope: Event.venontaj.chefaj.by_continent("eŭropo")
+  #     scope: Event.venontaj.regular.by_continent("eŭropo")
   #   ).call
   #
   class ByDatesQuery
@@ -30,7 +30,7 @@ module Events
     # @param timezone [String, nil] IANA timezone for date resolution
     #   (e.g. "America/Sao_Paulo"). When nil, each event's own +time_zone+
     #   attribute is used.
-    def initialize(from:, to:, scope: Event.venontaj.chefaj, timezone: nil)
+    def initialize(from:, to:, scope: Event.venontaj.regular, timezone: nil)
       @from = from
       @to = to
       @scope = scope

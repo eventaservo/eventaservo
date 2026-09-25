@@ -6,7 +6,7 @@
 #
 # @example Usage in a controller action
 #   # Caller must set @events to an unfiltered (includes-today) scope first:
-#   @events = Event.not_cancelled.chefaj.by_continent("reta")
+#   @events = Event.not_cancelled.regular.by_continent("reta")
 #   prepare_calendar_data
 module CalendarData
   extend ActiveSupport::Concern
