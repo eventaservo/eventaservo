@@ -2,6 +2,6 @@
   <%= calendar_icon(event.start_date_label(horzono: tz)) %>
   <% if event.multtaga?(horzono: tz) %>
     <div class="p-2"><%= icon('fas', 'arrow-right') %></div>
-    <%= calendar_icon(event.fina_tago(horzono: tz)) %>
+    <%= calendar_icon(event.end_date_label(horzono: tz)) %>
   <% end %>
 </div>
