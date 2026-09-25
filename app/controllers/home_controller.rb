@@ -112,7 +112,7 @@ class HomeController < ApplicationController
     @events = @events.by_continent(params[:continent]) if params[:continent].present?
     @events = @events.by_country_name(params[:country]) if params[:country].present?
     @events = @events.by_city(params[:city]) if params[:city].present?
-    @events = @events.lau_organizo(params[:o]) if params[:o].present?
+    @events = @events.by_organization(params[:o]) if params[:o].present?
 
     if params[:s].present?
       @events = @events.with_tags(params[:s].split(",").map(&:to_i))

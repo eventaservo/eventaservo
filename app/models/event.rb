@@ -246,16 +246,24 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
   private_class_method :day_in_tz
 
-  # Serĉas eventojn laŭ organizoj
+  # Filters events associated with any of the given organization short names.
   #
-  # Ekzemplo:
-  #   .lau_organizo('uea')
-  #   .lau_organizo('uea,tejo')
+  # The input is a comma-separated list of short names. Each entry is downcased
+  # and matched case-insensitively against the +organizations+ joined to the
+  # event.
   #
-  # @since 2021-11
-  def self.lau_organizo(o)
-    organizoj = o.downcase.split(",")
-    joins(:organizations).where("LOWER(organizations.short_name) IN (?)", organizoj)
+  # @example Single organization
+  #   Event.by_organization("uea")
+  #
+  # @example Multiple organizations
+  #   Event.by_organization("uea,tejo")
+  #
+  # @param organization [String] comma-separated organization short names
+  #
+  # @return [ActiveRecord::Relation<Event>]
+  def self.by_organization(organization)
+    short_names = organization.downcase.split(",")
+    joins(:organizations).where("LOWER(organizations.short_name) IN (?)", short_names)
   end
 
   # Reapegiru la eventon

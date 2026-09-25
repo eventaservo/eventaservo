@@ -22,7 +22,7 @@ class OrganizationsController < ApplicationController
 
   # Montras organizajn informojn
   def show
-    eventoj = Event.includes([:country]).lau_organizo(params[:short_name])
+    eventoj = Event.includes([:country]).by_organization(params[:short_name])
     @future_events = eventoj.venontaj
     @past_events = eventoj.pasintaj.order(date_start: :desc)
 
