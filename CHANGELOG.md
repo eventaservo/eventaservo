@@ -1,5 +1,43 @@
 # Changelog
 
+## [3.0.17](https://github.com/eventaservo/eventaservo/compare/v3.0.16...v3.0.17) (2026-09-26)
+
+
+### Bug Fixes
+
+* add missing end to ApplicationHelperTest class ([f66fa77](https://github.com/eventaservo/eventaservo/commit/f66fa77b94f6855c0a19afb1f4c4185f59204bbb))
+* add missing end to ApplicationHelperTest class ([327b052](https://github.com/eventaservo/eventaservo/commit/327b052ef7f08cdc68434f5bef765a09bfc3aefc))
+* eager load reports and users in report index ([6adb372](https://github.com/eventaservo/eventaservo/commit/6adb372c8aead150250cdf1b0db8ec5fb493e9ca))
+* prevent CSRF on event malnuligi endpoint ([#1394](https://github.com/eventaservo/eventaservo/issues/1394)) ([3c7dc39](https://github.com/eventaservo/eventaservo/commit/3c7dc3920202f833d680646fd24166d2b4e2d1b0))
+
+
+### Code Refactoring
+
+* extract online/offline event counts into a calculator object ([4f40218](https://github.com/eventaservo/eventaservo/commit/4f40218d381a69a3dd8048673dd2b11da7433a73))
+* extract registered users counts into a calculator object ([cf9ad15](https://github.com/eventaservo/eventaservo/commit/cf9ad158891d3213830d942274375eaac25aa638))
+* extract save_teaching_info into a service object ([ebd3f2e](https://github.com/eventaservo/eventaservo/commit/ebd3f2e9a92014538235e85574b91b33cc029aec))
+* extract speaking profile saving into Users::SaveSpeakingInfo ([4da5d38](https://github.com/eventaservo/eventaservo/commit/4da5d3866345e726b97a60d90f2c579831fea4c2))
+* rename aktivaj_filtroj helper to active_filters ([2c9e891](https://github.com/eventaservo/eventaservo/commit/2c9e89174990e7760761adffc518fd8e44d890ff))
+* rename Event#fina_tago to end_date_label ([ae04dba](https://github.com/eventaservo/eventaservo/commit/ae04dba06fd52a3b254371d6dcd33dc20639b092))
+* rename Event#komenca_tago to start_date_label ([f40aec9](https://github.com/eventaservo/eventaservo/commit/f40aec9538134643b27a01eae5bc0d855e068da0))
+* rename Event#ne_nuligitaj scope to not_cancelled ([a753178](https://github.com/eventaservo/eventaservo/commit/a753178dddb0ff7085031194f88d0a2553bd0f32))
+* rename kalkulas_kvanton_registritaj_eventoj to registered_events_counts ([f74d934](https://github.com/eventaservo/eventaservo/commit/f74d934342bf0bcf7d4bd1239141d8e0b6d2d1a1))
+* rename montras_adreson helper to address_link ([662ad2a](https://github.com/eventaservo/eventaservo/commit/662ad2ae02d44ac0da9ad8af34af69a27534fab3))
+* rename montras_flagon helper to display_flag ([58a74a5](https://github.com/eventaservo/eventaservo/commit/58a74a58be6b128a539638b7551343d149f1d626))
+* rename montras_retpaghon to link_to_website ([cdd0e72](https://github.com/eventaservo/eventaservo/commit/cdd0e72587ee29595a325f0b6660c23db0de9dc4))
+* rename montras_telefonnumeron helper to phone_link ([36419df](https://github.com/eventaservo/eventaservo/commit/36419df1a23cfa6fa63f31c6a74db77a7921744a))
+* rename Organization#ne_estroj to #non_administrators ([1af20ab](https://github.com/eventaservo/eventaservo/commit/1af20ab5a194396b6c5a8501a4ee329663d14726))
+* rename serchi to search across models ([b924b1c](https://github.com/eventaservo/eventaservo/commit/b924b1ceb8c19b4d81709594f312375105899f37))
+* rename User.instruistoj scope to teachers ([be0206b](https://github.com/eventaservo/eventaservo/commit/be0206b11fa66ec70880db5817bb993a57f73205))
+* rename User#administranto? to admin_of? ([0ff69d2](https://github.com/eventaservo/eventaservo/commit/0ff69d2a90fa3b6df02bc9b2df4a78ac00859de4))
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump herb from 0.10.3 to 0.10.4 ([#1393](https://github.com/eventaservo/eventaservo/issues/1393)) ([b36e10e](https://github.com/eventaservo/eventaservo/commit/b36e10ec7ecd8e76f6d34e53774bcfdf802e5dc7))
+* **deps-dev:** bump rubyzip from 3.2.2 to 3.4.0 in the bundler group across 1 directory ([#1413](https://github.com/eventaservo/eventaservo/issues/1413)) ([e74c997](https://github.com/eventaservo/eventaservo/commit/e74c9972889f7d866e0e85d6a7591eaa83eb47bc))
+* **deps-dev:** bump rubyzip in the bundler group across 1 directory ([e74c997](https://github.com/eventaservo/eventaservo/commit/e74c9972889f7d866e0e85d6a7591eaa83eb47bc))
+
 ## [3.0.16](https://github.com/eventaservo/eventaservo/compare/v3.0.15...v3.0.16) (2026-09-13)
 
 
