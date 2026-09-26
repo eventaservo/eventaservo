@@ -72,6 +72,18 @@ class Event::ScopeTest < ActiveSupport::TestCase
     assert_not_includes result, cancelled
   end
 
+  test "regular excludes events tagged Konkurso or Anonco" do
+    regular_event = create(:event)
+    competition = create(:event, tags: [tags(:konkurso)])
+    announcement = create(:event, tags: [tags(:anonco)])
+
+    result = Event.regular
+
+    assert_includes result, regular_event
+    assert_not_includes result, competition
+    assert_not_includes result, announcement
+  end
+
   test "venontaj excludes events from the previous UTC day" do
     Time.use_zone("UTC") do
       travel_to Time.zone.parse("2026-08-15 03:59:00") do

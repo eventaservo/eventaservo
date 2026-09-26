@@ -158,8 +158,15 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :not_cancelled, -> { where(cancelled: false) }
   scope :konkursoj, -> { joins(:tags).where(tags: {name: "Konkurso", group_name: "characteristic"}).distinct }
   scope :anoncoj, -> { joins(:tags).where(tags: {name: "Anonco", group_name: "characteristic"}).distinct }
-  # TODO: Move this scope to a query object at app/queries/events/chefaj_query.rb
-  scope :chefaj, -> {
+  # Filters the relation to regular events, excluding announcements and competitions.
+  #
+  # Keeps events that are not tagged +Konkurso+ or +Anonco+. It composes with
+  # other scopes (e.g. +Event.venontaj.regular+) and serves as the default scope
+  # of {Events::ByDatesQuery}, so it stays on the model rather than becoming a
+  # query object.
+  #
+  # @return [ActiveRecord::Relation<Event>] events without a Konkurso or Anonco tag
+  scope :regular, -> {
     excluded = Tag.where(name: %w[Konkurso Anonco])
       .joins(:taggings)
       .where(taggings: {taggable_type: "Event"})
