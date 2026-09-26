@@ -14,7 +14,7 @@
       </div>
 
       <div class="modal-body" style="font-weight: normal; font-size: 1rem;">
-        <% @partoprenontoj.publikaj.each do |participant| %>
+        <% @partoprenontoj.publicly_listed.each do |participant| %>
           <% next unless participant.user %>
 
           <br>
