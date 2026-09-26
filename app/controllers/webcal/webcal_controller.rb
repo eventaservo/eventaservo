@@ -28,7 +28,7 @@ module Webcal
       o = Organization.find_by(short_name: params[:short_name])
       redirect_to root_path, flash: {error: "Organizo ne ekzistas"} and return if o.nil?
 
-      eventoj = Event.lau_organizo(o.short_name).for_webcal.includes(:versions, :tags)
+      eventoj = Event.by_organization(o.short_name).for_webcal.includes(:versions, :tags)
 
       respond_to do |format|
         format.ics { kreas_webcal(eventoj, title: "#{o.short_name} Esperantaj eventoj") }
