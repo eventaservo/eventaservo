@@ -14,6 +14,6 @@ class InternationalCalendarController < ApplicationController
     @year = params[:year].to_i
     redirect_to root_path, flash: {error: "Jaro ne validas"} and return if @year < 1887 || @year > 2100
 
-    @events = Event.includes([:country, :organizations]).lau_jaro(@year).international_calendar.order(:date_start)
+    @events = Event.includes([:country, :organizations]).by_year(@year).international_calendar.order(:date_start)
   end
 end

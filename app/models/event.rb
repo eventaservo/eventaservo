@@ -120,7 +120,11 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :pasintaj, -> { where("date_end < ?", Time.zone.yesterday.end_of_day) }
   scope :today, ->(tz = nil) { by_dates(from: klass.send(:day_in_tz, tz), to: klass.send(:day_in_tz, tz).end_of_day) }
   scope :not_today, ->(tz = nil) { by_not_dates(from: klass.send(:day_in_tz, tz), to: klass.send(:day_in_tz, tz).end_of_day) }
-  scope :lau_jaro, ->(jaro) { where("extract(year from date_start) = ?", jaro) }
+  # Filters events by the year of their start date.
+  #
+  # @param year [Integer] the calendar year to filter on
+  # @return [ActiveRecord::Relation] events whose start date falls in the given year
+  scope :by_year, ->(year) { where("extract(year from date_start) = ?", year) }
   scope :in_7days,
     lambda { |tz = nil|
       where(
