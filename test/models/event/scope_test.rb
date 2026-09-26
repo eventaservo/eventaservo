@@ -72,6 +72,24 @@ class Event::ScopeTest < ActiveSupport::TestCase
     assert_not_includes result, cancelled
   end
 
+  test "by_year returns only events that start in the given year" do
+    event_2025 = create(:event, date_start: Time.zone.parse("2025-06-01 12:00:00"))
+    event_2026 = create(:event, date_start: Time.zone.parse("2026-06-01 12:00:00"))
+    event_2027 = create(:event, date_start: Time.zone.parse("2027-06-01 12:00:00"))
+
+    result = Event.by_year(2026)
+
+    assert_includes result, event_2026
+    assert_not_includes result, event_2025
+    assert_not_includes result, event_2027
+  end
+
+  test "by_year returns an empty relation when no events start in the given year" do
+    create(:event, date_start: Time.zone.parse("2026-06-01 12:00:00"))
+
+    assert_empty Event.by_year(2125)
+  end
+
   test "venontaj excludes events from the previous UTC day" do
     Time.use_zone("UTC") do
       travel_to Time.zone.parse("2026-08-15 03:59:00") do
