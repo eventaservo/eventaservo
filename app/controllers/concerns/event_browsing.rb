@@ -39,7 +39,7 @@ module EventBrowsing
     end
 
     Events::FilterQuery.new(
-      scope: base.includes(:organization_events).chefaj,
+      scope: base.includes(:organization_events).regular,
       organization: params[:o],
       tag_ids: params[:s]&.split(",")&.map(&:to_i) || [],
       duration_type: params[:t]

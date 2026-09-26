@@ -217,7 +217,7 @@ class Events::ByDatesQueryTest < ActiveSupport::TestCase
 
   # -- Default scope --
 
-  test "default scope uses venontaj and chefaj" do
+  test "default scope uses venontaj and regular" do
     past_event = create_event(
       title: "Past Event",
       date_start: Time.utc(2025, 1, 1, 10, 0),
