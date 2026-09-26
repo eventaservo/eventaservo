@@ -4,7 +4,7 @@ module Events
   # Counts events grouped by continent.
   #
   # @example Count future events by continent
-  #   Events::ContinentCountsQuery.new(scope: Event.venontaj.chefaj).call
+  #   Events::ContinentCountsQuery.new(scope: Event.venontaj.regular).call
   #   # => [#<Event name: "eŭropo", count: 42>, ...]
   #
   class ContinentCountsQuery
