@@ -155,13 +155,18 @@ class User < ApplicationRecord
     end
   end
 
-  # Kontrolas ĉu la uzanto estas administranto de organizo.
+  # Checks whether the user is an administrator of the given organization.
   #
-  # @param [Object] organizo Organizo
-  # @return [Boolean] se la uzanto estas administranto
-  # @note Ĉiam respondas +true+ se la uzanto estas ES-Admin.
-  def administranto?(organizo)
-    (in? organizo.admins) || admin
+  # The user is considered an administrator when they are listed among the
+  # organization's administrators or when they are an ES-Admin.
+  #
+  # @param organization [Organization] the organization to check
+  #
+  # @return [Boolean] true when the user is an administrator of the organization
+  # @note Always returns +true+ for ES-Admin users, even when they are not an
+  #   administrator of the organization.
+  def admin_of?(organization)
+    (in? organization.admins) || admin
   end
 
   # Checks if the user has any public contact information fullfilled

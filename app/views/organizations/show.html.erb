@@ -36,7 +36,7 @@
         <% end %>
       </p>
 
-      <% if user_signed_in? && current_user.administranto?(@organizo) %>
+      <% if user_signed_in? && current_user.admin_of?(@organizo) %>
         <div class="buttons-footer">
           <%= link_to icon('far', 'edit', 'Redakti'), edit_organization_url(@organizo.short_name), class: 'btn btn-sm btn-outline-primary no-border' %>
         </div>
