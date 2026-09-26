@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: participants
@@ -15,6 +17,13 @@ class Participant < ApplicationRecord
   belongs_to :event, counter_cache: true
   belongs_to :user
 
-  scope :publikaj, -> { where(public: true) }
-  scope :ne_publikaj, -> { where(public: false) }
+  # Returns participants who agreed to have their name shown publicly.
+  #
+  # @return [ActiveRecord::Relation<Participant>] participants with +public+ set to true
+  scope :publicly_listed, -> { where(public: true) }
+
+  # Returns participants who did not agree to have their name shown publicly.
+  #
+  # @return [ActiveRecord::Relation<Participant>] participants with +public+ set to false
+  scope :not_publicly_listed, -> { where(public: false) }
 end

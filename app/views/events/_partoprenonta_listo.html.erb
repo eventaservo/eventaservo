@@ -14,7 +14,7 @@
       </div>
 
       <div class="modal-body" style="font-weight: normal; font-size: 1rem;">
-        <% @partoprenontoj.publikaj.each do |participant| %>
+        <% @partoprenontoj.publicly_listed.each do |participant| %>
           <% next unless participant.user %>
 
           <br>
@@ -22,10 +22,10 @@
           <br>
         <% end %>
 
-        <% if @partoprenontoj.ne_publikaj.count > 0 %>
+        <% if @partoprenontoj.not_publicly_listed.count > 0 %>
           <p>
             <br>
-            kaj <%= pluralize(@partoprenontoj.ne_publikaj.count, 'alia kiu', plural: "aliaj kiuj") %>
+            kaj <%= pluralize(@partoprenontoj.not_publicly_listed.count, 'alia kiu', plural: "aliaj kiuj") %>
             preferis ne aperigi sian nomon
           </p>
         <% end %>
