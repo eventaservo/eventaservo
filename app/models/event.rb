@@ -319,7 +319,17 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     date_start.in_time_zone(time_zone).strftime("%d/%m/%Y")
   end
 
-  def fina_tago(horzono: nil)
+  # Formats the event end date in the given time zone as a display label.
+  #
+  # Returns a human-readable Brazilian-style "dd/mm/yyyy" string for the event's
+  # +date_end+ cast into +horzono+ (defaulting to the event's own time zone).
+  # Returns +nil+ when the event has no end date.
+  #
+  # @param horzono [String, nil] the IANA time zone name to format the date in;
+  #   falls back to the event's +time_zone+ when not provided
+  #
+  # @return [String, nil] the formatted end date label, or +nil+ when +date_end+ is blank
+  def end_date_label(horzono: nil)
     return unless date_end
 
     time_zone = horzono if horzono
@@ -344,9 +354,9 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   def multtaga?(horzono: nil)
     if horzono
-      fina_tago(horzono: horzono).to_date > start_date_label(horzono: horzono).to_date
+      end_date_label(horzono: horzono).to_date > start_date_label(horzono: horzono).to_date
     else
-      fina_tago(horzono: time_zone).to_date > start_date_label(horzono: time_zone).to_date
+      end_date_label(horzono: time_zone).to_date > start_date_label(horzono: time_zone).to_date
     end
   end
 
@@ -376,7 +386,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   # percent: Procento de la evento kiu jam pasis
   # @return [Hash]
   def tagoj
-    total = (fina_tago.to_date - start_date_label.to_date).to_i + 1
+    total = (end_date_label.to_date - start_date_label.to_date).to_i + 1
     parcial = Time.use_zone(time_zone) { (Time.zone.today - start_date_label.to_date).to_i + 1 }
     restanta = total - parcial
     percent = (parcial.to_f / total.to_f).to_f * 100

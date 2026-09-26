@@ -79,7 +79,7 @@
                   <input type="date" id="event_date_end" class="form-control"
                          data-datepicker-target="input"
                          data-action="change->datepicker#sync blur->datepicker#complete"
-                         data-initial="<%= @event.fina_tago(horzono: @event.time_zone) %>"
+                         data-initial="<%= @event.end_date_label(horzono: @event.time_zone) %>"
                          data-event--form-target="endDateInput">
                 </div>
                 <div class="col-4">
