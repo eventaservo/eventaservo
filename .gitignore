@@ -80,3 +80,10 @@ bun.lock
 
 .antigravitycli/
 public/docs/api/v2/
+
+# Qlty CLI local artifacts (config .qlty/qlty.toml is versioned)
+# (no trailing slash: paths are symlinks on dev machines, dirs on CI)
+.qlty/logs
+.qlty/out
+.qlty/plugin_cachedir
+.qlty/results
