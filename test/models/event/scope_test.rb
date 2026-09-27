@@ -113,6 +113,33 @@ class Event::ScopeTest < ActiveSupport::TestCase
     assert_not_includes result, cancelled
   end
 
+  test "conferences_and_competitions includes events tagged as Anonco" do
+    event = create(:event)
+    event.tags << tags(:anonco)
+
+    assert_includes Event.conferences_and_competitions, event
+  end
+
+  test "conferences_and_competitions includes events tagged as Konkurso" do
+    event = create(:event)
+    event.tags << tags(:konkurso)
+
+    assert_includes Event.conferences_and_competitions, event
+  end
+
+  test "conferences_and_competitions excludes events without Anonco or Konkurso tags" do
+    event = create(:event)
+
+    assert_not_includes Event.conferences_and_competitions, event
+  end
+
+  test "conferences_and_competitions respects the default_scope by excluding deleted events" do
+    event = create(:event, deleted: true)
+    event.tags << tags(:anonco)
+
+    assert_not_includes Event.conferences_and_competitions, event
+  end
+
   test "venontaj excludes events from the previous UTC day" do
     Time.use_zone("UTC") do
       travel_to Time.zone.parse("2026-08-15 03:59:00") do

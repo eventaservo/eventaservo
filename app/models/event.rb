@@ -166,7 +166,10 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
       .select("taggings.taggable_id")
     where.not(id: excluded)
   }
-  scope :anoncoj_kaj_konkursoj, -> { anoncoj.or(konkursoj) }
+  # Combines events tagged as +Anonco+ or +Konkurso+.
+  #
+  # @return [ActiveRecord::Relation<Event>] events tagged as +Anonco+ or +Konkurso+
+  scope :conferences_and_competitions, -> { anoncoj.or(konkursoj) }
   scope :international_calendar, -> { where(international_calendar: true) }
   scope :with_reports, -> { joins(:reports).distinct }
   scope :with_tags, ->(tag_ids) {
