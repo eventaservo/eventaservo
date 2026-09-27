@@ -336,7 +336,17 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     date_end.in_time_zone(time_zone).strftime("%d/%m/%Y")
   end
 
-  def komenca_horo(horzono: nil)
+  # Formats the event start time in the given time zone as a display label.
+  #
+  # Returns a human-readable "HH:MM" string for the event's +date_start+ cast
+  # into +horzono+ (defaulting to the event's own time zone). Returns +nil+
+  # when the event has no start date.
+  #
+  # @param horzono [String, nil] the IANA time zone name to format the time in;
+  #   falls back to the event's +time_zone+ when not provided
+  #
+  # @return [String, nil] the formatted start time label, or +nil+ when +date_start+ is blank
+  def start_time_label(horzono: nil)
     return unless date_start
 
     time_zone =
