@@ -134,4 +134,26 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
       assert_match(/Evening Event Copenhagen/, response.body)
     end
   end
+
+  test "kartaro view preloads organizations and tags without N+1 queries" do
+    country = countries(:denmark)
+    events = create_list(:event, 3,
+      city: "Kopenhago",
+      country: country,
+      date_start: 1.day.from_now,
+      date_end: 2.days.from_now)
+    events.each { |event| event.organizations = [organizations(:rotterdam_centre), organizations(:sat)] }
+
+    assert_no_queries_match(/"organization_events"\."event_id" = \$\d+/) do
+      assert_no_queries_match(/"taggings"\."taggable_id" = \$\d+/) do
+        get events_by_city_url(continent: country.continent.normalized,
+          country_name: country.name.normalized,
+          city_name: "Kopenhago"),
+          headers: {"HTTP_COOKIE" => "vidmaniero=kartaro"}
+      end
+    end
+
+    assert_response :success
+    assert_match(/#{Regexp.escape(events.first.title)}/, response.body)
+  end
 end

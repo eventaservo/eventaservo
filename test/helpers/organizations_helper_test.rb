@@ -44,4 +44,46 @@ class OrganizationsHelperTest < ActionView::TestCase
     event = create(:event, date_start: 2.days.ago, date_end: 1.day.ago)
     assert_equal "", display_event_days_left(event)
   end
+
+  test "display_organizations_for_event lists all organizations when not limited" do
+    event = create(:event)
+    event.organizations = [organizations(:rotterdam_centre), organizations(:sat)]
+
+    result = display_organizations_for_event(event)
+
+    assert_match organizations(:rotterdam_centre).short_name, result
+    assert_match organizations(:sat).short_name, result
+  end
+
+  test "display_organizations_for_event limits to first organization plus counter when limited" do
+    event = create(:event)
+    event.organizations = [organizations(:rotterdam_centre), organizations(:sat)]
+
+    result = display_organizations_for_event(event, limited: true)
+
+    assert_match organizations(:rotterdam_centre).short_name, result
+    assert_match(/\+1/, result)
+    assert_no_match organizations(:sat).short_name, result
+  end
+
+  test "display_organizations_for_event shows the single organization when limited and only one exists" do
+    event = create(:event)
+    event.organizations = [organizations(:rotterdam_centre)]
+
+    result = display_organizations_for_event(event, limited: true)
+
+    assert_match organizations(:rotterdam_centre).short_name, result
+    assert_no_match(/\+0/, result)
+  end
+
+  test "display_organizations_for_event does not query organizations when they are preloaded" do
+    event = create(:event)
+    event.organizations = [organizations(:rotterdam_centre), organizations(:sat)]
+    event = Event.includes(:organizations).find(event.id)
+
+    assert event.organizations.loaded?
+    assert_no_queries_match(/FROM "organizations"/) do
+      display_organizations_for_event(event, limited: true)
+    end
+  end
 end

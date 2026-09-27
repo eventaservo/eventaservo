@@ -22,6 +22,7 @@ jobs:
     secrets:
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      QLTY_COVERAGE_TOKEN: ${{ secrets.QLTY_COVERAGE_TOKEN }}
 
   docker:
     needs: tests
