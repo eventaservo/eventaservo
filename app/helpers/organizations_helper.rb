@@ -14,15 +14,24 @@ module OrganizationsHelper
     image_tag organization.logo.variant(resize_to_limit: size), width: size, class: html_class
   end
 
-  # Montras la organizojn pri la evento
-  # @param [Object] event
-  # @param [FalseClass] limited
+  # Renders the event's organizations as tag links, optionally limiting the
+  # output to a single organization plus a "+N" counter.
+  #
+  # Uses +size+ (memory-aware when the association is loaded) instead of
+  # +count+ so that preloaded associations do not trigger extra COUNT(*)
+  # queries per event (N+1).
+  #
+  # @param event [Event] the event whose organizations to display
+  # @param limited [Boolean] when true and the event has more than one
+  #   organization, render only the first organization plus a "+N" counter
+  # @return [ActiveSupport::SafeBuffer] the rendered organization tags
   def display_organizations_for_event(event, limited: false)
     content_tag(:div, class: "organization-tags") do
-      if limited && event.organizations.count > 1
-        concat organization_tag(event.organizations.first) + " +#{event.organizations.count - 1}"
+      organizations = event.organizations
+      if limited && organizations.size > 1
+        concat organization_tag(organizations.first) + " +#{organizations.size - 1}"
       else
-        event.organizations.each do |organization|
+        organizations.each do |organization|
           concat organization_tag(organization)
         end
       end
