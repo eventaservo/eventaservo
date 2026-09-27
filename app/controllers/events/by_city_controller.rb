@@ -16,7 +16,7 @@ class Events::ByCityController < ApplicationController
     redirect_to root_path, flash: {error: "Lando ne ekzistas"} and return if @country.nil?
 
     if params[:pasintaj].present?
-      render_pasintaj_by_city
+      setup_past_events_by_city
       return
     end
 
@@ -34,10 +34,15 @@ class Events::ByCityController < ApplicationController
 
   private
 
-  # Sets up assigns for the past-events view on +show+ (city).
+  # Sets up the view assigns for the past-events listing on +show+ (city).
   #
-  # @return [void]
-  def render_pasintaj_by_city
+  # Turns on past mode, scopes +@events+ to past events for the given city
+  # ordered newest-first, empties the future and today collections, and
+  # paginates the result.
+  #
+  # @return [Array(Pagy, Array<Event>)] the pagination object and paginated
+  #   events, destructured into +@pagy+ and +@events+
+  def setup_past_events_by_city
     @past_mode = true
     @events = build_events_scope
     @future_events = Event.none
