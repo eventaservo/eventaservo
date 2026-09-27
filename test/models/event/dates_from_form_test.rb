@@ -45,7 +45,7 @@ class Event::DatesFromFormTest < ActiveSupport::TestCase
 
   test "round-trips the local wall-clock time the form re-renders without drift" do
     # The form re-renders +date_start+/+date_end+ as wall-clock strings in the
-    # event's time zone (via +komenca_horo+). Resubmitting those values
+    # event's time zone (via +start_time_label+). Resubmitting those values
     # unchanged must round-trip — local representation stays the same, and
     # the stored UTC stays the same — so a "no-change" save does not drift.
     event = events(:valid_event)

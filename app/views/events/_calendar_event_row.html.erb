@@ -2,7 +2,7 @@
   <% if event.tuttaga? %>
     <span class="text-muted">tuttaga</span>
   <% else %>
-    <%= event.komenca_horo(horzono: cookies[:horzono]) %>
+    <%= event.start_time_label(horzono: cookies[:horzono]) %>
     <% end_time = event.fina_horo(horzono: cookies[:horzono]) %>
     <% if end_time %><br>
       <span class="calendar-end-time"><%= end_time %></span>
