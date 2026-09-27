@@ -137,11 +137,13 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
 
   test "kartaro view preloads organizations and tags without N+1 queries" do
     country = countries(:denmark)
-    events = create_list(:event, 3,
-      city: "Kopenhago",
-      country: country,
-      date_start: 1.day.from_now,
-      date_end: 2.days.from_now)
+    events = 3.times.map do |index|
+      create(:event,
+        city: "Kopenhago",
+        country: country,
+        date_start: 1.day.from_now + index.days,
+        date_end: 2.days.from_now + index.days)
+    end
     events.each { |event| event.organizations = [organizations(:rotterdam_centre), organizations(:sat)] }
 
     assert_no_queries_match(/"organization_events"\."event_id" = \$\d+/) do
@@ -154,6 +156,6 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :success
-    assert_match(/#{Regexp.escape(events.first.title)}/, response.body)
+    assert_includes response.body, ERB::Util.html_escape(events.first.title)
   end
 end
