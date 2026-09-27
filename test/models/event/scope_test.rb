@@ -113,6 +113,36 @@ class Event::ScopeTest < ActiveSupport::TestCase
     assert_not_includes result, cancelled
   end
 
+  test "regular excludes events tagged Konkurso or Anonco" do
+    regular_event = create(:event)
+    competition = create(:event, tags: [tags(:konkurso)])
+    announcement = create(:event, tags: [tags(:anonco)])
+
+    result = Event.regular
+
+    assert_includes result, regular_event
+    assert_not_includes result, competition
+    assert_not_includes result, announcement
+  end
+
+  test "by_year returns only events that start in the given year" do
+    event_2025 = create(:event, date_start: Time.zone.parse("2025-06-01 12:00:00"))
+    event_2026 = create(:event, date_start: Time.zone.parse("2026-06-01 12:00:00"))
+    event_2027 = create(:event, date_start: Time.zone.parse("2027-06-01 12:00:00"))
+
+    result = Event.by_year(2026)
+
+    assert_includes result, event_2026
+    assert_not_includes result, event_2025
+    assert_not_includes result, event_2027
+  end
+
+  test "by_year returns an empty relation when no events start in the given year" do
+    create(:event, date_start: Time.zone.parse("2026-06-01 12:00:00"))
+
+    assert_empty Event.by_year(2125)
+  end
+
   test "conferences_and_competitions includes events tagged as Anonco" do
     event = create(:event)
     event.tags << tags(:anonco)

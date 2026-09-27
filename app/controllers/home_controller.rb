@@ -107,7 +107,7 @@ class HomeController < ApplicationController
     redirect_to root_path unless access_from_server
 
     @horzono = cookies[:horzono]
-    @events = Event.not_cancelled.chefaj.includes(:country)
+    @events = Event.not_cancelled.regular.includes(:country)
     @events = @events.by_dates(from: params[:start], to: params[:end])
     @events = @events.by_continent(params[:continent]) if params[:continent].present?
     @events = @events.by_country_name(params[:country]) if params[:country].present?
@@ -200,7 +200,7 @@ class HomeController < ApplicationController
     end
 
     Events::FilterQuery.new(
-      scope: base.includes(:organization_events).chefaj,
+      scope: base.includes(:organization_events).regular,
       organization: params[:o],
       tag_ids: params[:s]&.split(",")&.map(&:to_i) || [],
       duration_type: params[:t]

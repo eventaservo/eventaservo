@@ -120,7 +120,11 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :pasintaj, -> { where("date_end < ?", Time.zone.yesterday.end_of_day) }
   scope :today, ->(tz = nil) { by_dates(from: klass.send(:day_in_tz, tz), to: klass.send(:day_in_tz, tz).end_of_day) }
   scope :not_today, ->(tz = nil) { by_not_dates(from: klass.send(:day_in_tz, tz), to: klass.send(:day_in_tz, tz).end_of_day) }
-  scope :lau_jaro, ->(jaro) { where("extract(year from date_start) = ?", jaro) }
+  # Filters events by the year of their start date.
+  #
+  # @param year [Integer] the calendar year to filter on
+  # @return [ActiveRecord::Relation] events whose start date falls in the given year
+  scope :by_year, ->(year) { where("extract(year from date_start) = ?", year) }
   scope :in_7days,
     lambda { |tz = nil|
       where(
@@ -158,8 +162,15 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :not_cancelled, -> { where(cancelled: false) }
   scope :konkursoj, -> { joins(:tags).where(tags: {name: "Konkurso", group_name: "characteristic"}).distinct }
   scope :anoncoj, -> { joins(:tags).where(tags: {name: "Anonco", group_name: "characteristic"}).distinct }
-  # TODO: Move this scope to a query object at app/queries/events/chefaj_query.rb
-  scope :chefaj, -> {
+  # Filters the relation to regular events, excluding announcements and competitions.
+  #
+  # Keeps events that are not tagged +Konkurso+ or +Anonco+. It composes with
+  # other scopes (e.g. +Event.venontaj.regular+) and serves as the default scope
+  # of {Events::ByDatesQuery}, so it stays on the model rather than becoming a
+  # query object.
+  #
+  # @return [ActiveRecord::Relation<Event>] events without a Konkurso or Anonco tag
+  scope :regular, -> {
     excluded = Tag.where(name: %w[Konkurso Anonco])
       .joins(:taggings)
       .where(taggings: {taggable_type: "Event"})
