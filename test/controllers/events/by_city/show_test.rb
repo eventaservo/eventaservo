@@ -30,6 +30,55 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
     assert_no_match older.title, response.body
   end
 
+  test "pasintaj=1 orders past events in the city newest first" do
+    country = countries(:denmark)
+    older = Event.create!(
+      title: "Aarhusa Statistika Kunveno",
+      description: "Test",
+      city: "Kopenhago",
+      country: country,
+      format: :onsite,
+      date_start: Time.zone.parse("2025-01-10 10:00:00"),
+      date_end: Time.zone.parse("2025-01-10 12:00:00"),
+      code: SecureRandom.hex(6),
+      site: "https://example.org/older",
+      user: users(:user)
+    )
+    newer = Event.create!(
+      title: "Kopenhaga Nova Kunveno",
+      description: "Test",
+      city: "Kopenhago",
+      country: country,
+      format: :onsite,
+      date_start: Time.zone.parse("2025-06-10 10:00:00"),
+      date_end: Time.zone.parse("2025-06-10 12:00:00"),
+      code: SecureRandom.hex(6),
+      site: "https://example.org/newer",
+      user: users(:user)
+    )
+
+    get events_by_city_url(continent: country.continent.normalized,
+      country_name: country.name.normalized,
+      city_name: "Kopenhago",
+      pasintaj: 1)
+
+    assert_response :success
+    assert response.body.index(newer.title) < response.body.index(older.title),
+      "Expected the more-recent past event to appear before the older one"
+  end
+
+  test "pasintaj=1 hides the today section" do
+    country = countries(:denmark)
+
+    get events_by_city_url(continent: country.continent.normalized,
+      country_name: country.name.normalized,
+      city_name: "Kopenhago",
+      pasintaj: 1)
+
+    assert_response :success
+    assert_no_match "okazas nuntempe", response.body
+  end
+
   test "redirects to root when country does not exist" do
     get events_by_city_url(continent: "europo", country_name: "neekzistas", city_name: "kopenhago")
     assert_redirected_to root_path
