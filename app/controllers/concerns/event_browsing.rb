@@ -57,7 +57,7 @@ module EventBrowsing
     return unless cookies[:vidmaniero].in?(%w[kartoj kartaro])
 
     @kvanto_venontaj_eventoj = @events.count
-    @pagy, @events = pagy(@events.not_today(current_timezone).includes(%i[country organizations]))
+    @pagy, @events = pagy(@events.not_today(current_timezone).includes(%i[country organizations tags]))
   end
 
   # Validates the +:continent+ param and sets +@continent+.
