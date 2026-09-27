@@ -40,7 +40,7 @@ class HomeController < ApplicationController
   def anoncoj
     ahoy.track "Visit Anoncoj"
 
-    @eventoj = Event.anoncoj_kaj_konkursoj.venontaj(current_timezone)
+    @eventoj = Event.conferences_and_competitions.venontaj(current_timezone)
   end
 
   # Displays the teachers and speakers directory.
