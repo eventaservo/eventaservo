@@ -7,6 +7,8 @@ on:
         required: true
       CODECOV_TOKEN:
         required: true
+      QLTY_COVERAGE_TOKEN:
+        required: true
 
 jobs:
   minitest:
@@ -70,6 +72,13 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
+      - name: Upload coverage to Qlty
+        uses: qltysh/qlty-action/coverage@c9b09987143d1e4ac955f4803c7bea742102feb5 # v2.4.0
+        with:
+          token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+          files: coverage/coverage.xml
+          tag: minitest
+
   system_tests:
     runs-on: ubuntu-22.04
     permissions:
@@ -130,3 +139,10 @@ jobs:
         uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Upload coverage to Qlty
+        uses: qltysh/qlty-action/coverage@c9b09987143d1e4ac955f4803c7bea742102feb5 # v2.4.0
+        with:
+          token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+          files: coverage/coverage.xml
+          tag: system_tests
