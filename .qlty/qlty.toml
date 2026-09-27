@@ -1,0 +1,89 @@
+# Qlty configuration for EventaServo.
+#
+# This file is committed to the repository so Qlty Cloud uses a stable,
+# project-specific configuration instead of the temporary `qlty init`
+# output it would otherwise generate on every analysis.
+#
+# Key decision: this project lints Ruby with StandardRB (see Gemfile and
+# AGENTS.md), NOT RuboCop. The auto-generated config enables the `rubocop`
+# plugin because the `standard` gem depends on rubocop transitively, which
+# produced ~2081 RuboCop issues that do not match the project's actual style.
+# We therefore enable the native `standardrb` plugin instead.
+#
+# Documentation: https://docs.qlty.sh/cli/qlty-toml.md
+config_version = "0"
+
+exclude_patterns = [
+  "**/node_modules/**",
+  "**/vendor/**",
+  "public/assets/**",
+  "tmp/**",
+  "log/**",
+  "coverage/**",
+  "storage/**",
+  "**/*.min.js",
+]
+
+test_patterns = [
+  "**/test/**",
+  "**/spec/**",
+  "**/test_*.*",
+  "**/spec_*.*",
+  "**/*_test.*",
+]
+
+[smells]
+mode = "comment"
+
+[[source]]
+name = "default"
+default = true
+
+# Ruby linter/formatter — the project's official lint (AGENTS.md) is
+# `bundle exec standardrb`. Pinned to the upstream known-good version.
+[[plugin]]
+name = "standardrb"
+version = "1.52.0"
+
+# GitHub Actions workflow linter (the repository has many workflows).
+[[plugin]]
+name = "actionlint"
+
+# Rails security scanner (also run in CI via .github/workflows/brakeman.yml).
+[[plugin]]
+name = "brakeman"
+
+# JavaScript linting (the repository has .eslintrc.yml).
+[[plugin]]
+name = "eslint"
+version = "8.57.0"
+
+# Dockerfile linting.
+[[plugin]]
+name = "hadolint"
+
+# Vulnerable/outdated dependencies scanner.
+[[plugin]]
+name = "osv-scanner"
+
+# IaC posture checks for the Dockerfile and GitHub Actions workflows.
+[[plugin]]
+name = "radarlint-iac"
+mode = "monitor"
+
+# Low-signal pattern search; mode = "comment" so it never blocks the gate.
+[[plugin]]
+name = "ripgrep"
+mode = "comment"
+
+# Shell script linting (workflows and bin/ scripts).
+[[plugin]]
+name = "shellcheck"
+
+# Secret scanning (GitGuardian already covers the CI pipeline).
+[[plugin]]
+name = "trufflehog"
+
+# Security posture for GitHub Actions workflows.
+[[plugin]]
+name = "zizmor"
