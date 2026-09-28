@@ -83,7 +83,7 @@
                          data-event--form-target="endDateInput">
                 </div>
                 <div class="col-4">
-                  <%= text_field_tag(:time_end, @event.fina_horo, class: 'timemask form-control', required: true, aria: { label: 'Fina horo' }, data: { controller: 'mask', mask_pattern_value: 'time', 'event--form-target': 'timeEnd' }) %>
+                  <%= text_field_tag(:time_end, @event.end_time_label, class: 'timemask form-control', required: true, aria: { label: 'Fina horo' }, data: { controller: 'mask', mask_pattern_value: 'time', 'event--form-target': 'timeEnd' }) %>
                 </div>
               </div>
             </div>

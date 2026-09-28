@@ -35,7 +35,7 @@ class EventsIntegrationTest < ActionDispatch::IntegrationTest
     assert_equal "17/07/2019", evento.start_date_label
     assert_equal "14:00", evento.start_time_label
     assert_equal "17/07/2019", evento.end_date_label
-    assert_equal "16:00", evento.fina_horo
+    assert_equal "16:00", evento.end_time_label
     assert_equal 1, evento.tags.categories.count
   end
 

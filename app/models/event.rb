@@ -376,7 +376,17 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     date_start.in_time_zone(time_zone).strftime("%H:%M")
   end
 
-  def fina_horo(horzono: nil)
+  # Formats the event end time in the given time zone as a display label.
+  #
+  # Returns a human-readable "HH:MM" string for the event's +date_end+ cast
+  # into +horzono+ (defaulting to the event's own time zone). Returns +nil+
+  # when the event has no end date.
+  #
+  # @param horzono [String, nil] the IANA time zone name to format the time in;
+  #   falls back to the event's +time_zone+ when not provided
+  #
+  # @return [String, nil] the formatted end time label, or +nil+ when +date_end+ is blank
+  def end_time_label(horzono: nil)
     return unless date_end
 
     time_zone =
