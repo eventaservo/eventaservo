@@ -14,7 +14,7 @@ module CalendarHelper
   def start_and_end_time_with_timezone(event, timezone)
     cet = ActiveSupport::TimeZone[timezone].cet?
     start_time = event.start_time_label(horzono: timezone)
-    end_time = event.fina_horo(horzono: timezone)
+    end_time = event.end_time_label(horzono: timezone)
     icon("far", "clock", "#{start_time} - #{end_time} #{"(MET)" if cet}")
   end
 end
