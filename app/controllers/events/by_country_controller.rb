@@ -23,7 +23,7 @@ class Events::ByCountryController < ApplicationController
 
       format.html do
         if params[:pasintaj].present?
-          render_pasintaj_by_country
+          setup_past_events_by_country
         else
           unless cookies[:vidmaniero].in? %w[kartaro mapo]
             cookies[:vidmaniero] = {value: "kartaro", expires: 2.weeks, secure: true}
@@ -43,10 +43,15 @@ class Events::ByCountryController < ApplicationController
 
   private
 
-  # Sets up assigns for the past-events view on +show+ (country).
+  # Sets up the view assigns for the past-events listing on +show+ (country).
   #
-  # @return [void]
-  def render_pasintaj_by_country
+  # Turns on past mode, scopes +@events+ to past events for the given country,
+  # empties the future and today collections, computes the city counts for
+  # past events, and paginates the result ordered newest-first.
+  #
+  # @return [Array(Pagy, Array<Event>)] the pagination object and paginated
+  #   events, destructured into +@pagy+ and +@events+
+  def setup_past_events_by_country
     @past_mode = true
     @events = build_events_scope
     @future_events = Event.none
