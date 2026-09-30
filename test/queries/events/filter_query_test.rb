@@ -70,7 +70,7 @@ class Events::FilterQueryTest < ActiveSupport::TestCase
 
   # -- Duration type filter --
 
-  # NOTE: The single_day/plurtagaj scopes currently look for group_name "characteristic"
+  # NOTE: The single_day/multi_day scopes currently look for group_name "characteristic"
   # but the after_save callback tags events with group_name "time". This is a
   # pre-existing mismatch — these tests verify FilterQuery delegates correctly,
   # even though the underlying scopes may not match any events.
@@ -82,12 +82,12 @@ class Events::FilterQueryTest < ActiveSupport::TestCase
     assert_equal Event.all.single_day.to_a, result.to_a
   end
 
-  test "delegates plurtaga filter to the plurtagaj scope" do
+  test "delegates plurtaga filter to the multi_day scope" do
     create_event(title: "Multi Day", date_start: 1.week.from_now, date_end: 1.week.from_now + 3.days)
 
     result = Events::FilterQuery.new(scope: Event.all, duration_type: "plurtaga").call
 
-    assert_equal Event.all.plurtagaj.to_a, result.to_a
+    assert_equal Event.all.multi_day.to_a, result.to_a
   end
 
   test "ignores duration type filter when nil" do

@@ -63,7 +63,7 @@ module Events
     def filter_by_duration_type(relation)
       case duration_type
       when "unutaga" then relation.single_day
-      when "plurtaga" then relation.plurtagaj
+      when "plurtaga" then relation.multi_day
       else relation
       end
     end
