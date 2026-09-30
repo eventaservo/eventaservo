@@ -25,7 +25,7 @@ class Events::ByContinentController < ApplicationController
 
       format.html do
         if params[:pasintaj].present?
-          render_pasintaj_by_continent
+          setup_past_events_by_continent
         else
           if params[:continent] == "reta" && cookies[:vidmaniero] != "kalendaro"
             cookies[:vidmaniero] = {value: "kalendaro", expires: 2.weeks, secure: true}
@@ -56,12 +56,15 @@ class Events::ByContinentController < ApplicationController
 
   private
 
-  # Sets up assigns for the past-events view on +show+ (continent).
-  # Skips the kartaro/mapo cookie dance and forces a cards-style render
-  # ordered newest-first with pagination.
+  # Sets up the view assigns for the past-events listing on +show+ (continent).
   #
-  # @return [void]
-  def render_pasintaj_by_continent
+  # Turns on past mode, scopes +@events+ to past events for the given continent,
+  # empties the future and today collections, computes the country counts for
+  # past events, and paginates the result ordered newest-first.
+  #
+  # @return [Array(Pagy, Array<Event>)] the pagination object and paginated
+  #   events, destructured into +@pagy+ and +@events+
+  def setup_past_events_by_continent
     @past_mode = true
     @events = build_events_scope
     continent_events_base = @events.by_continent(params[:continent])
