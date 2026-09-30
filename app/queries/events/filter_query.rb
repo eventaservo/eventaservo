@@ -62,7 +62,7 @@ module Events
     # @return [ActiveRecord::Relation]
     def filter_by_duration_type(relation)
       case duration_type
-      when "unutaga" then relation.unutagaj
+      when "unutaga" then relation.single_day
       when "plurtaga" then relation.plurtagaj
       else relation
       end
