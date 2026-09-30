@@ -70,16 +70,16 @@ class Events::FilterQueryTest < ActiveSupport::TestCase
 
   # -- Duration type filter --
 
-  # NOTE: The unutagaj/plurtagaj scopes currently look for group_name "characteristic"
+  # NOTE: The single_day/plurtagaj scopes currently look for group_name "characteristic"
   # but the after_save callback tags events with group_name "time". This is a
   # pre-existing mismatch — these tests verify FilterQuery delegates correctly,
   # even though the underlying scopes may not match any events.
-  test "delegates unutaga filter to the unutagaj scope" do
+  test "delegates unutaga filter to the single_day scope" do
     create_event(title: "One Day", date_start: 1.week.from_now, date_end: 1.week.from_now + 2.hours)
 
     result = Events::FilterQuery.new(scope: Event.all, duration_type: "unutaga").call
 
-    assert_equal Event.all.unutagaj.to_a, result.to_a
+    assert_equal Event.all.single_day.to_a, result.to_a
   end
 
   test "delegates plurtaga filter to the plurtagaj scope" do

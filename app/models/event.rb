@@ -153,7 +153,10 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :online, -> { where(online: true) }
   scope :not_online, -> { where(online: false) }
   scope :for_webcal, -> { where("date_start >= ? OR date_end >= ?", Time.zone.today - 6.months, Time.zone.today) }
-  scope :unutagaj, -> { joins(:tags).where(tags: {name: "Unutaga", group_name: "characteristic"}) }
+  # Filters the relation to events tagged as single-day ("Unutaga" characteristic).
+  #
+  # @return [ActiveRecord::Relation<Event>] events tagged +Unutaga+
+  scope :single_day, -> { joins(:tags).where(tags: {name: "Unutaga", group_name: "characteristic"}) }
   scope :plurtagaj, -> { joins(:tags).where(tags: {name: "Plurtaga", group_name: "characteristic"}) }
   scope :nuligitaj, -> { where(cancelled: true) }
   # Filters the relation to events that have not been cancelled.
