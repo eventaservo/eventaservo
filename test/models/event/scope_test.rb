@@ -143,6 +143,34 @@ class Event::ScopeTest < ActiveSupport::TestCase
     assert_empty Event.by_year(2125)
   end
 
+  test "by_country returns only events belonging to the given country" do
+    france = countries(:france)
+    matching = create(:event, country: france)
+    other = create(:event, country: countries(:brazil))
+
+    result = Event.by_country(france)
+
+    assert_includes result, matching
+    assert_not_includes result, other
+  end
+
+  test "by_country returns an empty relation when no events belong to the country" do
+    create(:event, country: countries(:france))
+
+    assert_empty Event.by_country(countries(:brazil))
+  end
+
+  test "by_country composes with other scopes" do
+    france = countries(:france)
+    cancelled = create(:event, country: france, cancelled: true)
+    active = create(:event, country: france)
+
+    result = Event.not_cancelled.by_country(france)
+
+    assert_includes result, active
+    assert_not_includes result, cancelled
+  end
+
   test "conferences_and_competitions includes events tagged as Anonco" do
     event = create(:event)
     event.tags << tags(:anonco)

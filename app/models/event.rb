@@ -142,7 +142,11 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
       )
     }
   scope :after_30days, ->(tz = nil) { where("date_start > ?", (klass.send(:day_in_tz, tz) + 30.days).end_of_day) }
-  scope :lau_lando, ->(lando) { joins(:country).where(country: lando) }
+  # Filters events belonging to the given country.
+  #
+  # @param country [Country] the country the events must belong to
+  # @return [ActiveRecord::Relation] events belonging to the given country
+  scope :by_country, ->(country) { joins(:country).where(country: country) }
   scope :by_country_id, ->(id) { where(country_id: id) }
   scope :by_country_name, ->(name) { joins(:country).where(countries: {name: name}) }
   scope :by_country_code, ->(code) { joins(:country).where(countries: {code: code}) }
