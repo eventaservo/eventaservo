@@ -93,7 +93,10 @@ class User < ApplicationRecord
   #
   # @return [ActiveRecord::Relation<User>] users whose instruction profile marks them as teachers
   scope :teachers, -> { where("instruo ->> 'instruisto' = 'true'") }
-  scope :prelegantoj, -> { where("prelego ->> 'preleganto' = 'true'") }
+  # Returns users who have marked themselves as speakers.
+  #
+  # @return [ActiveRecord::Relation<User>] users whose presentation profile marks them as speakers
+  scope :speakers, -> { where("prelego ->> 'preleganto' = 'true'") }
   scope :enabled, -> { where(disabled: false) }
   scope :disabled, -> { unscoped.where(disabled: true) }
   scope :abandoned, -> { where("last_sign_in_at < ?", 2.years.ago) }
