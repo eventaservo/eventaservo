@@ -8,4 +8,10 @@ class User::ScopeTest < ActiveSupport::TestCase
     assert_includes User.teachers, users(:teacher_and_speaker)
     assert_not_includes User.teachers, users(:speaker)
   end
+
+  test "speakers scope returns only users marked as speakers" do
+    assert_includes User.speakers, users(:speaker)
+    assert_includes User.speakers, users(:teacher_and_speaker)
+    assert_not_includes User.speakers, users(:teacher)
+  end
 end

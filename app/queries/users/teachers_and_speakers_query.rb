@@ -57,7 +57,7 @@ module Users
       filtered = filtered.where(country_id: country_id.to_i) if country_id.present?
 
       instruistoj = filtered.teachers.order(:name)
-      prelegantoj = filtered.prelegantoj.order(:name)
+      prelegantoj = filtered.speakers.order(:name)
 
       instruistoj = instruistoj.where("instruo -> 'nivelo' ? :nivelo", nivelo: level) if level.present?
 
@@ -74,7 +74,7 @@ module Users
     def random_results
       Result.new(
         instruistoj: base_scope.teachers.order(Arel.sql("RANDOM()")).limit(1),
-        prelegantoj: base_scope.prelegantoj.order(Arel.sql("RANDOM()")).limit(1),
+        prelegantoj: base_scope.speakers.order(Arel.sql("RANDOM()")).limit(1),
         filtering: false
       )
     end
