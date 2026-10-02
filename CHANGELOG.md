@@ -1,5 +1,66 @@
 # Changelog
 
+## [3.0.17](https://github.com/eventaservo/eventaservo/compare/v3.0.16...v3.0.17) (2026-10-02)
+
+
+### Bug Fixes
+
+* add missing end to ApplicationHelperTest class ([f66fa77](https://github.com/eventaservo/eventaservo/commit/f66fa77b94f6855c0a19afb1f4c4185f59204bbb))
+* add missing end to ApplicationHelperTest class ([327b052](https://github.com/eventaservo/eventaservo/commit/327b052ef7f08cdc68434f5bef765a09bfc3aefc))
+* eager load reports and users in report index ([6adb372](https://github.com/eventaservo/eventaservo/commit/6adb372c8aead150250cdf1b0db8ec5fb493e9ca))
+* eliminate N+1 queries on event listing pages ([889dade](https://github.com/eventaservo/eventaservo/commit/889dade90c003a811c528db9b25eb27d4b72e602))
+* eliminate N+1 queries on event listing pages (EVENTA-SERVO-1YK) ([#1417](https://github.com/eventaservo/eventaservo/issues/1417)) ([889dade](https://github.com/eventaservo/eventaservo/commit/889dade90c003a811c528db9b25eb27d4b72e602))
+* make N+1 regression test assertion robust to HTML escaping ([df1c099](https://github.com/eventaservo/eventaservo/commit/df1c099a4f38fa7bf73dc9e1c3ee746eb2ac611a))
+* prevent CSRF on event malnuligi endpoint ([#1394](https://github.com/eventaservo/eventaservo/issues/1394)) ([3c7dc39](https://github.com/eventaservo/eventaservo/commit/3c7dc3920202f833d680646fd24166d2b4e2d1b0))
+
+
+### Code Refactoring
+
+* extract online/offline event counts into a calculator object ([4f40218](https://github.com/eventaservo/eventaservo/commit/4f40218d381a69a3dd8048673dd2b11da7433a73))
+* extract registered users counts into a calculator object ([cf9ad15](https://github.com/eventaservo/eventaservo/commit/cf9ad158891d3213830d942274375eaac25aa638))
+* extract save_teaching_info into a service object ([ebd3f2e](https://github.com/eventaservo/eventaservo/commit/ebd3f2e9a92014538235e85574b91b33cc029aec))
+* extract speaking profile saving into Users::SaveSpeakingInfo ([4da5d38](https://github.com/eventaservo/eventaservo/commit/4da5d3866345e726b97a60d90f2c579831fea4c2))
+* rename aktivaj_filtroj helper to active_filters ([2c9e891](https://github.com/eventaservo/eventaservo/commit/2c9e89174990e7760761adffc518fd8e44d890ff))
+* rename Event scope plurtagaj to multi_day + YARD ([2ebb88f](https://github.com/eventaservo/eventaservo/commit/2ebb88f2ce8ea998e664c7935f2070f25796980a))
+* rename Event.anoncoj_kaj_konkursoj to conferences_and_competitions ([5ff0e2b](https://github.com/eventaservo/eventaservo/commit/5ff0e2bc0b21e20abda88a5df5948c9e274fb077))
+* rename Event.lau_organizo scope to by_organization ([7a4fc29](https://github.com/eventaservo/eventaservo/commit/7a4fc29482465c53d127dd807a1541f6b06bb429))
+* rename Event#fina_horo to end_time_label ([33402e6](https://github.com/eventaservo/eventaservo/commit/33402e66c5579d3313d9081a65e70881b9671dd8))
+* rename Event#fina_tago to end_date_label ([ae04dba](https://github.com/eventaservo/eventaservo/commit/ae04dba06fd52a3b254371d6dcd33dc20639b092))
+* rename Event#komenca_horo to start_time_label ([2cb8e26](https://github.com/eventaservo/eventaservo/commit/2cb8e26978381614928fc7fa42f62e80950d0218))
+* rename Event#komenca_tago to start_date_label ([f40aec9](https://github.com/eventaservo/eventaservo/commit/f40aec9538134643b27a01eae5bc0d855e068da0))
+* rename Event#ne_nuligitaj scope to not_cancelled ([a753178](https://github.com/eventaservo/eventaservo/commit/a753178dddb0ff7085031194f88d0a2553bd0f32))
+* rename Event#unutagaj scope to single_day ([d2fd920](https://github.com/eventaservo/eventaservo/commit/d2fd9201b4a8fa9c0901b6c1d47da3b1ccf261c0))
+* rename kalkulas_kvanton_registritaj_eventoj to registered_events_counts ([f74d934](https://github.com/eventaservo/eventaservo/commit/f74d934342bf0bcf7d4bd1239141d8e0b6d2d1a1))
+* rename montras_adreson helper to address_link ([662ad2a](https://github.com/eventaservo/eventaservo/commit/662ad2ae02d44ac0da9ad8af34af69a27534fab3))
+* rename montras_flagon helper to display_flag ([58a74a5](https://github.com/eventaservo/eventaservo/commit/58a74a58be6b128a539638b7551343d149f1d626))
+* rename montras_retpaghon to link_to_website ([cdd0e72](https://github.com/eventaservo/eventaservo/commit/cdd0e72587ee29595a325f0b6660c23db0de9dc4))
+* rename montras_telefonnumeron helper to phone_link ([36419df](https://github.com/eventaservo/eventaservo/commit/36419df1a23cfa6fa63f31c6a74db77a7921744a))
+* rename Organization#ne_estroj to #non_administrators ([1af20ab](https://github.com/eventaservo/eventaservo/commit/1af20ab5a194396b6c5a8501a4ee329663d14726))
+* rename Participant publikaj scopes to publicly_listed and not_publicly_listed ([73c55b5](https://github.com/eventaservo/eventaservo/commit/73c55b5b9c3d72047cb91cf5ed902b0948ff4d0b))
+* rename render_pasintaj_by_city to setup_past_events_by_city ([27d6bae](https://github.com/eventaservo/eventaservo/commit/27d6bae5e98fb1cba5812e7dbc123d1d6ac832d0))
+* rename render_pasintaj_by_continent to setup_past_events_by_continent ([a8028f7](https://github.com/eventaservo/eventaservo/commit/a8028f74e62653815787c28b348ce09ffaddd16d))
+* rename render_pasintaj_by_country to setup_past_events_by_country ([7717220](https://github.com/eventaservo/eventaservo/commit/7717220e52c7a7c9effdcb2580fc4c4078ed966e))
+* rename serchi to search across models ([b924b1c](https://github.com/eventaservo/eventaservo/commit/b924b1ceb8c19b4d81709594f312375105899f37))
+* rename User.instruistoj scope to teachers ([be0206b](https://github.com/eventaservo/eventaservo/commit/be0206b11fa66ec70880db5817bb993a57f73205))
+* rename User.prelegantoj scope to speakers ([9ba5433](https://github.com/eventaservo/eventaservo/commit/9ba5433d5da534f119aae035bcdeed9b3fe7c946))
+* rename User#administranto? to admin_of? ([0ff69d2](https://github.com/eventaservo/eventaservo/commit/0ff69d2a90fa3b6df02bc9b2df4a78ac00859de4))
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump herb from 0.10.3 to 0.10.4 ([#1393](https://github.com/eventaservo/eventaservo/issues/1393)) ([b36e10e](https://github.com/eventaservo/eventaservo/commit/b36e10ec7ecd8e76f6d34e53774bcfdf802e5dc7))
+* **deps-dev:** bump rubyzip from 3.2.2 to 3.4.0 in the bundler group across 1 directory ([#1413](https://github.com/eventaservo/eventaservo/issues/1413)) ([e74c997](https://github.com/eventaservo/eventaservo/commit/e74c9972889f7d866e0e85d6a7591eaa83eb47bc))
+* **deps-dev:** bump rubyzip in the bundler group across 1 directory ([e74c997](https://github.com/eventaservo/eventaservo/commit/e74c9972889f7d866e0e85d6a7591eaa83eb47bc))
+* **deps:** bump docker/build-push-action from 7.3.0 to 7.4.0 ([#1431](https://github.com/eventaservo/eventaservo/issues/1431)) ([c6f33b7](https://github.com/eventaservo/eventaservo/commit/c6f33b7328e0633458e5f20a035cda6a90273aa8))
+* **deps:** bump docker/setup-buildx-action from 4.3.0 to 4.4.1 ([#1432](https://github.com/eventaservo/eventaservo/issues/1432)) ([e40961a](https://github.com/eventaservo/eventaservo/commit/e40961a91c149f51bbfd16db02a5b73a754cd36b))
+* **deps:** bump docker/setup-qemu-action from 4.2.0 to 4.4.0 ([#1430](https://github.com/eventaservo/eventaservo/issues/1430)) ([89722dd](https://github.com/eventaservo/eventaservo/commit/89722ddf0a14fba1bdebc4296e05f5f7190a475f))
+* **deps:** bump dompurify ([88bd918](https://github.com/eventaservo/eventaservo/commit/88bd918b604e629db3598b6d2b6063560761ed37))
+* **deps:** bump dompurify from 3.4.13 to 3.4.16 in the npm_and_yarn group across 1 directory ([#1433](https://github.com/eventaservo/eventaservo/issues/1433)) ([88bd918](https://github.com/eventaservo/eventaservo/commit/88bd918b604e629db3598b6d2b6063560761ed37))
+* **deps:** bump github/codeql-action from 4.37.9 to 4.38.2 ([#1428](https://github.com/eventaservo/eventaservo/issues/1428)) ([905eeee](https://github.com/eventaservo/eventaservo/commit/905eeeee3cf4424ba2c9d979a5dde6d05184c01b))
+* **deps:** bump ruby from 4.0.6-slim-trixie to 4.0.7-slim-trixie ([#1427](https://github.com/eventaservo/eventaservo/issues/1427)) ([a2544f7](https://github.com/eventaservo/eventaservo/commit/a2544f7b61210beb5e189f9c6a7ec36fc240afdf))
+* **deps:** bump ruby/setup-ruby from 1.321.0 to 1.327.0 ([#1429](https://github.com/eventaservo/eventaservo/issues/1429)) ([e36d297](https://github.com/eventaservo/eventaservo/commit/e36d2978a3f6b2001f28e5aa022e59b3a53d5e0a))
+* **qlty:** use standardrb plugin and publish coverage to QLTY ([#1418](https://github.com/eventaservo/eventaservo/issues/1418)) ([0ec60c3](https://github.com/eventaservo/eventaservo/commit/0ec60c387e091b168da5618209019f4f0bf23d8a))
+
 ## [3.0.16](https://github.com/eventaservo/eventaservo/compare/v3.0.15...v3.0.16) (2026-09-13)
 
 
