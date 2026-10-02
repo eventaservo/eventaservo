@@ -10,7 +10,7 @@ module Webcal
       eventoj = if @lando.code == "ol" # Retaj eventoj
         Event.not_cancelled.without_tag("Anonco").venontaj.online
       else
-        Event.not_cancelled.without_tag("Anonco").lau_lando(@lando).for_webcal
+        Event.not_cancelled.without_tag("Anonco").by_country(@lando).for_webcal
       end
 
       respond_to do |format|
