@@ -23,7 +23,7 @@ gem "propshaft"
 gem "bootsnap", require: false
 
 # Kalendaroj
-gem "icalendar", "~> 2.6"
+gem "icalendar", "~> 2.12"
 
 gem "mini_magick", "~> 4.10"
 
