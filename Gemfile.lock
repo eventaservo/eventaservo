@@ -272,7 +272,7 @@ GEM
       mutex_m
     i18n (1.15.2)
       concurrent-ruby (~> 1.0)
-    icalendar (2.12.4)
+    icalendar (2.12.5)
       base64
       ice_cube (~> 0.16)
       logger
@@ -702,7 +702,7 @@ DEPENDENCIES
   hotwire_combobox (~> 0.3.1)
   htmlbeautifier (~> 1.4)
   httparty (~> 0.24)
-  icalendar (~> 2.6)
+  icalendar (~> 2.12)
   image_processing (>= 1.2)
   jbuilder (~> 2.14)
   jsbundling-rails (~> 1.1)
