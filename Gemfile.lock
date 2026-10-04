@@ -163,7 +163,7 @@ GEM
       ssrf_filter (~> 1.5)
     cssbundling-rails (1.4.3)
       railties (>= 6.0.0)
-    csv (3.3.5)
+    csv (3.3.6)
     date (3.5.1)
     debug (1.11.1)
       irb (~> 1.10)
@@ -264,7 +264,7 @@ GEM
       turbo-rails (>= 1.2)
     htmlbeautifier (1.4.3)
     htmlentities (4.3.4)
-    httparty (0.24.2)
+    httparty (0.24.3)
       csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
@@ -701,7 +701,7 @@ DEPENDENCIES
   hotwire-spark
   hotwire_combobox (~> 0.3.1)
   htmlbeautifier (~> 1.4)
-  httparty (~> 0.18)
+  httparty (~> 0.24)
   icalendar (~> 2.6)
   image_processing (>= 1.2)
   jbuilder (~> 2.14)
