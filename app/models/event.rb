@@ -179,7 +179,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   # object only to add indirection without any cohesion gain.
   #
   # @return [ActiveRecord::Relation<Event>] events tagged +Konkurso+
-  scope :competitions, -> { joins(:tags).where(tags: {name: "Konkurso", group_name: "characteristic"}).distinct }
+  scope :content, -> { joins(:tags).where(tags: {name: "Konkurso", group_name: "characteristic"}).distinct }
   scope :anoncoj, -> { joins(:tags).where(tags: {name: "Anonco", group_name: "characteristic"}).distinct }
   # Filters the relation to regular events, excluding announcements and competitions.
   #
@@ -199,7 +199,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   # Combines events tagged as +Anonco+ or +Konkurso+.
   #
   # @return [ActiveRecord::Relation<Event>] events tagged as +Anonco+ or +Konkurso+
-  scope :conferences_and_competitions, -> { anoncoj.or(competitions) }
+  scope :conferences_and_competitions, -> { anoncoj.or(content) }
   scope :international_calendar, -> { where(international_calendar: true) }
   scope :with_reports, -> { joins(:reports).distinct }
   scope :with_tags, ->(tag_ids) {
