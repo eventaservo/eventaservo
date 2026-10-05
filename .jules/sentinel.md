@@ -16,3 +16,8 @@
 **Vulnerability:** The state-changing action to un-cancel an event (`/e/:event_code/malnuligi`) was mapped to a `GET` request in `config/routes/events.rb`.
 **Learning:** Similar to the previous video deletion vulnerability, mapping state-changing actions to `GET` requests bypasses Rails' built-in Cross-Site Request Forgery (CSRF) protection. It allows attackers to forge requests (e.g., via embedded image tags like `<img src="https://example.com/e/some-code/malnuligi">`) to change the state of resources if an authenticated user with permissions visits the attacker's site or views an email containing the payload. `GET` requests are meant to be safe and idempotent.
 **Prevention:** State-changing actions MUST be mapped to appropriate HTTP verbs (`POST`, `PUT`, `PATCH`, `DELETE`) in routes. Corresponding links in views should use `method: :post` or button_to to ensure the requests are submitted as forms containing the CSRF token.
+
+## 2026-10-03 - [HIGH] Fixed Authorization Bypass in Organization User Addition
+**Vulnerability:** The `aldoni_uzanton` endpoint in `OrganizationsController` lacked an authorization check, allowing any authenticated user to add themselves or others to any organization, bypassing administrative controls.
+**Learning:** Authorization for modifying organizations (e.g., adding or removing members in `OrganizationsController`) must be explicitly verified by checking if the user is an admin via `current_user.admin_of?(organizo)` to prevent direct object reference (IDOR) vulnerabilities.
+**Prevention:** Always verify that newly created endpoints modifying relationships (like adding members to an organization) include explicit authorization checks for the current user's permissions over the target object.

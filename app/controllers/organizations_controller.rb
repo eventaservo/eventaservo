@@ -68,6 +68,8 @@ class OrganizationsController < ApplicationController
   def aldoni_uzanton
     uzanto = User.find(params[:id])
     organizo = Organization.find_by_short_name(params[:organization_short_name])
+    redirect_to organizations_url, flash: {error: "Vi ne rajtas fari tion"} and return unless current_user.admin_of?(organizo)
+
     redirect_to organization_url(organizo.short_name), flash: {error: "Uzanto ne trovita"} and return if uzanto.nil?
 
     OrganizationUser.create(organization_id: organizo.id, user_id: uzanto.id)
