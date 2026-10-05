@@ -13,6 +13,27 @@
         replaysOnErrorSampleRate: 1.0,
         environment: "<%= Rails.env %>",
         release: "<%= Eventaservo::Application::VERSION %>",
+        beforeSend: function (event) {
+          // Turbo Drive (v7.3+) aborts a navigation with an AbortError
+          // (DOMException code 20) whenever a visit is superseded by another
+          // one or the page is left mid-request. This is the framework's
+          // intentional cancellation of an in-flight request, not an app
+          // crash, so it would otherwise pollute the issue tracker. Keep every
+          // other error.
+          var values = event && event.exception && event.exception.values;
+          var isTurboCancellation =
+            values &&
+            values.some(function (exc) {
+              return (
+                exc &&
+                exc.mechanism &&
+                exc.mechanism.type === "onunhandledrejection" &&
+                exc.mechanism.handled === false &&
+                exc.type === "AbortError"
+              );
+            });
+          return isTurboCancellation ? null : event;
+        },
         integrations: [
           Sentry.replayIntegration({
             maskAllText: false,
