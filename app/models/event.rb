@@ -170,7 +170,16 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   #
   # @return [ActiveRecord::Relation<Event>] events with +cancelled+ set to false
   scope :not_cancelled, -> { where(cancelled: false) }
-  scope :konkursoj, -> { joins(:tags).where(tags: {name: "Konkurso", group_name: "characteristic"}).distinct }
+  # Filters the relation to events tagged as a competition ("Konkurso" characteristic).
+  #
+  # A one-line, stateless ActiveRecord scope that is consumed through relation
+  # chaining (e.g. +Event.conferences_and_competitions+ composes it via +or+).
+  # Following the Single Responsibility principle it stays on the model, cohered
+  # with its sibling scopes, rather than being extracted into a dedicated query
+  # object only to add indirection without any cohesion gain.
+  #
+  # @return [ActiveRecord::Relation<Event>] events tagged +Konkurso+
+  scope :content, -> { joins(:tags).where(tags: {name: "Konkurso", group_name: "characteristic"}).distinct }
   scope :anoncoj, -> { joins(:tags).where(tags: {name: "Anonco", group_name: "characteristic"}).distinct }
   # Filters the relation to regular events, excluding announcements and competitions.
   #
@@ -190,7 +199,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   # Combines events tagged as +Anonco+ or +Konkurso+.
   #
   # @return [ActiveRecord::Relation<Event>] events tagged as +Anonco+ or +Konkurso+
-  scope :conferences_and_competitions, -> { anoncoj.or(konkursoj) }
+  scope :conferences_and_competitions, -> { anoncoj.or(content) }
   scope :international_calendar, -> { where(international_calendar: true) }
   scope :with_reports, -> { joins(:reports).distinct }
   scope :with_tags, ->(tag_ids) {

@@ -198,6 +198,26 @@ class Event::ScopeTest < ActiveSupport::TestCase
     assert_not_includes Event.conferences_and_competitions, event
   end
 
+  test "content includes events tagged as Konkurso" do
+    event = create(:event)
+    event.tags << tags(:konkurso)
+
+    assert_includes Event.content, event
+  end
+
+  test "content excludes events without the Konkurso tag" do
+    event = create(:event)
+
+    assert_not_includes Event.content, event
+  end
+
+  test "content respects the default_scope by excluding deleted events" do
+    event = create(:event, deleted: true)
+    event.tags << tags(:konkurso)
+
+    assert_not_includes Event.content, event
+  end
+
   test "venontaj excludes events from the previous UTC day" do
     Time.use_zone("UTC") do
       travel_to Time.zone.parse("2026-08-15 03:59:00") do
