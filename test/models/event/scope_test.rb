@@ -125,6 +125,18 @@ class Event::ScopeTest < ActiveSupport::TestCase
     assert_not_includes result, announcement
   end
 
+  test "announcements returns only events tagged Anonco" do
+    announcement = create(:event, tags: [tags(:anonco)])
+    competition = create(:event, tags: [tags(:konkurso)])
+    regular_event = create(:event)
+
+    result = Event.announcements
+
+    assert_includes result, announcement
+    assert_not_includes result, competition
+    assert_not_includes result, regular_event
+  end
+
   test "by_year returns only events that start in the given year" do
     event_2025 = create(:event, date_start: Time.zone.parse("2025-06-01 12:00:00"))
     event_2026 = create(:event, date_start: Time.zone.parse("2026-06-01 12:00:00"))
