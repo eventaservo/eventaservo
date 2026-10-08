@@ -180,7 +180,10 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   #
   # @return [ActiveRecord::Relation<Event>] events tagged +Konkurso+
   scope :content, -> { joins(:tags).where(tags: {name: "Konkurso", group_name: "characteristic"}).distinct }
-  scope :anoncoj, -> { joins(:tags).where(tags: {name: "Anonco", group_name: "characteristic"}).distinct }
+  # Filters the relation to events tagged as an announcement ("Anonco" characteristic).
+  #
+  # @return [ActiveRecord::Relation<Event>] events tagged +Anonco+
+  scope :announcements, -> { joins(:tags).where(tags: {name: "Anonco", group_name: "characteristic"}).distinct }
   # Filters the relation to regular events, excluding announcements and competitions.
   #
   # Keeps events that are not tagged +Konkurso+ or +Anonco+. It composes with
@@ -199,7 +202,7 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   # Combines events tagged as +Anonco+ or +Konkurso+.
   #
   # @return [ActiveRecord::Relation<Event>] events tagged as +Anonco+ or +Konkurso+
-  scope :conferences_and_competitions, -> { anoncoj.or(content) }
+  scope :conferences_and_competitions, -> { announcements.or(content) }
   scope :international_calendar, -> { where(international_calendar: true) }
   scope :with_reports, -> { joins(:reports).distinct }
   scope :with_tags, ->(tag_ids) {
