@@ -1,5 +1,31 @@
 # Changelog
 
+## [3.0.18](https://github.com/eventaservo/eventaservo/compare/v3.0.17...v3.0.18) (2026-10-08)
+
+
+### Bug Fixes
+
+* add missing authorization check to organization aldoni_uzanton ([68ba00d](https://github.com/eventaservo/eventaservo/commit/68ba00db39ea6092daae7a2104e1648ab0029030))
+* handle missing mallongilo param in availability check ([#1445](https://github.com/eventaservo/eventaservo/issues/1445)) ([cdb2af3](https://github.com/eventaservo/eventaservo/commit/cdb2af3231fce03cf8083713b7de239b1df31189))
+* **sentry:** stop reporting intentional Turbo Drive navigation aborts ([#1446](https://github.com/eventaservo/eventaservo/issues/1446)) ([dba6fb5](https://github.com/eventaservo/eventaservo/commit/dba6fb5887c189273b40245c118668949c6f4099))
+
+
+### Code Refactoring
+
+* rename event announcement scope ([bdd2386](https://github.com/eventaservo/eventaservo/commit/bdd238632aa985668751d8391749252701e0b7b3))
+
+
+### Miscellaneous Chores
+
+* **deps:** bump @rails/actioncable from 7.2.302 to 7.2.400 ([#1437](https://github.com/eventaservo/eventaservo/issues/1437)) ([4b79bd3](https://github.com/eventaservo/eventaservo/commit/4b79bd3e341ca55e50bcd639c39dae3ab276a5bc))
+* **deps:** bump @rails/actiontext from 7.2.302 to 7.2.400 ([#1438](https://github.com/eventaservo/eventaservo/issues/1438)) ([8f77f82](https://github.com/eventaservo/eventaservo/commit/8f77f82e0e62301b2d58edf935577740242fe2e2))
+* **deps:** bump @rails/activestorage from 7.2.302 to 7.2.400 ([#1440](https://github.com/eventaservo/eventaservo/issues/1440)) ([a789566](https://github.com/eventaservo/eventaservo/commit/a7895668926c3d5bd43842265cd15bc5391ce57a))
+* **deps:** bump highcharts from 11.4.8 to 11.4.9 ([a96e53e](https://github.com/eventaservo/eventaservo/commit/a96e53ec582cfdbf33d102cd8cd8a0e1eda05eba))
+* **deps:** bump httparty from 0.24.2 to 0.24.3 ([#1441](https://github.com/eventaservo/eventaservo/issues/1441)) ([3157e21](https://github.com/eventaservo/eventaservo/commit/3157e21b47c21a9cbcf2dcaf8e08fa6d008afc23))
+* **deps:** bump icalendar from 2.12.4 to 2.12.5 ([#1442](https://github.com/eventaservo/eventaservo/issues/1442)) ([19c09ed](https://github.com/eventaservo/eventaservo/commit/19c09edea13c9699c46327019e17f0027fd2c098))
+* **deps:** bump rails from 8.1.3.1 to 8.1.4 ([#1436](https://github.com/eventaservo/eventaservo/issues/1436)) ([ee13afc](https://github.com/eventaservo/eventaservo/commit/ee13afcc64a22aadaac267da9b20ae6553275e2c))
+* **rack:** set Rack::Utils.key_space_limit to 16 MB ([#1449](https://github.com/eventaservo/eventaservo/issues/1449)) ([9d5c620](https://github.com/eventaservo/eventaservo/commit/9d5c620974c37099a9007cc3e1dd4667259734a2))
+
 ## [3.0.17](https://github.com/eventaservo/eventaservo/compare/v3.0.16...v3.0.17) (2026-10-02)
 
 
