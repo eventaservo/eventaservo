@@ -12,7 +12,7 @@ gem "benchmark"
 gem "rails", "~> 8.1.4"
 # Use Puma as the app server
 gem "puma", "~> 8"
-gem "thruster", "~> 0.1.26"
+gem "thruster", "~> 0.1.27"
 gem "propshaft"
 
 # Use Uglifier as compressor for JavaScript assets
