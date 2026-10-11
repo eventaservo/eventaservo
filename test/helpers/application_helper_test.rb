@@ -321,6 +321,17 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_equal expected, link_to_website(url)
   end
 
+  # eventaservo_logo_url tests
+  test "eventaservo_logo_url returns the absolute logo URL for the configured mailer host" do
+    assert_equal "https://localhost:3000/eventa_servo_logo.png", eventaservo_logo_url
+  end
+
+  test "eventaservo_logo_url points to the logo file shipped in public" do
+    logo_path = URI.parse(eventaservo_logo_url).path
+
+    assert File.exist?(Rails.root.join("public#{logo_path}"))
+  end
+
   # address_link tests
   test "address_link renders map marker icon and Google Maps link with default text" do
     address = "Zamenhofa 1, Bialystok"
