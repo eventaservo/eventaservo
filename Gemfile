@@ -67,7 +67,7 @@ gem "postmark-rails"
 gem "premailer-rails", "~> 1.11"
 gem "redcarpet", "~> 3.5"
 gem "sitemap_generator", "~> 6.1"
-gem "timezone", "~> 1.0"
+gem "timezone", "~> 1.3"
 # gem 'trix-rails', require: 'trix'
 gem "httparty", "~> 0.24"
 gem "nokogiri", ">= 1.10.4"
