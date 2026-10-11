@@ -228,10 +228,16 @@ module ApplicationHelper
     icon("fas", "globe", class: "fg-color-link me-1") + link_to(text, url, target: :_blank)
   end
 
-  # Returns the absolute URL for the logo used in email messages.
+  # Returns the absolute URL of the logo shown in email messages.
   #
-  # @return [String] the environment-specific public logo URL
-  def eventa_servo_logo_url
+  # Builds the URL from the mailer's default URL options, so every environment
+  # serves its own asset: the +eventa_servo_logo.png+ file shipped in +public/+.
+  #
+  # @example Test environment
+  #   eventaservo_logo_url #=> "https://localhost:3000/eventa_servo_logo.png"
+  #
+  # @return [String] the environment-specific absolute logo URL
+  def eventaservo_logo_url
     ActionDispatch::Http::URL.url_for(ActionMailer::Base.default_url_options) + "/eventa_servo_logo.png"
   end
 
