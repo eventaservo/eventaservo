@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.0.19](https://github.com/eventaservo/eventaservo/compare/v3.0.18...v3.0.19) (2026-10-13)
+
+
+### Code Refactoring
+
+* rename eventa_servo_logo_url to eventaservo_logo_url ([da2f6d0](https://github.com/eventaservo/eventaservo/commit/da2f6d0ed9b35fdf4240b01aabafd3732f680a78))
+
+
+### Miscellaneous Chores
+
+* **deps:** bump listen from 3.10.0 to 3.10.1 ([#1453](https://github.com/eventaservo/eventaservo/issues/1453)) ([af741b8](https://github.com/eventaservo/eventaservo/commit/af741b85a103f1db24d9fc17b9bed0dc3651da73))
+* **deps:** bump thruster from 0.1.26 to 0.1.27 ([#1452](https://github.com/eventaservo/eventaservo/issues/1452)) ([def2c77](https://github.com/eventaservo/eventaservo/commit/def2c77c11e802fe6ffa1bc76da696540f4ddf21))
+* **deps:** bump timezone from 1.3.30 to 1.3.31 ([#1451](https://github.com/eventaservo/eventaservo/issues/1451)) ([99632bc](https://github.com/eventaservo/eventaservo/commit/99632bc673d4442a3205a8bd72a4b4965fe1e66d))
+
 ## [3.0.18](https://github.com/eventaservo/eventaservo/compare/v3.0.17...v3.0.18) (2026-10-08)
 
 
