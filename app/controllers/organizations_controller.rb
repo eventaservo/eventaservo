@@ -29,6 +29,7 @@ class OrganizationsController < ApplicationController
     @pagy, @past_events = pagy(@past_events, limit: 10)
 
     if params["iframe"].present?
+      response.headers.delete("X-Frame-Options")
       render :show, layout: "iframe"
     else
       render :show
