@@ -6,12 +6,10 @@ class Event::DaysProgressTest < ActiveSupport::TestCase
   test "days_progress computes total, elapsed, remaining days and percent" do
     Time.use_zone("UTC") do
       travel_to Time.zone.parse("2026-08-15 12:00:00") do
-        event = create(
-          :event,
-          date_start: Time.zone.parse("2026-08-15 00:00:00"),
-          date_end: Time.zone.parse("2026-08-17 00:00:00"),
-          time_zone: "America/New_York"
-        )
+        event = events(:valid_event)
+        event.date_start = Time.zone.parse("2026-08-15 00:00:00")
+        event.date_end = Time.zone.parse("2026-08-17 00:00:00")
+        event.time_zone = "America/New_York"
 
         result = event.days_progress
 
@@ -27,14 +25,10 @@ class Event::DaysProgressTest < ActiveSupport::TestCase
   test "days_progress does not leak the event time zone to the process global zone" do
     Time.use_zone("UTC") do
       travel_to Time.zone.parse("2026-08-15 12:00:00") do
-        event = build(
-          :event,
-          date_start: Time.zone.parse("2026-08-15 00:00:00"),
-          date_end: Time.zone.parse("2026-08-17 00:00:00"),
-          time_zone: "America/New_York",
-          latitude: nil,
-          longitude: nil
-        )
+        event = events(:valid_event)
+        event.date_start = Time.zone.parse("2026-08-15 00:00:00")
+        event.date_end = Time.zone.parse("2026-08-17 00:00:00")
+        event.time_zone = "America/New_York"
 
         assert_equal "America/New_York", event.time_zone
         assert_equal "UTC", Time.zone.name
@@ -47,12 +41,10 @@ class Event::DaysProgressTest < ActiveSupport::TestCase
   test "days_progress computes elapsed and remaining days for a past event" do
     Time.use_zone("UTC") do
       travel_to Time.zone.parse("2026-08-20 12:00:00") do
-        event = create(
-          :event,
-          date_start: Time.zone.parse("2026-08-15 00:00:00"),
-          date_end: Time.zone.parse("2026-08-17 00:00:00"),
-          time_zone: "America/New_York"
-        )
+        event = events(:valid_event)
+        event.date_start = Time.zone.parse("2026-08-15 00:00:00")
+        event.date_end = Time.zone.parse("2026-08-17 00:00:00")
+        event.time_zone = "America/New_York"
 
         result = event.days_progress
 
@@ -67,12 +59,10 @@ class Event::DaysProgressTest < ActiveSupport::TestCase
   test "tagoj provides backward-compatible legacy keys" do
     Time.use_zone("UTC") do
       travel_to Time.zone.parse("2026-08-15 12:00:00") do
-        event = create(
-          :event,
-          date_start: Time.zone.parse("2026-08-15 00:00:00"),
-          date_end: Time.zone.parse("2026-08-17 00:00:00"),
-          time_zone: "America/New_York"
-        )
+        event = events(:valid_event)
+        event.date_start = Time.zone.parse("2026-08-15 00:00:00")
+        event.date_end = Time.zone.parse("2026-08-17 00:00:00")
+        event.time_zone = "America/New_York"
 
         result = event.tagoj
 
