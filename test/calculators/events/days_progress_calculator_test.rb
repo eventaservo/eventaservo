@@ -45,13 +45,16 @@ class Events::DaysProgressCalculatorTest < ActiveSupport::TestCase
   test "does not leak the event time zone to the process global zone" do
     Time.use_zone("UTC") do
       travel_to Time.zone.parse("2026-08-15 12:00:00") do
-        event = create(
+        event = build(
           :event,
           date_start: Time.zone.parse("2026-08-15 00:00:00"),
           date_end: Time.zone.parse("2026-08-17 00:00:00"),
-          time_zone: "America/New_York"
+          time_zone: "America/New_York",
+          latitude: nil,
+          longitude: nil
         )
 
+        assert_equal "America/New_York", event.time_zone
         assert_equal "UTC", Time.zone.name
         Events::DaysProgressCalculator.call(event)
         assert_equal "UTC", Time.zone.name
