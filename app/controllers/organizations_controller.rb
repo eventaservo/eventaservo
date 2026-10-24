@@ -34,6 +34,7 @@ class OrganizationsController < ApplicationController
     @pagy_reports, @events_with_reports = pagy(reports_scope, limit: 20, page_key: "raportoj_pagho")
 
     if params["iframe"].present?
+      response.headers.delete("X-Frame-Options")
       render :show, layout: "iframe"
     else
       render :show
