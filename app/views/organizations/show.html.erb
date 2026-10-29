@@ -44,7 +44,7 @@
     </div>
 
     <%
-      active_tab = if params[:tab].present?
+      active_tab = if %w[future past reports].include?(params[:tab].to_s)
         params[:tab].to_sym
       elsif params[:raportoj_pagho].present?
         :reports
