@@ -53,8 +53,8 @@ jobs:
           push: true
           target: ${{ inputs.environment }}
           tags: eventaservo/backend:${{ inputs.tag }}
-          cache-from: type=registry,ref=eventaservo/backend:${{ inputs.tag }}
-          cache-to: type=inline
+          cache-from: type=gha,scope=build-${{ inputs.environment }}
+          cache-to: type=gha,mode=max,scope=build-${{ inputs.environment }}
           build-args: |
             ENVIRONMENT=${{ inputs.environment }}
             RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}

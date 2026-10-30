@@ -1,4 +1,4 @@
-FROM ruby:4.0.7-slim-trixie as base
+FROM ruby:4.0.7-slim-trixie AS base
 
 WORKDIR /eventaservo
 
@@ -52,7 +52,7 @@ RUN npm install -g yarn
 # Production
 ############
 
-FROM base as production
+FROM base AS production
 
 # Sets environment variables
 ARG ENVIRONMENT=production
@@ -75,7 +75,9 @@ RUN bundle install --retry=3
 COPY package.json yarn.lock ./
 RUN yarn install
 
-COPY . .
+# Install build tools and download GeoLite2 database before copying application code
+# so these layers are cached across builds when code changes
+RUN npm install -g @redocly/cli@1.0.2
 
 # Download GeoLite2 offline IP geocoding database
 # NOTE: --insecure is used because GitHub raw URLs can have SSL issues
@@ -85,12 +87,14 @@ RUN curl -fSL --retry 5 --retry-delay 15 --connect-timeout 60 --insecure \
   -o /eventaservo/GeoLite2-City.mmdb \
   https://raw.githubusercontent.com/P3TERX/GeoLite.mmdb/download/GeoLite2-City.mmdb
 
+COPY . .
+
 ARG RAILS_MASTER_KEY
 ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
 
 RUN bundle exec rails assets:precompile
 
-RUN npm install -g @redocly/cli@1.0.2 && redocly build-docs openapi/v2.yaml -o public/docs/api/v2/index.html
+RUN redocly build-docs openapi/v2.yaml -o public/docs/api/v2/index.html
 
 EXPOSE 3000
 
@@ -106,7 +110,7 @@ CMD bin/rails db:migrate; bundle exec thrust bin/rails server -b 0.0.0.0 -p 3000
 # Staging
 #############
 
-FROM production as staging
+FROM production AS staging
 
 
 
@@ -116,7 +120,7 @@ FROM production as staging
 # Development
 #############
 
-FROM base as development
+FROM base AS development
 
 ENV RAILS_ENV=development
 ARG RAILS_MASTER_KEY
