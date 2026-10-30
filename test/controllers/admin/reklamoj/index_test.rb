@@ -8,10 +8,11 @@ class Admin::ReklamojController::IndexTest < ActionDispatch::IntegrationTest
     @user = users(:user)
   end
 
-  test "admin can access reklamoj index" do
+  test "admin can access reklamoj index and images have lazy loading and explicit dimensions" do
     sign_in @admin
     get admin_reklamoj_index_url
     assert_response :success
+    assert_select "img[loading='lazy'][width='200'][height='100']", minimum: 1
   end
 
   test "non-admin is redirected to root" do
