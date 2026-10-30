@@ -8,7 +8,7 @@
       <div class="col-12 col-md-6 col-lg-4">
         <div class="card m-2 align-items-center <%= 'bg-color-gray' unless r.active? %>">
           <% if r.image.attached? %>
-            <%= image_tag r.image.variant(resize_to_fill: [200, 100]), loading: "lazy", class: 'card-img-top reklam-bildo mt-2' %>
+            <%= image_tag r.image.variant(resize_to_fill: [200, 100]), width: 200, height: 100, loading: "lazy", class: 'card-img-top reklam-bildo mt-2' %>
           <% end %>
 
           <div class="card-body">
