@@ -43,33 +43,60 @@
       <% end %>
     </div>
 
-    <% if @future_events.any? %>
-      <div class="box-white">
-        <div class="lead">Venontaj eventoj</div>
-        <p class="small">
-          <%= link_to "Listigi venontajn eventojn de #{@organizo.short_name} en la ĉefa paĝo", root_url(o: @organizo.short_name) %>
-        </p>
-        <% @future_events.order(:date_start).each do |e| %>
-          <%= link_to event_path(code: e.ligilo), class: 'item-row small' do %>
-            <div class="col-5"><%= event_flag e %> <%= e.city %> - <%= format_date(e.komenca_dato, style: :short) %></div>
-            <div class="col <%= "cancelled" if e.cancelled %>"><%= e.title %></div>
-          <% end %>
-        <% end %>
-      </div>
-    <% end %>
+    <%
+      active_tab = if %w[future past reports].include?(params[:tab].to_s)
+        params[:tab].to_sym
+      elsif params[:venontaj_pagho].present?
+        :future
+      elsif params[:raportoj_pagho].present?
+        :reports
+      elsif params[:pagho].present? || params[:page].present?
+        :past
+      elsif @future_events.any?
+        :future
+      elsif @past_events.any?
+        :past
+      else
+        :reports
+      end
+    %>
 
-    <% if @past_events.any? %>
-      <div class="box-white">
-        <div class="lead">Pasintaj eventoj</div>
-        <% @past_events.each do |e| %>
-          <%= link_to event_path(code: e.ligilo), class: 'item-row small' do %>
-            <div class="col-5"><%= event_flag e %> <%= e.city %> - <%= format_date(e.date_start, style: :short) %></div>
-            <div class="col <%= "cancelled" if e.cancelled %>"><%= e.title %></div>
-          <% end %>
-        <% end %>
-        <%= render "shared/pagination", pagy: @pagy %>
+    <div class="box-white">
+      <ul class="nav nav-tabs org-tabs mb-3" id="orgTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link <%= 'active' if active_tab == :future %>" id="future-tab" data-bs-toggle="tab" data-bs-target="#future-tab-pane" type="button" role="tab" aria-controls="future-tab-pane" aria-selected="<%= active_tab == :future %>">
+            Venontaj <span class="d-none d-sm-inline">eventoj</span>
+            <span class="badge rounded-pill text-bg-secondary ms-1"><%= @pagy_future.count %></span>
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link <%= 'active' if active_tab == :past %>" id="past-tab" data-bs-toggle="tab" data-bs-target="#past-tab-pane" type="button" role="tab" aria-controls="past-tab-pane" aria-selected="<%= active_tab == :past %>">
+            Pasintaj <span class="d-none d-sm-inline">eventoj</span>
+            <span class="badge rounded-pill text-bg-secondary ms-1"><%= @pagy.count %></span>
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link <%= 'active' if active_tab == :reports %>" id="reports-tab" data-bs-toggle="tab" data-bs-target="#reports-tab-pane" type="button" role="tab" aria-controls="reports-tab-pane" aria-selected="<%= active_tab == :reports %>">
+            📸 Raportoj
+            <span class="badge rounded-pill text-bg-secondary ms-1"><%= @pagy_reports.count %></span>
+          </button>
+        </li>
+      </ul>
+
+      <div class="tab-content" id="orgTabsContent">
+        <div class="tab-pane fade <%= 'show active' if active_tab == :future %>" id="future-tab-pane" role="tabpanel" aria-labelledby="future-tab" tabindex="0">
+          <%= render "future_events_tab" %>
+        </div>
+
+        <div class="tab-pane fade <%= 'show active' if active_tab == :past %>" id="past-tab-pane" role="tabpanel" aria-labelledby="past-tab" tabindex="0">
+          <%= render "past_events_tab" %>
+        </div>
+
+        <div class="tab-pane fade <%= 'show active' if active_tab == :reports %>" id="reports-tab-pane" role="tabpanel" aria-labelledby="reports-tab" tabindex="0">
+          <%= render "reports_tab" %>
+        </div>
       </div>
-    <% end %>
+    </div>
   </div>
 
   <% unless params['iframe'] %>

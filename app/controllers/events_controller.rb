@@ -181,9 +181,14 @@ class EventsController < ApplicationController
     redirect_to event_path(code: @event.ligilo), flash: {success: "Dosiero sukcese forigita"}
   end
 
+  # Displays a user's public profile and their events
+  #
+  # @return [void]
   def by_username
     @uzanto = User.find_by(username: params[:username])
     redirect_to root_path, flash: {error: "Uzantnomo ne ekzistas"} and return if @uzanto.nil?
+
+    @uzanto.generate_webcal_token! if current_user == @uzanto && @uzanto.webcal_token.blank?
 
     @venontaj = Event.includes(:country).by_username(params[:username]).venontaj
     @interested_events = @uzanto.interested_events
