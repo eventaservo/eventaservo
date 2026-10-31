@@ -46,6 +46,8 @@
     <%
       active_tab = if %w[future past reports].include?(params[:tab].to_s)
         params[:tab].to_sym
+      elsif params[:venontaj_pagho].present?
+        :future
       elsif params[:raportoj_pagho].present?
         :reports
       elsif params[:pagho].present? || params[:page].present?
@@ -64,7 +66,7 @@
         <li class="nav-item" role="presentation">
           <button class="nav-link <%= 'active' if active_tab == :future %>" id="future-tab" data-bs-toggle="tab" data-bs-target="#future-tab-pane" type="button" role="tab" aria-controls="future-tab-pane" aria-selected="<%= active_tab == :future %>">
             Venontaj <span class="d-none d-sm-inline">eventoj</span>
-            <span class="badge rounded-pill text-bg-secondary ms-1"><%= @future_events.size %></span>
+            <span class="badge rounded-pill text-bg-secondary ms-1"><%= @pagy_future.count %></span>
           </button>
         </li>
         <li class="nav-item" role="presentation">
@@ -83,49 +85,15 @@
 
       <div class="tab-content" id="orgTabsContent">
         <div class="tab-pane fade <%= 'show active' if active_tab == :future %>" id="future-tab-pane" role="tabpanel" aria-labelledby="future-tab" tabindex="0">
-          <% if @future_events.any? %>
-            <p class="small mb-2">
-              <%= link_to "Listigi venontajn eventojn de #{@organizo.short_name} en la ĉefa paĝo", root_url(o: @organizo.short_name) %>
-            </p>
-            <% @future_events.order(:date_start).each do |e| %>
-              <%= link_to event_path(code: e.ligilo), class: 'item-row small' do %>
-                <div class="col-5"><%= event_flag e %> <%= e.city %> - <%= format_date(e.komenca_dato, style: :short) %></div>
-                <div class="col <%= "cancelled" if e.cancelled %>"><%= e.title %></div>
-              <% end %>
-            <% end %>
-          <% else %>
-            <p class="text-muted small text-center py-4 mb-0">Neniuj venontaj eventoj por ĉi tiu organizo.</p>
-          <% end %>
+          <%= render "future_events_tab" %>
         </div>
 
         <div class="tab-pane fade <%= 'show active' if active_tab == :past %>" id="past-tab-pane" role="tabpanel" aria-labelledby="past-tab" tabindex="0">
-          <%= turbo_frame_tag "past_events_tab" do %>
-            <% if @past_events.any? %>
-              <% @past_events.each do |e| %>
-                <%= link_to event_path(code: e.ligilo), class: 'item-row small', data: { turbo_frame: "_top" } do %>
-                  <div class="col-5"><%= event_flag e %> <%= e.city %> - <%= format_date(e.date_start, style: :short) %></div>
-                  <div class="col <%= "cancelled" if e.cancelled %>">
-                    <%= e.title %>
-                    <%= icon('fas', 'camera', class: 'fg-color-purple ms-1', title: 'Havas raportojn') if e.reports.any? %>
-                  </div>
-                <% end %>
-              <% end %>
-              <%= render "shared/pagination", pagy: @pagy %>
-            <% else %>
-              <p class="text-muted small text-center py-4 mb-0">Neniuj pasintaj eventoj.</p>
-            <% end %>
-          <% end %>
+          <%= render "past_events_tab" %>
         </div>
 
         <div class="tab-pane fade <%= 'show active' if active_tab == :reports %>" id="reports-tab-pane" role="tabpanel" aria-labelledby="reports-tab" tabindex="0">
-          <%= turbo_frame_tag "reports_tab" do %>
-            <% if @events_with_reports.any? %>
-              <%= render "event/report/events_with_report_list", events: @events_with_reports %>
-              <%= render "shared/pagination", pagy: @pagy_reports %>
-            <% else %>
-              <p class="text-muted small text-center py-4 mb-0">Neniuj raportoj por eventoj de ĉi tiu organizo.</p>
-            <% end %>
-          <% end %>
+          <%= render "reports_tab" %>
         </div>
       </div>
     </div>

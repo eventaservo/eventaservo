@@ -64,7 +64,7 @@ class User < ApplicationRecord
   store_accessor :prelego, :preleganto
   store_accessor :ligiloj, [:youtube, :telegram, :instagram, :facebook, :vk, :persona_retejo, :twitter]
 
-  before_validation :generate_webcal_token, if: :new_record?
+  before_validation :generate_webcal_token
   before_save :generate_username, if: :new_record?
   before_save :subscribe_mailings, if: :new_record?
   after_create :generate_initial_api_token
@@ -297,6 +297,9 @@ class User < ApplicationRecord
   #
   # @return [String]
   def create_webcal_token
-    Random.hex(4)
+    loop do
+      token = Random.hex(4)
+      break token unless User.unscoped.exists?(webcal_token: token)
+    end
   end
 end

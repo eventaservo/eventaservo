@@ -34,6 +34,8 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
       assert_select "#reports-tab", text: /Raportoj/
     end
 
+    assert_select "turbo-frame#future_events_tab"
+    assert_select "a[href=?]", root_url(o: organization.short_name), count: 0
     assert_select "turbo-frame#past_events_tab"
     assert_select "turbo-frame#reports_tab"
 
@@ -61,9 +63,24 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
     assert_select ".item-row", text: /Future Event/
   end
 
+  test "should activate future tab and paginate future events with venontaj_pagho parameter" do
+    organization = create(:organization)
+    22.times do |i|
+      organization.events << create(:event, date_start: (i + 1).days.from_now, date_end: (i + 1).days.from_now + 1.day, title: "Future Event #{i + 1}")
+    end
+
+    get organization_url(organization.short_name, venontaj_pagho: 2)
+    assert_response :success
+    assert_select "#future-tab.active"
+    assert_select "#future-tab-pane" do
+      assert_select ".item-row", count: 2
+      assert_select "nav.pagy-bootstrap"
+    end
+  end
+
   test "should activate past tab and paginate past events with pagho parameter" do
     organization = create(:organization)
-    12.times do |i|
+    22.times do |i|
       organization.events << create(:event, date_start: (i + 1).weeks.ago, date_end: (i + 1).weeks.ago + 1.day, title: "Past Event #{i + 1}")
     end
 
@@ -80,7 +97,7 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
     organization = create(:organization)
     user = create(:user)
 
-    12.times do |i|
+    22.times do |i|
       event = create(:event, date_start: (i + 1).weeks.ago, date_end: (i + 1).weeks.ago + 1.day, title: "Event #{i + 1}")
       create(:event_report, event: event, user: user, title: "Report #{i + 1}")
       organization.events << event
@@ -96,11 +113,11 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "should paginate reports tab to 10 records per page" do
+  test "should paginate reports tab to 20 records per page" do
     organization = create(:organization)
     user = create(:user)
 
-    12.times do |i|
+    22.times do |i|
       event = create(:event, date_start: (i + 1).weeks.ago, date_end: (i + 1).weeks.ago + 1.day, title: "Event #{i + 1}")
       create(:event_report, event: event, user: user, title: "Report #{i + 1}")
       organization.events << event
@@ -111,7 +128,7 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
 
     assert_select "#reports-tab.active"
     assert_select "#reports-tab-pane" do
-      assert_select ".row.small", count: 10
+      assert_select ".row.small", count: 20
       assert_select "nav.pagy-bootstrap"
     end
   end
