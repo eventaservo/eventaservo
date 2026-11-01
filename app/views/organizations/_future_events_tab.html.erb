@@ -1,0 +1,13 @@
+<%= turbo_frame_tag "future_events_tab" do %>
+  <% if @future_events.any? %>
+    <% @future_events.each do |e| %>
+      <%= link_to event_path(code: e.ligilo), class: 'item-row small', data: { turbo_frame: "_top" } do %>
+        <div class="col-5"><%= event_flag e %> <%= e.city %> - <%= format_date(e.komenca_dato, style: :short) %></div>
+        <div class="col <%= "cancelled" if e.cancelled %>"><%= e.title %></div>
+      <% end %>
+    <% end %>
+    <%= render "shared/pagination", pagy: @pagy_future %>
+  <% else %>
+    <p class="text-muted small text-center py-4 mb-0">Neniu venonta evento por ĉi tiu organizo.</p>
+  <% end %>
+<% end %>

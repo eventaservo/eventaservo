@@ -1,0 +1,8 @@
+<%= turbo_frame_tag "reports_tab" do %>
+  <% if @events_with_reports.any? %>
+    <%= render "event/report/events_with_report_list", events: @events_with_reports %>
+    <%= render "shared/pagination", pagy: @pagy_reports %>
+  <% else %>
+    <p class="text-muted small text-center py-4 mb-0">Neniu raporto pri eventoj de ĉi tiu organizo.</p>
+  <% end %>
+<% end %>

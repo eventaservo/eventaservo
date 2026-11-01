@@ -1,7 +1,7 @@
 <% events.each do |event| %>
   <div class="row">
     <div class="col">
-      <%= event_flag(event) %> <%= link_to event.title, event_path(code: event.ligilo) %>
+      <%= event_flag(event) %> <%= link_to event.title, event_path(code: event.ligilo), data: { turbo_frame: "_top" } %>
     </div>
     <div class="col text-end small"><%= format_date(event.date_start, style: :short) %></div>
   </div>

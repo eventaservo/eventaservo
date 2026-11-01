@@ -1,0 +1,16 @@
+<%= turbo_frame_tag "past_events_tab" do %>
+  <% if @past_events.any? %>
+    <% @past_events.each do |e| %>
+      <%= link_to event_path(code: e.ligilo), class: 'item-row small', data: { turbo_frame: "_top" } do %>
+        <div class="col-5"><%= event_flag e %> <%= e.city %> - <%= format_date(e.date_start, style: :short) %></div>
+        <div class="col <%= "cancelled" if e.cancelled %>">
+          <%= e.title %>
+          <%= icon('fas', 'camera', class: 'fg-color-purple ms-1', title: 'Havas raportojn') if e.reports.any? %>
+        </div>
+      <% end %>
+    <% end %>
+    <%= render "shared/pagination", pagy: @pagy %>
+  <% else %>
+    <p class="text-muted small text-center py-4 mb-0">Neniuj pasintaj eventoj.</p>
+  <% end %>
+<% end %>
