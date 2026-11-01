@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   # Dynamic error pages
   get "/robots.txt", to: "home#robots"
@@ -5,15 +7,11 @@ Rails.application.routes.draw do
   get "/422", to: "errors#unacceptable"
   get "/500", to: "errors#internal_error"
   post "/500", to: "errors#error_form", as: "error_form"
-  get "/privateco", to: "home#privateco"
-  get "/privacy", to: "home#privateco"
-  get "/license", to: "home#privateco"
-  get "/terms", to: "home#terms"
+
+  # Technical and format endpoints
   get "/v/:view_style", to: "home#view_style", as: "view_style"
-  get "/prie", to: "home#prie"
   get "/rss.xml", to: "home#feed", as: "events_rss"
   get "/events.json", to: "home#events"
-  get "/serchilo", to: "home#search"
   get "/versio", to: "home#versio", format: :json
   get "/dev/error", to: "home#error"
 
@@ -35,7 +33,6 @@ Rails.application.routes.draw do
   draw(:api)
   draw(:reports)
   draw(:organizations)
-
   draw(:shortcuts)
 
   # iloj
@@ -69,6 +66,13 @@ Rails.application.routes.draw do
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
     root to: "home#index"
 
+    get "/privateco", to: "home#privateco"
+    get "/privacy", to: "home#privateco"
+    get "/license", to: "home#privateco"
+    get "/terms", to: "home#terms"
+    get "/prie", to: "home#prie"
+    get "/serchilo", to: "home#search"
+
     # Anoncoj kaj Konkursoj
     get "/anoncoj", to: "home#anoncoj", as: "anoncoj"
 
@@ -82,7 +86,6 @@ Rails.application.routes.draw do
     get "/eventoj-hu", to: redirect("/ik/jaroj#eventoj-hu")
 
     draw(:videos)
-
     draw(:events)
 
     # Custom user actions

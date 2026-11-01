@@ -24,6 +24,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # Includes :locale in generated URLs only when it differs from the default locale.
+  #
+  # @return [Hash] URL options containing :locale if non-default
+  def default_url_options
+    if I18n.locale != I18n.default_locale
+      {locale: I18n.locale}
+    else
+      {}
+    end
+  end
+
   def user_is_owner_or_admin(event)
     user_signed_in? &&
       (current_user.owner_of?(event) ||
