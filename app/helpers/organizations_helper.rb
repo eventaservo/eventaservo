@@ -77,4 +77,39 @@ module OrganizationsHelper
       "| finiĝos post #{days} tagoj"
     end
   end
+
+  # Determines the active tab to display on the organization show page based on
+  # URL query parameters or available events.
+  #
+  # @param params [ActionController::Parameters, Hash] request parameters
+  # @param future_events [Enumerable, #any?] collection of upcoming events
+  # @param past_events [Enumerable, #any?] collection of past events
+  #
+  # @return [Symbol] active tab identifier (:future, :past, or :reports)
+  def organization_active_tab(params, future_events: [], past_events: [])
+    if %w[future past reports].include?(params[:tab].to_s)
+      params[:tab].to_sym
+    elsif params[:venontaj_pagho].present?
+      :future
+    elsif params[:raportoj_pagho].present?
+      :reports
+    elsif params[:pagho].present? || params[:page].present?
+      :past
+    elsif future_events.any?
+      :future
+    elsif past_events.any?
+      :past
+    else
+      :reports
+    end
+  end
+
+  # Determines whether the organization administration sidebar should be displayed.
+  #
+  # @param params [ActionController::Parameters, Hash] request parameters
+  #
+  # @return [Boolean] true if user is signed in and not inside an iframe
+  def organization_show_sidebar?(params)
+    user_signed_in? && params[:iframe].blank? && params["iframe"].blank?
+  end
 end
