@@ -132,4 +132,39 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
       assert_select "nav.pagy-bootstrap"
     end
   end
+
+  test "does not render organization administration sidebar when user is not signed in" do
+    organization = organizations(:rotterdam_centre)
+
+    get organization_url(organization.short_name)
+    assert_response :success
+
+    assert_select ".box-header", text: "Administrantoj", count: 0
+    assert_select ".row > .col-12"
+    assert_select ".row > .col-lg-4", count: 0
+  end
+
+  test "renders organization administration sidebar when user is signed in" do
+    organization = organizations(:rotterdam_centre)
+    sign_in users(:user)
+
+    get organization_url(organization.short_name)
+    assert_response :success
+
+    assert_select ".box-header", text: "Administrantoj"
+    assert_select ".row > .col-lg-8"
+    assert_select ".row > .col-lg-4"
+  end
+
+  test "does not render organization administration sidebar when inside iframe even if signed in" do
+    organization = organizations(:rotterdam_centre)
+    sign_in users(:user)
+
+    get organization_url(organization.short_name, iframe: "true")
+    assert_response :success
+
+    assert_select ".box-header", text: "Administrantoj", count: 0
+    assert_select ".row > .col-12"
+    assert_select ".row > .col-lg-4", count: 0
+  end
 end

@@ -1,0 +1,33 @@
+<div id="webcalModal" class="modal fade" aria-hidden="true" aria-labelledby="shareModalCenterTitle" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="shareModalCenterTitle" class="modal-title">Aboni organizan kalendaron</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermi"></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Kiam oni abonas organizan kalendaron, ĉiuj eventoj estas aldonataj al la kalendaro kaj ajnaj eventaj ŝanĝoj
+          aŭtomate ĝisdatiĝas.
+        </p>
+        <p>
+          Jen Webcal-ligilo por aboni la kalendaron de eventoj de <%= @organizo.short_name %>.
+          Uzu ĝin en programoj kiel Google Calendar, iCal aŭ similaj. Se vi bezonas klarigon kiel uzi la ligilon, legu
+          <%= link_to 'ĉi tiun artikolon', 'https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)', target: :'_blank' %>.
+        </p>
+        <div class="input-group" data-controller="clipboard">
+          <%= link_to 'Kopii', '#', class: 'input-group-text', data: { action: 'click->clipboard#copy' } %>
+          <%= text_field_tag nil, webcal_organizo_url(short_name: @organizo.short_name, format: :ics), readonly: true, class: 'form-control bg-color-white', data: { clipboard_target: 'source' } %>
+        </div>
+        <br>
+        <p>
+          Kelkaj kalendaraj programoj ebligas aŭtomate aboni la kalendaron se oni alklakas specifan ligilon. Vi povas
+          provi tion per <%= link_to 'ĉi tiu ligilo', webcal_organizo_url(short_name: @organizo.short_name, protocol: :webcal, format: :ics) %>.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Fermi</button>
+      </div>
+    </div>
+  </div>
+</div>
