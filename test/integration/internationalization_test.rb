@@ -63,6 +63,25 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     assert_equal :pt_BR, @controller.resolve_locale
   end
 
+  test "admin user can switch back to default locale (eo) and updates cookie" do
+    sign_in users(:admin_user)
+
+    get root_url(locale: :en)
+    assert_equal :en, @controller.resolve_locale
+    assert_equal "en", cookies[:locale]
+
+    eo_url = UrlLanguageChanger.new(request.original_url, "eo").call
+    get eo_url
+
+    assert_response :success
+    assert_equal :eo, @controller.resolve_locale
+    assert_equal "eo", cookies[:locale]
+
+    get root_url
+    assert_response :success
+    assert_equal :eo, @controller.resolve_locale
+  end
+
   test "admin user falls back to default locale when param is invalid" do
     sign_in users(:admin_user)
 
