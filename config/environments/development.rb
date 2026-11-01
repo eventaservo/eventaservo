@@ -109,6 +109,9 @@ Rails.application.configure do
   config.hosts << "pt_BR.eventaservo.local:3000"
   config.hosts << "eventaservo.org.localhost"
   config.hosts << "backend.eventaservo.orb.local:3010"
+  config.hosts << /.*\.ts\.net.*/
+  config.hosts << /100\.\d+\.\d+\.\d+.*/
+  config.hosts << /home1.*/
 
   config.active_job.default_url_options = {host: "localhost", port: 3000, protocol: :http}
   Rails.application.routes.default_url_options[:host] = "localhost"

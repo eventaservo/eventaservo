@@ -350,4 +350,11 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_includes result, '<i class="fas fa-map-marker-alt fg-color-link me-1" aria-hidden="true"></i>'
     assert_includes result, %(<a target="_blank" href="https://www.google.com/maps/search/?api=1&amp;query=#{address}">Bialystok</a>)
   end
+
+  # locale_display_code tests
+  test "locale_display_code formats locales as uppercase with hyphens" do
+    assert_equal "EO", locale_display_code(:eo)
+    assert_equal "EN", locale_display_code("en")
+    assert_equal "PT-BR", locale_display_code(:pt_BR)
+  end
 end

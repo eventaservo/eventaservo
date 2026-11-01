@@ -50,7 +50,7 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal :en, @controller.resolve_locale
     assert_equal "en", cookies[:locale]
-    assert_select "#navbar-dropdown div", text: "English"
+    assert_select "#navbar-dropdown div", text: "EN"
   end
 
   test "admin user restores locale from cookie when param is absent" do
@@ -62,7 +62,7 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_equal :pt_BR, @controller.resolve_locale
-    assert_select "#navbar-dropdown div", text: "Português"
+    assert_select "#navbar-dropdown div", text: "PT-BR"
   end
 
   test "admin user can switch back to default locale (eo) and updates cookie" do
@@ -71,7 +71,7 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     get root_url(locale: :en)
     assert_equal :en, @controller.resolve_locale
     assert_equal "en", cookies[:locale]
-    assert_select "#navbar-dropdown div", text: "English"
+    assert_select "#navbar-dropdown div", text: "EN"
 
     eo_url = UrlLanguageChanger.new(request.original_url, "eo").call
     get eo_url
@@ -79,12 +79,12 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal :eo, @controller.resolve_locale
     assert_equal "eo", cookies[:locale]
-    assert_select "#navbar-dropdown div", text: "Esperanto"
+    assert_select "#navbar-dropdown div", text: "EO"
 
     get root_url
     assert_response :success
     assert_equal :eo, @controller.resolve_locale
-    assert_select "#navbar-dropdown div", text: "Esperanto"
+    assert_select "#navbar-dropdown div", text: "EO"
   end
 
   test "admin user falls back to default locale when param is invalid" do
@@ -94,7 +94,7 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_equal :eo, @controller.resolve_locale
-    assert_select "#navbar-dropdown div", text: "Esperanto"
+    assert_select "#navbar-dropdown div", text: "EO"
   end
 
   test "default_url_options omits locale when current locale is default locale" do
@@ -115,8 +115,8 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     get root_url
 
     assert_response :success
-    assert_select "#navbar-dropdown div", text: "Esperanto", count: 0
-    assert_select ".dropdown-item", text: "English", count: 0
+    assert_select "#navbar-dropdown", count: 0
+    assert_select ".dropdown-item", text: "EN", count: 0
   end
 
   test "navbar language selector is not rendered for non-admin user" do
@@ -125,20 +125,20 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     get root_url
 
     assert_response :success
-    assert_select "#navbar-dropdown div", text: "Esperanto", count: 0
-    assert_select ".dropdown-item", text: "English", count: 0
+    assert_select "#navbar-dropdown", count: 0
+    assert_select ".dropdown-item", text: "EN", count: 0
   end
 
-  test "navbar language selector is rendered for admin user with human readable names" do
+  test "navbar language selector is rendered for admin user with uppercase locale codes" do
     sign_in users(:admin_user)
 
     get root_url
 
     assert_response :success
-    assert_select "#navbar-dropdown div", text: "Esperanto"
-    assert_select ".dropdown-item", text: "Esperanto"
-    assert_select ".dropdown-item", text: "English"
-    assert_select ".dropdown-item", text: "Português"
+    assert_select "#navbar-dropdown div", text: "EO"
+    assert_select ".dropdown-item", text: "EO"
+    assert_select ".dropdown-item", text: "EN"
+    assert_select ".dropdown-item", text: "PT-BR"
   end
 
   test "admin user can access user-facing resource routes with locale prefix" do
@@ -147,12 +147,12 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     get "/en/prie"
     assert_response :success
     assert_equal :en, @controller.resolve_locale
-    assert_select "#navbar-dropdown div", text: "English"
+    assert_select "#navbar-dropdown div", text: "EN"
 
     get "/pt_BR/serchilo"
     assert_response :success
     assert_equal :pt_BR, @controller.resolve_locale
-    assert_select "#navbar-dropdown div", text: "Português"
+    assert_select "#navbar-dropdown div", text: "PT-BR"
   end
 
   test "canonical paths without locale prefix remain accessible" do
