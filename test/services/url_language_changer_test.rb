@@ -30,4 +30,18 @@ class UrlLanguageChangerTest < ActiveSupport::TestCase
 
     assert_equal "http://eventaservo.org/en/e/12345", service.call
   end
+
+  test "removes locale prefix when switching to default locale (eo) from root" do
+    url = "http://eventaservo.org/en"
+    service = UrlLanguageChanger.new(url, "eo")
+
+    assert_equal "http://eventaservo.org/", service.call
+  end
+
+  test "removes locale prefix when switching to default locale (eo) with other paths" do
+    url = "http://eventaservo.org/en/e/12345"
+    service = UrlLanguageChanger.new(url, "eo")
+
+    assert_equal "http://eventaservo.org/e/12345", service.call
+  end
 end

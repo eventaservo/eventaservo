@@ -16,6 +16,18 @@ module ApplicationHelper
     html
   end
 
+  # Returns the human-readable display name for a given locale.
+  #
+  # @param locale [Symbol, String] The locale code
+  # @return [String] The human-readable name of the locale
+  def human_readable_locale_name(locale)
+    {
+      eo: "Esperanto",
+      en: "English",
+      pt_BR: "Português"
+    }[locale.to_sym] || locale.to_s
+  end
+
   def page_title(title, subtext = nil)
     content_tag(:h2, class: "text-center") do
       concat title

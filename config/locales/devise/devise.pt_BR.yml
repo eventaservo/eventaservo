@@ -68,7 +68,7 @@ pt_BR:
   errors:
     messages:
       already_confirmed: já foi confirmado, tente fazer login
-      confirmation_period_expired: deve ser confirmado dentro de % {period} , solicite
+      confirmation_period_expired: deve ser confirmado dentro de %{period}, solicite
         um novo
       expired: expirou, solicite um novo
       not_found: não encontrado

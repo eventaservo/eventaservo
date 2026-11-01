@@ -39,5 +39,5 @@
 <li class="nav-item d-md-block d-lg-none">
   <%= link_to icon('fas', 'user-friends', 'Pri ni'), prie_url, class: 'nav-link' %>
 </li>
-<%= render "layouts/navbar/language_selector" if Rails.env.in?(%w[development staging]) %>
+<%= render "layouts/navbar/language_selector" if user_signed_in? && current_user.admin? %>
 <%= render partial: 'layouts/admin' if user_signed_in? && current_user.admin? %>
