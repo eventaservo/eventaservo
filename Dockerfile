@@ -85,10 +85,11 @@ RUN curl -fSL --retry 5 --retry-delay 15 --connect-timeout 60 --insecure \
 
 COPY . .
 
+ARG ENVIRONMENT=production
+ENV RAILS_ENV=${ENVIRONMENT}
+ENV NODE_ENV=production
 ARG RAILS_MASTER_KEY
 ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
-ENV RAILS_ENV=production
-ENV NODE_ENV=production
 
 RUN bundle exec rails assets:precompile
 

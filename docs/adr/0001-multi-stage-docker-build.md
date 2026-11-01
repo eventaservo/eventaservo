@@ -39,7 +39,7 @@ We adopt a multi-stage Docker build that strictly isolates build-time dependenci
    - Extends `production` (`FROM production AS staging`) to preserve 100% parity with production.
 
 5. **`development`**:
-   - Extends `builder` (preserving compilers, Node.js, and Yarn needed for local compilation and asset watching).
+   - Extends `build-base` (preserving compilers, Node.js, and Yarn needed for local compilation and asset watching).
    - Installs developer tools: `btop`, `vim`, `iputils-ping`, `telnet`, `zsh`, `sudo`, `chromium-driver`, `fish`, `gh`, `jq`, `openssh-client`, `ripgrep`.
    - Configures the `rails` user and Oh-My-Zsh (single-layer instruction).
 
