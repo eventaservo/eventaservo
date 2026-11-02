@@ -9,7 +9,7 @@ jobs:
   filter:
     runs-on: ubuntu-22.04
     outputs:
-      should_test: ${{ steps.changes.outputs.should_test }}
+      skip_tests: ${{ steps.changes.outputs.skip_tests }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -17,23 +17,23 @@ jobs:
       - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3
         id: changes
         with:
-          predicate-quantifier: 'some-with-excludes'
+          predicate-quantifier: 'every'
           filters: |
-            should_test:
-              - '**'
-              - '!**.md'
-              - '!.github/**'
-              - '!.gitpod*'
-              - '!.devcontainer/**'
-              - '!.vscode/**'
-              - '!.agents/**'
-              - '!LICENSE'
-              - '!.gitignore'
-              - '!.dockerignore'
+            skip_tests:
+              - '*.md'
+              - '**/*.md'
+              - '.github/**'
+              - '.gitpod*'
+              - '.devcontainer/**'
+              - '.vscode/**'
+              - '.agents/**'
+              - 'LICENSE'
+              - '.gitignore'
+              - '.dockerignore'
 
   tests:
     needs: filter
-    if: github.ref != 'refs/heads/release-please--branches-main' && needs.filter.outputs.should_test == 'true'
+    if: github.ref != 'refs/heads/release-please--branches-main' && needs.filter.outputs.skip_tests != 'true'
     uses: ./.github/workflows/template_test.yml
     secrets:
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
@@ -47,7 +47,11 @@ jobs:
     steps:
       - name: Status check
         run: |
-          if [ "${{ needs.filter.outputs.should_test }}" == "false" ]; then
+          if [ "${{ needs.filter.result }}" != "success" ]; then
+            echo "Filter job failed or was cancelled."
+            exit 1
+          fi
+          if [ "${{ needs.filter.outputs.skip_tests }}" == "true" ]; then
             echo "Skipped tests because no application code or dependencies were changed."
             exit 0
           fi
