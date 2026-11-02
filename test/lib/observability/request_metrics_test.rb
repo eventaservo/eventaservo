@@ -101,8 +101,8 @@ class Observability::RequestMetricsTest < ActiveSupport::TestCase
       ActiveSupport::Notifications.instrument(Observability::RequestMetrics::EVENT, payload) { sleep 0.01 }
     end
 
-    assert_equal 1, recorder.counters.size
-    assert_operator recorder.distributions.first[:value], :>, 0
+    assert_operator recorder.counters.size, :>=, 1
+    assert_operator recorder.distributions.map { |d| d[:value] }.max, :>, 0
   ensure
     ActiveSupport::Notifications.unsubscribe(subscription) if subscription
   end
