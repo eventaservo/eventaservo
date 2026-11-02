@@ -168,6 +168,7 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
   test "renders localized footer elements across locales" do
     get root_url
     assert_response :success
+    assert_select ".footer", text: /Versio #{Regexp.escape(Eventaservo::Application::VERSION)}/o
     assert_select ".footer", text: /Kontaktu nin/
     assert_select ".footer", text: /Privateco/
     assert_select ".footer", text: /Regularo/
@@ -176,12 +177,14 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
 
     get "/en"
     assert_response :success
+    assert_select ".footer", text: /Version #{Regexp.escape(Eventaservo::Application::VERSION)}/o
     assert_select ".footer", text: /Contact us/
     assert_select ".footer", text: /Privacy/
     assert_select ".footer", text: /Terms of Service/
 
     get "/pt_BR"
     assert_response :success
+    assert_select ".footer", text: /Versão #{Regexp.escape(Eventaservo::Application::VERSION)}/o
     assert_select ".footer", text: /Contate-nos/
     assert_select ".footer", text: /Privacidade/
     assert_select ".footer", text: /Termos de uso/

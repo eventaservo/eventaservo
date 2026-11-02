@@ -176,7 +176,7 @@ en:
     privacy: Privacy
     server_status: Server status
     terms: Terms of Service
-    version: Version
+    version: Version %{version}
   helpers:
     select:
       prompt: Please select

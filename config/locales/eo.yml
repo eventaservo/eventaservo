@@ -176,7 +176,7 @@ eo:
     privacy: Privateco
     server_status: Servila stato
     terms: Regularo
-    version: Versio
+    version: Versio %{version}
   helpers:
     select:
       prompt: Bonvolu elekti

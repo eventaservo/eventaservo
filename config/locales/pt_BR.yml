@@ -176,7 +176,7 @@ pt_BR:
     privacy: Privacidade
     server_status: Status do servidor
     terms: Termos de uso
-    version: Versão
+    version: Versão %{version}
   helpers:
     select:
       prompt: Por favor, selecione
