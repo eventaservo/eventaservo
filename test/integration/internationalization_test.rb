@@ -322,6 +322,29 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     assert_select "input[type='submit'][value='Buscar']"
   end
 
+  test "redirects legacy teachers and speakers URL while preserving locale and query string" do
+    sign_in users(:admin_user)
+
+    get "/instruistoj_kaj_prelegantoj"
+    assert_redirected_to "/instruantoj_kaj_prelegantoj"
+
+    get "/en/instruistoj_kaj_prelegantoj"
+    assert_redirected_to "/en/instruantoj_kaj_prelegantoj"
+    follow_redirect!
+    assert_response :success
+    assert_equal :en, @controller.resolve_locale
+    assert_equal "en", cookies[:locale]
+    assert_select "h1", text: /Teachers and speakers/
+
+    get "/pt_BR/instruistoj_kaj_prelegantoj?name=Zamenhof"
+    assert_redirected_to "/pt_BR/instruantoj_kaj_prelegantoj?name=Zamenhof"
+    follow_redirect!
+    assert_response :success
+    assert_equal :pt_BR, @controller.resolve_locale
+    assert_equal "pt_BR", cookies[:locale]
+    assert_select "h1", text: /Professores e palestrantes/
+  end
+
   test "renders localized announcements view across locales" do
     sign_in users(:admin_user)
 
