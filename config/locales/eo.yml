@@ -29,7 +29,7 @@ eo:
         email: Retadreso
         name: Nomo
         password: Pasvorto
-        password_confirmation: Pasvorto-konfirmado
+        password_confirmation: Konfirmu pasvorton
         persona_retejo: Persona retejo
         ueacode: UEA-kodo
     errors:
@@ -115,7 +115,7 @@ eo:
       edit:
         minimum_characters: Minimume %{count} signoj
         new_password: Nova pasvorto
-        password_confirmation: Pasvorto-konfirmado
+        password_confirmation: Konfirmu pasvorton
         submit: Ŝanĝu ĝin
         title: Ŝanĝu vian pasvorton
       new:
@@ -139,7 +139,7 @@ eo:
         level: Nivelo
       new:
         birthday_placeholder: Naskiĝdato (T/M/J) *ne deviga
-        password_confirmation_placeholder: Pasvorto-konfirmado
+        password_confirmation_placeholder: Konfirmu pasvorton
         password_placeholder: Pasvorto
         security_phrase_placeholder: Kiel nomiĝas nia lingvo?
         submit: Registriĝi
