@@ -1,12 +1,12 @@
 <div class="box-white">
-  <div class="box-header">Eventoj</div>
+  <div class="box-header"><%= t("search.results.events.header") %></div>
   <% if events.empty? %>
-    <p>Neniu evento trovita</p>
+    <p><%= t("search.results.events.empty") %></p>
   <% else %>
     <h5>
-      <%= pluralize(events.count, 'evento trovita', 'eventoj trovitaj') %>
+      <%= t("search.results.events.found", count: events.count) %>
       <% if params[:pasintaj].blank? %>
-        (estontaj kaj ĵus okazintaj)
+        <%= t("search.results.events.upcoming_and_recent") %>
       <% end %>
     </h5>
 
@@ -14,9 +14,9 @@
       <table class="table table-sm table-hover">
         <thead>
           <tr>
-            <th>Titolo</th>
-            <th>Urbo</th>
-            <th>Dato</th>
+            <th><%= t("search.results.events.title") %></th>
+            <th><%= t("search.results.events.city") %></th>
+            <th><%= t("search.results.events.date") %></th>
           </tr>
         </thead>
         <tbody>

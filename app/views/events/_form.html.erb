@@ -16,7 +16,13 @@
       </div>
 
       <%= form_for(@event, url: (event_path(code: @event.code) if params[:action].in? %w(edit update)),
-          data: { controller: 'event--form', action: 'submit->event--form#validateCategories'}) do |form| %>
+          data: {
+            controller: 'event--form',
+            action: 'submit->event--form#validateCategories',
+            'event--form-search-placeholder-value': t('events.form.search_placeholder'),
+            'event--form-search-text-value': t('events.form.search_text'),
+            'event--form-select-category-alert-value': t('events.form.select_category_alert')
+          }) do |form| %>
         <%= error_handling(@event) %>
 
         <div class="mb-3">

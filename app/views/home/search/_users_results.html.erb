@@ -1,15 +1,15 @@
 <div class="box-white">
-  <div class="box-header">Uzantoj</div>
+  <div class="box-header"><%= t("search.results.users.header") %></div>
   <% if users.empty? %>
-    <p>Neniu uzanto trovita</p>
+    <p><%= t("search.results.users.empty") %></p>
   <% else %>
-    <h5><%= pluralize(users.count, 'uzanto trovita', 'uzantoj trovitaj') %></h5>
+    <h5><%= t("search.results.users.found", count: users.count) %></h5>
     <div class="table-responsive">
       <table class="table table-sm table-hover">
         <thead>
           <tr>
-            <th>Nomo</th>
-            <th>Lando</th>
+            <th><%= t("search.results.users.name") %></th>
+            <th><%= t("search.results.users.country") %></th>
           </tr>
         </thead>
         <tbody>

@@ -9,6 +9,9 @@ class EventsHelperTest < ActionView::TestCase
     assert_equal "Aliaj", tag_plural_name("Alia")
     assert_equal "Anoncoj", tag_plural_name("Anonco")
     assert_equal "Konkursoj", tag_plural_name("Konkurso")
+    assert_equal "Por junuloj", tag_plural_name("Por junuloj")
+    assert_equal "Unutagaj", tag_plural_name("Unutaga")
+    assert_equal "Plurtagaj", tag_plural_name("Plurtaga")
   end
 
   test "returns localized plural forms across locales" do
@@ -18,6 +21,9 @@ class EventsHelperTest < ActionView::TestCase
       assert_equal "Others", tag_plural_name("Alia")
       assert_equal "Announcements", tag_plural_name("Anonco")
       assert_equal "Contests", tag_plural_name("Konkurso")
+      assert_equal "For youth", tag_plural_name("Por junuloj")
+      assert_equal "Single day", tag_plural_name("Unutaga")
+      assert_equal "Multi-day", tag_plural_name("Plurtaga")
     end
 
     I18n.with_locale(:pt_BR) do
@@ -26,6 +32,9 @@ class EventsHelperTest < ActionView::TestCase
       assert_equal "Outros", tag_plural_name("Alia")
       assert_equal "Anúncios", tag_plural_name("Anonco")
       assert_equal "Concursos", tag_plural_name("Konkurso")
+      assert_equal "Para jovens", tag_plural_name("Por junuloj")
+      assert_equal "Um dia", tag_plural_name("Unutaga")
+      assert_equal "Vários dias", tag_plural_name("Plurtaga")
     end
   end
 

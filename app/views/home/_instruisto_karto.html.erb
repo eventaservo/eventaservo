@@ -18,16 +18,16 @@
 
     <div class="px-3 pt-3 pb-3">
       <div class="text-uppercase text-body-tertiary fw-semibold small mb-2" style="font-size:0.7rem;letter-spacing:0.05em">
-        <i class="fas fa-layer-group me-1"></i>Niveloj
+        <i class="fas fa-layer-group me-1"></i><%= t("teachers_and_speakers.cards.levels") %>
       </div>
       <div class="d-flex flex-wrap gap-1 mb-3">
         <% instruisto.instruo['nivelo'].each do |nivelo| %>
-          <span class="badge rounded-pill text-bg-primary"><%= nivelo.capitalize %></span>
+          <span class="badge rounded-pill text-bg-primary"><%= t("teachers_and_speakers.levels.#{nivelo.downcase}", default: nivelo.capitalize) %></span>
         <% end %>
       </div>
 
       <div class="text-uppercase text-body-tertiary fw-semibold small mb-1" style="font-size:0.7rem;letter-spacing:0.05em">
-        <i class="fas fa-briefcase me-1"></i>Sperto
+        <i class="fas fa-briefcase me-1"></i><%= t("teachers_and_speakers.cards.experience") %>
       </div>
       <p class="small text-body-secondary mb-0"><%= instruisto.instruo['sperto'] %></p>
     </div>

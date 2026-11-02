@@ -252,4 +252,130 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "nav[aria-label='breadcrumb'] .breadcrumb-item", text: "Mundo"
   end
+
+  test "renders localized continent buttons on home page across locales" do
+    sign_in users(:admin_user)
+
+    get root_url
+    assert_response :success
+    assert_select "a.button-event-count[href*='azio']", text: /Azio/
+
+    get "/en"
+    assert_response :success
+    assert_select "a.button-event-count[href*='azio']", text: /Asia/
+
+    get "/pt_BR"
+    assert_response :success
+    assert_select "a.button-event-count[href*='azio']", text: /Ásia/
+  end
+
+  test "renders localized search view across locales" do
+    sign_in users(:admin_user)
+
+    get serchilo_path
+    assert_response :success
+    assert_select "h1", text: "Serĉilo"
+    assert_select "input[name='query'][placeholder='Serĉi eventojn aŭ organizojn... (minimume 3 signoj)']"
+    assert_select "label", text: "Pasintaj"
+    assert_select "label", text: "Nuligitaj"
+
+    get "/en/serchilo"
+    assert_response :success
+    assert_select "h1", text: "Search"
+    assert_select "input[name='query'][placeholder='Search events or organizations... (minimum 3 characters)']"
+    assert_select "label", text: "Past"
+    assert_select "label", text: "Cancelled"
+
+    get "/pt_BR/serchilo"
+    assert_response :success
+    assert_select "h1", text: "Busca"
+    assert_select "input[name='query'][placeholder='Buscar eventos ou organizações... (mínimo de 3 caracteres)']"
+    assert_select "label", text: "Anteriores"
+    assert_select "label", text: "Cancelados"
+  end
+
+  test "renders localized teachers and speakers directory across locales" do
+    sign_in users(:admin_user)
+
+    get instruantoj_kaj_prelegantoj_path
+    assert_response :success
+    assert_select "h1", text: /Instruantoj kaj prelegantoj/
+    assert_select "label", text: "Nomo"
+    assert_select "label", text: "Lando"
+    assert_select "label", text: "Nivelo"
+    assert_select "input[type='submit'][value='Serĉi']"
+
+    get "/en/instruantoj_kaj_prelegantoj"
+    assert_response :success
+    assert_select "h1", text: /Teachers and speakers/
+    assert_select "label", text: "Name"
+    assert_select "label", text: "Country"
+    assert_select "label", text: "Level"
+    assert_select "input[type='submit'][value='Search']"
+
+    get "/pt_BR/instruantoj_kaj_prelegantoj"
+    assert_response :success
+    assert_select "h1", text: /Professores e palestrantes/
+    assert_select "label", text: "Nome"
+    assert_select "label", text: "País"
+    assert_select "label", text: "Nível"
+    assert_select "input[type='submit'][value='Buscar']"
+  end
+
+  test "renders localized announcements view across locales" do
+    sign_in users(:admin_user)
+
+    get anoncoj_path
+    assert_response :success
+    assert_select "h1", text: /Anoncoj kaj konkursoj/
+    assert_select ".caption", text: /Listo de nunaj anoncoj kaj konkursoj en Esperantujo\./
+
+    get "/en/anoncoj"
+    assert_response :success
+    assert_select "h1", text: /Announcements & Contests/
+    assert_select ".caption", text: /List of current announcements and contests in Esperanto-land\./
+
+    get "/pt_BR/anoncoj"
+    assert_response :success
+    assert_select "h1", text: /Anúncios e Concursos/
+    assert_select ".caption", text: /Lista de anúncios e concursos atuais no mundo do Esperanto\./
+  end
+
+  test "renders localized international calendar across locales" do
+    sign_in users(:admin_user)
+
+    get international_calendar_path
+    assert_response :success
+    assert_select "h1", text: /Internacia Kalendaro/
+    assert_select "a", text: "Pasintaj internaciaj eventoj"
+
+    get "/en/ik"
+    assert_response :success
+    assert_select "h1", text: /International Calendar/
+    assert_select "a", text: "Past international events"
+
+    get "/pt_BR/ik"
+    assert_response :success
+    assert_select "h1", text: /Calendário Internacional/
+    assert_select "a", text: "Eventos internacionais anteriores"
+  end
+
+  test "renders localized webcal modal in continent view across locales" do
+    sign_in users(:admin_user)
+
+    get events_by_continent_path(continent: "reta")
+    assert_response :success
+    assert_select "#webcalModal .modal-title", text: "Aboni kalendaron"
+    assert_select "#webcalModal button", text: "Fermi"
+
+    get "/en/reta"
+    assert_response :success
+    assert_select "#webcalModal .modal-title", text: "Subscribe to calendar"
+    assert_select "#webcalModal button", text: "Close"
+
+    get "/pt_BR/reta"
+    assert_response :success
+    assert_select "#webcalModal .modal-title", text: "Assinar calendário"
+    assert_select "#webcalModal button", text: "Fechar"
+  end
 end

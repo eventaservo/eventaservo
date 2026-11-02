@@ -46,6 +46,8 @@ eo:
       regenerate_token_confirmation: Ĉu vi certas, ke vi volas regeneri vian API-ĵetonon? La malnova ĵetono tuj ĉesos funkcii.
       token_regenerated: API-ĵetono sukcese regenerita.
       token_regeneration_error: 'Eraro dum regenerado de API-ĵetono: %{error}'
+  announcements_and_contests:
+    caption: Listo de nunaj anoncoj kaj konkursoj en Esperantujo.
   api:
     v2:
       errors:
@@ -59,11 +61,20 @@ eo:
     cancel: Nuligi
     change: Ŝangi
     close: Fermi
+    copy: Kopii
     duplicate: Duobligi
     edit: Redakti
+    search: Serĉi
     select: Elekti
     send: Sendi
     share: Diskonigi
+  continents:
+    afriko: Afriko
+    ameriko: Ameriko
+    azio: Azio
+    europo: Eŭropo
+    oceanio: Oceanio
+    reta: Reta
   errors:
     format: "%{attribute} %{message}"
     messages:
@@ -93,17 +104,49 @@ eo:
         one: 'Ne eblas registri tiun %{model}: 1 eraro'
         other: 'Ne eblas registri tiun %{model}: %{count} eraroj'
   events:
+    all_day: tuttaga
     calendar:
       jump_to_month: Monato
+      next_week: Sekva semajno
+      no_events: Neniu evento
+      previous_week: Antaŭa semajno
+      today: Hodiaŭ
+      week_navigation: Navigado inter semajnoj
+    cancelled_label: Nuligita
+    date_in_city: "%{date} en %{city}"
     days_left:
       in_days:
         one: finiĝos post %{count} tago
         other: finiĝos post %{count} tagoj
       tomorrow: finiĝos morgaŭ
+    form:
+      search_placeholder: Serĉi...
+      search_text: Neniu trafo
+      select_category_alert: Vi devas elekti almenaŭ unu specon
+    happening_now_count:
+      one: "%{count} okazas nuntempe"
+      other: "%{count} okazas nuntempe"
+    international_event: Internacia Evento
+    map:
+      duplicate_notice: "* La mapo aperigas nur la unuan venontan eventon, se temas pri evento en la sama loko kun la sama titolo"
+    online: Reta
+    online_event: Reta evento
     past_events_count:
       one: "%{count} pasinta evento"
       other: "%{count} pasintaj eventoj"
     show_past: Pasintaj eventoj
+    upcoming_events_count:
+      one: "%{count} venonta"
+      other: "%{count} venontaj"
+    webcal_modal:
+      auto_subscribe_html: Kelkaj kalendaraj programoj ebligas aŭtomate aboni la kalendaron se oni alklakas specifan ligilon. Vi povas provi tion per %{link}.
+      auto_subscribe_link: ĉi tiu ligilo
+      calendar_subscription_info: Kiam oni abonas kalendaron, ĉiuj eventoj estas aldonataj al la kalendaro kaj ajnaj eventaj ŝanĝoj aŭtomate ĝisdatiĝas.
+      country_intro_html: Jen Webcal-ligilo por aboni la kalendaron de eventoj en %{country}. Uzu ĝin en programoj kiel Google Calendar, iCal aŭ similaj. Se vi bezonas klarigon kiel uzi la ligilon, legu %{help_link}.
+      help_article_link: ĉi tiun artikolon
+      online_intro_html: Jen Webcal-ligilo por aboni la kalendaron de ĉiuj estontaj <strong>retaj eventoj</strong>. Uzu ĝin en programoj kiel Google Calendar, iCal aŭ similaj. Se vi bezonas klarigon kiel uzi la ligilon, legu %{help_link}.
+      subscribe_calendar: Aboni kalendaron
+      title: Aboni kalendaron
   filters:
     periods:
       estontece: Estontece
@@ -184,6 +227,25 @@ eo:
       create: Krei %{model}
       submit: Registri tiun %{model}
       update: Modifi tiun %{model}
+  home:
+    ads:
+      alt: Anonco
+  international_calendar:
+    by_year_title: Internaciaj Kalendaroj laŭ jaroj
+    contact_link_text: informu nin per retmesaĝo
+    current_calendar: Nuna Internacia Kalendaro
+    eventoj_hu:
+      logo_alt: Emblemo de eventoj.hu
+      paragraph_1_html: Inter 1996-2020 la Esperanto-Centro EVENTOJ / Lingvo-Studio en Budapeŝto funkciigis la "Internacian Kalendaron de Esperantaj Renkontiĝoj", kiu listigis la fizikajn Esperanto-aranĝojn, kiuj bonvenigis viziton de vojaĝemaj esperantistoj. Ĝia arkivo troviĝas en %{link}.
+      paragraph_2: La supra internacia listo de renkontiĝoj estas prizorgata de Eventa Servo. Esperanto-Centro EVENTOJ / Lingvo-Studio en Budapeŝto lanĉis ĉi tian liston en 1996 kaj kunlaboras kun Eventa Servo ekde 2020.
+    events: Eventoj
+    missing_event_html: Se laŭ vi mankas evento aŭ estas eraro, %{contact_link}.
+    page_title: Internacia Kalendaro | Eventa Servo
+    past_events: Pasintaj internaciaj eventoj
+    subtitle: Listo de la ĉefaj Esperanto-eventoj tutmonde
+    title: Internacia Kalendaro
+    year: Jaro
+    year_title: Internacia kalendaro %{year}
   links:
     announcements_and_contests: Anoncoj kaj konkursoj
     international_calendar: Internacia Kalendaro
@@ -209,6 +271,47 @@ eo:
       my_events: Miaj eventoj
       my_profile: Mia profilo
       sign_out: Elsaluti
+  search:
+    cancelled: Nuligitaj
+    min_chars_error: La serĉa frazo devas enhavi almenaŭ 3 signojn
+    past: Pasintaj
+    placeholder: Serĉi eventojn aŭ organizojn... (minimume 3 signoj)
+    query_aria_label: Serĉofrazo
+    results:
+      events:
+        city: Urbo
+        date: Dato
+        empty: Neniu evento trovita
+        found:
+          one: "%{count} evento trovita"
+          other: "%{count} eventoj trovitaj"
+        header: Eventoj
+        title: Titolo
+        upcoming_and_recent: "(estontaj kaj ĵus okazintaj)"
+      organizations:
+        empty: Neniu organizo trovita
+        found:
+          one: "%{count} organizo trovita"
+          other: "%{count} organizoj trovitaj"
+        header: Organizoj
+      users:
+        country: Lando
+        empty: Neniu uzanto trovita
+        found:
+          one: "%{count} uzanto trovita"
+          other: "%{count} uzantoj trovitaj"
+        header: Uzantoj
+        name: Nomo
+      videos:
+        date: Dato
+        empty: Neniu registrita prezento trovita
+        event: Evento
+        found:
+          one: "%{count} registrita prezento trovita"
+          other: "%{count} registritaj prezentoj trovitaj"
+        header: Registritaj prezentoj
+        title: Titolo
+    title: Serĉilo
   support:
     array:
       last_word_connector: " kaj "
@@ -222,5 +325,41 @@ eo:
       konkurso: Konkursoj
       kunveno_evento: Kunvenoj/Eventoj
       kurso: Kursoj
+      plurtaga: Plurtagaj
+      por_junuloj: Por junuloj
+      unutaga: Unutagaj
+  teachers_and_speakers:
+    cards:
+      experience: Sperto
+      levels: Niveloj
+      topics: Temoj
+    cefr: Komuna Eŭropa Referenckadro por Lingvoj
+    edukado_html: Nia partnero %{edukado_link} disponigas uzpretajn materialojn, informojn kaj diversajn servojn por ebligi bonkvalitan kaj modernan laboron surbaze de tutmonda kunlaboro de Esperanto-instruantoj. Ili proponas ekzamenojn de Esperanto laŭ la %{cefr_link} |
+    filters:
+      all_countries: Ĉiuj landoj
+      all_levels: Ĉiuj niveloj
+      country: Lando
+      experience_or_topics: Sperto / Temoj
+      keyword_placeholder: Ŝlosilvorto...
+      level: Nivelo
+      name: Nomo
+      name_placeholder: Serĉu laŭ nomo...
+    ilei_html: "%{ilei_link}, la Internacia Ligo de Esperantistaj Instruistoj estas la ĉefa kolektiĝejo por instruistoj kaj edukistoj de Esperanto. ILEI estas aliĝinta faka asocio de Universala Esperanto-Asocio (UEA). Ĝi havas membrojn en la tuta mondo kaj sekciojn en pli ol 40 landoj. Ĉu vi estas instruisto en bazlernejo, mezlernejo aŭ universitato, vi gvidas Esperanto-kursojn, vi interesiĝas pri instruado, vi deziras interŝanĝi spertojn kun kolegoj, vi volas subteni instruadon de Esperanto...? -> %{join_link}"
+    intro: Ĉu vi serĉas instruanton aŭ preleganton por via evento? En la ĉi-suba listo vi trovos nomojn de homoj kiuj indikis ĉe sia profilo en Eventa Servo, ke ili pretas instrui kaj prelegi. Detalojn vi trovos ĉe la respektivaj uzantoprofiloj. Iuj homoj pretas senpage instrui kaj/aŭ prelegi, aliaj petas repagon de vojaĝkostoj aŭ etan financan rekompencon. Foje eblos veni surloke; aliuloj pretas aŭ povos pro praktikaj kialoj nur rete agi. Ankaŭ se vi ne estas organizanto de evento, eblas kontakti ilin – ne hezitu! – esperantistoj estas ĝenerale tre helpemaj.
+    join_ilei: Fariĝu membro de ILEI
+    levels:
+      baza: Baza
+      meza: Meza
+      supera: Supera
+    no_speakers_filtered: Neniu preleganto trovita kun tiuj filtriloj.
+    no_speakers_registered: Neniu preleganto estas registrita.
+    no_teachers_filtered: Neniu instruanto trovita kun tiuj filtriloj.
+    no_teachers_registered: Neniu instruanto estas registrita.
+    random_notice: Montrataj hazardaj instruanto kaj preleganto. Uzu la filtrilon por vidi pliajn.
+    speakers_divider: Prelegantoj
+    teachers_divider: Instruantoj
+    title: Instruantoj kaj prelegantoj
+  timezone:
+    custom_timezone_text: 'Horoj montrataj laŭ via horzono: %{timezone}'
   video:
     presentations: Registraĵoj

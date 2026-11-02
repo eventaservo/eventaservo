@@ -113,6 +113,9 @@ module EventsHelper
     when "Alia" then I18n.t("tags.plural.alia")
     when "Anonco" then I18n.t("tags.plural.anonco")
     when "Konkurso" then I18n.t("tags.plural.konkurso")
+    when "Por junuloj" then I18n.t("tags.plural.por_junuloj")
+    when "Unutaga" then I18n.t("tags.plural.unutaga")
+    when "Plurtaga" then I18n.t("tags.plural.plurtaga")
     else tag_name
     end
   end

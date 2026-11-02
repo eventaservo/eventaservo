@@ -357,4 +357,42 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_equal "EN", locale_display_code("en")
     assert_equal "PT-BR", locale_display_code(:pt_BR)
   end
+
+  # continent_display_name tests
+  test "continent_display_name returns localized continent name" do
+    I18n.with_locale(:eo) do
+      assert_equal "Eŭropo", continent_display_name("europo")
+      assert_equal "Ameriko", continent_display_name("Ameriko")
+      assert_equal "Reta", continent_display_name("reta")
+    end
+
+    I18n.with_locale(:en) do
+      assert_equal "Europe", continent_display_name("europo")
+      assert_equal "Americas", continent_display_name("Ameriko")
+      assert_equal "Online", continent_display_name("reta")
+    end
+
+    I18n.with_locale(:pt_BR) do
+      assert_equal "Europa", continent_display_name("europo")
+      assert_equal "Américas", continent_display_name("Ameriko")
+      assert_equal "Online", continent_display_name("reta")
+    end
+  end
+
+  test "event_full_description uses localized online event text" do
+    event = events(:valid_event)
+    event.online = true
+
+    I18n.with_locale(:eo) do
+      assert_includes event_full_description(event), "(Reta evento)"
+    end
+
+    I18n.with_locale(:en) do
+      assert_includes event_full_description(event), "(Online event)"
+    end
+
+    I18n.with_locale(:pt_BR) do
+      assert_includes event_full_description(event), "(Evento online)"
+    end
+  end
 end

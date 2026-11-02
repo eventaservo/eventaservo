@@ -1,9 +1,9 @@
 <div class="box-white">
   <div class="d-flex">
-    <h1>Serĉilo</h1>
+    <h1><%= t("search.title") %></h1>
   </div>
 
-  <%= form_with url: "/serchilo", method: :get, data: {controller: "search-filters"} do |form| %>
+  <%= form_with url: serchilo_path, method: :get, data: {controller: "search-filters"} do |form| %>
     <div class="row">
       <div class="col-12 col-md-9">
         <div class="input-group">
@@ -12,14 +12,14 @@
             autofocus="true"
             value="<%= @search_term %>"
             name="query"
-            placeholder="Serĉi eventojn aŭ organizojn... (minimume 3 signoj)"
-            aria-label="Serĉofrazo"
+            placeholder="<%= t('search.placeholder') %>"
+            aria-label="<%= t('search.query_aria_label') %>"
             class="form-control <%= 'is-invalid' unless @search_is_valid %>"
             >
             <%= form.submit '🔎', class: 'btn btn-outline-primary' %>
 
             <% unless @search_is_valid %>
-              <div class="invalid-feedback d-inline">La serĉa frazo devas enhavi almenaŭ 3 signojn</div>
+              <div class="invalid-feedback d-inline"><%= t('search.min_chars_error') %></div>
             <% end %>
 
           </div>
@@ -29,12 +29,12 @@
           <div class="d-sm-flex justify-content-around flex-md-column">
             <div class="form-check form-switch">
               <%= check_box_tag :pasintaj, true, params[:pasintaj], class: "form-check-input", data: {action: "change->search-filters#submit"} %>
-              <%= label_tag :pasintaj, 'Pasintaj', class: 'form-check-label' %>
+              <%= label_tag :pasintaj, t('search.past'), class: 'form-check-label' %>
             </div>
 
             <div class="form-check form-switch">
               <%= check_box_tag :nuligitaj, true, params[:nuligitaj], class: "form-check-input", data: {action: "change->search-filters#submit"} %>
-              <%= label_tag :nuligitaj, 'Nuligitaj', class: 'form-check-label' %>
+              <%= label_tag :nuligitaj, t('search.cancelled'), class: 'form-check-label' %>
             </div>
           </div>
         </div>

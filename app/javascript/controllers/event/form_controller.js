@@ -16,6 +16,12 @@ export default class extends Controller {
     "site", "email", "tagsCategories"
   ]
 
+  static values = {
+    searchPlaceholder: { type: String, default: "Serĉi..." },
+    searchText: { type: String, default: "Neniu trafo" },
+    selectCategoryAlert: { type: String, default: "Vi devas elekti almenaŭ unu specon" }
+  }
+
   // Initializes SlimSelect for organizations (if present) and sets the
   // initial visibility of online/offline form sections.
   connect() {
@@ -24,8 +30,8 @@ export default class extends Controller {
         select: this.organizationsTarget,
         settings: {
           placeholderText: null,
-          searchPlaceholder: "Serĉi...",
-          searchText: "Neniu trafo",
+          searchPlaceholder: this.searchPlaceholderValue,
+          searchText: this.searchTextValue,
         }
       })
     }
@@ -93,7 +99,7 @@ export default class extends Controller {
   // @param {Event} event - form submit event
   validateCategories(event) {
     if (this.tagsCategoriesTarget.querySelectorAll(".btn-check:checked").length === 0) {
-      alert("Vi devas elekti almenaŭ unu specon")
+      alert(this.selectCategoryAlertValue)
       event.preventDefault()
       event.stopPropagation()
 
