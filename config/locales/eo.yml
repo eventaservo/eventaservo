@@ -57,6 +57,7 @@ eo:
   breadcrumbs:
     world: Mondo
   buttons:
+    add: Aldoni
     add_video: Video
     cancel: Nuligi
     cancel_registration: Ne registri
@@ -66,6 +67,7 @@ eo:
     delete: Forigi
     duplicate: Duobligi
     edit: Redakti
+    save: Registri
     save_event: Registri
     search: Serĉi
     select: Elekti
@@ -76,9 +78,12 @@ eo:
     copy_failed: Ne eblis kopii al la tondujo
   common:
     are_you_sure: Ĉu vi certas?
+    country: Lando
     date: Dato
+    events: Eventoj
     location: Loko
     name: Nomo
+    no_results: Neniu rezulto
     no_upper: NE
     sign_in: Ensalutu
     yes_upper: JES
@@ -378,6 +383,55 @@ eo:
       my_events: Miaj eventoj
       my_profile: Mia profilo
       sign_out: Elsaluti
+  organizations:
+    details:
+      subscribe_calendar: Aboni organizan kalendaron
+      youtube_channel: YouTube-kanalo
+    form:
+      address: Adreso
+      city: Urbo (aŭ loko)
+      delete_logo: Forviŝi emblemon
+      delete_logo_help: "(aŭ alŝutu novan por anstataŭigi ĝin)"
+      description: Priskribo
+      display_flag: Montri flagon
+      display_flag_help: Montras la landan flagon en la organiza paĝo kaj en ĉiuj eventoj de ĝi
+      edit_title: Redakti organizon
+      email: Retpoŝtadreso
+      logo: Emblemo
+      new_title: Nova organizo
+      phone: Telefon-numero
+      short_name: Mallonga nomo
+      short_name_help: Ne uzu spacojn aŭ specialajn signojn. Vi rajtas uzi _ kaj -
+      url: Reteja adreso (URL)
+      youtube: YouTube-kanalo (URL)
+    index:
+      admins_and_helpers_tooltip: Administrantoj kaj helpantoj
+      create_new: Krei novan organizon
+      search_placeholder: Serĉi organizon
+      searching: Serĉas
+      title: ORGANIZOJ
+    main_organizations:
+      title: ĈEFORGANIZOJ
+    tabs:
+      events: eventoj
+      has_reports: Havas raportojn
+      no_past_events: Neniuj pasintaj eventoj.
+      no_reports: Neniu raporto pri eventoj de ĉi tiu organizo.
+      no_upcoming_events: Neniu venonta evento por ĉi tiu organizo.
+      past: Pasintaj
+      reports: Raportoj
+      upcoming: Venontaj
+    users:
+      add_section: Aldoni
+      administrators_header: Administrantoj
+      co_administrators: Kunadministranto(j)
+      confirm_remove_user: Ĉu vi certas ke vi volas forigi la uzanton el la organizo?
+      head_admin_permission_info: Ĉefadministranto rajtas aldoni novan administranton
+      head_administrators: Ĉefadministranto(j)
+      make_co_admin: Igu kunadministranto
+      make_head_admin: Igu ĉefadministranto
+      remove_user_from_org: Forigi uzanton el la organizo
+      search_user_placeholder: Serĉi uzanton
   search:
     cancelled: Nuligitaj
     min_chars_error: La serĉa frazo devas enhavi almenaŭ 3 signojn

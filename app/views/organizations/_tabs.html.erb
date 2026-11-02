@@ -4,19 +4,19 @@
   <ul class="nav nav-tabs org-tabs mb-3" id="orgTabs" role="tablist">
     <li class="nav-item" role="presentation">
       <button class="nav-link <%= 'active' if active_tab == :future %>" id="future-tab" data-bs-toggle="tab" data-bs-target="#future-tab-pane" type="button" role="tab" aria-controls="future-tab-pane" aria-selected="<%= active_tab == :future %>">
-        Venontaj <span class="d-none d-sm-inline">eventoj</span>
+        <%= t("organizations.tabs.upcoming") %> <span class="d-none d-sm-inline"><%= t("organizations.tabs.events") %></span>
         <span class="badge rounded-pill text-bg-secondary ms-1"><%= @pagy_future.count %></span>
       </button>
     </li>
     <li class="nav-item" role="presentation">
       <button class="nav-link <%= 'active' if active_tab == :past %>" id="past-tab" data-bs-toggle="tab" data-bs-target="#past-tab-pane" type="button" role="tab" aria-controls="past-tab-pane" aria-selected="<%= active_tab == :past %>">
-        Pasintaj <span class="d-none d-sm-inline">eventoj</span>
+        <%= t("organizations.tabs.past") %> <span class="d-none d-sm-inline"><%= t("organizations.tabs.events") %></span>
         <span class="badge rounded-pill text-bg-secondary ms-1"><%= @pagy.count %></span>
       </button>
     </li>
     <li class="nav-item" role="presentation">
       <button class="nav-link <%= 'active' if active_tab == :reports %>" id="reports-tab" data-bs-toggle="tab" data-bs-target="#reports-tab-pane" type="button" role="tab" aria-controls="reports-tab-pane" aria-selected="<%= active_tab == :reports %>">
-        📸 Raportoj
+        📸 <%= t("organizations.tabs.reports") %>
         <span class="badge rounded-pill text-bg-secondary ms-1"><%= @pagy_reports.count %></span>
       </button>
     </li>

@@ -17,7 +17,7 @@ class OrganizationsController::CreateTest < ActionDispatch::IntegrationTest
       }
     end
 
-    assert_redirected_to organization_url(Organization.last.short_name)
+    assert_redirected_to organization_url(short_name: Organization.last.short_name)
     assert_equal "Organizo sukcese kreita.", flash[:notice]
 
     # Verify the user became an admin of the newly created organization

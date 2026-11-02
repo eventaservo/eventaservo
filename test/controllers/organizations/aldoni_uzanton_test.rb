@@ -13,10 +13,10 @@ class OrganizationsController::AldoniUzantonTest < ActionDispatch::IntegrationTe
     sign_in @admin_user
 
     assert_difference("OrganizationUser.count", 1) do
-      post organization_aldoni_uzanton_url(@organization.short_name), params: {id: @target_user.id}
+      post organization_aldoni_uzanton_url(organization_short_name: @organization.short_name), params: {id: @target_user.id}
     end
 
-    assert_redirected_to organization_url(@organization.short_name)
+    assert_redirected_to organization_url(short_name: @organization.short_name)
     assert_equal "Uzanto aldonita al la organizo", flash[:success]
     assert OrganizationUser.find_by(organization: @organization, user: @target_user)
   end
@@ -25,7 +25,7 @@ class OrganizationsController::AldoniUzantonTest < ActionDispatch::IntegrationTe
     sign_in @normal_user
 
     assert_no_difference("OrganizationUser.count") do
-      post organization_aldoni_uzanton_url(@organization.short_name), params: {id: @target_user.id}
+      post organization_aldoni_uzanton_url(organization_short_name: @organization.short_name), params: {id: @target_user.id}
     end
 
     assert_redirected_to organizations_url
@@ -34,7 +34,7 @@ class OrganizationsController::AldoniUzantonTest < ActionDispatch::IntegrationTe
 
   test "should redirect unauthenticated user" do
     assert_no_difference("OrganizationUser.count") do
-      post organization_aldoni_uzanton_url(@organization.short_name), params: {id: @target_user.id}
+      post organization_aldoni_uzanton_url(organization_short_name: @organization.short_name), params: {id: @target_user.id}
     end
 
     assert_redirected_to new_user_session_url

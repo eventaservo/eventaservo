@@ -155,7 +155,7 @@
 
         <div class="d-flex flex-wrap gap-2">
           <% @user.organizations.each do |org| %>
-            <%= link_to organization_path(org.short_name), target: "_blank",
+            <%= link_to organization_path(short_name: org.short_name), target: "_blank",
               class: "badge bg-success-subtle text-success text-decoration-none px-3 py-2" do %>
               <%= icon('fas', 'building', class: 'me-1') %><%= org.name %>
             <% end %>

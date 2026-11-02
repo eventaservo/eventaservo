@@ -123,7 +123,7 @@
       </div>
       <div class="text-divider">Organizoj</div>
       <% @user.organizoj.each do |organizo| %>
-        <%= link_to organizo.short_name, organization_url(organizo.short_name), class: 'btn btn-sm btn-outline-primary' %>
+        <%= link_to organizo.short_name, organization_url(short_name: organizo.short_name), class: 'btn btn-sm btn-outline-primary' %>
       <% end %>
       <div class="buttons-footer">
         <%= link_to "Forviŝi konton", user_registration_url, method: :delete, class: "button-cancel float-start",

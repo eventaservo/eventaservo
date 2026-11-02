@@ -56,7 +56,7 @@ class OrganizationsController < ApplicationController
       @organizo.organization_users.create(user: current_user, admin: true)
       ahoy.track "Create organization", organization: @organizo.name
       Logs::Create.call(text: "Created organization #{@organizo.name}", user: current_user, loggable: @organizo)
-      redirect_to organization_url(@organizo.short_name), flash: {notice: I18n.t("flash.organizations.created")}
+      redirect_to organization_url(short_name: @organizo.short_name), flash: {notice: I18n.t("flash.organizations.created")}
     else
       render :new
     end
@@ -67,7 +67,7 @@ class OrganizationsController < ApplicationController
       @organizo.logo.purge if params[:delete_logo] == "true"
       ahoy.track "Update organization", organization: @organizo.name
       Logs::Create.call(text: "Organization updated", user: current_user, loggable: @organizo)
-      redirect_to organization_url(@organizo.short_name), notice: I18n.t("flash.organizations.updated")
+      redirect_to organization_url(short_name: @organizo.short_name), notice: I18n.t("flash.organizations.updated")
     else
       render :edit
     end
@@ -78,12 +78,12 @@ class OrganizationsController < ApplicationController
     organizo = Organization.find_by_short_name(params[:organization_short_name])
     redirect_to organizations_url, flash: {error: I18n.t("flash.general.unauthorized_action")} and return unless current_user.admin_of?(organizo)
 
-    redirect_to organization_url(organizo.short_name), flash: {error: I18n.t("flash.users.not_found")} and return if uzanto.nil?
+    redirect_to organization_url(short_name: organizo.short_name), flash: {error: I18n.t("flash.users.not_found")} and return if uzanto.nil?
 
     OrganizationUser.create(organization_id: organizo.id, user_id: uzanto.id)
     ahoy.track "Add user to organization", organization: organizo.name, user: uzanto.name
     Logs::Create.call(text: "Added #{uzanto.name} to organization", user: current_user, loggable: organizo, metadata: {member_id: uzanto.id})
-    redirect_to organization_url(organizo.short_name), flash: {success: I18n.t("flash.organizations.user_added")}
+    redirect_to organization_url(short_name: organizo.short_name), flash: {success: I18n.t("flash.organizations.user_added")}
   end
 
   def estrighu
@@ -95,7 +95,7 @@ class OrganizationsController < ApplicationController
     ou.update(admin: !ou.admin)
     ahoy.track "Change user admin of organization", organization: organizo.name, user: uzanto.name
     Logs::Create.call(text: "Changed admin status for #{uzanto.name}", user: current_user, loggable: organizo, metadata: {member_id: uzanto.id})
-    redirect_to organization_url(organizo.short_name), flash: {success: I18n.t("flash.general.success")}
+    redirect_to organization_url(short_name: organizo.short_name), flash: {success: I18n.t("flash.general.success")}
   end
 
   # Forigas uzanton el organizo
@@ -110,7 +110,7 @@ class OrganizationsController < ApplicationController
     ou.destroy
     ahoy.track "Remover user from organization", organization: organizo.name, user: uzanto.name
     Logs::Create.call(text: "Removed #{uzanto.name} from organization", user: current_user, loggable: organizo, metadata: {member_id: uzanto.id})
-    redirect_to organization_url(organizo.short_name), flash: {success: I18n.t("flash.general.success")}
+    redirect_to organization_url(short_name: organizo.short_name), flash: {success: I18n.t("flash.general.success")}
   end
 
   private

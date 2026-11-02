@@ -18,7 +18,7 @@
         <div class="text-center" style="font-size: 1.3em;">
           <% @event.organizations.each do |o| %>
             <div class="organization-tags">
-              <%= link_to o.name, organization_url(o.short_name), class: 'tag text-truncate' %>
+              <%= link_to o.name, organization_url(short_name: o.short_name), class: 'tag text-truncate' %>
             </div>
             <br>
           <% end %>
