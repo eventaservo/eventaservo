@@ -74,7 +74,7 @@ class OrganizationsController < ApplicationController
   end
 
   def aldoni_uzanton
-    uzanto = User.find(params[:id])
+    uzanto = User.find_by(id: params[:id])
     organizo = Organization.find_by_short_name(params[:organization_short_name])
     redirect_to organizations_url, flash: {error: I18n.t("flash.general.unauthorized_action")} and return unless current_user.admin_of?(organizo)
 

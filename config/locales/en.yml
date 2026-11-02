@@ -432,6 +432,13 @@ en:
       make_head_admin: Make main administrator
       remove_user_from_org: Remove user from organization
       search_user_placeholder: Search user
+    webcal:
+      article_link_text: this article
+      auto_subscribe_html: Some calendar programs allow you to automatically subscribe to the calendar by clicking a specific link. You can try that via %{link}.
+      description_link_html: Here is the Webcal link to subscribe to the event calendar of %{short_name}. Use it in applications such as Google Calendar, iCal, or similar. If you need instructions on how to use the link, read %{article_link}.
+      description_sync: When you subscribe to an organization's calendar, all events are added to your calendar and any changes update automatically.
+      link_text: this link
+      title: Subscribe to organization calendar
   search:
     cancelled: Cancelled
     min_chars_error: The search query must contain at least 3 characters

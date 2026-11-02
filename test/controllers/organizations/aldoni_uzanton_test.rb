@@ -21,6 +21,17 @@ class OrganizationsController::AldoniUzantonTest < ActionDispatch::IntegrationTe
     assert OrganizationUser.find_by(organization: @organization, user: @target_user)
   end
 
+  test "should redirect with error when target user is not found" do
+    sign_in @admin_user
+
+    assert_no_difference("OrganizationUser.count") do
+      post organization_aldoni_uzanton_url(organization_short_name: @organization.short_name), params: {id: 999_999_999}
+    end
+
+    assert_redirected_to organization_url(short_name: @organization.short_name)
+    assert_equal "Uzanto ne ekzistas", flash[:error]
+  end
+
   test "should not allow normal user to add another user to organization" do
     sign_in @normal_user
 

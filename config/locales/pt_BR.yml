@@ -432,6 +432,13 @@ pt_BR:
       make_head_admin: Tornar administrador principal
       remove_user_from_org: Remover usuário da organização
       search_user_placeholder: Buscar usuário
+    webcal:
+      article_link_text: este artigo
+      auto_subscribe_html: Alguns aplicativos de calendário permitem assinar o calendário automaticamente ao clicar em um link específico. Você pode tentar isso através de %{link}.
+      description_link_html: Aqui está o link Webcal para assinar o calendário de eventos de %{short_name}. Use-o em aplicativos como Google Calendar, iCal ou similares. Se precisar de instruções sobre como usar o link, leia %{article_link}.
+      description_sync: Ao assinar o calendário de uma organização, todos os eventos são adicionados ao calendário e quaisquer alterações são atualizadas automaticamente.
+      link_text: este link
+      title: Assinar calendário da organização
   search:
     cancelled: Cancelados
     min_chars_error: A busca deve conter pelo menos 3 caracteres

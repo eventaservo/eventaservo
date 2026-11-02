@@ -432,6 +432,13 @@ eo:
       make_head_admin: Igu ĉefadministranto
       remove_user_from_org: Forigi uzanton el la organizo
       search_user_placeholder: Serĉi uzanton
+    webcal:
+      article_link_text: ĉi tiun artikolon
+      auto_subscribe_html: Kelkaj kalendaraj programoj ebligas aŭtomate aboni la kalendaron se oni alklakas specifan ligilon. Vi povas provi tion per %{link}.
+      description_link_html: Jen Webcal-ligilo por aboni la kalendaron de eventoj de %{short_name}. Uzu ĝin en programoj kiel Google Calendar, iCal aŭ similaj. Se vi bezonas klarigon kiel uzi la ligilon, legu %{article_link}.
+      description_sync: Kiam oni abonas organizan kalendaron, ĉiuj eventoj estas aldonataj al la kalendaro kaj ajnaj eventaj ŝanĝoj aŭtomate ĝisdatiĝas.
+      link_text: ĉi tiu ligilo
+      title: Aboni organizan kalendaron
   search:
     cancelled: Nuligitaj
     min_chars_error: La serĉa frazo devas enhavi almenaŭ 3 signojn

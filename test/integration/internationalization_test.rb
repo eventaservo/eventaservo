@@ -534,6 +534,7 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     assert_select "a", text: /Redakti/
     assert_select ".box-header", text: "Administrantoj"
     assert_select ".text-divider", text: "Ĉefadministranto(j)"
+    assert_select "#shareModalCenterTitle", text: "Aboni organizan kalendaron"
 
     get "/en/o/#{org.short_name}"
     assert_response :success
@@ -543,6 +544,7 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     assert_select "a", text: /Edit/
     assert_select ".box-header", text: "Administrators"
     assert_select ".text-divider", text: "Main administrator(s)"
+    assert_select "#shareModalCenterTitle", text: "Subscribe to organization calendar"
 
     get "/pt_BR/o/#{org.short_name}"
     assert_response :success
@@ -552,6 +554,7 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     assert_select "a", text: /Editar/
     assert_select ".box-header", text: "Administradores"
     assert_select ".text-divider", text: "Administrador(es) principal(is)"
+    assert_select "#shareModalCenterTitle", text: "Assinar calendário da organização"
   end
 
   test "renders localized organization new and edit forms across locales" do
