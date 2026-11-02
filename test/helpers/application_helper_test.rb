@@ -438,6 +438,9 @@ class ApplicationHelperTest < ActionView::TestCase
 
     assert_includes rendered, "error-handling"
     assert_includes rendered, I18n.t("errors.header")
+    user.errors.full_messages.each do |message|
+      assert_includes rendered, message
+    end
   end
 
   test "error_handling returns nil when record has no errors" do
