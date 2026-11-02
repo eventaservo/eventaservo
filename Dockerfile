@@ -2,7 +2,7 @@
 # Base (Runtime)
 ################
 
-FROM ruby:4.0.7-slim-trixie AS base
+FROM ruby:4.0.9-slim-trixie AS base
 
 WORKDIR /eventaservo
 
