@@ -395,4 +395,54 @@ class ApplicationHelperTest < ActionView::TestCase
       assert_includes event_full_description(event), "(Evento online)"
     end
   end
+
+  # events_by_username_path/url and user_events_path/url helper tests
+  test "events_by_username_path handles string, model, and hash arguments" do
+    user = users(:user)
+
+    assert_equal "/uzanto/#{user.username}", events_by_username_path(user.username)
+    assert_equal "/uzanto/#{user.username}", events_by_username_path(user)
+    assert_equal "/uzanto/#{user.username}", events_by_username_path(username: user.username)
+  end
+
+  test "events_by_username_url handles string, model, and hash arguments" do
+    user = users(:user)
+
+    assert_match(%r{/uzanto/#{user.username}$}, events_by_username_url(user.username))
+    assert_match(%r{/uzanto/#{user.username}$}, events_by_username_url(user))
+    assert_match(%r{/uzanto/#{user.username}$}, events_by_username_url(username: user.username))
+  end
+
+  test "user_events_path handles string, model, and hash arguments" do
+    user = users(:user)
+
+    assert_equal "/uzanto/#{user.username}/eventoj", user_events_path(user.username)
+    assert_equal "/uzanto/#{user.username}/eventoj", user_events_path(user)
+    assert_equal "/uzanto/#{user.username}/eventoj", user_events_path(username: user.username)
+  end
+
+  test "user_events_url handles string, model, and hash arguments" do
+    user = users(:user)
+
+    assert_match(%r{/uzanto/#{user.username}/eventoj$}, user_events_url(user.username))
+    assert_match(%r{/uzanto/#{user.username}/eventoj$}, user_events_url(user))
+    assert_match(%r{/uzanto/#{user.username}/eventoj$}, user_events_url(username: user.username))
+  end
+
+  test "error_handling returns alert container with localized header and errors" do
+    user = User.new
+    user.valid?
+
+    assert user.errors.any?
+    rendered = error_handling(user)
+
+    assert_includes rendered, "error-handling"
+    assert_includes rendered, I18n.t("errors.header")
+  end
+
+  test "error_handling returns nil when record has no errors" do
+    user = users(:user)
+
+    assert_nil error_handling(user)
+  end
 end
