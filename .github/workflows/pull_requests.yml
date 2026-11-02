@@ -1,6 +1,17 @@
 name: Pull Requests
 
-on: [pull_request]
+on:
+  pull_request:
+    paths-ignore:
+      - '**.md'
+      - '.github/**'
+      - '.gitpod*'
+      - '.devcontainer/**'
+      - '.vscode/**'
+      - '.agents/**'
+      - 'LICENSE'
+      - '.gitignore'
+      - '.dockerignore'
 
 permissions:
   contents: read
