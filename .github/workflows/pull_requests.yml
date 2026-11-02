@@ -9,7 +9,7 @@ jobs:
   filter:
     runs-on: ubuntu-22.04
     outputs:
-      skip_tests: ${{ steps.changes.outputs.skip_tests }}
+      should_test: ${{ steps.changes.outputs.should_test }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -19,21 +19,21 @@ jobs:
         with:
           predicate-quantifier: 'every'
           filters: |
-            skip_tests:
-              - '*.md'
-              - '**/*.md'
-              - '.github/**'
-              - '.gitpod*'
-              - '.devcontainer/**'
-              - '.vscode/**'
-              - '.agents/**'
-              - 'LICENSE'
-              - '.gitignore'
-              - '.dockerignore'
+            should_test:
+              - '!*.md'
+              - '!**/*.md'
+              - '!.github/**'
+              - '!.gitpod*'
+              - '!.devcontainer/**'
+              - '!.vscode/**'
+              - '!.agents/**'
+              - '!LICENSE'
+              - '!.gitignore'
+              - '!.dockerignore'
 
   tests:
     needs: filter
-    if: github.ref != 'refs/heads/release-please--branches-main' && needs.filter.outputs.skip_tests != 'true'
+    if: github.ref != 'refs/heads/release-please--branches-main' && needs.filter.outputs.should_test == 'true'
     uses: ./.github/workflows/template_test.yml
     secrets:
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
@@ -51,7 +51,7 @@ jobs:
             echo "Filter job failed or was cancelled."
             exit 1
           fi
-          if [ "${{ needs.filter.outputs.skip_tests }}" == "true" ]; then
+          if [ "${{ needs.filter.outputs.should_test }}" == "false" ]; then
             echo "Skipped tests because no application code or dependencies were changed."
             exit 0
           fi
