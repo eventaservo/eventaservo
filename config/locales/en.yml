@@ -57,6 +57,7 @@ en:
   breadcrumbs:
     world: World
   buttons:
+    add: Add
     add_video: Video
     cancel: Cancel
     cancel_registration: Do not register
@@ -66,6 +67,7 @@ en:
     delete: Delete
     duplicate: Duplicate
     edit: Edit
+    save: Save
     save_event: Save
     search: Search
     select: Select
@@ -76,9 +78,12 @@ en:
     copy_failed: Could not copy to clipboard
   common:
     are_you_sure: Are you sure?
+    country: Country
     date: Date
+    events: Events
     location: Location
     name: Name
+    no_results: No results
     no_upper: 'NO'
     sign_in: Sign in
     yes_upper: 'YES'
@@ -378,6 +383,62 @@ en:
       my_events: My events
       my_profile: My profile
       sign_out: Sign out
+  organizations:
+    details:
+      subscribe_calendar: Subscribe to organization calendar
+      youtube_channel: YouTube channel
+    form:
+      address: Address
+      city: City (or location)
+      delete_logo: Delete logo
+      delete_logo_help: "(or upload a new one to replace it)"
+      description: Description
+      display_flag: Show flag
+      display_flag_help: Shows the country flag on the organization page and all of its events
+      edit_title: Edit organization
+      email: Email address
+      logo: Logo
+      new_title: New organization
+      phone: Phone number
+      short_name: Short name
+      short_name_help: Do not use spaces or special characters. You may use _ and -
+      url: Website address (URL)
+      youtube: YouTube channel (URL)
+    index:
+      admins_and_helpers_tooltip: Administrators and helpers
+      create_new: Create new organization
+      search_placeholder: Search organization
+      searching: Searching
+      title: ORGANIZATIONS
+    main_organizations:
+      title: MAIN ORGANIZATIONS
+    tabs:
+      events: events
+      has_reports: Has reports
+      no_past_events: No past events.
+      no_reports: No reports for events of this organization.
+      no_upcoming_events: No upcoming events for this organization.
+      past: Past
+      reports: Reports
+      upcoming: Upcoming
+    users:
+      add_section: Add
+      administrators_header: Administrators
+      co_administrators: Co-administrator(s)
+      confirm_remove_user: Are you sure you want to remove the user from the organization?
+      head_admin_permission_info: Main administrator can add new administrators
+      head_administrators: Main administrator(s)
+      make_co_admin: Make co-administrator
+      make_head_admin: Make main administrator
+      remove_user_from_org: Remove user from organization
+      search_user_placeholder: Search user
+    webcal:
+      article_link_text: this article
+      auto_subscribe_html: Some calendar programs allow you to automatically subscribe to the calendar by clicking a specific link. You can try that via %{link}.
+      description_link_html: Here is the Webcal link to subscribe to the event calendar of %{short_name}. Use it in applications such as Google Calendar, iCal, or similar. If you need instructions on how to use the link, read %{article_link}.
+      description_sync: When you subscribe to an organization's calendar, all events are added to your calendar and any changes update automatically.
+      link_text: this link
+      title: Subscribe to organization calendar
   search:
     cancelled: Cancelled
     min_chars_error: The search query must contain at least 3 characters

@@ -2,18 +2,17 @@
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 id="shareModalCenterTitle" class="modal-title">Aboni organizan kalendaron</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermi"></button>
+        <h5 id="shareModalCenterTitle" class="modal-title"><%= t("organizations.webcal.title") %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= t("buttons.close") %>"></button>
       </div>
       <div class="modal-body">
         <p>
-          Kiam oni abonas organizan kalendaron, ĉiuj eventoj estas aldonataj al la kalendaro kaj ajnaj eventaj ŝanĝoj
-          aŭtomate ĝisdatiĝas.
+          <%= t("organizations.webcal.description_sync") %>
         </p>
         <p>
-          Jen Webcal-ligilo por aboni la kalendaron de eventoj de <%= @organizo.short_name %>.
-          Uzu ĝin en programoj kiel Google Calendar, iCal aŭ similaj. Se vi bezonas klarigon kiel uzi la ligilon, legu
-          <%= link_to 'ĉi tiun artikolon', 'https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)', target: :'_blank' %>.
+          <%= t("organizations.webcal.description_link_html",
+                short_name: @organizo.short_name,
+                article_link: link_to(t("organizations.webcal.article_link_text"), "https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)", target: :_blank)) %>
         </p>
         <div class="input-group" data-controller="clipboard"
              data-clipboard-success-message-value="<%= t('clipboard.copied_to_clipboard') %>"
@@ -23,8 +22,8 @@
         </div>
         <br>
         <p>
-          Kelkaj kalendaraj programoj ebligas aŭtomate aboni la kalendaron se oni alklakas specifan ligilon. Vi povas
-          provi tion per <%= link_to 'ĉi tiu ligilo', webcal_organizo_url(short_name: @organizo.short_name, protocol: :webcal, format: :ics) %>.
+          <%= t("organizations.webcal.auto_subscribe_html",
+                link: link_to(t("organizations.webcal.link_text"), webcal_organizo_url(short_name: @organizo.short_name, protocol: :webcal, format: :ics))) %>
         </p>
       </div>
       <div class="modal-footer">

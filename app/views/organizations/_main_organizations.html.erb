@@ -1,11 +1,11 @@
 <h4 class="text-center">
-  <%= icon('fas', 'building', 'ĈEFORGANIZOJ', class: 'fg-color-info') %>
+  <%= icon('fas', 'building', t("organizations.main_organizations.title"), class: 'fg-color-info') %>
 </h4>
 
 <div class="row">
   <% organizations.each do |organization| %>
     <div class="col-12 col-md-6 mb-2">
-      <%= link_to organization_url(organization.short_name), class: 'card-link' do %>
+      <%= link_to organization_url(short_name: organization.short_name), class: 'card-link' do %>
         <div class="card">
           <div class="card-header bg-info fg-color-white text-center">
             <%= organization.name %>

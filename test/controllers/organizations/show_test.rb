@@ -5,13 +5,13 @@ require "test_helper"
 class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
   test "should get show" do
     organization = create(:organization)
-    get organization_url(organization.short_name)
+    get organization_url(short_name: organization.short_name)
     assert_response :success
   end
 
   test "should render phone link when organization has phone" do
     organization = create(:organization, phone: "+55 11 99999-9999")
-    get organization_url(organization.short_name)
+    get organization_url(short_name: organization.short_name)
     assert_response :success
     assert_select "a[href='tel:+55 11 99999-9999']", text: "+55 11 99999-9999"
   end
@@ -25,7 +25,7 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
 
     organization.events << [future_event, past_event, past_event_no_report]
 
-    get organization_url(organization.short_name)
+    get organization_url(short_name: organization.short_name)
     assert_response :success
 
     assert_select "#orgTabs" do
@@ -55,7 +55,7 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
     future_event = create(:event, date_start: 5.days.from_now, date_end: 6.days.from_now, title: "Future Event")
     organization.events << future_event
 
-    get organization_url(organization.short_name, tab: :invalid_tab)
+    get organization_url(short_name: organization.short_name, tab: :invalid_tab)
     assert_response :success
 
     assert_select "#future-tab.active"
@@ -69,7 +69,7 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
       organization.events << create(:event, date_start: (i + 1).days.from_now, date_end: (i + 1).days.from_now + 1.day, title: "Future Event #{i + 1}")
     end
 
-    get organization_url(organization.short_name, venontaj_pagho: 2)
+    get organization_url(short_name: organization.short_name, venontaj_pagho: 2)
     assert_response :success
     assert_select "#future-tab.active"
     assert_select "#future-tab-pane" do
@@ -84,7 +84,7 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
       organization.events << create(:event, date_start: (i + 1).weeks.ago, date_end: (i + 1).weeks.ago + 1.day, title: "Past Event #{i + 1}")
     end
 
-    get organization_url(organization.short_name, pagho: 2)
+    get organization_url(short_name: organization.short_name, pagho: 2)
     assert_response :success
     assert_select "#past-tab.active"
     assert_select "#past-tab-pane" do
@@ -103,7 +103,7 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
       organization.events << event
     end
 
-    get organization_url(organization.short_name, raportoj_pagho: 2)
+    get organization_url(short_name: organization.short_name, raportoj_pagho: 2)
     assert_response :success
 
     assert_select "#reports-tab.active"
@@ -123,7 +123,7 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
       organization.events << event
     end
 
-    get organization_url(organization.short_name, tab: :reports)
+    get organization_url(short_name: organization.short_name, tab: :reports)
     assert_response :success
 
     assert_select "#reports-tab.active"
@@ -136,7 +136,7 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
   test "does not render organization administration sidebar when user is not signed in" do
     organization = organizations(:rotterdam_centre)
 
-    get organization_url(organization.short_name)
+    get organization_url(short_name: organization.short_name)
     assert_response :success
 
     assert_select ".box-header", text: "Administrantoj", count: 0
@@ -148,7 +148,7 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
     organization = organizations(:rotterdam_centre)
     sign_in users(:user)
 
-    get organization_url(organization.short_name)
+    get organization_url(short_name: organization.short_name)
     assert_response :success
 
     assert_select ".box-header", text: "Administrantoj"
@@ -160,7 +160,7 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
     organization = organizations(:rotterdam_centre)
     sign_in users(:user)
 
-    get organization_url(organization.short_name, iframe: "true")
+    get organization_url(short_name: organization.short_name, iframe: "true")
     assert_response :success
 
     assert_select ".box-header", text: "Administrantoj", count: 0
@@ -171,7 +171,7 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
   test "includes SAMEORIGIN X-Frame-Options header by default when not in iframe" do
     organization = organizations(:rotterdam_centre)
 
-    get organization_url(organization.short_name)
+    get organization_url(short_name: organization.short_name)
     assert_response :success
     assert_equal "SAMEORIGIN", response.headers["X-Frame-Options"]
   end
@@ -179,7 +179,7 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
   test "removes X-Frame-Options header when iframe parameter is present" do
     organization = organizations(:rotterdam_centre)
 
-    get organization_url(organization.short_name, iframe: "true")
+    get organization_url(short_name: organization.short_name, iframe: "true")
     assert_response :success
     assert_nil response.headers["X-Frame-Options"]
   end

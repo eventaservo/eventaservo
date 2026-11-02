@@ -31,7 +31,6 @@ Rails.application.routes.draw do
   end
 
   draw(:api)
-  draw(:organizations)
   draw(:shortcuts)
 
   # iloj
@@ -90,6 +89,7 @@ Rails.application.routes.draw do
     draw(:videos)
     draw(:events)
     draw(:reports)
+    draw(:organizations)
 
     # Custom user actions
     post "users/regenerate_api_token", to: "users#regenerate_api_token", as: :regenerate_api_token

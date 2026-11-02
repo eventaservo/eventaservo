@@ -55,7 +55,7 @@ module OrganizationsHelper
   #
   # @return [ActiveSupport::SafeBuffer] the rendered organization link
   def organization_tag(organization)
-    link_to organization_url(organization.short_name), class: "tag" do
+    link_to organization_url(short_name: organization.short_name), class: "tag" do
       content_tag(:div, organization.short_name)
     end
   end

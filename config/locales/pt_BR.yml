@@ -57,15 +57,17 @@ pt_BR:
   breadcrumbs:
     world: Mundo
   buttons:
+    add: Adicionar
     add_video: Vídeo
     cancel: Cancelar
-    cancel_registration: Não registrar
+    cancel_registration: Não se inscrever
     change: Alterar
     close: Fechar
     copy: Copiar
     delete: Excluir
     duplicate: Duplicar
     edit: Editar
+    save: Salvar
     save_event: Salvar
     search: Buscar
     select: Selecionar
@@ -76,9 +78,12 @@ pt_BR:
     copy_failed: Não foi possível copiar para a área de transferência
   common:
     are_you_sure: Tem certeza?
+    country: País
     date: Data
+    events: Eventos
     location: Local
     name: Nome
+    no_results: Nenhum resultado
     no_upper: NÃO
     sign_in: Entrar
     yes_upper: SIM
@@ -378,6 +383,62 @@ pt_BR:
       my_events: Meus eventos
       my_profile: Meu perfil
       sign_out: Sair
+  organizations:
+    details:
+      subscribe_calendar: Assinar calendário da organização
+      youtube_channel: Canal do YouTube
+    form:
+      address: Endereço
+      city: Cidade (ou local)
+      delete_logo: Excluir logotipo
+      delete_logo_help: "(ou envie um novo para substituí-lo)"
+      description: Descrição
+      display_flag: Mostrar bandeira
+      display_flag_help: Mostra a bandeira do país na página da organização e em todos os seus eventos
+      edit_title: Editar organização
+      email: Endereço de e-mail
+      logo: Logotipo
+      new_title: Nova organização
+      phone: Número de telefone
+      short_name: Nome curto
+      short_name_help: Não use espaços ou caracteres especiais. Você pode usar _ e -
+      url: Endereço do site (URL)
+      youtube: Canal do YouTube (URL)
+    index:
+      admins_and_helpers_tooltip: Administradores e ajudantes
+      create_new: Criar nova organização
+      search_placeholder: Buscar organização
+      searching: Buscando
+      title: ORGANIZAÇÕES
+    main_organizations:
+      title: PRINCIPAIS ORGANIZAÇÕES
+    tabs:
+      events: eventos
+      has_reports: Tem relatos
+      no_past_events: Nenhum evento passado.
+      no_reports: Nenhum relato para eventos desta organização.
+      no_upcoming_events: Nenhum evento futuro para esta organização.
+      past: Passados
+      reports: Relatos
+      upcoming: Futuros
+    users:
+      add_section: Adicionar
+      administrators_header: Administradores
+      co_administrators: Coadministrador(es)
+      confirm_remove_user: Tem certeza de que deseja remover o usuário da organização?
+      head_admin_permission_info: Administrador principal pode adicionar novos administradores
+      head_administrators: Administrador(es) principal(is)
+      make_co_admin: Tornar coadministrador
+      make_head_admin: Tornar administrador principal
+      remove_user_from_org: Remover usuário da organização
+      search_user_placeholder: Buscar usuário
+    webcal:
+      article_link_text: este artigo
+      auto_subscribe_html: Alguns aplicativos de calendário permitem assinar o calendário automaticamente ao clicar em um link específico. Você pode tentar isso através de %{link}.
+      description_link_html: Aqui está o link Webcal para assinar o calendário de eventos de %{short_name}. Use-o em aplicativos como Google Calendar, iCal ou similares. Se precisar de instruções sobre como usar o link, leia %{article_link}.
+      description_sync: Ao assinar o calendário de uma organização, todos os eventos são adicionados ao calendário e quaisquer alterações são atualizadas automaticamente.
+      link_text: este link
+      title: Assinar calendário da organização
   search:
     cancelled: Cancelados
     min_chars_error: A busca deve conter pelo menos 3 caracteres

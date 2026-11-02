@@ -499,4 +499,93 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select ".lead", text: /Eventos com relatos/
   end
+
+  test "renders localized organizations index across locales" do
+    sign_in users(:admin_user)
+
+    get organizations_path
+    assert_response :success
+    assert_select ".es-list h4", text: /ORGANIZOJ/
+    assert_select "a", text: /Krei novan organizon/
+    assert_select "input[name='serchi'][placeholder='Serĉi organizon']"
+
+    get "/en/o"
+    assert_response :success
+    assert_select ".es-list h4", text: /ORGANIZATIONS/
+    assert_select "a", text: /Create new organization/
+    assert_select "input[name='serchi'][placeholder='Search organization']"
+
+    get "/pt_BR/o"
+    assert_response :success
+    assert_select ".es-list h4", text: /ORGANIZAÇÕES/
+    assert_select "a", text: /Criar nova organização/
+    assert_select "input[name='serchi'][placeholder='Buscar organização']"
+  end
+
+  test "renders localized organization show view and tabs across locales" do
+    org = organizations(:sao_paulo_klubo)
+    sign_in users(:admin_user)
+
+    get organization_path(short_name: org.short_name)
+    assert_response :success
+    assert_select "#future-tab", text: /Venontaj/
+    assert_select "#past-tab", text: /Pasintaj/
+    assert_select "#reports-tab", text: /Raportoj/
+    assert_select "a", text: /Redakti/
+    assert_select ".box-header", text: "Administrantoj"
+    assert_select ".text-divider", text: "Ĉefadministranto(j)"
+    assert_select "#shareModalCenterTitle", text: "Aboni organizan kalendaron"
+
+    get "/en/o/#{org.short_name}"
+    assert_response :success
+    assert_select "#future-tab", text: /Upcoming/
+    assert_select "#past-tab", text: /Past/
+    assert_select "#reports-tab", text: /Reports/
+    assert_select "a", text: /Edit/
+    assert_select ".box-header", text: "Administrators"
+    assert_select ".text-divider", text: "Main administrator(s)"
+    assert_select "#shareModalCenterTitle", text: "Subscribe to organization calendar"
+
+    get "/pt_BR/o/#{org.short_name}"
+    assert_response :success
+    assert_select "#future-tab", text: /Futuros/
+    assert_select "#past-tab", text: /Passados/
+    assert_select "#reports-tab", text: /Relatos/
+    assert_select "a", text: /Editar/
+    assert_select ".box-header", text: "Administradores"
+    assert_select ".text-divider", text: "Administrador(es) principal(is)"
+    assert_select "#shareModalCenterTitle", text: "Assinar calendário da organização"
+  end
+
+  test "renders localized organization new and edit forms across locales" do
+    org = organizations(:sao_paulo_klubo)
+    sign_in users(:admin_user)
+
+    get new_organization_path
+    assert_response :success
+    assert_select ".lead", text: /Nova organizo/
+    assert_select "label[for='organization_short_name']", text: "Mallonga nomo"
+
+    get edit_organization_path(short_name: org.short_name)
+    assert_response :success
+    assert_select ".lead", text: /Redakti organizon/
+
+    get "/en/o/new"
+    assert_response :success
+    assert_select ".lead", text: /New organization/
+    assert_select "label[for='organization_short_name']", text: "Short name"
+
+    get "/en/o/#{org.short_name}/edit"
+    assert_response :success
+    assert_select ".lead", text: /Edit organization/
+
+    get "/pt_BR/o/new"
+    assert_response :success
+    assert_select ".lead", text: /Nova organização/
+    assert_select "label[for='organization_short_name']", text: "Nome curto"
+
+    get "/pt_BR/o/#{org.short_name}/edit"
+    assert_response :success
+    assert_select ".lead", text: /Editar organização/
+  end
 end
