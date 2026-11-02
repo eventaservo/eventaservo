@@ -2,7 +2,7 @@
   <%= turbo_frame_tag "short_url_availability" do %>
     <% if !@short_url_available %>
       <div class="fg-color-red text-end small">
-        Ĉi tiu mallonga ligilo ne estas disponebla. Elektu alian.
+        <%= t("events.form.short_url_unavailable") %>
       </div>
     <% end %>
   <% end %>

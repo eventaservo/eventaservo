@@ -4,6 +4,7 @@ en:
     event:
       add_to_calendar:
         download_ics: Download ICS
+        title: Add to your calendar
       cancel_event: Cancel
       report_problem: Problem?
       report_problem_form:

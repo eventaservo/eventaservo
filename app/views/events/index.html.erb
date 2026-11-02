@@ -1,10 +1,10 @@
 <div class="box-white">
   <%= page_title current_user.name %>
-  <div class="lead">Eventoj</div>
+  <div class="lead"><%= t("events.my_events") %></div>
   <div class="item-row-header">
-    <div class="col-lg-4">Nomo</div>
-    <div class="col-lg-4">Dato</div>
-    <div class="col-lg-4">Loko</div>
+    <div class="col-lg-4"><%= t("common.name") %></div>
+    <div class="col-lg-4"><%= t("common.date") %></div>
+    <div class="col-lg-4"><%= t("common.location") %></div>
   </div>
   <% @events.each do |event| %>
     <%= link_to event_path(code: event.ligilo), class: 'item-row' do %>

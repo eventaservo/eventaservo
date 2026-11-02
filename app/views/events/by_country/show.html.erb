@@ -54,7 +54,9 @@
         <p>
           <%= t("events.webcal_modal.country_intro_html", country: "#{flag_icon(@country.code)} #{@country.name}".html_safe, help_link: link_to(t("events.webcal_modal.help_article_link"), 'https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)', target: :'_blank', rel: 'noopener noreferrer')) %>
         </p>
-        <div class="input-group" data-controller="clipboard">
+        <div class="input-group" data-controller="clipboard"
+             data-clipboard-success-message-value="<%= t('clipboard.copied_to_clipboard') %>"
+             data-clipboard-error-message-value="<%= t('clipboard.copy_failed') %>">
           <div class="input-group-text">
               <%= link_to t("buttons.copy"), '#', data: { action: 'click->clipboard#copy' } %>
           </div>

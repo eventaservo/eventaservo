@@ -1,8 +1,8 @@
 <% if user_is_owner_or_admin(@event) %>
   <p>
-    <div class="text-divider">Alŝutilo</div>
+    <div class="text-divider"><%= t("events.uploader.title") %></div>
   </p>
-  <p>Aldonu fotojn aŭ dokumentojn al la evento.</p>
+  <p><%= t("events.uploader.prompt") %></p>
 
   <%= form_with(model: @event, url: event_path(code: @event.code), local: true, id: 'uploader_form', method: :patch) do |f| %>
     <%= f.file_field :uploads, multiple: true, direct_upload: true,
@@ -15,6 +15,6 @@
       application/vnd.openxmlformats-officedocument.wordprocessingml.document' %>
     <br>
     <br>
-    <%= f.submit 'Alŝuti', class: 'btn btn-outline-primary btn-sm col-12', id: 'submit_button' %>
+    <%= f.submit t("events.uploader.submit"), class: 'btn btn-outline-primary btn-sm col-12', id: 'submit_button' %>
   <% end %>
 <% end %>

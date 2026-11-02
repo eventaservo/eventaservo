@@ -401,4 +401,102 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     assert_select "#webcalModal .modal-title", text: "Assinar calendário"
     assert_select "#webcalModal button", text: "Fechar"
   end
+
+  test "renders localized event details page across locales" do
+    event = events(:valid_event)
+    sign_in users(:admin_user)
+
+    get event_path(code: event.ligilo)
+    assert_response :success
+    assert_select ".box-header", text: "Informoj"
+    assert_select "#partoprenantoj .text-divider", text: /Interesiĝantoj/
+    assert_select "#evento .text-divider", text: "Administranto"
+    assert_select "[data-event-user-interested-button-target='question'] a.btn-success", text: "JES"
+    assert_select "[data-event-user-interested-button-target='question'] a.btn-danger", text: "NE"
+
+    get "/en/e/#{event.ligilo}"
+    assert_response :success
+    assert_select ".box-header", text: "Details"
+    assert_select "#partoprenantoj .text-divider", text: /Interested/
+    assert_select "#evento .text-divider", text: "Administrator"
+    assert_select "[data-event-user-interested-button-target='question'] a.btn-success", text: "YES"
+    assert_select "[data-event-user-interested-button-target='question'] a.btn-danger", text: "NO"
+
+    get "/pt_BR/e/#{event.ligilo}"
+    assert_response :success
+    assert_select ".box-header", text: "Informações"
+    assert_select "#partoprenantoj .text-divider", text: /Interessados/
+    assert_select "#evento .text-divider", text: "Administrador"
+    assert_select "[data-event-user-interested-button-target='question'] a.btn-success", text: "SIM"
+    assert_select "[data-event-user-interested-button-target='question'] a.btn-danger", text: "NÃO"
+  end
+
+  test "renders localized event new form across locales" do
+    sign_in users(:admin_user)
+
+    get new_event_path
+    assert_response :success
+    assert_select ".lead", text: /Nova evento, kunveno aŭ okazaĵo/
+
+    get "/en/e/new"
+    assert_response :success
+    assert_select ".lead", text: /New event or gathering/
+
+    get "/pt_BR/e/new"
+    assert_response :success
+    assert_select ".lead", text: /Novo evento ou encontro/
+  end
+
+  test "renders localized event edit form across locales" do
+    event = events(:valid_event)
+    sign_in users(:admin_user)
+
+    get edit_event_path(code: event.ligilo)
+    assert_response :success
+    assert_select ".lead", text: /Redakti/
+
+    get "/en/e/#{event.ligilo}/edit"
+    assert_response :success
+    assert_select ".lead", text: /Edit/
+
+    get "/pt_BR/e/#{event.ligilo}/edit"
+    assert_response :success
+    assert_select ".lead", text: /Editar/
+  end
+
+  test "renders localized event chronology across locales" do
+    event = events(:valid_event)
+    sign_in users(:admin_user)
+
+    get "/e/#{event.ligilo}/kronologio"
+    assert_response :success
+    assert_select "h4", text: "Kronologio"
+    assert_select "a", text: "Revidi la eventon"
+
+    get "/en/e/#{event.ligilo}/kronologio"
+    assert_response :success
+    assert_select "h4", text: "History"
+    assert_select "a", text: "View event"
+
+    get "/pt_BR/e/#{event.ligilo}/kronologio"
+    assert_response :success
+    assert_select "h4", text: "Histórico"
+    assert_select "a", text: "Ver evento"
+  end
+
+  test "renders localized reports index across locales" do
+    sign_in users(:admin_user)
+
+    get reports_path
+    assert_response :success
+    assert_select ".lead", text: /Eventoj kun raportoj/
+
+    get "/en/raportoj"
+    assert_response :success
+    assert_select ".lead", text: /Events with reports/
+
+    get "/pt_BR/raportoj"
+    assert_response :success
+    assert_select ".lead", text: /Eventos com relatos/
+  end
 end

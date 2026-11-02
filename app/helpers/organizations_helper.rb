@@ -2,6 +2,8 @@
 
 # Helper methods for rendering organization badges, logos, and event days countdown.
 module OrganizationsHelper
+  include EventsHelper
+
   # Renders the logo image for an organization if attached.
   #
   # @param organization [Organization] the organization whose logo to render
@@ -80,7 +82,7 @@ module OrganizationsHelper
           elsif tag.characteristic?
             "text-bg-warning"
           end
-        concat content_tag(:span, tag.name, class: "me-1 badge rounded-pill #{tag_color}")
+        concat content_tag(:span, tag_display_name(tag), class: "me-1 badge rounded-pill #{tag_color}")
       end
     end
   end

@@ -216,7 +216,13 @@ module ApplicationHelper
     return if email.blank?
 
     if user_signed_in?
-      icon("fas", "at", email, data: {controller: "clipboard", clipboard_text_value: email, action: "click->clipboard#copy"})
+      icon("fas", "at", email, data: {
+        controller: "clipboard",
+        clipboard_text_value: email,
+        clipboard_success_message_value: I18n.t("clipboard.copied_to_clipboard"),
+        clipboard_error_message_value: I18n.t("clipboard.copy_failed"),
+        action: "click->clipboard#copy"
+      })
     else
       icon("fas", "at", email.gsub("@", "(ĉe)"))
     end

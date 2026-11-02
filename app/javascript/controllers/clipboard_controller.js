@@ -17,7 +17,11 @@ import { Controller } from "@hotwired/stimulus"
 //         data-action="click->clipboard#copy">...</span>
 export default class extends Controller {
   static targets = ["source"]
-  static values = { text: String }
+  static values = {
+    text: String,
+    successMessage: { type: String, default: "%{text} sukcese kopiita al la tondujo!" },
+    errorMessage: { type: String, default: "Ne eblis kopii al la tondujo" }
+  }
 
   copy(event) {
     event.preventDefault()
@@ -27,7 +31,7 @@ export default class extends Controller {
     navigator.clipboard.writeText(text).then(() => {
       this.#showFeedback(text)
     }).catch(() => {
-      alert("Ne eblis kopii al la tondujo")
+      alert(this.errorMessageValue)
     })
   }
 
@@ -36,6 +40,7 @@ export default class extends Controller {
     if (this.hasSourceTarget) {
       this.sourceTarget.select()
     }
-    alert(`${text} sukcese kopiita al la tondujo!`)
+    const message = this.successMessageValue.replace("%{text}", text)
+    alert(message)
   }
 }

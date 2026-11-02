@@ -31,7 +31,7 @@
 
       <% if @event.cancelled %>
         <div class="alert alert-danger">
-          <b>NULIGITA</b>
+          <b><%= t("events.cancelled_upper") %></b>
           <%= @event.cancel_reason %>
         </div>
       <% end %>

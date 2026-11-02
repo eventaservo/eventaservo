@@ -41,4 +41,51 @@ class EventsHelperTest < ActionView::TestCase
   test "returns the same tag for unknown values" do
     assert_equal "Unknown", tag_plural_name("Unknown")
   end
+
+  test "returns singular form for known tags in default locale" do
+    assert_equal "Kunveno/Evento", tag_display_name("Kunveno/Evento")
+    assert_equal "Kurso", tag_display_name("Kurso")
+    assert_equal "Alia", tag_display_name("Alia")
+    assert_equal "Anonco", tag_display_name("Anonco")
+    assert_equal "Konkurso", tag_display_name("Konkurso")
+    assert_equal "Por junuloj", tag_display_name("Por junuloj")
+    assert_equal "Unutaga", tag_display_name("Unutaga")
+    assert_equal "Plurtaga", tag_display_name("Plurtaga")
+  end
+
+  test "returns localized singular forms across locales" do
+    I18n.with_locale(:en) do
+      assert_equal "Meeting/Event", tag_display_name("Kunveno/Evento")
+      assert_equal "Course", tag_display_name("Kurso")
+      assert_equal "Other", tag_display_name("Alia")
+      assert_equal "Announcement", tag_display_name("Anonco")
+      assert_equal "Contest", tag_display_name("Konkurso")
+      assert_equal "For youth", tag_display_name("Por junuloj")
+      assert_equal "Single day", tag_display_name("Unutaga")
+      assert_equal "Multi-day", tag_display_name("Plurtaga")
+    end
+
+    I18n.with_locale(:pt_BR) do
+      assert_equal "Encontro/Evento", tag_display_name("Kunveno/Evento")
+      assert_equal "Curso", tag_display_name("Kurso")
+      assert_equal "Outro", tag_display_name("Alia")
+      assert_equal "Anúncio", tag_display_name("Anonco")
+      assert_equal "Concurso", tag_display_name("Konkurso")
+      assert_equal "Para jovens", tag_display_name("Por junuloj")
+      assert_equal "Um dia", tag_display_name("Unutaga")
+      assert_equal "Vários dias", tag_display_name("Plurtaga")
+    end
+  end
+
+  test "tag_display_name handles nil and Tag objects" do
+    assert_equal "", tag_display_name(nil)
+    assert_equal "Unknown", tag_display_name("Unknown")
+
+    tag = Tag.new(name: "Kurso")
+    assert_equal "Kurso", tag_display_name(tag)
+
+    I18n.with_locale(:en) do
+      assert_equal "Course", tag_display_name(tag)
+    end
+  end
 end
