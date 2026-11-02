@@ -3,9 +3,16 @@ name: "CodeQL"
 on:
   pull_request:
     branches: [main]
-    paths-ignore:
-      - "**/*.md"
-      - "**/*.txt"
+    paths:
+      - "app/javascript/**"
+      - "*.js"
+      - "package.json"
+      - "yarn.lock"
+      - ".github/workflows/codeql-analysis.yml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   actions: read

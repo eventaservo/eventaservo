@@ -17,9 +17,11 @@ jobs:
       - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3
         id: changes
         with:
+          predicate-quantifier: 'every'
           filters: |
             should_test:
-              - '!**.md'
+              - '!*.md'
+              - '!**/*.md'
               - '!.github/**'
               - '!.gitpod*'
               - '!.devcontainer/**'
@@ -39,12 +41,16 @@ jobs:
       QLTY_COVERAGE_TOKEN: ${{ secrets.QLTY_COVERAGE_TOKEN }}
 
   minitest:
-    needs: filter
+    needs: [filter, tests]
     if: always() && github.ref != 'refs/heads/release-please--branches-main'
     runs-on: ubuntu-22.04
     steps:
       - name: Status check
         run: |
+          if [ "${{ needs.filter.result }}" != "success" ]; then
+            echo "Filter job failed or was cancelled."
+            exit 1
+          fi
           if [ "${{ needs.filter.outputs.should_test }}" == "false" ]; then
             echo "Skipped tests because no application code or dependencies were changed."
             exit 0
