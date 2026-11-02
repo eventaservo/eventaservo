@@ -59,15 +59,29 @@ pt_BR:
   buttons:
     add_video: Vídeo
     cancel: Cancelar
+    cancel_registration: Não registrar
     change: Alterar
     close: Fechar
     copy: Copiar
+    delete: Excluir
     duplicate: Duplicar
     edit: Editar
+    save_event: Salvar
     search: Buscar
     select: Selecionar
     send: Enviar
     share: Compartilhar
+  clipboard:
+    copied_to_clipboard: "%{text} copiado para a área de transferência!"
+    copy_failed: Não foi possível copiar para a área de transferência
+  common:
+    are_you_sure: Tem certeza?
+    date: Data
+    location: Local
+    name: Nome
+    no_upper: NÃO
+    sign_in: Entrar
+    yes_upper: SIM
   continents:
     afriko: África
     ameriko: Américas
@@ -112,32 +126,120 @@ pt_BR:
       previous_week: Semana anterior
       today: Hoje
       week_navigation: Navegação por semanas
+    cancel_modal:
+      confirm_button: Confirmar cancelamento
+      description: Cancelar o evento não o remove da lista, mas o exibe como cancelado. Dessa forma, as pessoas saberão que o evento não acontecerá.
+      reason_placeholder: Digite o motivo
+      title: Cancelar o evento
     cancelled_label: Cancelado
+    cancelled_upper: CANCELADO
+    chronology:
+      no_changes: Nenhuma alteração encontrada no histórico.
+      title: Histórico
+      view_event: Ver evento
     date_in_city: "%{date} em %{city}"
+    daylight_saving_time: Horário de verão
     days_left:
       in_days:
         one: termina em %{count} dia
         other: termina em %{count} dias
       tomorrow: termina amanhã
+    details:
+      administrator: Administrador
+      header: Informações
     form:
+      add_to_international_calendar: Adicionar ao Calendário Internacional
+      address: Endereço local do evento
+      address_help: Adicione o nome da rua para definir a localização do evento no mapa
+      admin_functions: Funções administrativas
+      announcements_help_html: Anúncios e concursos não aparecerão na página inicial.<br>A inclusão de um evento no %{calendar_link} dos principais eventos mundiais de Esperanto é decidida pela equipe editorial do ES.
+      city_or_place: Cidade (ou local)
+      content: Conteúdo
+      delete_confirm: Tem certeza? Você não poderá desfazer isso.
+      email_for_contact: E-mail para contato
+      event_administrator: Administrador do evento
+      max_100_chars: Máximo de 100 caracteres
+      max_140_chars: Máximo de 140 caracteres
+      new_title: Novo evento ou encontro
+      online_or_hybrid: Evento online ou híbrido
+      organization_help: Deixe em branco se o evento não pertencer a uma organização
+      organizations: Organização(ões)
       search_placeholder: Buscar...
       search_text: Nenhum resultado
-      select_category_alert: Você deve selecionar pelo menos uma categoria
+      select_category_alert: Você deve escolher pelo menos uma categoria
+      select_timezone_instead_of_address: Selecionar fuso horário em vez de endereço/país
+      short_url: Link curto (opcional)
+      short_url_unavailable: Este link curto não está disponível. Escolha outro.
+      time_end_aria: Hora de término
+      time_start_aria: Hora de início
+      timezone: Fuso horário
+      website: Site
+      write_in_esperanto_notice: Escreva em esperanto. Para que todos possam saber o que acontece no mundo do Esperanto!
     happening_now_count:
       one: "%{count} acontecendo agora"
       other: "%{count} acontecendo agora"
     international_event: Evento Internacional
     map:
       duplicate_notice: "* O mapa exibe apenas o primeiro evento futuro quando múltiplos eventos ocorrem no mesmo local com o mesmo título"
+    my_events: Eventos
     online: Online
     online_event: Evento online
+    options:
+      aria_label: Opções do evento
+    participants:
+      and_more: e mais...
+      anonymous_count:
+        one: e mais %{count} pessoa que preferiu não exibir o nome
+        other: e mais %{count} pessoas que preferiram não exibir o nome
+      count_interested_future:
+        one: "%{count} interessado"
+        other: "%{count} interessados"
+      count_interested_past:
+        one: "%{count} interessado"
+        other: "%{count} interessados"
+      interested_active: Tenho interesse!
+      interested_button: Tenho interesse
+      interested_future: Interessados
+      interested_past: Interessados
+      public_list_question: Exibir seu nome na lista de interessados?
+      reminder_prompt: Indique que tem interesse e você receberá e-mails de lembrete sobre o evento.
+      reminder_subscribed: Você receberá e-mails de lembrete sobre o evento.
+      sign_in_to_show_interest_html: "%{link} para manifestar seu interesse"
     past_events_count:
       one: "%{count} evento passado"
       other: "%{count} eventos passados"
+    reports:
+      add_link: Adicionar link
+      delete_report_aria: Excluir relato
+      empty_prompt: Adicione links para relatos
+      events_with_reports_title: Eventos com relatos
+      header: Relatos
+      new_title: Relato de evento
+      url_example: 'Ex: https://uea.facila.org/artikoloj/movado/zamenhof-tago-r269'
+    share_modal:
+      prompt: Escolha como compartilhar o evento
+      share_on_facebook: Compartilhar no Facebook
+      share_on_pinterest: Compartilhar no Pinterest
+      share_on_reddit: Compartilhar no Reddit
+      share_on_telegram: Compartilhar no Telegram
+      share_on_twitter: Compartilhar no Twitter
+      share_on_vkontakte: Compartilhar no VKontakte
+      share_via_email: Compartilhar por e-mail
+      share_via_whatsapp: Compartilhar por WhatsApp
+      title: Compartilhar
     show_past: Eventos passados
+    timezone:
+      same_as_yours: Mesmo que seu fuso horário
     upcoming_events_count:
       one: "%{count} próximo evento"
       other: "%{count} próximos eventos"
+    uploader:
+      prompt: Adicione fotos ou documentos ao evento.
+      submit: Enviar
+      title: Envio de arquivos
+    uploads:
+      delete_file_aria: Excluir arquivo
+      title: Arquivos
     webcal_modal:
       auto_subscribe_html: Alguns aplicativos de calendário permitem assinar o calendário automaticamente ao clicar em um link específico. Você pode tentar isso através de %{link}.
       auto_subscribe_link: este link
@@ -200,6 +302,11 @@ pt_BR:
       not_found: Organização não existe
       updated: Organização atualizada com sucesso
       user_added: Usuário adicionado à organização
+    reports:
+      create_error: Ocorreu um erro ao criar o relato
+      created: O relato foi criado com sucesso
+      destroy_error: Ocorreu um erro ao excluir o relato
+      destroyed: O relato foi excluído com sucesso
     users:
       account_deleted: Sua conta foi excluída.
       invalid_security_phrase: Frase de segurança antispam incorreta. Digite o nome da língua internacional.
@@ -325,6 +432,15 @@ pt_BR:
       konkurso: Concursos
       kunveno_evento: Encontros/Eventos
       kurso: Cursos
+      plurtaga: Vários dias
+      por_junuloj: Para jovens
+      unutaga: Um dia
+    singular:
+      alia: Outro
+      anonco: Anúncio
+      konkurso: Concurso
+      kunveno_evento: Encontro/Evento
+      kurso: Curso
       plurtaga: Vários dias
       por_junuloj: Para jovens
       unutaga: Um dia

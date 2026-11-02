@@ -59,15 +59,29 @@ en:
   buttons:
     add_video: Video
     cancel: Cancel
+    cancel_registration: Do not register
     change: Change
     close: Close
     copy: Copy
+    delete: Delete
     duplicate: Duplicate
     edit: Edit
+    save_event: Save
     search: Search
     select: Select
     send: Send
     share: Share
+  clipboard:
+    copied_to_clipboard: "%{text} copied to clipboard!"
+    copy_failed: Could not copy to clipboard
+  common:
+    are_you_sure: Are you sure?
+    date: Date
+    location: Location
+    name: Name
+    no_upper: false
+    sign_in: Sign in
+    yes_upper: true
   continents:
     afriko: Africa
     ameriko: Americas
@@ -112,32 +126,120 @@ en:
       previous_week: Previous week
       today: Today
       week_navigation: Week navigation
+    cancel_modal:
+      confirm_button: Confirm cancellation
+      description: Cancelling the event does not remove it from the list, but displays it as cancelled. This informs people that the event will not take place.
+      reason_placeholder: Enter the reason
+      title: Cancel event
     cancelled_label: Cancelled
+    cancelled_upper: CANCELLED
+    chronology:
+      no_changes: No changes found in the history.
+      title: History
+      view_event: View event
     date_in_city: "%{date} in %{city}"
+    daylight_saving_time: Daylight saving time
     days_left:
       in_days:
         one: ends in %{count} day
         other: ends in %{count} days
       tomorrow: ends tomorrow
+    details:
+      administrator: Administrator
+      header: Details
     form:
+      add_to_international_calendar: Add to International Calendar
+      address: Local event address
+      address_help: Add the street name to pinpoint the event location on the map
+      admin_functions: Admin functions
+      announcements_help_html: Announcements and contests will not appear on the home page.<br>Whether an event is added to the %{calendar_link} of major worldwide Esperanto events is decided by the ES editorial team.
+      city_or_place: City (or location)
+      content: Content
+      delete_confirm: Are you sure? You will not be able to undo this.
+      email_for_contact: Contact email
+      event_administrator: Event administrator
+      max_100_chars: Maximum 100 characters
+      max_140_chars: Maximum 140 characters
+      new_title: New event or gathering
+      online_or_hybrid: Online or hybrid event
+      organization_help: Leave empty if the event does not belong to an organization
+      organizations: Organization(s)
       search_placeholder: Search...
       search_text: No results
       select_category_alert: You must select at least one category
+      select_timezone_instead_of_address: Select timezone instead of address/country
+      short_url: Short link (optional)
+      short_url_unavailable: This short link is not available. Please choose another.
+      time_end_aria: End time
+      time_start_aria: Start time
+      timezone: Timezone
+      website: Website
+      write_in_esperanto_notice: Write in Esperanto. Let everyone know what is happening in the Esperanto world worldwide!
     happening_now_count:
       one: "%{count} happening now"
       other: "%{count} happening now"
     international_event: International Event
     map:
       duplicate_notice: "* The map shows only the first upcoming event when multiple events occur at the same location with the same title"
+    my_events: Events
     online: Online
     online_event: Online event
+    options:
+      aria_label: Event options
+    participants:
+      and_more: and more...
+      anonymous_count:
+        one: and %{count} other who preferred not to show their name
+        other: and %{count} others who preferred not to show their name
+      count_interested_future:
+        one: "%{count} interested"
+        other: "%{count} interested"
+      count_interested_past:
+        one: "%{count} interested"
+        other: "%{count} interested"
+      interested_active: I'm interested!
+      interested_button: I'm interested
+      interested_future: Interested
+      interested_past: Interested
+      public_list_question: Display your name in the list of interested people?
+      reminder_prompt: Indicate that you are interested and you will receive reminder emails about the event.
+      reminder_subscribed: You will receive reminder emails about the event.
+      sign_in_to_show_interest_html: "%{link} to indicate your interest"
     past_events_count:
       one: "%{count} past event"
       other: "%{count} past events"
+    reports:
+      add_link: Add link
+      delete_report_aria: Delete report
+      empty_prompt: Add links to reports
+      events_with_reports_title: Events with reports
+      header: Reports
+      new_title: Event report
+      url_example: 'E.g.: https://uea.facila.org/artikoloj/movado/zamenhof-tago-r269'
+    share_modal:
+      prompt: Choose how to share the event
+      share_on_facebook: Share on Facebook
+      share_on_pinterest: Share on Pinterest
+      share_on_reddit: Share on Reddit
+      share_on_telegram: Share on Telegram
+      share_on_twitter: Share on Twitter
+      share_on_vkontakte: Share on VKontakte
+      share_via_email: Share via email
+      share_via_whatsapp: Share via WhatsApp
+      title: Share
     show_past: Past events
+    timezone:
+      same_as_yours: Same as your timezone
     upcoming_events_count:
       one: "%{count} upcoming event"
       other: "%{count} upcoming events"
+    uploader:
+      prompt: Add photos or documents to the event.
+      submit: Upload
+      title: Uploader
+    uploads:
+      delete_file_aria: Delete file
+      title: Files
     webcal_modal:
       auto_subscribe_html: Some calendar programs allow you to automatically subscribe to the calendar if you click a specific link. You can try this via %{link}.
       auto_subscribe_link: this link
@@ -200,6 +302,11 @@ en:
       not_found: Organization does not exist
       updated: Organization successfully updated
       user_added: User added to organization
+    reports:
+      create_error: An error occurred while creating the report
+      created: The report was successfully created
+      destroy_error: An error occurred while deleting the report
+      destroyed: The report was successfully deleted
     users:
       account_deleted: Your account has been deleted.
       invalid_security_phrase: Incorrect anti-spam security phrase. Type the name of the international language.
@@ -325,6 +432,15 @@ en:
       konkurso: Contests
       kunveno_evento: Meetings/Events
       kurso: Courses
+      plurtaga: Multi-day
+      por_junuloj: For youth
+      unutaga: Single day
+    singular:
+      alia: Other
+      anonco: Announcement
+      konkurso: Contest
+      kunveno_evento: Meeting/Event
+      kurso: Course
       plurtaga: Multi-day
       por_junuloj: For youth
       unutaga: Single day

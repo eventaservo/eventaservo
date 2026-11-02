@@ -2,7 +2,7 @@
   <div class="col-12 col-lg-9">
     <%= form_with(model: @report) do |f| %>
       <div class="box-white">
-        <h1 class="lead">Event-raporto</h1>
+        <h1 class="lead"><%= t("events.reports.new_title") %></h1>
 
         <%= error_handling(@report) %>
 
@@ -11,7 +11,7 @@
         <div class="field">
           <%= f.label :url %>
           <%= f.text_field :url, class: 'form-control', required: true, autofocus: true %>
-          <small class="form-text text-muted">Ekz: https://uea.facila.org/artikoloj/movado/zamenhof-tago-r269</small>
+          <small class="form-text text-muted"><%= t("events.reports.url_example") %></small>
         </div>
 
         <br>
@@ -22,8 +22,8 @@
         </div>
 
         <div class="buttons-footer">
-          <%= link_to 'Ne registri', event_path(code: @event.code), class: 'button-cancel' %>
-          <%= f.submit 'Registri', class: 'button-submit' %>
+          <%= link_to t("buttons.cancel_registration"), event_path(code: @event.code), class: 'button-cancel' %>
+          <%= f.submit t("buttons.save_event"), class: 'button-submit' %>
         </div>
       </div>
     <% end %>

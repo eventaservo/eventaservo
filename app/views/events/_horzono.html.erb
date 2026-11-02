@@ -1,6 +1,6 @@
 <% if Calendar.utc_offset(@event.time_zone) == Calendar.utc_offset(@horzono) && !@event.all_day? %>
   <span class="badge float-end text-bg-light fw-normal">
-    Sama kiel via horzono
+    <%= t("events.timezone.same_as_yours") %>
   </span>
 <% else %>
   <% unless @event.start_time_label == '00:00' && @event.end_time_label == '00:00' %>

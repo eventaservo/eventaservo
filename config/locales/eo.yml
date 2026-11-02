@@ -59,15 +59,29 @@ eo:
   buttons:
     add_video: Video
     cancel: Nuligi
+    cancel_registration: Ne registri
     change: Ŝangi
     close: Fermi
     copy: Kopii
+    delete: Forigi
     duplicate: Duobligi
     edit: Redakti
+    save_event: Registri
     search: Serĉi
     select: Elekti
     send: Sendi
     share: Diskonigi
+  clipboard:
+    copied_to_clipboard: "%{text} sukcese kopiita al la tondujo!"
+    copy_failed: Ne eblis kopii al la tondujo
+  common:
+    are_you_sure: Ĉu vi certas?
+    date: Dato
+    location: Loko
+    name: Nomo
+    no_upper: NE
+    sign_in: Ensalutu
+    yes_upper: JES
   continents:
     afriko: Afriko
     ameriko: Ameriko
@@ -112,32 +126,120 @@ eo:
       previous_week: Antaŭa semajno
       today: Hodiaŭ
       week_navigation: Navigado inter semajnoj
+    cancel_modal:
+      confirm_button: Konfirmi la nuligon
+      description: Nuligi la eventon ne forigas ĝin de la listo, sed aperigas ĝin kiel nuligitan. Tiel homoj informiĝos, ke la evento ne okazos.
+      reason_placeholder: Entajpu la kialon
+      title: Nuligi la eventon
     cancelled_label: Nuligita
+    cancelled_upper: NULIGITA
+    chronology:
+      no_changes: Neniu ŝanĝo troviĝis en la kronologio.
+      title: Kronologio
+      view_event: Revidi la eventon
     date_in_city: "%{date} en %{city}"
+    daylight_saving_time: Somera/Vintra tempo
     days_left:
       in_days:
         one: finiĝos post %{count} tago
         other: finiĝos post %{count} tagoj
       tomorrow: finiĝos morgaŭ
+    details:
+      administrator: Administranto
+      header: Informoj
     form:
+      add_to_international_calendar: Aldoni al Internacia Kalendaro
+      address: Loka adreso de la evento
+      address_help: Aldonu la strat-nomon por precizigi la eventlokon en la mapo
+      admin_functions: Administraj funkcioj
+      announcements_help_html: Anoncoj kaj konkursoj ne aperos en la ĉefpaĝo.<br>Ĉu evento estas aldonita al la %{calendar_link} de ĉefaj tutmondaj Esperanto-eventoj, tion decidas la redakcio de ES.
+      city_or_place: Urbo (aŭ loko)
+      content: Enhavo
+      delete_confirm: Ĉu vi certas? Vi ne kapablos malfari tion.
+      email_for_contact: Retpoŝtadreso por kontakto
+      event_administrator: Eventa administranto
+      max_100_chars: Maksimume 100 signoj
+      max_140_chars: Maksimume 140 signoj
+      new_title: Nova evento, kunveno aŭ okazaĵo
+      online_or_hybrid: Reta aŭ hibrida evento
+      organization_help: Lasu malplena se la evento ne apartenas al organizo
+      organizations: Organizo(j)
       search_placeholder: Serĉi...
       search_text: Neniu trafo
       select_category_alert: Vi devas elekti almenaŭ unu specon
+      select_timezone_instead_of_address: Elekti horzonon anstataŭ adreson/landon
+      short_url: Mallonga ligilo (nedeviga)
+      short_url_unavailable: Ĉi tiu mallonga ligilo ne estas disponebla. Elektu alian.
+      time_end_aria: Fina horo
+      time_start_aria: Komenca horo
+      timezone: Horzono
+      website: Retpaĝo
+      write_in_esperanto_notice: Skribu esperante. Povu ĉiuj scii, kio okazas en Esperantujo tutmonde!
     happening_now_count:
       one: "%{count} okazas nuntempe"
       other: "%{count} okazas nuntempe"
     international_event: Internacia Evento
     map:
       duplicate_notice: "* La mapo aperigas nur la unuan venontan eventon, se temas pri evento en la sama loko kun la sama titolo"
+    my_events: Eventoj
     online: Reta
     online_event: Reta evento
+    options:
+      aria_label: Eventaj ebloj
+    participants:
+      and_more: kaj pli...
+      anonymous_count:
+        one: kaj %{count} alia kiu preferis ne aperigi sian nomon
+        other: kaj %{count} aliaj kiuj preferis ne aperigi sian nomon
+      count_interested_future:
+        one: "%{count} interesiĝanto"
+        other: "%{count} interesiĝantoj"
+      count_interested_past:
+        one: "%{count} interesiĝinto"
+        other: "%{count} interesiĝintoj"
+      interested_active: Mi interesiĝas!
+      interested_button: Mi interesiĝas
+      interested_future: Interesiĝantoj
+      interested_past: Interesiĝintoj
+      public_list_question: Ĉu aperigi vian nomon en la listo de interesiĝantoj?
+      reminder_prompt: Indiku ke vi interesiĝas kaj vi ricevos memorigajn retmesaĝojn pri la evento.
+      reminder_subscribed: Vi ricevos memorigajn retmesaĝojn pri la evento.
+      sign_in_to_show_interest_html: "%{link} por indiki vian interesiĝon"
     past_events_count:
       one: "%{count} pasinta evento"
       other: "%{count} pasintaj eventoj"
+    reports:
+      add_link: Aldoni ligilon
+      delete_report_aria: Forigi raporton
+      empty_prompt: Aldonu ligilojn al raportoj
+      events_with_reports_title: Eventoj kun raportoj
+      header: Raportoj
+      new_title: Event-raporto
+      url_example: 'Ekz: https://uea.facila.org/artikoloj/movado/zamenhof-tago-r269'
+    share_modal:
+      prompt: Elektu kiel diskonigi la eventon
+      share_on_facebook: Diskonigi en Facebook
+      share_on_pinterest: Diskonigi en Pinterest
+      share_on_reddit: Diskonigi en Reddit
+      share_on_telegram: Diskonigi en Telegram
+      share_on_twitter: Diskonigi en Twitter
+      share_on_vkontakte: Diskonigi en VKontakte
+      share_via_email: Diskonigi per retpoŝto
+      share_via_whatsapp: Diskonigi per WhatsApp
+      title: Diskonigilo
     show_past: Pasintaj eventoj
+    timezone:
+      same_as_yours: Sama kiel via horzono
     upcoming_events_count:
       one: "%{count} venonta"
       other: "%{count} venontaj"
+    uploader:
+      prompt: Aldonu fotojn aŭ dokumentojn al la evento.
+      submit: Alŝuti
+      title: Alŝutilo
+    uploads:
+      delete_file_aria: Forigi dosieron
+      title: Dosieroj
     webcal_modal:
       auto_subscribe_html: Kelkaj kalendaraj programoj ebligas aŭtomate aboni la kalendaron se oni alklakas specifan ligilon. Vi povas provi tion per %{link}.
       auto_subscribe_link: ĉi tiu ligilo
@@ -200,6 +302,11 @@ eo:
       not_found: Organizo ne ekzistas
       updated: Organizo sukcese ĝisdatigita
       user_added: Uzanto aldonita al la organizo
+    reports:
+      create_error: Eraro okazis kreante la raporton
+      created: La raporto estis sukcese kreita
+      destroy_error: Eraro okazis forigante la raporton
+      destroyed: La raporto estis sukcese forigita
     users:
       account_deleted: Via konto estas forviŝita.
       invalid_security_phrase: Malĝusta kontraŭspama sekurvorto. Entajpu la nomon de la internacia lingvo.
@@ -328,6 +435,15 @@ eo:
       plurtaga: Plurtagaj
       por_junuloj: Por junuloj
       unutaga: Unutagaj
+    singular:
+      alia: Alia
+      anonco: Anonco
+      konkurso: Konkurso
+      kunveno_evento: Kunveno/Evento
+      kurso: Kurso
+      plurtaga: Plurtaga
+      por_junuloj: Por junuloj
+      unutaga: Unutaga
   teachers_and_speakers:
     cards:
       experience: Sperto

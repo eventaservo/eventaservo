@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module OrganizationsHelper
+  include EventsHelper
+
   def organization_logo(organization, size: :small, html_class: nil)
     return unless organization.persisted? && organization.logo.attached?
 
@@ -61,7 +63,7 @@ module OrganizationsHelper
           elsif tag.characteristic?
             "text-bg-warning"
           end
-        concat content_tag(:span, tag.name, class: "me-1 badge rounded-pill #{tag_color}")
+        concat content_tag(:span, tag_display_name(tag), class: "me-1 badge rounded-pill #{tag_color}")
       end
     end
   end

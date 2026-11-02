@@ -119,4 +119,26 @@ module EventsHelper
     else tag_name
     end
   end
+
+  # Returns the localized singular display name of a tag.
+  #
+  # @param tag_or_name [Tag, String, nil] the tag instance or singular tag name
+  #
+  # @return [String] the localized singular tag name, or the given name when untranslated
+  def tag_display_name(tag_or_name)
+    return "" if tag_or_name.nil?
+
+    name = tag_or_name.is_a?(Tag) ? tag_or_name.name : tag_or_name.to_s
+    case name
+    when "Kunveno/Evento" then I18n.t("tags.singular.kunveno_evento")
+    when "Kurso" then I18n.t("tags.singular.kurso")
+    when "Alia" then I18n.t("tags.singular.alia")
+    when "Anonco" then I18n.t("tags.singular.anonco")
+    when "Konkurso" then I18n.t("tags.singular.konkurso")
+    when "Por junuloj" then I18n.t("tags.singular.por_junuloj")
+    when "Unutaga" then I18n.t("tags.singular.unutaga")
+    when "Plurtaga" then I18n.t("tags.singular.plurtaga")
+    else name
+    end
+  end
 end

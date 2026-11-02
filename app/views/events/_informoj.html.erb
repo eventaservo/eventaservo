@@ -1,5 +1,5 @@
 <div class="box-white">
-  <div class="box-header">Informoj</div>
+  <div class="box-header"><%= t("events.details.header") %></div>
   <div class="box-body">
     <p style="line-height: 1.8em;">
       <%= link_to_website(@event.site) + raw('<br/>') if @event.site.present? %>
@@ -13,7 +13,7 @@
     <%= render partial: 'partoprenontoj', locals: { event: @event, interested: @partoprenontoj } %>
 
     <p>
-      <div class="text-divider">Administranto</div>
+      <div class="text-divider"><%= t("events.details.administrator") %></div>
       <% if @event.organizations.any? %>
         <div class="text-center" style="font-size: 1.3em;">
           <% @event.organizations.each do |o| %>
