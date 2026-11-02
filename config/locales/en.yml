@@ -21,10 +21,17 @@ en:
         name: Name
         short_name: Short name
       user:
+        about: About me
+        avatar: Avatar
+        birthday: Date of birth
         city: City
         country_id: Country
         email: Email
         name: Name
+        password: Password
+        password_confirmation: Confirm password
+        persona_retejo: Personal website
+        ueacode: UEA code
     errors:
       messages:
         record_invalid: 'Validation failed: %{errors}'
@@ -42,6 +49,7 @@ en:
     models:
       event: Events
     registrations:
+      api_v2_token: API v2 Token
       regenerate_token: Regenerate Token
       regenerate_token_confirmation: Are you sure you want to regenerate your API token? The old token will stop working immediately.
       token_regenerated: API token successfully regenerated.
@@ -73,6 +81,7 @@ en:
     select: Select
     send: Send
     share: Share
+    update: Update
   clipboard:
     copied_to_clipboard: "%{text} copied to clipboard!"
     copy_failed: Could not copy to clipboard
@@ -80,11 +89,14 @@ en:
     are_you_sure: Are you sure?
     country: Country
     date: Date
+    event: Event
     events: Events
     location: Location
     name: Name
     no_results: No results
     no_upper: 'NO'
+    optional: "*optional"
+    or_upper: OR
     sign_in: Sign in
     yes_upper: 'YES'
   continents:
@@ -94,8 +106,73 @@ en:
     europo: Europe
     oceanio: Oceania
     reta: Online
+  devise:
+    confirmations:
+      new:
+        submit: Resend
+        subtitle: Resend confirmation instructions
+    passwords:
+      edit:
+        minimum_characters: Minimum %{count} characters
+        new_password: New password
+        password_confirmation: Confirm new password
+        submit: Change my password
+        title: Change your password
+      new:
+        instructions: Enter your email address. We will send you instructions to create a new password.
+        submit: Receive instructions
+        subtitle: Forgot your password?
+    registrations:
+      edit:
+        delete_account: Delete account
+        delete_account_confirmation: Are you sure? This CANNOT be undone!
+        links: Links
+        organizations: Organizations
+        ready_to_help: I am ready to help
+        remove_avatar: Remove avatar
+        title: Edit profile
+      instructor:
+        experience: Experience
+        experience_placeholder: Write about your experience as a teacher.
+        i_am_teacher: I am a teacher
+        lead: As a teacher
+        level: Level
+      new:
+        birthday_placeholder: Date of birth (D/M/Y) *optional
+        password_confirmation_placeholder: Confirm password
+        password_placeholder: Password
+        security_phrase_placeholder: What is our language called?
+        submit: Sign up
+        subtitle_html: Sign up to create new events.<br>It's free!
+        ueacode_placeholder: UEA code *optional
+        video_help_html: If in doubt, watch %{video_link}. It explains how to sign up.
+        video_link_text: this video
+      speaker:
+        i_am_speaker: I am a speaker
+        lead: As a speaker
+        topics_label: I speak about the following topics
+        topics_placeholder: Write about the topics you are willing to give presentations on
+    sessions:
+      new:
+        forgot_password: Forgot password?
+        submit: Log in
+        subtitle: Log in to create new events.
+    shared:
+      links:
+        already_registered: Already registered?
+        didnt_receive_confirmation_instructions: Didn't receive confirmation instructions?
+        not_registered: Not registered yet?
+        sign_in: Log in
+        sign_up_now: Sign up now
+      sign_in_with_provider: Sign in with %{provider}
+      sign_up_with_provider: Sign up with %{provider}
+    unlocks:
+      new:
+        submit: Resend unlock instructions
+        title: Resend unlock instructions
   errors:
     format: "%{attribute} %{message}"
+    header: There is an error in the form
     messages:
       accepted: must be accepted
       blank: can't be blank
@@ -538,5 +615,33 @@ en:
     title: Teachers and speakers
   timezone:
     custom_timezone_text: 'Times shown in your timezone: %{timezone}'
+  users:
+    events:
+      interested_upcoming_events: Upcoming events I am interested in
+      managed_past_events: Past events I managed
+      managed_upcoming_events: Upcoming events I manage
+      my_personal_events_page: My personal events page
+      personal_page_notice: This page is personal. Other Eventa Servo users cannot see it.
+    profile:
+      admin_info:
+        active: Active
+        birthday: Date of birth
+        created_at: Created at
+        last_sign_in_at: Last signed in
+        never: never
+        search_in_admin: Search in Admin panel
+        title: Information for administrators
+        uea_code: UEA code
+      contacts: Contacts
+      i_am_teacher: I am a teacher
+      levels_taught: 'I teach level(s):'
+      ready_to_lecture_about: I am ready to speak about
+      subscribe_personal_calendar: Subscribe to personal calendar
+      this_article: this article
+      this_link: this link
+      webcal_info_1: When you subscribe to a personal calendar, all your own events and those you are interested in are added to the calendar. Any event updates are automatically synchronized.
+      webcal_info_2_html: Here is a Webcal link to subscribe to the calendar. Use it in applications like Google Calendar, iCal, or similar. If you need instructions on how to use the link, read %{article_link}.
+      webcal_info_3_html: Some calendar applications allow you to automatically subscribe to the calendar by clicking a specific link. You can try this via %{link}.
+      webcal_warning: Do not share your personal calendar address with anyone else. It is private.
   video:
     presentations: Presentations

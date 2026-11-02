@@ -24,7 +24,7 @@
           <% end %>
         </div>
       <% else %>
-        <%= link_to display_user(@event.user), events_by_username_path(@event.user.username), class: 'btn btn-sm btn-outline-link' %>
+        <%= link_to display_user(@event.user), events_by_username_path(username: @event.user.username), class: 'btn btn-sm btn-outline-link' %>
       <% end %>
     </p>
 

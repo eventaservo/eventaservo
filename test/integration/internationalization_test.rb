@@ -588,4 +588,99 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select ".lead", text: /Editar organização/
   end
+
+  test "renders localized devise sign in, registration, password, and confirmation pages in default locale" do
+    get new_user_session_path
+    assert_response :success
+    assert_select "p", text: /Ensalutu por krei novajn eventojn/
+    assert_select "input[type='submit'][value='Ensaluti']"
+    assert_select "a", text: /Mi forgesis mian pasvorton/
+    assert_select "a", text: /Registriĝu nun/
+
+    get new_user_registration_path
+    assert_response :success
+    assert_select "p", text: /Registriĝu por krei novajn eventojn/
+    assert_select "input[type='submit'][value='Registriĝi']"
+    assert_select "a", text: /Ensalutu/
+
+    get new_user_password_path
+    assert_response :success
+    assert_select "p", text: /Ĉu vi forgesis vian pasvorton\?/
+    assert_select "input[type='submit'][value='Ricevu instrukciojn']"
+
+    get new_user_confirmation_path
+    assert_response :success
+    assert_select "p", text: /Resendu konfirminstrukciojn/
+    assert_select "input[type='submit'][value='Resendi']"
+  end
+
+  test "renders localized devise account edit form across locales for admin user" do
+    sign_in users(:admin_user)
+
+    get edit_user_registration_path
+    assert_response :success
+    assert_select ".lead", text: "Redakti profilon"
+    assert_select "label[for='user_name']", text: "Nomo"
+    assert_select "label[for='user_email']", text: "Retadreso"
+    assert_select ".text-divider", text: "Mi pretas helpi"
+    assert_select ".text-divider", text: "Ligiloj"
+    assert_select ".text-divider", text: "Organizoj"
+    assert_select "input[type='submit'][value='Ĝisdatigi']"
+    assert_select "a", text: "Forviŝi konton"
+
+    get "/en/users/edit"
+    assert_response :success
+    assert_select ".lead", text: "Edit profile"
+    assert_select "label[for='user_name']", text: "Name"
+    assert_select "label[for='user_email']", text: "Email"
+    assert_select ".text-divider", text: "I am ready to help"
+    assert_select ".text-divider", text: "Links"
+    assert_select ".text-divider", text: "Organizations"
+    assert_select "input[type='submit'][value='Update']"
+    assert_select "a", text: "Delete account"
+
+    get "/pt_BR/users/edit"
+    assert_response :success
+    assert_select ".lead", text: "Editar perfil"
+    assert_select "label[for='user_name']", text: "Nome"
+    assert_select "label[for='user_email']", text: "E-mail"
+    assert_select ".text-divider", text: "Estou pronto para ajudar"
+    assert_select ".text-divider", text: "Links"
+    assert_select ".text-divider", text: "Organizações"
+    assert_select "input[type='submit'][value='Atualizar']"
+    assert_select "a", text: "Excluir conta"
+  end
+
+  test "renders localized user public profile and personal events page across locales" do
+    admin = users(:admin_user)
+    user = users(:user)
+    sign_in admin
+
+    # Default locale (eo)
+    get events_by_username_path(username: user.username)
+    assert_response :success
+    assert_select "h1", text: user.name
+
+    get user_events_path(username: admin.username)
+    assert_response :success
+    assert_select "h4", text: "Mia persona eventa paĝo"
+
+    # English (en)
+    get "/en/uzanto/#{user.username}"
+    assert_response :success
+    assert_select "h1", text: user.name
+
+    get "/en/uzanto/#{admin.username}/eventoj"
+    assert_response :success
+    assert_select "h4", text: "My personal events page"
+
+    # Portuguese (pt_BR)
+    get "/pt_BR/uzanto/#{user.username}"
+    assert_response :success
+    assert_select "h1", text: user.name
+
+    get "/pt_BR/uzanto/#{admin.username}/eventoj"
+    assert_response :success
+    assert_select "h4", text: "Minha página pessoal de eventos"
+  end
 end

@@ -38,7 +38,7 @@
         </div>
       </div>
       <div class="d-flex gap-2 flex-shrink-0">
-        <%= link_to events_by_username_path(@user.username), target: "_blank", rel: "noopener", class: "btn btn-outline-secondary btn-sm" do %>
+        <%= link_to events_by_username_path(username: @user.username), target: "_blank", rel: "noopener", class: "btn btn-outline-secondary btn-sm" do %>
           <%= icon('fas', 'external-link-alt') %> Profile
         <% end %>
         <%= link_to edit_admin_user_path(@user), class: "btn btn-success btn-sm" do %>

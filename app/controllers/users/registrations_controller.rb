@@ -93,6 +93,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # Alidirektas la uzanton al sia profila paĝo
   def after_update_path_for(resource)
-    events_by_username_path(resource.username)
+    events_by_username_path(username: resource.username)
   end
 end

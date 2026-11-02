@@ -5,7 +5,7 @@
         <%= display_user_image(instruisto) %>
         <div class="overflow-hidden">
           <h6 class="fw-bold mb-0 text-truncate">
-            <%= link_to instruisto.name, events_by_username_path(instruisto.username),
+            <%= link_to instruisto.name, events_by_username_path(username: instruisto.username),
                   class: "stretched-link text-decoration-none text-body" %>
           </h6>
           <span class="text-body-secondary small">

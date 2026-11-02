@@ -7,7 +7,7 @@ class EventsController::ByUsernameTest < ActionDispatch::IntegrationTest
     user = users(:user)
     user.update_column(:webcal_token, nil)
 
-    get events_by_username_path(user.username)
+    get events_by_username_path(username: user.username)
 
     assert_response :success
     assert_select "#webcalModal", count: 0
@@ -19,7 +19,7 @@ class EventsController::ByUsernameTest < ActionDispatch::IntegrationTest
     other_user = users(:admin_user)
     sign_in other_user
 
-    get events_by_username_path(user.username)
+    get events_by_username_path(username: user.username)
 
     assert_response :success
     assert_select "#webcalModal", count: 0
@@ -30,7 +30,7 @@ class EventsController::ByUsernameTest < ActionDispatch::IntegrationTest
     user = users(:user)
     sign_in user
 
-    get events_by_username_path(user.username)
+    get events_by_username_path(username: user.username)
 
     assert_response :success
     assert_select "#webcalModal", count: 1
@@ -42,7 +42,7 @@ class EventsController::ByUsernameTest < ActionDispatch::IntegrationTest
     user.update_column(:webcal_token, nil)
     sign_in user
 
-    get events_by_username_path(user.username)
+    get events_by_username_path(username: user.username)
 
     assert_response :success
     assert_not_nil user.reload.webcal_token
@@ -51,7 +51,7 @@ class EventsController::ByUsernameTest < ActionDispatch::IntegrationTest
   end
 
   test "redirects to root with error when username does not exist" do
-    get events_by_username_path("non_existent_username_xyz")
+    get events_by_username_path(username: "non_existent_username_xyz")
 
     assert_redirected_to root_path
     assert_equal "Uzantnomo ne ekzistas", flash[:error]

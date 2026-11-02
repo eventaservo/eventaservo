@@ -4,12 +4,12 @@ eo:
     combo_nav_js: Paĝo %{page_input} de %{pages}
     info:
       multiple_pages: Montrante <b>%{from}-%{to}</b> el <b>%{count}</b> eventoj
-      no_items: No %{item_name} found
+      no_items: Neniu ero trovita
       single_page: Montrante <b>%{count}</b> eventojn
     item_name:
-      one: item
-      other: items
-    items_selector_js: Show %{items_input} %{item_name} per page
+      one: ero
+      other: eroj
+    items_selector_js: Montri %{items_input} %{item_name} por paĝo
     nav:
       gap: "&hellip;"
       next: Sekva&nbsp;&rsaquo;

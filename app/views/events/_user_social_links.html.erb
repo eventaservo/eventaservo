@@ -3,11 +3,11 @@
 <% if user.has_public_contact? %>
 
   <div class="box-white">
-    <div class="box-header">Kontaktoj</div>
+    <div class="box-header"><%= t("users.profile.contacts") %></div>
 
     <div class="d-flex justify-content-around flex-wrap">
       <% if user.persona_retejo.present? %>
-        <%= link_to image_tag("www.svg", size: 24, alt: "Personal website", class: "me-1"),
+        <%= link_to image_tag("www.svg", size: 24, alt: t("activerecord.attributes.user.persona_retejo"), class: "me-1"),
               user.persona_retejo,
               target: :_blank %>
       <% end %>

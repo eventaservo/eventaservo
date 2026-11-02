@@ -12,7 +12,7 @@
           <%= link_to icon('far', 'calendar-alt'),
             webcal_user_url(webcal_token: @uzanto.webcal_token, protocol: :webcal, format: :ics),
             data: { bs_target: '#webcalModal', bs_toggle: 'modal' },
-            aria: { label: 'Aboni personan kalendaron' } %>
+            aria: { label: t("users.profile.subscribe_personal_calendar") } %>
         <% end %>
       </div>
 
@@ -49,19 +49,19 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 id="shareModalCenterTitle" class="modal-title">
-            Aboni personan kalendaron
+            <%= t("users.profile.subscribe_personal_calendar") %>
           </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermi"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= t("buttons.close") %>"></button>
         </div>
         <div class="modal-body">
           <p>
-            Kiam oni abonas personan kalendaron, ĉiuj propraj eventoj kaj tiuj pri kiu oni interesiĝas, estas aldonataj al la kalendaro. Ajnaj eventaj ŝanĝoj aŭtomate ĝisdatiĝas.
+            <%= t("users.profile.webcal_info_1") %>
           </p>
           <div class="alert alert-warning">
-            Ne konigu la adreson de via persona kalendaro al alia homo. Ĝi estas privata.
+            <%= t("users.profile.webcal_warning") %>
           </div>
           <p>
-            Jen Webcal-ligilo por aboni la kalendaron. Uzu ĝin en programoj kiel Google Calendar, iCal aŭ similaj. Se vi bezonas klarigon kiel uzi la ligilon, legu <%= link_to 'ĉi tiun artikolon', 'https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)', target: '_blank' %>.
+            <%= t("users.profile.webcal_info_2_html", article_link: link_to(t("users.profile.this_article"), "https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)", target: "_blank")) %>
           </p>
           <div class="input-group" data-controller="clipboard"
                data-clipboard-success-message-value="<%= t('clipboard.copied_to_clipboard') %>"
@@ -71,11 +71,11 @@
           </div>
           <br>
           <p>
-            Kelkaj kalendaraj programoj ebligas aŭtomate aboni la kalendaron se oni alklakas specifan ligilon. Vi povas provi tion per <%= link_to 'ĉi tiu ligilo', webcal_user_url(webcal_token: @uzanto.webcal_token, protocol: :webcal, format: :ics) %>.
+            <%= t("users.profile.webcal_info_3_html", link: link_to(t("users.profile.this_link"), webcal_user_url(webcal_token: @uzanto.webcal_token, protocol: :webcal, format: :ics))) %>
           </p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Fermi</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><%= t("buttons.close") %></button>
         </div>
       </div>
     </div>

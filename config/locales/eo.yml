@@ -21,10 +21,17 @@ eo:
         name: nomo
         short_name: mallonga nomo
       user:
+        about: Pri mi
+        avatar: Avatar
+        birthday: Naskiĝdato
         city: Urbo
         country_id: Lando
         email: Retadreso
         name: Nomo
+        password: Pasvorto
+        password_confirmation: Konfirmu pasvorton
+        persona_retejo: Persona retejo
+        ueacode: UEA-kodo
     errors:
       messages:
         record_invalid: 'Validado malsukcesis: %{errors}'
@@ -42,6 +49,7 @@ eo:
     models:
       event: Eventoj
     registrations:
+      api_v2_token: API v2 Token
       regenerate_token: Regeneri ĵetonon
       regenerate_token_confirmation: Ĉu vi certas, ke vi volas regeneri vian API-ĵetonon? La malnova ĵetono tuj ĉesos funkcii.
       token_regenerated: API-ĵetono sukcese regenerita.
@@ -73,6 +81,7 @@ eo:
     select: Elekti
     send: Sendi
     share: Diskonigi
+    update: Ĝisdatigi
   clipboard:
     copied_to_clipboard: "%{text} sukcese kopiita al la tondujo!"
     copy_failed: Ne eblis kopii al la tondujo
@@ -80,11 +89,14 @@ eo:
     are_you_sure: Ĉu vi certas?
     country: Lando
     date: Dato
+    event: Evento
     events: Eventoj
     location: Loko
     name: Nomo
     no_results: Neniu rezulto
     no_upper: NE
+    optional: "*ne deviga"
+    or_upper: AŬ
     sign_in: Ensalutu
     yes_upper: JES
   continents:
@@ -94,8 +106,73 @@ eo:
     europo: Eŭropo
     oceanio: Oceanio
     reta: Reta
+  devise:
+    confirmations:
+      new:
+        submit: Resendi
+        subtitle: Resendu konfirminstrukciojn
+    passwords:
+      edit:
+        minimum_characters: Minimume %{count} signoj
+        new_password: Nova pasvorto
+        password_confirmation: Konfirmu pasvorton
+        submit: Ŝanĝu ĝin
+        title: Ŝanĝu vian pasvorton
+      new:
+        instructions: Skribu vian retpoŝtadreson. Ni sendos al vi instrukciojn por krei novan pasvorton.
+        submit: Ricevu instrukciojn
+        subtitle: Ĉu vi forgesis vian pasvorton?
+    registrations:
+      edit:
+        delete_account: Forviŝi konton
+        delete_account_confirmation: Ĉu vi certas? Oni NE POVOS mal-fari tion!
+        links: Ligiloj
+        organizations: Organizoj
+        ready_to_help: Mi pretas helpi
+        remove_avatar: Forviŝi avatar
+        title: Redakti profilon
+      instructor:
+        experience: Sperto
+        experience_placeholder: Skribu pri via sperto kiel instruisto.
+        i_am_teacher: Mi estas instruanto
+        lead: Kiel instruanto
+        level: Nivelo
+      new:
+        birthday_placeholder: Naskiĝdato (T/M/J) *ne deviga
+        password_confirmation_placeholder: Konfirmu pasvorton
+        password_placeholder: Pasvorto
+        security_phrase_placeholder: Kiel nomiĝas nia lingvo?
+        submit: Registriĝi
+        subtitle_html: Registriĝu por krei novajn eventojn.<br>Estas senpage!
+        ueacode_placeholder: UEA-kodo *ne deviga
+        video_help_html: Se vi havas dubon, spektu %{video_link}. Ĝi klarigas kiel registriĝi.
+        video_link_text: ĉi tiun filmeton
+      speaker:
+        i_am_speaker: Mi estas preleganto
+        lead: Kiel preleganto
+        topics_label: Mi prelegas pri la jenaj temoj
+        topics_placeholder: Skribu pri la temoj pri kiuj vi pretas prelegi
+    sessions:
+      new:
+        forgot_password: Mi forgesis mian pasvorton
+        submit: Ensaluti
+        subtitle: Ensalutu por krei novajn eventojn.
+    shared:
+      links:
+        already_registered: Ĉu vi jam registriĝis?
+        didnt_receive_confirmation_instructions: Ĉu vi ne ricevis konfirminstrukciojn?
+        not_registered: Ĉu vi ne registriĝis?
+        sign_in: Ensalutu
+        sign_up_now: Registriĝu nun
+      sign_in_with_provider: Ensaluti per %{provider}
+      sign_up_with_provider: Registriĝi per %{provider}
+    unlocks:
+      new:
+        submit: Resendi malŝlosajn instrukciojn
+        title: Resendu malŝlosajn instrukciojn
   errors:
     format: "%{attribute} %{message}"
+    header: Troviĝas eraro en la formularo
     messages:
       accepted: devas esti akceptita
       blank: devas esti kompletigita
@@ -538,5 +615,33 @@ eo:
     title: Instruantoj kaj prelegantoj
   timezone:
     custom_timezone_text: 'Horoj montrataj laŭ via horzono: %{timezone}'
+  users:
+    events:
+      interested_upcoming_events: Venontaj eventoj pri kiuj mi interesiĝas
+      managed_past_events: Pasintaj eventoj kies administranto mi estas
+      managed_upcoming_events: Venontaj eventoj kies administranto mi estas
+      my_personal_events_page: Mia persona eventa paĝo
+      personal_page_notice: Ĉi tiu paĝo estas persona. Aliaj uzantoj de Eventa Servo ne povas vidi ĝin.
+    profile:
+      admin_info:
+        active: Aktiva
+        birthday: Naskiĝdato
+        created_at: Kreita en
+        last_sign_in_at: Laste ensalutis
+        never: neniam
+        search_in_admin: Serĉi en Admin panelo
+        title: Informoj por administrantoj
+        uea_code: UEA-Kodo
+      contacts: Kontaktoj
+      i_am_teacher: Mi estas instruanto
+      levels_taught: 'Mi instruas al nivelo(j):'
+      ready_to_lecture_about: Mi pretas prelegi pri
+      subscribe_personal_calendar: Aboni personan kalendaron
+      this_article: ĉi tiun artikolon
+      this_link: ĉi tiu ligilo
+      webcal_info_1: Kiam oni abonas personan kalendaron, ĉiuj propraj eventoj kaj tiuj pri kiu oni interesiĝas, estas aldonataj al la kalendaro. Ajnaj eventaj ŝanĝoj aŭtomate ĝisdatiĝas.
+      webcal_info_2_html: Jen Webcal-ligilo por aboni la kalendaron. Uzu ĝin en programoj kiel Google Calendar, iCal aŭ similaj. Se vi bezonas klarigon kiel uzi la ligilon, legu %{article_link}.
+      webcal_info_3_html: Kelkaj kalendaraj programoj ebligas aŭtomate aboni la kalendaron se oni alklakas specifan ligilon. Vi povas provi tion per %{link}.
+      webcal_warning: Ne konigu la adreson de via persona kalendaro al alia homo. Ĝi estas privata.
   video:
     presentations: Registraĵoj

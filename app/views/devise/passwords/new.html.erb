@@ -3,7 +3,7 @@
     <div class="text-center">
       <h3>Eventa Servo</h3>
       <p class="fg-color-grayDark fw-bold">
-        Ĉu vi forgesis vian pasvorton?
+        <%= t("devise.passwords.new.subtitle") %>
       </p>
     </div>
 
@@ -12,10 +12,10 @@
       <%= error_handling(resource) %>
 
       <div class="mb-3">
-        <p class="small">Skribu vian retpoŝtadreson. Ni sendos al vi instrukciojn por krei novan pasvorton.</p>
-        <%= f.email_field :email, autocomplete: 'email', class: 'form-control', autofocus: true, placeholder: 'Retpoŝtadreso' %>
+        <p class="small"><%= t("devise.passwords.new.instructions") %></p>
+        <%= f.email_field :email, autocomplete: 'email', class: 'form-control', autofocus: true, placeholder: t("activerecord.attributes.user.email") %>
       </div>
-      <%= f.submit 'Ricevu instrukciojn', class: 'button-submit col-12' %>
+      <%= f.submit t("devise.passwords.new.submit"), class: 'button-submit col-12' %>
     <% end %>
   </div>
 

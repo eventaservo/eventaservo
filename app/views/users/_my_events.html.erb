@@ -1,12 +1,12 @@
 <% if future_events.any? %>
   <div class="mb-5">
-    <div class="lead">Venontaj eventoj kies administranto mi estas</div>
+    <div class="lead"><%= t("users.events.managed_upcoming_events") %></div>
 
     <div class="border rounded overflow-hidden small">
       <div class="row g-0 align-items-center bg-success text-white text-uppercase fw-bold smaller px-2 py-2">
-        <div class="col-2">Dato</div>
-        <div class="col">Evento</div>
-        <div class="col-3">Loko</div>
+        <div class="col-2"><%= t("common.date") %></div>
+        <div class="col"><%= t("common.event") %></div>
+        <div class="col-3"><%= t("common.location") %></div>
       </div>
 
       <% future_events.order(:date_start).each_with_index do |e, i| %>
@@ -29,13 +29,13 @@
 
 <% if past_events.any? %>
   <div class="mb-5">
-    <div class="lead">Pasintaj eventoj kies administranto mi estas</div>
+    <div class="lead"><%= t("users.events.managed_past_events") %></div>
 
     <div class="border rounded overflow-hidden small">
       <div class="row g-0 align-items-center bg-success text-white text-uppercase fw-bold smaller px-2 py-2">
-        <div class="col-2">Dato</div>
-        <div class="col">Evento</div>
-        <div class="col-3">Loko</div>
+        <div class="col-2"><%= t("common.date") %></div>
+        <div class="col"><%= t("common.event") %></div>
+        <div class="col-3"><%= t("common.location") %></div>
       </div>
 
       <% past_events.order(date_start: :desc).each_with_index do |e, i| %>

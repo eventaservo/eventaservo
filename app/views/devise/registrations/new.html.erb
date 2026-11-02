@@ -3,58 +3,56 @@
     <div class="text-center">
       <h3>Eventa Servo</h3>
       <p class="fg-color-grayDark fw-bold">
-        Registriĝu por krei novajn eventojn.
-        <br>
-        Estas senpage!
+        <%= t("devise.registrations.new.subtitle_html") %>
       </p>
     </div>
 
-    <%= button_to 'Registriĝi per Google', user_google_oauth2_omniauth_authorize_path,
+    <%= button_to t("devise.shared.sign_up_with_provider", provider: "Google"), user_google_oauth2_omniauth_authorize_path,
           data: { turbo: false },
           class: 'google-button mb-1' %>
-    <%= button_to 'Registriĝi per Facebook', user_facebook_omniauth_authorize_path,
+    <%= button_to t("devise.shared.sign_up_with_provider", provider: "Facebook"), user_facebook_omniauth_authorize_path,
           data: { turbo: false },
           class: 'facebook-button' %>
     <br>
-    <div class="text-divider fw-bold fg-color-grayDark">AŬ</div>
+    <div class="text-divider fw-bold fg-color-grayDark"><%= t("common.or_upper") %></div>
     <br>
 
     <div class="alert alert-info small mt-2 text-center">
-      Se vi havas dubon, spektu <%= link_to "ĉi tiun filmeton", "https://mallonge.net/es1", target: :_blank %>. Ĝi klarigas kiel registriĝi.
+      <%= t("devise.registrations.new.video_help_html", video_link: link_to(t("devise.registrations.new.video_link_text"), "https://mallonge.net/es1", target: :_blank)) %>
     </div>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
       <div class="mb-3">
-        <%= f.text_field :name, autocomplete: 'name', required: true, class: 'form-control', autofocus: true, placeholder: 'Plena nomo' %>
+        <%= f.text_field :name, autocomplete: 'name', required: true, class: 'form-control', autofocus: true, placeholder: t("activerecord.attributes.user.name") %>
       </div>
       <div class="mb-3">
-        <%= f.email_field :email, autocomplete: 'email', required: true, class: 'form-control', placeholder: 'Retpoŝtadreso' %>
+        <%= f.email_field :email, autocomplete: 'email', required: true, class: 'form-control', placeholder: t("activerecord.attributes.user.email") %>
       </div>
       <div class="mb-3">
-        <%= f.text_field :city, required: true, class: 'form-control', placeholder: 'Urbo' %>
+        <%= f.text_field :city, required: true, class: 'form-control', placeholder: t("activerecord.attributes.user.city") %>
       </div>
       <div class="mb-3">
-        <%= f.combobox("country_id", Country.all, placeholder: 'Lando', required: true)%>
+        <%= f.combobox("country_id", Country.all, placeholder: t("activerecord.attributes.user.country_id"), required: true) %>
       </div>
       <div class="mb-3">
-        <%= f.text_field :birthday, class: 'birthday form-control', placeholder: 'Naskiĝdato (T/M/J) *ne deviga', data: { controller: 'mask', mask_pattern_value: 'birthday' } %>
+        <%= f.text_field :birthday, class: 'birthday form-control', placeholder: t("devise.registrations.new.birthday_placeholder"), data: { controller: 'mask', mask_pattern_value: 'birthday' } %>
       </div>
       <div class="mb-3">
-        <%= f.text_field :ueacode, class: 'form-control', placeholder: 'UEA-kodo *ne deviga' %>
+        <%= f.text_field :ueacode, class: 'form-control', placeholder: t("devise.registrations.new.ueacode_placeholder") %>
       </div>
       <div class="mb-3">
-        <%= f.password_field :password, required: true, class: 'form-control', placeholder: 'Pasvorto' %>
+        <%= f.password_field :password, required: true, class: 'form-control', placeholder: t("devise.registrations.new.password_placeholder") %>
       </div>
       <div class="mb-3">
-        <%= f.password_field :password, required: true, class: 'form-control', placeholder: 'Pasvorto-konfirmado' %>
+        <%= f.password_field :password_confirmation, required: true, class: 'form-control', placeholder: t("devise.registrations.new.password_confirmation_placeholder") %>
       </div>
 
       <div class="mb-3">
-        <%= text_field_tag 'sekurfrazo', nil, autocomplete: 'off', required: true, class: 'form-control', placeholder: 'Kiel nomiĝas nia lingvo?' %>
+        <%= text_field_tag 'sekurfrazo', nil, autocomplete: 'off', required: true, class: 'form-control', placeholder: t("devise.registrations.new.security_phrase_placeholder") %>
       </div>
 
-      <%= f.submit 'Registriĝi', class: 'btn btn-sm btn-success col-12' %>
+      <%= f.submit t("devise.registrations.new.submit"), class: 'btn btn-sm btn-success col-12' %>
     <% end %>
   </div>
 
