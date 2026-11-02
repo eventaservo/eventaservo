@@ -21,3 +21,7 @@
 **Vulnerability:** The `aldoni_uzanton` endpoint in `OrganizationsController` lacked an authorization check, allowing any authenticated user to add themselves or others to any organization, bypassing administrative controls.
 **Learning:** Authorization for modifying organizations (e.g., adding or removing members in `OrganizationsController`) must be explicitly verified by checking if the user is an admin via `current_user.admin_of?(organizo)` to prevent direct object reference (IDOR) vulnerabilities.
 **Prevention:** Always verify that newly created endpoints modifying relationships (like adding members to an organization) include explicit authorization checks for the current user's permissions over the target object.
+## 2026-10-24 - [CRITICAL] Fixed Clickjacking Vulnerability
+**Vulnerability:** The application had `config.action_dispatch.default_headers = {"X-Frame-Options" => "ALLOWALL"}` globally configured in `config/application.rb`, disabling clickjacking protection across the entire site.
+**Learning:** The global ALLOWALL was likely added to support embedding the Organizations show page as an iframe, but it dangerously opened the whole application to clickjacking attacks.
+**Prevention:** Never use global ALLOWALL for X-Frame-Options. If a specific page needs to be embedded, selectively delete the X-Frame-Options header (e.g., `response.headers.delete("X-Frame-Options")`) only within the specific controller action and under specific conditions (like checking for an iframe parameter).

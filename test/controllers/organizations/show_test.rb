@@ -167,4 +167,20 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
     assert_select ".row > .col-12"
     assert_select ".row > .col-lg-4", count: 0
   end
+
+  test "includes SAMEORIGIN X-Frame-Options header by default when not in iframe" do
+    organization = organizations(:rotterdam_centre)
+
+    get organization_url(organization.short_name)
+    assert_response :success
+    assert_equal "SAMEORIGIN", response.headers["X-Frame-Options"]
+  end
+
+  test "removes X-Frame-Options header when iframe parameter is present" do
+    organization = organizations(:rotterdam_centre)
+
+    get organization_url(organization.short_name, iframe: "true")
+    assert_response :success
+    assert_nil response.headers["X-Frame-Options"]
+  end
 end
