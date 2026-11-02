@@ -96,6 +96,28 @@ module EventsHelper
     end
   end
 
+  TAG_PLURAL_I18N_KEYS = {
+    "Kunveno/Evento" => "tags.plural.kunveno_evento",
+    "Kurso" => "tags.plural.kurso",
+    "Alia" => "tags.plural.alia",
+    "Anonco" => "tags.plural.anonco",
+    "Konkurso" => "tags.plural.konkurso",
+    "Por junuloj" => "tags.plural.por_junuloj",
+    "Unutaga" => "tags.plural.unutaga",
+    "Plurtaga" => "tags.plural.plurtaga"
+  }.freeze
+
+  TAG_SINGULAR_I18N_KEYS = {
+    "Kunveno/Evento" => "tags.singular.kunveno_evento",
+    "Kurso" => "tags.singular.kurso",
+    "Alia" => "tags.singular.alia",
+    "Anonco" => "tags.singular.anonco",
+    "Konkurso" => "tags.singular.konkurso",
+    "Por junuloj" => "tags.singular.por_junuloj",
+    "Unutaga" => "tags.singular.unutaga",
+    "Plurtaga" => "tags.singular.plurtaga"
+  }.freeze
+
   # Returns the plural display name of a tag.
   #
   # Some tag names have an Esperanto plural form that differs from the singular
@@ -107,17 +129,8 @@ module EventsHelper
   #
   # @return [String] the plural tag name, or the given name when it has no known plural
   def tag_plural_name(tag_name)
-    case tag_name
-    when "Kunveno/Evento" then I18n.t("tags.plural.kunveno_evento")
-    when "Kurso" then I18n.t("tags.plural.kurso")
-    when "Alia" then I18n.t("tags.plural.alia")
-    when "Anonco" then I18n.t("tags.plural.anonco")
-    when "Konkurso" then I18n.t("tags.plural.konkurso")
-    when "Por junuloj" then I18n.t("tags.plural.por_junuloj")
-    when "Unutaga" then I18n.t("tags.plural.unutaga")
-    when "Plurtaga" then I18n.t("tags.plural.plurtaga")
-    else tag_name
-    end
+    key = TAG_PLURAL_I18N_KEYS[tag_name]
+    key ? I18n.t(key) : tag_name
   end
 
   # Returns the localized singular display name of a tag.
@@ -129,16 +142,7 @@ module EventsHelper
     return "" if tag_or_name.nil?
 
     name = tag_or_name.is_a?(Tag) ? tag_or_name.name : tag_or_name.to_s
-    case name
-    when "Kunveno/Evento" then I18n.t("tags.singular.kunveno_evento")
-    when "Kurso" then I18n.t("tags.singular.kurso")
-    when "Alia" then I18n.t("tags.singular.alia")
-    when "Anonco" then I18n.t("tags.singular.anonco")
-    when "Konkurso" then I18n.t("tags.singular.konkurso")
-    when "Por junuloj" then I18n.t("tags.singular.por_junuloj")
-    when "Unutaga" then I18n.t("tags.singular.unutaga")
-    when "Plurtaga" then I18n.t("tags.singular.plurtaga")
-    else name
-    end
+    key = TAG_SINGULAR_I18N_KEYS[name]
+    key ? I18n.t(key) : name
   end
 end

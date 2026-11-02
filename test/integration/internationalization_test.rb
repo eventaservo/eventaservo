@@ -411,18 +411,24 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     assert_select ".box-header", text: "Informoj"
     assert_select "#partoprenantoj .text-divider", text: /Interesiĝantoj/
     assert_select "#evento .text-divider", text: "Administranto"
+    assert_select "[data-event-user-interested-button-target='question'] a.btn-success", text: "JES"
+    assert_select "[data-event-user-interested-button-target='question'] a.btn-danger", text: "NE"
 
     get "/en/e/#{event.ligilo}"
     assert_response :success
     assert_select ".box-header", text: "Details"
     assert_select "#partoprenantoj .text-divider", text: /Interested/
     assert_select "#evento .text-divider", text: "Administrator"
+    assert_select "[data-event-user-interested-button-target='question'] a.btn-success", text: "YES"
+    assert_select "[data-event-user-interested-button-target='question'] a.btn-danger", text: "NO"
 
     get "/pt_BR/e/#{event.ligilo}"
     assert_response :success
     assert_select ".box-header", text: "Informações"
     assert_select "#partoprenantoj .text-divider", text: /Interessados/
     assert_select "#evento .text-divider", text: "Administrador"
+    assert_select "[data-event-user-interested-button-target='question'] a.btn-success", text: "SIM"
+    assert_select "[data-event-user-interested-button-target='question'] a.btn-danger", text: "NÃO"
   end
 
   test "renders localized event new form across locales" do

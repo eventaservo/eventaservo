@@ -79,9 +79,9 @@ en:
     date: Date
     location: Location
     name: Name
-    no_upper: false
+    no_upper: 'NO'
     sign_in: Sign in
-    yes_upper: true
+    yes_upper: 'YES'
   continents:
     afriko: Africa
     ameriko: Americas
