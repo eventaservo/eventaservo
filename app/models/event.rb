@@ -268,13 +268,13 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   # @param pairs [Array<Array(String, Integer)>] [city, country_id] pairs
   #
   # @return [ActiveRecord::Relation]
-  scope :in_cities, ->(pairs) {
+  def self.in_cities(pairs)
     return none if pairs.blank?
 
     clause = pairs.map { "(lower(unaccent(events.city)) IN (?, ?) AND events.country_id = ?)" }.join(" OR ")
     binds = pairs.flat_map { |city, country_id| [city.normalized, city.downcase, country_id] }
     where(clause, *binds)
-  }
+  end
 
   def self.grouped_by_countries
     not_online.joins(:country).order("countries.name, events.date_start").group_by { |c| c.country.name }

@@ -78,6 +78,7 @@ module Events
       Event.by_city(city_name)
         .by_country_id(country_id)
         .where.not(latitude: nil)
+        .where.not(longitude: nil)
         .order(:id)
         .pick(:latitude, :longitude)
     end
@@ -113,6 +114,7 @@ module Events
 
       scope = Event.not_online
         .where.not(latitude: nil)
+        .where.not(longitude: nil)
         .where(latitude: min_lat..max_lat)
         .where.not(
           "lower(unaccent(events.city)) IN (?, ?) AND events.country_id = ?",
@@ -161,7 +163,9 @@ module Events
       clause = pairs.map { "(events.city = ? AND events.country_id = ?)" }.join(" OR ")
       binds = pairs.flat_map { |city, candidate_country_id| [city, candidate_country_id] }
 
-      Event.where.not(latitude: nil)
+      Event.not_online
+        .where.not(latitude: nil)
+        .where.not(longitude: nil)
         .where(clause, *binds)
         .select("DISTINCT ON (events.city, events.country_id) events.city, events.country_id, events.latitude, events.longitude")
         .order("events.city, events.country_id, events.id")

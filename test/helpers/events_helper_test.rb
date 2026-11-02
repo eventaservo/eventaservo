@@ -90,18 +90,18 @@ class EventsHelperTest < ActionView::TestCase
   end
 
   test "event_nearby? returns false when nearby_cities or city_name or country is absent" do
-    event = events(:nearby_malmo_future)
+    event = events(:valid_event)
 
     assert_not event_nearby?(event)
   end
 
   test "event_nearby? distinguishes target city from nearby cities" do
     @country = countries(:denmark)
-    @nearby_cities = [["Malmö", countries(:sweden).id]]
+    @nearby_cities = [["Aarhuso", countries(:denmark).id], ["New York", countries(:afghanistan).id]]
     params[:city_name] = "Kopenhago"
 
-    assert_not event_nearby?(events(:nearby_copenhagen_future))
-    assert event_nearby?(events(:nearby_malmo_future))
-    assert event_nearby?(events(:nearby_naestved_future))
+    assert_not event_nearby?(events(:past_event_danio_recent))
+    assert event_nearby?(events(:past_event_danio_older))
+    assert event_nearby?(events(:valid_event))
   end
 end

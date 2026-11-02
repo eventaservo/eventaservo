@@ -160,29 +160,35 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
   end
 
   test "card view shows nearby events within 120 km marked with Proksima badge" do
+    setup_nearby_events
+
     get_copenhagen
 
     assert_response :success
-    assert_includes response.body, events(:nearby_copenhagen_future).title
-    assert_includes response.body, events(:nearby_malmo_future).title
-    assert_includes response.body, events(:nearby_naestved_future).title
-    assert_select ".card", text: /#{events(:nearby_malmo_future).title}/ do
+    assert_includes response.body, @copenhagen_event.title
+    assert_includes response.body, @malmo_event.title
+    assert_includes response.body, @naestved_event.title
+    assert_select ".card", text: /#{@malmo_event.title}/ do
       assert_select ".badge", text: I18n.t("events.nearby")
     end
-    assert_select ".card", text: /#{events(:nearby_copenhagen_future).title}/ do
+    assert_select ".card", text: /#{@copenhagen_event.title}/ do
       assert_select ".badge", text: I18n.t("events.nearby"), count: 0
     end
   end
 
   test "card view excludes cities farther than the 120 km radius" do
+    setup_nearby_events
+
     get_copenhagen
 
     assert_response :success
-    assert_not_includes response.body, events(:nearby_aarhus_future).title
-    assert_not_includes response.body, events(:nearby_corner_future).title
+    assert_not_includes response.body, @aarhus_event.title
+    assert_not_includes response.body, @corner_event.title
   end
 
   test "card view shows a link to hide nearby events with nearby=0" do
+    setup_nearby_events
+
     get_copenhagen
 
     assert_response :success
@@ -190,16 +196,20 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
   end
 
   test "nearby=0 hides nearby events and shows a link to reveal them" do
+    setup_nearby_events
+
     get_copenhagen(nearby: 0)
 
     assert_response :success
-    assert_includes response.body, events(:nearby_copenhagen_future).title
-    assert_not_includes response.body, events(:nearby_malmo_future).title
-    assert_not_includes response.body, events(:nearby_naestved_future).title
+    assert_includes response.body, @copenhagen_event.title
+    assert_not_includes response.body, @malmo_event.title
+    assert_not_includes response.body, @naestved_event.title
     assert_select "a", text: I18n.t("events.show_nearby")
   end
 
   test "nearby toggle preserves active filters in the URL" do
+    setup_nearby_events
+
     get_copenhagen(periodo: "estontece", o: "uea", s: "1,2", t: "unutaga")
 
     assert_response :success
@@ -213,23 +223,79 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "filter badge links preserve nearby=0 when nearby events are hidden" do
+    setup_nearby_events
+
+    get_copenhagen(nearby: 0)
+
+    assert_response :success
+    assert_select "a.badge[href*='nearby=0']"
+  end
+
   test "map view does not include nearby events" do
+    setup_nearby_events
+
     get_copenhagen(view_mode: "mapo")
 
     assert_response :success
-    assert_includes response.body, events(:nearby_copenhagen_future).title
-    assert_not_includes response.body, events(:nearby_malmo_future).title
+    assert_includes response.body, @copenhagen_event.title
+    assert_not_includes response.body, @malmo_event.title
     assert_select "a", text: I18n.t("events.hide_nearby"), count: 0
   end
 
   test "past events view does not include nearby events" do
+    setup_nearby_events
+
     get_copenhagen(pasintaj: 1)
 
     assert_response :success
-    assert_not_includes response.body, events(:nearby_malmo_future).title
+    assert_not_includes response.body, @malmo_event.title
   end
 
   private
+
+  # Seeds geo-located future events around Copenhagen for nearby-cities integration tests.
+  #
+  # @return [void]
+  def setup_nearby_events
+    denmark = countries(:denmark)
+    sweden = countries(:sweden)
+
+    @copenhagen_event = create_geo_event(title: "Copenhagen Future Meetup", city: "Kopenhago", country: denmark, latitude: 55.6761, longitude: 12.5683)
+    @malmo_event = create_geo_event(title: "Malmo Future Meetup", city: "Malmö", country: sweden, latitude: 55.6050, longitude: 13.0038)
+    @naestved_event = create_geo_event(title: "Naestved Future Meetup", city: "Næstved", country: denmark, latitude: 55.2299, longitude: 11.7609)
+    @corner_event = create_geo_event(title: "Corner Town Future Meetup", city: "Angulurbo", country: sweden, latitude: 56.6761, longitude: 14.3683)
+    @aarhus_event = create_geo_event(title: "Aarhus Future Meetup", city: "Aarhuso", country: denmark, latitude: 56.1629, longitude: 10.2039)
+  end
+
+  # Creates an event with explicit coordinates without triggering the test geocoder stub.
+  #
+  # @param title [String] Event title
+  # @param city [String] City name
+  # @param country [Country] Country record
+  # @param latitude [Float] Latitude coordinate
+  # @param longitude [Float] Longitude coordinate
+  #
+  # @return [Event]
+  def create_geo_event(title:, city:, country:, latitude:, longitude:)
+    event = Event.new(
+      title: title,
+      description: "Test event",
+      city: city,
+      country: country,
+      date_start: 1.month.from_now,
+      date_end: 1.month.from_now + 1.day,
+      time_zone: "Etc/UTC",
+      code: SecureRandom.hex(6),
+      site: "https://example.org",
+      latitude: latitude,
+      longitude: longitude,
+      user: users(:user)
+    )
+    event.instance_variable_set(:@created_from_factory, true)
+    event.save!
+    event
+  end
 
   # Sends a GET request to the Copenhagen city page with the given view mode and query parameters.
   #
