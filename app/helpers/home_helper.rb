@@ -36,10 +36,10 @@ module HomeHelper
   #   known label; +nil+ when the given period is +nil+
   def period_label(period)
     case period
-    when "hodiau" then "Okazas nuntempe"
-    when "p7_tagojn" then "Proksimajn 7 tagojn"
-    when "p30_tagojn" then "Proksimajn 30 tagojn"
-    when "estontece" then "Estontece"
+    when "hodiau" then I18n.t("filters.periods.hodiau")
+    when "p7_tagojn" then I18n.t("filters.periods.p7_tagojn")
+    when "p30_tagojn" then I18n.t("filters.periods.p30_tagojn")
+    when "estontece" then I18n.t("filters.periods.estontece")
     else period
     end
   end

@@ -61,6 +61,6 @@ class ErrorsController < ApplicationController
     HTTParty.post(sentry_url, body: body, headers: headers)
     AdminMailer.notify(subject: "[ES] User reported error", body:).deliver_later
 
-    redirect_to root_path, notice: "Dankon!"
+    redirect_to root_path, notice: I18n.t("flash.feedback.thank_you")
   end
 end

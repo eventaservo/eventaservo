@@ -2,9 +2,6 @@
 en:
   activerecord:
     attributes:
-      event/report:
-        title: Title
-        url: Link
       event:
         city: City
         country_id: Country
@@ -13,6 +10,9 @@ en:
         description: Description
         short_url: Short URL
         title: Title
+      event/report:
+        title: Title
+        url: Link
       organization:
         city: City
         country_id: Country
@@ -21,10 +21,10 @@ en:
         name: Name
         short_name: Short name
       user:
-        name: Name
-        email: Email
         city: City
         country_id: Country
+        email: Email
+        name: Name
     errors:
       messages:
         record_invalid: 'Validation failed: %{errors}'
@@ -45,23 +45,25 @@ en:
       regenerate_token: Regenerate Token
       regenerate_token_confirmation: Are you sure you want to regenerate your API token? The old token will stop working immediately.
       token_regenerated: API token successfully regenerated.
-      token_regeneration_error: "Error regenerating API token: %{error}"
+      token_regeneration_error: 'Error regenerating API token: %{error}'
   api:
     v2:
       errors:
-        token_missing: Token missing
-        token_invalid: Token invalid
         token_expired: Token expired
+        token_invalid: Token invalid
+        token_missing: Token missing
+  breadcrumbs:
+    world: World
   buttons:
     add_video: Video
-    duplicate: Duplicate
-    edit: Edit
-    share: Share
     cancel: Cancel
     change: Change
     close: Close
+    duplicate: Duplicate
+    edit: Edit
     select: Select
     send: Send
+    share: Share
   errors:
     format: "%{attribute} %{message}"
     messages:
@@ -90,6 +92,91 @@ en:
       header:
         one: 'Cannot save this %{model}: 1 error'
         other: 'Cannot save this %{model}: %{count} errors'
+  events:
+    calendar:
+      jump_to_month: Month
+    days_left:
+      in_days:
+        one: ends in %{count} day
+        other: ends in %{count} days
+      tomorrow: ends tomorrow
+    past_events_count:
+      one: "%{count} past event"
+      other: "%{count} past events"
+    show_past: Past events
+  filters:
+    periods:
+      estontece: Upcoming
+      hodiau: Happening now
+      p30_tagojn: Next 30 days
+      p7_tagojn: Next 7 days
+  flash:
+    admin:
+      redirections:
+        created: Redirection successfully created.
+        destroyed: Redirection successfully deleted.
+        updated: Redirection successfully updated.
+      reports:
+        destroyed: Report successfully deleted.
+        updated: Report successfully updated.
+      users:
+        deactivated: User deactivated.
+        disable_failed_one_member_org: Could not disable the user. Maybe they belong to a one-member organization.
+        email_confirmed: User's email marked as confirmed.
+        enabled: User enabled.
+        merged: Users merged successfully.
+        new_password: 'New password: %{password}'
+        updated: User successfully updated.
+    countries:
+      not_found: Country does not exist
+      not_in_database: Country does not exist in database
+    events:
+      cancelled: Event cancelled
+      created: Event successfully created.
+      destroyed: Event successfully deleted
+      display_error: An error occurred while displaying that event
+      document_uploaded: Document successfully uploaded
+      file_deleted: File successfully deleted
+      invalid_file_format: Invalid file format
+      message_sent: Message sent
+      no_events_in_continent: There are no events in this continent
+      not_found: Event does not exist
+      select_file_first: You must select a file first
+      uncancelled: Event uncancelled
+      updated: Event successfully updated
+    feedback:
+      thank_you: Thank you!
+    formats:
+      not_found: Format does not exist.
+    general:
+      success: Success
+      unauthorized: You are not authorized
+      unauthorized_action: You are not authorized to do that
+    organizations:
+      created: Organization successfully created.
+      not_found: Organization does not exist
+      updated: Organization successfully updated
+      user_added: User added to organization
+    users:
+      account_deleted: Your account has been deleted.
+      invalid_security_phrase: Incorrect anti-spam security phrase. Type the name of the international language.
+      not_found: User does not exist
+      username_not_found: Username does not exist
+    videos:
+      destroyed: Video deleted
+      unauthorized: You are not authorized to delete this video
+    webcal:
+      country_code_not_found: Country code does not exist
+  footer:
+    about: About us
+    changelog: Changelog
+    contact_subject: Contact via Eventa Servo
+    contact_us: Contact us
+    more: More
+    privacy: Privacy
+    server_status: Server status
+    terms: Terms of Service
+    version: Version %{version}
   helpers:
     select:
       prompt: Please select
@@ -103,23 +190,37 @@ en:
     presentations: Presentations
     reports: Reports
     teachers_and_lecturers: Teachers
-  events:
-    calendar:
-      jump_to_month: Month
-    show_past: Past events
-    past_events_count:
-      one: "%{count} past event"
-      other: "%{count} past events"
   navbar:
     add_event: Add event
     log_in_sign_up: Login / Signup
     organizations: Organizations
+    search:
+      aria_label: Search events
+      placeholder: Search events, cities, or countries
     toggle_navigation: Toggle navigation
+    tools:
+      about_us: About us
+      close_map: Close map
+      news: News
+      support: Support
+      view_as_map: View as map
+    user:
+      edit_profile: Edit my profile
+      my_events: My events
+      my_profile: My profile
+      sign_out: Sign out
   support:
     array:
       last_word_connector: " and "
       two_words_connector: " and "
       words_connector: ", "
   tagline: Share Esperanto events worldwide!
+  tags:
+    plural:
+      alia: Others
+      anonco: Announcements
+      konkurso: Contests
+      kunveno_evento: Meetings/Events
+      kurso: Courses
   video:
     presentations: Presentations

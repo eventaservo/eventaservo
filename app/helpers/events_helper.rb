@@ -108,9 +108,11 @@ module EventsHelper
   # @return [String] the plural tag name, or the given name when it has no known plural
   def tag_plural_name(tag_name)
     case tag_name
-    when "Kunveno/Evento" then "Kunvenoj/Eventoj"
-    when "Kurso" then "Kursoj"
-    when "Alia" then "Aliaj"
+    when "Kunveno/Evento" then I18n.t("tags.plural.kunveno_evento")
+    when "Kurso" then I18n.t("tags.plural.kurso")
+    when "Alia" then I18n.t("tags.plural.alia")
+    when "Anonco" then I18n.t("tags.plural.anonco")
+    when "Konkurso" then I18n.t("tags.plural.konkurso")
     else tag_name
     end
   end

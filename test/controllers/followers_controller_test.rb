@@ -29,7 +29,7 @@ class FollowersControllerTest < ActionDispatch::IntegrationTest
     sign_in create(:user)
     get event_toggle_follow_path(event_code: "invalid")
     assert_redirected_to root_url
-    assert_equal "Event not found", flash[:alert]
+    assert_equal I18n.t("flash.events.not_found"), flash[:alert]
   end
 
   test "should redirect to sign in if not authenticated" do

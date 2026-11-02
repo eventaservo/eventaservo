@@ -44,7 +44,7 @@ module Admin
     # @return [void]
     def update
       if @report.update(report_params)
-        redirect_to admin_report_path(@report), notice: "Raporto sukcese ĝisdatigita."
+        redirect_to admin_report_path(@report), notice: I18n.t("flash.admin.reports.updated")
       else
         @users = User.order(:name)
         render :edit, status: :unprocessable_entity
@@ -56,7 +56,7 @@ module Admin
     # @return [void]
     def destroy
       @report.destroy
-      redirect_to admin_reports_path, notice: "Raporto sukcese forigita."
+      redirect_to admin_reports_path, notice: I18n.t("flash.admin.reports.destroyed")
     end
 
     private

@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
-      <%= link_to 'Mondo', root_url(s: params[:s].presence, t: params[:t].presence) %>
+      <%= link_to t('breadcrumbs.world'), root_url(s: params[:s].presence, t: params[:t].presence) %>
     </li>
 
     <% if params[:code].present? && params[:controller] == 'events' %>

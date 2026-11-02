@@ -5,7 +5,6 @@ pt_BR:
       add_to_calendar:
         download_ics: Baixar ICS
       cancel_event: Cancelar
-      uncancel_event: Descancelar
       report_problem: Problema?
       report_problem_form:
         email: E-mail
@@ -14,3 +13,4 @@ pt_BR:
         security_phrase: Como é chamada a nossa língua?
         text: Se você pensa que há um problema com este evento, notifique o administrador.
         title: Encontrou um problema?
+      uncancel_event: Descancelar

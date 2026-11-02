@@ -53,6 +53,21 @@ class OrganizationsHelperTest < ActionView::TestCase
     assert_equal "", display_event_days_left(event)
   end
 
+  test "display_event_days_left returns localized text across locales" do
+    event_tomorrow = create(:event, date_start: Time.zone.now, date_end: 1.day.from_now)
+    event_in_days = create(:event, date_start: Time.zone.now, date_end: 2.days.from_now)
+
+    I18n.with_locale(:en) do
+      assert_equal "| ends tomorrow", display_event_days_left(event_tomorrow)
+      assert_equal "| ends in 2 days", display_event_days_left(event_in_days)
+    end
+
+    I18n.with_locale(:pt_BR) do
+      assert_equal "| termina amanhã", display_event_days_left(event_tomorrow)
+      assert_equal "| termina em 2 dias", display_event_days_left(event_in_days)
+    end
+  end
+
   test "display_organizations_for_event lists all organizations when not limited" do
     event = create(:event)
     event.organizations = [organizations(:rotterdam_centre), organizations(:sat)]

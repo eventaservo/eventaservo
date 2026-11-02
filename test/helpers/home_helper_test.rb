@@ -10,6 +10,22 @@ class HomeHelperTest < ActionView::TestCase
     assert_equal "Estontece", period_label("estontece")
   end
 
+  test "returns localized period labels across locales" do
+    I18n.with_locale(:en) do
+      assert_equal "Happening now", period_label("hodiau")
+      assert_equal "Next 7 days", period_label("p7_tagojn")
+      assert_equal "Next 30 days", period_label("p30_tagojn")
+      assert_equal "Upcoming", period_label("estontece")
+    end
+
+    I18n.with_locale(:pt_BR) do
+      assert_equal "Acontecendo agora", period_label("hodiau")
+      assert_equal "Próximos 7 dias", period_label("p7_tagojn")
+      assert_equal "Próximos 30 dias", period_label("p30_tagojn")
+      assert_equal "Futuros", period_label("estontece")
+    end
+  end
+
   test "returns the given period when it has no known label" do
     assert_equal "Unknown", period_label("Unknown")
   end

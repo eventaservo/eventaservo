@@ -72,9 +72,9 @@ module OrganizationsHelper
     when (Float::INFINITY * -1)..0
       ""
     when 1
-      "| finiĝos morgaŭ"
+      "| #{I18n.t("events.days_left.tomorrow")}"
     else
-      "| finiĝos post #{days} tagoj"
+      "| #{I18n.t("events.days_left.in_days", count: days)}"
     end
   end
 
