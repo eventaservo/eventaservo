@@ -36,6 +36,15 @@ module ApplicationHelper
     }[locale.to_sym] || locale.to_s
   end
 
+  # Returns the localized display name for a continent or online ("reta").
+  #
+  # @param name [String, Symbol] The continent name or normalized key
+  # @return [String] The localized continent name
+  def continent_display_name(name)
+    key = name.to_s.normalized.downcase
+    I18n.t("continents.#{key}", default: name.to_s.capitalize)
+  end
+
   def page_title(title, subtext = nil)
     content_tag(:h2, class: "text-center") do
       concat title
@@ -129,7 +138,7 @@ module ApplicationHelper
 
   def event_full_description(event)
     text = event_date(event)
-    text += event.online ? " (Reta evento)" : " (#{event.country.name} - #{event.city})"
+    text += event.online ? " (#{I18n.t("events.online_event")})" : " (#{event.country.name} - #{event.city})"
     text += "<br/>#{event.description}"
 
     text

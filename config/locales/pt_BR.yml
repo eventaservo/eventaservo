@@ -46,6 +46,8 @@ pt_BR:
       regenerate_token_confirmation: Tem certeza que deseja regenerar seu token de API? O token antigo deixará de funcionar imediatamente.
       token_regenerated: Token de API regenerado com sucesso.
       token_regeneration_error: 'Erro ao regenerar token de API: %{error}'
+  announcements_and_contests:
+    caption: Lista de anúncios e concursos atuais no mundo do Esperanto.
   api:
     v2:
       errors:
@@ -59,11 +61,20 @@ pt_BR:
     cancel: Cancelar
     change: Alterar
     close: Fechar
+    copy: Copiar
     duplicate: Duplicar
     edit: Editar
+    search: Buscar
     select: Selecionar
     send: Enviar
     share: Compartilhar
+  continents:
+    afriko: África
+    ameriko: Américas
+    azio: Ásia
+    europo: Europa
+    oceanio: Oceania
+    reta: Online
   errors:
     format: "%{attribute} %{message}"
     messages:
@@ -93,17 +104,49 @@ pt_BR:
         one: 'Não foi possível salvar este %{model}: 1 erro'
         other: 'Não foi possível salvar este %{model}: %{count} erros'
   events:
+    all_day: dia inteiro
     calendar:
       jump_to_month: Mês
+      next_week: Próxima semana
+      no_events: Nenhum evento
+      previous_week: Semana anterior
+      today: Hoje
+      week_navigation: Navegação por semanas
+    cancelled_label: Cancelado
+    date_in_city: "%{date} em %{city}"
     days_left:
       in_days:
         one: termina em %{count} dia
         other: termina em %{count} dias
       tomorrow: termina amanhã
+    form:
+      search_placeholder: Buscar...
+      search_text: Nenhum resultado
+      select_category_alert: Você deve selecionar pelo menos uma categoria
+    happening_now_count:
+      one: "%{count} acontecendo agora"
+      other: "%{count} acontecendo agora"
+    international_event: Evento Internacional
+    map:
+      duplicate_notice: "* O mapa exibe apenas o primeiro evento futuro quando múltiplos eventos ocorrem no mesmo local com o mesmo título"
+    online: Online
+    online_event: Evento online
     past_events_count:
       one: "%{count} evento passado"
       other: "%{count} eventos passados"
     show_past: Eventos passados
+    upcoming_events_count:
+      one: "%{count} próximo evento"
+      other: "%{count} próximos eventos"
+    webcal_modal:
+      auto_subscribe_html: Alguns aplicativos de calendário permitem assinar o calendário automaticamente ao clicar em um link específico. Você pode tentar isso através de %{link}.
+      auto_subscribe_link: este link
+      calendar_subscription_info: Ao assinar um calendário, todos os eventos são adicionados ao calendário e quaisquer alterações são atualizadas automaticamente.
+      country_intro_html: Aqui está o link Webcal para assinar o calendário de eventos em %{country}. Use-o em programas como Google Calendar, iCal ou similares. Se precisar de instruções sobre como usar o link, leia %{help_link}.
+      help_article_link: este artigo
+      online_intro_html: Aqui está o link Webcal para assinar o calendário de todos os próximos <strong>eventos online</strong>. Use-o em programas como Google Calendar, iCal ou similares. Se precisar de instruções sobre como usar o link, leia %{help_link}.
+      subscribe_calendar: Assinar calendário
+      title: Assinar calendário
   filters:
     periods:
       estontece: Futuros
@@ -184,6 +227,25 @@ pt_BR:
       create: Criar %{model}
       submit: Salvar este %{model}
       update: Atualizar este %{model}
+  home:
+    ads:
+      alt: Anúncio
+  international_calendar:
+    by_year_title: Calendários Internacionais por ano
+    contact_link_text: informe-nos por e-mail
+    current_calendar: Calendário Internacional Atual
+    eventoj_hu:
+      logo_alt: Logotipo do eventoj.hu
+      paragraph_1_html: Entre 1996 e 2020 o Esperanto-Centro EVENTOJ / Lingvo-Studio em Budapeste manteve o "Calendário Internacional de Encontros de Esperanto", que listava os eventos presenciais de Esperanto abertos à visita de esperantistas viajantes. Seu arquivo pode ser encontrado em %{link}.
+      paragraph_2: A lista internacional de eventos acima é mantida pelo Eventa Servo. O Esperanto-Centro EVENTOJ / Lingvo-Studio em Budapeste lançou esta lista em 1996 e colabora com o Eventa Servo desde 2020.
+    events: Eventos
+    missing_event_html: Se você acredita que falta um evento ou há um erro, %{contact_link}.
+    page_title: Calendário Internacional | Eventa Servo
+    past_events: Eventos internacionais anteriores
+    subtitle: Lista dos principais eventos de Esperanto em todo o mundo
+    title: Calendário Internacional
+    year: Ano
+    year_title: Calendário internacional %{year}
   links:
     announcements_and_contests: Anúncios e Concursos
     international_calendar: Calendário Internacional
@@ -209,6 +271,47 @@ pt_BR:
       my_events: Meus eventos
       my_profile: Meu perfil
       sign_out: Sair
+  search:
+    cancelled: Cancelados
+    min_chars_error: A busca deve conter pelo menos 3 caracteres
+    past: Anteriores
+    placeholder: Buscar eventos ou organizações... (mínimo de 3 caracteres)
+    query_aria_label: Termo de busca
+    results:
+      events:
+        city: Cidade
+        date: Data
+        empty: Nenhum evento encontrado
+        found:
+          one: "%{count} evento encontrado"
+          other: "%{count} eventos encontrados"
+        header: Eventos
+        title: Título
+        upcoming_and_recent: "(próximos e recém-ocorridos)"
+      organizations:
+        empty: Nenhuma organização encontrada
+        found:
+          one: "%{count} organização encontrada"
+          other: "%{count} organizações encontradas"
+        header: Organizações
+      users:
+        country: País
+        empty: Nenhum usuário encontrado
+        found:
+          one: "%{count} usuário encontrado"
+          other: "%{count} usuários encontrados"
+        header: Usuários
+        name: Nome
+      videos:
+        date: Data
+        empty: Nenhuma apresentação gravada encontrada
+        event: Evento
+        found:
+          one: "%{count} apresentação gravada encontrada"
+          other: "%{count} apresentações gravadas encontradas"
+        header: Apresentações gravadas
+        title: Título
+    title: Busca
   support:
     array:
       last_word_connector: " e "
@@ -222,5 +325,41 @@ pt_BR:
       konkurso: Concursos
       kunveno_evento: Encontros/Eventos
       kurso: Cursos
+      plurtaga: Vários dias
+      por_junuloj: Para jovens
+      unutaga: Um dia
+  teachers_and_speakers:
+    cards:
+      experience: Experiência
+      levels: Níveis
+      topics: Temas
+    cefr: Quadro Europeu Comum de Referência para Línguas
+    edukado_html: Nosso parceiro %{edukado_link} disponibiliza materiais prontos para uso, informações e serviços diversos para possibilitar um trabalho moderno e de qualidade baseado na cooperação global de professores de Esperanto. Eles oferecem exames de Esperanto de acordo com o %{cefr_link} |
+    filters:
+      all_countries: Todos os países
+      all_levels: Todos os níveis
+      country: País
+      experience_or_topics: Experiência / Temas
+      keyword_placeholder: Palavra-chave...
+      level: Nível
+      name: Nome
+      name_placeholder: Buscar por nome...
+    ilei_html: "%{ilei_link}, a Liga Internacional de Professores Esperantistas, é o principal ponto de encontro para professores e educadores de Esperanto. A ILEI é uma associação especializada filiada à Associação Universal de Esperanto (UEA). Possui membros no mundo todo e seções em mais de 40 países. Seja você professor no ensino fundamental, médio ou superior, ministre cursos de Esperanto ou deseje trocar experiências com colegas -> %{join_link}"
+    intro: Você está procurando um professor ou palestrante para o seu evento? Na lista abaixo você encontrará nomes de pessoas que indicaram no perfil do Eventa Servo que estão dispostas a ensinar e palestrar. Você encontrará detalhes nos respectivos perfis de usuário. Algumas pessoas se dispõem a ensinar e/ou palestrar gratuitamente, outras solicitam reembolso de despesas de viagem ou uma pequena compensação financeira. Às vezes é possível comparecer presencialmente; outras pessoas podem atuar apenas online. Mesmo que você não seja organizador de eventos, sinta-se à vontade para contatá-las — os esperantistas geralmente são muito prestativos!
+    join_ilei: Torne-se membro da ILEI
+    levels:
+      baza: Básico
+      meza: Intermediário
+      supera: Avançado
+    no_speakers_filtered: Nenhum palestrante encontrado com esses filtros.
+    no_speakers_registered: Nenhum palestrante registrado.
+    no_teachers_filtered: Nenhum professor encontrado com esses filtros.
+    no_teachers_registered: Nenhum professor registrado.
+    random_notice: Professor e palestrante aleatórios exibidos. Use o filtro para ver mais.
+    speakers_divider: Palestrantes
+    teachers_divider: Professores
+    title: Professores e palestrantes
+  timezone:
+    custom_timezone_text: 'Horários exibidos no seu fuso horário: %{timezone}'
   video:
     presentations: Apresentações

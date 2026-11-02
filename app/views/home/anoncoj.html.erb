@@ -1,10 +1,10 @@
 <div class="box-white">
   <div class="text-center">
     <h1>
-      <%= icon("fas", "bullhorn", "Anoncoj kaj konkursoj") %>
+      <%= icon("fas", "bullhorn", t("links.announcements_and_contests")) %>
     </h1>
     <div class="caption">
-      Listo de aktivaj kaj venontaj anoncoj aŭ konkursoj
+      <%= t("announcements_and_contests.caption") %>
     </div>
   </div>
   <% @eventoj.grouped_by_months.each do |dato, eventoj| %>
@@ -19,7 +19,7 @@
           </strong>
           <%= display_organizations_for_event(e) %>
           <p class="small">
-            <strong><%= "#{event_date(e)} en #{e.city}" %></strong>
+            <strong><%= t("events.date_in_city", date: event_date(e), city: e.city) %></strong>
             <br>
             <%= e.description %>
           </p>

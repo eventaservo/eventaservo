@@ -46,6 +46,8 @@ en:
       regenerate_token_confirmation: Are you sure you want to regenerate your API token? The old token will stop working immediately.
       token_regenerated: API token successfully regenerated.
       token_regeneration_error: 'Error regenerating API token: %{error}'
+  announcements_and_contests:
+    caption: List of current announcements and contests in Esperanto-land.
   api:
     v2:
       errors:
@@ -59,11 +61,20 @@ en:
     cancel: Cancel
     change: Change
     close: Close
+    copy: Copy
     duplicate: Duplicate
     edit: Edit
+    search: Search
     select: Select
     send: Send
     share: Share
+  continents:
+    afriko: Africa
+    ameriko: Americas
+    azio: Asia
+    europo: Europe
+    oceanio: Oceania
+    reta: Online
   errors:
     format: "%{attribute} %{message}"
     messages:
@@ -93,17 +104,49 @@ en:
         one: 'Cannot save this %{model}: 1 error'
         other: 'Cannot save this %{model}: %{count} errors'
   events:
+    all_day: all day
     calendar:
       jump_to_month: Month
+      next_week: Next week
+      no_events: No events
+      previous_week: Previous week
+      today: Today
+      week_navigation: Week navigation
+    cancelled_label: Cancelled
+    date_in_city: "%{date} in %{city}"
     days_left:
       in_days:
         one: ends in %{count} day
         other: ends in %{count} days
       tomorrow: ends tomorrow
+    form:
+      search_placeholder: Search...
+      search_text: No results
+      select_category_alert: You must select at least one category
+    happening_now_count:
+      one: "%{count} happening now"
+      other: "%{count} happening now"
+    international_event: International Event
+    map:
+      duplicate_notice: "* The map shows only the first upcoming event when multiple events occur at the same location with the same title"
+    online: Online
+    online_event: Online event
     past_events_count:
       one: "%{count} past event"
       other: "%{count} past events"
     show_past: Past events
+    upcoming_events_count:
+      one: "%{count} upcoming event"
+      other: "%{count} upcoming events"
+    webcal_modal:
+      auto_subscribe_html: Some calendar programs allow you to automatically subscribe to the calendar if you click a specific link. You can try this via %{link}.
+      auto_subscribe_link: this link
+      calendar_subscription_info: When you subscribe to a calendar, all events are added to the calendar and any event changes are automatically updated.
+      country_intro_html: Here is the Webcal link to subscribe to the calendar of events in %{country}. Use it in applications like Google Calendar, iCal, or similar. If you need instructions on how to use the link, read %{help_link}.
+      help_article_link: this article
+      online_intro_html: Here is the Webcal link to subscribe to the calendar of all upcoming <strong>online events</strong>. Use it in applications like Google Calendar, iCal, or similar. If you need instructions on how to use the link, read %{help_link}.
+      subscribe_calendar: Subscribe to calendar
+      title: Subscribe to calendar
   filters:
     periods:
       estontece: Upcoming
@@ -184,6 +227,25 @@ en:
       create: Create %{model}
       submit: Save this %{model}
       update: Update this %{model}
+  home:
+    ads:
+      alt: Advertisement
+  international_calendar:
+    by_year_title: International Calendars by year
+    contact_link_text: let us know by email
+    current_calendar: Current International Calendar
+    eventoj_hu:
+      logo_alt: eventoj.hu logo
+      paragraph_1_html: Between 1996-2020 the Esperanto-Centro EVENTOJ / Lingvo-Studio in Budapest operated the "International Calendar of Esperanto Meetings", which listed physical Esperanto events welcoming traveling Esperantists. Its archive can be found at %{link}.
+      paragraph_2: The international list of events above is maintained by Eventa Servo. Esperanto-Centro EVENTOJ / Lingvo-Studio in Budapest launched this list in 1996 and has collaborated with Eventa Servo since 2020.
+    events: Events
+    missing_event_html: If you believe an event is missing or there is an error, %{contact_link}.
+    page_title: International Calendar | Eventa Servo
+    past_events: Past international events
+    subtitle: List of the main Esperanto events worldwide
+    title: International Calendar
+    year: Year
+    year_title: International calendar %{year}
   links:
     announcements_and_contests: Announcements & Contests
     international_calendar: International Calendar
@@ -209,6 +271,47 @@ en:
       my_events: My events
       my_profile: My profile
       sign_out: Sign out
+  search:
+    cancelled: Cancelled
+    min_chars_error: The search query must contain at least 3 characters
+    past: Past
+    placeholder: Search events or organizations... (minimum 3 characters)
+    query_aria_label: Search query
+    results:
+      events:
+        city: City
+        date: Date
+        empty: No events found
+        found:
+          one: "%{count} event found"
+          other: "%{count} events found"
+        header: Events
+        title: Title
+        upcoming_and_recent: "(upcoming and recent)"
+      organizations:
+        empty: No organizations found
+        found:
+          one: "%{count} organization found"
+          other: "%{count} organizations found"
+        header: Organizations
+      users:
+        country: Country
+        empty: No users found
+        found:
+          one: "%{count} user found"
+          other: "%{count} users found"
+        header: Users
+        name: Name
+      videos:
+        date: Date
+        empty: No recorded presentations found
+        event: Event
+        found:
+          one: "%{count} recorded presentation found"
+          other: "%{count} recorded presentations found"
+        header: Recorded presentations
+        title: Title
+    title: Search
   support:
     array:
       last_word_connector: " and "
@@ -222,5 +325,41 @@ en:
       konkurso: Contests
       kunveno_evento: Meetings/Events
       kurso: Courses
+      plurtaga: Multi-day
+      por_junuloj: For youth
+      unutaga: Single day
+  teachers_and_speakers:
+    cards:
+      experience: Experience
+      levels: Levels
+      topics: Topics
+    cefr: Common European Framework of Reference for Languages
+    edukado_html: Our partner %{edukado_link} provides ready-to-use materials, information, and diverse services to enable modern, high-quality work based on worldwide cooperation of Esperanto teachers. They offer Esperanto examinations according to the %{cefr_link} |
+    filters:
+      all_countries: All countries
+      all_levels: All levels
+      country: Country
+      experience_or_topics: Experience / Topics
+      keyword_placeholder: Keyword...
+      level: Level
+      name: Name
+      name_placeholder: Search by name...
+    ilei_html: "%{ilei_link}, the International League of Esperanto Teachers, is the primary gathering place for Esperanto teachers and educators. ILEI is an affiliated specialized association of the Universal Esperanto Association (UEA). It has members worldwide and sections in over 40 countries. Whether you teach in primary school, secondary school, or university, lead Esperanto courses, are interested in teaching, or wish to exchange experience with colleagues -> %{join_link}"
+    intro: Are you looking for a teacher or speaker for your event? In the list below you will find people who indicated in their Eventa Servo profile that they are ready to teach and speak. You can find details on their respective user profiles. Some are willing to teach or speak for free, others request travel expense reimbursement or a small honorarium. Sometimes they can attend on-site; others may only participate online. Even if you are not an event organizer, feel free to contact them — Esperantists are generally very helpful!
+    join_ilei: Become a member of ILEI
+    levels:
+      baza: Basic
+      meza: Intermediate
+      supera: Advanced
+    no_speakers_filtered: No speakers found with those filters.
+    no_speakers_registered: No speakers are registered.
+    no_teachers_filtered: No teachers found with those filters.
+    no_teachers_registered: No teachers are registered.
+    random_notice: Random teacher and speaker shown. Use the filter to see more.
+    speakers_divider: Speakers
+    teachers_divider: Teachers
+    title: Teachers and speakers
+  timezone:
+    custom_timezone_text: 'Times shown in your timezone: %{timezone}'
   video:
     presentations: Presentations

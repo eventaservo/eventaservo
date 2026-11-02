@@ -49,10 +49,6 @@ Rails.application.routes.draw do
     get "uzanto/:webcal_token", to: "webcal#user", as: "user"
   end
 
-  # Instruistoj kaj prelegantoj
-  get "/instruistoj_kaj_prelegantoj", to: redirect("/instruantoj_kaj_prelegantoj"), as: "instruistoj_kaj_prelegantoj"
-  get "/instruantoj_kaj_prelegantoj", to: "home#instruistoj_kaj_prelegantoj", as: "instruantoj_kaj_prelegantoj"
-
   draw(:admin)
 
   # Aldonaĵoj
@@ -72,6 +68,13 @@ Rails.application.routes.draw do
     get "/terms", to: "home#terms"
     get "/prie", to: "home#prie"
     get "/serchilo", to: "home#search"
+
+    # Instruistoj kaj prelegantoj
+    get "/instruistoj_kaj_prelegantoj", to: redirect { |params, request|
+      path = params[:locale].present? ? "/#{params[:locale]}/instruantoj_kaj_prelegantoj" : "/instruantoj_kaj_prelegantoj"
+      request.query_string.present? ? "#{path}?#{request.query_string}" : path
+    }, as: "instruistoj_kaj_prelegantoj"
+    get "/instruantoj_kaj_prelegantoj", to: "home#instruistoj_kaj_prelegantoj", as: "instruantoj_kaj_prelegantoj"
 
     # Anoncoj kaj Konkursoj
     get "/anoncoj", to: "home#anoncoj", as: "anoncoj"

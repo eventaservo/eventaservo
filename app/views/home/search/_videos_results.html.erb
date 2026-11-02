@@ -1,16 +1,16 @@
 <div class="box-white">
-  <div class="box-header">Registritaj prezentoj</div>
+  <div class="box-header"><%= t("search.results.videos.header") %></div>
   <% if videos.empty? %>
-    <p>Neniu registrita prezento trovita</p>
+    <p><%= t("search.results.videos.empty") %></p>
   <% else %>
-    <h5><%= pluralize(videos.count, 'registrita prezento trovita', 'registritaj prezentoj trovitaj') %></h5>
+    <h5><%= t("search.results.videos.found", count: videos.count) %></h5>
     <div class="table-responsive">
       <table class="table table-sm table-hover">
         <thead>
           <tr>
-            <th>Titolo</th>
-            <th>Evento</th>
-            <th>Dato</th>
+            <th><%= t("search.results.videos.title") %></th>
+            <th><%= t("search.results.videos.event") %></th>
+            <th><%= t("search.results.videos.date") %></th>
           </tr>
         </thead>
         <tbody>

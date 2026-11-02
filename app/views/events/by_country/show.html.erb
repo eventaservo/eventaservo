@@ -4,7 +4,7 @@
 
 <div class="box-white">
   <% content_for :breadcrumb_right do %>
-    <%= link_to icon('far', 'calendar-alt'), webcal_url(landa_kodo: @country.code, protocol: :webcal, format: :ics), data: { bs_target: '#webcalModal', bs_toggle: 'modal' }, aria: { label: 'Aboni kalendaron' } %>
+    <%= link_to icon('far', 'calendar-alt'), webcal_url(landa_kodo: @country.code, protocol: :webcal, format: :ics), data: { bs_target: '#webcalModal', bs_toggle: 'modal' }, aria: { label: t('events.webcal_modal.subscribe_calendar') } %>
     <%= link_to icon('fas', 'rss'), events_by_country_path(continent: @country.continent.normalized, country_name: @country.name.normalized, format: :xml), title: 'RSS', class: 'me-2', aria: { label: 'RSS' } %>
   <% end %>
   <%= render partial: 'layouts/breadcrumb' %>
@@ -44,33 +44,29 @@
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 id="shareModalCenterTitle" class="modal-title">Aboni kalendaron</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermi"></button>
+        <h5 id="shareModalCenterTitle" class="modal-title"><%= t("events.webcal_modal.title") %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= t("buttons.close") %>"></button>
       </div>
       <div class="modal-body">
         <p>
-          Kiam oni abonas landan kalendaron, ĉiuj eventoj estas aldonataj al la kalendaro kaj ajnaj eventaj ŝanĝoj
-          aŭtomate ĝisdatiĝas.
+          <%= t("events.webcal_modal.calendar_subscription_info") %>
         </p>
         <p>
-          Jen Webcal-ligilo por aboni la kalendaron de eventoj en <%= flag_icon(@country.code) %> <%= @country.name %>.
-          Uzu ĝin en programoj kiel Google Calendar, iCal aŭ similaj. Se vi bezonas klarigon kiel uzi la ligilon, legu
-          <%= link_to 'ĉi tiun artikolon', 'https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)', target: :'_blank' %>.
+          <%= t("events.webcal_modal.country_intro_html", country: "#{flag_icon(@country.code)} #{@country.name}".html_safe, help_link: link_to(t("events.webcal_modal.help_article_link"), 'https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)', target: :'_blank', rel: 'noopener noreferrer')) %>
         </p>
         <div class="input-group" data-controller="clipboard">
           <div class="input-group-text">
-              <%= link_to 'Kopii', '#', data: { action: 'click->clipboard#copy' } %>
+              <%= link_to t("buttons.copy"), '#', data: { action: 'click->clipboard#copy' } %>
           </div>
           <%= text_field_tag nil, webcal_url(landa_kodo: @country.code, format: :ics), readonly: true, class: 'form-control bg-color-white', data: { clipboard_target: 'source' } %>
         </div>
         <br>
         <p>
-          Kelkaj kalendaraj programoj ebligas aŭtomate aboni la kalendaron se oni alklakas specifan ligilon. Vi povas
-          provi tion per <%= link_to 'ĉi tiu ligilo', webcal_url(landa_kodo: @country.code, protocol: :webcal, format: :ics) %>.
+          <%= t("events.webcal_modal.auto_subscribe_html", link: link_to(t("events.webcal_modal.auto_subscribe_link"), webcal_url(landa_kodo: @country.code, protocol: :webcal, format: :ics))) %>
         </p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Fermi</button>
+        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><%= t("buttons.close") %></button>
       </div>
     </div>
   </div>

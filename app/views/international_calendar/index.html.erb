@@ -1,24 +1,24 @@
 <% content_for :title do %>
-  Internacia Kalendaro | Eventa Servo
+  <%= t("international_calendar.page_title") %>
 <% end %>
 
 <% content_for :og_title do %>
-  Internacia Kalendaro | Eventa Servo
+  <%= t("international_calendar.page_title") %>
 <% end %>
 
 <% content_for :og_description do %>
-  Listo de la ĉefaj Esperanto-eventoj tutmonde
+  <%= t("international_calendar.subtitle") %>
 <% end %>
 
 <div class="box-white">
   <div class="text-center">
-    <h1><%= icon("far", "calendar", "Internacia Kalendaro") %></h1>
+    <h1><%= icon("far", "calendar", t("international_calendar.title")) %></h1>
     <p>
-      Jen listo de la ĉefaj Esperanto-eventoj tutmonde.<br>
-      Se laŭ vi mankas evento aŭ estas eraro, <%= mail_to("kontakto@eventaservo.org", "informu nin per retmesaĝo") %>.
+      <%= t("international_calendar.subtitle") %><br>
+      <%= t("international_calendar.missing_event_html", contact_link: mail_to("kontakto@eventaservo.org", t("international_calendar.contact_link_text"))) %>
     </p>
     <hr>
-    <%= link_to "Pasintaj internaciaj eventoj", international_calendar_year_list_path, class: 'btn btn-sm btn-link' %>
+    <%= link_to t("international_calendar.past_events"), international_calendar_year_list_path, class: 'btn btn-sm btn-link' %>
   </div>
 
   <% @events.grouped_by_months.each do |date, events| %>
@@ -31,7 +31,7 @@
           <strong><%= link_to(e.title, event_url(code: e.ligilo), class: ("cancelled" if e.cancelled)) %></strong>
           <%= display_organizations_for_event(e) %>
           <p class="small">
-            <strong><%= event_date(e) %> en <%= e.city %></strong><br>
+            <strong><%= t("events.date_in_city", date: event_date(e), city: e.city) %></strong><br>
             <%= e.description %>
           </p>
           <hr>
