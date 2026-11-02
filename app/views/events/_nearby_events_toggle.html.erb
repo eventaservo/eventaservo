@@ -1,0 +1,5 @@
+<%# Renders a discreet link that shows or hides events from nearby cities. %>
+<%# Locals: +include_nearby+ — whether nearby events are currently shown %>
+<div class="text-center my-3">
+  <%= link_to (include_nearby ? t("events.hide_nearby") : t("events.show_nearby")), nearby_toggle_path(include_nearby:) %>
+</div>

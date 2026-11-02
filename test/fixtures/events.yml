@@ -18,8 +18,8 @@
 #  format                 :string           indexed
 #  import_url             :string(400)
 #  international_calendar :boolean          default(FALSE)
-#  latitude               :float
-#  longitude              :float
+#  latitude               :float            indexed => [longitude]
+#  longitude              :float            indexed => [latitude]
 #  metadata               :jsonb
 #  online                 :boolean          default(FALSE), indexed
 #  participants_count     :integer          default(0), indexed
@@ -89,4 +89,109 @@ past_event_danio_older:
   code: "aarhus6mago"
   site: "https://example.org/k2"
   email: "k2@example.org"
+  user: user
+
+# Future geo-located events used to verify the nearby-cities feature (120 km radius).
+# Distances are measured from Kopenhago (Danio):
+# - Malmö (Svedio): ~28 km, across the border -> nearby
+# - Næstved (Danio): ~70 km, beyond 50 km but within 120 km -> nearby
+# - Angulurbo (Svedio): inside the bounding box corner but ~158 km away -> not nearby
+# - Aarhuso (Danio): ~157 km -> not nearby
+nearby_copenhagen_future:
+  title: "Copenhagen Future Meetup"
+  description: "Future event in Copenhagen"
+  city: "Kopenhago"
+  country_id: 41
+  date_start: <%= 1.month.from_now %>
+  date_end: <%= 1.month.from_now + 1.day %>
+  code: "nearbycopenhagen"
+  site: "https://example.org/copenhagen"
+  email: "copenhagen@example.org"
+  latitude: 55.6761
+  longitude: 12.5683
+  user: user
+
+nearby_malmo_future:
+  title: "Malmo Future Meetup"
+  description: "Future event in Malmö"
+  city: "Malmö"
+  country_id: 212
+  date_start: <%= 1.month.from_now %>
+  date_end: <%= 1.month.from_now + 1.day %>
+  code: "nearbymalmo"
+  site: "https://example.org/malmo"
+  email: "malmo@example.org"
+  latitude: 55.6050
+  longitude: 13.0038
+  user: user
+
+nearby_naestved_future:
+  title: "Naestved Future Meetup"
+  description: "Future event in Næstved"
+  city: "Næstved"
+  country_id: 41
+  date_start: <%= 1.month.from_now %>
+  date_end: <%= 1.month.from_now + 1.day %>
+  code: "nearbynaestved"
+  site: "https://example.org/naestved"
+  email: "naestved@example.org"
+  latitude: 55.2299
+  longitude: 11.7609
+  user: user
+
+nearby_corner_future:
+  title: "Corner Town Future Meetup"
+  description: "Future event inside the bounding box corner but beyond the radius"
+  city: "Angulurbo"
+  country_id: 212
+  date_start: <%= 1.month.from_now %>
+  date_end: <%= 1.month.from_now + 1.day %>
+  code: "nearbycorner"
+  site: "https://example.org/corner"
+  email: "corner@example.org"
+  latitude: 56.6761
+  longitude: 14.3683
+  user: user
+
+nearby_aarhus_future:
+  title: "Aarhus Future Meetup"
+  description: "Future event in Aarhus, too far away"
+  city: "Aarhuso"
+  country_id: 41
+  date_start: <%= 1.month.from_now %>
+  date_end: <%= 1.month.from_now + 1.day %>
+  code: "nearbyaarhus"
+  site: "https://example.org/aarhus"
+  email: "aarhus@example.org"
+  latitude: 56.1629
+  longitude: 10.2039
+  user: user
+
+# Two Fiji towns ~21 km apart on opposite sides of the antimeridian (±180°).
+antimeridian_east_future:
+  title: "East Antimeridian Meetup"
+  description: "Future event just west of the antimeridian (positive longitude)"
+  city: "Orienturbo"
+  country_id: 54
+  date_start: <%= 1.month.from_now %>
+  date_end: <%= 1.month.from_now + 1.day %>
+  code: "antimeridianeast"
+  site: "https://example.org/east"
+  email: "east@example.org"
+  latitude: -16.8
+  longitude: 179.9
+  user: user
+
+antimeridian_west_future:
+  title: "West Antimeridian Meetup"
+  description: "Future event just east of the antimeridian (negative longitude)"
+  city: "Okcidenturbo"
+  country_id: 54
+  date_start: <%= 1.month.from_now %>
+  date_end: <%= 1.month.from_now + 1.day %>
+  code: "antimeridianwest"
+  site: "https://example.org/west"
+  email: "west@example.org"
+  latitude: -16.8
+  longitude: -179.9
   user: user

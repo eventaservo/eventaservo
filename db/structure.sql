@@ -2260,6 +2260,13 @@ CREATE INDEX index_events_on_format ON public.events USING btree (format);
 
 
 --
+-- Name: index_events_on_latitude_and_longitude; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_events_on_latitude_and_longitude ON public.events USING btree (latitude, longitude);
+
+
+--
 -- Name: index_events_on_online; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2830,6 +2837,7 @@ SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
 ('20261031095423'),
+('20260726000000'),
 ('20260722080000'),
 ('20260625220000'),
 ('20260528220136'),

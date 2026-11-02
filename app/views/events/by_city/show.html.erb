@@ -16,5 +16,8 @@
     <%= render partial: "events/past_events_toggle", locals: {
       past_url: events_by_city_path(continent: params[:continent], country_name: params[:country_name], city_name: params[:city_name], pasintaj: 1)
     } %>
+    <% if @card_view && @nearby_cities.present? %>
+      <%= render partial: "events/nearby_events_toggle", locals: {include_nearby: @include_nearby} %>
+    <% end %>
   <% end %>
 </div>

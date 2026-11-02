@@ -28,6 +28,41 @@ module EventsHelper
     end
   end
 
+  # Query parameters preserved when toggling the nearby-events visibility.
+  NEARBY_TOGGLE_PRESERVED_PARAMS = %w[periodo o s t].freeze
+
+  # Whether the event belongs to a nearby city rather than the page's city.
+  #
+  # Only meaningful on the by-city page, where +@nearby_cities+ is assigned and
+  # the card list may contain events from the target city plus nearby cities.
+  #
+  # @param event [Event]
+  #
+  # @return [Boolean]
+  def event_nearby?(event)
+    return false if @nearby_cities.blank? || params[:city_name].blank? || @country.nil?
+
+    event.country_id != @country.id || event.city.to_s.normalized != params[:city_name].normalized
+  end
+
+  # Path that toggles nearby events on the by-city page, preserving the active
+  # listing filters (+periodo+, +o+, +s+, +t+).
+  #
+  # @param include_nearby [Boolean] whether nearby events are currently shown
+  #
+  # @return [String]
+  def nearby_toggle_path(include_nearby:)
+    filters = request.query_parameters.slice(*NEARBY_TOGGLE_PRESERVED_PARAMS).symbolize_keys
+
+    events_by_city_path(
+      continent: params[:continent],
+      country_name: params[:country_name],
+      city_name: params[:city_name],
+      **filters,
+      nearby: (include_nearby ? 0 : nil)
+    )
+  end
+
   def event_flag(event)
     return unless event.country.code
     return if event.organizations.any? { |o| o.display_flag == false }

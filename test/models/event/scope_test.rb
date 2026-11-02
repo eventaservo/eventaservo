@@ -240,6 +240,26 @@ class Event::ScopeTest < ActiveSupport::TestCase
     end
   end
 
+  test "in_cities matches events across multiple city and country_id pairs" do
+    copenhagen = events(:nearby_copenhagen_future)
+    malmo = events(:nearby_malmo_future)
+    aarhus = events(:nearby_aarhus_future)
+
+    result = Event.in_cities([
+      ["Kopenhago", countries(:denmark).id],
+      ["Malmö", countries(:sweden).id]
+    ])
+
+    assert_includes result, copenhagen
+    assert_includes result, malmo
+    assert_not_includes result, aarhus
+  end
+
+  test "in_cities returns none when pairs are blank" do
+    assert_empty Event.in_cities([])
+    assert_empty Event.in_cities(nil)
+  end
+
   private
 
   # Creates an event with a fixed end time for scope boundary tests.

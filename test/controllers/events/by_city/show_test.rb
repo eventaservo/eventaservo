@@ -158,4 +158,92 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_includes response.body, ERB::Util.html_escape(events.first.title)
   end
+
+  test "card view shows nearby events within 120 km marked with Proksima badge" do
+    get_copenhagen
+
+    assert_response :success
+    assert_includes response.body, events(:nearby_copenhagen_future).title
+    assert_includes response.body, events(:nearby_malmo_future).title
+    assert_includes response.body, events(:nearby_naestved_future).title
+    assert_select ".card", text: /#{events(:nearby_malmo_future).title}/ do
+      assert_select ".badge", text: I18n.t("events.nearby")
+    end
+    assert_select ".card", text: /#{events(:nearby_copenhagen_future).title}/ do
+      assert_select ".badge", text: I18n.t("events.nearby"), count: 0
+    end
+  end
+
+  test "card view excludes cities farther than the 120 km radius" do
+    get_copenhagen
+
+    assert_response :success
+    assert_not_includes response.body, events(:nearby_aarhus_future).title
+    assert_not_includes response.body, events(:nearby_corner_future).title
+  end
+
+  test "card view shows a link to hide nearby events with nearby=0" do
+    get_copenhagen
+
+    assert_response :success
+    assert_select "a[href*='nearby=0']", text: I18n.t("events.hide_nearby")
+  end
+
+  test "nearby=0 hides nearby events and shows a link to reveal them" do
+    get_copenhagen(nearby: 0)
+
+    assert_response :success
+    assert_includes response.body, events(:nearby_copenhagen_future).title
+    assert_not_includes response.body, events(:nearby_malmo_future).title
+    assert_not_includes response.body, events(:nearby_naestved_future).title
+    assert_select "a", text: I18n.t("events.show_nearby")
+  end
+
+  test "nearby toggle preserves active filters in the URL" do
+    get_copenhagen(periodo: "estontece", o: "uea", s: "1,2", t: "unutaga")
+
+    assert_response :success
+    assert_select "a", text: I18n.t("events.hide_nearby") do |links|
+      href = links.first["href"]
+      assert_includes href, "nearby=0"
+      assert_includes href, "periodo=estontece"
+      assert_includes href, "o=uea"
+      assert_includes href, "s=1%2C2"
+      assert_includes href, "t=unutaga"
+    end
+  end
+
+  test "map view does not include nearby events" do
+    get_copenhagen(view_mode: "mapo")
+
+    assert_response :success
+    assert_includes response.body, events(:nearby_copenhagen_future).title
+    assert_not_includes response.body, events(:nearby_malmo_future).title
+    assert_select "a", text: I18n.t("events.hide_nearby"), count: 0
+  end
+
+  test "past events view does not include nearby events" do
+    get_copenhagen(pasintaj: 1)
+
+    assert_response :success
+    assert_not_includes response.body, events(:nearby_malmo_future).title
+  end
+
+  private
+
+  # Sends a GET request to the Copenhagen city page with the given view mode and query parameters.
+  #
+  # @param view_mode [String] Cookie value for +vidmaniero+
+  # @param query_params [Hash] Additional query parameters
+  #
+  # @return [void]
+  def get_copenhagen(view_mode: "kartaro", **query_params)
+    country = countries(:denmark)
+    get events_by_city_url(
+      continent: country.continent.normalized,
+      country_name: country.name.normalized,
+      city_name: "kopenhago",
+      **query_params
+    ), headers: {"HTTP_COOKIE" => "vidmaniero=#{view_mode}"}
+  end
 end
