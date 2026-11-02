@@ -20,7 +20,9 @@ class OrganizationsController < ApplicationController
     @pagy, @organizoj = pagy(@organizoj)
   end
 
-  # Montras organizajn informojn
+  # Shows organization details and associated events.
+  #
+  # @return [void]
   def show
     eventoj = Event.includes([:country]).by_organization(params[:short_name])
 
@@ -34,6 +36,7 @@ class OrganizationsController < ApplicationController
     @pagy_reports, @events_with_reports = pagy(reports_scope, limit: 20, page_key: "raportoj_pagho")
 
     if params["iframe"].present?
+      response.headers.delete("X-Frame-Options")
       render :show, layout: "iframe"
     else
       render :show
