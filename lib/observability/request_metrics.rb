@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Helpers that instrument the EventaServo application for observability.
 module Observability
   # Emits per-request metrics to Sentry so request volume, latency and the share
   # of bot traffic can be compared across deploys — for example, before and
@@ -8,6 +9,9 @@ module Observability
   # Metrics are aggregated by the Sentry SDK and flushed periodically, so the
   # per-request cost stays small. A distribution metric allows p50/p95
   # aggregation in Sentry, unlike a gauge.
+  #
+  # The `process_action.action_controller` payload carries no elapsed time, so
+  # the duration is derived from the notification timestamps.
   #
   # @see https://docs.sentry.io/platforms/ruby/metrics/
   class RequestMetrics
@@ -20,25 +24,29 @@ module Observability
     class << self
       # Subscribes the recorder to finished controller requests.
       #
+      # @param metrics [Object] metrics recorder, injectable for tests
       # @return [Object, nil] the subscription, or nil when Sentry is not initialized
-      def install!
+      def install!(metrics: Sentry.metrics)
         return unless Sentry.initialized?
 
-        ActiveSupport::Notifications.subscribe(EVENT) do |_name, _start, _finish, _id, payload|
-          record(payload)
+        ActiveSupport::Notifications.subscribe(EVENT) do |_name, started_at, finished_at, _id, payload|
+          record(payload, started_at: started_at, finished_at: finished_at, metrics: metrics)
         end
       end
 
       # Emits a count and a duration metric for a finished request.
       #
       # @param payload [Hash] payload of the `process_action.action_controller` event
+      # @param started_at [Time] time the notification started
+      # @param finished_at [Time] time the notification finished
       # @param metrics [Object] metrics recorder, injectable for tests
       # @return [Object, nil] result of the last metric call, or nil on failure
-      def record(payload, metrics: Sentry.metrics)
+      def record(payload, started_at:, finished_at:, metrics: Sentry.metrics)
         attributes = attributes_for(payload)
+        duration_ms = (finished_at - started_at) * 1000.0
 
         metrics.count("rails.request", value: 1, attributes: attributes)
-        metrics.distribution("rails.request.duration", payload[:duration].to_f,
+        metrics.distribution("rails.request.duration", duration_ms,
           unit: "millisecond", attributes: attributes)
       rescue
         # Observability must never break a request.
