@@ -20,7 +20,9 @@ class OrganizationsController < ApplicationController
     @pagy, @organizoj = pagy(@organizoj)
   end
 
-  # Montras organizajn informojn
+  # Shows organization details and associated events.
+  #
+  # @return [void]
   def show
     eventoj = Event.includes([:country]).by_organization(params[:short_name])
 
