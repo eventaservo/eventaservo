@@ -14,7 +14,7 @@
         </thead>
         <tbody>
           <% users.each do |user| %>
-            <tr class="small pointer" onclick="window.location.href = '<%= events_by_username_path(user.username) %>'">
+            <tr class="small pointer" onclick="window.location.href = '<%= events_by_username_path(username: user.username) %>'">
               <td><%= user.name %></td>
               <td><%= display_flag(user.country) + " #{user.country.name}" %></td>
             </tr>

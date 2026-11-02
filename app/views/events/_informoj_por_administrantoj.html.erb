@@ -1,20 +1,20 @@
 <div class="card small mt-2 border-warning">
   <div class="card-header bg-warning">
-    Informoj por administrantoj
+    <%= t("users.profile.admin_info.title") %>
   </div>
   <div class="card-body">
     <%= display_email(uzanto.email) %>
     <br>
-    UEA-Kodo: <%= uzanto.ueacode %>
+    <%= t("users.profile.admin_info.uea_code") %>: <%= uzanto.ueacode %>
     <br>
-    Naskiĝdato: <%= uzanto.birthday.strftime("%d/%m/%Y") if uzanto.birthday %>
+    <%= t("users.profile.admin_info.birthday") %>: <%= uzanto.birthday.strftime("%d/%m/%Y") if uzanto.birthday %>
     <hr>
-    Aktiva: <%= uzanto.active? ? "JES" : "NE" %>
+    <%= t("users.profile.admin_info.active") %>: <%= uzanto.active? ? t("common.yes_upper") : t("common.no_upper") %>
     <br>
-    Kreita en: <%= uzanto.created_at.strftime("%d/%m/%Y") %>
+    <%= t("users.profile.admin_info.created_at") %>: <%= uzanto.created_at.strftime("%d/%m/%Y") %>
     <br>
-    Laste ensalutis: <%= uzanto.last_sign_in_at&.strftime("%d/%m/%Y") || "neniam" %>
+    <%= t("users.profile.admin_info.last_sign_in_at") %>: <%= uzanto.last_sign_in_at&.strftime("%d/%m/%Y") || t("users.profile.admin_info.never") %>
     <hr>
-    <%= link_to 'Serĉi en Admin panelo', admin_users_path(name: uzanto.name[0..3]), target: :_blank %>
+    <%= link_to t("users.profile.admin_info.search_in_admin"), admin_users_path(name: uzanto.name[0..3]), target: :_blank %>
   </div>
 </div>

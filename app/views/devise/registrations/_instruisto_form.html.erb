@@ -1,7 +1,7 @@
 <div data-controller="user">
-  <div class="lead">Kiel instruanto</div>
+  <div class="lead"><%= t("devise.registrations.instructor.lead") %></div>
   <div class="row mb-3">
-    <%= f.label :instruisto, 'Mi estas instruanto', class: 'col-form-label col-5' %>
+    <%= f.label :instruisto, t("devise.registrations.instructor.i_am_teacher"), class: 'col-form-label col-5' %>
     <div class="col-7">
       <div class="mb-3 form-check">
         <%= check_box 'user', 'instruisto', { 'data-action': 'user#toggleUserInstruistoDetails', 'data-user-target': 'instruisto' }, 'true', 'false' %>
@@ -11,27 +11,27 @@
 
   <div id="instruisto-details" class="<%= 'd-none' unless resource.instruisto == 'true' %>">
     <div class="row mb-3">
-      <%= f.label :instruo, 'Nivelo', class: 'col-5 col-form-label' %>
+      <%= f.label :instruo, t("devise.registrations.instructor.level"), class: 'col-5 col-form-label' %>
       <div class="col-7">
-        <div class="btn-group mb-1" role="group" aria-label="Nivelo">
+        <div class="btn-group mb-1" role="group" aria-label="<%= t("devise.registrations.instructor.level") %>">
           <%= check_box_tag 'nivelo[baza]', 'baza', resource.instruo['nivelo']&.include?('baza'), class: 'btn-check', id: 'nivelo_baza' %>
-          <label class="btn tag-check tag-check--blue" for="nivelo_baza">Baza</label>
+          <label class="btn tag-check tag-check--blue" for="nivelo_baza"><%= t("teachers_and_speakers.levels.baza") %></label>
 
           <%= check_box_tag 'nivelo[meza]', 'meza', resource.instruo['nivelo']&.include?('meza'), class: 'btn-check', id: 'nivelo_meza' %>
-          <label class="btn tag-check tag-check--blue" for="nivelo_meza">Meza</label>
+          <label class="btn tag-check tag-check--blue" for="nivelo_meza"><%= t("teachers_and_speakers.levels.meza") %></label>
 
           <%= check_box_tag 'nivelo[supera]', 'supera', resource.instruo['nivelo']&.include?('supera'), class: 'btn-check', id: 'nivelo_supera' %>
-          <label class="btn tag-check tag-check--blue" for="nivelo_supera">Supera</label>
+          <label class="btn tag-check tag-check--blue" for="nivelo_supera"><%= t("teachers_and_speakers.levels.supera") %></label>
         </div>
       </div>
     </div>
 
     <div class="row mb-3">
-      <label class="col-md-5 col-form-label" for="instru_sperto">Sperto</label>
+      <label class="col-md-5 col-form-label" for="instru_sperto"><%= t("devise.registrations.instructor.experience") %></label>
       <div class="col-md-7">
         <div class="mb-3">
           <%= text_area_tag 'instru_sperto', resource.instruo["sperto"], rows: "3",
-            placeholder: "Skribu pri via sperto kiel instruisto.", class: "form-control" %>
+            placeholder: t("devise.registrations.instructor.experience_placeholder"), class: "form-control" %>
         </div>
       </div>
     </div>

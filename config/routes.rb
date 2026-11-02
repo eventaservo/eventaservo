@@ -21,10 +21,7 @@ Rails.application.routes.draw do
     mount MaintenanceTasks::Engine, at: "/maintenance_tasks"
   end
 
-  devise_for :users, controllers: {sessions: "users/sessions",
-                                   registrations: "users/registrations",
-                                   omniauth_callbacks: "users/omniauth_callbacks",
-                                   passwords: "users/passwords"}
+  devise_for :users, only: :omniauth_callbacks, controllers: {omniauth_callbacks: "users/omniauth_callbacks"}
 
   namespace :combobox do
     get "users_with_username"
@@ -53,12 +50,18 @@ Rails.application.routes.draw do
   post "upload/:record_id" => "attachments#upload", :as => "attachment_upload"
   delete "dosiero/:id/forighu" => "attachments#destroy", :as => "attachment_destroy"
 
-  # Eventoj de uzantoj
-  get "/uzanto/:username", controller: "events", action: "by_username", as: "events_by_username"
-  get "/uzanto/:username/eventoj", to: "profile#events", as: "user_events"
-
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
     root to: "home#index"
+
+    devise_for :users, skip: :omniauth_callbacks, controllers: {sessions: "users/sessions",
+                                                                registrations: "users/registrations",
+                                                                passwords: "users/passwords",
+                                                                confirmations: "users/confirmations",
+                                                                unlocks: "users/unlocks"}
+
+    # Eventoj de uzantoj
+    get "/uzanto/:username", controller: "events", action: "by_username", as: "events_by_username"
+    get "/uzanto/:username/eventoj", to: "profile#events", as: "user_events"
 
     get "/privateco", to: "home#privateco"
     get "/privacy", to: "home#privateco"

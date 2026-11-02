@@ -21,10 +21,17 @@ pt_BR:
         name: Nome
         short_name: Nome curto
       user:
+        about: Sobre mim
+        avatar: Avatar
+        birthday: Data de nascimento
         city: Cidade
         country_id: País
         email: E-mail
         name: Nome
+        password: Senha
+        password_confirmation: Confirmação de senha
+        persona_retejo: Site pessoal
+        ueacode: Código UEA
     errors:
       messages:
         record_invalid: 'Validação falhou: %{errors}'
@@ -42,6 +49,7 @@ pt_BR:
     models:
       event: Eventos
     registrations:
+      api_v2_token: Token da API v2
       regenerate_token: Regenerar token
       regenerate_token_confirmation: Tem certeza que deseja regenerar seu token de API? O token antigo deixará de funcionar imediatamente.
       token_regenerated: Token de API regenerado com sucesso.
@@ -73,6 +81,7 @@ pt_BR:
     select: Selecionar
     send: Enviar
     share: Compartilhar
+    update: Atualizar
   clipboard:
     copied_to_clipboard: "%{text} copiado para a área de transferência!"
     copy_failed: Não foi possível copiar para a área de transferência
@@ -80,11 +89,14 @@ pt_BR:
     are_you_sure: Tem certeza?
     country: País
     date: Data
+    event: Evento
     events: Eventos
     location: Local
     name: Nome
     no_results: Nenhum resultado
     no_upper: NÃO
+    optional: "*opcional"
+    or_upper: OU
     sign_in: Entrar
     yes_upper: SIM
   continents:
@@ -94,8 +106,73 @@ pt_BR:
     europo: Europa
     oceanio: Oceania
     reta: Online
+  devise:
+    confirmations:
+      new:
+        submit: Reenviar
+        subtitle: Reenviar instruções de confirmação
+    passwords:
+      edit:
+        minimum_characters: No mínimo %{count} caracteres
+        new_password: Nova senha
+        password_confirmation: Confirmação da nova senha
+        submit: Alterar minha senha
+        title: Altere sua senha
+      new:
+        instructions: Digite seu endereço de e-mail. Enviaremos instruções para criar uma nova senha.
+        submit: Receber instruções
+        subtitle: Esqueceu sua senha?
+    registrations:
+      edit:
+        delete_account: Excluir conta
+        delete_account_confirmation: Tem certeza? Esta ação NÃO PODERÁ ser desfeita!
+        links: Links
+        organizations: Organizações
+        ready_to_help: Estou pronto para ajudar
+        remove_avatar: Remover avatar
+        title: Editar perfil
+      instructor:
+        experience: Experiência
+        experience_placeholder: Escreva sobre sua experiência como professor.
+        i_am_teacher: Sou um professor
+        lead: Como professor
+        level: Nível
+      new:
+        birthday_placeholder: Data de nascimento (D/M/A) *opcional
+        password_confirmation_placeholder: Confirmação de senha
+        password_placeholder: Senha
+        security_phrase_placeholder: Como se chama a nossa língua?
+        submit: Cadastre-se
+        subtitle_html: Cadastre-se para criar novos eventos.<br>É gratuito!
+        ueacode_placeholder: Código UEA *opcional
+        video_help_html: Se tiver dúvidas, assista a %{video_link}. Ele explica como se cadastrar.
+        video_link_text: este vídeo
+      speaker:
+        i_am_speaker: Sou um palestrante
+        lead: Como palestrante
+        topics_label: Palestro sobre os seguintes temas
+        topics_placeholder: Escreva sobre os temas sobre os quais está disposto a palestrar
+    sessions:
+      new:
+        forgot_password: Esqueci minha senha
+        submit: Entrar
+        subtitle: Entre para criar novos eventos.
+    shared:
+      links:
+        already_registered: Já tem uma conta?
+        didnt_receive_confirmation_instructions: Não recebeu as instruções de confirmação?
+        not_registered: Ainda não tem conta?
+        sign_in: Entrar
+        sign_up_now: Cadastre-se agora
+      sign_in_with_provider: Entrar com %{provider}
+      sign_up_with_provider: Cadastrar-se com %{provider}
+    unlocks:
+      new:
+        submit: Reenviar instruções de desbloqueio
+        title: Reenviar instruções de desbloqueio
   errors:
     format: "%{attribute} %{message}"
+    header: Há um erro no formulário
     messages:
       accepted: deve ser aceito
       blank: não pode ficar em branco
@@ -538,5 +615,33 @@ pt_BR:
     title: Professores e palestrantes
   timezone:
     custom_timezone_text: 'Horários exibidos no seu fuso horário: %{timezone}'
+  users:
+    events:
+      interested_upcoming_events: Próximos eventos nos quais tenho interesse
+      managed_past_events: Eventos passados que administrei
+      managed_upcoming_events: Próximos eventos que administro
+      my_personal_events_page: Minha página pessoal de eventos
+      personal_page_notice: Esta página é pessoal. Outros usuários do Eventa Servo não podem visualizá-la.
+    profile:
+      admin_info:
+        active: Ativo
+        birthday: Data de nascimento
+        created_at: Criado em
+        last_sign_in_at: Último login
+        never: nunca
+        search_in_admin: Pesquisar no painel Admin
+        title: Informações para administradores
+        uea_code: Código UEA
+      contacts: Contatos
+      i_am_teacher: Sou um professor
+      levels_taught: 'Ensino o(s) nível(is):'
+      ready_to_lecture_about: Estou pronto para palestrar sobre
+      subscribe_personal_calendar: Assinar calendário pessoal
+      this_article: este artigo
+      this_link: este link
+      webcal_info_1: Ao assinar um calendário pessoal, todos os seus próprios eventos e aqueles em que você tem interesse são adicionados ao calendário. Quaisquer alterações nos eventos são atualizadas automaticamente.
+      webcal_info_2_html: Aqui está um link Webcal para assinar o calendário. Use-o em aplicativos como Google Calendar, iCal ou similares. Se precisar de instruções sobre como usar o link, leia %{article_link}.
+      webcal_info_3_html: Alguns aplicativos de calendário permitem assinar automaticamente o calendário clicando em um link específico. Você pode tentar isso através de %{link}.
+      webcal_warning: Não compartilhe o endereço do seu calendário pessoal com outra pessoa. Ele é privado.
   video:
     presentations: Apresentações

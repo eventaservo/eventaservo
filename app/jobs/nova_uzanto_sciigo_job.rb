@@ -8,7 +8,7 @@ class NovaUzantoSciigoJob < ApplicationJob
 
     mesagho = "Nova uzanto registrita:\n\n"
     mesagho += "#{uzanto.name} el #{uzanto.city} (#{uzanto.country.code.upcase})\n\n"
-    mesagho += events_by_username_url(uzanto.username) unless uzanto.username.nil?
+    mesagho += events_by_username_url(username: uzanto.username) unless uzanto.username.nil?
     Telegram.send_message(mesagho)
   end
 end

@@ -1,16 +1,16 @@
 ---
 pt_BR:
   pagy:
-    combo_nav_js: Paĝo %{page_input} de %{pages}
+    combo_nav_js: Página %{page_input} de %{pages}
     info:
-      multiple_pages: Montrante <b>%{from}-%{to}</b> el <b>%{count}</b> eventoj
-      no_items: No %{item_name} found
-      single_page: Montrante <b>%{count}</b> eventojn
+      multiple_pages: Exibindo <b>%{from}-%{to}</b> de <b>%{count}</b> eventos
+      no_items: Nenhum item encontrado
+      single_page: Exibindo <b>%{count}</b> eventos
     item_name:
       one: item
-      other: items
-    items_selector_js: Show %{items_input} %{item_name} per page
+      other: itens
+    items_selector_js: Exibir %{items_input} %{item_name} por página
     nav:
       gap: "&hellip;"
-      next: Sekva&nbsp;&rsaquo;
-      prev: "&lsaquo;&nbsp;Antaŭa"
+      next: Próximo&nbsp;&rsaquo;
+      prev: "&lsaquo;&nbsp;Anterior"

@@ -2,62 +2,62 @@
 pt_BR:
   devise:
     confirmations:
-      confirmed: Via retpoŝtadreso estas konfirmita. Vi nun povas ensaluti.
-      send_instructions: Vi ricevos baldaŭ retmesaĝon kun instrukcioj por konfirmi vian registron
-      send_paranoid_instructions: If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes.
+      confirmed: Seu endereço de e-mail foi confirmado com sucesso. Agora você pode entrar.
+      send_instructions: Você receberá um e-mail com instruções para confirmar seu e-mail em alguns minutos.
+      send_paranoid_instructions: Se o seu endereço de e-mail existir em nosso banco de dados, você receberá um e-mail com instruções para confirmá-lo em alguns minutos.
     failure:
-      already_authenticated: Vi jam ensalutis antaŭe
-      inactive: Via konto ankoraŭ ne estas aktiva
-      invalid: Nevalida retpoŝtadreso aŭ pasvorto
-      last_attempt: You have one more attempt before your account is locked.
-      locked: Your account is locked.
-      not_found_in_database: Nevalida retpoŝtadreso aŭ pasvorto.
-      timeout: Via sesio finiĝis. Bonvolu ensaluti denove.
-      unauthenticated: Vi bezonas ensaluti por fari tion
-      unconfirmed: Vi bezonas konfirmi vian retpoŝtadreson por ensaluti
+      already_authenticated: Você já está conectado.
+      inactive: Sua conta ainda não foi ativada.
+      invalid: E-mail ou senha inválida.
+      last_attempt: Você tem mais uma tentativa antes de sua conta ser bloqueada.
+      locked: Sua conta está bloqueada.
+      not_found_in_database: E-mail ou senha inválida.
+      timeout: Sua sessão expirou. Por favor, entre novamente para continuar.
+      unauthenticated: Você precisa entrar ou se cadastrar antes de continuar.
+      unconfirmed: Você precisa confirmar seu endereço de e-mail antes de continuar.
     mailer:
       confirmation_instructions:
-        subject: Konfirminstrukcioj
+        subject: Instruções de confirmação
       email_changed:
-        subject: Email Changed
+        subject: E-mail alterado
       password_change:
-        subject: Password Changed
+        subject: Senha alterada
       reset_password_instructions:
-        subject: Krei novan pasvorton
+        subject: Instruções de redefinição de senha
       unlock_instructions:
-        subject: Unlock instructions
+        subject: Instruções de desbloqueio
     omniauth_callbacks:
-      failure: Could not authenticate you from %{kind} because "%{reason}".
-      success: Sukcesa ensaluto per %{kind}.
+      failure: Não foi possível autenticar sua conta de %{kind} porque "%{reason}".
+      success: Autenticado com sucesso com uma conta de %{kind}.
     passwords:
-      no_token: You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided.
-      send_instructions: Vi ricevos retmesaĝon kun instrukcioj por rekrei vian pasvorton
-      send_paranoid_instructions: If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes.
-      updated: Via pasvorto estas sukcese ŝanĝita. Vi nun estas ensalutinta.
-      updated_not_active: Via pasvorto estas sukcese ŝanĝita.
+      no_token: Você não pode acessar esta página sem ter vindo de um e-mail de redefinição de senha. Se você veio de um e-mail de redefinição de senha, por favor certifique-se de que usou a URL completa fornecida.
+      send_instructions: Você receberá um e-mail com instruções sobre como redefinir sua senha em alguns minutos.
+      send_paranoid_instructions: Se o seu endereço de e-mail existir em nosso banco de dados, você receberá um link de recuperação de senha em alguns minutos.
+      updated: Sua senha foi alterada com sucesso. Você agora está conectado.
+      updated_not_active: Sua senha foi alterada com sucesso.
     registrations:
-      destroyed: Bye! Your account has been successfully cancelled. We hope to see you again soon.
-      signed_up: Welcome! You have signed up successfully.
-      signed_up_but_inactive: You have signed up successfully. However, we could not sign you in because your account is not yet activated.
-      signed_up_but_locked: You have signed up successfully. However, we could not sign you in because your account is locked.
-      signed_up_but_unconfirmed: Ni sendis retmesaĝon al via retpoŝtadreso kun instrukcioj por konfirmi vian registriĝon
-      update_needs_confirmation: You updated your account successfully, but we need to verify your new email address. Please check your email and follow the confirm link to confirm your new email address.
-      updated: Vi sukcese ĝisdatigis viajn informojn.
+      destroyed: Tchau! Sua conta foi cancelada com sucesso. Esperamos ver você novamente em breve.
+      signed_up: Boas-vindas! Você se cadastrou com sucesso.
+      signed_up_but_inactive: Você se cadastrou com sucesso. No entanto, não pudemos autenticá-lo porque sua conta ainda não foi ativada.
+      signed_up_but_locked: Você se cadastrou com sucesso. No entanto, não pudemos autenticá-lo porque sua conta está bloqueada.
+      signed_up_but_unconfirmed: Uma mensagem com um link de confirmação foi enviada para o seu endereço de e-mail. Por favor, acesse o link para ativar sua conta.
+      update_needs_confirmation: Você atualizou sua conta com sucesso, mas precisamos verificar seu novo endereço de e-mail. Por favor, cheque seu e-mail e clique no link de confirmação para confirmar seu novo e-mail.
+      updated: Sua conta foi atualizada com sucesso.
     sessions:
-      already_signed_out: Vi jam elsalutas
-      signed_in: Sukcesa ensaluto
-      signed_out: Sukcesa elsaluto
+      already_signed_out: Logout efetuado com sucesso.
+      signed_in: Login efetuado com sucesso.
+      signed_out: Logout efetuado com sucesso.
     unlocks:
-      send_instructions: You will receive an email with instructions for how to unlock your account in a few minutes.
-      send_paranoid_instructions: If your account exists, you will receive an email with instructions for how to unlock it in a few minutes.
-      unlocked: Your account has been unlocked successfully. Please sign in to continue.
+      send_instructions: Você receberá um e-mail com instruções para desbloquear sua conta em alguns minutos.
+      send_paranoid_instructions: Se sua conta existir, você receberá um e-mail com instruções para desbloqueá-la em alguns minutos.
+      unlocked: Sua conta foi desbloqueada com sucesso. Por favor, entre para continuar.
   errors:
     messages:
-      already_confirmed: já foi confirmado, tente fazer login
-      confirmation_period_expired: deve ser confirmado dentro de %{period}, solicite um novo
-      expired: expirou, solicite um novo
+      already_confirmed: já foi confirmado, por favor tente entrar
+      confirmation_period_expired: precisa ser confirmado dentro de %{period}, por favor solicite um novo
+      expired: expirou, por favor solicite um novo
       not_found: não encontrado
-      not_locked: não estava bloqueado
+      not_locked: não foi bloqueado
       not_saved:
-        one: 1 eraro malpermesis daŭrigi
-        other: "%{count} erros impediram a continuação"
+        one: '1 erro impediu que este(a) %{resource} fosse salvo(a):'
+        other: "%{count} erros impediram que este(a) %{resource} fosse salvo(a):"

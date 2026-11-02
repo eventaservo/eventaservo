@@ -5,7 +5,7 @@
         <%= display_user_image(preleganto) %>
         <div class="overflow-hidden">
           <h6 class="fw-bold mb-0 text-truncate">
-            <%= link_to preleganto.name, events_by_username_path(preleganto.username),
+            <%= link_to preleganto.name, events_by_username_path(username: preleganto.username),
                   class: "stretched-link text-decoration-none text-body" %>
           </h6>
           <span class="text-body-secondary small">

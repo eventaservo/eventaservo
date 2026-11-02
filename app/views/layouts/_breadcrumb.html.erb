@@ -20,7 +20,7 @@
     <% elsif params[:action] == 'by_username' %>
       <% user = User.find_by(username: params[:username]) %>
       <li class="breadcrumb-item">
-        <%= link_to user.name, events_by_username_url(params[:username]) %>
+        <%= link_to user.name, events_by_username_url(username: params[:username]) %>
       </li>
     <% end %>
 
