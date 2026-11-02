@@ -1,18 +1,18 @@
 <div class="footer">
-  Versio <%= Eventaservo::Application::VERSION %>
+  <%= t('footer.version', version: Eventaservo::Application::VERSION) %>
   |
-  <%= mail_to 'kontakto@eventaservo.org', 'Kontaktu nin', subject: 'Pri Eventa Servo' %>
+  <%= mail_to 'kontakto@eventaservo.org', t('footer.contact_us'), subject: t('footer.contact_subject') %>
   |
-  <%= link_to 'Prie', prie_path %>
+  <%= link_to t('footer.about'), prie_path %>
   |
   <span class="dropdown">
-    <a id="footerMenu" aria-expanded="false" aria-haspopup="true" data-bs-toggle="dropdown" href="#">Pli...</a>
+    <a id="footerMenu" aria-expanded="false" aria-haspopup="true" data-bs-toggle="dropdown" href="#"><%= t('footer.more') %></a>
     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="footerMenu">
-      <%= link_to 'Privateco', privateco_url, class: 'dropdown-item' %>
-      <%= link_to 'Uzokondiĉoj', terms_url, class: 'dropdown-item' %>
-      <%= link_to 'Ŝanĝoprotokolo', 'https://github.com/eventaservo/eventaservo/releases', target: :_blank, class: 'dropdown-item' %>
+      <%= link_to t('footer.privacy'), privateco_url, class: 'dropdown-item' %>
+      <%= link_to t('footer.terms'), terms_url, class: 'dropdown-item' %>
+      <%= link_to t('footer.changelog'), 'https://github.com/eventaservo/eventaservo/releases', target: :_blank, class: 'dropdown-item' %>
       <%= link_to icon('fas', 'rss', 'RSS'), events_rss_url, class: 'dropdown-item' %>
-      <%= link_to icon('fas', 'server', 'Servilaj statoj'), "https://status.eventaservo.org", target: :_blank, class: 'dropdown-item' %>
+      <%= link_to icon('fas', 'server', t('footer.server_status')), "https://status.eventaservo.org", target: :_blank, class: 'dropdown-item' %>
     </div>
   </span>
   <%= "(#{Rails.env})" unless Rails.env.production? %>

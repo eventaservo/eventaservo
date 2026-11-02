@@ -5,7 +5,7 @@ class FollowersController < ApplicationController
 
   def event
     event = Event.by_code(params[:event_code])
-    return redirect_back fallback_location: root_path, alert: "Event not found" unless event
+    return redirect_back fallback_location: root_path, alert: I18n.t("flash.events.not_found") unless event
 
     follower = event.followers.find_by(user_id: current_user.id)
 

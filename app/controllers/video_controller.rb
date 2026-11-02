@@ -11,13 +11,13 @@ class VideoController < ApplicationController
 
   def new
     @evento = Event.by_link(params[:event_code])
-    redirect_to(root_path, flash: {error: "Vi ne rajtas"}) unless user_can_edit_event?(user: current_user, event: @evento)
+    redirect_to(root_path, flash: {error: I18n.t("flash.general.unauthorized")}) unless user_can_edit_event?(user: current_user, event: @evento)
   end
 
   def create
     event = Event.by_link(params[:event_code])
     unless user_can_edit_event?(user: current_user, event: event)
-      redirect_to root_path, flash: {error: "Vi ne rajtas"}
+      redirect_to root_path, flash: {error: I18n.t("flash.general.unauthorized")}
       return
     end
 
@@ -39,9 +39,9 @@ class VideoController < ApplicationController
     if user_can_edit_event?(user: current_user, event: video.evento)
       video.destroy
       ahoy.track "Delete video from event", event_url: video.evento.short_url, video_url: video.url
-      flash[:success] = "Video forigita"
+      flash[:success] = I18n.t("flash.videos.destroyed")
     else
-      flash[:error] = "Vi ne rajtas forigi tiun videon"
+      flash[:error] = I18n.t("flash.videos.unauthorized")
     end
     redirect_back fallback_location: root_path
   end

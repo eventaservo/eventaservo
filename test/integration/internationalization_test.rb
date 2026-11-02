@@ -164,4 +164,89 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal :eo, @controller.resolve_locale
   end
+
+  test "renders localized footer elements across locales" do
+    get root_url
+    assert_response :success
+    assert_select ".footer", text: /Kontaktu nin/
+    assert_select ".footer", text: /Privateco/
+    assert_select ".footer", text: /Regularo/
+
+    sign_in users(:admin_user)
+
+    get "/en"
+    assert_response :success
+    assert_select ".footer", text: /Contact us/
+    assert_select ".footer", text: /Privacy/
+    assert_select ".footer", text: /Terms of Service/
+
+    get "/pt_BR"
+    assert_response :success
+    assert_select ".footer", text: /Contate-nos/
+    assert_select ".footer", text: /Privacidade/
+    assert_select ".footer", text: /Termos de uso/
+  end
+
+  test "renders localized navbar search input across locales" do
+    get root_url
+    assert_response :success
+    assert_select "input[placeholder='Serĉu eventojn, urbojn aŭ landojn']"
+    assert_select "input[aria-label='Serĉi eventojn']"
+
+    sign_in users(:admin_user)
+
+    get "/en"
+    assert_response :success
+    assert_select "input[placeholder='Search events, cities, or countries']"
+    assert_select "input[aria-label='Search events']"
+
+    get "/pt_BR"
+    assert_response :success
+    assert_select "input[placeholder='Pesquisar eventos, cidades ou países']"
+    assert_select "input[aria-label='Pesquisar eventos']"
+  end
+
+  test "renders localized user dropdown menu across locales" do
+    user = users(:admin_user)
+    sign_in user
+
+    get root_url
+    assert_response :success
+    assert_select "#uzantoDropdown + .dropdown-menu", text: /Mia profilo/
+    assert_select "#uzantoDropdown + .dropdown-menu", text: /Miaj eventoj/
+    assert_select "#uzantoDropdown + .dropdown-menu", text: /Redakti mian profilon/
+    assert_select "#uzantoDropdown + .dropdown-menu", text: /Elsaluti/
+
+    get "/en"
+    assert_response :success
+    assert_select "#uzantoDropdown + .dropdown-menu", text: /My profile/
+    assert_select "#uzantoDropdown + .dropdown-menu", text: /My events/
+    assert_select "#uzantoDropdown + .dropdown-menu", text: /Edit my profile/
+    assert_select "#uzantoDropdown + .dropdown-menu", text: /Sign out/
+
+    get "/pt_BR"
+    assert_response :success
+    assert_select "#uzantoDropdown + .dropdown-menu", text: /Meu perfil/
+    assert_select "#uzantoDropdown + .dropdown-menu", text: /Meus eventos/
+    assert_select "#uzantoDropdown + .dropdown-menu", text: /Editar meu perfil/
+    assert_select "#uzantoDropdown + .dropdown-menu", text: /Sair/
+  end
+
+  test "renders localized breadcrumb world link across locales" do
+    event = events(:valid_event)
+
+    get event_path(code: event.ligilo)
+    assert_response :success
+    assert_select "nav[aria-label='breadcrumb'] .breadcrumb-item", text: "Mondo"
+
+    sign_in users(:admin_user)
+
+    get "/en/e/#{event.ligilo}"
+    assert_response :success
+    assert_select "nav[aria-label='breadcrumb'] .breadcrumb-item", text: "World"
+
+    get "/pt_BR/e/#{event.ligilo}"
+    assert_response :success
+    assert_select "nav[aria-label='breadcrumb'] .breadcrumb-item", text: "Mundo"
+  end
 end

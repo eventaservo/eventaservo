@@ -2,9 +2,6 @@
 eo:
   activerecord:
     attributes:
-      event/report:
-        title: Titolo
-        url: Ligilo
       event:
         city: Urbo
         country_id: Lando
@@ -13,6 +10,9 @@ eo:
         description: Priskribo
         short_url: mallonga ligilo
         title: Titolo
+      event/report:
+        title: Titolo
+        url: Ligilo
       organization:
         city: urbo
         country_id: lando
@@ -21,10 +21,10 @@ eo:
         name: nomo
         short_name: mallonga nomo
       user:
-        name: Nomo
-        email: Retadreso
         city: Urbo
         country_id: Lando
+        email: Retadreso
+        name: Nomo
     errors:
       messages:
         record_invalid: 'Validado malsukcesis: %{errors}'
@@ -45,23 +45,25 @@ eo:
       regenerate_token: Regeneri ĵetonon
       regenerate_token_confirmation: Ĉu vi certas, ke vi volas regeneri vian API-ĵetonon? La malnova ĵetono tuj ĉesos funkcii.
       token_regenerated: API-ĵetono sukcese regenerita.
-      token_regeneration_error: "Eraro dum regenerado de API-ĵetono: %{error}"
+      token_regeneration_error: 'Eraro dum regenerado de API-ĵetono: %{error}'
   api:
     v2:
       errors:
-        token_missing: Ĵetono mankas
-        token_invalid: Ĵetono ne validas
         token_expired: Ĵetono malaktuala
+        token_invalid: Ĵetono ne validas
+        token_missing: Ĵetono mankas
+  breadcrumbs:
+    world: Mondo
   buttons:
     add_video: Video
-    duplicate: Duobligi
-    edit: Redakti
-    share: Diskonigi
     cancel: Nuligi
     change: Ŝangi
     close: Fermi
+    duplicate: Duobligi
+    edit: Redakti
     select: Elekti
     send: Sendi
+    share: Diskonigi
   errors:
     format: "%{attribute} %{message}"
     messages:
@@ -90,6 +92,91 @@ eo:
       header:
         one: 'Ne eblas registri tiun %{model}: 1 eraro'
         other: 'Ne eblas registri tiun %{model}: %{count} eraroj'
+  events:
+    calendar:
+      jump_to_month: Monato
+    days_left:
+      in_days:
+        one: finiĝos post %{count} tago
+        other: finiĝos post %{count} tagoj
+      tomorrow: finiĝos morgaŭ
+    past_events_count:
+      one: "%{count} pasinta evento"
+      other: "%{count} pasintaj eventoj"
+    show_past: Pasintaj eventoj
+  filters:
+    periods:
+      estontece: Estontece
+      hodiau: Okazas nuntempe
+      p30_tagojn: Proksimajn 30 tagojn
+      p7_tagojn: Proksimajn 7 tagojn
+  flash:
+    admin:
+      redirections:
+        created: Redirekto sukcese kreita.
+        destroyed: Redirekto sukcese forigita.
+        updated: Redirekto sukcese ĝisdatigita.
+      reports:
+        destroyed: Raporto sukcese forigita.
+        updated: Raporto sukcese ĝisdatigita.
+      users:
+        deactivated: Uzanto malvalidigita.
+        disable_failed_one_member_org: Ne eblis malvalidigi la uzanton. Eble ĝi apartenas al unumembra organizo.
+        email_confirmed: Retadreso de la uzanto markita kiel konfirmita.
+        enabled: Uzanto ebligita.
+        merged: Uzantoj sukcese kunfanditaj.
+        new_password: 'Nova pasvorto: %{password}'
+        updated: Uzanto sukcese ĝisdatigita.
+    countries:
+      not_found: Lando ne ekzistas
+      not_in_database: Lando ne ekzistas en la datumbazo
+    events:
+      cancelled: Evento nuligita
+      created: Evento sukcese kreita.
+      destroyed: Evento sukcese forigita
+      display_error: Eraro okazis montrante tiun eventon
+      document_uploaded: Dokumento sukcese alŝutita
+      file_deleted: Dosiero sukcese forigita
+      invalid_file_format: Dosier-formato ne valida
+      message_sent: Mesaĝo sendita
+      no_events_in_continent: Ne estas eventoj en tiu kontinento
+      not_found: Evento ne ekzistas
+      select_file_first: Vi devas unue elekti dosieron
+      uncancelled: Evento malnuligita
+      updated: Evento sukcese ĝisdatigita
+    feedback:
+      thank_you: Dankon!
+    formats:
+      not_found: Formato ne ekzistas.
+    general:
+      success: Sukceso
+      unauthorized: Vi ne rajtas
+      unauthorized_action: Vi ne rajtas fari tion
+    organizations:
+      created: Organizo sukcese kreita.
+      not_found: Organizo ne ekzistas
+      updated: Organizo sukcese ĝisdatigita
+      user_added: Uzanto aldonita al la organizo
+    users:
+      account_deleted: Via konto estas forviŝita.
+      invalid_security_phrase: Malĝusta kontraŭspama sekurvorto. Entajpu la nomon de la internacia lingvo.
+      not_found: Uzanto ne ekzistas
+      username_not_found: Uzantnomo ne ekzistas
+    videos:
+      destroyed: Video forigita
+      unauthorized: Vi ne rajtas forigi tiun videon
+    webcal:
+      country_code_not_found: Landa kodo ne ekzistas
+  footer:
+    about: Pri ni
+    changelog: Ŝanĝoprotokolo
+    contact_subject: Kontakto per Eventa Servo
+    contact_us: Kontaktu nin
+    more: Pli
+    privacy: Privateco
+    server_status: Servila stato
+    terms: Regularo
+    version: Versio
   helpers:
     select:
       prompt: Bonvolu elekti
@@ -103,23 +190,37 @@ eo:
     presentations: Registraĵoj
     reports: Raportoj
     teachers_and_lecturers: Instruantoj
-  events:
-    calendar:
-      jump_to_month: Monato
-    show_past: Pasintaj eventoj
-    past_events_count:
-      one: "%{count} pasinta evento"
-      other: "%{count} pasintaj eventoj"
   navbar:
     add_event: Aldoni eventon
     log_in_sign_up: Ensaluti / Registriĝi
     organizations: Organizoj
+    search:
+      aria_label: Serĉi eventojn
+      placeholder: Serĉu eventojn, urbojn aŭ landojn
     toggle_navigation: Baskuligi la navigadon
+    tools:
+      about_us: Pri ni
+      close_map: Fermi mapon
+      news: Novaĵoj
+      support: Subteni
+      view_as_map: Vidi kiel mapo
+    user:
+      edit_profile: Redakti mian profilon
+      my_events: Miaj eventoj
+      my_profile: Mia profilo
+      sign_out: Elsaluti
   support:
     array:
       last_word_connector: " kaj "
       two_words_connector: " kaj "
       words_connector: ", "
   tagline: Diskonigu Esperanto-eventojn tutmonde!
+  tags:
+    plural:
+      alia: Aliaj
+      anonco: Anoncoj
+      konkurso: Konkursoj
+      kunveno_evento: Kunvenoj/Eventoj
+      kurso: Kursoj
   video:
     presentations: Registraĵoj

@@ -2,9 +2,6 @@
 pt_BR:
   activerecord:
     attributes:
-      event/report:
-        title: Título
-        url: Link
       event:
         city: Cidade
         country_id: País
@@ -13,6 +10,9 @@ pt_BR:
         description: Descrição
         short_url: URL curta
         title: Título
+      event/report:
+        title: Título
+        url: Link
       organization:
         city: Cidade
         country_id: País
@@ -21,10 +21,10 @@ pt_BR:
         name: Nome
         short_name: Nome curto
       user:
-        name: Nome
-        email: E-mail
         city: Cidade
         country_id: País
+        email: E-mail
+        name: Nome
     errors:
       messages:
         record_invalid: 'Validação falhou: %{errors}'
@@ -45,23 +45,25 @@ pt_BR:
       regenerate_token: Regenerar token
       regenerate_token_confirmation: Tem certeza que deseja regenerar seu token de API? O token antigo deixará de funcionar imediatamente.
       token_regenerated: Token de API regenerado com sucesso.
-      token_regeneration_error: "Erro ao regenerar token de API: %{error}"
+      token_regeneration_error: 'Erro ao regenerar token de API: %{error}'
   api:
     v2:
       errors:
-        token_missing: Token faltando
-        token_invalid: Token inválido
         token_expired: Token expirado
+        token_invalid: Token inválido
+        token_missing: Token faltando
+  breadcrumbs:
+    world: Mundo
   buttons:
     add_video: Vídeo
-    duplicate: Duplicar
-    edit: Editar
-    share: Compartilhar
     cancel: Cancelar
     change: Alterar
     close: Fechar
+    duplicate: Duplicar
+    edit: Editar
     select: Selecionar
     send: Enviar
+    share: Compartilhar
   errors:
     format: "%{attribute} %{message}"
     messages:
@@ -90,6 +92,91 @@ pt_BR:
       header:
         one: 'Não foi possível salvar este %{model}: 1 erro'
         other: 'Não foi possível salvar este %{model}: %{count} erros'
+  events:
+    calendar:
+      jump_to_month: Mês
+    days_left:
+      in_days:
+        one: termina em %{count} dia
+        other: termina em %{count} dias
+      tomorrow: termina amanhã
+    past_events_count:
+      one: "%{count} evento passado"
+      other: "%{count} eventos passados"
+    show_past: Eventos passados
+  filters:
+    periods:
+      estontece: Futuros
+      hodiau: Acontecendo agora
+      p30_tagojn: Próximos 30 dias
+      p7_tagojn: Próximos 7 dias
+  flash:
+    admin:
+      redirections:
+        created: Redirecionamento criado com sucesso.
+        destroyed: Redirecionamento excluído com sucesso.
+        updated: Redirecionamento atualizado com sucesso.
+      reports:
+        destroyed: Relatório excluído com sucesso.
+        updated: Relatório atualizado com sucesso.
+      users:
+        deactivated: Usuário desativado.
+        disable_failed_one_member_org: Não foi possível desativar o usuário. Talvez ele pertença a uma organização de um único membro.
+        email_confirmed: E-mail do usuário marcado como confirmado.
+        enabled: Usuário ativado.
+        merged: Usuários mesclados com sucesso.
+        new_password: 'Nova senha: %{password}'
+        updated: Usuário atualizado com sucesso.
+    countries:
+      not_found: País não existe
+      not_in_database: País não existe no banco de dados
+    events:
+      cancelled: Evento cancelado
+      created: Evento criado com sucesso.
+      destroyed: Evento excluído com sucesso
+      display_error: Ocorreu um erro ao exibir este evento
+      document_uploaded: Documento enviado com sucesso
+      file_deleted: Arquivo excluído com sucesso
+      invalid_file_format: Formato de arquivo inválido
+      message_sent: Mensagem enviada
+      no_events_in_continent: Não há eventos neste continente
+      not_found: Evento não existe
+      select_file_first: Você deve primeiro selecionar um arquivo
+      uncancelled: Evento reativado
+      updated: Evento atualizado com sucesso
+    feedback:
+      thank_you: Obrigado!
+    formats:
+      not_found: Formato não existe.
+    general:
+      success: Sucesso
+      unauthorized: Você não tem permissão
+      unauthorized_action: Você não tem permissão para fazer isso
+    organizations:
+      created: Organização criada com sucesso.
+      not_found: Organização não existe
+      updated: Organização atualizada com sucesso
+      user_added: Usuário adicionado à organização
+    users:
+      account_deleted: Sua conta foi excluída.
+      invalid_security_phrase: Frase de segurança antispam incorreta. Digite o nome da língua internacional.
+      not_found: Usuário não existe
+      username_not_found: Nome de usuário não existe
+    videos:
+      destroyed: Vídeo excluído
+      unauthorized: Você não tem permissão para excluir este vídeo
+    webcal:
+      country_code_not_found: Código de país não existe
+  footer:
+    about: Sobre nós
+    changelog: Registro de alterações
+    contact_subject: Contato via Eventa Servo
+    contact_us: Contate-nos
+    more: Mais
+    privacy: Privacidade
+    server_status: Status do servidor
+    terms: Termos de uso
+    version: Versão
   helpers:
     select:
       prompt: Por favor, selecione
@@ -103,23 +190,37 @@ pt_BR:
     presentations: Apresentações
     reports: Relatórios
     teachers_and_lecturers: Professores
-  events:
-    calendar:
-      jump_to_month: Mês
-    show_past: Eventos passados
-    past_events_count:
-      one: "%{count} evento passado"
-      other: "%{count} eventos passados"
   navbar:
     add_event: Adicionar evento
     log_in_sign_up: Entrar / Cadastrar
     organizations: Organizações
+    search:
+      aria_label: Pesquisar eventos
+      placeholder: Pesquisar eventos, cidades ou países
     toggle_navigation: Alternar navegação
+    tools:
+      about_us: Sobre nós
+      close_map: Fechar mapa
+      news: Notícias
+      support: Apoiar
+      view_as_map: Ver como mapa
+    user:
+      edit_profile: Editar meu perfil
+      my_events: Meus eventos
+      my_profile: Meu perfil
+      sign_out: Sair
   support:
     array:
       last_word_connector: " e "
       two_words_connector: " e "
       words_connector: ", "
   tagline: Compartilhe eventos de Esperanto em todo o mundo!
+  tags:
+    plural:
+      alia: Outros
+      anonco: Anúncios
+      konkurso: Concursos
+      kunveno_evento: Encontros/Eventos
+      kurso: Cursos
   video:
     presentations: Apresentações

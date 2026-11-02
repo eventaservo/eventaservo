@@ -19,7 +19,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     unless params[:sekurfrazo].strip.downcase == Rails.application.credentials.dig("form_security_phrase")
       redirect_to(
         new_registration_path(resource_name),
-        flash: {error: "Malĝusta kontraŭspama sekurvorto. Entajpu la nomon de la internacia lingvo."}
+        flash: {error: I18n.t("flash.users.invalid_security_phrase")}
       ) && return
     end
 
@@ -52,7 +52,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     UserServices::Disable.call(resource)
     sign_out(@user)
 
-    redirect_to root_path, notice: "Via konto estas forviŝita."
+    redirect_to root_path, notice: I18n.t("flash.users.account_deleted")
   end
 
   # GET /resource/cancel
