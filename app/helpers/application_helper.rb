@@ -365,8 +365,6 @@ module ApplicationHelper
   def read_localized_markdown(document_name, locale: I18n.locale)
     candidates = [
       Rails.root.join("app/views/home", "#{document_name}.#{locale}.md"),
-      Rails.root.join("app/views/home", "#{document_name}.#{locale.to_s.underscore}.md"),
-      Rails.root.join("app/views/home", "#{document_name}.#{locale.to_s.downcase}.md"),
       Rails.root.join("app/views/home", "#{document_name}.#{I18n.default_locale}.md")
     ]
 

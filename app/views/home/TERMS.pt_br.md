@@ -1,1 +1,0 @@
-TERMS.pt_BR.md

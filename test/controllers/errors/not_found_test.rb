@@ -1,14 +1,31 @@
 # frozen_string_literal: true
 
 require "test_helper"
-require "webmock/minitest"
 
-class ErrorsControllerTest < ActionDispatch::IntegrationTest
-  test "should get not_found" do
+class ErrorsController::NotFoundTest < ActionDispatch::IntegrationTest
+  test "should get not_found in default locale (Esperanto)" do
     get "/404"
     assert_response :not_found
     assert_equal "text/html", response.media_type
     assert_select "h1", text: "Paĝo ne trovita"
+  end
+
+  test "should get not_found in English when admin user accesses localized route" do
+    sign_in users(:admin_user)
+
+    get "/en/404"
+    assert_response :not_found
+    assert_equal "text/html", response.media_type
+    assert_select "h1", text: "Page not found"
+  end
+
+  test "should get not_found in Portuguese when admin user accesses localized route" do
+    sign_in users(:admin_user)
+
+    get "/pt_BR/404"
+    assert_response :not_found
+    assert_equal "text/html", response.media_type
+    assert_select "h1", text: "Página não encontrada"
   end
 
   test "should get not_found for js format" do
@@ -59,49 +76,5 @@ class ErrorsControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
     assert_equal "application/json", response.media_type
     assert_equal({}, JSON.parse(response.body))
-  end
-
-  test "should get unacceptable" do
-    get "/422"
-    assert_response :unprocessable_entity
-    assert_equal "text/html", response.media_type
-    assert_select "h1", text: "Neakceptebla peto"
-  end
-
-  test "should get unacceptable for JSON format" do
-    get "/422.json"
-    assert_response :unprocessable_entity
-    assert_equal "application/json", response.media_type
-    assert_equal "Unprocessable Entity", JSON.parse(response.body)["error"]
-  end
-
-  test "should get internal_error" do
-    get "/500"
-    assert_response :internal_server_error
-    assert_equal "text/html", response.media_type
-    assert_select "h1", text: "Oh! Eraro okazis!"
-  end
-
-  test "should get internal_error for JSON format" do
-    get "/500.json"
-    assert_response :internal_server_error
-    assert_equal "application/json", response.media_type
-    assert_equal "Internal Server Error", JSON.parse(response.body)["error"]
-  end
-
-  test "should post error_form and redirect" do
-    stub_request(:post, /sentry\.io/).to_return(status: 200)
-
-    assert_enqueued_emails 1 do
-      post "/500", params: {
-        sentry_event_id: "123",
-        name: "Test User",
-        email: "test@example.com",
-        comments: "Test error"
-      }
-    end
-
-    assert_redirected_to root_path
-    assert_equal "Dankon!", flash[:notice]
   end
 end
