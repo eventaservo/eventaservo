@@ -4,23 +4,24 @@
     <tr>
       <td class="content" colspan="2">
         <p>
-          Saluton.
+          <%= t("event_mailer.rememorigas_uzantojn.greeting") %>
         </p>
         <p>
-          Vi indikis en la retejo de <%= link_to "Eventa Servo", "eventaservo.org" %>,
-          ke la jena evento interesas vin: <%= link_to @event.title, event_url(code: @event.ligilo) %>.
+          <%= t("event_mailer.rememorigas_uzantojn.interest_html",
+                site_link: link_to("Eventa Servo", "https://eventaservo.org"),
+                event_link: link_to(@event.title, event_url(code: @event.ligilo))) %>
         </p>
         <p><%= @reminder_message %></p>
 
         <p class="button-blue text-center">
-          <%= link_to 'VIDI LA EVENTAN PAĜON', event_url(code: @event.ligilo) %>
+          <%= link_to t("event_mailer.rememorigas_uzantojn.view_event_page"), event_url(code: @event.ligilo) %>
         </p>
 
         <br>
         <p style="font-size: small; color: gray;">
-          Vi ricevas ĉi tiun mesaĝon, ĉar vi indikis en la retejo <%= link_to "Eventa Servo", "eventaservo.org" %> ke vi
-          interesiĝas pri specifa evento.
-          Por ne plu ricevi ĉi tiajn mesaĝojn, sufiĉas ne plu alklaki la butonon "Mi interesiĝas".
+          <%= t("event_mailer.rememorigas_uzantojn.footer_note_html",
+                site_link: link_to("Eventa Servo", "https://eventaservo.org"),
+                button_name: t("events.participants.interested_button")) %>
         </p>
         <br>
       </td>

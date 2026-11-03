@@ -1,7 +1,7 @@
 <% content_for :event_footer do %>
-  Tiu ĉi informo estas nur por la administrantoj:
+  <%= t("event_mailer.notify_admins.admin_only_note") %>:
   <br>
-  Evento kreita de <%= @event.user.name %> en <%= format_date(@event.created_at) %>.
+  <%= t("event_mailer.notify_admins.created_by", user: @event.user.name, date: format_date(@event.created_at)) %>.
 <% end %>
 
 <%= render 'event_summary' %>

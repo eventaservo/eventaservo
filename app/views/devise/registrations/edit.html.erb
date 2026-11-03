@@ -34,6 +34,12 @@
         </div>
       </div>
       <div class="row mb-3">
+        <%= f.label :locale, t("activerecord.attributes.user.locale"), class: 'col-form-label col-md-3' %>
+        <div class="col-md-9">
+          <%= f.select :locale, options_for_select([[t("languages.eo"), "eo"], [t("languages.en"), "en"], [t("languages.pt_BR"), "pt_BR"]], f.object.preferred_locale), {}, class: 'form-select' %>
+        </div>
+      </div>
+      <div class="row mb-3">
         <%= f.label :birthday, class: 'col-form-label col-md-3' %>
         <div class="col-md-9">
           <%= f.text_field :birthday, value: (resource.birthday.strftime("%d/%m/%Y") if resource.birthday?),

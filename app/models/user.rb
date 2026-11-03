@@ -60,6 +60,7 @@ class User < ApplicationRecord
 
   has_one_attached :picture
   store_accessor :mailings, :weekly_summary
+  store_accessor :mailings, :locale
   store_accessor :instruo, :instruisto
   store_accessor :prelego, :preleganto
   store_accessor :ligiloj, [:youtube, :telegram, :instagram, :facebook, :vk, :persona_retejo, :twitter]
@@ -248,6 +249,18 @@ class User < ApplicationRecord
 
   def to_combobox_display
     "#{name} (#{username})"
+  end
+
+  # Returns the user's preferred locale, falling back to default locale (:eo).
+  #
+  # @return [Symbol] The preferred locale
+  def preferred_locale
+    loc = locale.presence || mailings&.dig("locale")
+    if loc.present? && I18n.available_locales.include?(loc.to_sym)
+      loc.to_sym
+    else
+      I18n.default_locale
+    end
   end
 
   private
