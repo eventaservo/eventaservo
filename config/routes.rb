@@ -70,6 +70,12 @@ Rails.application.routes.draw do
     get "/prie", to: "home#prie"
     get "/serchilo", to: "home#search"
 
+    # Dynamic error pages inside locale scope
+    get "/404", to: "errors#not_found"
+    get "/422", to: "errors#unacceptable"
+    get "/500", to: "errors#internal_error"
+    post "/500", to: "errors#error_form"
+
     # Instruistoj kaj prelegantoj
     get "/instruistoj_kaj_prelegantoj", to: redirect { |params, request|
       path = params[:locale].present? ? "/#{params[:locale]}/instruantoj_kaj_prelegantoj" : "/instruantoj_kaj_prelegantoj"

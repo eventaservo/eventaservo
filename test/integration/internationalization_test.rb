@@ -683,4 +683,178 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "h4", text: "Minha página pessoal de eventos"
   end
+
+  test "renders localized institutional pages across locales for admin user" do
+    sign_in users(:admin_user)
+
+    # 1. About page (/prie)
+    get prie_path
+    assert_response :success
+    assert_select "h1", text: "Eventa Servo"
+    assert_select "h3", text: "Historio"
+    assert_select "h3", text: "Helpantoj"
+
+    get "/en/prie"
+    assert_response :success
+    assert_select "h1", text: "Eventa Servo"
+    assert_select "h3", text: "History"
+    assert_select "h3", text: "Helpers"
+
+    get "/pt_BR/prie"
+    assert_response :success
+    assert_select "h1", text: "Eventa Servo"
+    assert_select "h3", text: "História"
+    assert_select "h3", text: "Colaboradores"
+
+    # Reset locale to default (eo)
+    get "/prie?locale=eo"
+    assert_equal :eo, @controller.resolve_locale
+
+    # 2. Terms of service (/terms)
+    get terms_path
+    assert_response :success
+    assert_select "h1", text: "Uzokondiĉoj"
+    assert_select "h2", text: "1. Akcepto de la kondiĉoj"
+
+    get "/en/terms"
+    assert_response :success
+    assert_select "h1", text: "Terms of Service"
+    assert_select "h2", text: "1. Acceptance of Terms"
+
+    get "/pt_BR/terms"
+    assert_response :success
+    assert_select "h1", text: "Termos de Serviço"
+    assert_select "h2", text: "1. Aceitação dos Termos"
+
+    # Plain text format (.text)
+    get "/terms.text?locale=eo"
+    assert_response :success
+    assert_includes response.body, "# Uzokondiĉoj"
+
+    get "/en/terms.text"
+    assert_response :success
+    assert_includes response.body, "# Terms of Service"
+
+    get "/pt_BR/terms.text"
+    assert_response :success
+    assert_includes response.body, "# Termos de Serviço"
+
+    # Reset locale to default (eo)
+    get "/terms?locale=eo"
+    assert_equal :eo, @controller.resolve_locale
+
+    # 3. Privacy page (/privateco, /privacy, /license)
+    get privateco_path
+    assert_response :success
+    assert_select "h1", text: "Privateca politiko"
+
+    get "/en/privateco"
+    assert_response :success
+    assert_select "h1", text: "Privacy Policy"
+
+    get "/pt_BR/privateco"
+    assert_response :success
+    assert_select "h1", text: "Política de Privacidade"
+
+    # Plain text format (.text)
+    get "/privateco.text?locale=eo"
+    assert_response :success
+    assert_includes response.body, "# Privateca politiko"
+
+    get "/en/privateco.text"
+    assert_response :success
+    assert_includes response.body, "# Privacy Policy"
+
+    get "/pt_BR/privateco.text"
+    assert_response :success
+    assert_includes response.body, "# Política de Privacidade"
+
+    # Reset locale to default (eo)
+    get "/privateco?locale=eo"
+    assert_equal :eo, @controller.resolve_locale
+
+    get "/privacy"
+    assert_response :success
+    assert_select "h1", text: "Privateca politiko"
+
+    get "/license"
+    assert_response :success
+    assert_select "h1", text: "Privateca politiko"
+  end
+
+  test "renders localized error pages across locales for admin user" do
+    sign_in users(:admin_user)
+
+    # 404 Not Found
+    get "/404"
+    assert_response :not_found
+    assert_select "h1", text: "Paĝo ne trovita"
+
+    get "/en/404"
+    assert_response :not_found
+    assert_select "h1", text: "Page not found"
+
+    get "/pt_BR/404"
+    assert_response :not_found
+    assert_select "h1", text: "Página não encontrada"
+
+    # Reset locale to default (eo)
+    get "/404?locale=eo"
+    assert_equal :eo, @controller.resolve_locale
+
+    # 422 Unacceptable
+    get "/422"
+    assert_response :unprocessable_entity
+    assert_select "h1", text: "Neakceptebla peto"
+
+    get "/en/422"
+    assert_response :unprocessable_entity
+    assert_select "h1", text: "Unacceptable request"
+
+    get "/pt_BR/422"
+    assert_response :unprocessable_entity
+    assert_select "h1", text: "Solicitação inaceitável"
+
+    # Reset locale to default (eo)
+    get "/422?locale=eo"
+    assert_equal :eo, @controller.resolve_locale
+
+    # 500 Internal Error
+    get "/500"
+    assert_response :internal_server_error
+    assert_select "h1", text: "Oh! Eraro okazis!"
+    assert_select "input[type='submit'][value='Sendi']"
+
+    get "/en/500"
+    assert_response :internal_server_error
+    assert_select "h1", text: "Oh! An error occurred!"
+    assert_select "input[type='submit'][value='Send']"
+
+    get "/pt_BR/500"
+    assert_response :internal_server_error
+    assert_select "h1", text: "Ops! Ocorreu um erro!"
+    assert_select "input[type='submit'][value='Enviar']"
+  end
+
+  test "guest users remain on default locale (eo) when visiting institutional and error pages" do
+    get "/en/prie"
+    assert_response :success
+    assert_equal :eo, @controller.resolve_locale
+    assert_select "h3", text: "Historio"
+
+    get "/en/terms"
+    assert_response :success
+    assert_equal :eo, @controller.resolve_locale
+    assert_select "h1", text: "Uzokondiĉoj"
+
+    get "/en/privateco"
+    assert_response :success
+    assert_equal :eo, @controller.resolve_locale
+    assert_select "h1", text: "Privateca politiko"
+
+    get "/en/404"
+    assert_response :not_found
+    assert_equal :eo, @controller.resolve_locale
+    assert_select "h1", text: "Paĝo ne trovita"
+  end
 end

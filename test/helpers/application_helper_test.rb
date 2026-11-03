@@ -448,4 +448,33 @@ class ApplicationHelperTest < ActionView::TestCase
 
     assert_nil error_handling(user)
   end
+
+  test "article_link renders link with blank target and small description" do
+    rendered = article_link("Test Article", "https://example.com/article", "Test description")
+
+    assert_includes rendered, '<a href="https://example.com/article" target="_blank">Test Article</a>'
+    assert_includes rendered, '<span class="small"> Test description</span>'
+  end
+
+  test "read_localized_markdown reads localized document files" do
+    eo_content = read_localized_markdown("TERMS", locale: :eo)
+    assert_includes eo_content, "# Uzokondiĉoj"
+
+    en_content = read_localized_markdown("TERMS", locale: :en)
+    assert_includes en_content, "# Terms of Service"
+
+    pt_content = read_localized_markdown("TERMS", locale: :pt_BR)
+    assert_includes pt_content, "# Termos de Serviço"
+  end
+
+  test "read_localized_markdown falls back to default locale when localized file is missing" do
+    content = read_localized_markdown("TERMS", locale: :non_existent_locale)
+    assert_includes content, "# Uzokondiĉoj"
+  end
+
+  test "read_localized_markdown raises Errno::ENOENT when document does not exist" do
+    assert_raises(Errno::ENOENT) do
+      read_localized_markdown("NON_EXISTENT_DOCUMENT")
+    end
+  end
 end
