@@ -4,22 +4,21 @@
     <tr>
       <td class="content" colspan="2">
         <p>
-          Saluton <%= @evento.user.name %>.
+          <%= t("event_mailer.nova_administranto.greeting", name: @evento.user.name) %>
         </p>
 
         <p>
-          Vi nun estas la administranto de la evento <%= link_to @evento.title, event_url(code: @evento.ligilo) %>
-          en Eventa Servo. Tio signifas ke vi povas ŝanĝi ĝian enhavon aŭ forigi ĝin.
+          <%= t("event_mailer.nova_administranto.body_html",
+                event_link: link_to(@evento.title, event_url(code: @evento.ligilo))) %>
         </p>
 
         <p>
-          Ni invitas vin aldoni informojn pri eventoj, kunvenoj kaj okazaĵoj al Eventa Servo.
-          Tion vi povas fari ĉu aldonante novan eventon, ĉu duobligante ekzistantan.
+          <%= t("event_mailer.nova_administranto.invitation") %>
         </p>
 
-        <p>Sukceson kun via agado!</p>
+        <p><%= t("event_mailer.nova_administranto.closing") %></p>
         <p class="button-blue text-center">
-          <%= link_to 'VIDI LA EVENTAN PAĜON', event_url(code: @evento.ligilo) %>
+          <%= link_to t("event_mailer.nova_administranto.view_event_page"), event_url(code: @evento.ligilo) %>
         </p>
       </td>
     </tr>

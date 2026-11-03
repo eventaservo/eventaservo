@@ -217,6 +217,57 @@ en:
     unacceptable:
       message: Maybe you do not have permission for this action or the submitted data was invalid.
       title: Unacceptable request
+  event_mailer:
+    event_summary:
+      read_more: READ MORE
+    footer:
+      instigo_fund: Instigo Fund
+      intro: Eventa Servo is a free service provided by UEA and TEJO. Do you enjoy it?
+      support_prompt: Support online volunteers with a donation to the
+    kontakti_organizanton:
+      body_html: Someone has a question, wants to report a problem, or inform you about the event "%{event_link}", which you manage on Eventa Servo. Could you please check this and correct it if necessary?
+      greeting: Hello.
+      message_intro: 'Here is the message:'
+      subject: Information about your event on Eventa Servo
+    notify_admins:
+      admin_only_note: This information is only for administrators
+      created_by: Event created by %{user} on %{date}
+      subject_new: "[ES board] New event: %{title}"
+      subject_update: "[ES board] Update: %{title}"
+    notify_user:
+      footer_html: If you no longer wish to receive notifications about new events in %{country}, you can %{link} via this link.
+      unsubscribe: unsubscribe
+    nova_administranto:
+      body_html: You are now the administrator of the event %{event_link} on Eventa Servo. This means you can edit its content or delete it.
+      closing: Best wishes for your event!
+      greeting: Hello %{name}.
+      invitation: We invite you to add information about events, meetings, and happenings to Eventa Servo. You can do this by adding a new event or duplicating an existing one.
+      subject: You are a new event administrator
+      view_event_page: VIEW EVENT PAGE
+    rememorigas_uzantojn:
+      footer_note_html: You are receiving this message because you indicated on %{site_link} that you are interested in a specific event. To stop receiving these messages, simply uncheck the "%{button_name}" button.
+      greeting: Hello.
+      interest_html: 'You indicated on %{site_link} that you are interested in the following event: %{event_link}.'
+      view_event_page: VIEW EVENT PAGE
+    reminders:
+      messages:
+        hours_2: It will start soon. We wish you an enjoyable and successful participation.
+        month_1: It will start in a month. Consider registering or at least letting the event organizer know about your intention to attend.
+        week_1: It will start in a week. Consider registering or at least letting the event organizer know about your intention to attend.
+      subjects:
+        hours_2: "[ES] %{title} will start soon"
+        month_1: "[ES] %{title} will start in a month"
+        week_1: "[ES] %{title} will start in a week"
+    weekly_summary:
+      and: and
+      events_taking_place_between: Events taking place between
+      in_person_events: In-person events
+      no_events: No events will take place
+      online_events: Online events
+      share_my_event: Share my event
+      subject: Worldwide weekly event summary
+      unsubscribe: unsubscribe
+      unsubscribe_html: If you no longer wish to receive the Weekly Summary, you can %{link}.
   events:
     all_day: all day
     calendar:

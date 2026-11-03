@@ -2,7 +2,7 @@
   <table class="stripped bordered">
     <tbody>
       <tr class="row-title">
-        <td class="text-center">Retaj eventoj</td>
+        <td class="text-center"><%= t("event_mailer.weekly_summary.online_events") %></td>
       </tr>
       <% @events.online.each do |event| %>
         <tr>
@@ -24,7 +24,7 @@
 <table class="bordered">
   <tbody>
     <tr class="row-title">
-      <td class="text-center">Ĉeestaj eventoj</td>
+      <td class="text-center"><%= t("event_mailer.weekly_summary.in_person_events") %></td>
     </tr>
     <% @events.grouped_by_countries.each do |country_name, events| %>
       <tr class="row-header">

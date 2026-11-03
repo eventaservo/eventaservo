@@ -217,6 +217,57 @@ eo:
     unacceptable:
       message: Eble vi ne rajtas fari tiun agon aŭ la senditaj datumoj estis malvalidaj.
       title: Neakceptebla peto
+  event_mailer:
+    event_summary:
+      read_more: LEGI PLI
+    footer:
+      instigo_fund: Fonduso Instigo
+      intro: Eventa Servo estas senpaga servo de UEA kaj TEJO. Ĉu ĝi plaĉas al vi?
+      support_prompt: Subtenu retajn agantojn per mondonaco al la
+    kontakti_organizanton:
+      body_html: Iu havas demandon, volas raporti problemon aŭ informi vin pri la evento "%{event_link}", kiun vi administras en Eventa Servo. Ĉu vi povas kontroli tion kaj korekti, se necese?
+      greeting: Saluton.
+      message_intro: 'Jen la mesaĝo:'
+      subject: Informo pri via evento en Eventa Servo
+    notify_admins:
+      admin_only_note: Tiu ĉi informo estas nur por la administrantoj
+      created_by: Evento kreita de %{user} en %{date}
+      subject_new: "[ES estraro] Nova evento: %{title}"
+      subject_update: "[ES estraro] Ĝisdatiĝo: %{title}"
+    notify_user:
+      footer_html: Se vi ne plu volas ricevi informojn pri novaj eventoj en %{country}, eblas %{link} per ĉi tiu ligilo.
+      unsubscribe: malaboni
+    nova_administranto:
+      body_html: Vi nun estas la administranto de la evento %{event_link} en Eventa Servo. Tio signifas ke vi povas ŝanĝi ĝian enhavon aŭ forigi ĝin.
+      closing: Sukceson kun via agado!
+      greeting: Saluton %{name}.
+      invitation: Ni invitas vin aldoni informojn pri eventoj, kunvenoj kaj okazaĵoj al Eventa Servo. Tion vi povas fari ĉu aldonante novan eventon, ĉu duobligante ekzistantan.
+      subject: Vi estas nova eventa administranto
+      view_event_page: VIDI LA EVENTAN PAĜON
+    rememorigas_uzantojn:
+      footer_note_html: Vi ricevas ĉi tiun mesaĝon, ĉar vi indikis en la retejo %{site_link} ke vi interesiĝas pri specifa evento. Por ne plu ricevi ĉi tiajn mesaĝojn, sufiĉas ne plu alklaki la butonon "%{button_name}".
+      greeting: Saluton.
+      interest_html: 'Vi indikis en la retejo de %{site_link}, ke la jena evento interesas vin: %{event_link}.'
+      view_event_page: VIDI LA EVENTAN PAĜON
+    reminders:
+      messages:
+        hours_2: Ĝi komenciĝos baldaŭ. Ni deziras al vi agrablan kaj sukcesan partoprenon.
+        month_1: Ĝi komenciĝos post monato. Pripensu aliĝi aŭ almenaŭ informi la organizanton de la evento pri via intenco ĝin ĉeesti.
+        week_1: Ĝi komenciĝos post semajno. Pripensu aliĝi aŭ almenaŭ informi la organizanton de la evento pri via intenco ĝin ĉeesti.
+      subjects:
+        hours_2: "[ES] %{title} baldaŭ komenciĝos"
+        month_1: "[ES] %{title} komenciĝos post monato"
+        week_1: "[ES] %{title} komenciĝos post semajno"
+    weekly_summary:
+      and: kaj
+      events_taking_place_between: Eventoj kiuj okazos inter
+      in_person_events: Ĉeestaj eventoj
+      no_events: Ne okazos eventoj
+      online_events: Retaj eventoj
+      share_my_event: Diskonigi mian eventon
+      subject: Tutmonda semajna resumo de eventoj
+      unsubscribe: malaboni
+      unsubscribe_html: Se vi ne plu volas ricevi la Semajnan Resumon, eblas %{link}.
   events:
     all_day: tuttaga
     calendar:

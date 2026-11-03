@@ -857,4 +857,49 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     assert_equal :eo, @controller.resolve_locale
     assert_select "h1", text: "Paĝo ne trovita"
   end
+
+  test "transactional emails respect recipient preference and explicit locale scopes" do
+    event = events(:valid_event)
+    user = users(:user)
+
+    # Weekly summary across languages
+    eo_mail = EventMailer.weekly_summary(user, locale: :eo)
+    assert_equal "Tutmonda semajna resumo de eventoj", eo_mail.subject
+
+    en_mail = EventMailer.weekly_summary(user, locale: :en)
+    assert_equal "Worldwide weekly event summary", en_mail.subject
+
+    pt_mail = EventMailer.weekly_summary(user, locale: :pt_BR)
+    assert_equal "Resumo semanal mundial de eventos", pt_mail.subject
+
+    # Contact organizer across languages
+    eo_contact = EventMailer.kontakti_organizanton(event: event, user: user, message: "Demando", locale: :eo)
+    assert_equal "Informo pri via evento en Eventa Servo", eo_contact.subject
+
+    en_contact = EventMailer.kontakti_organizanton(event: event, user: user, message: "Question", locale: :en)
+    assert_equal "Information about your event on Eventa Servo", en_contact.subject
+
+    pt_contact = EventMailer.kontakti_organizanton(event: event, user: user, message: "Dúvida", locale: :pt_BR)
+    assert_equal "Informações sobre seu evento no Eventa Servo", pt_contact.subject
+
+    # New admin notification across languages
+    eo_admin = EventMailer.nova_administranto(event, locale: :eo)
+    assert_equal "Vi estas nova eventa administranto", eo_admin.subject
+
+    en_admin = EventMailer.nova_administranto(event, locale: :en)
+    assert_equal "You are a new event administrator", en_admin.subject
+
+    pt_admin = EventMailer.nova_administranto(event, locale: :pt_BR)
+    assert_equal "Você é o novo administrador do evento", pt_admin.subject
+
+    # Reminder emails across languages
+    eo_reminder = EventMailer.rememorigas_uzantojn_pri_evento(event.id, user.email, "2.hours", locale: :eo)
+    assert_equal "[ES] #{event.title} baldaŭ komenciĝos", eo_reminder.subject
+
+    en_reminder = EventMailer.rememorigas_uzantojn_pri_evento(event.id, user.email, "2.hours", locale: :en)
+    assert_equal "[ES] #{event.title} will start soon", en_reminder.subject
+
+    pt_reminder = EventMailer.rememorigas_uzantojn_pri_evento(event.id, user.email, "2.hours", locale: :pt_BR)
+    assert_equal "[ES] #{event.title} começará em breve", pt_reminder.subject
+  end
 end

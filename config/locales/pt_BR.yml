@@ -217,6 +217,57 @@ pt_BR:
     unacceptable:
       message: Talvez você não tenha permissão para realizar esta ação ou os dados enviados eram inválidos.
       title: Solicitação inaceitável
+  event_mailer:
+    event_summary:
+      read_more: LER MAIS
+    footer:
+      instigo_fund: Fundo Instigo
+      intro: O Eventa Servo é um serviço gratuito da UEA e TEJO. Você gosta dele?
+      support_prompt: Apoie os ativistas online com uma doação para o
+    kontakti_organizanton:
+      body_html: Alguém tem uma dúvida, deseja relatar um problema ou informá-lo sobre o evento "%{event_link}", que você administra no Eventa Servo. Você poderia verificar isso e corrigir se necessário?
+      greeting: Olá.
+      message_intro: 'Aqui está a mensagem:'
+      subject: Informações sobre seu evento no Eventa Servo
+    notify_admins:
+      admin_only_note: Esta informação é apenas para os administradores
+      created_by: Evento criado por %{user} em %{date}
+      subject_new: "[ES diretoria] Novo evento: %{title}"
+      subject_update: "[ES diretoria] Atualização: %{title}"
+    notify_user:
+      footer_html: Se não quiser mais receber notificações sobre novos eventos em %{country}, você pode %{link} através deste link.
+      unsubscribe: cancelar inscrição
+    nova_administranto:
+      body_html: Você agora é o administrador do evento %{event_link} no Eventa Servo. Isso significa que você pode alterar o conteúdo ou excluí-lo.
+      closing: Sucesso com a sua atividade!
+      greeting: Olá %{name}.
+      invitation: Convidamos você a adicionar informações sobre eventos, reuniões e acontecimentos ao Eventa Servo. Você pode fazer isso adicionando um novo evento ou duplicando um existente.
+      subject: Você é o novo administrador do evento
+      view_event_page: VER A PÁGINA DO EVENTO
+    rememorigas_uzantojn:
+      footer_note_html: Você está recebendo esta mensagem porque indicou no site do %{site_link} que tem interesse em um evento específico. Para não receber mais estas mensagens, basta desmarcar o botão "%{button_name}".
+      greeting: Olá.
+      interest_html: 'Você indicou no site do %{site_link} que tem interesse no seguinte evento: %{event_link}.'
+      view_event_page: VER A PÁGINA DO EVENTO
+    reminders:
+      messages:
+        hours_2: Começará em breve. Desejamos a você uma participação agradável e proveitosa.
+        month_1: Começará em um mês. Considere se inscrever ou ao menos informar o organizador do evento sobre sua intenção de comparecer.
+        week_1: Começará em uma semana. Considere se inscrever ou ao menos informar o organizador do evento sobre sua intenção de comparecer.
+      subjects:
+        hours_2: "[ES] %{title} começará em breve"
+        month_1: "[ES] %{title} começará em um mês"
+        week_1: "[ES] %{title} começará em uma semana"
+    weekly_summary:
+      and: e
+      events_taking_place_between: Eventos que acontecerão entre
+      in_person_events: Eventos presenciais
+      no_events: Nenhum evento acontecerá
+      online_events: Eventos online
+      share_my_event: Divulgar meu evento
+      subject: Resumo semanal mundial de eventos
+      unsubscribe: cancelar inscrição
+      unsubscribe_html: Se não quiser mais receber o Resumo Semanal, você pode %{link}.
   events:
     all_day: dia inteiro
     calendar:

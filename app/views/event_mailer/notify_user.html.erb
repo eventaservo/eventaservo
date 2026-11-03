@@ -1,5 +1,7 @@
 <% content_for :event_footer do %>
-  Se vi ne plu volas ricevi informojn pri novaj eventoj en <%= @event.country.name %>, eblas <%= link_to 'malaboni', delete_recipient_url(@recipient.code) %> per ĉi tiu ligilo.
+  <%= t("event_mailer.notify_user.footer_html",
+        country: @event.country.name,
+        link: link_to(t("event_mailer.notify_user.unsubscribe"), delete_recipient_url(@recipient.code))) %>
 <% end %>
 
 <%= render 'event_summary' %>
