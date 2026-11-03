@@ -159,7 +159,7 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
     assert_includes response.body, ERB::Util.html_escape(events.first.title)
   end
 
-  test "card view shows nearby events within 120 km marked with Proksima badge" do
+  test "card view shows nearby events within 50 km marked with Proksima badge" do
     setup_nearby_events
 
     get_copenhagen
@@ -167,7 +167,6 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_includes response.body, @copenhagen_event.title
     assert_includes response.body, @malmo_event.title
-    assert_includes response.body, @naestved_event.title
     assert_select ".card", text: /#{@malmo_event.title}/ do
       assert_select ".badge", text: I18n.t("events.nearby")
     end
@@ -176,7 +175,7 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "card view excludes cities farther than the 120 km radius" do
+  test "card view excludes cities farther than the 50 km radius" do
     setup_nearby_events
 
     get_copenhagen
@@ -184,6 +183,7 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_not_includes response.body, @aarhus_event.title
     assert_not_includes response.body, @corner_event.title
+    assert_not_includes response.body, @naestved_event.title
   end
 
   test "card view shows a link to hide nearby events with nearby=0" do

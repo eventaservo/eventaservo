@@ -12,16 +12,16 @@ module Events
   # A city is anchored by the coordinates of its first event with valid coordinates.
   # Results are cached in {Rails.cache} for 12 hours.
   #
-  # @example Query nearby cities with the default 120 km radius
+  # @example Query nearby cities with the default 50 km radius
   #   Events::NearbyCitiesQuery.new(city_name: "Kopenhago", country_id: 41).call
   #   # => [["Malmö", 212], ["Roskilde", 41]]
   #
   # @example Query with a custom radius
-  #   Events::NearbyCitiesQuery.new(city_name: "Kopenhago", country_id: 41, radius_km: 50).call
+  #   Events::NearbyCitiesQuery.new(city_name: "Kopenhago", country_id: 41, radius_km: 100).call
   #
   class NearbyCitiesQuery
     # Default search radius in kilometers.
-    DEFAULT_RADIUS_KM = 120
+    DEFAULT_RADIUS_KM = 50
 
     # Approximate kilometers per degree of latitude.
     KM_PER_DEGREE_LAT = 111.0
@@ -33,7 +33,7 @@ module Events
 
     # @param city_name [String] The target city name
     # @param country_id [Integer] The target city country ID
-    # @param radius_km [Numeric] The discovery radius in kilometers (defaults to 120 km)
+    # @param radius_km [Numeric] The discovery radius in kilometers (defaults to 50 km)
     def initialize(city_name:, country_id:, radius_km: DEFAULT_RADIUS_KM)
       @city_name = city_name
       @country_id = country_id

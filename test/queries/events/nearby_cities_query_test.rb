@@ -18,29 +18,29 @@ class Events::NearbyCitiesQueryTest < ActiveSupport::TestCase
     @west = create_geo_event(city: "Okcidenturbo", country: @fiji, latitude: -16.8, longitude: -179.9)
   end
 
-  test "defaults radius_km to 120 km" do
+  test "defaults radius_km to 50 km" do
     query = Events::NearbyCitiesQuery.new(city_name: "Kopenhago", country_id: @denmark.id)
 
-    assert_equal 120, Events::NearbyCitiesQuery::DEFAULT_RADIUS_KM
-    assert_equal 120, query.radius_km
+    assert_equal 50, Events::NearbyCitiesQuery::DEFAULT_RADIUS_KM
+    assert_equal 50, query.radius_km
   end
 
-  test "returns cities within the 120 km radius including cross-border and 50-120 km cities" do
+  test "returns cities within the 50 km radius including cross-border cities" do
     result = Events::NearbyCitiesQuery.new(city_name: "Kopenhago", country_id: @denmark.id).call
 
     assert_includes result, ["Malmö", @sweden.id]
-    assert_includes result, ["Næstved", @denmark.id]
+    assert_not_includes result, ["Næstved", @denmark.id]
   end
 
   test "respects a custom radius_km parameter" do
     result = Events::NearbyCitiesQuery.new(
       city_name: "Kopenhago",
       country_id: @denmark.id,
-      radius_km: 50
+      radius_km: 120
     ).call
 
     assert_includes result, ["Malmö", @sweden.id]
-    assert_not_includes result, ["Næstved", @denmark.id]
+    assert_includes result, ["Næstved", @denmark.id]
   end
 
   test "excludes cities farther than the radius" do
@@ -112,7 +112,7 @@ class Events::NearbyCitiesQueryTest < ActiveSupport::TestCase
     query = Events::NearbyCitiesQuery.new(city_name: "Kopenhago", country_id: @denmark.id)
     first_result = query.call
 
-    assert Rails.cache.exist?("events/nearby_cities/v2/#{@denmark.id}/kopenhago/120")
+    assert Rails.cache.exist?("events/nearby_cities/v2/#{@denmark.id}/kopenhago/50")
     assert_equal first_result, query.call
   ensure
     Rails.cache = original_cache
