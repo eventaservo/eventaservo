@@ -27,6 +27,7 @@ pt_BR:
         city: Cidade
         country_id: País
         email: E-mail
+        locale: Idioma preferencial
         name: Nome
         password: Senha
         password_confirmation: Confirmação de senha
@@ -229,6 +230,10 @@ pt_BR:
       greeting: Olá.
       message_intro: 'Aqui está a mensagem:'
       subject: Informações sobre seu evento no Eventa Servo
+    layout:
+      automated_message_html: Mensagem enviada automaticamente pelo %{service}
+      automated_message_text: Mensagem enviada automaticamente pelo Eventa Servo
+      contact_us_html: Entre em contato conosco pelo %{link}
     notify_admins:
       admin_only_note: Esta informação é apenas para os administradores
       created_by: Evento criado por %{user} em %{date}
@@ -565,6 +570,10 @@ pt_BR:
     title: Calendário Internacional
     year: Ano
     year_title: Calendário internacional %{year}
+  languages:
+    en: Inglês (English)
+    eo: Esperanto
+    pt_BR: Português
   links:
     announcements_and_contests: Anúncios e Concursos
     international_calendar: Calendário Internacional

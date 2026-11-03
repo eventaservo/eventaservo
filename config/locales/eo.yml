@@ -27,6 +27,7 @@ eo:
         city: Urbo
         country_id: Lando
         email: Retadreso
+        locale: Preferata lingvo
         name: Nomo
         password: Pasvorto
         password_confirmation: Konfirmu pasvorton
@@ -229,6 +230,10 @@ eo:
       greeting: Saluton.
       message_intro: 'Jen la mesaĝo:'
       subject: Informo pri via evento en Eventa Servo
+    layout:
+      automated_message_html: Mesaĝo aŭtomate sendita de %{service}
+      automated_message_text: Mesaĝo aŭtomate sendita de Eventa Servo
+      contact_us_html: Kontaktu nin per %{link}
     notify_admins:
       admin_only_note: Tiu ĉi informo estas nur por la administrantoj
       created_by: Evento kreita de %{user} en %{date}
@@ -565,6 +570,10 @@ eo:
     title: Internacia Kalendaro
     year: Jaro
     year_title: Internacia kalendaro %{year}
+  languages:
+    en: Angla (English)
+    eo: Esperanto
+    pt_BR: Portugala (Português)
   links:
     announcements_and_contests: Anoncoj kaj konkursoj
     international_calendar: Internacia Kalendaro

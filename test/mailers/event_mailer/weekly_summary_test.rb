@@ -17,6 +17,7 @@ class EventMailer::WeeklySummaryTest < ActionMailer::TestCase
     assert_equal "Tutmonda semajna resumo de eventoj", email.subject
     assert_includes body, "Eventoj kiuj okazos inter"
     assert_includes body, "Diskonigi mian eventon"
+    assert_includes body, "Mesaĝo aŭtomate sendita de"
   end
 
   test "delivers weekly summary in English when specified" do
@@ -27,6 +28,7 @@ class EventMailer::WeeklySummaryTest < ActionMailer::TestCase
     assert_equal "Worldwide weekly event summary", email.subject
     assert_includes body, "Events taking place between"
     assert_includes body, "Share my event"
+    assert_includes body, "Message automatically sent by"
   end
 
   test "delivers weekly summary in Portuguese when user prefers pt_BR" do
@@ -38,5 +40,12 @@ class EventMailer::WeeklySummaryTest < ActionMailer::TestCase
     assert_equal "Resumo semanal mundial de eventos", email.subject
     assert_includes body, "Eventos que acontecerão entre"
     assert_includes body, "Divulgar meu evento"
+    assert_includes body, "Mensagem enviada automaticamente pelo"
+  end
+
+  test "send_weekly_summary_to_users enqueues weekly summary for all subscribed users" do
+    assert_enqueued_emails User.receives_weekly_summary.count do
+      EventMailer.send_weekly_summary_to_users
+    end
   end
 end

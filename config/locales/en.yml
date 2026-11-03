@@ -27,6 +27,7 @@ en:
         city: City
         country_id: Country
         email: Email
+        locale: Preferred language
         name: Name
         password: Password
         password_confirmation: Confirm password
@@ -229,6 +230,10 @@ en:
       greeting: Hello.
       message_intro: 'Here is the message:'
       subject: Information about your event on Eventa Servo
+    layout:
+      automated_message_html: Message automatically sent by %{service}
+      automated_message_text: Message automatically sent by Eventa Servo
+      contact_us_html: Contact us via %{link}
     notify_admins:
       admin_only_note: This information is only for administrators
       created_by: Event created by %{user} on %{date}
@@ -565,6 +570,10 @@ en:
     title: International Calendar
     year: Year
     year_title: International calendar %{year}
+  languages:
+    en: English
+    eo: Esperanto
+    pt_BR: Portuguese (Português)
   links:
     announcements_and_contests: Announcements & Contests
     international_calendar: International Calendar

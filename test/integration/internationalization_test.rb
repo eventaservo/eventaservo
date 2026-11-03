@@ -50,7 +50,22 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal :en, @controller.resolve_locale
     assert_equal "en", cookies[:locale]
+    assert_equal :en, users(:admin_user).reload.preferred_locale
     assert_select "#navbar-dropdown div", text: "EN"
+  end
+
+  test "user can save preferred locale in profile registration form" do
+    user = users(:user)
+    sign_in user
+
+    put user_registration_path, params: {
+      user: {
+        locale: "pt_BR"
+      }
+    }
+
+    assert_redirected_to events_by_username_path(username: user.username)
+    assert_equal :pt_BR, user.reload.preferred_locale
   end
 
   test "admin user restores locale from cookie when param is absent" do
