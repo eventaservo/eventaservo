@@ -50,7 +50,6 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal :en, @controller.resolve_locale
     assert_equal "en", cookies[:locale]
-    assert_equal :en, users(:admin_user).reload.preferred_locale
     assert_select "#navbar-dropdown div", text: "EN"
   end
 
@@ -66,6 +65,17 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to events_by_username_path(username: user.username)
     assert_equal :pt_BR, user.reload.preferred_locale
+  end
+
+  test "browsing pages with locale param does not overwrite user preferred_locale" do
+    admin = users(:admin_user)
+    admin.update!(mailings: {"locale" => "pt_BR"})
+    sign_in admin
+
+    get root_url(locale: :en)
+    assert_response :success
+    assert_equal :en, @controller.resolve_locale
+    assert_equal :pt_BR, admin.reload.preferred_locale
   end
 
   test "admin user restores locale from cookie when param is absent" do

@@ -31,7 +31,6 @@ module Internationalization
     if valid_locale?(params[:locale])
       locale = params[:locale].to_sym
       cookies.permanent[:locale] = locale.to_s
-      sync_user_locale(locale)
       locale
     elsif valid_locale?(cookies[:locale])
       cookies[:locale].to_sym
@@ -46,20 +45,5 @@ module Internationalization
   # @return [Boolean] true if locale is supported, false otherwise
   def valid_locale?(locale)
     locale.present? && I18n.available_locales.include?(locale.to_sym)
-  end
-
-  private
-
-  # Synchronizes the user's preferred locale with the current selection.
-  #
-  # @param locale [Symbol] The active locale
-  # @return [void]
-  def sync_user_locale(locale)
-    return unless user_signed_in? && current_user.respond_to?(:mailings)
-
-    current_mailings = current_user.mailings || {}
-    return if current_mailings["locale"] == locale.to_s
-
-    current_user.update_column(:mailings, current_mailings.merge("locale" => locale.to_s))
   end
 end
