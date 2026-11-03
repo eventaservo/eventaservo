@@ -173,6 +173,16 @@ eo:
   errors:
     format: "%{attribute} %{message}"
     header: Troviĝas eraro en la formularo
+    internal_error:
+      apology: Ni pardonpetas. Ni korektos tiun eraron baldaŭ.
+      form:
+        back_to_home: Iri al ĉefpaĝo
+        comments: Kion vi faris antaŭ la eraro okazis?
+        email: Retadreso
+        name: Nomo
+        submit: Sendi
+      help_us: Vi povas helpi nin sendante pli da informoj pri kio okazis
+      title: Oh! Eraro okazis!
     messages:
       accepted: devas esti akceptita
       blank: devas esti kompletigita
@@ -194,11 +204,19 @@ eo:
       too_long: estas tro longa (maksimume %{count} signoj)
       too_short: estas tro mallonga (minimume %{count} signoj)
       wrong_length: ne estas je ĝusta longo (devas enhavi %{count} signojn)
+    not_found:
+      back_to_home: Iru al la ĉefpaĝo
+      contact_link_text: Kontaktu nin
+      message_html: La paĝo ne ekzistas. %{contact_link} se vi bezonas helpon.
+      title: Paĝo ne trovita
     template:
       body: 'Kontrolu la jenajn kampojn: '
       header:
         one: 'Ne eblas registri tiun %{model}: 1 eraro'
         other: 'Ne eblas registri tiun %{model}: %{count} eraroj'
+    unacceptable:
+      message: Eble vi ne rajtas fari tiun agon aŭ la senditaj datumoj estis malvalidaj.
+      title: Neakceptebla peto
   events:
     all_day: tuttaga
     calendar:
@@ -417,6 +435,67 @@ eo:
       submit: Registri tiun %{model}
       update: Modifi tiun %{model}
   home:
+    about:
+      advantages:
+        contact_subject: Pri Eventa Servo
+        contact_us: kontaktu nin
+        files_p: Aldonu fotojn kaj dosierojn al viaj eventoj.
+        files_title: Dosierujo
+        open_source_p_html: Estas tute senpaga. La programkodo estas libera en %{github_link}. Se vi volas kontribui al la programado, %{contact_link}.
+        open_source_title: Senpaga kaj malfermitkoda
+        social_p: Facile diskonigu vian eventon per diversaj sociaj komunikiloj kiel Facebook, Twitter, WhatsApp, Telegram, retpoŝtaj servoj ktp.
+        social_title: Sociaj komunikiloj
+        tech_p: Konektu la eventojn al aliaj sistemoj per API-teknologio. Abonu la eventan liston per RSS-teknologio.
+        tech_title: Teknologioj
+        title: Kaj multaj aliaj avantaĝoj
+      articles:
+        art1: "(Artikolo de Yves Nevelsteen kaj Fernando Ŝajani kiu aperis en la maja numero de 2026 de Revuo Esperanto)"
+        art10: "(por virtuala Zoom-kunveno de la klubo La Verda Stelo 2020-12)"
+        art11: "(por la Virtuala Kongreso de Esperanto 2020-08)"
+        art12: "(Artikolo de Fernando kiu aperis en Kontakto 6-2018)"
+        art2: "(Podkasto-episodo pri Eventa Servo en Movada Vidpunkto en januaro 2026)"
+        art3: "(Prelego de Yves Nevelsteen por la Londona Esperanto-klubo kaj La Verda Stelo en januaro 2023)"
+        art4: "(Artikolo aperinta en Libera Folio 2022-12-06)"
+        art5: "(Gazetara komuniko de UEA kiu plurfoje mencias Eventan Servon - 2022-11-30)"
+        art6: "(Artikolo de Yves Nevelsteen kiu aperis en la oktobra numero de 2022 de Revuo Esperanto)"
+        art7: "(Artikolo de Yves Nevelsteen kiu aperis en la februara numero de 2020 de Revuo Esperanto)"
+        art8: "(Gazetara komuniko de UEA kiu plurfoje mencias Eventan Servon)"
+        art9: "(Intervjuo kun Yves Nevelsteen kiu aperis en Libera Folio en aprilo 2020)"
+        in_wikipedia: en Vikipedio
+        more_info_wiki_html: Vidu pli da informoj %{wiki_link}.
+        title: Artikoloj kaj prelegoj pri Eventa Servo
+      creator_company: EventaServo estas kreita de Fernando Ŝajani per
+      features:
+        calendar_p: Oni povas aboni landan aŭ organizan eventan liston per kalendara programo kiel Google Calendar, Apple iCal aŭ simila.
+        calendar_title: Aboni per via kalendara programo
+        device_p: Oni povas uzi Eventan Servon per tradicia komputilo, poŝtelefono aŭ tabulkomputilo. Instali aplikaĵon ne necesas.
+        device_title: Uzebla per komputilo aŭ poŝtelefono
+        discover_p1: Per Eventa Servo oni povas vidi eventojn ĉirkaŭ la tuta mondo laŭ mapo, listo, kartaro kaj kalendaro.
+        discover_p2: Ankaŭ eblas filtri la eventojn laŭ kontinentoj, landoj kaj urboj.
+        discover_title: Facile listigi kaj trovi eventojn!
+      helpers:
+        p1_html: "%{yves_link} eksciis pri Eventa Servo en 2018. Li tuj komprenis ĝian potencialon kaj tial multe ekhelpis varbi por la retejo. Hodiaŭ li daŭre estas 'ĉefhelpanto': konsilanto, testanto de novaj funkcioj kaj komunikanto (kun uzantoj kaj gazetaro).<br>%{robin_link} ekde 2020 ankaŭ helpas pri konsilado kaj programado."
+        p2_html: Ni aparte dankas %{fernando_link} vic-prezidanton de UEA, pro liaj apogo kaj helpo disvastigi Eventan Servon.
+        p3_html: Se ankaŭ vi volas helpi, aliĝu al ĉi tiu %{telegram_link}.
+        telegram_link_text: Telegram-grupo
+        title: Helpantoj
+      history:
+        eventoj_hu_link_text: Kalendaro de Eventoj.hu
+        p1_html: "%{creator_link} kreis la retejon Eventa Servo en 2017. En lia urbo troviĝas malmultaj esperantistoj, tial maloftas la renkontiĝoj. Li certis, ke esperantistoj agas en aliaj urboj kaj landoj, sed kiujn eventojn ili organizas? Kie? Kiam? Li kreis Eventan Servon por ordigi tiajn informojn."
+        p2: En aprilo 2019, Fernando donacis la sistemon al Universala Esperanto-Asocio. UEA kaj TEJO ekde tiam instigas al la uzado de Eventa Servo por informi Esperantujon pri internaciaj, landaj kaj lokaj eventoj, kongresoj, kunvenoj, renkontiĝoj k.s.
+        p3_html: Fine de 2020, Eventa Servo iĝis la oficiala posteulo de la %{link}.
+        title: Historio
+      partners:
+        p: Ni dankas ĉi tiujn kompaniojn pro la permeso uzi iliajn teknologiojn senpage por plibonigi Eventan Servon.
+        title: Dankoj al partneraj teknologiaj kompanioj
+      registered_events: registritaj eventoj
+      registered_users: registritaj uzantoj
+      tagline: La sistemo por diskonigi Esperanto-eventojn tutmonde!
+      title: Eventa Servo
+      uea_tejo:
+        p1_html: Eventa Servo apartenas al %{uea_link} kun apogo de %{tejo_link}.
+        p2: Ambaŭ organizoj instigas la uzadon de Eventa Servo por informi Esperantujon pri internaciaj, landaj kaj lokaj eventoj, kongresoj, kunvenoj, renkontiĝoj k.s.
+        title: UEA kaj TEJO
     ads:
       alt: Anonco
   international_calendar:

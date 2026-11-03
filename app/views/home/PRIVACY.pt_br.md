@@ -1,0 +1,1 @@
+PRIVACY.pt_BR.md

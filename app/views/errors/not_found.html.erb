@@ -1,11 +1,9 @@
 <div class="box-white col-12 col-md-6 mx-auto">
-  <h1>Paĝo ne trovita</h1>
+  <h1><%= t("errors.not_found.title") %></h1>
   <p>
-    La paĝo ne ekzistas.
-    <%= mail_to 'kontakto@eventaservo.org', 'Kontaktu nin' %>
-    se vi bezonas helpon.
+    <%= t("errors.not_found.message_html", contact_link: mail_to("kontakto@eventaservo.org", t("errors.not_found.contact_link_text"))) %>
   </p>
   <p>
-    <%= link_to 'Iru al la ĉefpaĝo', root_url, class: 'button-submit col-12' %>
+    <%= link_to t("errors.not_found.back_to_home"), root_url, class: "button-submit col-12" %>
   </p>
 </div>

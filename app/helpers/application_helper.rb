@@ -353,6 +353,36 @@ module ApplicationHelper
       link_to(text, "https://www.google.com/maps/search/?api=1&query=#{address}", target: :_blank)
   end
 
+  # Reads a localized Markdown legal document (e.g. TERMS or PRIVACY).
+  #
+  # Searches for localized document files (e.g. TERMS.eo.md, TERMS.en.md, TERMS.pt_BR.md)
+  # within the views directory and falls back to the default locale.
+  #
+  # @param document_name [String] Name of the document (e.g., "TERMS", "PRIVACY")
+  # @param locale [Symbol, String] The locale to load (defaults to I18n.locale)
+  #
+  # @return [String] Contents of the Markdown file
+  def read_localized_markdown(document_name, locale: I18n.locale)
+    candidates = [
+      Rails.root.join("app/views/home", "#{document_name}.#{locale}.md"),
+      Rails.root.join("app/views/home", "#{document_name}.#{locale.to_s.underscore}.md"),
+      Rails.root.join("app/views/home", "#{document_name}.#{locale.to_s.downcase}.md"),
+      Rails.root.join("app/views/home", "#{document_name}.#{I18n.default_locale}.md")
+    ]
+
+    path = candidates.find { |file| File.exist?(file) }
+    raise Errno::ENOENT, "Could not find markdown document #{document_name} for locale #{locale}" unless path
+
+    File.read(path)
+  end
+
+  # Generates an article link with description for the about page.
+  #
+  # @param text [String] Title of the article or resource
+  # @param link [String] URL to the article or resource
+  # @param description [String] Additional context or publication notes
+  #
+  # @return [ActiveSupport::SafeBuffer] HTML paragraph containing the article link and description
   def article_link(text, link, description)
     content_tag(:p) do
       content_tag(:a, text, href: link, target: :_blank) +

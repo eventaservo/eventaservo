@@ -64,23 +64,28 @@ class HomeController < ApplicationController
     @prelegantoj = result.prelegantoj
   end
 
+  # Renders the privacy policy and software license in HTML or plain text.
+  #
+  # @return [void]
   def privateco
     ahoy.track "Visit Privateco"
 
     respond_to do |format|
       format.html
       format.text do
-        render "privateco", layout: false
+        render plain: helpers.read_localized_markdown("PRIVACY"), layout: false
       end
     end
   end
 
-  # /terms
+  # Renders the terms of service in HTML or plain text.
+  #
+  # @return [void]
   def terms
     respond_to do |format|
       format.html
       format.text do
-        render "terms", layout: false
+        render plain: helpers.read_localized_markdown("TERMS"), layout: false
       end
     end
   end

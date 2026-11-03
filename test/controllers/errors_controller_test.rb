@@ -8,6 +8,7 @@ class ErrorsControllerTest < ActionDispatch::IntegrationTest
     get "/404"
     assert_response :not_found
     assert_equal "text/html", response.media_type
+    assert_select "h1", text: "Paĝo ne trovita"
   end
 
   test "should get not_found for js format" do
@@ -63,11 +64,29 @@ class ErrorsControllerTest < ActionDispatch::IntegrationTest
   test "should get unacceptable" do
     get "/422"
     assert_response :unprocessable_entity
+    assert_equal "text/html", response.media_type
+    assert_select "h1", text: "Neakceptebla peto"
+  end
+
+  test "should get unacceptable for JSON format" do
+    get "/422.json"
+    assert_response :unprocessable_entity
+    assert_equal "application/json", response.media_type
+    assert_equal "Unprocessable Entity", JSON.parse(response.body)["error"]
   end
 
   test "should get internal_error" do
     get "/500"
     assert_response :internal_server_error
+    assert_equal "text/html", response.media_type
+    assert_select "h1", text: "Oh! Eraro okazis!"
+  end
+
+  test "should get internal_error for JSON format" do
+    get "/500.json"
+    assert_response :internal_server_error
+    assert_equal "application/json", response.media_type
+    assert_equal "Internal Server Error", JSON.parse(response.body)["error"]
   end
 
   test "should post error_form and redirect" do

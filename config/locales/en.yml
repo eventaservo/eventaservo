@@ -173,6 +173,16 @@ en:
   errors:
     format: "%{attribute} %{message}"
     header: There is an error in the form
+    internal_error:
+      apology: We apologize. We will fix this error shortly.
+      form:
+        back_to_home: Go to home page
+        comments: What were you doing before the error occurred?
+        email: Email
+        name: Name
+        submit: Send
+      help_us: You can help us by sending more information about what happened
+      title: Oh! An error occurred!
     messages:
       accepted: must be accepted
       blank: can't be blank
@@ -194,11 +204,19 @@ en:
       too_long: is too long (maximum is %{count} characters)
       too_short: is too short (minimum is %{count} characters)
       wrong_length: is the wrong length (should be %{count} characters)
+    not_found:
+      back_to_home: Go to home page
+      contact_link_text: Contact us
+      message_html: The page does not exist. %{contact_link} if you need help.
+      title: Page not found
     template:
       body: 'Please review the following fields:'
       header:
         one: 'Cannot save this %{model}: 1 error'
         other: 'Cannot save this %{model}: %{count} errors'
+    unacceptable:
+      message: Maybe you do not have permission for this action or the submitted data was invalid.
+      title: Unacceptable request
   events:
     all_day: all day
     calendar:
@@ -417,6 +435,67 @@ en:
       submit: Save this %{model}
       update: Update this %{model}
   home:
+    about:
+      advantages:
+        contact_subject: About Eventa Servo
+        contact_us: contact us
+        files_p: Add photos and documents to your events.
+        files_title: File storage
+        open_source_p_html: It is completely free. The source code is open on %{github_link}. If you would like to contribute to development, %{contact_link}.
+        open_source_title: Free and open source
+        social_p: Easily share your event across social networks such as Facebook, Twitter, WhatsApp, Telegram, email services, etc.
+        social_title: Social media
+        tech_p: Connect events to external systems using the API. Subscribe to event feeds via RSS.
+        tech_title: Technologies
+        title: And many other benefits
+      articles:
+        art1: "(Article by Yves Nevelsteen and Fernando Ŝajani published in the May 2026 issue of Revuo Esperanto)"
+        art10: "(for a virtual Zoom meeting of the club La Verda Stelo 2020-12)"
+        art11: "(for the Virtual Congress of Esperanto 2020-08)"
+        art12: "(Article by Fernando published in Kontakto 6-2018)"
+        art2: "(Podcast episode about Eventa Servo on Movada Vidpunkto in January 2026)"
+        art3: "(Presentation by Yves Nevelsteen for the London Esperanto Club and La Verda Stelo in January 2023)"
+        art4: "(Article published in Libera Folio on 2022-12-06)"
+        art5: "(UEA press release mentioning Eventa Servo several times - 2022-11-30)"
+        art6: "(Article by Yves Nevelsteen published in the October 2022 issue of Revuo Esperanto)"
+        art7: "(Article by Yves Nevelsteen published in the February 2020 issue of Revuo Esperanto)"
+        art8: "(UEA press release mentioning Eventa Servo several times)"
+        art9: "(Interview with Yves Nevelsteen published in Libera Folio in April 2020)"
+        in_wikipedia: on Wikipedia
+        more_info_wiki_html: See more information %{wiki_link}.
+        title: Articles and presentations about Eventa Servo
+      creator_company: EventaServo is created by Fernando Ŝajani through
+      features:
+        calendar_p: You can subscribe to country or organization event calendars using calendar software like Google Calendar, Apple iCal, or similar.
+        calendar_title: Subscribe with your calendar app
+        device_p: You can use Eventa Servo on a traditional computer, smartphone, or tablet. No app installation is required.
+        device_title: Usable on computer or mobile phone
+        discover_p1: With Eventa Servo you can discover events worldwide on a map, list, cards, and calendar.
+        discover_p2: You can also filter events by continents, countries, and cities.
+        discover_title: Easily list and find events!
+      helpers:
+        p1_html: "%{yves_link} learned about Eventa Servo in 2018. He immediately understood its potential and contributed greatly to promoting the site. Today he continues as 'lead helper': advisor, tester of new features, and communicator (with users and the press).<br>%{robin_link} has also been helping since 2020 with advice and programming."
+        p2_html: We give special thanks to %{fernando_link} vice-president of UEA, for his support and assistance in spreading Eventa Servo.
+        p3_html: If you would also like to help, join this %{telegram_link}.
+        telegram_link_text: Telegram group
+        title: Helpers
+      history:
+        eventoj_hu_link_text: Calendar of Eventoj.hu
+        p1_html: "%{creator_link} created the Eventa Servo website in 2017. In his city there are few Esperanto speakers, so meetings are rare. He was certain that Esperantists were active in other cities and countries, but what events were they organizing? Where? When? He created Eventa Servo to organize this information."
+        p2: In April 2019, Fernando donated the system to the Universal Esperanto Association. Since then, UEA and TEJO encourage the use of Eventa Servo to inform the Esperanto community about international, national, and local events, congresses, meetings, gatherings, etc.
+        p3_html: At the end of 2020, Eventa Servo became the official successor to the %{link}.
+        title: History
+      partners:
+        p: We thank these companies for the permission to use their technologies for free to improve Eventa Servo.
+        title: Thanks to partner technology companies
+      registered_events: registered events
+      registered_users: registered users
+      tagline: The system to publicize Esperanto events worldwide!
+      title: Eventa Servo
+      uea_tejo:
+        p1_html: Eventa Servo belongs to %{uea_link} with support from %{tejo_link}.
+        p2: Both organizations encourage the use of Eventa Servo to inform the Esperanto community about international, national, and local events, congresses, meetings, gatherings, etc.
+        title: UEA and TEJO
     ads:
       alt: Advertisement
   international_calendar:
