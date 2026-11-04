@@ -12,10 +12,60 @@ class Rack::Attack
   end
 
   # List of blocked subnets (add problematic subnets here)
-  # Example: "47.79.0.0/16" blocks all IPs 47.79.x.x
+  # Example: "47.79.0.0/16" blocks all IPs of 47.79.x.x
   BLOCKED_SUBNETS = [
     # "47.79.0.0/16", # Uncomment to block this range
   ].freeze
+
+  # Legitimate search/AI crawlers. They are never blocked for reading the
+  # calendar: blocking them costs SEO and link previews. Their volume is
+  # contained by a shared bucket per family instead (see below), so the number
+  # of IPs a crawler uses does not matter.
+  CRAWLER_FAMILIES = {
+    "meta" => /meta-webindexer|meta-externalagent/i,
+    "google" => /googlebot/i,
+    "bing" => /bingbot/i,
+    "apple" => /applebot/i,
+    "yandex" => /yandexbot/i
+  }.freeze
+
+  # Requests per minute shared by every IP of one crawler family.
+  # Calibrated from the NPM logs: production peaks are 41/min (Meta),
+  # 43/min (Google), 15/min (Bing) and 10/min (Apple); staging reaches 207/min.
+  CRAWLER_LIMIT = 120
+
+  # Scanner thresholds (requests in 10 minutes, per IP). A legitimate crawler
+  # gets a much higher allowance, but it is still counted: a spoofed
+  # User-Agent must not be able to skip the scanner rule entirely.
+  HOME_SCANNER_THRESHOLD = 30
+  CRAWLER_HOME_THRESHOLD = 300
+
+  # Returns the crawler family for a User-Agent, or nil for anything else.
+  #
+  # @param user_agent [String, nil] the request User-Agent
+  # @return [String, nil] family key such as "meta" or "google"
+  def self.crawler_family(user_agent)
+    return nil if user_agent.to_s.empty?
+
+    CRAWLER_FAMILIES.each { |family, pattern| return family if pattern.match?(user_agent) }
+    nil
+  end
+
+  # Whether the path is the home page, localized or not ("/", "/eo", "/pt_BR").
+  #
+  # @param path [String] request path
+  # @return [Boolean]
+  def self.localized_home?(path)
+    path.match?(%r{\A/(?:eo|en|pt_BR)?/?\z})
+  end
+
+  # Whether the path is an event page, localized or not ("/e/abc", "/en/e/abc").
+  #
+  # @param path [String] request path
+  # @return [Boolean]
+  def self.localized_event?(path)
+    path.match?(%r{\A/(?:(?:eo|en|pt_BR)/)?e/[^/]+\z})
+  end
 
   # Allow localhost
   safelist("allow-localhost") do |req|
@@ -55,28 +105,50 @@ class Rack::Attack
   #
   blocklist("block home scanners without event visits") do |req|
     ip = real_ip(req)
+    cache = Rack::Attack.cache.store
+    # Crawler and human counters are kept apart on purpose: a legitimate
+    # crawler must never push a human visitor's counter to the ban threshold,
+    # especially behind a shared address (CDN PoP or NAT). The User-Agent can
+    # be spoofed, so the crawler bucket still counts and can be banned — it
+    # just cannot ban humans sharing the same IP.
+    bucket = crawler_family(req.user_agent) ? "c" : "h"
+    ban_key = "banned:#{bucket}:#{ip}"
+    scan_key = "scan:#{bucket}:#{ip}"
+    visit_key = "ev:#{bucket}:#{ip}"
 
-    if req.path == "/" && req.params.key?("date")
+    if localized_home?(req.path) && req.params.key?("date")
       # Check active ban first (persists 1h independently of the 10min counter)
-      if Rails.cache.read("banned:#{ip}")
+      if cache.read(ban_key)
         Rails.logger.warn "[Rack::Attack] Blocked (already banned) #{ip} - #{req.path}"
         true
       else
-        count = Rails.cache.increment("scan:#{ip}", 1, expires_in: 10.minutes) || 1
-        visited_event = Rails.cache.read("ev:#{ip}")
-        if count >= 30 && !visited_event
+        count = cache.increment(scan_key, 1, expires_in: 10.minutes) || 1
+        visited_event = cache.read(visit_key)
+        threshold = (bucket == "c") ? CRAWLER_HOME_THRESHOLD : HOME_SCANNER_THRESHOLD
+        if count >= threshold && !visited_event
           # Persist 1-hour ban so it survives the counter window rolling over
-          Rails.cache.write("banned:#{ip}", true, expires_in: 1.hour)
-          Rails.logger.warn "[Rack::Attack] Blocked (scanner threshold) #{ip} - #{count} home requests, no event visit - banned for 1h"
+          cache.write(ban_key, true, expires_in: 1.hour)
+          Rails.logger.warn "[Rack::Attack] Blocked (scanner threshold) #{ip} bucket=#{bucket} - #{count} home requests, no event visit - banned for 1h"
           true
         end
       end
-    elsif req.path.match?(/\A\/e\/[^\/]+\z/)
-      # If the IP was banned, visiting an event page clears the ban
-      Rails.cache.delete("banned:#{ip}")
-      Rails.cache.write("ev:#{ip}", true, expires_in: 1.hour)
+    elsif localized_event?(req.path)
+      # If this bucket was banned, visiting an event page clears the ban
+      cache.delete(ban_key)
+      cache.write(visit_key, true, expires_in: 1.hour)
       false
     end
+  end
+
+  # ============================================
+  # Crawler volume (legitimate crawlers)
+  # ============================================
+  #
+  # One bucket per family, shared by every IP the crawler uses. This keeps the
+  # calendar readable for search engines while stopping a single crawler from
+  # consuming the origin. Limit calibrated from the NPM access logs.
+  throttle("crawler volume", limit: CRAWLER_LIMIT, period: 60) do |req|
+    crawler_family(req.user_agent)
   end
 
   # ============================================
