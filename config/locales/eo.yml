@@ -340,6 +340,7 @@ eo:
       duplicate_notice: "* La mapo aperigas nur la unuan venontan eventon, se temas pri evento en la sama loko kun la sama titolo"
     my_events: Eventoj
     nearby: Proksima
+    nearby_breakdown: "%{city_count} en %{city} · %{nearby_count} ene de %{radius} km ĉirkaŭe"
     online: Reta
     online_event: Reta evento
     options:

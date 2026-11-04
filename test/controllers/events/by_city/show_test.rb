@@ -175,6 +175,46 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "card view shows breakdown line under count heading when nearby events exist" do
+    setup_nearby_events
+
+    get_copenhagen
+
+    assert_response :success
+    assert_select "p", text: "1 en Kopenhago · 1 ene de 50 km ĉirkaŭe"
+  end
+
+  test "breakdown line is localized according to current locale for authenticated admin" do
+    setup_nearby_events
+    denmark = countries(:denmark)
+    sign_in users(:admin_user)
+    cookies[:vidmaniero] = "kartaro"
+
+    get events_by_city_url(locale: "en", continent: denmark.continent.normalized,
+      country_name: denmark.name.normalized,
+      city_name: "Kopenhago")
+
+    assert_response :success
+    assert_select "p", text: "1 in Kopenhago · 1 within 50 km around"
+
+    get events_by_city_url(locale: "pt_BR", continent: denmark.continent.normalized,
+      country_name: denmark.name.normalized,
+      city_name: "Kopenhago")
+
+    assert_response :success
+    assert_select "p", text: "1 em Kopenhago · 1 em até 50 km ao redor"
+  end
+
+  test "card view hides breakdown line when all upcoming events belong to the target city" do
+    denmark = countries(:denmark)
+    create_geo_event(title: "Copenhagen Local Event", city: "Kopenhago", country: denmark, latitude: 55.6761, longitude: 12.5683)
+
+    get_copenhagen
+
+    assert_response :success
+    assert_select "p", text: /ene de 50 km ĉirkaŭe/, count: 0
+  end
+
   test "card view excludes cities farther than the 50 km radius" do
     setup_nearby_events
 
@@ -205,6 +245,7 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
     assert_not_includes response.body, @malmo_event.title
     assert_not_includes response.body, @naestved_event.title
     assert_select "a", text: I18n.t("events.show_nearby")
+    assert_select "p", text: /ene de 50 km ĉirkaŭe/, count: 0
   end
 
   test "nearby toggle preserves active filters in the URL" do

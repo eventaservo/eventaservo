@@ -340,6 +340,7 @@ pt_BR:
       duplicate_notice: "* O mapa exibe apenas o primeiro evento futuro quando múltiplos eventos ocorrem no mesmo local com o mesmo título"
     my_events: Eventos
     nearby: Próximo
+    nearby_breakdown: "%{city_count} em %{city} · %{nearby_count} em até %{radius} km ao redor"
     online: Online
     online_event: Evento online
     options:

@@ -33,9 +33,24 @@ class Events::ByCityController < ApplicationController
     @events = @events.not_today(current_timezone).in_cities(cities)
 
     setup_card_pagination
+    setup_nearby_breakdown
   end
 
   private
+
+  # Computes the count breakdown between the target city and nearby cities
+  # for the upcoming events card view when nearby discovery is active.
+  #
+  # @return [void]
+  def setup_nearby_breakdown
+    return unless @card_view && @include_nearby && @nearby_cities.present?
+
+    target_city_scope = [[params[:city_name], @country.id]]
+    @target_city_events_count = build_events_scope.not_today(current_timezone).in_cities(target_city_scope).count
+    @nearby_events_count = @kvanto_venontaj_eventoj.to_i - @target_city_events_count
+    @nearby_radius_km = Events::NearbyCitiesQuery::DEFAULT_RADIUS_KM
+    @target_city_name = Event.by_city(params[:city_name]).by_country_id(@country.id).order(:id).pick(:city) || params[:city_name]
+  end
 
   # Sets up the nearby-cities assigns used by the card view.
   #
