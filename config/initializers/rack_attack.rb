@@ -34,6 +34,12 @@ class Rack::Attack
   # 43/min (Google), 15/min (Bing) and 10/min (Apple); staging reaches 207/min.
   CRAWLER_LIMIT = 120
 
+  # Scanner thresholds (requests in 10 minutes, per IP). A legitimate crawler
+  # gets a much higher allowance, but it is still counted: a spoofed
+  # User-Agent must not be able to skip the scanner rule entirely.
+  HOME_SCANNER_THRESHOLD = 30
+  CRAWLER_HOME_THRESHOLD = 300
+
   # Returns the crawler family for a User-Agent, or nil for anything else.
   #
   # @param user_agent [String, nil] the request User-Agent
@@ -51,6 +57,14 @@ class Rack::Attack
   # @return [Boolean]
   def self.localized_home?(path)
     path.match?(%r{\A/(?:eo|en|pt_BR)?/?\z})
+  end
+
+  # Whether the path is an event page, localized or not ("/e/abc", "/en/e/abc").
+  #
+  # @param path [String] request path
+  # @return [Boolean]
+  def self.localized_event?(path)
+    path.match?(%r{\A/(?:(?:eo|en|pt_BR)/)?e/[^/]+\z})
   end
 
   # Allow localhost
@@ -93,7 +107,7 @@ class Rack::Attack
     ip = real_ip(req)
     cache = Rack::Attack.cache.store
 
-    if localized_home?(req.path) && req.params.key?("date") && crawler_family(req.user_agent).nil?
+    if localized_home?(req.path) && req.params.key?("date")
       # Check active ban first (persists 1h independently of the 10min counter)
       if cache.read("banned:#{ip}")
         Rails.logger.warn "[Rack::Attack] Blocked (already banned) #{ip} - #{req.path}"
@@ -101,14 +115,17 @@ class Rack::Attack
       else
         count = cache.increment("scan:#{ip}", 1, expires_in: 10.minutes) || 1
         visited_event = cache.read("ev:#{ip}")
-        if count >= 30 && !visited_event
+        # A crawler User-Agent can be spoofed, so it only raises the bar; it
+        # does not exempt the request from being counted.
+        threshold = crawler_family(req.user_agent) ? CRAWLER_HOME_THRESHOLD : HOME_SCANNER_THRESHOLD
+        if count >= threshold && !visited_event
           # Persist 1-hour ban so it survives the counter window rolling over
           cache.write("banned:#{ip}", true, expires_in: 1.hour)
           Rails.logger.warn "[Rack::Attack] Blocked (scanner threshold) #{ip} - #{count} home requests, no event visit - banned for 1h"
           true
         end
       end
-    elsif req.path.match?(/\A\/e\/[^\/]+\z/)
+    elsif localized_event?(req.path)
       # If the IP was banned, visiting an event page clears the ban
       cache.delete("banned:#{ip}")
       cache.write("ev:#{ip}", true, expires_in: 1.hour)

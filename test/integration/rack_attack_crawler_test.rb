@@ -15,8 +15,14 @@ class RackAttackCrawlerTest < ActionDispatch::IntegrationTest
 
   setup do
     # The test environment uses :null_store, which would make Rack::Attack
-    # counters invisible. Give it a real in-memory store per test.
+    # counters invisible. Give it a real in-memory store per test and restore
+    # the original afterwards so later tests are not affected.
+    @previous_store = Rack::Attack.cache.store
     Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new
+  end
+
+  teardown do
+    Rack::Attack.cache.store = @previous_store
   end
 
   test "detects the crawler family from the user agent" do
@@ -33,6 +39,24 @@ class RackAttackCrawlerTest < ActionDispatch::IntegrationTest
     assert Rack::Attack.localized_home?("/pt_BR")
     refute Rack::Attack.localized_home?("/e/0c9e59")
     refute Rack::Attack.localized_home?("/eo/europo")
+  end
+
+  test "recognizes event pages with and without locale" do
+    assert Rack::Attack.localized_event?("/e/0c9e59")
+    assert Rack::Attack.localized_event?("/eo/e/0c9e59")
+    assert Rack::Attack.localized_event?("/en/e/0c9e59")
+    assert Rack::Attack.localized_event?("/pt_BR/e/0c9e59")
+    refute Rack::Attack.localized_event?("/eo")
+    refute Rack::Attack.localized_event?("/eo/e")
+    refute Rack::Attack.localized_event?("/e/0c9e59/edito")
+  end
+
+  test "a localized event visit clears the scanner ban" do
+    Rack::Attack.cache.store.write("banned:203.0.113.9", true, expires_in: 1.hour)
+
+    get "/en/e/0c9e59", headers: {"User-Agent" => HUMAN_UA, "CF-Connecting-IP" => "203.0.113.9"}
+
+    assert_nil Rack::Attack.cache.store.read("banned:203.0.113.9")
   end
 
   test "throttles a crawler family after the limit and sends Retry-After" do
@@ -70,11 +94,19 @@ class RackAttackCrawlerTest < ActionDispatch::IntegrationTest
     assert_response :forbidden
   end
 
-  test "does not block a legitimate crawler with the home scanner rule" do
-    Rack::Attack.cache.store.write("scan:203.0.113.6", 29, expires_in: 10.minutes)
+  test "a crawler user agent gets a higher threshold but is still counted" do
+    Rack::Attack.cache.store.write("scan:203.0.113.6", 298, expires_in: 10.minutes)
 
     get "/eo?date=2026-01-01", headers: {"User-Agent" => META_UA, "CF-Connecting-IP" => "203.0.113.6"}
 
-    refute_equal 403, response.status
+    assert_not_equal 403, response.status
+  end
+
+  test "a spoofed crawler user agent still hits the scanner rule at the higher threshold" do
+    Rack::Attack.cache.store.write("scan:203.0.113.10", 299, expires_in: 10.minutes)
+
+    get "/eo?date=2026-01-01", headers: {"User-Agent" => META_UA, "CF-Connecting-IP" => "203.0.113.10"}
+
+    assert_response :forbidden
   end
 end
