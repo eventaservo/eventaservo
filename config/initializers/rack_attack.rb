@@ -106,29 +106,36 @@ class Rack::Attack
   blocklist("block home scanners without event visits") do |req|
     ip = real_ip(req)
     cache = Rack::Attack.cache.store
+    # Crawler and human counters are kept apart on purpose: a legitimate
+    # crawler must never push a human visitor's counter to the ban threshold,
+    # especially behind a shared address (CDN PoP or NAT). The User-Agent can
+    # be spoofed, so the crawler bucket still counts and can be banned — it
+    # just cannot ban humans sharing the same IP.
+    bucket = crawler_family(req.user_agent) ? "c" : "h"
+    ban_key = "banned:#{bucket}:#{ip}"
+    scan_key = "scan:#{bucket}:#{ip}"
+    visit_key = "ev:#{bucket}:#{ip}"
 
     if localized_home?(req.path) && req.params.key?("date")
       # Check active ban first (persists 1h independently of the 10min counter)
-      if cache.read("banned:#{ip}")
+      if cache.read(ban_key)
         Rails.logger.warn "[Rack::Attack] Blocked (already banned) #{ip} - #{req.path}"
         true
       else
-        count = cache.increment("scan:#{ip}", 1, expires_in: 10.minutes) || 1
-        visited_event = cache.read("ev:#{ip}")
-        # A crawler User-Agent can be spoofed, so it only raises the bar; it
-        # does not exempt the request from being counted.
-        threshold = crawler_family(req.user_agent) ? CRAWLER_HOME_THRESHOLD : HOME_SCANNER_THRESHOLD
+        count = cache.increment(scan_key, 1, expires_in: 10.minutes) || 1
+        visited_event = cache.read(visit_key)
+        threshold = (bucket == "c") ? CRAWLER_HOME_THRESHOLD : HOME_SCANNER_THRESHOLD
         if count >= threshold && !visited_event
           # Persist 1-hour ban so it survives the counter window rolling over
-          cache.write("banned:#{ip}", true, expires_in: 1.hour)
-          Rails.logger.warn "[Rack::Attack] Blocked (scanner threshold) #{ip} - #{count} home requests, no event visit - banned for 1h"
+          cache.write(ban_key, true, expires_in: 1.hour)
+          Rails.logger.warn "[Rack::Attack] Blocked (scanner threshold) #{ip} bucket=#{bucket} - #{count} home requests, no event visit - banned for 1h"
           true
         end
       end
     elsif localized_event?(req.path)
-      # If the IP was banned, visiting an event page clears the ban
-      cache.delete("banned:#{ip}")
-      cache.write("ev:#{ip}", true, expires_in: 1.hour)
+      # If this bucket was banned, visiting an event page clears the ban
+      cache.delete(ban_key)
+      cache.write(visit_key, true, expires_in: 1.hour)
       false
     end
   end

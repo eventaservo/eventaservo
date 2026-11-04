@@ -52,11 +52,11 @@ class RackAttackCrawlerTest < ActionDispatch::IntegrationTest
   end
 
   test "a localized event visit clears the scanner ban" do
-    Rack::Attack.cache.store.write("banned:203.0.113.9", true, expires_in: 1.hour)
+    Rack::Attack.cache.store.write("banned:h:203.0.113.9", true, expires_in: 1.hour)
 
     get "/en/e/0c9e59", headers: {"User-Agent" => HUMAN_UA, "CF-Connecting-IP" => "203.0.113.9"}
 
-    assert_nil Rack::Attack.cache.store.read("banned:203.0.113.9")
+    assert_nil Rack::Attack.cache.store.read("banned:h:203.0.113.9")
   end
 
   test "throttles a crawler family after the limit and sends Retry-After" do
@@ -87,7 +87,7 @@ class RackAttackCrawlerTest < ActionDispatch::IntegrationTest
   end
 
   test "blocks a localized home scanner that never visits an event" do
-    Rack::Attack.cache.store.write("scan:203.0.113.5", 29, expires_in: 10.minutes)
+    Rack::Attack.cache.store.write("scan:h:203.0.113.5", 29, expires_in: 10.minutes)
 
     get "/eo?date=2026-01-01", headers: {"User-Agent" => HUMAN_UA, "CF-Connecting-IP" => "203.0.113.5"}
 
@@ -95,15 +95,23 @@ class RackAttackCrawlerTest < ActionDispatch::IntegrationTest
   end
 
   test "a crawler user agent gets a higher threshold but is still counted" do
-    Rack::Attack.cache.store.write("scan:203.0.113.6", 298, expires_in: 10.minutes)
+    Rack::Attack.cache.store.write("scan:c:203.0.113.6", 298, expires_in: 10.minutes)
 
     get "/eo?date=2026-01-01", headers: {"User-Agent" => META_UA, "CF-Connecting-IP" => "203.0.113.6"}
 
     assert_not_equal 403, response.status
   end
 
+  test "crawler traffic does not count towards the human threshold" do
+    Rack::Attack.cache.store.write("scan:c:203.0.113.11", 200, expires_in: 10.minutes)
+
+    get "/eo?date=2026-01-01", headers: {"User-Agent" => HUMAN_UA, "CF-Connecting-IP" => "203.0.113.11"}
+
+    assert_not_equal 403, response.status
+  end
+
   test "a spoofed crawler user agent still hits the scanner rule at the higher threshold" do
-    Rack::Attack.cache.store.write("scan:203.0.113.10", 299, expires_in: 10.minutes)
+    Rack::Attack.cache.store.write("scan:c:203.0.113.10", 299, expires_in: 10.minutes)
 
     get "/eo?date=2026-01-01", headers: {"User-Agent" => META_UA, "CF-Connecting-IP" => "203.0.113.10"}
 
