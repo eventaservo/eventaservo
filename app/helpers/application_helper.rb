@@ -161,21 +161,13 @@ module ApplicationHelper
     end
   end
 
-  # Simpligas la eventajn datojn
+  # Formats the event date or date range for display.
+  #
+  # @param event [Event] the event to display
+  #
+  # @return [String] the localized date label
   def event_date(event)
-    ds = event.komenca_dato
-    de = event.fina_dato
-    return format_date(ds) if event.samtaga?
-
-    if de.year == ds.year # Samjara
-      if de.month == ds.month # Sammonata
-        "#{ds.day} - #{de.day} #{l(de, format: "%B %Y")}"
-      else # malsammonata
-        "#{l(ds, format: "%e %B")} - #{l(de, format: "%e %B %Y")}"
-      end
-    else # malsamjara
-      "#{l(ds, format: "%e %B %Y").strip} - #{l(de, format: "%e %B %Y").strip}"
-    end
+    EventPresenter.new(event:).date_label
   end
 
   # Elektas la eventkoloron
