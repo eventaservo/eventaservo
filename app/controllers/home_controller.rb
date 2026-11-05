@@ -2,6 +2,7 @@
 
 class HomeController < ApplicationController
   include CalendarData
+  include FilterCanonicalization
 
   before_action :set_default_view_mode, only: :index
 
