@@ -3,6 +3,9 @@
 require "test_helper"
 
 class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
+  setup do
+    host! "localhost"
+  end
   test "pasintaj=1 lists past events for the city" do
     country = countries(:denmark)
     recent = events(:past_event_danio_recent)
@@ -226,51 +229,41 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
     assert_not_includes response.body, @naestved_event.title
   end
 
-  test "card view shows a link to hide nearby events with nearby=0" do
+  test "card view shows a link to hide nearby events pointing to /nearby/off" do
     setup_nearby_events
 
     get_copenhagen
 
     assert_response :success
-    assert_select "a[href*='nearby=0']", text: I18n.t("events.hide_nearby")
+    assert_select "a[href='/nearby/off']", text: I18n.t("events.hide_nearby")
   end
 
-  test "nearby=0 hides nearby events and shows a link to reveal them" do
+  test "nearby cookie=0 hides nearby events and shows a link to reveal them" do
     setup_nearby_events
 
-    get_copenhagen(nearby: 0)
+    cookies[:nearby] = "0"
+    get_copenhagen
 
     assert_response :success
     assert_includes response.body, @copenhagen_event.title
     assert_not_includes response.body, @malmo_event.title
     assert_not_includes response.body, @naestved_event.title
-    assert_select "a", text: I18n.t("events.show_nearby")
+    assert_select "a[href='/nearby/on']", text: I18n.t("events.show_nearby")
     assert_select "p", text: /ene de 50 km ĉirkaŭe/, count: 0
   end
 
-  test "nearby toggle preserves active filters in the URL" do
+  test "nearby cookie persists hiding preference across city page visits" do
     setup_nearby_events
 
-    get_copenhagen(periodo: "estontece", o: "uea", s: "1,2", t: "unutaga")
+    cookies[:nearby] = "0"
+    get_copenhagen
 
     assert_response :success
-    assert_select "a", text: I18n.t("events.hide_nearby") do |links|
-      href = links.first["href"]
-      assert_includes href, "nearby=0"
-      assert_includes href, "periodo=estontece"
-      assert_includes href, "o=uea"
-      assert_includes href, "s=1%2C2"
-      assert_includes href, "t=unutaga"
-    end
-  end
+    assert_not_includes response.body, @malmo_event.title
 
-  test "filter badge links preserve nearby=0 when nearby events are hidden" do
-    setup_nearby_events
-
-    get_copenhagen(nearby: 0)
-
-    assert_response :success
-    assert_select "a.badge[href*='nearby=0']"
+    # Visiting the same city page again still respects the cookie
+    get_copenhagen
+    assert_not_includes response.body, @malmo_event.title
   end
 
   test "map view does not include nearby events" do
@@ -345,12 +338,13 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
   #
   # @return [void]
   def get_copenhagen(view_mode: "kartaro", **query_params)
+    cookies[:vidmaniero] = view_mode
     country = countries(:denmark)
     get events_by_city_url(
       continent: country.continent.normalized,
       country_name: country.name.normalized,
       city_name: "kopenhago",
       **query_params
-    ), headers: {"HTTP_COOKIE" => "vidmaniero=#{view_mode}"}
+    )
   end
 end

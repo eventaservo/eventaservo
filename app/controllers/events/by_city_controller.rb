@@ -54,13 +54,14 @@ class Events::ByCityController < ApplicationController
 
   # Sets up the nearby-cities assigns used by the card view.
   #
-  # Nearby events are shown by default and hidden with +?nearby=0+. They only
-  # apply to the card view; the map view stays scoped to the target city.
+  # Nearby events are shown by default (opt-out model) and hidden when
+  # +cookies[:nearby]+ is set to +"0"+. They only apply to the card view;
+  # the map view stays scoped to the target city.
   #
   # @return [void]
   def setup_nearby_cities
     @card_view = cookies[:vidmaniero].in?(%w[kartoj kartaro])
-    @include_nearby = params[:nearby] != "0"
+    @include_nearby = cookies[:nearby] != "0"
     @nearby_cities = @card_view ? Events::NearbyCitiesQuery.new(city_name: params[:city_name], country_id: @country.id).call : []
   end
 

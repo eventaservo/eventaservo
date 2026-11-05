@@ -28,9 +28,6 @@ module EventsHelper
     end
   end
 
-  # Query parameters preserved when toggling the nearby-events visibility.
-  NEARBY_TOGGLE_PRESERVED_PARAMS = %w[periodo o s t].freeze
-
   # Whether the event belongs to a nearby city rather than the page's city.
   #
   # Only meaningful on the by-city page, where +@nearby_cities+ is assigned and
@@ -45,22 +42,16 @@ module EventsHelper
     event.country_id != @country.id || event.city.to_s.normalized != params[:city_name].normalized
   end
 
-  # Path that toggles nearby events on the by-city page, preserving the active
-  # listing filters (+periodo+, +o+, +s+, +t+).
+  # Path to the nearby-cookie toggle route.
+  #
+  # Routes to +/nearby/off+ when nearby events are currently shown (to hide
+  # them) and to +/nearby/on+ when they are hidden (to show them again).
   #
   # @param include_nearby [Boolean] whether nearby events are currently shown
   #
   # @return [String]
-  def nearby_toggle_path(include_nearby:)
-    filters = request.query_parameters.slice(*NEARBY_TOGGLE_PRESERVED_PARAMS).symbolize_keys
-
-    events_by_city_path(
-      continent: params[:continent],
-      country_name: params[:country_name],
-      city_name: params[:city_name],
-      **filters,
-      nearby: (include_nearby ? 0 : nil)
-    )
+  def nearby_toggle_link_path(include_nearby:)
+    nearby_toggle_path(state: include_nearby ? "off" : "on")
   end
 
   def event_flag(event)

@@ -3,9 +3,13 @@
 </h5>
 
 <% if events.count > 0 && @nearby_events_count.to_i > 0 %>
-  <p class="text-center text-muted small mb-3">
+  <p class="text-center text-muted small mb-1">
     <%= t("events.nearby_breakdown", city_count: @target_city_events_count, city: @target_city_name, nearby_count: @nearby_events_count, radius: @nearby_radius_km) %>
   </p>
+<% end %>
+
+<% if @card_view && @nearby_cities.present? %>
+  <%= render partial: "events/nearby_events_toggle", locals: {include_nearby: @include_nearby} %>
 <% end %>
 
 <% events.grouped_by_months.each do |date, events| %>

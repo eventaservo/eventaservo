@@ -59,11 +59,11 @@ class HomeHelperTest < ActionView::TestCase
   end
 
   test "returns only the supported filters, permitted for reuse" do
-    @controller.params = ActionController::Parameters.new(o: "esperanto", periodo: "estontece", nearby: "0", pasintaj: "true")
+    @controller.params = ActionController::Parameters.new(o: "esperanto", periodo: "estontece", pasintaj: "true")
 
     result = active_filters
 
-    assert_equal({"o" => "esperanto", "periodo" => "estontece", "nearby" => "0"}, result.to_h)
+    assert_equal({"o" => "esperanto", "periodo" => "estontece"}, result.to_h)
     assert result.permitted?
   end
 

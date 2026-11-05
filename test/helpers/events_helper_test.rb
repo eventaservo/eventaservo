@@ -104,4 +104,9 @@ class EventsHelperTest < ActionView::TestCase
     assert event_nearby?(events(:past_event_danio_older))
     assert event_nearby?(events(:valid_event))
   end
+
+  test "nearby_toggle_link_path routes to /nearby/off when shown and /nearby/on when hidden" do
+    assert_equal "/nearby/off", nearby_toggle_link_path(include_nearby: true)
+    assert_equal "/nearby/on", nearby_toggle_link_path(include_nearby: false)
+  end
 end

@@ -148,6 +148,17 @@ class HomeController < ApplicationController
     redirect_to root_path
   end
 
+  # Persists the user's nearby-cities display preference as a cookie.
+  #
+  # Writes +cookies[:nearby]+ with a 2-week expiry and redirects back to the
+  # referring page. Accepts +/nearby/on+ (show) and +/nearby/off+ (hide).
+  #
+  # @return [void]
+  def nearby
+    cookies[:nearby] = {value: (params[:state] == "on") ? "1" : "0", expires: 2.weeks, secure: true}
+    redirect_back_or_to root_path
+  end
+
   def search
     @search_term = params[:query]&.strip
     if @search_term.blank? || @search_term.length < 3

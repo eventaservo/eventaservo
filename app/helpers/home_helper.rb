@@ -19,9 +19,9 @@ module HomeHelper
   # back to the URL helpers (for example to keep the current filters while
   # dropping one of them).
   #
-  # @return [ActionController::Parameters] permitted +o+, +periodo+, +s+, and +nearby+ params
+  # @return [ActionController::Parameters] permitted +o+, +periodo+, and +s+ params
   def active_filters
-    params.permit(:o, :periodo, :s, :nearby)
+    params.permit(:o, :periodo, :s)
   end
 
   # Returns the display label of an events period filter.

@@ -334,7 +334,7 @@ en:
     happening_now_count:
       one: "%{count} happening now"
       other: "%{count} happening now"
-    hide_nearby: Hide nearby events
+    hide_nearby: Hide events from nearby cities
     international_event: International Event
     map:
       duplicate_notice: "* The map shows only the first upcoming event when multiple events occur at the same location with the same title"
@@ -386,7 +386,7 @@ en:
       share_via_email: Share via email
       share_via_whatsapp: Share via WhatsApp
       title: Share
-    show_nearby: Show nearby events
+    show_nearby: Show events from nearby cities
     show_past: Past events
     timezone:
       same_as_yours: Same as your timezone

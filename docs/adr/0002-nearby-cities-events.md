@@ -19,9 +19,10 @@ We adopt a two-stage spatial search with caching for nearby city events in the b
    - Configured as `DEFAULT_RADIUS_KM = 50` in `Events::NearbyCitiesQuery`, accepting an optional `radius_km:` parameter for testability and flexibility.
    - UI copy and badges remain generic (`Proksima` / `Nearby` / `Próximo`) without hardcoding numbers in translated strings.
 
-2. **English Naming & URL Conventions**:
-   - All code, method names, variable names, documentation, and URL parameters are strictly in English.
-   - The query parameter for toggling nearby events is `nearby` (e.g., `?nearby=0` to hide nearby events, omitted or `?nearby=1` to show them).
+2. **English Naming & Preference Persistence via Cookie**:
+   - All code, method names, variable names, documentation, and technical endpoints are strictly in English.
+   - User preference for nearby events is stored in a 2-week cookie (`cookies[:nearby]`), following an opt-out model (shown by default, hidden when `cookies[:nearby] == "0"`).
+   - Toggling is handled via dedicated technical endpoints `/nearby/on` and `/nearby/off`, redirecting back to the referring page. This avoids cluttering URLs with query parameters and eliminates the need to propagate state across filter badges.
 
 3. **Two-Stage Spatial Query (`Events::NearbyCitiesQuery`)**:
    - **Reference Point**: The target city's representative coordinate is determined by its first event with valid coordinates (`Event.by_city(...).by_country_id(...).where.not(latitude: nil).order(:id).pick(:latitude, :longitude)`).
@@ -35,8 +36,8 @@ We adopt a two-stage spatial search with caching for nearby city events in the b
    - Past events (`pasintaj=1`) and map view (`mapo`) strictly remain focused on the target city only.
    - Query preserves timezone-awareness on `origin/main` using `venontaj(current_timezone)`.
 
-5. **Filter Preservation**:
-   - The nearby toggle link preserves all existing URL query parameters (`params.permit(...).merge(nearby: ...)`), preventing filter loss (e.g., preserving `periodo`, `o`, `s`, `t`).
+5. **Filter & State Independence**:
+   - Because preference is cookie-persisted, browsing filters (`periodo`, `o`, `s`, `t`) operate independently without needing to propagate `nearby` parameters through badges or links.
 
 6. **Database Schema**:
    - Includes a composite index on `events(latitude, longitude)` for efficient spatial bounding box range queries.
@@ -47,7 +48,7 @@ We adopt a two-stage spatial search with caching for nearby city events in the b
 - Substantially improves event discovery for users in metropolitan regions and border areas (e.g., Copenhagen/Malmö, border cities in Central Europe, neighboring Brazilian cities) within a realistic travel radius of 50 km.
 - High query performance: fast indexed SQL bounding box combined with in-memory Haversine refinement and 12-hour caching.
 - Zero filter disruption: users can refine by category, organization, or timeframe without losing nearby toggle state or vice-versa.
-- Clean English API and URL surface (`?nearby=0`).
+- Clean URLs without query parameter pollution; preference persists across sessions and navigation.
 - Mathematically robust handling of edge cases, including cities near the ±180° antimeridian.
 
 ### Negative / Trade-offs
