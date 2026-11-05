@@ -15,6 +15,19 @@ class HomeController < ApplicationController
       @future_events = @future_events.joins(:organizations).where("organizations.short_name = ?", params[:o])
     end
 
+    # Four COUNT queries per request; the numbers change slowly, so cache them.
+    @event_counts = Rails.cache.fetch(
+      ["home_event_counts_v1", current_timezone, params[:o], Date.current],
+      expires_in: 5.minutes
+    ) do
+      {
+        today: @future_events.today(current_timezone).count,
+        in_7days: @future_events.in_7days(current_timezone).count,
+        in_30days: @future_events.in_30days(current_timezone).count,
+        after_30days: @future_events.after_30days(current_timezone).count
+      }
+    end
+
     cache_key = ["continent_counts", params.permit(:o, :s, :t, :periodo).to_h, Event.maximum(:updated_at),
       current_timezone, (current_timezone ? Time.current.in_time_zone(current_timezone).to_date : Date.current)]
     @continents = Rails.cache.fetch(cache_key, expires_in: 1.hour) do
@@ -30,7 +43,10 @@ class HomeController < ApplicationController
       @events = @events.not_today(current_timezone).includes(:country, :organizations, :tags)
     end
 
-    @ads = Ad.with_attached_image.active.order(Arel.sql("RANDOM()")).limit(4)
+    # Ads are random per visit; caching the sampled ids keeps RANDOM() and the
+    # attachment eager load off the hot path for a minute.
+    ad_ids = Rails.cache.fetch("home_ad_ids_v1", expires_in: 1.minute) { Ad.active.pluck(:id).sample(4) }
+    @ads = Ad.with_attached_image.where(id: ad_ids).to_a.sort_by { |ad| ad_ids.index(ad.id) }
 
     return if cookies[:vidmaniero].in? %w[kalendaro mapo]
 
