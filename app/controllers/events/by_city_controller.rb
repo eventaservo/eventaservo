@@ -24,15 +24,74 @@ class Events::ByCityController < ApplicationController
       cookies[:vidmaniero] = {value: "kartaro", expires: 2.weeks, secure: true}
     end
 
+    setup_nearby_cities
+    cities = listed_city_pairs
+
     @events = build_events_scope
-    @future_events = Event.by_city(params[:city_name]).venontaj(current_timezone)
-    @today_events = @events.today(current_timezone).includes(:country).by_city(params[:city_name])
-    @events = @events.not_today(current_timezone).by_city(params[:city_name])
+    @future_events = Event.in_cities(cities).venontaj(current_timezone)
+    @today_events = @events.today(current_timezone).includes(:country).in_cities(cities)
+    @events = @events.not_today(current_timezone).in_cities(cities)
 
     setup_card_pagination
+    setup_nearby_breakdown
   end
 
   private
+
+  # Computes the count breakdown between the target city and nearby cities
+  # for the upcoming events card view when nearby discovery is active, and
+  # determines whether nearby events exist to be shown or hidden.
+  #
+  # @return [void]
+  def setup_nearby_breakdown
+    return unless @card_view && @nearby_cities.present?
+
+    if @include_nearby
+      target_city_scope = [[params[:city_name], @country.id]]
+      @target_city_events_count = build_events_scope.not_today(current_timezone).in_cities(target_city_scope).count
+      @nearby_events_count = @kvanto_venontaj_eventoj.to_i - @target_city_events_count
+      @nearby_radius_km = Events::NearbyCitiesQuery::DEFAULT_RADIUS_KM
+      @target_city_name = Event.by_city(params[:city_name]).by_country_id(@country.id).order(:id).pick(:city) || params[:city_name]
+
+      today_nearby_count = @today_events.count { |e| event_nearby?(e) }
+      @has_nearby_events = (@nearby_events_count.to_i + today_nearby_count) > 0
+    else
+      @has_nearby_events = build_events_scope.venontaj(current_timezone).in_cities(@nearby_cities).exists?
+    end
+  end
+
+  # Whether the given event belongs to a nearby city rather than the target city.
+  #
+  # @param event [Event]
+  #
+  # @return [Boolean]
+  def event_nearby?(event)
+    event.country_id != @country.id || event.city.to_s.normalized != params[:city_name].normalized
+  end
+
+  # Sets up the nearby-cities assigns used by the card view.
+  #
+  # Nearby events are shown by default (opt-out model) and hidden when
+  # +cookies[:nearby]+ is set to +"0"+. They only apply to the card view;
+  # the map view stays scoped to the target city.
+  #
+  # @return [void]
+  def setup_nearby_cities
+    @card_view = cookies[:vidmaniero].in?(%w[kartoj kartaro])
+    @include_nearby = cookies[:nearby] != "0"
+    @nearby_cities = @card_view ? Events::NearbyCitiesQuery.new(city_name: params[:city_name], country_id: @country.id).call : []
+  end
+
+  # The [city, country_id] pairs whose events are listed on the page.
+  #
+  # Always includes the target city; adds the nearby cities when the card view
+  # is active and nearby events have not been hidden.
+  #
+  # @return [Array<Array(String, Integer)>]
+  def listed_city_pairs
+    target = [[params[:city_name], @country.id]]
+    @include_nearby ? target + @nearby_cities : target
+  end
 
   # Sets up the view assigns for the past-events listing on +show+ (city).
   #

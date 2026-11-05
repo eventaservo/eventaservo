@@ -88,4 +88,25 @@ class EventsHelperTest < ActionView::TestCase
       assert_equal "Course", tag_display_name(tag)
     end
   end
+
+  test "event_nearby? returns false when nearby_cities or city_name or country is absent" do
+    event = events(:valid_event)
+
+    assert_not event_nearby?(event)
+  end
+
+  test "event_nearby? distinguishes target city from nearby cities" do
+    @country = countries(:denmark)
+    @nearby_cities = [["Aarhuso", countries(:denmark).id], ["New York", countries(:afghanistan).id]]
+    params[:city_name] = "Kopenhago"
+
+    assert_not event_nearby?(events(:past_event_danio_recent))
+    assert event_nearby?(events(:past_event_danio_older))
+    assert event_nearby?(events(:valid_event))
+  end
+
+  test "nearby_toggle_link_path routes to /nearby/off when shown and /nearby/on when hidden" do
+    assert_equal "/nearby/off", nearby_toggle_link_path(include_nearby: true)
+    assert_equal "/nearby/on", nearby_toggle_link_path(include_nearby: false)
+  end
 end

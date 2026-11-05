@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   # Technical and format endpoints
   get "/v/:view_style", to: "home#view_style", as: "view_style"
+  get "/nearby/:state", to: "home#nearby", as: "nearby_toggle", constraints: {state: /on|off/}
   get "/rss.xml", to: "home#feed", as: "events_rss"
   get "/events.json", to: "home#events"
   get "/versio", to: "home#versio", format: :json

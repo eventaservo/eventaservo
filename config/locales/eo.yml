@@ -334,10 +334,13 @@ eo:
     happening_now_count:
       one: "%{count} okazas nuntempe"
       other: "%{count} okazas nuntempe"
+    hide: kaŝi
     international_event: Internacia Evento
     map:
       duplicate_notice: "* La mapo aperigas nur la unuan venontan eventon, se temas pri evento en la sama loko kun la sama titolo"
     my_events: Eventoj
+    nearby: Proksima
+    nearby_breakdown: "%{city_count} en %{city} · %{nearby_count} ene de %{radius} km ĉirkaŭe"
     online: Reta
     online_event: Reta evento
     options:
@@ -383,7 +386,9 @@ eo:
       share_via_email: Diskonigi per retpoŝto
       share_via_whatsapp: Diskonigi per WhatsApp
       title: Diskonigilo
+    show_nearby: Montri eventojn de proksimaj urboj aŭ lokoj
     show_past: Pasintaj eventoj
+    show_upcoming: Venontaj eventoj
     timezone:
       same_as_yours: Sama kiel via horzono
     upcoming_events_count:

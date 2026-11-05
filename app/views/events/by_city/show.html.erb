@@ -12,9 +12,9 @@
     <%#= render partial: 'events/events_count' %>
     <%= render partial: 'home/filters' %>
     <%= render partial: 'events/okazantaj' %>
+    <% unless cards_view_mode? %>
+      <%= render partial: "events/past_events_toggle", locals: {past_url: past_events_listing_path} %>
+    <% end %>
     <%= display_events_by_style %>
-    <%= render partial: "events/past_events_toggle", locals: {
-      past_url: events_by_city_path(continent: params[:continent], country_name: params[:country_name], city_name: params[:city_name], pasintaj: 1)
-    } %>
   <% end %>
 </div>

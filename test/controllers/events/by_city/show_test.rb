@@ -3,6 +3,9 @@
 require "test_helper"
 
 class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
+  setup do
+    host! "localhost"
+  end
   test "pasintaj=1 lists past events for the city" do
     country = countries(:denmark)
     recent = events(:past_event_danio_recent)
@@ -157,5 +160,220 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_includes response.body, ERB::Util.html_escape(events.first.title)
+  end
+
+  test "card view shows nearby events within 50 km marked with Proksima badge" do
+    setup_nearby_events
+
+    get_copenhagen
+
+    assert_response :success
+    assert_includes response.body, @copenhagen_event.title
+    assert_includes response.body, @malmo_event.title
+    assert_select ".event-card", text: /#{@malmo_event.title}/ do
+      assert_select ".badge", text: I18n.t("events.nearby")
+    end
+    assert_select ".event-card", text: /#{@copenhagen_event.title}/ do
+      assert_select ".badge", text: I18n.t("events.nearby"), count: 0
+    end
+  end
+
+  test "card view shows breakdown line under count heading when nearby events exist" do
+    setup_nearby_events
+
+    get_copenhagen
+
+    assert_response :success
+    assert_select "p", text: "1 en Kopenhago · 1 ene de 50 km ĉirkaŭe (kaŝi)"
+  end
+
+  test "breakdown line is localized according to current locale for authenticated admin" do
+    setup_nearby_events
+    denmark = countries(:denmark)
+    sign_in users(:admin_user)
+    cookies[:vidmaniero] = "kartaro"
+
+    get events_by_city_url(locale: "en", continent: denmark.continent.normalized,
+      country_name: denmark.name.normalized,
+      city_name: "Kopenhago")
+
+    assert_response :success
+    assert_select "p", text: "1 in Kopenhago · 1 within 50 km around (hide)"
+
+    get events_by_city_url(locale: "pt_BR", continent: denmark.continent.normalized,
+      country_name: denmark.name.normalized,
+      city_name: "Kopenhago")
+
+    assert_response :success
+    assert_select "p", text: "1 em Kopenhago · 1 em até 50 km ao redor (ocultar)"
+  end
+
+  test "card view hides breakdown line when all upcoming events belong to the target city" do
+    denmark = countries(:denmark)
+    create_geo_event(title: "Copenhagen Local Event", city: "Kopenhago", country: denmark, latitude: 55.6761, longitude: 12.5683)
+
+    get_copenhagen
+
+    assert_response :success
+    assert_select "p", text: /ene de 50 km ĉirkaŭe/, count: 0
+  end
+
+  test "card view does not show nearby toggle when no upcoming events exist in nearby cities" do
+    denmark = countries(:denmark)
+    sweden = countries(:sweden)
+    create_geo_event(title: "Copenhagen Local Event", city: "Kopenhago", country: denmark, latitude: 55.6761, longitude: 12.5683)
+    past_event = create_geo_event(title: "Malmo Past Event", city: "Malmö", country: sweden, latitude: 55.6050, longitude: 13.0038)
+    past_event.update_columns(date_start: 1.month.ago, date_end: 1.month.ago + 1.day)
+
+    get_copenhagen
+
+    assert_response :success
+    assert_select "a[href='/nearby/off']", count: 0
+    assert_select "a[href='/nearby/on']", count: 0
+  end
+
+  test "card view with nearby cookie=0 does not show nearby toggle when no upcoming events exist in nearby cities" do
+    denmark = countries(:denmark)
+    sweden = countries(:sweden)
+    create_geo_event(title: "Copenhagen Local Event", city: "Kopenhago", country: denmark, latitude: 55.6761, longitude: 12.5683)
+    past_event = create_geo_event(title: "Malmo Past Event", city: "Malmö", country: sweden, latitude: 55.6050, longitude: 13.0038)
+    past_event.update_columns(date_start: 1.month.ago, date_end: 1.month.ago + 1.day)
+
+    cookies[:nearby] = "0"
+    get_copenhagen
+
+    assert_response :success
+    assert_select "a[href='/nearby/off']", count: 0
+    assert_select "a[href='/nearby/on']", count: 0
+  end
+
+  test "card view excludes cities farther than the 50 km radius" do
+    setup_nearby_events
+
+    get_copenhagen
+
+    assert_response :success
+    assert_not_includes response.body, @aarhus_event.title
+    assert_not_includes response.body, @corner_event.title
+    assert_not_includes response.body, @naestved_event.title
+  end
+
+  test "card view shows a link to hide nearby events pointing to /nearby/off" do
+    setup_nearby_events
+
+    get_copenhagen
+
+    assert_response :success
+    assert_select "a[href='/nearby/off']", text: I18n.t("events.hide")
+  end
+
+  test "nearby cookie=0 hides nearby events and shows a link to reveal them" do
+    setup_nearby_events
+
+    cookies[:nearby] = "0"
+    get_copenhagen
+
+    assert_response :success
+    assert_includes response.body, @copenhagen_event.title
+    assert_not_includes response.body, @malmo_event.title
+    assert_not_includes response.body, @naestved_event.title
+    assert_select "a[href='/nearby/on']", text: I18n.t("events.show_nearby")
+    assert_select "p", text: /ene de 50 km ĉirkaŭe/, count: 0
+  end
+
+  test "nearby cookie persists hiding preference across city page visits" do
+    setup_nearby_events
+
+    cookies[:nearby] = "0"
+    get_copenhagen
+
+    assert_response :success
+    assert_not_includes response.body, @malmo_event.title
+
+    # Visiting the same city page again still respects the cookie
+    get_copenhagen
+    assert_not_includes response.body, @malmo_event.title
+  end
+
+  test "map view does not include nearby events" do
+    setup_nearby_events
+
+    get_copenhagen(view_mode: "mapo")
+
+    assert_response :success
+    assert_includes response.body, @copenhagen_event.title
+    assert_not_includes response.body, @malmo_event.title
+    assert_select "a", text: I18n.t("events.hide"), count: 0
+  end
+
+  test "past events view does not include nearby events" do
+    setup_nearby_events
+
+    get_copenhagen(pasintaj: 1)
+
+    assert_response :success
+    assert_not_includes response.body, @malmo_event.title
+  end
+
+  private
+
+  # Seeds geo-located future events around Copenhagen for nearby-cities integration tests.
+  #
+  # @return [void]
+  def setup_nearby_events
+    denmark = countries(:denmark)
+    sweden = countries(:sweden)
+
+    @copenhagen_event = create_geo_event(title: "Copenhagen Future Meetup", city: "Kopenhago", country: denmark, latitude: 55.6761, longitude: 12.5683)
+    @malmo_event = create_geo_event(title: "Malmo Future Meetup", city: "Malmö", country: sweden, latitude: 55.6050, longitude: 13.0038)
+    @naestved_event = create_geo_event(title: "Naestved Future Meetup", city: "Næstved", country: denmark, latitude: 55.2299, longitude: 11.7609)
+    @corner_event = create_geo_event(title: "Corner Town Future Meetup", city: "Angulurbo", country: sweden, latitude: 56.6761, longitude: 14.3683)
+    @aarhus_event = create_geo_event(title: "Aarhus Future Meetup", city: "Aarhuso", country: denmark, latitude: 56.1629, longitude: 10.2039)
+  end
+
+  # Creates an event with explicit coordinates without triggering the test geocoder stub.
+  #
+  # @param title [String] Event title
+  # @param city [String] City name
+  # @param country [Country] Country record
+  # @param latitude [Float] Latitude coordinate
+  # @param longitude [Float] Longitude coordinate
+  #
+  # @return [Event]
+  def create_geo_event(title:, city:, country:, latitude:, longitude:)
+    event = Event.new(
+      title: title,
+      description: "Test event",
+      city: city,
+      country: country,
+      date_start: 1.month.from_now,
+      date_end: 1.month.from_now + 1.day,
+      time_zone: "Etc/UTC",
+      code: SecureRandom.hex(6),
+      site: "https://example.org",
+      latitude: latitude,
+      longitude: longitude,
+      user: users(:user)
+    )
+    event.instance_variable_set(:@created_from_factory, true)
+    event.save!
+    event
+  end
+
+  # Sends a GET request to the Copenhagen city page with the given view mode and query parameters.
+  #
+  # @param view_mode [String] Cookie value for +vidmaniero+
+  # @param query_params [Hash] Additional query parameters
+  #
+  # @return [void]
+  def get_copenhagen(view_mode: "kartaro", **query_params)
+    cookies[:vidmaniero] = view_mode
+    country = countries(:denmark)
+    get events_by_city_url(
+      continent: country.continent.normalized,
+      country_name: country.name.normalized,
+      city_name: "kopenhago",
+      **query_params
+    )
   end
 end

@@ -28,6 +28,65 @@ module EventsHelper
     end
   end
 
+  # URL of the past-events view for the current by-city, by-country or by-continent listing.
+  #
+  # @return [String, nil] the past-events URL, or nil when the page is not a geographic listing
+  def past_events_listing_path
+    if params[:city_name].present?
+      events_by_city_path(continent: params[:continent], country_name: params[:country_name], city_name: params[:city_name], pasintaj: 1)
+    elsif params[:country_name].present?
+      events_by_country_path(continent: params[:continent], country_name: params[:country_name], pasintaj: 1)
+    elsif params[:continent].present?
+      events_by_continent_path(continent: params[:continent], pasintaj: 1)
+    end
+  end
+
+  # URL of the upcoming-events view for the current by-city, by-country or by-continent listing.
+  #
+  # @return [String, nil] the upcoming-events URL, or nil when the page is not a geographic listing
+  def upcoming_events_listing_path
+    if params[:city_name].present?
+      events_by_city_path(continent: params[:continent], country_name: params[:country_name], city_name: params[:city_name])
+    elsif params[:country_name].present?
+      events_by_country_path(continent: params[:continent], country_name: params[:country_name])
+    elsif params[:continent].present?
+      events_by_continent_path(continent: params[:continent])
+    end
+  end
+
+  # Whether the listing is rendered as event cards (the default view mode).
+  #
+  # @return [Boolean]
+  def cards_view_mode?
+    %w[mapo kalendaro].exclude?(cookies[:vidmaniero])
+  end
+
+  # Whether the event belongs to a nearby city rather than the page's city.
+  #
+  # Only meaningful on the by-city page, where +@nearby_cities+ is assigned and
+  # the card list may contain events from the target city plus nearby cities.
+  #
+  # @param event [Event]
+  #
+  # @return [Boolean]
+  def event_nearby?(event)
+    return false if @nearby_cities.blank? || params[:city_name].blank? || @country.nil?
+
+    event.country_id != @country.id || event.city.to_s.normalized != params[:city_name].normalized
+  end
+
+  # Path to the nearby-cookie toggle route.
+  #
+  # Routes to +/nearby/off+ when nearby events are currently shown (to hide
+  # them) and to +/nearby/on+ when they are hidden (to show them again).
+  #
+  # @param include_nearby [Boolean] whether nearby events are currently shown
+  #
+  # @return [String]
+  def nearby_toggle_link_path(include_nearby:)
+    nearby_toggle_path(state: include_nearby ? "off" : "on")
+  end
+
   def event_flag(event)
     return unless event.country.code
     return if event.organizations.any? { |o| o.display_flag == false }

@@ -2,6 +2,12 @@
   <%= t("events.past_events_count", count: @pagy.count) if events.any? %>
 </h5>
 
+<% if upcoming_events_listing_path %>
+  <div class="text-center mb-3">
+    <%= link_to t("events.show_upcoming"), upcoming_events_listing_path, class: "small" %>
+  </div>
+<% end %>
+
 <% events.grouped_by_months(direction: :desc).each do |date, events_in_month| %>
   <br>
   <h3 class="text-divider"><%= l(date, format: "%B %Y") %></h3>
