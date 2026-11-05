@@ -15,19 +15,6 @@ class HomeController < ApplicationController
       @future_events = @future_events.joins(:organizations).where("organizations.short_name = ?", params[:o])
     end
 
-    # Four COUNT queries per request; the numbers change slowly, so cache them.
-    @event_counts = Rails.cache.fetch(
-      ["home_event_counts_v1", current_timezone, params[:o], Date.current],
-      expires_in: 5.minutes
-    ) do
-      {
-        today: @future_events.today(current_timezone).count,
-        in_7days: @future_events.in_7days(current_timezone).count,
-        in_30days: @future_events.in_30days(current_timezone).count,
-        after_30days: @future_events.after_30days(current_timezone).count
-      }
-    end
-
     cache_key = ["continent_counts", params.permit(:o, :s, :t, :periodo).to_h, Event.maximum(:updated_at),
       current_timezone, (current_timezone ? Time.current.in_time_zone(current_timezone).to_date : Date.current)]
     @continents = Rails.cache.fetch(cache_key, expires_in: 1.hour) do
