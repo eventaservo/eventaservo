@@ -13,6 +13,10 @@
 - Direction D: clear, functional and information-focused.
 - Palette 01, “Herança Esperanto”: retain the application's established green identity, with light backgrounds and a darker green for prominent elements.
 - The current application defines Esperanto green as `#28a745` and also uses `#00a300`. The selected palette study includes `#1e7145`, `#28a745`, `#e5f4e8`, `#f7faf7` and `#202c23`; their final roles and accessible combinations remain to be validated.
+- For the next event card redesign, the user prefers the compact C direction and wants several refinements compared before choosing one. Use a more institutional organization icon, slightly tighter spacing, and equal card heights on mobile and desktop; truncate descriptions as needed.
+- The user approved the refined C1 visual proposal with compact spacing and smaller title. During development review, they requested removing the modality badge and reducing the card height further. Long descriptions should be truncated as needed; verify the design with real content and accessibility needs during implementation.
+- The first implementation is available in development for user review. After seeing it, the user requested a slightly shorter card (232 px in development) and removal of the modality badge beside the date. Online events retain their online location information. Final visual approval of the real component is pending.
+- Preserve the existing left-border timing colors: today `#00A300`, 1–7 days `#E3A21A`, 8–30 days `#FFC40D`, more than 30 days `#2D89EF`, and past `#C0C0C0`. Other borders can follow the new design system.
 
 ## Revised first area of work
 
@@ -33,4 +37,4 @@
 
 ## Next step
 
-Decide the first extraction's scope and Lookbook availability, then plan the installation and event card component. Visual alternatives come later.
+Review the implemented C1 card in development with real event content and supported viewports.
