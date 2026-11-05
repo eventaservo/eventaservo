@@ -135,9 +135,12 @@ class ApplicationController < ActionController::Base
   # `noindex` and expose the clean path as canonical. The staging environment
   # is never indexed.
   #
+  # Crawlers commonly send `Accept: */*`, which is not `request.format.html?`,
+  # so only JSON is excluded instead of requiring an HTML format.
+  #
   # @return [void]
   def set_indexing_headers
-    return unless request.format.html?
+    return if request.format.json?
 
     filtered = IndexingPolicy.filtered?(params)
     tag = IndexingPolicy.robots_tag(environment: Rails.env.to_s, filtered:)

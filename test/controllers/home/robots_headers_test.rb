@@ -41,6 +41,12 @@ class HomeController::RobotsHeadersTest < ActionDispatch::IntegrationTest
     assert_equal "noindex, follow", response.headers["X-Robots-Tag"]
   end
 
+  test "directive is set for crawlers that send a wildcard Accept header" do
+    get "/eo", params: {date: "2026-01-01"}, headers: KALENDARO.merge("Accept" => "*/*")
+
+    assert_equal "noindex, follow", response.headers["X-Robots-Tag"]
+  end
+
   test "json responses are left untouched" do
     get "/events.json", params: {date: "2026-01-01"}
 
