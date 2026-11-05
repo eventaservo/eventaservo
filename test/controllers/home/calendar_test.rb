@@ -15,8 +15,11 @@ class HomeController::CalendarTest < ActionDispatch::IntegrationTest
     assert_select "[data-controller='events-calendar']"
   end
 
-  test "renders calendar for invalid date param without error" do
+  test "redirects an invalid date param to the clean calendar" do
     get root_url, params: {date: "not-a-date"}
+    assert_redirected_to root_url
+
+    follow_redirect!
     assert_response :success
     assert_select "[data-controller='events-calendar']"
   end

@@ -7,6 +7,8 @@
 module EventBrowsing
   extend ActiveSupport::Concern
 
+  include FilterCanonicalization
+
   included do
     before_action :sanitize_params
   end

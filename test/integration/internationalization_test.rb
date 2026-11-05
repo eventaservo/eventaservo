@@ -116,7 +116,9 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     sign_in users(:admin_user)
 
     get root_url, params: {locale: "invalid_locale"}
+    assert_redirected_to root_url
 
+    follow_redirect!
     assert_response :success
     assert_equal :eo, @controller.resolve_locale
     assert_select "#navbar-dropdown div", text: "EO"
