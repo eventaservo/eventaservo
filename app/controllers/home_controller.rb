@@ -30,7 +30,10 @@ class HomeController < ApplicationController
       @events = @events.not_today(current_timezone).includes(:country, :organizations, :tags)
     end
 
-    @ads = Ad.with_attached_image.active.order(Arel.sql("RANDOM()")).limit(4)
+    # Ads are random per visit; caching the sampled ids keeps RANDOM() and the
+    # attachment eager load off the hot path for a minute.
+    ad_ids = Rails.cache.fetch("home_ad_ids_v1", expires_in: 1.minute) { Ad.active.pluck(:id).sample(4) }
+    @ads = Ad.with_attached_image.where(id: ad_ids).to_a.sort_by { |ad| ad_ids.index(ad.id) }
 
     return if cookies[:vidmaniero].in? %w[kalendaro mapo]
 
