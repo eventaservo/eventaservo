@@ -1,5 +1,71 @@
 # Changelog
 
+## [3.1.0](https://github.com/eventaservo/eventaservo/compare/v3.0.18...v3.1.0) (2026-11-05)
+
+
+### Features
+
+* **events:** show nearby city events within 50 km on city view ([#1323](https://github.com/eventaservo/eventaservo/issues/1323)) ([#1495](https://github.com/eventaservo/eventaservo/issues/1495)) ([b936a00](https://github.com/eventaservo/eventaservo/commit/b936a00ee05359a870e7ee3fd4aa20022fe5ba5e))
+* **i18n:** core routing, admin-only gating, cookie persistence, and i18n-tasks setup ([#1483](https://github.com/eventaservo/eventaservo/issues/1483)) ([7dc27cc](https://github.com/eventaservo/eventaservo/commit/7dc27cc991e1b6e583b86174aafb3493ebbd5da2))
+* **i18n:** localize event detail page and event management forms ([#1465](https://github.com/eventaservo/eventaservo/issues/1465)) ([#1493](https://github.com/eventaservo/eventaservo/issues/1493)) ([11d2064](https://github.com/eventaservo/eventaservo/commit/11d206428961f249a8515cd0799a58095ae478c5))
+* **i18n:** localize global layout, navigation, footer, flash alerts, and shared helpers ([#1463](https://github.com/eventaservo/eventaservo/issues/1463)) ([#1484](https://github.com/eventaservo/eventaservo/issues/1484)) ([1856ba9](https://github.com/eventaservo/eventaservo/commit/1856ba9300c83a17f09884cad728d65c31c02ebe))
+* **i18n:** localize organizations directory, profiles, and management views ([#1494](https://github.com/eventaservo/eventaservo/issues/1494)) ([cb8c6ab](https://github.com/eventaservo/eventaservo/commit/cb8c6ab51b23e1833178c66631ca3c024deccf46))
+* **i18n:** localize public event discovery, filters, search, and calendar views ([#1485](https://github.com/eventaservo/eventaservo/issues/1485)) ([753c0bb](https://github.com/eventaservo/eventaservo/commit/753c0bbedc72bcea7fa3ba43af4d91f85fecffcf))
+* **i18n:** localize static informational pages and error pages ([#1468](https://github.com/eventaservo/eventaservo/issues/1468)) ([#1499](https://github.com/eventaservo/eventaservo/issues/1499)) ([3bba049](https://github.com/eventaservo/eventaservo/commit/3bba049aa921dafd69d7add54c75c0840939be28))
+* **i18n:** localize transactional emails and notifications ([#1469](https://github.com/eventaservo/eventaservo/issues/1469)) ([#1500](https://github.com/eventaservo/eventaservo/issues/1500)) ([f569556](https://github.com/eventaservo/eventaservo/commit/f5695569b405869f214941afd5426e9985adfb78))
+* **i18n:** sanitize Devise locale dictionaries and localize user account views ([#1496](https://github.com/eventaservo/eventaservo/issues/1496)) ([98e453d](https://github.com/eventaservo/eventaservo/commit/98e453d374eca25c7b6711c10679fcce84392a29))
+* introduce a foundation for the design system ([#1505](https://github.com/eventaservo/eventaservo/issues/1505)) ([2edf924](https://github.com/eventaservo/eventaservo/commit/2edf924b509f347b987df1cd1a19adabeba6c05f))
+* **observability:** emit per-request metrics to Sentry ([#1486](https://github.com/eventaservo/eventaservo/issues/1486)) ([ac184f3](https://github.com/eventaservo/eventaservo/commit/ac184f3eb73df9a81c2ca7bd70991f61d8e3bf2d))
+* **organizations:** group events and reports into a responsive tabbed view ([#1460](https://github.com/eventaservo/eventaservo/issues/1460)) ([fc50b3f](https://github.com/eventaservo/eventaservo/commit/fc50b3f16aa403fd9e347bd33b28bc05fc9672c2))
+* refine the event card design ([#1508](https://github.com/eventaservo/eventaservo/issues/1508)) ([cba8b96](https://github.com/eventaservo/eventaservo/commit/cba8b96d57c7e8e9ae9f65b90e84387fb09a5116))
+* restrict organization administration block to signed-in users ([#1482](https://github.com/eventaservo/eventaservo/issues/1482)) ([e4ca2fc](https://github.com/eventaservo/eventaservo/commit/e4ca2fcfabd09a33cddac90a4746acd49cdc16b4))
+* **security:** throttle legitimate crawlers by family in Rack::Attack ([#1502](https://github.com/eventaservo/eventaservo/issues/1502)) ([c258d04](https://github.com/eventaservo/eventaservo/commit/c258d04dd715c426131d794680d84961d0f004b8))
+* **seo:** canonicalize listing filters to stop crawler enumeration ([#1507](https://github.com/eventaservo/eventaservo/issues/1507)) ([4cfaa5b](https://github.com/eventaservo/eventaservo/commit/4cfaa5b698b5b0d93a46c7eff08ca953251e56af))
+* **seo:** mark filtered listings noindex and add canonical links ([#1503](https://github.com/eventaservo/eventaservo/issues/1503)) ([ed34022](https://github.com/eventaservo/eventaservo/commit/ed340229d8ceed70f61c5ad575a4ae8257f8cce0))
+
+
+### Bug Fixes
+
+* **seo:** apply robots directives to crawler Accept headers ([#1504](https://github.com/eventaservo/eventaservo/issues/1504)) ([b4c9852](https://github.com/eventaservo/eventaservo/commit/b4c9852fbb72d6d0d128d7eda3c4ba3476c1c747))
+* update Rails to 8.1.4.1 ([#1506](https://github.com/eventaservo/eventaservo/issues/1506)) ([954ea4f](https://github.com/eventaservo/eventaservo/commit/954ea4fff61e12782ce0fdf5d9a2ca495642ca1e))
+* use apt-get instead of apt in Dockerfile ([#1497](https://github.com/eventaservo/eventaservo/issues/1497)) ([e715abf](https://github.com/eventaservo/eventaservo/commit/e715abf3bd905374a39cb9a61d8065656477bbb6))
+
+
+### Performance Improvements
+
+* **ci:** optimize docker build caching and layer ordering ([#1471](https://github.com/eventaservo/eventaservo/issues/1471)) ([95d3b9c](https://github.com/eventaservo/eventaservo/commit/95d3b9c3f645696a56ec8737abe7e3c8e0e88238))
+* **docker:** optimize Dockerfile with multi-stage build for smaller images ([#1475](https://github.com/eventaservo/eventaservo/issues/1475)) ([ada4b84](https://github.com/eventaservo/eventaservo/commit/ada4b84f978a7eb37dca40617c2400595e4163b4))
+* enable lazy loading for ad images ([#1470](https://github.com/eventaservo/eventaservo/issues/1470)) ([1382d16](https://github.com/eventaservo/eventaservo/commit/1382d16e630f26271e811784802833359398eb6e))
+
+
+### Code Refactoring
+
+* rename eventa_servo_logo_url to eventaservo_logo_url ([da2f6d0](https://github.com/eventaservo/eventaservo/commit/da2f6d0ed9b35fdf4240b01aabafd3732f680a78))
+
+
+### Continuous Integration
+
+* configure dependabot grouped updates and weekly actions schedule ([3f41803](https://github.com/eventaservo/eventaservo/commit/3f41803bdb628cf1a35957ea481f8d8031c4da30))
+* handle required minitest status check via paths-filter ([#1488](https://github.com/eventaservo/eventaservo/issues/1488)) ([89f3f8a](https://github.com/eventaservo/eventaservo/commit/89f3f8a241ba123102f19d67dcd58a7acbceb3f0))
+* optimize CI minutes by skipping redundant test suites on deploy and non-application PRs ([#1487](https://github.com/eventaservo/eventaservo/issues/1487)) ([631f92d](https://github.com/eventaservo/eventaservo/commit/631f92d98978412a05f715b18701290115cae60e))
+* scope CodeQL to JavaScript paths and cancel redundant runs ([#1492](https://github.com/eventaservo/eventaservo/issues/1492)) ([6b041d1](https://github.com/eventaservo/eventaservo/commit/6b041d1d0578728eb3d6f82707a01cccc3881201))
+
+
+### Miscellaneous Chores
+
+* **deps:** bump crass ([0445db2](https://github.com/eventaservo/eventaservo/commit/0445db24640e78911a942e9c2c6e3abd5df7bff6))
+* **deps:** bump crass from 1.0.7 to 1.0.8 in the bundler group across 1 directory ([#1472](https://github.com/eventaservo/eventaservo/issues/1472)) ([0445db2](https://github.com/eventaservo/eventaservo/commit/0445db24640e78911a942e9c2c6e3abd5df7bff6))
+* **deps:** bump dompurify from 3.4.16 to 3.4.17 ([#1491](https://github.com/eventaservo/eventaservo/issues/1491)) ([dc3700e](https://github.com/eventaservo/eventaservo/commit/dc3700e6f6218d532201157d86190a31062ce75a))
+* **deps:** bump listen from 3.10.0 to 3.10.1 ([#1453](https://github.com/eventaservo/eventaservo/issues/1453)) ([af741b8](https://github.com/eventaservo/eventaservo/commit/af741b85a103f1db24d9fc17b9bed0dc3651da73))
+* **deps:** bump ruby from 4.0.7-slim-trixie to 4.0.9-slim-trixie ([#1476](https://github.com/eventaservo/eventaservo/issues/1476)) ([73ac2d6](https://github.com/eventaservo/eventaservo/commit/73ac2d6beef3aa0561e6b46cb52645a120cc5bbf))
+* **deps:** bump source-map-js ([d33fc8f](https://github.com/eventaservo/eventaservo/commit/d33fc8fabd1d39216fc63a88b7d7aa2b671d4de6))
+* **deps:** bump source-map-js from 1.2.1 to 1.2.2 in the npm_and_yarn group across 1 directory ([#1456](https://github.com/eventaservo/eventaservo/issues/1456)) ([d33fc8f](https://github.com/eventaservo/eventaservo/commit/d33fc8fabd1d39216fc63a88b7d7aa2b671d4de6))
+* **deps:** bump the actions group with 7 updates ([#1490](https://github.com/eventaservo/eventaservo/issues/1490)) ([2809c00](https://github.com/eventaservo/eventaservo/commit/2809c00dbe3e32f0fbe2526f40f3bbd7aaa3510c))
+* **deps:** bump the patch-updates group with 2 updates ([#1489](https://github.com/eventaservo/eventaservo/issues/1489)) ([19998c7](https://github.com/eventaservo/eventaservo/commit/19998c72f51465d6a7d31c602a3b0463def42742))
+* **deps:** bump thruster from 0.1.26 to 0.1.27 ([#1452](https://github.com/eventaservo/eventaservo/issues/1452)) ([def2c77](https://github.com/eventaservo/eventaservo/commit/def2c77c11e802fe6ffa1bc76da696540f4ddf21))
+* **deps:** bump timezone from 1.3.30 to 1.3.31 ([#1451](https://github.com/eventaservo/eventaservo/issues/1451)) ([99632bc](https://github.com/eventaservo/eventaservo/commit/99632bc673d4442a3205a8bd72a4b4965fe1e66d))
+* release 3.1.0 ([#1509](https://github.com/eventaservo/eventaservo/issues/1509)) ([ae11af6](https://github.com/eventaservo/eventaservo/commit/ae11af64aa43e93351093128d80e0f514758e22e))
+
 ## [3.0.18](https://github.com/eventaservo/eventaservo/compare/v3.0.17...v3.0.18) (2026-10-08)
 
 
