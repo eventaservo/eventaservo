@@ -11,7 +11,7 @@
 # crawler spending requests there only costs CPU.
 module IndexingPolicy
   # Query parameters that turn a listing into a filtered variant.
-  FILTER_PARAMS = %w[date o s next pagho pasintaj].freeze
+  FILTER_PARAMS = %w[date o s t periodo pasintaj next pagho page start end].freeze
 
   module_function
 

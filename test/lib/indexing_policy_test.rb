@@ -8,7 +8,10 @@ class IndexingPolicyTest < ActiveSupport::TestCase
     assert IndexingPolicy.filtered?({"s" => "1,2,3"})
     assert IndexingPolicy.filtered?({"o" => "UEA"})
     assert IndexingPolicy.filtered?({"next" => "1"})
-    refute IndexingPolicy.filtered?({"page" => "2"})
+    assert IndexingPolicy.filtered?({"periodo" => "p7_tagojn"})
+    assert IndexingPolicy.filtered?({"t" => "unutaga"})
+    assert IndexingPolicy.filtered?({"page" => "2"})
+    refute IndexingPolicy.filtered?({"q" => "esperanto"})
     refute IndexingPolicy.filtered?({})
   end
 

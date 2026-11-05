@@ -15,6 +15,18 @@ class HomeController::RobotsHeadersTest < ActionDispatch::IntegrationTest
     assert_includes response.body, %(href="http://www.example.com/eo" rel="canonical")
   end
 
+  test "period and timezone filters are also treated as filtered listings" do
+    get "/eo", params: {periodo: "p7_tagojn"}, headers: KALENDARO
+
+    assert_equal "noindex, follow", response.headers["X-Robots-Tag"]
+    assert_includes response.body, %(href="http://www.example.com/eo" rel="canonical")
+
+    get "/eo", params: {t: "unutaga"}, headers: KALENDARO
+
+    assert_equal "noindex, follow", response.headers["X-Robots-Tag"]
+    assert_includes response.body, %(href="http://www.example.com/eo" rel="canonical")
+  end
+
   test "plain home keeps no directive and no canonical link" do
     get "/eo", headers: KALENDARO
 
