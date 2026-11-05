@@ -34,6 +34,10 @@
 
     <%= yield(:head) %>
 
+    <% if @canonical_url.present? %>
+      <link href="<%= @canonical_url %>" rel="canonical">
+    <% end %>
+
     <title>
       <% if content_for?(:title) %>
         <%= yield(:title) %> |

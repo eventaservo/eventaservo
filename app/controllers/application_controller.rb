@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   before_action :set_paper_trail_whodunnit
   before_action :set_sentry_user
   before_action :normalize_horzono_cookie
+  before_action :set_indexing_headers
 
   # When the DB connection pool is exhausted ActiveRecord raises this error
   # after checkout_timeout seconds. Capture it explicitly so Sentry records
@@ -126,5 +127,21 @@ class ApplicationController < ActionController::Base
     elsif result.payload != raw
       cookies[:horzono] = {value: result.payload, expires: 1.year, secure: true}
     end
+  end
+
+  # Sets the robots directive and the canonical URL for filtered listings.
+  #
+  # Filtered variants of a listing share the same content, so they are marked
+  # `noindex` and expose the clean path as canonical. The staging environment
+  # is never indexed.
+  #
+  # @return [void]
+  def set_indexing_headers
+    return unless request.format.html?
+
+    filtered = IndexingPolicy.filtered?(params)
+    tag = IndexingPolicy.robots_tag(environment: Rails.env.to_s, filtered:)
+    response.headers["X-Robots-Tag"] = tag if tag
+    @canonical_url = "#{request.base_url}#{request.path}" if filtered
   end
 end
