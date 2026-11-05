@@ -334,6 +334,7 @@ en:
     happening_now_count:
       one: "%{count} happening now"
       other: "%{count} happening now"
+    hide: hide
     hide_nearby: Hide events from nearby cities or locations
     international_event: International Event
     map:
@@ -388,6 +389,7 @@ en:
       title: Share
     show_nearby: Show events from nearby cities or locations
     show_past: Past events
+    show_upcoming: Upcoming events
     timezone:
       same_as_yours: Same as your timezone
     upcoming_events_count:

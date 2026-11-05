@@ -33,10 +33,10 @@
 
     <%= render partial: 'home/filters' %>
     <%= render partial: 'events/okazantaj' %>
+    <% unless cards_view_mode? %>
+      <%= render partial: "events/past_events_toggle", locals: {past_url: past_events_listing_path} %>
+    <% end %>
     <%= display_events_by_style %>
-    <%= render partial: "events/past_events_toggle", locals: {
-      past_url: events_by_country_path(continent: @country.continent.normalized, country_name: @country.name.normalized, pasintaj: 1)
-    } %>
   <% end %>
 </div>
 

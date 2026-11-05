@@ -334,6 +334,7 @@ eo:
     happening_now_count:
       one: "%{count} okazas nuntempe"
       other: "%{count} okazas nuntempe"
+    hide: kaŝi
     hide_nearby: Kaŝi eventojn de proksimaj urboj aŭ lokoj
     international_event: Internacia Evento
     map:
@@ -388,6 +389,7 @@ eo:
       title: Diskonigilo
     show_nearby: Montri eventojn de proksimaj urboj aŭ lokoj
     show_past: Pasintaj eventoj
+    show_upcoming: Venontaj eventoj
     timezone:
       same_as_yours: Sama kiel via horzono
     upcoming_events_count:

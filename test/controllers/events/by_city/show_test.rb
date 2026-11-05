@@ -184,7 +184,7 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
     get_copenhagen
 
     assert_response :success
-    assert_select "p", text: "1 en Kopenhago · 1 ene de 50 km ĉirkaŭe"
+    assert_select "p", text: "1 en Kopenhago · 1 ene de 50 km ĉirkaŭe (kaŝi)"
   end
 
   test "breakdown line is localized according to current locale for authenticated admin" do
@@ -198,14 +198,14 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
       city_name: "Kopenhago")
 
     assert_response :success
-    assert_select "p", text: "1 in Kopenhago · 1 within 50 km around"
+    assert_select "p", text: "1 in Kopenhago · 1 within 50 km around (hide)"
 
     get events_by_city_url(locale: "pt_BR", continent: denmark.continent.normalized,
       country_name: denmark.name.normalized,
       city_name: "Kopenhago")
 
     assert_response :success
-    assert_select "p", text: "1 em Kopenhago · 1 em até 50 km ao redor"
+    assert_select "p", text: "1 em Kopenhago · 1 em até 50 km ao redor (ocultar)"
   end
 
   test "card view hides breakdown line when all upcoming events belong to the target city" do
@@ -264,7 +264,7 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
     get_copenhagen
 
     assert_response :success
-    assert_select "a[href='/nearby/off']", text: I18n.t("events.hide_nearby")
+    assert_select "a[href='/nearby/off']", text: I18n.t("events.hide")
   end
 
   test "nearby cookie=0 hides nearby events and shows a link to reveal them" do
@@ -303,7 +303,7 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_includes response.body, @copenhagen_event.title
     assert_not_includes response.body, @malmo_event.title
-    assert_select "a", text: I18n.t("events.hide_nearby"), count: 0
+    assert_select "a", text: I18n.t("events.hide"), count: 0
   end
 
   test "past events view does not include nearby events" do

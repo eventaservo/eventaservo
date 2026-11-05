@@ -28,6 +28,39 @@ module EventsHelper
     end
   end
 
+  # URL of the past-events view for the current by-city, by-country or by-continent listing.
+  #
+  # @return [String, nil] the past-events URL, or nil when the page is not a geographic listing
+  def past_events_listing_path
+    if params[:city_name].present?
+      events_by_city_path(continent: params[:continent], country_name: params[:country_name], city_name: params[:city_name], pasintaj: 1)
+    elsif params[:country_name].present?
+      events_by_country_path(continent: params[:continent], country_name: params[:country_name], pasintaj: 1)
+    elsif params[:continent].present?
+      events_by_continent_path(continent: params[:continent], pasintaj: 1)
+    end
+  end
+
+  # URL of the upcoming-events view for the current by-city, by-country or by-continent listing.
+  #
+  # @return [String, nil] the upcoming-events URL, or nil when the page is not a geographic listing
+  def upcoming_events_listing_path
+    if params[:city_name].present?
+      events_by_city_path(continent: params[:continent], country_name: params[:country_name], city_name: params[:city_name])
+    elsif params[:country_name].present?
+      events_by_country_path(continent: params[:continent], country_name: params[:country_name])
+    elsif params[:continent].present?
+      events_by_continent_path(continent: params[:continent])
+    end
+  end
+
+  # Whether the listing is rendered as event cards (the default view mode).
+  #
+  # @return [Boolean]
+  def cards_view_mode?
+    %w[mapo kalendaro].exclude?(cookies[:vidmaniero])
+  end
+
   # Whether the event belongs to a nearby city rather than the page's city.
   #
   # Only meaningful on the by-city page, where +@nearby_cities+ is assigned and
