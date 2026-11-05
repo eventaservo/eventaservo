@@ -369,7 +369,8 @@ GEM
     matrix (0.4.3)
     maxminddb (0.1.22)
     method_source (1.1.0)
-    mini_magick (4.13.2)
+    mini_magick (5.4.0)
+      logger
     mini_mime (1.1.5)
     minitest (6.0.6)
       drb (~> 2.0)
@@ -754,7 +755,7 @@ DEPENDENCIES
   lookbook
   maintenance_tasks (~> 2.16)
   maxminddb (~> 0.1)
-  mini_magick (~> 4.10)
+  mini_magick (~> 5.1)
   minitest (~> 6.0)
   minitest-mock (~> 5.27)
   mission_control-jobs

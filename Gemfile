@@ -25,7 +25,7 @@ gem "bootsnap", require: false
 # Kalendaroj
 gem "icalendar", "~> 2.12"
 
-gem "mini_magick", "~> 4.10"
+gem "mini_magick", "~> 5.1"
 
 # Omniauth authentication
 gem "omniauth-facebook", "~> 10.0"
