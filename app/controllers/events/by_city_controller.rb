@@ -39,17 +39,34 @@ class Events::ByCityController < ApplicationController
   private
 
   # Computes the count breakdown between the target city and nearby cities
-  # for the upcoming events card view when nearby discovery is active.
+  # for the upcoming events card view when nearby discovery is active, and
+  # determines whether nearby events exist to be shown or hidden.
   #
   # @return [void]
   def setup_nearby_breakdown
-    return unless @card_view && @include_nearby && @nearby_cities.present?
+    return unless @card_view && @nearby_cities.present?
 
-    target_city_scope = [[params[:city_name], @country.id]]
-    @target_city_events_count = build_events_scope.not_today(current_timezone).in_cities(target_city_scope).count
-    @nearby_events_count = @kvanto_venontaj_eventoj.to_i - @target_city_events_count
-    @nearby_radius_km = Events::NearbyCitiesQuery::DEFAULT_RADIUS_KM
-    @target_city_name = Event.by_city(params[:city_name]).by_country_id(@country.id).order(:id).pick(:city) || params[:city_name]
+    if @include_nearby
+      target_city_scope = [[params[:city_name], @country.id]]
+      @target_city_events_count = build_events_scope.not_today(current_timezone).in_cities(target_city_scope).count
+      @nearby_events_count = @kvanto_venontaj_eventoj.to_i - @target_city_events_count
+      @nearby_radius_km = Events::NearbyCitiesQuery::DEFAULT_RADIUS_KM
+      @target_city_name = Event.by_city(params[:city_name]).by_country_id(@country.id).order(:id).pick(:city) || params[:city_name]
+
+      today_nearby_count = @today_events.count { |e| event_nearby?(e) }
+      @has_nearby_events = (@nearby_events_count.to_i + today_nearby_count) > 0
+    else
+      @has_nearby_events = build_events_scope.venontaj(current_timezone).in_cities(@nearby_cities).exists?
+    end
+  end
+
+  # Whether the given event belongs to a nearby city rather than the target city.
+  #
+  # @param event [Event]
+  #
+  # @return [Boolean]
+  def event_nearby?(event)
+    event.country_id != @country.id || event.city.to_s.normalized != params[:city_name].normalized
   end
 
   # Sets up the nearby-cities assigns used by the card view.

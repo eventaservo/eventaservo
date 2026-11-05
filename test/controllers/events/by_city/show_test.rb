@@ -218,6 +218,35 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
     assert_select "p", text: /ene de 50 km ĉirkaŭe/, count: 0
   end
 
+  test "card view does not show nearby toggle when no upcoming events exist in nearby cities" do
+    denmark = countries(:denmark)
+    sweden = countries(:sweden)
+    create_geo_event(title: "Copenhagen Local Event", city: "Kopenhago", country: denmark, latitude: 55.6761, longitude: 12.5683)
+    past_event = create_geo_event(title: "Malmo Past Event", city: "Malmö", country: sweden, latitude: 55.6050, longitude: 13.0038)
+    past_event.update_columns(date_start: 1.month.ago, date_end: 1.month.ago + 1.day)
+
+    get_copenhagen
+
+    assert_response :success
+    assert_select "a[href='/nearby/off']", count: 0
+    assert_select "a[href='/nearby/on']", count: 0
+  end
+
+  test "card view with nearby cookie=0 does not show nearby toggle when no upcoming events exist in nearby cities" do
+    denmark = countries(:denmark)
+    sweden = countries(:sweden)
+    create_geo_event(title: "Copenhagen Local Event", city: "Kopenhago", country: denmark, latitude: 55.6761, longitude: 12.5683)
+    past_event = create_geo_event(title: "Malmo Past Event", city: "Malmö", country: sweden, latitude: 55.6050, longitude: 13.0038)
+    past_event.update_columns(date_start: 1.month.ago, date_end: 1.month.ago + 1.day)
+
+    cookies[:nearby] = "0"
+    get_copenhagen
+
+    assert_response :success
+    assert_select "a[href='/nearby/off']", count: 0
+    assert_select "a[href='/nearby/on']", count: 0
+  end
+
   test "card view excludes cities farther than the 50 km radius" do
     setup_nearby_events
 

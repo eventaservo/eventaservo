@@ -334,7 +334,7 @@ eo:
     happening_now_count:
       one: "%{count} okazas nuntempe"
       other: "%{count} okazas nuntempe"
-    hide_nearby: Kaŝi eventojn de proksimaj urboj
+    hide_nearby: Kaŝi eventojn de proksimaj urboj aŭ lokoj
     international_event: Internacia Evento
     map:
       duplicate_notice: "* La mapo aperigas nur la unuan venontan eventon, se temas pri evento en la sama loko kun la sama titolo"
@@ -386,7 +386,7 @@ eo:
       share_via_email: Diskonigi per retpoŝto
       share_via_whatsapp: Diskonigi per WhatsApp
       title: Diskonigilo
-    show_nearby: Montri eventojn de proksimaj urboj
+    show_nearby: Montri eventojn de proksimaj urboj aŭ lokoj
     show_past: Pasintaj eventoj
     timezone:
       same_as_yours: Sama kiel via horzono
