@@ -335,7 +335,6 @@ pt_BR:
       one: "%{count} acontecendo agora"
       other: "%{count} acontecendo agora"
     hide: ocultar
-    hide_nearby: Ocultar eventos de cidades ou locais próximos
     international_event: Evento Internacional
     map:
       duplicate_notice: "* O mapa exibe apenas o primeiro evento futuro quando múltiplos eventos ocorrem no mesmo local com o mesmo título"

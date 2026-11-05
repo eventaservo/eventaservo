@@ -170,10 +170,10 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_includes response.body, @copenhagen_event.title
     assert_includes response.body, @malmo_event.title
-    assert_select ".card", text: /#{@malmo_event.title}/ do
+    assert_select ".event-card", text: /#{@malmo_event.title}/ do
       assert_select ".badge", text: I18n.t("events.nearby")
     end
-    assert_select ".card", text: /#{@copenhagen_event.title}/ do
+    assert_select ".event-card", text: /#{@copenhagen_event.title}/ do
       assert_select ".badge", text: I18n.t("events.nearby"), count: 0
     end
   end

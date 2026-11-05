@@ -335,7 +335,6 @@ eo:
       one: "%{count} okazas nuntempe"
       other: "%{count} okazas nuntempe"
     hide: kaŝi
-    hide_nearby: Kaŝi eventojn de proksimaj urboj aŭ lokoj
     international_event: Internacia Evento
     map:
       duplicate_notice: "* La mapo aperigas nur la unuan venontan eventon, se temas pri evento en la sama loko kun la sama titolo"

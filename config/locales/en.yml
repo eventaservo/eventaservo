@@ -335,7 +335,6 @@ en:
       one: "%{count} happening now"
       other: "%{count} happening now"
     hide: hide
-    hide_nearby: Hide events from nearby cities or locations
     international_event: International Event
     map:
       duplicate_notice: "* The map shows only the first upcoming event when multiple events occur at the same location with the same title"
