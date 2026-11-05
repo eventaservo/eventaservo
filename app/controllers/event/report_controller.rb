@@ -23,18 +23,18 @@ class Event
         NewEventReportNotificationJob.perform_later(report.id)
         Logs::Create.call(text: "Report created", user: current_user, loggable: report)
 
-        redirect_to event_url(code: @event.code), flash: {success: "La raporto estis sukcese kreita"}
+        redirect_to event_url(code: @event.code), flash: {success: I18n.t("flash.reports.created")}
       else
         @report = report
-        render :new, status: :unprocessable_entity, flash: {error: "Eraro okazis kreante la raporton"}
+        render :new, status: :unprocessable_entity, flash: {error: I18n.t("flash.reports.create_error")}
       end
     end
 
     def destroy
       if @report.destroy
-        redirect_to event_url(code: @event.code), flash: {success: "La raporto estis sukcese forigita"}
+        redirect_to event_url(code: @event.code), flash: {success: I18n.t("flash.reports.destroyed")}
       else
-        redirect_to event_url(code: @event.code), flash: {error: "Eraro okazis forigante la raporton"}
+        redirect_to event_url(code: @event.code), flash: {error: I18n.t("flash.reports.destroy_error")}
       end
     end
 

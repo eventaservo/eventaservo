@@ -39,7 +39,7 @@ module Admin
     def create
       @redirection = EventRedirection.new(redirection_params)
       if @redirection.save
-        redirect_to admin_redirections_path, notice: "Redirekto sukcese kreita."
+        redirect_to admin_redirections_path, notice: I18n.t("flash.admin.redirections.created")
       else
         render :new, status: :unprocessable_entity
       end
@@ -56,7 +56,7 @@ module Admin
     # @return [void]
     def update
       if @redirection.update(redirection_params)
-        redirect_to admin_redirections_path, notice: "Redirekto sukcese ĝisdatigita."
+        redirect_to admin_redirections_path, notice: I18n.t("flash.admin.redirections.updated")
       else
         render :edit, status: :unprocessable_entity
       end
@@ -67,7 +67,7 @@ module Admin
     # @return [void]
     def destroy
       @redirection.destroy
-      redirect_to admin_redirections_path, notice: "Redirekto sukcese forigita."
+      redirect_to admin_redirections_path, notice: I18n.t("flash.admin.redirections.destroyed")
     end
 
     private

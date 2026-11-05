@@ -1,0 +1,84 @@
+# frozen_string_literal: true
+
+# Helpers that instrument the EventaServo application for observability.
+module Observability
+  # Emits per-request metrics to Sentry so request volume, latency and the share
+  # of bot traffic can be compared across deploys — for example, before and
+  # after removing a reverse proxy from the staging path.
+  #
+  # Metrics are aggregated by the Sentry SDK and flushed periodically, so the
+  # per-request cost stays small. A distribution metric allows p50/p95
+  # aggregation in Sentry, unlike a gauge.
+  #
+  # The `process_action.action_controller` payload carries no elapsed time, so
+  # the duration is derived from the notification timestamps.
+  #
+  # @see https://docs.sentry.io/platforms/ruby/metrics/
+  class RequestMetrics
+    # Controller notification emitted when a request finishes.
+    EVENT = "process_action.action_controller"
+
+    # User-Agent fragments used to flag probable automated traffic.
+    BOT_PATTERN = /bot|crawl|spider|slurp|preview|python-requests|curl|wget/i
+
+    class << self
+      # Subscribes the recorder to finished controller requests.
+      #
+      # @param metrics [Object] metrics recorder, injectable for tests
+      # @return [Object, nil] the subscription, or nil when Sentry is not initialized
+      def install!(metrics: Sentry.metrics)
+        return unless Sentry.initialized?
+
+        ActiveSupport::Notifications.subscribe(EVENT) do |_name, started_at, finished_at, _id, payload|
+          record(payload, started_at: started_at, finished_at: finished_at, metrics: metrics)
+        end
+      end
+
+      # Emits a count and a duration metric for a finished request.
+      #
+      # @param payload [Hash] payload of the `process_action.action_controller` event
+      # @param started_at [Time] time the notification started
+      # @param finished_at [Time] time the notification finished
+      # @param metrics [Object] metrics recorder, injectable for tests
+      # @return [Object, nil] result of the last metric call, or nil on failure
+      def record(payload, started_at:, finished_at:, metrics: Sentry.metrics)
+        attributes = attributes_for(payload)
+        duration_ms = (finished_at - started_at) * 1000.0
+
+        metrics.count("rails.request", value: 1, attributes: attributes)
+        metrics.distribution("rails.request.duration", duration_ms,
+          unit: "millisecond", attributes: attributes)
+      rescue
+        # Observability must never break a request.
+        nil
+      end
+
+      private
+
+      # Builds the metric attributes for a request.
+      #
+      # @param payload [Hash] payload of the controller event
+      # @return [Hash{Symbol => String, Integer}]
+      def attributes_for(payload)
+        {
+          controller: payload[:controller].to_s,
+          action: payload[:action].to_s,
+          status: payload[:status].to_i,
+          format: payload[:format].to_s,
+          bot: bot?(payload) ? "true" : "false"
+        }
+      end
+
+      # Detects probable automated traffic from the request User-Agent.
+      #
+      # @param payload [Hash] payload of the controller event
+      # @return [Boolean]
+      def bot?(payload)
+        user_agent = payload.dig(:request)&.user_agent
+        BOT_PATTERN.match?(user_agent.to_s)
+      rescue
+        false
+      end
+    end
+  end
+end

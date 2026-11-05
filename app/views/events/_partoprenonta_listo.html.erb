@@ -1,4 +1,4 @@
-<%= link_to 'kaj pli...', '#', data: { bs_target: '#partoprenontojModal', bs_toggle: 'modal' } %>
+<%= link_to t("events.participants.and_more"), '#', data: { bs_target: '#partoprenontojModal', bs_toggle: 'modal' } %>
 
 <div id="partoprenontojModal" class="modal fade" aria-hidden="true" aria-labelledby="titolo" role="dialog" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -6,11 +6,10 @@
 
       <div class="modal-header">
         <h5 class="modal-title" id="titolo">
-          <%= event.participants.count %>
-          <%= event.past? ? "interesiĝintoj" : "interesiĝantoj" %>
+          <%= event.past? ? t("events.participants.count_interested_past", count: event.participants.count) : t("events.participants.count_interested_future", count: event.participants.count) %>
         </h5>
 
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermi"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= t('buttons.close') %>"></button>
       </div>
 
       <div class="modal-body" style="font-weight: normal; font-size: 1rem;">
@@ -18,15 +17,14 @@
           <% next unless participant.user %>
 
           <br>
-          <%= link_to display_user(participant.user), events_by_username_path(participant.user&.username) %>
+          <%= link_to display_user(participant.user), events_by_username_path(username: participant.user&.username) %>
           <br>
         <% end %>
 
         <% if @partoprenontoj.not_publicly_listed.count > 0 %>
           <p>
             <br>
-            kaj <%= pluralize(@partoprenontoj.not_publicly_listed.count, 'alia kiu', plural: "aliaj kiuj") %>
-            preferis ne aperigi sian nomon
+            <%= t("events.participants.anonymous_count", count: @partoprenontoj.not_publicly_listed.count) %>
           </p>
         <% end %>
       </div>

@@ -119,6 +119,7 @@ group :development, :test do
   gem "debug", ">= 1.0.0", require: false
   gem "dotenv-rails"
   gem "hotwire-spark"
+  gem "i18n-tasks", "~> 1.0"
   gem "rake"
 end
 

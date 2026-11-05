@@ -3,7 +3,15 @@
 require "test_helper"
 
 class OrganizationsHelperTest < ActionView::TestCase
+  include Devise::Test::ControllerHelpers
   include OrganizationsHelper
+
+  # Forwards Devise's signed-in predicate from the test controller to the helper.
+  #
+  # @return [Boolean] true when a user session is active
+  def user_signed_in?
+    controller.user_signed_in?
+  end
 
   test "display_event_tags returns correct bootstrap 5 classes" do
     event = create(:event)
@@ -43,6 +51,21 @@ class OrganizationsHelperTest < ActionView::TestCase
 
     event = create(:event, date_start: 2.days.ago, date_end: 1.day.ago)
     assert_equal "", display_event_days_left(event)
+  end
+
+  test "display_event_days_left returns localized text across locales" do
+    event_tomorrow = create(:event, date_start: Time.zone.now, date_end: 1.day.from_now)
+    event_in_days = create(:event, date_start: Time.zone.now, date_end: 2.days.from_now)
+
+    I18n.with_locale(:en) do
+      assert_equal "| ends tomorrow", display_event_days_left(event_tomorrow)
+      assert_equal "| ends in 2 days", display_event_days_left(event_in_days)
+    end
+
+    I18n.with_locale(:pt_BR) do
+      assert_equal "| termina amanhã", display_event_days_left(event_tomorrow)
+      assert_equal "| termina em 2 dias", display_event_days_left(event_in_days)
+    end
   end
 
   test "display_organizations_for_event lists all organizations when not limited" do
@@ -85,5 +108,39 @@ class OrganizationsHelperTest < ActionView::TestCase
     assert_no_queries_match(/FROM "organizations"/) do
       display_organizations_for_event(event, limited: true)
     end
+  end
+
+  test "organization_active_tab returns tab param when valid" do
+    assert_equal :past, organization_active_tab({tab: "past"})
+    assert_equal :future, organization_active_tab({tab: "future"})
+    assert_equal :reports, organization_active_tab({tab: "reports"})
+  end
+
+  test "organization_active_tab handles pagination parameters" do
+    assert_equal :future, organization_active_tab({venontaj_pagho: 2})
+    assert_equal :reports, organization_active_tab({raportoj_pagho: 2})
+    assert_equal :past, organization_active_tab({pagho: 2})
+    assert_equal :past, organization_active_tab({page: 2})
+  end
+
+  test "organization_active_tab falls back according to events presence" do
+    assert_equal :future, organization_active_tab({}, future_events: [1], past_events: [])
+    assert_equal :past, organization_active_tab({}, future_events: [], past_events: [1])
+    assert_equal :reports, organization_active_tab({}, future_events: [], past_events: [])
+  end
+
+  test "organization_show_sidebar? returns false when user is not signed in" do
+    assert_not organization_show_sidebar?({})
+  end
+
+  test "organization_show_sidebar? returns true when user is signed in without iframe param" do
+    sign_in users(:user)
+    assert organization_show_sidebar?({})
+  end
+
+  test "organization_show_sidebar? returns false when user is signed in with iframe param" do
+    sign_in users(:user)
+    assert_not organization_show_sidebar?({iframe: "true"})
+    assert_not organization_show_sidebar?({"iframe" => "1"})
   end
 end

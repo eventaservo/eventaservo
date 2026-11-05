@@ -13,7 +13,7 @@ class Events::ByCountryController < ApplicationController
   before_action :set_country
 
   def show
-    redirect_to(root_path, flash: {error: "Lando ne ekzistas en la datumbazo"}) && return if @country.nil?
+    redirect_to(root_path, flash: {error: I18n.t("flash.countries.not_in_database")}) && return if @country.nil?
 
     respond_to do |format|
       format.xml do

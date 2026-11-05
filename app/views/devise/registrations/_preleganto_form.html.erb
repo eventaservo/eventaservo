@@ -1,7 +1,7 @@
 <div data-controller="user">
-  <div class="lead">Kiel preleganto</div>
+  <div class="lead"><%= t("devise.registrations.speaker.lead") %></div>
   <div class="row mb-3">
-    <%= f.label :preleganto, 'Mi estas preleganto', class: 'col-form-label col-5' %>
+    <%= f.label :preleganto, t("devise.registrations.speaker.i_am_speaker"), class: 'col-form-label col-5' %>
     <div class="col-7">
       <div class="mb-3 form-check">
         <%= check_box 'user', 'preleganto',
@@ -12,11 +12,11 @@
 
   <div id="preleganto-details" class="<%= 'd-none' unless resource.preleganto == 'true' %>">
     <div class="row mb-3">
-      <label class="col-md-5 col-form-label" for="preleg_temoj">Mi prelegas pri la jenaj temoj</label>
+      <label class="col-md-5 col-form-label" for="preleg_temoj"><%= t("devise.registrations.speaker.topics_label") %></label>
       <div class="col-md-7">
         <div class="mb-3">
           <%= text_area_tag 'preleg_temoj', resource.prelego["temoj"], rows: "3",
-            placeholder: "Sbriku pri la temoj pri kiuj vi pretas prelegi", class: "form-control" %>
+            placeholder: t("devise.registrations.speaker.topics_placeholder"), class: "form-control" %>
         </div>
       </div>
     </div>

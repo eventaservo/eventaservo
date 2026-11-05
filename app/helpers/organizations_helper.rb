@@ -1,6 +1,16 @@
 # frozen_string_literal: true
 
+# Helper methods for rendering organization badges, logos, and event days countdown.
 module OrganizationsHelper
+  include EventsHelper
+
+  # Renders the logo image for an organization if attached.
+  #
+  # @param organization [Organization] the organization whose logo to render
+  # @param size [Symbol] image size variant (:small, :medium, :large)
+  # @param html_class [String, nil] additional CSS classes for the image tag
+  #
+  # @return [ActiveSupport::SafeBuffer, nil] the image tag, or nil if logo is not attached
   def organization_logo(organization, size: :small, html_class: nil)
     return unless organization.persisted? && organization.logo.attached?
 
@@ -24,6 +34,7 @@ module OrganizationsHelper
   # @param event [Event] the event whose organizations to display
   # @param limited [Boolean] when true and the event has more than one
   #   organization, render only the first organization plus a "+N" counter
+  #
   # @return [ActiveSupport::SafeBuffer] the rendered organization tags
   def display_organizations_for_event(event, limited: false)
     content_tag(:div, class: "organization-tags") do
@@ -38,12 +49,22 @@ module OrganizationsHelper
     end
   end
 
+  # Renders a linked tag badge for an organization.
+  #
+  # @param organization [Organization] the organization to link to
+  #
+  # @return [ActiveSupport::SafeBuffer] the rendered organization link
   def organization_tag(organization)
-    link_to organization_url(organization.short_name), class: "tag" do
+    link_to organization_url(short_name: organization.short_name), class: "tag" do
       content_tag(:div, organization.short_name)
     end
   end
 
+  # Renders category and characteristic badges for an event.
+  #
+  # @param event [Event] the event whose tags to display
+  #
+  # @return [ActiveSupport::SafeBuffer] the rendered tag badges container
   def display_event_tags(event)
     content_tag(:div, class: "event-tags") do
       tags = if event.tags.loaded?
@@ -61,20 +82,60 @@ module OrganizationsHelper
           elsif tag.characteristic?
             "text-bg-warning"
           end
-        concat content_tag(:span, tag.name, class: "me-1 badge rounded-pill #{tag_color}")
+        concat content_tag(:span, tag_display_name(tag), class: "me-1 badge rounded-pill #{tag_color}")
       end
     end
   end
 
+  # Renders remaining days text for an event.
+  #
+  # @param event [Event] the event to display remaining days for
+  #
+  # @return [String] formatted string indicating days left, or empty string if passed
   def display_event_days_left(event)
-    days = event.tagoj[:restanta]
+    days = event.days_progress[:remaining]
     case days
     when (Float::INFINITY * -1)..0
       ""
     when 1
-      "| finiĝos morgaŭ"
+      "| #{I18n.t("events.days_left.tomorrow")}"
     else
-      "| finiĝos post #{days} tagoj"
+      "| #{I18n.t("events.days_left.in_days", count: days)}"
     end
+  end
+
+  # Determines the active tab to display on the organization show page based on
+  # URL query parameters or available events.
+  #
+  # @param params [ActionController::Parameters, Hash] request parameters
+  # @param future_events [Enumerable, #any?] collection of upcoming events
+  # @param past_events [Enumerable, #any?] collection of past events
+  #
+  # @return [Symbol] active tab identifier (:future, :past, or :reports)
+  def organization_active_tab(params, future_events: [], past_events: [])
+    if %w[future past reports].include?(params[:tab].to_s)
+      params[:tab].to_sym
+    elsif params[:venontaj_pagho].present?
+      :future
+    elsif params[:raportoj_pagho].present?
+      :reports
+    elsif params[:pagho].present? || params[:page].present?
+      :past
+    elsif future_events.any?
+      :future
+    elsif past_events.any?
+      :past
+    else
+      :reports
+    end
+  end
+
+  # Determines whether the organization administration sidebar should be displayed.
+  #
+  # @param params [ActionController::Parameters, Hash] request parameters
+  #
+  # @return [Boolean] true if user is signed in and not inside an iframe
+  def organization_show_sidebar?(params)
+    user_signed_in? && params[:iframe].blank? && params["iframe"].blank?
   end
 end

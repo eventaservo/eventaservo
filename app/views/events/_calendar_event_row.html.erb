@@ -1,6 +1,6 @@
 <div class="col-2 col-md-1 fw-light text-success-emphasis py-1">
   <% if event.tuttaga? %>
-    <span class="text-muted">tuttaga</span>
+    <span class="text-muted"><%= t("events.all_day") %></span>
   <% else %>
     <%= event.start_time_label(horzono: cookies[:horzono]) %>
     <% end_time = event.end_time_label(horzono: cookies[:horzono]) %>

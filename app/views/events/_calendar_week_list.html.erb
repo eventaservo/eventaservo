@@ -9,7 +9,7 @@
       </div>
 
       <% if day_events.empty? %>
-        <div class="px-2 py-1 text-muted fst-italic small">Neniu evento</div>
+        <div class="px-2 py-1 text-muted fst-italic small"><%= t("events.calendar.no_events") %></div>
       <% else %>
         <% day_events.each_with_index do |event, i| %>
           <div class="row g-0 align-items-center px-2 py-1 hover-row position-relative <%= 'border-bottom' unless i == day_events.size - 1 %>">

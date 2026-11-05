@@ -3,22 +3,37 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: monthly
+      interval: weekly
+    groups:
+      actions:
+        patterns:
+          - "*"
+
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
       interval: monthly
+
   - package-ecosystem: "bundler"
     directory: "/"
     schedule:
       interval: weekly
+    groups:
+      patch-updates:
+        patterns:
+          - "*"
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major", "version-update:semver-minor"]
+
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: weekly
+    groups:
+      patch-updates:
+        patterns:
+          - "*"
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major", "version-update:semver-minor"]

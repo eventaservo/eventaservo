@@ -444,17 +444,30 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     ActiveSupport::TimeZone.new(time_zone).cet?
   end
 
-  # total: Kvanto de tagoj de la evento
-  # parcial: Kvanto de tagoj kiu jam pasis de la evento
-  # restanta: Kvanto de tagoj restantaj en la evento
-  # percent: Procento de la evento kiu jam pasis
-  # @return [Hash]
+  # Calculates progress and day metrics for the event.
+  #
+  # Delegates calculation to {Events::DaysProgressCalculator}.
+  #
+  # @return [Hash{Symbol => Integer}] progress metrics containing +:total+,
+  #   +:elapsed+, +:partial+, +:remaining+, and +:percent+
+  def days_progress
+    Events::DaysProgressCalculator.call(self)
+  end
+
+  # Returns day metrics for the event using legacy keys.
+  #
+  # @deprecated Use {#days_progress} instead.
+  #
+  # @return [Hash{Symbol => Integer}] metrics containing +:total+, +:parcial+,
+  #   +:restanta+, and +:percent+
   def tagoj
-    total = (end_date_label.to_date - start_date_label.to_date).to_i + 1
-    parcial = Time.use_zone(time_zone) { (Time.zone.today - start_date_label.to_date).to_i + 1 }
-    restanta = total - parcial
-    percent = (parcial.to_f / total.to_f).to_f * 100
-    {total: total, parcial: parcial, restanta: restanta, percent: percent.to_i}
+    days = days_progress
+    {
+      total: days[:total],
+      parcial: days[:elapsed],
+      restanta: days[:remaining],
+      percent: days[:percent]
+    }
   end
 
   # Montras la specan liston kiel matrico

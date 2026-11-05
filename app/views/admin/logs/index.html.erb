@@ -51,7 +51,7 @@
             <%= link_to "Evento", event_url(code: event.ligilo), target: "_blank", class: "badge bg-secondary text-decoration-none" %>
           <% end %>
           <% if log.organization_id && (org = @organizations[log.organization_id.to_i]) %>
-            <%= link_to "Organizo", organization_url(org.short_name), target: "_blank", class: "badge bg-secondary text-decoration-none" %>
+            <%= link_to "Organizo", organization_url(short_name: org.short_name), target: "_blank", class: "badge bg-secondary text-decoration-none" %>
           <% end %>
         </div>
       </div>

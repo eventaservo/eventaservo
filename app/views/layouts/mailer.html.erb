@@ -9,9 +9,9 @@
 
     <br>
     <div class="email-footer">
-      Mesaĝo aŭtomate sendita de <%= link_to 'Eventa Servo', 'https://eventaservo.org' %>
+      <%= t("event_mailer.layout.automated_message_html", service: link_to("Eventa Servo", "https://eventaservo.org")) %>
       <br>
-      Kontaktu nin per <%= mail_to 'kontakto@eventaservo.org' %>
+      <%= t("event_mailer.layout.contact_us_html", link: mail_to("kontakto@eventaservo.org")) %>
     </div>
   </body>
 </html>

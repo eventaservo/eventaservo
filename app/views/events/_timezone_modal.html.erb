@@ -6,17 +6,15 @@
           <h5 class="modal-title" id="timezoneModalCenterTitle">
             <%= t("timezone.timezone") %>
           </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermi"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= t('buttons.close') %>"></button>
         </div>
         <div class="modal-body" style="font-size: 1rem; font-weight: normal;">
           <% if cookies[:horzono] %>
             <p>
-              Nuntempe vi vidas ĉiujn eventojn laŭ
-              <b><%= I18n.t(cookies[:horzono], scope: :timezones) %>.</b>
+              <%= t("timezone.modal.currently_viewing_html", timezone: content_tag(:b, I18n.t(cookies[:horzono], scope: :timezones))) %>
             </p>
             <div class="small">
-              Por vidi la eventojn laŭ la propra/loka horzono,
-              <%= link_to "alklaku ĉi tie.", iloj_forvishas_horzonon_url, id: 'remove-timezone-link' %>
+              <%= t("timezone.modal.reset_timezone_html", link: link_to(t("timezone.modal.click_here"), iloj_forvishas_horzonon_url, id: 'remove-timezone-link')) %>
             </div>
             <hr>
           <% end %>

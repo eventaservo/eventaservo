@@ -5,46 +5,52 @@
     <div class="box-white">
       <div class="lead">
         <% if params[:action] == 'new' %>
-          Nova evento, kunveno aŭ okazaĵo
+          <%= t("events.form.new_title") %>
         <% else %>
-          Redakti
+          <%= t("buttons.edit") %>
         <% end %>
       </div>
 
       <div class="alert alert-info small">
-        Skribu esperante. Povu ĉiuj scii, kio okazas en Esperantujo tutmonde!
+        <%= t("events.form.write_in_esperanto_notice") %>
       </div>
 
       <%= form_for(@event, url: (event_path(code: @event.code) if params[:action].in? %w(edit update)),
-          data: { controller: 'event--form', action: 'submit->event--form#validateCategories'}) do |form| %>
+          data: {
+            controller: 'event--form',
+            action: 'submit->event--form#validateCategories',
+            'event--form-search-placeholder-value': t('events.form.search_placeholder'),
+            'event--form-search-text-value': t('events.form.search_text'),
+            'event--form-select-category-alert-value': t('events.form.select_category_alert')
+          }) do |form| %>
         <%= error_handling(@event) %>
 
         <div class="mb-3">
-          <%= form.label :title, 'Titolo *' %>
+          <%= form.label :title, "#{t('activerecord.attributes.event.title')} *" %>
           <%= form.text_field :title, class: 'form-control', autofocus: true, required: true, aria: { describedby: 'title-characters-count' } %>
           <small class="form-text text-muted" id="title-characters-count">
-            Maksimume 100 signoj
+            <%= t("events.form.max_100_chars") %>
           </small>
         </div>
 
         <div class="mb-3">
-          <%= form.label :description, 'Priskribo *' %>
+          <%= form.label :description, "#{t('activerecord.attributes.event.description')} *" %>
           <%= form.text_field :description, class: 'form-control', required: true, aria: { describedby: 'description-help' } %>
           <small class="form-text text-muted" id="description-help">
-            Maksimume 140 signoj
+            <%= t("events.form.max_140_chars") %>
           </small>
         </div>
 
         <% if Organization.by_user(current_user).any? %>
           <div class="mb-3">
-            <%= label_tag :organization_id, 'Organizo(j)' %>
+            <%= label_tag :organization_id, t("events.form.organizations") %>
             <%= select_tag 'organization_ids[]',
               options_from_collection_for_select(Organization.by_user(current_user), 'id', 'full_name', @event_organization_ids),
               multiple: true,
               data: { 'event--form-target': 'organizations'},
               aria: { describedby: 'organization-help' } %>
             <small class="form-text text-muted" id="organization-help">
-              Lasu malplena se la evento ne apartenas al organizo
+              <%= t("events.form.organization_help") %>
             </small>
           </div>
         <% end %>
@@ -52,7 +58,7 @@
         <div class="row g-3">
           <div class="col-lg-6">
             <div class="mb-3">
-              <%= form.label :date_start, 'Komenca dato' %>
+              <%= form.label :date_start, t("activerecord.attributes.event.date_start") %>
               <div class="row g-3">
                 <div class="col-8" data-controller="datepicker"
                      data-action="datepicker:complete->event--form#syncEndDate">
@@ -63,7 +69,7 @@
                          data-initial="<%= @event.start_date_label(horzono: @event.time_zone) %>">
                 </div>
                 <div class="col-4">
-                  <%= text_field_tag(:time_start, @event.start_time_label, class: 'timemask form-control', required: true, aria: { label: 'Komenca horo' }, data: { controller: 'mask', mask_pattern_value: 'time', 'event--form-target': 'timeStart' }) %>
+                  <%= text_field_tag(:time_start, @event.start_time_label, class: 'timemask form-control', required: true, aria: { label: t('events.form.time_start_aria') }, data: { controller: 'mask', mask_pattern_value: 'time', 'event--form-target': 'timeStart' }) %>
                 </div>
               </div>
             </div>
@@ -71,7 +77,7 @@
 
           <div class="col-lg-6">
             <div class="mb-3">
-              <%= form.label :date_end, 'Fina dato' %>
+              <%= form.label :date_end, t("activerecord.attributes.event.date_end") %>
               <div class="row g-3">
                 <div class="col-8" data-controller="datepicker"
                      data-action="datepicker:complete->event--form#focusEndTime">
@@ -83,7 +89,7 @@
                          data-event--form-target="endDateInput">
                 </div>
                 <div class="col-4">
-                  <%= text_field_tag(:time_end, @event.end_time_label, class: 'timemask form-control', required: true, aria: { label: 'Fina horo' }, data: { controller: 'mask', mask_pattern_value: 'time', 'event--form-target': 'timeEnd' }) %>
+                  <%= text_field_tag(:time_end, @event.end_time_label, class: 'timemask form-control', required: true, aria: { label: t('events.form.time_end_aria') }, data: { controller: 'mask', mask_pattern_value: 'time', 'event--form-target': 'timeEnd' }) %>
                 </div>
               </div>
             </div>
@@ -101,7 +107,7 @@
               <div class="btn-group mb-1">
                 <%= check_box_tag "tags_categories[]", tag.id, event_categories.include?(tag), id: "tag_#{tag.id}", class: "btn-check", autocomplete: "off" %>
                 <label class="btn tag-check tag-check--blue" for="tag_<%= tag.id %>">
-                  <%= tag.name %>
+                  <%= tag_display_name(tag) %>
                 </label>
               </div>
             <% end %>
@@ -117,36 +123,33 @@
               <div class="btn-group">
                 <%= check_box_tag "tags_characteristics[]", tag.id, event_characteristics.include?(tag), id: "tag_#{tag.id}", class: "btn-check", autocomplete: "off" %>
                 <label class="btn tag-check tag-check--orange" for="tag_<%= tag.id %>">
-                  <%= tag.name %>
+                  <%= tag_display_name(tag) %>
                 </label>
               </div>
             <% end %>
             <br>
             <small class="form-text text-muted">
-              Anoncoj kaj konkursoj ne aperos en la ĉefpaĝo.
-              <br>
-              Ĉu evento estas aldonita al la
-              <%= link_to "Internacia Kalendaro", international_calendar_path, target: :_blank %>
-              de ĉefaj tutmondaj Esperanto-eventoj, tion decidas la redakcio de ES.
+              <%= t("events.form.announcements_help_html",
+                    calendar_link: link_to(t("international_calendar.title"), international_calendar_path, target: :_blank)) %>
             </small>
           </div>
         </div>
 
         <div class="mb-3">
-          <%= form.label :enhavo, 'Enhavo' %>
+          <%= form.label :enhavo, t("events.form.content") %>
           <%= form.rich_text_area :enhavo, style: 'height: 24em; overflow-y: auto;' %>
         </div>
 
         <div class="row">
           <div class="col-lg-6">
             <div class="mb-3">
-              <%= form.label :site, 'Retpaĝo' %>
+              <%= form.label :site, t("events.form.website") %>
               <%= form.text_field :site, class: 'form-control', required: @event.email.blank?, data: { 'event--form-target': 'site', action: 'input->event--form#crossValidateSiteEmail' } %>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="mb-3">
-              <%= form.label :email, 'Retpoŝtadreso por kontakto' %>
+              <%= form.label :email, t("events.form.email_for_contact") %>
               <%= form.email_field :email, class: 'form-control', required: @event.site.blank?, data: { 'event--form-target': 'email', action: 'input->event--form#crossValidateSiteEmail' } %>
             </div>
           </div>
@@ -156,41 +159,41 @@
 
         <div class="mb-3 form-check">
           <%= form.check_box :online, class: 'form-check-input', data: { 'event--form-target': 'online', action: 'change->event--form#toggleOnline' } %>
-          <%= form.label :online, "🖥 Reta aŭ hibrida evento", class: 'form-check-label' %>
+          <%= form.label :online, "🖥 #{t('events.form.online_or_hybrid')}", class: 'form-check-label' %>
         </div>
 
         <div id="retaj_informoj" data-event--form-target="onlineInfo">
           <div class="mb-3">
             <%= check_box_tag 'universala', "1", @event.universala?, data: { 'event--form-target': 'universala', action: 'change->event--form#toggleUniversala' } %>
-            <%= label_tag 'universala', 'Elekti horzonon anstataŭ adreson/landon', class: 'form-check-label' %>
+            <%= label_tag 'universala', t('events.form.select_timezone_instead_of_address'), class: 'form-check-label' %>
           </div>
         </div>
 
         <div id="horzono" data-event--form-target="timezone">
           <div class="mb-3">
-            <%= form.label :time_zone, 'Horzono' %>
+            <%= form.label :time_zone, t("events.form.timezone") %>
             <%= form.combobox("time_zone", Horzono.for_select) %>
           </div>
         </div>
 
         <div id="malretaj_informoj" data-event--form-target="offlineInfo">
           <div class="mb-3">
-            <%= form.label :address, 'Loka adreso de la evento' %>
+            <%= form.label :address, t("events.form.address") %>
             <%= form.text_field :address, class: 'form-control', aria: { describedby: 'address-help' } %>
             <small class="form-text text-muted" id="address-help">
-              Aldonu la strat-nomon por precizigi la eventlokon en la mapo
+              <%= t("events.form.address_help") %>
             </small>
           </div>
           <div class="row">
             <div class="col-lg-6">
               <div class="mb-3">
-                <%= form.label :city, 'Urbo (aŭ loko)' %>
+                <%= form.label :city, t("events.form.city_or_place") %>
                 <%= form.text_field :city, class: 'form-control', required: true, data: { 'event--form-target': 'city' } %>
               </div>
             </div>
             <div class="col-lg-6">
               <div class="mb-3">
-                <%= form.label :country_id, 'Lando' %>
+                <%= form.label :country_id, t("activerecord.attributes.event.country_id") %>
                 <%= form.combobox("country_id", Country.not_online) %>
               </div>
             </div>
@@ -200,14 +203,14 @@
         <% if current_user.admin? %>
           <div class="box-white border border-danger rounded">
             <div class="lead">
-              Administraj funkcioj
+              <%= t("events.form.admin_functions") %>
             </div>
             <div class="mb-3 form-check">
               <%= form.check_box :international_calendar, class: 'form-check-input' %>
-              <%= form.label :international_calendar, '📅 Aldoni al Internacia Kalendaro', class: 'form-check-label' %>
+              <%= form.label :international_calendar, "📅 #{t('events.form.add_to_international_calendar')}", class: 'form-check-label' %>
             </div>
             <div class="mb-3">
-              <%= label_tag :user_id, 'Eventa administranto' %>
+              <%= label_tag :user_id, t("events.form.event_administrator") %>
               <%= form.combobox("user_id", combobox_users_with_username_path, value: (@event.user_id || current_user.id)) %>
             </div>
           </div>
@@ -215,8 +218,8 @@
 
         <div class="buttons-footer">
           <% if params[:action] == 'edit' %>
-            <%= link_to 'Ne registri', :back, class: 'button-cancel' %>
-            <%= link_to 'Forigi', event_path(code: @event.ligilo), class: 'button-outline-red float-start', method: :delete, data: { confirm: 'Ĉu vi certas? Vi ne kapablos malfari tion.' } %>
+            <%= link_to t("buttons.cancel_registration"), :back, class: 'button-cancel' %>
+            <%= link_to t("buttons.delete"), event_path(code: @event.ligilo), class: 'button-outline-red float-start', method: :delete, data: { confirm: t("events.form.delete_confirm") } %>
 
             <% if @event.cancelled %>
               <%= link_to t("pages.event.uncancel_event"), event_malnuligi_url(event_code: @event.code), class: 'btn btn-sm btn-outline-success float-start ms-2', method: :post %>
@@ -228,9 +231,9 @@
 
           <% end %>
           <% if params[:action] == 'new' %>
-            <%= link_to 'Ne registri', root_path, class: 'button-cancel' %>
+            <%= link_to t("buttons.cancel_registration"), root_path, class: 'button-cancel' %>
           <% end %>
-          <%= form.submit 'Registri', class: 'button-submit' %>
+          <%= form.submit t("buttons.save_event"), class: 'button-submit' %>
         </div>
       <% end %>
     </div>

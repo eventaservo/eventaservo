@@ -5,7 +5,7 @@
         <%= display_user_image(preleganto) %>
         <div class="overflow-hidden">
           <h6 class="fw-bold mb-0 text-truncate">
-            <%= link_to preleganto.name, events_by_username_path(preleganto.username),
+            <%= link_to preleganto.name, events_by_username_path(username: preleganto.username),
                   class: "stretched-link text-decoration-none text-body" %>
           </h6>
           <span class="text-body-secondary small">
@@ -18,7 +18,7 @@
 
     <div class="px-3 pt-3 pb-3">
       <div class="text-uppercase text-success fw-semibold small mb-2" style="font-size:0.7rem;letter-spacing:0.05em">
-        <i class="fas fa-comments me-1"></i>Temoj
+        <i class="fas fa-comments me-1"></i><%= t("teachers_and_speakers.cards.topics") %>
       </div>
       <%= simple_format(preleganto.prelego['temoj'], class: 'small mb-0') %>
     </div>

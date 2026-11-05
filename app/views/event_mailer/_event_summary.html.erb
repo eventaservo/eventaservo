@@ -24,7 +24,7 @@
         <p><%= raw @event.content %></p>
         <br>
         <p class="button-blue text-center">
-          <%= link_to 'LEGI PLI', event_url(code: @event.ligilo) %>
+          <%= link_to t("event_mailer.event_summary.read_more"), event_url(code: @event.ligilo) %>
         </p>
       </td>
     </tr>

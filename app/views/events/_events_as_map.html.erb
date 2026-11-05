@@ -21,26 +21,26 @@
 <div class="d-flex justify-content-center small">
   <div class="m-2 text-center">
     <%= image_tag('/map_icons/pin_green.svg', height: 24, alt: 'verda pinglo') %>
-    Okazas nuntempe
+    <%= t("filters.periods.hodiau") %>
   </div>
   <div class="m-2 text-center">
     <%= image_tag('/map_icons/pin_orange.svg', height: 24, alt: 'oranĝa pinglo') %>
-    Proksimajn 7 tagojn
+    <%= t("filters.periods.p7_tagojn") %>
   </div>
   <div class="m-2 text-center">
     <%= image_tag('/map_icons/pin_yellow.svg', height: 24, alt: 'flava pinglo') %>
-    Proksimajn 30 tagojn
+    <%= t("filters.periods.p30_tagojn") %>
   </div>
   <div class="m-2 text-center">
     <%= image_tag('/map_icons/pin_blue.svg', height: 24, alt: 'blua pinglo') %>
-    Estontece
+    <%= t("filters.periods.estontece") %>
   </div>
   <div class="m-2 text-center">
     <%= image_tag('/map_icons/pin_red.svg', height: 24, alt: 'ruĝa pinglo') %>
-    Nuligita
+    <%= t("events.cancelled_label") %>
   </div>
 </div>
 
 <div class="d-flex justify-content-center small">
-* La mapo aperigas nur la unuan venontan eventon, se temas pri evento en la sama loko kun la sama titolo
+  <%= t("events.map.duplicate_notice") %>
 </div>

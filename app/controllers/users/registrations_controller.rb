@@ -19,7 +19,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     unless params[:sekurfrazo].strip.downcase == Rails.application.credentials.dig("form_security_phrase")
       redirect_to(
         new_registration_path(resource_name),
-        flash: {error: "Malĝusta kontraŭspama sekurvorto. Entajpu la nomon de la internacia lingvo."}
+        flash: {error: I18n.t("flash.users.invalid_security_phrase")}
       ) && return
     end
 
@@ -52,7 +52,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     UserServices::Disable.call(resource)
     sign_out(@user)
 
-    redirect_to root_path, notice: "Via konto estas forviŝita."
+    redirect_to root_path, notice: I18n.t("flash.users.account_deleted")
   end
 
   # GET /resource/cancel
@@ -73,7 +73,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: %i[name picture city country_id weekly_summary birthday ueacode about youtube telegram instagram facebook vk persona_retejo twitter instruisto preleganto])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[name picture city country_id weekly_summary locale birthday ueacode about youtube telegram instagram facebook vk persona_retejo twitter instruisto preleganto])
   end
 
   # The path used after sign up.
@@ -93,6 +93,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # Alidirektas la uzanton al sia profila paĝo
   def after_update_path_for(resource)
-    events_by_username_path(resource.username)
+    events_by_username_path(username: resource.username)
   end
 end

@@ -2,7 +2,7 @@
 
 class EventsController < ApplicationController
   rescue_from ActionController::UnknownFormat do |_e|
-    redirect_to root_path, flash: {error: "Formato ne ekzistas."}
+    redirect_to root_path, flash: {error: I18n.t("flash.formats.not_found")}
   end
   include Webcal
 
@@ -19,7 +19,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.includes(:organizations, :tags, :user, uploads_attachments: :blob).by_link(params[:code] || params[:event_code])
-    redirect_to root_path, flash: {error: "Evento ne ekzistas"} and return if @event.nil?
+    redirect_to root_path, flash: {error: I18n.t("flash.events.not_found")} and return if @event.nil?
 
     @horzono = cookies[:horzono] || params[:horzono] || @event.time_zone
     @partoprenontoj = @event.participants.includes(user: {picture_attachment: :blob})
@@ -30,7 +30,7 @@ class EventsController < ApplicationController
     end
   rescue ActionView::Template::Error => e
     Sentry.capture_exception(e)
-    redirect_to root_path, flash: {error: "Eraro okazis montrante tiun eventon"}
+    redirect_to root_path, flash: {error: I18n.t("flash.events.display_error")}
   end
 
   def new
@@ -85,7 +85,7 @@ class EventsController < ApplicationController
       NovaEventaSciigoJob.perform_later(@event)
       ahoy.track "Create event", event_url: @event.short_url
       Logs::Create.call(text: "Event created", user: current_user, loggable: @event)
-      redirect_to event_path(code: @event.ligilo), flash: {notice: "Evento sukcese kreita."}
+      redirect_to event_path(code: @event.ligilo), flash: {notice: I18n.t("flash.events.created")}
     else
       render :new
     end
@@ -97,13 +97,13 @@ class EventsController < ApplicationController
     if dosier_alshutado
       if params[:event].nil?
         redirect_to(event_url(code: @event.ligilo),
-          flash: {error: "Vi devas unue elekti dosieron"}) && return
+          flash: {error: I18n.t("flash.events.select_file_first")}) && return
       end
 
       if @event.uploads.attach(params[:event][:uploads])
-        flash[:notice] = "Dokumento sukcese alŝutita"
+        flash[:notice] = I18n.t("flash.events.document_uploaded")
       else
-        flash[:error] = "Dosier-formato ne valida"
+        flash[:error] = I18n.t("flash.events.invalid_file_format")
       end
       redirect_to event_path(code: @event.ligilo)
     elsif @event.update(event_params)
@@ -140,7 +140,7 @@ class EventsController < ApplicationController
       set_event_format(@event)
       ahoy.track "Update event", event_url: @event.short_url
       Logs::Create.call(text: "Event updated", user: current_user, loggable: @event)
-      redirect_to event_path(code: @event.ligilo), notice: "Evento sukcese ĝisdatigita"
+      redirect_to event_path(code: @event.ligilo), notice: I18n.t("flash.events.updated")
     else
       render :edit
     end
@@ -149,14 +149,14 @@ class EventsController < ApplicationController
     PaperTrail.request.disable_model(Event)
     @event.update(event_params)
     PaperTrail.request.enable_model(Event)
-    redirect_to event_path(code: @event.ligilo), notice: "Evento sukcese ĝisdatigita"
+    redirect_to event_path(code: @event.ligilo), notice: I18n.t("flash.events.updated")
   end
 
   def destroy
     result = Events::SoftDelete.call(event: @event, user: current_user)
 
     if result.success?
-      redirect_to root_path, flash: {notice: "Evento sukcese forigita"}
+      redirect_to root_path, flash: {notice: I18n.t("flash.events.destroyed")}
     else
       redirect_to event_path(code: @event.ligilo), flash: {error: result.error}
     end
@@ -166,24 +166,29 @@ class EventsController < ApplicationController
     @event.update(cancelled: true, cancel_reason: params[:cancel_reason])
     ahoy.track "Cancelled event", event_url: @event.short_url
 
-    redirect_to event_url(code: params[:event_code]), flash: {notice: "Evento nuligita"}
+    redirect_to event_url(code: params[:event_code]), flash: {notice: I18n.t("flash.events.cancelled")}
   end
 
   def malnuligi
     @event.update(cancelled: false, cancel_reason: nil)
     ahoy.track "Un-cancelled event", event_url: @event.short_url
 
-    redirect_to event_url(code: params[:event_code]), flash: {notice: "Evento malnuligita"}
+    redirect_to event_url(code: params[:event_code]), flash: {notice: I18n.t("flash.events.uncancelled")}
   end
 
   def delete_file
     @event.uploads.find(params[:file_id]).purge_later
-    redirect_to event_path(code: @event.ligilo), flash: {success: "Dosiero sukcese forigita"}
+    redirect_to event_path(code: @event.ligilo), flash: {success: I18n.t("flash.events.file_deleted")}
   end
 
+  # Displays a user's public profile and their events
+  #
+  # @return [void]
   def by_username
     @uzanto = User.find_by(username: params[:username])
-    redirect_to root_path, flash: {error: "Uzantnomo ne ekzistas"} and return if @uzanto.nil?
+    redirect_to root_path, flash: {error: I18n.t("flash.users.username_not_found")} and return if @uzanto.nil?
+
+    @uzanto.generate_webcal_token! if current_user == @uzanto && @uzanto.webcal_token.blank?
 
     @venontaj = Event.includes(:country).by_username(params[:username]).venontaj
     @interested_events = @uzanto.interested_events
@@ -197,7 +202,7 @@ class EventsController < ApplicationController
 
     EventMailer.kontakti_organizanton(event: @event, user: current_user, message:).deliver_later
 
-    redirect_to event_url(code: params[:event_code]), flash: {info: "Mesaĝo sendita"}
+    redirect_to event_url(code: params[:event_code]), flash: {info: I18n.t("flash.events.message_sent")}
   end
 
   def kronologio
@@ -220,7 +225,7 @@ class EventsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_event
     @event = Event.by_link(params[:code] || params[:event_code])
-    redirect_to root_path, flash: {error: "Evento ne ekzistas"} if @event.nil?
+    redirect_to root_path, flash: {error: I18n.t("flash.events.not_found")} if @event.nil?
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
@@ -249,7 +254,7 @@ class EventsController < ApplicationController
   # Nur la permesataj uzantoj povas redakti, ĝisdatiĝi kaj foriĝi la eventon
   def authorize_user
     unless user_can_edit_event?(user: current_user, event: @event)
-      redirect_to root_path, flash: {error: "Vi ne rajtas"}
+      redirect_to root_path, flash: {error: I18n.t("flash.general.unauthorized")}
     end
   end
 

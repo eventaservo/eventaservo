@@ -2,9 +2,6 @@
 eo:
   activerecord:
     attributes:
-      event/report:
-        title: Titolo
-        url: Ligilo
       event:
         city: Urbo
         country_id: Lando
@@ -13,6 +10,9 @@ eo:
         description: Priskribo
         short_url: mallonga ligilo
         title: Titolo
+      event/report:
+        title: Titolo
+        url: Ligilo
       organization:
         city: urbo
         country_id: lando
@@ -21,10 +21,18 @@ eo:
         name: nomo
         short_name: mallonga nomo
       user:
-        name: Nomo
-        email: Retadreso
+        about: Pri mi
+        avatar: Avatar
+        birthday: Naskiĝdato
         city: Urbo
         country_id: Lando
+        email: Retadreso
+        locale: Preferata lingvo
+        name: Nomo
+        password: Pasvorto
+        password_confirmation: Konfirmu pasvorton
+        persona_retejo: Persona retejo
+        ueacode: UEA-kodo
     errors:
       messages:
         record_invalid: 'Validado malsukcesis: %{errors}'
@@ -42,28 +50,140 @@ eo:
     models:
       event: Eventoj
     registrations:
+      api_v2_token: API v2 Token
       regenerate_token: Regeneri ĵetonon
       regenerate_token_confirmation: Ĉu vi certas, ke vi volas regeneri vian API-ĵetonon? La malnova ĵetono tuj ĉesos funkcii.
       token_regenerated: API-ĵetono sukcese regenerita.
-      token_regeneration_error: "Eraro dum regenerado de API-ĵetono: %{error}"
+      token_regeneration_error: 'Eraro dum regenerado de API-ĵetono: %{error}'
+  announcements_and_contests:
+    caption: Listo de nunaj anoncoj kaj konkursoj en Esperantujo.
   api:
     v2:
       errors:
-        token_missing: Ĵetono mankas
-        token_invalid: Ĵetono ne validas
         token_expired: Ĵetono malaktuala
+        token_invalid: Ĵetono ne validas
+        token_missing: Ĵetono mankas
+  breadcrumbs:
+    world: Mondo
   buttons:
+    add: Aldoni
     add_video: Video
-    duplicate: Duobligi
-    edit: Redakti
-    share: Diskonigi
     cancel: Nuligi
+    cancel_registration: Ne registri
     change: Ŝangi
     close: Fermi
+    copy: Kopii
+    delete: Forigi
+    duplicate: Duobligi
+    edit: Redakti
+    save: Registri
+    save_event: Registri
+    search: Serĉi
     select: Elekti
     send: Sendi
+    share: Diskonigi
+    update: Ĝisdatigi
+  clipboard:
+    copied_to_clipboard: "%{text} sukcese kopiita al la tondujo!"
+    copy_failed: Ne eblis kopii al la tondujo
+  common:
+    are_you_sure: Ĉu vi certas?
+    country: Lando
+    date: Dato
+    event: Evento
+    events: Eventoj
+    location: Loko
+    name: Nomo
+    no_results: Neniu rezulto
+    no_upper: NE
+    optional: "*ne deviga"
+    or_upper: AŬ
+    sign_in: Ensalutu
+    yes_upper: JES
+  continents:
+    afriko: Afriko
+    ameriko: Ameriko
+    azio: Azio
+    europo: Eŭropo
+    oceanio: Oceanio
+    reta: Reta
+  devise:
+    confirmations:
+      new:
+        submit: Resendi
+        subtitle: Resendu konfirminstrukciojn
+    passwords:
+      edit:
+        minimum_characters: Minimume %{count} signoj
+        new_password: Nova pasvorto
+        password_confirmation: Konfirmu pasvorton
+        submit: Ŝanĝu ĝin
+        title: Ŝanĝu vian pasvorton
+      new:
+        instructions: Skribu vian retpoŝtadreson. Ni sendos al vi instrukciojn por krei novan pasvorton.
+        submit: Ricevu instrukciojn
+        subtitle: Ĉu vi forgesis vian pasvorton?
+    registrations:
+      edit:
+        delete_account: Forviŝi konton
+        delete_account_confirmation: Ĉu vi certas? Oni NE POVOS mal-fari tion!
+        links: Ligiloj
+        organizations: Organizoj
+        ready_to_help: Mi pretas helpi
+        remove_avatar: Forviŝi avatar
+        title: Redakti profilon
+      instructor:
+        experience: Sperto
+        experience_placeholder: Skribu pri via sperto kiel instruisto.
+        i_am_teacher: Mi estas instruanto
+        lead: Kiel instruanto
+        level: Nivelo
+      new:
+        birthday_placeholder: Naskiĝdato (T/M/J) *ne deviga
+        password_confirmation_placeholder: Konfirmu pasvorton
+        password_placeholder: Pasvorto
+        security_phrase_placeholder: Kiel nomiĝas nia lingvo?
+        submit: Registriĝi
+        subtitle_html: Registriĝu por krei novajn eventojn.<br>Estas senpage!
+        ueacode_placeholder: UEA-kodo *ne deviga
+        video_help_html: Se vi havas dubon, spektu %{video_link}. Ĝi klarigas kiel registriĝi.
+        video_link_text: ĉi tiun filmeton
+      speaker:
+        i_am_speaker: Mi estas preleganto
+        lead: Kiel preleganto
+        topics_label: Mi prelegas pri la jenaj temoj
+        topics_placeholder: Skribu pri la temoj pri kiuj vi pretas prelegi
+    sessions:
+      new:
+        forgot_password: Mi forgesis mian pasvorton
+        submit: Ensaluti
+        subtitle: Ensalutu por krei novajn eventojn.
+    shared:
+      links:
+        already_registered: Ĉu vi jam registriĝis?
+        didnt_receive_confirmation_instructions: Ĉu vi ne ricevis konfirminstrukciojn?
+        not_registered: Ĉu vi ne registriĝis?
+        sign_in: Ensalutu
+        sign_up_now: Registriĝu nun
+      sign_in_with_provider: Ensaluti per %{provider}
+      sign_up_with_provider: Registriĝi per %{provider}
+    unlocks:
+      new:
+        submit: Resendi malŝlosajn instrukciojn
+        title: Resendu malŝlosajn instrukciojn
   errors:
     format: "%{attribute} %{message}"
+    header: Troviĝas eraro en la formularo
+    internal_error:
+      apology: Ni pardonpetas. Ni korektos tiun eraron baldaŭ.
+      form:
+        back_to_home: Iri al ĉefpaĝo
+        comments: Kion vi faris antaŭ la eraro okazis?
+        email: Retadreso
+        name: Nomo
+        submit: Sendi
+      help_us: Vi povas helpi nin sendante pli da informoj pri kio okazis
+      title: Oh! Eraro okazis!
     messages:
       accepted: devas esti akceptita
       blank: devas esti kompletigita
@@ -85,11 +205,284 @@ eo:
       too_long: estas tro longa (maksimume %{count} signoj)
       too_short: estas tro mallonga (minimume %{count} signoj)
       wrong_length: ne estas je ĝusta longo (devas enhavi %{count} signojn)
+    not_found:
+      back_to_home: Iru al la ĉefpaĝo
+      contact_link_text: Kontaktu nin
+      message_html: La paĝo ne ekzistas. %{contact_link} se vi bezonas helpon.
+      title: Paĝo ne trovita
     template:
       body: 'Kontrolu la jenajn kampojn: '
       header:
         one: 'Ne eblas registri tiun %{model}: 1 eraro'
         other: 'Ne eblas registri tiun %{model}: %{count} eraroj'
+    unacceptable:
+      message: Eble vi ne rajtas fari tiun agon aŭ la senditaj datumoj estis malvalidaj.
+      title: Neakceptebla peto
+  event_mailer:
+    event_summary:
+      read_more: LEGI PLI
+    footer:
+      instigo_fund: Fonduso Instigo
+      intro: Eventa Servo estas senpaga servo de UEA kaj TEJO. Ĉu ĝi plaĉas al vi?
+      support_prompt: Subtenu retajn agantojn per mondonaco al la
+    kontakti_organizanton:
+      body_html: Iu havas demandon, volas raporti problemon aŭ informi vin pri la evento "%{event_link}", kiun vi administras en Eventa Servo. Ĉu vi povas kontroli tion kaj korekti, se necese?
+      greeting: Saluton.
+      message_intro: 'Jen la mesaĝo:'
+      subject: Informo pri via evento en Eventa Servo
+    layout:
+      automated_message_html: Mesaĝo aŭtomate sendita de %{service}
+      automated_message_text: Mesaĝo aŭtomate sendita de Eventa Servo
+      contact_us_html: Kontaktu nin per %{link}
+    notify_admins:
+      admin_only_note: Tiu ĉi informo estas nur por la administrantoj
+      created_by: Evento kreita de %{user} en %{date}
+      subject_new: "[ES estraro] Nova evento: %{title}"
+      subject_update: "[ES estraro] Ĝisdatiĝo: %{title}"
+    notify_user:
+      footer_html: Se vi ne plu volas ricevi informojn pri novaj eventoj en %{country}, eblas %{link} per ĉi tiu ligilo.
+      unsubscribe: malaboni
+    nova_administranto:
+      body_html: Vi nun estas la administranto de la evento %{event_link} en Eventa Servo. Tio signifas ke vi povas ŝanĝi ĝian enhavon aŭ forigi ĝin.
+      closing: Sukceson kun via agado!
+      greeting: Saluton %{name}.
+      invitation: Ni invitas vin aldoni informojn pri eventoj, kunvenoj kaj okazaĵoj al Eventa Servo. Tion vi povas fari ĉu aldonante novan eventon, ĉu duobligante ekzistantan.
+      subject: Vi estas nova eventa administranto
+      view_event_page: VIDI LA EVENTAN PAĜON
+    rememorigas_uzantojn:
+      footer_note_html: Vi ricevas ĉi tiun mesaĝon, ĉar vi indikis en la retejo %{site_link} ke vi interesiĝas pri specifa evento. Por ne plu ricevi ĉi tiajn mesaĝojn, sufiĉas ne plu alklaki la butonon "%{button_name}".
+      greeting: Saluton.
+      interest_html: 'Vi indikis en la retejo de %{site_link}, ke la jena evento interesas vin: %{event_link}.'
+      view_event_page: VIDI LA EVENTAN PAĜON
+    reminders:
+      messages:
+        hours_2: Ĝi komenciĝos baldaŭ. Ni deziras al vi agrablan kaj sukcesan partoprenon.
+        month_1: Ĝi komenciĝos post monato. Pripensu aliĝi aŭ almenaŭ informi la organizanton de la evento pri via intenco ĝin ĉeesti.
+        week_1: Ĝi komenciĝos post semajno. Pripensu aliĝi aŭ almenaŭ informi la organizanton de la evento pri via intenco ĝin ĉeesti.
+      subjects:
+        hours_2: "[ES] %{title} baldaŭ komenciĝos"
+        month_1: "[ES] %{title} komenciĝos post monato"
+        week_1: "[ES] %{title} komenciĝos post semajno"
+    weekly_summary:
+      and: kaj
+      events_taking_place_between: Eventoj kiuj okazos inter
+      in_person_events: Ĉeestaj eventoj
+      no_events: Ne okazos eventoj
+      online_events: Retaj eventoj
+      share_my_event: Diskonigi mian eventon
+      subject: Tutmonda semajna resumo de eventoj
+      unsubscribe: malaboni
+      unsubscribe_html: Se vi ne plu volas ricevi la Semajnan Resumon, eblas %{link}.
+  events:
+    all_day: tuttaga
+    calendar:
+      jump_to_month: Monato
+      next_week: Sekva semajno
+      no_events: Neniu evento
+      previous_week: Antaŭa semajno
+      today: Hodiaŭ
+      week_navigation: Navigado inter semajnoj
+    cancel_modal:
+      confirm_button: Konfirmi la nuligon
+      description: Nuligi la eventon ne forigas ĝin de la listo, sed aperigas ĝin kiel nuligitan. Tiel homoj informiĝos, ke la evento ne okazos.
+      reason_placeholder: Entajpu la kialon
+      title: Nuligi la eventon
+    cancelled_label: Nuligita
+    cancelled_upper: NULIGITA
+    chronology:
+      no_changes: Neniu ŝanĝo troviĝis en la kronologio.
+      title: Kronologio
+      view_event: Revidi la eventon
+    date_in_city: "%{date} en %{city}"
+    daylight_saving_time: Somera/Vintra tempo
+    days_left:
+      in_days:
+        one: finiĝos post %{count} tago
+        other: finiĝos post %{count} tagoj
+      tomorrow: finiĝos morgaŭ
+    details:
+      administrator: Administranto
+      header: Informoj
+    form:
+      add_to_international_calendar: Aldoni al Internacia Kalendaro
+      address: Loka adreso de la evento
+      address_help: Aldonu la strat-nomon por precizigi la eventlokon en la mapo
+      admin_functions: Administraj funkcioj
+      announcements_help_html: Anoncoj kaj konkursoj ne aperos en la ĉefpaĝo.<br>Ĉu evento estas aldonita al la %{calendar_link} de ĉefaj tutmondaj Esperanto-eventoj, tion decidas la redakcio de ES.
+      city_or_place: Urbo (aŭ loko)
+      content: Enhavo
+      delete_confirm: Ĉu vi certas? Vi ne kapablos malfari tion.
+      email_for_contact: Retpoŝtadreso por kontakto
+      event_administrator: Eventa administranto
+      max_100_chars: Maksimume 100 signoj
+      max_140_chars: Maksimume 140 signoj
+      new_title: Nova evento, kunveno aŭ okazaĵo
+      online_or_hybrid: Reta aŭ hibrida evento
+      organization_help: Lasu malplena se la evento ne apartenas al organizo
+      organizations: Organizo(j)
+      search_placeholder: Serĉi...
+      search_text: Neniu trafo
+      select_category_alert: Vi devas elekti almenaŭ unu specon
+      select_timezone_instead_of_address: Elekti horzonon anstataŭ adreson/landon
+      short_url: Mallonga ligilo (nedeviga)
+      short_url_unavailable: Ĉi tiu mallonga ligilo ne estas disponebla. Elektu alian.
+      time_end_aria: Fina horo
+      time_start_aria: Komenca horo
+      timezone: Horzono
+      website: Retpaĝo
+      write_in_esperanto_notice: Skribu esperante. Povu ĉiuj scii, kio okazas en Esperantujo tutmonde!
+    happening_now_count:
+      one: "%{count} okazas nuntempe"
+      other: "%{count} okazas nuntempe"
+    international_event: Internacia Evento
+    map:
+      duplicate_notice: "* La mapo aperigas nur la unuan venontan eventon, se temas pri evento en la sama loko kun la sama titolo"
+    my_events: Eventoj
+    online: Reta
+    online_event: Reta evento
+    options:
+      aria_label: Eventaj ebloj
+    participants:
+      and_more: kaj pli...
+      anonymous_count:
+        one: kaj %{count} alia kiu preferis ne aperigi sian nomon
+        other: kaj %{count} aliaj kiuj preferis ne aperigi sian nomon
+      count_interested_future:
+        one: "%{count} interesiĝanto"
+        other: "%{count} interesiĝantoj"
+      count_interested_past:
+        one: "%{count} interesiĝinto"
+        other: "%{count} interesiĝintoj"
+      interested_active: Mi interesiĝas!
+      interested_button: Mi interesiĝas
+      interested_future: Interesiĝantoj
+      interested_past: Interesiĝintoj
+      public_list_question: Ĉu aperigi vian nomon en la listo de interesiĝantoj?
+      reminder_prompt: Indiku ke vi interesiĝas kaj vi ricevos memorigajn retmesaĝojn pri la evento.
+      reminder_subscribed: Vi ricevos memorigajn retmesaĝojn pri la evento.
+      sign_in_to_show_interest_html: "%{link} por indiki vian interesiĝon"
+    past_events_count:
+      one: "%{count} pasinta evento"
+      other: "%{count} pasintaj eventoj"
+    reports:
+      add_link: Aldoni ligilon
+      delete_report_aria: Forigi raporton
+      empty_prompt: Aldonu ligilojn al raportoj
+      events_with_reports_title: Eventoj kun raportoj
+      header: Raportoj
+      new_title: Event-raporto
+      url_example: 'Ekz: https://uea.facila.org/artikoloj/movado/zamenhof-tago-r269'
+    share_modal:
+      prompt: Elektu kiel diskonigi la eventon
+      share_on_facebook: Diskonigi en Facebook
+      share_on_pinterest: Diskonigi en Pinterest
+      share_on_reddit: Diskonigi en Reddit
+      share_on_telegram: Diskonigi en Telegram
+      share_on_twitter: Diskonigi en Twitter
+      share_on_vkontakte: Diskonigi en VKontakte
+      share_via_email: Diskonigi per retpoŝto
+      share_via_whatsapp: Diskonigi per WhatsApp
+      title: Diskonigilo
+    show_past: Pasintaj eventoj
+    timezone:
+      same_as_yours: Sama kiel via horzono
+    upcoming_events_count:
+      one: "%{count} venonta"
+      other: "%{count} venontaj"
+    uploader:
+      prompt: Aldonu fotojn aŭ dokumentojn al la evento.
+      submit: Alŝuti
+      title: Alŝutilo
+    uploads:
+      delete_file_aria: Forigi dosieron
+      title: Dosieroj
+    webcal_modal:
+      auto_subscribe_html: Kelkaj kalendaraj programoj ebligas aŭtomate aboni la kalendaron se oni alklakas specifan ligilon. Vi povas provi tion per %{link}.
+      auto_subscribe_link: ĉi tiu ligilo
+      calendar_subscription_info: Kiam oni abonas kalendaron, ĉiuj eventoj estas aldonataj al la kalendaro kaj ajnaj eventaj ŝanĝoj aŭtomate ĝisdatiĝas.
+      country_intro_html: Jen Webcal-ligilo por aboni la kalendaron de eventoj en %{country}. Uzu ĝin en programoj kiel Google Calendar, iCal aŭ similaj. Se vi bezonas klarigon kiel uzi la ligilon, legu %{help_link}.
+      help_article_link: ĉi tiun artikolon
+      online_intro_html: Jen Webcal-ligilo por aboni la kalendaron de ĉiuj estontaj <strong>retaj eventoj</strong>. Uzu ĝin en programoj kiel Google Calendar, iCal aŭ similaj. Se vi bezonas klarigon kiel uzi la ligilon, legu %{help_link}.
+      subscribe_calendar: Aboni kalendaron
+      title: Aboni kalendaron
+  filters:
+    periods:
+      estontece: Estontece
+      hodiau: Okazas nuntempe
+      p30_tagojn: Proksimajn 30 tagojn
+      p7_tagojn: Proksimajn 7 tagojn
+  flash:
+    admin:
+      redirections:
+        created: Redirekto sukcese kreita.
+        destroyed: Redirekto sukcese forigita.
+        updated: Redirekto sukcese ĝisdatigita.
+      reports:
+        destroyed: Raporto sukcese forigita.
+        updated: Raporto sukcese ĝisdatigita.
+      users:
+        deactivated: Uzanto malvalidigita.
+        disable_failed_one_member_org: Ne eblis malvalidigi la uzanton. Eble ĝi apartenas al unumembra organizo.
+        email_confirmed: Retadreso de la uzanto markita kiel konfirmita.
+        enabled: Uzanto ebligita.
+        merged: Uzantoj sukcese kunfanditaj.
+        new_password: 'Nova pasvorto: %{password}'
+        updated: Uzanto sukcese ĝisdatigita.
+    countries:
+      not_found: Lando ne ekzistas
+      not_in_database: Lando ne ekzistas en la datumbazo
+    events:
+      cancelled: Evento nuligita
+      created: Evento sukcese kreita.
+      destroyed: Evento sukcese forigita
+      display_error: Eraro okazis montrante tiun eventon
+      document_uploaded: Dokumento sukcese alŝutita
+      file_deleted: Dosiero sukcese forigita
+      invalid_file_format: Dosier-formato ne valida
+      message_sent: Mesaĝo sendita
+      no_events_in_continent: Ne estas eventoj en tiu kontinento
+      not_found: Evento ne ekzistas
+      select_file_first: Vi devas unue elekti dosieron
+      uncancelled: Evento malnuligita
+      updated: Evento sukcese ĝisdatigita
+    feedback:
+      thank_you: Dankon!
+    formats:
+      not_found: Formato ne ekzistas.
+    general:
+      success: Sukceso
+      unauthorized: Vi ne rajtas
+      unauthorized_action: Vi ne rajtas fari tion
+    organizations:
+      created: Organizo sukcese kreita.
+      not_found: Organizo ne ekzistas
+      updated: Organizo sukcese ĝisdatigita
+      user_added: Uzanto aldonita al la organizo
+    reports:
+      create_error: Eraro okazis kreante la raporton
+      created: La raporto estis sukcese kreita
+      destroy_error: Eraro okazis forigante la raporton
+      destroyed: La raporto estis sukcese forigita
+    users:
+      account_deleted: Via konto estas forviŝita.
+      invalid_security_phrase: Malĝusta kontraŭspama sekurvorto. Entajpu la nomon de la internacia lingvo.
+      not_found: Uzanto ne ekzistas
+      username_not_found: Uzantnomo ne ekzistas
+    videos:
+      destroyed: Video forigita
+      unauthorized: Vi ne rajtas forigi tiun videon
+    webcal:
+      country_code_not_found: Landa kodo ne ekzistas
+  footer:
+    about: Pri ni
+    changelog: Ŝanĝoprotokolo
+    contact_subject: Kontakto per Eventa Servo
+    contact_us: Kontaktu nin
+    more: Pli
+    privacy: Privateco
+    server_status: Servila stato
+    terms: Regularo
+    version: Versio %{version}
   helpers:
     select:
       prompt: Bonvolu elekti
@@ -97,29 +490,297 @@ eo:
       create: Krei %{model}
       submit: Registri tiun %{model}
       update: Modifi tiun %{model}
+  home:
+    about:
+      advantages:
+        contact_subject: Pri Eventa Servo
+        contact_us: kontaktu nin
+        files_p: Aldonu fotojn kaj dosierojn al viaj eventoj.
+        files_title: Dosierujo
+        open_source_p_html: Estas tute senpaga. La programkodo estas libera en %{github_link}. Se vi volas kontribui al la programado, %{contact_link}.
+        open_source_title: Senpaga kaj malfermitkoda
+        social_p: Facile diskonigu vian eventon per diversaj sociaj komunikiloj kiel Facebook, Twitter, WhatsApp, Telegram, retpoŝtaj servoj ktp.
+        social_title: Sociaj komunikiloj
+        tech_p: Konektu la eventojn al aliaj sistemoj per API-teknologio. Abonu la eventan liston per RSS-teknologio.
+        tech_title: Teknologioj
+        title: Kaj multaj aliaj avantaĝoj
+      articles:
+        art1: "(Artikolo de Yves Nevelsteen kaj Fernando Ŝajani kiu aperis en la maja numero de 2026 de Revuo Esperanto)"
+        art10: "(por virtuala Zoom-kunveno de la klubo La Verda Stelo 2020-12)"
+        art11: "(por la Virtuala Kongreso de Esperanto 2020-08)"
+        art12: "(Artikolo de Fernando kiu aperis en Kontakto 6-2018)"
+        art2: "(Podkasto-episodo pri Eventa Servo en Movada Vidpunkto en januaro 2026)"
+        art3: "(Prelego de Yves Nevelsteen por la Londona Esperanto-klubo kaj La Verda Stelo en januaro 2023)"
+        art4: "(Artikolo aperinta en Libera Folio 2022-12-06)"
+        art5: "(Gazetara komuniko de UEA kiu plurfoje mencias Eventan Servon - 2022-11-30)"
+        art6: "(Artikolo de Yves Nevelsteen kiu aperis en la oktobra numero de 2022 de Revuo Esperanto)"
+        art7: "(Artikolo de Yves Nevelsteen kiu aperis en la februara numero de 2020 de Revuo Esperanto)"
+        art8: "(Gazetara komuniko de UEA kiu plurfoje mencias Eventan Servon)"
+        art9: "(Intervjuo kun Yves Nevelsteen kiu aperis en Libera Folio en aprilo 2020)"
+        in_wikipedia: en Vikipedio
+        more_info_wiki_html: Vidu pli da informoj %{wiki_link}.
+        title: Artikoloj kaj prelegoj pri Eventa Servo
+      creator_company: EventaServo estas kreita de Fernando Ŝajani per
+      features:
+        calendar_p: Oni povas aboni landan aŭ organizan eventan liston per kalendara programo kiel Google Calendar, Apple iCal aŭ simila.
+        calendar_title: Aboni per via kalendara programo
+        device_p: Oni povas uzi Eventan Servon per tradicia komputilo, poŝtelefono aŭ tabulkomputilo. Instali aplikaĵon ne necesas.
+        device_title: Uzebla per komputilo aŭ poŝtelefono
+        discover_p1: Per Eventa Servo oni povas vidi eventojn ĉirkaŭ la tuta mondo laŭ mapo, listo, kartaro kaj kalendaro.
+        discover_p2: Ankaŭ eblas filtri la eventojn laŭ kontinentoj, landoj kaj urboj.
+        discover_title: Facile listigi kaj trovi eventojn!
+      helpers:
+        p1_html: "%{yves_link} eksciis pri Eventa Servo en 2018. Li tuj komprenis ĝian potencialon kaj tial multe ekhelpis varbi por la retejo. Hodiaŭ li daŭre estas 'ĉefhelpanto': konsilanto, testanto de novaj funkcioj kaj komunikanto (kun uzantoj kaj gazetaro).<br>%{robin_link} ekde 2020 ankaŭ helpas pri konsilado kaj programado."
+        p2_html: Ni aparte dankas %{fernando_link} vic-prezidanton de UEA, pro liaj apogo kaj helpo disvastigi Eventan Servon.
+        p3_html: Se ankaŭ vi volas helpi, aliĝu al ĉi tiu %{telegram_link}.
+        telegram_link_text: Telegram-grupo
+        title: Helpantoj
+      history:
+        eventoj_hu_link_text: Kalendaro de Eventoj.hu
+        p1_html: "%{creator_link} kreis la retejon Eventa Servo en 2017. En lia urbo troviĝas malmultaj esperantistoj, tial maloftas la renkontiĝoj. Li certis, ke esperantistoj agas en aliaj urboj kaj landoj, sed kiujn eventojn ili organizas? Kie? Kiam? Li kreis Eventan Servon por ordigi tiajn informojn."
+        p2: En aprilo 2019, Fernando donacis la sistemon al Universala Esperanto-Asocio. UEA kaj TEJO ekde tiam instigas al la uzado de Eventa Servo por informi Esperantujon pri internaciaj, landaj kaj lokaj eventoj, kongresoj, kunvenoj, renkontiĝoj k.s.
+        p3_html: Fine de 2020, Eventa Servo iĝis la oficiala posteulo de la %{link}.
+        title: Historio
+      partners:
+        p: Ni dankas ĉi tiujn kompaniojn pro la permeso uzi iliajn teknologiojn senpage por plibonigi Eventan Servon.
+        title: Dankoj al partneraj teknologiaj kompanioj
+      registered_events: registritaj eventoj
+      registered_users: registritaj uzantoj
+      tagline: La sistemo por diskonigi Esperanto-eventojn tutmonde!
+      title: Eventa Servo
+      uea_tejo:
+        p1_html: Eventa Servo apartenas al %{uea_link} kun apogo de %{tejo_link}.
+        p2: Ambaŭ organizoj instigas la uzadon de Eventa Servo por informi Esperantujon pri internaciaj, landaj kaj lokaj eventoj, kongresoj, kunvenoj, renkontiĝoj k.s.
+        title: UEA kaj TEJO
+    ads:
+      alt: Anonco
+  international_calendar:
+    by_year_title: Internaciaj Kalendaroj laŭ jaroj
+    contact_link_text: informu nin per retmesaĝo
+    current_calendar: Nuna Internacia Kalendaro
+    eventoj_hu:
+      logo_alt: Emblemo de eventoj.hu
+      paragraph_1_html: Inter 1996-2020 la Esperanto-Centro EVENTOJ / Lingvo-Studio en Budapeŝto funkciigis la "Internacian Kalendaron de Esperantaj Renkontiĝoj", kiu listigis la fizikajn Esperanto-aranĝojn, kiuj bonvenigis viziton de vojaĝemaj esperantistoj. Ĝia arkivo troviĝas en %{link}.
+      paragraph_2: La supra internacia listo de renkontiĝoj estas prizorgata de Eventa Servo. Esperanto-Centro EVENTOJ / Lingvo-Studio en Budapeŝto lanĉis ĉi tian liston en 1996 kaj kunlaboras kun Eventa Servo ekde 2020.
+    events: Eventoj
+    missing_event_html: Se laŭ vi mankas evento aŭ estas eraro, %{contact_link}.
+    page_title: Internacia Kalendaro | Eventa Servo
+    past_events: Pasintaj internaciaj eventoj
+    subtitle: Listo de la ĉefaj Esperanto-eventoj tutmonde
+    title: Internacia Kalendaro
+    year: Jaro
+    year_title: Internacia kalendaro %{year}
+  languages:
+    en: Angla (English)
+    eo: Esperanto
+    pt_BR: Portugala (Português)
   links:
     announcements_and_contests: Anoncoj kaj konkursoj
     international_calendar: Internacia Kalendaro
     presentations: Registraĵoj
     reports: Raportoj
     teachers_and_lecturers: Instruantoj
-  events:
-    calendar:
-      jump_to_month: Monato
-    show_past: Pasintaj eventoj
-    past_events_count:
-      one: "%{count} pasinta evento"
-      other: "%{count} pasintaj eventoj"
   navbar:
     add_event: Aldoni eventon
     log_in_sign_up: Ensaluti / Registriĝi
     organizations: Organizoj
+    search:
+      aria_label: Serĉi eventojn
+      placeholder: Serĉu eventojn, urbojn aŭ landojn
     toggle_navigation: Baskuligi la navigadon
+    tools:
+      about_us: Pri ni
+      close_map: Fermi mapon
+      news: Novaĵoj
+      support: Subteni
+      view_as_map: Vidi kiel mapo
+    user:
+      edit_profile: Redakti mian profilon
+      my_events: Miaj eventoj
+      my_profile: Mia profilo
+      sign_out: Elsaluti
+  organizations:
+    details:
+      subscribe_calendar: Aboni organizan kalendaron
+      youtube_channel: YouTube-kanalo
+    form:
+      address: Adreso
+      city: Urbo (aŭ loko)
+      delete_logo: Forviŝi emblemon
+      delete_logo_help: "(aŭ alŝutu novan por anstataŭigi ĝin)"
+      description: Priskribo
+      display_flag: Montri flagon
+      display_flag_help: Montras la landan flagon en la organiza paĝo kaj en ĉiuj eventoj de ĝi
+      edit_title: Redakti organizon
+      email: Retpoŝtadreso
+      logo: Emblemo
+      new_title: Nova organizo
+      phone: Telefon-numero
+      short_name: Mallonga nomo
+      short_name_help: Ne uzu spacojn aŭ specialajn signojn. Vi rajtas uzi _ kaj -
+      url: Reteja adreso (URL)
+      youtube: YouTube-kanalo (URL)
+    index:
+      admins_and_helpers_tooltip: Administrantoj kaj helpantoj
+      create_new: Krei novan organizon
+      search_placeholder: Serĉi organizon
+      searching: Serĉas
+      title: ORGANIZOJ
+    main_organizations:
+      title: ĈEFORGANIZOJ
+    tabs:
+      events: eventoj
+      has_reports: Havas raportojn
+      no_past_events: Neniuj pasintaj eventoj.
+      no_reports: Neniu raporto pri eventoj de ĉi tiu organizo.
+      no_upcoming_events: Neniu venonta evento por ĉi tiu organizo.
+      past: Pasintaj
+      reports: Raportoj
+      upcoming: Venontaj
+    users:
+      add_section: Aldoni
+      administrators_header: Administrantoj
+      co_administrators: Kunadministranto(j)
+      confirm_remove_user: Ĉu vi certas ke vi volas forigi la uzanton el la organizo?
+      head_admin_permission_info: Ĉefadministranto rajtas aldoni novan administranton
+      head_administrators: Ĉefadministranto(j)
+      make_co_admin: Igu kunadministranto
+      make_head_admin: Igu ĉefadministranto
+      remove_user_from_org: Forigi uzanton el la organizo
+      search_user_placeholder: Serĉi uzanton
+    webcal:
+      article_link_text: ĉi tiun artikolon
+      auto_subscribe_html: Kelkaj kalendaraj programoj ebligas aŭtomate aboni la kalendaron se oni alklakas specifan ligilon. Vi povas provi tion per %{link}.
+      description_link_html: Jen Webcal-ligilo por aboni la kalendaron de eventoj de %{short_name}. Uzu ĝin en programoj kiel Google Calendar, iCal aŭ similaj. Se vi bezonas klarigon kiel uzi la ligilon, legu %{article_link}.
+      description_sync: Kiam oni abonas organizan kalendaron, ĉiuj eventoj estas aldonataj al la kalendaro kaj ajnaj eventaj ŝanĝoj aŭtomate ĝisdatiĝas.
+      link_text: ĉi tiu ligilo
+      title: Aboni organizan kalendaron
+  search:
+    cancelled: Nuligitaj
+    min_chars_error: La serĉa frazo devas enhavi almenaŭ 3 signojn
+    past: Pasintaj
+    placeholder: Serĉi eventojn aŭ organizojn... (minimume 3 signoj)
+    query_aria_label: Serĉofrazo
+    results:
+      events:
+        city: Urbo
+        date: Dato
+        empty: Neniu evento trovita
+        found:
+          one: "%{count} evento trovita"
+          other: "%{count} eventoj trovitaj"
+        header: Eventoj
+        title: Titolo
+        upcoming_and_recent: "(estontaj kaj ĵus okazintaj)"
+      organizations:
+        empty: Neniu organizo trovita
+        found:
+          one: "%{count} organizo trovita"
+          other: "%{count} organizoj trovitaj"
+        header: Organizoj
+      users:
+        country: Lando
+        empty: Neniu uzanto trovita
+        found:
+          one: "%{count} uzanto trovita"
+          other: "%{count} uzantoj trovitaj"
+        header: Uzantoj
+        name: Nomo
+      videos:
+        date: Dato
+        empty: Neniu registrita prezento trovita
+        event: Evento
+        found:
+          one: "%{count} registrita prezento trovita"
+          other: "%{count} registritaj prezentoj trovitaj"
+        header: Registritaj prezentoj
+        title: Titolo
+    title: Serĉilo
   support:
     array:
       last_word_connector: " kaj "
       two_words_connector: " kaj "
       words_connector: ", "
   tagline: Diskonigu Esperanto-eventojn tutmonde!
+  tags:
+    plural:
+      alia: Aliaj
+      anonco: Anoncoj
+      konkurso: Konkursoj
+      kunveno_evento: Kunvenoj/Eventoj
+      kurso: Kursoj
+      plurtaga: Plurtagaj
+      por_junuloj: Por junuloj
+      unutaga: Unutagaj
+    singular:
+      alia: Alia
+      anonco: Anonco
+      konkurso: Konkurso
+      kunveno_evento: Kunveno/Evento
+      kurso: Kurso
+      plurtaga: Plurtaga
+      por_junuloj: Por junuloj
+      unutaga: Unutaga
+  teachers_and_speakers:
+    cards:
+      experience: Sperto
+      levels: Niveloj
+      topics: Temoj
+    cefr: Komuna Eŭropa Referenckadro por Lingvoj
+    edukado_html: Nia partnero %{edukado_link} disponigas uzpretajn materialojn, informojn kaj diversajn servojn por ebligi bonkvalitan kaj modernan laboron surbaze de tutmonda kunlaboro de Esperanto-instruantoj. Ili proponas ekzamenojn de Esperanto laŭ la %{cefr_link} |
+    filters:
+      all_countries: Ĉiuj landoj
+      all_levels: Ĉiuj niveloj
+      country: Lando
+      experience_or_topics: Sperto / Temoj
+      keyword_placeholder: Ŝlosilvorto...
+      level: Nivelo
+      name: Nomo
+      name_placeholder: Serĉu laŭ nomo...
+    ilei_html: "%{ilei_link}, la Internacia Ligo de Esperantistaj Instruistoj estas la ĉefa kolektiĝejo por instruistoj kaj edukistoj de Esperanto. ILEI estas aliĝinta faka asocio de Universala Esperanto-Asocio (UEA). Ĝi havas membrojn en la tuta mondo kaj sekciojn en pli ol 40 landoj. Ĉu vi estas instruisto en bazlernejo, mezlernejo aŭ universitato, vi gvidas Esperanto-kursojn, vi interesiĝas pri instruado, vi deziras interŝanĝi spertojn kun kolegoj, vi volas subteni instruadon de Esperanto...? -> %{join_link}"
+    intro: Ĉu vi serĉas instruanton aŭ preleganton por via evento? En la ĉi-suba listo vi trovos nomojn de homoj kiuj indikis ĉe sia profilo en Eventa Servo, ke ili pretas instrui kaj prelegi. Detalojn vi trovos ĉe la respektivaj uzantoprofiloj. Iuj homoj pretas senpage instrui kaj/aŭ prelegi, aliaj petas repagon de vojaĝkostoj aŭ etan financan rekompencon. Foje eblos veni surloke; aliuloj pretas aŭ povos pro praktikaj kialoj nur rete agi. Ankaŭ se vi ne estas organizanto de evento, eblas kontakti ilin – ne hezitu! – esperantistoj estas ĝenerale tre helpemaj.
+    join_ilei: Fariĝu membro de ILEI
+    levels:
+      baza: Baza
+      meza: Meza
+      supera: Supera
+    no_speakers_filtered: Neniu preleganto trovita kun tiuj filtriloj.
+    no_speakers_registered: Neniu preleganto estas registrita.
+    no_teachers_filtered: Neniu instruanto trovita kun tiuj filtriloj.
+    no_teachers_registered: Neniu instruanto estas registrita.
+    random_notice: Montrataj hazardaj instruanto kaj preleganto. Uzu la filtrilon por vidi pliajn.
+    speakers_divider: Prelegantoj
+    teachers_divider: Instruantoj
+    title: Instruantoj kaj prelegantoj
+  timezone:
+    custom_timezone_text: 'Horoj montrataj laŭ via horzono: %{timezone}'
+  users:
+    events:
+      interested_upcoming_events: Venontaj eventoj pri kiuj mi interesiĝas
+      managed_past_events: Pasintaj eventoj kies administranto mi estas
+      managed_upcoming_events: Venontaj eventoj kies administranto mi estas
+      my_personal_events_page: Mia persona eventa paĝo
+      personal_page_notice: Ĉi tiu paĝo estas persona. Aliaj uzantoj de Eventa Servo ne povas vidi ĝin.
+    profile:
+      admin_info:
+        active: Aktiva
+        birthday: Naskiĝdato
+        created_at: Kreita en
+        last_sign_in_at: Laste ensalutis
+        never: neniam
+        search_in_admin: Serĉi en Admin panelo
+        title: Informoj por administrantoj
+        uea_code: UEA-Kodo
+      contacts: Kontaktoj
+      i_am_teacher: Mi estas instruanto
+      levels_taught: 'Mi instruas al nivelo(j):'
+      ready_to_lecture_about: Mi pretas prelegi pri
+      subscribe_personal_calendar: Aboni personan kalendaron
+      this_article: ĉi tiun artikolon
+      this_link: ĉi tiu ligilo
+      webcal_info_1: Kiam oni abonas personan kalendaron, ĉiuj propraj eventoj kaj tiuj pri kiu oni interesiĝas, estas aldonataj al la kalendaro. Ajnaj eventaj ŝanĝoj aŭtomate ĝisdatiĝas.
+      webcal_info_2_html: Jen Webcal-ligilo por aboni la kalendaron. Uzu ĝin en programoj kiel Google Calendar, iCal aŭ similaj. Se vi bezonas klarigon kiel uzi la ligilon, legu %{article_link}.
+      webcal_info_3_html: Kelkaj kalendaraj programoj ebligas aŭtomate aboni la kalendaron se oni alklakas specifan ligilon. Vi povas provi tion per %{link}.
+      webcal_warning: Ne konigu la adreson de via persona kalendaro al alia homo. Ĝi estas privata.
   video:
     presentations: Registraĵoj

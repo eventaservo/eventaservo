@@ -60,11 +60,12 @@ class User < ApplicationRecord
 
   has_one_attached :picture
   store_accessor :mailings, :weekly_summary
+  store_accessor :mailings, :locale
   store_accessor :instruo, :instruisto
   store_accessor :prelego, :preleganto
   store_accessor :ligiloj, [:youtube, :telegram, :instagram, :facebook, :vk, :persona_retejo, :twitter]
 
-  before_validation :generate_webcal_token, if: :new_record?
+  before_validation :generate_webcal_token
   before_save :generate_username, if: :new_record?
   before_save :subscribe_mailings, if: :new_record?
   after_create :generate_initial_api_token
@@ -250,6 +251,18 @@ class User < ApplicationRecord
     "#{name} (#{username})"
   end
 
+  # Returns the user's preferred locale, falling back to default locale (:eo).
+  #
+  # @return [Symbol] The preferred locale
+  def preferred_locale
+    loc = locale.presence || mailings&.dig("locale")
+    if loc.present? && I18n.available_locales.include?(loc.to_sym)
+      loc.to_sym
+    else
+      I18n.default_locale
+    end
+  end
+
   private
 
   def generate_initial_api_token
@@ -297,6 +310,9 @@ class User < ApplicationRecord
   #
   # @return [String]
   def create_webcal_token
-    Random.hex(4)
+    loop do
+      token = Random.hex(4)
+      break token unless User.unscoped.exists?(webcal_token: token)
+    end
   end
 end

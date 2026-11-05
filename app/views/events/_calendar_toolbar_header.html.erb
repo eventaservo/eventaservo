@@ -28,16 +28,16 @@
       </ul>
     </div>
 
-    <%= link_to "Hodiaŭ", today_path, class: "btn btn-light", data: {turbo_frame: "native-calendar"} %>
+    <%= link_to t("events.calendar.today"), today_path, class: "btn btn-light", data: {turbo_frame: "native-calendar"} %>
 
-    <div class="btn-group" role="group" aria-label="Navigado inter semajnoj">
+    <div class="btn-group" role="group" aria-label="<%= t('events.calendar.week_navigation') %>">
       <%= link_to icon("fas", "chevron-left"), prev_path,
-          class: "btn btn-light px-3", title: "Antaŭa semajno",
-          aria: {label: "Antaŭa semajno"},
+          class: "btn btn-light px-3", title: t("events.calendar.previous_week"),
+          aria: {label: t("events.calendar.previous_week")},
           data: {turbo_frame: "native-calendar"} %>
       <%= link_to icon("fas", "chevron-right"), next_path,
-          class: "btn btn-light px-3", title: "Sekva semajno",
-          aria: {label: "Sekva semajno"},
+          class: "btn btn-light px-3", title: t("events.calendar.next_week"),
+          aria: {label: t("events.calendar.next_week")},
           data: {turbo_frame: "native-calendar"} %>
     </div>
   </div>

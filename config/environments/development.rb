@@ -1,5 +1,6 @@
 require "active_support/core_ext/integer/time"
 require "debug"
+require "ipaddr"
 
 Rails.application.configure do
   config.view_component.previews.default_layout = "component_preview"
@@ -110,6 +111,9 @@ Rails.application.configure do
   config.hosts << "pt_BR.eventaservo.local:3000"
   config.hosts << "eventaservo.org.localhost"
   config.hosts << "backend.eventaservo.orb.local:3010"
+  config.hosts << /\A.+\.ts\.net(:\d+)?\z/
+  config.hosts << IPAddr.new("100.64.0.0/10")
+  config.hosts << /\Ahome1(:\d+)?\z/
 
   config.active_job.default_url_options = {host: "localhost", port: 3000, protocol: :http}
   Rails.application.routes.default_url_options[:host] = "localhost"

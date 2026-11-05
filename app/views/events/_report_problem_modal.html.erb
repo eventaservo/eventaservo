@@ -13,7 +13,7 @@
         <h5 id="reportProblemModalCenterTitle" class="modal-title">
           <%= t("pages.event.report_problem_form.title") %>
         </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermi"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= t('buttons.close') %>"></button>
       </div>
 
       <%= form_tag event_kontakti_organizanton_url(event_code: @event.code) do %>

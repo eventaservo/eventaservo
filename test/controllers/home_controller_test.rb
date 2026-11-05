@@ -6,6 +6,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     get root_url
     assert_response :success
+    assert_equal "SAMEORIGIN", response.headers["X-Frame-Options"]
   end
 
   test "rewrites the horzono cookie when visitor has a legacy timezone" do

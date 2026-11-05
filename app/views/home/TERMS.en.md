@@ -37,7 +37,7 @@ Users are solely responsible for the content they publish on EventaServo. Althou
 
 ## 5. Privacy
 
-Our commitment to privacy is detailed in our [Privacy Policy](https://eventaservo.org/terms), which governs how we collect, use, and protect your personal information.
+Our commitment to privacy is detailed in our [Privacy Policy](/privacy), which governs how we collect, use, and protect your personal information.
 
 ## 6. Modifications and Suspension of Service
 
@@ -51,6 +51,6 @@ EventaServo is offered "as is," and we do not guarantee that the service will be
 
 These Terms of Service are governed and interpreted in accordance with the laws of the country where EventaServo is based. If any provision of these Terms is found to be invalid or unenforceable, the remaining provisions will remain in effect.
 
-For any questions or clarifications regarding the Terms of Service, please contact us via email at [contato@eventaservo.org](mailto:contato@eventaservo.org).
+For any questions or clarifications regarding the Terms of Service, please contact us via email at [kontakto@eventaservo.org](mailto:kontakto@eventaservo.org).
 
 **Last Updated:** November 11, 2024

@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   before_action :set_paper_trail_whodunnit
   before_action :set_sentry_user
   before_action :normalize_horzono_cookie
+  before_action :set_indexing_headers
 
   # When the DB connection pool is exhausted ActiveRecord raises this error
   # after checkout_timeout seconds. Capture it explicitly so Sentry records
@@ -21,6 +22,17 @@ class ApplicationController < ActionController::Base
       format.html { render "errors/internal_error", status: :service_unavailable }
       format.json { render json: {error: "Database connection timeout"}, status: :service_unavailable }
       format.all { head :service_unavailable }
+    end
+  end
+
+  # Includes :locale in generated URLs only when it differs from the default locale.
+  #
+  # @return [Hash] URL options containing :locale if non-default
+  def default_url_options
+    if I18n.locale != I18n.default_locale
+      {locale: I18n.locale}
+    else
+      {}
     end
   end
 
@@ -115,5 +127,24 @@ class ApplicationController < ActionController::Base
     elsif result.payload != raw
       cookies[:horzono] = {value: result.payload, expires: 1.year, secure: true}
     end
+  end
+
+  # Sets the robots directive and the canonical URL for filtered listings.
+  #
+  # Filtered variants of a listing share the same content, so they are marked
+  # `noindex` and expose the clean path as canonical. The staging environment
+  # is never indexed.
+  #
+  # Crawlers commonly send `Accept: */*`, which is not `request.format.html?`,
+  # so only JSON is excluded instead of requiring an HTML format.
+  #
+  # @return [void]
+  def set_indexing_headers
+    return if request.format.json?
+
+    filtered = IndexingPolicy.filtered?(params)
+    tag = IndexingPolicy.robots_tag(environment: Rails.env.to_s, filtered:)
+    response.headers["X-Robots-Tag"] = tag if tag
+    @canonical_url = "#{request.base_url}#{request.path}" if filtered
   end
 end

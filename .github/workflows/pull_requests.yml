@@ -6,10 +6,56 @@ permissions:
   contents: read
 
 jobs:
+  filter:
+    runs-on: ubuntu-22.04
+    outputs:
+      should_test: ${{ steps.changes.outputs.should_test }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4.0.3
+        id: changes
+        with:
+          predicate-quantifier: 'every'
+          filters: |
+            should_test:
+              - '!*.md'
+              - '!**/*.md'
+              - '!.github/**'
+              - '!.gitpod*'
+              - '!.devcontainer/**'
+              - '!.vscode/**'
+              - '!.agents/**'
+              - '!LICENSE'
+              - '!.gitignore'
+              - '!.dockerignore'
+
   tests:
-    if: github.ref != 'refs/heads/release-please--branches-main'
+    needs: filter
+    if: github.ref != 'refs/heads/release-please--branches-main' && needs.filter.outputs.should_test == 'true'
     uses: ./.github/workflows/template_test.yml
     secrets:
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       QLTY_COVERAGE_TOKEN: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+
+  minitest:
+    needs: [filter, tests]
+    if: always() && github.ref != 'refs/heads/release-please--branches-main'
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Status check
+        run: |
+          if [ "${{ needs.filter.result }}" != "success" ]; then
+            echo "Filter job failed or was cancelled."
+            exit 1
+          fi
+          if [ "${{ needs.filter.outputs.should_test }}" == "false" ]; then
+            echo "Skipped tests because no application code or dependencies were changed."
+            exit 0
+          fi
+          if [ "${{ needs.tests.result }}" != "success" ]; then
+            echo "Tests failed or were cancelled."
+            exit 1
+          fi

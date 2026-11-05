@@ -5,12 +5,12 @@
         <%= display_user(current_user) %>
       </a>
       <div class="dropdown-menu dropdown-menu-end" aria-labelledby="uzantoDropdown">
-        <%= link_to icon('fa-solid', 'user', 'Mia profilo'), events_by_username_path(current_user.username), class: 'dropdown-item' %>
-        <%= link_to icon('fa-regular', 'calendar', 'Miaj eventoj'), user_events_path(current_user.username), class: 'dropdown-item' %>
+        <%= link_to icon('fa-solid', 'user', t('navbar.user.my_profile')), events_by_username_path(username: current_user.username), class: 'dropdown-item' %>
+        <%= link_to icon('fa-regular', 'calendar', t('navbar.user.my_events')), user_events_path(username: current_user.username), class: 'dropdown-item' %>
         <div class="dropdown-divider"></div>
-        <%= link_to icon('fa-solid', 'user-edit', 'Redakti mian profilon'), edit_user_registration_path, class: 'dropdown-item' %>
+        <%= link_to icon('fa-solid', 'user-edit', t('navbar.user.edit_profile')), edit_user_registration_path, class: 'dropdown-item' %>
         <div class="dropdown-divider"></div>
-        <%= link_to icon('fa-solid', 'sign-out-alt', 'Elsaluti'), destroy_user_session_path, class: 'dropdown-item', method: :delete %>
+        <%= link_to icon('fa-solid', 'sign-out-alt', t('navbar.user.sign_out')), destroy_user_session_path, class: 'dropdown-item', method: :delete %>
       </div>
     </li>
   <% else %>

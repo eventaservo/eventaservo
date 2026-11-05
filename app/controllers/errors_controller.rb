@@ -1,9 +1,14 @@
 # frozen_string_literal: true
 
+# Controller handling dynamic HTTP error responses (404, 422, 500)
+# and the user feedback form for reporting errors.
 class ErrorsController < ApplicationController
-  # Permite requisições de assets (que vêm sem CSRF token) de origens diversas
+  # Allows asset requests (which come without CSRF tokens) from various origins
   skip_forgery_protection only: [:not_found]
 
+  # Responds with 404 Not Found for HTML, JSON, and asset requests.
+  #
+  # @return [void]
   def not_found
     orig_path = request.env["action_dispatch.original_path"] || request.original_fullpath || ""
     clean_path = orig_path.split("?").first || ""
@@ -31,17 +36,33 @@ class ErrorsController < ApplicationController
     end
   end
 
+  # Responds with 422 Unprocessable Entity.
+  #
+  # @return [void]
   def unacceptable
-    render "errors/internal_error", status: 422
+    respond_to do |format|
+      format.html { render "errors/unacceptable", status: :unprocessable_entity }
+      format.json { render json: {error: "Unprocessable Entity"}, status: :unprocessable_entity }
+      format.all { render plain: "422 Unprocessable Entity", status: :unprocessable_entity }
+    end
   end
 
-  # Error 500
+  # Responds with 500 Internal Server Error.
+  #
+  # @return [void]
   def internal_error
     @sentry_id = request.env["sentry.error_event_id"]
 
-    render status: :internal_server_error
+    respond_to do |format|
+      format.html { render status: :internal_server_error }
+      format.json { render json: {error: "Internal Server Error"}, status: :internal_server_error }
+      format.all { render plain: "500 Internal Server Error", status: :internal_server_error }
+    end
   end
 
+  # Submits user feedback regarding an error to Sentry and notifies administrators via email.
+  #
+  # @return [void]
   def error_form # rubocop:disable Metrics/MethodLength
     sentry_url = "https://sentry.io/api/0/projects/#{Constants::SENTRY_ORGANIZATION_SLUG}" \
                  "/#{Constants::SENTRY_PROJECT_SLUG}/user-feedback/"
@@ -61,6 +82,6 @@ class ErrorsController < ApplicationController
     HTTParty.post(sentry_url, body: body, headers: headers)
     AdminMailer.notify(subject: "[ES] User reported error", body:).deliver_later
 
-    redirect_to root_path, notice: "Dankon!"
+    redirect_to root_path, notice: I18n.t("flash.feedback.thank_you")
   end
 end

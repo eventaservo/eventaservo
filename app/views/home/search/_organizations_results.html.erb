@@ -1,14 +1,14 @@
 <div class="box-white">
-  <div class="box-header">Organizoj</div>
+  <div class="box-header"><%= t("search.results.organizations.header") %></div>
   <% if organizations.empty? %>
-    <p>Neniu organizo trovita</p>
+    <p><%= t("search.results.organizations.empty") %></p>
   <% else %>
-    <h5><%= pluralize(organizations.count, 'organizo trovita', 'organizoj trovitaj') %></h5>
+    <h5><%= t("search.results.organizations.found", count: organizations.count) %></h5>
     <div class="table-responsive">
       <table class="table table-sm table-hover">
         <tbody>
           <% organizations.each do |organizo| %>
-            <tr class="small pointer" onclick="window.location.href='<%= organization_path(organizo.short_name) %>'">
+            <tr class="small pointer" onclick="window.location.href='<%= organization_path(short_name: organizo.short_name) %>'">
               <td><%= display_flag(organizo.country) if organizo.display_flag %> <%= organizo.name %></td>
             </tr>
           <% end %>

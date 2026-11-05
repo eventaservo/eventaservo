@@ -16,6 +16,35 @@ module ApplicationHelper
     html
   end
 
+  # Returns the uppercase code for displaying a given locale in the navigation.
+  #
+  # @param locale [Symbol, String] The locale code
+  # @return [String] The uppercase code with hyphens (e.g. "EO", "EN", "PT-BR")
+  def locale_display_code(locale)
+    locale.to_s.tr("_", "-").upcase
+  end
+
+  # Returns the human-readable display name for a given locale.
+  #
+  # @param locale [Symbol, String] The locale code
+  # @return [String] The human-readable name of the locale
+  def human_readable_locale_name(locale)
+    {
+      eo: "Esperanto",
+      en: "English",
+      pt_BR: "Português"
+    }[locale.to_sym] || locale.to_s
+  end
+
+  # Returns the localized display name for a continent or online ("reta").
+  #
+  # @param name [String, Symbol] The continent name or normalized key
+  # @return [String] The localized continent name
+  def continent_display_name(name)
+    key = name.to_s.normalized.downcase
+    I18n.t("continents.#{key}", default: name.to_s.capitalize)
+  end
+
   def page_title(title, subtext = nil)
     content_tag(:h2, class: "text-center") do
       concat title
@@ -33,16 +62,76 @@ module ApplicationHelper
     end
   end
 
+  # Renders form validation errors for a given record.
+  #
+  # @param record [ActiveRecord::Base] Record to display errors for
+  # @return [ActiveSupport::SafeBuffer, nil] Error box HTML if errors exist
   def error_handling(record)
     return unless record.errors.any?
 
     content_tag(:div, class: "error-handling") do
       safe_join([
-        content_tag(:h5, "Troviĝas eraro en la formularo"),
+        content_tag(:h5, t("errors.header")),
         content_tag(:ul) do
           safe_join(record.errors.full_messages.map { |msg| content_tag(:li, msg) })
         end
       ])
+    end
+  end
+
+  # Generates path for user profile, safely handling positional or keyword arguments when scoped.
+  #
+  # @param username_or_options [String, User, Hash] Username, User model, or options hash
+  # @param options [Hash] Additional URL options
+  # @return [String] Generated path
+  def events_by_username_path(username_or_options = {}, options = {})
+    if username_or_options.is_a?(Hash)
+      super(username_or_options)
+    else
+      username = username_or_options.respond_to?(:username) ? username_or_options.username : username_or_options
+      super(options.merge(username: username))
+    end
+  end
+
+  # Generates URL for user profile, safely handling positional or keyword arguments when scoped.
+  #
+  # @param username_or_options [String, User, Hash] Username, User model, or options hash
+  # @param options [Hash] Additional URL options
+  # @return [String] Generated URL
+  def events_by_username_url(username_or_options = {}, options = {})
+    if username_or_options.is_a?(Hash)
+      super(username_or_options)
+    else
+      username = username_or_options.respond_to?(:username) ? username_or_options.username : username_or_options
+      super(options.merge(username: username))
+    end
+  end
+
+  # Generates path for user events, safely handling positional or keyword arguments when scoped.
+  #
+  # @param username_or_options [String, User, Hash] Username, User model, or options hash
+  # @param options [Hash] Additional URL options
+  # @return [String] Generated path
+  def user_events_path(username_or_options = {}, options = {})
+    if username_or_options.is_a?(Hash)
+      super(username_or_options)
+    else
+      username = username_or_options.respond_to?(:username) ? username_or_options.username : username_or_options
+      super(options.merge(username: username))
+    end
+  end
+
+  # Generates URL for user events, safely handling positional or keyword arguments when scoped.
+  #
+  # @param username_or_options [String, User, Hash] Username, User model, or options hash
+  # @param options [Hash] Additional URL options
+  # @return [String] Generated URL
+  def user_events_url(username_or_options = {}, options = {})
+    if username_or_options.is_a?(Hash)
+      super(username_or_options)
+    else
+      username = username_or_options.respond_to?(:username) ? username_or_options.username : username_or_options
+      super(options.merge(username: username))
     end
   end
 
@@ -109,7 +198,7 @@ module ApplicationHelper
 
   def event_full_description(event)
     text = event_date(event)
-    text += event.online ? " (Reta evento)" : " (#{event.country.name} - #{event.city})"
+    text += event.online ? " (#{I18n.t("events.online_event")})" : " (#{event.country.name} - #{event.city})"
     text += "<br/>#{event.description}"
 
     text
@@ -187,7 +276,13 @@ module ApplicationHelper
     return if email.blank?
 
     if user_signed_in?
-      icon("fas", "at", email, data: {controller: "clipboard", clipboard_text_value: email, action: "click->clipboard#copy"})
+      icon("fas", "at", email, data: {
+        controller: "clipboard",
+        clipboard_text_value: email,
+        clipboard_success_message_value: I18n.t("clipboard.copied_to_clipboard"),
+        clipboard_error_message_value: I18n.t("clipboard.copy_failed"),
+        action: "click->clipboard#copy"
+      })
     else
       icon("fas", "at", email.gsub("@", "(ĉe)"))
     end
@@ -258,6 +353,34 @@ module ApplicationHelper
       link_to(text, "https://www.google.com/maps/search/?api=1&query=#{address}", target: :_blank)
   end
 
+  # Reads a localized Markdown legal document (e.g. TERMS or PRIVACY).
+  #
+  # Searches for localized document files (e.g. TERMS.eo.md, TERMS.en.md, TERMS.pt_BR.md)
+  # within the views directory and falls back to the default locale.
+  #
+  # @param document_name [String] Name of the document (e.g., "TERMS", "PRIVACY")
+  # @param locale [Symbol, String] The locale to load (defaults to I18n.locale)
+  #
+  # @return [String] Contents of the Markdown file
+  def read_localized_markdown(document_name, locale: I18n.locale)
+    candidates = [
+      Rails.root.join("app/views/home", "#{document_name}.#{locale}.md"),
+      Rails.root.join("app/views/home", "#{document_name}.#{I18n.default_locale}.md")
+    ]
+
+    path = candidates.find { |file| File.exist?(file) }
+    raise Errno::ENOENT, "Could not find markdown document #{document_name} for locale #{locale}" unless path
+
+    File.read(path)
+  end
+
+  # Generates an article link with description for the about page.
+  #
+  # @param text [String] Title of the article or resource
+  # @param link [String] URL to the article or resource
+  # @param description [String] Additional context or publication notes
+  #
+  # @return [ActiveSupport::SafeBuffer] HTML paragraph containing the article link and description
   def article_link(text, link, description)
     content_tag(:p) do
       content_tag(:a, text, href: link, target: :_blank) +

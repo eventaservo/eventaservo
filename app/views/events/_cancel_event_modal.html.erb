@@ -4,20 +4,20 @@
     <div class="modal-content text-start">
 
       <div class="modal-header">
-        <h5 id="nuligiloModalCenterTitle" class="modal-title">Nuligi la eventon</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermi"></button>
+        <h5 id="nuligiloModalCenterTitle" class="modal-title"><%= t("events.cancel_modal.title") %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= t('buttons.close') %>"></button>
       </div>
 
       <%= form_tag event_nuligi_url(event_code: @event.code) do %>
         <div class="modal-body" style="font-weight: normal; font-size: 1rem;">
-          <p>Nuligi la eventon ne forigas ĝin de la listo, sed aperigas ĝin kiel nuligitan. Tiel homoj informiĝos, ke la evento ne okazos.</p>
+          <p><%= t("events.cancel_modal.description") %></p>
           <div class="mb-3">
-            <%= text_field_tag :cancel_reason, '', class: 'form-control', required: true, placeholder: 'Entajpu la kialon' %>
+            <%= text_field_tag :cancel_reason, '', class: 'form-control', required: true, placeholder: t("events.cancel_modal.reason_placeholder") %>
           </div>
         </div>
 
         <div class="modal-footer">
-          <%= submit_tag 'Konfirmi la nuligon', class: 'btn btn-sm btn-danger' %>
+          <%= submit_tag t("events.cancel_modal.confirm_button"), class: 'btn btn-sm btn-danger' %>
         </div>
       <% end %>
 

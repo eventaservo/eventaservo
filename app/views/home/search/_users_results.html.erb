@@ -1,20 +1,20 @@
 <div class="box-white">
-  <div class="box-header">Uzantoj</div>
+  <div class="box-header"><%= t("search.results.users.header") %></div>
   <% if users.empty? %>
-    <p>Neniu uzanto trovita</p>
+    <p><%= t("search.results.users.empty") %></p>
   <% else %>
-    <h5><%= pluralize(users.count, 'uzanto trovita', 'uzantoj trovitaj') %></h5>
+    <h5><%= t("search.results.users.found", count: users.count) %></h5>
     <div class="table-responsive">
       <table class="table table-sm table-hover">
         <thead>
           <tr>
-            <th>Nomo</th>
-            <th>Lando</th>
+            <th><%= t("search.results.users.name") %></th>
+            <th><%= t("search.results.users.country") %></th>
           </tr>
         </thead>
         <tbody>
           <% users.each do |user| %>
-            <tr class="small pointer" onclick="window.location.href = '<%= events_by_username_path(user.username) %>'">
+            <tr class="small pointer" onclick="window.location.href = '<%= events_by_username_path(username: user.username) %>'">
               <td><%= user.name %></td>
               <td><%= display_flag(user.country) + " #{user.country.name}" %></td>
             </tr>

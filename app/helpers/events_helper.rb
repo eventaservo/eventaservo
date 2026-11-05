@@ -96,6 +96,28 @@ module EventsHelper
     end
   end
 
+  TAG_PLURAL_I18N_KEYS = {
+    "Kunveno/Evento" => "tags.plural.kunveno_evento",
+    "Kurso" => "tags.plural.kurso",
+    "Alia" => "tags.plural.alia",
+    "Anonco" => "tags.plural.anonco",
+    "Konkurso" => "tags.plural.konkurso",
+    "Por junuloj" => "tags.plural.por_junuloj",
+    "Unutaga" => "tags.plural.unutaga",
+    "Plurtaga" => "tags.plural.plurtaga"
+  }.freeze
+
+  TAG_SINGULAR_I18N_KEYS = {
+    "Kunveno/Evento" => "tags.singular.kunveno_evento",
+    "Kurso" => "tags.singular.kurso",
+    "Alia" => "tags.singular.alia",
+    "Anonco" => "tags.singular.anonco",
+    "Konkurso" => "tags.singular.konkurso",
+    "Por junuloj" => "tags.singular.por_junuloj",
+    "Unutaga" => "tags.singular.unutaga",
+    "Plurtaga" => "tags.singular.plurtaga"
+  }.freeze
+
   # Returns the plural display name of a tag.
   #
   # Some tag names have an Esperanto plural form that differs from the singular
@@ -107,11 +129,20 @@ module EventsHelper
   #
   # @return [String] the plural tag name, or the given name when it has no known plural
   def tag_plural_name(tag_name)
-    case tag_name
-    when "Kunveno/Evento" then "Kunvenoj/Eventoj"
-    when "Kurso" then "Kursoj"
-    when "Alia" then "Aliaj"
-    else tag_name
-    end
+    key = TAG_PLURAL_I18N_KEYS[tag_name]
+    key ? I18n.t(key) : tag_name
+  end
+
+  # Returns the localized singular display name of a tag.
+  #
+  # @param tag_or_name [Tag, String, nil] the tag instance or singular tag name
+  #
+  # @return [String] the localized singular tag name, or the given name when untranslated
+  def tag_display_name(tag_or_name)
+    return "" if tag_or_name.nil?
+
+    name = tag_or_name.is_a?(Tag) ? tag_or_name.name : tag_or_name.to_s
+    key = TAG_SINGULAR_I18N_KEYS[name]
+    key ? I18n.t(key) : name
   end
 end

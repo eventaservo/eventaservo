@@ -3,9 +3,9 @@
         <%= link_to image_tag(eventaservo_logo_url, size: 48, alt: 'Eventa Servo'), 'https://eventaservo.org' %>
       </td>
       <td>
-        Eventa Servo estas senpaga servo de UEA kaj TEJO. Ĉu ĝi plaĉas al vi?
+        <%= t("event_mailer.footer.intro") %>
         <br>
-        Subtenu retajn agantojn per mondonaco al la
-        <%= link_to 'Fonduso Instigo', 'https://nevelsteen.info/instigo/' %>.
+        <%= t("event_mailer.footer.support_prompt") %>
+        <%= link_to t("event_mailer.footer.instigo_fund"), 'https://nevelsteen.info/instigo/' %>.
       </td>
     </tr>

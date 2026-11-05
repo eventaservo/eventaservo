@@ -1,21 +1,21 @@
 <div class="event-count-container">
   <%= link_to_event_count('hodiau', params[:o], params[:s]) do %>
     <span class="ec-count"><%= @future_events.today(current_timezone).count %></span>
-    <span class="ec-title">okazas nuntempe</span>
+    <span class="ec-title"><%= t("filters.periods.hodiau").downcase %></span>
   <% end %>
 
   <%= link_to_event_count('p7_tagojn', params[:o], params[:s]) do %>
     <span class="ec-count"><%= @future_events.in_7days(current_timezone).count %></span>
-    <span class="ec-title">proksimajn 7 tagojn</span>
+    <span class="ec-title"><%= t("filters.periods.p7_tagojn").downcase %></span>
   <% end %>
 
   <%= link_to_event_count('p30_tagojn', params[:o], params[:s]) do %>
     <span class="ec-count"><%= @future_events.in_30days(current_timezone).count %></span>
-    <span class="ec-title">proksimajn 30 tagojn</span>
+    <span class="ec-title"><%= t("filters.periods.p30_tagojn").downcase %></span>
   <% end %>
 
   <%= link_to_event_count('estontece', params[:o], params[:s]) do %>
     <span class="ec-count"><%= @future_events.after_30days(current_timezone).count %></span>
-    <span class="ec-title">estontece</span>
+    <span class="ec-title"><%= t("filters.periods.estontece").downcase %></span>
   <% end %>
 </div>

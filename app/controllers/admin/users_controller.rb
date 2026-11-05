@@ -39,7 +39,7 @@ module Admin
     # @return [void]
     def update
       if @user.update(user_params)
-        redirect_to admin_user_path(@user), notice: "User successfully updated."
+        redirect_to admin_user_path(@user), notice: I18n.t("flash.admin.users.updated")
       else
         render :edit, status: :unprocessable_entity
       end
@@ -50,7 +50,7 @@ module Admin
     # @return [void]
     def confirm
       @user.update(confirmed_at: Time.zone.now)
-      redirect_to admin_user_path(@user), notice: "User's email marked as confirmed."
+      redirect_to admin_user_path(@user), notice: I18n.t("flash.admin.users.email_confirmed")
     end
 
     # Re-enables a disabled user.
@@ -58,7 +58,7 @@ module Admin
     # @return [void]
     def enable
       UserServices::Enable.call(user: @user)
-      redirect_to admin_user_path(@user), notice: "User enabled."
+      redirect_to admin_user_path(@user), notice: I18n.t("flash.admin.users.enabled")
     end
 
     # Disables a user and moves events to system account.
@@ -66,10 +66,10 @@ module Admin
     # @return [void]
     def deactivate
       if UserServices::Disable.call(@user).success?
-        redirect_to admin_user_path(@user), alert: "User deactivated."
+        redirect_to admin_user_path(@user), alert: I18n.t("flash.admin.users.deactivated")
       else
         redirect_to admin_user_path(@user),
-          alert: "Could not disable the user. Maybe they belong to a one-member organization."
+          alert: I18n.t("flash.admin.users.disable_failed_one_member_org")
       end
     end
 
@@ -86,7 +86,7 @@ module Admin
       elsif request.post?
         target_id = params[:merge_users][:target_user_id]
         @user.merge_to(target_id)
-        redirect_to admin_user_path(target_id), notice: "Users merged successfully."
+        redirect_to admin_user_path(target_id), notice: I18n.t("flash.admin.users.merged")
       end
     end
 
@@ -96,7 +96,7 @@ module Admin
     def reset_password
       new_password = @user.name.split(" ").first + rand(1000).to_s
       @user.update!(password: new_password, password_confirmation: new_password)
-      redirect_to admin_user_path(@user), alert: "New password: #{new_password}"
+      redirect_to admin_user_path(@user), alert: I18n.t("flash.admin.users.new_password", password: new_password)
     end
 
     private

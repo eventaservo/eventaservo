@@ -2,15 +2,15 @@
   <div class="box-white">
     <div class="text-center">
       <h3>Eventa Servo</h3>
-      <p class="fg-color-grayDark fw-bold">Resendu konfirminstrukciojn</p>
+      <p class="fg-color-grayDark fw-bold"><%= t("devise.confirmations.new.subtitle") %></p>
     </div>
 
     <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
       <div class="mb-3">
-        <%= f.email_field :email, autocomplete: 'email', class: 'form-control', autofocus: true, placeholder: 'Retpoŝtadreso' %>
+        <%= f.email_field :email, autocomplete: 'email', class: 'form-control', autofocus: true, placeholder: t("activerecord.attributes.user.email") %>
       </div>
-      <%= f.submit 'Resendi', class: 'button-submit col-12' %>
+      <%= f.submit t("devise.confirmations.new.submit"), class: 'button-submit col-12' %>
     <% end %>
 
     <%= render partial: 'devise/shared/links' %>

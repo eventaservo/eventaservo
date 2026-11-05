@@ -1,7 +1,7 @@
 <div class="box-white">
   <div class="text-center">
-    <h1>Internacia kalendaro <%= @year %></h1>
-    <%= link_to "Nuna Internacia Kalendaro", international_calendar_path, class: 'btn btn-sm btn-link' %>
+    <h1><%= t("international_calendar.year_title", year: @year) %></h1>
+    <%= link_to t("international_calendar.current_calendar"), international_calendar_path, class: 'btn btn-sm btn-link' %>
   </div>
 
   <% @events.grouped_by_months.each do |date, events| %>
@@ -14,7 +14,7 @@
           <strong><%= link_to(e.title, event_url(code: e.ligilo), class: ("cancelled" if e.cancelled)) %></strong>
           <%= display_organizations_for_event(e) %>
           <p class="small">
-            <strong><%= event_date(e) %> en <%= e.city %></strong>
+            <strong><%= t("events.date_in_city", date: event_date(e), city: e.city) %></strong>
             <br>
             <%= e.description %>
           </p>

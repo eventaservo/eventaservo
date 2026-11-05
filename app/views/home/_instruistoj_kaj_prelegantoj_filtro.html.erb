@@ -2,33 +2,37 @@
   <%= form_tag instruantoj_kaj_prelegantoj_path, method: :get do %>
     <div class="row g-2 align-items-end">
       <div class="col-12 col-md-3">
-        <%= label_tag :name, "Nomo", class: "form-label small fw-semibold mb-1" %>
+        <%= label_tag :name, t("teachers_and_speakers.filters.name"), class: "form-label small fw-semibold mb-1" %>
         <%= text_field_tag :name, params[:name], class: "form-control form-control-sm",
-              placeholder: "Serĉu laŭ nomo..." %>
+              placeholder: t("teachers_and_speakers.filters.name_placeholder") %>
       </div>
       <div class="col-12 col-md-3">
-        <%= label_tag :country_id, "Lando", class: "form-label small fw-semibold mb-1" %>
+        <%= label_tag :country_id, t("teachers_and_speakers.filters.country"), class: "form-label small fw-semibold mb-1" %>
         <%= select_tag :country_id,
               options_from_collection_for_select(@countries, :id, :name, params[:country_id]),
-              include_blank: "Ĉiuj landoj",
+              include_blank: t("teachers_and_speakers.filters.all_countries"),
               class: "form-select form-select-sm" %>
       </div>
       <div class="col-12 col-md-2">
-        <%= label_tag :level, "Nivelo", class: "form-label small fw-semibold mb-1" %>
+        <%= label_tag :level, t("teachers_and_speakers.filters.level"), class: "form-label small fw-semibold mb-1" %>
         <%= select_tag :level,
-              options_for_select([["Baza", "baza"], ["Meza", "meza"], ["Supera", "supera"]], params[:level]),
-              include_blank: "Ĉiuj niveloj",
+              options_for_select([
+                [t("teachers_and_speakers.levels.baza"), "baza"],
+                [t("teachers_and_speakers.levels.meza"), "meza"],
+                [t("teachers_and_speakers.levels.supera"), "supera"]
+              ], params[:level]),
+              include_blank: t("teachers_and_speakers.filters.all_levels"),
               class: "form-select form-select-sm" %>
       </div>
       <div class="col-12 col-md-2">
-        <%= label_tag :keyword, "Sperto / Temoj", class: "form-label small fw-semibold mb-1" %>
+        <%= label_tag :keyword, t("teachers_and_speakers.filters.experience_or_topics"), class: "form-label small fw-semibold mb-1" %>
         <%= text_field_tag :keyword, params[:keyword], class: "form-control form-control-sm",
-              placeholder: "Ŝlosilvorto..." %>
+              placeholder: t("teachers_and_speakers.filters.keyword_placeholder") %>
       </div>
       <div class="col-12 col-md-2 d-flex gap-2">
-        <%= submit_tag "Serĉi", class: "btn btn-primary btn-sm flex-grow-1" %>
+        <%= submit_tag t("buttons.search"), class: "btn btn-primary btn-sm flex-grow-1" %>
         <% if @filtering %>
-          <%= link_to "Nuligi", instruantoj_kaj_prelegantoj_path, class: "btn btn-outline-secondary btn-sm" %>
+          <%= link_to t("buttons.cancel"), instruantoj_kaj_prelegantoj_path, class: "btn btn-outline-secondary btn-sm" %>
         <% end %>
       </div>
     </div>

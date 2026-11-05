@@ -2,9 +2,6 @@
 pt_BR:
   activerecord:
     attributes:
-      event/report:
-        title: Título
-        url: Link
       event:
         city: Cidade
         country_id: País
@@ -13,6 +10,9 @@ pt_BR:
         description: Descrição
         short_url: URL curta
         title: Título
+      event/report:
+        title: Título
+        url: Link
       organization:
         city: Cidade
         country_id: País
@@ -21,10 +21,18 @@ pt_BR:
         name: Nome
         short_name: Nome curto
       user:
-        name: Nome
-        email: E-mail
+        about: Sobre mim
+        avatar: Avatar
+        birthday: Data de nascimento
         city: Cidade
         country_id: País
+        email: E-mail
+        locale: Idioma preferencial
+        name: Nome
+        password: Senha
+        password_confirmation: Confirmação de senha
+        persona_retejo: Site pessoal
+        ueacode: Código UEA
     errors:
       messages:
         record_invalid: 'Validação falhou: %{errors}'
@@ -42,28 +50,140 @@ pt_BR:
     models:
       event: Eventos
     registrations:
+      api_v2_token: Token da API v2
       regenerate_token: Regenerar token
       regenerate_token_confirmation: Tem certeza que deseja regenerar seu token de API? O token antigo deixará de funcionar imediatamente.
       token_regenerated: Token de API regenerado com sucesso.
-      token_regeneration_error: "Erro ao regenerar token de API: %{error}"
+      token_regeneration_error: 'Erro ao regenerar token de API: %{error}'
+  announcements_and_contests:
+    caption: Lista de anúncios e concursos atuais no mundo do Esperanto.
   api:
     v2:
       errors:
-        token_missing: Token faltando
-        token_invalid: Token inválido
         token_expired: Token expirado
+        token_invalid: Token inválido
+        token_missing: Token faltando
+  breadcrumbs:
+    world: Mundo
   buttons:
+    add: Adicionar
     add_video: Vídeo
-    duplicate: Duplicar
-    edit: Editar
-    share: Compartilhar
     cancel: Cancelar
+    cancel_registration: Não se inscrever
     change: Alterar
     close: Fechar
+    copy: Copiar
+    delete: Excluir
+    duplicate: Duplicar
+    edit: Editar
+    save: Salvar
+    save_event: Salvar
+    search: Buscar
     select: Selecionar
     send: Enviar
+    share: Compartilhar
+    update: Atualizar
+  clipboard:
+    copied_to_clipboard: "%{text} copiado para a área de transferência!"
+    copy_failed: Não foi possível copiar para a área de transferência
+  common:
+    are_you_sure: Tem certeza?
+    country: País
+    date: Data
+    event: Evento
+    events: Eventos
+    location: Local
+    name: Nome
+    no_results: Nenhum resultado
+    no_upper: NÃO
+    optional: "*opcional"
+    or_upper: OU
+    sign_in: Entrar
+    yes_upper: SIM
+  continents:
+    afriko: África
+    ameriko: Américas
+    azio: Ásia
+    europo: Europa
+    oceanio: Oceania
+    reta: Online
+  devise:
+    confirmations:
+      new:
+        submit: Reenviar
+        subtitle: Reenviar instruções de confirmação
+    passwords:
+      edit:
+        minimum_characters: No mínimo %{count} caracteres
+        new_password: Nova senha
+        password_confirmation: Confirmação da nova senha
+        submit: Alterar minha senha
+        title: Altere sua senha
+      new:
+        instructions: Digite seu endereço de e-mail. Enviaremos instruções para criar uma nova senha.
+        submit: Receber instruções
+        subtitle: Esqueceu sua senha?
+    registrations:
+      edit:
+        delete_account: Excluir conta
+        delete_account_confirmation: Tem certeza? Esta ação NÃO PODERÁ ser desfeita!
+        links: Links
+        organizations: Organizações
+        ready_to_help: Estou pronto para ajudar
+        remove_avatar: Remover avatar
+        title: Editar perfil
+      instructor:
+        experience: Experiência
+        experience_placeholder: Escreva sobre sua experiência como professor.
+        i_am_teacher: Sou um professor
+        lead: Como professor
+        level: Nível
+      new:
+        birthday_placeholder: Data de nascimento (D/M/A) *opcional
+        password_confirmation_placeholder: Confirmação de senha
+        password_placeholder: Senha
+        security_phrase_placeholder: Como se chama a nossa língua?
+        submit: Cadastre-se
+        subtitle_html: Cadastre-se para criar novos eventos.<br>É gratuito!
+        ueacode_placeholder: Código UEA *opcional
+        video_help_html: Se tiver dúvidas, assista a %{video_link}. Ele explica como se cadastrar.
+        video_link_text: este vídeo
+      speaker:
+        i_am_speaker: Sou um palestrante
+        lead: Como palestrante
+        topics_label: Palestro sobre os seguintes temas
+        topics_placeholder: Escreva sobre os temas sobre os quais está disposto a palestrar
+    sessions:
+      new:
+        forgot_password: Esqueci minha senha
+        submit: Entrar
+        subtitle: Entre para criar novos eventos.
+    shared:
+      links:
+        already_registered: Já tem uma conta?
+        didnt_receive_confirmation_instructions: Não recebeu as instruções de confirmação?
+        not_registered: Ainda não tem conta?
+        sign_in: Entrar
+        sign_up_now: Cadastre-se agora
+      sign_in_with_provider: Entrar com %{provider}
+      sign_up_with_provider: Cadastrar-se com %{provider}
+    unlocks:
+      new:
+        submit: Reenviar instruções de desbloqueio
+        title: Reenviar instruções de desbloqueio
   errors:
     format: "%{attribute} %{message}"
+    header: Há um erro no formulário
+    internal_error:
+      apology: Pedimos desculpas. Corrigiremos este erro em breve.
+      form:
+        back_to_home: Ir para a página inicial
+        comments: O que você estava fazendo antes do erro acontecer?
+        email: E-mail
+        name: Nome
+        submit: Enviar
+      help_us: Você pode nos ajudar enviando mais informações sobre o ocorrido
+      title: Ops! Ocorreu um erro!
     messages:
       accepted: deve ser aceito
       blank: não pode ficar em branco
@@ -85,11 +205,284 @@ pt_BR:
       too_long: é muito longo (máximo de %{count} caracteres)
       too_short: é muito curto (mínimo de %{count} caracteres)
       wrong_length: não possui o tamanho correto (deve ter %{count} caracteres)
+    not_found:
+      back_to_home: Ir para a página inicial
+      contact_link_text: Contate-nos
+      message_html: A página não existe. %{contact_link} se você precisar de ajuda.
+      title: Página não encontrada
     template:
       body: 'Por favor, verifique os seguintes campos:'
       header:
         one: 'Não foi possível salvar este %{model}: 1 erro'
         other: 'Não foi possível salvar este %{model}: %{count} erros'
+    unacceptable:
+      message: Talvez você não tenha permissão para realizar esta ação ou os dados enviados eram inválidos.
+      title: Solicitação inaceitável
+  event_mailer:
+    event_summary:
+      read_more: LER MAIS
+    footer:
+      instigo_fund: Fundo Instigo
+      intro: O Eventa Servo é um serviço gratuito da UEA e TEJO. Você gosta dele?
+      support_prompt: Apoie os ativistas online com uma doação para o
+    kontakti_organizanton:
+      body_html: Alguém tem uma dúvida, deseja relatar um problema ou informá-lo sobre o evento "%{event_link}", que você administra no Eventa Servo. Você poderia verificar isso e corrigir se necessário?
+      greeting: Olá.
+      message_intro: 'Aqui está a mensagem:'
+      subject: Informações sobre seu evento no Eventa Servo
+    layout:
+      automated_message_html: Mensagem enviada automaticamente pelo %{service}
+      automated_message_text: Mensagem enviada automaticamente pelo Eventa Servo
+      contact_us_html: Entre em contato conosco pelo %{link}
+    notify_admins:
+      admin_only_note: Esta informação é apenas para os administradores
+      created_by: Evento criado por %{user} em %{date}
+      subject_new: "[ES diretoria] Novo evento: %{title}"
+      subject_update: "[ES diretoria] Atualização: %{title}"
+    notify_user:
+      footer_html: Se não quiser mais receber notificações sobre novos eventos em %{country}, você pode %{link} através deste link.
+      unsubscribe: cancelar inscrição
+    nova_administranto:
+      body_html: Você agora é o administrador do evento %{event_link} no Eventa Servo. Isso significa que você pode alterar o conteúdo ou excluí-lo.
+      closing: Sucesso com a sua atividade!
+      greeting: Olá %{name}.
+      invitation: Convidamos você a adicionar informações sobre eventos, reuniões e acontecimentos ao Eventa Servo. Você pode fazer isso adicionando um novo evento ou duplicando um existente.
+      subject: Você é o novo administrador do evento
+      view_event_page: VER A PÁGINA DO EVENTO
+    rememorigas_uzantojn:
+      footer_note_html: Você está recebendo esta mensagem porque indicou no site do %{site_link} que tem interesse em um evento específico. Para não receber mais estas mensagens, basta desmarcar o botão "%{button_name}".
+      greeting: Olá.
+      interest_html: 'Você indicou no site do %{site_link} que tem interesse no seguinte evento: %{event_link}.'
+      view_event_page: VER A PÁGINA DO EVENTO
+    reminders:
+      messages:
+        hours_2: Começará em breve. Desejamos a você uma participação agradável e proveitosa.
+        month_1: Começará em um mês. Considere se inscrever ou ao menos informar o organizador do evento sobre sua intenção de comparecer.
+        week_1: Começará em uma semana. Considere se inscrever ou ao menos informar o organizador do evento sobre sua intenção de comparecer.
+      subjects:
+        hours_2: "[ES] %{title} começará em breve"
+        month_1: "[ES] %{title} começará em um mês"
+        week_1: "[ES] %{title} começará em uma semana"
+    weekly_summary:
+      and: e
+      events_taking_place_between: Eventos que acontecerão entre
+      in_person_events: Eventos presenciais
+      no_events: Nenhum evento acontecerá
+      online_events: Eventos online
+      share_my_event: Divulgar meu evento
+      subject: Resumo semanal mundial de eventos
+      unsubscribe: cancelar inscrição
+      unsubscribe_html: Se não quiser mais receber o Resumo Semanal, você pode %{link}.
+  events:
+    all_day: dia inteiro
+    calendar:
+      jump_to_month: Mês
+      next_week: Próxima semana
+      no_events: Nenhum evento
+      previous_week: Semana anterior
+      today: Hoje
+      week_navigation: Navegação por semanas
+    cancel_modal:
+      confirm_button: Confirmar cancelamento
+      description: Cancelar o evento não o remove da lista, mas o exibe como cancelado. Dessa forma, as pessoas saberão que o evento não acontecerá.
+      reason_placeholder: Digite o motivo
+      title: Cancelar o evento
+    cancelled_label: Cancelado
+    cancelled_upper: CANCELADO
+    chronology:
+      no_changes: Nenhuma alteração encontrada no histórico.
+      title: Histórico
+      view_event: Ver evento
+    date_in_city: "%{date} em %{city}"
+    daylight_saving_time: Horário de verão
+    days_left:
+      in_days:
+        one: termina em %{count} dia
+        other: termina em %{count} dias
+      tomorrow: termina amanhã
+    details:
+      administrator: Administrador
+      header: Informações
+    form:
+      add_to_international_calendar: Adicionar ao Calendário Internacional
+      address: Endereço local do evento
+      address_help: Adicione o nome da rua para definir a localização do evento no mapa
+      admin_functions: Funções administrativas
+      announcements_help_html: Anúncios e concursos não aparecerão na página inicial.<br>A inclusão de um evento no %{calendar_link} dos principais eventos mundiais de Esperanto é decidida pela equipe editorial do ES.
+      city_or_place: Cidade (ou local)
+      content: Conteúdo
+      delete_confirm: Tem certeza? Você não poderá desfazer isso.
+      email_for_contact: E-mail para contato
+      event_administrator: Administrador do evento
+      max_100_chars: Máximo de 100 caracteres
+      max_140_chars: Máximo de 140 caracteres
+      new_title: Novo evento ou encontro
+      online_or_hybrid: Evento online ou híbrido
+      organization_help: Deixe em branco se o evento não pertencer a uma organização
+      organizations: Organização(ões)
+      search_placeholder: Buscar...
+      search_text: Nenhum resultado
+      select_category_alert: Você deve escolher pelo menos uma categoria
+      select_timezone_instead_of_address: Selecionar fuso horário em vez de endereço/país
+      short_url: Link curto (opcional)
+      short_url_unavailable: Este link curto não está disponível. Escolha outro.
+      time_end_aria: Hora de término
+      time_start_aria: Hora de início
+      timezone: Fuso horário
+      website: Site
+      write_in_esperanto_notice: Escreva em esperanto. Para que todos possam saber o que acontece no mundo do Esperanto!
+    happening_now_count:
+      one: "%{count} acontecendo agora"
+      other: "%{count} acontecendo agora"
+    international_event: Evento Internacional
+    map:
+      duplicate_notice: "* O mapa exibe apenas o primeiro evento futuro quando múltiplos eventos ocorrem no mesmo local com o mesmo título"
+    my_events: Eventos
+    online: Online
+    online_event: Evento online
+    options:
+      aria_label: Opções do evento
+    participants:
+      and_more: e mais...
+      anonymous_count:
+        one: e mais %{count} pessoa que preferiu não exibir o nome
+        other: e mais %{count} pessoas que preferiram não exibir o nome
+      count_interested_future:
+        one: "%{count} interessado"
+        other: "%{count} interessados"
+      count_interested_past:
+        one: "%{count} interessado"
+        other: "%{count} interessados"
+      interested_active: Tenho interesse!
+      interested_button: Tenho interesse
+      interested_future: Interessados
+      interested_past: Interessados
+      public_list_question: Exibir seu nome na lista de interessados?
+      reminder_prompt: Indique que tem interesse e você receberá e-mails de lembrete sobre o evento.
+      reminder_subscribed: Você receberá e-mails de lembrete sobre o evento.
+      sign_in_to_show_interest_html: "%{link} para manifestar seu interesse"
+    past_events_count:
+      one: "%{count} evento passado"
+      other: "%{count} eventos passados"
+    reports:
+      add_link: Adicionar link
+      delete_report_aria: Excluir relato
+      empty_prompt: Adicione links para relatos
+      events_with_reports_title: Eventos com relatos
+      header: Relatos
+      new_title: Relato de evento
+      url_example: 'Ex: https://uea.facila.org/artikoloj/movado/zamenhof-tago-r269'
+    share_modal:
+      prompt: Escolha como compartilhar o evento
+      share_on_facebook: Compartilhar no Facebook
+      share_on_pinterest: Compartilhar no Pinterest
+      share_on_reddit: Compartilhar no Reddit
+      share_on_telegram: Compartilhar no Telegram
+      share_on_twitter: Compartilhar no Twitter
+      share_on_vkontakte: Compartilhar no VKontakte
+      share_via_email: Compartilhar por e-mail
+      share_via_whatsapp: Compartilhar por WhatsApp
+      title: Compartilhar
+    show_past: Eventos passados
+    timezone:
+      same_as_yours: Mesmo que seu fuso horário
+    upcoming_events_count:
+      one: "%{count} próximo evento"
+      other: "%{count} próximos eventos"
+    uploader:
+      prompt: Adicione fotos ou documentos ao evento.
+      submit: Enviar
+      title: Envio de arquivos
+    uploads:
+      delete_file_aria: Excluir arquivo
+      title: Arquivos
+    webcal_modal:
+      auto_subscribe_html: Alguns aplicativos de calendário permitem assinar o calendário automaticamente ao clicar em um link específico. Você pode tentar isso através de %{link}.
+      auto_subscribe_link: este link
+      calendar_subscription_info: Ao assinar um calendário, todos os eventos são adicionados ao calendário e quaisquer alterações são atualizadas automaticamente.
+      country_intro_html: Aqui está o link Webcal para assinar o calendário de eventos em %{country}. Use-o em programas como Google Calendar, iCal ou similares. Se precisar de instruções sobre como usar o link, leia %{help_link}.
+      help_article_link: este artigo
+      online_intro_html: Aqui está o link Webcal para assinar o calendário de todos os próximos <strong>eventos online</strong>. Use-o em programas como Google Calendar, iCal ou similares. Se precisar de instruções sobre como usar o link, leia %{help_link}.
+      subscribe_calendar: Assinar calendário
+      title: Assinar calendário
+  filters:
+    periods:
+      estontece: Futuros
+      hodiau: Acontecendo agora
+      p30_tagojn: Próximos 30 dias
+      p7_tagojn: Próximos 7 dias
+  flash:
+    admin:
+      redirections:
+        created: Redirecionamento criado com sucesso.
+        destroyed: Redirecionamento excluído com sucesso.
+        updated: Redirecionamento atualizado com sucesso.
+      reports:
+        destroyed: Relatório excluído com sucesso.
+        updated: Relatório atualizado com sucesso.
+      users:
+        deactivated: Usuário desativado.
+        disable_failed_one_member_org: Não foi possível desativar o usuário. Talvez ele pertença a uma organização de um único membro.
+        email_confirmed: E-mail do usuário marcado como confirmado.
+        enabled: Usuário ativado.
+        merged: Usuários mesclados com sucesso.
+        new_password: 'Nova senha: %{password}'
+        updated: Usuário atualizado com sucesso.
+    countries:
+      not_found: País não existe
+      not_in_database: País não existe no banco de dados
+    events:
+      cancelled: Evento cancelado
+      created: Evento criado com sucesso.
+      destroyed: Evento excluído com sucesso
+      display_error: Ocorreu um erro ao exibir este evento
+      document_uploaded: Documento enviado com sucesso
+      file_deleted: Arquivo excluído com sucesso
+      invalid_file_format: Formato de arquivo inválido
+      message_sent: Mensagem enviada
+      no_events_in_continent: Não há eventos neste continente
+      not_found: Evento não existe
+      select_file_first: Você deve primeiro selecionar um arquivo
+      uncancelled: Evento reativado
+      updated: Evento atualizado com sucesso
+    feedback:
+      thank_you: Obrigado!
+    formats:
+      not_found: Formato não existe.
+    general:
+      success: Sucesso
+      unauthorized: Você não tem permissão
+      unauthorized_action: Você não tem permissão para fazer isso
+    organizations:
+      created: Organização criada com sucesso.
+      not_found: Organização não existe
+      updated: Organização atualizada com sucesso
+      user_added: Usuário adicionado à organização
+    reports:
+      create_error: Ocorreu um erro ao criar o relato
+      created: O relato foi criado com sucesso
+      destroy_error: Ocorreu um erro ao excluir o relato
+      destroyed: O relato foi excluído com sucesso
+    users:
+      account_deleted: Sua conta foi excluída.
+      invalid_security_phrase: Frase de segurança antispam incorreta. Digite o nome da língua internacional.
+      not_found: Usuário não existe
+      username_not_found: Nome de usuário não existe
+    videos:
+      destroyed: Vídeo excluído
+      unauthorized: Você não tem permissão para excluir este vídeo
+    webcal:
+      country_code_not_found: Código de país não existe
+  footer:
+    about: Sobre nós
+    changelog: Registro de alterações
+    contact_subject: Contato via Eventa Servo
+    contact_us: Contate-nos
+    more: Mais
+    privacy: Privacidade
+    server_status: Status do servidor
+    terms: Termos de uso
+    version: Versão %{version}
   helpers:
     select:
       prompt: Por favor, selecione
@@ -97,29 +490,297 @@ pt_BR:
       create: Criar %{model}
       submit: Salvar este %{model}
       update: Atualizar este %{model}
+  home:
+    about:
+      advantages:
+        contact_subject: Sobre o Eventa Servo
+        contact_us: entre em contato conosco
+        files_p: Adicione fotos e arquivos aos seus eventos.
+        files_title: Arquivos
+        open_source_p_html: É totalmente gratuito. O código-fonte é aberto no %{github_link}. Se quiser contribuir com a programação, %{contact_link}.
+        open_source_title: Gratuito e de código aberto
+        social_p: Divulgue facilmente seu evento em redes sociais como Facebook, Twitter, WhatsApp, Telegram, serviços de e-mail etc.
+        social_title: Mídias sociais
+        tech_p: Conecte eventos a outros sistemas através de API. Assine a lista de eventos com tecnologia RSS.
+        tech_title: Tecnologias
+        title: E muitas outras vantagens
+      articles:
+        art1: "(Artigo de Yves Nevelsteen e Fernando Ŝajani publicado na edição de maio de 2026 da Revuo Esperanto)"
+        art10: "(para reunião virtual no Zoom do clube La Verda Stelo 2020-12)"
+        art11: "(para o Congresso Virtual de Esperanto 2020-08)"
+        art12: "(Artigo de Fernando publicado na Kontakto 6-2018)"
+        art2: "(Episódio de podcast sobre o Eventa Servo no Movada Vidpunkto em janeiro de 2026)"
+        art3: "(Palestra de Yves Nevelsteen para o Clube de Esperanto de Londres e La Verda Stelo em janeiro de 2023)"
+        art4: "(Artigo publicado no Libera Folio em 06/12/2022)"
+        art5: "(Comunicado de imprensa da UEA mencionando o Eventa Servo várias vezes - 30/11/2022)"
+        art6: "(Artigo de Yves Nevelsteen publicado na edição de outubro de 2022 da Revuo Esperanto)"
+        art7: "(Artigo de Yves Nevelsteen publicado na edição de fevereiro de 2020 da Revuo Esperanto)"
+        art8: "(Comunicado de imprensa da UEA mencionando o Eventa Servo várias vezes)"
+        art9: "(Entrevista com Yves Nevelsteen publicada no Libera Folio em abril de 2020)"
+        in_wikipedia: na Wikipédia
+        more_info_wiki_html: Veja mais informações %{wiki_link}.
+        title: Artigos e apresentações sobre o Eventa Servo
+      creator_company: EventaServo é criado por Fernando Ŝajani através de
+      features:
+        calendar_p: Você pode assinar calendários de eventos por país ou organização através de aplicativos como Google Calendar, Apple iCal ou similar.
+        calendar_title: Inscreva-se pelo seu aplicativo de calendário
+        device_p: É possível usar o Eventa Servo pelo computador convencional, celular ou tablet. Não é necessário instalar nenhum aplicativo.
+        device_title: Compatível com computador ou celular
+        discover_p1: Com o Eventa Servo você pode ver eventos pelo mundo todo em mapa, lista, cartões e calendário.
+        discover_p2: Também é possível filtrar os eventos por continentes, países e cidades.
+        discover_title: Liste e encontre eventos facilmente!
+      helpers:
+        p1_html: "%{yves_link} soube do Eventa Servo em 2018. Ele compreendeu imediatamente seu potencial e, por isso, ajudou bastante na divulgação do site. Hoje continua como 'colaborador principal': conselheiro, testador de novas funcionalidades e comunicador (com usuários e imprensa).<br>%{robin_link} também ajuda desde 2020 com consultoria e programação."
+        p2_html: Agradecemos especialmente a %{fernando_link} vice-presidente da UEA, por seu apoio e ajuda na divulgação do Eventa Servo.
+        p3_html: Se você também deseja ajudar, participe deste %{telegram_link}.
+        telegram_link_text: grupo no Telegram
+        title: Colaboradores
+      history:
+        eventoj_hu_link_text: Calendário de Eventoj.hu
+        p1_html: "%{creator_link} criou o site Eventa Servo em 2017. Em sua cidade há poucos esperantistas, por isso os encontros são raros. Ele tinha certeza de que esperantistas atuavam em outras cidades e países, mas quais eventos eles organizavam? Onde? Quando? Ele criou o Eventa Servo para organizar tais informações."
+        p2: Em abril de 2019, Fernando doou o sistema para a Associação Universal de Esperanto. Desde então, a UEA e a TEJO incentivam o uso do Eventa Servo para informar a comunidade esperantista sobre eventos internacionais, nacionais e locais, congressos, reuniões, encontros etc.
+        p3_html: No final de 2020, o Eventa Servo tornou-se o sucessor oficial do %{link}.
+        title: História
+      partners:
+        p: Agradecemos a estas empresas pela permissão para utilizar suas tecnologias gratuitamente no aprimoramento do Eventa Servo.
+        title: Agradecimentos às empresas parceiras de tecnologia
+      registered_events: eventos registrados
+      registered_users: usuários registrados
+      tagline: O sistema para divulgar eventos em Esperanto no mundo todo!
+      title: Eventa Servo
+      uea_tejo:
+        p1_html: O Eventa Servo pertence à %{uea_link} com apoio da %{tejo_link}.
+        p2: Ambas as organizações incentivam o uso do Eventa Servo para divulgar à comunidade esperantista eventos internacionais, nacionais e locais, congressos, reuniões, encontros etc.
+        title: UEA e TEJO
+    ads:
+      alt: Anúncio
+  international_calendar:
+    by_year_title: Calendários Internacionais por ano
+    contact_link_text: informe-nos por e-mail
+    current_calendar: Calendário Internacional Atual
+    eventoj_hu:
+      logo_alt: Logotipo do eventoj.hu
+      paragraph_1_html: Entre 1996 e 2020 o Esperanto-Centro EVENTOJ / Lingvo-Studio em Budapeste manteve o "Calendário Internacional de Encontros de Esperanto", que listava os eventos presenciais de Esperanto abertos à visita de esperantistas viajantes. Seu arquivo pode ser encontrado em %{link}.
+      paragraph_2: A lista internacional de eventos acima é mantida pelo Eventa Servo. O Esperanto-Centro EVENTOJ / Lingvo-Studio em Budapeste lançou esta lista em 1996 e colabora com o Eventa Servo desde 2020.
+    events: Eventos
+    missing_event_html: Se você acredita que falta um evento ou há um erro, %{contact_link}.
+    page_title: Calendário Internacional | Eventa Servo
+    past_events: Eventos internacionais anteriores
+    subtitle: Lista dos principais eventos de Esperanto em todo o mundo
+    title: Calendário Internacional
+    year: Ano
+    year_title: Calendário internacional %{year}
+  languages:
+    en: Inglês (English)
+    eo: Esperanto
+    pt_BR: Português
   links:
     announcements_and_contests: Anúncios e Concursos
     international_calendar: Calendário Internacional
     presentations: Apresentações
     reports: Relatórios
     teachers_and_lecturers: Professores
-  events:
-    calendar:
-      jump_to_month: Mês
-    show_past: Eventos passados
-    past_events_count:
-      one: "%{count} evento passado"
-      other: "%{count} eventos passados"
   navbar:
     add_event: Adicionar evento
     log_in_sign_up: Entrar / Cadastrar
     organizations: Organizações
+    search:
+      aria_label: Pesquisar eventos
+      placeholder: Pesquisar eventos, cidades ou países
     toggle_navigation: Alternar navegação
+    tools:
+      about_us: Sobre nós
+      close_map: Fechar mapa
+      news: Notícias
+      support: Apoiar
+      view_as_map: Ver como mapa
+    user:
+      edit_profile: Editar meu perfil
+      my_events: Meus eventos
+      my_profile: Meu perfil
+      sign_out: Sair
+  organizations:
+    details:
+      subscribe_calendar: Assinar calendário da organização
+      youtube_channel: Canal do YouTube
+    form:
+      address: Endereço
+      city: Cidade (ou local)
+      delete_logo: Excluir logotipo
+      delete_logo_help: "(ou envie um novo para substituí-lo)"
+      description: Descrição
+      display_flag: Mostrar bandeira
+      display_flag_help: Mostra a bandeira do país na página da organização e em todos os seus eventos
+      edit_title: Editar organização
+      email: Endereço de e-mail
+      logo: Logotipo
+      new_title: Nova organização
+      phone: Número de telefone
+      short_name: Nome curto
+      short_name_help: Não use espaços ou caracteres especiais. Você pode usar _ e -
+      url: Endereço do site (URL)
+      youtube: Canal do YouTube (URL)
+    index:
+      admins_and_helpers_tooltip: Administradores e ajudantes
+      create_new: Criar nova organização
+      search_placeholder: Buscar organização
+      searching: Buscando
+      title: ORGANIZAÇÕES
+    main_organizations:
+      title: PRINCIPAIS ORGANIZAÇÕES
+    tabs:
+      events: eventos
+      has_reports: Tem relatos
+      no_past_events: Nenhum evento passado.
+      no_reports: Nenhum relato para eventos desta organização.
+      no_upcoming_events: Nenhum evento futuro para esta organização.
+      past: Passados
+      reports: Relatos
+      upcoming: Futuros
+    users:
+      add_section: Adicionar
+      administrators_header: Administradores
+      co_administrators: Coadministrador(es)
+      confirm_remove_user: Tem certeza de que deseja remover o usuário da organização?
+      head_admin_permission_info: Administrador principal pode adicionar novos administradores
+      head_administrators: Administrador(es) principal(is)
+      make_co_admin: Tornar coadministrador
+      make_head_admin: Tornar administrador principal
+      remove_user_from_org: Remover usuário da organização
+      search_user_placeholder: Buscar usuário
+    webcal:
+      article_link_text: este artigo
+      auto_subscribe_html: Alguns aplicativos de calendário permitem assinar o calendário automaticamente ao clicar em um link específico. Você pode tentar isso através de %{link}.
+      description_link_html: Aqui está o link Webcal para assinar o calendário de eventos de %{short_name}. Use-o em aplicativos como Google Calendar, iCal ou similares. Se precisar de instruções sobre como usar o link, leia %{article_link}.
+      description_sync: Ao assinar o calendário de uma organização, todos os eventos são adicionados ao calendário e quaisquer alterações são atualizadas automaticamente.
+      link_text: este link
+      title: Assinar calendário da organização
+  search:
+    cancelled: Cancelados
+    min_chars_error: A busca deve conter pelo menos 3 caracteres
+    past: Anteriores
+    placeholder: Buscar eventos ou organizações... (mínimo de 3 caracteres)
+    query_aria_label: Termo de busca
+    results:
+      events:
+        city: Cidade
+        date: Data
+        empty: Nenhum evento encontrado
+        found:
+          one: "%{count} evento encontrado"
+          other: "%{count} eventos encontrados"
+        header: Eventos
+        title: Título
+        upcoming_and_recent: "(próximos e recém-ocorridos)"
+      organizations:
+        empty: Nenhuma organização encontrada
+        found:
+          one: "%{count} organização encontrada"
+          other: "%{count} organizações encontradas"
+        header: Organizações
+      users:
+        country: País
+        empty: Nenhum usuário encontrado
+        found:
+          one: "%{count} usuário encontrado"
+          other: "%{count} usuários encontrados"
+        header: Usuários
+        name: Nome
+      videos:
+        date: Data
+        empty: Nenhuma apresentação gravada encontrada
+        event: Evento
+        found:
+          one: "%{count} apresentação gravada encontrada"
+          other: "%{count} apresentações gravadas encontradas"
+        header: Apresentações gravadas
+        title: Título
+    title: Busca
   support:
     array:
       last_word_connector: " e "
       two_words_connector: " e "
       words_connector: ", "
   tagline: Compartilhe eventos de Esperanto em todo o mundo!
+  tags:
+    plural:
+      alia: Outros
+      anonco: Anúncios
+      konkurso: Concursos
+      kunveno_evento: Encontros/Eventos
+      kurso: Cursos
+      plurtaga: Vários dias
+      por_junuloj: Para jovens
+      unutaga: Um dia
+    singular:
+      alia: Outro
+      anonco: Anúncio
+      konkurso: Concurso
+      kunveno_evento: Encontro/Evento
+      kurso: Curso
+      plurtaga: Vários dias
+      por_junuloj: Para jovens
+      unutaga: Um dia
+  teachers_and_speakers:
+    cards:
+      experience: Experiência
+      levels: Níveis
+      topics: Temas
+    cefr: Quadro Europeu Comum de Referência para Línguas
+    edukado_html: Nosso parceiro %{edukado_link} disponibiliza materiais prontos para uso, informações e serviços diversos para possibilitar um trabalho moderno e de qualidade baseado na cooperação global de professores de Esperanto. Eles oferecem exames de Esperanto de acordo com o %{cefr_link} |
+    filters:
+      all_countries: Todos os países
+      all_levels: Todos os níveis
+      country: País
+      experience_or_topics: Experiência / Temas
+      keyword_placeholder: Palavra-chave...
+      level: Nível
+      name: Nome
+      name_placeholder: Buscar por nome...
+    ilei_html: "%{ilei_link}, a Liga Internacional de Professores Esperantistas, é o principal ponto de encontro para professores e educadores de Esperanto. A ILEI é uma associação especializada filiada à Associação Universal de Esperanto (UEA). Possui membros no mundo todo e seções em mais de 40 países. Seja você professor no ensino fundamental, médio ou superior, ministre cursos de Esperanto ou deseje trocar experiências com colegas -> %{join_link}"
+    intro: Você está procurando um professor ou palestrante para o seu evento? Na lista abaixo você encontrará nomes de pessoas que indicaram no perfil do Eventa Servo que estão dispostas a ensinar e palestrar. Você encontrará detalhes nos respectivos perfis de usuário. Algumas pessoas se dispõem a ensinar e/ou palestrar gratuitamente, outras solicitam reembolso de despesas de viagem ou uma pequena compensação financeira. Às vezes é possível comparecer presencialmente; outras pessoas podem atuar apenas online. Mesmo que você não seja organizador de eventos, sinta-se à vontade para contatá-las — os esperantistas geralmente são muito prestativos!
+    join_ilei: Torne-se membro da ILEI
+    levels:
+      baza: Básico
+      meza: Intermediário
+      supera: Avançado
+    no_speakers_filtered: Nenhum palestrante encontrado com esses filtros.
+    no_speakers_registered: Nenhum palestrante registrado.
+    no_teachers_filtered: Nenhum professor encontrado com esses filtros.
+    no_teachers_registered: Nenhum professor registrado.
+    random_notice: Professor e palestrante aleatórios exibidos. Use o filtro para ver mais.
+    speakers_divider: Palestrantes
+    teachers_divider: Professores
+    title: Professores e palestrantes
+  timezone:
+    custom_timezone_text: 'Horários exibidos no seu fuso horário: %{timezone}'
+  users:
+    events:
+      interested_upcoming_events: Próximos eventos nos quais tenho interesse
+      managed_past_events: Eventos passados que administrei
+      managed_upcoming_events: Próximos eventos que administro
+      my_personal_events_page: Minha página pessoal de eventos
+      personal_page_notice: Esta página é pessoal. Outros usuários do Eventa Servo não podem visualizá-la.
+    profile:
+      admin_info:
+        active: Ativo
+        birthday: Data de nascimento
+        created_at: Criado em
+        last_sign_in_at: Último login
+        never: nunca
+        search_in_admin: Pesquisar no painel Admin
+        title: Informações para administradores
+        uea_code: Código UEA
+      contacts: Contatos
+      i_am_teacher: Sou um professor
+      levels_taught: 'Ensino o(s) nível(is):'
+      ready_to_lecture_about: Estou pronto para palestrar sobre
+      subscribe_personal_calendar: Assinar calendário pessoal
+      this_article: este artigo
+      this_link: este link
+      webcal_info_1: Ao assinar um calendário pessoal, todos os seus próprios eventos e aqueles em que você tem interesse são adicionados ao calendário. Quaisquer alterações nos eventos são atualizadas automaticamente.
+      webcal_info_2_html: Aqui está um link Webcal para assinar o calendário. Use-o em aplicativos como Google Calendar, iCal ou similares. Se precisar de instruções sobre como usar o link, leia %{article_link}.
+      webcal_info_3_html: Alguns aplicativos de calendário permitem assinar automaticamente o calendário clicando em um link específico. Você pode tentar isso através de %{link}.
+      webcal_warning: Não compartilhe o endereço do seu calendário pessoal com outra pessoa. Ele é privado.
   video:
     presentations: Apresentações

@@ -13,10 +13,10 @@ class OrganizationsController::ForighuTest < ActionDispatch::IntegrationTest
     sign_in @admin_user
 
     assert_difference "OrganizationUser.count", -1 do
-      delete organization_forighu_url(@organization.short_name, @normal_user.username)
+      delete organization_forighu_url(organization_short_name: @organization.short_name, username: @normal_user.username)
     end
 
-    assert_redirected_to organization_url(@organization.short_name)
+    assert_redirected_to organization_url(short_name: @organization.short_name)
     assert_equal "Sukceso", flash[:success]
   end
 
@@ -24,7 +24,7 @@ class OrganizationsController::ForighuTest < ActionDispatch::IntegrationTest
     sign_in @normal_user
 
     assert_no_difference "OrganizationUser.count" do
-      delete organization_forighu_url(@organization.short_name, @admin_user.username)
+      delete organization_forighu_url(organization_short_name: @organization.short_name, username: @admin_user.username)
     end
 
     assert_redirected_to organizations_url
@@ -33,7 +33,7 @@ class OrganizationsController::ForighuTest < ActionDispatch::IntegrationTest
 
   test "should not allow unauthenticated user to remove user" do
     assert_no_difference "OrganizationUser.count" do
-      delete organization_forighu_url(@organization.short_name, @normal_user.username)
+      delete organization_forighu_url(organization_short_name: @organization.short_name, username: @normal_user.username)
     end
 
     assert_redirected_to new_user_session_url

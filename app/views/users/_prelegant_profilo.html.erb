@@ -1,4 +1,4 @@
 <% if user.preleganto == 'true' %>
-  <div class="lead">Mi pretas prelegi pri</div>
+  <div class="lead"><%= t("users.profile.ready_to_lecture_about") %></div>
   <%= simple_format(user.prelego['temoj']) %>
 <% end %>

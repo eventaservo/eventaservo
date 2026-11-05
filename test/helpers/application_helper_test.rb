@@ -350,4 +350,131 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_includes result, '<i class="fas fa-map-marker-alt fg-color-link me-1" aria-hidden="true"></i>'
     assert_includes result, %(<a target="_blank" href="https://www.google.com/maps/search/?api=1&amp;query=#{address}">Bialystok</a>)
   end
+
+  # locale_display_code tests
+  test "locale_display_code formats locales as uppercase with hyphens" do
+    assert_equal "EO", locale_display_code(:eo)
+    assert_equal "EN", locale_display_code("en")
+    assert_equal "PT-BR", locale_display_code(:pt_BR)
+  end
+
+  # continent_display_name tests
+  test "continent_display_name returns localized continent name" do
+    I18n.with_locale(:eo) do
+      assert_equal "Eŭropo", continent_display_name("europo")
+      assert_equal "Ameriko", continent_display_name("Ameriko")
+      assert_equal "Reta", continent_display_name("reta")
+    end
+
+    I18n.with_locale(:en) do
+      assert_equal "Europe", continent_display_name("europo")
+      assert_equal "Americas", continent_display_name("Ameriko")
+      assert_equal "Online", continent_display_name("reta")
+    end
+
+    I18n.with_locale(:pt_BR) do
+      assert_equal "Europa", continent_display_name("europo")
+      assert_equal "Américas", continent_display_name("Ameriko")
+      assert_equal "Online", continent_display_name("reta")
+    end
+  end
+
+  test "event_full_description uses localized online event text" do
+    event = events(:valid_event)
+    event.online = true
+
+    I18n.with_locale(:eo) do
+      assert_includes event_full_description(event), "(Reta evento)"
+    end
+
+    I18n.with_locale(:en) do
+      assert_includes event_full_description(event), "(Online event)"
+    end
+
+    I18n.with_locale(:pt_BR) do
+      assert_includes event_full_description(event), "(Evento online)"
+    end
+  end
+
+  # events_by_username_path/url and user_events_path/url helper tests
+  test "events_by_username_path handles string, model, and hash arguments" do
+    user = users(:user)
+
+    assert_equal "/uzanto/#{user.username}", events_by_username_path(user.username)
+    assert_equal "/uzanto/#{user.username}", events_by_username_path(user)
+    assert_equal "/uzanto/#{user.username}", events_by_username_path(username: user.username)
+  end
+
+  test "events_by_username_url handles string, model, and hash arguments" do
+    user = users(:user)
+
+    assert_match(%r{/uzanto/#{user.username}$}, events_by_username_url(user.username))
+    assert_match(%r{/uzanto/#{user.username}$}, events_by_username_url(user))
+    assert_match(%r{/uzanto/#{user.username}$}, events_by_username_url(username: user.username))
+  end
+
+  test "user_events_path handles string, model, and hash arguments" do
+    user = users(:user)
+
+    assert_equal "/uzanto/#{user.username}/eventoj", user_events_path(user.username)
+    assert_equal "/uzanto/#{user.username}/eventoj", user_events_path(user)
+    assert_equal "/uzanto/#{user.username}/eventoj", user_events_path(username: user.username)
+  end
+
+  test "user_events_url handles string, model, and hash arguments" do
+    user = users(:user)
+
+    assert_match(%r{/uzanto/#{user.username}/eventoj$}, user_events_url(user.username))
+    assert_match(%r{/uzanto/#{user.username}/eventoj$}, user_events_url(user))
+    assert_match(%r{/uzanto/#{user.username}/eventoj$}, user_events_url(username: user.username))
+  end
+
+  test "error_handling returns alert container with localized header and errors" do
+    user = User.new
+    user.valid?
+
+    assert user.errors.any?
+    rendered = error_handling(user)
+
+    assert_includes rendered, "error-handling"
+    assert_includes rendered, I18n.t("errors.header")
+    user.errors.full_messages.each do |message|
+      assert_includes rendered, message
+    end
+  end
+
+  test "error_handling returns nil when record has no errors" do
+    user = users(:user)
+
+    assert_nil error_handling(user)
+  end
+
+  test "article_link renders link with blank target and small description" do
+    rendered = article_link("Test Article", "https://example.com/article", "Test description")
+
+    assert_includes rendered, '<a href="https://example.com/article" target="_blank">Test Article</a>'
+    assert_includes rendered, '<span class="small"> Test description</span>'
+  end
+
+  test "read_localized_markdown reads localized document files" do
+    eo_content = read_localized_markdown("TERMS", locale: :eo)
+    assert_includes eo_content, "# Uzokondiĉoj"
+
+    en_content = read_localized_markdown("TERMS", locale: :en)
+    assert_includes en_content, "# Terms of Service"
+
+    pt_content = read_localized_markdown("TERMS", locale: :pt_BR)
+    assert_includes pt_content, "# Termos de Serviço"
+  end
+
+  test "read_localized_markdown falls back to default locale when localized file is missing" do
+    content = read_localized_markdown("TERMS", locale: :non_existent_locale)
+    assert_includes content, "# Uzokondiĉoj"
+  end
+
+  test "read_localized_markdown raises Errno::ENOENT when document does not exist" do
+    assert_raises(Errno::ENOENT) do
+      read_localized_markdown("NON_EXISTENT_DOCUMENT")
+    end
+  end
 end

@@ -2,9 +2,6 @@
 en:
   activerecord:
     attributes:
-      event/report:
-        title: Title
-        url: Link
       event:
         city: City
         country_id: Country
@@ -13,6 +10,9 @@ en:
         description: Description
         short_url: Short URL
         title: Title
+      event/report:
+        title: Title
+        url: Link
       organization:
         city: City
         country_id: Country
@@ -21,10 +21,18 @@ en:
         name: Name
         short_name: Short name
       user:
-        name: Name
-        email: Email
+        about: About me
+        avatar: Avatar
+        birthday: Date of birth
         city: City
         country_id: Country
+        email: Email
+        locale: Preferred language
+        name: Name
+        password: Password
+        password_confirmation: Confirm password
+        persona_retejo: Personal website
+        ueacode: UEA code
     errors:
       messages:
         record_invalid: 'Validation failed: %{errors}'
@@ -42,28 +50,140 @@ en:
     models:
       event: Events
     registrations:
+      api_v2_token: API v2 Token
       regenerate_token: Regenerate Token
       regenerate_token_confirmation: Are you sure you want to regenerate your API token? The old token will stop working immediately.
       token_regenerated: API token successfully regenerated.
-      token_regeneration_error: "Error regenerating API token: %{error}"
+      token_regeneration_error: 'Error regenerating API token: %{error}'
+  announcements_and_contests:
+    caption: List of current announcements and contests in Esperanto-land.
   api:
     v2:
       errors:
-        token_missing: Token missing
-        token_invalid: Token invalid
         token_expired: Token expired
+        token_invalid: Token invalid
+        token_missing: Token missing
+  breadcrumbs:
+    world: World
   buttons:
+    add: Add
     add_video: Video
-    duplicate: Duplicate
-    edit: Edit
-    share: Share
     cancel: Cancel
+    cancel_registration: Do not register
     change: Change
     close: Close
+    copy: Copy
+    delete: Delete
+    duplicate: Duplicate
+    edit: Edit
+    save: Save
+    save_event: Save
+    search: Search
     select: Select
     send: Send
+    share: Share
+    update: Update
+  clipboard:
+    copied_to_clipboard: "%{text} copied to clipboard!"
+    copy_failed: Could not copy to clipboard
+  common:
+    are_you_sure: Are you sure?
+    country: Country
+    date: Date
+    event: Event
+    events: Events
+    location: Location
+    name: Name
+    no_results: No results
+    no_upper: 'NO'
+    optional: "*optional"
+    or_upper: OR
+    sign_in: Sign in
+    yes_upper: 'YES'
+  continents:
+    afriko: Africa
+    ameriko: Americas
+    azio: Asia
+    europo: Europe
+    oceanio: Oceania
+    reta: Online
+  devise:
+    confirmations:
+      new:
+        submit: Resend
+        subtitle: Resend confirmation instructions
+    passwords:
+      edit:
+        minimum_characters: Minimum %{count} characters
+        new_password: New password
+        password_confirmation: Confirm new password
+        submit: Change my password
+        title: Change your password
+      new:
+        instructions: Enter your email address. We will send you instructions to create a new password.
+        submit: Receive instructions
+        subtitle: Forgot your password?
+    registrations:
+      edit:
+        delete_account: Delete account
+        delete_account_confirmation: Are you sure? This CANNOT be undone!
+        links: Links
+        organizations: Organizations
+        ready_to_help: I am ready to help
+        remove_avatar: Remove avatar
+        title: Edit profile
+      instructor:
+        experience: Experience
+        experience_placeholder: Write about your experience as a teacher.
+        i_am_teacher: I am a teacher
+        lead: As a teacher
+        level: Level
+      new:
+        birthday_placeholder: Date of birth (D/M/Y) *optional
+        password_confirmation_placeholder: Confirm password
+        password_placeholder: Password
+        security_phrase_placeholder: What is our language called?
+        submit: Sign up
+        subtitle_html: Sign up to create new events.<br>It's free!
+        ueacode_placeholder: UEA code *optional
+        video_help_html: If in doubt, watch %{video_link}. It explains how to sign up.
+        video_link_text: this video
+      speaker:
+        i_am_speaker: I am a speaker
+        lead: As a speaker
+        topics_label: I speak about the following topics
+        topics_placeholder: Write about the topics you are willing to give presentations on
+    sessions:
+      new:
+        forgot_password: Forgot password?
+        submit: Log in
+        subtitle: Log in to create new events.
+    shared:
+      links:
+        already_registered: Already registered?
+        didnt_receive_confirmation_instructions: Didn't receive confirmation instructions?
+        not_registered: Not registered yet?
+        sign_in: Log in
+        sign_up_now: Sign up now
+      sign_in_with_provider: Sign in with %{provider}
+      sign_up_with_provider: Sign up with %{provider}
+    unlocks:
+      new:
+        submit: Resend unlock instructions
+        title: Resend unlock instructions
   errors:
     format: "%{attribute} %{message}"
+    header: There is an error in the form
+    internal_error:
+      apology: We apologize. We will fix this error shortly.
+      form:
+        back_to_home: Go to home page
+        comments: What were you doing before the error occurred?
+        email: Email
+        name: Name
+        submit: Send
+      help_us: You can help us by sending more information about what happened
+      title: Oh! An error occurred!
     messages:
       accepted: must be accepted
       blank: can't be blank
@@ -85,11 +205,284 @@ en:
       too_long: is too long (maximum is %{count} characters)
       too_short: is too short (minimum is %{count} characters)
       wrong_length: is the wrong length (should be %{count} characters)
+    not_found:
+      back_to_home: Go to home page
+      contact_link_text: Contact us
+      message_html: The page does not exist. %{contact_link} if you need help.
+      title: Page not found
     template:
       body: 'Please review the following fields:'
       header:
         one: 'Cannot save this %{model}: 1 error'
         other: 'Cannot save this %{model}: %{count} errors'
+    unacceptable:
+      message: Maybe you do not have permission for this action or the submitted data was invalid.
+      title: Unacceptable request
+  event_mailer:
+    event_summary:
+      read_more: READ MORE
+    footer:
+      instigo_fund: Instigo Fund
+      intro: Eventa Servo is a free service provided by UEA and TEJO. Do you enjoy it?
+      support_prompt: Support online volunteers with a donation to the
+    kontakti_organizanton:
+      body_html: Someone has a question, wants to report a problem, or inform you about the event "%{event_link}", which you manage on Eventa Servo. Could you please check this and correct it if necessary?
+      greeting: Hello.
+      message_intro: 'Here is the message:'
+      subject: Information about your event on Eventa Servo
+    layout:
+      automated_message_html: Message automatically sent by %{service}
+      automated_message_text: Message automatically sent by Eventa Servo
+      contact_us_html: Contact us via %{link}
+    notify_admins:
+      admin_only_note: This information is only for administrators
+      created_by: Event created by %{user} on %{date}
+      subject_new: "[ES board] New event: %{title}"
+      subject_update: "[ES board] Update: %{title}"
+    notify_user:
+      footer_html: If you no longer wish to receive notifications about new events in %{country}, you can %{link} via this link.
+      unsubscribe: unsubscribe
+    nova_administranto:
+      body_html: You are now the administrator of the event %{event_link} on Eventa Servo. This means you can edit its content or delete it.
+      closing: Best wishes for your event!
+      greeting: Hello %{name}.
+      invitation: We invite you to add information about events, meetings, and happenings to Eventa Servo. You can do this by adding a new event or duplicating an existing one.
+      subject: You are a new event administrator
+      view_event_page: VIEW EVENT PAGE
+    rememorigas_uzantojn:
+      footer_note_html: You are receiving this message because you indicated on %{site_link} that you are interested in a specific event. To stop receiving these messages, simply uncheck the "%{button_name}" button.
+      greeting: Hello.
+      interest_html: 'You indicated on %{site_link} that you are interested in the following event: %{event_link}.'
+      view_event_page: VIEW EVENT PAGE
+    reminders:
+      messages:
+        hours_2: It will start soon. We wish you an enjoyable and successful participation.
+        month_1: It will start in a month. Consider registering or at least letting the event organizer know about your intention to attend.
+        week_1: It will start in a week. Consider registering or at least letting the event organizer know about your intention to attend.
+      subjects:
+        hours_2: "[ES] %{title} will start soon"
+        month_1: "[ES] %{title} will start in a month"
+        week_1: "[ES] %{title} will start in a week"
+    weekly_summary:
+      and: and
+      events_taking_place_between: Events taking place between
+      in_person_events: In-person events
+      no_events: No events will take place
+      online_events: Online events
+      share_my_event: Share my event
+      subject: Worldwide weekly event summary
+      unsubscribe: unsubscribe
+      unsubscribe_html: If you no longer wish to receive the Weekly Summary, you can %{link}.
+  events:
+    all_day: all day
+    calendar:
+      jump_to_month: Month
+      next_week: Next week
+      no_events: No events
+      previous_week: Previous week
+      today: Today
+      week_navigation: Week navigation
+    cancel_modal:
+      confirm_button: Confirm cancellation
+      description: Cancelling the event does not remove it from the list, but displays it as cancelled. This informs people that the event will not take place.
+      reason_placeholder: Enter the reason
+      title: Cancel event
+    cancelled_label: Cancelled
+    cancelled_upper: CANCELLED
+    chronology:
+      no_changes: No changes found in the history.
+      title: History
+      view_event: View event
+    date_in_city: "%{date} in %{city}"
+    daylight_saving_time: Daylight saving time
+    days_left:
+      in_days:
+        one: ends in %{count} day
+        other: ends in %{count} days
+      tomorrow: ends tomorrow
+    details:
+      administrator: Administrator
+      header: Details
+    form:
+      add_to_international_calendar: Add to International Calendar
+      address: Local event address
+      address_help: Add the street name to pinpoint the event location on the map
+      admin_functions: Admin functions
+      announcements_help_html: Announcements and contests will not appear on the home page.<br>Whether an event is added to the %{calendar_link} of major worldwide Esperanto events is decided by the ES editorial team.
+      city_or_place: City (or location)
+      content: Content
+      delete_confirm: Are you sure? You will not be able to undo this.
+      email_for_contact: Contact email
+      event_administrator: Event administrator
+      max_100_chars: Maximum 100 characters
+      max_140_chars: Maximum 140 characters
+      new_title: New event or gathering
+      online_or_hybrid: Online or hybrid event
+      organization_help: Leave empty if the event does not belong to an organization
+      organizations: Organization(s)
+      search_placeholder: Search...
+      search_text: No results
+      select_category_alert: You must select at least one category
+      select_timezone_instead_of_address: Select timezone instead of address/country
+      short_url: Short link (optional)
+      short_url_unavailable: This short link is not available. Please choose another.
+      time_end_aria: End time
+      time_start_aria: Start time
+      timezone: Timezone
+      website: Website
+      write_in_esperanto_notice: Write in Esperanto. Let everyone know what is happening in the Esperanto world worldwide!
+    happening_now_count:
+      one: "%{count} happening now"
+      other: "%{count} happening now"
+    international_event: International Event
+    map:
+      duplicate_notice: "* The map shows only the first upcoming event when multiple events occur at the same location with the same title"
+    my_events: Events
+    online: Online
+    online_event: Online event
+    options:
+      aria_label: Event options
+    participants:
+      and_more: and more...
+      anonymous_count:
+        one: and %{count} other who preferred not to show their name
+        other: and %{count} others who preferred not to show their name
+      count_interested_future:
+        one: "%{count} interested"
+        other: "%{count} interested"
+      count_interested_past:
+        one: "%{count} interested"
+        other: "%{count} interested"
+      interested_active: I'm interested!
+      interested_button: I'm interested
+      interested_future: Interested
+      interested_past: Interested
+      public_list_question: Display your name in the list of interested people?
+      reminder_prompt: Indicate that you are interested and you will receive reminder emails about the event.
+      reminder_subscribed: You will receive reminder emails about the event.
+      sign_in_to_show_interest_html: "%{link} to indicate your interest"
+    past_events_count:
+      one: "%{count} past event"
+      other: "%{count} past events"
+    reports:
+      add_link: Add link
+      delete_report_aria: Delete report
+      empty_prompt: Add links to reports
+      events_with_reports_title: Events with reports
+      header: Reports
+      new_title: Event report
+      url_example: 'E.g.: https://uea.facila.org/artikoloj/movado/zamenhof-tago-r269'
+    share_modal:
+      prompt: Choose how to share the event
+      share_on_facebook: Share on Facebook
+      share_on_pinterest: Share on Pinterest
+      share_on_reddit: Share on Reddit
+      share_on_telegram: Share on Telegram
+      share_on_twitter: Share on Twitter
+      share_on_vkontakte: Share on VKontakte
+      share_via_email: Share via email
+      share_via_whatsapp: Share via WhatsApp
+      title: Share
+    show_past: Past events
+    timezone:
+      same_as_yours: Same as your timezone
+    upcoming_events_count:
+      one: "%{count} upcoming event"
+      other: "%{count} upcoming events"
+    uploader:
+      prompt: Add photos or documents to the event.
+      submit: Upload
+      title: Uploader
+    uploads:
+      delete_file_aria: Delete file
+      title: Files
+    webcal_modal:
+      auto_subscribe_html: Some calendar programs allow you to automatically subscribe to the calendar if you click a specific link. You can try this via %{link}.
+      auto_subscribe_link: this link
+      calendar_subscription_info: When you subscribe to a calendar, all events are added to the calendar and any event changes are automatically updated.
+      country_intro_html: Here is the Webcal link to subscribe to the calendar of events in %{country}. Use it in applications like Google Calendar, iCal, or similar. If you need instructions on how to use the link, read %{help_link}.
+      help_article_link: this article
+      online_intro_html: Here is the Webcal link to subscribe to the calendar of all upcoming <strong>online events</strong>. Use it in applications like Google Calendar, iCal, or similar. If you need instructions on how to use the link, read %{help_link}.
+      subscribe_calendar: Subscribe to calendar
+      title: Subscribe to calendar
+  filters:
+    periods:
+      estontece: Upcoming
+      hodiau: Happening now
+      p30_tagojn: Next 30 days
+      p7_tagojn: Next 7 days
+  flash:
+    admin:
+      redirections:
+        created: Redirection successfully created.
+        destroyed: Redirection successfully deleted.
+        updated: Redirection successfully updated.
+      reports:
+        destroyed: Report successfully deleted.
+        updated: Report successfully updated.
+      users:
+        deactivated: User deactivated.
+        disable_failed_one_member_org: Could not disable the user. Maybe they belong to a one-member organization.
+        email_confirmed: User's email marked as confirmed.
+        enabled: User enabled.
+        merged: Users merged successfully.
+        new_password: 'New password: %{password}'
+        updated: User successfully updated.
+    countries:
+      not_found: Country does not exist
+      not_in_database: Country does not exist in database
+    events:
+      cancelled: Event cancelled
+      created: Event successfully created.
+      destroyed: Event successfully deleted
+      display_error: An error occurred while displaying that event
+      document_uploaded: Document successfully uploaded
+      file_deleted: File successfully deleted
+      invalid_file_format: Invalid file format
+      message_sent: Message sent
+      no_events_in_continent: There are no events in this continent
+      not_found: Event does not exist
+      select_file_first: You must select a file first
+      uncancelled: Event uncancelled
+      updated: Event successfully updated
+    feedback:
+      thank_you: Thank you!
+    formats:
+      not_found: Format does not exist.
+    general:
+      success: Success
+      unauthorized: You are not authorized
+      unauthorized_action: You are not authorized to do that
+    organizations:
+      created: Organization successfully created.
+      not_found: Organization does not exist
+      updated: Organization successfully updated
+      user_added: User added to organization
+    reports:
+      create_error: An error occurred while creating the report
+      created: The report was successfully created
+      destroy_error: An error occurred while deleting the report
+      destroyed: The report was successfully deleted
+    users:
+      account_deleted: Your account has been deleted.
+      invalid_security_phrase: Incorrect anti-spam security phrase. Type the name of the international language.
+      not_found: User does not exist
+      username_not_found: Username does not exist
+    videos:
+      destroyed: Video deleted
+      unauthorized: You are not authorized to delete this video
+    webcal:
+      country_code_not_found: Country code does not exist
+  footer:
+    about: About us
+    changelog: Changelog
+    contact_subject: Contact via Eventa Servo
+    contact_us: Contact us
+    more: More
+    privacy: Privacy
+    server_status: Server status
+    terms: Terms of Service
+    version: Version %{version}
   helpers:
     select:
       prompt: Please select
@@ -97,29 +490,297 @@ en:
       create: Create %{model}
       submit: Save this %{model}
       update: Update this %{model}
+  home:
+    about:
+      advantages:
+        contact_subject: About Eventa Servo
+        contact_us: contact us
+        files_p: Add photos and documents to your events.
+        files_title: File storage
+        open_source_p_html: It is completely free. The source code is open on %{github_link}. If you would like to contribute to development, %{contact_link}.
+        open_source_title: Free and open source
+        social_p: Easily share your event across social networks such as Facebook, Twitter, WhatsApp, Telegram, email services, etc.
+        social_title: Social media
+        tech_p: Connect events to external systems using the API. Subscribe to event feeds via RSS.
+        tech_title: Technologies
+        title: And many other benefits
+      articles:
+        art1: "(Article by Yves Nevelsteen and Fernando Ŝajani published in the May 2026 issue of Revuo Esperanto)"
+        art10: "(for a virtual Zoom meeting of the club La Verda Stelo 2020-12)"
+        art11: "(for the Virtual Congress of Esperanto 2020-08)"
+        art12: "(Article by Fernando published in Kontakto 6-2018)"
+        art2: "(Podcast episode about Eventa Servo on Movada Vidpunkto in January 2026)"
+        art3: "(Presentation by Yves Nevelsteen for the London Esperanto Club and La Verda Stelo in January 2023)"
+        art4: "(Article published in Libera Folio on 2022-12-06)"
+        art5: "(UEA press release mentioning Eventa Servo several times - 2022-11-30)"
+        art6: "(Article by Yves Nevelsteen published in the October 2022 issue of Revuo Esperanto)"
+        art7: "(Article by Yves Nevelsteen published in the February 2020 issue of Revuo Esperanto)"
+        art8: "(UEA press release mentioning Eventa Servo several times)"
+        art9: "(Interview with Yves Nevelsteen published in Libera Folio in April 2020)"
+        in_wikipedia: on Wikipedia
+        more_info_wiki_html: See more information %{wiki_link}.
+        title: Articles and presentations about Eventa Servo
+      creator_company: EventaServo is created by Fernando Ŝajani through
+      features:
+        calendar_p: You can subscribe to country or organization event calendars using calendar software like Google Calendar, Apple iCal, or similar.
+        calendar_title: Subscribe with your calendar app
+        device_p: You can use Eventa Servo on a traditional computer, smartphone, or tablet. No app installation is required.
+        device_title: Usable on computer or mobile phone
+        discover_p1: With Eventa Servo you can discover events worldwide on a map, list, cards, and calendar.
+        discover_p2: You can also filter events by continents, countries, and cities.
+        discover_title: Easily list and find events!
+      helpers:
+        p1_html: "%{yves_link} learned about Eventa Servo in 2018. He immediately understood its potential and contributed greatly to promoting the site. Today he continues as 'lead helper': advisor, tester of new features, and communicator (with users and the press).<br>%{robin_link} has also been helping since 2020 with advice and programming."
+        p2_html: We give special thanks to %{fernando_link} vice-president of UEA, for his support and assistance in spreading Eventa Servo.
+        p3_html: If you would also like to help, join this %{telegram_link}.
+        telegram_link_text: Telegram group
+        title: Helpers
+      history:
+        eventoj_hu_link_text: Calendar of Eventoj.hu
+        p1_html: "%{creator_link} created the Eventa Servo website in 2017. In his city there are few Esperanto speakers, so meetings are rare. He was certain that Esperantists were active in other cities and countries, but what events were they organizing? Where? When? He created Eventa Servo to organize this information."
+        p2: In April 2019, Fernando donated the system to the Universal Esperanto Association. Since then, UEA and TEJO encourage the use of Eventa Servo to inform the Esperanto community about international, national, and local events, congresses, meetings, gatherings, etc.
+        p3_html: At the end of 2020, Eventa Servo became the official successor to the %{link}.
+        title: History
+      partners:
+        p: We thank these companies for the permission to use their technologies for free to improve Eventa Servo.
+        title: Thanks to partner technology companies
+      registered_events: registered events
+      registered_users: registered users
+      tagline: The system to publicize Esperanto events worldwide!
+      title: Eventa Servo
+      uea_tejo:
+        p1_html: Eventa Servo belongs to %{uea_link} with support from %{tejo_link}.
+        p2: Both organizations encourage the use of Eventa Servo to inform the Esperanto community about international, national, and local events, congresses, meetings, gatherings, etc.
+        title: UEA and TEJO
+    ads:
+      alt: Advertisement
+  international_calendar:
+    by_year_title: International Calendars by year
+    contact_link_text: let us know by email
+    current_calendar: Current International Calendar
+    eventoj_hu:
+      logo_alt: eventoj.hu logo
+      paragraph_1_html: Between 1996-2020 the Esperanto-Centro EVENTOJ / Lingvo-Studio in Budapest operated the "International Calendar of Esperanto Meetings", which listed physical Esperanto events welcoming traveling Esperantists. Its archive can be found at %{link}.
+      paragraph_2: The international list of events above is maintained by Eventa Servo. Esperanto-Centro EVENTOJ / Lingvo-Studio in Budapest launched this list in 1996 and has collaborated with Eventa Servo since 2020.
+    events: Events
+    missing_event_html: If you believe an event is missing or there is an error, %{contact_link}.
+    page_title: International Calendar | Eventa Servo
+    past_events: Past international events
+    subtitle: List of the main Esperanto events worldwide
+    title: International Calendar
+    year: Year
+    year_title: International calendar %{year}
+  languages:
+    en: English
+    eo: Esperanto
+    pt_BR: Portuguese (Português)
   links:
     announcements_and_contests: Announcements & Contests
     international_calendar: International Calendar
     presentations: Presentations
     reports: Reports
     teachers_and_lecturers: Teachers
-  events:
-    calendar:
-      jump_to_month: Month
-    show_past: Past events
-    past_events_count:
-      one: "%{count} past event"
-      other: "%{count} past events"
   navbar:
     add_event: Add event
     log_in_sign_up: Login / Signup
     organizations: Organizations
+    search:
+      aria_label: Search events
+      placeholder: Search events, cities, or countries
     toggle_navigation: Toggle navigation
+    tools:
+      about_us: About us
+      close_map: Close map
+      news: News
+      support: Support
+      view_as_map: View as map
+    user:
+      edit_profile: Edit my profile
+      my_events: My events
+      my_profile: My profile
+      sign_out: Sign out
+  organizations:
+    details:
+      subscribe_calendar: Subscribe to organization calendar
+      youtube_channel: YouTube channel
+    form:
+      address: Address
+      city: City (or location)
+      delete_logo: Delete logo
+      delete_logo_help: "(or upload a new one to replace it)"
+      description: Description
+      display_flag: Show flag
+      display_flag_help: Shows the country flag on the organization page and all of its events
+      edit_title: Edit organization
+      email: Email address
+      logo: Logo
+      new_title: New organization
+      phone: Phone number
+      short_name: Short name
+      short_name_help: Do not use spaces or special characters. You may use _ and -
+      url: Website address (URL)
+      youtube: YouTube channel (URL)
+    index:
+      admins_and_helpers_tooltip: Administrators and helpers
+      create_new: Create new organization
+      search_placeholder: Search organization
+      searching: Searching
+      title: ORGANIZATIONS
+    main_organizations:
+      title: MAIN ORGANIZATIONS
+    tabs:
+      events: events
+      has_reports: Has reports
+      no_past_events: No past events.
+      no_reports: No reports for events of this organization.
+      no_upcoming_events: No upcoming events for this organization.
+      past: Past
+      reports: Reports
+      upcoming: Upcoming
+    users:
+      add_section: Add
+      administrators_header: Administrators
+      co_administrators: Co-administrator(s)
+      confirm_remove_user: Are you sure you want to remove the user from the organization?
+      head_admin_permission_info: Main administrator can add new administrators
+      head_administrators: Main administrator(s)
+      make_co_admin: Make co-administrator
+      make_head_admin: Make main administrator
+      remove_user_from_org: Remove user from organization
+      search_user_placeholder: Search user
+    webcal:
+      article_link_text: this article
+      auto_subscribe_html: Some calendar programs allow you to automatically subscribe to the calendar by clicking a specific link. You can try that via %{link}.
+      description_link_html: Here is the Webcal link to subscribe to the event calendar of %{short_name}. Use it in applications such as Google Calendar, iCal, or similar. If you need instructions on how to use the link, read %{article_link}.
+      description_sync: When you subscribe to an organization's calendar, all events are added to your calendar and any changes update automatically.
+      link_text: this link
+      title: Subscribe to organization calendar
+  search:
+    cancelled: Cancelled
+    min_chars_error: The search query must contain at least 3 characters
+    past: Past
+    placeholder: Search events or organizations... (minimum 3 characters)
+    query_aria_label: Search query
+    results:
+      events:
+        city: City
+        date: Date
+        empty: No events found
+        found:
+          one: "%{count} event found"
+          other: "%{count} events found"
+        header: Events
+        title: Title
+        upcoming_and_recent: "(upcoming and recent)"
+      organizations:
+        empty: No organizations found
+        found:
+          one: "%{count} organization found"
+          other: "%{count} organizations found"
+        header: Organizations
+      users:
+        country: Country
+        empty: No users found
+        found:
+          one: "%{count} user found"
+          other: "%{count} users found"
+        header: Users
+        name: Name
+      videos:
+        date: Date
+        empty: No recorded presentations found
+        event: Event
+        found:
+          one: "%{count} recorded presentation found"
+          other: "%{count} recorded presentations found"
+        header: Recorded presentations
+        title: Title
+    title: Search
   support:
     array:
       last_word_connector: " and "
       two_words_connector: " and "
       words_connector: ", "
   tagline: Share Esperanto events worldwide!
+  tags:
+    plural:
+      alia: Others
+      anonco: Announcements
+      konkurso: Contests
+      kunveno_evento: Meetings/Events
+      kurso: Courses
+      plurtaga: Multi-day
+      por_junuloj: For youth
+      unutaga: Single day
+    singular:
+      alia: Other
+      anonco: Announcement
+      konkurso: Contest
+      kunveno_evento: Meeting/Event
+      kurso: Course
+      plurtaga: Multi-day
+      por_junuloj: For youth
+      unutaga: Single day
+  teachers_and_speakers:
+    cards:
+      experience: Experience
+      levels: Levels
+      topics: Topics
+    cefr: Common European Framework of Reference for Languages
+    edukado_html: Our partner %{edukado_link} provides ready-to-use materials, information, and diverse services to enable modern, high-quality work based on worldwide cooperation of Esperanto teachers. They offer Esperanto examinations according to the %{cefr_link} |
+    filters:
+      all_countries: All countries
+      all_levels: All levels
+      country: Country
+      experience_or_topics: Experience / Topics
+      keyword_placeholder: Keyword...
+      level: Level
+      name: Name
+      name_placeholder: Search by name...
+    ilei_html: "%{ilei_link}, the International League of Esperanto Teachers, is the primary gathering place for Esperanto teachers and educators. ILEI is an affiliated specialized association of the Universal Esperanto Association (UEA). It has members worldwide and sections in over 40 countries. Whether you teach in primary school, secondary school, or university, lead Esperanto courses, are interested in teaching, or wish to exchange experience with colleagues -> %{join_link}"
+    intro: Are you looking for a teacher or speaker for your event? In the list below you will find people who indicated in their Eventa Servo profile that they are ready to teach and speak. You can find details on their respective user profiles. Some are willing to teach or speak for free, others request travel expense reimbursement or a small honorarium. Sometimes they can attend on-site; others may only participate online. Even if you are not an event organizer, feel free to contact them — Esperantists are generally very helpful!
+    join_ilei: Become a member of ILEI
+    levels:
+      baza: Basic
+      meza: Intermediate
+      supera: Advanced
+    no_speakers_filtered: No speakers found with those filters.
+    no_speakers_registered: No speakers are registered.
+    no_teachers_filtered: No teachers found with those filters.
+    no_teachers_registered: No teachers are registered.
+    random_notice: Random teacher and speaker shown. Use the filter to see more.
+    speakers_divider: Speakers
+    teachers_divider: Teachers
+    title: Teachers and speakers
+  timezone:
+    custom_timezone_text: 'Times shown in your timezone: %{timezone}'
+  users:
+    events:
+      interested_upcoming_events: Upcoming events I am interested in
+      managed_past_events: Past events I managed
+      managed_upcoming_events: Upcoming events I manage
+      my_personal_events_page: My personal events page
+      personal_page_notice: This page is personal. Other Eventa Servo users cannot see it.
+    profile:
+      admin_info:
+        active: Active
+        birthday: Date of birth
+        created_at: Created at
+        last_sign_in_at: Last signed in
+        never: never
+        search_in_admin: Search in Admin panel
+        title: Information for administrators
+        uea_code: UEA code
+      contacts: Contacts
+      i_am_teacher: I am a teacher
+      levels_taught: 'I teach level(s):'
+      ready_to_lecture_about: I am ready to speak about
+      subscribe_personal_calendar: Subscribe to personal calendar
+      this_article: this article
+      this_link: this link
+      webcal_info_1: When you subscribe to a personal calendar, all your own events and those you are interested in are added to the calendar. Any event updates are automatically synchronized.
+      webcal_info_2_html: Here is a Webcal link to subscribe to the calendar. Use it in applications like Google Calendar, iCal, or similar. If you need instructions on how to use the link, read %{article_link}.
+      webcal_info_3_html: Some calendar applications allow you to automatically subscribe to the calendar by clicking a specific link. You can try this via %{link}.
+      webcal_warning: Do not share your personal calendar address with anyone else. It is private.
   video:
     presentations: Presentations

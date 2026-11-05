@@ -1,14 +1,14 @@
 <div class="box-white">
   <div class="text-center">
-    <h1>Internaciaj Kalendaroj laŭ jaroj</h1>
-    <%= link_to "Nuna Internacia Kalendaro", international_calendar_path, class: 'btn btn-sm btn-link' %>
+    <h1><%= t("international_calendar.by_year_title") %></h1>
+    <%= link_to t("international_calendar.current_calendar"), international_calendar_path, class: 'btn btn-sm btn-link' %>
   </div>
 
   <div class="col-lg-6 offset-lg-3 mt-4">
     <div class="border rounded overflow-hidden small">
       <div class="row g-0 align-items-center bg-success text-white text-uppercase fw-bold px-2 py-2 smaller">
-        <div class="col-6">Jaro</div>
-        <div class="col-6">Eventoj</div>
+        <div class="col-6"><%= t("international_calendar.year") %></div>
+        <div class="col-6"><%= t("international_calendar.events") %></div>
       </div>
 
       <% @events_by_year.each_with_index do |(year, event_count), i| %>
