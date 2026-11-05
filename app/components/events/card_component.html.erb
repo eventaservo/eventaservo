@@ -2,7 +2,7 @@
   <div class="event-card__header">
     <span class="event-card__date">
       <%= event.start_time_label(horzono: (helpers.cookies[:horzono] || event.time_zone)) unless (event.multtaga? or event.tuttaga?) %>
-      <%= date_label %>
+      <%= EventPresenter.new(event:).date_label(abbreviated: true) %>
     </span>
   </div>
   <h3 class="event-card__title">
