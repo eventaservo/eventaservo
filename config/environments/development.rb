@@ -3,6 +3,7 @@ require "debug"
 require "ipaddr"
 
 Rails.application.configure do
+  config.view_component.previews.default_layout = "component_preview"
   config.after_initialize do
     Bullet.enable = true
     Bullet.rails_logger = true

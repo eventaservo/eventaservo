@@ -8,7 +8,7 @@
   <div class="row">
     <% events.each do |event| %>
       <div class="col-12 col-md-4">
-        <%= render partial: 'events/card', locals: { event: event } %>
+        <%= render Events::CardComponent.new(event: event) %>
       </div>
     <% end %>
   </div>

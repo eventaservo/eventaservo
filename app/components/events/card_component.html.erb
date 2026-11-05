@@ -1,7 +1,7 @@
-<div class="card mb-3 <%= event_color_class(event) %>">
+<div class="card mb-3 <%= helpers.event_color_class(event) %>">
   <div class="card-body">
     <h5 class="card-title">
-      <%= event_flag(event) %>
+      <%= helpers.event_flag(event) %>
       <% titolo = event.title %>
       <% if event.participants.size > Constants::FAJRA_EVENTO_PARTOPRENONTOJ %>
         <% titolo = "🔥 #{titolo}" %>
@@ -9,12 +9,12 @@
       <%= link_to titolo, event_path(code: event.ligilo), class: ("cancelled" if event.cancelled) %>
     </h5>
     <div class="card-text text-muted">
-      <%= display_organizations_for_event(event, limited: true) %>
+      <%= helpers.display_organizations_for_event(event, limited: true) %>
       <%= render "events/international_badge", event: %>
-      <%= display_event_tags(event) %>
+      <%= helpers.display_event_tags(event) %>
       <p class="small">
-        <%= event.start_time_label(horzono: (cookies[:horzono] || event.time_zone)) unless (event.multtaga? or event.tuttaga?) %>
-        <%= event_date(event) %><br>
+        <%= event.start_time_label(horzono: (helpers.cookies[:horzono] || event.time_zone)) unless (event.multtaga? or event.tuttaga?) %>
+        <%= helpers.event_date(event) %><br>
         <% if event.universala? %>
           (<%= t("events.online_event") %>)
         <% else %>
