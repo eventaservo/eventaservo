@@ -315,6 +315,31 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
     assert_not_includes response.body, @malmo_event.title
   end
 
+  test "card view renders past events link after the event cards while keeping nearby link at the top" do
+    setup_nearby_events
+    cookies[:nearby] = "0"
+
+    get_copenhagen
+
+    assert_response :success
+    nearby_link_pos = response.body.index(I18n.t("events.show_nearby"))
+    event_card_pos = response.body.index(@copenhagen_event.title)
+    past_link_pos = response.body.index(I18n.t("events.show_past"))
+
+    assert_not_nil nearby_link_pos
+    assert_not_nil event_card_pos
+    assert_not_nil past_link_pos
+    assert_operator nearby_link_pos, :<, event_card_pos
+    assert_operator event_card_pos, :<, past_link_pos
+  end
+
+  test "card view omits past events link when there are no upcoming events" do
+    get_copenhagen
+
+    assert_response :success
+    assert_select "a", text: I18n.t("events.show_past"), count: 0
+  end
+
   private
 
   # Seeds geo-located future events around Copenhagen for nearby-cities integration tests.
