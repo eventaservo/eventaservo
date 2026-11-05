@@ -72,6 +72,7 @@ gem "timezone", "~> 1.3"
 gem "httparty", "~> 0.24"
 gem "nokogiri", ">= 1.10.4"
 gem "yard"
+gem "view_component"
 
 # Hotwired
 gem "stimulus-rails", "~> 1.2"
@@ -131,6 +132,7 @@ group :development do
   gem "binding_of_caller"
   gem "herb", "~> 0.10.4"
   gem "htmlbeautifier", "~> 1.4"
+  gem "lookbook"
   gem "pry-rails", "~> 0.3.4"
   gem "seed_dump" # Por rekrei la seeds.db dosieron
   gem "standard"

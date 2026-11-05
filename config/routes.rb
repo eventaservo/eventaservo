@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Lookbook::Engine, at: "/lookbook" if Rails.env.development?
   # Dynamic error pages
   get "/robots.txt", to: "home#robots"
   get "/404", to: "errors#not_found"

@@ -2,6 +2,7 @@ require "active_support/core_ext/integer/time"
 require "debug"
 
 Rails.application.configure do
+  config.view_component.previews.default_layout = "component_preview"
   config.after_initialize do
     Bullet.enable = true
     Bullet.rails_logger = true

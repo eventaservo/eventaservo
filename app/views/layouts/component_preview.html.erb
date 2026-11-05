@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="eo">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= combobox_style_tag %>
+    <%= stylesheet_link_tag "cssbundling", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= yield :head %>
+  </head>
+  <body>
+    <main class="container py-4">
+      <%= yield %>
+    </main>
+  </body>
+</html>
