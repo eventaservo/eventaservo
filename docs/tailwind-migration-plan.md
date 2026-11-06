@@ -1,6 +1,6 @@
 # Tailwind CSS migration plan
 
-- **Status**: Phase 0 spike complete (2026-11-05); Phase 1 pending
+- **Status**: Phase 1 complete (2026-11-06); Phase 2 pending
 - **Date**: 2026-11-05
 - **Tracking issue**: [#1514](https://github.com/eventaservo/eventaservo/issues/1514)
 - **Related**: [ADR-0003](adr/0003-bootstrap-tailwind-coexistence.md), [design system discovery](design-system-discovery.md)
@@ -238,6 +238,8 @@ Keep `import * as bootstrap` and `window.bootstrap` until the last interaction i
 Exit criteria: build passes in the devcontainer and in `assets:precompile`; the canary system test passes; no visual change on control pages; the `prefix()` + parts-import question is answered.
 
 ### Phase 1 — Infrastructure
+
+Status: completed on 2026-11-06. The Tailwind build, the legacy layer, the layout links, the token guard, the cascade guard and the Bootstrap usage budget are in place. No production markup uses Tailwind utilities yet.
 
 - Add the Tailwind build, entry point, tokens, layer declaration and layout links.
 - Add the build scripts, `Procfile.dev` entry and the detection canary test.
