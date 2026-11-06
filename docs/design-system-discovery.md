@@ -38,3 +38,7 @@
 ## Next step
 
 Review the implemented C1 card in development with real event content and supported viewports.
+
+## Tailwind migration
+
+The gradual Bootstrap-to-Tailwind strategy is recorded in [`tailwind-migration-plan.md`](tailwind-migration-plan.md) and [ADR-0003](adr/0003-bootstrap-tailwind-coexistence.md). The approved first production pilot is pagination, not the event card; the card remains a later pilot after its redesign is approved.
