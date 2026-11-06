@@ -21,8 +21,8 @@
 ## Revised first area of work
 
 - First establish ViewComponent and Lookbook, then extract the existing event card into a component while preserving its current appearance and behavior. Modernize its visual design in a later step.
-- Use the extracted component at all existing event card call sites, including past listings and event reports. Make Lookbook available in development initially.
-- Initial implementation installs ViewComponent 4.23.0 and Lookbook 2.3.15 and exposes the event card preview at `/lookbook/inspect/events/card/default` in development. The preview uses the first event in the development database; seed it if no events exist. The component contains the original card markup.
+- Use the extracted component at all existing event card call sites, including past listings and event reports. Make Lookbook available in all environments, restricted to admin users.
+- Initial implementation installs ViewComponent 4.23.0 and Lookbook 2.3.15 and exposes the event card preview at `/lookbook/inspect/events/card/default`. The preview uses the first event in the database; seed it if no events exist. The component contains the original card markup.
 - Component previews use a minimal layout with the application assets, without the application navigation or footer.
 - Start with a simple, elegant redesign of the event card used on city listings, such as Copenhagen. The user considers the event detail page too critical for a significant initial change.
 - The event card displays a title, flag, organizations, badges and tags, date and time, location, and description when applicable. It also handles cancellation and popular events. Preserve these behaviors when modernizing the component.

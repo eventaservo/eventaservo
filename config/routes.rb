@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  mount Lookbook::Engine, at: "/lookbook" if Rails.env.development?
   # Dynamic error pages
   get "/robots.txt", to: "home#robots"
   get "/404", to: "errors#not_found"
@@ -18,6 +17,7 @@ Rails.application.routes.draw do
   get "/dev/error", to: "home#error"
 
   authenticated :user, ->(user) { user.admin? } do
+    mount Lookbook::Engine, at: "/lookbook"
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
     mount MissionControl::Jobs::Engine, at: "/jobs"
     mount MaintenanceTasks::Engine, at: "/maintenance_tasks"
