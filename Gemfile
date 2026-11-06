@@ -111,6 +111,12 @@ gem "newrelic_rpm"
 # Maintenance Tasks
 gem "maintenance_tasks", "~> 2.16"
 
+group :development, :test, :staging, :production do
+  # Lookbook is mounted in every environment behind the admin-only route
+  # constraint, so it must be available for staging and production builds.
+  gem "lookbook"
+end
+
 group :development, :test, :staging do
   gem "faker"
 end
@@ -133,7 +139,6 @@ group :development do
   gem "binding_of_caller"
   gem "herb", "~> 0.10.4"
   gem "htmlbeautifier", "~> 1.4"
-  gem "lookbook"
   gem "pry-rails", "~> 0.3.4"
   gem "seed_dump" # Por rekrei la seeds.db dosieron
   gem "standard"
