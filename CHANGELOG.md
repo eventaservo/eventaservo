@@ -1,5 +1,25 @@
 # Changelog
 
+## [3.1.1](https://github.com/eventaservo/eventaservo/compare/v3.1.0...v3.1.1) (2026-11-06)
+
+
+### Features
+
+* allow Lookbook in all environments for admin users ([#1515](https://github.com/eventaservo/eventaservo/issues/1515)) ([4399f72](https://github.com/eventaservo/eventaservo/commit/4399f72f31dcb28fd9e67082f48a26292a1114f1))
+
+
+### Bug Fixes
+
+* **events:** make event cards flexible and readable on tablets ([#1517](https://github.com/eventaservo/eventaservo/issues/1517)) ([12ec09a](https://github.com/eventaservo/eventaservo/commit/12ec09a52fd6e8c532d0a3a88bb1eb073978d580))
+* **events:** make event cards flexible and responsive ([12ec09a](https://github.com/eventaservo/eventaservo/commit/12ec09a52fd6e8c532d0a3a88bb1eb073978d580))
+* **events:** move past events link back to the bottom of listings ([#1510](https://github.com/eventaservo/eventaservo/issues/1510)) ([#1511](https://github.com/eventaservo/eventaservo/issues/1511)) ([2c8d4c8](https://github.com/eventaservo/eventaservo/commit/2c8d4c8c90d09fa876e7d1bd641c605a8cc10164))
+* include lookbook in staging and production builds ([dfb09f4](https://github.com/eventaservo/eventaservo/commit/dfb09f4ffea6bc0adaeb3790621f57cfa3543f0b))
+
+
+### Performance Improvements
+
+* **home:** cache ad selection ([#1513](https://github.com/eventaservo/eventaservo/issues/1513)) ([10e01b7](https://github.com/eventaservo/eventaservo/commit/10e01b78ca1c97f0c9a47ea9a985ae0124c9f424))
+
 ## [3.1.0](https://github.com/eventaservo/eventaservo/compare/v3.0.18...v3.1.0) (2026-11-05)
 
 
