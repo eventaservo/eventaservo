@@ -51,6 +51,8 @@ Adopt a coexistence strategy with the following elements:
 
 Phase 0 (2026-11-05) validated the build, the `tw:` prefix with explicit imports, `source(none)` with explicit `@source` entries, the `properties, legacy, theme, base, components, utilities` layer order, the cascade canary and the 3 × 3 visual checklist. The full suite passed (977 tests) and the seven system tests passed. See [the plan](../tailwind-migration-plan.md#phase-0-spike-results-2026-11-05) for evidence.
 
+Phase 1 (2026-11-06) landed the infrastructure: the separate Tailwind build, the `legacy` cascade layer, the stylesheet links in the three layouts, the token consistency guard, the cascade guard and the Bootstrap usage budget. All 1015 tests and the seven system tests pass, and `assets:precompile` includes the Tailwind bundle. No production markup uses Tailwind utilities yet.
+
 ### Follow-ups
 
 - Verify in Phase 0 that the installed Tailwind v4 version supports `prefix(tw)` with the explicit `theme.css` and `utilities.css` imports.
