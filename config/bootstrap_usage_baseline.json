@@ -1,0 +1,18 @@
+{
+  "app/views": {
+    "data_attributes": 50,
+    "component_classes": 1297
+  },
+  "app/components": {
+    "data_attributes": 0,
+    "component_classes": 4
+  },
+  "app/javascript": {
+    "data_attributes": 4,
+    "component_classes": 19
+  },
+  "app/helpers": {
+    "data_attributes": 0,
+    "component_classes": 10
+  }
+}
