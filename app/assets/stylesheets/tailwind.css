@@ -1,3 +1,5 @@
+/* stylelint-disable at-rule-no-unknown, import-notation -- Tailwind CSS directives */
+
 @layer properties, legacy, theme, base, components, utilities;
 
 @import "tailwindcss/theme.css" layer(theme) prefix(tw);
@@ -16,7 +18,6 @@
   --color-esperanto-500: #28a745;
   --color-esperanto-600: #1e7145;
   --color-esperanto-900: #202c23;
-
   --color-event-today: #00a300;
   --color-event-7days: #e3a21a;
   --color-event-30days: #ffc40d;
