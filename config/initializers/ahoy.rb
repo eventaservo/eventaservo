@@ -11,10 +11,12 @@ Ahoy.api = false
 # Track bots
 Ahoy.track_bots = Rails.env.test?
 
-# set to true for IP geocoding via the geocoder gem (configured below)
-# Uses MaxMind GeoLite2 local database (no external API calls).
-# see https://github.com/ankane/ahoy#geocoding
-Ahoy.geocode = true if Rails.env.production?
+# IP geocoding is intentionally disabled: it enqueued one Ahoy::GeocodeV2Job
+# per visit (~12.5k/day in production) and no code reads the country, city or
+# latitude columns of ahoy_visits — GenerateStatisticsJob only rolls up events.
+# If geographic data is needed later, geocode in batches, never per visit.
+# See EVENTA-SERVO-283.
+Ahoy.geocode = false
 
 # GDPR compliance
 Ahoy.mask_ips = true
