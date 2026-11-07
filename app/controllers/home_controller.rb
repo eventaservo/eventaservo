@@ -30,10 +30,17 @@ class HomeController < ApplicationController
       @events = @events.not_today(current_timezone).includes(:country, :organizations, :tags)
     end
 
-    # Ads are random per visit; caching the sampled ids keeps RANDOM() and the
-    # attachment eager load off the hot path for a minute.
+    # Ads are random per visit; caching the rendered HTML keeps RANDOM(), the
+    # attachment eager load and the variant generation off the hot path.
     ad_ids = Rails.cache.fetch("home_ad_ids_v1", expires_in: 1.minute) { Ad.active.pluck(:id).sample(4) }
-    @ads = Ad.with_attached_image.where(id: ad_ids).to_a.sort_by { |ad| ad_ids.index(ad.id) }
+    @ads_html = Rails.cache.fetch(["home_ads_html_v1", ad_ids], expires_in: 1.minute) do
+      ads = Ad.with_attached_image.where(id: ad_ids).to_a.sort_by { |ad| ad_ids.index(ad.id) }
+      helpers.sanitize(
+        render_to_string(partial: "home/ads", locals: {ads: ads}),
+        tags: %w[div a img br],
+        attributes: %w[class href src width height alt loading]
+      )
+    end
 
     return if cookies[:vidmaniero].in? %w[kalendaro mapo]
 
