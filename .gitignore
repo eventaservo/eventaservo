@@ -81,6 +81,12 @@ bun.lock
 .antigravitycli/
 public/docs/api/v2/
 
+# Hermes (AI assistant)
+.hermes/
+
+# Superpowers plans/specs (Claude Code plugin)
+docs/superpowers/
+
 # Qlty CLI local artifacts (config .qlty/qlty.toml is versioned)
 # (no trailing slash: paths are symlinks on dev machines, dirs on CI)
 .qlty/logs
