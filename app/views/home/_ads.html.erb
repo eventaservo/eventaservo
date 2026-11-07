@@ -3,7 +3,11 @@
     <% responsive_classes = [ nil, 'd-none d-sm-block', 'd-none d-md-block', 'd-none d-lg-block'] %>
     <% ads.each_with_index do |ad, index| %>
       <%= link_to ad.url, class: responsive_classes[index] do %>
-        <%= image_tag ad.image.variant(resize_to_fill: [400, 200]).processed, width: 200, height: 100, alt: t("home.ads.alt"), loading: "lazy", class: 'reklam-bildo' %>
+        <%= image_tag rails_blob_representation_proxy_path(
+              ad.image.blob.signed_id,
+              ad.image.variant(resize_to_fill: [400, 200]).processed.variation.key,
+              ad.image.blob.filename.to_s
+            ), width: 200, height: 100, alt: t("home.ads.alt"), loading: "lazy", class: "reklam-bildo" %>
       <% end %>
     <% end %>
   </div>
