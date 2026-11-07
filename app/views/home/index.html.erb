@@ -48,7 +48,7 @@
     <div class="d-flex justify-content-center">
       <%= render "home/current_timezone" %>
     </div>
-    <%= render partial: 'home/ads', locals: { ads: @ads } %>
+    <%= @ads_html %>
     <%= render partial: 'events/okazantaj' %>
     <%= display_events_by_style %>
   </div>
