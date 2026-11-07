@@ -1,5 +1,25 @@
 # Changelog
 
+## [3.1.2](https://github.com/eventaservo/eventaservo/compare/v3.1.1...v3.1.2) (2026-11-07)
+
+
+### Bug Fixes
+
+* **home:** render ad images with a request-independent path ([#1524](https://github.com/eventaservo/eventaservo/issues/1524)) ([2638b35](https://github.com/eventaservo/eventaservo/commit/2638b35201a963f1abf0615e080f4962979d8e68))
+
+
+### Performance Improvements
+
+* **ahoy:** disable per-visit geocoding ([c11771d](https://github.com/eventaservo/eventaservo/commit/c11771da5131c2a1726abe54b7b90617c24da085))
+* **ahoy:** disable per-visit geocoding (EVENTA-SERVO-283) ([#1523](https://github.com/eventaservo/eventaservo/issues/1523)) ([c11771d](https://github.com/eventaservo/eventaservo/commit/c11771da5131c2a1726abe54b7b90617c24da085))
+* **home:** cache the rendered ad block (EVENTA-SERVO-28D) ([#1520](https://github.com/eventaservo/eventaservo/issues/1520)) ([fa5ef44](https://github.com/eventaservo/eventaservo/commit/fa5ef4482cabe3980452e8ad056fb0b840266a55))
+* **home:** cache the rendered ad block instead of the ad records ([fa5ef44](https://github.com/eventaservo/eventaservo/commit/fa5ef4482cabe3980452e8ad056fb0b840266a55))
+
+
+### Miscellaneous Chores
+
+* ignore local AI assistant artifacts ([#1521](https://github.com/eventaservo/eventaservo/issues/1521)) ([07c2e03](https://github.com/eventaservo/eventaservo/commit/07c2e0355c853afbfb296b57a7682857b17c82b9))
+
 ## [3.1.1](https://github.com/eventaservo/eventaservo/compare/v3.1.0...v3.1.1) (2026-11-06)
 
 
