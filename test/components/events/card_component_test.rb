@@ -66,8 +66,7 @@ class Events::CardComponentTest < ActionView::TestCase
 
   test "renders tags with badge classes" do
     event = events(:valid_event)
-    tag = Tag.find_or_create_by!(name: "Kunveno/Evento", group_name: "category")
-    event.tags = [tag]
+    event.tags = [tags(:kunveno_evento)]
 
     render_inline(Events::CardComponent.new(event:))
 
