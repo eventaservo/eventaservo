@@ -84,6 +84,9 @@ class Events::CardComponentTest < ActionView::TestCase
 
     render_inline(Events::CardComponent.new(event:))
 
-    assert_selector ".event-card__tags .badge.rounded-pill.text-bg-secondary.event-card__tag-nearby", text: I18n.t("events.nearby")
+    assert_selector(
+      ".event-card__tags .badge.rounded-pill.text-bg-secondary.event-card__tag-nearby",
+      text: I18n.t("events.nearby")
+    )
   end
 end
