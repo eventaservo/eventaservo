@@ -1,4 +1,4 @@
-<% if cookies[:vidmaniero].in?(%w[kartoj kartaro]) && params[:pagho].nil? %>
+<% if cookies[:vidmaniero].in?(%w[kartoj kartaro]) && params[:page].nil? && params[:pagho].nil? %>
   <% if @today_events.any? %>
     <br>
     <h5 class="text-center fw-bold"><%= t("events.happening_now_count", count: @today_events.not_cancelled.length) %></h5>

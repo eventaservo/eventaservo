@@ -50,6 +50,81 @@ class Events::ByCountryController::ShowTest < ActionDispatch::IntegrationTest
       "Expected the more-recent past event to appear before the older one"
   end
 
+  test "pasintaj=1 advances past events on page 2 for country listing" do
+    country = countries(:germany)
+    user = users(:user)
+
+    newest = Event.create!(
+      title: "Germana Plej Nova Evento",
+      description: "Test",
+      city: "Berlino",
+      country: country,
+      format: :onsite,
+      date_start: 2.days.ago,
+      date_end: 2.days.ago + 2.hours,
+      time_zone: "Europe/Berlin",
+      code: "de-past-newest",
+      site: "https://test.example.com",
+      user: user
+    )
+
+    14.times do |n|
+      Event.create!(
+        title: "Germana Meza Evento #{n + 1}",
+        description: "Test",
+        city: "Berlino",
+        country: country,
+        format: :onsite,
+        date_start: (n + 3).days.ago,
+        date_end: (n + 3).days.ago + 2.hours,
+        time_zone: "Europe/Berlin",
+        code: "de-past-mid-#{n + 1}",
+        site: "https://test.example.com",
+        user: user
+      )
+    end
+
+    older = Event.create!(
+      title: "Germana Plej Malnova Evento",
+      description: "Test",
+      city: "Berlino",
+      country: country,
+      format: :onsite,
+      date_start: 20.days.ago,
+      date_end: 20.days.ago + 2.hours,
+      time_zone: "Europe/Berlin",
+      code: "de-past-oldest",
+      site: "https://test.example.com",
+      user: user
+    )
+
+    get events_by_country_url(continent: country.continent.normalized,
+      country_name: country.name.normalized, pasintaj: 1)
+
+    assert_response :success
+    assert_match newest.title, response.body
+    assert_no_match older.title, response.body
+
+    # Visiting with page: 2 stays on canonical URL and renders page 2 events
+    get events_by_country_url(continent: country.continent.normalized,
+      country_name: country.name.normalized, pasintaj: 1, page: 2)
+
+    assert_response :success
+    assert_match older.title, response.body
+    assert_no_match newest.title, response.body
+
+    # Visiting with legacy pagho: 2 redirects to canonical page: 2
+    get events_by_country_url(continent: country.continent.normalized,
+      country_name: country.name.normalized, pasintaj: 1, pagho: 2)
+
+    assert_response :moved_permanently
+    assert_redirected_to "#{events_by_country_url(continent: country.continent.normalized, country_name: country.name.normalized)}?pasintaj=1&page=2"
+    follow_redirect!
+    assert_response :success
+    assert_match older.title, response.body
+    assert_no_match newest.title, response.body
+  end
+
   test "without pasintaj param the past events do not appear" do
     country = countries(:denmark)
     older = events(:past_event_danio_older)

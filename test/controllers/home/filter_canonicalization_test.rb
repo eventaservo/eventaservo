@@ -39,6 +39,11 @@ class HomeController::FilterCanonicalizationTest < ActionDispatch::IntegrationTe
 
     assert_response :moved_permanently
     assert_equal "http://www.example.com/eo?page=20", response.location
+
+    get "/eo", params: {pagho: "40"}, headers: KALENDARO
+
+    assert_response :moved_permanently
+    assert_equal "http://www.example.com/eo?page=20", response.location
   end
 
   test "also redirects crawlers that send a wildcard accept header" do

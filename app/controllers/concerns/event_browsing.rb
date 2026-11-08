@@ -86,11 +86,12 @@ module EventBrowsing
 
   # Strips invalid pagination params from the request.
   #
-  # Removes +:pagho+ when the value is less than 1.
+  # Removes +:pagho+ and +:page+ when the value is less than 1.
   #
   # @return [void]
   def sanitize_params
     params.delete(:pagho) if params[:pagho].to_i < 1
+    params.delete(:page) if params[:page].to_i < 1
   end
 
   # Renders RSS feed for events filtered by a given scope.

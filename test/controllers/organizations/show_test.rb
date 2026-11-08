@@ -78,13 +78,13 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "should activate past tab and paginate past events with pagho parameter" do
+  test "should activate past tab and paginate past events with page parameter" do
     organization = create(:organization)
     22.times do |i|
       organization.events << create(:event, date_start: (i + 1).weeks.ago, date_end: (i + 1).weeks.ago + 1.day, title: "Past Event #{i + 1}")
     end
 
-    get organization_url(short_name: organization.short_name, pagho: 2)
+    get organization_url(short_name: organization.short_name, page: 2)
     assert_response :success
     assert_select "#past-tab.active"
     assert_select "#past-tab-pane" do
