@@ -14,7 +14,7 @@
   <div class="event-card__tags">
     <%= render "events/international_badge", event: %>
     <% if helpers.event_nearby?(event) %>
-      <span class="badge text-bg-secondary"><%= t("events.nearby") %></span>
+      <span class="badge rounded-pill text-bg-secondary event-card__tag-nearby"><%= t("events.nearby") %></span>
     <% end %>
     <%= helpers.display_event_tags(event) %>
   </div>

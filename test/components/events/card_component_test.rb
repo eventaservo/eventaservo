@@ -54,4 +54,37 @@ class Events::CardComponentTest < ActionView::TestCase
       assert_no_text "February"
     end
   end
+
+  test "renders international badge as a span" do
+    event = events(:valid_event)
+    event.international_calendar = true
+
+    render_inline(Events::CardComponent.new(event:))
+
+    assert_selector "span.badge.text-bg-success", text: /Internacia Evento/
+  end
+
+  test "renders tags with badge classes" do
+    event = events(:valid_event)
+    tag = Tag.find_or_create_by!(name: "Kunveno/Evento", group_name: "category")
+    event.tags = [tag]
+
+    render_inline(Events::CardComponent.new(event:))
+
+    assert_selector ".event-card__tags .event-tags .badge.rounded-pill", text: "Kunveno/Evento"
+  end
+
+  test "renders nearby badge with rounded-pill and tag-nearby classes" do
+    event = events(:valid_event)
+    event.city = "Roskilde"
+    event.country = countries(:denmark)
+
+    vc_test_controller.instance_variable_set(:@country, countries(:denmark))
+    vc_test_controller.instance_variable_set(:@nearby_cities, [["Roskilde", countries(:denmark).id]])
+    vc_test_controller.params[:city_name] = "Kopenhago"
+
+    render_inline(Events::CardComponent.new(event:))
+
+    assert_selector ".event-card__tags .badge.rounded-pill.text-bg-secondary.event-card__tag-nearby", text: I18n.t("events.nearby")
+  end
 end
