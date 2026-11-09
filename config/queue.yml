@@ -30,16 +30,13 @@ staging:
     - polling_interval: 30
       batch_size: 500
   workers:
-    - queues: [ahoy]
-      threads: 1
-      processes: 1
-      polling_interval: 30
-    - queues: [backup]
-      threads: 1
-      processes: 1
-      polling_interval: 30
+    # Single general worker for every queue. The former dedicated workers for
+    # `ahoy` and `backup` did not isolate anything: a worker with `queues: "*"`
+    # already polls those queues, so they only added whole Rails processes
+    # (~200 MB each) to a queue that finishes about a hundred jobs per day.
+    # Extra threads keep the daily backup from blocking everything else.
     - queues: "*"
-      threads: 2
+      threads: 4
       processes: <%= ENV.fetch("JOB_CONCURRENCY", 1) %>
       polling_interval: 30
 
