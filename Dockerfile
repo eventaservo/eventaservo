@@ -21,6 +21,7 @@ RUN curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmo
 # Install runtime-only packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
   imagemagick \
+  libjemalloc2 \
   libpq5 \
   libvips42 \
   poppler-utils \
@@ -115,6 +116,11 @@ ENV GOOGLE_MAPS_KEY=${GOOGLE_MAPS_KEY}
 ENV IPINFO_KEY=${IPINFO_KEY}
 ENV BUNDLE_WITHOUT="development:test"
 ENV BUNDLE_DEPLOYMENT="1"
+
+# Use jemalloc instead of the glibc allocator. Long-lived Ruby processes
+# (Puma workers, Solid Queue forks) fragment the default allocator badly and
+# keep the released memory, which shows up as steady growth until a restart.
+ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so.2
 
 # Copy precompiled gems and application code from builder
 COPY --from=builder /usr/local/bundle /usr/local/bundle
