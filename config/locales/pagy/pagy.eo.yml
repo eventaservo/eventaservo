@@ -1,6 +1,11 @@
 ---
 eo:
   pagy:
+    aria_label:
+      nav: Paĝa navigado
+      next: Sekva paĝo
+      page: Paĝo %{page}
+      prev: Antaŭa paĝo
     combo_nav_js: Paĝo %{page_input} de %{pages}
     info:
       multiple_pages: Montrante <b>%{from}-%{to}</b> el <b>%{count}</b> eventoj

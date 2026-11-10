@@ -74,7 +74,7 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
     assert_select "#future-tab.active"
     assert_select "#future-tab-pane" do
       assert_select ".item-row", count: 2
-      assert_select "nav.pagy-bootstrap"
+      assert_select "nav[aria-label]"
     end
   end
 
@@ -89,7 +89,7 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
     assert_select "#past-tab.active"
     assert_select "#past-tab-pane" do
       assert_select ".item-row", count: 2
-      assert_select "nav.pagy-bootstrap"
+      assert_select "nav[aria-label]"
     end
   end
 
@@ -109,7 +109,7 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
     assert_select "#reports-tab.active"
     assert_select "#reports-tab-pane" do
       assert_select ".row.small", count: 2
-      assert_select "nav.pagy-bootstrap"
+      assert_select "nav[aria-label]"
     end
   end
 
@@ -129,7 +129,7 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
     assert_select "#reports-tab.active"
     assert_select "#reports-tab-pane" do
       assert_select ".row.small", count: 20
-      assert_select "nav.pagy-bootstrap"
+      assert_select "nav[aria-label]"
     end
   end
 

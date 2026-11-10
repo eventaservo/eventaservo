@@ -1,6 +1,11 @@
 ---
 pt_BR:
   pagy:
+    aria_label:
+      nav: Paginação
+      next: Próxima página
+      page: Página %{page}
+      prev: Página anterior
     combo_nav_js: Página %{page_input} de %{pages}
     info:
       multiple_pages: Exibindo <b>%{from}-%{to}</b> de <b>%{count}</b> eventos
