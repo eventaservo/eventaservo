@@ -1,0 +1,19 @@
+<div class="tw:p-6 tw:space-y-4">
+  <div>
+    <h4 class="tw:text-xs tw:font-bold tw:uppercase tw:tracking-wider tw:text-gray-500 tw:mb-2">Aktivaj Filtroj (Alklaku por forigi)</h4>
+    <div class="tw:flex tw:flex-wrap tw:gap-2 tw:items-center">
+      <%= render Ui::BadgeComponent.new("Renkontiĝoj", variant: :info, removable: true, remove_href: "#remove-renkontigoj") %>
+      <%= render Ui::BadgeComponent.new("Prelegoj", variant: :info, removable: true, remove_href: "#remove-prelegoj") %>
+    </div>
+  </div>
+
+  <div>
+    <h4 class="tw:text-xs tw:font-bold tw:uppercase tw:tracking-wider tw:text-gray-500 tw:mb-2">Disponeblaj Kategorioj (Alklaku por filtri)</h4>
+    <div class="tw:flex tw:flex-wrap tw:gap-2 tw:items-center">
+      <%= render Ui::BadgeComponent.new("Kursoj", href: "#filter-kursoj", variant: :light) %>
+      <%= render Ui::BadgeComponent.new("Festivaloj", href: "#filter-festivaloj", variant: :light) %>
+      <%= render Ui::BadgeComponent.new("Kongresoj", href: "#filter-kongresoj", variant: :light) %>
+      <%= render Ui::BadgeComponent.new("Kunsidoj", href: "#filter-kunsidoj", variant: :light) %>
+    </div>
+  </div>
+</div>

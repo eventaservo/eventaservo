@@ -1,0 +1,18 @@
+<%= content_tag(tag_name, **element_attributes) do %>
+  <% if leading_icon? %>
+    <%= render_icon %>
+  <% end %>
+  <%= content? ? content : text %>
+  <% if trailing_icon? %>
+    <%= render_icon %>
+  <% end %>
+  <% if removable %>
+    <% if remove_href.present? %>
+      <%= link_to remove_href, class: "tw:ml-0.5 tw:text-current tw:opacity-60 tw:hover:opacity-100 tw:focus:outline-none", aria: { label: "Forigi" } do %>
+        <i class="fas fa-times" aria-hidden="true"></i>
+      <% end %>
+    <% else %>
+      <i class="fas fa-times tw:ml-0.5 tw:opacity-60" aria-hidden="true"></i>
+    <% end %>
+  <% end %>
+<% end %>

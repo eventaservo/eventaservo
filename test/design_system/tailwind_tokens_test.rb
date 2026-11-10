@@ -8,6 +8,7 @@ module DesignSystem
   class TailwindTokensTest < ActiveSupport::TestCase
     TAILWIND_CSS = Rails.root.join("app/assets/stylesheets/tailwind.css").read
     LEGACY_COLORS = Rails.root.join("app/assets/stylesheets/colors.scss").read
+    LEGACY_CSSBUNDLING = Rails.root.join("app/assets/stylesheets/cssbundling.sass.scss").read
 
     test "keeps the Esperanto green in sync with the legacy Sass variable" do
       assert_equal sass_variable("esperantoGreen"), tailwind_token("color-esperanto-500")
@@ -25,6 +26,7 @@ module DesignSystem
     test "keeps the brand colours in sync with the legacy Sass variables" do
       assert_equal sass_variable("blue"), tailwind_token("color-brand-blue")
       assert_equal sass_variable("red"), tailwind_token("color-brand-red")
+      assert_equal LEGACY_CSSBUNDLING[/\$info\s*:\s*(#[0-9a-fA-F]{6})/, 1]&.downcase, tailwind_token("color-brand-info")
     end
 
     private
