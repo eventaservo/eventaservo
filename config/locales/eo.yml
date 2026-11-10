@@ -662,6 +662,7 @@ eo:
       title: Aboni organizan kalendaron
   search:
     cancelled: Nuligitaj
+    from_date: Ekde
     min_chars_error: La serĉa frazo devas enhavi almenaŭ 3 signojn
     past: Pasintaj
     placeholder: Serĉi eventojn aŭ organizojn... (minimume 3 signoj)
@@ -701,6 +702,7 @@ eo:
         header: Registritaj prezentoj
         title: Titolo
     title: Serĉilo
+    to_date: Ĝis
   support:
     array:
       last_word_connector: " kaj "
