@@ -1,0 +1,10 @@
+<div class="tw:p-6 tw:space-y-4">
+  <p class="tw:text-sm tw:text-gray-600">
+    When <code>href:</code> is passed, the component renders a semantic <code>&lt;a&gt;</code> tag styled identically to button elements.
+  </p>
+  <div class="tw:flex tw:flex-wrap tw:gap-3 tw:items-center">
+    <%= render Ui::ButtonComponent.new("Reeniri al ĉefpaĝo", href: "/", variant: :secondary, icon: "arrow-left") %>
+    <%= render Ui::ButtonComponent.new("Nova Evento", href: "/e/new", variant: :success, icon: "plus") %>
+    <%= render Ui::ButtonComponent.new("Nuligi", href: "/", variant: :cancel) %>
+  </div>
+</div>

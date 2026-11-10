@@ -1,0 +1,21 @@
+<div class="tw:p-6 tw:space-y-6">
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-3">Disabled Button Elements</h3>
+    <div class="tw:flex tw:flex-wrap tw:gap-3 tw:items-center">
+      <%= render Ui::ButtonComponent.new("Primary", variant: :primary, disabled: true) %>
+      <%= render Ui::ButtonComponent.new("Success", variant: :success, disabled: true) %>
+      <%= render Ui::ButtonComponent.new("Secondary", variant: :secondary, disabled: true) %>
+      <%= render Ui::ButtonComponent.new("Cancel", variant: :cancel, disabled: true) %>
+      <%= render Ui::ButtonComponent.new("Delete", variant: :delete, disabled: true) %>
+    </div>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-3">Disabled Link Elements (with aria-disabled & tabindex="-1")</h3>
+    <div class="tw:flex tw:flex-wrap tw:gap-3 tw:items-center">
+      <%= render Ui::ButtonComponent.new("Primary Link", href: "/save", variant: :primary, disabled: true) %>
+      <%= render Ui::ButtonComponent.new("Success Link", href: "/new", variant: :success, disabled: true) %>
+      <%= render Ui::ButtonComponent.new("Cancel Link", href: "/cancel", variant: :cancel, disabled: true) %>
+    </div>
+  </div>
+</div>
