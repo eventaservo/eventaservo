@@ -1,0 +1,29 @@
+<div class="tw:p-6 tw:space-y-6">
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-3">Filled Variants</h3>
+    <div class="tw:flex tw:flex-wrap tw:gap-3 tw:items-center">
+      <%= render Ui::ButtonComponent.new("Primary (Save)", variant: :primary) %>
+      <%= render Ui::ButtonComponent.new("Success (New)", variant: :success) %>
+      <%= render Ui::ButtonComponent.new("Danger (Delete)", variant: :danger) %>
+    </div>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-3">Outline Variants</h3>
+    <div class="tw:flex tw:flex-wrap tw:gap-3 tw:items-center">
+      <%= render Ui::ButtonComponent.new("Secondary", variant: :secondary) %>
+      <%= render Ui::ButtonComponent.new("Outline Primary", variant: :outline_primary) %>
+      <%= render Ui::ButtonComponent.new("Outline Danger", variant: :outline_danger) %>
+    </div>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-3">Link & Dismissal Variants</h3>
+    <div class="tw:flex tw:flex-wrap tw:gap-3 tw:items-center">
+      <%= render Ui::ButtonComponent.new("New Link", variant: :new_link) %>
+      <%= render Ui::ButtonComponent.new("Cancel", variant: :cancel) %>
+      <%= render Ui::ButtonComponent.new("Delete", variant: :delete) %>
+      <%= render Ui::ButtonComponent.new("Plain Link", variant: :link) %>
+    </div>
+  </div>
+</div>

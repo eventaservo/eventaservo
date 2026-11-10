@@ -1,0 +1,9 @@
+<%= content_tag(tag_name, **element_attributes) do %>
+  <% if leading_icon? %>
+    <%= render_icon %>
+  <% end %>
+  <%= content? ? content : text %>
+  <% if trailing_icon? %>
+    <%= render_icon %>
+  <% end %>
+<% end %>

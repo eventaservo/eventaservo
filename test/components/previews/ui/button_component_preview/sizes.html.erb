@@ -1,0 +1,28 @@
+<div class="tw:p-6 tw:space-y-6">
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-3">Primary Action</h3>
+    <div class="tw:flex tw:flex-wrap tw:gap-3 tw:items-center">
+      <%= render Ui::ButtonComponent.new("Small (Compact)", size: :small, variant: :primary) %>
+      <%= render Ui::ButtonComponent.new("Medium (Standard / Default)", size: :medium, variant: :primary) %>
+      <%= render Ui::ButtonComponent.new("Large (Prominent)", size: :large, variant: :primary) %>
+    </div>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-3">Success Action</h3>
+    <div class="tw:flex tw:flex-wrap tw:gap-3 tw:items-center">
+      <%= render Ui::ButtonComponent.new("Small", size: :small, variant: :success) %>
+      <%= render Ui::ButtonComponent.new("Medium (Standard)", size: :medium, variant: :success) %>
+      <%= render Ui::ButtonComponent.new("Large", size: :large, variant: :success) %>
+    </div>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-3">Secondary Outline</h3>
+    <div class="tw:flex tw:flex-wrap tw:gap-3 tw:items-center">
+      <%= render Ui::ButtonComponent.new("Small", size: :small, variant: :secondary) %>
+      <%= render Ui::ButtonComponent.new("Medium (Standard)", size: :medium, variant: :secondary) %>
+      <%= render Ui::ButtonComponent.new("Large", size: :large, variant: :secondary) %>
+    </div>
+  </div>
+</div>

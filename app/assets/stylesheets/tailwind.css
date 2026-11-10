@@ -23,4 +23,8 @@
   --color-event-30days: #ffc40d;
   --color-event-future: #2d89ef;
   --color-event-past: #c0c0c0;
+  --color-brand-blue: #2d89ef;
+  --color-brand-blue-hover: #1a6fd4;
+  --color-brand-red: #b91d47;
+  --color-brand-red-hover: #8a1535;
 }

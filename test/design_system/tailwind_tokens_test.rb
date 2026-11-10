@@ -22,6 +22,11 @@ module DesignSystem
       assert_equal sass_variable("evento-pasinta"), tailwind_token("color-event-past")
     end
 
+    test "keeps the brand colours in sync with the legacy Sass variables" do
+      assert_equal sass_variable("blue"), tailwind_token("color-brand-blue")
+      assert_equal sass_variable("red"), tailwind_token("color-brand-red")
+    end
+
     private
 
     # Reads a hex value from the Tailwind @theme block.

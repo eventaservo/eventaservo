@@ -1,0 +1,18 @@
+<div class="tw:p-6 tw:max-w-xl tw:mx-auto">
+  <div class="tw:bg-white tw:border tw:border-gray-200 tw:rounded tw:p-4 tw:shadow-sm">
+    <h3 class="tw:text-base tw:font-semibold tw:text-gray-900 tw:mb-2">Redakti Eventon</h3>
+    <p class="tw:text-sm tw:text-gray-600 tw:mb-4">
+      Standard form footer demonstrating the canonical layout: Delete flush left, Cancel and Primary confirming action on the right.
+    </p>
+
+    <div class="tw:flex tw:items-center tw:justify-between tw:pt-3 tw:border-t tw:border-gray-200 tw:mt-6">
+      <div>
+        <%= render Ui::ButtonComponent.new("Forigi", variant: :delete, icon: "trash") %>
+      </div>
+      <div class="tw:flex tw:items-center tw:gap-2">
+        <%= render Ui::ButtonComponent.new("Nuligi", variant: :cancel) %>
+        <%= render Ui::ButtonComponent.new("Konservi Ŝanĝojn", variant: :primary, type: :submit) %>
+      </div>
+    </div>
+  </div>
+</div>
