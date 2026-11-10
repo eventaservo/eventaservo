@@ -17,11 +17,13 @@ Rails.application.routes.draw do
   get "/dev/error", to: "home#error"
 
   authenticated :user, ->(user) { user.admin? } do
-    mount Lookbook::Engine, at: "/lookbook"
+    mount Lookbook::Engine, at: "/lookbook" unless Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
     mount MissionControl::Jobs::Engine, at: "/jobs"
     mount MaintenanceTasks::Engine, at: "/maintenance_tasks"
   end
+
+  mount Lookbook::Engine, at: "/lookbook" if Rails.env.development?
 
   devise_for :users, only: :omniauth_callbacks, controllers: {omniauth_callbacks: "users/omniauth_callbacks"}
 

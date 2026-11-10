@@ -1,0 +1,63 @@
+<nav class="tw:flex tw:justify-center tw:pt-3" aria-label="<%= aria_label %>">
+  <ul class="tw:inline-flex tw:items-center tw:-space-x-px tw:text-sm tw:rounded-md tw:shadow-xs tw:list-none tw:p-0 tw:m-0">
+    <%# Previous button %>
+    <li class="tw:list-none">
+      <% if prev? %>
+        <a href="<%= prev_url %>"
+           rel="prev"
+           aria-label="<%= t("pagy.aria_label.prev", default: "Antaŭa paĝo") %>"
+           class="tw:inline-flex tw:items-center tw:justify-center tw:px-3 tw:h-9 tw:border tw:border-gray-300 tw:bg-white tw:text-gray-700 tw:rounded-l-md tw:leading-tight hover:tw:bg-esperanto-50 hover:tw:text-esperanto-600 hover:tw:border-esperanto-500 focus:tw:z-10 focus:tw:outline-hidden focus:tw:ring-2 focus:tw:ring-esperanto-500">
+          <%= prev_label %>
+        </a>
+      <% else %>
+        <span aria-disabled="true"
+              aria-label="<%= t("pagy.aria_label.prev", default: "Antaŭa paĝo") %>"
+              class="tw:inline-flex tw:items-center tw:justify-center tw:px-3 tw:h-9 tw:border tw:border-gray-300 tw:bg-gray-100 tw:text-gray-400 tw:rounded-l-md tw:leading-tight tw:cursor-not-allowed">
+          <%= prev_label %>
+        </span>
+      <% end %>
+    </li>
+
+    <%# Page numbers & gaps %>
+    <% series.each do |item| %>
+      <li class="tw:list-none">
+        <% if item.is_a?(Integer) %>
+          <a href="<%= page_url(item) %>"
+             aria-label="<%= t("pagy.aria_label.page", page: item, default: "Paĝo #{item}") %>"
+             class="tw:inline-flex tw:items-center tw:justify-center tw:px-3.5 tw:h-9 tw:border tw:border-gray-300 tw:bg-white tw:text-gray-700 tw:leading-tight hover:tw:bg-esperanto-50 hover:tw:text-esperanto-600 hover:tw:border-esperanto-500 focus:tw:z-10 focus:tw:outline-hidden focus:tw:ring-2 focus:tw:ring-esperanto-500">
+            <%= item %>
+          </a>
+        <% elsif item.is_a?(String) %>
+          <span aria-current="page"
+                aria-label="<%= t("pagy.aria_label.page", page: item, default: "Paĝo #{item}") %>"
+                class="tw:inline-flex tw:items-center tw:justify-center tw:px-3.5 tw:h-9 tw:border tw:border-esperanto-600 tw:bg-esperanto-600 tw:text-white tw:font-semibold tw:leading-tight tw:z-10">
+            <%= item %>
+          </span>
+        <% elsif item == :gap %>
+          <span aria-hidden="true"
+                class="tw:inline-flex tw:items-center tw:justify-center tw:px-3 tw:h-9 tw:border tw:border-gray-300 tw:bg-white tw:text-gray-400 tw:leading-tight tw:cursor-default tw:select-none">
+            <%= gap_label %>
+          </span>
+        <% end %>
+      </li>
+    <% end %>
+
+    <%# Next button %>
+    <li class="tw:list-none">
+      <% if next? %>
+        <a href="<%= next_url %>"
+           rel="next"
+           aria-label="<%= t("pagy.aria_label.next", default: "Sekva paĝo") %>"
+           class="tw:inline-flex tw:items-center tw:justify-center tw:px-3 tw:h-9 tw:border tw:border-gray-300 tw:bg-white tw:text-gray-700 tw:rounded-r-md tw:leading-tight hover:tw:bg-esperanto-50 hover:tw:text-esperanto-600 hover:tw:border-esperanto-500 focus:tw:z-10 focus:tw:outline-hidden focus:tw:ring-2 focus:tw:ring-esperanto-500">
+          <%= next_label %>
+        </a>
+      <% else %>
+        <span aria-disabled="true"
+              aria-label="<%= t("pagy.aria_label.next", default: "Sekva paĝo") %>"
+              class="tw:inline-flex tw:items-center tw:justify-center tw:px-3 tw:h-9 tw:border tw:border-gray-300 tw:bg-gray-100 tw:text-gray-400 tw:rounded-r-md tw:leading-tight tw:cursor-not-allowed">
+          <%= next_label %>
+        </span>
+      <% end %>
+    </li>
+  </ul>
+</nav>
