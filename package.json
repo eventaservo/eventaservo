@@ -13,6 +13,7 @@
     "@rails/actiontext": "^7.2.400",
     "@rails/activestorage": "^7.2.400",
     "@rails/ujs": "^7.1.600",
+    "@tailwindcss/cli": "^4.3.0",
     "bootstrap": "^5.3",
     "chartkick": "^5.0.1",
     "dompurify": "^3.4.17",
@@ -26,8 +27,8 @@
     "leaflet": "^1.9.4",
     "leaflet.markercluster": "^1.5.3",
     "sass": "^1.97.3",
-    "source-map-js": "^1.2.2",
     "slim-select": "^2.13.1",
+    "source-map-js": "^1.2.2",
     "trix": "^2.1.19"
   },
   "optionalDependencies": {
@@ -37,8 +38,10 @@
     "build": "node esbuild.config.js",
     "build:css:assets": "cp -r node_modules/@fortawesome/fontawesome-free/webfonts public/webfonts && cp -r node_modules/flag-icons/flags public/flags",
     "build:css:app": "sass ./app/assets/stylesheets/cssbundling.sass.scss:./app/assets/builds/cssbundling.css --no-source-map --load-path=node_modules --quiet-deps --silence-deprecation=import",
+    "build:css:tailwind": "tailwindcss -i ./app/assets/stylesheets/tailwind.css -o ./app/assets/builds/tailwind.css --minify",
+    "build:css:tailwind:watch": "tailwindcss -i ./app/assets/stylesheets/tailwind.css -o ./app/assets/builds/tailwind.css --watch",
     "build:css:mailer": "sass ./app/assets/stylesheets/mailer.sass:./app/assets/builds/mailer.css --no-source-map --quiet-deps --silence-deprecation=import",
-    "build:css": "yarn build:css:assets && yarn build:css:app && yarn build:css:mailer",
+    "build:css": "yarn build:css:assets && yarn build:css:app && yarn build:css:tailwind && yarn build:css:mailer",
     "build:css:watch": "yarn build:css:assets && yarn build:css:app --watch"
   },
   "devDependencies": {}

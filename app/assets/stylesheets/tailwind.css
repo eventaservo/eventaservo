@@ -1,0 +1,26 @@
+/* stylelint-disable at-rule-no-unknown, import-notation -- Tailwind CSS directives */
+
+@layer properties, legacy, theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme) prefix(tw);
+@import "tailwindcss/utilities.css" layer(utilities) prefix(tw) source(none);
+
+@source "../../views";
+@source "../../components";
+@source "../../helpers";
+@source "../../javascript";
+@source "../../../test/components/previews";
+@source "../../../test/system";
+
+@theme {
+  --color-esperanto-50: #f7faf7;
+  --color-esperanto-100: #e5f4e8;
+  --color-esperanto-500: #28a745;
+  --color-esperanto-600: #1e7145;
+  --color-esperanto-900: #202c23;
+  --color-event-today: #00a300;
+  --color-event-7days: #e3a21a;
+  --color-event-30days: #ffc40d;
+  --color-event-future: #2d89ef;
+  --color-event-past: #c0c0c0;
+}

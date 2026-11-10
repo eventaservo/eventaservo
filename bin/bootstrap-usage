@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "json"
+require_relative "../lib/bootstrap_usage"
+
+if ARGV.include?("--write")
+  path = File.join(BootstrapUsage::ROOT, "config/bootstrap_usage_baseline.json")
+  File.write(path, "#{JSON.pretty_generate(BootstrapUsage.counts)}\n")
+  puts "Wrote #{path}"
+else
+  puts JSON.pretty_generate(BootstrapUsage.counts)
+end
