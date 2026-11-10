@@ -41,4 +41,14 @@ staging:
       polling_interval: 30
 
 production:
-  <<: *default
+  dispatchers:
+    - polling_interval: 15
+      batch_size: 500
+  workers:
+    # Same consolidation as staging: a worker with `queues: "*"` already polls
+    # every queue, so the dedicated ahoy and backup workers duplicated whole
+    # Rails processes without isolating anything.
+    - queues: "*"
+      threads: 4
+      processes: <%= ENV.fetch("JOB_CONCURRENCY", 1) %>
+      polling_interval: 10
