@@ -1,0 +1,19 @@
+<div class="tw:p-6 tw:space-y-6">
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-3">Event Categories</h3>
+    <div class="tw:flex tw:flex-wrap tw:gap-3 tw:items-center">
+      <%= render Ui::BadgeComponent.new("Small (Card tag)", size: :small, variant: :info) %>
+      <%= render Ui::BadgeComponent.new("Medium (Standard)", size: :medium, variant: :info) %>
+      <%= render Ui::BadgeComponent.new("Large (Prominent)", size: :large, variant: :info) %>
+    </div>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-3">Event Characteristics</h3>
+    <div class="tw:flex tw:flex-wrap tw:gap-3 tw:items-center">
+      <%= render Ui::BadgeComponent.new("Small", size: :small, variant: :warning) %>
+      <%= render Ui::BadgeComponent.new("Medium (Standard)", size: :medium, variant: :warning) %>
+      <%= render Ui::BadgeComponent.new("Large", size: :large, variant: :warning) %>
+    </div>
+  </div>
+</div>

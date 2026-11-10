@@ -1,0 +1,24 @@
+<div class="tw:p-6 tw:max-w-md">
+  <div class="tw:bg-white tw:border tw:border-gray-200 tw:rounded tw:p-4 tw:shadow-sm">
+    <div class="tw:flex tw:items-baseline tw:justify-between tw:mb-2">
+      <span class="tw:text-xs tw:font-semibold tw:text-esperanto-600">Danio · Kopenhago</span>
+      <span class="tw:text-xs tw:text-gray-500">15 Jul 2026</span>
+    </div>
+    <h4 class="tw:text-base tw:font-bold tw:text-gray-900 tw:mb-1">Somera Esperanto-Semajno</h4>
+    <p class="tw:text-xs tw:text-gray-600 tw:mb-3">
+      La plej granda somera renkontiĝo en Skandinavio kun kursoj por ĉiuj niveloj.
+    </p>
+
+    <div class="tw:flex tw:flex-wrap tw:gap-1.5 tw:items-center">
+      <%# ★ Internacia Evento is verde esperanto (.text-bg-success) %>
+      <%= render Ui::BadgeComponent.new("★ Internacia Evento", variant: :success, size: :small) %>
+      <%# Proksima is cinza (.text-bg-secondary) %>
+      <%= render Ui::BadgeComponent.new("Proksima", variant: :secondary, size: :small) %>
+      <%# Category is teal (#17a2b8 / .text-bg-info) %>
+      <%= render Ui::BadgeComponent.new("Renkontiĝo", variant: :info, size: :small) %>
+      <%# Characteristic is warning (#ffc107 / .text-bg-warning) %>
+      <%= render Ui::BadgeComponent.new("Por komencantoj", variant: :warning, size: :small) %>
+      <%= render Ui::BadgeComponent.new("Feria", variant: :warning, size: :small) %>
+    </div>
+  </div>
+</div>

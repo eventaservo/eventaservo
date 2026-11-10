@@ -1,0 +1,21 @@
+<div class="tw:p-6 tw:space-y-6">
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-3">Pill Shape (Default)</h3>
+    <div class="tw:flex tw:flex-wrap tw:gap-2 tw:items-center">
+      <%= render Ui::BadgeComponent.new("Kunveno", shape: :pill, variant: :info) %>
+      <%= render Ui::BadgeComponent.new("Por komencantoj", shape: :pill, variant: :warning) %>
+      <%= render Ui::BadgeComponent.new("Aktiva", shape: :pill, variant: :success) %>
+      <%= render Ui::BadgeComponent.new("Nombro: 42", shape: :pill, variant: :secondary) %>
+    </div>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-3">Rounded Shape (Rectangular)</h3>
+    <div class="tw:flex tw:flex-wrap tw:gap-2 tw:items-center">
+      <%= render Ui::BadgeComponent.new("Kunveno", shape: :rounded, variant: :info) %>
+      <%= render Ui::BadgeComponent.new("Por komencantoj", shape: :rounded, variant: :warning) %>
+      <%= render Ui::BadgeComponent.new("Aktiva", shape: :rounded, variant: :success) %>
+      <%= render Ui::BadgeComponent.new("Nombro: 42", shape: :rounded, variant: :secondary) %>
+    </div>
+  </div>
+</div>

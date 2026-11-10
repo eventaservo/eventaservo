@@ -1,0 +1,11 @@
+<div class="tw:p-6 tw:space-y-4">
+  <p class="tw:text-sm tw:text-gray-600">
+    When <code>href:</code> is passed, the badge renders a semantic <code>&lt;a&gt;</code> tag with interactive hover opacity.
+  </p>
+
+  <div class="tw:flex tw:flex-wrap tw:gap-2 tw:items-center">
+    <%= render Ui::BadgeComponent.new("Kopenhago (12)", href: "/europo/Danio/Kopenhago", variant: :secondary) %>
+    <%= render Ui::BadgeComponent.new("Berlin (8)", href: "/europo/Germanio/Berlin", variant: :secondary) %>
+    <%= render Ui::BadgeComponent.new("Rio de Janeiro (25)", href: "/ameriko/Brazilo/Rio-de-Janeiro", variant: :secondary) %>
+  </div>
+</div>

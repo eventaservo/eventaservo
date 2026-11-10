@@ -1,0 +1,14 @@
+<div class="tw:p-6 tw:space-y-6">
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-3">Event Domain Variants (1:1 with Bootstrap)</h3>
+    <div class="tw:flex tw:flex-wrap tw:gap-2 tw:items-center">
+      <%= render Ui::BadgeComponent.new("Kategorio (Info / #17a2b8)", variant: :info) %>
+      <%= render Ui::BadgeComponent.new("Karakterizo (Warning / #ffc107)", variant: :warning) %>
+      <%= render Ui::BadgeComponent.new("★ Internacia Evento (Success)", variant: :success) %>
+      <%= render Ui::BadgeComponent.new("Proksima (Secondary / #6c757d)", variant: :secondary) %>
+      <%= render Ui::BadgeComponent.new("Urbo-Nombro (Primary / #2d89ef)", variant: :primary) %>
+      <%= render Ui::BadgeComponent.new("Neaktiva Filtro (Light)", variant: :light) %>
+      <%= render Ui::BadgeComponent.new("Nuligita (Danger / #b91d47)", variant: :danger) %>
+    </div>
+  </div>
+</div>
