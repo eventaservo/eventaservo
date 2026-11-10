@@ -5,7 +5,7 @@
   <% else %>
     <h5>
       <%= t("search.results.events.found", count: events.count) %>
-      <% if params[:pasintaj].blank? %>
+      <% if params[:pasintaj].blank? && params[:from].blank? && params[:to].blank? %>
         <%= t("search.results.events.upcoming_and_recent") %>
       <% end %>
     </h5>

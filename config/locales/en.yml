@@ -662,6 +662,7 @@ en:
       title: Subscribe to organization calendar
   search:
     cancelled: Cancelled
+    from_date: From
     min_chars_error: The search query must contain at least 3 characters
     past: Past
     placeholder: Search events or organizations... (minimum 3 characters)
@@ -701,6 +702,7 @@ en:
         header: Recorded presentations
         title: Title
     title: Search
+    to_date: To
   support:
     array:
       last_word_connector: " and "

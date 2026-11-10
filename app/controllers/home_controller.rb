@@ -169,6 +169,14 @@ class HomeController < ApplicationController
     redirect_back_or_to root_path
   end
 
+  # Renders the global search page with organizations, events, users and videos.
+  #
+  # Event results accept three optional filters: +pasintaj+ (include past
+  # events), +nuligitaj+ (include cancelled events) and the +from+/+to+ date
+  # window. Upcoming events are listed closest first; when +pasintaj+ is
+  # enabled the most recent past events come first instead.
+  #
+  # @return [void]
   def search
     @search_term = params[:query]&.strip
     if @search_term.blank? || @search_term.length < 3
@@ -180,10 +188,14 @@ class HomeController < ApplicationController
       @users = User.includes(:country).search(@search_term)
       @videos = Video.includes(:evento).search(@search_term)
 
+      @search_from = search_filter_date(params[:from])
+      @search_to = search_filter_date(params[:to])
+
       @events = Event.includes(%i[country participants organizations]).search(@search_term)
       @events = @events.future_and_just_finished if params[:pasintaj].nil?
       @events = @events.not_cancelled if params[:nuligitaj].nil?
-      @events = @events.order(date_start: :desc)
+      @events = filter_events_by_period(@events)
+      @events = @events.order(date_start: params[:pasintaj].present? ? :desc : :asc)
     end
   end
 
@@ -199,6 +211,37 @@ class HomeController < ApplicationController
   end
 
   private
+
+  # Parses one optional search date filter parameter.
+  #
+  # Blank or invalid values are ignored instead of raising so a mistyped query
+  # string never breaks the search page.
+  #
+  # @param value [String, nil] date in ISO 8601 format (+YYYY-MM-DD+)
+  # @return [Date, nil]
+  def search_filter_date(value)
+    Date.iso8601(value.to_s)
+  rescue Date::Error
+    nil
+  end
+
+  # Restricts the search event relation to the +from+/+to+ window.
+  #
+  # Both bounds come from +@search_from+/+@search_to+ and are optional and
+  # inclusive. An event starting before +from+ but still running inside the
+  # window is kept, matching +Event.by_dates+ semantics.
+  #
+  # @param events [ActiveRecord::Relation<Event>] the search event relation
+  # @return [ActiveRecord::Relation<Event>]
+  def filter_events_by_period(events)
+    if @search_from
+      events = events.where("date_start >= :from OR date_end >= :from", from: @search_from.beginning_of_day)
+    end
+    if @search_to
+      events = events.where("date_start <= :to", to: @search_to.end_of_day)
+    end
+    events
+  end
 
   def access_from_server
     request.headers["SERVER_NAME"].in? %w[testservilo.eventaservo.org staging.eventaservo.org

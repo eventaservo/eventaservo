@@ -662,6 +662,7 @@ pt_BR:
       title: Assinar calendário da organização
   search:
     cancelled: Cancelados
+    from_date: De
     min_chars_error: A busca deve conter pelo menos 3 caracteres
     past: Anteriores
     placeholder: Buscar eventos ou organizações... (mínimo de 3 caracteres)
@@ -701,6 +702,7 @@ pt_BR:
         header: Apresentações gravadas
         title: Título
     title: Busca
+    to_date: Até
   support:
     array:
       last_word_connector: " e "
