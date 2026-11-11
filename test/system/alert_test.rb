@@ -2,7 +2,7 @@
 
 require "application_system_test_case"
 
-# Phase 3 AlertComponent guard: verifies rendering, variants, sizes, accessibility, and dismiss interactions.
+# Phase 4 Step 1 Alert dismiss guard: verifies rendering, accessibility, and Stimulus dismiss interactions.
 class AlertTest < ApplicationSystemTestCase
   setup do
     @admin = create(:user, :admin, :e2e_test_user)
@@ -52,6 +52,28 @@ class AlertTest < ApplicationSystemTestCase
     assert_no_selector "div[data-controller='dismissible']", text: /Ĉi tiu estas fermebla informo/
   end
 
+  test "dismisses alert when close button is activated via Enter key" do
+    visit "/lookbook/preview/ui/alert/dismissible"
+
+    assert_selector "div[data-controller='dismissible']", text: /Ĉi tiu estas fermebla informo/
+
+    close_btn = first("button[data-action='dismissible#dismiss']")
+    close_btn.send_keys(:enter)
+
+    assert_no_selector "div[data-controller='dismissible']", text: /Ĉi tiu estas fermebla informo/
+  end
+
+  test "dismisses alert when Escape key is pressed while focused on the close button" do
+    visit "/lookbook/preview/ui/alert/dismissible"
+
+    assert_selector "div[data-controller='dismissible']", text: /Ĉi tiu estas fermebla informo/
+
+    close_btn = first("button[data-action='dismissible#dismiss']")
+    close_btn.send_keys(:escape)
+
+    assert_no_selector "div[data-controller='dismissible']", text: /Ĉi tiu estas fermebla informo/
+  end
+
   test "renders floating flash message with shadow and dismiss button" do
     visit "/lookbook/preview/ui/alert/flash_messages"
 
@@ -60,6 +82,17 @@ class AlertTest < ApplicationSystemTestCase
 
     # Click close button on flash message
     find("button[data-action='dismissible#dismiss']").click
+
+    assert_no_selector "div.flash-alert-box"
+  end
+
+  test "dismisses floating flash message via Escape key" do
+    visit "/lookbook/preview/ui/alert/flash_messages"
+
+    assert_selector "div.flash-alert-box.tw\\:fixed.tw\\:top-10", text: /Evento sukcese konservita kaj publikigita!/
+
+    close_btn = find("button[data-action='dismissible#dismiss']")
+    close_btn.send_keys(:escape)
 
     assert_no_selector "div.flash-alert-box"
   end
