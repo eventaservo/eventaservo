@@ -38,7 +38,7 @@ class FormControlsTest < ApplicationSystemTestCase
     visit "/lookbook/preview/ui/select/default"
 
     assert_selector "select#select_country_id"
-    assert_selector "select option", text: "Brazilo"
+    assert_selector "select#select_country_id option", text: "Brazilo", visible: :all
     assert_selector "div.tw\\:pointer-events-none i.fa-chevron-down"
   end
 

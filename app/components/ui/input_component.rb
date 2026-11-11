@@ -196,28 +196,48 @@ module Ui
     #
     # @return [Hash]
     def input_tag_attributes
-      attrs = html_options.except(:class)
-      attrs[:type] = type
-      attrs[:name] = name if name.present?
-      attrs[:id] = input_id
-      attrs[:value] = value if value.present?
-      attrs[:placeholder] = placeholder if placeholder.present?
-      attrs[:disabled] = true if disabled
-      attrs[:readonly] = true if readonly
-      attrs[:required] = true if required
-      attrs[:class] = input_classes
-
-      if error?
-        attrs[:"aria-invalid"] = "true"
-        attrs[:"aria-describedby"] = error_id
-      elsif hint?
-        attrs[:"aria-describedby"] = hint_id
-      end
-
-      attrs
+      html_options.except(:class)
+        .merge(type: type, id: input_id, class: input_classes)
+        .merge(optional_attributes)
+        .merge(aria_attributes)
     end
 
     private
+
+    # Optional and boolean attributes for the input tag.
+    #
+    # @return [Hash]
+    def optional_attributes
+      {
+        name: name.presence,
+        value: value.presence,
+        placeholder: placeholder.presence,
+        disabled: true_or_nil(disabled),
+        readonly: true_or_nil(readonly),
+        required: true_or_nil(required)
+      }.compact
+    end
+
+    # Accessibility attributes for the input tag.
+    #
+    # @return [Hash]
+    def aria_attributes
+      if error?
+        {"aria-invalid": "true", "aria-describedby": error_id}
+      elsif hint?
+        {"aria-describedby": hint_id}
+      else
+        {}
+      end
+    end
+
+    # Returns true if condition is truthy, otherwise nil so compact removes it.
+    #
+    # @param value [Boolean]
+    # @return [Boolean, nil]
+    def true_or_nil(value)
+      true if value
+    end
 
     # Base classes for input elements.
     #

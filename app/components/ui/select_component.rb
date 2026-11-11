@@ -157,21 +157,10 @@ module Ui
     #
     # @return [Hash]
     def select_tag_attributes
-      attrs = html_options.except(:class)
-      attrs[:name] = name if name.present?
-      attrs[:id] = select_id
-      attrs[:disabled] = true if disabled
-      attrs[:required] = true if required
-      attrs[:class] = select_classes
-
-      if error?
-        attrs[:"aria-invalid"] = "true"
-        attrs[:"aria-describedby"] = error_id
-      elsif hint?
-        attrs[:"aria-describedby"] = hint_id
-      end
-
-      attrs
+      html_options.except(:class)
+        .merge(id: select_id, class: select_classes)
+        .merge(optional_attributes)
+        .merge(aria_attributes)
     end
 
     # Formats normalized options array.
@@ -179,27 +168,65 @@ module Ui
     # @return [Array<Array>]
     def formatted_options
       list = []
-      if include_blank
-        blank_text = (include_blank == true) ? "" : include_blank.to_s
-        list << [blank_text, ""]
-      end
-
-      if options.is_a?(Hash)
-        options.each { |k, v| list << [k.to_s, v] }
-      elsif options.respond_to?(:each)
-        options.each do |item|
-          list << if item.is_a?(Array)
-            item
-          else
-            [item.to_s, item]
-          end
-        end
-      end
-
-      list
+      list << blank_option if include_blank
+      list.concat(normalized_options)
     end
 
     private
+
+    # Optional and boolean attributes for the select tag.
+    #
+    # @return [Hash]
+    def optional_attributes
+      {
+        name: name.presence,
+        disabled: true_or_nil(disabled),
+        required: true_or_nil(required)
+      }.compact
+    end
+
+    # Accessibility attributes for the select tag.
+    #
+    # @return [Hash]
+    def aria_attributes
+      if error?
+        {"aria-invalid": "true", "aria-describedby": error_id}
+      elsif hint?
+        {"aria-describedby": hint_id}
+      else
+        {}
+      end
+    end
+
+    # Returns true if condition is truthy, otherwise nil so compact removes it.
+    #
+    # @param value [Boolean]
+    # @return [Boolean, nil]
+    def true_or_nil(value)
+      true if value
+    end
+
+    # Returns blank option tuple.
+    #
+    # @return [Array(String, String)]
+    def blank_option
+      [(include_blank == true) ? "" : include_blank.to_s, ""]
+    end
+
+    # Normalizes option collection into array of [label, value] pairs.
+    #
+    # @return [Array<Array>]
+    def normalized_options
+      return [] unless options.respond_to?(:each)
+
+      options.map do |item|
+        if item.is_a?(Array)
+          [item.first.to_s, item.last]
+        else
+          [item.to_s, item]
+        end
+      end
+    end
 
     # Base classes for select elements.
     #
