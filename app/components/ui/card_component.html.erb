@@ -1,0 +1,67 @@
+<%= content_tag(
+      resolved_tag,
+      class: container_classes,
+      **container_attributes
+    ) do %>
+  <% if horizontal? %>
+    <% if media? %>
+      <%= media %>
+    <% end %>
+
+    <div class="tw:flex tw:flex-col tw:flex-1 tw:min-w-0">
+      <% if header? %>
+        <%= header %>
+      <% elsif title.present? %>
+        <div class="<%= default_header_classes %>">
+          <h3 class="<%= default_title_classes %>"><%= title %></h3>
+          <% if subtitle.present? %>
+            <p class="<%= default_subtitle_classes %>"><%= subtitle %></p>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if body? %>
+        <%= body %>
+      <% elsif content.present? %>
+        <div class="<%= default_body_classes %>">
+          <%= content %>
+        </div>
+      <% end %>
+
+      <% if footer? %>
+        <%= footer %>
+      <% end %>
+    </div>
+  <% else %>
+    <% if media? && media.top? %>
+      <%= media %>
+    <% end %>
+
+    <% if header? %>
+      <%= header %>
+    <% elsif title.present? %>
+      <div class="<%= default_header_classes %>">
+        <h3 class="<%= default_title_classes %>"><%= title %></h3>
+        <% if subtitle.present? %>
+          <p class="<%= default_subtitle_classes %>"><%= subtitle %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if body? %>
+      <%= body %>
+    <% elsif content.present? %>
+      <div class="<%= default_body_classes %>">
+        <%= content %>
+      </div>
+    <% end %>
+
+    <% if footer? %>
+      <%= footer %>
+    <% end %>
+
+    <% if media? && media.bottom? %>
+      <%= media %>
+    <% end %>
+  <% end %>
+<% end %>

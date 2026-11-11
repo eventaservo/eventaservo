@@ -1,0 +1,35 @@
+<div class="tw:p-6 tw:space-y-6 tw:max-w-4xl">
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-3">Surface & Border Variants</h3>
+    <div class="tw:grid tw:grid-cols-1 md:tw:grid-cols-3 tw:gap-4">
+      <%= render Ui::CardComponent.new(title: "Default Surface", subtitle: "Standard shadow-sm", variant: :default) do %>
+        <p class="tw:text-sm tw:text-gray-600">Pure white background with subtle 1px border and soft drop shadow.</p>
+      <% end %>
+
+      <%= render Ui::CardComponent.new(title: "Bordered", subtitle: "Flat outline", variant: :bordered) do %>
+        <p class="tw:text-sm tw:text-gray-600">Clean flat panel with no shadow, suitable for dense dashboards and nested views.</p>
+      <% end %>
+
+      <%= render Ui::CardComponent.new(title: "Elevated", subtitle: "Prominent shadow-md", variant: :elevated) do %>
+        <p class="tw:text-sm tw:text-gray-600">Higher elevation for cards that need to pop off the canvas or act as focal points.</p>
+      <% end %>
+    </div>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-3">Brand Accent & Interactive Variants</h3>
+    <div class="tw:grid tw:grid-cols-1 md:tw:grid-cols-3 tw:gap-4">
+      <%= render Ui::CardComponent.new(title: "Esperanto Accent", subtitle: "Esperanto green top accent", variant: :accent_success) do %>
+        <p class="tw:text-sm tw:text-gray-600">Features a 4px Esperanto green top border, perfect for confirmed events and speakers.</p>
+      <% end %>
+
+      <%= render Ui::CardComponent.new(title: "Primary Accent", subtitle: "Brand blue top accent", variant: :accent_primary) do %>
+        <p class="tw:text-sm tw:text-gray-600">Features a 4px UEA brand blue top border, used for courses, teachers, and announcements.</p>
+      <% end %>
+
+      <%= render Ui::CardComponent.new(title: "Interactive", subtitle: "Hover & cursor pointer", variant: :interactive) do %>
+        <p class="tw:text-sm tw:text-gray-600">Hover lifts the card with deeper shadow and darker border for clickable cards.</p>
+      <% end %>
+    </div>
+  </div>
+</div>

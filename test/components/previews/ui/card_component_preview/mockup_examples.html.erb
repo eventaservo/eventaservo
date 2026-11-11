@@ -1,0 +1,73 @@
+<div class="tw:p-6 tw:space-y-8 tw:max-w-4xl">
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-1">Modern Teacher Card (Instruisto)</h3>
+    <p class="tw:text-xs tw:text-gray-500 tw:mb-3">Migrated from admin/mockups/_teacher_card using Ui::CardComponent accent_primary.</p>
+    <div class="tw:max-w-sm">
+      <%= render Ui::CardComponent.new(variant: :accent_primary) do |c| %>
+        <% c.with_header(accent: :primary) do %>
+          <div class="tw:flex tw:items-center tw:gap-3">
+            <div class="tw:w-12 tw:h-12 tw:rounded-full tw:bg-blue-100 tw:text-brand-blue tw:flex tw:items-center tw:justify-center tw:font-bold tw:text-lg tw:shrink-0">
+              <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+            </div>
+            <div class="tw:min-w-0 tw:flex-1">
+              <h4 class="tw:text-sm tw:font-bold tw:text-gray-900 tw:truncate">Karlo Markso</h4>
+              <p class="tw:text-xs tw:text-gray-500">🇧🇷 Brazilo • Nivelo C2</p>
+            </div>
+          </div>
+        <% end %>
+        <% c.with_body do %>
+          <div class="tw:space-y-2">
+            <div class="tw:text-xs tw:font-semibold tw:text-brand-blue tw:uppercase tw:tracking-wider">
+              <i class="fas fa-book-open tw:mr-1" aria-hidden="true"></i>Spertoj
+            </div>
+            <p class="tw:text-xs tw:text-gray-600">
+              Instruas Esperanton ekde 15 jaroj. Specialisto pri gramatiko kaj parola praktiko por komencantoj kaj progresantoj.
+            </p>
+          </div>
+        <% end %>
+        <% c.with_footer(background: true) do %>
+          <div class="tw:flex tw:items-center tw:justify-between tw:w-full">
+            <span class="tw:text-xs tw:text-gray-500">12 lernantoj</span>
+            <%= render Ui::ButtonComponent.new("Kontakti", variant: :primary, size: :small) %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-1">Modern Speaker Card (Preleganto)</h3>
+    <p class="tw:text-xs tw:text-gray-500 tw:mb-3">Migrated from admin/mockups/_speaker_card using Ui::CardComponent accent_success.</p>
+    <div class="tw:max-w-sm">
+      <%= render Ui::CardComponent.new(variant: :accent_success) do |c| %>
+        <% c.with_header(accent: :success) do %>
+          <div class="tw:flex tw:items-center tw:gap-3">
+            <div class="tw:w-12 tw:h-12 tw:rounded-full tw:bg-esperanto-100 tw:text-esperanto-700 tw:flex tw:items-center tw:justify-center tw:font-bold tw:text-lg tw:shrink-0">
+              <i class="fas fa-microphone" aria-hidden="true"></i>
+            </div>
+            <div class="tw:min-w-0 tw:flex-1">
+              <h4 class="tw:text-sm tw:font-bold tw:text-gray-900 tw:truncate">Anna Lowenstein</h4>
+              <p class="tw:text-xs tw:text-gray-500">🇬🇧 Britio • Verkisto & Akademiano</p>
+            </div>
+          </div>
+        <% end %>
+        <% c.with_body do %>
+          <div class="tw:space-y-2">
+            <div class="tw:text-xs tw:font-semibold tw:text-esperanto-600 tw:uppercase tw:tracking-wider">
+              <i class="fas fa-comments tw:mr-1" aria-hidden="true"></i>Temoj
+            </div>
+            <p class="tw:text-xs tw:text-gray-600">
+              Historio de la Esperanto-movado, virinoj en Esperanto, kaj originala literaturo.
+            </p>
+          </div>
+        <% end %>
+        <% c.with_footer(background: true) do %>
+          <div class="tw:flex tw:items-center tw:justify-between tw:w-full">
+            <span class="tw:text-xs tw:text-gray-500">5 prelegoj</span>
+            <%= render Ui::ButtonComponent.new("Inviti", variant: :success, size: :small) %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
