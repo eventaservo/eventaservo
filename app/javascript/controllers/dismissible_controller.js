@@ -68,10 +68,34 @@ export default class extends Controller {
       document.activeElement.blur()
     }
 
-    this.element.classList.add("tw:opacity-0")
-    setTimeout(() => {
-      this.element.remove()
-      this.dispatch("dismissed")
-    }, 300)
+    const isFixed = window.getComputedStyle(this.element).position === "fixed"
+
+    if (isFixed) {
+      // Floating banners (flash messages): fade out without moving the page layout
+      this.element.classList.add("tw:opacity-0")
+      setTimeout(() => {
+        this.element.remove()
+        this.dispatch("dismissed")
+      }, 300)
+    } else {
+      // Inline banners: smoothly shrink height and margin to avoid abrupt jumps
+      this.element.style.transition = "opacity 300ms ease, max-height 300ms ease, margin 300ms ease, padding 300ms ease"
+      this.element.style.maxHeight = `${this.element.scrollHeight}px`
+      this.element.style.overflow = "hidden"
+
+      requestAnimationFrame(() => {
+        this.element.classList.add("tw:opacity-0")
+        this.element.style.maxHeight = "0px"
+        this.element.style.marginTop = "0px"
+        this.element.style.marginBottom = "0px"
+        this.element.style.paddingTop = "0px"
+        this.element.style.paddingBottom = "0px"
+      })
+
+      setTimeout(() => {
+        this.element.remove()
+        this.dispatch("dismissed")
+      }, 320)
+    }
   }
 }
