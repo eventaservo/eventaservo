@@ -4,14 +4,14 @@
 
 import { application } from "./application"
 
-import EventsCalendarController from "./events_calendar_controller"
-application.register("events-calendar", EventsCalendarController)
-
 import ClipboardController from "./clipboard_controller"
 application.register("clipboard", ClipboardController)
 
 import DatepickerController from "./datepicker_controller"
 application.register("datepicker", DatepickerController)
+
+import DismissibleController from "./dismissible_controller"
+application.register("dismissible", DismissibleController)
 
 import Event__FormController from "./event/form_controller"
 application.register("event--form", Event__FormController)
@@ -22,17 +22,17 @@ application.register("event-map", EventMapController)
 import EventUserInterestedButtonController from "./event_user_interested_button_controller"
 application.register("event-user-interested-button", EventUserInterestedButtonController)
 
-import FlashMessageController from "./flash_message_controller"
-application.register("flash-message", FlashMessageController)
+import EventsCalendarController from "./events_calendar_controller"
+application.register("events-calendar", EventsCalendarController)
 
 import LightboxController from "./lightbox_controller"
 application.register("lightbox", LightboxController)
 
-import MaskController from "./mask_controller"
-application.register("mask", MaskController)
-
 import MapViewController from "./map_view_controller"
 application.register("map-view", MapViewController)
+
+import MaskController from "./mask_controller"
+application.register("mask", MaskController)
 
 import OrgSearchController from "./org_search_controller"
 application.register("org-search", OrgSearchController)
@@ -60,9 +60,6 @@ application.register("user", UserController)
 
 import VideoController from "./video_controller"
 application.register("video", VideoController)
-
-import DismissibleController from "./dismissible_controller"
-application.register("dismissible", DismissibleController)
 
 import HwComboboxController from "@josefarias/hotwire_combobox"
 application.register("hw-combobox", HwComboboxController)

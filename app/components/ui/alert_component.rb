@@ -222,7 +222,7 @@ module Ui
     #
     # @return [String]
     def base_classes
-      "tw:relative tw:w-full tw:border tw:transition-opacity tw:duration-300 " \
+      "tw:border tw:transition-opacity tw:duration-300 " \
         "[&_a]:tw:font-bold [&_a]:tw:underline [&_a]:tw:text-current [&_a]:tw:hover:opacity-80"
     end
 
@@ -233,9 +233,9 @@ module Ui
       if flash
         flash_box = ["flash", "al" + "ert", "box"].join("-")
         "#{flash_box} tw:fixed tw:top-10 tw:left-1/2 tw:-translate-x-1/2 tw:w-11/12 " \
-          "tw:max-w-lg tw:z-50 tw:shadow-xl tw:text-center tw:rounded-none"
+          "tw:max-w-lg tw:z-50 tw:shadow-xl tw:text-center tw:rounded-lg"
       else
-        "tw:rounded-md tw:mb-4"
+        "tw:relative tw:w-full tw:rounded-md tw:mb-4"
       end
     end
 
