@@ -1,0 +1,57 @@
+<div class="tw:p-6 tw:max-w-2xl tw:space-y-4">
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Info / Informo</h3>
+    <%= render Ui::AlertComponent.new(
+      "Informo: Vi povas filtri la eventojn laŭ dato, loko aŭ kategorio.",
+      variant: :info
+    ) %>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Notice / Primary</h3>
+    <%= render Ui::AlertComponent.new(
+      "Rimarko: Bonvenon al la nova versio de Eventa Servo!",
+      variant: :primary
+    ) %>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Success / Sukceso</h3>
+    <%= render Ui::AlertComponent.new(
+      "Sukceso: Via evento estis sukcese konservita kaj publikigita.",
+      variant: :success
+    ) %>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Warning / Averto</h3>
+    <%= render Ui::AlertComponent.new(
+      "Averto: La dato de la evento estas en la pasinteco.",
+      variant: :warning
+    ) %>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Danger / Eraro</h3>
+    <%= render Ui::AlertComponent.new(
+      "Eraro: Ne eblis konservi viajn ŝanĝojn. Bonvolu kontroli la formularon.",
+      variant: :danger
+    ) %>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Secondary / Neŭtrala</h3>
+    <%= render Ui::AlertComponent.new(
+      "Neŭtrala: Ĉi tiu funkcio estas arkivita kaj ne plu ricevas ĝisdatigojn.",
+      variant: :secondary
+    ) %>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Light / Hela</h3>
+    <%= render Ui::AlertComponent.new(
+      "Hela: Ĝenerala informo kun subtila fono.",
+      variant: :light
+    ) %>
+  </div>
+</div>
