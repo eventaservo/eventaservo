@@ -1,0 +1,21 @@
+<div class="tw:space-y-6">
+  <%= render Ui::NavbarComponent.new do |nav| %>
+    <% nav.with_brand(title: "Eventa Servo", env_badge: "STAGING") %>
+    <% nav.with_search(placeholder: "Serĉi eventojn...") %>
+
+    <% nav.with_item("Aldoni eventon", href: "/events/new", icon: "calendar-plus", active: true) %>
+    <% nav.with_item("Organizaĵoj", href: "/organizations", icon: "building") %>
+
+    <% nav.with_tool(icon: "map-marker-alt", href: "/?vidmaniero=mapo", label: "Vidi sur mapo") %>
+    <% nav.with_tool(icon: "user-friends", href: "/prie", label: "Pri ni") %>
+
+    <% nav.with_user_menu do %>
+      <div class="tw:flex tw:items-center tw:gap-2 tw:px-2 tw:py-1 tw:rounded-full hover:tw:bg-white/10 tw:cursor-pointer">
+        <div class="tw:w-7 tw:h-7 tw:rounded-full tw:bg-white/25 tw:flex tw:items-center tw:justify-center tw:text-xs tw:font-semibold tw:text-white">
+          FS
+        </div>
+        <span class="tw:text-xs tw:font-medium tw:text-white">Fernando</span>
+      </div>
+    <% end %>
+  <% end %>
+</div>

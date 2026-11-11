@@ -1,0 +1,19 @@
+<div class="tw:max-w-sm tw:mx-auto tw:border tw:border-gray-300 tw:rounded-xl tw:overflow-hidden tw:shadow-md">
+  <%= render Ui::NavbarComponent.new do |nav| %>
+    <% nav.with_brand(title: "Eventa Servo") %>
+    <% nav.with_search %>
+
+    <% nav.with_item("Aldoni eventon", href: "/events/new", icon: "calendar-plus") %>
+    <% nav.with_item("Organizaĵoj", href: "/organizations", icon: "building") %>
+
+    <% nav.with_user_menu do %>
+      <%= render Ui::ButtonComponent.new(
+            "Ensaluti",
+            href: "/users/sign_in",
+            variant: :secondary,
+            size: :small,
+            class: "tw:!text-white tw:!border-white/40 hover:tw:!bg-white/15"
+          ) %>
+    <% end %>
+  <% end %>
+</div>

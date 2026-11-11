@@ -1,0 +1,24 @@
+<div class="tw:space-y-6">
+  <div class="tw:p-4 tw:bg-gray-100 tw:rounded-lg tw:mb-4">
+    <h3 class="tw:text-sm tw:font-bold tw:text-gray-900 tw:mb-1">Proposta B: Minimalista & Focada em Ícones (Inspirada no Instagram e X)</h3>
+    <p class="tw:text-xs tw:text-gray-600">
+      Design super limpo e espaçoso. Prioriza ícones universais com estados de hover elegantes em vez de texto denso, reduzindo a carga cognitiva e mantendo o topo desobstruído.
+    </p>
+  </div>
+
+  <%= render Ui::NavbarComponent.new do |nav| %>
+    <% nav.with_brand(title: "Eventa Servo") %>
+    <% nav.with_search(placeholder: "Serĉi...") %>
+
+    <% nav.with_tool(icon: "plus", href: "/events/new", label: "Aldoni eventon", active: true) %>
+    <% nav.with_tool(icon: "building", href: "/organizations", label: "Organizaĵoj") %>
+    <% nav.with_tool(icon: "map-marker-alt", href: "/?vidmaniero=mapo", label: "Mapo") %>
+    <% nav.with_tool(icon: "globe", href: "#", label: "Lingvo") %>
+
+    <% nav.with_user_menu do %>
+      <div class="tw:w-8 tw:h-8 tw:rounded-full tw:bg-white/20 tw:border tw:border-white/40 tw:flex tw:items-center tw:justify-center tw:text-xs tw:font-bold tw:text-white tw:cursor-pointer hover:tw:bg-white/30 tw:transition">
+        FS
+      </div>
+    <% end %>
+  <% end %>
+</div>
