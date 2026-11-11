@@ -25,7 +25,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_response :success
     assert_equal edit_user_registration_path, path
-    assert_select ".alert-primary", /#{I18n.t("activerecord.registrations.token_regenerated")}/
+    assert_select "div.flash-alert-box", /#{I18n.t("activerecord.registrations.token_regenerated")}/
   end
 
   test "regenerate_api_token handles failure" do
@@ -47,6 +47,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_response :success
     assert_equal edit_user_registration_path, path
-    assert_select ".alert-danger", /#{I18n.t("activerecord.registrations.token_regeneration_error", error: "Test Error")}/
+    assert_select "div.flash-alert-box", /#{I18n.t("activerecord.registrations.token_regeneration_error", error: "Test Error")}/
   end
 end
