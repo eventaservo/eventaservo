@@ -1,0 +1,41 @@
+<div class="tw:p-6 tw:max-w-2xl tw:space-y-4">
+  <p class="tw:text-sm tw:text-gray-600 tw:mb-4">
+    Klaku sur la butonon <strong>×</strong> por fermi la sciigon. La elemento fadiĝos glate kaj estos forigita el la dokumento per Stimulus.
+  </p>
+
+  <div>
+    <%= render Ui::AlertComponent.new(
+      "Ĉi tiu estas fermebla informo. Vi povas fermi ĝin klakante la butonon dekstre.",
+      variant: :info,
+      icon: true,
+      dismissible: true
+    ) %>
+  </div>
+
+  <div>
+    <%= render Ui::AlertComponent.new(
+      "Via pasvorto estis sukcese ŝanĝita. Bonvolu konservi ĝin en sekura loko.",
+      variant: :success,
+      icon: true,
+      dismissible: true
+    ) %>
+  </div>
+
+  <div>
+    <%= render Ui::AlertComponent.new(
+      "Atentu: Se vi ne konfirmos vian retpoŝtadreson, via konto estos limigita.",
+      variant: :warning,
+      icon: true,
+      dismissible: true
+    ) %>
+  </div>
+
+  <div>
+    <%= render Ui::AlertComponent.new(
+      "Ne eblis ŝarĝi la bildon. Kontrolu la formaton kaj grandecon de la dosiero.",
+      variant: :danger,
+      icon: true,
+      dismissible: true
+    ) %>
+  </div>
+</div>

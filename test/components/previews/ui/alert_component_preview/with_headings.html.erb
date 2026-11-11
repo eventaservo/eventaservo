@@ -1,0 +1,37 @@
+<div class="tw:p-6 tw:max-w-2xl tw:space-y-4">
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Informo kun titolo kaj ligilo</h3>
+    <%= render Ui::AlertComponent.new(
+      variant: :info,
+      title: "Nova funkcio: Kalendara sinkronigo",
+      icon: true
+    ) do %>
+      Vi nun povas aboni la retan kalendaron per Webcal. Legu pli en la <a href="#">gvidilo pri retaj kalendaroj</a> aŭ vizitu vian agordopaĝon.
+    <% end %>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Sukceso kun detaloj</h3>
+    <%= render Ui::AlertComponent.new(
+      variant: :success,
+      title: "Evento sukcese publikigita!",
+      icon: true
+    ) do %>
+      Via evento aperas nun en la ĉefa kalendaro. Vi povas <a href="#">spekti la publikan paĝon</a> aŭ <a href="#">redakti detalojn</a>.
+    <% end %>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Formularaj eraroj (Error summary)</h3>
+    <%= render Ui::AlertComponent.new(
+      variant: :danger,
+      title: "Ne eblis krei la eventon (2 eraroj)",
+      icon: true
+    ) do %>
+      <ul class="tw:list-disc tw:list-inside tw:space-y-1 tw:mt-2">
+        <li>Titolo ne povas esti malplena</li>
+        <li>Komenca dato devas esti antaŭ la fina dato</li>
+      </ul>
+    <% end %>
+  </div>
+</div>

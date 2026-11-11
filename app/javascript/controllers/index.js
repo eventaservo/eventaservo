@@ -61,5 +61,8 @@ application.register("user", UserController)
 import VideoController from "./video_controller"
 application.register("video", VideoController)
 
+import DismissibleController from "./dismissible_controller"
+application.register("dismissible", DismissibleController)
+
 import HwComboboxController from "@josefarias/hotwire_combobox"
 application.register("hw-combobox", HwComboboxController)

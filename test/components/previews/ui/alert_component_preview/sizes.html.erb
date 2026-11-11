@@ -1,0 +1,26 @@
+<div class="tw:p-6 tw:max-w-2xl tw:space-y-6">
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Medium (:medium) — Padrão do sistema (py-2 px-3 text-sm)</h3>
+    <p class="tw:text-xs tw:text-gray-400 tw:mb-2">O tamanho padrão para notificações, formulários, avisos e mensagens gerais.</p>
+    <%= render Ui::AlertComponent.new(
+      "Via konto estas sukcese agordita por ricevi semajnajn sciigojn.",
+      variant: :success,
+      size: :medium,
+      icon: true,
+      dismissible: true
+    ) %>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Large (:large) — Destaque (py-3.5 px-4 text-base)</h3>
+    <p class="tw:text-xs tw:text-gray-400 tw:mb-2">Para alertas de maior destaque, títulos descritivos ou anúncios importantes.</p>
+    <%= render Ui::AlertComponent.new(
+      "Gravaj prizorgaj laboroj okazos sabate je la 22:00 UTC. La servo estos neatingebla dum proksimume 30 minutoj.",
+      variant: :warning,
+      size: :large,
+      title: "Grava Sistema Anonco",
+      icon: true,
+      dismissible: true
+    ) %>
+  </div>
+</div>

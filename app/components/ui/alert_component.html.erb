@@ -1,0 +1,27 @@
+<%= content_tag(:div, **element_attributes) do %>
+  <div class="<%= inner_layout_classes %>">
+    <% if icon? %>
+      <div class="tw:shrink-0 tw:mt-0.5">
+        <%= render_icon %>
+      </div>
+    <% end %>
+
+    <div class="tw:flex-1 tw:min-w-0">
+      <% if title.present? %>
+        <h5 class="<%= title_classes %>"><%= title %></h5>
+      <% end %>
+      <div class="tw:leading-relaxed">
+        <%= content? ? content : text %>
+      </div>
+    </div>
+  </div>
+
+  <% if dismissible %>
+    <button type="button"
+            class="<%= dismiss_button_classes %>"
+            data-action="dismissible#dismiss"
+            aria-label="<%= resolved_dismiss_label %>">
+      <i class="<%= dismiss_icon_classes %>" aria-hidden="true"></i>
+    </button>
+  <% end %>
+<% end %>

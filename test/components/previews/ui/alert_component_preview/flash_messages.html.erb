@@ -1,0 +1,18 @@
+<div class="tw:p-6 tw:relative tw:min-h-[300px] tw:bg-gray-100 tw:rounded-lg">
+  <div class="tw:text-center tw:text-sm tw:text-gray-500 tw:mb-6">
+    <p class="tw:font-semibold">Simulado de Flash Message (Pozicio flosanta ĉe la supro de la ekrano)</p>
+    <p class="tw:text-xs tw:mt-1">Ĉi tiu sciigo aperas centre supre (<code>top: 40px</code>) kun ombro kaj aŭtomate fadiĝas post 5 sekundoj aŭ kiam la uzanto klakas la butonon <strong>×</strong>.</p>
+  </div>
+
+  <%= render Ui::AlertComponent.new(
+    "Evento sukcese konservita kaj publikigita!",
+    variant: :success,
+    flash: true,
+    icon: true,
+    dismissible: true
+  ) %>
+
+  <div class="tw:mt-32 tw:text-center tw:text-xs tw:text-gray-400">
+    (La paĝa enhavo aperas sub la flosanta mesaĝo)
+  </div>
+</div>
