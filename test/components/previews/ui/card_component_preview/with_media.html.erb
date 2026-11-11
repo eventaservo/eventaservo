@@ -1,0 +1,37 @@
+<div class="tw:p-6 tw:space-y-6 tw:max-w-4xl">
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-3">Cover Image with Aspect Video (16:9)</h3>
+    <div class="tw:max-w-md">
+      <%= render Ui::CardComponent.new do |c| %>
+        <% c.with_media(src: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80", alt: "Konferenca Halo", aspect_ratio: :video) %>
+        <% c.with_body do %>
+          <div class="tw:flex tw:items-center tw:gap-2 tw:mb-1.5">
+            <%= render Ui::BadgeComponent.new("Kongreso", variant: :primary, size: :small) %>
+            <span class="tw:text-xs tw:text-gray-500">15-22 Julio 2026</span>
+          </div>
+          <h3 class="tw:text-lg tw:font-bold tw:text-gray-900 tw:mb-1">111-a Universala Kongreso</h3>
+          <p class="tw:text-sm tw:text-gray-600">
+            La ĉefa jara aranĝo por esperantistoj, kun prelegoj, kulturaj vesperoj, kaj renkontiĝoj.
+          </p>
+        <% end %>
+        <% c.with_footer do %>
+          <span class="tw:text-xs tw:text-gray-500">📍 Kopenhago, Danio</span>
+          <%= render Ui::ButtonComponent.new("Aliĝi", variant: :success, size: :small) %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-3">Square Aspect Ratio (1:1) Media</h3>
+    <div class="tw:max-w-xs">
+      <%= render Ui::CardComponent.new do |c| %>
+        <% c.with_media(src: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=600&q=80", alt: "Junulara Renkontiĝo", aspect_ratio: :square) %>
+        <% c.with_body do %>
+          <h4 class="tw:text-base tw:font-semibold tw:text-gray-900">Internacia Junulara Festivalo</h4>
+          <p class="tw:text-xs tw:text-gray-600 tw:mt-1">Plej granda printempa renkontiĝo de junaj esperantistoj.</p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

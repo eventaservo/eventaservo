@@ -1,0 +1,45 @@
+<div class="tw:p-6 tw:space-y-6 tw:max-w-4xl">
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-3">Structured Slots with Custom Actions</h3>
+    <div class="tw:max-w-lg">
+      <%= render Ui::CardComponent.new(variant: :default) do |c| %>
+        <% c.with_header do %>
+          <div class="tw:flex tw:items-start tw:justify-between tw:gap-4">
+            <div>
+              <span class="tw:text-xs tw:font-bold tw:text-esperanto-600 tw:tracking-wide tw:uppercase">Loka Grupo</span>
+              <h3 class="tw:text-base tw:font-bold tw:text-gray-900 tw:mt-0.5">San-Paŭla Esperanto-Klubo</h3>
+              <p class="tw:text-xs tw:text-gray-500">San-Paŭlo, Brazilo</p>
+            </div>
+            <%= render Ui::BadgeComponent.new("Aktiva", variant: :success, size: :small) %>
+          </div>
+        <% end %>
+
+        <% c.with_body do %>
+          <div class="tw:space-y-2 tw:text-sm tw:text-gray-700">
+            <p>Kunsidoj ĉiun duan sabaton je la 15:00 en la sidejo de EASP.</p>
+            <div class="tw:flex tw:items-center tw:gap-4 tw:pt-2 tw:text-xs tw:text-gray-500">
+              <span class="tw:flex tw:items-center tw:gap-1">
+                <i class="fas fa-users" aria-hidden="true"></i>
+                42 membroj
+              </span>
+              <span class="tw:flex tw:items-center tw:gap-1">
+                <i class="fas fa-calendar" aria-hidden="true"></i>
+                Venonta: 18 Nov
+              </span>
+            </div>
+          </div>
+        <% end %>
+
+        <% c.with_footer(background: true) do %>
+          <div class="tw:flex tw:items-center tw:justify-between tw:w-full">
+            <a href="#" class="tw:text-xs tw:font-medium tw:text-brand-blue hover:tw:underline">Viziti paĝaron →</a>
+            <div class="tw:flex tw:gap-2">
+              <%= render Ui::ButtonComponent.new("Mesaĝo", variant: :secondary, size: :small) %>
+              <%= render Ui::ButtonComponent.new("Aliĝi", variant: :primary, size: :small) %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

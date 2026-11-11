@@ -1,0 +1,29 @@
+<%# Static Tailwind utility scanner hint: tw:flex-row md:tw:flex-row %>
+<div class="tw:p-6 tw:space-y-6 tw:max-w-4xl">
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-3">Horizontal Card Layout</h3>
+    <div class="tw:max-w-2xl">
+      <%= render Ui::CardComponent.new(orientation: :horizontal) do |c| %>
+        <% c.with_media(src: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=600&q=80", alt: "Konferenco") %>
+        <div class="tw:flex tw:flex-col tw:h-full">
+          <% c.with_header do %>
+            <div class="tw:flex tw:items-center tw:justify-between tw:gap-2">
+              <span class="tw:text-xs tw:font-semibold tw:text-esperanto-600 tw:uppercase tw:tracking-wider">Aranĝo</span>
+              <%= render Ui::BadgeComponent.new("Hibrida", variant: :info, size: :small) %>
+            </div>
+            <h4 class="tw:text-base tw:font-bold tw:text-gray-900 tw:mt-1">Tutmonda Esperanta Junulara Kongreso</h4>
+          <% end %>
+          <% c.with_body do %>
+            <p class="tw:text-sm tw:text-gray-600">
+              IJK estas la plej granda junulara Esperanto-renkontiĝo en la mondo, okazanta ĉiujare en malsama lando.
+            </p>
+          <% end %>
+          <% c.with_footer do %>
+            <span class="tw:text-xs tw:text-gray-500">2-9 Aŭgusto 2026</span>
+            <%= render Ui::ButtonComponent.new("Detaloj", variant: :primary, size: :small) %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

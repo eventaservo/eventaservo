@@ -1,0 +1,31 @@
+<div class="tw:p-6 tw:space-y-6 tw:max-w-4xl">
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-3">Small Size (:small) — Compact</h3>
+    <div class="tw:max-w-md">
+      <%= render Ui::CardComponent.new(
+            title: "Kopenhago Esperanto-Klubo",
+            subtitle: "Danio • 24 membroj",
+            size: :small
+          ) do %>
+        <p class="tw:text-xs tw:text-gray-600">
+          Semajna renkontiĝo de loka klubo en Kopenhago por lingvo-ekzercoj kaj kulturaj babiladoj.
+        </p>
+      <% end %>
+    </div>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-3">Medium Size (:medium) — Standard / Default</h3>
+    <div class="tw:max-w-md">
+      <%= render Ui::CardComponent.new(
+            title: "Kopenhago Esperanto-Klubo",
+            subtitle: "Danio • 24 membroj",
+            size: :medium
+          ) do %>
+        <p class="tw:text-sm tw:text-gray-600">
+          Semajna renkontiĝo de loka klubo en Kopenhago por lingvo-ekzercoj kaj kulturaj babiladoj.
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>
