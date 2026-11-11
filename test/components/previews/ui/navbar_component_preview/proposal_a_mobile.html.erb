@@ -1,0 +1,118 @@
+<div class="tw:py-6 tw:px-4 tw:bg-slate-100 tw:min-h-screen">
+  <div class="tw:max-w-md tw:mx-auto tw:mb-6 tw:text-center">
+    <span class="tw:text-xs tw:font-bold tw:uppercase tw:tracking-wider tw:text-esperanto-700 tw:bg-esperanto-100 tw:px-2.5 tw:py-1 tw:rounded-full">Proposta A • Celular (375px)</span>
+    <h2 class="tw:text-lg tw:font-bold tw:text-gray-900 tw:mt-2">Foco em Ações Claras (GitHub / Eventbrite)</h2>
+    <p class="tw:text-xs tw:text-gray-600 tw:mt-1">
+      Visualização compacta fechada e menu expandido com botão destacado para adicionar eventos.
+    </p>
+  </div>
+
+  <div class="tw:flex tw:flex-wrap tw:justify-center tw:gap-8">
+    <!-- Estado 1: Barra Fechada (Padrão) -->
+    <div class="tw:w-[375px] tw:border-[8px] tw:border-gray-800 tw:rounded-[36px] tw:overflow-hidden tw:shadow-2xl tw:bg-white tw:flex tw:flex-col" style="height: 640px;">
+      <!-- Status bar -->
+      <div class="tw:bg-esperanto-500 tw:text-white tw:text-[11px] tw:font-semibold tw:px-6 tw:pt-3 tw:pb-1 tw:flex tw:justify-between tw:items-center">
+        <span>9:41</span>
+        <div class="tw:flex tw:items-center tw:gap-1.5">
+          <i class="fas fa-signal tw:text-[10px]" aria-hidden="true"></i>
+          <i class="fas fa-wifi tw:text-[10px]" aria-hidden="true"></i>
+          <i class="fas fa-battery-full tw:text-xs" aria-hidden="true"></i>
+        </div>
+      </div>
+
+      <!-- Navbar Fechada -->
+      <nav class="tw:bg-esperanto-500 tw:text-white tw:px-3 tw:py-1.5 tw:shadow-sm">
+        <div class="tw:flex tw:items-center tw:justify-between tw:min-h-[44px] tw:gap-2">
+          <a href="#" class="tw:font-bold tw:text-base tw:text-white tw:tracking-tight tw:no-underline tw:shrink-0">Eventa Servo</a>
+          
+          <div class="tw:w-36 tw:relative">
+            <i class="fas fa-search tw:absolute tw:left-2.5 tw:top-2.5 tw:text-[11px] tw:text-white/70" aria-hidden="true"></i>
+            <input type="search" placeholder="Serĉi..." class="tw:w-full tw:pl-7 tw:pr-2 tw:py-1 tw:text-xs tw:rounded-md tw:bg-white/20 tw:text-white tw:placeholder-white/70 tw:border tw:border-white/25 focus:tw:outline-none">
+          </div>
+
+          <button type="button" class="tw:inline-flex tw:items-center tw:justify-center tw:w-8 tw:h-8 tw:rounded-md tw:bg-transparent tw:border tw:border-white/20 tw:text-white/80">
+            <i class="fas fa-bars tw:text-sm" aria-hidden="true"></i>
+          </button>
+        </div>
+      </nav>
+
+      <!-- Conteúdo simulado da página -->
+      <div class="tw:p-4 tw:space-y-3 tw:bg-gray-50 tw:flex-1 tw:overflow-y-auto">
+        <div class="tw:p-3 tw:bg-white tw:rounded-lg tw:border tw:border-gray-200 tw:shadow-xs">
+          <span class="tw:text-[10px] tw:font-bold tw:text-esperanto-700 tw:uppercase">Venonta Evento</span>
+          <h4 class="tw:text-sm tw:font-bold tw:text-gray-900 tw:mt-0.5">Kopenhaga Babilado</h4>
+          <p class="tw:text-xs tw:text-gray-500 tw:mt-1">Hodiaŭ je 19:00 • Enreta</p>
+        </div>
+        <div class="tw:p-3 tw:bg-white tw:rounded-lg tw:border tw:border-gray-200 tw:shadow-xs">
+          <span class="tw:text-[10px] tw:font-bold tw:text-brand-blue tw:uppercase">Kongreso</span>
+          <h4 class="tw:text-sm tw:font-bold tw:text-gray-900 tw:mt-0.5">111-a Universala Kongreso</h4>
+          <p class="tw:text-xs tw:text-gray-500 tw:mt-1">15-22 Julio 2026 • Danio</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Estado 2: Menu Aberto no Celular -->
+    <div class="tw:w-[375px] tw:border-[8px] tw:border-gray-800 tw:rounded-[36px] tw:overflow-hidden tw:shadow-2xl tw:bg-white tw:flex tw:flex-col" style="height: 640px;">
+      <!-- Status bar -->
+      <div class="tw:bg-esperanto-600 tw:text-white tw:text-[11px] tw:font-semibold tw:px-6 tw:pt-3 tw:pb-1 tw:flex tw:justify-between tw:items-center">
+        <span>9:41</span>
+        <div class="tw:flex tw:items-center tw:gap-1.5">
+          <i class="fas fa-signal tw:text-[10px]" aria-hidden="true"></i>
+          <i class="fas fa-wifi tw:text-[10px]" aria-hidden="true"></i>
+          <i class="fas fa-battery-full tw:text-xs" aria-hidden="true"></i>
+        </div>
+      </div>
+
+      <!-- Topo com botão fechar -->
+      <div class="tw:bg-esperanto-600 tw:text-white tw:px-3 tw:py-2 tw:flex tw:items-center tw:justify-between">
+        <span class="tw:font-bold tw:text-base">Eventa Servo</span>
+        <button type="button" class="tw:w-8 tw:h-8 tw:rounded-md tw:bg-transparent tw:border tw:border-white/20 tw:text-white/80 tw:flex tw:items-center tw:justify-center">
+          <i class="fas fa-times tw:text-sm" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- Menu gaveta aberto -->
+      <div class="tw:bg-esperanto-600 tw:text-white tw:px-4 tw:pb-6 tw:pt-2 tw:space-y-4 tw:flex-1 tw:flex tw:flex-col">
+        <!-- Ação primária em destaque -->
+        <a href="#" class="tw:w-full tw:py-2.5 tw:px-4 tw:rounded-lg tw:bg-white tw:text-esperanto-700 tw:font-bold tw:text-sm tw:flex tw:items-center tw:justify-center tw:gap-2 tw:shadow-sm tw:no-underline">
+          <i class="fas fa-plus-circle" aria-hidden="true"></i>
+          Aldoni novan eventon
+        </a>
+
+        <!-- Links de navegação -->
+        <div class="tw:space-y-1 tw:border-t tw:border-white/15 tw:pt-3">
+          <a href="#" class="tw:flex tw:items-center tw:gap-3 tw:px-3 tw:py-2 tw:rounded-md tw:text-sm tw:font-medium tw:text-white tw:bg-white/10 tw:no-underline">
+            <i class="fas fa-calendar tw:w-5 tw:text-center" aria-hidden="true"></i>
+            Eventoj & Kalendaro
+          </a>
+          <a href="#" class="tw:flex tw:items-center tw:gap-3 tw:px-3 tw:py-2 tw:rounded-md tw:text-sm tw:font-medium tw:text-white/90 hover:tw:bg-white/10 tw:no-underline">
+            <i class="fas fa-building tw:w-5 tw:text-center" aria-hidden="true"></i>
+            Organizaĵoj
+          </a>
+          <a href="#" class="tw:flex tw:items-center tw:gap-3 tw:px-3 tw:py-2 tw:rounded-md tw:text-sm tw:font-medium tw:text-white/90 hover:tw:bg-white/10 tw:no-underline">
+            <i class="fas fa-map-marker-alt tw:w-5 tw:text-center" aria-hidden="true"></i>
+            Vidi sur mapo
+          </a>
+          <a href="#" class="tw:flex tw:items-center tw:gap-3 tw:px-3 tw:py-2 tw:rounded-md tw:text-sm tw:font-medium tw:text-white/90 hover:tw:bg-white/10 tw:no-underline">
+            <i class="fas fa-globe tw:w-5 tw:text-center" aria-hidden="true"></i>
+            Lingvo: Esperanto (Ŝanĝi)
+          </a>
+        </div>
+
+        <!-- Perfil do Usuário na base -->
+        <div class="tw:mt-auto tw:border-t tw:border-white/15 tw:pt-4 tw:flex tw:items-center tw:justify-between">
+          <div class="tw:flex tw:items-center tw:gap-2.5">
+            <div class="tw:w-8 tw:h-8 tw:rounded-full tw:bg-white tw:text-esperanto-700 tw:flex tw:items-center tw:justify-center tw:font-bold tw:text-xs">
+              FS
+            </div>
+            <div>
+              <p class="tw:text-xs tw:font-bold tw:text-white tw:m-0">Fernando</p>
+              <p class="tw:text-[10px] tw:text-white/70 tw:m-0">shayani@gmail.com</p>
+            </div>
+          </div>
+          <a href="#" class="tw:text-xs tw:text-white/80 hover:tw:text-white tw:no-underline">Elsaluti</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="tw:space-y-6">
+  <div class="tw:p-4 tw:bg-gray-100 tw:rounded-lg tw:mb-4">
+    <h3 class="tw:text-sm tw:font-bold tw:text-gray-900 tw:mb-1">Proposta C: Cápsula Unificada (Inspirada no Airbnb e Notion)</h3>
+    <p class="tw:text-xs tw:text-gray-600">
+      Consolida a navegação e a identidade do usuário em uma cápsula de perfil (estilo pill do Airbnb com ícone de menu + avatar lado a lado). Extremamente familiar para usuários modernos, limpa e economiza espaço horizontal.
+    </p>
+  </div>
+
+  <%= render Ui::NavbarComponent.new do |nav| %>
+    <% nav.with_brand(title: "Eventa Servo") %>
+    <% nav.with_search(placeholder: "Serĉu eventojn, urbojn, landojn...") %>
+
+    <% nav.with_item("Aldoni eventon", href: "/events/new", icon: "calendar-plus") %>
+    <% nav.with_item("Organizaĵoj", href: "/organizations", icon: "building") %>
+
+    <% nav.with_tool(icon: "map-marker-alt", href: "/?vidmaniero=mapo", label: "Vidi sur mapo") %>
+    <% nav.with_tool(icon: "globe", href: "#", label: "Lingvo: Esperanto") %>
+
+    <% nav.with_user_menu do %>
+      <div class="tw:flex tw:items-center tw:gap-2 tw:bg-white/10 hover:tw:bg-white/20 tw:border tw:border-white/30 tw:py-1 tw:pl-2.5 tw:pr-1.5 tw:rounded-full tw:cursor-pointer tw:transition">
+        <i class="fas fa-bars tw:text-xs tw:text-white/80" aria-hidden="true"></i>
+        <div class="tw:w-6 tw:h-6 tw:rounded-full tw:bg-white tw:text-esperanto-700 tw:flex tw:items-center tw:justify-center tw:text-[11px] tw:font-bold tw:shadow-xs">
+          FS
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

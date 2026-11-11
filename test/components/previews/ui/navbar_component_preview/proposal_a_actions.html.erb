@@ -1,0 +1,34 @@
+<div class="tw:space-y-6">
+  <div class="tw:p-4 tw:bg-gray-100 tw:rounded-lg tw:mb-4">
+    <h3 class="tw:text-sm tw:font-bold tw:text-gray-900 tw:mb-1">Proposta A: Foco em Ações Claras (Inspirada no GitHub e Eventbrite)</h3>
+    <p class="tw:text-xs tw:text-gray-600">
+      Destaca a criação de eventos com um botão dedicado, mantém busca rápida e usa links de texto elegantes. O perfil do usuário é representado por um avatar circular limpo, sem badges ou ruído visual.
+    </p>
+  </div>
+
+  <%= render Ui::NavbarComponent.new do |nav| %>
+    <% nav.with_brand(title: "Eventa Servo") %>
+    <% nav.with_search(placeholder: "Serĉi eventojn, urbojn...") %>
+
+    <% nav.with_item("Eventoj", href: "/events", icon: "calendar") %>
+    <% nav.with_item("Organizaĵoj", href: "/organizations", icon: "building") %>
+
+    <% nav.with_tool(icon: "map-marker-alt", href: "/?vidmaniero=mapo", label: "Vidi sur mapo") %>
+    <% nav.with_tool(icon: "globe", href: "#", label: "Lingvo: Esperanto") %>
+
+    <% nav.with_user_menu do %>
+      <div class="tw:flex tw:items-center tw:gap-3">
+        <%= render Ui::ButtonComponent.new(
+              "+ Aldoni eventon",
+              href: "/events/new",
+              variant: :secondary,
+              size: :small,
+              class: "tw:!bg-white tw:!text-esperanto-700 tw:!border-white hover:tw:!bg-white/90 tw:font-semibold tw:shadow-xs"
+            ) %>
+        <div class="tw:w-7 tw:h-7 tw:rounded-full tw:bg-white/25 tw:flex tw:items-center tw:justify-center tw:text-xs tw:font-bold tw:text-white tw:cursor-pointer hover:tw:ring-2 hover:tw:ring-white/40 tw:transition">
+          FS
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

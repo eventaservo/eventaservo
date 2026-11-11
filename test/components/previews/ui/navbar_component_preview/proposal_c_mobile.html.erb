@@ -1,0 +1,126 @@
+<div class="tw:py-6 tw:px-4 tw:bg-slate-100 tw:min-h-screen">
+  <div class="tw:max-w-md tw:mx-auto tw:mb-6 tw:text-center">
+    <span class="tw:text-xs tw:font-bold tw:uppercase tw:tracking-wider tw:text-blue-700 tw:bg-blue-100 tw:px-2.5 tw:py-1 tw:rounded-full">Proposta C • Celular (375px)</span>
+    <h2 class="tw:text-lg tw:font-bold tw:text-gray-900 tw:mt-2">Cápsula Unificada (Airbnb / Notion)</h2>
+    <p class="tw:text-xs tw:text-gray-600 tw:mt-1">
+      O botão de menu e o perfil do usuário ficam consolidados em uma única pílula compacta. Ao tocar, abre um menu moderno de ações e conta.
+    </p>
+  </div>
+
+  <div class="tw:flex tw:flex-wrap tw:justify-center tw:gap-8">
+    <!-- Estado 1: Barra Fechada com Cápsula Airbnb -->
+    <div class="tw:w-[375px] tw:border-[8px] tw:border-gray-800 tw:rounded-[36px] tw:overflow-hidden tw:shadow-2xl tw:bg-white tw:flex tw:flex-col" style="height: 640px;">
+      <!-- Status bar -->
+      <div class="tw:bg-esperanto-500 tw:text-white tw:text-[11px] tw:font-semibold tw:px-6 tw:pt-3 tw:pb-1 tw:flex tw:justify-between tw:items-center">
+        <span>9:41</span>
+        <div class="tw:flex tw:items-center tw:gap-1.5">
+          <i class="fas fa-signal tw:text-[10px]" aria-hidden="true"></i>
+          <i class="fas fa-wifi tw:text-[10px]" aria-hidden="true"></i>
+          <i class="fas fa-battery-full tw:text-xs" aria-hidden="true"></i>
+        </div>
+      </div>
+
+      <!-- Navbar com Cápsula Airbnb -->
+      <nav class="tw:bg-esperanto-500 tw:text-white tw:px-3 tw:py-1.5 tw:shadow-sm">
+        <div class="tw:flex tw:items-center tw:justify-between tw:min-h-[44px] tw:gap-2">
+          <a href="#" class="tw:font-bold tw:text-base tw:text-white tw:tracking-tight tw:no-underline tw:shrink-0">Eventa Servo</a>
+
+          <!-- Busca compacta -->
+          <div class="tw:w-32 tw:relative">
+            <i class="fas fa-search tw:absolute tw:left-2.5 tw:top-2.5 tw:text-[10px] tw:text-white/70" aria-hidden="true"></i>
+            <input type="search" placeholder="Serĉi..." class="tw:w-full tw:pl-6 tw:pr-2 tw:py-1 tw:text-xs tw:rounded-md tw:bg-white/20 tw:text-white tw:placeholder-white/70 tw:border tw:border-white/25 focus:tw:outline-none">
+          </div>
+
+          <!-- Cápsula estilo Airbnb unificando menu + usuário -->
+          <div class="tw:flex tw:items-center tw:gap-1.5 tw:bg-white/15 hover:tw:bg-white/25 tw:border tw:border-white/30 tw:py-1 tw:pl-2.5 tw:pr-1 tw:rounded-full tw:cursor-pointer tw:transition tw:shadow-xs">
+            <i class="fas fa-bars tw:text-xs tw:text-white/90" aria-hidden="true"></i>
+            <div class="tw:w-6 tw:h-6 tw:rounded-full tw:bg-white tw:text-esperanto-700 tw:flex tw:items-center tw:justify-center tw:text-[11px] tw:font-bold">
+              FS
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Conteúdo simulado -->
+      <div class="tw:p-4 tw:space-y-3 tw:bg-gray-50 tw:flex-1 tw:overflow-y-auto">
+        <div class="tw:p-3 tw:bg-white tw:rounded-lg tw:border tw:border-gray-200 tw:shadow-xs">
+          <span class="tw:text-[10px] tw:font-bold tw:text-esperanto-700 tw:uppercase">Venonta Evento</span>
+          <h4 class="tw:text-sm tw:font-bold tw:text-gray-900 tw:mt-0.5">Kopenhaga Babilado</h4>
+          <p class="tw:text-xs tw:text-gray-500 tw:mt-1">Hodiaŭ je 19:00 • Enreta</p>
+        </div>
+        <div class="tw:p-3 tw:bg-white tw:rounded-lg tw:border tw:border-gray-200 tw:shadow-xs">
+          <span class="tw:text-[10px] tw:font-bold tw:text-brand-blue tw:uppercase">Kongreso</span>
+          <h4 class="tw:text-sm tw:font-bold tw:text-gray-900 tw:mt-0.5">111-a Universala Kongreso</h4>
+          <p class="tw:text-xs tw:text-gray-500 tw:mt-1">15-22 Julio 2026 • Danio</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Estado 2: Menu da Cápsula Aberto (Painel / Bottom Sheet) -->
+    <div class="tw:w-[375px] tw:border-[8px] tw:border-gray-800 tw:rounded-[36px] tw:overflow-hidden tw:shadow-2xl tw:bg-white tw:flex tw:flex-col" style="height: 640px;">
+      <!-- Status bar -->
+      <div class="tw:bg-gray-800 tw:text-white tw:text-[11px] tw:font-semibold tw:px-6 tw:pt-3 tw:pb-1 tw:flex tw:justify-between tw:items-center">
+        <span>9:41</span>
+        <div class="tw:flex tw:items-center tw:gap-1.5">
+          <i class="fas fa-signal tw:text-[10px]" aria-hidden="true"></i>
+          <i class="fas fa-wifi tw:text-[10px]" aria-hidden="true"></i>
+          <i class="fas fa-battery-full tw:text-xs" aria-hidden="true"></i>
+        </div>
+      </div>
+
+      <!-- Fundo escurecido simulado com gaveta modal -->
+      <div class="tw:flex-1 tw:bg-black/40 tw:flex tw:flex-col tw:justify-end">
+        <!-- Bottom Sheet Modal da Cápsula -->
+        <div class="tw:bg-white tw:rounded-t-2xl tw:p-5 tw:space-y-4 tw:shadow-2xl">
+          <!-- Alça de arrastar da gaveta -->
+          <div class="tw:w-10 tw:h-1 tw:bg-gray-300 tw:rounded-full tw:mx-auto tw:mb-2"></div>
+
+          <!-- Header da conta -->
+          <div class="tw:flex tw:items-center tw:justify-between tw:border-b tw:border-gray-100 tw:pb-3">
+            <div class="tw:flex tw:items-center tw:gap-3">
+              <div class="tw:w-10 tw:h-10 tw:rounded-full tw:bg-esperanto-100 tw:text-esperanto-700 tw:flex tw:items-center tw:justify-center tw:font-bold tw:text-sm">
+                FS
+              </div>
+              <div>
+                <h4 class="tw:text-sm tw:font-bold tw:text-gray-900 tw:m-0">Fernando</h4>
+                <p class="tw:text-xs tw:text-gray-500 tw:m-0">Konto & Agordoj</p>
+              </div>
+            </div>
+            <button type="button" class="tw:w-8 tw:h-8 tw:rounded-full tw:bg-gray-100 tw:flex tw:items-center tw:justify-center tw:text-gray-500">
+              <i class="fas fa-times tw:text-xs" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <!-- Ações principais -->
+          <div class="tw:space-y-1">
+            <a href="#" class="tw:flex tw:items-center tw:gap-3 tw:p-2.5 tw:rounded-lg tw:text-sm tw:font-semibold tw:text-esperanto-700 tw:bg-esperanto-50 tw:no-underline">
+              <i class="fas fa-plus-circle tw:w-5 tw:text-center" aria-hidden="true"></i>
+              Aldoni novan eventon
+            </a>
+            <a href="#" class="tw:flex tw:items-center tw:gap-3 tw:p-2.5 tw:rounded-lg tw:text-sm tw:text-gray-700 hover:tw:bg-gray-50 tw:no-underline">
+              <i class="fas fa-calendar tw:w-5 tw:text-center tw:text-gray-400" aria-hidden="true"></i>
+              Miaj eventoj
+            </a>
+            <a href="#" class="tw:flex tw:items-center tw:gap-3 tw:p-2.5 tw:rounded-lg tw:text-sm tw:text-gray-700 hover:tw:bg-gray-50 tw:no-underline">
+              <i class="fas fa-building tw:w-5 tw:text-center tw:text-gray-400" aria-hidden="true"></i>
+              Organizaĵoj
+            </a>
+            <a href="#" class="tw:flex tw:items-center tw:gap-3 tw:p-2.5 tw:rounded-lg tw:text-sm tw:text-gray-700 hover:tw:bg-gray-50 tw:no-underline">
+              <i class="fas fa-map-marker-alt tw:w-5 tw:text-center tw:text-gray-400" aria-hidden="true"></i>
+              Vidi sur mapo
+            </a>
+          </div>
+
+          <!-- Rodapé do menu -->
+          <div class="tw:border-t tw:border-gray-100 tw:pt-3 tw:flex tw:items-center tw:justify-between tw:text-xs tw:text-gray-500">
+            <div class="tw:flex tw:items-center tw:gap-1.5 tw:cursor-pointer hover:tw:text-gray-900">
+              <i class="fas fa-globe" aria-hidden="true"></i>
+              <span>Esperanto (eo)</span>
+            </div>
+            <a href="#" class="tw:text-red-600 hover:tw:underline tw:font-medium tw:no-underline">Elsaluti</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

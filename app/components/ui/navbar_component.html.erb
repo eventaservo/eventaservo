@@ -1,0 +1,57 @@
+<header class="tw:w-full">
+  <nav class="<%= bar_classes %>" <%= tag.attributes(bar_attributes) %>>
+    <div class="tw:w-full tw:px-3 sm:tw:px-4">
+      <div class="tw:flex tw:items-center tw:justify-between tw:min-h-[48px] tw:py-1.5 tw:gap-3">
+        <div class="tw:flex tw:items-center tw:gap-3 sm:tw:gap-4 tw:min-w-0 tw:flex-shrink-1">
+          <% if brand? %>
+            <%= brand %>
+          <% end %>
+
+          <% if search? %>
+            <div class="tw:w-36 sm:tw:w-56 md:tw:w-64 tw:min-w-0">
+              <%= search %>
+            </div>
+          <% end %>
+        </div>
+
+        <% if items.any? %>
+          <div class="tw:hidden lg:tw:flex tw:items-center tw:gap-1">
+            <% items.each do |item| %>
+              <%= item %>
+            <% end %>
+          </div>
+        <% end %>
+
+        <div class="tw:flex tw:items-center tw:gap-1.5 sm:tw:gap-2 tw:shrink-0">
+          <% if action? %>
+            <div class="tw:hidden sm:tw:flex tw:items-center">
+              <%= action %>
+            </div>
+          <% end %>
+
+          <% if tools.any? %>
+            <div class="tw:hidden md:tw:flex tw:items-center tw:gap-1">
+              <% tools.each do |tool| %>
+                <%= tool %>
+              <% end %>
+            </div>
+          <% end %>
+
+          <% if user_menu? %>
+            <div class="tw:flex tw:items-center">
+              <%= user_menu %>
+            </div>
+          <% end %>
+
+          <button
+            type="button"
+            class="tw:inline-flex lg:tw:hidden tw:items-center tw:justify-center tw:px-2.5 tw:py-1.5 tw:rounded-md tw:bg-transparent tw:border tw:border-white/20 tw:text-white/75 hover:tw:text-white hover:tw:border-white/40 hover:tw:bg-white/10 focus:tw:outline-none focus:tw:ring-2 focus:tw:ring-white/30"
+            aria-label="Navigado"
+          >
+            <i class="fas fa-bars tw:text-base" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
