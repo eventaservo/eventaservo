@@ -1,0 +1,23 @@
+<div class="tw:p-6 tw:max-w-md tw:space-y-6">
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Small (:small) — Compacto</h3>
+    <%= render Ui::SelectComponent.new(
+      :filter_country,
+      label: "Filtri laŭ lando",
+      size: :small,
+      include_blank: "Ĉiuj landoj",
+      options: ["Brazilo", "Danio", "Francio", "Germanio", "Pollando"]
+    ) %>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Medium (:medium) — Padrão</h3>
+    <%= render Ui::SelectComponent.new(
+      :city_id,
+      label: "Urbo",
+      size: :medium,
+      include_blank: "Elektu urbon...",
+      options: ["Berlino", "Parizo", "Varsovio", "Kopenhago"]
+    ) %>
+  </div>
+</div>

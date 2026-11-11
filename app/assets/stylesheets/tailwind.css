@@ -29,3 +29,36 @@
   --color-brand-red-hover: #8a1535;
   --color-brand-info: #17a2b8;
 }
+
+@utility custom-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  cursor: pointer;
+  vertical-align: top;
+  flex-shrink: 0;
+
+  &:checked {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+  }
+
+  &:focus-visible {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    border-color: #86b7fe;
+  }
+
+  &:disabled {
+    pointer-events: none;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+    opacity: 0.7;
+  }
+}

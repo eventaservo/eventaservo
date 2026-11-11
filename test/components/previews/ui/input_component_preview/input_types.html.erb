@@ -1,0 +1,31 @@
+<div class="tw:p-6 tw:max-w-md tw:space-y-4">
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Teksto (Text)</h3>
+    <%= render Ui::InputComponent.new(:title, label: "Titolo de la evento", placeholder: "Ekz: Internacia Kongreso de Esperanto") %>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Retpoŝto (Email)</h3>
+    <%= render Ui::InputComponent.new(:email, type: :email, label: "Retpoŝto", placeholder: "vi@esperanto.org", icon: "envelope") %>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Pasvorto (Password)</h3>
+    <%= render Ui::InputComponent.new(:password, type: :password, label: "Pasvorto", placeholder: "••••••••", icon: "lock") %>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Dato (Date)</h3>
+    <%= render Ui::InputComponent.new(:date, type: :date, label: "Komenca dato", value: "2026-11-10") %>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Nombro (Number)</h3>
+    <%= render Ui::InputComponent.new(:capacity, type: :number, label: "Maksimuma nombro de partoprenantoj", value: 50, min: 1, max: 1000) %>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Serĉo (Search)</h3>
+    <%= render Ui::InputComponent.new(:q, type: :search, placeholder: "Serĉi...", icon: "search") %>
+  </div>
+</div>

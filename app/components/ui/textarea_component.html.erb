@@ -1,0 +1,25 @@
+<div class="<%= wrapper_classes %>">
+  <% if label? %>
+    <label for="<%= textarea_id %>" class="<%= label_classes %>">
+      <%= label %>
+      <% if required %>
+        <span class="tw:text-red-500 tw:ml-0.5" aria-hidden="true">*</span>
+      <% end %>
+    </label>
+  <% end %>
+
+  <div class="tw:relative tw:w-full">
+    <textarea <%= tag.attributes(textarea_tag_attributes) %>><%= content? ? content : value %></textarea>
+  </div>
+
+  <% if error? %>
+    <p id="<%= error_id %>" class="tw:mt-1 tw:text-xs tw:text-red-600 tw:flex tw:items-center tw:gap-1">
+      <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
+      <%= error %>
+    </p>
+  <% elsif hint? %>
+    <p id="<%= hint_id %>" class="tw:mt-1 tw:text-xs tw:text-gray-500">
+      <%= hint %>
+    </p>
+  <% end %>
+</div>

@@ -1,0 +1,23 @@
+<div class="tw:p-6 tw:max-w-md tw:space-y-6">
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Small (:small) — Compacto</h3>
+    <%= render Ui::TextareaComponent.new(
+      :internal_comment,
+      label: "Mallonga Rimarko",
+      placeholder: "Rapida noto...",
+      rows: 2,
+      size: :small
+    ) %>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Medium (:medium) — Padrão</h3>
+    <%= render Ui::TextareaComponent.new(
+      :short_bio,
+      label: "Mallonga Biografio",
+      placeholder: "Rakontu kelkajn vortojn pri vi mem...",
+      rows: 3,
+      size: :medium
+    ) %>
+  </div>
+</div>
