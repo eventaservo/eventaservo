@@ -1,0 +1,34 @@
+<div class="<%= wrapper_classes %>">
+  <% if label? %>
+    <label for="<%= select_id %>" class="<%= label_classes %>">
+      <%= label %>
+      <% if required %>
+        <span class="tw:text-red-500 tw:ml-0.5" aria-hidden="true">*</span>
+      <% end %>
+    </label>
+  <% end %>
+
+  <div class="tw:relative tw:w-full">
+    <select <%= tag.attributes(select_tag_attributes) %>>
+      <% formatted_options.each do |option_label, option_value| %>
+        <option value="<%= option_value %>" <%= "selected" if selected.to_s == option_value.to_s %>><%= option_label %></option>
+      <% end %>
+      <%= content if content? %>
+    </select>
+
+    <div class="<%= chevron_wrapper_classes %>">
+      <i class="<%= chevron_icon_classes %>" aria-hidden="true"></i>
+    </div>
+  </div>
+
+  <% if error? %>
+    <p id="<%= error_id %>" class="tw:mt-1 tw:text-xs tw:text-red-600 tw:flex tw:items-center tw:gap-1">
+      <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
+      <%= error %>
+    </p>
+  <% elsif hint? %>
+    <p id="<%= hint_id %>" class="tw:mt-1 tw:text-xs tw:text-gray-500">
+      <%= hint %>
+    </p>
+  <% end %>
+</div>

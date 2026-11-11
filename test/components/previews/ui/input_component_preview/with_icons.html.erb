@@ -1,0 +1,42 @@
+<div class="tw:p-6 tw:max-w-md tw:space-y-4">
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Ícone no Início (Leading Icon)</h3>
+    <%= render Ui::InputComponent.new(
+      :search,
+      label: "Serĉi",
+      placeholder: "Serĉi eventojn...",
+      icon: "search",
+      icon_position: :leading
+    ) %>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Ícone no Fim (Trailing Icon)</h3>
+    <%= render Ui::InputComponent.new(
+      :calendar,
+      type: :date,
+      label: "Komenca Dato",
+      icon: "calendar-alt",
+      icon_position: :trailing
+    ) %>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Com Ícone de Usuário e Senha</h3>
+    <div class="tw:space-y-3">
+      <%= render Ui::InputComponent.new(
+        :user,
+        label: "Uzantnomo",
+        placeholder: "via_nomo",
+        icon: "user"
+      ) %>
+      <%= render Ui::InputComponent.new(
+        :password,
+        type: :password,
+        label: "Pasvorto",
+        placeholder: "••••••••",
+        icon: "lock"
+      ) %>
+    </div>
+  </div>
+</div>

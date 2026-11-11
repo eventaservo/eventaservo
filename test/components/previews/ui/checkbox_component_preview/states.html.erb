@@ -1,0 +1,46 @@
+<div class="tw:p-6 tw:max-w-md tw:space-y-4">
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Nekontrolita (Unchecked)</h3>
+    <%= render Ui::CheckboxComponent.new(
+      :subscribe,
+      label: "Aboni monatan bultenon",
+      checked: false
+    ) %>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Kontrolita (Checked)</h3>
+    <%= render Ui::CheckboxComponent.new(
+      :active,
+      label: "Evento estas aktiva kaj publika",
+      checked: true
+    ) %>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Kun Eraro (With Error)</h3>
+    <%= render Ui::CheckboxComponent.new(
+      :required_terms,
+      label: "Mi konfirmas mian aĝon super 18 jaroj",
+      error: "Vi devas konfirmi ĉi tiun punkton por daŭrigi."
+    ) %>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Desabilitado (Disabled)</h3>
+    <div class="tw:space-y-2">
+      <%= render Ui::CheckboxComponent.new(
+        :disabled_unchecked,
+        label: "Nehavebla opcio",
+        disabled: true,
+        hint: "Ĉi tiu funkcio estas malŝaltita de administranto."
+      ) %>
+      <%= render Ui::CheckboxComponent.new(
+        :disabled_checked,
+        label: "Deviga sistema agordo",
+        checked: true,
+        disabled: true
+      ) %>
+    </div>
+  </div>
+</div>

@@ -36,6 +36,14 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     fill_in "user_password", with: "administranto" # Assuming this is the password for the factory user
     click_on "Ensaluti"
 
-    assert_text "Sukcesa ensaluto"
+    retries = 0
+    begin
+      assert_text "Sukcesa ensaluto"
+    rescue Selenium::WebDriver::Error::UnknownError => e
+      raise unless e.message.include?("Node with given id does not belong to the document") && (retries += 1) <= 5
+
+      sleep 0.1
+      retry
+    end
   end
 end

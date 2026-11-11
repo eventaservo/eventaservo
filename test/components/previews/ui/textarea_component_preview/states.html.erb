@@ -1,0 +1,32 @@
+<div class="tw:p-6 tw:max-w-md tw:space-y-4">
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Padrão / Normal</h3>
+    <%= render Ui::TextareaComponent.new(
+      :notes,
+      label: "Notoj",
+      placeholder: "Aldonaj notoj por partoprenantoj...",
+      hint: "Maksimumo 500 signoj."
+    ) %>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Com Erro de Validação</h3>
+    <%= render Ui::TextareaComponent.new(
+      :description_error,
+      label: "Priskribo",
+      value: "Tro mallonga",
+      error: "La priskribo devas enhavi minimume 50 signojn."
+    ) %>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Desabilitado (Disabled)</h3>
+    <%= render Ui::TextareaComponent.new(
+      :terms,
+      label: "Reguloj kaj Kondiĉoj",
+      value: "1. Ĉiuj partoprenantoj devas respekti la kondutkodon.\n2. Malpermesita estas ĉia diskriminacio.",
+      disabled: true,
+      rows: 3
+    ) %>
+  </div>
+</div>

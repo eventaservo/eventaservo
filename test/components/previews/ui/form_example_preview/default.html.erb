@@ -1,0 +1,117 @@
+<div class="tw:p-6 tw:max-w-xl tw:mx-auto tw:bg-white tw:border tw:border-gray-200 tw:rounded-lg tw:shadow-sm">
+  <div class="tw:border-b tw:border-gray-200 tw:pb-4 tw:mb-6">
+    <h2 class="tw:text-xl tw:font-bold tw:text-gray-900">Krei Novan Eventon</h2>
+    <p class="tw:text-sm tw:text-gray-500 tw:mt-1">Plenigu la formularon sube por anonci vian eventon en Eventa Servo.</p>
+  </div>
+
+  <form class="tw:space-y-5" onsubmit="event.preventDefault();">
+    <div>
+      <%= render Ui::InputComponent.new(
+        :event_title,
+        label: "Titolo de la evento",
+        placeholder: "Ekz: 110-a Universala Kongreso de Esperanto",
+        required: true,
+        hint: "Klara kaj rekonebla nomo por la evento."
+      ) %>
+    </div>
+
+    <div class="tw:grid tw:grid-cols-1 md:tw:grid-cols-2 tw:gap-4">
+      <div>
+        <%= render Ui::InputComponent.new(
+          :date_start,
+          type: :date,
+          label: "Komenca dato",
+          value: "2026-11-15",
+          required: true,
+          icon: "calendar-alt",
+          icon_position: :trailing
+        ) %>
+      </div>
+
+      <div>
+        <%= render Ui::InputComponent.new(
+          :date_end,
+          type: :date,
+          label: "Fina dato",
+          value: "2026-11-22",
+          required: true,
+          icon: "calendar-alt",
+          icon_position: :trailing
+        ) %>
+      </div>
+    </div>
+
+    <div class="tw:grid tw:grid-cols-1 md:tw:grid-cols-2 tw:gap-4">
+      <div>
+        <%= render Ui::SelectComponent.new(
+          :category,
+          label: "Kategorio",
+          include_blank: "Elektu kategorion...",
+          options: ["Kongreso", "Seminario", "Renkontiĝo", "Kurso", "Prelego", "Kultura"],
+          selected: "Kongreso",
+          required: true
+        ) %>
+      </div>
+
+      <div>
+        <%= render Ui::SelectComponent.new(
+          :country,
+          label: "Lando",
+          include_blank: "Elektu landon...",
+          options: ["Brazilo", "Danio", "Francio", "Germanio", "Pollando", "Japanio"],
+          selected: "Danio",
+          required: true
+        ) %>
+      </div>
+    </div>
+
+    <div>
+      <%= render Ui::InputComponent.new(
+        :city,
+        label: "Urbo",
+        placeholder: "Kopenhago",
+        icon: "map-marker-alt"
+      ) %>
+    </div>
+
+    <div>
+      <%= render Ui::TextareaComponent.new(
+        :description,
+        label: "Priskribo de la evento",
+        placeholder: "Priskribu la programon, temon, gastigantojn kaj gravajn informojn por la aliĝantoj...",
+        rows: 4,
+        hint: "Maksimumo 2 000 signoj."
+      ) %>
+    </div>
+
+    <div class="tw:space-y-3 tw:pt-2 tw:border-t tw:border-gray-100">
+      <%= render Ui::CheckboxComponent.new(
+        :international,
+        label: "Internacia evento",
+        hint: "Ĉi tiu evento bonvenigas internaciajn partoprenantojn el aliaj landoj.",
+        checked: true
+      ) %>
+
+      <%= render Ui::CheckboxComponent.new(
+        :online,
+        label: "Reta evento (virtuala)",
+        hint: "Partopreno eblas per Zoom, Teams aŭ simila platformo."
+      ) %>
+    </div>
+
+    <div class="tw:pt-4 tw:border-t tw:border-gray-200 tw:flex tw:items-center tw:justify-end tw:gap-3">
+      <%= render Ui::ButtonComponent.new(
+        "Nuligi",
+        variant: :light,
+        type: :button
+      ) %>
+
+      <%= render Ui::ButtonComponent.new(
+        "Konservi Eventon",
+        variant: :primary,
+        icon: "check",
+        type: :submit
+      ) %>
+    </div>
+  </form>
+</div>

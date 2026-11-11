@@ -1,0 +1,25 @@
+<div class="tw:p-6 tw:max-w-md tw:space-y-6">
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Small (:small) — Compacto (py-1 px-2.5 text-xs)</h3>
+    <p class="tw:text-xs tw:text-gray-400 tw:mb-3">Para barras de filtros, tabelas administrativas ou formulários densos.</p>
+    <%= render Ui::InputComponent.new(
+      :filter_title,
+      label: "Filtri laŭ titolo",
+      placeholder: "Serĉi...",
+      size: :small,
+      icon: "search"
+    ) %>
+  </div>
+
+  <div>
+    <h3 class="tw:text-sm tw:font-semibold tw:text-gray-500 tw:uppercase tw:tracking-wider tw:mb-2">Medium (:medium) — Padrão do sistema (py-1.5 px-3 text-sm)</h3>
+    <p class="tw:text-xs tw:text-gray-400 tw:mb-3">Tamanho padrão compacto e harmonioso para os formulários do sistema.</p>
+    <%= render Ui::InputComponent.new(
+      :username,
+      label: "Uzantnomo",
+      placeholder: "zamenhof",
+      size: :medium,
+      hint: "Nur literoj kaj ciferoj sen spacoj."
+    ) %>
+  </div>
+</div>

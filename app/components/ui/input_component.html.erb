@@ -1,0 +1,37 @@
+<div class="<%= wrapper_classes %>">
+  <% if label? %>
+    <label for="<%= input_id %>" class="<%= label_classes %>">
+      <%= label %>
+      <% if required %>
+        <span class="tw:text-red-500 tw:ml-0.5" aria-hidden="true">*</span>
+      <% end %>
+    </label>
+  <% end %>
+
+  <div class="tw:relative tw:w-full">
+    <% if leading_icon? %>
+      <div class="<%= leading_icon_wrapper_classes %>">
+        <%= render_icon %>
+      </div>
+    <% end %>
+
+    <%= tag.input(**input_tag_attributes) %>
+
+    <% if trailing_icon? %>
+      <div class="<%= trailing_icon_wrapper_classes %>">
+        <%= render_icon %>
+      </div>
+    <% end %>
+  </div>
+
+  <% if error? %>
+    <p id="<%= error_id %>" class="tw:mt-1 tw:text-xs tw:text-red-600 tw:flex tw:items-center tw:gap-1">
+      <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
+      <%= error %>
+    </p>
+  <% elsif hint? %>
+    <p id="<%= hint_id %>" class="tw:mt-1 tw:text-xs tw:text-gray-500">
+      <%= hint %>
+    </p>
+  <% end %>
+</div>
