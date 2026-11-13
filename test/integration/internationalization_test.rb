@@ -850,17 +850,17 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     get "/500"
     assert_response :internal_server_error
     assert_select "h1", text: "Oh! Eraro okazis!"
-    assert_select "input[type='submit'][value='Sendi']"
+    assert_select "button[type='submit']", text: "Sendi"
 
     get "/en/500"
     assert_response :internal_server_error
     assert_select "h1", text: "Oh! An error occurred!"
-    assert_select "input[type='submit'][value='Send']"
+    assert_select "button[type='submit']", text: "Send"
 
     get "/pt_BR/500"
     assert_response :internal_server_error
     assert_select "h1", text: "Ops! Ocorreu um erro!"
-    assert_select "input[type='submit'][value='Enviar']"
+    assert_select "button[type='submit']", text: "Enviar"
   end
 
   test "guest users remain on default locale (eo) when visiting institutional and error pages" do

@@ -1,37 +1,32 @@
-<div class="box-white col-12 col-md-6 mx-auto">
-  <h1><%= t("errors.internal_error.title") %></h1>
-  <p>
-    <%= t("errors.internal_error.apology") %>
-  </p>
+<div class="tw:w-full tw:md:w-1/2 tw:mx-auto tw:my-4">
+  <%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+    <% panel.with_body(class: "tw:space-y-3") do %>
+      <h1 class="tw:text-2xl tw:font-bold tw:text-gray-900 tw:m-0"><%= t("errors.internal_error.title") %></h1>
+      <p class="tw:text-sm tw:text-gray-700 tw:m-0">
+        <%= t("errors.internal_error.apology") %>
+      </p>
 
-  <p>
-    <%= t("errors.internal_error.help_us") %>
-  </p>
+      <p class="tw:text-sm tw:text-gray-700 tw:m-0">
+        <%= t("errors.internal_error.help_us") %>
+      </p>
 
-  <%= form_tag error_form_url, method: :post do %>
-    <% if current_user %>
-      <%= hidden_field_tag :name, current_user.name %>
-      <%= hidden_field_tag :email, current_user.email %>
-      <%= hidden_field_tag :sentry_event_id, @sentry_id %>
-    <% else %>
-      <div class="mb-3">
-        <%= label_tag :name, t("errors.internal_error.form.name") %>
-        <%= text_field_tag :name, "", autocomplete: "name", class: "form-control", required: true, autofocus: true %>
-      </div>
-      <div class="mb-3">
-        <%= label_tag :email, t("errors.internal_error.form.email") %>
-        <%= text_field_tag :email, "", autocomplete: "email", class: "form-control", required: true %>
-      </div>
+      <%= form_tag error_form_url, method: :post, class: "tw:space-y-3" do %>
+        <% if current_user %>
+          <%= hidden_field_tag :name, current_user.name %>
+          <%= hidden_field_tag :email, current_user.email %>
+          <%= hidden_field_tag :sentry_event_id, @sentry_id %>
+        <% else %>
+          <%= render Ui::InputComponent.new(:name, id: "name", label: t("errors.internal_error.form.name"), autocomplete: "name", required: true, autofocus: true) %>
+          <%= render Ui::InputComponent.new(:email, id: "email", label: t("errors.internal_error.form.email"), autocomplete: "email", required: true) %>
+        <% end %>
+
+        <%= render Ui::TextareaComponent.new(:comments, id: "comments", label: t("errors.internal_error.form.comments"), rows: 4, required: true, autofocus: current_user.present?) %>
+
+        <div class="tw:flex tw:items-center tw:justify-end tw:gap-2 tw:pt-3 tw:mt-5 tw:border-t tw:border-gray-300">
+          <%= render Ui::ButtonComponent.new(t("errors.internal_error.form.back_to_home"), href: root_url, variant: :cancel) %>
+          <%= render Ui::ButtonComponent.new(t("errors.internal_error.form.submit"), type: :submit, variant: :primary) %>
+        </div>
+      <% end %>
     <% end %>
-
-    <div class="mb-3">
-      <%= label_tag :comments, t("errors.internal_error.form.comments") %>
-      <%= text_area_tag :comments, nil, class: "form-control", rows: 4, required: true, autofocus: true %>
-    </div>
-
-    <div class="buttons-footer">
-      <%= link_to t("errors.internal_error.form.back_to_home"), root_url, class: "button-cancel" %>
-      <%= submit_tag t("errors.internal_error.form.submit"), class: "button-submit" %>
-    </div>
   <% end %>
 </div>

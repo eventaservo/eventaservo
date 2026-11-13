@@ -1,23 +1,23 @@
-<div class="text-center">
-  <h1><%= t("home.about.title") %></h1>
-  <p><%= t("home.about.tagline") %></p>
+<div class="tw:text-center tw:py-4">
+  <h1 class="tw:text-3xl tw:font-bold tw:text-gray-900"><%= t("home.about.title") %></h1>
+  <p class="tw:text-base tw:text-gray-600 tw:mt-1"><%= t("home.about.tagline") %></p>
 </div>
 
-<div class="d-flex justify-content-around text-center m-2">
+<div class="tw:flex tw:justify-around tw:text-center tw:my-2 tw:gap-4">
   <div>
-    <h3><%= User.all.size %></h3>
-    <p><%= t("home.about.registered_users") %></p>
+    <h3 class="tw:text-2xl tw:font-semibold tw:text-gray-900"><%= User.all.size %></h3>
+    <p class="tw:text-sm tw:text-gray-600"><%= t("home.about.registered_users") %></p>
   </div>
   <div>
-    <h3><%= Event.all.size %></h3>
-    <p><%= t("home.about.registered_events") %></p>
+    <h3 class="tw:text-2xl tw:font-semibold tw:text-gray-900"><%= Event.all.size %></h3>
+    <p class="tw:text-sm tw:text-gray-600"><%= t("home.about.registered_events") %></p>
   </div>
 </div>
 
-<div class="full_rectangle bg-color-grayLighter" style="min-height: 0px;">
-  <div class="col-12 col-md-5 px-3">
-    <h3 class="title"><%= t("home.about.history.title") %></h3>
-    <div style="text-align: justify;">
+<div class="tw:bg-[#f7f7f7] tw:p-5 tw:flex tw:flex-wrap tw:justify-around tw:text-center tw:gap-6">
+  <div class="tw:w-full tw:md:w-5/12 tw:px-3">
+    <h3 class="tw:text-esperanto-500 tw:font-bold tw:text-xl tw:mb-3"><%= t("home.about.history.title") %></h3>
+    <div class="tw:text-justify tw:space-y-3">
       <p>
         <%= t("home.about.history.p1_html",
               creator_link: link_to("Fernando Ŝajani", "https://t.me/fernandoshayani")) %>
@@ -31,9 +31,9 @@
       </p>
     </div>
   </div>
-  <div class="col-12 col-md-5 px-3">
-    <h3 class="title"><%= t("home.about.helpers.title") %></h3>
-    <div style="text-align: justify;">
+  <div class="tw:w-full tw:md:w-5/12 tw:px-3">
+    <h3 class="tw:text-esperanto-500 tw:font-bold tw:text-xl tw:mb-3"><%= t("home.about.helpers.title") %></h3>
+    <div class="tw:text-justify tw:space-y-3">
       <p>
         <%= t("home.about.helpers.p1_html",
               yves_link: link_to("Yves Nevelsteen", "https://t.me/yvesnev"),
@@ -51,10 +51,10 @@
   </div>
 </div>
 
-<div class="full_rectangle bg-color-white" style="min-height: 0px;">
-  <div class="col-12">
-    <h3 class="title"><%= t("home.about.articles.title") %></h3>
-    <div style="text-align: justify;">
+<div class="tw:bg-white tw:p-5 tw:flex tw:flex-wrap tw:justify-around tw:text-center">
+  <div class="tw:w-full">
+    <h3 class="tw:text-esperanto-500 tw:font-bold tw:text-xl tw:mb-3"><%= t("home.about.articles.title") %></h3>
+    <div class="tw:text-justify tw:space-y-2">
       <%= article_link("Eventa Servo: teknologiaj novigoj por pli moderna kaj alirebla platformo",
         "/ES-RevuoEsperanto-majo2026.pdf",
         t("home.about.articles.art1")) %>
@@ -111,104 +111,102 @@
   </div>
 </div>
 
-<div class="full_rectangle bg-color-grayLighter align-items-center">
-  <div class="col-12 col-md-6">
-    <h3 class="title"><%= t("home.about.features.discover_title") %></h3>
-    <p><%= t("home.about.features.discover_p1") %></p>
+<div class="tw:bg-[#f7f7f7] tw:p-5 tw:min-h-[400px] tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:gap-6 tw:items-center tw:text-center">
+  <div>
+    <h3 class="tw:text-esperanto-500 tw:font-bold tw:text-xl tw:mb-3"><%= t("home.about.features.discover_title") %></h3>
+    <p class="tw:mb-3"><%= t("home.about.features.discover_p1") %></p>
     <p><%= t("home.about.features.discover_p2") %></p>
   </div>
-  <div class="col-12 col-md-6">
-    <%= image_tag 'prie/mapo.png', class: 'screen-shot border' %>
+  <div>
+    <%= image_tag "prie/mapo.png", class: "tw:max-w-full tw:h-auto tw:max-h-[400px] tw:mx-auto tw:border tw:border-gray-300" %>
   </div>
 </div>
 
-<div class="full_rectangle bg-color-white align-items-center">
-  <div class="col-12 col-md-6 order-lg-2">
-    <h3 class="title"><%= t("home.about.features.calendar_title") %></h3>
+<div class="tw:bg-white tw:p-5 tw:min-h-[400px] tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:gap-6 tw:items-center tw:text-center">
+  <div class="tw:lg:order-2">
+    <h3 class="tw:text-esperanto-500 tw:font-bold tw:text-xl tw:mb-3"><%= t("home.about.features.calendar_title") %></h3>
     <p><%= t("home.about.features.calendar_p") %></p>
   </div>
-  <div class="col-12 col-md-6 order-lg-1">
-    <%= image_tag 'prie/kalendaro.png', class: 'screen-shot' %>
+  <div class="tw:lg:order-1">
+    <%= image_tag "prie/kalendaro.png", class: "tw:max-w-full tw:h-auto tw:max-h-[400px] tw:mx-auto" %>
   </div>
 </div>
 
-<div class="full_rectangle bg-color-grayLighter align-items-center">
-  <div class="col-12 col-md-6">
-    <h3 class="title"><%= t("home.about.features.device_title") %></h3>
+<div class="tw:bg-[#f7f7f7] tw:p-5 tw:min-h-[400px] tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:gap-6 tw:items-center tw:text-center">
+  <div>
+    <h3 class="tw:text-esperanto-500 tw:font-bold tw:text-xl tw:mb-3"><%= t("home.about.features.device_title") %></h3>
     <p><%= t("home.about.features.device_p") %></p>
   </div>
-  <div class="col-12 col-md-6">
-    <%= image_tag 'prie/mobile.png', class: 'screen-shot border' %>
+  <div>
+    <%= image_tag "prie/mobile.png", class: "tw:max-w-full tw:h-auto tw:max-h-[400px] tw:mx-auto tw:border tw:border-gray-300" %>
   </div>
 </div>
 
-<div class="full_rectangle bg-color-white align-items-center">
-  <div class="row">
-    <div class="col-12">
-      <h3 class="title"><%= t("home.about.uea_tejo.title") %></h3>
-      <p>
-        <%= t("home.about.uea_tejo.p1_html",
-              uea_link: link_to('Universala Esperanto-Asocio (UEA)', 'https://uea.org', target: :_blank),
-              tejo_link: link_to('Tutmonda Esperanta Junulara Organizo (TEJO)', 'https://www.tejo.org', target: :_blank)) %>
-      </p>
-      <p>
-        <%= t("home.about.uea_tejo.p2") %>
-      </p>
-    </div>
+<div class="tw:bg-white tw:p-5 tw:min-h-[400px] tw:flex tw:flex-col tw:justify-center tw:items-center tw:text-center tw:gap-6">
+  <div class="tw:w-full">
+    <h3 class="tw:text-esperanto-500 tw:font-bold tw:text-xl tw:mb-3"><%= t("home.about.uea_tejo.title") %></h3>
+    <p class="tw:mb-3">
+      <%= t("home.about.uea_tejo.p1_html",
+            uea_link: link_to("Universala Esperanto-Asocio (UEA)", "https://uea.org", target: :_blank),
+            tejo_link: link_to("Tutmonda Esperanta Junulara Organizo (TEJO)", "https://www.tejo.org", target: :_blank)) %>
+    </p>
+    <p>
+      <%= t("home.about.uea_tejo.p2") %>
+    </p>
   </div>
-  <div class="row">
-    <div class="col-6">
-      <%= link_to image_tag('prie/uea.png', class: 'screen-shot'), 'https://uea.org', target: :_blank %>
+  <div class="tw:w-full tw:grid tw:grid-cols-2 tw:gap-6 tw:items-center">
+    <div>
+      <%= link_to image_tag("prie/uea.png", class: "tw:max-w-full tw:h-auto tw:max-h-[400px] tw:mx-auto"), "https://uea.org", target: :_blank %>
     </div>
-    <div class="col-6">
-      <%= link_to image_tag('tejo.svg', class: 'screen-shot', width: '75%'), 'https://www.tejo.org', target: :_blank %>
+    <div>
+      <%= link_to image_tag("tejo.svg", class: "tw:w-3/4 tw:max-w-full tw:h-auto tw:max-h-[400px] tw:mx-auto"), "https://www.tejo.org", target: :_blank %>
     </div>
   </div>
 </div>
 
-<div class="full_rectangle bg-color-grayLighter align-items-center">
-  <div class="row">
-    <div class="col-12 mb-5">
-      <h3 class="title"><%= t("home.about.advantages.title") %></h3>
+<div class="tw:bg-[#f7f7f7] tw:p-5 tw:min-h-[400px] tw:flex tw:items-center tw:text-center">
+  <div class="tw:w-full tw:grid tw:grid-cols-1 tw:md:grid-cols-4 tw:gap-6">
+    <div class="tw:md:col-span-4 tw:mb-6">
+      <h3 class="tw:text-esperanto-500 tw:font-bold tw:text-xl"><%= t("home.about.advantages.title") %></h3>
     </div>
-    <div class="col-md mb-3">
-      <div class="title"><%= t("home.about.advantages.files_title") %></div>
+    <div>
+      <div class="tw:text-esperanto-500 tw:font-bold tw:mb-2"><%= t("home.about.advantages.files_title") %></div>
       <p><%= t("home.about.advantages.files_p") %></p>
     </div>
-    <div class="col-md mb-3">
-      <div class="title"><%= t("home.about.advantages.social_title") %></div>
+    <div>
+      <div class="tw:text-esperanto-500 tw:font-bold tw:mb-2"><%= t("home.about.advantages.social_title") %></div>
       <p><%= t("home.about.advantages.social_p") %></p>
     </div>
-    <div class="col-md mb-3">
-      <div class="title"><%= t("home.about.advantages.open_source_title") %></div>
+    <div>
+      <div class="tw:text-esperanto-500 tw:font-bold tw:mb-2"><%= t("home.about.advantages.open_source_title") %></div>
       <p>
         <%= t("home.about.advantages.open_source_p_html",
               github_link: link_to("GitHub", "https://github.com/eventaservo/eventaservo", target: :_blank),
               contact_link: mail_to("kontakto@eventaservo.org", t("home.about.advantages.contact_us"), subject: t("home.about.advantages.contact_subject"))) %>
       </p>
     </div>
-    <div class="col-md mb-3">
-      <div class="title"><%= t("home.about.advantages.tech_title") %></div>
+    <div>
+      <div class="tw:text-esperanto-500 tw:font-bold tw:mb-2"><%= t("home.about.advantages.tech_title") %></div>
       <p><%= t("home.about.advantages.tech_p") %></p>
     </div>
   </div>
 </div>
 
-<div class="full_rectangle bg-color-white align-items-center">
-  <div class="col-12">
-    <h3 class="title"><%= t("home.about.partners.title") %></h3>
-    <p><%= t("home.about.partners.p") %></p>
-    <div class="d-flex justify-content-around flex-wrap align-items-center">
-      <%= link_to(image_tag('jetbrains.svg', width: 128, alt: 'Jetbrains'), 'http://jetbrains.com', target: :_blank) %>
-      <%= link_to(image_tag('sentry.svg', width: 128, alt: 'Sentry'), 'https://sentry.io', target: :_blank) %>
-      <%= link_to(image_tag('github.svg', width: 128, alt: 'Github'), 'https://github.com/eventaservo', target: :_blank) %>
-      <%= link_to(image_tag('lokalise.png', width: 128, alt: 'Lokalise'), 'https://lokalise.com', target: :_blank) %>
+<div class="tw:bg-white tw:p-5 tw:min-h-[400px] tw:flex tw:items-center tw:text-center">
+  <div class="tw:w-full">
+    <h3 class="tw:text-esperanto-500 tw:font-bold tw:text-xl tw:mb-3"><%= t("home.about.partners.title") %></h3>
+    <p class="tw:mb-4"><%= t("home.about.partners.p") %></p>
+    <div class="tw:flex tw:justify-around tw:flex-wrap tw:items-center tw:gap-6">
+      <%= link_to(image_tag("jetbrains.svg", width: 128, alt: "Jetbrains"), "http://jetbrains.com", target: :_blank) %>
+      <%= link_to(image_tag("sentry.svg", width: 128, alt: "Sentry"), "https://sentry.io", target: :_blank) %>
+      <%= link_to(image_tag("github.svg", width: 128, alt: "Github"), "https://github.com/eventaservo", target: :_blank) %>
+      <%= link_to(image_tag("lokalise.png", width: 128, alt: "Lokalise"), "https://lokalise.com", target: :_blank) %>
     </div>
   </div>
 </div>
 
-<div class="text-end mt-3">
-  <p class="small">
+<div class="tw:text-right tw:mt-3">
+  <p class="tw:text-xs tw:text-gray-600">
     <%= t("home.about.creator_company") %>
     <br>
     Kosmotek Tecnologia da Informação LTDA
