@@ -1,3 +1,5 @@
-<div class="box-white">
-  <%= markdown(read_localized_markdown("PRIVACY")) %>
-</div>
+<%= render Ui::CardComponent.new(variant: :bordered, class: "tw:my-2") do |panel| %>
+  <% panel.with_body(class: "tailwind-prose") do %>
+    <%= markdown(read_localized_markdown("PRIVACY")) %>
+  <% end %>
+<% end %>
