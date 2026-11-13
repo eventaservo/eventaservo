@@ -1,0 +1,17 @@
+<div class="tw:flex tw:flex-wrap tw:items-center tw:justify-center tw:gap-x-10 tw:gap-y-14 tw:p-20">
+  <%= render Ui::TooltipComponent.new(text: "Indiko supre", placement: :top, focusable: false) do %>
+    <%= render Ui::ButtonComponent.new("Supre", variant: :outline_primary) %>
+  <% end %>
+
+  <%= render Ui::TooltipComponent.new(text: "Indiko malsupre", placement: :bottom, focusable: false) do %>
+    <%= render Ui::ButtonComponent.new("Malsupre", variant: :outline_primary) %>
+  <% end %>
+
+  <%= render Ui::TooltipComponent.new(text: "Indiko maldekstre", placement: :left, focusable: false) do %>
+    <%= render Ui::ButtonComponent.new("Maldekstre", variant: :outline_primary) %>
+  <% end %>
+
+  <%= render Ui::TooltipComponent.new(text: "Indiko dekstre", placement: :right, focusable: false) do %>
+    <%= render Ui::ButtonComponent.new("Dekstre", variant: :outline_primary) %>
+  <% end %>
+</div>

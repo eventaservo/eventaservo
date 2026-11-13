@@ -1,0 +1,17 @@
+<div class="tw:flex tw:items-center tw:justify-center tw:gap-8 tw:p-16 tw:text-lg tw:text-gray-700">
+  <%= render Ui::TooltipComponent.new(text: "Montri kiel mapon", placement: :bottom) do %>
+    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+  <% end %>
+
+  <%= render Ui::TooltipComponent.new(text: "Somertempo", placement: :top) do %>
+    <i class="fas fa-sun" aria-hidden="true"></i>
+  <% end %>
+
+  <%= render Ui::TooltipComponent.new(text: "Eventoj", placement: :top) do %>
+    <i class="far fa-calendar" aria-hidden="true"></i>
+  <% end %>
+
+  <%= render Ui::TooltipComponent.new(text: "Administrantoj kaj helpantoj", placement: :top) do %>
+    <i class="fas fa-users" aria-hidden="true"></i>
+  <% end %>
+</div>

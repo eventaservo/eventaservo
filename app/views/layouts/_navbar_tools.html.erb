@@ -1,14 +1,18 @@
 <li class="nav-item d-none d-lg-block me-2">
   <% if cookies[:vidmaniero] == 'mapo' %>
-    <%= link_to view_style_url('kalendaro'), class: 'nav-link', aria: { label: t('navbar.tools.close_map') } do %>
-      <i class="fas fa-map-marker-alt fg-color-yellow" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<%= t('navbar.tools.close_map') %>"></i>
+    <%= link_to view_style_url('kalendaro'), class: 'nav-link',
+      aria: { label: t('navbar.tools.close_map') },
+      data: { controller: 'hint', hint_text_value: t('navbar.tools.close_map'), hint_placement_value: 'bottom' } do %>
+      <i class="fas fa-map-marker-alt fg-color-yellow" aria-hidden="true"></i>
     <% end %>
     <li class="nav-item d-md-block d-lg-none">
       <%= link_to icon('fas', 'map-marker-alt', t('navbar.tools.close_map'), class: 'fg-color-yellow'), view_style_url('kalendaro'), class: 'nav-link' %>
     </li>
   <% else %>
-    <%= link_to view_style_url('mapo'), class: 'nav-link', aria: { label: t('navbar.tools.view_as_map') } do %>
-      <i class="fas fa-map-marker-alt" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<%= t('navbar.tools.view_as_map') %>"></i>
+    <%= link_to view_style_url('mapo'), class: 'nav-link',
+      aria: { label: t('navbar.tools.view_as_map') },
+      data: { controller: 'hint', hint_text_value: t('navbar.tools.view_as_map'), hint_placement_value: 'bottom' } do %>
+      <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
     <% end %>
     <li class="nav-item d-md-block d-lg-none">
       <%= link_to icon('fas', 'map-marker-alt', t('navbar.tools.view_as_map')), view_style_url('mapo'), class: 'nav-link' %>
@@ -16,24 +20,30 @@
   <% end %>
 </li>
 <li class="nav-item d-none d-lg-block">
-  <%= link_to "https://nevelsteen.info/instigo/", target: "_blank", class: 'nav-link', aria: { label: t('navbar.tools.support') } do %>
-    <i class="fas fa-heart" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<%= t('navbar.tools.support') %>"></i>
+  <%= link_to "https://nevelsteen.info/instigo/", target: "_blank", class: 'nav-link',
+    aria: { label: t('navbar.tools.support') },
+    data: { controller: 'hint', hint_text_value: t('navbar.tools.support'), hint_placement_value: 'bottom' } do %>
+    <i class="fas fa-heart" aria-hidden="true"></i>
   <% end %>
 </li>
 <li class="nav-item d-md-block d-lg-none">
   <%= link_to icon('fas', 'heart', t('navbar.tools.support')), "https://nevelsteen.info/instigo/", target: "_blank", class: 'nav-link' %>
 </li>
 <li class="nav-item d-none d-lg-block">
-  <%= link_to "https://t.me/s/eventaservo", target: "_blank", class: 'nav-link', aria: { label: t('navbar.tools.news') } do %>
-    <i class="fas fa-newspaper" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<%= t('navbar.tools.news') %>"></i>
+  <%= link_to "https://t.me/s/eventaservo", target: "_blank", class: 'nav-link',
+    aria: { label: t('navbar.tools.news') },
+    data: { controller: 'hint', hint_text_value: t('navbar.tools.news'), hint_placement_value: 'bottom' } do %>
+    <i class="fas fa-newspaper" aria-hidden="true"></i>
   <% end %>
 </li>
 <li class="nav-item d-md-block d-lg-none">
   <%= link_to icon('fas', 'newspaper', t('navbar.tools.news')), "https://t.me/s/eventaservo", target: "_blank", class: 'nav-link' %>
 </li>
 <li class="nav-item d-none d-lg-block">
-  <%= link_to prie_url, class: 'nav-link', aria: { label: t('navbar.tools.about_us') } do %>
-    <i class="fas fa-user-friends" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<%= t('navbar.tools.about_us') %>"></i>
+  <%= link_to prie_url, class: 'nav-link',
+    aria: { label: t('navbar.tools.about_us') },
+    data: { controller: 'hint', hint_text_value: t('navbar.tools.about_us'), hint_placement_value: 'bottom' } do %>
+    <i class="fas fa-user-friends" aria-hidden="true"></i>
   <% end %>
 </li>
 <li class="nav-item d-md-block d-lg-none">
