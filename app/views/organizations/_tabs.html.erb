@@ -1,21 +1,21 @@
 <% active_tab = organization_active_tab(params, future_events: @future_events, past_events: @past_events) %>
 
-<div class="box-white">
+<div class="box-white" data-controller="tabs">
   <ul class="nav nav-tabs org-tabs mb-3" id="orgTabs" role="tablist">
     <li class="nav-item" role="presentation">
-      <button class="nav-link <%= 'active' if active_tab == :future %>" id="future-tab" data-bs-toggle="tab" data-bs-target="#future-tab-pane" type="button" role="tab" aria-controls="future-tab-pane" aria-selected="<%= active_tab == :future %>">
+      <button class="nav-link <%= 'active' if active_tab == :future %>" id="future-tab" data-tabs-target="tab" data-action="click->tabs#select" type="button" role="tab" aria-controls="future-tab-pane" aria-selected="<%= active_tab == :future %>" tabindex="<%= active_tab == :future ? 0 : -1 %>">
         <%= t("organizations.tabs.upcoming") %> <span class="d-none d-sm-inline"><%= t("organizations.tabs.events") %></span>
         <span class="badge rounded-pill text-bg-secondary ms-1"><%= @pagy_future.count %></span>
       </button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link <%= 'active' if active_tab == :past %>" id="past-tab" data-bs-toggle="tab" data-bs-target="#past-tab-pane" type="button" role="tab" aria-controls="past-tab-pane" aria-selected="<%= active_tab == :past %>">
+      <button class="nav-link <%= 'active' if active_tab == :past %>" id="past-tab" data-tabs-target="tab" data-action="click->tabs#select" type="button" role="tab" aria-controls="past-tab-pane" aria-selected="<%= active_tab == :past %>" tabindex="<%= active_tab == :past ? 0 : -1 %>">
         <%= t("organizations.tabs.past") %> <span class="d-none d-sm-inline"><%= t("organizations.tabs.events") %></span>
         <span class="badge rounded-pill text-bg-secondary ms-1"><%= @pagy.count %></span>
       </button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link <%= 'active' if active_tab == :reports %>" id="reports-tab" data-bs-toggle="tab" data-bs-target="#reports-tab-pane" type="button" role="tab" aria-controls="reports-tab-pane" aria-selected="<%= active_tab == :reports %>">
+      <button class="nav-link <%= 'active' if active_tab == :reports %>" id="reports-tab" data-tabs-target="tab" data-action="click->tabs#select" type="button" role="tab" aria-controls="reports-tab-pane" aria-selected="<%= active_tab == :reports %>" tabindex="<%= active_tab == :reports ? 0 : -1 %>">
         📸 <%= t("organizations.tabs.reports") %>
         <span class="badge rounded-pill text-bg-secondary ms-1"><%= @pagy_reports.count %></span>
       </button>
@@ -23,15 +23,15 @@
   </ul>
 
   <div class="tab-content" id="orgTabsContent">
-    <div class="tab-pane fade <%= 'show active' if active_tab == :future %>" id="future-tab-pane" role="tabpanel" aria-labelledby="future-tab" tabindex="0">
+    <div class="tab-pane fade <%= 'show active' if active_tab == :future %>" id="future-tab-pane" role="tabpanel" aria-labelledby="future-tab" tabindex="0" data-tabs-target="panel">
       <%= render "future_events_tab" %>
     </div>
 
-    <div class="tab-pane fade <%= 'show active' if active_tab == :past %>" id="past-tab-pane" role="tabpanel" aria-labelledby="past-tab" tabindex="0">
+    <div class="tab-pane fade <%= 'show active' if active_tab == :past %>" id="past-tab-pane" role="tabpanel" aria-labelledby="past-tab" tabindex="0" data-tabs-target="panel">
       <%= render "past_events_tab" %>
     </div>
 
-    <div class="tab-pane fade <%= 'show active' if active_tab == :reports %>" id="reports-tab-pane" role="tabpanel" aria-labelledby="reports-tab" tabindex="0">
+    <div class="tab-pane fade <%= 'show active' if active_tab == :reports %>" id="reports-tab-pane" role="tabpanel" aria-labelledby="reports-tab" tabindex="0" data-tabs-target="panel">
       <%= render "reports_tab" %>
     </div>
   </div>

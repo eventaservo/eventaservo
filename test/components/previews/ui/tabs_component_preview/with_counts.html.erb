@@ -1,0 +1,13 @@
+<div class="tw:p-4 tw:bg-white tw:border tw:border-solid tw:border-gray-200 tw:rounded-md">
+  <%= render Ui::TabsComponent.new(id: "preview-counts-tabs", aria_label: "Organizaj listoj") do |tabs| %>
+    <% tabs.with_tab(id: "future", label: "Venontaj eventoj", count: 12, active: true) do %>
+      <p class="tw:text-sm tw:text-gray-700">Venontaj eventoj organizataj de la asocio.</p>
+    <% end %>
+    <% tabs.with_tab(id: "past", label: "Pasintaj eventoj", count: 48) do %>
+      <p class="tw:text-sm tw:text-gray-700">Pasintaj eventoj en la arkivo.</p>
+    <% end %>
+    <% tabs.with_tab(id: "reports", label: "Raportoj", icon: "camera", count: 5) do %>
+      <p class="tw:text-sm tw:text-gray-700">Fotoj kaj raportoj el pasintaj renkontiĝoj.</p>
+    <% end %>
+  <% end %>
+</div>

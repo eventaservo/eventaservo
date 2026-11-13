@@ -1,0 +1,17 @@
+<%= content_tag(:div, class: wrapper_classes, **wrapper_attributes) do %>
+  <%= content_tag(:div, class: tablist_classes, **tablist_attributes) do %>
+    <% tabs.each_with_index do |tab, idx| %>
+      <% selected = (idx == active_index) %>
+      <%= content_tag(:button, class: tab.tab_classes(selected: selected), **tab.trigger_attributes(selected: selected)) do %>
+        <%= tab.render_label_content(selected: selected) %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <% tabs.each_with_index do |tab, idx| %>
+    <% selected = (idx == active_index) %>
+    <%= content_tag(:div, class: tab.panel_classes(selected: selected), **tab.panel_attributes) do %>
+      <%= tab.to_s %>
+    <% end %>
+  <% end %>
+<% end %>

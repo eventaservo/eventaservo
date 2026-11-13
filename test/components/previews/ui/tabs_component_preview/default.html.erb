@@ -1,0 +1,13 @@
+<div class="tw:p-4 tw:bg-white tw:border tw:border-solid tw:border-gray-200 tw:rounded-md">
+  <%= render Ui::TabsComponent.new(id: "preview-default-tabs", aria_label: "Eventaj sekcioj") do |tabs| %>
+    <% tabs.with_tab(id: "informoj", label: "Informoj", icon: "info-circle") do %>
+      <p class="tw:text-sm tw:text-gray-700">Ĝeneralaj informoj pri la evento kaj loko.</p>
+    <% end %>
+    <% tabs.with_tab(id: "programo", label: "Programo", icon: "calendar-alt") do %>
+      <p class="tw:text-sm tw:text-gray-700">Prelegoj, ekskursoj kaj vesperaj programeroj.</p>
+    <% end %>
+    <% tabs.with_tab(id: "partoprenantoj", label: "Partoprenantoj", icon: "users") do %>
+      <p class="tw:text-sm tw:text-gray-700">Listo de aliĝintaj partoprenantoj.</p>
+    <% end %>
+  <% end %>
+</div>
