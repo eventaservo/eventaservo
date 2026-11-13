@@ -1,36 +1,63 @@
 <% tag_ids = params[:s]&.split(",")&.map(&:to_i) || [] %>
-<div class="text-center m-2">
+<div class="tw:flex tw:flex-col tw:items-center tw:gap-2 tw:mt-4 tw:mb-3 tw:text-center">
   <%# Tag: Categories %>
-  <div class="d-flex justify-content-center flex-wrap">
+  <div class="tw:flex tw:justify-center tw:flex-wrap tw:gap-1.5">
     <% Tag.categories.where(display_in_filters: true).order(:sort_order).each do |tag| %>
       <% if tag_ids.include?(tag.id) %>
         <% new_tag_ids = tag_ids - [tag.id] %>
-        <%= link_to(icon('fas', 'times', tag_plural_name(tag.name)), url_for(s: new_tag_ids.join(","), o: params[:o], t: params[:t], periodo: params[:periodo]), class: 'badge rounded-pill text-bg-info m-1') %>
+        <%= render Ui::BadgeComponent.new(
+              tag_plural_name(tag.name),
+              href: url_for(s: new_tag_ids.join(","), o: params[:o], t: params[:t], periodo: params[:periodo]),
+              variant: :info,
+              shape: :pill,
+              icon: "times"
+            ) %>
       <% else %>
         <% new_tag_ids = tag_ids + [tag.id] %>
-        <%= link_to(tag_plural_name(tag.name), url_for(s: new_tag_ids.join(","), o: params[:o], t: params[:t], periodo: params[:periodo]), class: 'badge rounded-pill text-bg-light m-1') %>
+        <%= render Ui::BadgeComponent.new(
+              tag_plural_name(tag.name),
+              href: url_for(s: new_tag_ids.join(","), o: params[:o], t: params[:t], periodo: params[:periodo]),
+              variant: :light,
+              shape: :pill
+            ) %>
       <% end %>
     <% end %>
   </div>
 
   <%# Tag: Characteristics %>
-  <div class="d-flex justify-content-center flex-wrap">
-    <% ([Tag.times.where(display_in_filters: true).order(:sort_order), Tag.characteristics.where(display_in_filters: true).order(:sort_order) ].flatten.uniq).each do |tag| %>
+  <div class="tw:flex tw:justify-center tw:flex-wrap tw:gap-1.5">
+    <% [Tag.times.where(display_in_filters: true).order(:sort_order), Tag.characteristics.where(display_in_filters: true).order(:sort_order)].flatten.uniq.each do |tag| %>
       <% if tag_ids.include?(tag.id) %>
         <% new_tag_ids = tag_ids - [tag.id] %>
-        <%= link_to(icon('fas', 'times', tag_plural_name(tag.name)), url_for(s: new_tag_ids.join(","), o: params[:o], periodo: params[:periodo]), class: 'badge rounded-pill text-bg-info m-1') %>
+        <%= render Ui::BadgeComponent.new(
+              tag_plural_name(tag.name),
+              href: url_for(s: new_tag_ids.join(","), o: params[:o], periodo: params[:periodo]),
+              variant: :info,
+              shape: :pill,
+              icon: "times"
+            ) %>
       <% else %>
         <% new_tag_ids = tag_ids + [tag.id] %>
-        <%= link_to(tag_plural_name(tag.name), url_for(s: new_tag_ids.join(","), o: params[:o], periodo: params[:periodo]), class: 'badge rounded-pill text-bg-light m-1') %>
+        <%= render Ui::BadgeComponent.new(
+              tag_plural_name(tag.name),
+              href: url_for(s: new_tag_ids.join(","), o: params[:o], periodo: params[:periodo]),
+              variant: :light,
+              shape: :pill
+            ) %>
       <% end %>
     <% end %>
   </div>
 
-  <% if active_filters? %>
-    <% if active_filters.include? 'o' %>
-      <div class="text-center m-2">
-        <%= link_to(icon('fas', 'times', params[:o]), active_filters.except(:o), class: 'button-filters') %>
-      </div>
-    <% end %>
+  <% if active_filters? && active_filters.include?("o") %>
+    <div class="tw:flex tw:justify-center">
+      <%= render Ui::BadgeComponent.new(
+            params[:o],
+            href: url_for(active_filters.except(:o)),
+            variant: :info,
+            shape: :rounded,
+            size: :large,
+            icon: "times"
+          ) %>
+    </div>
   <% end %>
 </div>

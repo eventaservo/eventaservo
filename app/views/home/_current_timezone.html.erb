@@ -1,12 +1,10 @@
-<div class="d-flex">
-  <p class="small">
-    <% if cookies[:horzono] %>
-      <%= t("timezone.custom_timezone_text", timezone: I18n.t(cookies[:horzono], scope: :timezones)) %>
-      <%= '(MET)' if Time.now.in_time_zone(cookies[:horzono]).utc_offset == 3600 %>
-      (UTC <%= Time.now.in_time_zone(cookies[:horzono]).formatted_offset.split(":").first %>) ·
-    <% else %>
-      <%= t("timezone.current_timezone_text") %>
-    <% end %>
-  </p>
-  &nbsp;<%= render partial: 'events/timezone_selector' %>
+<div class="tw:text-center tw:text-xs tw:text-gray-700">
+  <% if cookies[:horzono] %>
+    <%= t("timezone.custom_timezone_text", timezone: I18n.t(cookies[:horzono], scope: :timezones)) %>
+    <%= "(MET)" if Time.now.in_time_zone(cookies[:horzono]).utc_offset == 3600 %>
+    (UTC <%= Time.now.in_time_zone(cookies[:horzono]).formatted_offset.split(":").first %>) ·
+  <% else %>
+    <%= t("timezone.current_timezone_text") %>
+  <% end %>
+  <%= render partial: "events/timezone_selector" %>
 </div>
