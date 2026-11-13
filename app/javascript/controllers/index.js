@@ -52,6 +52,9 @@ application.register("search-filters", SearchFiltersController)
 import ShortUrlController from "./short_url_controller"
 application.register("short-url", ShortUrlController)
 
+import TabsController from "./tabs_controller"
+application.register("tabs", TabsController)
+
 import TimezoneController from "./timezone_controller"
 application.register("timezone", TimezoneController)
 
