@@ -13,16 +13,17 @@
     <% end %>
   </strong>
   <div class="d-flex align-items-center justify-content-between justify-content-md-end gap-2 flex-wrap flex-md-nowrap w-100 flex-md-grow-1">
-    <div class="dropdown">
+    <div class="tw:relative" data-controller="menu">
       <button class="btn btn-light dropdown-toggle" type="button" id="calendarMonthNavigation"
-        data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+        aria-expanded="false" aria-haspopup="true" aria-controls="calendarMonthNavigationMenu"
+        data-menu-target="button" data-action="click->menu#toggle">
         <%= t("events.calendar.jump_to_month") %>
       </button>
-      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="calendarMonthNavigation">
+      <ul id="calendarMonthNavigationMenu" role="menu" data-menu-target="panel" class="dropdown-menu dropdown-menu-end tw:right-0 tw:left-auto tw:top-full tw:mt-1" aria-labelledby="calendarMonthNavigation">
         <% month_navigation_options.each do |label, path| %>
           <li>
             <%= link_to label, path, class: "dropdown-item",
-              data: {turbo_frame: "native-calendar"} %>
+              data: {turbo_frame: "native-calendar", action: "click->menu#close"} %>
           </li>
         <% end %>
       </ul>

@@ -10,12 +10,21 @@
     <% nav.with_tool(icon: "user-friends", href: "/prie", label: "Pri ni") %>
 
     <% nav.with_user_menu do %>
-      <div class="tw:flex tw:items-center tw:gap-2 tw:px-2 tw:py-1 tw:rounded-full hover:tw:bg-white/10 tw:cursor-pointer">
-        <div class="tw:w-7 tw:h-7 tw:rounded-full tw:bg-white/25 tw:flex tw:items-center tw:justify-center tw:text-xs tw:font-semibold tw:text-white">
-          FS
-        </div>
-        <span class="tw:text-xs tw:font-medium tw:text-white">Fernando</span>
-      </div>
+      <%= render Ui::DropdownComponent.new(align: :right, menu_id: "navbar-preview-user-menu") do |menu| %>
+        <% menu.with_trigger(variant: :inverse, caret: false, class: "tw:rounded-full") do %>
+          <div class="tw:w-7 tw:h-7 tw:rounded-full tw:bg-white/25 tw:flex tw:items-center tw:justify-center tw:text-xs tw:font-semibold tw:text-white">
+            FS
+          </div>
+          <span class="tw:text-xs tw:font-medium tw:text-white">Fernando</span>
+          <i class="fas fa-chevron-down tw:text-[10px] tw:text-white/80" aria-hidden="true"></i>
+        <% end %>
+        <% menu.with_item("Mia profilo", href: "#profilo", icon: "user") %>
+        <% menu.with_item("Miaj eventoj", href: "#eventoj", icon: "calendar", icon_style: "far") %>
+        <% menu.with_divider %>
+        <% menu.with_item("Redakti mian profilon", href: "#agordoj", icon: "user-edit") %>
+        <% menu.with_divider %>
+        <% menu.with_item("Elsaluti", href: "#elsaluti", icon: "sign-out-alt", destructive: true) %>
+      <% end %>
     <% end %>
   <% end %>
 </div>

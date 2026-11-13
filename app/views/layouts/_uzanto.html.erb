@@ -1,10 +1,10 @@
 <ul class="navbar-nav align-items-end align-items-lg-center">
   <% if user_signed_in? %>
-    <li class="nav-item dropdown active text-end text-lg-start">
-      <a id="uzantoDropdown" class="nav-link dropdown-toggle text-end text-lg-start" aria-expanded="false" aria-haspopup="true" data-bs-toggle="dropdown" href="#" role="button">
+    <li class="nav-item active text-end text-lg-start tw:relative" data-controller="menu">
+      <a id="uzantoDropdown" class="nav-link dropdown-toggle text-end text-lg-start" aria-expanded="false" aria-haspopup="true" aria-controls="uzantoDropdownMenu" data-menu-target="button" data-action="click->menu#toggle" href="#" role="button">
         <%= display_user(current_user) %>
       </a>
-      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="uzantoDropdown">
+      <div id="uzantoDropdownMenu" role="menu" data-menu-target="panel" class="dropdown-menu dropdown-menu-end tw:right-0 tw:left-auto tw:top-full tw:mt-1" aria-labelledby="uzantoDropdown">
         <%= link_to icon('fa-solid', 'user', t('navbar.user.my_profile')), events_by_username_path(username: current_user.username), class: 'dropdown-item' %>
         <%= link_to icon('fa-regular', 'calendar', t('navbar.user.my_events')), user_events_path(username: current_user.username), class: 'dropdown-item' %>
         <div class="dropdown-divider"></div>

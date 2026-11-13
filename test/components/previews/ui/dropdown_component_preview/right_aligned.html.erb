@@ -1,0 +1,12 @@
+<div class="tw:p-8 tw:min-h-72 tw:flex tw:justify-end">
+  <%= render Ui::DropdownComponent.new(align: :right, menu_id: "preview-user-menu") do |menu| %>
+    <% menu.with_trigger("Fernando", icon: "user-circle", variant: :light) %>
+    <% menu.with_header("Konto") %>
+    <% menu.with_item("Mia profilo", href: "#profilo", icon: "user") %>
+    <% menu.with_item("Miaj eventoj", href: "#eventoj", icon: "calendar", icon_style: "far") %>
+    <% menu.with_divider %>
+    <% menu.with_item("Redakti mian profilon", href: "#agordoj", icon: "user-edit") %>
+    <% menu.with_divider %>
+    <% menu.with_item("Elsaluti", href: "#elsaluti", icon: "sign-out-alt", destructive: true) %>
+  <% end %>
+</div>

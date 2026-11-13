@@ -1,9 +1,9 @@
-<li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" id="navbar-dropdown" aria-expanded="false" aria-haspopup="true" data-bs-toggle="dropdown" href="#" role="button">
+<li class="nav-item tw:relative" data-controller="menu">
+  <a class="nav-link dropdown-toggle" id="navbar-dropdown" aria-expanded="false" aria-haspopup="true" aria-controls="navbar-dropdown-menu" data-menu-target="button" data-action="click->menu#toggle" href="#" role="button">
     <div class="d-inline"><%= locale_display_code(I18n.locale) %></div>
   </a>
 
-  <div class="dropdown-menu" aria-labelledby="navbar-dropdown">
+  <div id="navbar-dropdown-menu" role="menu" data-menu-target="panel" class="dropdown-menu tw:left-0 tw:top-full tw:mt-1" aria-labelledby="navbar-dropdown">
     <% I18n.available_locales.each do |locale| %>
       <%= link_to locale_display_code(locale), UrlLanguageChanger.new(request.original_url, locale).call, class: "dropdown-item" %>
     <% end %>

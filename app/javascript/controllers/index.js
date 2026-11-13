@@ -34,6 +34,9 @@ application.register("map-view", MapViewController)
 import MaskController from "./mask_controller"
 application.register("mask", MaskController)
 
+import MenuController from "./menu_controller"
+application.register("menu", MenuController)
+
 import OrgSearchController from "./org_search_controller"
 application.register("org-search", OrgSearchController)
 

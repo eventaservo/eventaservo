@@ -1,0 +1,12 @@
+<div class="tw:p-8 tw:min-h-72 tw:flex tw:justify-end">
+  <%= render Ui::DropdownComponent.new(align: :right, width: :medium, menu_id: "preview-calendar-menu") do |menu| %>
+    <% menu.with_trigger(icon: "calendar", icon_style: "far", caret: false, variant: :ghost, aria: {label: "Aldoni al kalendaro"}) %>
+    <% menu.with_header("Aldoni al kalendaro") %>
+    <% menu.with_item("Google", href: "#google", icon: "google", icon_style: "fa-brands") %>
+    <% menu.with_item("Apple", href: "#apple", icon: "apple", icon_style: "fa-brands") %>
+    <% menu.with_item("Outlook.com", href: "#outlook", icon: "microsoft", icon_style: "fa-brands") %>
+    <% menu.with_item("Yahoo", href: "#yahoo", icon: "yahoo", icon_style: "fa-brands") %>
+    <% menu.with_divider %>
+    <% menu.with_item("Elŝuti .ics", href: "#ics", icon: "calendar") %>
+  <% end %>
+</div>
