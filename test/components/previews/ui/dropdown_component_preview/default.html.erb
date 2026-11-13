@@ -1,0 +1,9 @@
+<div class="tw:p-8 tw:min-h-64">
+  <%= render Ui::DropdownComponent.new(menu_id: "preview-default-menu") do |menu| %>
+    <% menu.with_trigger("Elektoj", icon: "bars") %>
+    <% menu.with_item("Vidi eventon", href: "#vidi", icon: "eye") %>
+    <% menu.with_item("Redakti eventon", href: "#redakti", icon: "edit", active: true) %>
+    <% menu.with_divider %>
+    <% menu.with_item("Nuligi eventon", href: "#nuligi", icon: "ban", destructive: true) %>
+  <% end %>
+</div>

@@ -5,9 +5,9 @@
   |
   <%= link_to t('footer.about'), prie_path %>
   |
-  <span class="dropdown">
-    <a id="footerMenu" aria-expanded="false" aria-haspopup="true" data-bs-toggle="dropdown" href="#"><%= t('footer.more') %></a>
-    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="footerMenu">
+  <span class="tw:relative tw:inline-block" data-controller="menu">
+    <a id="footerMenu" role="button" aria-expanded="false" aria-haspopup="true" aria-controls="footerMenuPanel" data-menu-target="button" data-action="click->menu#toggle" href="#"><%= t('footer.more') %></a>
+    <div id="footerMenuPanel" role="menu" data-menu-target="panel" class="dropdown-menu dropdown-menu-end tw:right-0 tw:left-auto tw:bottom-full tw:top-auto tw:mb-1" aria-labelledby="footerMenu">
       <%= link_to t('footer.privacy'), privateco_url, class: 'dropdown-item' %>
       <%= link_to t('footer.terms'), terms_url, class: 'dropdown-item' %>
       <%= link_to t('footer.changelog'), 'https://github.com/eventaservo/eventaservo/releases', target: :_blank, class: 'dropdown-item' %>

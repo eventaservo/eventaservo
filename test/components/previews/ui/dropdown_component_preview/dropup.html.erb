@@ -1,0 +1,9 @@
+<div class="tw:p-8 tw:pt-56 tw:flex tw:justify-end">
+  <%= render Ui::DropdownComponent.new(align: :right, direction: :up, menu_id: "preview-dropup-menu") do |menu| %>
+    <% menu.with_trigger("Pli", variant: :ghost) %>
+    <% menu.with_item("Privateco", href: "#privateco", icon: "shield-alt") %>
+    <% menu.with_item("Kondiĉoj", href: "#kondichoj", icon: "file-contract") %>
+    <% menu.with_item("RSS", href: "#rss", icon: "rss") %>
+    <% menu.with_item("Stato de la servilo", href: "#stato", icon: "server") %>
+  <% end %>
+</div>

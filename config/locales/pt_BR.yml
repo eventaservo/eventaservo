@@ -343,8 +343,6 @@ pt_BR:
     nearby_breakdown: "%{city_count} em %{city} · %{nearby_count} em até %{radius} km ao redor"
     online: Online
     online_event: Evento online
-    options:
-      aria_label: Opções do evento
     participants:
       and_more: e mais...
       anonymous_count:
