@@ -1,7 +1,7 @@
-<ul class="navbar-nav">
+<ul class="navbar-nav align-items-end align-items-lg-center">
   <% if user_signed_in? %>
-    <li class="nav-item dropdown active">
-      <a id="uzantoDropdown" class="nav-link dropdown-toggle" aria-expanded="false" aria-haspopup="true" data-bs-toggle="dropdown" href="#" role="button">
+    <li class="nav-item dropdown active text-end text-lg-start">
+      <a id="uzantoDropdown" class="nav-link dropdown-toggle text-end text-lg-start" aria-expanded="false" aria-haspopup="true" data-bs-toggle="dropdown" href="#" role="button">
         <%= display_user(current_user) %>
       </a>
       <div class="dropdown-menu dropdown-menu-end" aria-labelledby="uzantoDropdown">
@@ -14,7 +14,7 @@
       </div>
     </li>
   <% else %>
-    <li class="nav-item">
+    <li class="nav-item text-end text-lg-start">
       <%= link_to icon('fa-solid', 'sign-in-alt', t('navbar.log_in_sign_up')), new_user_session_path, class: 'btn btn-sm btn-outline-light' %>
     </li>
   <% end %>

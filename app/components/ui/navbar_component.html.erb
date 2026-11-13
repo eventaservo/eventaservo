@@ -1,4 +1,4 @@
-<header class="tw:w-full">
+<header class="tw:w-full" data-controller="toggle" data-toggle-close-on-esc-value="true" data-toggle-close-on-click-outside-value="true" data-toggle-breakpoint-value="1024">
   <nav class="<%= bar_classes %>" <%= tag.attributes(bar_attributes) %>>
     <div class="tw:w-full tw:px-3 sm:tw:px-4">
       <div class="tw:flex tw:items-center tw:justify-between tw:min-h-[48px] tw:py-1.5 tw:gap-3">
@@ -47,11 +47,46 @@
             type="button"
             class="tw:inline-flex lg:tw:hidden tw:items-center tw:justify-center tw:px-2.5 tw:py-1.5 tw:rounded-md tw:bg-transparent tw:border tw:border-white/20 tw:text-white/75 hover:tw:text-white hover:tw:border-white/40 hover:tw:bg-white/10 focus:tw:outline-none focus:tw:ring-2 focus:tw:ring-white/30"
             aria-label="Navigado"
+            data-toggle-target="button"
+            data-action="toggle#toggle"
+            aria-expanded="false"
           >
-            <i class="fas fa-bars tw:text-base" aria-hidden="true"></i>
+            <i class="fas fa-bars tw:text-base" data-toggle-target="icon" aria-hidden="true"></i>
           </button>
         </div>
       </div>
+    </div>
+
+    <div class="tw:hidden lg:tw:hidden tw:border-t tw:border-white/15 tw:bg-esperanto-600 tw:px-4 tw:py-3 tw:space-y-3 tw:text-right"
+         data-toggle-target="content"
+         data-toggle-hidden-class="tw:hidden">
+      <% if action? %>
+        <div class="sm:tw:hidden tw:flex tw:justify-end">
+          <%= action %>
+        </div>
+      <% end %>
+
+      <% if items.any? %>
+        <div class="tw:space-y-1 tw:flex tw:flex-col tw:items-end">
+          <% items.each do |item| %>
+            <%= item %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if tools.any? %>
+        <div class="tw:flex tw:flex-wrap tw:items-center tw:justify-end tw:gap-1.5 tw:pt-2 tw:border-t tw:border-white/15 md:tw:hidden">
+          <% tools.each do |tool| %>
+            <%= tool %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if user_menu? %>
+        <div class="tw:pt-2 tw:border-t tw:border-white/15 sm:tw:hidden tw:flex tw:justify-end">
+          <%= user_menu %>
+        </div>
+      <% end %>
     </div>
   </nav>
 </header>

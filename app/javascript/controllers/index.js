@@ -52,6 +52,9 @@ application.register("short-url", ShortUrlController)
 import TimezoneController from "./timezone_controller"
 application.register("timezone", TimezoneController)
 
+import ToggleController from "./toggle_controller"
+application.register("toggle", ToggleController)
+
 import TooltipController from "./tooltip_controller"
 application.register("tooltip", TooltipController)
 

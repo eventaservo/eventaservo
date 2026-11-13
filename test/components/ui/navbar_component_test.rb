@@ -8,11 +8,14 @@ module Ui
   class NavbarComponentTest < ActionView::TestCase
     include ViewComponent::TestHelpers
 
-    test "renders base navigation bar element" do
+    test "renders base navigation bar element with toggle controller and mobile drawer" do
       render_inline(Ui::NavbarComponent.new)
 
+      assert_selector "header[data-controller='toggle']"
       assert_selector "nav.tw\\:bg-esperanto-500.tw\\:text-white"
-      assert_selector "button.tw\\:bg-transparent.tw\\:border-white\\/20[aria-label='Navigado'] i.fa-bars"
+      assert_selector "button.tw\\:bg-transparent.tw\\:border-white\\/20[aria-label='Navigado'][data-toggle-target='button'][data-action='toggle#toggle']"
+      assert_selector "button i.fa-bars[data-toggle-target='icon']"
+      assert_selector "div.tw\\:hidden[data-toggle-target='content']"
     end
 
     test "renders brand slot with title and destination link" do
