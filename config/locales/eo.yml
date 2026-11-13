@@ -343,8 +343,6 @@ eo:
     nearby_breakdown: "%{city_count} en %{city} · %{nearby_count} ene de %{radius} km ĉirkaŭe"
     online: Reta
     online_event: Reta evento
-    options:
-      aria_label: Eventaj ebloj
     participants:
       and_more: kaj pli...
       anonymous_count:

@@ -27,6 +27,13 @@ class DropdownTest < ApplicationSystemTestCase
     find("body").click
     assert_equal "false", trigger["aria-expanded"]
     assert_not panel.visible?
+
+    # Clicking an item inside the panel also closes the menu
+    trigger.click
+    assert panel.visible?
+    panel.first("a[role='menuitem']").click
+    assert_equal "false", trigger["aria-expanded"]
+    assert_not panel.visible?
   end
 
   test "supports full keyboard navigation and Escape focus return in lookbook" do
@@ -110,5 +117,24 @@ class DropdownTest < ApplicationSystemTestCase
     assert_selector "#uzantoDropdown[aria-expanded='false']"
     assert_no_selector "#uzantoDropdownMenu.show"
     assert page.evaluate_script("document.activeElement === arguments[0]", user_trigger.native)
+  end
+
+  test "selecting a calendar month closes the menu and updates the calendar date" do
+    visit "/?date=#{Date.current.iso8601}"
+
+    month_trigger = find("#calendarMonthNavigation")
+    month_trigger.click
+    assert_selector "#calendarMonthNavigation[aria-expanded='true']"
+    assert_selector "#calendarMonthNavigationMenu.show"
+
+    next_month = Date.current.beginning_of_month >> 1
+    next_month_date = next_month.iso8601
+    within("#calendarMonthNavigationMenu") do
+      find("a[href*='#{next_month_date}']").click
+    end
+
+    assert_selector "turbo-frame#native-calendar a[href*='#{(next_month + 7.days).iso8601}']"
+    assert_selector "#calendarMonthNavigation[aria-expanded='false']"
+    assert_no_selector "#calendarMonthNavigationMenu.show"
   end
 end

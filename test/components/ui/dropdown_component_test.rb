@@ -66,5 +66,53 @@ module Ui
       end
       assert_selector "div[role='menu'].tw\\:right-0.tw\\:bottom-full"
     end
+
+    test "supports trigger variants with Tailwind v4 variant prefix classes" do
+      render_inline(Ui::DropdownComponent.new) do |menu|
+        menu.with_trigger("Defaŭlta", variant: :default)
+      end
+      assert_selector "button.tw\\:bg-white.tw\\:hover\\:bg-gray-50.tw\\:focus\\:outline-none"
+
+      render_inline(Ui::DropdownComponent.new) do |menu|
+        menu.with_trigger("Fantomo", variant: :ghost)
+      end
+      assert_selector "button.tw\\:bg-transparent.tw\\:hover\\:bg-gray-100"
+
+      render_inline(Ui::DropdownComponent.new) do |menu|
+        menu.with_trigger("Hela", variant: :light)
+      end
+      assert_selector "button.tw\\:bg-gray-100.tw\\:hover\\:bg-gray-200"
+
+      render_inline(Ui::DropdownComponent.new) do |menu|
+        menu.with_trigger("Ĉefa", variant: :primary)
+      end
+      assert_selector "button.tw\\:bg-esperanto-500.tw\\:hover\\:bg-esperanto-600"
+
+      render_inline(Ui::DropdownComponent.new) do |menu|
+        menu.with_trigger("Inversa", variant: :inverse)
+      end
+      assert_selector "button.tw\\:text-white\\/95.tw\\:hover\\:bg-white\\/15"
+    end
+
+    test "supports panel width options and custom item/header blocks" do
+      render_inline(Ui::DropdownComponent.new(width: :auto)) do |menu|
+        menu.with_trigger("Aŭtomata")
+        menu.with_header { "Propra Kapo" }
+        menu.with_item(href: "/propra") { "Propraero" }
+      end
+      assert_selector "div[role='menu'].tw\\:min-w-48"
+      assert_selector "div[role='presentation']", text: "Propra Kapo"
+      assert_selector "a[role='menuitem'].tw\\:hover\\:bg-gray-100.tw\\:focus\\:bg-gray-100", text: "Propraero"
+
+      render_inline(Ui::DropdownComponent.new(width: :medium)) do |menu|
+        menu.with_trigger("Meza")
+      end
+      assert_selector "div[role='menu'].tw\\:w-56"
+
+      render_inline(Ui::DropdownComponent.new(width: :large)) do |menu|
+        menu.with_trigger("Larĝa")
+      end
+      assert_selector "div[role='menu'].tw\\:w-64"
+    end
   end
 end

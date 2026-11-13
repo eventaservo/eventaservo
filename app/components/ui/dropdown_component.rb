@@ -73,7 +73,7 @@ module Ui
         [
           "tw:inline-flex tw:items-center tw:justify-center tw:gap-1.5 tw:rounded-md",
           "tw:text-sm tw:font-medium tw:transition-colors tw:cursor-pointer",
-          "focus:tw:outline-none focus:tw:ring-2 focus:tw:ring-esperanto-500/40",
+          "tw:focus:outline-none tw:focus:ring-2 tw:focus:ring-esperanto-500/40",
           variant_classes,
           html_options[:class]
         ].compact.join(" ")
@@ -118,15 +118,15 @@ module Ui
       def variant_classes
         case variant
         when :ghost
-          "tw:px-2.5 tw:py-1.5 tw:bg-transparent tw:border-0 tw:text-gray-700 hover:tw:bg-gray-100"
+          "tw:px-2.5 tw:py-1.5 tw:bg-transparent tw:border-0 tw:text-gray-700 tw:hover:bg-gray-100"
         when :light
-          "tw:px-3 tw:py-1.5 tw:bg-gray-100 tw:border tw:border-gray-200 tw:text-gray-800 hover:tw:bg-gray-200"
+          "tw:px-3 tw:py-1.5 tw:bg-gray-100 tw:border tw:border-gray-200 tw:text-gray-800 tw:hover:bg-gray-200"
         when :primary
-          "tw:px-3.5 tw:py-2 tw:bg-esperanto-500 tw:border tw:border-esperanto-500 tw:text-white hover:tw:bg-esperanto-600"
+          "tw:px-3.5 tw:py-2 tw:bg-esperanto-500 tw:border tw:border-esperanto-500 tw:text-white tw:hover:bg-esperanto-600"
         when :inverse
-          "tw:px-2.5 tw:py-1.5 tw:bg-transparent tw:border-0 tw:text-white/95 hover:tw:bg-white/15 hover:tw:text-white"
+          "tw:px-2.5 tw:py-1.5 tw:bg-transparent tw:border-0 tw:text-white/95 tw:hover:bg-white/15 tw:hover:text-white"
         else
-          "tw:px-3.5 tw:py-2 tw:bg-white tw:border tw:border-gray-300 tw:text-gray-700 tw:shadow-xs hover:tw:bg-gray-50"
+          "tw:px-3.5 tw:py-2 tw:bg-white tw:border tw:border-gray-300 tw:text-gray-700 tw:shadow-xs tw:hover:bg-gray-50"
         end
       end
 
@@ -182,7 +182,7 @@ module Ui
         [
           "tw:flex tw:items-center tw:gap-2.5 tw:w-full tw:px-3.5 tw:py-2 tw:text-sm",
           "tw:no-underline tw:transition-colors tw:text-left",
-          "focus:tw:outline-none focus:tw:bg-gray-100",
+          "tw:focus:outline-none tw:focus:bg-gray-100",
           state_classes,
           html_options[:class]
         ].compact.join(" ")
@@ -221,11 +221,11 @@ module Ui
       # @return [String]
       def state_classes
         if destructive
-          "tw:text-red-700 hover:tw:bg-red-50 hover:tw:text-red-800 focus:tw:bg-red-50"
+          "tw:text-red-700 tw:hover:bg-red-50 tw:hover:text-red-800 tw:focus:bg-red-50"
         elsif active
-          "tw:bg-esperanto-50 tw:text-esperanto-700 tw:font-medium hover:tw:bg-esperanto-100"
+          "tw:bg-esperanto-50 tw:text-esperanto-700 tw:font-medium tw:hover:bg-esperanto-100"
         else
-          "tw:text-gray-700 hover:tw:bg-gray-100 hover:tw:text-gray-900"
+          "tw:text-gray-700 tw:hover:bg-gray-100 tw:hover:text-gray-900"
         end
       end
 
@@ -368,7 +368,7 @@ module Ui
     def panel_classes
       [
         "tw:hidden tw:absolute tw:z-50 tw:py-1 tw:bg-white tw:rounded-lg",
-        "tw:shadow-lg tw:border tw:border-gray-200 focus:tw:outline-none",
+        "tw:shadow-lg tw:border tw:border-gray-200 tw:focus:outline-none",
         position_classes,
         width_classes
       ].join(" ")

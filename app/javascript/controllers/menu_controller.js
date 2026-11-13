@@ -14,8 +14,10 @@ export default class extends Controller {
     this.handleKeydown = this.handleKeydown.bind(this)
     this.handleDocumentKeydown = this.handleDocumentKeydown.bind(this)
     this.handleClickOutside = this.handleClickOutside.bind(this)
+    this.handlePanelClick = this.handlePanelClick.bind(this)
 
     this.element.addEventListener("keydown", this.handleKeydown)
+    this.element.addEventListener("click", this.handlePanelClick)
     document.addEventListener("keydown", this.handleDocumentKeydown, true)
     document.addEventListener("click", this.handleClickOutside)
 
@@ -25,6 +27,7 @@ export default class extends Controller {
 
   disconnect() {
     this.element.removeEventListener("keydown", this.handleKeydown)
+    this.element.removeEventListener("click", this.handlePanelClick)
     document.removeEventListener("keydown", this.handleDocumentKeydown, true)
     document.removeEventListener("click", this.handleClickOutside)
   }
@@ -83,10 +86,7 @@ export default class extends Controller {
     this.updateState()
   }
 
-  close(event) {
-    if (event) {
-      event.preventDefault()
-    }
+  close() {
     this.openValue = false
     this.updateState()
   }
@@ -219,6 +219,17 @@ export default class extends Controller {
       event.preventDefault()
       items[items.length - 1].focus()
     } else if (event.key === "Tab") {
+      this.close()
+    }
+  }
+
+  handlePanelClick(event) {
+    if (!this.openValue || !this.hasPanelTarget || !this.panelTarget.contains(event.target)) {
+      return
+    }
+
+    const item = event.target.closest("[role='menuitem'], a[href], button:not([disabled])")
+    if (item && this.panelTarget.contains(item) && item.getAttribute("aria-disabled") !== "true") {
       this.close()
     }
   }
