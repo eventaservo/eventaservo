@@ -1,6 +1,6 @@
 <% if ads.any? %>
-  <div class="d-flex justify-content-around">
-    <% responsive_classes = [ nil, 'd-none d-sm-block', 'd-none d-md-block', 'd-none d-lg-block'] %>
+  <div class="tw:flex tw:justify-around tw:gap-2 tw:mt-1 tw:mb-3">
+    <% responsive_classes = [nil, "tw:hidden tw:sm:block", "tw:hidden tw:md:block", "tw:hidden tw:lg:block"] %>
     <% ads.each_with_index do |ad, index| %>
       <%= link_to ad.url, class: responsive_classes[index] do %>
         <%= image_tag rails_blob_representation_proxy_path(
@@ -11,5 +11,4 @@
       <% end %>
     <% end %>
   </div>
-  <br>
 <% end %>

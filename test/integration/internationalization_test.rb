@@ -285,15 +285,15 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
 
     get root_url
     assert_response :success
-    assert_select "a.button-event-count[href*='azio']", text: /Azio/
+    assert_select "a[href*='azio']", text: /Azio/
 
     get "/en"
     assert_response :success
-    assert_select "a.button-event-count[href*='azio']", text: /Asia/
+    assert_select "a[href*='azio']", text: /Asia/
 
     get "/pt_BR"
     assert_response :success
-    assert_select "a.button-event-count[href*='azio']", text: /Ásia/
+    assert_select "a[href*='azio']", text: /Ásia/
   end
 
   test "renders localized search view across locales" do

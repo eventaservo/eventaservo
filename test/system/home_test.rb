@@ -2,7 +2,37 @@
 
 require "application_system_test_case"
 
+# End-to-end tests for home page search, filter toggles, and responsive layout.
 class HomeSystemTest < ApplicationSystemTestCase
+  setup do
+    @original_window_size = page.current_window.size
+  end
+
+  teardown do
+    page.current_window.resize_to(*@original_window_size) if @original_window_size
+  end
+
+  test "renders home navigation, continent links, and filter pills without horizontal overflow" do
+    visit root_path
+
+    assert_selector "a[href*='#{prie_path}']"
+    assert_selector "a[href*='#{anoncoj_path}']"
+    assert_selector "a[href*='#{international_calendar_path}']"
+
+    [375, 768, 1280].each do |width|
+      page.current_window.resize_to(width, 900)
+      scroll_width = evaluate_script("document.documentElement.scrollWidth")
+      client_width = evaluate_script("document.documentElement.clientWidth")
+      assert_operator scroll_width, :<=, client_width,
+        "Expected no horizontal overflow at #{width}px (scrollWidth=#{scroll_width}, clientWidth=#{client_width})"
+
+      uea_box = evaluate_script("document.querySelector(\"img[alt='UEA logo']\").getBoundingClientRect()")
+      tejo_box = evaluate_script("document.querySelector(\"img[alt='TEJO logo']\").getBoundingClientRect()")
+      assert_operator tejo_box["left"], :>, uea_box["right"],
+        "Expected UEA and TEJO logos to sit side-by-side at #{width}px"
+    end
+  end
+
   test "does not redirect to search page when the navbar search field is empty" do
     visit root_path
 
