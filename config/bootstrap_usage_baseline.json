@@ -1,15 +1,15 @@
 {
   "app/views": {
-    "data_attributes": 14,
-    "component_classes": 1154
+    "data_attributes": 0,
+    "component_classes": 1144
   },
   "app/components": {
     "data_attributes": 0,
     "component_classes": 4
   },
   "app/javascript": {
-    "data_attributes": 4,
-    "component_classes": 17
+    "data_attributes": 0,
+    "component_classes": 11
   },
   "app/helpers": {
     "data_attributes": 0,

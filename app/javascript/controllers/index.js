@@ -64,8 +64,8 @@ application.register("timezone", TimezoneController)
 import ToggleController from "./toggle_controller"
 application.register("toggle", ToggleController)
 
-import TooltipController from "./tooltip_controller"
-application.register("tooltip", TooltipController)
+import HintController from "./hint_controller"
+application.register("hint", HintController)
 
 import UserController from "./user_controller"
 application.register("user", UserController)
