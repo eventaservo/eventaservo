@@ -13,6 +13,9 @@ application.register("datepicker", DatepickerController)
 import DismissibleController from "./dismissible_controller"
 application.register("dismissible", DismissibleController)
 
+import DialogController from "./dialog_controller"
+application.register("dialog", DialogController)
+
 import Event__FormController from "./event/form_controller"
 application.register("event--form", Event__FormController)
 

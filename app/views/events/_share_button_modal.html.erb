@@ -1,58 +1,44 @@
-<!-- /eventaservo/app/views/events/_share_button_modal.html.erb -->
-<div id="shareModal" class="modal fade" aria-hidden="true" aria-labelledby="shareModalCenterTitle" role="dialog" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h5 id="shareModalCenterTitle" class="modal-title"><%= t("events.share_modal.title") %></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= t('buttons.close') %>"></button>
-      </div>
-
-      <div class="modal-body">
-        <div class="text-center">
-          <p><%= t("events.share_modal.prompt") %></p>
-          <% encoded_url = CGI.escape(request.url) %>
-          <% encoded_title = CGI.escape(@event.title.to_s) %>
-          <% twitter_text = CGI.escape("#{@event.title} #eventaservo") %>
-          <a href="mailto:?subject=<%= encoded_title %>&body=<%= encoded_url %>" class="btn btn-outline-secondary m-1" title="Email"
-             aria-label="<%= t('events.share_modal.share_via_email') %>">
-            <%= icon('fas', 'envelope') %>
-          </a>
-          <a href="https://www.facebook.com/sharer/sharer.php?u=<%= encoded_url %>" class="btn btn-outline-secondary m-1" title="Facebook" target="_blank" rel="noopener noreferrer"
-             aria-label="<%= t('events.share_modal.share_on_facebook') %>">
-            <%= icon('fab', 'facebook') %>
-          </a>
-          <a href="https://twitter.com/intent/tweet?url=<%= encoded_url %>&text=<%= twitter_text %>" class="btn btn-outline-secondary m-1" title="Twitter" target="_blank" rel="noopener noreferrer"
-             aria-label="<%= t('events.share_modal.share_on_twitter') %>">
-            <%= icon('fab', 'twitter') %>
-          </a>
-          <a href="whatsapp://send?text=<%= encoded_title %>%0A<%= encoded_url %>" class="btn btn-outline-secondary m-1" title="WhatsApp" target="_blank" rel="noopener noreferrer"
-             aria-label="<%= t('events.share_modal.share_via_whatsapp') %>">
-            <%= icon('fab', 'whatsapp') %>
-          </a>
-          <a href="https://telegram.me/share/url?text=<%= encoded_title %>&url=<%= encoded_url %>" class="btn btn-outline-secondary m-1" title="Telegram" target="_blank" rel="noopener noreferrer"
-             aria-label="<%= t('events.share_modal.share_on_telegram') %>">
-            <%= icon('fab', 'telegram') %>
-          </a>
-          <a href="https://www.pinterest.com/pin/create/button/?url=<%= encoded_url %>&description=<%= encoded_title %>" class="btn btn-outline-secondary m-1" title="Pinterest" target="_blank" rel="noopener noreferrer"
-             aria-label="<%= t('events.share_modal.share_on_pinterest') %>">
-            <%= icon('fab', 'pinterest') %>
-          </a>
-          <a href="https://vk.com/share.php?url=<%= encoded_url %>&title=<%= encoded_title %>" class="btn btn-outline-secondary m-1" title="VKontakte" target="_blank" rel="noopener noreferrer"
-             aria-label="<%= t('events.share_modal.share_on_vkontakte') %>">
-            <%= icon('fab', 'vk') %>
-          </a>
-          <a href="https://www.reddit.com/submit?url=<%= encoded_url %>&newwindow=1" class="btn btn-outline-secondary m-1" title="Reddit" target="_blank" rel="noopener noreferrer"
-             aria-label="<%= t('events.share_modal.share_on_reddit') %>">
-            <%= icon('fab', 'reddit') %>
-          </a>
-        </div>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><%= t("buttons.close") %></button>
-      </div>
-
-    </div>
+<%= render Ui::ModalComponent.new(id: "shareModal", title: t("events.share_modal.title"), title_id: "shareModalCenterTitle") do |dialog| %>
+  <div class="text-center">
+    <p><%= t("events.share_modal.prompt") %></p>
+    <% encoded_url = CGI.escape(request.url) %>
+    <% encoded_title = CGI.escape(@event.title.to_s) %>
+    <% twitter_text = CGI.escape("#{@event.title} #eventaservo") %>
+    <a href="mailto:?subject=<%= encoded_title %>&body=<%= encoded_url %>" class="btn btn-outline-secondary m-1" title="Email"
+       aria-label="<%= t('events.share_modal.share_via_email') %>">
+      <%= icon('fas', 'envelope') %>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=<%= encoded_url %>" class="btn btn-outline-secondary m-1" title="Facebook" target="_blank" rel="noopener noreferrer"
+       aria-label="<%= t('events.share_modal.share_on_facebook') %>">
+      <%= icon('fab', 'facebook') %>
+    </a>
+    <a href="https://twitter.com/intent/tweet?url=<%= encoded_url %>&text=<%= twitter_text %>" class="btn btn-outline-secondary m-1" title="Twitter" target="_blank" rel="noopener noreferrer"
+       aria-label="<%= t('events.share_modal.share_on_twitter') %>">
+      <%= icon('fab', 'twitter') %>
+    </a>
+    <a href="whatsapp://send?text=<%= encoded_title %>%0A<%= encoded_url %>" class="btn btn-outline-secondary m-1" title="WhatsApp" target="_blank" rel="noopener noreferrer"
+       aria-label="<%= t('events.share_modal.share_via_whatsapp') %>">
+      <%= icon('fab', 'whatsapp') %>
+    </a>
+    <a href="https://telegram.me/share/url?text=<%= encoded_title %>&url=<%= encoded_url %>" class="btn btn-outline-secondary m-1" title="Telegram" target="_blank" rel="noopener noreferrer"
+       aria-label="<%= t('events.share_modal.share_on_telegram') %>">
+      <%= icon('fab', 'telegram') %>
+    </a>
+    <a href="https://www.pinterest.com/pin/create/button/?url=<%= encoded_url %>&description=<%= encoded_title %>" class="btn btn-outline-secondary m-1" title="Pinterest" target="_blank" rel="noopener noreferrer"
+       aria-label="<%= t('events.share_modal.share_on_pinterest') %>">
+      <%= icon('fab', 'pinterest') %>
+    </a>
+    <a href="https://vk.com/share.php?url=<%= encoded_url %>&title=<%= encoded_title %>" class="btn btn-outline-secondary m-1" title="VKontakte" target="_blank" rel="noopener noreferrer"
+       aria-label="<%= t('events.share_modal.share_on_vkontakte') %>">
+      <%= icon('fab', 'vk') %>
+    </a>
+    <a href="https://www.reddit.com/submit?url=<%= encoded_url %>&newwindow=1" class="btn btn-outline-secondary m-1" title="Reddit" target="_blank" rel="noopener noreferrer"
+       aria-label="<%= t('events.share_modal.share_on_reddit') %>">
+      <%= icon('fab', 'reddit') %>
+    </a>
   </div>
-</div>
+
+  <% dialog.with_footer do %>
+    <%= render Ui::ButtonComponent.new(t("buttons.close"), variant: :secondary, data: {action: "dialog#close"}) %>
+  <% end %>
+<% end %>

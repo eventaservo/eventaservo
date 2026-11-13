@@ -415,17 +415,17 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
 
     get events_by_continent_path(continent: "reta")
     assert_response :success
-    assert_select "#webcalModal .modal-title", text: "Aboni kalendaron"
+    assert_select "#webcalModal #shareModalCenterTitle", text: "Aboni kalendaron"
     assert_select "#webcalModal button", text: "Fermi"
 
     get "/en/reta"
     assert_response :success
-    assert_select "#webcalModal .modal-title", text: "Subscribe to calendar"
+    assert_select "#webcalModal #shareModalCenterTitle", text: "Subscribe to calendar"
     assert_select "#webcalModal button", text: "Close"
 
     get "/pt_BR/reta"
     assert_response :success
-    assert_select "#webcalModal .modal-title", text: "Assinar calendário"
+    assert_select "#webcalModal #shareModalCenterTitle", text: "Assinar calendário"
     assert_select "#webcalModal button", text: "Fechar"
   end
 

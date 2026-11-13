@@ -1,0 +1,18 @@
+<div class="tw:p-6">
+  <%= render Ui::ModalComponent.new(id: "preview-large-dialog", title: "Listo de partoprenantoj", size: :lg, scrollable: true, open: local_assigns.fetch(:open, true)) do |modal| %>
+    <% modal.with_trigger do %>
+      <%= render Ui::ButtonComponent.new("Montri larĝan dialogon", variant: :primary, data: {dialog_open: "preview-large-dialog"}) %>
+    <% end %>
+
+    <div class="tw:space-y-3 tw:text-sm tw:text-gray-700">
+      <p class="tw:m-0">Tiu ĉi dialogo uzas la grandan larĝecon (<code>size: :lg</code>) kun rulumebla korpo.</p>
+      <% 15.times do |i| %>
+        <p class="tw:m-0">Partoprenanto #<%= i + 1 %> — Esperanto-klubo</p>
+      <% end %>
+    </div>
+
+    <% modal.with_footer do %>
+      <%= render Ui::ButtonComponent.new("Fermi", variant: :secondary, data: {action: "dialog#close"}) %>
+    <% end %>
+  <% end %>
+</div>

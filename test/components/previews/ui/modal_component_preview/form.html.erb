@@ -1,0 +1,25 @@
+<div class="tw:p-6">
+  <%= render Ui::ModalComponent.new(id: "preview-form-dialog", title: "Raporti problemon", padded: false, open: local_assigns.fetch(:open, true)) do |modal| %>
+    <% modal.with_trigger do %>
+      <%= render Ui::ButtonComponent.new("Malfermi formularon", variant: :primary, data: {dialog_open: "preview-form-dialog"}) %>
+    <% end %>
+
+    <form action="#" method="post" onsubmit="event.preventDefault()">
+      <div class="<%= modal.body_classes %> tw:space-y-4">
+        <div>
+          <label for="preview-name" class="tw:block tw:mb-1 tw:text-sm tw:font-medium tw:text-gray-700">Nomo</label>
+          <input id="preview-name" type="text" class="tw:w-full tw:rounded-md tw:border tw:border-solid tw:border-gray-300 tw:px-3 tw:py-2 tw:text-sm" placeholder="Via nomo" />
+        </div>
+        <div>
+          <label for="preview-message" class="tw:block tw:mb-1 tw:text-sm tw:font-medium tw:text-gray-700">Mesaĝo</label>
+          <textarea id="preview-message" rows="3" class="tw:w-full tw:rounded-md tw:border tw:border-solid tw:border-gray-300 tw:px-3 tw:py-2 tw:text-sm" placeholder="Priskribu la problemon"></textarea>
+        </div>
+      </div>
+
+      <div class="<%= modal.footer_classes %>">
+        <%= render Ui::ButtonComponent.new("Nuligi", variant: :cancel, data: {action: "dialog#close"}) %>
+        <%= render Ui::ButtonComponent.new("Sendi", variant: :primary, type: :submit) %>
+      </div>
+    </form>
+  <% end %>
+</div>

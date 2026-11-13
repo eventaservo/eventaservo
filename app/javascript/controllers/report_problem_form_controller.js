@@ -5,15 +5,15 @@ export default class extends Controller {
   static targets = ["name", "message"]
 
   connect() {
-    this.handleModalShown = this.handleModalShown.bind(this)
-    this.element.addEventListener('shown.bs.modal', this.handleModalShown)
+    this.handleDialogShown = this.handleDialogShown.bind(this)
+    this.element.addEventListener("dialog:shown", this.handleDialogShown)
   }
 
   disconnect() {
-    this.element.removeEventListener('shown.bs.modal', this.handleModalShown)
+    this.element.removeEventListener("dialog:shown", this.handleDialogShown)
   }
 
-  handleModalShown() {
+  handleDialogShown() {
     if (this.hasNameTarget && this.nameTarget.value === "") {
       this.nameTarget.focus()
     } else if (this.hasMessageTarget) {

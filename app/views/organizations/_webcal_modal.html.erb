@@ -1,34 +1,25 @@
-<div id="webcalModal" class="modal fade" aria-hidden="true" aria-labelledby="shareModalCenterTitle" role="dialog" tabindex="-1">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 id="shareModalCenterTitle" class="modal-title"><%= t("organizations.webcal.title") %></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= t("buttons.close") %>"></button>
-      </div>
-      <div class="modal-body">
-        <p>
-          <%= t("organizations.webcal.description_sync") %>
-        </p>
-        <p>
-          <%= t("organizations.webcal.description_link_html",
-                short_name: @organizo.short_name,
-                article_link: link_to(t("organizations.webcal.article_link_text"), "https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)", target: :_blank)) %>
-        </p>
-        <div class="input-group" data-controller="clipboard"
-             data-clipboard-success-message-value="<%= t('clipboard.copied_to_clipboard') %>"
-             data-clipboard-error-message-value="<%= t('clipboard.copy_failed') %>">
-          <%= link_to t('buttons.copy'), '#', class: 'input-group-text', data: { action: 'click->clipboard#copy' } %>
-          <%= text_field_tag nil, webcal_organizo_url(short_name: @organizo.short_name, format: :ics), readonly: true, class: 'form-control bg-color-white', data: { clipboard_target: 'source' } %>
-        </div>
-        <br>
-        <p>
-          <%= t("organizations.webcal.auto_subscribe_html",
-                link: link_to(t("organizations.webcal.link_text"), webcal_organizo_url(short_name: @organizo.short_name, protocol: :webcal, format: :ics))) %>
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><%= t('buttons.close') %></button>
-      </div>
-    </div>
+<%= render Ui::ModalComponent.new(id: "webcalModal", title: t("organizations.webcal.title"), title_id: "shareModalCenterTitle", size: :lg) do |dialog| %>
+  <p>
+    <%= t("organizations.webcal.description_sync") %>
+  </p>
+  <p>
+    <%= t("organizations.webcal.description_link_html",
+          short_name: @organizo.short_name,
+          article_link: link_to(t("organizations.webcal.article_link_text"), "https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)", target: :_blank)) %>
+  </p>
+  <div class="input-group" data-controller="clipboard"
+       data-clipboard-success-message-value="<%= t('clipboard.copied_to_clipboard') %>"
+       data-clipboard-error-message-value="<%= t('clipboard.copy_failed') %>">
+    <%= link_to t('buttons.copy'), '#', class: 'input-group-text', data: { action: 'click->clipboard#copy' } %>
+    <%= text_field_tag nil, webcal_organizo_url(short_name: @organizo.short_name, format: :ics), readonly: true, class: 'form-control bg-color-white', data: { clipboard_target: 'source' } %>
   </div>
-</div>
+  <br>
+  <p>
+    <%= t("organizations.webcal.auto_subscribe_html",
+          link: link_to(t("organizations.webcal.link_text"), webcal_organizo_url(short_name: @organizo.short_name, protocol: :webcal, format: :ics))) %>
+  </p>
+
+  <% dialog.with_footer do %>
+    <%= render Ui::ButtonComponent.new(t("buttons.close"), variant: :secondary, data: {action: "dialog#close"}) %>
+  <% end %>
+<% end %>
