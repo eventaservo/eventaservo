@@ -13,7 +13,8 @@ class Ui::ModalComponent < ViewComponent::Base
     lg: "tw:max-w-3xl"
   }.freeze
 
-  attr_reader :id, :title, :title_id, :size, :auto_focus, :open, :close_label, :padded, :scrollable, :dialog_data
+  attr_reader :id, :title, :title_id, :size, :auto_focus, :open, :close_label,
+    :padded, :scrollable, :overflow_visible, :dialog_data
 
   # Initializes a new dialog component.
   #
@@ -26,6 +27,7 @@ class Ui::ModalComponent < ViewComponent::Base
   # @param close_label [String, nil] Accessible label for the header close icon button
   # @param padded [Boolean] Whether default body padding classes wrap the main content
   # @param scrollable [Boolean] Whether the body region scrolls vertically within viewport height
+  # @param overflow_visible [Boolean] Whether content may extend outside `<dialog>` bounds instead of scrolling within the viewport
   # @param dialog_data [Hash] Extra Stimulus/data attributes merged onto `<dialog>`
   def initialize(
     id:,
@@ -37,6 +39,7 @@ class Ui::ModalComponent < ViewComponent::Base
     close_label: nil,
     padded: true,
     scrollable: false,
+    overflow_visible: false,
     dialog_data: {}
   )
     @id = id.to_s
@@ -48,6 +51,7 @@ class Ui::ModalComponent < ViewComponent::Base
     @close_label = close_label
     @padded = padded
     @scrollable = scrollable
+    @overflow_visible = ActiveModel::Type::Boolean.new.cast(overflow_visible)
     @dialog_data = dialog_data || {}
   end
 
@@ -55,10 +59,13 @@ class Ui::ModalComponent < ViewComponent::Base
   #
   # @return [String] Space-separated Tailwind classes
   def dialog_classes
+    overflow_class = overflow_visible ? "tw:overflow-visible" : "tw:max-h-[90dvh] tw:overflow-y-auto"
+
     [
       "tw:w-[calc(100%-2rem)]",
       SIZES.fetch(size),
-      "tw:m-auto tw:p-0 tw:overflow-visible",
+      "tw:m-auto tw:p-0",
+      overflow_class,
       "tw:rounded-xl tw:border tw:border-solid tw:border-gray-300",
       "tw:bg-white tw:text-gray-900 tw:shadow-2xl",
       "tw:backdrop:bg-gray-900/50",

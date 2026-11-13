@@ -54,6 +54,30 @@ module Ui
       assert_selector "dialog#triggeredDialog"
     end
 
+    test "defaults to viewport-bounded scrolling and supports overflow_visible, size :sm, open, and custom close_label" do
+      component = Ui::ModalComponent.new(
+        id: "compactDialog",
+        title: "Kompakta",
+        size: :sm,
+        open: true,
+        close_label: "Fermi nun",
+        dialog_data: {action: "custom#act"}
+      )
+      render_inline(component) { "Enhavo" }
+
+      assert_selector "dialog#compactDialog.tw\\:max-w-md.tw\\:overflow-y-auto[aria-labelledby='compactDialogTitle'][data-dialog-open-on-connect-value='true'][data-action='click->dialog#backdropClose custom#act']"
+      assert_selector "dialog#compactDialog button[aria-label='Fermi nun']"
+      assert_includes component.body_classes, "tw:overflow-visible"
+      assert_includes component.footer_classes, "tw:justify-end"
+
+      overflow_component = Ui::ModalComponent.new(id: "tzDialog", title: "Horzono", overflow_visible: true, scrollable: true)
+      render_inline(overflow_component) { "Elekti" }
+
+      assert_selector "dialog#tzDialog.tw\\:overflow-visible"
+      assert_no_selector "dialog#tzDialog.tw\\:overflow-y-auto"
+      assert_includes overflow_component.body_classes, "tw:overflow-y-auto"
+    end
+
     test "raises ArgumentError for unknown size" do
       assert_raises(ArgumentError) do
         Ui::ModalComponent.new(id: "bad", title: "Bad", size: :xl)

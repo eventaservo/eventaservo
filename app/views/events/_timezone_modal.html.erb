@@ -1,4 +1,4 @@
-<%= render Ui::ModalComponent.new(id: "timezoneModal", title: t("timezone.timezone"), title_id: "timezoneModalCenterTitle", auto_focus: false, padded: false) do |dialog| %>
+<%= render Ui::ModalComponent.new(id: "timezoneModal", title: t("timezone.timezone"), title_id: "timezoneModalCenterTitle", auto_focus: false, padded: false, overflow_visible: true) do |dialog| %>
   <%= form_tag(iloj_elektas_horzonon_url, method: :post, class: "text-start") do %>
     <div class="<%= dialog.body_classes %>" style="font-size: 1rem; font-weight: normal;">
       <% if cookies[:horzono] %>
