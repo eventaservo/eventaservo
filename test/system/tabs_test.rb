@@ -110,4 +110,21 @@ class TabsTest < ApplicationSystemTestCase
     assert_selector "#future-tab-pane.show.active"
     assert page.evaluate_script("document.activeElement === arguments[0]", future_tab.native)
   end
+
+  test "preserves server-selected non-first tab on organization page" do
+    organization = organizations(:rotterdam_centre)
+    visit organization_path(short_name: organization.short_name, tab: "past")
+
+    assert_selector "#past-tab.active[aria-selected='true'][tabindex='0']"
+    assert_selector "#future-tab[aria-selected='false'][tabindex='-1']"
+    assert_selector "#past-tab-pane.show.active"
+    assert_no_selector "#future-tab-pane.show.active"
+
+    visit organization_path(short_name: organization.short_name, tab: "reports")
+
+    assert_selector "#reports-tab.active[aria-selected='true'][tabindex='0']"
+    assert_selector "#future-tab[aria-selected='false'][tabindex='-1']"
+    assert_selector "#reports-tab-pane.show.active"
+    assert_no_selector "#future-tab-pane.show.active"
+  end
 end

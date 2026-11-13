@@ -60,7 +60,10 @@ export default class extends Controller {
     }
   }
 
-  indexValueChanged() {
+  indexValueChanged(value) {
+    if (value < 0 || value >= this.tabTargets.length) {
+      return
+    }
     this.updateState()
   }
 
