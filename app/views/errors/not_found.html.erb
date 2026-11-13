@@ -1,8 +1,8 @@
 <div class="tw:w-full tw:md:w-1/2 tw:mx-auto tw:my-4">
   <%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
-    <% panel.with_body(class: "tailwind-prose tw:space-y-4") do %>
+    <% panel.with_body(class: "tw:space-y-4") do %>
       <h1 class="tw:text-2xl tw:font-bold tw:text-gray-900 tw:m-0"><%= t("errors.not_found.title") %></h1>
-      <p class="tw:text-sm tw:text-gray-700 tw:m-0">
+      <p class="tailwind-prose tw:text-sm tw:text-gray-700 tw:m-0">
         <%= t("errors.not_found.message_html", contact_link: mail_to("kontakto@eventaservo.org", t("errors.not_found.contact_link_text"))) %>
       </p>
       <div>

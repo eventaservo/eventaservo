@@ -2,7 +2,16 @@
 
 require "application_system_test_case"
 
+# Checks static and error page content, link styles, and horizontal overflow.
 class StaticPagesTest < ApplicationSystemTestCase
+  setup do
+    @original_window_size = page.current_window.size
+  end
+
+  teardown do
+    page.current_window.resize_to(*@original_window_size) if @original_window_size
+  end
+
   test "renders privacy and terms pages inside prose cards without horizontal overflow" do
     ["/privateco", "/terms"].each do |path|
       visit path
