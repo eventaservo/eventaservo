@@ -6,7 +6,7 @@
   <%# Montras WebCAl ikonon nur por Retaj 'kontinentoj' %>
   <% if params[:continent] == 'reta' %>
     <% content_for :breadcrumb_right do %>
-      <%= link_to icon('far', 'calendar-alt'), webcal_url(landa_kodo: 'ol', protocol: :webcal, format: :ics), data: { bs_target: '#webcalModal', bs_toggle: 'modal' }, aria: { label: t('events.webcal_modal.subscribe_calendar') } %>
+      <%= link_to icon('far', 'calendar-alt'), webcal_url(landa_kodo: 'ol', protocol: :webcal, format: :ics), data: { dialog_open: 'webcalModal' }, aria: { label: t('events.webcal_modal.subscribe_calendar') } %>
       <%= link_to icon('fas', 'rss'), events_by_continent_path(continent: params[:continent], format: :xml), title: 'RSS', class: 'me-2', aria: { label: 'RSS' } %>
     <% end %>
   <% end %>
@@ -50,36 +50,27 @@
   <% end %>
 </div>
 
-<div id="webcalModal" class="modal fade" aria-hidden="true" role="dialog" tabindex="-1">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 id="shareModalCenterTitle" class="modal-title"><%= t("events.webcal_modal.title") %></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= t("buttons.close") %>"></button>
-      </div>
-      <div class="modal-body">
-        <p>
-          <%= t("events.webcal_modal.calendar_subscription_info") %>
-        </p>
-        <p>
-          <%= t("events.webcal_modal.online_intro_html", help_link: link_to(t("events.webcal_modal.help_article_link"), 'https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)', target: :'_blank', rel: 'noopener noreferrer')) %>
-        </p>
-        <div class="input-group" data-controller="clipboard"
-             data-clipboard-success-message-value="<%= t('clipboard.copied_to_clipboard') %>"
-             data-clipboard-error-message-value="<%= t('clipboard.copy_failed') %>">
-          <div class="input-group-text">
-              <%= link_to t("buttons.copy"), '#', data: { action: 'click->clipboard#copy' } %>
-          </div>
-          <%= text_field_tag nil, webcal_url(landa_kodo: 'ol', format: :ics), readonly: true, class: 'form-control bg-color-white', data: { clipboard_target: 'source' } %>
-        </div>
-        <br>
-        <p>
-          <%= t("events.webcal_modal.auto_subscribe_html", link: link_to(t("events.webcal_modal.auto_subscribe_link"), webcal_url(landa_kodo: 'ol', protocol: :webcal, format: :ics))) %>
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><%= t("buttons.close") %></button>
-      </div>
+<%= render Ui::ModalComponent.new(id: "webcalModal", title: t("events.webcal_modal.title"), title_id: "shareModalCenterTitle", size: :lg) do |dialog| %>
+  <p>
+    <%= t("events.webcal_modal.calendar_subscription_info") %>
+  </p>
+  <p>
+    <%= t("events.webcal_modal.online_intro_html", help_link: link_to(t("events.webcal_modal.help_article_link"), 'https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)', target: :'_blank', rel: 'noopener noreferrer')) %>
+  </p>
+  <div class="input-group" data-controller="clipboard"
+       data-clipboard-success-message-value="<%= t('clipboard.copied_to_clipboard') %>"
+       data-clipboard-error-message-value="<%= t('clipboard.copy_failed') %>">
+    <div class="input-group-text">
+      <%= link_to t("buttons.copy"), '#', data: { action: 'click->clipboard#copy' } %>
     </div>
+    <%= text_field_tag nil, webcal_url(landa_kodo: 'ol', format: :ics), readonly: true, class: 'form-control bg-color-white', data: { clipboard_target: 'source' } %>
   </div>
-</div>
+  <br>
+  <p>
+    <%= t("events.webcal_modal.auto_subscribe_html", link: link_to(t("events.webcal_modal.auto_subscribe_link"), webcal_url(landa_kodo: 'ol', protocol: :webcal, format: :ics))) %>
+  </p>
+
+  <% dialog.with_footer do %>
+    <%= render Ui::ButtonComponent.new(t("buttons.close"), variant: :secondary, data: {action: "dialog#close"}) %>
+  <% end %>
+<% end %>

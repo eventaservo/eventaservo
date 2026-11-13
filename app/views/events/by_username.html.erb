@@ -11,7 +11,7 @@
         <% if current_user == @uzanto && @uzanto.webcal_token.present? %>
           <%= link_to icon('far', 'calendar-alt'),
             webcal_user_url(webcal_token: @uzanto.webcal_token, protocol: :webcal, format: :ics),
-            data: { bs_target: '#webcalModal', bs_toggle: 'modal' },
+            data: { dialog_open: 'webcalModal' },
             aria: { label: t("users.profile.subscribe_personal_calendar") } %>
         <% end %>
       </div>
@@ -44,40 +44,29 @@
 </div>
 
 <% if current_user == @uzanto && @uzanto.webcal_token.present? %>
-  <div id="webcalModal" class="modal fade" aria-hidden="true" aria-labelledby="shareModalCenterTitle" role="dialog" tabindex="-1">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 id="shareModalCenterTitle" class="modal-title">
-            <%= t("users.profile.subscribe_personal_calendar") %>
-          </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= t("buttons.close") %>"></button>
-        </div>
-        <div class="modal-body">
-          <p>
-            <%= t("users.profile.webcal_info_1") %>
-          </p>
-          <div class="alert alert-warning">
-            <%= t("users.profile.webcal_warning") %>
-          </div>
-          <p>
-            <%= t("users.profile.webcal_info_2_html", article_link: link_to(t("users.profile.this_article"), "https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)", target: "_blank")) %>
-          </p>
-          <div class="input-group" data-controller="clipboard"
-               data-clipboard-success-message-value="<%= t('clipboard.copied_to_clipboard') %>"
-               data-clipboard-error-message-value="<%= t('clipboard.copy_failed') %>">
-            <%= link_to t('buttons.copy'), '#', class: 'input-group-text', data: { action: 'click->clipboard#copy' } %>
-            <%= text_field_tag nil, webcal_user_url(webcal_token: @uzanto.webcal_token, format: :ics), readonly: true, class: 'form-control bg-color-white', data: { clipboard_target: 'source' } %>
-          </div>
-          <br>
-          <p>
-            <%= t("users.profile.webcal_info_3_html", link: link_to(t("users.profile.this_link"), webcal_user_url(webcal_token: @uzanto.webcal_token, protocol: :webcal, format: :ics))) %>
-          </p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><%= t("buttons.close") %></button>
-        </div>
-      </div>
+  <%= render Ui::ModalComponent.new(id: "webcalModal", title: t("users.profile.subscribe_personal_calendar"), title_id: "shareModalCenterTitle", size: :lg) do |dialog| %>
+    <p>
+      <%= t("users.profile.webcal_info_1") %>
+    </p>
+    <div class="alert alert-warning">
+      <%= t("users.profile.webcal_warning") %>
     </div>
-  </div>
+    <p>
+      <%= t("users.profile.webcal_info_2_html", article_link: link_to(t("users.profile.this_article"), "https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)", target: "_blank")) %>
+    </p>
+    <div class="input-group" data-controller="clipboard"
+         data-clipboard-success-message-value="<%= t('clipboard.copied_to_clipboard') %>"
+         data-clipboard-error-message-value="<%= t('clipboard.copy_failed') %>">
+      <%= link_to t('buttons.copy'), '#', class: 'input-group-text', data: { action: 'click->clipboard#copy' } %>
+      <%= text_field_tag nil, webcal_user_url(webcal_token: @uzanto.webcal_token, format: :ics), readonly: true, class: 'form-control bg-color-white', data: { clipboard_target: 'source' } %>
+    </div>
+    <br>
+    <p>
+      <%= t("users.profile.webcal_info_3_html", link: link_to(t("users.profile.this_link"), webcal_user_url(webcal_token: @uzanto.webcal_token, protocol: :webcal, format: :ics))) %>
+    </p>
+
+    <% dialog.with_footer do %>
+      <%= render Ui::ButtonComponent.new(t("buttons.close"), variant: :secondary, data: {action: "dialog#close"}) %>
+    <% end %>
+  <% end %>
 <% end %>

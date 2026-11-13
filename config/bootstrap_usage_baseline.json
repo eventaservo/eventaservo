@@ -1,7 +1,7 @@
 {
   "app/views": {
-    "data_attributes": 33,
-    "component_classes": 1282
+    "data_attributes": 14,
+    "component_classes": 1154
   },
   "app/components": {
     "data_attributes": 0,
@@ -9,7 +9,7 @@
   },
   "app/javascript": {
     "data_attributes": 4,
-    "component_classes": 19
+    "component_classes": 17
   },
   "app/helpers": {
     "data_attributes": 0,

@@ -1,41 +1,30 @@
-<div class="modal text-start fade" id="timezoneModal" aria-hidden="true" aria-labelledby="timezoneModalCenterTitle" role="dialog" tabindex="-1" data-bs-focus="false">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <%= form_tag(iloj_elektas_horzonon_url, method: :post) do %>
-        <div class="modal-header">
-          <h5 class="modal-title" id="timezoneModalCenterTitle">
-            <%= t("timezone.timezone") %>
-          </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= t('buttons.close') %>"></button>
+<%= render Ui::ModalComponent.new(id: "timezoneModal", title: t("timezone.timezone"), title_id: "timezoneModalCenterTitle", auto_focus: false, padded: false, overflow_visible: true) do |dialog| %>
+  <%= form_tag(iloj_elektas_horzonon_url, method: :post, class: "text-start") do %>
+    <div class="<%= dialog.body_classes %>" style="font-size: 1rem; font-weight: normal;">
+      <% if cookies[:horzono] %>
+        <p>
+          <%= t("timezone.modal.currently_viewing_html", timezone: content_tag(:b, I18n.t(cookies[:horzono], scope: :timezones))) %>
+        </p>
+        <div class="small">
+          <%= t("timezone.modal.reset_timezone_html", link: link_to(t("timezone.modal.click_here"), iloj_forvishas_horzonon_url, id: 'remove-timezone-link')) %>
         </div>
-        <div class="modal-body" style="font-size: 1rem; font-weight: normal;">
-          <% if cookies[:horzono] %>
-            <p>
-              <%= t("timezone.modal.currently_viewing_html", timezone: content_tag(:b, I18n.t(cookies[:horzono], scope: :timezones))) %>
-            </p>
-            <div class="small">
-              <%= t("timezone.modal.reset_timezone_html", link: link_to(t("timezone.modal.click_here"), iloj_forvishas_horzonon_url, id: 'remove-timezone-link')) %>
-            </div>
-            <hr>
-          <% end %>
-
-          <p>
-            <%= t("timezone.select_timezone") %>
-          </p>
-
-          <div data-controller="timezone" class="mb-3">
-            <% selected = @event.nil? ? (cookies[:horzono] || nil) : @event.time_zone %>
-            <%= select_tag(:horzono, options_for_select(Horzono.for_select, selected),
-              data: { timezone_target: "timezoneSelect" }) %>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button class="button-cancel" data-bs-dismiss="modal" type="button">
-            <%= t("buttons.close") %>
-          </button>
-          <%= submit_tag("#{cookies[:horzono] ? t("buttons.change") : t("buttons.select")}", class: 'button-submit') %>
-        </div>
+        <hr>
       <% end %>
+
+      <p>
+        <%= t("timezone.select_timezone") %>
+      </p>
+
+      <div data-controller="timezone" class="mb-3">
+        <% selected = @event.nil? ? (cookies[:horzono] || nil) : @event.time_zone %>
+        <%= select_tag(:horzono, options_for_select(Horzono.for_select, selected),
+          data: { timezone_target: "timezoneSelect" }) %>
+      </div>
     </div>
-  </div>
-</div>
+
+    <div class="<%= dialog.footer_classes %>">
+      <%= render Ui::ButtonComponent.new(t("buttons.close"), variant: :cancel, data: {action: "dialog#close"}) %>
+      <%= render Ui::ButtonComponent.new("#{cookies[:horzono] ? t("buttons.change") : t("buttons.select")}", variant: :primary, type: :submit) %>
+    </div>
+  <% end %>
+<% end %>

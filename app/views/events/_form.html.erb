@@ -224,7 +224,7 @@
             <% if @event.cancelled %>
               <%= link_to t("pages.event.uncancel_event"), event_malnuligi_url(event_code: @event.code), class: 'btn btn-sm btn-outline-success float-start ms-2', method: :post %>
             <% else %>
-              <a href="#" class="button-outline-red float-start ms-2" data-bs-target="#nuligiloModal" data-bs-toggle="modal">
+              <a href="#" class="button-outline-red float-start ms-2" data-dialog-open="nuligiloModal">
                 <%= t("pages.event.cancel_event") %>
               </a>
             <% end %>

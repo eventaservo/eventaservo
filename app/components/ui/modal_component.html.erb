@@ -1,0 +1,42 @@
+<%= trigger if trigger? %>
+
+<%= tag.dialog(
+  id: id,
+  tabindex: -1,
+  class: dialog_classes,
+  aria: { labelledby: title_id },
+  data: resolved_dialog_data
+) do %>
+  <div class="tw:flex tw:flex-col tw:w-full">
+    <div class="tw:flex tw:items-center tw:justify-between tw:gap-4 tw:border-0 tw:border-b tw:border-solid tw:border-esperanto-100 tw:bg-esperanto-50 tw:px-6 tw:py-4 tw:rounded-t-xl">
+      <h5 id="<%= title_id %>" class="tw:m-0 tw:text-lg tw:font-semibold tw:text-esperanto-900">
+        <%= title %>
+      </h5>
+
+      <button
+        type="button"
+        class="tw:inline-flex tw:items-center tw:justify-center tw:rounded-lg tw:border-0 tw:bg-transparent tw:p-1.5 tw:text-gray-600 tw:cursor-pointer tw:transition-colors tw:hover:bg-esperanto-100 tw:hover:text-esperanto-900 tw:focus-visible:outline-none tw:focus-visible:ring-2 tw:focus-visible:ring-esperanto-500/40"
+        data-action="dialog#close"
+        aria-label="<%= resolved_close_label %>"
+      >
+        <svg class="tw:h-5 tw:w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+      </button>
+    </div>
+
+    <% if padded %>
+      <div class="<%= body_classes %>">
+        <%= content %>
+      </div>
+    <% else %>
+      <%= content %>
+    <% end %>
+
+    <% if footer? %>
+      <div class="<%= footer_classes %>">
+        <%= footer %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

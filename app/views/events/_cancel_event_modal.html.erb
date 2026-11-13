@@ -1,26 +1,15 @@
-<!-- /eventaservo/app/views/events/_cancel_event_modal.html.erb -->
-<div id="nuligiloModal" class="modal fade" aria-hidden="true" aria-labelledby="nuligiloModalCenterTitle" role="dialog" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content text-start">
-
-      <div class="modal-header">
-        <h5 id="nuligiloModalCenterTitle" class="modal-title"><%= t("events.cancel_modal.title") %></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= t('buttons.close') %>"></button>
+<%= render Ui::ModalComponent.new(id: "nuligiloModal", title: t("events.cancel_modal.title"), title_id: "nuligiloModalCenterTitle", padded: false) do |dialog| %>
+  <%= form_tag event_nuligi_url(event_code: @event.code), class: "text-start" do %>
+    <div class="<%= dialog.body_classes %>" style="font-weight: normal; font-size: 1rem;">
+      <p><%= t("events.cancel_modal.description") %></p>
+      <div class="mb-3">
+        <%= text_field_tag :cancel_reason, '', class: 'form-control', required: true, placeholder: t("events.cancel_modal.reason_placeholder") %>
       </div>
-
-      <%= form_tag event_nuligi_url(event_code: @event.code) do %>
-        <div class="modal-body" style="font-weight: normal; font-size: 1rem;">
-          <p><%= t("events.cancel_modal.description") %></p>
-          <div class="mb-3">
-            <%= text_field_tag :cancel_reason, '', class: 'form-control', required: true, placeholder: t("events.cancel_modal.reason_placeholder") %>
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <%= submit_tag t("events.cancel_modal.confirm_button"), class: 'btn btn-sm btn-danger' %>
-        </div>
-      <% end %>
-
     </div>
-  </div>
-</div>
+
+    <div class="<%= dialog.footer_classes %>">
+      <%= render Ui::ButtonComponent.new(t("buttons.close"), variant: :cancel, data: {action: "dialog#close"}) %>
+      <%= render Ui::ButtonComponent.new(t("events.cancel_modal.confirm_button"), variant: :danger, type: :submit) %>
+    </div>
+  <% end %>
+<% end %>

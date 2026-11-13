@@ -6,12 +6,17 @@ export default class extends Controller {
   static targets = ["timezoneSelect"]
 
   connect() {
-    new SlimSelect({
+    this.slimSelect = new SlimSelect({
       select: this.timezoneSelectTarget,
       settings: {
+        contentLocation: this.element,
         searchPlaceholder: "Serĉi...",
         searchText: "Neniu trafo",
       }
     })
+  }
+
+  disconnect() {
+    this.slimSelect?.destroy()
   }
 }

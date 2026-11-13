@@ -1,0 +1,15 @@
+<div class="tw:p-6">
+  <%= render Ui::ModalComponent.new(id: "preview-default-dialog", title: "Kunhavigi eventon", open: local_assigns.fetch(:open, true)) do |modal| %>
+    <% modal.with_trigger do %>
+      <%= render Ui::ButtonComponent.new("Malfermi dialogon", variant: :primary, data: {dialog_open: "preview-default-dialog"}) %>
+    <% end %>
+
+    <p class="tw:m-0 tw:text-sm tw:text-gray-700">
+      Jen baznivela dialogo konstruita per nativa HTML <code>&lt;dialog&gt;</code>, Stimulus kaj Tailwind CSS.
+    </p>
+
+    <% modal.with_footer do %>
+      <%= render Ui::ButtonComponent.new("Fermi", variant: :secondary, data: {action: "dialog#close"}) %>
+    <% end %>
+  <% end %>
+</div>
