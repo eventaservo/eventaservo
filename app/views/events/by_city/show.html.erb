@@ -2,19 +2,21 @@
   <%= "#{params[:city_name]} (#{params[:country_name]})" %>
 <% end %>
 
-<div class="box-white">
-  <%= render partial: 'layouts/breadcrumb' %>
+<%= render Ui::CardComponent.new(variant: :bordered, class: "tw:my-1 tw:sm:my-2") do |panel| %>
+  <% panel.with_body(padding: false, class: "tw:p-2 tw:sm:p-4") do %>
+    <%= render partial: "layouts/breadcrumb" %>
 
-  <% if @past_mode %>
-    <%= render partial: "events/events_as_cards_pasintaj", locals: {events: @events} %>
-  <% else %>
-    <%= render partial: 'home/view_style_chooser', locals: { kartaro: true, kalendaro: false, mapo: true } %>
-    <%#= render partial: 'events/events_count' %>
-    <%= render partial: 'home/filters' %>
-    <%= render partial: 'events/okazantaj' %>
-    <%= display_events_by_style %>
-    <% unless cards_view_mode? %>
-      <%= render partial: "events/past_events_toggle", locals: {past_url: past_events_listing_path} %>
+    <% if @past_mode %>
+      <%= render partial: "events/events_as_cards_pasintaj", locals: {events: @events} %>
+    <% else %>
+      <%= render partial: "home/view_style_chooser", locals: {kartaro: true, kalendaro: false, mapo: true} %>
+      <%#= render partial: 'events/events_count' %>
+      <%= render partial: "home/filters" %>
+      <%= render partial: "events/okazantaj" if cookies[:vidmaniero].in?(%w[kartoj kartaro]) %>
+      <%= display_events_by_style %>
+      <% unless cards_view_mode? %>
+        <%= render partial: "events/past_events_toggle", locals: {past_url: past_events_listing_path} %>
+      <% end %>
     <% end %>
   <% end %>
-</div>
+<% end %>

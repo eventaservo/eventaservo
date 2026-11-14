@@ -1,17 +1,17 @@
 <div class="item-row-no-chevron <%= event_color_class(event) %>">
-  <div class="col-12">
-    <p>
-      <div class="text-center fw-bold">
+  <div class="tw:w-full">
+    <div class="tw:mt-2">
+      <div class="tw:text-center tw:font-bold">
         <%= event_flag(event) %>
         <%= link_to event.title, event_path(code: event.ligilo), class: ("cancelled" if event.cancelled) %>
       </div>
-      <div class="text-center">
+      <div class="tw:text-center">
         <%= display_organizations_for_event(event) %>
         <br>
         <%= event_date(event) %>
         <%= event.online ? "(Reta evento)" : "- #{event.city} - #{event.country.name}" %>
       </div>
-    </p>
-    <p class="text-center"><%= event.description %></p>
+    </div>
+    <p class="tw:text-center tw:mt-2 tw:mb-2"><%= event.description %></p>
   </div>
 </div>

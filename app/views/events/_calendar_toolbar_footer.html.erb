@@ -1,13 +1,15 @@
 <%# Navigation links target "native-calendar" explicitly so Turbo Frame navigation
     works correctly even if this partial is ever rendered outside the frame context. %>
-<div class="d-flex align-items-center justify-content-end mt-2 flex-wrap gap-2">
-  <div class="btn-group" role="group" aria-label="<%= t('events.calendar.week_navigation') %>">
+<div class="tw:flex tw:items-center tw:justify-end tw:mt-2 tw:flex-wrap tw:gap-2">
+  <div class="tw:inline-flex tw:rounded-md tw:border tw:border-gray-200 tw:overflow-hidden tw:divide-x tw:divide-gray-200" role="group" aria-label="<%= t("events.calendar.week_navigation") %>">
     <%= link_to icon("fas", "chevron-left"), prev_path,
-        class: "btn btn-light px-3", title: t("events.calendar.previous_week"),
+        class: "tw:inline-flex tw:items-center tw:px-3 tw:py-1.5 tw:text-sm tw:bg-gray-100 tw:text-gray-800 tw:hover:bg-gray-200 tw:no-underline",
+        title: t("events.calendar.previous_week"),
         aria: {label: t("events.calendar.previous_week")},
         data: {turbo_frame: "native-calendar"} %>
     <%= link_to icon("fas", "chevron-right"), next_path,
-        class: "btn btn-light px-3", title: t("events.calendar.next_week"),
+        class: "tw:inline-flex tw:items-center tw:px-3 tw:py-1.5 tw:text-sm tw:bg-gray-100 tw:text-gray-800 tw:hover:bg-gray-200 tw:no-underline",
+        title: t("events.calendar.next_week"),
         aria: {label: t("events.calendar.next_week")},
         data: {turbo_frame: "native-calendar"} %>
   </div>

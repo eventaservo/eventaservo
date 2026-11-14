@@ -7,7 +7,7 @@
     next if [e.title, e.description, e.city].in? dup
 
     dup << [e.title, e.description, e.city]
-    @eventoj << { title: e.title, description: e.description, latitude: e.latitude, longitude: e.longitude, ligilo: event_url(code: e.ligilo), date: event_date(e), pinColor: event_map_pin_color(e) }
+    @eventoj << {title: e.title, description: e.description, latitude: e.latitude, longitude: e.longitude, ligilo: event_url(code: e.ligilo), date: event_date(e), pinColor: event_map_pin_color(e)}
   end
 %>
 <div
@@ -15,32 +15,31 @@
   class="full-map"
   data-controller="map-view"
   data-map-view-events-value="<%= @eventoj.to_json %>"
-  >
-</div>
+></div>
 
-<div class="d-flex justify-content-center small">
-  <div class="m-2 text-center">
-    <%= image_tag('/map_icons/pin_green.svg', height: 24, alt: 'verda pinglo') %>
+<div class="tw:flex tw:flex-wrap tw:justify-center tw:text-sm tw:mt-2">
+  <div class="tw:m-2 tw:text-center">
+    <%= image_tag("/map_icons/pin_green.svg", height: 24, alt: "verda pinglo", class: "tw:inline-block") %>
     <%= t("filters.periods.hodiau") %>
   </div>
-  <div class="m-2 text-center">
-    <%= image_tag('/map_icons/pin_orange.svg', height: 24, alt: 'oranĝa pinglo') %>
+  <div class="tw:m-2 tw:text-center">
+    <%= image_tag("/map_icons/pin_orange.svg", height: 24, alt: "oranĝa pinglo", class: "tw:inline-block") %>
     <%= t("filters.periods.p7_tagojn") %>
   </div>
-  <div class="m-2 text-center">
-    <%= image_tag('/map_icons/pin_yellow.svg', height: 24, alt: 'flava pinglo') %>
+  <div class="tw:m-2 tw:text-center">
+    <%= image_tag("/map_icons/pin_yellow.svg", height: 24, alt: "flava pinglo", class: "tw:inline-block") %>
     <%= t("filters.periods.p30_tagojn") %>
   </div>
-  <div class="m-2 text-center">
-    <%= image_tag('/map_icons/pin_blue.svg', height: 24, alt: 'blua pinglo') %>
+  <div class="tw:m-2 tw:text-center">
+    <%= image_tag("/map_icons/pin_blue.svg", height: 24, alt: "blua pinglo", class: "tw:inline-block") %>
     <%= t("filters.periods.estontece") %>
   </div>
-  <div class="m-2 text-center">
-    <%= image_tag('/map_icons/pin_red.svg', height: 24, alt: 'ruĝa pinglo') %>
+  <div class="tw:m-2 tw:text-center">
+    <%= image_tag("/map_icons/pin_red.svg", height: 24, alt: "ruĝa pinglo", class: "tw:inline-block") %>
     <%= t("events.cancelled_label") %>
   </div>
 </div>
 
-<div class="d-flex justify-content-center small">
+<div class="tw:flex tw:justify-center tw:text-sm tw:text-center tw:mb-2">
   <%= t("events.map.duplicate_notice") %>
 </div>

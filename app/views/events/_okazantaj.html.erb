@@ -1,28 +1,24 @@
 <% if cookies[:vidmaniero].in?(%w[kartoj kartaro]) && params[:page].nil? && params[:pagho].nil? %>
   <% if @today_events.any? %>
-    <br>
-    <h5 class="text-center fw-bold"><%= t("events.happening_now_count", count: @today_events.not_cancelled.length) %></h5>
-    <div class="row">
+    <h5 class="tw:text-center tw:font-bold tw:text-xl tw:mt-4 tw:mb-2"><%= t("events.happening_now_count", count: @today_events.not_cancelled.length) %></h5>
+    <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:gap-x-6">
       <% @today_events.order(:date_start).each do |evento| %>
-        <div class="col-12 col-md-6">
-          <div class="okazantaj-eventoj">
-            <h6 class="text-truncate">
-              <%= event_flag(evento) %>
-              <% titolo = evento.title %>
-              <% if evento.participants.size > 5 %>
-                <% titolo = "🔥 #{titolo}" %>
-              <% end %>
-              <%= link_to titolo, event_path(code: evento.ligilo), class: ("cancelled" if evento.cancelled) %>
-            </h6>
-            <div class="small ps-4">
-              <%= evento.start_time_label(horzono: (cookies[:horzono] || evento.time_zone)) unless (evento.multtaga? or evento.tuttaga?) %>
-              <%= evento.universala? ? t('events.online') : "#{evento.city} (#{evento.country.code.upcase})" %>
-              <%= display_event_days_left(evento) %>
-            </div>
+        <div class="okazantaj-eventoj tw:min-w-0">
+          <h6 class="tw:truncate tw:text-base tw:font-medium tw:m-0">
+            <%= event_flag(evento) %>
+            <% titolo = evento.title %>
+            <% if evento.participants.size > 5 %>
+              <% titolo = "🔥 #{titolo}" %>
+            <% end %>
+            <%= link_to titolo, event_path(code: evento.ligilo), class: ("cancelled" if evento.cancelled) %>
+          </h6>
+          <div class="tw:text-sm tw:ps-6">
+            <%= evento.start_time_label(horzono: (cookies[:horzono] || evento.time_zone)) unless (evento.multtaga? or evento.tuttaga?) %>
+            <%= evento.universala? ? t("events.online") : "#{evento.city} (#{evento.country.code.upcase})" %>
+            <%= display_event_days_left(evento) %>
           </div>
         </div>
       <% end %>
     </div>
   <% end %>
 <% end %>
-<br>

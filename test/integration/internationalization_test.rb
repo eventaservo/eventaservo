@@ -267,17 +267,17 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
 
     get event_path(code: event.ligilo)
     assert_response :success
-    assert_select "nav[aria-label='breadcrumb'] .breadcrumb-item", text: "Mondo"
+    assert_select "nav[aria-label='breadcrumb'] li", text: "Mondo"
 
     sign_in users(:admin_user)
 
     get "/en/e/#{event.ligilo}"
     assert_response :success
-    assert_select "nav[aria-label='breadcrumb'] .breadcrumb-item", text: "World"
+    assert_select "nav[aria-label='breadcrumb'] li", text: "World"
 
     get "/pt_BR/e/#{event.ligilo}"
     assert_response :success
-    assert_select "nav[aria-label='breadcrumb'] .breadcrumb-item", text: "Mundo"
+    assert_select "nav[aria-label='breadcrumb'] li", text: "Mundo"
   end
 
   test "renders localized continent buttons on home page across locales" do

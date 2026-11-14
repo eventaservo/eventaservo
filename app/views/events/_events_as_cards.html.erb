@@ -1,26 +1,25 @@
-<h5 class="text-center fw-bold">
+<h5 class="tw:text-center tw:font-bold tw:text-xl tw:mb-2">
   <%= t("events.upcoming_events_count", count: @kvanto_venontaj_eventoj) if events.count > 0 %>
 </h5>
 
 <% if events.count > 0 && @nearby_events_count.to_i > 0 %>
-  <p class="text-center text-muted small mb-1">
+  <p class="tw:text-center tw:text-gray-500 tw:text-sm tw:mb-1">
     <%= t("events.nearby_breakdown", city_count: @target_city_events_count, city: @target_city_name, nearby_count: @nearby_events_count, radius: @nearby_radius_km) %>
-    (<%= link_to t("events.hide"), nearby_toggle_link_path(include_nearby: true), class: "small" %>)
+    (<%= link_to t("events.hide"), nearby_toggle_link_path(include_nearby: true), class: "tw:text-sm" %>)
   </p>
 <% end %>
 
 <% if past_events_listing_path && @card_view && @has_nearby_events && !@include_nearby %>
-  <div class="text-center mb-3">
-    <%= link_to t("events.show_nearby"), nearby_toggle_link_path(include_nearby: false), class: "small" %>
+  <div class="tw:text-center tw:mb-3">
+    <%= link_to t("events.show_nearby"), nearby_toggle_link_path(include_nearby: false), class: "tw:text-sm" %>
   </div>
 <% end %>
 
-<% events.grouped_by_months.each do |date, events| %>
-  <br>
-  <h3 class="text-divider"><%= l(date, format: "%B %Y") %></h3>
-  <div class="row">
-    <% events.each do |event| %>
-      <div class="col-12 col-sm-6 col-lg-4 mb-4">
+<% events.grouped_by_months.each do |date, month_events| %>
+  <h3 class="text-divider tw:mt-6 tw:mb-3"><%= l(date, format: "%B %Y") %></h3>
+  <div class="tw:grid tw:grid-cols-1 tw:sm:grid-cols-2 tw:lg:grid-cols-3 tw:gap-6 tw:mb-6">
+    <% month_events.each do |event| %>
+      <div>
         <%= render Events::CardComponent.new(event: event) %>
       </div>
     <% end %>
@@ -28,8 +27,8 @@
 <% end %>
 
 <% if past_events_listing_path && events.any? %>
-  <div class="text-center mb-3">
-    <%= link_to t("events.show_past"), past_events_listing_path, class: "small" %>
+  <div class="tw:text-center tw:mb-3">
+    <%= link_to t("events.show_past"), past_events_listing_path, class: "tw:text-sm" %>
   </div>
 <% end %>
 

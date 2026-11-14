@@ -71,9 +71,9 @@ class HomeController::CalendarTest < ActionDispatch::IntegrationTest
       get root_url
       assert_response :success
       assert_select "#calendarMonthNavigation"
-      assert_select ".dropdown-menu a[data-turbo-frame='native-calendar']", count: 12
-      assert_select ".dropdown-menu a[href*='date=2026-04-01']"
-      assert_select ".dropdown-menu a[href*='date=2027-03-01']"
+      assert_select "#calendarMonthNavigationMenu a[data-turbo-frame='native-calendar']", count: 12
+      assert_select "#calendarMonthNavigationMenu a[href*='date=2026-04-01']"
+      assert_select "#calendarMonthNavigationMenu a[href*='date=2027-03-01']"
     end
   end
 
