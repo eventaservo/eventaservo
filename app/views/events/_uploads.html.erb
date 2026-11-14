@@ -7,7 +7,7 @@
           <%= link_to(image_tag(url_for(upload.variant(resize_to_limit: [150, 150])), class: "tw:p-1 tw:bg-white tw:border tw:border-gray-200 tw:rounded tw:max-w-full tw:h-auto tw:inline-block"), url_for(upload), class: "glightbox", data: {gallery: @event.code}) %>
           <% if user_is_owner_or_admin(@event) %>
             <p class="tw:mt-1 tw:mb-0">
-              <%= render Ui::ButtonComponent.new(t("buttons.delete"), href: event_delete_file_path(event_code: @event.code, file_id: upload.id), icon: "trash-alt", icon_style: "far", variant: :delete, size: :small, method: :delete, data: {confirm: t("common.are_you_sure")}) %>
+              <%= render Ui::ButtonComponent.new(t("buttons.delete"), href: event_delete_file_path(event_code: @event.code, file_id: upload.id), icon: "trash-alt", icon_style: "far", variant: :delete, size: :small, data: {method: :delete, confirm: t("common.are_you_sure")}) %>
             </p>
           <% end %>
         </div>

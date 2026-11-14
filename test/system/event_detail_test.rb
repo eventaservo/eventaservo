@@ -45,4 +45,27 @@ class EventDetailSystemTest < ApplicationSystemTestCase
     assert_selector "[data-event-user-interested-button-target='question'] a", text: I18n.t("common.yes_upper"), visible: true
     assert_selector "[data-event-user-interested-button-target='question'] a", text: I18n.t("common.no_upper"), visible: true
   end
+
+  test "owner can delete an uploaded image from event detail page" do
+    user = create(:user, :e2e_test_user)
+    event = events(:valid_event)
+    event.update!(user:)
+    event.uploads.attach(
+      io: File.open(Rails.root.join("test/fixtures/files/jes.png")),
+      filename: "jes.png",
+      content_type: "image/png"
+    )
+    login_as(user)
+
+    visit event_path(code: event.ligilo)
+    assert_selector "#lightgallery .foto"
+
+    accept_confirm do
+      within("#lightgallery") { click_on I18n.t("buttons.delete") }
+    end
+
+    assert_text "Dosiero sukcese forigita"
+    assert_no_selector "#lightgallery .foto"
+    assert_not event.reload.uploads.attached?
+  end
 end
