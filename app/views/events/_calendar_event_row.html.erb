@@ -1,6 +1,6 @@
-<div class="col-2 col-md-1 fw-light text-success-emphasis py-1">
+<div class="tw:col-span-2 tw:md:col-span-1 tw:font-light tw:text-esperanto-900 tw:py-1">
   <% if event.tuttaga? %>
-    <span class="text-muted"><%= t("events.all_day") %></span>
+    <span class="tw:text-gray-500"><%= t("events.all_day") %></span>
   <% else %>
     <%= event.start_time_label(horzono: cookies[:horzono]) %>
     <% end_time = event.end_time_label(horzono: cookies[:horzono]) %>
@@ -9,15 +9,15 @@
     <% end %>
   <% end %>
 </div>
-<div class="col py-1 calendar-event-col">
-  <div class="fw-medium text-truncate">
-    <%= link_to event.title, event_path(code: event.ligilo), class: "text-decoration-none text-reset stretched-link", data: {turbo_frame: "_top"} %>
+<div class="tw:col-span-10 tw:md:col-span-11 tw:py-1 tw:min-w-0">
+  <div class="tw:font-medium tw:truncate tw:text-gray-900">
+    <%= link_to event.title, event_path(code: event.ligilo), class: "tw:no-underline tw:text-inherit tw:after:absolute tw:after:inset-0 tw:after:content-['']", data: {turbo_frame: "_top"} %>
   </div>
-  <div class="text-body-secondary small text-truncate">
+  <div class="tw:text-gray-500 tw:text-xs tw:truncate">
     <%= event_flag(event) %>
     <% if event.country&.code && !event.universala? %>
-      <span class="d-none d-md-inline"><%= event.country.name %></span>
-      <span class="d-inline d-md-none"><%= event.country.code.upcase %></span>
+      <span class="tw:hidden tw:md:inline"><%= event.country.name %></span>
+      <span class="tw:inline tw:md:hidden"><%= event.country.code.upcase %></span>
       <% if event.city.present? %> · <% end %>
     <% end %>
     <%= event.city %>

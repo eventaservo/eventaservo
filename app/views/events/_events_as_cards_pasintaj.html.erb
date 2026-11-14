@@ -1,19 +1,18 @@
-<h5 class="text-center fw-bold">
+<h5 class="tw:text-center tw:font-bold tw:text-xl tw:mb-2">
   <%= t("events.past_events_count", count: @pagy.count) if events.any? %>
 </h5>
 
 <% if upcoming_events_listing_path %>
-  <div class="text-center mb-3">
-    <%= link_to t("events.show_upcoming"), upcoming_events_listing_path, class: "small" %>
+  <div class="tw:text-center tw:mb-3">
+    <%= link_to t("events.show_upcoming"), upcoming_events_listing_path, class: "tw:text-sm" %>
   </div>
 <% end %>
 
 <% events.grouped_by_months(direction: :desc).each do |date, events_in_month| %>
-  <br>
-  <h3 class="text-divider"><%= l(date, format: "%B %Y") %></h3>
-  <div class="row">
+  <h3 class="text-divider tw:mt-6 tw:mb-3"><%= l(date, format: "%B %Y") %></h3>
+  <div class="tw:grid tw:grid-cols-1 tw:sm:grid-cols-2 tw:lg:grid-cols-3 tw:gap-6 tw:mb-6">
     <% events_in_month.each do |event| %>
-      <div class="col-12 col-sm-6 col-lg-4 mb-4">
+      <div>
         <%= render Events::CardComponent.new(event: event) %>
       </div>
     <% end %>

@@ -1,8 +1,6 @@
-<% events.grouped_by_months.map do |date, events| %>
-  <br>
-  <br>
-  <h3 class="text-divider"><%= l(date, format: "%B %Y") %></h3>
-  <% events.each do |event| %>
-    <%= render partial: 'events/list', locals: { event: event } %>
+<% events.grouped_by_months.map do |date, month_events| %>
+  <h3 class="text-divider tw:mt-8 tw:mb-3"><%= l(date, format: "%B %Y") %></h3>
+  <% month_events.each do |event| %>
+    <%= render partial: "events/list", locals: {event: event} %>
   <% end %>
 <% end %>

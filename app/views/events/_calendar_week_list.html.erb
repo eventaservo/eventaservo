@@ -1,18 +1,17 @@
-<div class="border rounded overflow-hidden small">
+<div class="tw:border tw:border-gray-200 tw:rounded tw:overflow-hidden tw:text-sm">
   <% (date..(date + 6.days)).each_with_index do |day, di| %>
     <% day_events = events_by_day[day] || [] %>
-    <div class="<%= 'border-top' if di > 0 %>">
-
-      <div class="row g-0 align-items-center bg-success text-white text-uppercase fw-bold px-2 py-1">
-        <div class="col-3 col-md-1"><%= l(day, format: :short) %></div>
-        <div class="col text-uppercase"><%= l(day, format: "%A") %></div>
+    <div class="<%= "tw:border-t tw:border-gray-200" if di > 0 %>">
+      <div class="tw:grid tw:grid-cols-12 tw:items-center tw:bg-esperanto-500 tw:text-white tw:uppercase tw:font-bold tw:px-2 tw:py-1">
+        <div class="tw:col-span-3 tw:md:col-span-1"><%= l(day, format: :short) %></div>
+        <div class="tw:col-span-9 tw:md:col-span-11 tw:uppercase"><%= l(day, format: "%A") %></div>
       </div>
 
       <% if day_events.empty? %>
-        <div class="px-2 py-1 text-muted fst-italic small"><%= t("events.calendar.no_events") %></div>
+        <div class="tw:px-2 tw:py-1 tw:text-gray-500 tw:italic tw:text-xs"><%= t("events.calendar.no_events") %></div>
       <% else %>
         <% day_events.each_with_index do |event, i| %>
-          <div class="row g-0 align-items-center px-2 py-1 hover-row position-relative <%= 'border-bottom' unless i == day_events.size - 1 %>">
+          <div class="tw:grid tw:grid-cols-12 tw:items-center tw:px-2 tw:py-1 hover-row tw:relative <%= "tw:border-b tw:border-gray-200" unless i == day_events.size - 1 %>">
             <%= render "events/calendar_event_row", event: event %>
           </div>
         <% end %>

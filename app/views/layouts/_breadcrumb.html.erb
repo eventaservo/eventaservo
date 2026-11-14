@@ -1,52 +1,54 @@
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-      <%= link_to t('breadcrumbs.world'), root_url(s: params[:s].presence, t: params[:t].presence) %>
+<nav aria-label="breadcrumb" class="tw:mt-1 tw:mb-4 tw:bg-[#e9ecef] tw:px-4 tw:py-3 tw:rounded">
+  <ol class="tw:flex tw:flex-wrap tw:items-center tw:list-none tw:m-0 tw:p-0">
+    <li class="tw:inline-flex tw:items-center">
+      <%= link_to t("breadcrumbs.world"), root_url(s: params[:s].presence, t: params[:t].presence) %>
     </li>
 
-    <% if params[:code].present? && params[:controller] == 'events' %>
+    <% if params[:code].present? && params[:controller] == "events" %>
       <% event = Event.joins(:country).by_link(params[:code]) %>
-      <li class="breadcrumb-item">
+      <li class="tw:inline-flex tw:items-center tw:before:content-['/'] tw:before:px-2 tw:before:text-gray-500">
         <%= link_to event.country.continent, events_by_continent_url(continent: event.country.continent.normalized) %>
       </li>
       <% unless event.universala? %>
-        <li class="breadcrumb-item">
+        <li class="tw:inline-flex tw:items-center tw:before:content-['/'] tw:before:px-2 tw:before:text-gray-500">
           <%= link_to event.country.name, events_by_country_url(continent: event.country.continent.normalized, country_name: event.country.name.downcase) %>
         </li>
-        <li class="breadcrumb-item">
+        <li class="tw:inline-flex tw:items-center tw:before:content-['/'] tw:before:px-2 tw:before:text-gray-500">
           <%= link_to event.city, events_by_city_url(continent: event.country.continent.normalized, country_name: event.country.name.downcase, city_name: event.city.downcase) %>
         </li>
       <% end %>
-    <% elsif params[:action] == 'by_username' %>
+    <% elsif params[:action] == "by_username" %>
       <% user = User.find_by(username: params[:username]) %>
-      <li class="breadcrumb-item">
+      <li class="tw:inline-flex tw:items-center tw:before:content-['/'] tw:before:px-2 tw:before:text-gray-500">
         <%= link_to user.name, events_by_username_url(username: params[:username]) %>
       </li>
     <% end %>
 
     <%# Continent %>
     <% if params[:continent].present? %>
-      <li class="breadcrumb-item">
+      <li class="tw:inline-flex tw:items-center tw:before:content-['/'] tw:before:px-2 tw:before:text-gray-500">
         <%= link_to @continent, events_by_continent_url(continent: params[:continent].normalized, s: params[:s].presence, t: params[:t].presence) %>
       </li>
     <% end %>
 
     <%# Country %>
     <% if params[:country_name].present? %>
-      <li class="breadcrumb-item">
+      <li class="tw:inline-flex tw:items-center tw:before:content-['/'] tw:before:px-2 tw:before:text-gray-500">
         <%= link_to @country.name, events_by_country_url(continent: params[:continent].normalized, country_name: params[:country_name].downcase, s: params[:s].presence, t: params[:t].presence) %>
       </li>
     <% end %>
 
     <%# City %>
     <% if params[:city_name].present? %>
-      <li class="breadcrumb-item">
+      <li class="tw:inline-flex tw:items-center tw:before:content-['/'] tw:before:px-2 tw:before:text-gray-500">
         <%= link_to params[:city_name].titleize, events_by_city_url(continent: params[:continent].normalized, country_name: params[:country_name].downcase, city_name: params[:city_name].downcase, s: params[:s].presence, t: params[:t].presence) %>
       </li>
     <% end %>
 
-    <div class="ms-auto">
-      <%= yield :breadcrumb_right %>
-    </div>
+    <% if content_for?(:breadcrumb_right) %>
+      <li class="tw:ms-auto tw:flex tw:items-center tw:gap-2">
+        <%= yield :breadcrumb_right %>
+      </li>
+    <% end %>
   </ol>
 </nav>

@@ -2,72 +2,84 @@
   <%= continent_display_name(params[:continent]) %>
 <% end %>
 
-<div class="box-white">
+<%= render Ui::CardComponent.new(variant: :bordered, class: "tw:my-1 tw:sm:my-2") do |panel| %>
   <%# Montras WebCAl ikonon nur por Retaj 'kontinentoj' %>
-  <% if params[:continent] == 'reta' %>
+  <% if params[:continent] == "reta" %>
     <% content_for :breadcrumb_right do %>
-      <%= link_to icon('far', 'calendar-alt'), webcal_url(landa_kodo: 'ol', protocol: :webcal, format: :ics), data: { dialog_open: 'webcalModal' }, aria: { label: t('events.webcal_modal.subscribe_calendar') } %>
-      <%= link_to icon('fas', 'rss'), events_by_continent_path(continent: params[:continent], format: :xml), title: 'RSS', class: 'me-2', aria: { label: 'RSS' } %>
+      <%= link_to icon("far", "calendar-alt"), webcal_url(landa_kodo: "ol", protocol: :webcal, format: :ics), data: {dialog_open: "webcalModal"}, aria: {label: t("events.webcal_modal.subscribe_calendar")} %>
+      <%= link_to icon("fas", "rss"), events_by_continent_path(continent: params[:continent], format: :xml), title: "RSS", class: "tw:me-2", aria: {label: "RSS"} %>
     <% end %>
   <% end %>
 
-  <%= render partial: 'layouts/breadcrumb' %>
+  <% panel.with_body(padding: false, class: "tw:p-2 tw:sm:p-4") do %>
+    <%= render partial: "layouts/breadcrumb" %>
 
-  <% if @past_mode %>
-    <% unless params[:continent] == 'reta' %>
-      <div class="text-center m-2">
-        <% @countries.each do |country| %>
-          <%= link_to events_by_country_path(continent: country.continent.normalized, country_name: country.name, pasintaj: 1), class: 'button-event-count' do %>
-            <%= flag_icon(country.code, squared: true) %>
-            <%= country.name %>
-            <span class="badge text-bg-secondary"><%= country.count %></span>
+    <% if @past_mode %>
+      <% if params[:continent] != "reta" && @countries.any? %>
+        <div class="tw:flex tw:flex-wrap tw:justify-center tw:gap-1.5 tw:my-2 tw:mx-1">
+          <% @countries.each do |country| %>
+            <%= render Ui::ButtonComponent.new(
+              href: events_by_country_path(continent: country.continent.normalized, country_name: country.name, pasintaj: 1),
+              variant: :outline_primary,
+              size: :small
+            ) do %>
+              <%= flag_icon(country.code, squared: true) %>
+              <span><%= country.name %></span>
+              <%= render Ui::BadgeComponent.new(country.count, variant: :secondary, shape: :pill, size: :small) %>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
-    <% end %>
-    <%= render partial: "events/events_as_cards_pasintaj", locals: {events: @events} %>
-  <% else %>
-    <%= render partial: 'home/view_style_chooser', locals: { kartaro: true, kalendaro: false, mapo: true } %>
+        </div>
+      <% end %>
+      <%= render partial: "events/events_as_cards_pasintaj", locals: {events: @events} %>
+    <% else %>
+      <%= render partial: "home/view_style_chooser", locals: {kartaro: true, kalendaro: false, mapo: true} %>
 
-    <% unless params[:continent] == 'reta' %>
-      <div class="text-center m-2">
-        <% @countries.each do |country| %>
-          <%= link_to events_by_country_path(continent: country.continent.normalized, country_name: country.name, periodo: params[:periodo].presence, o: params[:o].presence, s: params[:s].presence), class: 'button-event-count' do %>
-            <%= flag_icon(country.code, squared: true) %>
-            <%= country.name %>
-            <span class="badge text-bg-primary"><%= country.count %></span>
+      <% if params[:continent] != "reta" && @countries.any? %>
+        <div class="tw:flex tw:flex-wrap tw:justify-center tw:gap-1.5 tw:my-2 tw:mx-1">
+          <% @countries.each do |country| %>
+            <%= render Ui::ButtonComponent.new(
+              href: events_by_country_path(continent: country.continent.normalized, country_name: country.name, periodo: params[:periodo].presence, o: params[:o].presence, s: params[:s].presence),
+              variant: :outline_primary,
+              size: :small
+            ) do %>
+              <%= flag_icon(country.code, squared: true) %>
+              <span><%= country.name %></span>
+              <%= render Ui::BadgeComponent.new(country.count, variant: :primary, shape: :pill, size: :small) %>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
-    <% end %>
+        </div>
+      <% end %>
 
-    <%= render partial: 'home/filters' %>
-    <%= render partial: 'events/okazantaj' %>
-    <%= display_events_by_style %>
-    <% unless cards_view_mode? %>
-      <%= render partial: "events/past_events_toggle", locals: {past_url: past_events_listing_path} %>
+      <%= render partial: "home/filters" %>
+      <%= render partial: "events/okazantaj" if cookies[:vidmaniero].in?(%w[kartoj kartaro]) %>
+      <%= display_events_by_style %>
+      <% unless cards_view_mode? %>
+        <%= render partial: "events/past_events_toggle", locals: {past_url: past_events_listing_path} %>
+      <% end %>
     <% end %>
   <% end %>
-</div>
+<% end %>
 
 <%= render Ui::ModalComponent.new(id: "webcalModal", title: t("events.webcal_modal.title"), title_id: "shareModalCenterTitle", size: :lg) do |dialog| %>
   <p>
     <%= t("events.webcal_modal.calendar_subscription_info") %>
   </p>
   <p>
-    <%= t("events.webcal_modal.online_intro_html", help_link: link_to(t("events.webcal_modal.help_article_link"), 'https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)', target: :'_blank', rel: 'noopener noreferrer')) %>
+    <%= t("events.webcal_modal.online_intro_html", help_link: link_to(t("events.webcal_modal.help_article_link"), "https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)", target: :_blank, rel: "noopener noreferrer")) %>
   </p>
-  <div class="input-group" data-controller="clipboard"
-       data-clipboard-success-message-value="<%= t('clipboard.copied_to_clipboard') %>"
-       data-clipboard-error-message-value="<%= t('clipboard.copy_failed') %>">
-    <div class="input-group-text">
-      <%= link_to t("buttons.copy"), '#', data: { action: 'click->clipboard#copy' } %>
-    </div>
-    <%= text_field_tag nil, webcal_url(landa_kodo: 'ol', format: :ics), readonly: true, class: 'form-control bg-color-white', data: { clipboard_target: 'source' } %>
+  <div class="tw:flex tw:items-stretch tw:w-full" data-controller="clipboard"
+       data-clipboard-success-message-value="<%= t("clipboard.copied_to_clipboard") %>"
+       data-clipboard-error-message-value="<%= t("clipboard.copy_failed") %>">
+    <%= link_to t("buttons.copy"), "#",
+      class: "tw:inline-flex tw:items-center tw:px-3 tw:py-1.5 tw:text-sm tw:bg-gray-100 tw:border tw:border-r-0 tw:border-gray-300 tw:rounded-l-md tw:text-brand-blue tw:hover:text-brand-blue-hover tw:hover:bg-gray-200 tw:whitespace-nowrap",
+      data: {action: "click->clipboard#copy"} %>
+    <%= text_field_tag nil, webcal_url(landa_kodo: "ol", format: :ics),
+      readonly: true,
+      class: "tw:flex-1 tw:min-w-0 tw:px-3 tw:py-1.5 tw:text-sm tw:bg-white tw:text-gray-900 tw:border tw:border-gray-300 tw:rounded-r-md tw:focus:outline-none tw:focus:ring-2 tw:focus:ring-brand-blue/40",
+      data: {clipboard_target: "source"} %>
   </div>
-  <br>
-  <p>
-    <%= t("events.webcal_modal.auto_subscribe_html", link: link_to(t("events.webcal_modal.auto_subscribe_link"), webcal_url(landa_kodo: 'ol', protocol: :webcal, format: :ics))) %>
+  <p class="tw:mt-4">
+    <%= t("events.webcal_modal.auto_subscribe_html", link: link_to(t("events.webcal_modal.auto_subscribe_link"), webcal_url(landa_kodo: "ol", protocol: :webcal, format: :ics))) %>
   </p>
 
   <% dialog.with_footer do %>

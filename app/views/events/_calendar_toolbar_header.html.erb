@@ -1,9 +1,9 @@
 <%# Navigation links target "native-calendar" explicitly so Turbo Frame navigation
     works correctly even if this partial is ever rendered outside the frame context. %>
-<div class="d-flex flex-column flex-md-row align-items-stretch align-items-md-center gap-2 mb-2 w-100">
+<div class="tw:flex tw:flex-col tw:md:flex-row tw:items-stretch tw:md:items-center tw:gap-2 tw:mb-2 tw:w-full">
   <% week_end = date + 6.days %>
   <% month_names = I18n.t("date.month_names") %>
-  <strong class="text-uppercase fs-5 text-start flex-shrink-0">
+  <strong class="tw:uppercase tw:text-xl tw:font-bold tw:text-start tw:shrink-0">
     <% if date.year != week_end.year %>
       <%= date.day %> <%= month_names[date.month].upcase %> <%= date.year %> – <%= week_end.day %> <%= month_names[week_end.month].upcase %> <%= week_end.year %>
     <% elsif date.month != week_end.month %>
@@ -12,32 +12,27 @@
       <%= date.day %> – <%= week_end.day %> <%= month_names[date.month].upcase %> <%= date.year %>
     <% end %>
   </strong>
-  <div class="d-flex align-items-center justify-content-between justify-content-md-end gap-2 flex-wrap flex-md-nowrap w-100 flex-md-grow-1">
-    <div class="tw:relative" data-controller="menu">
-      <button class="btn btn-light dropdown-toggle" type="button" id="calendarMonthNavigation"
-        aria-expanded="false" aria-haspopup="true" aria-controls="calendarMonthNavigationMenu"
-        data-menu-target="button" data-action="click->menu#toggle">
-        <%= t("events.calendar.jump_to_month") %>
-      </button>
-      <ul id="calendarMonthNavigationMenu" role="menu" data-menu-target="panel" class="dropdown-menu dropdown-menu-end tw:right-0 tw:left-auto tw:top-full tw:mt-1" aria-labelledby="calendarMonthNavigation">
-        <% month_navigation_options.each do |label, path| %>
-          <li>
-            <%= link_to label, path, class: "dropdown-item",
-              data: {turbo_frame: "native-calendar", action: "click->menu#close"} %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
+  <div class="tw:flex tw:items-center tw:justify-between tw:md:justify-end tw:gap-2 tw:flex-wrap tw:md:flex-nowrap tw:w-full tw:md:grow">
+    <%= render Ui::DropdownComponent.new(menu_id: "calendarMonthNavigationMenu", align: :right, width: :auto) do |dropdown| %>
+      <% dropdown.with_trigger(t("events.calendar.jump_to_month"), id: "calendarMonthNavigation", variant: :light) %>
+      <% month_navigation_options.each do |label, path| %>
+        <% dropdown.with_item(label, href: path, data: {turbo_frame: "native-calendar", action: "click->menu#close"}) %>
+      <% end %>
+    <% end %>
 
-    <%= link_to t("events.calendar.today"), today_path, class: "btn btn-light", data: {turbo_frame: "native-calendar"} %>
+    <%= link_to t("events.calendar.today"), today_path,
+      class: "tw:inline-flex tw:items-center tw:px-3 tw:py-1.5 tw:text-sm tw:font-medium tw:bg-gray-100 tw:border tw:border-gray-200 tw:rounded-md tw:text-gray-800 tw:hover:bg-gray-200 tw:no-underline",
+      data: {turbo_frame: "native-calendar"} %>
 
-    <div class="btn-group" role="group" aria-label="<%= t('events.calendar.week_navigation') %>">
+    <div class="tw:inline-flex tw:rounded-md tw:border tw:border-gray-200 tw:overflow-hidden tw:divide-x tw:divide-gray-200" role="group" aria-label="<%= t("events.calendar.week_navigation") %>">
       <%= link_to icon("fas", "chevron-left"), prev_path,
-          class: "btn btn-light px-3", title: t("events.calendar.previous_week"),
+          class: "tw:inline-flex tw:items-center tw:px-3 tw:py-1.5 tw:text-sm tw:bg-gray-100 tw:text-gray-800 tw:hover:bg-gray-200 tw:no-underline",
+          title: t("events.calendar.previous_week"),
           aria: {label: t("events.calendar.previous_week")},
           data: {turbo_frame: "native-calendar"} %>
       <%= link_to icon("fas", "chevron-right"), next_path,
-          class: "btn btn-light px-3", title: t("events.calendar.next_week"),
+          class: "tw:inline-flex tw:items-center tw:px-3 tw:py-1.5 tw:text-sm tw:bg-gray-100 tw:text-gray-800 tw:hover:bg-gray-200 tw:no-underline",
+          title: t("events.calendar.next_week"),
           aria: {label: t("events.calendar.next_week")},
           data: {turbo_frame: "native-calendar"} %>
     </div>
