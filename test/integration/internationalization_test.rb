@@ -463,15 +463,15 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
 
     get new_event_path
     assert_response :success
-    assert_select ".lead", text: /Nova evento, kunveno aŭ okazaĵo/
+    assert_select "h1", text: /Nova evento, kunveno aŭ okazaĵo/
 
     get "/en/e/new"
     assert_response :success
-    assert_select ".lead", text: /New event or gathering/
+    assert_select "h1", text: /New event or gathering/
 
     get "/pt_BR/e/new"
     assert_response :success
-    assert_select ".lead", text: /Novo evento ou encontro/
+    assert_select "h1", text: /Novo evento ou encontro/
   end
 
   test "renders localized event edit form across locales" do
@@ -480,15 +480,15 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
 
     get edit_event_path(code: event.ligilo)
     assert_response :success
-    assert_select ".lead", text: /Redakti/
+    assert_select "h1", text: /Redakti/
 
     get "/en/e/#{event.ligilo}/edit"
     assert_response :success
-    assert_select ".lead", text: /Edit/
+    assert_select "h1", text: /Edit/
 
     get "/pt_BR/e/#{event.ligilo}/edit"
     assert_response :success
-    assert_select ".lead", text: /Editar/
+    assert_select "h1", text: /Editar/
   end
 
   test "renders localized event chronology across locales" do

@@ -13,12 +13,12 @@
   </div>
 
   <% if error? %>
-    <p id="<%= error_id %>" class="tw:mt-1 tw:text-xs tw:text-red-600 tw:flex tw:items-center tw:gap-1">
+    <p id="<%= error_id %>" class="tw:mt-1 tw:mb-0 tw:text-xs tw:text-red-600 tw:flex tw:items-center tw:gap-1">
       <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
       <%= error %>
     </p>
   <% elsif hint? %>
-    <p id="<%= hint_id %>" class="tw:mt-1 tw:text-xs tw:text-gray-500">
+    <p id="<%= hint_id %>" class="tw:mt-1 tw:mb-0 tw:text-xs tw:text-gray-500">
       <%= hint %>
     </p>
   <% end %>

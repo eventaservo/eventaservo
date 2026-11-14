@@ -1,241 +1,263 @@
-<%= render partial: 'cancel_event_modal' %>
+<%= render partial: "cancel_event_modal" %>
 
-<div class="row">
-  <div class="col-lg-8 offset-lg-2">
-    <div class="box-white">
-      <div class="lead">
-        <% if params[:action] == 'new' %>
-          <%= t("events.form.new_title") %>
-        <% else %>
-          <%= t("buttons.edit") %>
-        <% end %>
-      </div>
+<%
+  field_classes = "tw:block tw:w-full tw:rounded tw:border tw:border-gray-300 tw:bg-white tw:px-3 tw:py-1.5 tw:text-sm tw:text-gray-900 tw:placeholder-gray-400 tw:focus:border-esperanto-500 tw:focus:ring-2 tw:focus:ring-esperanto-500/25 tw:focus:outline-none"
+  label_classes = "tw:block tw:text-sm tw:font-medium tw:text-gray-700 tw:mb-1"
+  hint_classes = "tw:mt-1 tw:mb-0 tw:text-xs tw:text-gray-500"
+  checkbox_classes = "tw:h-4 tw:w-4 tw:rounded tw:border-gray-300 tw:text-esperanto-500 tw:focus:ring-esperanto-500/40"
+%>
 
-      <div class="alert alert-info small">
-        <%= t("events.form.write_in_esperanto_notice") %>
-      </div>
+<div class="tw:max-w-4xl tw:mx-auto">
+  <%= render Ui::CardComponent.new(variant: :bordered, overflow_visible: true) do |card| %>
+    <% card.with_body do %>
+      <h1 class="tw:text-xl tw:font-bold tw:text-gray-900 tw:border-b tw:border-gray-200 tw:pb-2 tw:mb-3">
+        <%= @event.persisted? ? t("buttons.edit") : t("events.form.new_title") %>
+      </h1>
 
-      <%= form_for(@event, url: (event_path(code: @event.code) if params[:action].in? %w(edit update)),
+      <%= render Ui::AlertComponent.new(
+        t("events.form.write_in_esperanto_notice"),
+        variant: :info,
+        class: "tw:mb-3 tw:text-sm"
+      ) %>
+
+      <%= form_for(@event, url: (event_path(code: @event.code) if params[:action].in? %w[edit update]),
           data: {
-            controller: 'event--form',
-            action: 'submit->event--form#validateCategories',
-            'event--form-search-placeholder-value': t('events.form.search_placeholder'),
-            'event--form-search-text-value': t('events.form.search_text'),
-            'event--form-select-category-alert-value': t('events.form.select_category_alert')
+            controller: "event--form",
+            action: "submit->event--form#validateCategories",
+            "event--form-search-placeholder-value": t("events.form.search_placeholder"),
+            "event--form-search-text-value": t("events.form.search_text"),
+            "event--form-select-category-alert-value": t("events.form.select_category_alert")
           }) do |form| %>
         <%= error_handling(@event) %>
 
-        <div class="mb-3">
-          <%= form.label :title, "#{t('activerecord.attributes.event.title')} *" %>
-          <%= form.text_field :title, class: 'form-control', autofocus: true, required: true, aria: { describedby: 'title-characters-count' } %>
-          <small class="form-text text-muted" id="title-characters-count">
-            <%= t("events.form.max_100_chars") %>
-          </small>
+        <div class="tw:mb-3">
+          <%= render Ui::InputComponent.new(
+            "event[title]",
+            id: "event_title",
+            value: @event.title,
+            label: t("activerecord.attributes.event.title"),
+            hint: t("events.form.max_100_chars"),
+            required: true,
+            autofocus: true,
+            "aria-describedby": "title-characters-count"
+          ) %>
         </div>
 
-        <div class="mb-3">
-          <%= form.label :description, "#{t('activerecord.attributes.event.description')} *" %>
-          <%= form.text_field :description, class: 'form-control', required: true, aria: { describedby: 'description-help' } %>
-          <small class="form-text text-muted" id="description-help">
-            <%= t("events.form.max_140_chars") %>
-          </small>
+        <div class="tw:mb-3">
+          <%= render Ui::InputComponent.new(
+            "event[description]",
+            id: "event_description",
+            value: @event.description,
+            label: t("activerecord.attributes.event.description"),
+            hint: t("events.form.max_140_chars"),
+            required: true,
+            "aria-describedby": "description-help"
+          ) %>
         </div>
 
         <% if Organization.by_user(current_user).any? %>
-          <div class="mb-3">
-            <%= label_tag :organization_id, t("events.form.organizations") %>
-            <%= select_tag 'organization_ids[]',
-              options_from_collection_for_select(Organization.by_user(current_user), 'id', 'full_name', @event_organization_ids),
+          <div class="tw:mb-3">
+            <%= label_tag :organization_id, t("events.form.organizations"), class: label_classes %>
+            <%= select_tag "organization_ids[]",
+              options_from_collection_for_select(Organization.by_user(current_user), "id", "full_name", @event_organization_ids),
               multiple: true,
-              data: { 'event--form-target': 'organizations'},
-              aria: { describedby: 'organization-help' } %>
-            <small class="form-text text-muted" id="organization-help">
+              data: { "event--form-target": "organizations" },
+              aria: { describedby: "organization-help" } %>
+            <p class="<%= hint_classes %>" id="organization-help">
               <%= t("events.form.organization_help") %>
-            </small>
+            </p>
           </div>
         <% end %>
 
-        <div class="row g-3">
-          <div class="col-lg-6">
-            <div class="mb-3">
-              <%= form.label :date_start, t("activerecord.attributes.event.date_start") %>
-              <div class="row g-3">
-                <div class="col-8" data-controller="datepicker"
-                     data-action="datepicker:complete->event--form#syncEndDate">
-                  <input type="hidden" name="event[date_start]" data-datepicker-target="hidden">
-                  <input type="date" id="event_date_start" class="form-control"
-                         data-datepicker-target="input"
-                         data-action="change->datepicker#sync blur->datepicker#complete"
-                         data-initial="<%= @event.start_date_label(horzono: @event.time_zone) %>">
-                </div>
-                <div class="col-4">
-                  <%= text_field_tag(:time_start, @event.start_time_label, class: 'timemask form-control', required: true, aria: { label: t('events.form.time_start_aria') }, data: { controller: 'mask', mask_pattern_value: 'time', 'event--form-target': 'timeStart' }) %>
-                </div>
+        <div class="tw:grid tw:grid-cols-1 tw:lg:grid-cols-2 tw:gap-3 tw:mb-3">
+          <div>
+            <%= form.label :date_start, t("activerecord.attributes.event.date_start"), class: label_classes %>
+            <div class="tw:grid tw:grid-cols-12 tw:gap-3">
+              <div class="tw:col-span-8" data-controller="datepicker"
+                   data-action="datepicker:complete->event--form#syncEndDate">
+                <input type="hidden" name="event[date_start]" data-datepicker-target="hidden">
+                <input type="date" id="event_date_start" class="<%= field_classes %>"
+                       data-datepicker-target="input"
+                       data-action="change->datepicker#sync blur->datepicker#complete"
+                       data-initial="<%= @event.start_date_label(horzono: @event.time_zone) %>">
+              </div>
+              <div class="tw:col-span-4">
+                <%= text_field_tag(:time_start, @event.start_time_label, class: "timemask #{field_classes}", required: true, aria: { label: t("events.form.time_start_aria") }, data: { controller: "mask", mask_pattern_value: "time", "event--form-target": "timeStart" }) %>
               </div>
             </div>
           </div>
 
-          <div class="col-lg-6">
-            <div class="mb-3">
-              <%= form.label :date_end, t("activerecord.attributes.event.date_end") %>
-              <div class="row g-3">
-                <div class="col-8" data-controller="datepicker"
-                     data-action="datepicker:complete->event--form#focusEndTime">
-                  <input type="hidden" name="event[date_end]" data-datepicker-target="hidden" data-event--form-target="endDateHidden">
-                  <input type="date" id="event_date_end" class="form-control"
-                         data-datepicker-target="input"
-                         data-action="change->datepicker#sync blur->datepicker#complete"
-                         data-initial="<%= @event.end_date_label(horzono: @event.time_zone) %>"
-                         data-event--form-target="endDateInput">
-                </div>
-                <div class="col-4">
-                  <%= text_field_tag(:time_end, @event.end_time_label, class: 'timemask form-control', required: true, aria: { label: t('events.form.time_end_aria') }, data: { controller: 'mask', mask_pattern_value: 'time', 'event--form-target': 'timeEnd' }) %>
-                </div>
+          <div>
+            <%= form.label :date_end, t("activerecord.attributes.event.date_end"), class: label_classes %>
+            <div class="tw:grid tw:grid-cols-12 tw:gap-3">
+              <div class="tw:col-span-8" data-controller="datepicker"
+                   data-action="datepicker:complete->event--form#focusEndTime">
+                <input type="hidden" name="event[date_end]" data-datepicker-target="hidden" data-event--form-target="endDateHidden">
+                <input type="date" id="event_date_end" class="<%= field_classes %>"
+                       data-datepicker-target="input"
+                       data-action="change->datepicker#sync blur->datepicker#complete"
+                       data-initial="<%= @event.end_date_label(horzono: @event.time_zone) %>"
+                       data-event--form-target="endDateInput">
+              </div>
+              <div class="tw:col-span-4">
+                <%= text_field_tag(:time_end, @event.end_time_label, class: "timemask #{field_classes}", required: true, aria: { label: t("events.form.time_end_aria") }, data: { controller: "mask", mask_pattern_value: "time", "event--form-target": "timeEnd" }) %>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="mb-3">
-          <div class="text-center" id="tags-categories" data-event--form-target="tagsCategories">
+        <div class="tw:mb-3">
+          <div class="tw:flex tw:flex-wrap tw:justify-center tw:gap-1.5 tw:mb-2" id="tags-categories" data-event--form-target="tagsCategories">
             <%
               # Use copied tags if available (for duplication) or event's tags (for editing)
               event_categories = @copied_tags&.categories || @event.tags.categories
-              event_category_ids = event_categories.pluck(:id)
             %>
             <% Tag.categories.order(:sort_order).each do |tag| %>
-              <div class="btn-group mb-1">
-                <%= check_box_tag "tags_categories[]", tag.id, event_categories.include?(tag), id: "tag_#{tag.id}", class: "btn-check", autocomplete: "off" %>
-                <label class="btn tag-check tag-check--blue" for="tag_<%= tag.id %>">
-                  <%= tag_display_name(tag) %>
+              <div>
+                <%= check_box_tag "tags_categories[]", tag.id, event_categories.include?(tag), id: "tag_#{tag.id}", class: "tw:sr-only tw:peer", autocomplete: "off" %>
+                <label class="tw:inline-flex tw:items-center tw:gap-1 tw:px-3 tw:py-1.5 tw:rounded tw:border tw:border-[#17a2b8] tw:text-sm tw:font-medium tw:text-[#17a2b8] tw:bg-transparent tw:hover:bg-[#17a2b8]/10 tw:peer-focus-visible:ring-2 tw:peer-focus-visible:ring-offset-1 tw:peer-focus-visible:ring-[#17a2b8] tw:peer-checked:bg-[#17a2b8] tw:peer-checked:text-white tw:peer-checked:[&>span:first-child]:inline-block tw:cursor-pointer tw:transition-colors tw:select-none" for="tag_<%= tag.id %>">
+                  <span class="tw:hidden tw:text-xs" aria-hidden="true"><i class="fas fa-check"></i></span>
+                  <span><%= tag_display_name(tag) %></span>
                 </label>
               </div>
             <% end %>
           </div>
 
-          <div class="text-center" id="tags-characteristics">
+          <div class="tw:text-center" id="tags-characteristics">
             <%
               # Use copied tags if available (for duplication) or event's characteristics (for editing)
               event_characteristics = @copied_tags&.characteristics || @event.characteristics
-              event_characteristic_ids = event_characteristics.pluck(:id)
             %>
-            <% Tag.characteristics.order(:sort_order).each do |tag| %>
-              <div class="btn-group">
-                <%= check_box_tag "tags_characteristics[]", tag.id, event_characteristics.include?(tag), id: "tag_#{tag.id}", class: "btn-check", autocomplete: "off" %>
-                <label class="btn tag-check tag-check--orange" for="tag_<%= tag.id %>">
-                  <%= tag_display_name(tag) %>
-                </label>
-              </div>
-            <% end %>
-            <br>
-            <small class="form-text text-muted">
+            <div class="tw:flex tw:flex-wrap tw:justify-center tw:gap-1.5 tw:mb-1.5">
+              <% Tag.characteristics.order(:sort_order).each do |tag| %>
+                <div>
+                  <%= check_box_tag "tags_characteristics[]", tag.id, event_characteristics.include?(tag), id: "tag_#{tag.id}", class: "tw:sr-only tw:peer", autocomplete: "off" %>
+                  <label class="tw:inline-flex tw:items-center tw:gap-1 tw:px-3 tw:py-1.5 tw:rounded tw:border tw:border-[#ffc107] tw:text-sm tw:font-medium tw:text-[#b38600] tw:bg-transparent tw:hover:bg-[#ffc107]/15 tw:peer-focus-visible:ring-2 tw:peer-focus-visible:ring-offset-1 tw:peer-focus-visible:ring-[#ffc107] tw:peer-checked:bg-[#ffc107] tw:peer-checked:text-[#212529] tw:peer-checked:[&>span:first-child]:inline-block tw:cursor-pointer tw:transition-colors tw:select-none" for="tag_<%= tag.id %>">
+                    <span class="tw:hidden tw:text-xs" aria-hidden="true"><i class="fas fa-check"></i></span>
+                    <span><%= tag_display_name(tag) %></span>
+                  </label>
+                </div>
+              <% end %>
+            </div>
+            <p class="<%= hint_classes %>">
               <%= t("events.form.announcements_help_html",
-                    calendar_link: link_to(t("international_calendar.title"), international_calendar_path, target: :_blank)) %>
-            </small>
+                    calendar_link: link_to(t("international_calendar.title"), international_calendar_path, target: :_blank, class: "tw:text-brand-blue hover:tw:underline")) %>
+            </p>
           </div>
         </div>
 
-        <div class="mb-3">
-          <%= form.label :enhavo, t("events.form.content") %>
-          <%= form.rich_text_area :enhavo, style: 'height: 24em; overflow-y: auto;' %>
+        <div class="tw:mb-3">
+          <%= form.label :enhavo, t("events.form.content"), class: label_classes %>
+          <%= form.rich_text_area :enhavo, style: "height: 24em; overflow-y: auto;" %>
         </div>
 
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="mb-3">
-              <%= form.label :site, t("events.form.website") %>
-              <%= form.text_field :site, class: 'form-control', required: @event.email.blank?, data: { 'event--form-target': 'site', action: 'input->event--form#crossValidateSiteEmail' } %>
-            </div>
+        <div class="tw:grid tw:grid-cols-1 tw:lg:grid-cols-2 tw:gap-3 tw:mb-3">
+          <div>
+            <%= form.label :site, t("events.form.website"), class: label_classes %>
+            <%= form.text_field :site, class: field_classes, required: @event.email.blank?, data: { "event--form-target": "site", action: "input->event--form#crossValidateSiteEmail" } %>
           </div>
-          <div class="col-lg-6">
-            <div class="mb-3">
-              <%= form.label :email, t("events.form.email_for_contact") %>
-              <%= form.email_field :email, class: 'form-control', required: @event.site.blank?, data: { 'event--form-target': 'email', action: 'input->event--form#crossValidateSiteEmail' } %>
-            </div>
+          <div>
+            <%= form.label :email, t("events.form.email_for_contact"), class: label_classes %>
+            <%= form.email_field :email, class: field_classes, required: @event.site.blank?, data: { "event--form-target": "email", action: "input->event--form#crossValidateSiteEmail" } %>
           </div>
         </div>
 
-        <%= render partial: 'events/form/short_url', locals: { form: form, event: @event } %>
+        <%= render partial: "events/form/short_url", locals: { form: form, event: @event } %>
 
-        <div class="mb-3 form-check">
-          <%= form.check_box :online, class: 'form-check-input', data: { 'event--form-target': 'online', action: 'change->event--form#toggleOnline' } %>
-          <%= form.label :online, "🖥 #{t('events.form.online_or_hybrid')}", class: 'form-check-label' %>
+        <div class="tw:mb-3 tw:flex tw:items-center tw:gap-2">
+          <%= form.check_box :online, class: checkbox_classes, data: { "event--form-target": "online", action: "change->event--form#toggleOnline" } %>
+          <%= form.label :online, "🖥 #{t("events.form.online_or_hybrid")}", class: "tw:text-sm tw:text-gray-700 tw:cursor-pointer" %>
         </div>
 
         <div id="retaj_informoj" data-event--form-target="onlineInfo">
-          <div class="mb-3">
-            <%= check_box_tag 'universala', "1", @event.universala?, data: { 'event--form-target': 'universala', action: 'change->event--form#toggleUniversala' } %>
-            <%= label_tag 'universala', t('events.form.select_timezone_instead_of_address'), class: 'form-check-label' %>
+          <div class="tw:mb-3 tw:flex tw:items-center tw:gap-2">
+            <%= check_box_tag "universala", "1", @event.universala?, class: checkbox_classes, data: { "event--form-target": "universala", action: "change->event--form#toggleUniversala" } %>
+            <%= label_tag "universala", t("events.form.select_timezone_instead_of_address"), class: "tw:text-sm tw:text-gray-700 tw:cursor-pointer" %>
           </div>
         </div>
 
         <div id="horzono" data-event--form-target="timezone">
-          <div class="mb-3">
-            <%= form.label :time_zone, t("events.form.timezone") %>
+          <div class="tw:mb-3">
+            <%= form.label :time_zone, t("events.form.timezone"), class: label_classes %>
             <%= form.combobox("time_zone", Horzono.for_select) %>
           </div>
         </div>
 
         <div id="malretaj_informoj" data-event--form-target="offlineInfo">
-          <div class="mb-3">
-            <%= form.label :address, t("events.form.address") %>
-            <%= form.text_field :address, class: 'form-control', aria: { describedby: 'address-help' } %>
-            <small class="form-text text-muted" id="address-help">
+          <div class="tw:mb-3">
+            <%= form.label :address, t("events.form.address"), class: label_classes %>
+            <%= form.text_field :address, class: field_classes, aria: { describedby: "address-help" } %>
+            <p class="<%= hint_classes %>" id="address-help">
               <%= t("events.form.address_help") %>
-            </small>
+            </p>
           </div>
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <%= form.label :city, t("events.form.city_or_place") %>
-                <%= form.text_field :city, class: 'form-control', required: true, data: { 'event--form-target': 'city' } %>
-              </div>
+          <div class="tw:grid tw:grid-cols-1 tw:lg:grid-cols-2 tw:gap-3 tw:mb-3">
+            <div>
+              <%= form.label :city, t("events.form.city_or_place"), class: label_classes %>
+              <%= form.text_field :city, class: field_classes, required: true, data: { "event--form-target": "city" } %>
             </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <%= form.label :country_id, t("activerecord.attributes.event.country_id") %>
-                <%= form.combobox("country_id", Country.not_online) %>
-              </div>
+            <div>
+              <%= form.label :country_id, t("activerecord.attributes.event.country_id"), class: label_classes %>
+              <%= form.combobox("country_id", Country.not_online) %>
             </div>
           </div>
         </div>
 
         <% if current_user.admin? %>
-          <div class="box-white border border-danger rounded">
-            <div class="lead">
+          <div class="tw:my-4 tw:p-4 tw:bg-white tw:border tw:border-brand-red tw:rounded-md">
+            <h2 class="tw:text-base tw:font-bold tw:text-gray-900 tw:border-b tw:border-gray-200 tw:pb-2 tw:mb-3">
               <%= t("events.form.admin_functions") %>
+            </h2>
+            <div class="tw:mb-3 tw:flex tw:items-center tw:gap-2">
+              <%= form.check_box :international_calendar, class: checkbox_classes %>
+              <%= form.label :international_calendar, "📅 #{t("events.form.add_to_international_calendar")}", class: "tw:text-sm tw:text-gray-700 tw:cursor-pointer" %>
             </div>
-            <div class="mb-3 form-check">
-              <%= form.check_box :international_calendar, class: 'form-check-input' %>
-              <%= form.label :international_calendar, "📅 #{t('events.form.add_to_international_calendar')}", class: 'form-check-label' %>
-            </div>
-            <div class="mb-3">
-              <%= label_tag :user_id, t("events.form.event_administrator") %>
+            <div>
+              <%= label_tag :user_id, t("events.form.event_administrator"), class: label_classes %>
               <%= form.combobox("user_id", combobox_users_with_username_path, value: (@event.user_id || current_user.id)) %>
             </div>
           </div>
         <% end %>
 
-        <div class="buttons-footer">
-          <% if params[:action] == 'edit' %>
-            <%= link_to t("buttons.cancel_registration"), :back, class: 'button-cancel' %>
-            <%= link_to t("buttons.delete"), event_path(code: @event.ligilo), class: 'button-outline-red float-start', method: :delete, data: { confirm: t("events.form.delete_confirm") } %>
+        <div class="tw:flex tw:flex-wrap tw:items-center tw:justify-between tw:gap-2 tw:pt-3 tw:mt-5 tw:border-t tw:border-gray-200">
+          <% if @event.persisted? %>
+            <div class="tw:flex tw:flex-wrap tw:items-center tw:gap-2">
+              <%= render Ui::ButtonComponent.new(
+                t("buttons.delete"),
+                href: event_path(code: @event.ligilo),
+                variant: :outline_danger,
+                data: { method: :delete, confirm: t("events.form.delete_confirm") }
+              ) %>
 
-            <% if @event.cancelled %>
-              <%= link_to t("pages.event.uncancel_event"), event_malnuligi_url(event_code: @event.code), class: 'btn btn-sm btn-outline-success float-start ms-2', method: :post %>
-            <% else %>
-              <a href="#" class="button-outline-red float-start ms-2" data-dialog-open="nuligiloModal">
-                <%= t("pages.event.cancel_event") %>
-              </a>
-            <% end %>
+              <% if @event.cancelled %>
+                <%= render Ui::ButtonComponent.new(
+                  t("pages.event.uncancel_event"),
+                  href: event_malnuligi_url(event_code: @event.code),
+                  variant: :success,
+                  data: { method: :post }
+                ) %>
+              <% else %>
+                <%= render Ui::ButtonComponent.new(
+                  t("pages.event.cancel_event"),
+                  href: "#",
+                  variant: :outline_danger,
+                  data: { dialog_open: "nuligiloModal" }
+                ) %>
+              <% end %>
+            </div>
 
+            <div class="tw:flex tw:flex-wrap tw:items-center tw:gap-2 tw:ml-auto">
+              <%= render Ui::ButtonComponent.new(t("buttons.cancel_registration"), href: :back, variant: :cancel) %>
+              <%= render Ui::ButtonComponent.new(t("buttons.save_event"), variant: :primary, type: :submit) %>
+            </div>
+          <% else %>
+            <div class="tw:flex tw:flex-wrap tw:items-center tw:gap-2 tw:ml-auto">
+              <%= render Ui::ButtonComponent.new(t("buttons.cancel_registration"), href: root_path, variant: :cancel) %>
+              <%= render Ui::ButtonComponent.new(t("buttons.save_event"), variant: :primary, type: :submit) %>
+            </div>
           <% end %>
-          <% if params[:action] == 'new' %>
-            <%= link_to t("buttons.cancel_registration"), root_path, class: 'button-cancel' %>
-          <% end %>
-          <%= form.submit t("buttons.save_event"), class: 'button-submit' %>
         </div>
       <% end %>
-    </div>
-  </div>
+    <% end %>
+  <% end %>
 </div>
