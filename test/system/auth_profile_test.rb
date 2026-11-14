@@ -45,6 +45,15 @@ class AuthProfileSystemTest < ApplicationSystemTestCase
     assert_selector "#instruisto-details", visible: true
     assert_no_selector "#instruisto-details.tw\\:hidden", visible: :all
 
+    assert find("#nivelo_baza", visible: :all).checked?
+    assert_selector "label[for='nivelo_baza'] i.fa-check", visible: true
+    refute find("#nivelo_meza", visible: :all).checked?
+    assert_no_selector "label[for='nivelo_meza'] i.fa-check", visible: true
+
+    find("label[for='nivelo_meza']").click
+    assert find("#nivelo_meza", visible: :all).checked?
+    assert_selector "label[for='nivelo_meza'] i.fa-check", visible: true
+
     visit events_by_username_path(username: user.username)
     assert_selector "h1", text: user.name
     find("a[data-dialog-open='webcalModal']").click

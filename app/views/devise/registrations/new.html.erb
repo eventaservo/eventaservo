@@ -38,7 +38,7 @@
         <div>
           <%= f.combobox("country_id", Country.all, placeholder: t("activerecord.attributes.user.country_id"), required: true) %>
         </div>
-        <%= render Ui::InputComponent.new(f.field_name(:birthday), id: f.field_id(:birthday), value: resource.birthday, class: "birthday", placeholder: t("devise.registrations.new.birthday_placeholder"), data: {controller: "mask", mask_pattern_value: "birthday"}) %>
+        <%= render Ui::InputComponent.new(f.field_name(:birthday), id: f.field_id(:birthday), value: (resource.birthday ? resource.birthday.strftime("%d/%m/%Y") : resource.birthday_before_type_cast.presence), class: "birthday", placeholder: t("devise.registrations.new.birthday_placeholder"), data: {controller: "mask", mask_pattern_value: "birthday"}) %>
         <%= render Ui::InputComponent.new(f.field_name(:ueacode), id: f.field_id(:ueacode), value: resource.ueacode, placeholder: t("devise.registrations.new.ueacode_placeholder")) %>
         <%= render Ui::InputComponent.new(f.field_name(:password), id: f.field_id(:password), type: :password, required: true, placeholder: t("devise.registrations.new.password_placeholder")) %>
         <%= render Ui::InputComponent.new(f.field_name(:password_confirmation), id: f.field_id(:password_confirmation), type: :password, required: true, placeholder: t("devise.registrations.new.password_confirmation_placeholder")) %>

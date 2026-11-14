@@ -19,8 +19,8 @@
             <div>
               <%= check_box_tag "nivelo[#{level}]", level, resource.instruo["nivelo"]&.include?(level), class: "tw:sr-only tw:peer", id: "nivelo_#{level}" %>
               <label for="nivelo_<%= level %>"
-                     class="tw:inline-flex tw:items-center tw:gap-1 tw:px-2.5 tw:py-1 tw:text-xs tw:font-medium tw:text-[#17a2b8] tw:bg-transparent tw:hover:bg-[#17a2b8]/10 tw:peer-checked:bg-[#17a2b8] tw:peer-checked:text-white tw:cursor-pointer tw:transition-colors tw:select-none">
-                <i class="fas fa-check tw:hidden tw:peer-checked:inline-block tw:text-[10px]" aria-hidden="true"></i>
+                     class="tw:inline-flex tw:items-center tw:gap-1 tw:px-2.5 tw:py-1 tw:text-xs tw:font-medium tw:text-[#17a2b8] tw:bg-transparent tw:hover:bg-[#17a2b8]/10 tw:peer-focus-visible:ring-2 tw:peer-focus-visible:ring-inset tw:peer-focus-visible:ring-[#17a2b8] tw:peer-checked:bg-[#17a2b8] tw:peer-checked:text-white tw:peer-checked:[&>span:first-child]:inline-block tw:cursor-pointer tw:transition-colors tw:select-none">
+                <span class="tw:hidden tw:text-[10px]" aria-hidden="true"><i class="fas fa-check"></i></span>
                 <span><%= t("teachers_and_speakers.levels.#{level}") %></span>
               </label>
             </div>
