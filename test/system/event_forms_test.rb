@@ -103,11 +103,20 @@ class EventFormsSystemTest < ApplicationSystemTestCase
     assert_selector "#thumbnail", visible: true
     find("#video_link").fill_in with: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     find("h1").click
-    assert_selector "#thumbnail.tw\\:hidden", visible: :all
+    assert_no_selector "#thumbnail", visible: true
+
+    # Non-YouTube URL restores manual thumbnail upload visibility
+    find("#video_link").fill_in with: "https://vimeo.com/123456"
+    find("h1").click
+    assert_selector "#thumbnail", visible: true
   end
 
   private
 
+  # Asserts that the page at +path+ renders without horizontal overflow across key viewports.
+  #
+  # @param path [String] the visited URL path for failure context
+  # @return [void]
   def assert_no_horizontal_overflow(path)
     [375, 768, 1280].each do |width|
       page.current_window.resize_to(width, 900)

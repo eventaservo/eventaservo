@@ -54,7 +54,7 @@
         </div>
 
         <div class="tw:flex tw:items-center tw:justify-end tw:gap-2 tw:pt-3 tw:mt-5 tw:border-t tw:border-gray-200">
-          <%= render Ui::ButtonComponent.new("Ne registri", href: :back, variant: :cancel) %>
+          <%= render Ui::ButtonComponent.new("Ne registri", href: event_path(code: @evento.ligilo), variant: :cancel) %>
           <%= render Ui::ButtonComponent.new("Registri", variant: :primary, type: :submit) %>
         </div>
       <% end %>

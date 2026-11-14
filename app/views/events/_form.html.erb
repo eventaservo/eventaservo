@@ -247,7 +247,7 @@
             </div>
 
             <div class="tw:flex tw:flex-wrap tw:items-center tw:gap-2 tw:ml-auto">
-              <%= render Ui::ButtonComponent.new(t("buttons.cancel_registration"), href: :back, variant: :cancel) %>
+              <%= render Ui::ButtonComponent.new(t("buttons.cancel_registration"), href: event_path(code: @event.ligilo), variant: :cancel) %>
               <%= render Ui::ButtonComponent.new(t("buttons.save_event"), variant: :primary, type: :submit) %>
             </div>
           <% else %>
