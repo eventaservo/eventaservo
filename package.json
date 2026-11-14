@@ -13,7 +13,7 @@
     "@rails/actiontext": "^7.2.400",
     "@rails/activestorage": "^7.2.400",
     "@rails/ujs": "^7.1.600",
-    "@tailwindcss/cli": "^4.3.0",
+    "@tailwindcss/cli": "^4.3.5",
     "bootstrap": "^5.3",
     "chartkick": "^5.0.1",
     "dompurify": "^3.4.17",
