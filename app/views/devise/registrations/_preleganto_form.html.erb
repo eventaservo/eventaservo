@@ -1,23 +1,20 @@
-<div data-controller="user">
-  <div class="lead"><%= t("devise.registrations.speaker.lead") %></div>
-  <div class="row mb-3">
-    <%= f.label :preleganto, t("devise.registrations.speaker.i_am_speaker"), class: 'col-form-label col-5' %>
-    <div class="col-7">
-      <div class="mb-3 form-check">
-        <%= check_box 'user', 'preleganto',
-          { 'data-action': 'user#toggleUserPrelegantoDetails', 'data-user-target': 'preleganto' }, 'true', 'false' %>
-      </div>
+<div data-controller="user" class="tw:space-y-3">
+  <h3 class="tw:text-lg tw:font-light tw:text-gray-900 tw:m-0"><%= t("devise.registrations.speaker.lead") %></h3>
+  <div class="tw:grid tw:grid-cols-12 tw:gap-2 tw:md:gap-4 tw:items-center">
+    <%= f.label :preleganto, t("devise.registrations.speaker.i_am_speaker"), class: "tw:col-span-5 tw:text-sm tw:font-medium tw:text-gray-700" %>
+    <div class="tw:col-span-7">
+      <%= check_box "user", "preleganto",
+            {class: "tw:w-4 tw:h-4 tw:rounded tw:border-gray-300 tw:text-esperanto-600 tw:focus:ring-esperanto-500/30 tw:cursor-pointer",
+             data: {action: "user#toggleUserPrelegantoDetails", user_target: "preleganto"}},
+            "true", "false" %>
     </div>
   </div>
 
-  <div id="preleganto-details" class="<%= 'd-none' unless resource.preleganto == 'true' %>">
-    <div class="row mb-3">
-      <label class="col-md-5 col-form-label" for="preleg_temoj"><%= t("devise.registrations.speaker.topics_label") %></label>
-      <div class="col-md-7">
-        <div class="mb-3">
-          <%= text_area_tag 'preleg_temoj', resource.prelego["temoj"], rows: "3",
-            placeholder: t("devise.registrations.speaker.topics_placeholder"), class: "form-control" %>
-        </div>
+  <div id="preleganto-details" class="tw:space-y-3 <%= "tw:hidden" unless resource.preleganto == "true" %>">
+    <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-12 tw:gap-2 tw:md:gap-4 tw:items-start">
+      <label class="tw:md:col-span-5 tw:text-sm tw:font-medium tw:text-gray-700 tw:md:pt-2" for="preleg_temoj"><%= t("devise.registrations.speaker.topics_label") %></label>
+      <div class="tw:md:col-span-7">
+        <%= render Ui::TextareaComponent.new("preleg_temoj", id: "preleg_temoj", value: resource.prelego["temoj"], rows: 3, placeholder: t("devise.registrations.speaker.topics_placeholder")) %>
       </div>
     </div>
   </div>

@@ -1,18 +1,19 @@
-<div class="col-12 col-lg-4 offset-lg-4 col-sm-8 offset-sm-2">
-  <div class="box-white">
-    <div class="text-center">
-      <h3>Eventa Servo</h3>
-      <p class="fg-color-grayDark fw-bold"><%= t("devise.confirmations.new.subtitle") %></p>
-    </div>
-
-    <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
-      <div class="mb-3">
-        <%= f.email_field :email, autocomplete: 'email', class: 'form-control', autofocus: true, placeholder: t("activerecord.attributes.user.email") %>
+<div class="tw:max-w-md tw:mx-auto tw:my-4">
+  <%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+    <% panel.with_body(class: "tw:space-y-4") do %>
+      <div class="tw:text-center">
+        <h3 class="tw:text-2xl tw:font-medium tw:text-gray-900 tw:m-0">Eventa Servo</h3>
+        <p class="tw:text-sm tw:font-bold tw:text-gray-600 tw:mt-1 tw:mb-0"><%= t("devise.confirmations.new.subtitle") %></p>
       </div>
-      <%= f.submit t("devise.confirmations.new.submit"), class: 'button-submit col-12' %>
-    <% end %>
 
-    <%= render partial: 'devise/shared/links' %>
-  </div>
+      <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: {method: :post, class: "tw:space-y-3"}) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <%= render Ui::InputComponent.new(f.field_name(:email), id: f.field_id(:email), type: :email, value: resource.email, autocomplete: "email", autofocus: true, placeholder: t("activerecord.attributes.user.email")) %>
+        <%= f.submit t("devise.confirmations.new.submit"),
+              class: "tw:w-full tw:inline-flex tw:items-center tw:justify-center tw:px-3 tw:py-1.5 tw:text-sm tw:font-medium tw:text-white tw:bg-brand-blue tw:hover:bg-brand-blue-hover tw:rounded tw:border tw:border-brand-blue tw:cursor-pointer tw:transition-colors" %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= render partial: "devise/shared/links" %>
 </div>

@@ -1,144 +1,167 @@
-<div class="col-lg-8 offset-lg-2">
-  <div class="box-white" id="profilo">
-    <div class="lead"><%= t("devise.registrations.edit.title") %></div>
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
-      <div class="row mb-3">
-        <%= f.label :name, class: 'col-form-label col-md-3' %>
-        <div class="col-md-9">
-          <%= f.text_field :name, autocomplete: 'name', class: 'form-control', autofocus: true %>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <%= f.label :email, class: 'col-form-label col-md-3' %>
-        <div class="col-md-9">
-          <%= f.email_field :email, autocomplete: 'email', class: 'form-control' %>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <%= f.label :about, class: 'col-form-label col-md-3' %>
-        <div class="col-md-9">
-          <%= f.text_area :about, rows: 2, class: 'form-control' %>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <%= f.label :city, class: 'col-form-label col-md-3' %>
-        <div class="col-md-9">
-          <%= f.text_field :city, autocomplete: 'city', class: 'form-control' %>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <%= f.label :country_id, class: 'col-form-label col-md-3' %>
-        <div class="col-md-9">
-          <%= f.combobox("country_id", Country.all, placeholder: t("activerecord.attributes.user.country_id"), required: true) %>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <%= f.label :locale, t("activerecord.attributes.user.locale"), class: 'col-form-label col-md-3' %>
-        <div class="col-md-9">
-          <%= f.select :locale, options_for_select([[t("languages.eo"), "eo"], [t("languages.en"), "en"], [t("languages.pt_BR"), "pt_BR"]], f.object.preferred_locale), {}, class: 'form-select' %>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <%= f.label :birthday, class: 'col-form-label col-md-3' %>
-        <div class="col-md-9">
-          <%= f.text_field :birthday, value: (resource.birthday.strftime("%d/%m/%Y") if resource.birthday?),
-                           class: 'birthday form-control', data: { controller: 'mask', mask_pattern_value: 'birthday' } %>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <%= f.label :ueacode, class: 'col-form-label col-md-3' %>
-        <div class="col-md-9">
-          <%= f.text_field :ueacode, class: 'form-control', placeholder: t("common.optional") %>
-        </div>
-      </div>
-      <div class="text-divider"><%= t("devise.registrations.edit.ready_to_help") %></div>
-      <div class="box-white">
-        <%= render partial: 'instruisto_form', locals: { f: f, resource: resource } %>
-        <%= render partial: 'preleganto_form', locals: { f: f, resource: resource } %>
-      </div>
-      <div class="text-divider"><%= t("devise.registrations.edit.links") %></div>
-      <div class="row mb-3">
-        <%= f.label :persona_retejo, image_tag('www.svg', size: 24) + " " + t("activerecord.attributes.user.persona_retejo"), class: 'col-md-3 col-form-label' %>
-        <div class="col-md-9">
-          <%= f.text_field :persona_retejo, class: 'form-control' %>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <%= f.label :youtube, image_tag('youtube-link.svg', size: 24) + ' YouTube', class: 'col-md-3 col-form-label' %>
-        <div class="col-md-9">
-          <%= f.text_field :youtube, class: 'form-control' %>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <%= f.label :telegram, image_tag('telegram-link.svg', size: 24) + ' Telegram', class: 'col-md-3 col-form-label' %>
-        <div class="col-md-9">
-          <%= f.text_field :telegram, class: 'form-control' %>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <%= f.label :instagram, image_tag('instagram-link.svg', size: 24) + ' Instagram', class: 'col-md-3 col-form-label' %>
-        <div class="col-md-9">
-          <%= f.text_field :instagram, class: 'form-control' %>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <%= f.label :twitter, image_tag('twitter.svg', size: 24) + ' Twitter', class: 'col-md-3 col-form-label' %>
-        <div class="col-md-9">
-          <%= f.text_field :twitter, class: 'form-control' %>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <%= f.label :facebook, image_tag('facebook.svg', size: 24) + ' Facebook', class: 'col-md-3 col-form-label' %>
-        <div class="col-md-9">
-          <%= f.text_field :facebook, class: 'form-control' %>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <%= f.label :vk, image_tag('vk.svg', size: 24) + ' Vkontakte', class: 'col-md-3 col-form-label' %>
-        <div class="col-md-9">
-          <%= f.text_field :vk, class: 'form-control' %>
-        </div>
-      </div>
-      <hr>
-      <div class="row mb-3">
-        <%= f.label :avatar, class: 'col-form-label col-md-3' %>
-        <div class="col-md-9">
-          <%= display_user_image(@user) %>
-          <%= f.file_field :picture, class: 'form-control', accept: 'image/gif,image/jpeg,image/png' %>
-          <div class="form-check">
-            <%= check_box_tag :remove_picture, '1', false, class: 'form-check-input' %>
-            <%= label_tag :remove_picture, t("devise.registrations.edit.remove_avatar"), class: 'form-check-label' %>
+<div class="tw:max-w-3xl tw:mx-auto tw:my-4">
+  <%= render Ui::CardComponent.new(variant: :bordered, id: "profilo") do |panel| %>
+    <% panel.with_body(class: "tw:space-y-4") do %>
+      <h2 class="tw:text-xl tw:font-light tw:text-gray-900 tw:m-0"><%= t("devise.registrations.edit.title") %></h2>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put, class: "tw:space-y-3"}) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-12 tw:gap-2 tw:md:gap-4 tw:items-center">
+          <%= f.label :name, class: "tw:md:col-span-3 tw:text-sm tw:font-medium tw:text-gray-700" %>
+          <div class="tw:md:col-span-9">
+            <%= render Ui::InputComponent.new(f.field_name(:name), id: f.field_id(:name), value: resource.name, autocomplete: "name", autofocus: true) %>
           </div>
         </div>
-      </div>
-      <hr>
-      <div class="row mb-3">
-        <%= f.label :jwt_token, t("activerecord.registrations.api_v2_token"), class: 'col-form-label col-md-3' %>
-        <div class="col-md-9">
-          <%= f.text_field :jwt_token, readonly: true, class: 'form-control' %>
-          <div class="float-end">
-            <button type="submit"
-                    form="regenerate_token_form"
-                    data-confirm="<%= t('activerecord.registrations.regenerate_token_confirmation') %>"
-                    class="btn btn-outline-primary btn-xs">
-              <i class="fas fa-sync-alt"></i> <%= t("activerecord.registrations.regenerate_token") %>
-            </button>
+
+        <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-12 tw:gap-2 tw:md:gap-4 tw:items-center">
+          <%= f.label :email, class: "tw:md:col-span-3 tw:text-sm tw:font-medium tw:text-gray-700" %>
+          <div class="tw:md:col-span-9">
+            <%= render Ui::InputComponent.new(f.field_name(:email), id: f.field_id(:email), type: :email, value: resource.email, autocomplete: "email") %>
           </div>
         </div>
-      </div>
-      <div class="text-divider"><%= t("devise.registrations.edit.organizations") %></div>
-      <% @user.organizoj.each do |organizo| %>
-        <%= link_to organizo.short_name, organization_url(short_name: organizo.short_name), class: 'btn btn-sm btn-outline-primary' %>
+
+        <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-12 tw:gap-2 tw:md:gap-4 tw:items-start">
+          <%= f.label :about, class: "tw:md:col-span-3 tw:text-sm tw:font-medium tw:text-gray-700 tw:md:pt-2" %>
+          <div class="tw:md:col-span-9">
+            <%= render Ui::TextareaComponent.new(f.field_name(:about), id: f.field_id(:about), value: resource.about, rows: 2) %>
+          </div>
+        </div>
+
+        <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-12 tw:gap-2 tw:md:gap-4 tw:items-center">
+          <%= f.label :city, class: "tw:md:col-span-3 tw:text-sm tw:font-medium tw:text-gray-700" %>
+          <div class="tw:md:col-span-9">
+            <%= render Ui::InputComponent.new(f.field_name(:city), id: f.field_id(:city), value: resource.city, autocomplete: "city") %>
+          </div>
+        </div>
+
+        <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-12 tw:gap-2 tw:md:gap-4 tw:items-center">
+          <%= f.label :country_id, class: "tw:md:col-span-3 tw:text-sm tw:font-medium tw:text-gray-700" %>
+          <div class="tw:md:col-span-9">
+            <%= f.combobox("country_id", Country.all, placeholder: t("activerecord.attributes.user.country_id"), required: true) %>
+          </div>
+        </div>
+
+        <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-12 tw:gap-2 tw:md:gap-4 tw:items-center">
+          <%= f.label :locale, t("activerecord.attributes.user.locale"), class: "tw:md:col-span-3 tw:text-sm tw:font-medium tw:text-gray-700" %>
+          <div class="tw:md:col-span-9">
+            <%= render Ui::SelectComponent.new(
+                  f.field_name(:locale),
+                  id: f.field_id(:locale),
+                  options: [[t("languages.eo"), "eo"], [t("languages.en"), "en"], [t("languages.pt_BR"), "pt_BR"]],
+                  selected: f.object.preferred_locale
+                ) %>
+          </div>
+        </div>
+
+        <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-12 tw:gap-2 tw:md:gap-4 tw:items-center">
+          <%= f.label :birthday, class: "tw:md:col-span-3 tw:text-sm tw:font-medium tw:text-gray-700" %>
+          <div class="tw:md:col-span-9">
+            <%= render Ui::InputComponent.new(
+                  f.field_name(:birthday),
+                  id: f.field_id(:birthday),
+                  value: (resource.birthday.strftime("%d/%m/%Y") if resource.birthday?),
+                  class: "birthday",
+                  data: {controller: "mask", mask_pattern_value: "birthday"}
+                ) %>
+          </div>
+        </div>
+
+        <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-12 tw:gap-2 tw:md:gap-4 tw:items-center">
+          <%= f.label :ueacode, class: "tw:md:col-span-3 tw:text-sm tw:font-medium tw:text-gray-700" %>
+          <div class="tw:md:col-span-9">
+            <%= render Ui::InputComponent.new(f.field_name(:ueacode), id: f.field_id(:ueacode), value: resource.ueacode, placeholder: t("common.optional")) %>
+          </div>
+        </div>
+
+        <div class="text-divider tw:my-4"><%= t("devise.registrations.edit.ready_to_help") %></div>
+
+        <%= render Ui::CardComponent.new(variant: :bordered) do |subpanel| %>
+          <% subpanel.with_body(class: "tw:space-y-4") do %>
+            <%= render partial: "instruisto_form", locals: {f: f, resource: resource} %>
+            <%= render partial: "preleganto_form", locals: {f: f, resource: resource} %>
+          <% end %>
+        <% end %>
+
+        <div class="text-divider tw:my-4"><%= t("devise.registrations.edit.links") %></div>
+
+        <% [
+          [:persona_retejo, image_tag("www.svg", size: 24) + " " + t("activerecord.attributes.user.persona_retejo")],
+          [:youtube, image_tag("youtube-link.svg", size: 24) + " YouTube"],
+          [:telegram, image_tag("telegram-link.svg", size: 24) + " Telegram"],
+          [:instagram, image_tag("instagram-link.svg", size: 24) + " Instagram"],
+          [:twitter, image_tag("twitter.svg", size: 24) + " Twitter"],
+          [:facebook, image_tag("facebook.svg", size: 24) + " Facebook"],
+          [:vk, image_tag("vk.svg", size: 24) + " Vkontakte"]
+        ].each do |field, label_html| %>
+          <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-12 tw:gap-2 tw:md:gap-4 tw:items-center">
+            <%= f.label field, label_html, class: "tw:md:col-span-3 tw:text-sm tw:font-medium tw:text-gray-700 tw:inline-flex tw:items-center tw:gap-1.5" %>
+            <div class="tw:md:col-span-9">
+              <%= render Ui::InputComponent.new(f.field_name(field), id: f.field_id(field), value: resource.public_send(field)) %>
+            </div>
+          </div>
+        <% end %>
+
+        <hr class="tw:border-gray-200">
+
+        <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-12 tw:gap-2 tw:md:gap-4 tw:items-start">
+          <%= f.label :avatar, class: "tw:md:col-span-3 tw:text-sm tw:font-medium tw:text-gray-700" %>
+          <div class="tw:md:col-span-9 tw:space-y-2">
+            <div><%= display_user_image(@user) %></div>
+            <%= f.file_field :picture,
+                  class: "tw:block tw:w-full tw:text-sm tw:text-gray-700 tw:file:mr-3 tw:file:py-1.5 tw:file:px-3 tw:file:rounded tw:file:border tw:file:border-gray-300 tw:file:text-sm tw:file:font-medium tw:file:bg-gray-50 tw:file:text-gray-700 tw:hover:file:bg-gray-100 tw:rounded tw:border tw:border-gray-300 tw:bg-white",
+                  accept: "image/gif,image/jpeg,image/png" %>
+            <label class="tw:inline-flex tw:items-center tw:gap-2 tw:text-sm tw:text-gray-700 tw:cursor-pointer">
+              <%= check_box_tag :remove_picture, "1", false, class: "tw:w-4 tw:h-4 tw:rounded tw:border-gray-300 tw:text-esperanto-600 tw:focus:ring-esperanto-500/30" %>
+              <span><%= t("devise.registrations.edit.remove_avatar") %></span>
+            </label>
+          </div>
+        </div>
+
+        <hr class="tw:border-gray-200">
+
+        <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-12 tw:gap-2 tw:md:gap-4 tw:items-start">
+          <%= f.label :jwt_token, t("activerecord.registrations.api_v2_token"), class: "tw:md:col-span-3 tw:text-sm tw:font-medium tw:text-gray-700 tw:md:pt-2" %>
+          <div class="tw:md:col-span-9 tw:space-y-1.5">
+            <%= render Ui::InputComponent.new(f.field_name(:jwt_token), id: f.field_id(:jwt_token), value: resource.jwt_token, readonly: true) %>
+            <div class="tw:flex tw:justify-end">
+              <%= render Ui::ButtonComponent.new(
+                    t("activerecord.registrations.regenerate_token"),
+                    type: :submit,
+                    form: "regenerate_token_form",
+                    icon: "sync-alt",
+                    variant: :outline_primary,
+                    size: :small,
+                    data: {confirm: t("activerecord.registrations.regenerate_token_confirmation")}
+                  ) %>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-divider tw:my-4"><%= t("devise.registrations.edit.organizations") %></div>
+
+        <div class="tw:flex tw:flex-wrap tw:gap-1.5">
+          <% @user.organizoj.each do |organizo| %>
+            <%= render Ui::ButtonComponent.new(organizo.short_name, href: organization_url(short_name: organizo.short_name), variant: :outline_primary, size: :small) %>
+          <% end %>
+        </div>
+
+        <div class="tw:flex tw:flex-wrap tw:items-center tw:justify-between tw:gap-2 tw:pt-3 tw:mt-5 tw:border-t tw:border-gray-300">
+          <%= render Ui::ButtonComponent.new(
+                t("devise.registrations.edit.delete_account"),
+                href: user_registration_url,
+                variant: :cancel,
+                data: {method: :delete, confirm: t("devise.registrations.edit.delete_account_confirmation")}
+              ) %>
+          <div class="tw:flex tw:items-center tw:gap-2 tw:ms-auto">
+            <%= render Ui::ButtonComponent.new(t("buttons.cancel"), href: root_path, variant: :cancel) %>
+            <%= f.submit t("buttons.update"),
+                  class: "tw:inline-flex tw:items-center tw:justify-center tw:px-3 tw:py-1.5 tw:text-sm tw:font-medium tw:text-white tw:bg-brand-blue tw:hover:bg-brand-blue-hover tw:rounded tw:border tw:border-brand-blue tw:cursor-pointer tw:transition-colors" %>
+          </div>
+        </div>
       <% end %>
-      <div class="buttons-footer">
-        <%= link_to t("devise.registrations.edit.delete_account"), user_registration_url, method: :delete, class: "button-cancel float-start",
-                    data: { confirm: t("devise.registrations.edit.delete_account_confirmation") } %>
-        <%= link_to t("buttons.cancel"), root_path, class: 'button-cancel' %>
-        <%= f.submit t("buttons.update"), class: 'button-submit' %>
-      </div>
+
+      <%= form_with url: regenerate_api_token_path, method: :post, id: "regenerate_token_form" do %>
+      <% end %>
     <% end %>
-    <%= form_with url: regenerate_api_token_path, method: :post, id: "regenerate_token_form" do %>
-    <% end %>
-  </div>
+  <% end %>
 </div>

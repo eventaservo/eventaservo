@@ -1,23 +1,35 @@
-<div class="col-lg-6 offset-lg-3">
-  <div class="box-white">
-    <div class="lead"><%= t("devise.passwords.edit.title") %></div>
-    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
-      <%= f.hidden_field :reset_password_token %>
+<div class="tw:max-w-lg tw:mx-auto tw:my-4">
+  <%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+    <% panel.with_body(class: "tw:space-y-4") do %>
+      <h2 class="tw:text-xl tw:font-light tw:text-gray-900 tw:m-0"><%= t("devise.passwords.edit.title") %></h2>
 
-      <div class="mb-3">
-        <%= f.label :password, t("devise.passwords.edit.new_password") %>
-        <%= f.password_field :password, autofocus: true, autocomplete: 'new-password', class: 'form-control', aria: { describedby: "password-help" } %>
-        <small class="form-text text-muted" id="password-help"><%= t("devise.passwords.edit.minimum_characters", count: 6) %></small>
-      </div>
-      <div class="mb-3">
-        <%= f.label :password_confirmation, t("devise.passwords.edit.password_confirmation") %>
-        <%= f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control' %>
-      </div>
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: {method: :put, class: "tw:space-y-3"}) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <%= f.hidden_field :reset_password_token %>
 
-      <div class="buttons-footer">
-        <%= f.submit t("devise.passwords.edit.submit"), class: 'button-submit' %>
-      </div>
+        <%= render Ui::InputComponent.new(
+              f.field_name(:password),
+              id: f.field_id(:password),
+              type: :password,
+              label: t("devise.passwords.edit.new_password"),
+              hint: t("devise.passwords.edit.minimum_characters", count: 6),
+              autofocus: true,
+              autocomplete: "new-password"
+            ) %>
+
+        <%= render Ui::InputComponent.new(
+              f.field_name(:password_confirmation),
+              id: f.field_id(:password_confirmation),
+              type: :password,
+              label: t("devise.passwords.edit.password_confirmation"),
+              autocomplete: "off"
+            ) %>
+
+        <div class="tw:flex tw:justify-end tw:pt-3 tw:mt-4 tw:border-t tw:border-gray-300">
+          <%= f.submit t("devise.passwords.edit.submit"),
+                class: "tw:inline-flex tw:items-center tw:justify-center tw:px-3 tw:py-1.5 tw:text-sm tw:font-medium tw:text-white tw:bg-brand-blue tw:hover:bg-brand-blue-hover tw:rounded tw:border tw:border-brand-blue tw:cursor-pointer tw:transition-colors" %>
+        </div>
+      <% end %>
     <% end %>
-  </div>
+  <% end %>
 </div>

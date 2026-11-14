@@ -6,11 +6,11 @@ export default class extends Controller {
 
   connect () { }
 
-  toggleUserInstruistoDetails () {
-    $('#instruisto-details').toggleClass('d-none')
+  toggleUserInstruistoDetails() {
+    document.getElementById('instruisto-details')?.classList.toggle('tw:hidden')
   }
 
   toggleUserPrelegantoDetails() {
-    $('#preleganto-details').toggleClass('d-none')
+    document.getElementById('preleganto-details')?.classList.toggle('tw:hidden')
   }
 }

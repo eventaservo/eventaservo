@@ -1,4 +1,6 @@
-<% if user.preleganto == 'true' %>
-  <div class="lead"><%= t("users.profile.ready_to_lecture_about") %></div>
-  <%= simple_format(user.prelego['temoj']) %>
+<% if user.preleganto == "true" %>
+  <div class="tw:space-y-2">
+    <h3 class="tw:text-lg tw:font-light tw:text-gray-900 tw:m-0"><%= t("users.profile.ready_to_lecture_about") %></h3>
+    <div class="tw:text-sm tw:text-gray-700"><%= simple_format(user.prelego["temoj"]) %></div>
+  </div>
 <% end %>
