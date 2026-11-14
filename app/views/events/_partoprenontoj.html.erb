@@ -8,22 +8,22 @@
     <% end %>
   </div>
 
-  <div class="box-body">
+  <div class="tw:text-xs">
     <% unless event.past? %>
-      <div class="row text-center">
-        <div class="col-6 my-auto">
-          <h1><%= event.participants.size %></h1>
+      <div class="tw:grid tw:grid-cols-2 tw:items-center tw:text-center tw:mt-2">
+        <div>
+          <h1 class="tw:text-3xl tw:font-bold tw:m-0"><%= event.participants.size %></h1>
         </div>
-        <div class="col-6 my-auto">
+        <div>
           <%= render partial: "mi_interesighas_button", locals: {event: event} %>
         </div>
       </div>
       <% if current_user && event.participants.pluck(:user_id).include?(current_user.id) %>
-        <p class="bg-color-greenLighter p-1 mt-2 text-center" style="border-radius: 5px;">
+        <p class="tw:bg-[#eaffe7] tw:p-1.5 tw:mt-2 tw:text-center tw:rounded">
           <%= t("events.participants.reminder_subscribed") %>
         </p>
       <% elsif current_user %>
-        <p class="bg-color-grayLighter p-1 mt-2 text-center" style="border-radius: 5px;">
+        <p class="tw:bg-[#F7F7F7] tw:p-1.5 tw:mt-2 tw:text-center tw:rounded">
           <%= t("events.participants.reminder_prompt") %>
         </p>
       <% end %>
@@ -32,14 +32,13 @@
     <!-- Listo de interesiĝ(a/i)ntoj -->
     <% interested.publicly_listed.sample(3).each do |participant| %>
       <% next unless participant.user %>
-      <br>
-      <%= link_to display_user(participant.user), events_by_username_path(username: participant.user&.username) %>
-      <br>
-      <br>
+      <div class="tw:my-2">
+        <%= link_to display_user(participant.user), events_by_username_path(username: participant.user&.username) %>
+      </div>
     <% end %>
 
     <% if interested.size > 3 %>
-      <%= render partial: 'partoprenonta_listo', locals: { event: event } %>
+      <%= render partial: "partoprenonta_listo", locals: {event: event} %>
     <% end %>
   </div>
 </div>

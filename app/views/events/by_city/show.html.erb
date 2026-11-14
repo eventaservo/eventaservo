@@ -2,7 +2,7 @@
   <%= "#{params[:city_name]} (#{params[:country_name]})" %>
 <% end %>
 
-<%= render Ui::CardComponent.new(variant: :bordered, class: "tw:my-1 tw:sm:my-2") do |panel| %>
+<%= render Ui::CardComponent.new(variant: :bordered, overflow_visible: true, class: "tw:my-1 tw:sm:my-2") do |panel| %>
   <% panel.with_body(padding: false, class: "tw:p-2 tw:sm:p-4") do %>
     <%= render partial: "layouts/breadcrumb" %>
 

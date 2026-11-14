@@ -1,28 +1,35 @@
 <% if Time.zone.now > event.date_start %>
-  <div class="box-white">
-    <div class="box-header bg-color-purple">📸 <%= t("events.reports.header") %></div>
-    <div class="box-body">
-      <div class="text-end">
-        <%= link_to icon("fas", "plus-circle", t("events.reports.add_link")), new_event_report_path(event_code: event.code), class: 'link-green' %>
+  <%= render Ui::CardComponent.new(variant: :bordered, class: "tw:my-1 tw:sm:my-2") do |panel| %>
+    <% panel.with_header(class: "tw:bg-[#603CBA] tw:text-white tw:text-[10px] tw:font-bold tw:uppercase tw:tracking-[0.5px] tw:leading-3 tw:px-3 tw:py-2") do %>
+      📸 <%= t("events.reports.header") %>
+    <% end %>
+
+    <% panel.with_body(padding: false, class: "tw:p-3 tw:text-xs") do %>
+      <div class="tw:text-end tw:mb-2">
+        <%= link_to icon("fas", "plus-circle", t("events.reports.add_link")), new_event_report_path(event_code: event.code), class: "link-green" %>
       </div>
 
       <% if event.reports.any? %>
-        <% event.reports.each do |report| %>
-          <div>
-            <%= link_to report.label, report.url, target: '_blank', rel: 'noopener noreferrer' %>
-            <i class="fg-color-grayDark">- <%= report.user.name %></i>
+        <div class="tw:space-y-1.5">
+          <% event.reports.each do |report| %>
+            <div class="tw:flex tw:items-start tw:justify-between tw:gap-2">
+              <div class="tw:min-w-0">
+                <%= link_to report.label, report.url, target: "_blank", rel: "noopener noreferrer" %>
+                <i class="tw:text-gray-600">- <%= report.user.name %></i>
+              </div>
 
-            <% if @current_user == report.user || user_can_edit_event?(user: @current_user, event: event) %>
-              <%= link_to icon('far', 'trash-alt'),
-                event_report_url(event_code: event.code, id: report), method: :delete,
-                data: { confirm: t("common.are_you_sure") }, aria: { label: t("events.reports.delete_report_aria") },
-                class: 'link-simples fg-color-red float-end' %>
-            <% end %>
-          </div>
-        <% end %>
+              <% if @current_user == report.user || user_can_edit_event?(user: @current_user, event: event) %>
+                <%= link_to icon("far", "trash-alt"),
+                  event_report_url(event_code: event.code, id: report), method: :delete,
+                  data: {confirm: t("common.are_you_sure")}, aria: {label: t("events.reports.delete_report_aria")},
+                  class: "tw:shrink-0 tw:text-red-600 tw:hover:text-red-700 tw:no-underline" %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
       <% else %>
-        <p class="mt-3 text-center">🥳 <%= t("events.reports.empty_prompt") %> 🎉</p>
+        <p class="tw:mt-3 tw:text-center tw:mb-0">🥳 <%= t("events.reports.empty_prompt") %> 🎉</p>
       <% end %>
-    </div>
-  </div>
+    <% end %>
+  <% end %>
 <% end %>

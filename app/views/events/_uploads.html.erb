@@ -1,12 +1,14 @@
 <% if @event.uploads.attached? %>
-  <div class="text-divider"><%= t("events.uploads.title") %></div>
-  <div id="lightgallery" class="fotoj-container d-flex justify-content-center flex-wrap align-content-around" data-controller="lightbox">
+  <div class="text-divider tw:my-4"><%= t("events.uploads.title") %></div>
+  <div id="lightgallery" class="fotoj-container tw:flex tw:justify-center tw:flex-wrap tw:gap-2" data-controller="lightbox">
     <% @event.uploads.each do |upload| %>
       <% if upload.blob.image? %>
-        <div class="foto flex-fill m-1">
-          <%= link_to(image_tag(url_for(upload.variant(resize_to_limit: [150, 150])), class: 'img-thumbnail'), url_for(upload), class: 'glightbox', data: { gallery: @event.code }) %>
+        <div class="foto tw:flex-1 tw:m-1 tw:text-center">
+          <%= link_to(image_tag(url_for(upload.variant(resize_to_limit: [150, 150])), class: "tw:p-1 tw:bg-white tw:border tw:border-gray-200 tw:rounded tw:max-w-full tw:h-auto tw:inline-block"), url_for(upload), class: "glightbox", data: {gallery: @event.code}) %>
           <% if user_is_owner_or_admin(@event) %>
-            <p><%= link_to(icon('far', 'trash-alt', t("buttons.delete")), event_delete_file_path(event_code: @event.code, file_id: upload.id), method: :delete, data: { confirm: t("common.are_you_sure") }, class: 'btn btn-sm btn-outline-link') %></p>
+            <p class="tw:mt-1 tw:mb-0">
+              <%= render Ui::ButtonComponent.new(t("buttons.delete"), href: event_delete_file_path(event_code: @event.code, file_id: upload.id), icon: "trash-alt", icon_style: "far", variant: :delete, size: :small, data: {method: :delete, confirm: t("common.are_you_sure")}) %>
+            </p>
           <% end %>
         </div>
       <% end %>
@@ -14,11 +16,11 @@
   </div>
   <% @event.uploads.each do |upload| %>
     <% unless upload.blob.image? %>
-      <div class="item-row-no-chevron">
+      <div class="item-row-no-chevron tw:flex tw:items-center tw:gap-2">
         <% if user_is_owner_or_admin(@event) %>
-          <%= link_to(icon('far', 'trash-alt'), event_delete_file_path(event_code: @event.code, file_id: upload.id), method: :delete, data: { confirm: t("common.are_you_sure") }, aria: { label: t("events.uploads.delete_file_aria") }, class: 'btn btn-sm btn-outline-link') %>
+          <%= link_to(icon("far", "trash-alt"), event_delete_file_path(event_code: @event.code, file_id: upload.id), method: :delete, data: {confirm: t("common.are_you_sure")}, aria: {label: t("events.uploads.delete_file_aria")}, class: "tw:text-sm tw:text-red-600 tw:hover:text-red-700 tw:no-underline") %>
         <% end %>
-        <%= link_to(upload.filename, upload, class: 'btn btn-sm btn-outline-link') %>
+        <%= link_to(upload.filename, upload, class: "tw:text-sm") %>
       </div>
     <% end %>
   <% end %>

@@ -125,5 +125,12 @@ module Ui
 
       assert_selector "button#custom-btn.custom-extra-class[data-action='click->test#run']"
     end
+
+    test "converts method option on links to data-method" do
+      render_inline(Ui::ButtonComponent.new("Forigi", href: "/events/1", method: :delete))
+
+      assert_selector "a[href='/events/1'][data-method='delete']"
+      assert_no_selector "a[method]"
+    end
   end
 end

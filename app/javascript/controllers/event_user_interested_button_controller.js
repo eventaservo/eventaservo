@@ -15,7 +15,7 @@ export default class extends Controller {
   }
 
   toggle() {
-    this.questionTarget.classList.toggle('d-none')
-    this.buttonTarget.classList.toggle('d-none')
+    this.questionTarget.classList.toggle('tw:hidden')
+    this.buttonTarget.classList.toggle('tw:hidden')
   }
 }

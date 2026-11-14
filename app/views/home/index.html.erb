@@ -2,7 +2,7 @@
   <%= render "layouts/mapbox_token" %>
 <% end %>
 
-<%= render Ui::CardComponent.new(variant: :bordered, class: "tw:my-1 tw:sm:my-2") do |panel| %>
+<%= render Ui::CardComponent.new(variant: :bordered, overflow_visible: true, class: "tw:my-1 tw:sm:my-2") do |panel| %>
   <% panel.with_body(padding: false, class: "tw:p-2 tw:sm:p-4") do %>
     <div class="tw:flex tw:items-start tw:md:items-center tw:justify-around tw:gap-2 tw:text-center tw:text-esperanto-500 tw:font-bold tw:mb-2">
       <div class="tw:shrink-0">

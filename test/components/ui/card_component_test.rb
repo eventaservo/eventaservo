@@ -146,5 +146,12 @@ module Ui
       assert_no_selector "div.tw\\:p-5"
       assert_selector "div.tw\\:flex-1", text: "Sen marĝeno"
     end
+
+    test "allows overflowing content when overflow_visible is true" do
+      render_inline(Ui::CardComponent.new(overflow_visible: true)) { "Falmenuo" }
+
+      assert_selector "div.tw\\:overflow-visible", text: "Falmenuo"
+      assert_no_selector "div.tw\\:overflow-hidden"
+    end
   end
 end

@@ -1,18 +1,19 @@
-<%= link_to icon('fas', 'exclamation-triangle', t("pages.event.report_problem")), '#', class: 'btn btn-sm btn-outline-warning no-border', data: { dialog_open: 'reportProblemModal' } %>
+<%= link_to icon("fas", "exclamation-triangle", t("pages.event.report_problem")), "#",
+  class: "tw:inline-flex tw:items-center tw:gap-1 tw:px-2 tw:py-1 tw:text-sm tw:text-amber-600 tw:hover:bg-amber-50 tw:rounded tw:no-underline tw:transition-colors",
+  data: {dialog_open: "reportProblemModal"} %>
 
 <%= render Ui::ModalComponent.new(
   id: "reportProblemModal",
   title: t("pages.event.report_problem_form.title"),
   title_id: "reportProblemModalCenterTitle",
   padded: false,
-  dialog_data: { controller: "report-problem-form" }
+  dialog_data: {controller: "report-problem-form"}
 ) do |dialog| %>
-  <%= form_tag event_kontakti_organizanton_url(event_code: @event.code), class: "text-start" do %>
-    <div class="<%= dialog.body_classes %>" style="font-weight: normal; font-size: 1rem;">
-      <p><%= t("pages.event.report_problem_form.text") %></p>
-      <div class="mb-3">
-        <label><%= t("pages.event.report_problem_form.message") %></label>
-        <%= text_area_tag :message, nil, class: 'form-control', rows: 4, required: true, data: { report_problem_form_target: "message" } %>
+  <%= form_tag event_kontakti_organizanton_url(event_code: @event.code), class: "tw:text-start" do %>
+    <div class="<%= dialog.body_classes %> tw:text-base tw:font-normal">
+      <p class="tw:mb-3"><%= t("pages.event.report_problem_form.text") %></p>
+      <div class="tw:mb-3">
+        <%= render Ui::TextareaComponent.new(:message, label: t("pages.event.report_problem_form.message"), rows: 4, required: true, data: {report_problem_form_target: "message"}) %>
       </div>
     </div>
 

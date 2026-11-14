@@ -141,6 +141,8 @@ module Ui
 
       if link?
         attrs[:href] = href unless disabled
+        http_method = attrs.delete(:method)
+        attrs[:data] = (attrs[:data] || {}).merge(method: http_method) if http_method.present? && !disabled
         if disabled
           attrs[:role] = "link"
           attrs[:aria] = (attrs[:aria] || {}).merge(disabled: "true")

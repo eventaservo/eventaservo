@@ -124,6 +124,14 @@ module EventsHelper
     end
   end
 
+  EVENT_BORDER_CLASSES = {
+    today: "tw:border-l-[3px] tw:border-l-event-today",
+    soon: "tw:border-l-[3px] tw:border-l-event-7days",
+    later: "tw:border-l-[3px] tw:border-l-event-30days",
+    future: "tw:border-l-[3px] tw:border-l-event-future",
+    past: "tw:border-l-[3px] tw:border-l-event-past"
+  }.freeze
+
   def event_color_class(event)
     case days_to_event(event)
     when 0 then "event-color-today"
@@ -131,6 +139,21 @@ module EventsHelper
     when 8..30 then "event-color-30days"
     when 31..Float::INFINITY then "event-color-future"
     else "event-color-past"
+    end
+  end
+
+  # Returns the Tailwind left-border utility classes indicating how soon an event occurs.
+  #
+  # @param event [Event] the event to style
+  #
+  # @return [String] Tailwind border width and color classes
+  def event_border_color_class(event)
+    case days_to_event(event)
+    when 0 then EVENT_BORDER_CLASSES[:today]
+    when 1..7 then EVENT_BORDER_CLASSES[:soon]
+    when 8..30 then EVENT_BORDER_CLASSES[:later]
+    when 31..Float::INFINITY then EVENT_BORDER_CLASSES[:future]
+    else EVENT_BORDER_CLASSES[:past]
     end
   end
 
