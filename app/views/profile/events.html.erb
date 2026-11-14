@@ -1,15 +1,15 @@
-<div class="box-white">
-  <div class="text-center">
-    <h4>
-      <%= t("users.events.my_personal_events_page") %>
-    </h4>
-    <div class="small">
-      <%= t("users.events.personal_page_notice") %>
+<%= render Ui::CardComponent.new(variant: :bordered, class: "tw:my-2") do |panel| %>
+  <% panel.with_body(class: "tw:space-y-6") do %>
+    <div class="tw:text-center tw:space-y-1">
+      <h4 class="tw:text-xl tw:font-medium tw:text-gray-900 tw:m-0">
+        <%= t("users.events.my_personal_events_page") %>
+      </h4>
+      <div class="tw:text-xs tw:text-gray-600">
+        <%= t("users.events.personal_page_notice") %>
+      </div>
     </div>
-  </div>
 
-  <br>
-
-  <%= render partial: "users/interested_events_list", locals: { interested_events: @interested_events } %>
-  <%= render partial: "users/my_events", locals: { future_events: @future_events, past_events: @past_events, pagy: @pagy } %>
-</div>
+    <%= render partial: "users/interested_events_list", locals: {interested_events: @interested_events} %>
+    <%= render partial: "users/my_events", locals: {future_events: @future_events, past_events: @past_events, pagy: @pagy} %>
+  <% end %>
+<% end %>

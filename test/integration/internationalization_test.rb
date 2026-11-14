@@ -646,7 +646,7 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
 
     get edit_user_registration_path
     assert_response :success
-    assert_select ".lead", text: "Redakti profilon"
+    assert_select "#profilo h2", text: "Redakti profilon"
     assert_select "label[for='user_name']", text: "Nomo"
     assert_select "label[for='user_email']", text: "Retadreso"
     assert_select ".text-divider", text: "Mi pretas helpi"
@@ -657,7 +657,7 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
 
     get "/en/users/edit"
     assert_response :success
-    assert_select ".lead", text: "Edit profile"
+    assert_select "#profilo h2", text: "Edit profile"
     assert_select "label[for='user_name']", text: "Name"
     assert_select "label[for='user_email']", text: "Email"
     assert_select ".text-divider", text: "I am ready to help"
@@ -668,7 +668,7 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
 
     get "/pt_BR/users/edit"
     assert_response :success
-    assert_select ".lead", text: "Editar perfil"
+    assert_select "#profilo h2", text: "Editar perfil"
     assert_select "label[for='user_name']", text: "Nome"
     assert_select "label[for='user_email']", text: "E-mail"
     assert_select ".text-divider", text: "Estou pronto para ajudar"

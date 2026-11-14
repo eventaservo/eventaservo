@@ -1,8 +1,13 @@
-<h2><%= t("organizations.index.title") %></h2>
-<ul class="list-group">
-  <% @uzanto.organizations.order(:name).each do |o| %>
-    <li class="list-group-item list-group-item-action small">
-      <%= link_to o.name, organization_url(short_name: o.short_name) %>
-    </li>
+<div class="tw:space-y-2">
+  <h2 class="tw:text-lg tw:font-medium tw:text-gray-900 tw:m-0"><%= t("organizations.index.title") %></h2>
+  <% if @uzanto.organizations.any? %>
+    <ul class="tw:border tw:border-gray-200 tw:rounded tw:divide-y tw:divide-gray-200 tw:bg-white tw:m-0 tw:p-0 tw:list-none">
+      <% @uzanto.organizations.order(:name).each do |o| %>
+        <li>
+          <%= link_to o.name, organization_url(short_name: o.short_name),
+                class: "tw:block tw:px-3 tw:py-2 tw:text-xs tw:text-gray-800 tw:hover:bg-gray-50 tw:no-underline tw:transition-colors" %>
+        </li>
+      <% end %>
+    </ul>
   <% end %>
-</ul>
+</div>

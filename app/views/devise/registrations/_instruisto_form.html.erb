@@ -1,38 +1,38 @@
-<div data-controller="user">
-  <div class="lead"><%= t("devise.registrations.instructor.lead") %></div>
-  <div class="row mb-3">
-    <%= f.label :instruisto, t("devise.registrations.instructor.i_am_teacher"), class: 'col-form-label col-5' %>
-    <div class="col-7">
-      <div class="mb-3 form-check">
-        <%= check_box 'user', 'instruisto', { 'data-action': 'user#toggleUserInstruistoDetails', 'data-user-target': 'instruisto' }, 'true', 'false' %>
-      </div>
+<div data-controller="user" class="tw:space-y-3">
+  <h3 class="tw:text-lg tw:font-light tw:text-gray-900 tw:m-0"><%= t("devise.registrations.instructor.lead") %></h3>
+  <div class="tw:grid tw:grid-cols-12 tw:gap-2 tw:md:gap-4 tw:items-center">
+    <%= f.label :instruisto, t("devise.registrations.instructor.i_am_teacher"), class: "tw:col-span-5 tw:text-sm tw:font-medium tw:text-gray-700" %>
+    <div class="tw:col-span-7">
+      <%= check_box "user", "instruisto",
+            {class: "tw:w-4 tw:h-4 tw:rounded tw:border-gray-300 tw:text-esperanto-600 tw:focus:ring-esperanto-500/30 tw:cursor-pointer",
+             data: {action: "user#toggleUserInstruistoDetails", user_target: "instruisto"}},
+            "true", "false" %>
     </div>
   </div>
 
-  <div id="instruisto-details" class="<%= 'd-none' unless resource.instruisto == 'true' %>">
-    <div class="row mb-3">
-      <%= f.label :instruo, t("devise.registrations.instructor.level"), class: 'col-5 col-form-label' %>
-      <div class="col-7">
-        <div class="btn-group mb-1" role="group" aria-label="<%= t("devise.registrations.instructor.level") %>">
-          <%= check_box_tag 'nivelo[baza]', 'baza', resource.instruo['nivelo']&.include?('baza'), class: 'btn-check', id: 'nivelo_baza' %>
-          <label class="btn tag-check tag-check--blue" for="nivelo_baza"><%= t("teachers_and_speakers.levels.baza") %></label>
-
-          <%= check_box_tag 'nivelo[meza]', 'meza', resource.instruo['nivelo']&.include?('meza'), class: 'btn-check', id: 'nivelo_meza' %>
-          <label class="btn tag-check tag-check--blue" for="nivelo_meza"><%= t("teachers_and_speakers.levels.meza") %></label>
-
-          <%= check_box_tag 'nivelo[supera]', 'supera', resource.instruo['nivelo']&.include?('supera'), class: 'btn-check', id: 'nivelo_supera' %>
-          <label class="btn tag-check tag-check--blue" for="nivelo_supera"><%= t("teachers_and_speakers.levels.supera") %></label>
+  <div id="instruisto-details" class="tw:space-y-3 <%= "tw:hidden" unless resource.instruisto == "true" %>">
+    <div class="tw:grid tw:grid-cols-12 tw:gap-2 tw:md:gap-4 tw:items-center">
+      <%= f.label :instruo, t("devise.registrations.instructor.level"), class: "tw:col-span-5 tw:text-sm tw:font-medium tw:text-gray-700" %>
+      <div class="tw:col-span-7">
+        <div class="tw:inline-flex tw:flex-wrap tw:rounded tw:overflow-hidden tw:border tw:border-[#17a2b8] tw:divide-x tw:divide-[#17a2b8]" role="group" aria-label="<%= t("devise.registrations.instructor.level") %>">
+          <% %w[baza meza supera].each do |level| %>
+            <div>
+              <%= check_box_tag "nivelo[#{level}]", level, resource.instruo["nivelo"]&.include?(level), class: "tw:sr-only tw:peer", id: "nivelo_#{level}" %>
+              <label for="nivelo_<%= level %>"
+                     class="tw:inline-flex tw:items-center tw:gap-1 tw:px-2.5 tw:py-1 tw:text-xs tw:font-medium tw:text-[#17a2b8] tw:bg-transparent tw:hover:bg-[#17a2b8]/10 tw:peer-checked:bg-[#17a2b8] tw:peer-checked:text-white tw:cursor-pointer tw:transition-colors tw:select-none">
+                <i class="fas fa-check tw:hidden tw:peer-checked:inline-block tw:text-[10px]" aria-hidden="true"></i>
+                <span><%= t("teachers_and_speakers.levels.#{level}") %></span>
+              </label>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
 
-    <div class="row mb-3">
-      <label class="col-md-5 col-form-label" for="instru_sperto"><%= t("devise.registrations.instructor.experience") %></label>
-      <div class="col-md-7">
-        <div class="mb-3">
-          <%= text_area_tag 'instru_sperto', resource.instruo["sperto"], rows: "3",
-            placeholder: t("devise.registrations.instructor.experience_placeholder"), class: "form-control" %>
-        </div>
+    <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-12 tw:gap-2 tw:md:gap-4 tw:items-start">
+      <label class="tw:md:col-span-5 tw:text-sm tw:font-medium tw:text-gray-700 tw:md:pt-2" for="instru_sperto"><%= t("devise.registrations.instructor.experience") %></label>
+      <div class="tw:md:col-span-7">
+        <%= render Ui::TextareaComponent.new("instru_sperto", id: "instru_sperto", value: resource.instruo["sperto"], rows: 3, placeholder: t("devise.registrations.instructor.experience_placeholder")) %>
       </div>
     </div>
   </div>

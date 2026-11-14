@@ -1,23 +1,24 @@
 <% if future_events.any? %>
-  <div class="mb-5">
-    <div class="lead"><%= t("users.events.managed_upcoming_events") %></div>
+  <div class="tw:mb-6">
+    <h5 class="tw:text-lg tw:font-light tw:text-gray-900 tw:mb-2"><%= t("users.events.managed_upcoming_events") %></h5>
 
-    <div class="border rounded overflow-hidden small">
-      <div class="row g-0 align-items-center bg-success text-white text-uppercase fw-bold smaller px-2 py-2">
-        <div class="col-2"><%= t("common.date") %></div>
-        <div class="col"><%= t("common.event") %></div>
-        <div class="col-3"><%= t("common.location") %></div>
+    <div class="tw:border tw:border-gray-200 tw:rounded tw:overflow-hidden tw:text-xs">
+      <div class="tw:grid tw:grid-cols-12 tw:items-center tw:gap-2 tw:bg-esperanto-600 tw:text-white tw:uppercase tw:font-bold tw:text-[11px] tw:px-2 tw:py-2">
+        <div class="tw:col-span-3 tw:sm:col-span-2"><%= t("common.date") %></div>
+        <div class="tw:col-span-6 tw:sm:col-span-7"><%= t("common.event") %></div>
+        <div class="tw:col-span-3"><%= t("common.location") %></div>
       </div>
 
       <% future_events.order(:date_start).each_with_index do |e, i| %>
-        <%= link_to event_path(code: e.ligilo), class: "row g-0 align-items-center px-2 py-1 small hover-row text-decoration-none text-dark #{'border-bottom' unless i == future_events.size - 1} #{'bg-body-tertiary' if i.odd?}" do %>
-          <div class="col-2 fw-semibold text-success-emphasis small">
+        <%= link_to event_path(code: e.ligilo),
+              class: "tw:grid tw:grid-cols-12 tw:items-center tw:gap-2 tw:px-2 tw:py-1.5 hover-row tw:no-underline tw:text-gray-900 #{"tw:border-b tw:border-gray-200" unless i == future_events.size - 1} #{"tw:bg-gray-50" if i.odd?}" do %>
+          <div class="tw:col-span-3 tw:sm:col-span-2 tw:font-semibold tw:text-esperanto-700 tw:truncate">
             <%= format_date(e.komenca_dato, style: :compact) %>
           </div>
-          <div class="col fw-medium text-truncate <%= 'cancelled' if e.cancelled %>">
+          <div class="tw:col-span-6 tw:sm:col-span-7 tw:font-medium tw:truncate <%= "tw:line-through tw:text-red-600" if e.cancelled %>">
             <%= e.title %>
           </div>
-          <div class="col-3 text-body-secondary text-truncate">
+          <div class="tw:col-span-3 tw:text-gray-500 tw:truncate">
             <%= event_flag e %>
             <%= e.city %>
           </div>
@@ -28,25 +29,26 @@
 <% end %>
 
 <% if past_events.any? %>
-  <div class="mb-5">
-    <div class="lead"><%= t("users.events.managed_past_events") %></div>
+  <div class="tw:mb-6 tw:space-y-3">
+    <h5 class="tw:text-lg tw:font-light tw:text-gray-900 tw:m-0"><%= t("users.events.managed_past_events") %></h5>
 
-    <div class="border rounded overflow-hidden small">
-      <div class="row g-0 align-items-center bg-success text-white text-uppercase fw-bold smaller px-2 py-2">
-        <div class="col-2"><%= t("common.date") %></div>
-        <div class="col"><%= t("common.event") %></div>
-        <div class="col-3"><%= t("common.location") %></div>
+    <div class="tw:border tw:border-gray-200 tw:rounded tw:overflow-hidden tw:text-xs">
+      <div class="tw:grid tw:grid-cols-12 tw:items-center tw:gap-2 tw:bg-esperanto-600 tw:text-white tw:uppercase tw:font-bold tw:text-[11px] tw:px-2 tw:py-2">
+        <div class="tw:col-span-3 tw:sm:col-span-2"><%= t("common.date") %></div>
+        <div class="tw:col-span-6 tw:sm:col-span-7"><%= t("common.event") %></div>
+        <div class="tw:col-span-3"><%= t("common.location") %></div>
       </div>
 
       <% past_events.order(date_start: :desc).each_with_index do |e, i| %>
-        <%= link_to event_path(code: e.ligilo), class: "row g-0 align-items-center px-2 py-1 small hover-row text-decoration-none text-dark #{'border-bottom' unless i == past_events.size - 1} #{'bg-body-tertiary' if i.odd?}" do %>
-          <div class="col-2 fw-semibold text-success-emphasis small">
+        <%= link_to event_path(code: e.ligilo),
+              class: "tw:grid tw:grid-cols-12 tw:items-center tw:gap-2 tw:px-2 tw:py-1.5 hover-row tw:no-underline tw:text-gray-900 #{"tw:border-b tw:border-gray-200" unless i == past_events.size - 1} #{"tw:bg-gray-50" if i.odd?}" do %>
+          <div class="tw:col-span-3 tw:sm:col-span-2 tw:font-semibold tw:text-esperanto-700 tw:truncate">
             <%= format_date(e.komenca_dato, style: :compact) %>
           </div>
-          <div class="col fw-medium text-truncate <%= 'cancelled' if e.cancelled %>">
+          <div class="tw:col-span-6 tw:sm:col-span-7 tw:font-medium tw:truncate <%= "tw:line-through tw:text-red-600" if e.cancelled %>">
             <%= e.title %>
           </div>
-          <div class="col-3 text-body-secondary text-truncate">
+          <div class="tw:col-span-3 tw:text-gray-500 tw:truncate">
             <%= event_flag e %>
             <%= e.city %>
           </div>

@@ -1,67 +1,74 @@
-<div class="box-white">
-  <div class="row">
-    <div class="col-md-3">
-      <div class="text-center">
+<%= render Ui::CardComponent.new(variant: :bordered, class: "tw:my-2") do |panel| %>
+  <% panel.with_body(class: "tw:space-y-6") do %>
+    <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-12 tw:gap-4 tw:items-start">
+      <div class="tw:md:col-span-3 tw:text-center">
         <%= display_user_image_profile(@uzanto) %>
       </div>
-    </div>
-    <div class="col-md-9">
-      <div class="d-flex justify-content-between">
-        <h1 class="display-4"><%= @uzanto.name %></h1>
-        <% if current_user == @uzanto && @uzanto.webcal_token.present? %>
-          <%= link_to icon('far', 'calendar-alt'),
-            webcal_user_url(webcal_token: @uzanto.webcal_token, protocol: :webcal, format: :ics),
-            data: { dialog_open: 'webcalModal' },
-            aria: { label: t("users.profile.subscribe_personal_calendar") } %>
-        <% end %>
-      </div>
+      <div class="tw:md:col-span-9 tw:space-y-2">
+        <div class="tw:flex tw:items-start tw:justify-between tw:gap-2">
+          <h1 class="tw:text-3xl tw:sm:text-4xl tw:font-light tw:text-gray-900 tw:m-0"><%= @uzanto.name %></h1>
+          <% if current_user == @uzanto && @uzanto.webcal_token.present? %>
+            <%= link_to icon("far", "calendar-alt"),
+                  webcal_user_url(webcal_token: @uzanto.webcal_token, protocol: :webcal, format: :ics),
+                  class: "tw:text-xl tw:text-gray-700 tw:hover:text-brand-blue",
+                  data: {dialog_open: "webcalModal"},
+                  aria: {label: t("users.profile.subscribe_personal_calendar")} %>
+          <% end %>
+        </div>
 
-      <%= display_flag(@uzanto.country) %>
-      <%= @uzanto.country.name if @uzanto.country %>
-      (<%= @uzanto.city %>)
-      <p class="small"><%= simple_format(@uzanto.about) %></p>
-    </div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="col-lg-3 col-md-12">
-      <%= render 'user_social_links', user: @uzanto %>
-      <br>
-      <%= render partial: 'uzantaj_organizoj' %>
-      <%= render partial: 'informoj_por_administrantoj', locals: { uzanto: @uzanto } if current_user&.admin? %>
-    </div>
-    <div class="col-lg-9 col-md-12">
-      <div class="row">
-        <div class="col-12 col-md-6 mb-5">
-          <%= render partial: 'users/instruist_profilo' %>
+        <div class="tw:text-sm tw:text-gray-700">
+          <%= display_flag(@uzanto.country) %>
+          <%= @uzanto.country.name if @uzanto.country %>
+          (<%= @uzanto.city %>)
         </div>
-        <div class="col-12 col-md-6 mb-5">
-          <%= render partial: 'users/prelegant_profilo', locals: { user: @uzanto } %>
+
+        <div class="tw:text-xs tw:text-gray-700"><%= simple_format(@uzanto.about) %></div>
+      </div>
+    </div>
+
+    <div class="tw:grid tw:grid-cols-1 tw:lg:grid-cols-12 tw:gap-4 tw:items-start">
+      <div class="tw:lg:col-span-3 tw:space-y-4">
+        <%= render "user_social_links", user: @uzanto %>
+        <%= render partial: "uzantaj_organizoj" %>
+        <%= render partial: "informoj_por_administrantoj", locals: {uzanto: @uzanto} if current_user&.admin? %>
+      </div>
+      <div class="tw:lg:col-span-9">
+        <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:gap-6">
+          <div>
+            <%= render partial: "users/instruist_profilo" %>
+          </div>
+          <div>
+            <%= render partial: "users/prelegant_profilo", locals: {user: @uzanto} %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+  <% end %>
+<% end %>
 
 <% if current_user == @uzanto && @uzanto.webcal_token.present? %>
   <%= render Ui::ModalComponent.new(id: "webcalModal", title: t("users.profile.subscribe_personal_calendar"), title_id: "shareModalCenterTitle", size: :lg) do |dialog| %>
-    <p>
+    <p class="tw:text-sm tw:text-gray-700">
       <%= t("users.profile.webcal_info_1") %>
     </p>
-    <div class="alert alert-warning">
+    <%= render Ui::AlertComponent.new(variant: :warning, class: "tw:text-sm") do %>
       <%= t("users.profile.webcal_warning") %>
-    </div>
-    <p>
+    <% end %>
+    <p class="tw:text-sm tw:text-gray-700">
       <%= t("users.profile.webcal_info_2_html", article_link: link_to(t("users.profile.this_article"), "https://github.com/eventaservo/eventaservo/wiki/Webcal-(Google-Calendar---iCal)", target: "_blank")) %>
     </p>
-    <div class="input-group" data-controller="clipboard"
-         data-clipboard-success-message-value="<%= t('clipboard.copied_to_clipboard') %>"
-         data-clipboard-error-message-value="<%= t('clipboard.copy_failed') %>">
-      <%= link_to t('buttons.copy'), '#', class: 'input-group-text', data: { action: 'click->clipboard#copy' } %>
-      <%= text_field_tag nil, webcal_user_url(webcal_token: @uzanto.webcal_token, format: :ics), readonly: true, class: 'form-control bg-color-white', data: { clipboard_target: 'source' } %>
+    <div class="tw:flex tw:items-stretch tw:rounded tw:overflow-hidden tw:border tw:border-gray-300" data-controller="clipboard"
+         data-clipboard-success-message-value="<%= t("clipboard.copied_to_clipboard") %>"
+         data-clipboard-error-message-value="<%= t("clipboard.copy_failed") %>">
+      <%= link_to t("buttons.copy"), "#",
+            class: "tw:inline-flex tw:items-center tw:px-3 tw:py-1.5 tw:text-sm tw:font-medium tw:bg-gray-100 tw:text-gray-700 tw:border-r tw:border-gray-300 tw:hover:bg-gray-200 tw:no-underline tw:shrink-0",
+            data: {action: "click->clipboard#copy"} %>
+      <%= text_field_tag nil, webcal_user_url(webcal_token: @uzanto.webcal_token, format: :ics),
+            readonly: true,
+            class: "tw:block tw:w-full tw:px-3 tw:py-1.5 tw:text-sm tw:bg-white tw:text-gray-900 tw:border-0 tw:focus:outline-none",
+            data: {clipboard_target: "source"} %>
     </div>
-    <br>
-    <p>
+    <p class="tw:text-sm tw:text-gray-700 tw:mt-3 tw:mb-0">
       <%= t("users.profile.webcal_info_3_html", link: link_to(t("users.profile.this_link"), webcal_user_url(webcal_token: @uzanto.webcal_token, protocol: :webcal, format: :ics))) %>
     </p>
 

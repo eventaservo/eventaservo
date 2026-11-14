@@ -1,9 +1,14 @@
-<% if @uzanto.instruisto == 'true' %>
-  <div class="lead"><%= t("users.profile.i_am_teacher") %></div>
-  <div><%= t("users.profile.levels_taught") %></div>
-  <% @uzanto.instruo['nivelo'].each do |nivelo| %>
-    <div class="badge text-bg-info"><%= t("teachers_and_speakers.levels.#{nivelo}", default: nivelo.capitalize) %></div>
-  <% end %>
-  <br>
-  <%= @uzanto.instruo['sperto'] %>
+<% if @uzanto.instruisto == "true" %>
+  <div class="tw:space-y-2">
+    <h3 class="tw:text-lg tw:font-light tw:text-gray-900 tw:m-0"><%= t("users.profile.i_am_teacher") %></h3>
+    <div class="tw:text-sm tw:text-gray-700"><%= t("users.profile.levels_taught") %></div>
+    <div class="tw:flex tw:flex-wrap tw:gap-1">
+      <% @uzanto.instruo["nivelo"].each do |nivelo| %>
+        <%= render Ui::BadgeComponent.new(t("teachers_and_speakers.levels.#{nivelo}", default: nivelo.capitalize), variant: :info, size: :medium) %>
+      <% end %>
+    </div>
+    <% if @uzanto.instruo["sperto"].present? %>
+      <div class="tw:text-sm tw:text-gray-700 tw:pt-1"><%= @uzanto.instruo["sperto"] %></div>
+    <% end %>
+  </div>
 <% end %>

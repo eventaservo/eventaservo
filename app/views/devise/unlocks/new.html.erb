@@ -1,16 +1,16 @@
-<h2><%= t("devise.unlocks.new.title") %></h2>
+<div class="tw:max-w-md tw:mx-auto tw:my-4">
+  <%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+    <% panel.with_body(class: "tw:space-y-4") do %>
+      <h2 class="tw:text-xl tw:font-semibold tw:text-gray-900 tw:text-center tw:m-0"><%= t("devise.unlocks.new.title") %></h2>
 
-<%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+      <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: {method: :post, class: "tw:space-y-3"}) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <%= render Ui::InputComponent.new(f.field_name(:email), id: f.field_id(:email), type: :email, value: resource.email, label: User.human_attribute_name(:email), autofocus: true, autocomplete: "email") %>
+        <%= f.submit t("devise.unlocks.new.submit"),
+              class: "tw:w-full tw:inline-flex tw:items-center tw:justify-center tw:px-3 tw:py-1.5 tw:text-sm tw:font-medium tw:text-white tw:bg-brand-blue tw:hover:bg-brand-blue-hover tw:rounded tw:border tw:border-brand-blue tw:cursor-pointer tw:transition-colors" %>
+      <% end %>
+    <% end %>
+  <% end %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit t("devise.unlocks.new.submit") %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+  <%= render "devise/shared/links" %>
+</div>

@@ -1,60 +1,54 @@
-<div class="col-12 col-lg-6 offset-lg-3">
-  <div class="box-white">
-    <div class="text-center">
-      <h3>Eventa Servo</h3>
-      <p class="fg-color-grayDark fw-bold">
-        <%= t("devise.registrations.new.subtitle_html") %>
-      </p>
-    </div>
-
-    <%= button_to t("devise.shared.sign_up_with_provider", provider: "Google"), user_google_oauth2_omniauth_authorize_path,
-          data: { turbo: false },
-          class: 'google-button mb-1' %>
-    <%= button_to t("devise.shared.sign_up_with_provider", provider: "Facebook"), user_facebook_omniauth_authorize_path,
-          data: { turbo: false },
-          class: 'facebook-button' %>
-    <br>
-    <div class="text-divider fw-bold fg-color-grayDark"><%= t("common.or_upper") %></div>
-    <br>
-
-    <div class="alert alert-info small mt-2 text-center">
-      <%= t("devise.registrations.new.video_help_html", video_link: link_to(t("devise.registrations.new.video_link_text"), "https://mallonge.net/es1", target: :_blank)) %>
-    </div>
-
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
-      <div class="mb-3">
-        <%= f.text_field :name, autocomplete: 'name', required: true, class: 'form-control', autofocus: true, placeholder: t("activerecord.attributes.user.name") %>
-      </div>
-      <div class="mb-3">
-        <%= f.email_field :email, autocomplete: 'email', required: true, class: 'form-control', placeholder: t("activerecord.attributes.user.email") %>
-      </div>
-      <div class="mb-3">
-        <%= f.text_field :city, required: true, class: 'form-control', placeholder: t("activerecord.attributes.user.city") %>
-      </div>
-      <div class="mb-3">
-        <%= f.combobox("country_id", Country.all, placeholder: t("activerecord.attributes.user.country_id"), required: true) %>
-      </div>
-      <div class="mb-3">
-        <%= f.text_field :birthday, class: 'birthday form-control', placeholder: t("devise.registrations.new.birthday_placeholder"), data: { controller: 'mask', mask_pattern_value: 'birthday' } %>
-      </div>
-      <div class="mb-3">
-        <%= f.text_field :ueacode, class: 'form-control', placeholder: t("devise.registrations.new.ueacode_placeholder") %>
-      </div>
-      <div class="mb-3">
-        <%= f.password_field :password, required: true, class: 'form-control', placeholder: t("devise.registrations.new.password_placeholder") %>
-      </div>
-      <div class="mb-3">
-        <%= f.password_field :password_confirmation, required: true, class: 'form-control', placeholder: t("devise.registrations.new.password_confirmation_placeholder") %>
+<div class="tw:max-w-xl tw:mx-auto tw:my-4">
+  <%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+    <% panel.with_body(class: "tw:space-y-4") do %>
+      <div class="tw:text-center">
+        <h3 class="tw:text-2xl tw:font-medium tw:text-gray-900 tw:m-0">Eventa Servo</h3>
+        <p class="tw:text-sm tw:font-bold tw:text-gray-600 tw:mt-1 tw:mb-0">
+          <%= t("devise.registrations.new.subtitle_html") %>
+        </p>
       </div>
 
-      <div class="mb-3">
-        <%= text_field_tag 'sekurfrazo', nil, autocomplete: 'off', required: true, class: 'form-control', placeholder: t("devise.registrations.new.security_phrase_placeholder") %>
+      <div class="tw:space-y-1.5">
+        <%= button_to user_google_oauth2_omniauth_authorize_path,
+              data: {turbo: false},
+              class: "tw:w-full tw:inline-flex tw:items-center tw:justify-center tw:gap-1.5 tw:px-3 tw:py-1.5 tw:text-sm tw:font-medium tw:bg-white tw:hover:bg-gray-50 tw:text-gray-800 tw:border tw:border-gray-300 tw:rounded tw:cursor-pointer tw:transition-colors" do %>
+          <i class="fab fa-google" aria-hidden="true"></i>
+          <span><%= t("devise.shared.sign_up_with_provider", provider: "Google") %></span>
+        <% end %>
+
+        <%= button_to user_facebook_omniauth_authorize_path,
+              data: {turbo: false},
+              class: "tw:w-full tw:inline-flex tw:items-center tw:justify-center tw:gap-1.5 tw:px-3 tw:py-1.5 tw:text-sm tw:font-medium tw:bg-[#4260B4] tw:hover:bg-[#38529a] tw:text-white tw:border tw:border-[#4260B4] tw:rounded tw:cursor-pointer tw:transition-colors" do %>
+          <i class="fab fa-facebook" aria-hidden="true"></i>
+          <span><%= t("devise.shared.sign_up_with_provider", provider: "Facebook") %></span>
+        <% end %>
       </div>
 
-      <%= f.submit t("devise.registrations.new.submit"), class: 'btn btn-sm btn-success col-12' %>
+      <div class="text-divider tw:font-bold tw:text-gray-600"><%= t("common.or_upper") %></div>
+
+      <%= render Ui::AlertComponent.new(variant: :info, class: "tw:text-xs tw:text-center") do %>
+        <%= t("devise.registrations.new.video_help_html", video_link: link_to(t("devise.registrations.new.video_link_text"), "https://mallonge.net/es1", target: :_blank)) %>
+      <% end %>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "tw:space-y-3"}) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <%= render Ui::InputComponent.new(f.field_name(:name), id: f.field_id(:name), value: resource.name, autocomplete: "name", required: true, autofocus: true, placeholder: t("activerecord.attributes.user.name")) %>
+        <%= render Ui::InputComponent.new(f.field_name(:email), id: f.field_id(:email), type: :email, value: resource.email, autocomplete: "email", required: true, placeholder: t("activerecord.attributes.user.email")) %>
+        <%= render Ui::InputComponent.new(f.field_name(:city), id: f.field_id(:city), value: resource.city, required: true, placeholder: t("activerecord.attributes.user.city")) %>
+        <div>
+          <%= f.combobox("country_id", Country.all, placeholder: t("activerecord.attributes.user.country_id"), required: true) %>
+        </div>
+        <%= render Ui::InputComponent.new(f.field_name(:birthday), id: f.field_id(:birthday), value: resource.birthday, class: "birthday", placeholder: t("devise.registrations.new.birthday_placeholder"), data: {controller: "mask", mask_pattern_value: "birthday"}) %>
+        <%= render Ui::InputComponent.new(f.field_name(:ueacode), id: f.field_id(:ueacode), value: resource.ueacode, placeholder: t("devise.registrations.new.ueacode_placeholder")) %>
+        <%= render Ui::InputComponent.new(f.field_name(:password), id: f.field_id(:password), type: :password, required: true, placeholder: t("devise.registrations.new.password_placeholder")) %>
+        <%= render Ui::InputComponent.new(f.field_name(:password_confirmation), id: f.field_id(:password_confirmation), type: :password, required: true, placeholder: t("devise.registrations.new.password_confirmation_placeholder")) %>
+        <%= render Ui::InputComponent.new(:sekurfrazo, id: "sekurfrazo", autocomplete: "off", required: true, placeholder: t("devise.registrations.new.security_phrase_placeholder")) %>
+
+        <%= f.submit t("devise.registrations.new.submit"),
+              class: "tw:w-full tw:inline-flex tw:items-center tw:justify-center tw:px-3 tw:py-1.5 tw:text-sm tw:font-medium tw:text-white tw:bg-esperanto-500 tw:hover:bg-esperanto-600 tw:rounded tw:border tw:border-esperanto-500 tw:cursor-pointer tw:transition-colors" %>
+      <% end %>
     <% end %>
-  </div>
+  <% end %>
 
-  <%= render partial: 'devise/shared/links' %>
+  <%= render partial: "devise/shared/links" %>
 </div>

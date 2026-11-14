@@ -1,55 +1,55 @@
 <%# locals: (user:) %>
 
 <% if user.has_public_contact? %>
+  <%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+    <% panel.with_header(class: "tw:bg-[#008000] tw:text-white tw:text-[10px] tw:font-bold tw:uppercase tw:tracking-[0.5px] tw:leading-3 tw:px-3 tw:py-2") do %>
+      <%= t("users.profile.contacts") %>
+    <% end %>
 
-  <div class="box-white">
-    <div class="box-header"><%= t("users.profile.contacts") %></div>
+    <% panel.with_body(padding: false, class: "tw:p-3") do %>
+      <div class="tw:flex tw:justify-around tw:flex-wrap tw:gap-2">
+        <% if user.persona_retejo.present? %>
+          <%= link_to image_tag("www.svg", size: 24, alt: t("activerecord.attributes.user.persona_retejo")),
+                user.persona_retejo,
+                target: :_blank %>
+        <% end %>
 
-    <div class="d-flex justify-content-around flex-wrap">
-      <% if user.persona_retejo.present? %>
-        <%= link_to image_tag("www.svg", size: 24, alt: t("activerecord.attributes.user.persona_retejo"), class: "me-1"),
-              user.persona_retejo,
-              target: :_blank %>
-      <% end %>
+        <% if user.youtube.present? %>
+          <%= link_to image_tag("youtube-link.svg", size: 24, alt: "Youtube"),
+                user.youtube,
+                target: :_blank %>
+        <% end %>
 
-      <% if user.youtube.present? %>
-        <%= link_to image_tag("youtube-link.svg", size: 24, alt: "Youtube", class: "me-1"),
-              user.youtube,
-              target: :_blank %>
-      <% end %>
+        <% if user.telegram.present? %>
+          <%= link_to image_tag("telegram-link.svg", size: 24, alt: "Telegram"),
+                user.telegram,
+                target: :_blank %>
+        <% end %>
 
-      <% if user.telegram.present? %>
-        <%= link_to image_tag("telegram-link.svg", size: 24, alt: "Telegram", class: "me-1"),
-              user.telegram,
-              target: :_blank %>
-      <% end %>
+        <% if user.instagram.present? %>
+          <%= link_to image_tag("instagram-link.svg", size: 24, alt: "instagram"),
+                user.instagram,
+                target: :_blank %>
+        <% end %>
 
-      <% if user.instagram.present? %>
-        <%= link_to image_tag("instagram-link.svg", size: 24, alt: "instagram", class: "me-1"),
-              user.instagram,
-              target: :_blank %>
-      <% end %>
+        <% if user.twitter.present? %>
+          <%= link_to image_tag("twitter.svg", size: 24, alt: "twitter"),
+                user.twitter,
+                target: :_blank %>
+        <% end %>
 
-      <% if user.twitter.present? %>
-        <%= link_to image_tag("twitter.svg", size: 24, alt: "twitter", class: "me-1"),
-              user.twitter,
-              target: :_blank %>
-      <% end %>
+        <% if user.facebook.present? %>
+          <%= link_to image_tag("facebook.svg", size: 24, alt: "facebook"),
+                user.facebook,
+                target: :_blank %>
+        <% end %>
 
-      <% if user.facebook.present? %>
-        <%= link_to image_tag("facebook.svg", size: 24, alt: "facebook", class: "me-1"),
-              user.facebook,
-              target: :_blank %>
-      <% end %>
-
-      <% if user.vk.present? %>
-        <%= link_to image_tag("vk.svg", size: 24, alt: "vk", class: "me-1"),
-              user.vk,
-              target: :_blank %>
-      <% end %>
-
-    </div>
-
-  </div>
-
+        <% if user.vk.present? %>
+          <%= link_to image_tag("vk.svg", size: 24, alt: "vk"),
+                user.vk,
+                target: :_blank %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
 <% end %>
