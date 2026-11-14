@@ -1,5 +1,59 @@
 # Changelog
 
+## [3.1.2](https://github.com/eventaservo/eventaservo/compare/v3.1.1...v3.1.2) (2026-11-14)
+
+
+### Features
+
+* add Tailwind build and legacy cascade layer ([#1518](https://github.com/eventaservo/eventaservo/issues/1518)) ([9888654](https://github.com/eventaservo/eventaservo/commit/9888654b971a00d272de81a9ce0b66ccd44f8c5f))
+* add Tailwind pagination component ([#1532](https://github.com/eventaservo/eventaservo/issues/1532)) ([afa0d9a](https://github.com/eventaservo/eventaservo/commit/afa0d9a35281e182a36d54ce1da3b1aaf7bf0142))
+* migrate authentication and user profile views to Tailwind CSS ([#1553](https://github.com/eventaservo/eventaservo/issues/1553)) ([f79d502](https://github.com/eventaservo/eventaservo/commit/f79d502507c54efea29910d5ee199855035c6b51))
+* migrate Bootstrap modals to Tailwind native dialog ([#1514](https://github.com/eventaservo/eventaservo/issues/1514)) ([#1545](https://github.com/eventaservo/eventaservo/issues/1545)) ([c475b0d](https://github.com/eventaservo/eventaservo/commit/c475b0d3c926eb60f9d1caa5d28094637767c17b))
+* migrate Bootstrap tooltips to Stimulus and Tailwind ([#1514](https://github.com/eventaservo/eventaservo/issues/1514)) ([#1546](https://github.com/eventaservo/eventaservo/issues/1546)) ([2ea660c](https://github.com/eventaservo/eventaservo/commit/2ea660c4cdf91bf6cb01befea52ae8c005f89688))
+* migrate Bootstrap tooltips to Stimulus hint controller ([2ea660c](https://github.com/eventaservo/eventaservo/commit/2ea660c4cdf91bf6cb01befea52ae8c005f89688))
+* migrate event and video forms to Tailwind CSS ([#1554](https://github.com/eventaservo/eventaservo/issues/1554)) ([113ca06](https://github.com/eventaservo/eventaservo/commit/113ca0681a5d6ebb62c2641a42b6c74d7cb218fb))
+* migrate event detail page to Tailwind CSS ([#1552](https://github.com/eventaservo/eventaservo/issues/1552)) ([2e88c25](https://github.com/eventaservo/eventaservo/commit/2e88c253adaf85a86cbe8ed2bd93235032e06293))
+* migrate event listings and calendar partials to Tailwind CSS ([#1514](https://github.com/eventaservo/eventaservo/issues/1514)) ([1c4ace4](https://github.com/eventaservo/eventaservo/commit/1c4ace4fcac3c1d1fcc7ca87402907f8219fb2ed))
+* migrate event listings and calendar partials to Tailwind CSS ([#1551](https://github.com/eventaservo/eventaservo/issues/1551)) ([1c4ace4](https://github.com/eventaservo/eventaservo/commit/1c4ace4fcac3c1d1fcc7ca87402907f8219fb2ed))
+* migrate home page to Tailwind CSS ([#1514](https://github.com/eventaservo/eventaservo/issues/1514)) ([78f1fb1](https://github.com/eventaservo/eventaservo/commit/78f1fb1f2854e949a916ac01646bcc2f72ac0dcd))
+* migrate home page to Tailwind CSS ([#1550](https://github.com/eventaservo/eventaservo/issues/1550)) ([78f1fb1](https://github.com/eventaservo/eventaservo/commit/78f1fb1f2854e949a916ac01646bcc2f72ac0dcd))
+* migrate static and error pages to Tailwind CSS ([#1514](https://github.com/eventaservo/eventaservo/issues/1514)) ([#1549](https://github.com/eventaservo/eventaservo/issues/1549)) ([3542c38](https://github.com/eventaservo/eventaservo/commit/3542c387b43ecaee8f27d4222336354f60db4961))
+* **ui:** add Tailwind alert and flash message component (Phase 3) ([#1536](https://github.com/eventaservo/eventaservo/issues/1536)) ([b5cf037](https://github.com/eventaservo/eventaservo/commit/b5cf03758775e23888330636108dbed29ba09c2b))
+* **ui:** add Tailwind badge component and design system palette (Phase 3) ([#1535](https://github.com/eventaservo/eventaservo/issues/1535)) ([074d747](https://github.com/eventaservo/eventaservo/commit/074d747626bf2070dfea654577a768d009bc7b02))
+* **ui:** add Tailwind button component (Phase 3) ([#1533](https://github.com/eventaservo/eventaservo/issues/1533)) ([0eb2e39](https://github.com/eventaservo/eventaservo/commit/0eb2e39be16251c291231f9ad4c92dd0b2948a29))
+* **ui:** add Tailwind card component (Phase 3 Step 5) ([#1538](https://github.com/eventaservo/eventaservo/issues/1538)) ([c8be576](https://github.com/eventaservo/eventaservo/commit/c8be5764bab338d21b1ce7a86b6e9f88f91df83d))
+* **ui:** add Tailwind form controls suite (Phase 3 Step 4) ([#1537](https://github.com/eventaservo/eventaservo/issues/1537)) ([1f40842](https://github.com/eventaservo/eventaservo/commit/1f40842d2b0063af9a48b22ed76915a2e7955bfd))
+* **ui:** add Tailwind navbar pieces (Phase 3 Step 6) ([#1539](https://github.com/eventaservo/eventaservo/issues/1539)) ([d30576d](https://github.com/eventaservo/eventaservo/commit/d30576d63eb65d6d138067957344ccc4a381dd95))
+* **ui:** add Tailwind pagination component (Phase 2) ([afa0d9a](https://github.com/eventaservo/eventaservo/commit/afa0d9a35281e182a36d54ce1da3b1aaf7bf0142))
+* **ui:** migrate alert dismiss to Stimulus and Tailwind (Phase 4 Step 1) ([#1540](https://github.com/eventaservo/eventaservo/issues/1540)) ([3033803](https://github.com/eventaservo/eventaservo/commit/3033803c55b3b5e8db68be91f961c08124cc3f24))
+* **ui:** migrate dropdowns to Stimulus menu and Tailwind (Phase 4 Step 3) ([#1543](https://github.com/eventaservo/eventaservo/issues/1543)) ([8a7fa7f](https://github.com/eventaservo/eventaservo/commit/8a7fa7ffee9bedbd84f8c71e7be201d58cf6358e))
+* **ui:** migrate navbar collapse to Stimulus toggle (Phase 4 Step 2) ([#1541](https://github.com/eventaservo/eventaservo/issues/1541)) ([1cd2876](https://github.com/eventaservo/eventaservo/commit/1cd287644f214cdbbdf22453143158a63af81433))
+* **ui:** migrate tabs to Stimulus and Tailwind (Phase 4 Step 4) ([#1544](https://github.com/eventaservo/eventaservo/issues/1544)) ([2e33fc9](https://github.com/eventaservo/eventaservo/commit/2e33fc984737aa047769c0afa6354ae77798e4a2))
+
+
+### Bug Fixes
+
+* **events:** align nearby tag styling and prevent badge clipping ([#1519](https://github.com/eventaservo/eventaservo/issues/1519)) ([#1528](https://github.com/eventaservo/eventaservo/issues/1528)) ([48f3d30](https://github.com/eventaservo/eventaservo/commit/48f3d301cf5a82096e711776e447f83a45cdb207))
+* **events:** standardize pagination on page parameter and fix country past events ([#1526](https://github.com/eventaservo/eventaservo/issues/1526)) ([#1527](https://github.com/eventaservo/eventaservo/issues/1527)) ([2991b3e](https://github.com/eventaservo/eventaservo/commit/2991b3e14504e48a112c85fe994c12e562c0dd11))
+* **home:** render ad images with a request-independent path ([#1524](https://github.com/eventaservo/eventaservo/issues/1524)) ([2638b35](https://github.com/eventaservo/eventaservo/commit/2638b35201a963f1abf0615e080f4962979d8e68))
+* **search:** order events closest first and add optional date period filter ([#1534](https://github.com/eventaservo/eventaservo/issues/1534)) ([2af6f8d](https://github.com/eventaservo/eventaservo/commit/2af6f8d1f0b231cf10619e63fc6c306e384d1079))
+
+
+### Performance Improvements
+
+* **ahoy:** disable per-visit geocoding ([c11771d](https://github.com/eventaservo/eventaservo/commit/c11771da5131c2a1726abe54b7b90617c24da085))
+* **ahoy:** disable per-visit geocoding (EVENTA-SERVO-283) ([#1523](https://github.com/eventaservo/eventaservo/issues/1523)) ([c11771d](https://github.com/eventaservo/eventaservo/commit/c11771da5131c2a1726abe54b7b90617c24da085))
+* **home:** cache the rendered ad block (EVENTA-SERVO-28D) ([#1520](https://github.com/eventaservo/eventaservo/issues/1520)) ([fa5ef44](https://github.com/eventaservo/eventaservo/commit/fa5ef4482cabe3980452e8ad056fb0b840266a55))
+* **home:** cache the rendered ad block instead of the ad records ([fa5ef44](https://github.com/eventaservo/eventaservo/commit/fa5ef4482cabe3980452e8ad056fb0b840266a55))
+* **solid_queue:** consolidate production workers ([#1531](https://github.com/eventaservo/eventaservo/issues/1531)) ([06c84b2](https://github.com/eventaservo/eventaservo/commit/06c84b2ca57461ce23bdcc2ef73dff50e924798e))
+* **solid_queue:** consolidate workers and use jemalloc ([#1530](https://github.com/eventaservo/eventaservo/issues/1530)) ([b03972b](https://github.com/eventaservo/eventaservo/commit/b03972bacd6c198a934bf12e1466dc90f026a210))
+
+
+### Miscellaneous Chores
+
+* ignore local AI assistant artifacts ([#1521](https://github.com/eventaservo/eventaservo/issues/1521)) ([07c2e03](https://github.com/eventaservo/eventaservo/commit/07c2e0355c853afbfb296b57a7682857b17c82b9))
+* **sentry:** raise traces sample rate to 50% ([#1529](https://github.com/eventaservo/eventaservo/issues/1529)) ([ef2e898](https://github.com/eventaservo/eventaservo/commit/ef2e898c65e356ea01160c812662523131a04ce3))
+
 ## [3.1.1](https://github.com/eventaservo/eventaservo/compare/v3.1.0...v3.1.1) (2026-11-06)
 
 
