@@ -2,7 +2,7 @@
   <%= @country.name %>
 <% end %>
 
-<%= render Ui::CardComponent.new(variant: :bordered, class: "tw:my-1 tw:sm:my-2") do |panel| %>
+<%= render Ui::CardComponent.new(variant: :bordered, overflow_visible: true, class: "tw:my-1 tw:sm:my-2") do |panel| %>
   <% content_for :breadcrumb_right do %>
     <%= link_to icon("far", "calendar-alt"), webcal_url(landa_kodo: @country.code, protocol: :webcal, format: :ics), data: {dialog_open: "webcalModal"}, aria: {label: t("events.webcal_modal.subscribe_calendar")} %>
     <%= link_to icon("fas", "rss"), events_by_country_path(continent: @country.continent.normalized, country_name: @country.name.normalized, format: :xml), title: "RSS", class: "tw:me-2", aria: {label: "RSS"} %>

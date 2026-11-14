@@ -1,24 +1,25 @@
 <div data-controller="event-user-interested-button">
   <% if user_signed_in? %>
     <% if event.participants_records.include?(current_user) %>
-      <%= link_to event_toggle_participant_url(event_code: event.ligilo), class: 'link-green' do %>
-        <h1><%= icon('fas', 'user-check') %></h1>
+      <%= link_to event_toggle_participant_url(event_code: event.ligilo), class: "link-green" do %>
+        <h1 class="tw:text-3xl tw:m-0"><%= icon("fas", "user-check") %></h1>
         <span><%= t("events.participants.interested_active") %></span>
       <% end %>
     <% else %>
       <a href="#" class="pointer" data-action="click->event-user-interested-button#buttonClicked" data-event-user-interested-button-target="button">
-        <h1><%= icon('fas', 'user') %></h1>
+        <h1 class="tw:text-3xl tw:m-0"><%= icon("fas", "user") %></h1>
         <span><%= t("events.participants.interested_button") %></span>
       </a>
 
-
-      <div class="d-none" data-event-user-interested-button-target="question">
-        <%= t("events.participants.public_list_question") %><br>
-        <%= link_to t("common.yes_upper"), event_toggle_participant_url(event_code: event.ligilo, publika: 'jes'), class: 'btn btn-sm btn-success w-100 mb-1' %>
-        <%= link_to t("common.no_upper"), event_toggle_participant_url(event_code: event.ligilo), class: 'btn btn-sm btn-danger w-100' %>
+      <div class="tw:hidden" data-event-user-interested-button-target="question">
+        <div class="tw:mb-1"><%= t("events.participants.public_list_question") %></div>
+        <div class="tw:flex tw:flex-col tw:gap-1">
+          <%= render Ui::ButtonComponent.new(t("common.yes_upper"), href: event_toggle_participant_url(event_code: event.ligilo, publika: "jes"), variant: :success, size: :small, full_width: true) %>
+          <%= render Ui::ButtonComponent.new(t("common.no_upper"), href: event_toggle_participant_url(event_code: event.ligilo), variant: :danger, size: :small, full_width: true) %>
+        </div>
       </div>
     <% end %>
   <% else %>
-    <%= t("events.participants.sign_in_to_show_interest_html", link: link_to(t("common.sign_in"), new_user_session_path, class: 'fw-bold')) %>
+    <%= t("events.participants.sign_in_to_show_interest_html", link: link_to(t("common.sign_in"), new_user_session_path, class: "tw:font-bold")) %>
   <% end %>
 </div>

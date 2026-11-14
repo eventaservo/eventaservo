@@ -1,33 +1,37 @@
-<div class="box-white">
-  <div class="box-header"><%= t("events.details.header") %></div>
-  <div class="box-body">
-    <p style="line-height: 1.8em;">
-      <%= link_to_website(@event.site) + raw('<br/>') if @event.site.present? %>
-      <%= display_email(@event.email) + raw('<br/>') if @event.email.present? %>
-      <% unless @event.online && @event.city == 'Reta' %>
+<%= render Ui::CardComponent.new(variant: :bordered, id: "informoj", class: "tw:my-1 tw:sm:my-2") do |panel| %>
+  <% panel.with_header(class: "tw:bg-[#008000] tw:text-white tw:text-[10px] tw:font-bold tw:uppercase tw:tracking-[0.5px] tw:leading-3 tw:px-3 tw:py-2") do %>
+    <%= t("events.details.header") %>
+  <% end %>
+
+  <% panel.with_body(padding: false, class: "tw:p-3 tw:text-xs") do %>
+    <p class="tw:leading-[1.8em] tw:mb-3">
+      <%= link_to_website(@event.site) + raw("<br/>") if @event.site.present? %>
+      <%= display_email(@event.email) + raw("<br/>") if @event.email.present? %>
+      <% unless @event.online && @event.city == "Reta" %>
         <%= address_link(@event.full_address, text: @event.address) unless @event.address.blank? %>
-        <%= render partial: 'event_map', locals: { event: @event } if @event.location_defined? %>
+        <%= render partial: "event_map", locals: {event: @event} if @event.location_defined? %>
       <% end %>
     </p>
 
-    <%= render partial: 'partoprenontoj', locals: { event: @event, interested: @partoprenontoj } %>
+    <%= render partial: "partoprenontoj", locals: {event: @event, interested: @partoprenontoj} %>
 
-    <p>
+    <div class="tw:mt-3">
       <div class="text-divider"><%= t("events.details.administrator") %></div>
       <% if @event.organizations.any? %>
-        <div class="text-center" style="font-size: 1.3em;">
+        <div class="tw:flex tw:flex-col tw:items-center tw:gap-1.5 tw:mt-2">
           <% @event.organizations.each do |o| %>
-            <div class="organization-tags">
-              <%= link_to o.name, organization_url(short_name: o.short_name), class: 'tag text-truncate' %>
-            </div>
-            <br>
+            <%= render Ui::BadgeComponent.new(variant: :light, shape: :rounded, size: :medium, class: "tw:max-w-full") do %>
+              <%= link_to o.name, organization_url(short_name: o.short_name), class: "tw:truncate tw:text-inherit tw:no-underline" %>
+            <% end %>
           <% end %>
         </div>
       <% else %>
-        <%= link_to display_user(@event.user), events_by_username_path(username: @event.user.username), class: 'btn btn-sm btn-outline-link' %>
+        <div class="tw:mt-2 tw:text-center">
+          <%= render Ui::ButtonComponent.new(display_user(@event.user), href: events_by_username_path(username: @event.user.username), variant: :link, size: :small) %>
+        </div>
       <% end %>
-    </p>
+    </div>
 
-    <%= render partial: 'alshutilo' %>
-  </div>
-</div>
+    <%= render partial: "alshutilo" %>
+  <% end %>
+<% end %>

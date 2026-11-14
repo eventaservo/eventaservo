@@ -1,14 +1,14 @@
 <% unless @event.all_day? %>
-  <div class="small text-end mt-1 fw-bold">
+  <div class="tw:text-xs tw:text-end tw:mt-1 tw:font-bold">
     <div>
       <%= start_and_end_time_with_timezone(@event, tz) %>
     </div>
     <div>
       <%= I18n.t tz, scope: :timezones %>
-      <%= content_tag(:small, t("timezone.utc_label"), class: "text-secondary fw-normal") if tz == "Etc/UTC" %>
+      <%= content_tag(:small, t("timezone.utc_label"), class: "tw:text-gray-500 tw:font-normal") if tz == "Etc/UTC" %>
       <% if @event.dst? %>
         <%= render Ui::TooltipComponent.new(text: t("events.daylight_saving_time"), placement: :top) do %>
-          <%= icon('fas', 'sun', aria: { hidden: true }) %>
+          <%= icon("fas", "sun", aria: {hidden: true}) %>
         <% end %>
       <% end %>
     </div>

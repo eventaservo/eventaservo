@@ -1,7 +1,7 @@
-<div class="d-flex kalendareto-grupo justify-content-end">
+<div class="tw:flex kalendareto-grupo tw:justify-end">
   <%= calendar_icon(event.start_date_label(horzono: tz)) %>
   <% if event.multtaga?(horzono: tz) %>
-    <div class="p-2"><%= icon('fas', 'arrow-right') %></div>
+    <div class="tw:p-2"><%= icon("fas", "arrow-right") %></div>
     <%= calendar_icon(event.end_date_label(horzono: tz)) %>
   <% end %>
 </div>

@@ -2,7 +2,7 @@
   <%= continent_display_name(params[:continent]) %>
 <% end %>
 
-<%= render Ui::CardComponent.new(variant: :bordered, class: "tw:my-1 tw:sm:my-2") do |panel| %>
+<%= render Ui::CardComponent.new(variant: :bordered, overflow_visible: true, class: "tw:my-1 tw:sm:my-2") do |panel| %>
   <%# Montras WebCAl ikonon nur por Retaj 'kontinentoj' %>
   <% if params[:continent] == "reta" %>
     <% content_for :breadcrumb_right do %>

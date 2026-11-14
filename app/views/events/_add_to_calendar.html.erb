@@ -1,36 +1,56 @@
 <% presenter = EventPresenter.new(event: @event) %>
-<div class="tw:relative" data-controller="menu">
+<div class="tw:relative tw:inline-block" data-controller="menu">
   <a id="add-to-calendar-options" class="far fa-calendar link-black" role="button"
      aria-expanded="false" aria-haspopup="true" aria-controls="add-to-calendar-menu"
-     data-menu-target="button" data-action="click->menu#toggle" href="#" aria-label="<%= t('pages.event.add_to_calendar.title') %>">
+     data-menu-target="button" data-action="click->menu#toggle" href="#" aria-label="<%= t("pages.event.add_to_calendar.title") %>">
   </a>
-  <div id="add-to-calendar-menu" role="menu" data-menu-target="panel" class="dropdown-menu dropdown-menu-end tw:right-0 tw:left-auto tw:top-full tw:mt-1" aria-labelledby="add-to-calendar-options">
-    <h5 class="dropdown-header"><%= t('pages.event.add_to_calendar.title') %></h5>
+  <div id="add-to-calendar-menu" role="menu" aria-orientation="vertical"
+       data-menu-target="panel" data-menu-hidden-class="tw:hidden"
+       class="tw:hidden tw:absolute tw:right-0 tw:top-full tw:mt-1 tw:z-50 tw:w-56 tw:py-1 tw:bg-white tw:rounded-lg tw:shadow-lg tw:border tw:border-gray-200 tw:text-sm tw:font-normal"
+       aria-labelledby="add-to-calendar-options">
+    <h5 role="presentation" class="tw:px-3.5 tw:py-1.5 tw:text-xs tw:font-semibold tw:uppercase tw:tracking-wider tw:text-gray-500 tw:m-0">
+      <%= t("pages.event.add_to_calendar.title") %>
+    </h5>
 
-    <%= link_to icon('fa-brands', 'google', 'Google'),
+    <%= link_to icon("fa-brands", "google", "Google"),
           presenter.add_to_calendar_links[:google],
           target: :_blank,
-          class: 'dropdown-item' %>
+          role: "menuitem",
+          tabindex: "-1",
+          data: {menu_target: "item"},
+          class: "tw:flex tw:items-center tw:gap-2.5 tw:w-full tw:px-3.5 tw:py-2 tw:text-sm tw:text-gray-700 tw:hover:bg-gray-100 tw:hover:text-gray-900 tw:no-underline" %>
 
-    <%= link_to icon('fa-brands', 'apple', 'Apple'),
+    <%= link_to icon("fa-brands", "apple", "Apple"),
           presenter.add_to_calendar_links[:apple],
           target: :_blank,
-          class: 'dropdown-item' %>
+          role: "menuitem",
+          tabindex: "-1",
+          data: {menu_target: "item"},
+          class: "tw:flex tw:items-center tw:gap-2.5 tw:w-full tw:px-3.5 tw:py-2 tw:text-sm tw:text-gray-700 tw:hover:bg-gray-100 tw:hover:text-gray-900 tw:no-underline" %>
 
-    <%= link_to icon('fa-brands', 'microsoft', 'Outlook.com'),
+    <%= link_to icon("fa-brands", "microsoft", "Outlook.com"),
           presenter.add_to_calendar_links[:outlook],
           target: :_blank,
-          class: 'dropdown-item' %>
+          role: "menuitem",
+          tabindex: "-1",
+          data: {menu_target: "item"},
+          class: "tw:flex tw:items-center tw:gap-2.5 tw:w-full tw:px-3.5 tw:py-2 tw:text-sm tw:text-gray-700 tw:hover:bg-gray-100 tw:hover:text-gray-900 tw:no-underline" %>
 
-    <%= link_to icon('fa-brands', 'yahoo', 'Yahoo'),
+    <%= link_to icon("fa-brands", "yahoo", "Yahoo"),
           presenter.add_to_calendar_links[:yahoo],
           target: :_blank,
-          class: 'dropdown-item' %>
+          role: "menuitem",
+          tabindex: "-1",
+          data: {menu_target: "item"},
+          class: "tw:flex tw:items-center tw:gap-2.5 tw:w-full tw:px-3.5 tw:py-2 tw:text-sm tw:text-gray-700 tw:hover:bg-gray-100 tw:hover:text-gray-900 tw:no-underline" %>
 
-    <div class="dropdown-divider"></div>
+    <div role="separator" class="tw:my-1 tw:border-t tw:border-gray-200"></div>
 
-    <%= link_to icon('fas', 'calendar', t('pages.event.add_to_calendar.download_ics')),
+    <%= link_to icon("fas", "calendar", t("pages.event.add_to_calendar.download_ics")),
           presenter.add_to_calendar_links[:ics],
-          class: 'dropdown-item' %>
+          role: "menuitem",
+          tabindex: "-1",
+          data: {menu_target: "item"},
+          class: "tw:flex tw:items-center tw:gap-2.5 tw:w-full tw:px-3.5 tw:py-2 tw:text-sm tw:text-gray-700 tw:hover:bg-gray-100 tw:hover:text-gray-900 tw:no-underline" %>
   </div>
 </div>

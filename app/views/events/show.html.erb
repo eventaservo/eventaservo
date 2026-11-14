@@ -1,85 +1,92 @@
 <% content_for :head do %>
-  <%= render 'layouts/mapbox_token' %>
+  <%= render "layouts/mapbox_token" %>
 <% end %>
 
 <% content_for :title do %>
   <%= @event.title %>
 <% end %>
-<% content_for(:head) { render partial: 'event_scheme' } %>
+<% content_for(:head) { render partial: "event_scheme" } %>
 
-<%= render partial: 'fb_meta', locals: { event: @event } %>
-<%= render partial: 'layouts/breadcrumb' %>
+<%= render partial: "fb_meta", locals: {event: @event} %>
+<%= render partial: "layouts/breadcrumb" %>
 
-<%= render partial: 'share_button_modal' %>
+<%= render partial: "share_button_modal" %>
 
-<div class="row" id="evento">
-  <div class="col-lg-8">
-    <div class="box-white <%= event_color_class(@event) %>">
-      <div class="lead d-flex">
-        <div>
-          <%= event_flag(@event) %> <span class="<%= 'cancelled' if @event.cancelled %>"><%= @event.title %></span>
-        </div>
-        <div class="ms-auto">
-          <div class="d-flex">
-            <div class="me-2">
-              <%= render 'add_to_calendar', event: @event %>
-            </div>
+<div class="tw:grid tw:grid-cols-1 tw:lg:grid-cols-12 tw:gap-4" id="evento">
+  <div class="tw:lg:col-span-8">
+    <%= render Ui::CardComponent.new(variant: :bordered, overflow_visible: true, class: "tw:my-1 tw:sm:my-2 #{event_border_color_class(@event)}") do |panel| %>
+      <% panel.with_body(padding: false, class: "tw:p-3 tw:sm:p-4") do %>
+        <div class="tw:flex tw:items-start tw:justify-between tw:gap-2 tw:text-xl tw:font-bold tw:border-b tw:border-gray-300 tw:pb-1 tw:mb-3">
+          <div class="tw:min-w-0">
+            <%= event_flag(@event) %>
+            <span class="<%= "tw:text-red-600 tw:line-through" if @event.cancelled %>"><%= @event.title %></span>
+          </div>
+          <div class="tw:shrink-0 tw:flex tw:items-center tw:me-1">
+            <%= render "add_to_calendar", event: @event %>
           </div>
         </div>
-      </div>
 
-      <% if @event.cancelled %>
-        <div class="alert alert-danger">
-          <b><%= t("events.cancelled_upper") %></b>
-          <%= @event.cancel_reason %>
-        </div>
-      <% end %>
-
-      <div id="div">
-        <div class="ms-2 float-end">
-          <%= render partial: 'kalendareto', locals: { event: @event, tz: @event.time_zone } %>
-          <%= render partial: 'horoj', locals: { tz: @event.time_zone } %>
-          <%= render partial: 'horzono' if cookies[:horzono] %>
-          <% unless @event.all_day? %>
-            <div class="text-end"><%= render partial: 'timezone_selector' %></div>
+        <% if @event.cancelled %>
+          <%= render Ui::AlertComponent.new(variant: :danger, class: "tw:mb-3") do %>
+            <b><%= t("events.cancelled_upper") %></b>
+            <%= @event.cancel_reason %>
           <% end %>
-        </div>
-
-        <h5 class="text-start"><%= @event.description %></h5>
-
-        <p>
-          <%= render "events/international_badge", event: @event %>
-          <%= display_event_tags(@event) %>
-        </p>
-
-        <% begin %>
-          <%= @event.enhavo %>
-          <% rescue => e %>
-          <% Sentry.capture_exception(e) %>
         <% end %>
 
-        <div class="clearfix"></div>
-        <%= render partial: 'uploads' %>
-        <%= render partial: 'videos' %>
-
-        <div class="buttons-footer d-flex justify-content-between">
-          <% if user_signed_in? %>
-            <%= render "report_problem_modal" %>
-            <%= link_to icon('far', 'copy', t("buttons.duplicate")), new_event_url(from_event: @event), class: 'btn btn-sm btn-outline-success no-border' %>
-            <% if user_can_edit_event?(user: current_user, event: @event) %>
-              <%= link_to icon('fas', 'plus-circle', t("buttons.add_video")), event_nova_video_url(event_code: @event.ligilo), class: 'btn btn-sm btn-outline-success no-border' %>
-              <%= link_to icon('far', 'edit', t("buttons.edit")), edit_event_url(event_code: @event.ligilo), class: 'btn btn-sm btn-outline-primary no-border' %>
+        <div id="div">
+          <div class="tw:ms-3 tw:mb-2 tw:float-end">
+            <%= render partial: "kalendareto", locals: {event: @event, tz: @event.time_zone} %>
+            <%= render partial: "horoj", locals: {tz: @event.time_zone} %>
+            <%= render partial: "horzono" if cookies[:horzono] %>
+            <% unless @event.all_day? %>
+              <div class="tw:text-end"><%= render partial: "timezone_selector" %></div>
             <% end %>
-            <%= link_to icon('fas', 'share-alt', t("buttons.share")), '#', class: 'btn btn-sm btn-outline-info no-border', data: { dialog_open: 'shareModal' } %>
-          <% else %>
-            <%= link_to icon('fas', 'share-alt', t("buttons.share")), '#', class: 'btn btn-sm btn-outline-info no-border ms-auto', data: { dialog_open: 'shareModal' } %>
+          </div>
+
+          <h5 class="tw:text-start tw:text-xl tw:font-medium tw:mb-2"><%= @event.description %></h5>
+
+          <div class="tw:mb-3 tw:flex tw:flex-wrap tw:items-center tw:gap-1">
+            <%= render "events/international_badge", event: @event %>
+            <%= display_event_tags(@event) %>
+          </div>
+
+          <% begin %>
+            <%= @event.enhavo %>
+          <% rescue => e %>
+            <% Sentry.capture_exception(e) %>
           <% end %>
+
+          <div class="tw:clear-both"></div>
+          <%= render partial: "uploads" %>
+          <%= render partial: "videos" %>
+
+          <div class="tw:flex tw:flex-wrap tw:items-center tw:justify-between tw:gap-2 tw:pt-2 tw:mt-5 tw:border-t tw:border-gray-300">
+            <% if user_signed_in? %>
+              <%= render "report_problem_modal" %>
+              <%= link_to icon("far", "copy", t("buttons.duplicate")), new_event_url(from_event: @event),
+                class: "tw:inline-flex tw:items-center tw:gap-1 tw:px-2 tw:py-1 tw:text-sm tw:text-esperanto-600 tw:hover:bg-esperanto-50 tw:rounded tw:no-underline tw:transition-colors" %>
+              <% if user_can_edit_event?(user: current_user, event: @event) %>
+                <%= link_to icon("fas", "plus-circle", t("buttons.add_video")), event_nova_video_url(event_code: @event.ligilo),
+                  class: "tw:inline-flex tw:items-center tw:gap-1 tw:px-2 tw:py-1 tw:text-sm tw:text-esperanto-600 tw:hover:bg-esperanto-50 tw:rounded tw:no-underline tw:transition-colors" %>
+                <%= link_to icon("far", "edit", t("buttons.edit")), edit_event_url(event_code: @event.ligilo),
+                  class: "tw:inline-flex tw:items-center tw:gap-1 tw:px-2 tw:py-1 tw:text-sm tw:text-brand-blue tw:hover:bg-blue-50 tw:rounded tw:no-underline tw:transition-colors" %>
+              <% end %>
+              <%= link_to icon("fas", "share-alt", t("buttons.share")), "#",
+                class: "tw:inline-flex tw:items-center tw:gap-1 tw:px-2 tw:py-1 tw:text-sm tw:text-brand-info tw:hover:bg-cyan-50 tw:rounded tw:no-underline tw:transition-colors",
+                data: {dialog_open: "shareModal"} %>
+            <% else %>
+              <%= link_to icon("fas", "share-alt", t("buttons.share")), "#",
+                class: "tw:ms-auto tw:inline-flex tw:items-center tw:gap-1 tw:px-2 tw:py-1 tw:text-sm tw:text-brand-info tw:hover:bg-cyan-50 tw:rounded tw:no-underline tw:transition-colors",
+                data: {dialog_open: "shareModal"} %>
+            <% end %>
+          </div>
         </div>
-      </div>
-    </div>
+      <% end %>
+    <% end %>
   </div>
-  <div class="col-lg-4">
-    <%= render partial: 'event_reports_sidebar', locals: { event: @event } %>
-    <%= render partial: 'informoj' %>
+
+  <div class="tw:lg:col-span-4 tw:space-y-2">
+    <%= render partial: "event_reports_sidebar", locals: {event: @event} %>
+    <%= render partial: "informoj" %>
   </div>
 </div>

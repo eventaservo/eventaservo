@@ -1,19 +1,18 @@
-<%= link_to t("events.participants.and_more"), '#', data: { dialog_open: 'partoprenontojModal' } %>
+<%= link_to t("events.participants.and_more"), "#", data: {dialog_open: "partoprenontojModal"} %>
 
 <% modal_title = event.past? ? t("events.participants.count_interested_past", count: event.participants.count) : t("events.participants.count_interested_future", count: event.participants.count) %>
 <%= render Ui::ModalComponent.new(id: "partoprenontojModal", title: modal_title, title_id: "titolo", scrollable: true) do %>
-  <div class="text-start" style="font-weight: normal; font-size: 1rem;">
+  <div class="tw:text-start tw:font-normal tw:text-base">
     <% @partoprenontoj.publicly_listed.each do |participant| %>
       <% next unless participant.user %>
 
-      <br>
-      <%= link_to display_user(participant.user), events_by_username_path(username: participant.user&.username) %>
-      <br>
+      <div class="tw:my-2">
+        <%= link_to display_user(participant.user), events_by_username_path(username: participant.user&.username) %>
+      </div>
     <% end %>
 
     <% if @partoprenontoj.not_publicly_listed.count > 0 %>
-      <p>
-        <br>
+      <p class="tw:mt-3 tw:mb-0">
         <%= t("events.participants.anonymous_count", count: @partoprenontoj.not_publicly_listed.count) %>
       </p>
     <% end %>

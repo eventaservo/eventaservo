@@ -58,4 +58,37 @@ class ListingsSystemTest < ApplicationSystemTestCase
     assert_selector "dialog#webcalModal[open]"
     assert_selector "dialog#webcalModal input[data-clipboard-target='source']"
   end
+
+  test "reta calendar month menu is not clipped by the outer card on an empty week" do
+    visit events_by_continent_path(continent: "reta", date: "2028-01-03")
+
+    find("#calendarMonthNavigation").click
+    assert_selector "#calendarMonthNavigationMenu.show", visible: true
+
+    menu_rect = evaluate_script("document.getElementById('calendarMonthNavigationMenu').getBoundingClientRect()")
+    last_item_rect = evaluate_script("document.querySelector('#calendarMonthNavigationMenu a:last-of-type').getBoundingClientRect()")
+    card_overflow = evaluate_script("getComputedStyle(document.querySelector('.tw\\\\:overflow-visible')).overflow")
+
+    assert_equal "visible", card_overflow
+    assert_operator last_item_rect["bottom"], :<=, menu_rect["bottom"] + 1
+    assert_operator last_item_rect["height"], :>, 20
+  end
+
+  test "calendar month menu stays within mobile and desktop viewports" do
+    [375, 1280].each do |width|
+      page.current_window.resize_to(width, 900)
+      visit root_path
+
+      find("#calendarMonthNavigation").click
+      assert_selector "#calendarMonthNavigationMenu.show", visible: true
+
+      menu_rect = evaluate_script("document.getElementById('calendarMonthNavigationMenu').getBoundingClientRect()")
+      client_width = evaluate_script("document.documentElement.clientWidth")
+
+      assert_operator menu_rect["left"], :>=, 0,
+        "Expected month menu not to overflow left viewport edge at #{width}px (left=#{menu_rect["left"]})"
+      assert_operator menu_rect["right"], :<=, client_width,
+        "Expected month menu not to overflow right viewport edge at #{width}px (right=#{menu_rect["right"]}, clientWidth=#{client_width})"
+    end
+  end
 end

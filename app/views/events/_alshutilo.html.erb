@@ -1,20 +1,20 @@
 <% if user_is_owner_or_admin(@event) %>
-  <p>
-    <div class="text-divider"><%= t("events.uploader.title") %></div>
-  </p>
-  <p><%= t("events.uploader.prompt") %></p>
+  <div class="tw:mt-3">
+    <div class="text-divider tw:mb-2"><%= t("events.uploader.title") %></div>
+    <p class="tw:mb-2"><%= t("events.uploader.prompt") %></p>
 
-  <%= form_with(model: @event, url: event_path(code: @event.code), local: true, id: 'uploader_form', method: :patch) do |f| %>
-    <%= f.file_field :uploads, multiple: true, direct_upload: true,
-      accept: 'application/pdf,
-      image/png,
-      image/jpg,
-      image/jpeg,
-      image/gif,
-      application/zip,
-      application/vnd.openxmlformats-officedocument.wordprocessingml.document' %>
-    <br>
-    <br>
-    <%= f.submit t("events.uploader.submit"), class: 'btn btn-outline-primary btn-sm col-12', id: 'submit_button' %>
-  <% end %>
+    <%= form_with(model: @event, url: event_path(code: @event.code), local: true, id: "uploader_form", method: :patch) do |f| %>
+      <%= f.file_field :uploads, multiple: true, direct_upload: true,
+        accept: "application/pdf,
+        image/png,
+        image/jpg,
+        image/jpeg,
+        image/gif,
+        application/zip,
+        application/vnd.openxmlformats-officedocument.wordprocessingml.document" %>
+      <div class="tw:mt-3">
+        <%= render Ui::ButtonComponent.new(t("events.uploader.submit"), type: :submit, variant: :outline_primary, size: :small, full_width: true, id: "submit_button") %>
+      </div>
+    <% end %>
+  </div>
 <% end %>

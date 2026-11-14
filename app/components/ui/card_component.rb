@@ -390,7 +390,7 @@ module Ui
       Footer.new(border: border, background: background, size: size, **options, &block)
     }
 
-    attr_reader :title, :subtitle, :variant, :size, :orientation, :href, :tag_name, :flush, :html_options
+    attr_reader :title, :subtitle, :variant, :size, :orientation, :href, :tag_name, :flush, :overflow_visible, :html_options
 
     # Creates a new surface panel component instance.
     #
@@ -403,6 +403,7 @@ module Ui
     # @param href [String, nil] optional link destination URL
     # @param tag [Symbol, String, nil] HTML element tag to render
     # @param flush [Boolean] whether body padding is removed (defaults to false)
+    # @param overflow_visible [Boolean] whether overflowing menus can extend past the edges (defaults to false)
     # @param html_options [Hash] additional HTML attributes
     #
     # @return [Ui::CardComponent]
@@ -415,6 +416,7 @@ module Ui
       href: nil,
       tag: nil,
       flush: false,
+      overflow_visible: false,
       **html_options
     )
       @title = title
@@ -425,6 +427,7 @@ module Ui
       @href = href
       @tag_name = tag
       @flush = flush
+      @overflow_visible = overflow_visible
       @html_options = html_options
     end
 
@@ -450,7 +453,8 @@ module Ui
     # @return [String]
     def container_classes
       [
-        "tw:bg-white tw:rounded-lg tw:overflow-hidden",
+        "tw:bg-white tw:rounded-lg",
+        overflow_visible ? "tw:overflow-visible" : "tw:overflow-hidden",
         orientation_classes,
         variant_classes,
         interactive_link_classes,

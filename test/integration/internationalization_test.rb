@@ -435,27 +435,27 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
 
     get event_path(code: event.ligilo)
     assert_response :success
-    assert_select ".box-header", text: "Informoj"
+    assert_select "#informoj", text: /Informoj/
     assert_select "#partoprenantoj .text-divider", text: /Interesiĝantoj/
     assert_select "#evento .text-divider", text: "Administranto"
-    assert_select "[data-event-user-interested-button-target='question'] a.btn-success", text: "JES"
-    assert_select "[data-event-user-interested-button-target='question'] a.btn-danger", text: "NE"
+    assert_select "[data-event-user-interested-button-target='question'] a[href*='publika=jes']", text: "JES"
+    assert_select "[data-event-user-interested-button-target='question'] a:not([href*='publika=jes'])", text: "NE"
 
     get "/en/e/#{event.ligilo}"
     assert_response :success
-    assert_select ".box-header", text: "Details"
+    assert_select "#informoj", text: /Details/
     assert_select "#partoprenantoj .text-divider", text: /Interested/
     assert_select "#evento .text-divider", text: "Administrator"
-    assert_select "[data-event-user-interested-button-target='question'] a.btn-success", text: "YES"
-    assert_select "[data-event-user-interested-button-target='question'] a.btn-danger", text: "NO"
+    assert_select "[data-event-user-interested-button-target='question'] a[href*='publika=jes']", text: "YES"
+    assert_select "[data-event-user-interested-button-target='question'] a:not([href*='publika=jes'])", text: "NO"
 
     get "/pt_BR/e/#{event.ligilo}"
     assert_response :success
-    assert_select ".box-header", text: "Informações"
+    assert_select "#informoj", text: /Informações/
     assert_select "#partoprenantoj .text-divider", text: /Interessados/
     assert_select "#evento .text-divider", text: "Administrador"
-    assert_select "[data-event-user-interested-button-target='question'] a.btn-success", text: "SIM"
-    assert_select "[data-event-user-interested-button-target='question'] a.btn-danger", text: "NÃO"
+    assert_select "[data-event-user-interested-button-target='question'] a[href*='publika=jes']", text: "SIM"
+    assert_select "[data-event-user-interested-button-target='question'] a:not([href*='publika=jes'])", text: "NÃO"
   end
 
   test "renders localized event new form across locales" do

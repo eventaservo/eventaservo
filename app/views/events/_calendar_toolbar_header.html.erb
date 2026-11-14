@@ -13,7 +13,7 @@
     <% end %>
   </strong>
   <div class="tw:flex tw:items-center tw:justify-between tw:md:justify-end tw:gap-2 tw:flex-wrap tw:md:flex-nowrap tw:w-full tw:md:grow">
-    <%= render Ui::DropdownComponent.new(menu_id: "calendarMonthNavigationMenu", align: :right, width: :auto) do |dropdown| %>
+    <%= render Ui::DropdownComponent.new(menu_id: "calendarMonthNavigationMenu", align: :left, width: :auto) do |dropdown| %>
       <% dropdown.with_trigger(t("events.calendar.jump_to_month"), id: "calendarMonthNavigation", variant: :light) %>
       <% month_navigation_options.each do |label, path| %>
         <% dropdown.with_item(label, href: path, data: {turbo_frame: "native-calendar", action: "click->menu#close"}) %>
