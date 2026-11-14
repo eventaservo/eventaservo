@@ -1,10 +1,14 @@
-<div class="mb-3" data-controller="short-url">
-  <%= hidden_field_tag :event_id, event.id, 'data-short-url-target': 'eventId' %>
-  <label for="event_short_url"><%= t("events.form.short_url") %></label>
-  <div class="input-group">
-    <div class="input-group-text">https://eventaservo.org/e/</div>
-    <%= form.text_field :short_url, class: 'form-control', maxlength: 32, value: (event.short_url || event.code),
-      'data-action': 'blur->short-url#check', 'data-short-url-target': 'url' %>
+<div class="tw:mb-3" data-controller="short-url">
+  <%= hidden_field_tag :event_id, event.id, "data-short-url-target": "eventId" %>
+  <label for="event_short_url" class="tw:block tw:text-sm tw:font-medium tw:text-gray-700 tw:mb-1"><%= t("events.form.short_url") %></label>
+  <div class="tw:flex tw:flex-col tw:sm:flex-row tw:items-stretch tw:w-full tw:rounded tw:border tw:border-gray-300 tw:overflow-hidden tw:focus-within:border-esperanto-500 tw:focus-within:ring-2 tw:focus-within:ring-esperanto-500/25">
+    <span class="tw:inline-flex tw:items-center tw:px-2.5 tw:py-1.5 tw:text-sm tw:text-gray-600 tw:bg-gray-100 tw:border-b tw:sm:border-b-0 tw:sm:border-r tw:border-gray-300 tw:select-none">https://eventaservo.org/e/</span>
+    <%= form.text_field :short_url,
+      class: "tw:flex-1 tw:min-w-0 tw:border-0 tw:px-2.5 tw:py-1.5 tw:text-sm tw:text-gray-900 tw:bg-white tw:focus:outline-none",
+      maxlength: 32,
+      value: (event.short_url || event.code),
+      "data-action": "blur->short-url#check",
+      "data-short-url-target": "url" %>
   </div>
   <%= turbo_frame_tag "short_url_availability" %>
 </div>

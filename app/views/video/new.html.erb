@@ -1,38 +1,63 @@
-<div class="row" data-controller="video" data-video-apikey="<%= Rails.application.credentials.dig(:google, :youtube_api_key) || ENV["GOOGLE_YOUTUBE_API_KEY"] %>">
-  <div class="col-12 col-lg-8 offset-lg-2">
-    <div class="box-white">
+<div class="tw:max-w-3xl tw:mx-auto" data-controller="video" data-video-apikey="<%= Rails.application.credentials.dig(:google, :youtube_api_key) || ENV["GOOGLE_YOUTUBE_API_KEY"] %>">
+  <%= render Ui::CardComponent.new(variant: :bordered) do |card| %>
+    <% card.with_body do %>
       <%= form_with(action: event_new_video_path, method: :post) do |form| %>
-        <p class="lead">Ligi registritan prezenton</p>
-        <div class="mb-3">
-          <%= form.label :video_link, 'Adreso (URL) de la video' %>
-          <%= form.text_field :video_link, autofocus: true, class: "form-control form-control-sm",
-            placeholder: "ekz: https://www.youtube.com/watch?v=t7YPEKvmHvo", required: true,
-            data: { action: "blur->video#fetchData", video_target: "url" } %>
+        <h1 class="tw:text-xl tw:font-bold tw:text-gray-900 tw:border-b tw:border-gray-200 tw:pb-2 tw:mb-4">Ligi registritan prezenton</h1>
+
+        <div class="tw:mb-3">
+          <%= render Ui::InputComponent.new(
+            :video_link,
+            id: "video_link",
+            size: :small,
+            label: "Adreso (URL) de la video",
+            placeholder: "ekz: https://www.youtube.com/watch?v=t7YPEKvmHvo",
+            required: true,
+            autofocus: true,
+            data: { action: "blur->video#fetchData", video_target: "url" }
+          ) %>
         </div>
 
-        <div class="mb-3">
-          <%= form.label :title, 'Titolo' %>
-          <%= form.text_field :title, class: "form-control form-control-sm", required: true,
-            "data-video-target": "title" %>
+        <div class="tw:mb-3">
+          <%= render Ui::InputComponent.new(
+            :title,
+            id: "title",
+            size: :small,
+            label: "Titolo",
+            required: true,
+            "data-video-target": "title"
+          ) %>
         </div>
 
-        <div class="mb-3">
-          <%= form.label :description, 'Priskribo' %>
-          <%= form.text_area :description, class: "form-control form-control-sm", required: true,
-            rows: "5", maxlength: "400", "data-video-target": "description", aria: { describedby: "description-help" } %>
-          <small class="form-text text-muted" id="description-help">Maksimume 400 signoj</small>
+        <div class="tw:mb-3">
+          <%= render Ui::TextareaComponent.new(
+            :description,
+            id: "description",
+            size: :small,
+            label: "Priskribo",
+            hint: "Maksimume 400 signoj",
+            rows: 5,
+            maxlength: 400,
+            required: true,
+            "data-video-target": "description"
+          ) %>
         </div>
 
-        <div class="mb-3" id="thumbnail" data-video-target="thumbnail">
-          <p class="text-divider">Alŝuti bild-dosieron</p>
-          <%= form.file_field :image, accept: "image/gif, image/jpeg, image/png", class: "form-control" %>
+        <div class="tw:mb-4" id="thumbnail" data-video-target="thumbnail">
+          <div class="tw:flex tw:items-center tw:gap-3 tw:my-3">
+            <div class="tw:flex-1 tw:h-px tw:bg-gray-300"></div>
+            <span class="tw:text-sm tw:font-medium tw:text-gray-600">Alŝuti bild-dosieron</span>
+            <div class="tw:flex-1 tw:h-px tw:bg-gray-300"></div>
+          </div>
+          <%= form.file_field :image,
+            accept: "image/gif, image/jpeg, image/png",
+            class: "tw:block tw:w-full tw:text-sm tw:text-gray-700 tw:border tw:border-gray-300 tw:rounded tw:bg-white tw:px-2.5 tw:py-1.5 tw:file:mr-3 tw:file:py-1 tw:file:px-2.5 tw:file:rounded tw:file:border tw:file:border-gray-300 tw:file:text-xs tw:file:font-medium tw:file:bg-gray-100 tw:file:text-gray-700 tw:hover:file:bg-gray-200" %>
         </div>
 
-        <div class="buttons-footer">
-          <%= link_to "Ne registri", :back, class: "button-cancel" %>
-          <%= form.submit 'Registri', class: "btn ms-2 btn-primary btn-sm" %>
+        <div class="tw:flex tw:items-center tw:justify-end tw:gap-2 tw:pt-3 tw:mt-5 tw:border-t tw:border-gray-200">
+          <%= render Ui::ButtonComponent.new("Ne registri", href: event_path(code: @evento.ligilo), variant: :cancel) %>
+          <%= render Ui::ButtonComponent.new("Registri", variant: :primary, type: :submit) %>
         </div>
       <% end %>
-    </div>
-  </div>
+    <% end %>
+  <% end %>
 </div>

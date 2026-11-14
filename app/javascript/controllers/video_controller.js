@@ -14,7 +14,7 @@ export default class extends Controller {
     )
 
     if (youtube_url) {
-      this.thumbnailTarget.classList.add('d-none')
+      this.thumbnailTarget.classList.add('tw:hidden')
       this.thumbnailTarget.value = ''
 
       const youtube_id = youtube_url[1]
@@ -29,7 +29,7 @@ export default class extends Controller {
         })
     } else {
       window.b = this.thumbnailTarget
-      this.thumbnailTarget.classList.remove('d-none')
+      this.thumbnailTarget.classList.remove('tw:hidden')
       this.thumbnailTarget.value = ''
     }
   }

@@ -1,29 +1,31 @@
-<div class="card mb-2" style="width: 300px">
-  <% video_url = video.bildo.attached? ? url_for(video.bildo) : asset_url('video_thumbnail.png') %>
-  <%= image_tag video_url, class: 'card-img-top' %>
-  <div class="card-body">
-    <p class="card-title">
-      <%= link_to video.title, video.url %>
+<% video_url = video.bildo.attached? ? url_for(video.bildo) : asset_url("video_thumbnail.png") %>
+<%= render Ui::CardComponent.new(variant: :bordered, class: "tw:w-full tw:max-w-[300px]") do |card| %>
+  <% card.with_media(src: video_url, alt: video.title, aspect_ratio: :video) %>
+
+  <% card.with_body(size: :small) do %>
+    <p class="tw:text-sm tw:font-semibold tw:text-gray-900 tw:mb-1">
+      <%= link_to video.title, video.url, class: "tw:text-brand-blue hover:tw:underline" %>
     </p>
-    <p class="card-text small">
+    <p class="tw:text-xs tw:text-gray-600 tw:mb-2 tw:break-words">
       <%= video.description %>
     </p>
 
     <% if user_can_edit_event?(user: user, event: video.evento) %>
-      <%= link_to icon('fas', 'trash', class: 'fg-color-red'), "/video/#{video.id}/forigi", method: :delete, data: { confirm: 'Ĉu vi certas?' }, aria: { label: 'Forigi videon' } %>
+      <%= link_to icon("fas", "trash", class: "tw:text-brand-red"), "/video/#{video.id}/forigi", method: :delete, data: { confirm: "Ĉu vi certas?" }, aria: { label: "Forigi videon" }, class: "tw:inline-flex tw:items-center tw:text-brand-red hover:tw:text-brand-red-hover" %>
     <% end %>
-  </div>
+  <% end %>
 
   <% if show_event_details %>
-    <div class="card-footer small">
-      <%= video.evento.date_start.strftime('%B %Y').downcase %><br>
-      <%= link_to video.evento.title, "/e/#{video.evento.short_url}" %>
+    <% card.with_footer(background: true, size: :small, class: "tw:text-xs tw:text-gray-600 tw:space-y-0.5") do %>
+      <div><%= video.evento.date_start.strftime("%B %Y").downcase %></div>
+      <div><%= link_to video.evento.title, "/e/#{video.evento.short_url}", class: "tw:text-brand-blue" %></div>
 
       <% organizations = video.evento.organizations.pluck(:name, :short_name) %>
       <% if organizations.any? %>
-        <br>
-        <%= organizations.map { |o| link_to o[0], "/o/#{o[1]}", class: 'fg-color-blueLight' }.join(', ').html_safe %>
+        <div>
+          <%= safe_join(organizations.map { |o| link_to o[0], "/o/#{o[1]}", class: "tw:text-brand-blue" }, ", ") %>
+        </div>
       <% end %>
-    </div>
+    <% end %>
   <% end %>
-</div>
+<% end %>

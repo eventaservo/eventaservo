@@ -1,7 +1,7 @@
 <%= turbo_stream.replace "short_url_availability" do %>
   <%= turbo_frame_tag "short_url_availability" do %>
     <% if !@short_url_available %>
-      <div class="fg-color-red text-end small">
+      <div class="tw:text-brand-red tw:text-right tw:text-xs tw:mt-1">
         <%= t("events.form.short_url_unavailable") %>
       </div>
     <% end %>
