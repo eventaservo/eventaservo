@@ -137,17 +137,21 @@ class HomeController < ApplicationController
     @events = Event.includes(:country).by_username(params[:username]) if params[:username].present?
   end
 
+  # Number of events published in the RSS feed. Feed readers only need the
+  # nearest upcoming events: rendering every future event produced a ~350 KB
+  # document with hundreds of items and ~1.2 s of view time per request.
+  FEED_LIMIT = 100
+
+  # How long a rendered feed document is reused before being rebuilt.
+  FEED_CACHE_TTL = 5.minutes
+
   def feed
     ahoy.track "Rendered feed"
 
     respond_to do |format|
       format.xml do
-        @events = Event.includes([:country, [uploads_attachments: :blob]])
-          .venontaj
-          .not_cancelled
-          .where(cancelled: false)
-          .order(:date_start)
-        render layout: false
+        response.headers["Cache-Control"] = "public, max-age=#{FEED_CACHE_TTL.to_i}"
+        render xml: cached_feed_xml
       end
       format.all { head :not_acceptable }
     end
@@ -211,6 +215,56 @@ class HomeController < ApplicationController
   end
 
   private
+
+  # Renders the RSS document, reusing the cached copy while its content is unchanged.
+  #
+  # Crawlers and feed readers poll +/rss.xml+ several times per hour; the
+  # document only changes when an event or an attachment changes, so rendering
+  # it once per cache window removes the repeated cost.
+  #
+  # The feed is public and advertises +xml:lang+ "eo", so it is always rendered in
+  # the default locale: administrators can switch locale through +?locale=+ or the
+  # +locale+ cookie, and a translated document must never reach the shared cache.
+  #
+  # @return [String] rendered RSS XML
+  def cached_feed_xml
+    I18n.with_locale(I18n.default_locale) do
+      Rails.cache.fetch(feed_cache_key, expires_in: FEED_CACHE_TTL) do
+        @events = feed_events.to_a
+        render_to_string(template: "home/feed", formats: [:xml], layout: false)
+      end
+    end
+  end
+
+  # Builds the cache key parts that change when the feed content changes.
+  #
+  # +base_url+ keeps documents rendered for different hosts/schemes apart, since
+  # the feed embeds absolute URLs. Timestamps keep microsecond precision, so two
+  # edits inside the same second still produce different keys. +count+ catches
+  # inserts and deletes done with +insert_all+/+update_all+ (importers), which do
+  # not touch +updated_at+.
+  #
+  # @return [Array<String, Integer, nil>] cache key parts
+  def feed_cache_key
+    scope = Event.venontaj.not_cancelled
+    ["events_feed_v1",
+      request.base_url,
+      scope.maximum(:updated_at)&.utc&.iso8601(6),
+      scope.count,
+      ActiveStorage::Attachment.where(record_type: "Event").maximum(:created_at)&.utc&.iso8601(6)]
+  end
+
+  # Builds the scope of events published in the feed: the nearest upcoming,
+  # non-cancelled events, with countries and uploads preloaded.
+  #
+  # @return [ActiveRecord::Relation] limited relation ordered by start date
+  def feed_events
+    Event.includes([:country, {uploads_attachments: {blob: :variant_records}}])
+      .venontaj
+      .not_cancelled
+      .order(:date_start)
+      .limit(FEED_LIMIT)
+  end
 
   # Parses one optional search date filter parameter.
   #
