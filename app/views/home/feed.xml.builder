@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
 xml.instruct! :xml, version: "1.0"
+last_build = @events.map(&:updated_at).max&.strftime("%a, %d %b %Y %T %z")
 xml.rss version: "2.0", "xmlns:atom": "http://www.w3.org/2005/Atom" do
   xml.channel do
     xml.title "Eventa Servo"
     xml.link root_url
     xml.description "Venontaj eventoj"
     xml.language "eo"
-    xml.pubDate @events.order(updated_at: :desc).last.updated_at.strftime("%a, %d %b %Y %T %z")
-    xml.lastBuildDate @events.order(updated_at: :desc).last.updated_at.strftime("%a, %d %b %Y %T %z")
+    xml.pubDate last_build
+    xml.lastBuildDate last_build
     xml.docs "http://blogs.law.harvard.edu/tech/rss"
     xml.generator "Ruby on Rails 6.0"
     xml.managingEditor "kontakto@eventaservo.org (Eventa Servo)"
