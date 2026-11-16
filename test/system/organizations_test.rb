@@ -36,13 +36,15 @@ class OrganizationsTest < ApplicationSystemTestCase
 
   test "organizations index and show render cleanly without horizontal overflow and open webcal modal" do
     organization = organizations(:rotterdam_centre)
-    main_org = create(:organization, name: "Ĉefa Testorganizo", short_name: "chefa_test", major: true, description: "Priskribo de la ĉefa organizo por kontrolo.")
+    main_org = organizations(:sao_paulo_klubo)
+    main_org.update!(major: true, description: "Priskribo de la ĉefa organizo por kontrolo.")
     main_org.logo.attach(
       io: File.open(Rails.root.join("app/assets/images/uea_emblemeto.png")),
       filename: "uea_emblemeto.png",
       content_type: "image/png"
     )
-    second_main_org = create(:organization, name: "Dua Ĉefa Testorganizo", short_name: "dua_chefa_test", major: true, description: "Priskribo de la dua ĉefa organizo por kontrolo.")
+    second_main_org = organizations(:tokyo_society)
+    second_main_org.update!(major: true, description: "Priskribo de la dua ĉefa organizo por kontrolo.")
     second_main_org.logo.attach(
       io: File.open(Rails.root.join("app/assets/images/tejo.png")),
       filename: "tejo.png",
