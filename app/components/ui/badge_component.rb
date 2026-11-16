@@ -152,10 +152,16 @@ module Ui
 
     # Base classes shared by all badges.
     #
+    # Line height is left to the font (`normal`) instead of a fixed value such as
+    # `leading-none` (1em). Badge labels are often wrapped in an element with
+    # `tw:truncate`, which adds `overflow: hidden`, so any part of a glyph below
+    # the line box is clipped. Fonts whose ascent plus descent exceed 1em (Segoe
+    # UI, Noto Sans, DejaVu Sans and others) lost the descenders of p, g, j and y.
+    #
     # @return [String]
     def base_classes
       "tw:inline-flex tw:items-center tw:gap-1.5 tw:font-medium " \
-        "tw:leading-none tw:select-none tw:border tw:border-solid tw:no-underline"
+        "tw:leading-[normal] tw:select-none tw:border tw:border-solid tw:no-underline"
     end
 
     # Shape utilities.
