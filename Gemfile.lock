@@ -263,7 +263,8 @@ GEM
       listen
       rails (>= 7.0.0)
       zeitwerk
-    hotwire_combobox (0.3.2)
+    hotwire_combobox (0.4.1)
+      platform_agent (>= 1.0.1)
       rails (>= 7.0.7.2)
       stimulus-rails (>= 1.2)
       turbo-rails (>= 1.2)
@@ -463,6 +464,9 @@ GEM
     pg (1.7.0-arm64-darwin)
     pg (1.7.0-x86_64-linux)
     pg (1.7.0-x86_64-linux-musl)
+    platform_agent (1.0.1)
+      activesupport (>= 5.2.0)
+      useragent (~> 0.16.3)
     postmark (1.25.1)
       json
     postmark-rails (0.22.1)
@@ -744,7 +748,7 @@ DEPENDENCIES
   herb (~> 0.11)
   highcharts-rails (~> 6.0)
   hotwire-spark
-  hotwire_combobox (~> 0.3.1)
+  hotwire_combobox (~> 0.4.1)
   htmlbeautifier (~> 1.4)
   httparty (~> 0.24)
   i18n-tasks (~> 1.0)

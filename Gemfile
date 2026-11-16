@@ -77,7 +77,7 @@ gem "view_component"
 # Hotwired
 gem "stimulus-rails", "~> 1.2"
 gem "turbo-rails", "~> 2"
-gem "hotwire_combobox", "~> 0.3.1"
+gem "hotwire_combobox", "~> 0.4.1"
 
 # Bundling gems
 gem "jsbundling-rails", "~> 1.1"
