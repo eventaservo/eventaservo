@@ -1,32 +1,54 @@
-<div class="box-white">
-  <% if user_signed_in? %>
-    <p><%= link_to icon('fas', 'plus-circle', t("organizations.index.create_new")), new_organization_url, class: 'small fg-color-green' %></p>
-  <% end %>
-
-  <% unless params[:serchi].present? %>
-    <%= render partial: "organizations/main_organizations", locals: { organizations: Organization.mains } %>
-    <hr>
-  <% end %>
-
-  <div class="es-list">
-    <h4 class="text-center">
-      <i class="fas fa-users fg-color-info"></i>
-      <%= t("organizations.index.title") %>
-    </h4>
-
-    <%= form_tag organization_search_url, method: :get, remote: true, class: 'mb-3', data: { controller: 'org-search', action: 'keyup->org-search#search' } do %>
-      <%= text_field_tag :serchi, nil, class: 'form-control col-12', autofocus: true, placeholder: t("organizations.index.search_placeholder") %>
-    <% end %>
-
-    <% if params[:serchi].present? %>
-      <div class="row col-12">
-        <%= t("organizations.index.searching") %>:
-        <%= link_to icon('fas', 'times', params[:serchi]), organizations_url, class: 'btn btn-sm btn-link' %>
+<%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+  <% panel.with_body(class: "tw:space-y-4") do %>
+    <% if user_signed_in? %>
+      <div>
+        <%= render Ui::ButtonComponent.new(
+          t("organizations.index.create_new"),
+          href: new_organization_url,
+          icon: "plus-circle",
+          variant: :new_link,
+          size: :small
+        ) %>
       </div>
     <% end %>
 
-    <div id="o_search_results">
-      <%= render partial: "organizations/search_results" %>
+    <% unless params[:serchi].present? %>
+      <%= render partial: "organizations/main_organizations", locals: { organizations: Organization.mains } %>
+      <hr class="tw:my-4 tw:border-0 tw:border-t tw:border-gray-200">
+    <% end %>
+
+    <div id="organizations_directory">
+      <h4 class="tw:text-lg tw:font-medium tw:text-gray-800 tw:text-center tw:mb-3 tw:flex tw:items-center tw:justify-center tw:gap-1.5">
+        <i class="fas fa-users tw:text-cyan-600" aria-hidden="true"></i>
+        <span><%= t("organizations.index.title") %></span>
+      </h4>
+
+      <%= form_tag organization_search_url, method: :get, remote: true, class: "tw:mb-3", data: { controller: "org-search", action: "keyup->org-search#search" } do %>
+        <%= render Ui::InputComponent.new(
+          :serchi,
+          id: "serchi",
+          value: params[:serchi],
+          autofocus: true,
+          placeholder: t("organizations.index.search_placeholder")
+        ) %>
+      <% end %>
+
+      <% if params[:serchi].present? %>
+        <div class="tw:flex tw:items-center tw:flex-wrap tw:gap-2 tw:mb-2 tw:text-sm">
+          <span><%= t("organizations.index.searching") %>:</span>
+          <%= render Ui::ButtonComponent.new(
+            params[:serchi],
+            href: organizations_url,
+            icon: "times",
+            variant: :link,
+            size: :small
+          ) %>
+        </div>
+      <% end %>
+
+      <div id="o_search_results">
+        <%= render partial: "organizations/search_results" %>
+      </div>
     </div>
-  </div>
-</div>
+  <% end %>
+<% end %>

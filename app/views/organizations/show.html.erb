@@ -6,14 +6,14 @@
 
 <% show_sidebar = organization_show_sidebar?(params) %>
 
-<div class="row">
-  <div class="<%= show_sidebar ? "col-lg-8" : "col-12" %>">
+<div class="tw:grid tw:grid-cols-1 <%= "tw:lg:grid-cols-12" if show_sidebar %> tw:gap-4">
+  <div id="organization_main_column" class="<%= show_sidebar ? "tw:lg:col-span-8" : "tw:col-span-1" %> tw:space-y-4">
     <%= render "details" %>
     <%= render "tabs" %>
   </div>
 
   <% if show_sidebar %>
-    <div class="col-lg-4">
+    <div id="organization_admin_sidebar" class="tw:lg:col-span-4">
       <%= render partial: "uzantoj" %>
     </div>
   <% end %>

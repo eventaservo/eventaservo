@@ -37,23 +37,53 @@ User.create!(
 )
 
 puts "- Creating organizations"
-Organization.create!(
+uea = Organization.create!(
   name: "Universala Esperanto Asocio",
   short_name: "UEA",
   city: "Rotterdam",
   country: Country.find_by(code: "nl"),
   email: "uea@uea.org",
+  url: "https://uea.org",
+  youtube: "https://www.youtube.com/user/UEAviva",
+  description: "Universala Esperanto-Asocio estis fondita en 1908 kiel organizaĵo de individuaj esperantistoj. Nuntempe UEA estas la plej granda internacia organizaĵo por la parolantoj de Esperanto kaj havas membrojn en 120 landoj.",
   major: true
 )
 
-Organization.create!(
+tejo = Organization.create!(
   name: "Tutmonda Esperanta Junulara Organizo",
   short_name: "TEJO",
   city: "Rotterdam",
   country: Country.find_by(code: "nl"),
   email: "info@tejo.org",
+  url: "https://www.tejo.org",
+  description: "Tutmonda Esperantista Junulara Organizo (TEJO) estas organizo de junaj parolantoj de Esperanto kun individuaj membroj kaj landaj sekcioj en ĉirkaŭ 40 landoj. TEJO mem estas la junulara sekcio de Universala Esperanto-Asocio. Ĉefa sidejo troviĝas en Roterdamo, Nederlando.",
   major: true
 )
+
+puts "- Attaching organization logos"
+seed_logos = {
+  "UEA" => Rails.root.join("app/assets/images/uea_emblemeto.png"),
+  "TEJO" => Rails.root.join("app/assets/images/tejo.png"),
+  "ILEI" => Rails.root.join("app/assets/images/ilei.png"),
+  "SAT" => Rails.root.join("db/seeds/logos/sat.png"),
+  "rotterdam_centre" => Rails.root.join("db/seeds/logos/rotterdam_centre.png"),
+  "sao_paulo_klubo" => Rails.root.join("db/seeds/logos/sao_paulo_klubo.png"),
+  "tokyo_society" => Rails.root.join("db/seeds/logos/tokyo_society.png")
+}
+
+seed_logos.each do |short_name, logo_path|
+  organization = Organization.find_by(short_name: short_name)
+  next unless organization && File.exist?(logo_path)
+
+  File.open(logo_path, "rb") do |file|
+    organization.logo.attach(
+      io: file,
+      filename: File.basename(logo_path),
+      content_type: "image/png"
+    )
+  end
+end
+_unused = [uea, tejo]
 
 # Sample data for development environment
 if Rails.env.development?

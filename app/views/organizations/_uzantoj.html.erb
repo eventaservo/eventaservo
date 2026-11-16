@@ -1,50 +1,58 @@
-<div class="box-white">
-  <div class="box-header"><%= t("organizations.users.administrators_header") %></div>
-  <div class="box-body">
-    <div class="text-divider"><%= t("organizations.users.head_administrators") %></div>
+<%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+  <% panel.with_header(title: t("organizations.users.administrators_header"), size: :small) %>
+  <% panel.with_body(class: "tw:space-y-4 tw:text-sm") do %>
+    <div>
+      <div class="text-divider tw:text-xs tw:font-semibold tw:text-gray-600 tw:mb-2"><%= t("organizations.users.head_administrators") %></div>
 
-    <p class="bg-color-grayLighter p-1 mt-2 text-center" style="border-radius: 5px;">
-      <%= t("organizations.users.head_admin_permission_info") %>
-    </p>
+      <p class="tw:bg-gray-100 tw:text-gray-700 tw:text-xs tw:p-2 tw:rounded tw:text-center tw:mb-3">
+        <%= t("organizations.users.head_admin_permission_info") %>
+      </p>
 
-    <% @organizo.admins.order(:name).each do |u| %>
-      <br>
-      <%= link_to display_user(u), events_by_username_path(username: u.username) %>
-      <% if user_signed_in? && current_user.admin_of?(@organizo) %>
-        <%= link_to icon('fas', 'star', class: 'fg-color-yellow'), organization_estrighu_url(organization_short_name: @organizo.short_name, username: u.username), method: :patch, aria: { label: t("organizations.users.make_head_admin") } %>
-      <% else %>
-        <%= icon('fas', 'star', class: 'fg-color-yellow') %>
-      <% end %>
-      <br>
-    <% end %>
+      <div class="tw:space-y-1.5">
+        <% @organizo.admins.order(:name).each do |u| %>
+          <div class="tw:flex tw:items-center tw:justify-between tw:gap-2">
+            <%= link_to display_user(u), events_by_username_path(username: u.username), class: "tw:text-brand-blue tw:hover:text-brand-blue-hover tw:truncate" %>
+            <% if user_signed_in? && current_user.admin_of?(@organizo) %>
+              <%= link_to icon("fas", "star", class: "tw:text-amber-500"), organization_estrighu_url(organization_short_name: @organizo.short_name, username: u.username), method: :patch, class: "tw:shrink-0", aria: { label: t("organizations.users.make_head_admin") } %>
+            <% else %>
+              <%= icon("fas", "star", class: "tw:text-amber-500 tw:shrink-0") %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
-    <br>
-    <br>
-    <div class="text-divider"><%= t("organizations.users.co_administrators") %></div>
-    <% @organizo.non_administrators.order(:name).each do |u| %>
-      <br>
-      <%= link_to display_user(u), events_by_username_path(username: u.username) %>
+    <div>
+      <div class="text-divider tw:text-xs tw:font-semibold tw:text-gray-600 tw:mb-2"><%= t("organizations.users.co_administrators") %></div>
+      <div class="tw:space-y-1.5">
+        <% @organizo.non_administrators.order(:name).each do |u| %>
+          <div class="tw:flex tw:items-center tw:justify-between tw:gap-2">
+            <%= link_to display_user(u), events_by_username_path(username: u.username), class: "tw:text-brand-blue tw:hover:text-brand-blue-hover tw:truncate" %>
 
-      <% if user_signed_in? && current_user.admin_of?(@organizo) %>
-        <%= link_to icon('far', 'star', class: 'fg-color-gray'), organization_estrighu_url(organization_short_name: @organizo.short_name, username: u.username), method: :patch, aria: { label: t("organizations.users.make_co_admin") } %>
-        <%= link_to icon('fas', 'minus-circle', class: 'fg-color-red'),
-          organization_forighu_url(organization_short_name: @organizo.short_name, username: u.username),
-          method: :delete,
-          data: { confirm: t("organizations.users.confirm_remove_user") }, aria: { label: t("organizations.users.remove_user_from_org") } %>
-      <% end %>
-      <br>
-    <% end %>
+            <% if user_signed_in? && current_user.admin_of?(@organizo) %>
+              <div class="tw:flex tw:items-center tw:gap-2 tw:shrink-0">
+                <%= link_to icon("far", "star", class: "tw:text-gray-500 tw:hover:text-amber-500"), organization_estrighu_url(organization_short_name: @organizo.short_name, username: u.username), method: :patch, aria: { label: t("organizations.users.make_co_admin") } %>
+                <%= link_to icon("fas", "minus-circle", class: "tw:text-brand-red tw:hover:text-brand-red-hover"),
+                  organization_forighu_url(organization_short_name: @organizo.short_name, username: u.username),
+                  method: :delete,
+                  data: { confirm: t("organizations.users.confirm_remove_user") }, aria: { label: t("organizations.users.remove_user_from_org") } %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
     <% if user_signed_in? && current_user.admin_of?(@organizo) %>
-      <br>
-      <br>
-      <div class="text-divider"><%= t("organizations.users.add_section") %></div>
-      <%= form_tag organization_aldoni_uzanton_url(organization_short_name: @organizo.short_name) do %>
-        <div class="mb-3">
-          <%= combobox_tag("id", combobox_users_with_username_path, placeholder: t("organizations.users.search_user_placeholder"), required: true) %>
-        </div>
-        <%= submit_tag t("buttons.add"), class: 'button-submit col-12' %>
-      <% end %>
+      <div>
+        <div class="text-divider tw:text-xs tw:font-semibold tw:text-gray-600 tw:mb-2"><%= t("organizations.users.add_section") %></div>
+        <%= form_tag organization_aldoni_uzanton_url(organization_short_name: @organizo.short_name), class: "tw:space-y-3" do %>
+          <div>
+            <%= combobox_tag("id", combobox_users_with_username_path, placeholder: t("organizations.users.search_user_placeholder"), required: true) %>
+          </div>
+          <%= render Ui::ButtonComponent.new(t("buttons.add"), variant: :primary, type: :submit, full_width: true) %>
+        <% end %>
+      </div>
     <% end %>
-  </div>
-</div>
+  <% end %>
+<% end %>

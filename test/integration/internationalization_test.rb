@@ -532,19 +532,19 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
 
     get organizations_path
     assert_response :success
-    assert_select ".es-list h4", text: /ORGANIZOJ/
+    assert_select "#organizations_directory h4", text: /ORGANIZOJ/
     assert_select "a", text: /Krei novan organizon/
     assert_select "input[name='serchi'][placeholder='Serĉi organizon']"
 
     get "/en/o"
     assert_response :success
-    assert_select ".es-list h4", text: /ORGANIZATIONS/
+    assert_select "#organizations_directory h4", text: /ORGANIZATIONS/
     assert_select "a", text: /Create new organization/
     assert_select "input[name='serchi'][placeholder='Search organization']"
 
     get "/pt_BR/o"
     assert_response :success
-    assert_select ".es-list h4", text: /ORGANIZAÇÕES/
+    assert_select "#organizations_directory h4", text: /ORGANIZAÇÕES/
     assert_select "a", text: /Criar nova organização/
     assert_select "input[name='serchi'][placeholder='Buscar organização']"
   end
@@ -559,7 +559,7 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     assert_select "#past-tab", text: /Pasintaj/
     assert_select "#reports-tab", text: /Raportoj/
     assert_select "a", text: /Redakti/
-    assert_select ".box-header", text: "Administrantoj"
+    assert_select "#organization_admin_sidebar", text: /Administrantoj/
     assert_select ".text-divider", text: "Ĉefadministranto(j)"
     assert_select "#shareModalCenterTitle", text: "Aboni organizan kalendaron"
 
@@ -569,7 +569,7 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     assert_select "#past-tab", text: /Past/
     assert_select "#reports-tab", text: /Reports/
     assert_select "a", text: /Edit/
-    assert_select ".box-header", text: "Administrators"
+    assert_select "#organization_admin_sidebar", text: /Administrators/
     assert_select ".text-divider", text: "Main administrator(s)"
     assert_select "#shareModalCenterTitle", text: "Subscribe to organization calendar"
 
@@ -579,7 +579,7 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     assert_select "#past-tab", text: /Passados/
     assert_select "#reports-tab", text: /Relatos/
     assert_select "a", text: /Editar/
-    assert_select ".box-header", text: "Administradores"
+    assert_select "#organization_admin_sidebar", text: /Administradores/
     assert_select ".text-divider", text: "Administrador(es) principal(is)"
     assert_select "#shareModalCenterTitle", text: "Assinar calendário da organização"
   end
@@ -590,30 +590,30 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
 
     get new_organization_path
     assert_response :success
-    assert_select ".lead", text: /Nova organizo/
-    assert_select "label[for='organization_short_name']", text: "Mallonga nomo"
+    assert_select "h1", text: /Nova organizo/
+    assert_select "label[for='organization_short_name']", text: /Mallonga nomo/
 
     get edit_organization_path(short_name: org.short_name)
     assert_response :success
-    assert_select ".lead", text: /Redakti organizon/
+    assert_select "h1", text: /Redakti organizon/
 
     get "/en/o/new"
     assert_response :success
-    assert_select ".lead", text: /New organization/
-    assert_select "label[for='organization_short_name']", text: "Short name"
+    assert_select "h1", text: /New organization/
+    assert_select "label[for='organization_short_name']", text: /Short name/
 
     get "/en/o/#{org.short_name}/edit"
     assert_response :success
-    assert_select ".lead", text: /Edit organization/
+    assert_select "h1", text: /Edit organization/
 
     get "/pt_BR/o/new"
     assert_response :success
-    assert_select ".lead", text: /Nova organização/
-    assert_select "label[for='organization_short_name']", text: "Nome curto"
+    assert_select "h1", text: /Nova organização/
+    assert_select "label[for='organization_short_name']", text: /Nome curto/
 
     get "/pt_BR/o/#{org.short_name}/edit"
     assert_response :success
-    assert_select ".lead", text: /Editar organização/
+    assert_select "h1", text: /Editar organização/
   end
 
   test "renders localized devise sign in, registration, password, and confirmation pages in default locale" do

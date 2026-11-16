@@ -39,13 +39,13 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
     assert_select "turbo-frame#past_events_tab"
     assert_select "turbo-frame#reports_tab"
 
-    assert_select "#past-tab-pane" do
-      assert_select ".item-row", text: /Past Event With Report/ do
+    assert_select "#past-panel" do
+      assert_select "a[data-turbo-frame='_top']", text: /Past Event With Report/ do
         assert_select "i.fa-camera"
       end
     end
 
-    assert_select "#reports-tab-pane" do
+    assert_select "#reports-panel" do
       assert_select "a[href='#{report.url}']", text: /Kongresa Raporto/
     end
   end
@@ -59,8 +59,8 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     assert_select "#future-tab.active"
-    assert_select "#future-tab-pane.show.active"
-    assert_select ".item-row", text: /Future Event/
+    assert_select "#future-panel.show.active"
+    assert_select "a[data-turbo-frame='_top']", text: /Future Event/
   end
 
   test "should activate future tab and paginate future events with venontaj_pagho parameter" do
@@ -72,8 +72,8 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
     get organization_url(short_name: organization.short_name, venontaj_pagho: 2)
     assert_response :success
     assert_select "#future-tab.active"
-    assert_select "#future-tab-pane" do
-      assert_select ".item-row", count: 2
+    assert_select "#future-panel" do
+      assert_select "a[data-turbo-frame='_top']", count: 2
       assert_select "nav[aria-label]"
     end
   end
@@ -87,8 +87,8 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
     get organization_url(short_name: organization.short_name, page: 2)
     assert_response :success
     assert_select "#past-tab.active"
-    assert_select "#past-tab-pane" do
-      assert_select ".item-row", count: 2
+    assert_select "#past-panel" do
+      assert_select "a[data-turbo-frame='_top']", count: 2
       assert_select "nav[aria-label]"
     end
   end
@@ -107,8 +107,8 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     assert_select "#reports-tab.active"
-    assert_select "#reports-tab-pane" do
-      assert_select ".row.small", count: 2
+    assert_select "#reports-panel" do
+      assert_select "[data-report-event-row]", count: 2
       assert_select "nav[aria-label]"
     end
   end
@@ -127,8 +127,8 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     assert_select "#reports-tab.active"
-    assert_select "#reports-tab-pane" do
-      assert_select ".row.small", count: 20
+    assert_select "#reports-panel" do
+      assert_select "[data-report-event-row]", count: 20
       assert_select "nav[aria-label]"
     end
   end
@@ -139,9 +139,8 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
     get organization_url(short_name: organization.short_name)
     assert_response :success
 
-    assert_select ".box-header", text: "Administrantoj", count: 0
-    assert_select ".row > .col-12"
-    assert_select ".row > .col-lg-4", count: 0
+    assert_select "#organization_admin_sidebar", count: 0
+    assert_select "#organization_main_column.tw\\:col-span-1"
   end
 
   test "renders organization administration sidebar when user is signed in" do
@@ -151,9 +150,8 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
     get organization_url(short_name: organization.short_name)
     assert_response :success
 
-    assert_select ".box-header", text: "Administrantoj"
-    assert_select ".row > .col-lg-8"
-    assert_select ".row > .col-lg-4"
+    assert_select "#organization_admin_sidebar", text: /Administrantoj/
+    assert_select "#organization_main_column.tw\\:lg\\:col-span-8"
   end
 
   test "does not render organization administration sidebar when inside iframe even if signed in" do
@@ -163,9 +161,8 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
     get organization_url(short_name: organization.short_name, iframe: "true")
     assert_response :success
 
-    assert_select ".box-header", text: "Administrantoj", count: 0
-    assert_select ".row > .col-12"
-    assert_select ".row > .col-lg-4", count: 0
+    assert_select "#organization_admin_sidebar", count: 0
+    assert_select "#organization_main_column.tw\\:col-span-1"
   end
 
   test "includes SAMEORIGIN X-Frame-Options header by default when not in iframe" do

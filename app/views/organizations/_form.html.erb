@@ -1,87 +1,147 @@
-<div class="row">
-  <div class="col-lg-8 offset-lg-2">
-    <div class="box-white">
-      <div class="lead">
-        <% if params[:action] == 'new' %>
+<% label_classes = "tw:block tw:text-sm tw:font-medium tw:text-gray-700 tw:mb-1" %>
+
+<div class="tw:max-w-3xl tw:mx-auto">
+  <%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+    <% panel.with_body do %>
+      <h1 class="tw:text-xl tw:font-light tw:text-gray-900 tw:pb-3 tw:mb-4 tw:border-b tw:border-gray-200 tw:mt-0">
+        <% if params[:action] == "new" %>
           <%= t("organizations.form.new_title") %>
         <% else %>
           <%= t("organizations.form.edit_title") %>
         <% end %>
-      </div>
-      <%= form_for(@organizo, url: (organization_url(short_name: @organizo.short_name) if params[:action].in? %w(edit update))) do |f| %>
+      </h1>
+
+      <%= form_for(@organizo, url: (organization_url(short_name: @organizo.short_name) if params[:action].in? %w[edit update])) do |f| %>
         <%= error_handling(@organizo) %>
-        <div class="mb-3">
-          <%= f.label :name, t("common.name") %>
-          <%= f.text_field :name, class: 'form-control', autofocus: true, required: true %>
+
+        <div class="tw:mb-3">
+          <%= render Ui::InputComponent.new(
+            f.field_name(:name),
+            id: f.field_id(:name),
+            value: @organizo.name,
+            label: t("common.name"),
+            autofocus: true,
+            required: true
+          ) %>
         </div>
-        <div class="mb-3">
-          <%= f.label :short_name, t("organizations.form.short_name") %>
-          <%= f.text_field :short_name, class: 'form-control', required: true, aria: { describedby: 'short_name_help' } %>
-          <small id="short_name_help" class="form-text text-muted"><%= t("organizations.form.short_name_help") %></small>
+
+        <div class="tw:mb-3">
+          <%= render Ui::InputComponent.new(
+            f.field_name(:short_name),
+            id: f.field_id(:short_name),
+            value: @organizo.short_name,
+            label: t("organizations.form.short_name"),
+            hint: t("organizations.form.short_name_help"),
+            required: true,
+            "aria-describedby": "short_name_help"
+          ) %>
         </div>
-        <div class="mb-3 form-check">
-          <%= f.check_box :display_flag, class: 'form-check-input', aria: { describedby: 'display_flag_help' } %>
-          <%= f.label :display_flag, t("organizations.form.display_flag"), class: 'form-check-label' %>
-          <small id="display_flag_help" class="form-text text-muted"><%= t("organizations.form.display_flag_help") %></small>
+
+        <div class="tw:mb-3">
+          <%= hidden_field_tag f.field_name(:display_flag), "0", id: nil %>
+          <%= render Ui::CheckboxComponent.new(
+            f.field_name(:display_flag),
+            id: f.field_id(:display_flag),
+            checked: @organizo.display_flag,
+            label: t("organizations.form.display_flag"),
+            hint: t("organizations.form.display_flag_help"),
+            "aria-describedby": "display_flag_help"
+          ) %>
         </div>
-        <div class="row">
-          <div class="mb-3 col-12 col-md-6">
-            <%= f.label :url, t("organizations.form.url") %>
-            <%= f.text_field :url, class: 'form-control' %>
+
+        <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:gap-3 tw:mb-3">
+          <div>
+            <%= render Ui::InputComponent.new(
+              f.field_name(:url),
+              id: f.field_id(:url),
+              value: @organizo.url,
+              label: t("organizations.form.url")
+            ) %>
           </div>
-          <div class="mb-3 col-12 col-md-6">
-            <%= f.label :youtube, t("organizations.form.youtube") %>
-            <%= f.text_field :youtube, class: 'form-control' %>
+          <div>
+            <%= render Ui::InputComponent.new(
+              f.field_name(:youtube),
+              id: f.field_id(:youtube),
+              value: @organizo.youtube,
+              label: t("organizations.form.youtube")
+            ) %>
           </div>
         </div>
-        <div class="row">
-          <div class="mb-3 col-12 col-md-6">
-            <%= f.label :email, t("organizations.form.email") %>
-            <%= f.text_field :email, class: 'form-control', type: 'email' %>
+
+        <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:gap-3 tw:mb-3">
+          <div>
+            <%= render Ui::InputComponent.new(
+              f.field_name(:email),
+              id: f.field_id(:email),
+              type: :email,
+              value: @organizo.email,
+              label: t("organizations.form.email")
+            ) %>
           </div>
-          <div class="mb-3 col-12 col-md-6">
-            <%= f.label :phone, t("organizations.form.phone") %>
-            <%= f.text_field :phone, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="mb-3">
-          <%= f.label :address, t("organizations.form.address") %>
-          <%= f.text_field :address, class: 'form-control' %>
-        </div>
-        <div class="row">
-          <div class="mb-3 col-12 col-md-6">
-            <%= f.label :city, t("organizations.form.city") %>
-            <%= f.text_field :city, class: 'form-control' %>
-          </div>
-          <div class="mb-3 col-12 col-md-6">
-            <%= f.label :country_id, t("common.country") %>
-            <%= f.combobox("country_id", Country.all, placeholder: t("common.country"), required: true)%>
+          <div>
+            <%= render Ui::InputComponent.new(
+              f.field_name(:phone),
+              id: f.field_id(:phone),
+              value: @organizo.phone,
+              label: t("organizations.form.phone")
+            ) %>
           </div>
         </div>
-        <div class="mb-3">
-          <%= f.label :description, t("organizations.form.description") %>
-          <%= f.rich_text_area :description, class: 'form-control', style: 'height: 15em; overflow-y: auto;' %>
+
+        <div class="tw:mb-3">
+          <%= render Ui::InputComponent.new(
+            f.field_name(:address),
+            id: f.field_id(:address),
+            value: @organizo.address,
+            label: t("organizations.form.address")
+          ) %>
         </div>
-        <div class="mb-3">
-          <div class="text-divider"><%= t("organizations.form.logo") %></div>
-          <br>
+
+        <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:gap-3 tw:mb-3">
+          <div>
+            <%= render Ui::InputComponent.new(
+              f.field_name(:city),
+              id: f.field_id(:city),
+              value: @organizo.city,
+              label: t("organizations.form.city")
+            ) %>
+          </div>
+          <div>
+            <%= f.label :country_id, t("common.country"), class: label_classes %>
+            <%= f.combobox("country_id", Country.all, placeholder: t("common.country"), required: true) %>
+          </div>
+        </div>
+
+        <div class="tw:mb-4">
+          <%= f.label :description, t("organizations.form.description"), class: label_classes %>
+          <%= f.rich_text_area :description, class: "tw:block tw:w-full tw:min-h-48 tw:max-h-96 tw:overflow-y-auto tw:rounded-[3px] tw:border tw:border-gray-300 tw:bg-white tw:p-2 tw:text-sm" %>
+        </div>
+
+        <div class="tw:mb-4">
+          <div class="text-divider tw:font-medium tw:text-gray-700 tw:mb-3"><%= t("organizations.form.logo") %></div>
           <% if @organizo.logo.attached? %>
-            <div class="d-flex flex-column align-items-center justify-content-center">
+            <div class="tw:flex tw:flex-col tw:items-center tw:justify-center tw:gap-2 tw:mb-3">
               <%= organization_logo(@organizo, size: :large) %>
-              <div class="form-check">
-                <%= check_box_tag :delete_logo, true, false, class: 'form-check-input' %>
-                <%= label_tag 'delete_logo', t("organizations.form.delete_logo"), class: 'form-check-label' %>
-                <p><%= t("organizations.form.delete_logo_help") %></p>
-              </div>
+              <%= render Ui::CheckboxComponent.new(
+                :delete_logo,
+                id: "delete_logo",
+                value: "true",
+                checked: false,
+                label: t("organizations.form.delete_logo"),
+                hint: t("organizations.form.delete_logo_help")
+              ) %>
             </div>
           <% end %>
-          <%= f.file_field :logo, class: 'form-control', accept: 'image/gif,image/jpeg,image/png' %>
+          <%= f.file_field :logo,
+            accept: "image/gif,image/jpeg,image/png",
+            class: "tw:block tw:w-full tw:text-sm tw:text-gray-700 tw:border tw:border-gray-300 tw:rounded tw:bg-white tw:px-2.5 tw:py-1.5 tw:file:mr-3 tw:file:py-1 tw:file:px-2.5 tw:file:rounded tw:file:border tw:file:border-gray-300 tw:file:text-xs tw:file:font-medium tw:file:bg-gray-100 tw:file:text-gray-700 tw:hover:file:bg-gray-200" %>
         </div>
-        <div class="buttons-footer">
-          <%= link_to t("buttons.cancel"), organizations_url, class: 'button-cancel' %>
-          <%= f.submit t("buttons.save"), class: 'button-submit' %>
+
+        <div class="tw:flex tw:items-center tw:justify-end tw:gap-2 tw:pt-3 tw:mt-5 tw:border-t tw:border-gray-200">
+          <%= render Ui::ButtonComponent.new(t("buttons.cancel"), href: organizations_url, variant: :cancel) %>
+          <%= render Ui::ButtonComponent.new(t("buttons.save"), variant: :primary, type: :submit) %>
         </div>
       <% end %>
-    </div>
-  </div>
+    <% end %>
+  <% end %>
 </div>
