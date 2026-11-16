@@ -1,18 +1,20 @@
-<% events.each do |event| %>
-  <div class="row">
-    <div class="col">
-      <%= event_flag(event) %> <%= link_to event.title, event_path(code: event.ligilo), data: { turbo_frame: "_top" } %>
+<div class="tw:divide-y tw:divide-gray-200">
+  <% events.each do |event| %>
+    <div class="tw:py-3" data-report-event-row>
+      <div class="tw:flex tw:items-baseline tw:justify-between tw:gap-3">
+        <div class="tw:font-medium tw:text-sm">
+          <%= event_flag(event) %> <%= link_to event.title, event_path(code: event.ligilo), data: { turbo_frame: "_top" }, class: "tw:text-brand-blue tw:hover:text-brand-blue-hover" %>
+        </div>
+        <div class="tw:text-xs tw:text-gray-600 tw:shrink-0"><%= format_date(event.date_start, style: :short) %></div>
+      </div>
+      <div class="tw:mt-2 tw:text-xs tw:space-y-1">
+        <% event.reports.each do |report| %>
+          <div>
+            <%= link_to report.label, report.url, target: "_blank", rel: "noopener noreferrer", class: "tw:text-brand-blue tw:hover:text-brand-blue-hover" %>
+            <i class="tw:text-gray-600">- <%= report.user.name %></i>
+          </div>
+        <% end %>
+      </div>
     </div>
-    <div class="col text-end small"><%= format_date(event.date_start, style: :short) %></div>
-  </div>
-  <div class="row small">
-    <div class="col mt-3">
-      <% event.reports.each do |report| %>
-        <%= link_to report.label, report.url, target: '_blank', rel: 'noopener noreferrer' %>
-        <i class="fg-color-grayDark">- <%= report.user.name %></i>
-        <br>
-      <% end %>
-    </div>
-  </div>
-  <hr>
-<% end %>
+  <% end %>
+</div>

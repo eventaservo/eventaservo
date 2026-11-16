@@ -1,11 +1,11 @@
-<div class="es-list__headers align-items-center">
-  <div class="col-8 col-lg-10"><%= t("common.name") %></div>
-  <div class="col-2 col-lg-1">
+<div class="tw:grid tw:grid-cols-12 tw:items-center tw:gap-2 tw:px-2 tw:py-1.5 tw:text-center tw:text-sm tw:font-bold tw:border-b tw:border-gray-300">
+  <div class="tw:col-span-8 tw:lg:col-span-10 tw:text-left"><%= t("common.name") %></div>
+  <div class="tw:col-span-2 tw:lg:col-span-1">
     <%= render Ui::TooltipComponent.new(text: t("common.events"), placement: :top) do %>
       <i class="far fa-calendar" aria-hidden="true"></i>
     <% end %>
   </div>
-  <div class="col-2 col-lg-1">
+  <div class="tw:col-span-2 tw:lg:col-span-1">
     <%= render Ui::TooltipComponent.new(text: t("organizations.index.admins_and_helpers_tooltip"), placement: :top) do %>
       <i class="fas fa-users" aria-hidden="true"></i>
     <% end %>
@@ -13,13 +13,15 @@
 </div>
 
 <% @organizoj.each do |organizo| %>
-  <%= render partial: 'organization_card', locals: { organizo: organizo } %>
+  <%= render partial: "organization_card", locals: { organizo: organizo } %>
 <% end %>
 
 <% if @organizoj.size.zero? %>
-  <div class="text-center">
+  <div class="tw:text-center tw:text-sm tw:text-gray-500 tw:py-4">
     <%= t("common.no_results") %>
   </div>
 <% end %>
 
-<%= render "shared/pagination", pagy: @pagy %>
+<div class="tw:mt-4">
+  <%= render "shared/pagination", pagy: @pagy %>
+</div>

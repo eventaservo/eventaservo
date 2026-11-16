@@ -1,36 +1,52 @@
-<div class="box-white">
-  <div class="lead">
-    <%= display_flag(@organizo.country) if @organizo.country.present? && @organizo.display_flag? %>
-    <%= @organizo.name %>
-    <span class="float-end">
-      <%= link_to icon('far', 'calendar-alt'),
+<%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+  <% panel.with_body(class: "tw:space-y-3") do %>
+    <div class="tw:flex tw:items-start tw:justify-between tw:gap-3">
+      <div class="tw:text-xl tw:font-light tw:text-gray-900 tw:flex tw:items-center tw:flex-wrap tw:gap-2">
+        <%= display_flag(@organizo.country) if @organizo.country.present? && @organizo.display_flag? %>
+        <span><%= @organizo.name %></span>
+      </div>
+      <%= link_to icon("far", "calendar-alt"),
         webcal_organizo_url(short_name: @organizo.short_name, protocol: :webcal, format: :ics),
-        data: { dialog_open: 'webcalModal' },
+        class: "tw:shrink-0 tw:text-brand-blue tw:hover:text-brand-blue-hover",
+        data: { dialog_open: "webcalModal" },
         aria: { label: t("organizations.details.subscribe_calendar") } %>
-    </span>
-  </div>
-
-  <div class="clearfix mb-2">
-    <%= organization_logo(@organizo, size: :large, html_class: 'float-start me-2') %>
-    <%= @organizo.description %>
-  </div>
-
-  <p class="small">
-    <%= phone_link(@organizo.phone) + raw('<br/>') if @organizo.phone.present? %>
-    <%= link_to_website(@organizo.url) + raw('<br/>') if @organizo.url.present? %>
-    <%= display_email(@organizo.email) + raw('<br/>') if @organizo.email.present? %>
-    <% if @organizo.youtube.present? %>
-      <%= link_to icon('fab', 'youtube', t("organizations.details.youtube_channel")), @organizo.youtube, target: :_blank, class: 'fg-color-link me-1' %>
-      <br>
-    <% end %>
-    <% if @organizo.country.present? && (@organizo.country_id != 99999) %>
-      <%= address_link(@organizo.full_address) %>
-    <% end %>
-  </p>
-
-  <% if user_signed_in? && current_user.admin_of?(@organizo) %>
-    <div class="buttons-footer">
-      <%= link_to icon('far', 'edit', t("buttons.edit")), edit_organization_url(short_name: @organizo.short_name), class: 'btn btn-sm btn-outline-primary no-border' %>
     </div>
+
+    <div class="tw:flow-root tw:text-sm tw:text-gray-800">
+      <%= organization_logo(@organizo, size: :large, html_class: "tw:float-left tw:mr-3 tw:mb-2") %>
+      <%= @organizo.description %>
+    </div>
+
+    <div class="tw:text-xs tw:text-gray-700 tw:space-y-1">
+      <% if @organizo.phone.present? %>
+        <div><%= phone_link(@organizo.phone) %></div>
+      <% end %>
+      <% if @organizo.url.present? %>
+        <div><%= link_to_website(@organizo.url) %></div>
+      <% end %>
+      <% if @organizo.email.present? %>
+        <div><%= display_email(@organizo.email) %></div>
+      <% end %>
+      <% if @organizo.youtube.present? %>
+        <div>
+          <%= link_to icon("fab", "youtube", t("organizations.details.youtube_channel")), @organizo.youtube, target: :_blank, rel: "noopener noreferrer", class: "tw:inline-flex tw:items-center tw:gap-1 tw:text-brand-blue tw:hover:text-brand-blue-hover" %>
+        </div>
+      <% end %>
+      <% if @organizo.country.present? && (@organizo.country_id != 99999) %>
+        <div><%= address_link(@organizo.full_address) %></div>
+      <% end %>
+    </div>
+
+    <% if user_signed_in? && current_user.admin_of?(@organizo) %>
+      <div class="tw:flex tw:items-center tw:justify-end tw:pt-3 tw:mt-4 tw:border-t tw:border-gray-200">
+        <%= render Ui::ButtonComponent.new(
+          t("buttons.edit"),
+          href: edit_organization_url(short_name: @organizo.short_name),
+          icon: "edit",
+          icon_style: "far",
+          variant: :outline_primary
+        ) %>
+      </div>
+    <% end %>
   <% end %>
-</div>
+<% end %>

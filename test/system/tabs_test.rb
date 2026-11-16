@@ -97,17 +97,17 @@ class TabsTest < ApplicationSystemTestCase
 
     past_tab.click
     assert_equal "true", past_tab["aria-selected"]
-    assert_selector "#past-tab-pane.show.active"
-    assert_no_selector "#future-tab-pane.show.active"
+    assert_selector "#past-panel.show.active"
+    assert_no_selector "#future-panel.show.active"
 
     past_tab.send_keys(:arrow_right)
     assert_equal "true", reports_tab["aria-selected"]
-    assert_selector "#reports-tab-pane.show.active"
+    assert_selector "#reports-panel.show.active"
     assert page.evaluate_script("document.activeElement === arguments[0]", reports_tab.native)
 
     reports_tab.send_keys(:arrow_right)
     assert_equal "true", future_tab["aria-selected"]
-    assert_selector "#future-tab-pane.show.active"
+    assert_selector "#future-panel.show.active"
     assert page.evaluate_script("document.activeElement === arguments[0]", future_tab.native)
   end
 
@@ -117,14 +117,14 @@ class TabsTest < ApplicationSystemTestCase
 
     assert_selector "#past-tab.active[aria-selected='true'][tabindex='0']"
     assert_selector "#future-tab[aria-selected='false'][tabindex='-1']"
-    assert_selector "#past-tab-pane.show.active"
-    assert_no_selector "#future-tab-pane.show.active"
+    assert_selector "#past-panel.show.active"
+    assert_no_selector "#future-panel.show.active"
 
     visit organization_path(short_name: organization.short_name, tab: "reports")
 
     assert_selector "#reports-tab.active[aria-selected='true'][tabindex='0']"
     assert_selector "#future-tab[aria-selected='false'][tabindex='-1']"
-    assert_selector "#reports-tab-pane.show.active"
-    assert_no_selector "#future-tab-pane.show.active"
+    assert_selector "#reports-panel.show.active"
+    assert_no_selector "#future-panel.show.active"
   end
 end
