@@ -84,6 +84,13 @@ module Ui
       assert_selector "span a[href='/clear'][aria-label='Forigi'] i.fa-times"
     end
 
+    test "lets the font define the line box so descenders are not clipped" do
+      render_inline(Ui::BadgeComponent.new("Esperantoland", variant: :light, shape: :rounded))
+
+      assert_selector "span.tw\\:leading-\\[normal\\]", text: "Esperantoland"
+      assert_no_selector "span.tw\\:leading-none"
+    end
+
     test "merges custom html options and classes" do
       render_inline(
         Ui::BadgeComponent.new(
