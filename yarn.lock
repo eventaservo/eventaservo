@@ -184,10 +184,10 @@
   resolved "https://registry.yarnpkg.com/@hotwired/turbo/-/turbo-7.3.0.tgz#2226000fff1aabda9fd9587474565c9929dbf15d"
   integrity sha512-Dcu+NaSvHLT7EjrDrkEmH4qET2ZJZ5IcCWmNXxNQTBwlnE5tBZfN6WxZ842n5cHV52DH/AKNirbPBtcEXDLW4g==
 
-"@josefarias/hotwire_combobox@^0.3.2":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@josefarias/hotwire_combobox/-/hotwire_combobox-0.3.2.tgz#bf3d4b069bc3d41e72022bc0158666d35d010514"
-  integrity sha512-FFs6nqL1xmdofaBJDkAcLcFdiLgTOajSopPaBFc05EddgS2EjP9bkGvJDLaIEZn/CzWPSwwbMt3WvLEW968Geg==
+"@josefarias/hotwire_combobox@^0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@josefarias/hotwire_combobox/-/hotwire_combobox-0.4.1.tgz#d3536ffba107cbaf4111c19e4a8453202d1ef80a"
+  integrity sha512-JvfGC7osghQ8jl/ZkJjAEvvMj4ZecguhjNGcaqmPEBRDhPjSOhYziO9PsOXPUgjqcpLZx654VufWnYu1+aR8xQ==
 
 "@jridgewell/gen-mapping@^0.3.5":
   version "0.3.13"
