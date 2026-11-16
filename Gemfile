@@ -84,7 +84,7 @@ gem "jsbundling-rails", "~> 1.1"
 gem "cssbundling-rails", "~> 1.4"
 
 # Solid Queue
-gem "solid_queue", "~> 1.4.0"
+gem "solid_queue", "~> 1.7"
 gem "mission_control-jobs"
 
 # Sentry.io
