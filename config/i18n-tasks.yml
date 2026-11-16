@@ -124,6 +124,8 @@ ignore_unused:
   - 'timezones.*'
   - 'pages.event.report_problem_form.*'
   - 'tags.*'
+  - 'continents.*'
+  - 'event_mailer.reminders.*'
 
 ## Exclude these keys from the `i18n-tasks eq-base' report:
 # ignore_eq_base:

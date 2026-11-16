@@ -95,7 +95,7 @@ module Users
     #   @return [ActiveRecord::Relation] matched speakers
     # @!attribute [r] filtering
     #   @return [Boolean] whether filters were applied
-    Result = Struct.new(:instruistoj, :prelegantoj, :filtering, keyword_init: true) do
+    Result = Struct.new(:instruistoj, :prelegantoj, :filtering) do
       alias_method :filtering?, :filtering
     end
   end
