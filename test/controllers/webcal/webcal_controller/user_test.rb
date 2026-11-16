@@ -73,6 +73,22 @@ class Webcal::WebcalController::UserTest < ActionDispatch::IntegrationTest
     meetup_event = cal.events.find { |event| event.uid == "#{meetup.uuid}@eventaservo.org" }
     assert meetup_event.present?, "Expected #{meetup.uuid}@eventaservo.org in the ICS output"
     assert_equal meetup.tags.categories.map(&:name), meetup_event.categories
+
+    uncategorized = events(:valid_event)
+    uncategorized_event = cal.events.find { |event| event.uid == "#{uncategorized.uuid}@eventaservo.org" }
+    assert uncategorized_event.present?, "Expected #{uncategorized.uuid}@eventaservo.org in the ICS output"
+    assert_empty uncategorized_event.categories
+  end
+
+  test "ICS event with multiple categories serializes comma-separated CATEGORIES" do
+    user = users(:user)
+    meetup = events(:esperanto_meetup)
+    meetup.tags << tags(:kurso)
+
+    get webcal_user_url(webcal_token: user.webcal_token, format: :ics)
+    assert_response :success
+
+    assert_includes response.body, "CATEGORIES:Kunveno/Evento,Kurso"
   end
 
   private

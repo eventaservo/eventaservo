@@ -36,7 +36,7 @@ module Webcal
         e.location = evento.full_address
         e.last_modified = evento.updated_at.utc
         e.sequence = evento.versions.size
-        e.categories = evento.tags.categories.map(&:name)
+        assign_categories(e, evento)
       end
     end
   end
@@ -57,7 +57,7 @@ module Webcal
       e.location = evento.full_address
       e.last_modified = evento.updated_at.utc
       e.sequence = evento.versions.size
-      e.categories = evento.tags.categories.map(&:name)
+      assign_categories(e, evento)
     end
   end
 
@@ -81,7 +81,18 @@ module Webcal
       e.location = event.full_address
       e.last_modified = event.updated_at.utc
       e.sequence = event.versions.size
-      e.categories = event.tags.categories.map(&:name)
+      assign_categories(e, event)
     end
+  end
+
+  # Assigns category names only when present; icalendar 2.13+ raises
+  # NoMethodError if an empty array is assigned and later serialized.
+  #
+  # @param ical_event [Icalendar::Event]
+  # @param evento [Event]
+  # @return [void]
+  def assign_categories(ical_event, evento)
+    categories = evento.tags.categories.map(&:name)
+    ical_event.categories = categories if categories.any?
   end
 end
