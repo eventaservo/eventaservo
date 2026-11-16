@@ -89,10 +89,10 @@ module Webcal
   # NoMethodError if an empty array is assigned and later serialized.
   #
   # @param ical_event [Icalendar::Event]
-  # @param evento [Event]
+  # @param event [Event]
   # @return [void]
-  def assign_categories(ical_event, evento)
-    categories = evento.tags.categories.map(&:name)
+  def assign_categories(ical_event, event)
+    categories = event.tags.categories.map(&:name)
     ical_event.categories = categories if categories.any?
   end
 end

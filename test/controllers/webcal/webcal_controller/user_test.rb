@@ -88,7 +88,14 @@ class Webcal::WebcalController::UserTest < ActionDispatch::IntegrationTest
     get webcal_user_url(webcal_token: user.webcal_token, format: :ics)
     assert_response :success
 
-    assert_includes response.body, "CATEGORIES:Kunveno/Evento,Kurso"
+    vevent = response.body.gsub(/\r?\n[ \t]/, "").split("BEGIN:VEVENT").find do |block|
+      block.include?("UID:#{meetup.uuid}@eventaservo.org")
+    end
+    assert vevent.present?, "Expected VEVENT for #{meetup.uuid}"
+    categories_lines = vevent.lines.select { |line| line.start_with?("CATEGORIES:") }
+    assert_equal 1, categories_lines.size
+    assert_equal ["Kunveno/Evento", "Kurso"],
+      categories_lines.first.delete_prefix("CATEGORIES:").strip.split(",").sort
   end
 
   private
