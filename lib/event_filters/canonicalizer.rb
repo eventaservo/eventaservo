@@ -31,7 +31,7 @@ module EventFilters
     #   @return [String] canonical query string ("" when no filter remains)
     # @!attribute not_found
     #   @return [Boolean] true when a filter points to a record that does not exist
-    Result = Struct.new(:query, :not_found, keyword_init: true) do
+    Result = Struct.new(:query, :not_found) do
       # @return [Boolean]
       def not_found? = not_found
     end
