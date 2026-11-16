@@ -94,13 +94,14 @@ class EventsController < ApplicationController
   def update # rubocop:disable Metrics/MethodLength, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
     mark_dates_from_form
 
-    if dosier_alshutado
-      if params[:event].nil?
+    if file_upload?
+      uploaded_files = Array(params.dig(:event, :uploads)).reject(&:blank?)
+      if uploaded_files.empty?
         redirect_to(event_url(code: @event.ligilo),
           flash: {error: I18n.t("flash.events.select_file_first")}) && return
       end
 
-      if @event.uploads.attach(params[:event][:uploads])
+      if @event.uploads.attach(uploaded_files)
         flash[:notice] = I18n.t("flash.events.document_uploaded")
       else
         flash[:error] = I18n.t("flash.events.invalid_file_format")
@@ -278,8 +279,11 @@ class EventsController < ApplicationController
     redirect_to root_path
   end
 
-  def dosier_alshutado
-    params[:commit] == "Alŝuti"
+  # Detects whether the update request originated from the event file uploader form.
+  #
+  # @return [Boolean] true when the uploader marker or legacy submit value is present
+  def file_upload?
+    params[:file_upload].present? || params[:commit] == "Alŝuti"
   end
 
   # Redirect event with old links to the new ones
