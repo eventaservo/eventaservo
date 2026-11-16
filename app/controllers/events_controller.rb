@@ -94,7 +94,7 @@ class EventsController < ApplicationController
   def update # rubocop:disable Metrics/MethodLength, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
     mark_dates_from_form
 
-    if dosier_alshutado
+    if file_upload?
       uploaded_files = Array(params.dig(:event, :uploads)).reject(&:blank?)
       if uploaded_files.empty?
         redirect_to(event_url(code: @event.ligilo),
@@ -282,8 +282,8 @@ class EventsController < ApplicationController
   # Detects whether the update request originated from the event file uploader form.
   #
   # @return [Boolean] true when the uploader marker or legacy submit value is present
-  def dosier_alshutado
-    params[:dosier_alshutado].present? || params[:commit] == "Alŝuti"
+  def file_upload?
+    params[:file_upload].present? || params[:commit] == "Alŝuti"
   end
 
   # Redirect event with old links to the new ones

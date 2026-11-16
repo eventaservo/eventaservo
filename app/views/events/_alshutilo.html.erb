@@ -4,7 +4,7 @@
     <p class="tw:mb-2"><%= t("events.uploader.prompt") %></p>
 
     <%= form_with(model: @event, url: event_path(code: @event.code), local: true, id: "uploader_form", method: :patch) do |f| %>
-      <%= hidden_field_tag :dosier_alshutado, "1" %>
+      <%= hidden_field_tag :file_upload, "1" %>
       <%= f.file_field :uploads, multiple: true, direct_upload: true,
         accept: "application/pdf,
         image/png,

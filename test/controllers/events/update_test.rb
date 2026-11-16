@@ -160,7 +160,7 @@ class EventsController::UpdateTest < ActionDispatch::IntegrationTest
 
   test "unauthenticated user cannot upload files" do
     patch event_path(code: @event.code), params: {
-      dosier_alshutado: "1",
+      file_upload: "1",
       event: {uploads: [fixture_file_upload("jes.png", "image/png")]}
     }
 
@@ -172,7 +172,7 @@ class EventsController::UpdateTest < ActionDispatch::IntegrationTest
     sign_in @other_user
 
     patch event_path(code: @event.code), params: {
-      dosier_alshutado: "1",
+      file_upload: "1",
       event: {uploads: [fixture_file_upload("jes.png", "image/png")]}
     }
 
