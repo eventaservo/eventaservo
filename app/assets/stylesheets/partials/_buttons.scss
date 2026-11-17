@@ -35,7 +35,7 @@
 
   &:before {
     @extend .fab;
-    content: fa-content($fa-var-facebook);
+    content: fa-content($var-facebook);
     padding-right: 5px;
   }
 }
@@ -50,7 +50,7 @@
 
   &:before {
     @extend .fab;
-    content: fa-content($fa-var-google);
+    content: fa-content($var-google);
     padding-right: 5px;
   }
 }
@@ -93,7 +93,7 @@
 
   &:before {
     @extend .fas;
-    content: fa-content($fa-var-arrow-left);
+    content: fa-content($var-arrow-left);
     padding-right: 5px;
   }
 }
@@ -123,7 +123,7 @@
 
   &:before {
     @extend .fas;
-    content: fa-content($fa-var-info-circle);
+    content: fa-content($var-info-circle);
     padding-right: 5px;
   }
 }

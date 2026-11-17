@@ -12,6 +12,8 @@ $info: #17a2b8;
 $badge-font-weight: normal;
 
 // Third-party CSS: intentionally unlayered.
+@import "@fortawesome/fontawesome-free/scss/functions";
+@import "@fortawesome/fontawesome-free/scss/variables";
 @import "@fortawesome/fontawesome-free/scss/fontawesome";
 @import "@fortawesome/fontawesome-free/scss/solid";
 @import "@fortawesome/fontawesome-free/scss/brands";
