@@ -205,16 +205,26 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :conferences_and_competitions, -> { announcements.or(content) }
   scope :international_calendar, -> { where(international_calendar: true) }
   scope :with_reports, -> { joins(:reports).distinct }
+  # Filters events that possess every tag in +tag_ids+.
+  #
+  # Uses one correlated +EXISTS+ subquery per tag ID so PostgreSQL can apply
+  # selective event filters (country, city, date window) first and probe
+  # +index_taggings_on_tag_and_taggable+ via index-only scans instead of
+  # grouping all event taggings upfront.
+  #
+  # @param tag_ids [Array<Integer, String>, Integer, String] tag IDs to require
+  # @return [ActiveRecord::Relation<Event>]
   scope :with_tags, ->(tag_ids) {
-    where(
-      "events.id IN (
-        SELECT taggable_id
-        FROM taggings
-        WHERE taggable_type = 'Event' AND tag_id IN (?)
-        GROUP BY taggable_id
-        HAVING COUNT(DISTINCT tag_id) = ?
-      )", tag_ids, tag_ids.size
-    )
+    ids = Array(tag_ids).map(&:to_i).uniq
+    return none if ids.empty?
+
+    ids.reduce(all) do |relation, tag_id|
+      relation.where(
+        "EXISTS (SELECT 1 FROM taggings WHERE taggings.taggable_type = 'Event' " \
+        "AND taggings.taggable_id = events.id AND taggings.tag_id = ?)",
+        tag_id
+      )
+    end
   }
   scope :without_tag, ->(tag_name) {
     where.not(id: joins(:tags).where(tags: {name: tag_name}).select(:id))

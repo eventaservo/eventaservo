@@ -260,6 +260,56 @@ class Event::ScopeTest < ActiveSupport::TestCase
     assert_empty Event.in_cities(nil)
   end
 
+  test "with_tags returns events matching a single tag" do
+    kurso = tags(:kurso)
+    kunveno = tags(:kunveno_evento)
+    matching = create(:event, title: "Tagged Kurso")
+    matching.tags = [kurso]
+    other = create(:event, title: "Tagged Kunveno")
+    other.tags = [kunveno]
+
+    result = Event.with_tags([kurso.id])
+
+    assert_includes result, matching
+    assert_not_includes result, other
+  end
+
+  test "with_tags returns only events matching all given tags" do
+    kurso = tags(:kurso)
+    por_junuloj = tags(:por_junuloj)
+    both = create(:event, title: "Youth Course")
+    both.tags = [kurso, por_junuloj]
+    only_one = create(:event, title: "Adult Course")
+    only_one.tags = [kurso]
+
+    result = Event.with_tags([kurso.id, por_junuloj.id])
+
+    assert_includes result, both
+    assert_not_includes result, only_one
+  end
+
+  test "with_tags deduplicates tag_ids and composes with country scope" do
+    kurso = tags(:kurso)
+    por_junuloj = tags(:por_junuloj)
+    denmark = countries(:denmark)
+    sweden = countries(:sweden)
+
+    dk_match = create(:event, title: "DK Match", country: denmark)
+    dk_match.tags = [kurso, por_junuloj]
+    se_match = create(:event, title: "SE Match", country: sweden)
+    se_match.tags = [kurso, por_junuloj]
+
+    result = Event.by_country_id(denmark.id).with_tags([kurso.id, kurso.id.to_s, por_junuloj.id])
+
+    assert_includes result, dk_match
+    assert_not_includes result, se_match
+  end
+
+  test "with_tags returns none when tag_ids are empty or nil" do
+    assert_empty Event.with_tags([])
+    assert_empty Event.with_tags(nil)
+  end
+
   private
 
   # Creates an event with a fixed end time for scope boundary tests.

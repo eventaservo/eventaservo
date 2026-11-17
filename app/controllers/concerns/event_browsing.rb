@@ -51,15 +51,16 @@ module EventBrowsing
   # Sets up pagination assigns for card view mode.
   #
   # Card view uses pagination; other view modes do not. When the +vidmaniero+
-  # cookie is set to +"kartoj"+ or +"kartaro"+, computes +@kvanto_venontaj_eventoj+
-  # and +@pagy+, then paginates +@events+.
+  # cookie is set to +"kartoj"+ or +"kartaro"+, paginates +@events+ (expected to
+  # already be scoped to non-today events) and reuses +@pagy.count+ for
+  # +@kvanto_venontaj_eventoj+ to avoid a duplicate COUNT query.
   #
   # @return [void]
   def setup_card_pagination
     return unless cookies[:vidmaniero].in?(%w[kartoj kartaro])
 
-    @kvanto_venontaj_eventoj = @events.count
-    @pagy, @events = pagy(@events.not_today(current_timezone).includes(%i[country organizations tags]))
+    @pagy, @events = pagy(@events.includes(%i[country organizations tags]))
+    @kvanto_venontaj_eventoj = @pagy.count
   end
 
   # Validates the +:continent+ param and sets +@continent+.
