@@ -28,7 +28,7 @@ gem "icalendar", "~> 2.13"
 gem "mini_magick", "~> 5.1"
 
 # Omniauth authentication
-gem "omniauth-facebook", "~> 10.0"
+gem "omniauth-facebook", "~> 11.0"
 gem "omniauth-google-oauth2", "~> 1.2"
 gem "omniauth-rails_csrf_protection"
 
@@ -66,7 +66,7 @@ gem "paper_trail-association_tracking", "~> 2.2"
 gem "postmark-rails"
 gem "premailer-rails", "~> 1.11"
 gem "redcarpet", "~> 3.5"
-gem "sitemap_generator", "~> 6.1"
+gem "sitemap_generator", "~> 7.0"
 gem "timezone", "~> 1.3"
 # gem 'trix-rails', require: 'trix'
 gem "httparty", "~> 0.24"
