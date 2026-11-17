@@ -13,10 +13,8 @@ Sentry.init do |config|
   # end
 
   config.enabled_environments = %w[production staging]
-  config.enable_logs = true
 
   if Rails.env.production?
-    config.enable_logs = true
     config.enabled_patches = [:logger]
   end
 end

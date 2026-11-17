@@ -89,8 +89,8 @@ gem "mission_control-jobs"
 
 # Sentry.io
 gem "stackprof"
-gem "sentry-ruby", "~> 6"
-gem "sentry-rails", "~> 6"
+gem "sentry-ruby", "~> 7"
+gem "sentry-rails", "~> 7"
 
 gem "listen"
 
