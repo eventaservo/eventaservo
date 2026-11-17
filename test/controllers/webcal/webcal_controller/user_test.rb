@@ -85,7 +85,11 @@ class Webcal::WebcalController::UserTest < ActionDispatch::IntegrationTest
     meetup = events(:esperanto_meetup)
     meetup.tags << tags(:kurso)
 
-    get webcal_user_url(webcal_token: user.webcal_token, format: :ics)
+    assert_no_queries_match(/FROM "countries" WHERE "countries"\."id" = .* LIMIT/) do
+      assert_no_queries_match(/"tags"\."group_name" =/) do
+        get webcal_user_url(webcal_token: user.webcal_token, format: :ics)
+      end
+    end
     assert_response :success
 
     vevent = response.body.gsub(/\r?\n[ \t]/, "").split("BEGIN:VEVENT").find do |block|

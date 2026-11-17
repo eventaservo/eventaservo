@@ -46,6 +46,31 @@ class Webcal::WebcalController::LandoTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "country webcal filters category tags from preloaded tags without N+1 queries" do
+    tagged = Event.create!(
+      title: "Brazilia Kurso",
+      description: "Kurso en Brazilo",
+      city: "San-Paŭlo",
+      country_id: @brazil.id,
+      date_start: 2.months.from_now,
+      date_end: 2.months.from_now + 2.days,
+      code: "cxe-br-kurso",
+      site: "https://example.org/br-kurso",
+      email: "br-kurso@example.org",
+      user: users(:user)
+    )
+    tagged.tags = [tags(:kurso), tags(:por_junuloj)]
+
+    assert_no_queries_match(/"tags"\."group_name" =/) do
+      get "/webcal/lando/br.ics"
+    end
+
+    assert_response :success
+    cal = Icalendar::Calendar.parse(response.body).first
+    ics_event = cal.events.find { |e| e.uid == "#{tagged.uuid}@eventaservo.org" }
+    assert_equal ["Kurso"], ics_event.categories
+  end
+
   private
 
   # Parses UID values from raw ICS text.

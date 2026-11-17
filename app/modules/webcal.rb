@@ -92,7 +92,8 @@ module Webcal
   # @param event [Event]
   # @return [void]
   def assign_categories(ical_event, event)
-    categories = event.tags.categories.map(&:name)
+    # Filter preloaded tags in Ruby so .categories scope never triggers an N+1 query.
+    categories = event.tags.select(&:category?).map(&:name)
     ical_event.categories = categories if categories.any?
   end
 end
