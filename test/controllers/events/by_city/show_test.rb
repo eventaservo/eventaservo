@@ -340,6 +340,39 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
     assert_select "a", text: I18n.t("events.show_past"), count: 0
   end
 
+  test "tag filter matches all selected tags without grouping taggings" do
+    kurso = tags(:kurso)
+    por_junuloj = tags(:por_junuloj)
+    denmark = countries(:denmark)
+
+    matching = create(
+      :event,
+      title: "Junulara Kurso",
+      city: "Kopenhago",
+      country: denmark,
+      date_start: 2.days.from_now,
+      date_end: 3.days.from_now
+    )
+    matching.tags = [kurso, por_junuloj]
+    partial = create(
+      :event,
+      title: "Nur Kurso",
+      city: "Kopenhago",
+      country: denmark,
+      date_start: 4.days.from_now,
+      date_end: 5.days.from_now
+    )
+    partial.tags = [kurso]
+
+    assert_no_queries_match(/GROUP BY.*taggable_id/i) do
+      get_copenhagen(s: [kurso.id, por_junuloj.id].sort.join(","))
+    end
+
+    assert_response :success
+    assert_includes response.body, matching.title
+    assert_not_includes response.body, partial.title
+  end
+
   private
 
   # Seeds geo-located future events around Copenhagen for nearby-cities integration tests.
