@@ -63,6 +63,11 @@ class OrganizationsTest < ApplicationSystemTestCase
     assert_selector "#o_search_results img", minimum: 2
     assert_no_horizontal_overflow(organizations_path)
 
+    # Debounced live search sends XHR via Rails.ajax and updates #o_search_results via jQuery .html()
+    find("#serchi").send_keys("Rotterdam")
+    assert_selector "#o_search_results", text: organization.name
+    assert_no_selector "#o_search_results", text: main_org.name
+
     page.current_window.resize_to(1280, 900)
     column_count = evaluate_script(<<~JS)
       getComputedStyle(document.querySelector("#main_organizations_grid")).gridTemplateColumns.trim().split(/\s+/).length

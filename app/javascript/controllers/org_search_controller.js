@@ -1,8 +1,8 @@
 import { Controller } from "@hotwired/stimulus"
-import $ from "jquery"
+import Rails from "@rails/ujs"
 
 // Debounces keyup events on the organization search form and triggers
-// an AJAX request via jQuery (Rails UJS renders a JS response).
+// a Rails UJS script request (Rails UJS renders a JS response).
 //
 // Usage:
 //   <form data-controller="org-search" data-action="keyup->org-search#search">
@@ -20,7 +20,12 @@ export default class extends Controller {
     if (event.key === "Enter") return
 
     this._timer = setTimeout(() => {
-      $.get(this.element.action, $(this.element).serialize(), null, "script")
+      Rails.ajax({
+        url: this.element.action,
+        type: "GET",
+        data: new URLSearchParams(new FormData(this.element)).toString(),
+        dataType: "script"
+      })
     }, 500)
   }
 
