@@ -17,7 +17,7 @@
 
   .chevron-right {
     @extend .fas;
-    content : fa-content($fa-var-chevron-right);
+    content : fa-content($var-chevron-right);
     float   : right;
     color   : black;
   }
