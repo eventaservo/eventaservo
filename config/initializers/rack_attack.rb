@@ -11,11 +11,17 @@ class Rack::Attack
     req.env["HTTP_CF_CONNECTING_IP"] || req.ip
   end
 
-  # List of blocked subnets (add problematic subnets here)
-  # Example: "47.79.0.0/16" blocks all IPs of 47.79.x.x
+  # List of blocked subnets (Alibaba Cloud & Tencent Cloud scraper botnets
+  # rotating IPs across /16 ranges with 0 real/authenticated users).
   BLOCKED_SUBNETS = [
-    # "47.79.0.0/16", # Uncomment to block this range
+    "47.79.0.0/16",
+    "47.82.0.0/16",
+    "47.84.0.0/16",
+    "47.238.0.0/16",
+    "43.135.0.0/16"
   ].freeze
+
+  BLOCKED_IP_RANGES = BLOCKED_SUBNETS.map { |subnet| IPAddr.new(subnet) }.freeze
 
   # Legitimate search/AI crawlers. They are never blocked for reading the
   # calendar: blocking them costs SEO and link previews. Their volume is
@@ -82,9 +88,7 @@ class Rack::Attack
   # Block known problematic subnets
   blocklist("block bad subnets") do |req|
     ip = IPAddr.new(real_ip(req))
-    BLOCKED_SUBNETS.any? do |subnet|
-      IPAddr.new(subnet).include?(ip)
-    end
+    BLOCKED_IP_RANGES.any? { |range| range.include?(ip) }
   rescue IPAddr::InvalidAddressError
     false
   end
