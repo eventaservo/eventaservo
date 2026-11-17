@@ -103,7 +103,7 @@ gem "ahoy_matey", "~> 5"
 gem "rollups", "~> 0.6.0"
 
 # For connecting to Google Drive
-gem "google-api-client", "~> 0.53.0"
+gem "google-apis-drive_v3", "~> 0.89"
 
 # New Relic
 gem "newrelic_rpm"
