@@ -108,7 +108,21 @@ class ModalTest < ApplicationSystemTestCase
     # SlimSelect content mounts inside the dialog controller subtree rather than document.body
     assert_selector "dialog#timezoneModal .ss-main"
     find("dialog#timezoneModal .ss-main").click
-    assert_selector "dialog#timezoneModal .ss-content.ss-open-below, dialog#timezoneModal .ss-content.ss-open-above", visible: true
+    assert_selector "dialog#timezoneModal .ss-content.ss-open.ss-dir-below, dialog#timezoneModal .ss-content.ss-open.ss-dir-above", visible: true
+
+    # Ensure fixed/top-layer positioning keeps the dropdown anchored to .ss-main inside <dialog>
+    rects = page.evaluate_script(<<~JS)
+      (() => {
+        const main = document.querySelector("dialog#timezoneModal .ss-main").getBoundingClientRect();
+        const content = document.querySelector("dialog#timezoneModal .ss-content").getBoundingClientRect();
+        return {
+          leftDiff: Math.abs(content.left - main.left),
+          verticalGap: Math.min(Math.abs(content.top - main.bottom), Math.abs(content.bottom - main.top))
+        };
+      })()
+    JS
+    assert_operator rects["leftDiff"], :<, 2
+    assert_operator rects["verticalGap"], :<, 5
 
     find("dialog#timezoneModal").send_keys(:escape)
     assert_no_selector "dialog#timezoneModal[open]"

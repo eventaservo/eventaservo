@@ -765,10 +765,10 @@ sass@^1.97.3:
   optionalDependencies:
     "@parcel/watcher" "^2.4.1"
 
-slim-select@^2.13.1:
-  version "2.13.1"
-  resolved "https://registry.yarnpkg.com/slim-select/-/slim-select-2.13.1.tgz#4973613ac3dc8c281cbe3d510593aa286be56ea3"
-  integrity sha512-0/j1SAYzwaCgb4mWEOIr+QSzznVPEfT/o6FHAK3yk9qZTM+79DC/J3YRZz7lC4JvteZTzxoGXxPF6CAG7ezjyg==
+slim-select@^4.7.0:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/slim-select/-/slim-select-4.7.0.tgz#681b023e549e286768ba6e1fc3699c3b3f039685"
+  integrity sha512-YvdtjVpy8w5z0wEnhX7d2E0oOOFh9wgdoMCIXgI3htVN8eTQ1bfN1SVK1fzFBBTbGgOBycDnu03ma8YQGvIpGg==
 
 "source-map-js@>=0.6.2 <2.0.0", source-map-js@^1.2.1, source-map-js@^1.2.2:
   version "1.2.2"
