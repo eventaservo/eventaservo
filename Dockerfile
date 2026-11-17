@@ -56,7 +56,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && rm -rf /var/lib/apt/lists/*
 
 # Install Yarn and Redocly CLI
-RUN npm install -g yarn @redocly/cli@1.0.2
+RUN npm install -g yarn @redocly/cli@2.79.0
 
 ######################
 # Builder (Production)
