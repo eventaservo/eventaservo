@@ -154,7 +154,7 @@ GEM
       logger (~> 1.5)
     coderay (1.1.3)
     concurrent-ruby (1.3.8)
-    connection_pool (3.0.2)
+    connection_pool (3.0.3)
     crack (1.0.1)
       bigdecimal
       rexml
@@ -617,10 +617,10 @@ GEM
       logger (~> 1.4)
       rubyzip (>= 1.2.2, < 4.0)
       websocket (~> 1.0)
-    sentry-rails (6.5.0)
+    sentry-rails (7.2.0)
       railties (>= 5.2.0)
-      sentry-ruby (~> 6.5.0)
-    sentry-ruby (6.5.0)
+      sentry-ruby (~> 7.2.0)
+    sentry-ruby (7.2.0)
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
       logger
@@ -787,8 +787,8 @@ DEPENDENCIES
   rollups (~> 0.6.0)
   seed_dump
   selenium-webdriver
-  sentry-rails (~> 6)
-  sentry-ruby (~> 6)
+  sentry-rails (~> 7)
+  sentry-ruby (~> 7)
   shoulda-matchers
   simple_token_authentication!
   simplecov
