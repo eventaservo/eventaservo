@@ -10,7 +10,7 @@ class EventsCalendarSystemTest < ApplicationSystemTestCase
     visit root_path(date: event.date_start.to_date.iso8601)
     assert_selector "turbo-frame#native-calendar"
 
-    event_link = find("turbo-frame#native-calendar a[href='#{event_path(code: event.ligilo)}']")
+    event_link = find("turbo-frame#native-calendar a[href='#{event_path(code: event.ligilo)}']", match: :first)
     event_link.hover
     sleep 0.35
 
@@ -29,7 +29,7 @@ class EventsCalendarSystemTest < ApplicationSystemTestCase
     assert_text event.title
   end
 
-  test "navigating weeks inside calendar updates date and clears loading state" do
+  test "navigating weeks inside calendar loads next week and clears loading state" do
     start_date = events(:esperanto_meetup).date_start.to_date
     next_week_date = start_date + 7.days
 
