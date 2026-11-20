@@ -45,12 +45,12 @@ class Api::V2::Events::CreateTest < ActiveSupport::TestCase
     assert_includes event.enhavo.to_s, "Full schedule"
   end
 
-  test "creates purely online event without city or country_code" do
+  test "creates purely online event without city or country_code and preserves seconds" do
     params = {
       title: "Online Esperanto Cafe",
       description: "Weekly online conversation",
-      date_start: "2026-09-10T19:00:00",
-      date_end: "2026-09-10T21:00:00",
+      date_start: "2026-09-10T19:00:45",
+      date_end: "2026-09-10T21:30:15",
       time_zone: "America/Sao_Paulo",
       email: "cafe@example.org",
       online: true
@@ -64,7 +64,8 @@ class Api::V2::Events::CreateTest < ActiveSupport::TestCase
     assert_equal "online", event.format
     assert_equal "Reta", event.city
     assert_equal 99_999, event.country_id
-    assert_equal "19:00", event.date_start.in_time_zone("America/Sao_Paulo").strftime("%H:%M")
+    assert_equal "19:00:45", event.date_start.in_time_zone("America/Sao_Paulo").strftime("%H:%M:%S")
+    assert_equal "21:30:15", event.date_end.in_time_zone("America/Sao_Paulo").strftime("%H:%M:%S")
   end
 
   test "creates hybrid event when online is true with city and country_code" do
@@ -156,6 +157,11 @@ class Api::V2::Events::CreateTest < ActiveSupport::TestCase
 
   private
 
+  # Asserts that the given value matches standard UUID format.
+  #
+  # @param uuid [String, nil] UUID string to validate
+  #
+  # @return [void]
   def assert_present_uuid(uuid)
     assert_match(/\A[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\z/i, uuid.to_s)
   end

@@ -35,10 +35,15 @@ module Events
 
     private
 
-    # Builds the base relation of events owned by the user or linked to their organizations.
+    # Builds the base relation of events the user is authorized to manage.
+    #
+    # Administrators can manage all non-deleted events; other users can manage
+    # events they own or events linked to organizations they belong to.
     #
     # @return [ActiveRecord::Relation<Event>]
     def base_scope
+      return Event.all if user.admin?
+
       org_ids = Organization.by_user(user).select(:id)
       org_event_ids = OrganizationEvent.where(organization_id: org_ids).select(:event_id)
 

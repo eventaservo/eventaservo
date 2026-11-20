@@ -44,9 +44,8 @@ module Api
           render_auth_error(:token_missing, status: :unauthorized) and return
         end
 
-        begin
-          decoded = ::JWT.decode(token, Rails.application.credentials.dig(:jwt, :secret), true, algorithm: "HS256")
-        rescue JWT::DecodeError
+        decoded = decode_token(token)
+        if decoded.nil?
           ahoy.track "Token invalid", kind: "api"
           render_auth_error(:token_invalid, status: :unauthorized) and return
         end
@@ -69,6 +68,17 @@ module Api
         end
 
         PaperTrail.request.whodunnit = @user.id.to_s
+      end
+
+      # Decodes a HS256 JWT token, returning nil when decoding fails.
+      #
+      # @param token [String] raw JWT string
+      #
+      # @return [Array, nil] decoded JWT payload and header, or nil on error
+      def decode_token(token)
+        ::JWT.decode(token, Rails.application.credentials.dig(:jwt, :secret), true, algorithm: "HS256")
+      rescue JWT::DecodeError
+        nil
       end
 
       # Returns the authenticated API user's ID for PaperTrail auditing.
@@ -95,10 +105,14 @@ module Api
       # @return [void]
       def render_auth_error(error_key, status:)
         message = case error_key
+        when :token_missing
+          I18n.t("api.v2.errors.token_missing")
+        when :token_invalid
+          I18n.t("api.v2.errors.token_invalid")
+        when :token_expired
+          I18n.t("api.v2.errors.token_expired")
         when :account_inactive
           "Account is disabled or unconfirmed"
-        else
-          I18n.t("api.v2.errors.#{error_key}")
         end
 
         render json: {eraro: message}, status:

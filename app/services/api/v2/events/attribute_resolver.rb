@@ -156,12 +156,13 @@ module Api
         # Parses a single ISO 8601 datetime string.
         #
         # Preserves the exact instant when an explicit UTC offset or +Z+ suffix
-        # is present; otherwise interprets wall-clock components in +time_zone+.
+        # is present; otherwise interprets wall-clock components (including
+        # seconds and fractional seconds) in +time_zone+ with DST-safe fallback.
         #
         # @param value [String] raw ISO 8601 datetime string
         # @param time_zone [String] IANA time zone for naive datetimes
         #
-        # @return [ActiveSupport::TimeWithZone, Time, nil]
+        # @return [Time, nil]
         def parse_iso8601_datetime(value, time_zone)
           return nil unless value.include?("T") || value.match?(/\A\d{4}-\d{2}-\d{2}\z/)
 
@@ -169,10 +170,30 @@ module Api
             Time.iso8601(value).utc
           else
             naive = Time.iso8601("#{value}#{"T00:00:00" if value.match?(/\A\d{4}-\d{2}-\d{2}\z/)}Z")
-            TimeZone::WallClockToUtc.call(time_zone:, datetime: naive).payload
+            wall_clock_to_utc_preserving_seconds(naive, time_zone)
           end
-        rescue ArgumentError
+        rescue ArgumentError, TZInfo::InvalidTimezoneIdentifier
           nil
+        end
+
+        # Converts a naive wall-clock Time into UTC in +time_zone+ while preserving
+        # seconds and fractional seconds, with DST ambiguity and gap handling.
+        #
+        # @param naive [Time] parsed wall-clock components
+        # @param time_zone [String] IANA time zone identifier
+        #
+        # @return [Time] UTC timestamp
+        def wall_clock_to_utc_preserving_seconds(naive, time_zone)
+          tz = TZInfo::Timezone.get(time_zone)
+          local = Time.new(naive.year, naive.month, naive.day, naive.hour, naive.min, naive.sec + naive.subsec)
+
+          begin
+            tz.local_to_utc(local)
+          rescue TZInfo::AmbiguousTime
+            tz.local_to_utc(local, true)
+          rescue TZInfo::PeriodNotFound
+            tz.local_to_utc(local + 3600)
+          end
         end
 
         # Resolves +country_code+ and online-only location defaults.

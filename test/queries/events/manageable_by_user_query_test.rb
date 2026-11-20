@@ -31,6 +31,15 @@ class Events::ManageableByUserQueryTest < ActiveSupport::TestCase
     assert_not_includes result, event
   end
 
+  test "returns all non-deleted events including personal events for administrators" do
+    admin = users(:admin_user)
+    personal_event = events(:valid_event)
+
+    result = Events::ManageableByUserQuery.new(user: admin).call
+
+    assert_includes result, personal_event
+  end
+
   test "filters by upcoming and past status" do
     user = users(:user)
     upcoming_event = events(:valid_event)
