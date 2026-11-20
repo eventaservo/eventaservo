@@ -9,7 +9,7 @@
       </div>
 
       <%= form_with model: @ad, method: :post, url: admin_reklamoj_index_url, local: true, class: "tw:space-y-4" do |f| %>
-        <%= render Ui::InputComponent.new("reklamo[url]", id: "reklamo_url", label: "URL", value: @ad.url, required: true) %>
+        <%= render Ui::InputComponent.new("ad[url]", id: "ad_url", label: "URL", value: @ad.url, required: true) %>
 
         <div>
           <%= f.label :image, "BILDO", class: "tw:block tw:text-xs tw:font-semibold tw:text-gray-700 tw:mb-1" %>
