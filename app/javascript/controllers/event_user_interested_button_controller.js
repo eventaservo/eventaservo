@@ -6,10 +6,23 @@ export default class extends Controller {
 
   connect() {}
 
-  buttonClicked() {
+  disconnect() {
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId)
+      this.timeoutId = null
+    }
+  }
+
+  buttonClicked(event) {
+    event?.preventDefault()
     this.toggle()
 
-    setTimeout(() => {
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId)
+    }
+
+    this.timeoutId = setTimeout(() => {
+      this.timeoutId = null
       this.toggle()
     }, 10_000)
   }

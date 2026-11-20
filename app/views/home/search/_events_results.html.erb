@@ -1,12 +1,12 @@
-<%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
-  <% panel.with_header(class: "tw:bg-esperanto-600 tw:text-white tw:py-2 tw:px-4 tw:border-0") do %>
-    <span class="tw:text-xs tw:font-bold tw:uppercase tw:tracking-wider"><%= t("search.results.events.header") %></span>
-  <% end %>
-  <% panel.with_body(class: "tw:space-y-3") do %>
+<section class="tw:bg-white tw:border tw:border-gray-200 tw:rounded tw:overflow-hidden">
+  <div class="tw:bg-[#008000] tw:text-white tw:px-3 tw:py-1.5 tw:text-[10px] tw:font-bold tw:uppercase tw:tracking-wider">
+    <%= t("search.results.events.header") %>
+  </div>
+  <div class="tw:p-3 tw:space-y-2">
     <% if events.empty? %>
-      <p class="tw:text-sm tw:text-gray-600 tw:m-0"><%= t("search.results.events.empty") %></p>
+      <p class="tw:text-sm tw:text-gray-700 tw:m-0"><%= t("search.results.events.empty") %></p>
     <% else %>
-      <h2 class="tw:text-base tw:font-semibold tw:text-gray-900 tw:m-0">
+      <h2 class="tw:text-base tw:font-medium tw:text-gray-900 tw:m-0">
         <%= t("search.results.events.found", count: events.count) %>
         <% if params[:pasintaj].blank? && params[:from].blank? && params[:to].blank? %>
           <%= t("search.results.events.upcoming_and_recent") %>
@@ -14,7 +14,7 @@
       </h2>
 
       <div class="tw:border tw:border-gray-200 tw:rounded tw:overflow-hidden tw:text-xs">
-        <div class="tw:grid tw:grid-cols-12 tw:gap-2 tw:bg-gray-100 tw:text-gray-700 tw:font-semibold tw:px-3 tw:py-2 tw:border-b tw:border-gray-200" aria-hidden="true">
+        <div class="tw:grid tw:grid-cols-12 tw:gap-2 tw:bg-gray-100 tw:text-gray-700 tw:font-semibold tw:px-3 tw:py-1.5 tw:border-b tw:border-gray-200" aria-hidden="true">
           <div class="tw:col-span-6"><%= t("search.results.events.title") %></div>
           <div class="tw:col-span-3"><%= t("search.results.events.city") %></div>
           <div class="tw:col-span-3"><%= t("search.results.events.date") %></div>
@@ -23,7 +23,7 @@
           <% events.each do |event| %>
             <%= link_to event_path(code: event.ligilo),
                   data: { href: event_path(code: event.ligilo) },
-                  class: "tw:grid tw:grid-cols-12 tw:gap-2 tw:items-center tw:px-3 tw:py-2 tw:text-gray-900 tw:no-underline tw:hover:bg-gray-50 tw:transition-colors #{event_color_class(event)}" do %>
+                  class: "tw:grid tw:grid-cols-12 tw:gap-2 tw:items-center tw:px-3 tw:py-1.5 tw:text-gray-900 tw:no-underline tw:hover:bg-gray-50 tw:transition-colors #{event_color_class(event)}" do %>
               <div class="tw:col-span-6 tw:font-medium tw:break-words"><span class="tw:sr-only"><%= t("search.results.events.title") %>: </span><%= event_flag(event) %> <%= event.title %></div>
               <div class="tw:col-span-3 tw:text-gray-600 tw:break-words"><span class="tw:sr-only"><%= t("search.results.events.city") %>: </span><%= event.city %></div>
               <div class="tw:col-span-3 tw:text-gray-600 tw:break-words"><span class="tw:sr-only"><%= t("search.results.events.date") %>: </span><%= event_date(event) %></div>
@@ -32,5 +32,5 @@
         </div>
       </div>
     <% end %>
-  <% end %>
-<% end %>
+  </div>
+</section>

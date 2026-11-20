@@ -57,7 +57,7 @@ module Ui
       def header_classes
         [
           "tw:border-b",
-          size_classes,
+          (size_classes unless custom_padding?),
           accent_classes,
           html_options[:class]
         ].compact.join(" ")
@@ -83,6 +83,13 @@ module Ui
       # @return [Hash]
       def html_attributes
         html_options.except(:class)
+      end
+
+      # Checks whether the caller supplied explicit Tailwind padding utilities.
+      #
+      # @return [Boolean]
+      def custom_padding?
+        html_options[:class].to_s.match?(/\btw:p[xytrbl]?-/)
       end
 
       # Padding classes based on size.
