@@ -85,19 +85,13 @@
     }
   }
 
-  & > a {
-    @extend .btn;
-    @extend .btn-sm;
-  }
-
-  & > button {
-    @extend .btn;
-    @extend .btn-sm;
-  }
-
+  & > a,
+  & > button,
   .btn-group > button {
-    @extend .btn;
-    @extend .btn-sm;
+    display: inline-block;
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
   }
 
   .toolbar-divider {

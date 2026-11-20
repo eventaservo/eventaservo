@@ -152,7 +152,7 @@ Event feeds support multiple formats via `respond_to` blocks in controllers:
   - Module: `app/modules/webcal.rb`
 
 ### Frontend
-- **CSS**: Bootstrap 5.3
+- **CSS**: Tailwind CSS v4 (with `tw:` prefix)
 - **JS**: Stimulus + Turbo (Hotwire) with esbuild bundling
 - **Maps**: Leaflet with marker clustering
 - **View Partials**: Break complex, repetitive, or tabbed views into dedicated Rails partials (e.g. `_partial_name.html.erb`) rather than keeping large inline blocks inside main templates. This keeps view code modular, maintainable, and readable.
