@@ -20,7 +20,7 @@
         <div class="tw:grid tw:grid-cols-12 tw:gap-2 tw:items-center tw:px-3 tw:py-1.5 <%= stripe_classes %>">
           <div class="tw:col-span-5 tw:flex tw:items-center tw:gap-2 tw:min-w-0">
             <%= link_to icon("fas", "minus-circle"), delete_recipient_path(recipient.code), class: "tw:text-brand-red tw:hover:text-brand-red-hover tw:shrink-0", aria: { label: "Forigi sciigon" } %>
-            <span class="tw:truncate tw:text-gray-900"><%= recipient.email %></span>
+            <span class="tw:break-all tw:text-gray-900"><%= recipient.email %></span>
           </div>
           <div class="tw:col-span-4 tw:text-gray-600 tw:truncate"><%= recipient.country.name %></div>
           <div class="tw:col-span-3 tw:text-gray-600 tw:truncate"><%= format_date recipient.created_at %></div>

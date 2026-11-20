@@ -2,6 +2,7 @@
 
 require "application_system_test_case"
 
+# Checks core admin pages for breadcrumbs, headings, and horizontal overflow.
 class AdminCoreTest < ApplicationSystemTestCase
   setup do
     @original_window_size = page.current_window.size

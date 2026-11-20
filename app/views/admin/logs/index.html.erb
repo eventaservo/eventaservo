@@ -40,7 +40,7 @@
         ].compact.join(" ") %>
 
         <div data-testid="log-entry" class="tw:grid tw:grid-cols-12 tw:gap-2 tw:items-center tw:px-3 tw:py-1.5 <%= stripe_classes %>">
-          <div class="tw:col-span-3 tw:md:col-span-2 tw:font-semibold tw:text-esperanto-600 tw:truncate"><%= log.created_at.strftime("%d/%m/%Y %H:%M") %></div>
+          <div class="tw:col-span-3 tw:md:col-span-2 tw:font-semibold tw:text-esperanto-600 tw:break-words"><%= log.created_at.strftime("%d/%m/%Y %H:%M") %></div>
           <div class="tw:col-span-3 tw:md:col-span-2 tw:font-medium tw:text-gray-900 tw:truncate"><%= log.user&.name %></div>
           <div class="tw:col-span-4 tw:md:col-span-6 tw:text-gray-600 tw:break-words"><%= log.text %></div>
           <div class="tw:col-span-2 tw:flex tw:flex-wrap tw:gap-1">
