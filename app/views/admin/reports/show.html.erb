@@ -1,58 +1,56 @@
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb small mb-2">
-    <li class="breadcrumb-item"><%= link_to "Admin", admin_root_path %></li>
-    <li class="breadcrumb-item"><%= link_to "Raportoj", admin_reports_path %></li>
-    <li class="breadcrumb-item active" aria-current="page">Detaloj</li>
-  </ol>
-</nav>
+<%= render "admin/shared/breadcrumb", items: [["Raportoj", admin_reports_path], ["Detaloj"]] %>
 
-<div class="box-white">
-  <div class="lead mb-4">Raportaj Detaloj</div>
+<%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+  <% panel.with_body(class: "tw:space-y-5") do %>
+    <h1 class="tw:text-xl tw:font-bold tw:text-gray-900 tw:pb-2 tw:border-b tw:border-gray-200 tw:m-0">Raportaj Detaloj</h1>
 
-  <div class="row g-4">
-    <div class="col-md-8">
-      <div class="mb-4">
-        <label class="form-label small text-uppercase fw-bold text-body-secondary mb-1">Titolo</label>
-        <div class="fs-5 fw-semibold"><%= @report.title %></div>
-      </div>
-
-      <div class="mb-4">
-        <label class="form-label small text-uppercase fw-bold text-body-secondary mb-1">URL</label>
-        <div><%= link_to @report.url, @report.url, target: "_blank", class: "text-break" %></div>
-      </div>
-      
-      <div class="mb-4">
-        <label class="form-label small text-uppercase fw-bold text-body-secondary mb-1">Evento</label>
+    <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-12 tw:gap-6">
+      <div class="tw:md:col-span-8 tw:space-y-4">
         <div>
-          <%= link_to @report.event.title, event_path(code: @report.event.ligilo), target: "_blank", class: "fw-medium" %>
+          <div class="tw:text-[11px] tw:uppercase tw:font-bold tw:text-gray-500 tw:mb-1">Titolo</div>
+          <div class="tw:text-lg tw:font-semibold tw:text-gray-900"><%= @report.title %></div>
+        </div>
+
+        <div>
+          <div class="tw:text-[11px] tw:uppercase tw:font-bold tw:text-gray-500 tw:mb-1">URL</div>
+          <div><%= link_to @report.url, @report.url, target: "_blank", rel: "noopener", class: "tw:text-brand-blue tw:hover:text-brand-blue-hover tw:break-all" %></div>
+        </div>
+
+        <div>
+          <div class="tw:text-[11px] tw:uppercase tw:font-bold tw:text-gray-500 tw:mb-1">Evento</div>
+          <div>
+            <%= link_to @report.event.title, event_path(code: @report.event.ligilo), target: "_blank", rel: "noopener", class: "tw:font-medium tw:text-brand-blue tw:hover:text-brand-blue-hover" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="tw:md:col-span-4 tw:md:border-l tw:md:border-gray-200 tw:md:pl-6 tw:space-y-4">
+        <div>
+          <div class="tw:text-[11px] tw:uppercase tw:font-bold tw:text-gray-500 tw:mb-1">Raportanto</div>
+          <div class="tw:flex tw:flex-wrap tw:items-center tw:gap-1.5 tw:text-sm tw:text-gray-900">
+            <span><%= @report.user&.name %></span>
+            <span class="tw:text-gray-500 tw:text-xs">(<%= @report.user&.username %>)</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="tw:text-[11px] tw:uppercase tw:font-bold tw:text-gray-500 tw:mb-1">Kreita je</div>
+          <div class="tw:text-gray-600 tw:text-xs">
+            <%= l(@report.created_at, format: :long) %>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="col-md-4 border-start">
-      <div class="mb-4">
-        <label class="form-label small text-uppercase fw-bold text-body-secondary mb-1">Raportanto</label>
-        <div class="d-flex align-items-center gap-2">
-          <%= @report.user&.name %>
-          <span class="text-body-secondary small">(<%= @report.user&.username %>)</span>
-        </div>
-      </div>
-
-      <div class="mb-4">
-        <label class="form-label small text-uppercase fw-bold text-body-secondary mb-1">Kreita je</label>
-        <div class="text-body-secondary small">
-          <%= l(@report.created_at, format: :long) %>
-        </div>
-      </div>
+    <div class="tw:pt-4 tw:border-t tw:border-gray-200 tw:flex tw:flex-wrap tw:items-center tw:justify-between tw:gap-2">
+      <%= render Ui::ButtonComponent.new("Redakti", href: edit_admin_report_path(@report), icon: "edit", variant: :success) %>
+      <%= render Ui::ButtonComponent.new(
+        "Forigi",
+        href: admin_report_path(@report),
+        icon: "trash",
+        variant: :outline_danger,
+        data: { method: :delete, confirm: "Ĉu vi estas certa?" }
+      ) %>
     </div>
-  </div>
-
-  <div class="mt-5 pt-3 border-top d-flex justify-content-between align-items-center">
-    <%= link_to edit_admin_report_path(@report), class: "btn btn-success" do %>
-      <%= icon('fas', 'edit', 'Redakti') %>
-    <% end %>
-    <%= link_to admin_report_path(@report), data: { method: :delete, confirm: "Ĉu vi estas certa?" }, class: "btn btn-outline-danger" do %>
-      <%= icon('fas', 'trash', 'Forigi') %>
-    <% end %>
-  </div>
-</div>
+  <% end %>
+<% end %>

@@ -1,52 +1,52 @@
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb small mb-2">
-    <li class="breadcrumb-item"><%= link_to "Admin", admin_root_path %></li>
-    <li class="breadcrumb-item active" aria-current="page">Raportoj</li>
-  </ol>
-</nav>
+<%= render "admin/shared/breadcrumb", items: [["Raportoj"]] %>
 
-<div class="box-white">
-  <div class="lead mb-3">Eventaj Raportoj</div>
+<%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+  <% panel.with_body(class: "tw:space-y-4") do %>
+    <h1 class="tw:text-xl tw:font-bold tw:text-gray-900 tw:pb-2 tw:border-b tw:border-gray-200 tw:m-0">Eventaj Raportoj</h1>
 
-  <%= form_with url: admin_reports_path, method: :get, local: true, class: "mb-3" do |f| %>
-    <div class="row g-2 align-items-end">
-      <div class="col-md-4">
-        <label class="form-label smaller text-uppercase fw-bold text-body-secondary mb-1">Titolo de la raporto</label>
-        <%= text_field_tag :title, params[:title], class: "form-control form-control-sm", placeholder: "Serĉi raporton..." %>
+    <%= form_with url: admin_reports_path, method: :get, local: true do %>
+      <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-12 tw:gap-2 tw:items-end">
+        <div class="tw:md:col-span-5">
+          <%= render Ui::InputComponent.new(:title, id: "title", size: :small, label: "TITOLO DE LA RAPORTO", value: params[:title], placeholder: "Serĉi raporton...") %>
+        </div>
+        <div class="tw:md:col-span-4">
+          <%= render Ui::InputComponent.new(:event_title, id: "event_title", size: :small, label: "TITOLO DE LA EVENTO", value: params[:event_title], placeholder: "Serĉi eventon...") %>
+        </div>
+        <div class="tw:md:col-span-3 tw:flex tw:items-center tw:gap-2">
+          <%= render Ui::ButtonComponent.new("Filtri", type: :submit, variant: :success, size: :small) %>
+          <%= render Ui::ButtonComponent.new("Nuligi", href: admin_reports_path, variant: :secondary, size: :small) %>
+        </div>
       </div>
-      <div class="col-md-4">
-        <label class="form-label smaller text-uppercase fw-bold text-body-secondary mb-1">Titolo de la evento</label>
-        <%= text_field_tag :event_title, params[:event_title], class: "form-control form-control-sm", placeholder: "Serĉi eventon..." %>
-      </div>
-      <div class="col-md-auto d-flex gap-2">
-        <%= f.submit "Filtri", class: "btn btn-sm btn-success" %>
-        <%= link_to "Nuligi", admin_reports_path, class: "btn btn-sm btn-outline-secondary" %>
-      </div>
-    </div>
-  <% end %>
+    <% end %>
 
-  <div class="border rounded overflow-hidden small">
-    <div class="row g-0 align-items-center bg-success text-white text-uppercase fw-bold px-2 py-2 smaller">
-      <div class="col">Evento</div>
-      <div class="col-3">Uzanto</div>
-      <div class="col-3">Titolo de la raporto</div>
-    </div>
+    <div class="tw:border tw:border-gray-200 tw:rounded tw:overflow-hidden tw:text-xs">
+      <div class="tw:grid tw:grid-cols-12 tw:gap-2 tw:items-center tw:bg-esperanto-500 tw:text-white tw:uppercase tw:font-bold tw:px-3 tw:py-2 tw:text-[11px]">
+        <div class="tw:col-span-6">Evento</div>
+        <div class="tw:col-span-3">Uzanto</div>
+        <div class="tw:col-span-3">Titolo de la raporto</div>
+      </div>
 
-    <% @reports.each_with_index do |report, i| %>
-      <%= link_to admin_report_path(report), class: "row g-0 align-items-center px-2 py-1 small hover-row text-decoration-none text-dark #{'border-bottom' unless i == @reports.size - 1} #{'bg-body-tertiary' if i.odd?}" do %>
-        <div class="col fw-medium text-truncate"><%= report.event.title %></div>
-        <div class="col-3 text-body-secondary text-truncate"><%= report.user&.name %></div>
-        <div class="col-3 text-body-secondary text-truncate"><%= report.title %></div>
+      <% @reports.each_with_index do |report, i| %>
+        <% stripe_classes = [
+          ("tw:border-b tw:border-gray-200" unless i == @reports.size - 1),
+          ("tw:bg-gray-50" if i.odd?)
+        ].compact.join(" ") %>
+
+        <%= link_to admin_report_path(report), class: "tw:grid tw:grid-cols-12 tw:gap-2 tw:items-center tw:px-3 tw:py-1.5 tw:text-gray-900 tw:no-underline tw:hover:bg-esperanto-50 tw:transition-colors #{stripe_classes}" do %>
+          <div class="tw:col-span-6 tw:font-medium tw:text-gray-900 tw:break-words"><%= report.event.title %></div>
+          <div class="tw:col-span-3 tw:text-gray-600 tw:break-words"><%= report.user&.name %></div>
+          <div class="tw:col-span-3 tw:text-gray-600 tw:break-words"><%= report.title %></div>
+        <% end %>
       <% end %>
-    <% end %>
 
-    <% if @reports.empty? %>
-      <div class="p-4 text-center text-body-secondary">
-        <%= icon('fas', 'search', class: 'fa-2x mb-3 opacity-25') %>
-        <p>Neniu raporto trovita.</p>
-      </div>
-    <% end %>
-  </div>
+      <% if @reports.empty? %>
+        <div class="tw:p-6 tw:text-center tw:text-gray-500">
+          <%= icon("fas", "search", class: "fa-2x tw:mb-3 tw:opacity-25") %>
+          <p class="tw:m-0">Neniu raporto trovita.</p>
+        </div>
+      <% end %>
+    </div>
 
-  <%= render "shared/pagination", pagy: @pagy %>
-</div>
+    <%= render "shared/pagination", pagy: @pagy %>
+  <% end %>
+<% end %>
