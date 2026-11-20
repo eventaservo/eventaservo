@@ -8,7 +8,7 @@ class EventsController::InternationalBadgeTest < ActionDispatch::IntegrationTest
 
     get event_path(code: event.code)
     assert_response :success
-    assert_select ".text-bg-success", text: /Internacia Evento/
+    assert_select "span.tw\\:bg-esperanto-500", text: /Internacia Evento/
   end
 
   test "does not render international badge on show page when event is local" do
@@ -16,6 +16,6 @@ class EventsController::InternationalBadgeTest < ActionDispatch::IntegrationTest
 
     get event_path(code: event.code)
     assert_response :success
-    assert_select ".text-bg-success", false
+    assert_select "span.tw\\:bg-esperanto-500", text: /Internacia Evento/, count: 0
   end
 end
