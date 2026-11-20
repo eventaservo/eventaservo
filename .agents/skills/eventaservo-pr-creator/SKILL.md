@@ -1,13 +1,13 @@
 ---
 name: eventaservo-pr-creator
 description: >-
-  Prepares branches and commits, previews, then creates a GitHub pull request with
-  `gh pr create` or updates title/body with `gh pr edit` when a PR already exists for
-  the branch. PR descriptions are a short why-first executive summary in English (no
+  Prepares branches and commits, then creates a GitHub pull request with `gh pr create`
+  (auto-assigning @me) or updates title/body with `gh pr edit` when a PR already exists
+  for the branch. PR descriptions are a short why-first executive summary in English (no
   technical changelog); emojis allowed. Use when the user asks to open or create a PR,
-  update a PR description, or refresh pull request text. Follows
-  Eventaservo AGENTS.md (Conventional Commits, English PR text, explicit confirmation
-  before push or remote edits).
+  update a PR description, or refresh pull request text. Follows Eventaservo AGENTS.md
+  (Conventional Commits, English PR text, explicit permission before creating branches,
+  commits, or PRs).
 ---
 
 # Eventaservo Pull Request Creator
@@ -24,9 +24,12 @@ repository using the **GitHub CLI** (`gh`).
 ## Prerequisites
 
 - **`gh` installed and authenticated** — if unsure, run `gh auth status`.
-- The user must **explicitly** ask to create or update a PR. Do **not** push, commit
-  for this purpose, or change GitHub without their **yes** after the preview
-  (`AGENTS.md`: no branches, commits, or PRs without permission).
+- The user must **explicitly** ask to create or update a PR (`AGENTS.md`: no branches,
+  commits, or PRs without permission). Once the user has explicitly authorized
+  creating or updating the PR, proceed directly through commit, push, and `gh`
+  create/edit without stopping for a second confirmation of the PR text—unless the
+  user asks to preview/review the text first or there are ambiguous unrelated local
+  changes to resolve.
 
 ## Workflow
 
@@ -60,13 +63,12 @@ repository using the **GitHub CLI** (`gh`).
 
 ### 6. Detect an existing PR for this branch
 
-- **Do not push here.** Pushing to `origin` happens only after the user approves the
-  preview (step 9), per prerequisites and `AGENTS.md`.
+- **Do not push before checking.** Pushing to `origin` happens in step 9.
 - If the branch **already exists on `origin`** (e.g. `git rev-parse origin/<branch>`
   succeeds, or equivalent), check for an open PR, e.g.:
   - `gh pr list --head <branch> --json number,url,title,state`
   - or `gh pr view --branch <branch>` if supported by the installed `gh` version.
-- If the branch is **not** on `origin` yet, **skip** this lookup. In the preview, assume
+- If the branch is **not** on `origin` yet, **skip** this lookup. Assume
   **Create new PR** unless the user says a PR already exists; after you push in step 9,
   **run the same `gh` lookup again** before choosing `gh pr create` vs `gh pr edit`.
 - If a PR exists, note its **number**, **URL**, and a **short summary** of current title/body.
@@ -89,9 +91,14 @@ repository using the **GitHub CLI** (`gh`).
 - **Emojis:** allowed in moderation when they support tone or context (e.g. motivation).
 - Do **not** add long checklists or “How to test” unless the user explicitly asks.
 
-### 8. Mandatory preview (English)
+### 8. Optional preview (only when requested or unconfirmed)
 
-Show a full preview before any create/update:
+- If the user **already explicitly asked** to create/update the PR (e.g. "open a PR",
+  "commit and create the PR"), **skip** the confirmation prompt and go straight to
+  step 9.
+- Only show a preview and wait for confirmation (`yes / edit / cancel`) if the user
+  explicitly asked to review the PR text first, or if they have not yet authorized
+  creating/updating the PR:
 
 ```text
 **Branch:** <name>  →  **Base:** main (or user-specified)
@@ -105,11 +112,7 @@ Show a full preview before any create/update:
 Proceed? (yes / edit / cancel)
 ```
 
-- **yes** → continue to step 9
-- **edit** → ask what to change, revise, show preview again
-- **cancel** → stop; do not push or call `gh` for create/edit
-
-### 9. Execute after yes
+### 9. Execute
 
 1. `git add` (scoped to agreed files), `git commit` if there are staged/uncommitted
    changes the user wants in the PR.
@@ -120,10 +123,10 @@ Proceed? (yes / edit / cancel)
 **If no PR exists:**
 
 ```bash
-gh pr create --title "..." --body-file /path/to/body.md
+gh pr create --title "..." --body-file /path/to/body.md --assignee @me
 ```
 
-Prefer **`--body-file`** for multiline bodies. Add `--draft` only if the user asked.
+Always assign the authenticated user (`--assignee @me`) when creating a PR. Prefer **`--body-file`** for multiline bodies. Add `--draft` only if the user asked.
 
 **If a PR already exists:**
 
@@ -131,6 +134,12 @@ Prefer **`--body-file`** for multiline bodies. Add `--draft` only if the user as
   should reflect the latest **why** or agreed wording.
 - If the user only wanted to **ensure a PR exists** and the narrative is unchanged,
   do **not** rewrite the body without need — state that in the preview (“ensure only”).
+- If `gh pr edit` fails due to GitHub's GraphQL `projectCards` deprecation, fall back to
+  the REST API:
+  - Update title and body:
+    `gh api --method PATCH repos/{owner}/{repo}/pulls/<number> -f title="..." -f body="$(cat /path/to/body.md)"`
+  - Add an assignee:
+    `gh api repos/{owner}/{repo}/issues/<number>/assignees -f 'assignees[]=<login>'`
 
 4. Print the **PR URL** (created or updated).
 
