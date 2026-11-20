@@ -13,7 +13,6 @@
     "@rails/activestorage": "^8.1.401",
     "@rails/ujs": "^7.1.600",
     "@tailwindcss/cli": "^4.3.0",
-    "bootstrap": "^5.3",
     "chartkick": "^5.0.1",
     "dompurify": "^3.4.17",
     "esbuild": "^0.28.2",

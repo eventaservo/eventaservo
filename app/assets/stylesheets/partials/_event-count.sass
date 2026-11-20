@@ -15,14 +15,18 @@
       background-color: color.adjust($color, $lightness: 10%)
 
 .event-count-container
-  @extend .mt-1, .mb-1
-  @extend .d-flex, .justify-content-between, .flex-wrap
+  margin-top: 0.25rem
+  margin-bottom: 0.25rem
+  display: flex
+  justify-content: space-between
+  flex-wrap: wrap
 
   .event-count
     border-radius: 3px
     color: white
-    @extend .m-1, .ps-3
-    @extend .flex-fill
+    margin: 0.25rem
+    padding-left: 1rem
+    flex: 1 1 auto
 
     &:hover
       text-decoration: none

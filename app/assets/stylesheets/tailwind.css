@@ -1,6 +1,6 @@
 /* stylelint-disable at-rule-no-unknown, import-notation -- Tailwind CSS directives */
 
-@layer properties, legacy, theme, base, components, utilities;
+@layer properties, theme, base, components, utilities;
 
 @import "tailwindcss/theme.css" layer(theme) prefix(tw);
 @import "tailwindcss/utilities.css" layer(utilities) prefix(tw) source(none);

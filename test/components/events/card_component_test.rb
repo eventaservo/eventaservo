@@ -61,7 +61,7 @@ class Events::CardComponentTest < ActionView::TestCase
 
     render_inline(Events::CardComponent.new(event:))
 
-    assert_selector "span.badge.text-bg-success", text: /Internacia Evento/
+    assert_selector "span.tw\\:bg-esperanto-500", text: /Internacia Evento/
   end
 
   test "renders tags with badge classes" do
@@ -70,7 +70,7 @@ class Events::CardComponentTest < ActionView::TestCase
 
     render_inline(Events::CardComponent.new(event:))
 
-    assert_selector ".event-card__tags .event-tags .badge.rounded-pill", text: "Kunveno/Evento"
+    assert_selector ".event-card__tags .event-tags span.tw\\:rounded-full", text: "Kunveno/Evento"
   end
 
   test "renders nearby badge with rounded-pill and tag-nearby classes" do
@@ -85,7 +85,7 @@ class Events::CardComponentTest < ActionView::TestCase
     render_inline(Events::CardComponent.new(event:))
 
     assert_selector(
-      ".event-card__tags .badge.rounded-pill.text-bg-secondary.event-card__tag-nearby",
+      ".event-card__tags span.tw\\:rounded-full.tw\\:bg-gray-600.event-card__tag-nearby",
       text: I18n.t("events.nearby")
     )
   end
