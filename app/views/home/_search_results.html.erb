@@ -1,30 +1,28 @@
 <% events.each do |date, events| %>
-  <br>
-  <br>
-  <h3 class="text-divider"><%= l(date, format: "%B %Y") %></h3>
-  <% events.each do |event| %>
-    <div class="item-row-no-chevron">
-      <div class="col-12">
-        <p>
-          <div class="text-center fw-bold">
+  <section class="tw:mt-6 tw:space-y-3">
+    <h3 class="text-divider"><%= l(date, format: "%B %Y") %></h3>
+    <div class="tw:divide-y tw:divide-gray-200">
+      <% events.each do |event| %>
+        <article class="tw:py-3 tw:px-2 tw:odd:bg-gray-50 tw:hover:bg-gray-100 tw:transition-colors tw:space-y-1.5">
+          <div class="tw:text-center tw:font-bold">
             <%= link_to((highlight event.title, params[:query].split), event_path(code: event.ligilo), class: ("cancelled" if event.cancelled)) %>
           </div>
-          <div class="text-center small">
+          <div class="tw:text-center tw:text-xs tw:text-gray-600">
             <%= "#{highlight event.city, params[:query].split} - #{highlight event.country.name, params[:query].split} | #{event_date(event)}" %>
           </div>
-          <div class="text-center">
+          <div class="tw:text-center">
             <%= display_event_tags(event) %>
           </div>
-        </p>
-        <div class="row col-md-12">
-          <p class="small">
-            <%= highlight event.description, params[:query].split %>
-          </p>
-          <p class="small">
-            <%= highlight ActionView::Base.full_sanitizer.sanitize(event.content), params[:query].split %>
-          </p>
-        </div>
-      </div>
+          <div class="tw:space-y-1 tw:text-xs tw:text-gray-700">
+            <p class="tw:m-0">
+              <%= highlight event.description, params[:query].split %>
+            </p>
+            <p class="tw:m-0">
+              <%= highlight ActionView::Base.full_sanitizer.sanitize(event.content), params[:query].split %>
+            </p>
+          </div>
+        </article>
+      <% end %>
     </div>
-  <% end %>
+  </section>
 <% end %>

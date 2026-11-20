@@ -1,38 +1,56 @@
-<div class="bg-body-tertiary rounded-3 p-3 mb-4">
+<div class="tw:bg-gray-50 tw:border tw:border-gray-200 tw:rounded-lg tw:p-3">
   <%= form_tag instruantoj_kaj_prelegantoj_path, method: :get do %>
-    <div class="row g-2 align-items-end">
-      <div class="col-12 col-md-3">
-        <%= label_tag :name, t("teachers_and_speakers.filters.name"), class: "form-label small fw-semibold mb-1" %>
-        <%= text_field_tag :name, params[:name], class: "form-control form-control-sm",
-              placeholder: t("teachers_and_speakers.filters.name_placeholder") %>
+    <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-12 tw:gap-2 tw:items-end">
+      <div class="tw:md:col-span-3">
+        <%= render Ui::InputComponent.new(
+          :name,
+          id: "name",
+          size: :small,
+          label: t("teachers_and_speakers.filters.name"),
+          value: params[:name],
+          placeholder: t("teachers_and_speakers.filters.name_placeholder")
+        ) %>
       </div>
-      <div class="col-12 col-md-3">
-        <%= label_tag :country_id, t("teachers_and_speakers.filters.country"), class: "form-label small fw-semibold mb-1" %>
-        <%= select_tag :country_id,
-              options_from_collection_for_select(@countries, :id, :name, params[:country_id]),
-              include_blank: t("teachers_and_speakers.filters.all_countries"),
-              class: "form-select form-select-sm" %>
+      <div class="tw:md:col-span-3">
+        <%= render Ui::SelectComponent.new(
+          :country_id,
+          id: "country_id",
+          size: :small,
+          label: t("teachers_and_speakers.filters.country"),
+          options: @countries.map { |country| [country.name, country.id] },
+          selected: params[:country_id],
+          include_blank: t("teachers_and_speakers.filters.all_countries")
+        ) %>
       </div>
-      <div class="col-12 col-md-2">
-        <%= label_tag :level, t("teachers_and_speakers.filters.level"), class: "form-label small fw-semibold mb-1" %>
-        <%= select_tag :level,
-              options_for_select([
-                [t("teachers_and_speakers.levels.baza"), "baza"],
-                [t("teachers_and_speakers.levels.meza"), "meza"],
-                [t("teachers_and_speakers.levels.supera"), "supera"]
-              ], params[:level]),
-              include_blank: t("teachers_and_speakers.filters.all_levels"),
-              class: "form-select form-select-sm" %>
+      <div class="tw:md:col-span-2">
+        <%= render Ui::SelectComponent.new(
+          :level,
+          id: "level",
+          size: :small,
+          label: t("teachers_and_speakers.filters.level"),
+          options: [
+            [t("teachers_and_speakers.levels.baza"), "baza"],
+            [t("teachers_and_speakers.levels.meza"), "meza"],
+            [t("teachers_and_speakers.levels.supera"), "supera"]
+          ],
+          selected: params[:level],
+          include_blank: t("teachers_and_speakers.filters.all_levels")
+        ) %>
       </div>
-      <div class="col-12 col-md-2">
-        <%= label_tag :keyword, t("teachers_and_speakers.filters.experience_or_topics"), class: "form-label small fw-semibold mb-1" %>
-        <%= text_field_tag :keyword, params[:keyword], class: "form-control form-control-sm",
-              placeholder: t("teachers_and_speakers.filters.keyword_placeholder") %>
+      <div class="tw:md:col-span-2">
+        <%= render Ui::InputComponent.new(
+          :keyword,
+          id: "keyword",
+          size: :small,
+          label: t("teachers_and_speakers.filters.experience_or_topics"),
+          value: params[:keyword],
+          placeholder: t("teachers_and_speakers.filters.keyword_placeholder")
+        ) %>
       </div>
-      <div class="col-12 col-md-2 d-flex gap-2">
-        <%= submit_tag t("buttons.search"), class: "btn btn-primary btn-sm flex-grow-1" %>
+      <div class="tw:md:col-span-2 tw:flex tw:items-center tw:gap-2">
+        <%= render Ui::ButtonComponent.new(t("buttons.search"), type: :submit, variant: :primary, size: :small, full_width: !@filtering, class: "tw:flex-1") %>
         <% if @filtering %>
-          <%= link_to t("buttons.cancel"), instruantoj_kaj_prelegantoj_path, class: "btn btn-outline-secondary btn-sm" %>
+          <%= render Ui::ButtonComponent.new(t("buttons.cancel"), href: instruantoj_kaj_prelegantoj_path, variant: :secondary, size: :small) %>
         <% end %>
       </div>
     </div>

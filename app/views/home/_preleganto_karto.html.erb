@@ -1,14 +1,18 @@
-<div class="card shadow-sm card-hover h-100 position-relative">
-  <div class="card-body p-0">
-    <div class="bg-success bg-opacity-10 border-bottom border-success border-opacity-25 px-3 py-3">
-      <div class="d-flex align-items-center gap-3">
+<%= render Ui::CardComponent.new(
+  variant: :interactive,
+  flush: true,
+  class: "tw:h-full"
+) do |panel| %>
+  <% panel.with_body(padding: false) do %>
+    <div class="tw:bg-esperanto-50 tw:border-b tw:border-esperanto-100 tw:px-3 tw:py-3">
+      <div class="tw:flex tw:items-center tw:gap-3">
         <%= display_user_image(preleganto) %>
-        <div class="overflow-hidden">
-          <h6 class="fw-bold mb-0 text-truncate">
+        <div class="tw:min-w-0 tw:flex-1">
+          <h3 class="tw:text-sm tw:font-bold tw:m-0 tw:truncate">
             <%= link_to preleganto.name, events_by_username_path(username: preleganto.username),
-                  class: "stretched-link text-decoration-none text-body" %>
-          </h6>
-          <span class="text-body-secondary small">
+                  class: "tw:text-gray-900 tw:hover:text-esperanto-600 tw:no-underline" %>
+          </h3>
+          <span class="tw:text-gray-600 tw:text-xs">
             <%= display_flag(preleganto.country) %>
             <%= preleganto.country.name %>
           </span>
@@ -16,11 +20,11 @@
       </div>
     </div>
 
-    <div class="px-3 pt-3 pb-3">
-      <div class="text-uppercase text-success fw-semibold small mb-2" style="font-size:0.7rem;letter-spacing:0.05em">
-        <i class="fas fa-comments me-1"></i><%= t("teachers_and_speakers.cards.topics") %>
+    <div class="tw:p-3">
+      <div class="tw:text-[11px] tw:uppercase tw:tracking-wider tw:font-semibold tw:text-esperanto-600 tw:mb-1.5">
+        <i class="fas fa-comments tw:mr-1" aria-hidden="true"></i><%= t("teachers_and_speakers.cards.topics") %>
       </div>
-      <%= simple_format(preleganto.prelego['temoj'], class: 'small mb-0') %>
+      <%= simple_format(preleganto.prelego["temoj"], class: "tw:text-xs tw:text-gray-600 tw:m-0 tw:break-words") %>
     </div>
-  </div>
-</div>
+  <% end %>
+<% end %>
