@@ -27,7 +27,7 @@
               >🔎</button>
             </div>
             <% unless @search_is_valid %>
-              <div id="query-error" role="alert" class="tw:text-xs tw:text-red-600 tw:mt-1"><%= t("search.min_chars_error") %></div>
+              <div id="query-error" aria-live="assertive" class="tw:text-xs tw:text-red-600 tw:mt-1"><%= t("search.min_chars_error") %></div>
             <% end %>
           </div>
 
