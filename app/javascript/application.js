@@ -5,10 +5,6 @@ import '@hotwired/turbo-rails'
 import $ from 'jquery'
 window.$ = window.jQuery = $
 
-// Bootstrap 5 JS (jQuery-free, uses @popperjs/core)
-import * as bootstrap from 'bootstrap'
-window.bootstrap = bootstrap
-
 // Rails UJS — handles data-method, data-confirm, remote: true
 import Rails from '@rails/ujs'
 Rails.start()
