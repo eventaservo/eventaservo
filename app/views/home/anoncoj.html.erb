@@ -1,31 +1,36 @@
-<div class="box-white">
-  <div class="text-center">
-    <h1>
-      <%= icon("fas", "bullhorn", t("links.announcements_and_contests")) %>
-    </h1>
-    <div class="caption">
-      <%= t("announcements_and_contests.caption") %>
+<%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+  <% panel.with_body(class: "tw:space-y-4") do %>
+    <div class="tw:text-center tw:space-y-1">
+      <h1 class="tw:text-2xl tw:font-bold tw:text-gray-900 tw:m-0">
+        <%= icon("fas", "bullhorn", t("links.announcements_and_contests")) %>
+      </h1>
+      <div class="tw:text-sm tw:text-gray-500">
+        <%= t("announcements_and_contests.caption") %>
+      </div>
     </div>
-  </div>
-  <% @eventoj.grouped_by_months.each do |dato, eventoj| %>
-    <br>
-    <h3 class="text-divider"><%= l(dato, format: '%B').upcase %></h3>
-    <div class="row">
-      <% eventoj.each do |e| %>
-        <div class="col-12">
-          <%= event_flag(e) %>
-          <strong>
-            <%= link_to(e.title, event_url(code: e.ligilo), class: ("cancelled" if e.cancelled)) %>
-          </strong>
-          <%= display_organizations_for_event(e) %>
-          <p class="small">
-            <strong><%= t("events.date_in_city", date: event_date(e), city: e.city) %></strong>
-            <br>
-            <%= e.description %>
-          </p>
-          <hr>
+
+    <% @eventoj.grouped_by_months.each do |dato, eventoj| %>
+      <section class="tw:pt-3 tw:space-y-3">
+        <h2 class="text-divider tw:text-base"><%= l(dato, format: "%B").upcase %></h2>
+        <div class="tw:divide-y tw:divide-gray-200">
+          <% eventoj.each do |e| %>
+            <article class="tw:py-3 tw:first:pt-0">
+              <div class="tw:flex tw:flex-wrap tw:items-center tw:gap-1.5">
+                <%= event_flag(e) %>
+                <strong>
+                  <%= link_to(e.title, event_url(code: e.ligilo), class: ("cancelled" if e.cancelled)) %>
+                </strong>
+                <%= display_organizations_for_event(e) %>
+              </div>
+              <p class="tw:text-xs tw:text-gray-600 tw:mt-1 tw:mb-0">
+                <strong class="tw:text-gray-800"><%= t("events.date_in_city", date: event_date(e), city: e.city) %></strong>
+                <br>
+                <%= e.description %>
+              </p>
+            </article>
+          <% end %>
         </div>
-      <% end %>
-    </div>
+      </section>
+    <% end %>
   <% end %>
-</div>
+<% end %>

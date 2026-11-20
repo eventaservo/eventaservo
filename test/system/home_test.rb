@@ -64,4 +64,21 @@ class HomeSystemTest < ApplicationSystemTestCase
 
     assert_current_path %r{/serchilo\?.*pasintaj=true}
   end
+
+  test "teachers and speakers, announcements, and search pages render without horizontal overflow" do
+    [
+      instruantoj_kaj_prelegantoj_path,
+      anoncoj_path,
+      serchilo_path(query: "Esperanto")
+    ].each do |path|
+      visit path
+      [375, 768, 1280].each do |width|
+        page.current_window.resize_to(width, 900)
+        scroll_width = evaluate_script("document.documentElement.scrollWidth")
+        client_width = evaluate_script("document.documentElement.clientWidth")
+        assert_operator scroll_width, :<=, client_width,
+          "Expected no horizontal overflow at #{width}px on #{path} (scrollWidth=#{scroll_width}, clientWidth=#{client_width})"
+      end
+    end
+  end
 end
