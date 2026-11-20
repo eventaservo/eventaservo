@@ -1,23 +1,35 @@
-<%= form_with(model: redirection, url: redirection.new_record? ? admin_redirections_path : admin_redirection_path(redirection), local: true) do |f| %>
+<%= form_with(model: redirection, url: redirection.new_record? ? admin_redirections_path : admin_redirection_path(redirection), local: true, class: "tw:space-y-4") do %>
   <%= error_handling(redirection) %>
 
-  <div class="mb-3">
-    <%= f.label :old_short_url, "Malnova URL (short code)", class: "form-label fw-bold small text-uppercase text-body-secondary" %>
-    <%= f.text_field :old_short_url, class: "form-control", placeholder: "ekz: ijk2024" %>
-    <div class="form-text small text-body-secondary">Tio estas kion la uzanto tajpas post la domajno.</div>
-  </div>
+  <%= render Ui::InputComponent.new(
+    "event_redirection[old_short_url]",
+    id: "event_redirection_old_short_url",
+    label: "MALNOVA URL (SHORT CODE)",
+    value: redirection.old_short_url,
+    placeholder: "ekz: ijk2024",
+    hint: "Tio estas kion la uzanto tajpas post la domajno."
+  ) %>
 
-  <div class="mb-3">
-    <%= f.label :new_short_url, "Nova URL (short code)", class: "form-label fw-bold small text-uppercase text-body-secondary" %>
-    <%= f.text_field :new_short_url, class: "form-control", placeholder: "ekz: ijk2025" %>
-    <div class="form-text small text-body-secondary">Tio estas la celo de la redirekto.</div>
-  </div>
+  <%= render Ui::InputComponent.new(
+    "event_redirection[new_short_url]",
+    id: "event_redirection_new_short_url",
+    label: "NOVA URL (SHORT CODE)",
+    value: redirection.new_short_url,
+    placeholder: "ekz: ijk2025",
+    hint: "Tio estas la celo de la redirekto."
+  ) %>
 
-  <div class="buttons-footer">
+  <div class="tw:pt-3 tw:border-t tw:border-gray-200 tw:flex tw:flex-wrap tw:items-center tw:justify-end tw:gap-2">
     <% if redirection.persisted? %>
-      <%= link_to "Forigi", admin_redirection_path(redirection), data: { method: :delete, confirm: "Ĉu vi estas certa?" }, class: "button-delete me-auto" %>
+      <%= render Ui::ButtonComponent.new(
+        "Forigi",
+        href: admin_redirection_path(redirection),
+        variant: :delete,
+        class: "tw:mr-auto",
+        data: { method: :delete, confirm: "Ĉu vi estas certa?" }
+      ) %>
     <% end %>
-    <%= link_to "Nuligi", admin_redirections_path, class: "button-cancel" %>
-    <%= f.submit "Konservi", class: "button-submit" %>
+    <%= render Ui::ButtonComponent.new("Nuligi", href: admin_redirections_path, variant: :cancel) %>
+    <%= render Ui::ButtonComponent.new("Konservi", type: :submit, variant: :success) %>
   </div>
 <% end %>

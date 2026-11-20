@@ -1,55 +1,55 @@
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb small mb-2">
-    <li class="breadcrumb-item"><%= link_to "Admin", admin_root_path %></li>
-    <li class="breadcrumb-item active" aria-current="page">Redirektoj</li>
-  </ol>
-</nav>
+<%= render "admin/shared/breadcrumb", items: [["Redirektoj"]] %>
 
-<div class="box-white">
-  <div class="mb-3 d-flex justify-content-between align-items-center">
-    <div class="lead">Eventaj Redirektoj</div>
-    <%= link_to "Nova Redirekto", new_admin_redirection_path, class: "button-new-link" %>
-  </div>
-
-  <%= form_with url: admin_redirections_path, method: :get, local: true, class: "mb-3" do |f| %>
-    <div class="row g-2 align-items-end">
-      <div class="col-md-4">
-        <label class="form-label smaller text-uppercase fw-bold text-body-secondary mb-1">Malnova URL</label>
-        <%= text_field_tag :old_url, params[:old_url], class: "form-control form-control-sm", placeholder: "Serĉi malnovan URL..." %>
-      </div>
-      <div class="col-md-4">
-        <label class="form-label smaller text-uppercase fw-bold text-body-secondary mb-1">Nova URL</label>
-        <%= text_field_tag :new_url, params[:new_url], class: "form-control form-control-sm", placeholder: "Serĉi novan URL..." %>
-      </div>
-      <div class="col-md-auto d-flex gap-2">
-        <%= f.submit "Filtri", class: "button-submit" %>
-        <%= link_to "Nuligi", admin_redirections_path, class: "button-cancel" %>
-      </div>
-    </div>
-  <% end %>
-
-  <div class="border rounded overflow-hidden small">
-    <div class="row g-0 align-items-center bg-success text-white text-uppercase fw-bold px-2 py-2 smaller">
-      <div class="col">Malnova URL</div>
-      <div class="col">Nova URL</div>
-      <div class="col-1 text-center">Hits</div>
+<%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+  <% panel.with_body(class: "tw:space-y-4") do %>
+    <div class="tw:flex tw:flex-wrap tw:items-center tw:justify-between tw:gap-2 tw:pb-2 tw:border-b tw:border-gray-200">
+      <h1 class="tw:text-xl tw:font-bold tw:text-gray-900 tw:m-0">Eventaj Redirektoj</h1>
+      <%= render Ui::ButtonComponent.new("Nova Redirekto", href: new_admin_redirection_path, icon: "plus", variant: :new_link, size: :small) %>
     </div>
 
-    <% @redirections.each_with_index do |redirection, i| %>
-      <%= link_to edit_admin_redirection_path(redirection), class: "row g-0 align-items-center px-2 py-1 small hover-row text-decoration-none text-dark #{'border-bottom' unless i == @redirections.size - 1} #{'bg-body-tertiary' if i.odd?}" do %>
-        <div class="col text-truncate fw-medium"><%= redirection.old_short_url %></div>
-        <div class="col text-truncate text-body-secondary"><%= redirection.new_short_url %></div>
-        <div class="col-1 text-center text-body-secondary"><%= redirection.hits %></div>
+    <%= form_with url: admin_redirections_path, method: :get, local: true do %>
+      <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-12 tw:gap-2 tw:items-end">
+        <div class="tw:md:col-span-5">
+          <%= render Ui::InputComponent.new(:old_url, id: "old_url", size: :small, label: "MALNOVA URL", value: params[:old_url], placeholder: "Serĉi malnovan URL...") %>
+        </div>
+        <div class="tw:md:col-span-4">
+          <%= render Ui::InputComponent.new(:new_url, id: "new_url", size: :small, label: "NOVA URL", value: params[:new_url], placeholder: "Serĉi novan URL...") %>
+        </div>
+        <div class="tw:md:col-span-3 tw:flex tw:items-center tw:gap-2">
+          <%= render Ui::ButtonComponent.new("Filtri", type: :submit, variant: :success, size: :small) %>
+          <%= render Ui::ButtonComponent.new("Nuligi", href: admin_redirections_path, variant: :secondary, size: :small) %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="tw:border tw:border-gray-200 tw:rounded tw:overflow-hidden tw:text-xs">
+      <div class="tw:grid tw:grid-cols-12 tw:gap-2 tw:items-center tw:bg-esperanto-500 tw:text-white tw:uppercase tw:font-bold tw:px-3 tw:py-2 tw:text-[11px]">
+        <div class="tw:col-span-5">Malnova URL</div>
+        <div class="tw:col-span-5">Nova URL</div>
+        <div class="tw:col-span-2 tw:text-center">Hits</div>
+      </div>
+
+      <% @redirections.each_with_index do |redirection, i| %>
+        <% stripe_classes = [
+          ("tw:border-b tw:border-gray-200" unless i == @redirections.size - 1),
+          ("tw:bg-gray-50" if i.odd?)
+        ].compact.join(" ") %>
+
+        <%= link_to edit_admin_redirection_path(redirection), class: "tw:grid tw:grid-cols-12 tw:gap-2 tw:items-center tw:px-3 tw:py-1.5 tw:text-gray-900 tw:no-underline tw:hover:bg-esperanto-50 tw:transition-colors #{stripe_classes}" do %>
+          <div class="tw:col-span-5 tw:font-medium tw:text-gray-900 tw:break-all"><%= redirection.old_short_url %></div>
+          <div class="tw:col-span-5 tw:text-gray-600 tw:break-all"><%= redirection.new_short_url %></div>
+          <div class="tw:col-span-2 tw:text-center tw:text-gray-600"><%= redirection.hits %></div>
+        <% end %>
       <% end %>
-    <% end %>
 
-    <% if @redirections.empty? %>
-      <div class="p-4 text-center text-body-secondary">
-        <%= icon('fas', 'search', class: 'fa-2x mb-3 opacity-25') %>
-        <p>Neniu redirekto trovita.</p>
-      </div>
-    <% end %>
-  </div>
+      <% if @redirections.empty? %>
+        <div class="tw:p-6 tw:text-center tw:text-gray-500">
+          <%= icon("fas", "search", class: "fa-2x tw:mb-3 tw:opacity-25") %>
+          <p class="tw:m-0">Neniu redirekto trovita.</p>
+        </div>
+      <% end %>
+    </div>
 
-  <%= render "shared/pagination", pagy: @pagy %>
-</div>
+    <%= render "shared/pagination", pagy: @pagy %>
+  <% end %>
+<% end %>

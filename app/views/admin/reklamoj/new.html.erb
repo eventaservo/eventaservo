@@ -1,19 +1,26 @@
-<div class="col-12 col-lg-8 offset-lg-2 col-md-8 offset-md-2">
-  <div class="box-white">
-    <h2>Krei novan reklamon</h2>
-    <p>Bild-grandeco: 400x200 px</p>
+<%= render "admin/shared/breadcrumb", items: [["Reklamoj", admin_reklamoj_index_path], ["Nova"]] %>
 
-    <%= form_with model: @ad, method: :post, url: admin_reklamoj_index_url, local: true do |f| %>
-      <div class="mb-3">
-        <%= f.label :url, "URL" %>
-        <%= f.text_field :url, class: "form-control", required: true %>
+<div class="tw:max-w-2xl tw:mx-auto">
+  <%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+    <% panel.with_body(class: "tw:space-y-4") do %>
+      <div>
+        <h1 class="tw:text-xl tw:font-bold tw:text-gray-900 tw:pb-2 tw:border-b tw:border-gray-200 tw:m-0">Krei novan reklamon</h1>
+        <p class="tw:text-xs tw:text-gray-500 tw:mt-2 tw:mb-0">Bild-grandeco: 400x200 px</p>
       </div>
-      <%= f.file_field :image, class: 'form-control', accept: 'image/*', required: true %>
 
-      <div class="buttons-footer">
-        <%= link_to 'Nuligi', admin_reklamoj_index_url, class: 'button-cancel' %>
-        <%= f.submit 'Registri', class: 'button-submit' %>
-      </div>
+      <%= form_with model: @ad, method: :post, url: admin_reklamoj_index_url, local: true, class: "tw:space-y-4" do |f| %>
+        <%= render Ui::InputComponent.new("reklamo[url]", id: "reklamo_url", label: "URL", value: @ad.url, required: true) %>
+
+        <div>
+          <%= f.label :image, "BILDO", class: "tw:block tw:text-xs tw:font-semibold tw:text-gray-700 tw:mb-1" %>
+          <%= f.file_field :image, accept: "image/*", required: true, class: "tw:block tw:w-full tw:text-sm tw:text-gray-700 tw:border tw:border-gray-300 tw:rounded tw:bg-white tw:px-3 tw:py-1.5" %>
+        </div>
+
+        <div class="tw:pt-2 tw:border-t tw:border-gray-200 tw:flex tw:items-center tw:justify-end tw:gap-2">
+          <%= render Ui::ButtonComponent.new("Nuligi", href: admin_reklamoj_index_url, variant: :cancel) %>
+          <%= render Ui::ButtonComponent.new("Registri", type: :submit, variant: :success) %>
+        </div>
+      <% end %>
     <% end %>
-  </div>
+  <% end %>
 </div>

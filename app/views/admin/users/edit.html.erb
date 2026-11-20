@@ -1,13 +1,8 @@
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb small mb-2">
-    <li class="breadcrumb-item"><%= link_to "Admin", admin_root_path %></li>
-    <li class="breadcrumb-item"><%= link_to "Users", admin_users_path %></li>
-    <li class="breadcrumb-item"><%= link_to @user.name, admin_user_path(@user) %></li>
-    <li class="breadcrumb-item active" aria-current="page">Edit</li>
-  </ol>
-</nav>
+<%= render "admin/shared/breadcrumb", items: [["Users", admin_users_path], [@user.name, admin_user_path(@user)], ["Edit"]] %>
 
-<div class="box-white">
-  <div class="lead mb-3">Edit User</div>
-  <%= render "form", user: @user %>
-</div>
+<%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+  <% panel.with_body(class: "tw:space-y-4") do %>
+    <h1 class="tw:text-xl tw:font-bold tw:text-gray-900 tw:pb-2 tw:border-b tw:border-gray-200 tw:m-0">Edit User</h1>
+    <%= render "form", user: @user %>
+  <% end %>
+<% end %>

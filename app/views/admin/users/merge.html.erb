@@ -1,36 +1,33 @@
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb small mb-2">
-    <li class="breadcrumb-item"><%= link_to "Admin", admin_root_path %></li>
-    <li class="breadcrumb-item"><%= link_to "Users", admin_users_path %></li>
-    <li class="breadcrumb-item"><%= link_to @user.name, admin_user_path(@user) %></li>
-    <li class="breadcrumb-item active" aria-current="page">Merge</li>
-  </ol>
-</nav>
+<%= render "admin/shared/breadcrumb", items: [["Users", admin_users_path], [@user.name, admin_user_path(@user)], ["Merge"]] %>
 
-<div class="box-white">
-  <div class="lead mb-3">Merge Users</div>
+<%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+  <% panel.with_body(class: "tw:space-y-4") do %>
+    <h1 class="tw:text-xl tw:font-bold tw:text-gray-900 tw:pb-2 tw:border-b tw:border-gray-200 tw:m-0">Merge Users</h1>
 
-  <div class="alert alert-warning">
-    <strong>Warning:</strong> This will transfer all events, organization memberships, and logs from
-    <strong><%= @user.name %></strong> to the selected target user, then delete this account.
-    This action cannot be undone.
-  </div>
+    <%= render Ui::AlertComponent.new(variant: :warning, icon: true) do %>
+      <strong>Warning:</strong> This will transfer all events, organization memberships, and logs from
+      <strong><%= @user.name %></strong> to the selected target user, then delete this account.
+      This action cannot be undone.
+    <% end %>
 
-  <%= form_with url: merge_admin_user_path(@user), method: :post, local: true do |f| %>
-    <div class="mb-3">
-      <label class="form-label fw-bold small text-uppercase text-body-secondary">
-        Transfer everything to
-      </label>
-      <%= select_tag "merge_users[target_user_id]",
-        options_for_select(@user_list),
-        class: "form-select",
-        required: true %>
-    </div>
+    <%= form_with url: merge_admin_user_path(@user), method: :post, local: true, class: "tw:space-y-4" do %>
+      <%= render Ui::SelectComponent.new(
+        "merge_users[target_user_id]",
+        id: "merge_users_target_user_id",
+        label: "TRANSFER EVERYTHING TO",
+        options: @user_list,
+        required: true
+      ) %>
 
-    <div class="mt-4 d-flex gap-2">
-      <%= f.submit "Merge", class: "btn btn-warning",
-        data: { confirm: "Are you absolutely sure? This cannot be undone." } %>
-      <%= link_to "Cancel", admin_user_path(@user), class: "btn btn-outline-secondary" %>
-    </div>
+      <div class="tw:pt-2 tw:flex tw:items-center tw:gap-2">
+        <%= render Ui::ButtonComponent.new(
+          "Merge",
+          type: :submit,
+          variant: :danger,
+          data: { confirm: "Are you absolutely sure? This cannot be undone." }
+        ) %>
+        <%= render Ui::ButtonComponent.new("Cancel", href: admin_user_path(@user), variant: :secondary) %>
+      </div>
+    <% end %>
   <% end %>
-</div>
+<% end %>
