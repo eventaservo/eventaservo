@@ -1,11 +1,10 @@
-<form class="d-flex flex-shrink-1" style="min-width: 0;" data-controller="search" data-search-url-value="<%= serchilo_path %>">
+<form class="tw:flex tw:shrink tw:min-w-0" data-controller="search" data-search-url-value="<%= serchilo_path %>">
   <input
-    class="form-control me-2"
-    style="min-width: 0; max-width: 220px;"
+    class="tw:block tw:w-full tw:min-w-0 tw:max-w-[220px] tw:rounded tw:border tw:border-white/30 tw:bg-white tw:text-gray-900 tw:placeholder:text-gray-400 tw:px-2.5 tw:py-1 tw:text-sm tw:focus:outline-none tw:focus:ring-2 tw:focus:ring-white/40"
     type="search"
-    placeholder="<%= t('navbar.search.placeholder') %>"
-    aria-label="<%= t('navbar.search.aria_label') %>"
+    placeholder="<%= t("navbar.search.placeholder") %>"
+    aria-label="<%= t("navbar.search.aria_label") %>"
     data-search-target="searchTerm"
     data-action="keyup->search#goToSearchPage"
-    >
+  >
 </form>

@@ -163,9 +163,9 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "#navbar-dropdown div", text: "EO"
-    assert_select ".dropdown-item", text: "EO"
-    assert_select ".dropdown-item", text: "EN"
-    assert_select ".dropdown-item", text: "PT-BR"
+    assert_select "#navbar-dropdown-menu a", text: "EO"
+    assert_select "#navbar-dropdown-menu a", text: "EN"
+    assert_select "#navbar-dropdown-menu a", text: "PT-BR"
   end
 
   test "admin user can access user-facing resource routes with locale prefix" do
@@ -242,24 +242,24 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
 
     get root_url
     assert_response :success
-    assert_select "#uzantoDropdown + .dropdown-menu", text: /Mia profilo/
-    assert_select "#uzantoDropdown + .dropdown-menu", text: /Miaj eventoj/
-    assert_select "#uzantoDropdown + .dropdown-menu", text: /Redakti mian profilon/
-    assert_select "#uzantoDropdown + .dropdown-menu", text: /Elsaluti/
+    assert_select "#uzantoDropdownMenu", text: /Mia profilo/
+    assert_select "#uzantoDropdownMenu", text: /Miaj eventoj/
+    assert_select "#uzantoDropdownMenu", text: /Redakti mian profilon/
+    assert_select "#uzantoDropdownMenu", text: /Elsaluti/
 
     get "/en"
     assert_response :success
-    assert_select "#uzantoDropdown + .dropdown-menu", text: /My profile/
-    assert_select "#uzantoDropdown + .dropdown-menu", text: /My events/
-    assert_select "#uzantoDropdown + .dropdown-menu", text: /Edit my profile/
-    assert_select "#uzantoDropdown + .dropdown-menu", text: /Sign out/
+    assert_select "#uzantoDropdownMenu", text: /My profile/
+    assert_select "#uzantoDropdownMenu", text: /My events/
+    assert_select "#uzantoDropdownMenu", text: /Edit my profile/
+    assert_select "#uzantoDropdownMenu", text: /Sign out/
 
     get "/pt_BR"
     assert_response :success
-    assert_select "#uzantoDropdown + .dropdown-menu", text: /Meu perfil/
-    assert_select "#uzantoDropdown + .dropdown-menu", text: /Meus eventos/
-    assert_select "#uzantoDropdown + .dropdown-menu", text: /Editar meu perfil/
-    assert_select "#uzantoDropdown + .dropdown-menu", text: /Sair/
+    assert_select "#uzantoDropdownMenu", text: /Meu perfil/
+    assert_select "#uzantoDropdownMenu", text: /Meus eventos/
+    assert_select "#uzantoDropdownMenu", text: /Editar meu perfil/
+    assert_select "#uzantoDropdownMenu", text: /Sair/
   end
 
   test "renders localized breadcrumb world link across locales" do

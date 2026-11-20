@@ -74,7 +74,7 @@ class NavbarTest < ApplicationSystemTestCase
   test "toggles application navbar on mobile viewport via Stimulus" do
     visit "/"
 
-    toggler = find("button.navbar-toggler[data-toggle-target='button']", visible: :all)
+    toggler = find("button[data-toggle-target='button']", visible: :all)
     assert_equal "false", toggler["aria-expanded"]
     assert_no_selector "#navbar-supported-content.show", visible: :all
 
@@ -92,8 +92,8 @@ class NavbarTest < ApplicationSystemTestCase
   test "keeps brand and toggler on the same row on mobile viewport without wrapping" do
     visit "/"
 
-    brand = find(".navbar-brand", visible: :all)
-    toggler = find("button.navbar-toggler", visible: :all)
+    brand = find("[data-testid='navbar-brand']", visible: :all)
+    toggler = find("button[data-toggle-target='button']", visible: :all)
 
     # In mobile view, toggler should be vertically aligned with brand (not wrapped to a second line)
     assert_in_delta brand.rect.y, toggler.rect.y, 16

@@ -1,18 +1,24 @@
 <div class="footer">
-  <%= t('footer.version', version: Eventaservo::Application::VERSION) %>
+  <%= t("footer.version", version: Eventaservo::Application::VERSION) %>
   |
-  <%= mail_to 'kontakto@eventaservo.org', t('footer.contact_us'), subject: t('footer.contact_subject') %>
+  <%= mail_to "kontakto@eventaservo.org", t("footer.contact_us"), subject: t("footer.contact_subject") %>
   |
-  <%= link_to t('footer.about'), prie_path %>
+  <%= link_to t("footer.about"), prie_path %>
   |
   <span class="tw:relative tw:inline-block" data-controller="menu">
-    <a id="footerMenu" role="button" aria-expanded="false" aria-haspopup="true" aria-controls="footerMenuPanel" data-menu-target="button" data-action="click->menu#toggle" href="#"><%= t('footer.more') %></a>
-    <div id="footerMenuPanel" role="menu" data-menu-target="panel" class="dropdown-menu dropdown-menu-end tw:right-0 tw:left-auto tw:bottom-full tw:top-auto tw:mb-1" aria-labelledby="footerMenu">
-      <%= link_to t('footer.privacy'), privateco_url, class: 'dropdown-item' %>
-      <%= link_to t('footer.terms'), terms_url, class: 'dropdown-item' %>
-      <%= link_to t('footer.changelog'), 'https://github.com/eventaservo/eventaservo/releases', target: :_blank, class: 'dropdown-item' %>
-      <%= link_to icon('fas', 'rss', 'RSS'), events_rss_url, class: 'dropdown-item' %>
-      <%= link_to icon('fas', 'server', t('footer.server_status')), "https://status.eventaservo.org", target: :_blank, class: 'dropdown-item' %>
+    <a id="footerMenu" role="button" aria-expanded="false" aria-haspopup="true" aria-controls="footerMenuPanel" data-menu-target="button" data-action="click->menu#toggle" href="#"><%= t("footer.more") %></a>
+    <div id="footerMenuPanel"
+         role="menu"
+         data-menu-target="panel"
+         data-menu-hidden-class="tw:hidden"
+         class="tw:hidden tw:absolute tw:right-0 tw:bottom-full tw:mb-1 tw:z-50 tw:min-w-[11rem] tw:rounded-md tw:bg-white tw:border tw:border-gray-200 tw:shadow-lg tw:py-1 tw:text-left"
+         aria-labelledby="footerMenu">
+      <% item_classes = "tw:flex tw:items-center tw:gap-2 tw:px-3 tw:py-1.5 tw:text-sm tw:text-gray-700 tw:hover:bg-gray-100 tw:hover:text-gray-900 tw:no-underline tw:whitespace-nowrap" %>
+      <%= link_to t("footer.privacy"), privateco_url, class: item_classes %>
+      <%= link_to t("footer.terms"), terms_url, class: item_classes %>
+      <%= link_to t("footer.changelog"), "https://github.com/eventaservo/eventaservo/releases", target: :_blank, rel: "noopener", class: item_classes %>
+      <%= link_to icon("fas", "rss", "RSS"), events_rss_url, class: item_classes %>
+      <%= link_to icon("fas", "server", t("footer.server_status")), "https://status.eventaservo.org", target: :_blank, rel: "noopener", class: item_classes %>
     </div>
   </span>
   <%= "(#{Rails.env})" unless Rails.env.production? %>

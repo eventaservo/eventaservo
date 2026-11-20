@@ -58,12 +58,12 @@
   </head>
 
   <body class="<%= "#{controller_name} #{action_name}" %>">
-    <%= render partial: 'layouts/navbar' %>
-    <div class="container">
+    <%= render partial: "layouts/navbar" %>
+    <div class="tw:w-full tw:max-w-[1320px] tw:mx-auto tw:px-3">
       <%= render "layouts/flash" %>
       <%= yield %>
     </div>
     <br>
-    <%= render partial: 'layouts/footer' %>
+    <%= render partial: "layouts/footer" %>
   </body>
 </html>
