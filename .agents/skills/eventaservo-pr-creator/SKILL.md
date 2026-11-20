@@ -135,8 +135,11 @@ Always assign the authenticated user (`--assignee @me`) when creating a PR. Pref
 - If the user only wanted to **ensure a PR exists** and the narrative is unchanged,
   do **not** rewrite the body without need — state that in the preview (“ensure only”).
 - If `gh pr edit` fails due to GitHub's GraphQL `projectCards` deprecation, fall back to
-  the REST API (e.g. `gh api repos/{owner}/{repo}/issues/<number>/assignees -f 'assignees[]=<login>'`
-  to add an assignee).
+  the REST API:
+  - Update title and body:
+    `gh api --method PATCH repos/{owner}/{repo}/pulls/<number> -f title="..." -f body="$(cat /path/to/body.md)"`
+  - Add an assignee:
+    `gh api repos/{owner}/{repo}/issues/<number>/assignees -f 'assignees[]=<login>'`
 
 4. Print the **PR URL** (created or updated).
 
