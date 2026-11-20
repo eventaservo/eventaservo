@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
   def user_can_edit_event?(user:, event:)
     return false unless current_user
 
-    user.can_edit_event?(event)
+    EventPolicy.new(user:, event:).edit?
   end
   helper_method :user_can_edit_event?
 

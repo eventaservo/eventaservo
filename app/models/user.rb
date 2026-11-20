@@ -141,20 +141,6 @@ class User < ApplicationRecord
     object.user_id == id
   end
 
-  # Checks whether this user is authorized to edit or manage the given event.
-  #
-  # Administrators and the event owner are always allowed. Any other user
-  # qualifies when they belong to at least one organization linked to the event.
-  #
-  # @param event [Event] the event to check authorization for
-  #
-  # @return [Boolean] true when the user can edit the event, false otherwise
-  def can_edit_event?(event)
-    admin? ||
-      owner_of?(event) ||
-      Users::MemberOfEventOrganizationsQuery.new(user: self, event:).call.exists?
-  end
-
   def follower?(record)
     !record.followers.find_by(user_id: self).nil?
   end

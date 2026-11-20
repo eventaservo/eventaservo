@@ -29,7 +29,7 @@ module Events
     #
     # @return [Boolean]
     def user_can_delete_event?
-      user.can_edit_event?(event)
+      EventPolicy.new(user:, event:).destroy?
     end
 
     def set_deleted_attribute_to_true

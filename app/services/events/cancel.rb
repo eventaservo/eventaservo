@@ -24,7 +24,7 @@ module Events
     #
     # @return [ApplicationService::Response] success with Event payload, or failure with error message
     def call
-      return failure("User is not authorized to cancel event") unless user.can_edit_event?(event)
+      return failure("User is not authorized to cancel event") unless EventPolicy.new(user:, event:).cancel?
 
       if event.update(cancelled: true, cancel_reason:)
         Logs::Create.call(text: "Event cancelled", user:, loggable: event)

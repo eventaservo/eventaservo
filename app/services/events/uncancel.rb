@@ -22,7 +22,7 @@ module Events
     #
     # @return [ApplicationService::Response] success with Event payload, or failure with error message
     def call
-      return failure("User is not authorized to uncancel event") unless user.can_edit_event?(event)
+      return failure("User is not authorized to uncancel event") unless EventPolicy.new(user:, event:).uncancel?
 
       if event.update(cancelled: false, cancel_reason: nil)
         Logs::Create.call(text: "Event uncancelled", user:, loggable: event)

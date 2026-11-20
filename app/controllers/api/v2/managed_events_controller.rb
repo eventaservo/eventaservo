@@ -148,7 +148,7 @@ module Api
       #
       # @return [void]
       def authorize_event!
-        render_forbidden unless @user.can_edit_event?(@event)
+        render_forbidden unless EventPolicy.new(user: @user, event: @event).edit?
       end
 
       # Extracts permitted event attributes from either top-level or nested `event` params.

@@ -27,7 +27,7 @@ module Api
         #
         # @return [ApplicationService::Response] success with Event payload, or failure with error message or validation errors hash
         def call
-          return failure(:forbidden) unless user.can_edit_event?(event)
+          return failure(:forbidden) unless EventPolicy.new(user:, event:).update?
 
           resolved = AttributeResolver.new(params:, user:, event:).call
           return failure(resolved.errors) unless resolved.valid?
