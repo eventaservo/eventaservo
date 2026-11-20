@@ -10,33 +10,38 @@
   <%= t("international_calendar.subtitle") %>
 <% end %>
 
-<div class="box-white">
-  <div class="text-center">
-    <h1><%= icon("far", "calendar", t("international_calendar.title")) %></h1>
-    <p>
-      <%= t("international_calendar.subtitle") %><br>
-      <%= t("international_calendar.missing_event_html", contact_link: mail_to("kontakto@eventaservo.org", t("international_calendar.contact_link_text"))) %>
-    </p>
-    <hr>
-    <%= link_to t("international_calendar.past_events"), international_calendar_year_list_path, class: 'btn btn-sm btn-link' %>
-  </div>
-
-  <% @events.grouped_by_months.each do |date, events| %>
-    <br>
-    <h3 class="text-divider"><%= l(date, format: '%B %Y').upcase %></h3>
-    <div class="row">
-      <% events.each do |e| %>
-        <div class="col-12">
-          <%= event_flag(e) %>
-          <strong><%= link_to(e.title, event_url(code: e.ligilo), class: ("cancelled" if e.cancelled)) %></strong>
-          <%= display_organizations_for_event(e) %>
-          <p class="small">
-            <strong><%= t("events.date_in_city", date: event_date(e), city: e.city) %></strong><br>
-            <%= e.description %>
-          </p>
-          <hr>
-        </div>
-      <% end %>
+<%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+  <% panel.with_body(class: "tw:space-y-4") do %>
+    <div class="tw:text-center tw:space-y-2">
+      <h1 class="tw:text-2xl tw:font-bold tw:text-gray-900 tw:m-0"><%= icon("far", "calendar", t("international_calendar.title")) %></h1>
+      <p class="tw:text-sm tw:text-gray-700 tw:m-0">
+        <%= t("international_calendar.subtitle") %><br>
+        <%= t("international_calendar.missing_event_html", contact_link: mail_to("kontakto@eventaservo.org", t("international_calendar.contact_link_text"))) %>
+      </p>
+      <div class="tw:pt-2 tw:border-t tw:border-gray-200">
+        <%= render Ui::ButtonComponent.new(t("international_calendar.past_events"), href: international_calendar_year_list_path, variant: :link, size: :small) %>
+      </div>
     </div>
+
+    <% @events.grouped_by_months.each do |date, events| %>
+      <section class="tw:pt-3 tw:space-y-3">
+        <h2 class="text-divider tw:text-base"><%= l(date, format: "%B %Y").upcase %></h2>
+        <div class="tw:divide-y tw:divide-gray-200">
+          <% events.each do |e| %>
+            <article class="tw:py-3 tw:first:pt-0">
+              <div class="tw:flex tw:flex-wrap tw:items-center tw:gap-1.5">
+                <%= event_flag(e) %>
+                <strong><%= link_to(e.title, event_url(code: e.ligilo), class: ("cancelled" if e.cancelled)) %></strong>
+                <%= display_organizations_for_event(e) %>
+              </div>
+              <p class="tw:text-xs tw:text-gray-600 tw:mt-1 tw:mb-0">
+                <strong class="tw:text-gray-800"><%= t("events.date_in_city", date: event_date(e), city: e.city) %></strong><br>
+                <%= e.description %>
+              </p>
+            </article>
+          <% end %>
+        </div>
+      </section>
+    <% end %>
   <% end %>
-</div>
+<% end %>
