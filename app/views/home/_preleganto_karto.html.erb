@@ -1,16 +1,16 @@
 <%= render Ui::CardComponent.new(
   variant: :interactive,
   flush: true,
-  href: events_by_username_path(username: preleganto.username),
-  class: "tw:h-full tw:no-underline tw:text-inherit"
+  class: "tw:h-full"
 ) do |panel| %>
   <% panel.with_body(padding: false) do %>
     <div class="tw:bg-esperanto-50 tw:border-b tw:border-esperanto-100 tw:px-3 tw:py-3">
       <div class="tw:flex tw:items-center tw:gap-3">
         <%= display_user_image(preleganto) %>
         <div class="tw:min-w-0 tw:flex-1">
-          <h3 class="tw:text-sm tw:font-bold tw:text-gray-900 tw:m-0 tw:truncate">
-            <%= preleganto.name %>
+          <h3 class="tw:text-sm tw:font-bold tw:m-0 tw:truncate">
+            <%= link_to preleganto.name, events_by_username_path(username: preleganto.username),
+                  class: "tw:text-gray-900 tw:hover:text-esperanto-600 tw:no-underline" %>
           </h3>
           <span class="tw:text-gray-600 tw:text-xs">
             <%= display_flag(preleganto.country) %>

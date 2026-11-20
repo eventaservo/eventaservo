@@ -1,14 +1,14 @@
-<%= render Ui::CardComponent.new(variant: :bordered, flush: true) do |panel| %>
+<%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
   <% panel.with_header(class: "tw:bg-esperanto-600 tw:text-white tw:py-2 tw:px-4 tw:border-0") do %>
     <span class="tw:text-xs tw:font-bold tw:uppercase tw:tracking-wider"><%= t("search.results.users.header") %></span>
   <% end %>
-  <% panel.with_body(padding: true, class: "tw:space-y-3") do %>
+  <% panel.with_body(class: "tw:space-y-3") do %>
     <% if users.empty? %>
       <p class="tw:text-sm tw:text-gray-600 tw:m-0"><%= t("search.results.users.empty") %></p>
     <% else %>
       <h2 class="tw:text-base tw:font-semibold tw:text-gray-900 tw:m-0"><%= t("search.results.users.found", count: users.count) %></h2>
       <div class="tw:border tw:border-gray-200 tw:rounded tw:overflow-hidden tw:text-xs">
-        <div class="tw:grid tw:grid-cols-12 tw:gap-2 tw:bg-gray-100 tw:text-gray-700 tw:font-semibold tw:px-3 tw:py-2 tw:border-b tw:border-gray-200">
+        <div class="tw:grid tw:grid-cols-12 tw:gap-2 tw:bg-gray-100 tw:text-gray-700 tw:font-semibold tw:px-3 tw:py-2 tw:border-b tw:border-gray-200" aria-hidden="true">
           <div class="tw:col-span-7"><%= t("search.results.users.name") %></div>
           <div class="tw:col-span-5"><%= t("search.results.users.country") %></div>
         </div>
@@ -16,8 +16,8 @@
           <% users.each do |user| %>
             <%= link_to events_by_username_path(username: user.username),
                   class: "tw:grid tw:grid-cols-12 tw:gap-2 tw:items-center tw:px-3 tw:py-2 tw:text-gray-900 tw:no-underline tw:hover:bg-gray-50 tw:transition-colors" do %>
-              <div class="tw:col-span-7 tw:font-medium tw:break-words"><%= user.name %></div>
-              <div class="tw:col-span-5 tw:text-gray-600 tw:break-words"><%= display_flag(user.country) %> <%= user.country&.name %></div>
+              <div class="tw:col-span-7 tw:font-medium tw:break-words"><span class="tw:sr-only"><%= t("search.results.users.name") %>: </span><%= user.name %></div>
+              <div class="tw:col-span-5 tw:text-gray-600 tw:break-words"><span class="tw:sr-only"><%= t("search.results.users.country") %>: </span><%= display_flag(user.country) %> <%= user.country&.name %></div>
             <% end %>
           <% end %>
         </div>

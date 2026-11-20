@@ -330,7 +330,7 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     assert_select "label", text: "Nomo"
     assert_select "label", text: "Lando"
     assert_select "label", text: "Nivelo"
-    assert_select "input[type='submit'][value='Serĉi']"
+    assert_select "button[type='submit']", text: "Serĉi"
 
     get "/en/instruantoj_kaj_prelegantoj"
     assert_response :success
@@ -338,7 +338,7 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     assert_select "label", text: "Name"
     assert_select "label", text: "Country"
     assert_select "label", text: "Level"
-    assert_select "input[type='submit'][value='Search']"
+    assert_select "button[type='submit']", text: "Search"
 
     get "/pt_BR/instruantoj_kaj_prelegantoj"
     assert_response :success
@@ -346,7 +346,7 @@ class InternationalizationTest < ActionDispatch::IntegrationTest
     assert_select "label", text: "Nome"
     assert_select "label", text: "País"
     assert_select "label", text: "Nível"
-    assert_select "input[type='submit'][value='Buscar']"
+    assert_select "button[type='submit']", text: "Buscar"
   end
 
   test "redirects legacy teachers and speakers URL while preserving locale and query string" do
