@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "~> 4.0.9"
+ruby ">= 4.0.10", "< 4.1"
 
 # Ruby 4.0 removed several stdlib gems from defaults
 gem "benchmark"
