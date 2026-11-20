@@ -1,25 +1,34 @@
-<%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
-  <% panel.with_body(class: "tw:space-y-4") do %>
-    <h1 class="tw:text-2xl tw:font-bold tw:text-gray-900 tw:m-0"><%= t("search.title") %></h1>
+<%= render Ui::CardComponent.new(variant: :bordered, size: :small) do |panel| %>
+  <% panel.with_body(class: "tw:space-y-3") do %>
+    <h1 class="tw:text-2xl tw:font-semibold tw:text-gray-900 tw:m-0"><%= t("search.title") %></h1>
 
-    <%= form_with url: serchilo_path, method: :get, data: { controller: "search-filters" }, class: "tw:space-y-4" do %>
-      <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-12 tw:gap-4 tw:items-start">
-        <div class="tw:md:col-span-9 tw:space-y-3">
+    <%= form_with url: serchilo_path, method: :get, data: { controller: "search-filters" }, class: "tw:space-y-3" do %>
+      <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-12 tw:gap-3 tw:items-start">
+        <div class="tw:md:col-span-9 tw:space-y-2">
           <div>
-            <div class="tw:flex tw:items-stretch tw:gap-2">
-              <div class="tw:flex-1">
-                <%= render Ui::InputComponent.new(
-                  :query,
-                  id: "query",
-                  value: @search_term,
-                  autofocus: true,
-                  placeholder: t("search.placeholder"),
-                  error: (@search_is_valid ? nil : t("search.min_chars_error")),
-                  aria: { label: t("search.query_aria_label") }
-                ) %>
-              </div>
-              <%= render Ui::ButtonComponent.new("🔎", type: :submit, variant: :outline_primary, class: "tw:self-start") %>
+            <div class="tw:flex tw:items-stretch">
+              <input
+                type="text"
+                id="query"
+                autofocus="true"
+                value="<%= @search_term %>"
+                name="query"
+                placeholder="<%= t("search.placeholder") %>"
+                aria-label="<%= t("search.query_aria_label") %>"
+                <% unless @search_is_valid %>
+                  aria-invalid="true"
+                  aria-describedby="query-error"
+                <% end %>
+                class="tw:block tw:w-full tw:min-w-0 tw:flex-1 tw:rounded-l tw:rounded-r-none tw:border tw:bg-white tw:text-gray-900 tw:placeholder:text-gray-400 tw:px-3 tw:py-1.5 tw:text-sm tw:transition-colors tw:focus:outline-none tw:focus:z-10 <%= @search_is_valid ? 'tw:border-gray-300 tw:focus:border-[#2d89ef] tw:focus:ring-2 tw:focus:ring-[#2d89ef]/20' : 'tw:border-red-500 tw:focus:border-red-500 tw:focus:ring-2 tw:focus:ring-red-500/20' %>"
+              >
+              <button
+                type="submit"
+                class="tw:inline-flex tw:items-center tw:justify-center tw:px-3 tw:py-1.5 tw:text-sm tw:rounded-r tw:rounded-l-none tw:-ml-px tw:border tw:border-brand-blue tw:bg-white tw:text-brand-blue tw:hover:bg-brand-blue tw:hover:text-white tw:cursor-pointer tw:transition-colors tw:focus:outline-none tw:focus:z-10 tw:focus:ring-2 tw:focus:ring-brand-blue/30"
+              >🔎</button>
             </div>
+            <% unless @search_is_valid %>
+              <div id="query-error" aria-live="assertive" class="tw:text-xs tw:text-red-600 tw:mt-1"><%= t("search.min_chars_error") %></div>
+            <% end %>
           </div>
 
           <div class="tw:grid tw:grid-cols-2 tw:md:grid-cols-3 tw:gap-2">
@@ -49,29 +58,22 @@
           </div>
         </div>
 
-        <div class="tw:md:col-span-3 tw:flex tw:flex-wrap tw:md:flex-col tw:gap-3 tw:pt-1">
-          <%= render Ui::CheckboxComponent.new(
-            :pasintaj,
-            id: "pasintaj",
-            value: "true",
-            checked: params[:pasintaj].present?,
-            label: t("search.past"),
-            data: { action: "change->search-filters#submit" }
-          ) %>
+        <div class="tw:md:col-span-3 tw:flex tw:flex-wrap tw:md:flex-col tw:gap-2.5 tw:pt-1">
+          <% switch_classes = "tw:appearance-none tw:relative tw:inline-block tw:w-8 tw:h-4 tw:rounded-full tw:bg-gray-300 tw:checked:bg-brand-blue tw:cursor-pointer tw:transition-colors tw:shrink-0 tw:focus-visible:outline-none tw:focus-visible:ring-2 tw:focus-visible:ring-brand-blue/40 tw:after:content-[''] tw:after:absolute tw:after:top-0.5 tw:after:left-0.5 tw:after:w-3 tw:after:h-3 tw:after:bg-white tw:after:rounded-full tw:after:transition-transform tw:checked:after:translate-x-4" %>
+          <label for="pasintaj" class="tw:inline-flex tw:items-center tw:gap-2 tw:cursor-pointer tw:select-none">
+            <%= check_box_tag :pasintaj, true, params[:pasintaj].present?, id: "pasintaj", class: switch_classes, data: { action: "change->search-filters#submit" } %>
+            <span class="tw:text-sm tw:text-gray-800"><%= t("search.past") %></span>
+          </label>
 
-          <%= render Ui::CheckboxComponent.new(
-            :nuligitaj,
-            id: "nuligitaj",
-            value: "true",
-            checked: params[:nuligitaj].present?,
-            label: t("search.cancelled"),
-            data: { action: "change->search-filters#submit" }
-          ) %>
+          <label for="nuligitaj" class="tw:inline-flex tw:items-center tw:gap-2 tw:cursor-pointer tw:select-none">
+            <%= check_box_tag :nuligitaj, true, params[:nuligitaj].present?, id: "nuligitaj", class: switch_classes, data: { action: "change->search-filters#submit" } %>
+            <span class="tw:text-sm tw:text-gray-800"><%= t("search.cancelled") %></span>
+          </label>
         </div>
       </div>
 
       <% if @search_is_valid %>
-        <div class="tw:space-y-4">
+        <div class="tw:space-y-3">
           <%= render partial: "home/search/organizations_results", locals: { organizations: @organizations } %>
           <%= render partial: "home/search/events_results", locals: { events: @events } %>
           <%= render partial: "home/search/users_results", locals: { users: @users } %>

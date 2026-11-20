@@ -1,6 +1,6 @@
 # Tailwind CSS migration plan
 
-- **Status**: Phase 1 complete (2026-11-06); Phase 2 pending
+- **Status**: Complete (2026-11-20) — Bootstrap 5.3 fully removed; Tailwind CSS v4 is the sole CSS framework
 - **Date**: 2026-11-05
 - **Tracking issue**: [#1514](https://github.com/eventaservo/eventaservo/issues/1514)
 - **Related**: [ADR-0003](adr/0003-bootstrap-tailwind-coexistence.md), [design system discovery](design-system-discovery.md)

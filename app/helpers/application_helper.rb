@@ -376,7 +376,7 @@ module ApplicationHelper
   def article_link(text, link, description)
     content_tag(:p) do
       content_tag(:a, text, href: link, target: :_blank) +
-        content_tag(:span, " #{description}", class: "small")
+        content_tag(:span, " #{description}", class: "tw:text-sm")
     end
   end
 end

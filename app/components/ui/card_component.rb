@@ -85,16 +85,29 @@ module Ui
         html_options.except(:class)
       end
 
-      # Padding classes based on size.
+      # Checks whether the caller supplied explicit horizontal padding utilities.
       #
-      # @return [String]
+      # @return [Boolean]
+      def custom_horizontal_padding?
+        html_options[:class].to_s.match?(/\btw:(?:p|px|pl|pr|ps|pe)-/)
+      end
+
+      # Checks whether the caller supplied explicit vertical padding utilities.
+      #
+      # @return [Boolean]
+      def custom_vertical_padding?
+        html_options[:class].to_s.match?(/\btw:(?:p|py|pt|pb)-/)
+      end
+
+      # Padding classes based on size, preserving defaults on untouched axes.
+      #
+      # @return [String, nil]
       def size_classes
-        case size
-        when :small
-          "tw:px-3.5 tw:py-2.5"
-        else
-          "tw:px-5 tw:py-4"
-        end
+        horizontal, vertical = (size == :small) ? ["tw:px-3.5", "tw:py-2.5"] : ["tw:px-5", "tw:py-4"]
+        classes = []
+        classes << horizontal unless custom_horizontal_padding?
+        classes << vertical unless custom_vertical_padding?
+        classes.join(" ").presence
       end
 
       # Background and border accent classes.
