@@ -1,21 +1,37 @@
-<ul class="navbar-nav align-items-end align-items-lg-center">
+<ul class="tw:list-none tw:m-0 tw:p-0 tw:flex tw:flex-col tw:lg:flex-row tw:items-end tw:lg:items-center">
   <% if user_signed_in? %>
-    <li class="nav-item active text-end text-lg-start tw:relative" data-controller="menu">
-      <a id="uzantoDropdown" class="nav-link dropdown-toggle text-end text-lg-start" aria-expanded="false" aria-haspopup="true" aria-controls="uzantoDropdownMenu" data-menu-target="button" data-action="click->menu#toggle" href="#" role="button">
+    <li class="tw:text-right tw:lg:text-left tw:relative" data-controller="menu">
+      <a id="uzantoDropdown"
+         class="tw:inline-flex tw:items-center tw:gap-1.5 tw:px-2 tw:py-1.5 tw:text-sm tw:text-white tw:hover:text-white/90 tw:no-underline"
+         aria-expanded="false"
+         aria-haspopup="true"
+         aria-controls="uzantoDropdownMenu"
+         data-menu-target="button"
+         data-action="click->menu#toggle"
+         href="#"
+         role="button">
         <%= display_user(current_user) %>
+        <i class="fas fa-caret-down tw:text-xs tw:opacity-80" aria-hidden="true"></i>
       </a>
-      <div id="uzantoDropdownMenu" role="menu" data-menu-target="panel" class="dropdown-menu dropdown-menu-end tw:right-0 tw:left-auto tw:top-full tw:mt-1" aria-labelledby="uzantoDropdown">
-        <%= link_to icon('fa-solid', 'user', t('navbar.user.my_profile')), events_by_username_path(username: current_user.username), class: 'dropdown-item' %>
-        <%= link_to icon('fa-regular', 'calendar', t('navbar.user.my_events')), user_events_path(username: current_user.username), class: 'dropdown-item' %>
-        <div class="dropdown-divider"></div>
-        <%= link_to icon('fa-solid', 'user-edit', t('navbar.user.edit_profile')), edit_user_registration_path, class: 'dropdown-item' %>
-        <div class="dropdown-divider"></div>
-        <%= link_to icon('fa-solid', 'sign-out-alt', t('navbar.user.sign_out')), destroy_user_session_path, class: 'dropdown-item', method: :delete %>
+      <div id="uzantoDropdownMenu"
+           role="menu"
+           data-menu-target="panel"
+           data-menu-hidden-class="tw:hidden"
+           class="tw:hidden tw:absolute tw:right-0 tw:top-full tw:mt-1 tw:z-50 tw:min-w-[12rem] tw:rounded-md tw:bg-white tw:border tw:border-gray-200 tw:shadow-lg tw:py-1 tw:text-left"
+           aria-labelledby="uzantoDropdown">
+        <% item_classes = "tw:flex tw:items-center tw:gap-2 tw:px-3 tw:py-1.5 tw:text-sm tw:text-gray-700 tw:hover:bg-gray-100 tw:hover:text-gray-900 tw:no-underline tw:whitespace-nowrap" %>
+        <%= link_to icon("fa-solid", "user", t("navbar.user.my_profile")), events_by_username_path(username: current_user.username), class: item_classes %>
+        <%= link_to icon("fa-regular", "calendar", t("navbar.user.my_events")), user_events_path(username: current_user.username), class: item_classes %>
+        <div class="tw:my-1 tw:border-t tw:border-gray-200"></div>
+        <%= link_to icon("fa-solid", "user-edit", t("navbar.user.edit_profile")), edit_user_registration_path, class: item_classes %>
+        <div class="tw:my-1 tw:border-t tw:border-gray-200"></div>
+        <%= link_to icon("fa-solid", "sign-out-alt", t("navbar.user.sign_out")), destroy_user_session_path, class: item_classes, method: :delete %>
       </div>
     </li>
   <% else %>
-    <li class="nav-item text-end text-lg-start">
-      <%= link_to icon('fa-solid', 'sign-in-alt', t('navbar.log_in_sign_up')), new_user_session_path, class: 'btn btn-sm btn-outline-light' %>
+    <li class="tw:text-right tw:lg:text-left">
+      <%= link_to icon("fa-solid", "sign-in-alt", t("navbar.log_in_sign_up")), new_user_session_path,
+            class: "tw:inline-flex tw:items-center tw:gap-1.5 tw:px-2.5 tw:py-1 tw:text-xs tw:font-medium tw:rounded tw:border tw:border-white/75 tw:text-white tw:hover:bg-white tw:hover:text-esperanto-600 tw:no-underline tw:transition-colors" %>
     </li>
   <% end %>
 </ul>
