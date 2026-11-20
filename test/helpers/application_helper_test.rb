@@ -453,7 +453,7 @@ class ApplicationHelperTest < ActionView::TestCase
     rendered = article_link("Test Article", "https://example.com/article", "Test description")
 
     assert_includes rendered, '<a href="https://example.com/article" target="_blank">Test Article</a>'
-    assert_includes rendered, '<span class="small"> Test description</span>'
+    assert_includes rendered, '<span class="tw:text-sm"> Test description</span>'
   end
 
   test "read_localized_markdown reads localized document files" do

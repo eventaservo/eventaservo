@@ -15,6 +15,10 @@
                 name="query"
                 placeholder="<%= t("search.placeholder") %>"
                 aria-label="<%= t("search.query_aria_label") %>"
+                <% unless @search_is_valid %>
+                  aria-invalid="true"
+                  aria-describedby="query-error"
+                <% end %>
                 class="tw:block tw:w-full tw:min-w-0 tw:flex-1 tw:rounded-l tw:rounded-r-none tw:border tw:bg-white tw:text-gray-900 tw:placeholder:text-gray-400 tw:px-3 tw:py-1.5 tw:text-sm tw:transition-colors tw:focus:outline-none tw:focus:z-10 <%= @search_is_valid ? 'tw:border-gray-300 tw:focus:border-[#2d89ef] tw:focus:ring-2 tw:focus:ring-[#2d89ef]/20' : 'tw:border-red-500 tw:focus:border-red-500 tw:focus:ring-2 tw:focus:ring-red-500/20' %>"
               >
               <button
@@ -23,7 +27,7 @@
               >🔎</button>
             </div>
             <% unless @search_is_valid %>
-              <div class="tw:text-xs tw:text-red-600 tw:mt-1"><%= t("search.min_chars_error") %></div>
+              <div id="query-error" role="alert" class="tw:text-xs tw:text-red-600 tw:mt-1"><%= t("search.min_chars_error") %></div>
             <% end %>
           </div>
 
