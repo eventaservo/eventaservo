@@ -156,8 +156,8 @@ Event feeds support multiple formats via `respond_to` blocks in controllers:
 - **JS**: Stimulus + Turbo (Hotwire) with esbuild bundling
 - **Maps**: Leaflet with marker clustering
 - **View Partials**: Break complex, repetitive, or tabbed views into dedicated Rails partials (e.g. `_partial_name.html.erb`) rather than keeping large inline blocks inside main templates. This keeps view code modular, maintainable, and readable.
-- **UI Mockups**: Before creating or modifying UI components, **always** check the mockups at `app/views/admin/mockups/` for established patterns (tables, breadcrumbs, cards, etc.). Use the existing patterns to ensure visual consistency across the application.
-- **Admin Breadcrumbs**: Every admin page **must** include a breadcrumb navigation at the top (before the main content). Use the pattern from `app/views/admin/mockups/breadcrumbs.html.erb` as reference. The breadcrumb follows the hierarchy: `Admin > Section > Page`.
+- **UI Component Previews**: Before creating or modifying UI components, **always** check the ViewComponents in `app/components/ui/` and their Lookbook previews in `test/components/previews/` for established Tailwind patterns (buttons, badges, cards, form controls, modals, etc.). Use the existing components to ensure visual consistency across the application.
+- **Admin Breadcrumbs**: Every admin page **must** include a breadcrumb navigation at the top (before the main content) using the shared partial `app/views/admin/shared/_breadcrumb.html.erb`. The breadcrumb follows the hierarchy: `Admin > Section > Page`.
 
 ## Testing
 
