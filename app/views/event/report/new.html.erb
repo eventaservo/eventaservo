@@ -1,37 +1,40 @@
-<div class="row mt-3">
-  <div class="col-12 col-lg-9">
-    <%= form_with(model: @report) do |f| %>
-      <div class="box-white">
-        <h1 class="lead"><%= t("events.reports.new_title") %></h1>
+<div class="tw:grid tw:grid-cols-1 tw:lg:grid-cols-12 tw:gap-4 tw:mt-3 tw:items-start">
+  <div class="tw:lg:col-span-9">
+    <%= form_with(model: @report) do %>
+      <%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+        <% panel.with_body(class: "tw:space-y-4") do %>
+          <h1 class="tw:text-xl tw:font-bold tw:text-gray-900 tw:pb-2 tw:border-b tw:border-gray-200 tw:m-0"><%= t("events.reports.new_title") %></h1>
 
-        <%= error_handling(@report) %>
+          <%= error_handling(@report) %>
 
-        <br>
+          <%= render Ui::InputComponent.new(
+            "event_report[url]",
+            id: "event_report_url",
+            label: Event::Report.human_attribute_name(:url),
+            value: @report.url,
+            hint: t("events.reports.url_example"),
+            required: true,
+            autofocus: true
+          ) %>
 
-        <div class="field">
-          <%= f.label :url %>
-          <%= f.text_field :url, class: 'form-control', required: true, autofocus: true %>
-          <small class="form-text text-muted"><%= t("events.reports.url_example") %></small>
-        </div>
+          <%= render Ui::InputComponent.new(
+            "event_report[title]",
+            id: "event_report_title",
+            label: Event::Report.human_attribute_name(:title),
+            value: @report.title,
+            required: true
+          ) %>
 
-        <br>
-
-        <div class="mb-3">
-          <%= f.label :title %>
-          <%= f.text_field :title, class: 'form-control', required: true %>
-        </div>
-
-        <div class="buttons-footer">
-          <%= link_to t("buttons.cancel_registration"), event_path(code: @event.code), class: 'button-cancel' %>
-          <%= f.submit t("buttons.save_event"), class: 'button-submit' %>
-        </div>
-      </div>
+          <div class="tw:pt-3 tw:border-t tw:border-gray-200 tw:flex tw:items-center tw:justify-end tw:gap-2">
+            <%= render Ui::ButtonComponent.new(t("buttons.cancel_registration"), href: event_path(code: @event.code), variant: :cancel) %>
+            <%= render Ui::ButtonComponent.new(t("buttons.save_event"), type: :submit, variant: :success) %>
+          </div>
+        <% end %>
+      <% end %>
     <% end %>
   </div>
 
-  <div class="col-12 col-lg-3">
-    <div class="mt-1">
-      <%= render Events::CardComponent.new(event: @event) %>
-    </div>
+  <div class="tw:lg:col-span-3">
+    <%= render Events::CardComponent.new(event: @event) %>
   </div>
 </div>

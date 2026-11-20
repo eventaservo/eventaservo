@@ -1,11 +1,13 @@
-<div class="col-lg-6 offset-lg-3 mt-4" id="eventoj-hu">
-  <div class="border rounded bg-body-tertiary px-4 py-3 small text-body-secondary">
-    <%= image_tag('eventojhu.gif', size: '64x64', class: 'rounded float-start me-3 mb-1', alt: t('international_calendar.eventoj_hu.logo_alt')) %>
-    <p class="mb-1">
-      <%= t("international_calendar.eventoj_hu.paragraph_1_html", link: link_to("eventoj.hu/kalendaro.htm", "http://eventoj.hu/kalendaro.htm", target: :_blank, rel: "noopener noreferrer")) %>
-    </p>
-    <p class="mb-0">
-      <%= t("international_calendar.eventoj_hu.paragraph_2") %>
-    </p>
+<div class="tw:max-w-xl tw:mx-auto" id="eventoj-hu">
+  <div class="tw:border tw:border-gray-200 tw:rounded-lg tw:bg-gray-50 tw:px-4 tw:py-3 tw:text-xs tw:text-gray-600 tw:flex tw:items-start tw:gap-3">
+    <%= image_tag("eventojhu.gif", size: "64x64", class: "tw:rounded tw:shrink-0", alt: t("international_calendar.eventoj_hu.logo_alt")) %>
+    <div class="tw:space-y-1.5">
+      <p class="tw:m-0">
+        <%= t("international_calendar.eventoj_hu.paragraph_1_html", link: link_to("eventoj.hu/kalendaro.htm", "http://eventoj.hu/kalendaro.htm", target: :_blank, rel: "noopener noreferrer")) %>
+      </p>
+      <p class="tw:m-0">
+        <%= t("international_calendar.eventoj_hu.paragraph_2") %>
+      </p>
+    </div>
   </div>
 </div>
