@@ -1,19 +1,31 @@
-<div class="box-white small">
-  <div class="lead">Sciiga listo</div>
-  <div class="item-row-header">
-    <div class="col">Retpoŝtadreso</div>
-    <div class="col">Lando</div>
-    <div class="col">Kreada dato</div>
-  </div>
+<%= render "admin/shared/breadcrumb", items: [["Sciiga listo"]] %>
 
-  <% @recipients.each do |recipient| %>
-    <div class="item-row-no-chevron">
-      <div class="col">
-        <%= link_to icon('fas', 'minus-circle'), delete_recipient_path(recipient.code), class: 'fg-color-red', aria: { label: 'Forigi sciigon' } %>
-        <%= recipient.email %>
+<%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+  <% panel.with_body(class: "tw:space-y-4") do %>
+    <h1 class="tw:text-xl tw:font-bold tw:text-gray-900 tw:pb-2 tw:border-b tw:border-gray-200 tw:m-0">Sciiga listo</h1>
+
+    <div class="tw:border tw:border-gray-200 tw:rounded tw:overflow-hidden tw:text-xs">
+      <div class="tw:grid tw:grid-cols-12 tw:gap-2 tw:items-center tw:bg-esperanto-500 tw:text-white tw:uppercase tw:font-bold tw:px-3 tw:py-2 tw:text-[11px]">
+        <div class="tw:col-span-5">Retpoŝtadreso</div>
+        <div class="tw:col-span-4">Lando</div>
+        <div class="tw:col-span-3">Kreada dato</div>
       </div>
-      <div class="col"><%= recipient.country.name %></div>
-      <div class="col"><%= format_date recipient.created_at %></div>
+
+      <% @recipients.each_with_index do |recipient, i| %>
+        <% stripe_classes = [
+          ("tw:border-b tw:border-gray-200" unless i == @recipients.size - 1),
+          ("tw:bg-gray-50" if i.odd?)
+        ].compact.join(" ") %>
+
+        <div class="tw:grid tw:grid-cols-12 tw:gap-2 tw:items-center tw:px-3 tw:py-1.5 <%= stripe_classes %>">
+          <div class="tw:col-span-5 tw:flex tw:items-center tw:gap-2 tw:min-w-0">
+            <%= link_to icon("fas", "minus-circle"), delete_recipient_path(recipient.code), class: "tw:text-brand-red tw:hover:text-brand-red-hover tw:shrink-0", aria: { label: "Forigi sciigon" } %>
+            <span class="tw:truncate tw:text-gray-900"><%= recipient.email %></span>
+          </div>
+          <div class="tw:col-span-4 tw:text-gray-600 tw:truncate"><%= recipient.country.name %></div>
+          <div class="tw:col-span-3 tw:text-gray-600 tw:truncate"><%= format_date recipient.created_at %></div>
+        </div>
+      <% end %>
     </div>
   <% end %>
-</div>
+<% end %>

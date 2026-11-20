@@ -1,31 +1,31 @@
-<div class="box-white">
-  <h1 class="lead">Statistikoj</h1>
+<%= render "admin/shared/breadcrumb", items: [["Statistikoj"]] %>
 
-  <div class="mb-4">
-    <%= form_with url: admin_statistics_path, method: :get, class: "row g-3" do |f| %>
-      <div class="col-auto">
-        <%= f.label :start_date, "Komenca dato", class: "form-label" %>
-        <%= f.date_field :start_date, value: @start_date, class: "form-control" %>
-      </div>
-      <div class="col-auto">
-        <%= f.label :end_date, "Fina dato", class: "form-label" %>
-        <%= f.date_field :end_date, value: @end_date, class: "form-control" %>
-      </div>
-      <div class="col-auto align-self-end">
-        <%= f.submit "Filtri", class: "btn btn-primary" %>
+<%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+  <% panel.with_body(class: "tw:space-y-5") do %>
+    <h1 class="tw:text-xl tw:font-bold tw:text-gray-900 tw:pb-2 tw:border-b tw:border-gray-200 tw:m-0">Statistikoj</h1>
+
+    <%= form_with url: admin_statistics_path, method: :get do %>
+      <div class="tw:flex tw:flex-wrap tw:items-end tw:gap-3">
+        <div class="tw:w-full tw:sm:w-44">
+          <%= render Ui::InputComponent.new(:start_date, id: "start_date", type: :date, label: "Komenca dato", value: @start_date) %>
+        </div>
+        <div class="tw:w-full tw:sm:w-44">
+          <%= render Ui::InputComponent.new(:end_date, id: "end_date", type: :date, label: "Fina dato", value: @end_date) %>
+        </div>
+        <div>
+          <%= render Ui::ButtonComponent.new("Filtri", type: :submit, variant: :primary) %>
+        </div>
       </div>
     <% end %>
-  </div>
 
-  <div class="row">
-    <div class="col-12 mb-4">
-      <%= render "new_users_chart" %>
+    <div class="tw:space-y-6">
+      <div>
+        <%= render "new_users_chart" %>
+      </div>
+
+      <div>
+        <%= render "events_chart" %>
+      </div>
     </div>
-
-    <div class="col-12 mb-4">
-      <%= render "events_chart" %>
-    </div>
-  </div>
-
-
-</div>
+  <% end %>
+<% end %>
