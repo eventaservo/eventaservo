@@ -1,5 +1,3 @@
 <% if event.international_calendar? %>
-  <span class="badge text-bg-success">
-    ★ <%= t("events.international_event") %>
-  </span>
+  <%= render Ui::BadgeComponent.new("★ #{t('events.international_event')}", variant: :success, shape: :rounded, size: :small) %>
 <% end %>
