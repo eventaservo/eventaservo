@@ -25,10 +25,11 @@ module Events
 
     private
 
+    # Checks whether the user is authorized to delete the event.
+    #
+    # @return [Boolean]
     def user_can_delete_event?
-      user.owner_of?(event) ||
-        Users::MemberOfEventOrganizationsQuery.new(user:, event:).call.exists? ||
-        user.admin?
+      EventPolicy.new(user:, event:).destroy?
     end
 
     def set_deleted_attribute_to_true

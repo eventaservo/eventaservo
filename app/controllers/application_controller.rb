@@ -62,16 +62,8 @@ class ApplicationController < ActionController::Base
   # @return [Boolean] true when the user may edit the event, false otherwise
   def user_can_edit_event?(user:, event:)
     return false unless current_user
-    return true if user.admin?
-    return true if user.owner_of?(event)
 
-    if event.organizations.any?
-      event.organizations.each do |o|
-        return true if user.in? o.users
-      end
-    end
-
-    false
+    EventPolicy.new(user:, event:).edit?
   end
   helper_method :user_can_edit_event?
 

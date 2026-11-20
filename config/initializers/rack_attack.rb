@@ -184,10 +184,16 @@ class Rack::Attack
   # ============================================
   # API throttling
   # ============================================
-
-  # throttle("limit API requests per IP", limit: 2, period: 10) do |req|
-  #   real_ip(req) if req.path == "/api/v2/organizations"
-  # end
+  #
+  # Discriminates by SHA-256 digest of the Bearer/query JWT token rather than
+  # visitor IP, so it is unaffected by CDN PoP IP collisions while protecting
+  # API v2 write endpoints from abusive or runaway client scripts.
+  throttle("limit API v2 event writes per token", limit: 30, period: 60) do |req|
+    if req.path.start_with?("/api/v2/events") && %w[POST PATCH PUT DELETE].include?(req.request_method)
+      token = req.get_header("HTTP_AUTHORIZATION")&.sub(/\ABearer /i, "") || req.params["user_token"]
+      Digest::SHA256.hexdigest(token) if token.present?
+    end
+  end
 
   # ============================================
   # Login throttling
@@ -239,12 +245,23 @@ Rack::Attack.throttled_responder = lambda do |request|
   now = match_data[:epoch_time]
   retry_after = match_data[:period] - (now % match_data[:period])
 
-  [
-    429,
-    {
-      "Content-Type" => "text/plain",
-      "Retry-After" => retry_after.to_s
-    },
-    ["Too Many Requests. Retry later.\n"]
-  ]
+  if request.path.start_with?("/api/")
+    [
+      429,
+      {
+        "Content-Type" => "application/json",
+        "Retry-After" => retry_after.to_s
+      },
+      [{error: "Too many requests. Please retry later."}.to_json]
+    ]
+  else
+    [
+      429,
+      {
+        "Content-Type" => "text/plain",
+        "Retry-After" => retry_after.to_s
+      },
+      ["Too Many Requests. Retry later.\n"]
+    ]
+  end
 end
