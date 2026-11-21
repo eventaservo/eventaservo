@@ -155,6 +155,24 @@ class Api::V2::Events::CreateTest < ActiveSupport::TestCase
     assert_match(/invalid tags/, result.error[:tags].first)
   end
 
+  test "ignores user_id in payload and always assigns event to authenticated user" do
+    other_user = users(:user)
+    params = {
+      title: "Ownership Check Event",
+      description: "Verifies API v2 cannot spoof event ownership",
+      date_start: "2026-09-12T10:00:00Z",
+      date_end: "2026-09-12T12:00:00Z",
+      site: "https://example.org",
+      online: true,
+      user_id: other_user.id
+    }
+
+    result = Api::V2::Events::Create.call(user: @user, params:)
+
+    assert result.success?
+    assert_equal @user, result.payload.user
+  end
+
   private
 
   # Asserts that the given value matches standard UUID format.

@@ -29,6 +29,7 @@ module Api
           return failure(resolved.errors) unless resolved.valid?
 
           attributes = resolved.attributes.dup
+          attributes[:user_id] = user.id
           attributes[:enhavo] = resolved.content if resolved.content_provided
 
           ::Events::Create.call(
