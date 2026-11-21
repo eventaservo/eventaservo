@@ -77,13 +77,7 @@ module Api
         #
         # @return [String]
         def self.compute_format(event)
-          if !event.online?
-            "onsite"
-          elsif event.city == ONLINE_CITY
-            "online"
-          else
-            "hybrid"
-          end
+          event.computed_format
         end
 
         private
