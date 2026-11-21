@@ -232,7 +232,7 @@
               <% if @event.cancelled %>
                 <%= render Ui::ButtonComponent.new(
                   t("pages.event.uncancel_event"),
-                  href: event_malnuligi_url(event_code: @event.code),
+                  href: event_uncancel_url(event_code: @event.code),
                   variant: :success,
                   data: { method: :post }
                 ) %>

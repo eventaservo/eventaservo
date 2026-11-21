@@ -6,10 +6,10 @@ class EventsController < ApplicationController
   end
   include Webcal
 
-  before_action :authenticate_user!, only: %i[index new create edit update destroy kontakti_organizanton nuligi malnuligi delete_file]
+  before_action :authenticate_user!, only: %i[index new create edit update destroy kontakti_organizanton cancel uncancel delete_file]
   before_action :redirect_old_link, only: %i[show edit]
-  before_action :set_event, only: %i[edit update destroy kronologio nuligi malnuligi kontakti_organizanton delete_file]
-  before_action :authorize_user, only: %i[edit update destroy nuligi malnuligi delete_file]
+  before_action :set_event, only: %i[edit update destroy kronologio cancel uncancel kontakti_organizanton delete_file]
+  before_action :authorize_user, only: %i[edit update destroy cancel uncancel delete_file]
 
   # Montras la uzantajn eventojn
   # This action is probable deprecated and it is required to explore if can be removed
@@ -163,18 +163,32 @@ class EventsController < ApplicationController
     end
   end
 
-  def nuligi
-    @event.update(cancelled: true, cancel_reason: params[:cancel_reason])
-    ahoy.track "Cancelled event", event_url: @event.short_url
+  # Cancels the event with an optional reason via {Events::Cancel}.
+  #
+  # @return [void]
+  def cancel
+    result = Events::Cancel.call(event: @event, user: current_user, cancel_reason: params[:cancel_reason])
 
-    redirect_to event_url(code: params[:event_code]), flash: {notice: I18n.t("flash.events.cancelled")}
+    if result.success?
+      ahoy.track "Cancelled event", event_url: @event.short_url
+      redirect_to event_url(code: params[:event_code]), flash: {notice: I18n.t("flash.events.cancelled")}
+    else
+      redirect_to event_url(code: params[:event_code]), flash: {error: service_error_message(result.error)}
+    end
   end
 
-  def malnuligi
-    @event.update(cancelled: false, cancel_reason: nil)
-    ahoy.track "Un-cancelled event", event_url: @event.short_url
+  # Uncancels a previously cancelled event via {Events::Uncancel}.
+  #
+  # @return [void]
+  def uncancel
+    result = Events::Uncancel.call(event: @event, user: current_user)
 
-    redirect_to event_url(code: params[:event_code]), flash: {notice: I18n.t("flash.events.uncancelled")}
+    if result.success?
+      ahoy.track "Un-cancelled event", event_url: @event.short_url
+      redirect_to event_url(code: params[:event_code]), flash: {notice: I18n.t("flash.events.uncancelled")}
+    else
+      redirect_to event_url(code: params[:event_code]), flash: {error: service_error_message(result.error)}
+    end
   end
 
   def delete_file
@@ -340,6 +354,22 @@ class EventsController < ApplicationController
       users_cache: users_cache,
       countries_cache: countries_cache
     }
+  end
+
+  # Formats an {ApplicationService} failure error for flash display.
+  #
+  # When the service returns a Hash of ActiveRecord validation messages,
+  # formats the event's full error messages into a readable sentence.
+  #
+  # @param error [Hash, String] the error returned by the service
+  #
+  # @return [String] human-readable error message
+  def service_error_message(error)
+    if error.is_a?(Hash)
+      @event.errors.full_messages.presence&.to_sentence || error.values.flatten.to_sentence
+    else
+      error.to_s
+    end
   end
 
   def build_versions_where_clause(event)
