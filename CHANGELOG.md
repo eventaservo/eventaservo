@@ -1,5 +1,68 @@
 # Changelog
 
+## [3.1.3](https://github.com/eventaservo/eventaservo/compare/v3.1.2...v3.1.3) (2026-11-21)
+
+
+### Features
+
+* **api:** add full-lifecycle event management endpoints in API v2 ([#1591](https://github.com/eventaservo/eventaservo/issues/1591)) ([30b7abb](https://github.com/eventaservo/eventaservo/commit/30b7abbefb7ca39b11600224808d1d1148219044))
+* **home:** migrate search, teachers/speakers, and announcements views to Tailwind CSS ([#1514](https://github.com/eventaservo/eventaservo/issues/1514)) ([#1600](https://github.com/eventaservo/eventaservo/issues/1600)) ([9ce5187](https://github.com/eventaservo/eventaservo/commit/9ce518784b93b3e6eeea4358f082f7aca4e4754d))
+* **layouts:** migrate application shell, navbar, and footer menus to Tailwind CSS ([#1514](https://github.com/eventaservo/eventaservo/issues/1514)) ([#1602](https://github.com/eventaservo/eventaservo/issues/1602)) ([7401986](https://github.com/eventaservo/eventaservo/commit/74019862bc176a59645674116fc7816b06cd8e92))
+* migrate admin core views to Tailwind CSS ([#1514](https://github.com/eventaservo/eventaservo/issues/1514)) ([#1597](https://github.com/eventaservo/eventaservo/issues/1597)) ([d8b65b9](https://github.com/eventaservo/eventaservo/commit/d8b65b9b39907fe4119e3eaf5f3b7e2a3a7d8e1a))
+* migrate admin management views to Tailwind CSS ([#1514](https://github.com/eventaservo/eventaservo/issues/1514)) ([#1598](https://github.com/eventaservo/eventaservo/issues/1598)) ([1b96f48](https://github.com/eventaservo/eventaservo/commit/1b96f4800609e64fc40307a1a03d17c697bd6afc))
+* migrate organization views to Tailwind CSS ([#1560](https://github.com/eventaservo/eventaservo/issues/1560)) ([e73bb1f](https://github.com/eventaservo/eventaservo/commit/e73bb1f0ac07b053dd37226a0cfc19e5a222e1c7))
+* **views:** migrate international calendar and residual event views to Tailwind CSS ([#1514](https://github.com/eventaservo/eventaservo/issues/1514)) ([#1601](https://github.com/eventaservo/eventaservo/issues/1601)) ([5c46edd](https://github.com/eventaservo/eventaservo/commit/5c46edd89cee4c3693d090950d6e6d1e6edff7e1))
+
+
+### Bug Fixes
+
+* **calendar:** ignore child link prefetches in loading state ([#1582](https://github.com/eventaservo/eventaservo/issues/1582)) ([6c8fc90](https://github.com/eventaservo/eventaservo/commit/6c8fc90c1e8d8bb3adfa5b93fffba2e645fe6999))
+* **security:** block Alibaba and Tencent scraper subnets in Rack::Attack ([#1587](https://github.com/eventaservo/eventaservo/issues/1587)) ([0c8e1de](https://github.com/eventaservo/eventaservo/commit/0c8e1ded481b9f5c4e8693f05eea2a0edb502e63))
+* **ui:** keep badge descenders visible in every font ([#1573](https://github.com/eventaservo/eventaservo/issues/1573)) ([13b3c7b](https://github.com/eventaservo/eventaservo/commit/13b3c7b0061280216c3d737f50af1edbfc972cfe)), closes [#1566](https://github.com/eventaservo/eventaservo/issues/1566)
+* **ui:** polish search, event headers, admin breadcrumbs, and interested button ([#1514](https://github.com/eventaservo/eventaservo/issues/1514)) ([#1605](https://github.com/eventaservo/eventaservo/issues/1605)) ([5c258cf](https://github.com/eventaservo/eventaservo/commit/5c258cf3f5326bd0b6791b923adbc6d15cfe5b1a))
+
+
+### Performance Improvements
+
+* **events:** optimize tag filtering and eliminate redundant listing queries ([#1589](https://github.com/eventaservo/eventaservo/issues/1589)) ([e78425f](https://github.com/eventaservo/eventaservo/commit/e78425fea3061d0a935cb2f83b514d14743bc4b9))
+* **webcal:** eliminate country and category-tag N+1 queries ([#1590](https://github.com/eventaservo/eventaservo/issues/1590)) ([36f840f](https://github.com/eventaservo/eventaservo/commit/36f840f81b97fb1129ed8c2ae0a822f5e35b4376))
+
+
+### Code Refactoring
+
+* **events:** delegate cancel and uncancel actions to domain services ([ee6d5b0](https://github.com/eventaservo/eventaservo/commit/ee6d5b0fc74349a93b1e79b2d555c0a11ca24bfe)), closes [#1594](https://github.com/eventaservo/eventaservo/issues/1594)
+* **events:** delegate web cancel and uncancel actions to domain services ([#1608](https://github.com/eventaservo/eventaservo/issues/1608)) ([ee6d5b0](https://github.com/eventaservo/eventaservo/commit/ee6d5b0fc74349a93b1e79b2d555c0a11ca24bfe))
+
+
+### Miscellaneous Chores
+
+* **admin:** remove obsolete Bootstrap admin mockups ([#1514](https://github.com/eventaservo/eventaservo/issues/1514)) ([#1599](https://github.com/eventaservo/eventaservo/issues/1599)) ([89f4ec8](https://github.com/eventaservo/eventaservo/commit/89f4ec866985f6644df9bbe004f61be1ead1362d))
+* align Ruby version to 4.0.9 ([#1562](https://github.com/eventaservo/eventaservo/issues/1562)) ([435c89e](https://github.com/eventaservo/eventaservo/commit/435c89e4dff912581c3cfb66deb6e7534e603a47))
+* bump PostgreSQL patch version to 15.20 ([#1564](https://github.com/eventaservo/eventaservo/issues/1564)) ([e5bce0d](https://github.com/eventaservo/eventaservo/commit/e5bce0df194e735c8b273608887331e518506c19))
+* **css:** remove Bootstrap Sass, package dependency, and legacy cascade layer ([#1514](https://github.com/eventaservo/eventaservo/issues/1514)) ([#1604](https://github.com/eventaservo/eventaservo/issues/1604)) ([fe0b505](https://github.com/eventaservo/eventaservo/commit/fe0b505941461e08ab9e8ebe701da2727f6d061d))
+* **deps:** allow semver-minor updates in dependabot ([#1586](https://github.com/eventaservo/eventaservo/issues/1586)) ([600d36c](https://github.com/eventaservo/eventaservo/commit/600d36cdfdbf108c0561392ec30a97e5a78ff07f))
+* **deps:** replace google-api-client with google-apis-drive_v3 ([#1583](https://github.com/eventaservo/eventaservo/issues/1583)) ([b7a716c](https://github.com/eventaservo/eventaservo/commit/b7a716c652e172d0d74b6da7cd8a4292a800bdfc))
+* **deps:** update core runtime and background job gems ([#1565](https://github.com/eventaservo/eventaservo/issues/1565)) ([26d19e1](https://github.com/eventaservo/eventaservo/commit/26d19e1e41c2e86d2d89577831aeabf87d752946))
+* **deps:** update development and test gems ([#1568](https://github.com/eventaservo/eventaservo/issues/1568)) ([79d913d](https://github.com/eventaservo/eventaservo/commit/79d913dba7dfdf47ff2208d5eebb309001d1c86e))
+* **deps:** update JS and CSS patch/minor dependencies ([#1569](https://github.com/eventaservo/eventaservo/issues/1569)) ([06169dd](https://github.com/eventaservo/eventaservo/commit/06169dddd02c424d522f673a577970ddeca1dc1a))
+* **deps:** update remaining safe production gems ([#1567](https://github.com/eventaservo/eventaservo/issues/1567)) ([39b3714](https://github.com/eventaservo/eventaservo/commit/39b3714d6a0eab8865faa4f393bf6b5177d1e84f))
+* **deps:** update Ruby and JavaScript dependencies ([#1595](https://github.com/eventaservo/eventaservo/issues/1595)) ([117f76e](https://github.com/eventaservo/eventaservo/commit/117f76e94996a0454fcba86f197a6a4ded3930f9))
+* **deps:** upgrade @fortawesome/fontawesome-free to 7.3.1 ([#1576](https://github.com/eventaservo/eventaservo/issues/1576)) ([446f3aa](https://github.com/eventaservo/eventaservo/commit/446f3aaf2980fb35239c8fad679a2456a3f29094))
+* **deps:** upgrade @hotwired/turbo-rails to 8.0.23 ([#1571](https://github.com/eventaservo/eventaservo/issues/1571)) ([abf93eb](https://github.com/eventaservo/eventaservo/commit/abf93eb703bfe4945cce0db8f9a3dff78255116c))
+* **deps:** upgrade @redocly/cli to 2.79.0 and remove legacy JS configs ([#1574](https://github.com/eventaservo/eventaservo/issues/1574)) ([c462cb9](https://github.com/eventaservo/eventaservo/commit/c462cb92e1fa4ba5fe4dc36d1f690abfebfb6d3a))
+* **deps:** upgrade highcharts to 13.1.1 ([#1581](https://github.com/eventaservo/eventaservo/issues/1581)) ([45d94a8](https://github.com/eventaservo/eventaservo/commit/45d94a8b3b6193e26331742c564735442ce103cc))
+* **deps:** upgrade hotwire_combobox to 0.4.1 ([#1570](https://github.com/eventaservo/eventaservo/issues/1570)) ([25892fa](https://github.com/eventaservo/eventaservo/commit/25892faea703838905118cee9319e13786ef0032))
+* **deps:** upgrade icalendar to 2.13.0 ([#1572](https://github.com/eventaservo/eventaservo/issues/1572)) ([831e49e](https://github.com/eventaservo/eventaservo/commit/831e49ecf7b946c4efb8c3ff08d0347d2cefe85f))
+* **deps:** upgrade image_processing to 2.2.0 ([#1579](https://github.com/eventaservo/eventaservo/issues/1579)) ([115631f](https://github.com/eventaservo/eventaservo/commit/115631f87d8c69b37459b070141e0b9f471f4fc1))
+* **deps:** upgrade omniauth-facebook, sitemap_generator, and shoulda-matchers ([#1580](https://github.com/eventaservo/eventaservo/issues/1580)) ([1804f3b](https://github.com/eventaservo/eventaservo/commit/1804f3b0fe903d9e5bcf7b9f03d7b6845b62fd97))
+* **deps:** upgrade sentry-ruby and sentry-rails to 7.2.0 ([#1575](https://github.com/eventaservo/eventaservo/issues/1575)) ([77de167](https://github.com/eventaservo/eventaservo/commit/77de167d5432adc02b06eb3281cbca248159e65f))
+* **deps:** upgrade simplecov to 1.3.2 and simplecov-cobertura to 4.0.0 ([#1577](https://github.com/eventaservo/eventaservo/issues/1577)) ([dc15938](https://github.com/eventaservo/eventaservo/commit/dc159389dc996cd3ae693e269afa36d22d9569e1))
+* **deps:** upgrade slim-select to 4.7.0 ([#1578](https://github.com/eventaservo/eventaservo/issues/1578)) ([41bc27f](https://github.com/eventaservo/eventaservo/commit/41bc27fd9081c55ca569738c28230acd2fb1bef3))
+* **js:** remove Bootstrap JavaScript import and @popperjs/core ([#1514](https://github.com/eventaservo/eventaservo/issues/1514)) ([#1603](https://github.com/eventaservo/eventaservo/issues/1603)) ([c50b205](https://github.com/eventaservo/eventaservo/commit/c50b205c30e6b40de1b52de3891206f17b6690ee))
+* **skills:** streamline eventaservo-pr-creator workflow ([#1596](https://github.com/eventaservo/eventaservo/issues/1596)) ([b4ba9f6](https://github.com/eventaservo/eventaservo/commit/b4ba9f670623d984efd1537036d0eba20e1b5d9d))
+* track Ruby 4.0 with security floor ([#1606](https://github.com/eventaservo/eventaservo/issues/1606)) ([6029f32](https://github.com/eventaservo/eventaservo/commit/6029f329c28f53237526cb95e38da9a41986685a))
+* upgrade Node.js to 26 ([#1563](https://github.com/eventaservo/eventaservo/issues/1563)) ([fd56013](https://github.com/eventaservo/eventaservo/commit/fd5601365f399b2b13dfd5ab0aef308271c032ba))
+
 ## [3.1.2](https://github.com/eventaservo/eventaservo/compare/v3.1.1...v3.1.2) (2026-11-16)
 
 
