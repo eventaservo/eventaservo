@@ -21,49 +21,22 @@ module Api
           @params = params
         end
 
-        # Executes event creation and associated side effects.
+        # Executes event creation by resolving API v2 attributes and delegating to {Events::Create}.
         #
         # @return [ApplicationService::Response] success with Event payload, or failure with validation errors hash
         def call
           resolved = AttributeResolver.new(params:, user:).call
           return failure(resolved.errors) unless resolved.valid?
 
-          event = Event.new(resolved.attributes)
-          event.user = user
-          event.enhavo = resolved.content if resolved.content_provided
+          attributes = resolved.attributes.dup
+          attributes[:enhavo] = resolved.content if resolved.content_provided
 
-          saved = ActiveRecord::Base.transaction do
-            unless event.save
-              raise ActiveRecord::Rollback
-            end
-
-            event.update_event_organizations(resolved.organizations.map(&:id)) if resolved.organizations_provided
-            assign_tags(event, resolved.tags) if resolved.tags_provided
-            event.update_columns(format: AttributeResolver.compute_format(event))
-            true
-          end
-
-          return failure(event.errors.messages) unless saved
-
-          event.reload
-          NovaEventaSciigoJob.perform_later(event)
-          Logs::Create.call(text: "Event created", user:, loggable: event)
-
-          success(event)
-        end
-
-        private
-
-        # Attaches the resolved category and characteristic tags to the event.
-        #
-        # @param event [Event] the persisted event
-        # @param tags [Array<Tag>] the tags to attach
-        #
-        # @return [void]
-        def assign_tags(event, tags)
-          tags.each do |tag|
-            event.tags << tag unless event.tags.include?(tag)
-          end
+          ::Events::Create.call(
+            user:,
+            attributes:,
+            organization_ids: resolved.organizations_provided ? resolved.organizations.map(&:id) : nil,
+            tag_ids: resolved.tags_provided ? resolved.tags.map(&:id) : nil
+          )
         end
       end
     end

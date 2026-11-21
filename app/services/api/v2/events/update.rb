@@ -23,56 +23,25 @@ module Api
           @params = params
         end
 
-        # Executes the event update and associated side effects.
+        # Executes the event update by resolving API v2 attributes and delegating to {Events::Update}.
         #
-        # @return [ApplicationService::Response] success with Event payload, or failure with error message or validation errors hash
+        # @return [ApplicationService::Response] success with Event payload, or failure with error symbol or validation errors hash
         def call
           return failure(:forbidden) unless EventPolicy.new(user:, event:).update?
 
           resolved = AttributeResolver.new(params:, user:, event:).call
           return failure(resolved.errors) unless resolved.valid?
 
-          updated = ActiveRecord::Base.transaction do
-            event.assign_attributes(resolved.attributes)
-            event.enhavo = resolved.content if resolved.content_provided
+          attributes = resolved.attributes.dup
+          attributes[:enhavo] = resolved.content if resolved.content_provided
 
-            unless event.save
-              raise ActiveRecord::Rollback
-            end
-
-            event.update_event_organizations(resolved.organizations.map(&:id)) if resolved.organizations_provided
-            sync_tags(event, resolved.tags) if resolved.tags_provided
-            event.update_columns(format: AttributeResolver.compute_format(event))
-            true
-          end
-
-          return failure(event.errors.messages) unless updated
-
-          event.reload
-          EventoGhisdatigitaJob.perform_later(event)
-          Logs::Create.call(text: "Event updated", user:, loggable: event)
-
-          success(event)
-        end
-
-        private
-
-        # Synchronizes category and characteristic tags while preserving auto-managed time tags.
-        #
-        # @param event [Event] the event being updated
-        # @param tags [Array<Tag>] the desired category/characteristic tags
-        #
-        # @return [void]
-        def sync_tags(event, tags)
-          desired_ids = tags.map(&:id)
-
-          event.tags.where(group_name: AttributeResolver::ALLOWED_TAG_GROUPS)
-            .where.not(id: desired_ids)
-            .find_each { |tag| event.tags.delete(tag) }
-
-          tags.each do |tag|
-            event.tags << tag unless event.tags.include?(tag)
-          end
+          ::Events::Update.call(
+            event:,
+            user:,
+            attributes:,
+            organization_ids: resolved.organizations_provided ? resolved.organizations.map(&:id) : nil,
+            tag_ids: resolved.tags_provided ? resolved.tags.map(&:id) : nil
+          )
         end
       end
     end

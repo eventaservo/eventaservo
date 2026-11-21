@@ -5,6 +5,8 @@ require "test_helper"
 # Integration tests for {EventsController#update}, focusing on file upload
 # preservation across sequential submissions and authorization checks.
 class EventsController::UpdateTest < ActionDispatch::IntegrationTest
+  include ActiveJob::TestHelper
+
   setup do
     @owner = users(:user)
     @admin = users(:admin_user)
@@ -13,6 +15,45 @@ class EventsController::UpdateTest < ActionDispatch::IntegrationTest
   end
 
   # Success cases
+
+  test "updates event attributes, tags, organizations, format, notifications, and audit log" do
+    sign_in @owner
+    org = organizations(:rotterdam_centre)
+    category_tag = tags(:kurso)
+    characteristic_tag = tags(:por_junuloj)
+
+    assert_enqueued_with(job: EventoGhisdatigitaJob) do
+      assert_difference ["Log.count", "Ahoy::Event.count"], 1 do
+        patch event_path(code: @event.code), params: {
+          event: {
+            title: "Updated Web Event",
+            description: @event.description,
+            date_start: "2027-06-10",
+            date_end: "2027-06-12",
+            time_zone: "Etc/UTC",
+            site: @event.site,
+            email: @event.email,
+            city: "Reta",
+            country_id: 99_999,
+            online: true
+          },
+          time_start: "09:00",
+          time_end: "17:00",
+          tags_categories: [category_tag.id.to_s],
+          tags_characteristics: [characteristic_tag.id.to_s],
+          organization_ids: [org.id.to_s]
+        }
+      end
+    end
+
+    assert_redirected_to event_path(code: @event.reload.ligilo)
+    assert_equal I18n.t("flash.events.updated"), flash[:notice]
+    assert_equal "Updated Web Event", @event.title
+    assert_equal "online", @event.format
+    assert_equal [org.id], @event.organizations.pluck(:id)
+    assert_includes @event.tags, category_tag
+    assert_includes @event.tags, characteristic_tag
+  end
 
   test "uploading a second file via the event uploader form preserves existing uploads and tags" do
     sign_in @owner

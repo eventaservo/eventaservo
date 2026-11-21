@@ -364,6 +364,19 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     latitude.present? && longitude.present?
   end
 
+  # Computes the canonical event format (+onsite+, +online+, or +hybrid+).
+  #
+  # @return [String] one of +"onsite"+, +"online"+, or +"hybrid"+
+  def computed_format
+    if !online?
+      "onsite"
+    elsif city == "Reta"
+      "online"
+    else
+      "hybrid"
+    end
+  end
+
   def komenca_dato(horzono: nil)
     date_start.in_time_zone(horzono || time_zone)
   end
