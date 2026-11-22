@@ -46,6 +46,9 @@ class Events::CreateTest < ActiveSupport::TestCase
     assert event.persisted?
     assert_equal @user, event.user
     assert_equal "onsite", event.format
+    assert_in_delta 40.71, event.latitude
+    assert_in_delta(-74.00, event.longitude)
+    assert_equal "America/New_York", event.time_zone
     assert_equal [org.id], event.organizations.pluck(:id)
     assert_includes event.tags, category_tag
     assert_includes event.tags, characteristic_tag
@@ -107,17 +110,26 @@ class Events::CreateTest < ActiveSupport::TestCase
   # Error cases
 
   test "fails with validation errors and unsaved event payload when attributes are invalid" do
+    geocode_called = false
+    timezone_called = false
     result = nil
-    assert_no_enqueued_jobs(only: NovaEventaSciigoJob) do
-      assert_no_difference ["Event.count", "Log.count"] do
-        result = Events::Create.call(
-          user: @user,
-          attributes: @base_attributes.merge(title: "")
-        )
+
+    Geocoder.stub :search, ->(*_args) { geocode_called = true } do
+      Timezone.stub :lookup, ->(*_args) { timezone_called = true } do
+        assert_no_enqueued_jobs(only: NovaEventaSciigoJob) do
+          assert_no_difference ["Event.count", "Log.count"] do
+            result = Events::Create.call(
+              user: @user,
+              attributes: @base_attributes.merge(title: "")
+            )
+          end
+        end
       end
     end
 
     assert result.failure?
+    assert_not geocode_called
+    assert_not timezone_called
     assert_includes result.error[:title], I18n.t("errors.messages.blank")
     assert_instance_of Event, result.payload
     assert_not result.payload.persisted?
