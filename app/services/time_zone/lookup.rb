@@ -34,14 +34,25 @@ module TimeZone
 
       raw_name = ::Timezone.lookup(latitude, longitude).name
       normalized = TimeZone::Normalize.call(raw_name)
-      success(normalized.success? ? normalized.payload : DEFAULT_TIME_ZONE)
+      return failure(normalized.error, payload: DEFAULT_TIME_ZONE) if normalized.failure?
+
+      success(normalized.payload)
     rescue => e
-      log_error(e)
-      Sentry.capture_exception(e, extra: context.merge(lat: latitude, lon: longitude))
-      failure(e.message, payload: DEFAULT_TIME_ZONE)
+      handle_lookup_error(e)
     end
 
     private
+
+    # Logs and reports a lookup exception and returns a UTC fallback failure response.
+    #
+    # @param error [StandardError] the rescued lookup exception
+    #
+    # @return [ApplicationService::Response]
+    def handle_lookup_error(error)
+      log_error(error)
+      Sentry.capture_exception(error, extra: context.merge(lat: latitude, lon: longitude))
+      failure(error.message, payload: DEFAULT_TIME_ZONE)
+    end
 
     # Writes a structured error message to the Rails logger.
     #

@@ -25,6 +25,18 @@ class TimeZone::LookupTest < ActiveSupport::TestCase
 
   # Error cases
 
+  test "fails with UTC fallback when provider returns an unrecognized timezone name" do
+    fake_zone = Struct.new(:name).new("Invalid/Zone")
+
+    Timezone.stub :lookup, ->(_lat, _lon) { fake_zone } do
+      result = TimeZone::Lookup.call(latitude: 40.71, longitude: -74.00)
+
+      assert result.failure?
+      assert_equal "Etc/UTC", result.payload
+      assert_includes result.error, "Invalid/Zone"
+    end
+  end
+
   test "fails with UTC fallback when coordinates are missing" do
     result = TimeZone::Lookup.call(latitude: nil, longitude: -74.00)
 
