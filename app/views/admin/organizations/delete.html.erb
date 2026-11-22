@@ -1,0 +1,45 @@
+<%= render "admin/shared/breadcrumb", items: [["Organizaĵoj", admin_organizations_path], [@organization.name, organization_path(short_name: @organization.short_name)], ["Forigi"]] %>
+
+<%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+  <% panel.with_body(class: "tw:space-y-4") do %>
+    <h1 class="tw:text-xl tw:font-bold tw:text-gray-900 tw:pb-2 tw:border-b tw:border-gray-200 tw:m-0">
+      Forigi organizon: <%= @organization.full_name %>
+    </h1>
+
+    <%= render Ui::AlertComponent.new(variant: :warning, icon: true) do %>
+      <strong>Atentu:</strong> Ĉi tiu ago estas nemalfarebla.
+      <ul class="tw:mt-2 tw:mb-0 tw:list-disc tw:pl-5 tw:space-y-1">
+        <li><strong><%= @members_count %></strong> membro(j) estos forigitaj de la organizo.</li>
+        <% if @events_count.positive? %>
+          <li><strong><%= @events_count %></strong> evento(j) estos translokigitaj al la elektita cela organizo.</li>
+        <% else %>
+          <li>La organizo ne havas ligitajn eventojn.</li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <%= form_with url: admin_organization_path(@organization), method: :delete, local: true, class: "tw:space-y-4" do %>
+      <% if @events_count.positive? %>
+        <%= render Ui::SelectComponent.new(
+          :target_organization_id,
+          id: "target_organization_id",
+          label: "TRANSLOKIGI EVENTOJN AL",
+          options: @target_organizations,
+          selected: params[:target_organization_id],
+          include_blank: "Elektu celan organizon...",
+          required: true
+        ) %>
+      <% end %>
+
+      <div class="tw:pt-2 tw:flex tw:items-center tw:gap-2">
+        <%= render Ui::ButtonComponent.new(
+          "Forigi organizon",
+          type: :submit,
+          variant: :danger,
+          data: {turbo_confirm: "Ĉu vi certas ke vi volas forigi ĉi tiun organizon? Ĉi tiu ago ne povas esti malfarita."}
+        ) %>
+        <%= render Ui::ButtonComponent.new("Nuligi", href: admin_organizations_path, variant: :secondary) %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

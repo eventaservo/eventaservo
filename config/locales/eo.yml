@@ -416,6 +416,11 @@ eo:
       p7_tagojn: Proksimajn 7 tagojn
   flash:
     admin:
+      organizations:
+        destroyed: Organizo "%{name}" sukcese forigita.
+        not_found: Organizo ne trovita.
+        same_organization: La cela organizo devas esti malsama ol la forigata organizo.
+        target_required: Elektu celan organizon por translokigi la eventojn.
       redirections:
         created: Redirekto sukcese kreita.
         destroyed: Redirekto sukcese forigita.

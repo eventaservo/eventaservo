@@ -4,7 +4,11 @@ namespace :admin do
   patch "events/recover/:event_code", controller: "events", action: :recover, as: "recover_event"
 
   resources :logs, only: [:index]
-  resources :organizations, only: [:index]
+  resources :organizations, only: %i[index destroy] do
+    member do
+      get :delete
+    end
+  end
   resources :redirections, except: [:show]
   resources :reports, except: [:new, :create]
 

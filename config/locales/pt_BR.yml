@@ -416,6 +416,11 @@ pt_BR:
       p7_tagojn: Próximos 7 dias
   flash:
     admin:
+      organizations:
+        destroyed: Organização "%{name}" excluída com sucesso.
+        not_found: Organização não encontrada.
+        same_organization: A organização de destino deve ser diferente da organização a ser excluída.
+        target_required: Selecione uma organização de destino para transferir os eventos.
       redirections:
         created: Redirecionamento criado com sucesso.
         destroyed: Redirecionamento excluído com sucesso.
