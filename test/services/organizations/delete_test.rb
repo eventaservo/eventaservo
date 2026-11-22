@@ -55,6 +55,8 @@ class Organizations::DeleteTest < ActiveSupport::TestCase
     )
 
     assert result.success?
+    assert_equal 0, result.payload.transferred_events_count
+    assert_equal 1, result.payload.deduplicated_events_count
     assert_equal 1, OrganizationEvent.where(organization_id: @target_org.id, event_id: @event.id).count
     assert_not Organization.exists?(@source_org.id)
   end
