@@ -416,6 +416,11 @@ en:
       p7_tagojn: Next 7 days
   flash:
     admin:
+      organizations:
+        destroyed: Organization "%{name}" successfully deleted.
+        not_found: Organization not found.
+        same_organization: Target organization must be different from the organization being deleted.
+        target_required: Please select a target organization to transfer events to.
       redirections:
         created: Redirection successfully created.
         destroyed: Redirection successfully deleted.

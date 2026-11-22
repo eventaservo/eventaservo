@@ -29,9 +29,10 @@
 
     <div class="tw:border tw:border-gray-200 tw:rounded tw:overflow-hidden tw:text-xs">
       <div class="tw:grid tw:grid-cols-12 tw:gap-2 tw:items-center tw:bg-esperanto-500 tw:text-white tw:uppercase tw:font-bold tw:px-3 tw:py-2 tw:text-[11px]">
-        <div class="tw:col-span-6">Nomo</div>
+        <div class="tw:col-span-5">Nomo</div>
         <div class="tw:col-span-3">Mallonga nomo</div>
         <div class="tw:col-span-3">Lando</div>
+        <div class="tw:col-span-1 tw:text-right">Agoj</div>
       </div>
 
       <% @organizations.each_with_index do |organization, i| %>
@@ -40,14 +41,19 @@
           ("tw:bg-gray-50" if i.odd?)
         ].compact.join(" ") %>
 
-        <%= link_to organization_path(short_name: organization.short_name), class: "tw:grid tw:grid-cols-12 tw:gap-2 tw:items-center tw:px-3 tw:py-1.5 tw:text-gray-900 tw:no-underline tw:hover:bg-esperanto-50 tw:transition-colors #{stripe_classes}" do %>
-          <div class="tw:col-span-6 tw:font-medium tw:text-gray-900 tw:truncate"><%= organization.name %></div>
+        <div class="tw:grid tw:grid-cols-12 tw:gap-2 tw:items-center tw:px-3 tw:py-1.5 tw:text-gray-900 tw:hover:bg-esperanto-50 tw:transition-colors <%= stripe_classes %>">
+          <div class="tw:col-span-5 tw:font-medium tw:truncate">
+            <%= link_to organization.name, organization_path(short_name: organization.short_name), class: "tw:text-gray-900 tw:no-underline tw:hover:text-esperanto-600" %>
+          </div>
           <div class="tw:col-span-3 tw:text-gray-600 tw:truncate"><%= organization.short_name %></div>
           <div class="tw:col-span-3 tw:text-gray-600 tw:truncate">
             <%= flag_icon(organization.country&.code) if organization.country&.code %>
             <%= organization.country&.name %>
           </div>
-        <% end %>
+          <div class="tw:col-span-1 tw:text-right">
+            <%= render Ui::ButtonComponent.new("Forigi", href: delete_admin_organization_path(organization), variant: :danger, size: :small) %>
+          </div>
+        </div>
       <% end %>
 
       <% if @organizations.empty? %>
