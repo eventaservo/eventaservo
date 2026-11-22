@@ -42,6 +42,10 @@ module Events
       event.user_id ||= user.id
       event.dates_from_form = true if dates_from_form
 
+      return failure(event.errors.messages, payload: event) unless event.valid?
+
+      Events::Geocode.call(event:)
+
       saved = ActiveRecord::Base.transaction do
         raise ActiveRecord::Rollback unless event.save
 

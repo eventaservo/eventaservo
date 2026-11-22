@@ -47,7 +47,6 @@ class CreateSampleEventsJob < ApplicationJob
       online: false,
       format: "onsite"
     )
-    event.instance_variable_set(:@created_from_factory, true)
     event.save!
     event.tags << Tag.categories.first if Tag.categories.any?
     event

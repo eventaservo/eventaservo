@@ -91,33 +91,11 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   enum :format, {onsite: "onsite", hybrid: "hybrid", online: "online"}, prefix: true
 
-  before_validation :reset_timezone_refresh_flag
-  after_validation :geocode, if: :require_geocode?
   before_save :format_event_data
   after_commit :schedule_users_reminders_jobs, if: :schedule_on_create_or_dates_changed?
   after_update :create_redirection, if: :saved_change_to_short_url?
   after_save :update_duration_tags
   after_commit :invalidate_calendar_cache
-
-  geocoded_by :full_address
-
-  # Collects coordinates using the Geocoder gem and immediately updates the
-  # event's timezone when geocoding succeeds.
-  #
-  # Overrides the default geocode method to handle and report errors from the
-  # Google Maps API or network issues, and forces a timezone lookup even when
-  # the geocoded coordinates match the previous values.
-  #
-  # @return [Array<Float>, nil] geocoded +[latitude, longitude]+ pair, or +nil+ on error
-  def geocode
-    coordinates = super
-    update_timezone_from_coordinates if coordinates.present? && latitude.present? && longitude.present?
-    coordinates
-  rescue Geocoder::Error, SocketError, Timeout::Error => e
-    Rails.logger.error "Google API geocoding error for event \"#{title}\": #{e.message}"
-    Sentry.capture_exception(e, extra: {event_id: id, event_title: title})
-    nil
-  end
 
   default_scope { where(deleted: false) }
   scope :deleted, -> { unscoped.where(deleted: true) }
@@ -357,13 +335,6 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     return "" if online && city == "Reta"
 
     [address, city, country.try(:code).try(:upcase)].reject(&:blank?).join(", ")
-  end
-
-  def require_geocode?
-    return false if @created_from_factory
-    return false if online && city == "Reta"
-
-    address_changed? || city_changed? || country_id_changed?
   end
 
   def location_defined?
@@ -658,11 +629,6 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
       self.longitude = nil
     end
 
-    if !@timezone_refreshed_from_coordinates && (latitude_changed? || longitude_changed?)
-      update_timezone_from_coordinates
-    end
-    @timezone_refreshed_from_coordinates = false
-
     result = TimeZone::Normalize.call(time_zone)
     self.time_zone = result.success? ? result.payload : "Etc/UTC"
 
@@ -670,28 +636,6 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
       self.date_start = TimeZone::WallClockToUtc.call(time_zone:, datetime: date_start).payload.in_time_zone(time_zone)
       self.date_end = TimeZone::WallClockToUtc.call(time_zone:, datetime: date_end).payload.in_time_zone(time_zone)
     end
-  end
-
-  # Resets the per-save flag tracking whether timezone lookup already ran during geocoding.
-  #
-  # @return [void]
-  def reset_timezone_refresh_flag
-    @timezone_refreshed_from_coordinates = false
-  end
-
-  # Updates +time_zone+ from the event's coordinates via {TimeZone::Lookup}.
-  #
-  # @return [void]
-  def update_timezone_from_coordinates
-    return if latitude.nil? || longitude.nil?
-
-    result = TimeZone::Lookup.call(
-      latitude:,
-      longitude:,
-      context: {event_id: id || "new record", event_title: title}
-    )
-    self.time_zone = result.success? ? result.payload : TimeZone::Lookup::DEFAULT_TIME_ZONE
-    @timezone_refreshed_from_coordinates = true
   end
 
   # Remove the X characters from the title, description and body

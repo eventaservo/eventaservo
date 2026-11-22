@@ -46,12 +46,16 @@ module Events
     def call
       return failure(:forbidden) unless EventPolicy.new(user:, event:).update?
 
+      event.dates_from_form = true if dates_from_form
+      event.assign_attributes(attributes)
+
+      return failure(event.errors.messages, payload: event) unless event.valid?
+
+      Events::Geocode.call(event:)
+
       user_id_changed = false
 
       updated = ActiveRecord::Base.transaction do
-        event.dates_from_form = true if dates_from_form
-        event.assign_attributes(attributes)
-
         raise ActiveRecord::Rollback unless event.save
 
         user_id_changed = event.saved_change_to_user_id?

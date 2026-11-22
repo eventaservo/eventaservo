@@ -46,6 +46,9 @@ class Events::CreateTest < ActiveSupport::TestCase
     assert event.persisted?
     assert_equal @user, event.user
     assert_equal "onsite", event.format
+    assert_in_delta 40.71, event.latitude
+    assert_in_delta(-74.00, event.longitude)
+    assert_equal "America/New_York", event.time_zone
     assert_equal [org.id], event.organizations.pluck(:id)
     assert_includes event.tags, category_tag
     assert_includes event.tags, characteristic_tag

@@ -143,7 +143,6 @@ class Events::NearbyCitiesQueryTest < ActiveSupport::TestCase
       longitude: longitude,
       user: @user
     )
-    event.instance_variable_set(:@created_from_factory, true)
     event.save!
     event
   end

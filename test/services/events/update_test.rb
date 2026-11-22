@@ -100,6 +100,21 @@ class Events::UpdateTest < ActiveSupport::TestCase
     assert_equal "online", result.payload.format
   end
 
+  test "geocodes and refreshes timezone when address changes even if coordinates are unchanged" do
+    @event.update_columns(latitude: 40.71, longitude: -74.00, time_zone: "Etc/UTC")
+
+    result = Events::Update.call(
+      event: @event,
+      user: @owner,
+      attributes: {address: "100 Broadway"}
+    )
+
+    assert result.success?
+    assert_in_delta 40.71, result.payload.latitude
+    assert_in_delta(-74.00, result.payload.longitude)
+    assert_equal "America/New_York", result.payload.time_zone
+  end
+
   test "sends nova_administranto email when event owner changes" do
     new_owner = users(:teacher)
     admin = users(:admin_user)

@@ -189,7 +189,7 @@ class ApplicationHelperTest < ActionView::TestCase
 
   # event_full_description tests
   test "event_full_description should return the full address for RSS" do
-    event = create(:event, :brazila)
+    event = create(:event, :brazila, time_zone: "America/Sao_Paulo")
     event.date_start = Time.zone.parse("1978-07-17 21:00:00 +03:00")
     event.date_end = event.date_start + 1.hour
     event.description = "Grava tago"
