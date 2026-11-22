@@ -1,214 +1,236 @@
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb small mb-2">
-    <li class="breadcrumb-item"><%= link_to "Admin", admin_root_path %></li>
-    <li class="breadcrumb-item"><%= link_to "Users", admin_users_path %></li>
-    <li class="breadcrumb-item active" aria-current="page"><%= @user.name %></li>
-  </ol>
-</nav>
+<%= render "admin/shared/breadcrumb", items: [["Users", admin_users_path], [@user.name]] %>
 
-<%# ── Header Card ─────────────────────────────────────────── %>
-<div class="box-white mb-3 p-0 overflow-hidden">
-  <div class="<%= @user.disabled? ? "bg-danger" : "bg-success" %> bg-opacity-10 border-bottom px-4 py-4">
-    <div class="d-flex align-items-center gap-3">
-      <div class="bg-secondary-subtle rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
-           style="width:64px;height:64px">
-        <i class="fas fa-user fa-lg text-secondary"></i>
-      </div>
-      <div class="flex-grow-1">
-        <div class="d-flex align-items-center gap-2 mb-1">
-          <h5 class="fw-bold mb-0"><%= @user.name %></h5>
-          <% if @user.admin? %>
-            <span class="badge bg-warning text-dark">Admin</span>
-          <% end %>
-          <% if @user.disabled? %>
-            <span class="badge bg-danger">Disabled</span>
-          <% end %>
-          <% if @user.active? %>
-            <span class="badge bg-success-subtle text-success">Active</span>
-          <% else %>
-            <span class="badge bg-danger-subtle text-danger">Inactive</span>
-          <% end %>
-        </div>
-        <div class="text-body-secondary small">
-          @<%= @user.username %>
-          <span class="mx-1">&middot;</span>
-          <%= @user.email %>
-          <span class="mx-1">&middot;</span>
-          <%= display_flag(@user.country) %> <%= @user.country&.name %>
-        </div>
-      </div>
-      <div class="d-flex gap-2 flex-shrink-0">
-        <%= link_to events_by_username_path(username: @user.username), target: "_blank", rel: "noopener", class: "btn btn-outline-secondary btn-sm" do %>
-          <%= icon('fas', 'external-link-alt') %> Profile
-        <% end %>
-        <%= link_to edit_admin_user_path(@user), class: "btn btn-success btn-sm" do %>
-          <%= icon('fas', 'edit') %> Edit
-        <% end %>
-      </div>
-    </div>
-  </div>
+<div class="tw:space-y-4">
+  <%# ── Header Panel ──────────────────────────────────────── %>
+  <%= render Ui::CardComponent.new(variant: :bordered, flush: true) do |panel| %>
+    <% panel.with_body(padding: false) do %>
+      <div class="<%= @user.disabled? ? "tw:bg-red-50" : "tw:bg-esperanto-50" %> tw:border-b tw:border-gray-200 tw:px-5 tw:py-5">
+        <div class="tw:flex tw:flex-col tw:sm:flex-row tw:sm:items-center tw:gap-4">
+          <div class="tw:w-16 tw:h-16 tw:rounded-full tw:bg-gray-200 tw:flex tw:items-center tw:justify-center tw:shrink-0">
+            <i class="fas fa-user fa-lg tw:text-gray-500" aria-hidden="true"></i>
+          </div>
 
-  <%# ── Quick Stats ──────────────────────────────────────── %>
-  <div class="d-flex border-bottom">
-    <div class="flex-fill text-center py-3 border-end">
-      <div class="fs-4 fw-bold text-success"><%= @user.events_count %></div>
-      <div class="text-uppercase text-body-tertiary fw-semibold" style="font-size:0.7rem;letter-spacing:0.05em">Events</div>
-    </div>
-    <div class="flex-fill text-center py-3 border-end">
-      <div class="fs-4 fw-bold text-success"><%= @user.organizations.count %></div>
-      <div class="text-uppercase text-body-tertiary fw-semibold" style="font-size:0.7rem;letter-spacing:0.05em">Organizations</div>
-    </div>
-    <div class="flex-fill text-center py-3 border-end">
-      <div class="fs-4 fw-bold text-success"><%= @user.sign_in_count %></div>
-      <div class="text-uppercase text-body-tertiary fw-semibold" style="font-size:0.7rem;letter-spacing:0.05em">Sign-ins</div>
-    </div>
-    <div class="flex-fill text-center py-3">
-      <div class="fs-6 fw-bold text-body-secondary"><%= @user.created_at.present? ? l(@user.created_at, format: :short) : "—" %></div>
-      <div class="text-uppercase text-body-tertiary fw-semibold" style="font-size:0.7rem;letter-spacing:0.05em">Joined</div>
-    </div>
-  </div>
-</div>
-
-<div class="row g-3">
-  <%# ── Personal Information ────────────────────────────────── %>
-  <div class="col-md-6">
-    <div class="box-white h-100">
-      <div class="text-uppercase text-body-tertiary fw-semibold small mb-3" style="font-size:0.7rem;letter-spacing:0.05em">
-        <i class="fas fa-id-card me-1"></i>Personal Information
-      </div>
-
-      <table class="table table-sm table-borderless mb-0 small">
-        <tbody>
-          <tr>
-            <td class="text-body-secondary fw-semibold" style="width:130px">ID</td>
-            <td><%= @user.id %></td>
-          </tr>
-          <tr>
-            <td class="text-body-secondary fw-semibold">Email</td>
-            <td><%= @user.email %></td>
-          </tr>
-          <tr>
-            <td class="text-body-secondary fw-semibold">Username</td>
-            <td>@<%= @user.username %></td>
-          </tr>
-          <tr>
-            <td class="text-body-secondary fw-semibold">City</td>
-            <td><%= @user.city.presence || "—" %></td>
-          </tr>
-          <tr>
-            <td class="text-body-secondary fw-semibold">Country</td>
-            <td><%= display_flag(@user.country) %> <%= @user.country&.name || "—" %></td>
-          </tr>
-          <tr>
-            <td class="text-body-secondary fw-semibold">Birthday</td>
-            <td><%= @user.birthday.present? ? l(@user.birthday, format: :long) : "—" %></td>
-          </tr>
-          <tr>
-            <td class="text-body-secondary fw-semibold">UEA Code</td>
-            <td><%= @user.ueacode.presence || "—" %></td>
-          </tr>
-          <tr>
-            <td class="text-body-secondary fw-semibold">About</td>
-            <td><%= @user.about.presence || "—" %></td>
-          </tr>
-          <tr>
-            <td class="text-body-secondary fw-semibold">Webcal Token</td>
-            <td><code class="text-body-secondary"><%= @user.webcal_token %></code></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <%# ── Account & Organizations ─────────────────────────────── %>
-  <div class="col-md-6">
-    <div class="box-white mb-3">
-      <div class="text-uppercase text-body-tertiary fw-semibold small mb-3" style="font-size:0.7rem;letter-spacing:0.05em">
-        <i class="fas fa-shield-alt me-1"></i>Account Status
-      </div>
-
-      <table class="table table-sm table-borderless mb-0 small">
-        <tbody>
-          <tr>
-            <td class="text-body-secondary fw-semibold" style="width:130px">Confirmed at</td>
-            <td>
-              <% if @user.confirmed_at.present? %>
-                <%= l(@user.confirmed_at, format: :long) %>
-              <% else %>
-                <span class="badge bg-danger-subtle text-danger">Not confirmed</span>
+          <div class="tw:flex-1 tw:min-w-0">
+            <div class="tw:flex tw:flex-wrap tw:items-center tw:gap-2 tw:mb-1">
+              <h1 class="tw:text-lg tw:font-bold tw:text-gray-900 tw:m-0"><%= @user.name %></h1>
+              <% if @user.admin? %>
+                <%= render Ui::BadgeComponent.new("Admin", variant: :warning, shape: :rounded, size: :small) %>
               <% end %>
-            </td>
-          </tr>
-          <tr>
-            <td class="text-body-secondary fw-semibold">Last sign in</td>
-            <td><%= @user.last_sign_in_at.present? ? l(@user.last_sign_in_at, format: :long) : "—" %></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+              <% if @user.disabled? %>
+                <%= render Ui::BadgeComponent.new("Disabled", variant: :danger, shape: :rounded, size: :small) %>
+              <% end %>
+              <% if @user.active? %>
+                <%= render Ui::BadgeComponent.new("Active", variant: :success, shape: :rounded, size: :small) %>
+              <% else %>
+                <%= render Ui::BadgeComponent.new("Inactive", variant: :danger, shape: :rounded, size: :small) %>
+              <% end %>
+            </div>
+            <div class="tw:text-xs tw:text-gray-600 tw:flex tw:flex-wrap tw:items-center tw:gap-x-1.5 tw:gap-y-0.5">
+              <span>@<%= @user.username %></span>
+              <span>&middot;</span>
+              <span class="tw:break-all"><%= @user.email %></span>
+              <span>&middot;</span>
+              <span><%= display_flag(@user.country) %> <%= @user.country&.name %></span>
+            </div>
+          </div>
 
-    <% if @user.organizations.any? %>
-      <div class="box-white mb-3">
-        <div class="text-uppercase text-body-tertiary fw-semibold small mb-3" style="font-size:0.7rem;letter-spacing:0.05em">
-          <i class="fas fa-sitemap me-1"></i>Organizations
+          <div class="tw:flex tw:flex-wrap tw:gap-2 tw:shrink-0">
+            <%= render Ui::ButtonComponent.new("Profile", href: events_by_username_path(username: @user.username), icon: "external-link-alt", variant: :secondary, size: :small, target: "_blank", rel: "noopener") %>
+            <%= render Ui::ButtonComponent.new("Edit", href: edit_admin_user_path(@user), icon: "edit", variant: :success, size: :small) %>
+          </div>
         </div>
+      </div>
 
-        <div class="d-flex flex-wrap gap-2">
-          <% @user.organizations.each do |org| %>
-            <%= link_to organization_path(short_name: org.short_name), target: "_blank",
-              class: "badge bg-success-subtle text-success text-decoration-none px-3 py-2" do %>
-              <%= icon('fas', 'building', class: 'me-1') %><%= org.name %>
-            <% end %>
-          <% end %>
+      <%# ── Quick Stats ──────────────────────────────────────── %>
+      <div class="tw:grid tw:grid-cols-2 tw:sm:grid-cols-4 tw:divide-y tw:sm:divide-y-0 tw:sm:divide-x tw:divide-gray-200">
+        <div class="tw:text-center tw:py-3 tw:px-2">
+          <div class="tw:text-2xl tw:font-bold tw:text-esperanto-500"><%= @user.events_count %></div>
+          <div class="tw:text-[11px] tw:uppercase tw:tracking-wider tw:font-semibold tw:text-gray-400">Events</div>
+        </div>
+        <div class="tw:text-center tw:py-3 tw:px-2">
+          <div class="tw:text-2xl tw:font-bold tw:text-esperanto-500"><%= @user.organizations.count %></div>
+          <div class="tw:text-[11px] tw:uppercase tw:tracking-wider tw:font-semibold tw:text-gray-400">Organizations</div>
+        </div>
+        <div class="tw:text-center tw:py-3 tw:px-2">
+          <div class="tw:text-2xl tw:font-bold tw:text-esperanto-500"><%= @user.sign_in_count %></div>
+          <div class="tw:text-[11px] tw:uppercase tw:tracking-wider tw:font-semibold tw:text-gray-400">Sign-ins</div>
+        </div>
+        <div class="tw:text-center tw:py-3 tw:px-2">
+          <div class="tw:text-sm tw:font-bold tw:text-gray-600 tw:mt-1"><%= @user.created_at.present? ? l(@user.created_at, format: :short) : "—" %></div>
+          <div class="tw:text-[11px] tw:uppercase tw:tracking-wider tw:font-semibold tw:text-gray-400">Joined</div>
         </div>
       </div>
     <% end %>
-  </div>
-</div>
+  <% end %>
 
-<%# ── Actions ───────────────────────────────────────────── %>
-<div class="box-white mt-3">
-  <div class="text-uppercase text-body-tertiary fw-semibold small mb-3" style="font-size:0.7rem;letter-spacing:0.05em">
-    <i class="fas fa-bolt me-1"></i>Actions
-  </div>
+  <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:gap-4">
+    <%# ── Personal Information ────────────────────────────────── %>
+    <%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+      <% panel.with_body(class: "tw:space-y-3") do %>
+        <h2 class="tw:text-[11px] tw:uppercase tw:tracking-wider tw:font-semibold tw:text-gray-400 tw:m-0 tw:flex tw:items-center tw:gap-1.5">
+          <i class="fas fa-id-card" aria-hidden="true"></i>
+          <span>Personal Information</span>
+        </h2>
 
-  <div class="d-flex flex-wrap gap-2">
-    <% if @user.confirmed_at.nil? %>
-      <%= link_to confirm_admin_user_path(@user),
-        method: :patch,
-        data: { confirm: "This will confirm the user's email. Are you sure?" },
-        class: "btn btn-outline-primary btn-sm" do %>
-        <%= icon('fas', 'check-circle') %> Confirm email
+        <dl class="tw:divide-y tw:divide-gray-100 tw:text-xs tw:m-0">
+          <div class="tw:grid tw:grid-cols-3 tw:gap-2 tw:py-1.5">
+            <dt class="tw:font-semibold tw:text-gray-500">ID</dt>
+            <dd class="tw:col-span-2 tw:text-gray-900 tw:m-0"><%= @user.id %></dd>
+          </div>
+          <div class="tw:grid tw:grid-cols-3 tw:gap-2 tw:py-1.5">
+            <dt class="tw:font-semibold tw:text-gray-500">Email</dt>
+            <dd class="tw:col-span-2 tw:text-gray-900 tw:m-0 tw:break-all"><%= @user.email %></dd>
+          </div>
+          <div class="tw:grid tw:grid-cols-3 tw:gap-2 tw:py-1.5">
+            <dt class="tw:font-semibold tw:text-gray-500">Username</dt>
+            <dd class="tw:col-span-2 tw:text-gray-900 tw:m-0">@<%= @user.username %></dd>
+          </div>
+          <div class="tw:grid tw:grid-cols-3 tw:gap-2 tw:py-1.5">
+            <dt class="tw:font-semibold tw:text-gray-500">City</dt>
+            <dd class="tw:col-span-2 tw:text-gray-900 tw:m-0"><%= @user.city.presence || "—" %></dd>
+          </div>
+          <div class="tw:grid tw:grid-cols-3 tw:gap-2 tw:py-1.5">
+            <dt class="tw:font-semibold tw:text-gray-500">Country</dt>
+            <dd class="tw:col-span-2 tw:text-gray-900 tw:m-0"><%= display_flag(@user.country) %> <%= @user.country&.name || "—" %></dd>
+          </div>
+          <div class="tw:grid tw:grid-cols-3 tw:gap-2 tw:py-1.5">
+            <dt class="tw:font-semibold tw:text-gray-500">Birthday</dt>
+            <dd class="tw:col-span-2 tw:text-gray-900 tw:m-0"><%= @user.birthday.present? ? l(@user.birthday, format: :long) : "—" %></dd>
+          </div>
+          <div class="tw:grid tw:grid-cols-3 tw:gap-2 tw:py-1.5">
+            <dt class="tw:font-semibold tw:text-gray-500">UEA Code</dt>
+            <dd class="tw:col-span-2 tw:text-gray-900 tw:m-0"><%= @user.ueacode.presence || "—" %></dd>
+          </div>
+          <div class="tw:grid tw:grid-cols-3 tw:gap-2 tw:py-1.5">
+            <dt class="tw:font-semibold tw:text-gray-500">About</dt>
+            <dd class="tw:col-span-2 tw:text-gray-900 tw:m-0 tw:break-words"><%= @user.about.presence || "—" %></dd>
+          </div>
+          <div class="tw:grid tw:grid-cols-3 tw:gap-2 tw:py-1.5">
+            <dt class="tw:font-semibold tw:text-gray-500">Webcal Token</dt>
+            <dd class="tw:col-span-2 tw:m-0"><code class="tw:text-gray-600 tw:break-all"><%= @user.webcal_token %></code></dd>
+          </div>
+        </dl>
       <% end %>
     <% end %>
 
-    <% if @user.disabled? %>
-      <%= link_to enable_admin_user_path(@user),
-        method: :patch,
-        data: { confirm: "Re-enable this deleted user. Are you sure?" },
-        class: "btn btn-outline-success btn-sm" do %>
-        <%= icon('fas', 'user-check') %> Enable
+    <%# ── Account & Organizations ─────────────────────────────── %>
+    <div class="tw:space-y-4">
+      <%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+        <% panel.with_body(class: "tw:space-y-3") do %>
+          <h2 class="tw:text-[11px] tw:uppercase tw:tracking-wider tw:font-semibold tw:text-gray-400 tw:m-0 tw:flex tw:items-center tw:gap-1.5">
+            <i class="fas fa-shield-alt" aria-hidden="true"></i>
+            <span>Account Status</span>
+          </h2>
+
+          <dl class="tw:divide-y tw:divide-gray-100 tw:text-xs tw:m-0">
+            <div class="tw:grid tw:grid-cols-3 tw:gap-2 tw:py-1.5">
+              <dt class="tw:font-semibold tw:text-gray-500">Confirmed at</dt>
+              <dd class="tw:col-span-2 tw:text-gray-900 tw:m-0">
+                <% if @user.confirmed_at.present? %>
+                  <%= l(@user.confirmed_at, format: :long) %>
+                <% else %>
+                  <%= render Ui::BadgeComponent.new("Not confirmed", variant: :danger, shape: :rounded, size: :small) %>
+                <% end %>
+              </dd>
+            </div>
+            <div class="tw:grid tw:grid-cols-3 tw:gap-2 tw:py-1.5">
+              <dt class="tw:font-semibold tw:text-gray-500">Last sign in</dt>
+              <dd class="tw:col-span-2 tw:text-gray-900 tw:m-0"><%= @user.last_sign_in_at.present? ? l(@user.last_sign_in_at, format: :long) : "—" %></dd>
+            </div>
+          </dl>
+        <% end %>
       <% end %>
-    <% end %>
 
-    <% unless @user.disabled? %>
-      <%= link_to deactivate_admin_user_path(@user),
-        method: :patch,
-        data: { confirm: "This will remove the user from organizations, move all events to system account and disable the user. Are you sure?" },
-        class: "btn btn-outline-danger btn-sm" do %>
-        <%= icon('fas', 'user-slash') %> Deactivate
+      <% if @user.organizations.any? %>
+        <%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+          <% panel.with_body(class: "tw:space-y-3") do %>
+            <h2 class="tw:text-[11px] tw:uppercase tw:tracking-wider tw:font-semibold tw:text-gray-400 tw:m-0 tw:flex tw:items-center tw:gap-1.5">
+              <i class="fas fa-sitemap" aria-hidden="true"></i>
+              <span>Organizations</span>
+            </h2>
+
+            <div class="tw:flex tw:flex-wrap tw:gap-2">
+              <% @user.organizations.each do |org| %>
+                <%= render Ui::BadgeComponent.new(
+                  org.name,
+                  href: organization_path(short_name: org.short_name),
+                  icon: "building",
+                  variant: :success,
+                  shape: :rounded,
+                  size: :medium,
+                  target: "_blank"
+                ) %>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
       <% end %>
-    <% end %>
-
-    <%= link_to merge_admin_user_path(@user), class: "btn btn-outline-warning btn-sm" do %>
-      <%= icon('fas', 'object-group') %> Merge
-    <% end %>
-
-    <%= link_to reset_password_admin_user_path(@user),
-      method: :patch,
-      data: { confirm: "This will change the user's password. Are you sure?" },
-      class: "btn btn-outline-danger btn-sm" do %>
-      <%= icon('fas', 'key') %> Reset password
-    <% end %>
+    </div>
   </div>
+
+  <%# ── Actions ───────────────────────────────────────────── %>
+  <%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+    <% panel.with_body(class: "tw:space-y-3") do %>
+      <h2 class="tw:text-[11px] tw:uppercase tw:tracking-wider tw:font-semibold tw:text-gray-400 tw:m-0 tw:flex tw:items-center tw:gap-1.5">
+        <i class="fas fa-bolt" aria-hidden="true"></i>
+        <span>Actions</span>
+      </h2>
+
+      <div class="tw:flex tw:flex-wrap tw:gap-2">
+        <% if @user.confirmed_at.nil? %>
+          <%= render Ui::ButtonComponent.new(
+            "Confirm email",
+            href: confirm_admin_user_path(@user),
+            icon: "check-circle",
+            variant: :outline_primary,
+            size: :small,
+            method: :patch,
+            data: { confirm: "This will confirm the user's email. Are you sure?" }
+          ) %>
+        <% end %>
+
+        <% if @user.disabled? %>
+          <%= render Ui::ButtonComponent.new(
+            "Enable",
+            href: enable_admin_user_path(@user),
+            icon: "user-check",
+            variant: :success,
+            size: :small,
+            method: :patch,
+            data: { confirm: "Re-enable this deleted user. Are you sure?" }
+          ) %>
+        <% end %>
+
+        <% unless @user.disabled? %>
+          <%= render Ui::ButtonComponent.new(
+            "Deactivate",
+            href: deactivate_admin_user_path(@user),
+            icon: "user-slash",
+            variant: :outline_danger,
+            size: :small,
+            method: :patch,
+            data: { confirm: "This will remove the user from organizations, move all events to system account and disable the user. Are you sure?" }
+          ) %>
+        <% end %>
+
+        <%= render Ui::ButtonComponent.new(
+          "Merge",
+          href: merge_admin_user_path(@user),
+          icon: "object-group",
+          variant: :secondary,
+          size: :small
+        ) %>
+
+        <%= render Ui::ButtonComponent.new(
+          "Reset password",
+          href: reset_password_admin_user_path(@user),
+          icon: "key",
+          variant: :outline_danger,
+          size: :small,
+          method: :patch,
+          data: { confirm: "This will change the user's password. Are you sure?" }
+        ) %>
+      </div>
+    <% end %>
+  <% end %>
 </div>

@@ -9,6 +9,13 @@ namespace :api do
       get "/", to: "events#index", as: "events"
     end
 
+    resources :events, param: :uuid, controller: "managed_events", only: %i[index show create update destroy], as: :managed_events do
+      member do
+        post :cancel
+        post :uncancel
+      end
+    end
+
     resources :organizations, only: [:index]
 
     # Catch-all for invalid API v2 endpoints

@@ -1,16 +1,17 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-success"
+<nav class="tw:bg-esperanto-500 tw:text-white tw:px-3 tw:py-2"
      data-controller="toggle"
      data-toggle-active-class-value="show"
      data-toggle-close-on-esc-value="true"
-     data-toggle-close-on-click-outside-value="true">
-  <div class="container-fluid">
-    <div class="d-flex align-items-center justify-content-between flex-grow-1 flex-lg-grow-0 me-lg-3 flex-nowrap" style="min-width: 0;">
-      <div class="d-flex align-items-center flex-nowrap flex-shrink-1 me-2" style="min-width: 0;">
-        <%= link_to(root_url, class: "navbar-brand me-2 flex-shrink-0") do %>
+     data-toggle-close-on-click-outside-value="true"
+     data-toggle-breakpoint-value="1024">
+  <div class="tw:w-full tw:flex tw:flex-wrap tw:lg:flex-nowrap tw:items-center tw:justify-between tw:gap-y-2">
+    <div class="tw:flex tw:items-center tw:justify-between tw:w-full tw:lg:w-auto tw:lg:mr-3 tw:flex-nowrap tw:min-w-0">
+      <div class="tw:flex tw:items-center tw:flex-nowrap tw:shrink tw:min-w-0 tw:gap-2 tw:mr-2">
+        <%= link_to(root_url, data: { testid: "navbar-brand" }, class: "tw:text-white tw:hover:text-white/90 tw:text-lg tw:font-medium tw:no-underline tw:shrink-0 tw:whitespace-nowrap") do %>
           <% if Rails.env.production? %>
             Eventa Servo
           <% else %>
-            <span class="small"><%= Rails.env.upcase %></span>
+            <span class="tw:text-sm tw:font-semibold"><%= Rails.env.upcase %></span>
           <% end %>
         <% end %>
 
@@ -18,35 +19,36 @@
       </div>
 
       <button type="button"
-              class="navbar-toggler flex-shrink-0 ms-auto"
+              class="tw:inline-flex tw:lg:hidden tw:items-center tw:justify-center tw:px-2.5 tw:py-1.5 tw:rounded tw:bg-transparent tw:border tw:border-white/30 tw:text-white/85 tw:hover:text-white tw:hover:border-white/50 tw:shrink-0 tw:ml-auto tw:cursor-pointer"
               data-toggle-target="button"
               data-action="toggle#toggle"
               aria-controls="navbar-supported-content"
               aria-expanded="false"
-              aria-label="<%= t('navbar.toggle_navigation') %>">
-        <span class="navbar-toggler-icon"></span>
+              aria-label="<%= t("navbar.toggle_navigation") %>">
+        <i class="fas fa-bars tw:text-base" data-toggle-target="icon" aria-hidden="true"></i>
       </button>
     </div>
 
-    <div class="collapse navbar-collapse justify-content-between text-end text-lg-start"
+    <div class="tw:hidden tw:lg:flex tw:w-full tw:lg:w-auto tw:lg:flex-1 tw:flex-col tw:lg:flex-row tw:items-end tw:lg:items-center tw:justify-between tw:gap-2 tw:pt-2 tw:lg:pt-0 tw:border-t tw:border-white/20 tw:lg:border-0 tw:text-right tw:lg:text-left"
          id="navbar-supported-content"
-         data-toggle-target="content">
-      <ul class="navbar-nav ms-auto mx-lg-auto align-items-end align-items-lg-center text-end text-lg-start">
-        <li class="nav-item">
-          <%= link_to(new_event_path, class: "nav-link text-end text-lg-start") do %>
+         data-toggle-target="content"
+         data-toggle-hidden-class="tw:hidden">
+      <ul class="tw:list-none tw:m-0 tw:p-0 tw:flex tw:flex-col tw:lg:flex-row tw:items-end tw:lg:items-center tw:lg:mx-auto tw:gap-1 tw:lg:gap-3">
+        <li>
+          <%= link_to(new_event_path, class: "tw:inline-flex tw:items-center tw:gap-1.5 tw:px-2 tw:py-1.5 tw:text-sm tw:text-white/85 tw:hover:text-white tw:no-underline") do %>
             <%= icon("fas", "calendar-plus") %>
             <%= t("navbar.add_event") %>
           <% end %>
         </li>
-        <li class="nav-item">
-          <%= link_to(organizations_url, class: "nav-link text-end text-lg-start") do %>
+        <li>
+          <%= link_to(organizations_url, class: "tw:inline-flex tw:items-center tw:gap-1.5 tw:px-2 tw:py-1.5 tw:text-sm tw:text-white/85 tw:hover:text-white tw:no-underline") do %>
             <%= icon("fas", "building") %>
             <%= t("navbar.organizations") %>
           <% end %>
         </li>
       </ul>
 
-      <ul class="navbar-nav align-items-end align-items-lg-center justify-content-end">
+      <ul class="tw:list-none tw:m-0 tw:p-0 tw:flex tw:flex-col tw:lg:flex-row tw:items-end tw:lg:items-center tw:justify-end tw:gap-1 tw:lg:gap-2">
         <%= render "layouts/navbar_tools" %>
       </ul>
 

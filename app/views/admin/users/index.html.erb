@@ -1,90 +1,97 @@
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb small mb-2">
-    <li class="breadcrumb-item"><%= link_to "Admin", admin_root_path %></li>
-    <li class="breadcrumb-item active" aria-current="page">Users</li>
-  </ol>
-</nav>
+<%= render "admin/shared/breadcrumb", items: [["Users"]] %>
 
-<div class="box-white">
-  <div class="lead mb-3">Users</div>
+<%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+  <% panel.with_body(class: "tw:space-y-4") do %>
+    <h1 class="tw:text-xl tw:font-bold tw:text-gray-900 tw:pb-2 tw:border-b tw:border-gray-200 tw:m-0">Users</h1>
 
-  <%# ── Scopes ──────────────────────────────────────────── %>
-  <div class="d-flex gap-2 mb-3">
-    <% scopes = [["Enabled", "enabled"], ["Disabled", "disabled"], ["Abandoned", "abandoned"], ["Not confirmed", "not_confirmed"]] %>
-    <% current_scope = params[:scope].presence || "enabled" %>
-    <% scopes.each do |label, scope| %>
-      <%= link_to label, admin_users_path(scope: scope),
-        class: "btn btn-sm #{current_scope == scope ? "btn-success" : "btn-outline-secondary"}" %>
+    <%# ── Scopes ──────────────────────────────────────────── %>
+    <div class="tw:flex tw:flex-wrap tw:gap-2">
+      <% scopes = [["Enabled", "enabled"], ["Disabled", "disabled"], ["Abandoned", "abandoned"], ["Not confirmed", "not_confirmed"]] %>
+      <% current_scope = params[:scope].presence || "enabled" %>
+      <% scopes.each do |label, scope| %>
+        <%= render Ui::ButtonComponent.new(
+          label,
+          href: admin_users_path(scope: scope),
+          variant: (current_scope == scope) ? :success : :secondary,
+          size: :small
+        ) %>
+      <% end %>
+    </div>
+
+    <%# ── Filters ─────────────────────────────────────────── %>
+    <%= form_with url: admin_users_path, method: :get, local: true do %>
+      <%= hidden_field_tag :scope, params[:scope] %>
+      <div class="tw:grid tw:grid-cols-1 tw:sm:grid-cols-2 tw:lg:grid-cols-12 tw:gap-2 tw:items-end">
+        <div class="tw:lg:col-span-2">
+          <%= render Ui::InputComponent.new(:name, id: "name", size: :small, label: "NAME", value: params[:name], placeholder: "Search name...") %>
+        </div>
+        <div class="tw:lg:col-span-3">
+          <%= render Ui::InputComponent.new(:email, id: "email", size: :small, label: "EMAIL", value: params[:email], placeholder: "Search email...") %>
+        </div>
+        <div class="tw:lg:col-span-2">
+          <%= render Ui::InputComponent.new(:username, id: "username", size: :small, label: "USERNAME", value: params[:username], placeholder: "Search username...") %>
+        </div>
+        <div class="tw:lg:col-span-3">
+          <%= render Ui::SelectComponent.new(
+            :country_id,
+            id: "country_id",
+            size: :small,
+            label: "COUNTRY",
+            options: Country.order(:name).map { |country| [country.name, country.id] },
+            selected: params[:country_id]&.to_i,
+            include_blank: "All countries"
+          ) %>
+        </div>
+        <div class="tw:sm:col-span-2 tw:lg:col-span-2 tw:flex tw:items-center tw:gap-2">
+          <%= render Ui::ButtonComponent.new("Filter", type: :submit, variant: :success, size: :small) %>
+          <%= render Ui::ButtonComponent.new("Clear", href: admin_users_path(scope: params[:scope]), variant: :secondary, size: :small) %>
+        </div>
+      </div>
     <% end %>
-  </div>
 
-  <%# ── Filters ─────────────────────────────────────────── %>
-  <%= form_with url: admin_users_path, method: :get, local: true, class: "mb-3" do |f| %>
-    <%= hidden_field_tag :scope, params[:scope] %>
-    <div class="row g-2 align-items-end">
-      <div class="col-md-2">
-        <label class="form-label smaller text-uppercase fw-bold text-body-secondary mb-1">Name</label>
-        <%= text_field_tag :name, params[:name], class: "form-control form-control-sm", placeholder: "Search name..." %>
+    <%# ── List ────────────────────────────────────────────── %>
+    <div class="tw:border tw:border-gray-200 tw:rounded tw:overflow-hidden tw:text-xs">
+      <div class="tw:grid tw:grid-cols-12 tw:gap-2 tw:items-center tw:bg-esperanto-500 tw:text-white tw:uppercase tw:font-bold tw:px-3 tw:py-2 tw:text-[11px]">
+        <div class="tw:col-span-5 tw:md:col-span-3">Name</div>
+        <div class="tw:col-span-5 tw:md:col-span-3">Email</div>
+        <div class="tw:hidden tw:md:block tw:md:col-span-1">City</div>
+        <div class="tw:hidden tw:md:block tw:md:col-span-2">Country</div>
+        <div class="tw:hidden tw:md:block tw:md:col-span-1">Username</div>
+        <div class="tw:hidden tw:md:block tw:md:col-span-1">Events</div>
+        <div class="tw:col-span-2 tw:md:col-span-1">Active?</div>
       </div>
-      <div class="col-md-2">
-        <label class="form-label smaller text-uppercase fw-bold text-body-secondary mb-1">Email</label>
-        <%= text_field_tag :email, params[:email], class: "form-control form-control-sm", placeholder: "Search email..." %>
-      </div>
-      <div class="col-md-2">
-        <label class="form-label smaller text-uppercase fw-bold text-body-secondary mb-1">Username</label>
-        <%= text_field_tag :username, params[:username], class: "form-control form-control-sm", placeholder: "Search username..." %>
-      </div>
-      <div class="col-md-2">
-        <label class="form-label smaller text-uppercase fw-bold text-body-secondary mb-1">Country</label>
-        <%= select_tag :country_id,
-          options_from_collection_for_select(Country.order(:name), :id, :name, params[:country_id]&.to_i),
-          include_blank: "All countries",
-          class: "form-select form-select-sm" %>
-      </div>
-      <div class="col-md-auto d-flex gap-2">
-        <%= f.submit "Filter", class: "btn btn-sm btn-success" %>
-        <%= link_to "Clear", admin_users_path(scope: params[:scope]), class: "btn btn-sm btn-outline-secondary" %>
-      </div>
-    </div>
-  <% end %>
 
-  <%# ── Table ───────────────────────────────────────────── %>
-  <div class="border rounded overflow-hidden small">
-    <div class="row g-0 align-items-center bg-success text-white text-uppercase fw-bold px-2 py-2 smaller">
-      <div class="col-3">Name</div>
-      <div class="col-3">Email</div>
-      <div class="col-1">City</div>
-      <div class="col-2">Country</div>
-      <div class="col-1">Username</div>
-      <div class="col-1">Events</div>
-      <div class="col-1">Active?</div>
-    </div>
+      <% @users.each_with_index do |user, i| %>
+        <% stripe_classes = [
+          ("tw:border-b tw:border-gray-200" unless i == @users.size - 1),
+          ("tw:bg-gray-50" if i.odd?)
+        ].compact.join(" ") %>
 
-    <% @users.each_with_index do |user, i| %>
-      <%= link_to admin_user_path(user), class: "row g-0 align-items-center px-2 py-1 small hover-row text-decoration-none text-dark #{'border-bottom' unless i == @users.size - 1} #{'bg-body-tertiary' if i.odd?}" do %>
-        <div class="col-3 fw-medium text-truncate"><%= user.name %></div>
-        <div class="col-3 text-body-secondary text-truncate"><%= user.email %></div>
-        <div class="col-1 text-body-secondary text-truncate"><%= user.city %></div>
-        <div class="col-2 text-body-secondary text-truncate"><%= display_flag(user.country) %> <%= user.country&.name %></div>
-        <div class="col-1 text-body-secondary text-truncate"><%= user.username %></div>
-        <div class="col-1 text-body-secondary"><%= user.events_count %></div>
-        <div class="col-1">
-          <% if user.active? %>
-            <span class="badge bg-success-subtle text-success">Yes</span>
-          <% else %>
-            <span class="badge bg-danger-subtle text-danger">No</span>
-          <% end %>
+        <%= link_to admin_user_path(user), class: "tw:grid tw:grid-cols-12 tw:gap-2 tw:items-center tw:px-3 tw:py-1.5 tw:text-gray-900 tw:no-underline tw:hover:bg-esperanto-50 tw:transition-colors #{stripe_classes}" do %>
+          <div class="tw:col-span-5 tw:md:col-span-3 tw:font-medium tw:text-gray-900 tw:break-words"><%= user.name %></div>
+          <div class="tw:col-span-5 tw:md:col-span-3 tw:text-gray-600 tw:break-all"><%= user.email %></div>
+          <div class="tw:hidden tw:md:block tw:md:col-span-1 tw:text-gray-600 tw:truncate"><%= user.city %></div>
+          <div class="tw:hidden tw:md:block tw:md:col-span-2 tw:text-gray-600 tw:truncate"><%= display_flag(user.country) %> <%= user.country&.name %></div>
+          <div class="tw:hidden tw:md:block tw:md:col-span-1 tw:text-gray-600 tw:truncate"><%= user.username %></div>
+          <div class="tw:hidden tw:md:block tw:md:col-span-1 tw:text-gray-600"><%= user.events_count %></div>
+          <div class="tw:col-span-2 tw:md:col-span-1">
+            <% if user.active? %>
+              <%= render Ui::BadgeComponent.new("Yes", variant: :success, shape: :rounded, size: :small) %>
+            <% else %>
+              <%= render Ui::BadgeComponent.new("No", variant: :danger, shape: :rounded, size: :small) %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <% if @users.empty? %>
+        <div class="tw:p-6 tw:text-center tw:text-gray-500">
+          <%= icon("fas", "search", class: "fa-2x tw:mb-3 tw:opacity-25") %>
+          <p class="tw:m-0">No users found.</p>
         </div>
       <% end %>
-    <% end %>
+    </div>
 
-    <% if @users.empty? %>
-      <div class="p-4 text-center text-body-secondary">
-        <%= icon('fas', 'search', class: 'fa-2x mb-3 opacity-25') %>
-        <p>No users found.</p>
-      </div>
-    <% end %>
-  </div>
-
-  <%= render "shared/pagination", pagy: @pagy %>
-</div>
+    <%= render "shared/pagination", pagy: @pagy %>
+  <% end %>
+<% end %>

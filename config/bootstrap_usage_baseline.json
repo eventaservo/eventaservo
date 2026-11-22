@@ -1,11 +1,11 @@
 {
   "app/views": {
     "data_attributes": 0,
-    "component_classes": 672
+    "component_classes": 105
   },
   "app/components": {
     "data_attributes": 0,
-    "component_classes": 4
+    "component_classes": 3
   },
   "app/javascript": {
     "data_attributes": 0,
@@ -13,6 +13,6 @@
   },
   "app/helpers": {
     "data_attributes": 0,
-    "component_classes": 10
+    "component_classes": 9
   }
 }

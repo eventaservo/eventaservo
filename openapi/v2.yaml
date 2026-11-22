@@ -116,6 +116,379 @@ paths:
                     type: string
                     description: Error message in Esperanto.
                     example: Mankas komenca_dato kaj fina_dato aŭ eventa UUID
+  /events:
+    get:
+      summary: List manageable events
+      description: >
+        List non-deleted events that the authenticated user can manage (events owned
+        by the user or linked to organizations the user belongs to), ordered by
+        start date descending.
+      tags:
+        - Events (English)
+      operationId: list-managed-events
+      parameters:
+        - name: status
+          in: query
+          required: false
+          description: Filter events by time status (`upcoming`, `past`, or `all`). Defaults to `all`.
+          schema:
+            type: string
+            enum:
+              - upcoming
+              - past
+              - all
+            default: all
+        - name: page
+          in: query
+          required: false
+          description: Page number (1-based).
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: per_page
+          in: query
+          required: false
+          description: Number of items per page (default 20, max 100).
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+      responses:
+        '200':
+          description: Paginated list of manageable events.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagedEventList'
+        '401':
+          description: Missing, invalid, or expired JWT token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Account is disabled or unconfirmed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      summary: Create an event
+      description: >
+        Create a new event owned by the authenticated user.
+        Rate-limited to 30 write requests per minute per token.
+      tags:
+        - Events (English)
+      operationId: create-event
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventCreateInput'
+      responses:
+        '201':
+          description: Event created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagedEvent'
+        '401':
+          description: Missing, invalid, or expired JWT token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Account is disabled or unconfirmed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '429':
+          description: Rate limit exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /events/{uuid}:
+    parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Immutable UUID of the event.
+        schema:
+          type: string
+          format: uuid
+          example: 206da237-65ee-4b86-96f6-5bd4cc3bd210
+    get:
+      summary: Get an event by UUID
+      description: Returns any non-deleted event by its UUID.
+      tags:
+        - Events (English)
+      operationId: get-event
+      responses:
+        '200':
+          description: Event details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagedEvent'
+        '401':
+          description: Missing, invalid, or expired JWT token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Event not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    patch:
+      summary: Update an event
+      description: >
+        Partially update an event. Allowed for the event owner, members of any
+        organization linked to the event, or administrators. Omitting `tags` or
+        `organization_short_names` preserves existing associations; passing `[]`
+        clears them.
+      tags:
+        - Events (English)
+      operationId: update-event
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventUpdateInput'
+      responses:
+        '200':
+          description: Event updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagedEvent'
+        '401':
+          description: Missing, invalid, or expired JWT token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: User is not authorized to edit this event.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Event not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '429':
+          description: Rate limit exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      summary: Update an event (PUT alias)
+      description: Same behavior as `PATCH /events/{uuid}`.
+      tags:
+        - Events (English)
+      operationId: replace-event
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventUpdateInput'
+      responses:
+        '200':
+          description: Event updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagedEvent'
+        '401':
+          description: Missing, invalid, or expired JWT token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: User is not authorized to edit this event.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Event not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '429':
+          description: Rate limit exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      summary: Soft-delete an event
+      description: >
+        Marks the event as deleted. Allowed for the event owner, members of any
+        organization linked to the event, or administrators.
+      tags:
+        - Events (English)
+      operationId: delete-event
+      responses:
+        '204':
+          description: Event soft-deleted successfully.
+        '401':
+          description: Missing, invalid, or expired JWT token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: User is not authorized to delete this event.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Event not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /events/{uuid}/cancel:
+    parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Immutable UUID of the event.
+        schema:
+          type: string
+          format: uuid
+    post:
+      summary: Cancel an event
+      description: Marks an event as cancelled with an optional reason.
+      tags:
+        - Events (English)
+      operationId: cancel-event
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelEventInput'
+      responses:
+        '200':
+          description: Event cancelled successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagedEvent'
+        '401':
+          description: Missing, invalid, or expired JWT token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: User is not authorized to cancel this event.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Event not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /events/{uuid}/uncancel:
+    parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: Immutable UUID of the event.
+        schema:
+          type: string
+          format: uuid
+    post:
+      summary: Uncancel an event
+      description: Clears the cancelled flag and cancellation reason on an event.
+      tags:
+        - Events (English)
+      operationId: uncancel-event
+      responses:
+        '200':
+          description: Event uncancelled successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagedEvent'
+        '401':
+          description: Missing, invalid, or expired JWT token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: User is not authorized to uncancel this event.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Event not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /organizations:
     get:
       summary: List organizations
@@ -367,9 +740,368 @@ components:
           format: date-time
           description: Last update timestamp.
           example: '2024-08-31T16:54:32.114Z'
+    ManagedEvent:
+      type: object
+      description: English representation of an EventaServo event.
+      required:
+        - uuid
+        - code
+        - title
+        - description
+        - date_start
+        - date_end
+        - time_zone
+        - international_calendar
+        - format
+        - online
+        - cancelled
+        - organizations
+        - tags
+        - organizer
+        - url
+        - created_at
+        - updated_at
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          example: 206da237-65ee-4b86-96f6-5bd4cc3bd210
+        code:
+          type: string
+          example: ab6712d
+        short_url:
+          type: string
+          nullable: true
+          example: uk2026
+        title:
+          type: string
+          example: 111-a Universala Kongreso
+        description:
+          type: string
+          maxLength: 400
+          example: The annual World Esperanto Congress.
+        content:
+          type: string
+          nullable: true
+          description: Detailed event description (HTML / rich text).
+          example: '<div>Detailed program and registration info</div>'
+        date_start:
+          type: string
+          format: date-time
+          example: '2026-08-01T09:00:00+02:00'
+        date_end:
+          type: string
+          format: date-time
+          example: '2026-08-08T18:00:00+02:00'
+        time_zone:
+          type: string
+          description: IANA time zone identifier.
+          example: Europe/Graz
+        site:
+          type: string
+          format: uri
+          nullable: true
+          example: 'https://uk.esperanto.net'
+        email:
+          type: string
+          format: email
+          nullable: true
+          example: kontakto@uea.org
+        international_calendar:
+          type: boolean
+          example: true
+        format:
+          type: string
+          enum:
+            - onsite
+            - hybrid
+            - online
+          example: hybrid
+        online:
+          type: boolean
+          example: true
+        cancelled:
+          type: boolean
+          example: false
+        cancel_reason:
+          type: string
+          nullable: true
+          example: null
+        location:
+          type: object
+          nullable: true
+          description: Physical location details. Null for purely online events.
+          properties:
+            address:
+              type: string
+              nullable: true
+              example: Messeplatz 1
+            city:
+              type: string
+              example: Graz
+            country:
+              type: string
+              nullable: true
+              example: Aŭstrio
+            country_code:
+              type: string
+              nullable: true
+              example: at
+            continent:
+              type: string
+              nullable: true
+              example: Eŭropo
+            latitude:
+              type: number
+              nullable: true
+              example: 47.0604
+            longitude:
+              type: number
+              nullable: true
+              example: 15.4488
+        organizations:
+          type: array
+          items:
+            type: object
+            required:
+              - short_name
+              - name
+            properties:
+              short_name:
+                type: string
+                example: UEA
+              name:
+                type: string
+                example: Universala Esperanto-Asocio
+        tags:
+          type: array
+          description: Category and characteristic tag names attached to the event.
+          items:
+            type: string
+            example: Kongreso
+        organizer:
+          type: string
+          description: Display name of the event owner.
+          example: Universala Esperanto-Asocio
+        url:
+          type: string
+          format: uri
+          example: 'https://eventaservo.org/e/uk2026'
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-11-19T18:00:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2026-11-19T18:00:00Z'
+    ManagedEventList:
+      type: object
+      required:
+        - events
+        - meta
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManagedEvent'
+        meta:
+          type: object
+          required:
+            - page
+            - per_page
+            - total_count
+            - total_pages
+          properties:
+            page:
+              type: integer
+              example: 1
+            per_page:
+              type: integer
+              example: 20
+            total_count:
+              type: integer
+              example: 42
+            total_pages:
+              type: integer
+              example: 3
+    EventCreateInput:
+      type: object
+      description: Payload to create a new event. Either `site` or `email` must be provided.
+      required:
+        - title
+        - description
+        - date_start
+        - date_end
+      properties:
+        title:
+          type: string
+          maxLength: 100
+          example: Esperanto Meetup
+        description:
+          type: string
+          maxLength: 400
+          example: Monthly Esperanto conversation meetup.
+        content:
+          type: string
+          nullable: true
+          description: Detailed event description (plain text or HTML).
+          example: '<p>Join us for coffee and conversation!</p>'
+        date_start:
+          type: string
+          format: date-time
+          description: ISO 8601 datetime. Explicit offset/Z preserves exact instant; naive datetime is interpreted in `time_zone`.
+          example: '2026-08-01T14:00:00-03:00'
+        date_end:
+          type: string
+          format: date-time
+          example: '2026-08-01T17:00:00-03:00'
+        time_zone:
+          type: string
+          description: IANA time zone identifier. Defaults to `Etc/UTC`.
+          example: America/Sao_Paulo
+        site:
+          type: string
+          format: uri
+          nullable: true
+          example: 'https://esperanto.org.br'
+        email:
+          type: string
+          format: email
+          nullable: true
+          example: info@esperanto.org.br
+        short_url:
+          type: string
+          maxLength: 32
+          nullable: true
+          example: sp-meetup-2026
+        international_calendar:
+          type: boolean
+          default: false
+        online:
+          type: boolean
+          default: false
+          description: Set true without `city`/`country_code` for purely online events, or with `city`/`country_code` for hybrid events.
+        address:
+          type: string
+          nullable: true
+          example: Av. Paulista, 1000
+        city:
+          type: string
+          nullable: true
+          description: Required for onsite/hybrid events; automatically set to `Reta` for purely online events.
+          example: São Paulo
+        country_code:
+          type: string
+          nullable: true
+          description: 2-letter ISO country code (case-insensitive). Required for onsite/hybrid events.
+          example: br
+        organization_short_names:
+          type: array
+          description: Short names of organizations the user belongs to (admins may link any organization).
+          items:
+            type: string
+            example: UEA
+        tags:
+          type: array
+          description: Tag names from `category` or `characteristic` groups.
+          items:
+            type: string
+            example: Kunveno/Evento
+    EventUpdateInput:
+      type: object
+      description: Partial payload to update an event. Omitted fields remain unchanged; sending `[]` for `tags` or `organization_short_names` clears them.
+      properties:
+        title:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          maxLength: 400
+        content:
+          type: string
+          nullable: true
+        date_start:
+          type: string
+          format: date-time
+        date_end:
+          type: string
+          format: date-time
+        time_zone:
+          type: string
+        site:
+          type: string
+          format: uri
+          nullable: true
+        email:
+          type: string
+          format: email
+          nullable: true
+        short_url:
+          type: string
+          maxLength: 32
+          nullable: true
+        international_calendar:
+          type: boolean
+        online:
+          type: boolean
+        address:
+          type: string
+          nullable: true
+        city:
+          type: string
+          nullable: true
+        country_code:
+          type: string
+          nullable: true
+        organization_short_names:
+          type: array
+          items:
+            type: string
+        tags:
+          type: array
+          items:
+            type: string
+    CancelEventInput:
+      type: object
+      properties:
+        cancel_reason:
+          type: string
+          nullable: true
+          example: Venue unavailable due to weather.
+    ErrorResponse:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          type: string
+          example: Event not found
+    ValidationErrorResponse:
+      type: object
+      required:
+        - error
+        - details
+      properties:
+        error:
+          type: string
+          example: Validation failed
+        details:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          example:
+            title:
+              - "can't be blank"
+            country_code:
+              - is not a valid country code
 tags:
   - name: Events
-    description: Event-related endpoints
+    description: Legacy Esperanto event listing endpoints
+  - name: Events (English)
+    description: Full-lifecycle English event management endpoints
   - name: Organizations
     description: Organization-related endpoints
 security:

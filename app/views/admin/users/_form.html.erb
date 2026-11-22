@@ -1,23 +1,20 @@
-<%= form_with(model: user, url: admin_user_path(user), local: true) do |f| %>
+<%= form_with(model: user, url: admin_user_path(user), local: true, class: "tw:space-y-4") do %>
   <%= error_handling(user) %>
 
-  <div class="mb-3">
-    <%= f.label :name, "Name", class: "form-label fw-bold small text-uppercase text-body-secondary" %>
-    <%= f.text_field :name, class: "form-control" %>
-  </div>
+  <%= render Ui::InputComponent.new("user[name]", id: "user_name", label: "NAME", value: user.name) %>
 
-  <div class="mb-3">
-    <%= f.label :country_id, "Country", class: "form-label fw-bold small text-uppercase text-body-secondary" %>
-    <%= f.collection_select :country_id, Country.order(:name), :id, :name, {}, { class: "form-select" } %>
-  </div>
+  <%= render Ui::SelectComponent.new(
+    "user[country_id]",
+    id: "user_country_id",
+    label: "COUNTRY",
+    options: Country.order(:name).map { |country| [country.name, country.id] },
+    selected: user.country_id
+  ) %>
 
-  <div class="mb-3">
-    <%= f.label :city, "City", class: "form-label fw-bold small text-uppercase text-body-secondary" %>
-    <%= f.text_field :city, class: "form-control" %>
-  </div>
+  <%= render Ui::InputComponent.new("user[city]", id: "user_city", label: "CITY", value: user.city) %>
 
-  <div class="mt-4 d-flex gap-2">
-    <%= f.submit "Save", class: "btn btn-success" %>
-    <%= link_to "Cancel", admin_user_path(user), class: "btn btn-outline-secondary" %>
+  <div class="tw:pt-2 tw:flex tw:items-center tw:gap-2">
+    <%= render Ui::ButtonComponent.new("Save", type: :submit, variant: :success) %>
+    <%= render Ui::ButtonComponent.new("Cancel", href: admin_user_path(user), variant: :secondary) %>
   </div>
 <% end %>

@@ -1,24 +1,33 @@
-<div class="box-white">
-  <div class="text-center">
-    <h1><%= t("international_calendar.by_year_title") %></h1>
-    <%= link_to t("international_calendar.current_calendar"), international_calendar_path, class: 'btn btn-sm btn-link' %>
-  </div>
-
-  <div class="col-lg-6 offset-lg-3 mt-4">
-    <div class="border rounded overflow-hidden small">
-      <div class="row g-0 align-items-center bg-success text-white text-uppercase fw-bold px-2 py-2 smaller">
-        <div class="col-6"><%= t("international_calendar.year") %></div>
-        <div class="col-6"><%= t("international_calendar.events") %></div>
+<%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+  <% panel.with_body(class: "tw:space-y-5") do %>
+    <div class="tw:text-center tw:space-y-2">
+      <h1 class="tw:text-2xl tw:font-bold tw:text-gray-900 tw:m-0"><%= t("international_calendar.by_year_title") %></h1>
+      <div>
+        <%= render Ui::ButtonComponent.new(t("international_calendar.current_calendar"), href: international_calendar_path, variant: :link, size: :small) %>
       </div>
-
-      <% @events_by_year.each_with_index do |(year, event_count), i| %>
-        <%= link_to international_calendar_year_path(year: year.to_i), class: "row g-0 align-items-center px-2 py-1 small hover-row text-decoration-none #{'border-bottom' unless i == @events_by_year.size - 1} #{'bg-body-tertiary' if i.odd?}" do %>
-          <div class="col-6 fw-semibold text-success-emphasis"><%= year.to_i %></div>
-          <div class="col-6 text-body-secondary"><%= event_count %></div>
-        <% end %>
-      <% end %>
     </div>
-  </div>
 
-  <%= render partial: "eventoj_hu" %>
-</div>
+    <div class="tw:max-w-xl tw:mx-auto">
+      <div class="tw:border tw:border-gray-200 tw:rounded tw:overflow-hidden tw:text-xs">
+        <div class="tw:grid tw:grid-cols-2 tw:items-center tw:bg-esperanto-500 tw:text-white tw:uppercase tw:font-bold tw:px-3 tw:py-2 tw:text-[11px]">
+          <div><%= t("international_calendar.year") %></div>
+          <div><%= t("international_calendar.events") %></div>
+        </div>
+
+        <% @events_by_year.each_with_index do |(year, event_count), i| %>
+          <% stripe_classes = [
+            ("tw:border-b tw:border-gray-200" unless i == @events_by_year.size - 1),
+            ("tw:bg-gray-50" if i.odd?)
+          ].compact.join(" ") %>
+
+          <%= link_to international_calendar_year_path(year: year.to_i), class: "tw:grid tw:grid-cols-2 tw:items-center tw:px-3 tw:py-1.5 tw:text-gray-900 tw:no-underline tw:hover:bg-esperanto-50 tw:transition-colors #{stripe_classes}" do %>
+            <div class="tw:font-semibold tw:text-esperanto-600"><%= year.to_i %></div>
+            <div class="tw:text-gray-600"><%= event_count %></div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <%= render partial: "eventoj_hu" %>
+  <% end %>
+<% end %>

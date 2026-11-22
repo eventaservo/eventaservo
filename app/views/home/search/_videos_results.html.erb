@@ -1,28 +1,31 @@
-<div class="box-white">
-  <div class="box-header"><%= t("search.results.videos.header") %></div>
-  <% if videos.empty? %>
-    <p><%= t("search.results.videos.empty") %></p>
-  <% else %>
-    <h5><%= t("search.results.videos.found", count: videos.count) %></h5>
-    <div class="table-responsive">
-      <table class="table table-sm table-hover">
-        <thead>
-          <tr>
-            <th><%= t("search.results.videos.title") %></th>
-            <th><%= t("search.results.videos.event") %></th>
-            <th><%= t("search.results.videos.date") %></th>
-          </tr>
-        </thead>
-        <tbody>
+<section class="tw:bg-white tw:border tw:border-gray-200 tw:rounded tw:overflow-hidden">
+  <div class="tw:bg-[#008000] tw:text-white tw:px-3 tw:py-1.5 tw:text-[10px] tw:font-bold tw:uppercase tw:tracking-wider">
+    <%= t("search.results.videos.header") %>
+  </div>
+  <div class="tw:p-3 tw:space-y-2">
+    <% if videos.empty? %>
+      <p class="tw:text-sm tw:text-gray-700 tw:m-0"><%= t("search.results.videos.empty") %></p>
+    <% else %>
+      <h2 class="tw:text-base tw:font-medium tw:text-gray-900 tw:m-0"><%= t("search.results.videos.found", count: videos.count) %></h2>
+      <div class="tw:border tw:border-gray-200 tw:rounded tw:overflow-hidden tw:text-xs">
+        <div class="tw:grid tw:grid-cols-12 tw:gap-2 tw:bg-gray-100 tw:text-gray-700 tw:font-semibold tw:px-3 tw:py-1.5 tw:border-b tw:border-gray-200" aria-hidden="true">
+          <div class="tw:col-span-5"><%= t("search.results.videos.title") %></div>
+          <div class="tw:col-span-4"><%= t("search.results.videos.event") %></div>
+          <div class="tw:col-span-3"><%= t("search.results.videos.date") %></div>
+        </div>
+        <div class="tw:divide-y tw:divide-gray-200">
           <% videos.each do |video| %>
-            <tr class="small pointer" onclick="window.location.href='<%= video.url %>'">
-              <td><%= video.title %></td>
-              <td><%= video.evento.title %></td>
-              <td><%= format_date(video.evento.komenca_dato, style: :month_year).downcase %></td>
-            </tr>
+            <%= link_to video.url,
+                  target: "_blank",
+                  rel: "noopener",
+                  class: "tw:grid tw:grid-cols-12 tw:gap-2 tw:items-center tw:px-3 tw:py-1.5 tw:text-gray-900 tw:no-underline tw:hover:bg-gray-50 tw:transition-colors" do %>
+              <div class="tw:col-span-5 tw:font-medium tw:break-words"><span class="tw:sr-only"><%= t("search.results.videos.title") %>: </span><%= video.title %></div>
+              <div class="tw:col-span-4 tw:text-gray-600 tw:break-words"><span class="tw:sr-only"><%= t("search.results.videos.event") %>: </span><%= video.evento.title %></div>
+              <div class="tw:col-span-3 tw:text-gray-600 tw:break-words"><span class="tw:sr-only"><%= t("search.results.videos.date") %>: </span><%= format_date(video.evento.komenca_dato, style: :month_year).downcase %></div>
+            <% end %>
           <% end %>
-        </tbody>
-      </table>
-    </div>
-  <% end %>
-</div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>

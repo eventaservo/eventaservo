@@ -76,13 +76,8 @@ module OrganizationsHelper
       tags.each do |tag|
         next unless tag.category? || tag.characteristic?
 
-        tag_color =
-          if tag.category?
-            "text-bg-info"
-          elsif tag.characteristic?
-            "text-bg-warning"
-          end
-        concat content_tag(:span, tag_display_name(tag), class: "me-1 badge rounded-pill #{tag_color}")
+        variant = tag.category? ? :info : :warning
+        concat render(Ui::BadgeComponent.new(tag_display_name(tag), variant:, shape: :pill, size: :small, class: "tw:mr-1"))
       end
     end
   end

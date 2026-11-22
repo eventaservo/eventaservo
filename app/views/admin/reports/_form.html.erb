@@ -1,23 +1,20 @@
-<%= form_with(model: report, url: admin_report_path(report), local: true) do |f| %>
+<%= form_with(model: report, url: admin_report_path(report), local: true, class: "tw:space-y-4") do %>
   <%= error_handling(report) %>
 
-  <div class="mb-3">
-    <%= f.label :title, "Titolo de la raporto", class: "form-label fw-bold small text-uppercase text-body-secondary" %>
-    <%= f.text_field :title, class: "form-control" %>
-  </div>
+  <%= render Ui::InputComponent.new("event_report[title]", id: "event_report_title", label: "TITOLO DE LA RAPORTO", value: report.title) %>
 
-  <div class="mb-3">
-    <%= f.label :url, "URL de la raporto", class: "form-label fw-bold small text-uppercase text-body-secondary" %>
-    <%= f.text_field :url, class: "form-control" %>
-  </div>
+  <%= render Ui::InputComponent.new("event_report[url]", id: "event_report_url", label: "URL DE LA RAPORTO", value: report.url) %>
 
-  <div class="mb-3">
-    <%= f.label :user_id, "Raportanto (Uziranto)", class: "form-label fw-bold small text-uppercase text-body-secondary" %>
-    <%= f.collection_select :user_id, @users, :id, :name, {}, { class: "form-select" } %>
-  </div>
+  <%= render Ui::SelectComponent.new(
+    "event_report[user_id]",
+    id: "event_report_user_id",
+    label: "RAPORTANTO (UZANTO)",
+    options: @users.map { |user| [user.name, user.id] },
+    selected: report.user_id
+  ) %>
 
-  <div class="mt-4 d-flex gap-2">
-    <%= f.submit "Konservi", class: "btn btn-success" %>
-    <%= link_to "Nuligi", admin_report_path(report), class: "btn btn-outline-secondary" %>
+  <div class="tw:pt-2 tw:flex tw:items-center tw:gap-2">
+    <%= render Ui::ButtonComponent.new("Konservi", type: :submit, variant: :success) %>
+    <%= render Ui::ButtonComponent.new("Nuligi", href: admin_report_path(report), variant: :secondary) %>
   </div>
 <% end %>

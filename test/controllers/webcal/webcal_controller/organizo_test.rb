@@ -34,4 +34,35 @@ class Webcal::WebcalController::OrganizoTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
     assert_equal "Organizo ne ekzistas", flash[:error]
   end
+
+  test "organization webcal preloads countries and category tags without N+1 queries" do
+    denmark = countries(:denmark)
+    second_event = Event.create!(
+      title: "UEA Dua Kunveno",
+      description: "Dua evento",
+      city: "Kopenhago",
+      country_id: denmark.id,
+      date_start: 2.months.from_now,
+      date_end: 2.months.from_now + 2.days,
+      code: "uea-dua",
+      email: "dua@example.org",
+      user: users(:user)
+    )
+    second_event.organization_events.create!(organization: @org)
+
+    @event.tags = [tags(:kurso), tags(:por_junuloj)]
+    second_event.tags = [tags(:kunveno_evento), tags(:plurtaga)]
+
+    assert_no_queries_match(/FROM "countries" WHERE "countries"\."id" =/) do
+      assert_no_queries_match(/"tags"\."group_name" =/) do
+        get webcal_organizo_url(short_name: "uea", format: :ics)
+      end
+    end
+
+    assert_response :success
+    cal = Icalendar::Calendar.parse(response.body).first
+    first_vevent = cal.events.find { |e| e.uid == "#{@event.uuid}@eventaservo.org" }
+    assert_equal ["Kurso"], first_vevent.categories
+    assert_includes first_vevent.location, @country.code.upcase
+  end
 end

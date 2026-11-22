@@ -1,64 +1,85 @@
-<div class="box-white">
-  <div class="d-flex">
-    <h1><%= t("search.title") %></h1>
-  </div>
+<%= render Ui::CardComponent.new(variant: :bordered, size: :small) do |panel| %>
+  <% panel.with_body(class: "tw:space-y-3") do %>
+    <h1 class="tw:text-2xl tw:font-semibold tw:text-gray-900 tw:m-0"><%= t("search.title") %></h1>
 
-  <%= form_with url: serchilo_path, method: :get, data: {controller: "search-filters"} do |form| %>
-    <div class="row">
-      <div class="col-12 col-md-9">
-        <div class="input-group">
-          <input
-            type="text"
-            autofocus="true"
-            value="<%= @search_term %>"
-            name="query"
-            placeholder="<%= t('search.placeholder') %>"
-            aria-label="<%= t('search.query_aria_label') %>"
-            class="form-control <%= 'is-invalid' unless @search_is_valid %>"
-            >
-            <%= form.submit '🔎', class: 'btn btn-outline-primary' %>
-
+    <%= form_with url: serchilo_path, method: :get, data: { controller: "search-filters" }, class: "tw:space-y-3" do %>
+      <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-12 tw:gap-3 tw:items-start">
+        <div class="tw:md:col-span-9 tw:space-y-2">
+          <div>
+            <div class="tw:flex tw:items-stretch">
+              <input
+                type="text"
+                id="query"
+                autofocus="true"
+                value="<%= @search_term %>"
+                name="query"
+                placeholder="<%= t("search.placeholder") %>"
+                aria-label="<%= t("search.query_aria_label") %>"
+                <% unless @search_is_valid %>
+                  aria-invalid="true"
+                  aria-describedby="query-error"
+                <% end %>
+                class="tw:block tw:w-full tw:min-w-0 tw:flex-1 tw:rounded-l tw:rounded-r-none tw:border tw:bg-white tw:text-gray-900 tw:placeholder:text-gray-400 tw:px-3 tw:py-1.5 tw:text-sm tw:transition-colors tw:focus:outline-none tw:focus:z-10 <%= @search_is_valid ? 'tw:border-gray-300 tw:focus:border-[#2d89ef] tw:focus:ring-2 tw:focus:ring-[#2d89ef]/20' : 'tw:border-red-500 tw:focus:border-red-500 tw:focus:ring-2 tw:focus:ring-red-500/20' %>"
+              >
+              <button
+                type="submit"
+                class="tw:inline-flex tw:items-center tw:justify-center tw:px-3 tw:py-1.5 tw:text-sm tw:rounded-r tw:rounded-l-none tw:-ml-px tw:border tw:border-brand-blue tw:bg-white tw:text-brand-blue tw:hover:bg-brand-blue tw:hover:text-white tw:cursor-pointer tw:transition-colors tw:focus:outline-none tw:focus:z-10 tw:focus:ring-2 tw:focus:ring-brand-blue/30"
+              >🔎</button>
+            </div>
             <% unless @search_is_valid %>
-              <div class="invalid-feedback d-inline"><%= t('search.min_chars_error') %></div>
+              <div id="query-error" aria-live="assertive" class="tw:text-xs tw:text-red-600 tw:mt-1"><%= t("search.min_chars_error") %></div>
             <% end %>
-
           </div>
 
-        <div class="row g-2 mt-1">
-          <div class="col-6 col-md-4">
-            <%= label_tag :from, t("search.from_date"), class: "form-label small mb-0" %>
-            <%= date_field_tag :from, params[:from], class: "form-control form-control-sm",
-                  aria: {label: t("search.from_date")} %>
-          </div>
+          <div class="tw:grid tw:grid-cols-2 tw:md:grid-cols-3 tw:gap-2">
+            <div>
+              <%= render Ui::InputComponent.new(
+                :from,
+                id: "from",
+                type: :date,
+                size: :small,
+                label: t("search.from_date"),
+                value: params[:from],
+                aria: { label: t("search.from_date") }
+              ) %>
+            </div>
 
-          <div class="col-6 col-md-4">
-            <%= label_tag :to, t("search.to_date"), class: "form-label small mb-0" %>
-            <%= date_field_tag :to, params[:to], class: "form-control form-control-sm",
-                  aria: {label: t("search.to_date")} %>
+            <div>
+              <%= render Ui::InputComponent.new(
+                :to,
+                id: "to",
+                type: :date,
+                size: :small,
+                label: t("search.to_date"),
+                value: params[:to],
+                aria: { label: t("search.to_date") }
+              ) %>
+            </div>
           </div>
+        </div>
+
+        <div class="tw:md:col-span-3 tw:flex tw:flex-wrap tw:md:flex-col tw:gap-2.5 tw:pt-1">
+          <% switch_classes = "tw:appearance-none tw:relative tw:inline-block tw:w-8 tw:h-4 tw:rounded-full tw:bg-gray-300 tw:checked:bg-brand-blue tw:cursor-pointer tw:transition-colors tw:shrink-0 tw:focus-visible:outline-none tw:focus-visible:ring-2 tw:focus-visible:ring-brand-blue/40 tw:after:content-[''] tw:after:absolute tw:after:top-0.5 tw:after:left-0.5 tw:after:w-3 tw:after:h-3 tw:after:bg-white tw:after:rounded-full tw:after:transition-transform tw:checked:after:translate-x-4" %>
+          <label for="pasintaj" class="tw:inline-flex tw:items-center tw:gap-2 tw:cursor-pointer tw:select-none">
+            <%= check_box_tag :pasintaj, true, params[:pasintaj].present?, id: "pasintaj", class: switch_classes, data: { action: "change->search-filters#submit" } %>
+            <span class="tw:text-sm tw:text-gray-800"><%= t("search.past") %></span>
+          </label>
+
+          <label for="nuligitaj" class="tw:inline-flex tw:items-center tw:gap-2 tw:cursor-pointer tw:select-none">
+            <%= check_box_tag :nuligitaj, true, params[:nuligitaj].present?, id: "nuligitaj", class: switch_classes, data: { action: "change->search-filters#submit" } %>
+            <span class="tw:text-sm tw:text-gray-800"><%= t("search.cancelled") %></span>
+          </label>
         </div>
       </div>
 
-      <div class="col-12 col-md-3">
-        <div class="d-sm-flex justify-content-around flex-md-column">
-          <div class="form-check form-switch">
-            <%= check_box_tag :pasintaj, true, params[:pasintaj], class: "form-check-input", data: {action: "change->search-filters#submit"} %>
-            <%= label_tag :pasintaj, t('search.past'), class: 'form-check-label' %>
-          </div>
-
-          <div class="form-check form-switch">
-            <%= check_box_tag :nuligitaj, true, params[:nuligitaj], class: "form-check-input", data: {action: "change->search-filters#submit"} %>
-            <%= label_tag :nuligitaj, t('search.cancelled'), class: 'form-check-label' %>
-          </div>
+      <% if @search_is_valid %>
+        <div class="tw:space-y-3">
+          <%= render partial: "home/search/organizations_results", locals: { organizations: @organizations } %>
+          <%= render partial: "home/search/events_results", locals: { events: @events } %>
+          <%= render partial: "home/search/users_results", locals: { users: @users } %>
+          <%= render partial: "home/search/videos_results", locals: { videos: @videos } %>
         </div>
-      </div>
-    </div>
-
-    <% if @search_is_valid %>
-      <%= render partial: "home/search/organizations_results", locals: { organizations: @organizations } %>
-      <%= render partial: "home/search/events_results", locals: { events: @events } %>
-      <%= render partial: "home/search/users_results", locals: { users: @users } %>
-      <%= render partial: "home/search/videos_results", locals: { videos: @videos } %>
+      <% end %>
     <% end %>
-    <% end %>
-  </div>
+  <% end %>
+<% end %>

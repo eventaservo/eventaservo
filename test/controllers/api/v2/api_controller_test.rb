@@ -106,4 +106,45 @@ class Api::V2::ApiControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
   end
+
+  test "returns forbidden when user account is disabled" do
+    @user.update!(disabled: true)
+
+    get "/api/v2/organizations",
+      headers: {"Authorization" => "Bearer #{@token}"}
+
+    assert_response :forbidden
+  end
+
+  test "returns forbidden when user account is unconfirmed" do
+    @user.update_columns(confirmed_at: nil)
+
+    get "/api/v2/organizations",
+      headers: {"Authorization" => "Bearer #{@token}"}
+
+    assert_response :forbidden
+  end
+
+  test "returns unauthorized when token references a nonexistent user" do
+    ghost_token = JWT.encode({id: -999_999}, Rails.application.credentials.dig(:jwt, :secret), "HS256")
+
+    get "/api/v2/organizations",
+      headers: {"Authorization" => "Bearer #{ghost_token}"}
+
+    assert_response :unauthorized
+  end
+
+  test "records PaperTrail whodunnit as authenticated user id on API writes" do
+    event = events(:valid_event)
+
+    PaperTrail.request(enabled: true) do
+      patch "/api/v2/events/#{event.uuid}",
+        params: {title: "Audited API Title"},
+        headers: {"Authorization" => "Bearer #{@token}"},
+        as: :json
+    end
+
+    assert_response :ok
+    assert_equal @user.id.to_s, event.reload.versions.first.whodunnit
+  end
 end

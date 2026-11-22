@@ -1,11 +1,26 @@
-<li class="nav-item tw:relative" data-controller="menu">
-  <a class="nav-link dropdown-toggle" id="navbar-dropdown" aria-expanded="false" aria-haspopup="true" aria-controls="navbar-dropdown-menu" data-menu-target="button" data-action="click->menu#toggle" href="#" role="button">
-    <div class="d-inline"><%= locale_display_code(I18n.locale) %></div>
+<li class="tw:relative" data-controller="menu">
+  <a class="tw:inline-flex tw:items-center tw:gap-1 tw:px-2 tw:py-1.5 tw:text-sm tw:text-white/85 tw:hover:text-white tw:no-underline"
+     id="navbar-dropdown"
+     aria-expanded="false"
+     aria-haspopup="true"
+     aria-controls="navbar-dropdown-menu"
+     data-menu-target="button"
+     data-action="click->menu#toggle"
+     href="#"
+     role="button">
+    <div class="tw:inline"><%= locale_display_code(I18n.locale) %></div>
+    <i class="fas fa-caret-down tw:text-xs tw:opacity-80" aria-hidden="true"></i>
   </a>
 
-  <div id="navbar-dropdown-menu" role="menu" data-menu-target="panel" class="dropdown-menu tw:left-0 tw:top-full tw:mt-1" aria-labelledby="navbar-dropdown">
+  <div id="navbar-dropdown-menu"
+       role="menu"
+       data-menu-target="panel"
+       data-menu-hidden-class="tw:hidden"
+       class="tw:hidden tw:absolute tw:right-0 tw:lg:left-0 tw:lg:right-auto tw:top-full tw:mt-1 tw:z-50 tw:min-w-[7rem] tw:rounded-md tw:bg-white tw:border tw:border-gray-200 tw:shadow-lg tw:py-1 tw:text-left"
+       aria-labelledby="navbar-dropdown">
     <% I18n.available_locales.each do |locale| %>
-      <%= link_to locale_display_code(locale), UrlLanguageChanger.new(request.original_url, locale).call, class: "dropdown-item" %>
+      <%= link_to locale_display_code(locale), UrlLanguageChanger.new(request.original_url, locale).call,
+            class: "tw:block tw:px-3 tw:py-1.5 tw:text-sm tw:text-gray-700 tw:hover:bg-gray-100 tw:hover:text-gray-900 tw:no-underline tw:whitespace-nowrap" %>
     <% end %>
   </div>
 </li>

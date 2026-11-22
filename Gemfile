@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "~> 4.0.9"
+ruby ">= 4.0.10", "< 4.1"
 
 # Ruby 4.0 removed several stdlib gems from defaults
 gem "benchmark"
@@ -103,7 +103,7 @@ gem "ahoy_matey", "~> 5"
 gem "rollups", "~> 0.6.0"
 
 # For connecting to Google Drive
-gem "google-api-client", "~> 0.53.0"
+gem "google-apis-drive_v3", "~> 0.89"
 
 # New Relic
 gem "newrelic_rpm"

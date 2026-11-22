@@ -1,0 +1,17 @@
+<nav aria-label="breadcrumb" class="tw:mt-2 tw:mb-3 tw:bg-[#e9ecef] tw:px-4 tw:py-2.5 tw:rounded">
+  <ol class="tw:flex tw:flex-wrap tw:items-center tw:list-none tw:m-0 tw:p-0 tw:text-sm tw:text-gray-600">
+    <li class="tw:inline-flex tw:items-center">
+      <%= link_to "Admin", admin_root_path, class: "tw:text-brand-blue tw:hover:text-brand-blue-hover" %>
+    </li>
+    <% items.each_with_index do |(label, path), index| %>
+      <% current = path.nil? || index == items.size - 1 %>
+      <li class="tw:inline-flex tw:items-center tw:before:content-['/'] tw:before:px-2 tw:before:text-gray-500" <%= 'aria-current="page"'.html_safe if current %>>
+        <% if current %>
+          <span class="tw:text-gray-600"><%= label %></span>
+        <% else %>
+          <%= link_to label, path, class: "tw:text-brand-blue tw:hover:text-brand-blue-hover" %>
+        <% end %>
+      </li>
+    <% end %>
+  </ol>
+</nav>

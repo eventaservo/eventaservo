@@ -1,8 +1,9 @@
 <% if cookies[:vidmaniero].in?(%w[kartoj kartaro]) && params[:page].nil? && params[:pagho].nil? %>
-  <% if @today_events.any? %>
-    <h5 class="tw:text-center tw:font-bold tw:text-xl tw:mt-4 tw:mb-2"><%= t("events.happening_now_count", count: @today_events.not_cancelled.length) %></h5>
+  <% today_events = @today_events.respond_to?(:order) ? @today_events.order(:date_start).to_a : @today_events %>
+  <% if today_events.any? %>
+    <h5 class="tw:text-center tw:font-bold tw:text-xl tw:mt-4 tw:mb-2"><%= t("events.happening_now_count", count: today_events.count { |e| !e.cancelled }) %></h5>
     <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:gap-x-6">
-      <% @today_events.order(:date_start).each do |evento| %>
+      <% today_events.each do |evento| %>
         <div class="okazantaj-eventoj tw:min-w-0">
           <h6 class="tw:truncate tw:text-base tw:font-medium tw:m-0">
             <%= event_flag(evento) %>

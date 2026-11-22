@@ -1,84 +1,82 @@
-<div class="box-white">
-  <div class="text-center">
-    <h1>
-      <%= icon("fas", "person-chalkboard", t("teachers_and_speakers.title")) %>
-    </h1>
-  </div>
+<%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+  <% panel.with_body(class: "tw:space-y-4") do %>
+    <div class="tw:text-center">
+      <h1 class="tw:text-2xl tw:font-bold tw:text-gray-900 tw:m-0">
+        <%= icon("fas", "person-chalkboard", t("teachers_and_speakers.title")) %>
+      </h1>
+    </div>
 
-  <p>
-    <%= t("teachers_and_speakers.intro") %>
-  </p>
+    <p class="tw:text-sm tw:text-gray-700">
+      <%= t("teachers_and_speakers.intro") %>
+    </p>
 
-  <div class="row">
-    <div class="col-12 col-md-6">
-      <div class="text-center">
-        <%= image_tag "edukadonet.jpg", alt: "Edukado.net", height: "150px" %>
+    <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:gap-6">
+      <div class="tw:space-y-2">
+        <div class="tw:text-center">
+          <%= image_tag "edukadonet.jpg", alt: "Edukado.net", height: "150px", class: "tw:mx-auto tw:h-[150px] tw:w-auto tw:object-contain" %>
+        </div>
+        <p class="tw:text-sm tw:text-gray-700">
+          <%= t("teachers_and_speakers.edukado_html",
+                edukado_link: link_to("Edukado.net", "https://edukado.net/prie", target: "_blank", rel: "noopener"),
+                cefr_link: link_to(t("teachers_and_speakers.cefr"), "https://eo.wikipedia.org/wiki/Komuna_E%C5%ADropa_Referenckadro_por_Lingvoj", target: "_blank", rel: "noopener")) %>
+        </p>
       </div>
-      <p>
-        <%= t("teachers_and_speakers.edukado_html",
-              edukado_link: link_to("Edukado.net", "https://edukado.net/prie", target: "_blank"),
-              cefr_link: link_to(t("teachers_and_speakers.cefr"), "https://eo.wikipedia.org/wiki/Komuna_E%C5%ADropa_Referenckadro_por_Lingvoj", target: "_blank")) %>
-      </p>
-    </div>
 
-    <div class="col-12 col-md-6">
-      <div class="text-center">
-        <%= image_tag "ilei.png", alt: "ILEI", height: "150px", class: "p-3" %>
+      <div class="tw:space-y-2">
+        <div class="tw:text-center">
+          <%= image_tag "ilei.png", alt: "ILEI", height: "150px", class: "tw:mx-auto tw:h-[150px] tw:w-auto tw:object-contain tw:p-3" %>
+        </div>
+        <p class="tw:text-sm tw:text-gray-700">
+          <%= t("teachers_and_speakers.ilei_html",
+                ilei_link: link_to("ILEI", "https://eventaservo.org/o/ILEI", target: "_blank", rel: "noopener"),
+                join_link: link_to(t("teachers_and_speakers.join_ilei"), "https://www.ilei.info/membrigxo.php", target: "_blank", rel: "noopener")) %>
+        </p>
       </div>
-      <p>
-        <%= t("teachers_and_speakers.ilei_html",
-              ilei_link: link_to("ILEI", "https://eventaservo.org/o/ILEI", target: "_blank"),
-              join_link: link_to(t("teachers_and_speakers.join_ilei"), "https://www.ilei.info/membrigxo.php", target: "_blank")) %>
-      </p>
     </div>
-  </div>
 
-  <%= render "instruistoj_kaj_prelegantoj_filtro" %>
+    <%= render "instruistoj_kaj_prelegantoj_filtro" %>
 
-  <% unless @filtering %>
-    <div class="text-center text-body-secondary small mb-3">
-      <i class="fas fa-shuffle me-1"></i>
-      <%= t("teachers_and_speakers.random_notice") %>
-    </div>
-  <% end %>
+    <% unless @filtering %>
+      <div class="tw:text-center tw:text-gray-500 tw:text-xs">
+        <i class="fas fa-shuffle tw:mr-1" aria-hidden="true"></i>
+        <%= t("teachers_and_speakers.random_notice") %>
+      </div>
+    <% end %>
 
-  <!-- Teachers -->
-  <div class="text-divider"><%= t("teachers_and_speakers.teachers_divider") %></div>
-  <% if @instruistoj.any? %>
-    <div class="row g-3">
-      <% @instruistoj.each do |instruisto| %>
-        <div class="col-12 col-md-4">
+    <%# Teachers %>
+    <div class="text-divider"><%= t("teachers_and_speakers.teachers_divider") %></div>
+    <% if @instruistoj.any? %>
+      <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-3 tw:gap-4">
+        <% @instruistoj.each do |instruisto| %>
           <%= render partial: "instruisto_karto", locals: {instruisto: instruisto} %>
-        </div>
-      <% end %>
-    </div>
-  <% else %>
-    <p class="text-body-secondary text-center py-3">
-      <% if @filtering %>
-        <i class="fas fa-search me-1"></i><%= t("teachers_and_speakers.no_teachers_filtered") %>
-      <% else %>
-        <i class="fas fa-user-slash me-1"></i><%= t("teachers_and_speakers.no_teachers_registered") %>
-      <% end %>
-    </p>
-  <% end %>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="tw:text-gray-500 tw:text-center tw:py-4 tw:text-sm">
+        <% if @filtering %>
+          <i class="fas fa-search tw:mr-1" aria-hidden="true"></i><%= t("teachers_and_speakers.no_teachers_filtered") %>
+        <% else %>
+          <i class="fas fa-user-slash tw:mr-1" aria-hidden="true"></i><%= t("teachers_and_speakers.no_teachers_registered") %>
+        <% end %>
+      </p>
+    <% end %>
 
-  <!-- Speakers -->
-  <div class="mt-4 text-divider"><%= t("teachers_and_speakers.speakers_divider") %></div>
-  <% if @prelegantoj.any? %>
-    <div class="row g-3">
-      <% @prelegantoj.each do |preleganto| %>
-        <div class="col-12 col-md-4">
+    <%# Speakers %>
+    <div class="tw:mt-6 text-divider"><%= t("teachers_and_speakers.speakers_divider") %></div>
+    <% if @prelegantoj.any? %>
+      <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-3 tw:gap-4">
+        <% @prelegantoj.each do |preleganto| %>
           <%= render partial: "preleganto_karto", locals: {preleganto: preleganto} %>
-        </div>
-      <% end %>
-    </div>
-  <% else %>
-    <p class="text-body-secondary text-center py-3">
-      <% if @filtering %>
-        <i class="fas fa-search me-1"></i><%= t("teachers_and_speakers.no_speakers_filtered") %>
-      <% else %>
-        <i class="fas fa-user-slash me-1"></i><%= t("teachers_and_speakers.no_speakers_registered") %>
-      <% end %>
-    </p>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="tw:text-gray-500 tw:text-center tw:py-4 tw:text-sm">
+        <% if @filtering %>
+          <i class="fas fa-search tw:mr-1" aria-hidden="true"></i><%= t("teachers_and_speakers.no_speakers_filtered") %>
+        <% else %>
+          <i class="fas fa-user-slash tw:mr-1" aria-hidden="true"></i><%= t("teachers_and_speakers.no_speakers_registered") %>
+        <% end %>
+      </p>
+    <% end %>
   <% end %>
-</div>
+<% end %>

@@ -90,7 +90,7 @@ class DropdownTest < ApplicationSystemTestCase
     assert_no_selector "#footerMenuPanel.show"
 
     # Open mobile navbar drawer to interact with user & language menus
-    find("button.navbar-toggler[data-toggle-target='button']", visible: :all).click
+    find("button[data-toggle-target='button']", visible: :all).click
     assert_selector "#navbar-supported-content.show"
 
     # Language selector menu

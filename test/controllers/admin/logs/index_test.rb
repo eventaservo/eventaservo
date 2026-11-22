@@ -40,10 +40,10 @@ class Admin::LogsController::IndexTest < ActionDispatch::IntegrationTest
   test "should get index" do
     get admin_logs_url
     assert_response :success
-    assert_select ".lead", "Logs"
-    assert_select "div.px-2.py-1", text: /#{@log1.text}/
-    assert_select "div.px-2.py-1", text: /#{@log2.text}/
-    assert_select "div.px-2.py-1", text: /#{@log3.text}/
+    assert_select "h1", "Logs"
+    assert_select "[data-testid='log-entry']", text: /#{@log1.text}/
+    assert_select "[data-testid='log-entry']", text: /#{@log2.text}/
+    assert_select "[data-testid='log-entry']", text: /#{@log3.text}/
 
     # Verify if the links were rendered correctly using the pre-load
     assert_select "a", text: "Evento", count: 2
@@ -53,15 +53,15 @@ class Admin::LogsController::IndexTest < ActionDispatch::IntegrationTest
   test "should use query object for filtering" do
     get admin_logs_url, params: {user_name: @user.name}
     assert_response :success
-    assert_select "div.px-2.py-1", text: /#{@log1.text}/
-    assert_select "div.px-2.py-1", text: /#{@log2.text}/, count: 0
+    assert_select "[data-testid='log-entry']", text: /#{@log1.text}/
+    assert_select "[data-testid='log-entry']", text: /#{@log2.text}/, count: 0
   end
 
   test "should handle invalid date filters without crashing" do
     get admin_logs_url, params: {start_date: "invalid-date", end_date: "also-invalid"}
     assert_response :success
-    assert_select "div.px-2.py-1", text: /#{@log1.text}/
-    assert_select "div.px-2.py-1", text: /#{@log2.text}/
+    assert_select "[data-testid='log-entry']", text: /#{@log1.text}/
+    assert_select "[data-testid='log-entry']", text: /#{@log2.text}/
   end
 
   test "should show empty state when no logs found" do

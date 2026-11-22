@@ -1,26 +1,27 @@
-<div class="box-white">
-  <div class="box-header"><%= t("search.results.users.header") %></div>
-  <% if users.empty? %>
-    <p><%= t("search.results.users.empty") %></p>
-  <% else %>
-    <h5><%= t("search.results.users.found", count: users.count) %></h5>
-    <div class="table-responsive">
-      <table class="table table-sm table-hover">
-        <thead>
-          <tr>
-            <th><%= t("search.results.users.name") %></th>
-            <th><%= t("search.results.users.country") %></th>
-          </tr>
-        </thead>
-        <tbody>
+<section class="tw:bg-white tw:border tw:border-gray-200 tw:rounded tw:overflow-hidden">
+  <div class="tw:bg-[#008000] tw:text-white tw:px-3 tw:py-1.5 tw:text-[10px] tw:font-bold tw:uppercase tw:tracking-wider">
+    <%= t("search.results.users.header") %>
+  </div>
+  <div class="tw:p-3 tw:space-y-2">
+    <% if users.empty? %>
+      <p class="tw:text-sm tw:text-gray-700 tw:m-0"><%= t("search.results.users.empty") %></p>
+    <% else %>
+      <h2 class="tw:text-base tw:font-medium tw:text-gray-900 tw:m-0"><%= t("search.results.users.found", count: users.count) %></h2>
+      <div class="tw:border tw:border-gray-200 tw:rounded tw:overflow-hidden tw:text-xs">
+        <div class="tw:grid tw:grid-cols-12 tw:gap-2 tw:bg-gray-100 tw:text-gray-700 tw:font-semibold tw:px-3 tw:py-1.5 tw:border-b tw:border-gray-200" aria-hidden="true">
+          <div class="tw:col-span-7"><%= t("search.results.users.name") %></div>
+          <div class="tw:col-span-5"><%= t("search.results.users.country") %></div>
+        </div>
+        <div class="tw:divide-y tw:divide-gray-200">
           <% users.each do |user| %>
-            <tr class="small pointer" onclick="window.location.href = '<%= events_by_username_path(username: user.username) %>'">
-              <td><%= user.name %></td>
-              <td><%= display_flag(user.country) + " #{user.country.name}" %></td>
-            </tr>
+            <%= link_to events_by_username_path(username: user.username),
+                  class: "tw:grid tw:grid-cols-12 tw:gap-2 tw:items-center tw:px-3 tw:py-1.5 tw:text-gray-900 tw:no-underline tw:hover:bg-gray-50 tw:transition-colors" do %>
+              <div class="tw:col-span-7 tw:font-medium tw:break-words"><span class="tw:sr-only"><%= t("search.results.users.name") %>: </span><%= user.name %></div>
+              <div class="tw:col-span-5 tw:text-gray-600 tw:break-words"><span class="tw:sr-only"><%= t("search.results.users.country") %>: </span><%= display_flag(user.country) %> <%= user.country&.name %></div>
+            <% end %>
           <% end %>
-        </tbody>
-      </table>
-    </div>
-  <% end %>
-</div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>

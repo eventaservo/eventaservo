@@ -1,13 +1,8 @@
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb small mb-2">
-    <li class="breadcrumb-item"><%= link_to "Admin", admin_root_path %></li>
-    <li class="breadcrumb-item"><%= link_to "Raportoj", admin_reports_path %></li>
-    <li class="breadcrumb-item"><%= link_to "Detaloj", admin_report_path(@report) %></li>
-    <li class="breadcrumb-item active" aria-current="page">Redakti</li>
-  </ol>
-</nav>
+<%= render "admin/shared/breadcrumb", items: [["Raportoj", admin_reports_path], ["Detaloj", admin_report_path(@report)], ["Redakti"]] %>
 
-<div class="box-white">
-  <div class="lead mb-3">Redakti Raporton</div>
-  <%= render "form", report: @report %>
-</div>
+<%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+  <% panel.with_body(class: "tw:space-y-4") do %>
+    <h1 class="tw:text-xl tw:font-bold tw:text-gray-900 tw:pb-2 tw:border-b tw:border-gray-200 tw:m-0">Redakti Raporton</h1>
+    <%= render "form", report: @report %>
+  <% end %>
+<% end %>

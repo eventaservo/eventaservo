@@ -1,19 +1,20 @@
-<div class="box-white">
-  <div class="box-header"><%= t("search.results.organizations.header") %></div>
-  <% if organizations.empty? %>
-    <p><%= t("search.results.organizations.empty") %></p>
-  <% else %>
-    <h5><%= t("search.results.organizations.found", count: organizations.count) %></h5>
-    <div class="table-responsive">
-      <table class="table table-sm table-hover">
-        <tbody>
-          <% organizations.each do |organizo| %>
-            <tr class="small pointer" onclick="window.location.href='<%= organization_path(short_name: organizo.short_name) %>'">
-              <td><%= display_flag(organizo.country) if organizo.display_flag %> <%= organizo.name %></td>
-            </tr>
+<section class="tw:bg-white tw:border tw:border-gray-200 tw:rounded tw:overflow-hidden">
+  <div class="tw:bg-[#008000] tw:text-white tw:px-3 tw:py-1.5 tw:text-[10px] tw:font-bold tw:uppercase tw:tracking-wider">
+    <%= t("search.results.organizations.header") %>
+  </div>
+  <div class="tw:p-3 tw:space-y-2">
+    <% if organizations.empty? %>
+      <p class="tw:text-sm tw:text-gray-700 tw:m-0"><%= t("search.results.organizations.empty") %></p>
+    <% else %>
+      <h2 class="tw:text-base tw:font-medium tw:text-gray-900 tw:m-0"><%= t("search.results.organizations.found", count: organizations.count) %></h2>
+      <div class="tw:border tw:border-gray-200 tw:rounded tw:overflow-hidden tw:divide-y tw:divide-gray-200 tw:text-xs">
+        <% organizations.each do |organizo| %>
+          <%= link_to organization_path(short_name: organizo.short_name),
+                class: "tw:block tw:px-3 tw:py-1.5 tw:text-gray-900 tw:no-underline tw:hover:bg-gray-50 tw:transition-colors" do %>
+            <%= display_flag(organizo.country) if organizo.display_flag %> <%= organizo.name %>
           <% end %>
-        </tbody>
-      </table>
-    </div>
-  <% end %>
-</div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</section>

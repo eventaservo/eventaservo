@@ -1,12 +1,8 @@
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb small mb-2">
-    <li class="breadcrumb-item"><%= link_to "Admin", admin_root_path %></li>
-    <li class="breadcrumb-item"><%= link_to "Redirektoj", admin_redirections_path %></li>
-    <li class="breadcrumb-item active" aria-current="page">Nova</li>
-  </ol>
-</nav>
+<%= render "admin/shared/breadcrumb", items: [["Redirektoj", admin_redirections_path], ["Nova"]] %>
 
-<div class="box-white">
-  <div class="lead mb-3">Nova Redirekto</div>
-  <%= render "form", redirection: @redirection %>
-</div>
+<%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+  <% panel.with_body(class: "tw:space-y-4") do %>
+    <h1 class="tw:text-xl tw:font-bold tw:text-gray-900 tw:pb-2 tw:border-b tw:border-gray-200 tw:m-0">Nova Redirekto</h1>
+    <%= render "form", redirection: @redirection %>
+  <% end %>
+<% end %>

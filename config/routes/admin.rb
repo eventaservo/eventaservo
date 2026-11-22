@@ -4,7 +4,11 @@ namespace :admin do
   patch "events/recover/:event_code", controller: "events", action: :recover, as: "recover_event"
 
   resources :logs, only: [:index]
-  resources :organizations, only: [:index]
+  resources :organizations, only: %i[index destroy] do
+    member do
+      get :delete
+    end
+  end
   resources :redirections, except: [:show]
   resources :reports, except: [:new, :create]
 
@@ -20,12 +24,6 @@ namespace :admin do
   end
 
   get "statistics", controller: "statistics", action: :index
-  get "mockups", controller: "mockups", action: :index
-  get "mockups/breadcrumbs", controller: "mockups", action: :breadcrumbs, as: "mockups_breadcrumbs"
-  get "mockups/buttons", controller: "mockups", action: :buttons, as: "mockups_buttons"
-  get "mockups/calendar", controller: "mockups", action: :calendar, as: "mockups_calendar"
-  get "mockups/cards", controller: "mockups", action: :cards, as: "mockups_cards"
-  get "mockups/tables", controller: "mockups", action: :tables, as: "mockups_tables"
   resources :reklamoj do
     get "toggle_active"
   end

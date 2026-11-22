@@ -171,10 +171,10 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
     assert_includes response.body, @copenhagen_event.title
     assert_includes response.body, @malmo_event.title
     assert_select ".event-card", text: /#{@malmo_event.title}/ do
-      assert_select ".badge", text: I18n.t("events.nearby")
+      assert_select ".event-card__tag-nearby", text: I18n.t("events.nearby")
     end
     assert_select ".event-card", text: /#{@copenhagen_event.title}/ do
-      assert_select ".badge", text: I18n.t("events.nearby"), count: 0
+      assert_select ".event-card__tag-nearby", text: I18n.t("events.nearby"), count: 0
     end
   end
 
@@ -338,6 +338,39 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "a", text: I18n.t("events.show_past"), count: 0
+  end
+
+  test "tag filter matches all selected tags without grouping taggings" do
+    kurso = tags(:kurso)
+    por_junuloj = tags(:por_junuloj)
+    denmark = countries(:denmark)
+
+    matching = create(
+      :event,
+      title: "Junulara Kurso",
+      city: "Kopenhago",
+      country: denmark,
+      date_start: 2.days.from_now,
+      date_end: 3.days.from_now
+    )
+    matching.tags = [kurso, por_junuloj]
+    partial = create(
+      :event,
+      title: "Nur Kurso",
+      city: "Kopenhago",
+      country: denmark,
+      date_start: 4.days.from_now,
+      date_end: 5.days.from_now
+    )
+    partial.tags = [kurso]
+
+    assert_no_queries_match(/GROUP BY.*taggable_id/i) do
+      get_copenhagen(s: [kurso.id, por_junuloj.id].sort.join(","))
+    end
+
+    assert_response :success
+    assert_includes response.body, matching.title
+    assert_not_includes response.body, partial.title
   end
 
   private

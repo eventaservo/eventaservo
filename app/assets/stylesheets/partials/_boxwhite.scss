@@ -1,5 +1,5 @@
 .box-white {
-  @include media-breakpoint-up(sm) {
+  @media (min-width: 576px) {
     border           : 1px solid lightgray;
   }
   margin: 5px 0 5px 0;
@@ -48,8 +48,8 @@
   }
 
   .item-row-header {
-    //@extend .small-text;
-    @extend .row;
+    display          : flex;
+    flex-wrap        : wrap;
     background-color : $blueDark;
     color            : white;
     margin           : 0;

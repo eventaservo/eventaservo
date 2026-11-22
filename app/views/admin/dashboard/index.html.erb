@@ -1,134 +1,109 @@
-<div class="box-white">
-  <div class="lead">Admin Panel</div>
+<%= render Ui::CardComponent.new(variant: :bordered) do |panel| %>
+  <% panel.with_body(class: "tw:space-y-5") do %>
+    <h1 class="tw:text-xl tw:font-bold tw:text-gray-900 tw:pb-2 tw:border-b tw:border-gray-200 tw:m-0">Admin Panel</h1>
 
-  <%# ── Events ─────────────────────────────────────────── %>
-  <div class="text-uppercase fw-bold text-body-secondary small mt-2 mb-2" style="letter-spacing:1px; font-size:11px">Events</div>
+    <%# ── Events ─────────────────────────────────────────── %>
+    <section>
+      <h2 class="tw:text-[11px] tw:font-bold tw:uppercase tw:tracking-wider tw:text-gray-500 tw:mb-2">Events</h2>
+      <div class="tw:divide-y tw:divide-gray-100">
+        <%= link_to admin_events_path, class: "tw:flex tw:items-center tw:gap-3 tw:px-2.5 tw:py-2 tw:rounded-md tw:text-gray-900 tw:no-underline tw:hover:bg-gray-50 tw:transition-colors" do %>
+          <span class="tw:text-esperanto-500 tw:text-lg tw:w-6 tw:text-center tw:shrink-0"><%= icon("fas", "calendar-alt") %></span>
+          <div>
+            <div class="tw:font-semibold tw:text-sm tw:text-gray-900">Events</div>
+            <div class="tw:text-xs tw:text-gray-500">List, filter and manage all events</div>
+          </div>
+        <% end %>
 
-  <div class="list-group list-group-flush mb-3">
-    <%= link_to admin_events_path, class: "list-group-item list-group-item-action border-0 px-2 py-2" do %>
-      <div class="d-flex align-items-center gap-3">
-        <span class="text-success fs-5"><%= icon('fas', 'calendar-alt') %></span>
-        <div>
-          <div class="fw-semibold small">Events</div>
-          <div class="text-body-secondary" style="font-size:12px">List, filter and manage all events</div>
-        </div>
+        <%= link_to admin_redirections_path, class: "tw:flex tw:items-center tw:gap-3 tw:px-2.5 tw:py-2 tw:rounded-md tw:text-gray-900 tw:no-underline tw:hover:bg-gray-50 tw:transition-colors" do %>
+          <span class="tw:text-esperanto-500 tw:text-lg tw:w-6 tw:text-center tw:shrink-0"><%= icon("fas", "directions") %></span>
+          <div>
+            <div class="tw:font-semibold tw:text-sm tw:text-gray-900">Redirections</div>
+            <div class="tw:text-xs tw:text-gray-500">Short URL redirections for events</div>
+          </div>
+        <% end %>
+
+        <%= link_to admin_reports_path, class: "tw:flex tw:items-center tw:gap-3 tw:px-2.5 tw:py-2 tw:rounded-md tw:text-gray-900 tw:no-underline tw:hover:bg-gray-50 tw:transition-colors" do %>
+          <span class="tw:text-esperanto-500 tw:text-lg tw:w-6 tw:text-center tw:shrink-0"><%= icon("fas", "file-alt") %></span>
+          <div>
+            <div class="tw:font-semibold tw:text-sm tw:text-gray-900">Reports</div>
+            <div class="tw:text-xs tw:text-gray-500">Event reports and external links</div>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+    </section>
 
-    <%= link_to admin_redirections_path, class: "list-group-item list-group-item-action border-0 px-2 py-2" do %>
-      <div class="d-flex align-items-center gap-3">
-        <span class="text-success fs-5"><%= icon('fas', 'directions') %></span>
-        <div>
-          <div class="fw-semibold small">Redirections</div>
-          <div class="text-body-secondary" style="font-size:12px">Short URL redirections for events</div>
-        </div>
+    <%# ── Data & Content ─────────────────────────────────── %>
+    <section>
+      <h2 class="tw:text-[11px] tw:font-bold tw:uppercase tw:tracking-wider tw:text-gray-500 tw:mb-2">Data &amp; Content</h2>
+      <div class="tw:divide-y tw:divide-gray-100">
+        <%= link_to admin_users_path, class: "tw:flex tw:items-center tw:gap-3 tw:px-2.5 tw:py-2 tw:rounded-md tw:text-gray-900 tw:no-underline tw:hover:bg-gray-50 tw:transition-colors" do %>
+          <span class="tw:text-esperanto-500 tw:text-lg tw:w-6 tw:text-center tw:shrink-0"><%= icon("fas", "users") %></span>
+          <div>
+            <div class="tw:font-semibold tw:text-sm tw:text-gray-900">Users</div>
+            <div class="tw:text-xs tw:text-gray-500">List, filter and manage user accounts</div>
+          </div>
+        <% end %>
+
+        <%= link_to admin_statistics_path, class: "tw:flex tw:items-center tw:gap-3 tw:px-2.5 tw:py-2 tw:rounded-md tw:text-gray-900 tw:no-underline tw:hover:bg-gray-50 tw:transition-colors" do %>
+          <span class="tw:text-esperanto-500 tw:text-lg tw:w-6 tw:text-center tw:shrink-0"><%= icon("fas", "chart-bar") %></span>
+          <div>
+            <div class="tw:font-semibold tw:text-sm tw:text-gray-900">Statistics</div>
+            <div class="tw:text-xs tw:text-gray-500">Charts and analytics about events and users</div>
+          </div>
+        <% end %>
+
+        <%= link_to admin_organizations_path, class: "tw:flex tw:items-center tw:gap-3 tw:px-2.5 tw:py-2 tw:rounded-md tw:text-gray-900 tw:no-underline tw:hover:bg-gray-50 tw:transition-colors" do %>
+          <span class="tw:text-esperanto-500 tw:text-lg tw:w-6 tw:text-center tw:shrink-0"><%= icon("fas", "sitemap") %></span>
+          <div>
+            <div class="tw:font-semibold tw:text-sm tw:text-gray-900">Organizations</div>
+            <div class="tw:text-xs tw:text-gray-500">List and manage all organizations</div>
+          </div>
+        <% end %>
+
+        <%= link_to admin_reklamoj_index_path, class: "tw:flex tw:items-center tw:gap-3 tw:px-2.5 tw:py-2 tw:rounded-md tw:text-gray-900 tw:no-underline tw:hover:bg-gray-50 tw:transition-colors" do %>
+          <span class="tw:text-esperanto-500 tw:text-lg tw:w-6 tw:text-center tw:shrink-0"><%= icon("fas", "ad") %></span>
+          <div>
+            <div class="tw:font-semibold tw:text-sm tw:text-gray-900">Advertisements</div>
+            <div class="tw:text-xs tw:text-gray-500">Manage advertisements and images</div>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+    </section>
 
-    <%= link_to admin_reports_path, class: "list-group-item list-group-item-action border-0 px-2 py-2" do %>
-      <div class="d-flex align-items-center gap-3">
-        <span class="text-success fs-5"><%= icon('fas', 'file-alt') %></span>
-        <div>
-          <div class="fw-semibold small">Reports</div>
-          <div class="text-body-secondary" style="font-size:12px">Event reports and external links</div>
-        </div>
+    <%# ── System ─────────────────────────────────────────── %>
+    <section>
+      <h2 class="tw:text-[11px] tw:font-bold tw:uppercase tw:tracking-wider tw:text-gray-500 tw:mb-2">System</h2>
+      <div class="tw:divide-y tw:divide-gray-100">
+        <%= link_to admin_logs_path, class: "tw:flex tw:items-center tw:gap-3 tw:px-2.5 tw:py-2 tw:rounded-md tw:text-gray-900 tw:no-underline tw:hover:bg-gray-50 tw:transition-colors" do %>
+          <span class="tw:text-esperanto-500 tw:text-lg tw:w-6 tw:text-center tw:shrink-0"><%= icon("fas", "history") %></span>
+          <div>
+            <div class="tw:font-semibold tw:text-sm tw:text-gray-900">Logs</div>
+            <div class="tw:text-xs tw:text-gray-500">View system audit logs and activity</div>
+          </div>
+        <% end %>
+
+        <%= link_to "/jobs", class: "tw:flex tw:items-center tw:gap-3 tw:px-2.5 tw:py-2 tw:rounded-md tw:text-gray-900 tw:no-underline tw:hover:bg-gray-50 tw:transition-colors" do %>
+          <span class="tw:text-gray-500 tw:text-lg tw:w-6 tw:text-center tw:shrink-0"><%= icon("fas", "cogs") %></span>
+          <div>
+            <div class="tw:font-semibold tw:text-sm tw:text-gray-900 tw:flex tw:items-center tw:gap-1.5">
+              <span>Background Jobs</span>
+              <%= render Ui::BadgeComponent.new("external", variant: :light, shape: :rounded, size: :small) %>
+            </div>
+            <div class="tw:text-xs tw:text-gray-500">Solid Queue — background tasks and queues</div>
+          </div>
+        <% end %>
+
+        <%= link_to "/maintenance_tasks", class: "tw:flex tw:items-center tw:gap-3 tw:px-2.5 tw:py-2 tw:rounded-md tw:text-gray-900 tw:no-underline tw:hover:bg-gray-50 tw:transition-colors" do %>
+          <span class="tw:text-gray-500 tw:text-lg tw:w-6 tw:text-center tw:shrink-0"><%= icon("fas", "tools") %></span>
+          <div>
+            <div class="tw:font-semibold tw:text-sm tw:text-gray-900 tw:flex tw:items-center tw:gap-1.5">
+              <span>Maintenance Tasks</span>
+              <%= render Ui::BadgeComponent.new("engine", variant: :light, shape: :rounded, size: :small) %>
+            </div>
+            <div class="tw:text-xs tw:text-gray-500">Data migrations and backfills</div>
+          </div>
+        <% end %>
       </div>
-    <% end %>
-  </div>
-
-  <%# ── Data & Content ─────────────────────────────────── %>
-  <div class="text-uppercase fw-bold text-body-secondary small mb-2" style="letter-spacing:1px; font-size:11px">Data & Content</div>
-
-  <div class="list-group list-group-flush mb-3">
-    <%= link_to admin_users_path, class: "list-group-item list-group-item-action border-0 px-2 py-2" do %>
-      <div class="d-flex align-items-center gap-3">
-        <span class="text-success fs-5"><%= icon('fas', 'users') %></span>
-        <div>
-          <div class="fw-semibold small">Users</div>
-          <div class="text-body-secondary" style="font-size:12px">List, filter and manage user accounts</div>
-        </div>
-      </div>
-    <% end %>
-
-    <%= link_to admin_statistics_path, class: "list-group-item list-group-item-action border-0 px-2 py-2" do %>
-      <div class="d-flex align-items-center gap-3">
-        <span class="text-success fs-5"><%= icon('fas', 'chart-bar') %></span>
-        <div>
-          <div class="fw-semibold small">Statistics</div>
-          <div class="text-body-secondary" style="font-size:12px">Charts and analytics about events and users</div>
-        </div>
-      </div>
-    <% end %>
-
-    <%= link_to admin_organizations_path, class: "list-group-item list-group-item-action border-0 px-2 py-2" do %>
-      <div class="d-flex align-items-center gap-3">
-        <span class="text-success fs-5"><%= icon('fas', 'sitemap') %></span>
-        <div>
-          <div class="fw-semibold small">Organizations</div>
-          <div class="text-body-secondary" style="font-size:12px">List and manage all organizations</div>
-        </div>
-      </div>
-    <% end %>
-
-    <%= link_to admin_reklamoj_index_path, class: "list-group-item list-group-item-action border-0 px-2 py-2" do %>
-      <div class="d-flex align-items-center gap-3">
-        <span class="text-success fs-5"><%= icon('fas', 'ad') %></span>
-        <div>
-          <div class="fw-semibold small">Advertisements</div>
-          <div class="text-body-secondary" style="font-size:12px">Manage advertisements and images</div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-
-  <%# ── System ─────────────────────────────────────────── %>
-  <div class="text-uppercase fw-bold text-body-secondary small mb-2" style="letter-spacing:1px; font-size:11px">System</div>
-
-  <div class="list-group list-group-flush mb-3">
-    <%= link_to admin_logs_path, class: "list-group-item list-group-item-action border-0 px-2 py-2" do %>
-      <div class="d-flex align-items-center gap-3">
-        <span class="text-success fs-5"><%= icon('fas', 'history') %></span>
-        <div>
-          <div class="fw-semibold small">Logs</div>
-          <div class="text-body-secondary" style="font-size:12px">View system audit logs and activity</div>
-        </div>
-      </div>
-    <% end %>
-
-
-    <%= link_to "/jobs", class: "list-group-item list-group-item-action border-0 px-2 py-2" do %>
-      <div class="d-flex align-items-center gap-3">
-        <span class="text-secondary fs-5"><%= icon('fas', 'cogs') %></span>
-        <div>
-          <div class="fw-semibold small">Background Jobs <span class="badge bg-light text-body-secondary fw-normal border">external</span></div>
-          <div class="text-body-secondary" style="font-size:12px">Solid Queue — background tasks and queues</div>
-        </div>
-      </div>
-    <% end %>
-
-    <%= link_to "/maintenance_tasks", class: "list-group-item list-group-item-action border-0 px-2 py-2" do %>
-      <div class="d-flex align-items-center gap-3">
-        <span class="text-secondary fs-5"><%= icon('fas', 'tools') %></span>
-        <div>
-          <div class="fw-semibold small">Maintenance Tasks <span class="badge bg-light text-body-secondary fw-normal border">engine</span></div>
-          <div class="text-body-secondary" style="font-size:12px">Data migrations and backfills</div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-
-  <%# ── Development ────────────────────────────────────── %>
-  <div class="text-uppercase fw-bold text-body-secondary small mb-2" style="letter-spacing:1px; font-size:11px">Development</div>
-
-  <div class="list-group list-group-flush">
-    <%= link_to admin_mockups_path, class: "list-group-item list-group-item-action border-0 px-2 py-2" do %>
-      <div class="d-flex align-items-center gap-3">
-        <span class="text-success fs-5"><%= icon('fas', 'paint-brush') %></span>
-        <div>
-          <div class="fw-semibold small">Mockups</div>
-          <div class="text-body-secondary" style="font-size:12px">UI component sketches and templates</div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</div>
+    </section>
+  <% end %>
+<% end %>

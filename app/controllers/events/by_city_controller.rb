@@ -47,9 +47,14 @@ class Events::ByCityController < ApplicationController
     return unless @card_view && @nearby_cities.present?
 
     if @include_nearby
-      target_city_scope = [[params[:city_name], @country.id]]
-      @target_city_events_count = build_events_scope.not_today(current_timezone).in_cities(target_city_scope).count
-      @nearby_events_count = @kvanto_venontaj_eventoj.to_i - @target_city_events_count
+      if @kvanto_venontaj_eventoj.to_i.zero?
+        @target_city_events_count = 0
+        @nearby_events_count = 0
+      else
+        target_city_scope = [[params[:city_name], @country.id]]
+        @target_city_events_count = build_events_scope.not_today(current_timezone).in_cities(target_city_scope).count
+        @nearby_events_count = @kvanto_venontaj_eventoj.to_i - @target_city_events_count
+      end
       @nearby_radius_km = Events::NearbyCitiesQuery::DEFAULT_RADIUS_KM
       @target_city_name = Event.by_city(params[:city_name]).by_country_id(@country.id).order(:id).pick(:city) || params[:city_name]
 

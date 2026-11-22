@@ -13,7 +13,7 @@ class OrganizationsHelperTest < ActionView::TestCase
     controller.user_signed_in?
   end
 
-  test "display_event_tags returns correct bootstrap 5 classes" do
+  test "display_event_tags renders Tailwind badge classes for category and characteristic tags" do
     event = create(:event)
 
     category_tag = Tag.find_or_create_by!(name: "Kategorio", group_name: "category")
@@ -23,9 +23,9 @@ class OrganizationsHelperTest < ActionView::TestCase
 
     result = display_event_tags(event)
 
-    assert_match(/text-bg-info/, result)
-    assert_match(/text-bg-warning/, result)
-    assert_match(/badge rounded-pill/, result)
+    assert_match(/tw:bg-brand-info/, result)
+    assert_match(/tw:bg-\[#ffc107\]/, result)
+    assert_match(/tw:rounded-full/, result)
   end
 
   test "display_event_tags ignores and excludes time duration tags" do

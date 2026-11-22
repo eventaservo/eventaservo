@@ -6,10 +6,10 @@ class EventsController < ApplicationController
   end
   include Webcal
 
-  before_action :authenticate_user!, only: %i[index new create edit update destroy kontakti_organizanton nuligi malnuligi delete_file]
+  before_action :authenticate_user!, only: %i[index new create edit update destroy kontakti_organizanton cancel uncancel delete_file]
   before_action :redirect_old_link, only: %i[show edit]
-  before_action :set_event, only: %i[edit update destroy kronologio nuligi malnuligi kontakti_organizanton delete_file]
-  before_action :authorize_user, only: %i[edit update destroy nuligi malnuligi delete_file]
+  before_action :set_event, only: %i[edit update destroy kronologio cancel uncancel kontakti_organizanton delete_file]
+  before_action :authorize_user, only: %i[edit update destroy cancel uncancel delete_file]
 
   # Montras la uzantajn eventojn
   # This action is probable deprecated and it is required to explore if can be removed
@@ -59,88 +59,43 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(event_params)
-    @event.user_id ||= current_user.id
-    mark_dates_from_form
+    result = Events::Create.call(
+      user: current_user,
+      attributes: event_params,
+      tag_ids: form_tag_ids,
+      organization_ids: params[:organization_ids] || [],
+      dates_from_form: params[:time_start].present?
+    )
 
-    if @event.save
-      # Process categories tags
-      if params[:tags_categories].present?
-        params[:tags_categories].each do |id|
-          tag = Tag.find(id)
-          @event.tags << tag unless @event.tags.include?(tag)
-        end
-      end
+    @event = result.payload
 
-      # Process characteristics tags
-      if params[:tags_characteristics].present?
-        params[:tags_characteristics].each do |id|
-          tag = Tag.find(id)
-          @event.tags << tag unless @event.tags.include?(tag)
-        end
-      end
-
-      @event.update_event_organizations(params[:organization_ids])
-      set_event_format(@event)
-      NovaEventaSciigoJob.perform_later(@event)
+    if result.success?
       ahoy.track "Create event", event_url: @event.short_url
-      Logs::Create.call(text: "Event created", user: current_user, loggable: @event)
       redirect_to event_path(code: @event.ligilo), flash: {notice: I18n.t("flash.events.created")}
     else
       render :new
     end
   end
 
-  def update # rubocop:disable Metrics/MethodLength, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
-    mark_dates_from_form
-
+  def update
     if file_upload?
-      uploaded_files = Array(params.dig(:event, :uploads)).reject(&:blank?)
-      if uploaded_files.empty?
-        redirect_to(event_url(code: @event.ligilo),
-          flash: {error: I18n.t("flash.events.select_file_first")}) && return
-      end
+      handle_file_upload
+      return
+    end
 
-      if @event.uploads.attach(uploaded_files)
-        flash[:notice] = I18n.t("flash.events.document_uploaded")
-      else
-        flash[:error] = I18n.t("flash.events.invalid_file_format")
-      end
-      redirect_to event_path(code: @event.ligilo)
-    elsif @event.update(event_params)
-      # Process categories tags
-      if params[:tags_categories].present?
-        @event.tags.categories.where.not(id: params[:tags_categories]).each do |tag|
-          @event.tags.delete(tag)
-        end
-        params[:tags_categories].each do |id|
-          tag = Tag.find(id)
-          @event.tags << tag unless @event.tags.include?(tag)
-        end
-      else
-        # Remove all category tags if no categories are selected
-        @event.tags.categories.each { |tag| @event.tags.delete(tag) }
-      end
+    permitted_attributes = event_params
+    result = Events::Update.call(
+      event: @event,
+      user: current_user,
+      attributes: permitted_attributes,
+      tag_ids: form_tag_ids,
+      organization_ids: params[:organization_ids] || [],
+      dates_from_form: params[:time_start].present?
+    )
 
-      # Process characteristics tags
-      if params[:tags_characteristics].present?
-        @event.tags.characteristics.where.not(id: params[:tags_characteristics]).each do |tag|
-          @event.tags.delete(tag)
-        end
-        params[:tags_characteristics].each do |id|
-          tag = Tag.find(id)
-          @event.tags << tag unless @event.tags.include?(tag)
-        end
-      else
-        @event.tags.characteristics.each { |tag| @event.tags.delete(tag) }
-      end
-
-      EventoGhisdatigitaJob.perform_later(@event)
-      EventMailer.nova_administranto(@event).deliver_later if @event.saved_change_to_user_id?
-      @event.update_event_organizations(params[:organization_ids])
-      set_event_format(@event)
+    if result.success?
+      @event = result.payload
       ahoy.track "Update event", event_url: @event.short_url
-      Logs::Create.call(text: "Event updated", user: current_user, loggable: @event)
       redirect_to event_path(code: @event.ligilo), notice: I18n.t("flash.events.updated")
     else
       render :edit
@@ -148,7 +103,7 @@ class EventsController < ApplicationController
   rescue ActionView::Template::Error => e
     Sentry.capture_exception(e)
     PaperTrail.request.disable_model(Event)
-    @event.update(event_params)
+    @event.update(permitted_attributes)
     PaperTrail.request.enable_model(Event)
     redirect_to event_path(code: @event.ligilo), notice: I18n.t("flash.events.updated")
   end
@@ -163,18 +118,32 @@ class EventsController < ApplicationController
     end
   end
 
-  def nuligi
-    @event.update(cancelled: true, cancel_reason: params[:cancel_reason])
-    ahoy.track "Cancelled event", event_url: @event.short_url
+  # Cancels the event with an optional reason via {Events::Cancel}.
+  #
+  # @return [void]
+  def cancel
+    result = Events::Cancel.call(event: @event, user: current_user, cancel_reason: params[:cancel_reason])
 
-    redirect_to event_url(code: params[:event_code]), flash: {notice: I18n.t("flash.events.cancelled")}
+    if result.success?
+      ahoy.track "Cancelled event", event_url: @event.short_url
+      redirect_to event_url(code: params[:event_code]), flash: {notice: I18n.t("flash.events.cancelled")}
+    else
+      redirect_to event_url(code: params[:event_code]), flash: {error: service_error_message(result.error)}
+    end
   end
 
-  def malnuligi
-    @event.update(cancelled: false, cancel_reason: nil)
-    ahoy.track "Un-cancelled event", event_url: @event.short_url
+  # Uncancels a previously cancelled event via {Events::Uncancel}.
+  #
+  # @return [void]
+  def uncancel
+    result = Events::Uncancel.call(event: @event, user: current_user)
 
-    redirect_to event_url(code: params[:event_code]), flash: {notice: I18n.t("flash.events.uncancelled")}
+    if result.success?
+      ahoy.track "Un-cancelled event", event_url: @event.short_url
+      redirect_to event_url(code: params[:event_code]), flash: {notice: I18n.t("flash.events.uncancelled")}
+    else
+      redirect_to event_url(code: params[:event_code]), flash: {error: service_error_message(result.error)}
+    end
   end
 
   def delete_file
@@ -265,14 +234,29 @@ class EventsController < ApplicationController
     "#{date} #{time}"
   end
 
-  # Marks the event so the model reinterprets its wall-clock date components
-  # in the event's time zone during save. Only flips on when the form
-  # submitted +time_start+, which is the signal that the user typed a
-  # wall-clock value the model must preserve.
+  # Collects selected category and characteristic tag IDs from the event form params.
+  #
+  # @return [Array<String>] combined tag IDs submitted by the form
+  def form_tag_ids
+    Array(params[:tags_categories]) + Array(params[:tags_characteristics])
+  end
+
+  # Attaches uploaded files from the event file uploader form and redirects back to the event.
   #
   # @return [void]
-  def mark_dates_from_form
-    @event.dates_from_form = true if params[:time_start].present?
+  def handle_file_upload
+    uploaded_files = Array(params.dig(:event, :uploads)).reject(&:blank?)
+    if uploaded_files.empty?
+      redirect_to event_url(code: @event.ligilo), flash: {error: I18n.t("flash.events.select_file_first")}
+      return
+    end
+
+    if @event.uploads.attach(uploaded_files)
+      flash[:notice] = I18n.t("flash.events.document_uploaded")
+    else
+      flash[:error] = I18n.t("flash.events.invalid_file_format")
+    end
+    redirect_to event_path(code: @event.ligilo)
   end
 
   def spam_detected
@@ -293,19 +277,6 @@ class EventsController < ApplicationController
 
     redirection.increment!(:hits)
     redirect_to event_path(code: redirection.new_short_url), status: :moved_permanently
-  end
-
-  def set_event_format(event)
-    format =
-      if !event.online?
-        "onsite"
-      elsif event.online? && event.city == "Reta"
-        "online"
-      elsif event.online? && event.city != "Reta"
-        "hybrid"
-      end
-
-    event.update_columns(format:)
   end
 
   def build_kronologio_data(event)
@@ -340,6 +311,22 @@ class EventsController < ApplicationController
       users_cache: users_cache,
       countries_cache: countries_cache
     }
+  end
+
+  # Formats an {ApplicationService} failure error for flash display.
+  #
+  # When the service returns a Hash of ActiveRecord validation messages,
+  # formats the event's full error messages into a readable sentence.
+  #
+  # @param error [Hash, String] the error returned by the service
+  #
+  # @return [String] human-readable error message
+  def service_error_message(error)
+    if error.is_a?(Hash)
+      @event.errors.full_messages.presence&.to_sentence || error.values.flatten.to_sentence
+    else
+      error.to_s
+    end
   end
 
   def build_versions_where_clause(event)
