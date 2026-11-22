@@ -41,48 +41,15 @@ module Organizations
     # Executes the organization deletion workflow.
     #
     # @return [ApplicationService::Response] success with {Result} payload,
-    #   or failure with +:forbidden+, +:same_organization+, or +:target_required+
+    #   or failure with +:forbidden+, +:same_organization+, +:target_required+, or log error
     def call
       return failure(:forbidden) unless user&.admin?
       return failure(:same_organization) if same_organization?
-      return failure(:target_required) if organization.organization_events.exists? && target_organization.nil?
 
-      transferred_events_count = 0
-      deduplicated_events_count = 0
-      removed_members_count = 0
-      log_error = nil
+      counts, error = execute_deletion
+      return failure(error) if error
 
-      deleted = ActiveRecord::Base.transaction do
-        transferred_events_count, deduplicated_events_count = transfer_events
-        removed_members_count = remove_members
-        organization.organization_events.reset
-        organization.organization_users.reset
-        organization.destroy!
-
-        log_result = create_audit_log(
-          transferred_events_count:,
-          deduplicated_events_count:,
-          removed_members_count:
-        )
-        if log_result.failure?
-          log_error = log_result.error
-          raise ActiveRecord::Rollback
-        end
-
-        true
-      end
-
-      return failure(log_error) unless deleted
-
-      success(
-        Result.new(
-          organization:,
-          target_organization:,
-          transferred_events_count:,
-          deduplicated_events_count:,
-          removed_members_count:
-        )
-      )
+      success(build_result(counts))
     end
 
     private
@@ -92,6 +59,66 @@ module Organizations
     # @return [Boolean]
     def same_organization?
       target_organization.present? && target_organization.id == organization.id
+    end
+
+    # Runs the locked transfer, membership cleanup, destruction, and audit logging atomically.
+    #
+    # @return [Array(Hash, Object)] +[counts, error]+
+    def execute_deletion
+      counts = nil
+      error = nil
+
+      ActiveRecord::Base.transaction do
+        lock_organizations
+        if organization.organization_events.exists? && target_organization.nil?
+          error = :target_required
+          raise ActiveRecord::Rollback
+        end
+
+        counts = perform_transfer_and_destroy
+        log_result = create_audit_log(**counts)
+        if log_result.failure?
+          error = log_result.error
+          raise ActiveRecord::Rollback
+        end
+      end
+
+      [counts, error]
+    end
+
+    # Acquires row-level locks on involved organizations in deterministic ID order.
+    #
+    # @return [void]
+    def lock_organizations
+      [organization, target_organization].compact.sort_by(&:id).each(&:lock!)
+    end
+
+    # Transfers events, removes members, and destroys the organization.
+    #
+    # @return [Hash{Symbol => Integer}] counts of transferred, deduplicated, and removed records
+    def perform_transfer_and_destroy
+      transferred_events_count, deduplicated_events_count = transfer_events
+      removed_members_count = remove_members
+      organization.organization_events.reset
+      organization.organization_users.reset
+      organization.destroy!
+
+      {transferred_events_count:, deduplicated_events_count:, removed_members_count:}
+    end
+
+    # Builds the immutable {Result} payload from execution counts.
+    #
+    # @param counts [Hash{Symbol => Integer}] execution summary counts
+    #
+    # @return [Result]
+    def build_result(counts)
+      Result.new(
+        organization:,
+        target_organization:,
+        transferred_events_count: counts[:transferred_events_count],
+        deduplicated_events_count: counts[:deduplicated_events_count],
+        removed_members_count: counts[:removed_members_count]
+      )
     end
 
     # Transfers all organization_event records to +target_organization+, deduplicating
