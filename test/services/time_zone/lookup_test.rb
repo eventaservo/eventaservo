@@ -50,9 +50,7 @@ class TimeZone::LookupTest < ActiveSupport::TestCase
 
     Timezone.stub :lookup, ->(_lat, _lon) { raise StandardError, "quota exceeded" } do
       Rails.logger.stub :error, ->(msg) { logger_called = true if msg.include?("quota exceeded") && msg.include?("Test Event") } do
-        Sentry.stub :capture_exception, ->(err, extra: {}) {
-          sentry_extra = extra if err.message == "quota exceeded"
-        } do
+        Sentry.stub :capture_exception, ->(err, extra: {}) { sentry_extra = extra if err.message == "quota exceeded" } do
           result = TimeZone::Lookup.call(
             latitude: 40.71,
             longitude: -74.00,

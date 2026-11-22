@@ -23,10 +23,12 @@ class Event::TimezoneUpdateTest < ActiveSupport::TestCase
     lookup_calls = 0
     fake_zone = Struct.new(:name).new("America/New_York")
 
-    Timezone.stub :lookup, ->(_lat, _lon) {
+    lookup_stub = lambda do |_lat, _lon|
       lookup_calls += 1
       fake_zone
-    } do
+    end
+
+    Timezone.stub :lookup, lookup_stub do
       event.update!(address: "200 Park Ave")
     end
 
