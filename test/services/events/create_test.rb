@@ -110,17 +110,26 @@ class Events::CreateTest < ActiveSupport::TestCase
   # Error cases
 
   test "fails with validation errors and unsaved event payload when attributes are invalid" do
+    geocode_called = false
+    timezone_called = false
     result = nil
-    assert_no_enqueued_jobs(only: NovaEventaSciigoJob) do
-      assert_no_difference ["Event.count", "Log.count"] do
-        result = Events::Create.call(
-          user: @user,
-          attributes: @base_attributes.merge(title: "")
-        )
+
+    Geocoder.stub :search, ->(*_args) { geocode_called = true } do
+      Timezone.stub :lookup, ->(*_args) { timezone_called = true } do
+        assert_no_enqueued_jobs(only: NovaEventaSciigoJob) do
+          assert_no_difference ["Event.count", "Log.count"] do
+            result = Events::Create.call(
+              user: @user,
+              attributes: @base_attributes.merge(title: "")
+            )
+          end
+        end
       end
     end
 
     assert result.failure?
+    assert_not geocode_called
+    assert_not timezone_called
     assert_includes result.error[:title], I18n.t("errors.messages.blank")
     assert_instance_of Event, result.payload
     assert_not result.payload.persisted?

@@ -59,6 +59,21 @@ class Events::GeocodeTest < ActiveSupport::TestCase
     assert_equal "America/New_York", event.time_zone
   end
 
+  test "refreshes timezone when coordinates change directly without address changes" do
+    event = events(:valid_event)
+    event.update_columns(latitude: 40.71, longitude: -74.00, time_zone: "America/New_York")
+    event.assign_attributes(latitude: 48.8566, longitude: 2.3522)
+
+    geocode_called = false
+    Geocoder.stub :search, ->(*_args) { geocode_called = true } do
+      result = Events::Geocode.call(event:)
+
+      assert result.success?
+      assert_not geocode_called
+      assert_equal "Europe/Paris", event.time_zone
+    end
+  end
+
   test "skips geocoding for purely online events and preserves user timezone" do
     event = events(:valid_event)
     event.assign_attributes(online: true, city: "Reta", country_id: 99_999, time_zone: "Europe/Paris")

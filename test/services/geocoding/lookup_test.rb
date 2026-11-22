@@ -55,7 +55,7 @@ class Geocoding::LookupTest < ActiveSupport::TestCase
 
     Geocoder.stub :search, ->(*_args) { raise SocketError, "getaddrinfo: Name or service not known" } do
       Rails.logger.stub :error, ->(msg) { logger_called = true if msg.include?("getaddrinfo") } do
-        Sentry.stub :capture_exception, ->(err, extra: {}) { sentry_called = true if err.is_a?(SocketError) } do
+        Sentry.stub :capture_exception, ->(err, **_kwargs) { sentry_called = true if err.is_a?(SocketError) } do
           result = Geocoding::Lookup.call(query: "Network Failure Street", context: {event_title: "Kongreso"})
 
           assert result.failure?

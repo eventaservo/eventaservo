@@ -25,8 +25,19 @@ module Events
     # @return [ApplicationService::Response] success with Event payload (including no-op skips),
     #   or failure with error message if geocoding fails
     def call
-      return success(event) unless should_geocode?
+      return success(event) if event.universala?
+      return geocode_address if should_geocode?
 
+      refresh_timezone if coordinates_changed?
+      success(event)
+    end
+
+    private
+
+    # Looks up coordinates for the event's address and updates coordinates and timezone.
+    #
+    # @return [ApplicationService::Response]
+    def geocode_address
       geo_result = Geocoding::Lookup.call(query: event.full_address, context: log_context)
       return failure(geo_result.error, payload: event) if geo_result.failure?
 
@@ -34,13 +45,10 @@ module Events
       success(event)
     end
 
-    private
-
     # Checks whether geocoding should run for the current event state.
     #
     # @return [Boolean]
     def should_geocode?
-      return false if event.universala?
       return false if event.full_address.blank?
 
       force || event.new_record? || location_changed?
@@ -53,6 +61,13 @@ module Events
       event.address_changed? || event.city_changed? || event.country_id_changed?
     end
 
+    # Checks whether coordinates were modified directly and are both present.
+    #
+    # @return [Boolean]
+    def coordinates_changed?
+      (event.latitude_changed? || event.longitude_changed?) && event.latitude.present? && event.longitude.present?
+    end
+
     # Assigns resolved coordinates and refreshes +time_zone+ via {TimeZone::Lookup}.
     #
     # @param coordinates [Geocoding::Lookup::Coordinates] resolved latitude and longitude
@@ -61,7 +76,13 @@ module Events
     def assign_coordinates_and_timezone(coordinates)
       event.latitude = coordinates.latitude
       event.longitude = coordinates.longitude
+      refresh_timezone
+    end
 
+    # Refreshes +time_zone+ on +event+ from its current coordinates.
+    #
+    # @return [void]
+    def refresh_timezone
       tz_result = TimeZone::Lookup.call(
         latitude: event.latitude,
         longitude: event.longitude,
