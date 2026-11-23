@@ -43,19 +43,19 @@ class OrganizationsHelperTest < ActionView::TestCase
   end
 
   test "display_event_days_left returns correct text" do
-    event = create(:event, date_start: Time.zone.now, date_end: 1.day.from_now)
+    event = create(:event, date_start: Time.zone.now, date_end: 1.day.from_now, time_zone: "Etc/UTC")
     assert_equal "| finiĝos morgaŭ", display_event_days_left(event)
 
-    event = create(:event, date_start: Time.zone.now, date_end: 2.days.from_now)
+    event = create(:event, date_start: Time.zone.now, date_end: 2.days.from_now, time_zone: "Etc/UTC")
     assert_equal "| finiĝos post 2 tagoj", display_event_days_left(event)
 
-    event = create(:event, date_start: 2.days.ago, date_end: 1.day.ago)
+    event = create(:event, date_start: 2.days.ago, date_end: 1.day.ago, time_zone: "Etc/UTC")
     assert_equal "", display_event_days_left(event)
   end
 
   test "display_event_days_left returns localized text across locales" do
-    event_tomorrow = create(:event, date_start: Time.zone.now, date_end: 1.day.from_now)
-    event_in_days = create(:event, date_start: Time.zone.now, date_end: 2.days.from_now)
+    event_tomorrow = create(:event, date_start: Time.zone.now, date_end: 1.day.from_now, time_zone: "Etc/UTC")
+    event_in_days = create(:event, date_start: Time.zone.now, date_end: 2.days.from_now, time_zone: "Etc/UTC")
 
     I18n.with_locale(:en) do
       assert_equal "| ends tomorrow", display_event_days_left(event_tomorrow)
