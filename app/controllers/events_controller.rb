@@ -175,13 +175,16 @@ class EventsController < ApplicationController
     redirect_to event_url(code: params[:event_code]), flash: {info: I18n.t("flash.events.message_sent")}
   end
 
+  # Displays the paginated change history (kronologio) for an event.
+  #
+  # @return [void]
   def kronologio
     # Cache key based on event and last version update
     cache_key = "kronologio_#{@event.id}_#{@event.updated_at.to_i}"
 
     # Try to get from cache first
     cached_data = Rails.cache.fetch(cache_key, expires_in: 1.hour) do
-      build_kronologio_data(@event)
+      Events::KronologioQuery.new(event: @event).call
     end
 
     # Apply pagination to cached data
@@ -279,40 +282,6 @@ class EventsController < ApplicationController
     redirect_to event_path(code: redirection.new_short_url), status: :moved_permanently
   end
 
-  def build_kronologio_data(event)
-    # Single optimized query to get all versions
-    versions = PaperTrail::Version
-      .joins("LEFT JOIN users ON versions.whodunnit = users.id::text")
-      .where(build_versions_where_clause(event))
-      .select("versions.*, users.name as user_name")
-      .order(created_at: :desc)
-      .limit(500) # Reasonable limit for performance
-
-    # Preload users and countries that might be referenced in changesets
-    all_user_ids = Set.new
-    all_country_ids = Set.new
-
-    versions.each do |version|
-      version.changeset.each do |_field, changes|
-        if changes.is_a?(Array) && changes.length == 2
-          all_user_ids << changes[0].to_i if changes[0].to_s.match?(/^\d+$/)
-          all_user_ids << changes[1].to_i if changes[1].to_s.match?(/^\d+$/)
-          all_country_ids << changes[0].to_i if changes[0].to_s.match?(/^\d+$/)
-          all_country_ids << changes[1].to_i if changes[1].to_s.match?(/^\d+$/)
-        end
-      end
-    end
-
-    users_cache = User.where(id: all_user_ids.to_a).index_by(&:id)
-    countries_cache = Country.where(id: all_country_ids.to_a).index_by(&:id)
-
-    {
-      versions: versions.to_a,
-      users_cache: users_cache,
-      countries_cache: countries_cache
-    }
-  end
-
   # Formats an {ApplicationService} failure error for flash display.
   #
   # When the service returns a Hash of ActiveRecord validation messages,
@@ -327,19 +296,5 @@ class EventsController < ApplicationController
     else
       error.to_s
     end
-  end
-
-  def build_versions_where_clause(event)
-    event_clause = "(item_type = 'Event' AND item_id = #{event.id})"
-
-    # Handle rich text versions for enhavo
-    rich_text_clause = if event.enhavo.present?
-      rich_text_id = event.enhavo.id
-      "(item_type = 'ActionText::RichText' AND item_id = #{rich_text_id})"
-    else
-      "(1=0)" # No enhavo versions
-    end
-
-    "#{event_clause} OR #{rich_text_clause}"
   end
 end
