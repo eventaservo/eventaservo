@@ -105,9 +105,6 @@ gem "rollups", "~> 0.6.0"
 # For connecting to Google Drive
 gem "google-apis-drive_v3", "~> 0.89"
 
-# New Relic
-gem "newrelic_rpm"
-
 # Maintenance Tasks
 gem "maintenance_tasks", "~> 2.16"
 
