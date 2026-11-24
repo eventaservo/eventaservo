@@ -64,7 +64,7 @@
         <%= render "home/current_timezone" %>
       </div>
       <%= @ads_html %>
-      <%= render partial: "events/okazantaj" if cookies[:vidmaniero].in?(%w[kartoj kartaro]) %>
+      <%= render partial: "events/okazantaj" if cookies[:vidmaniero].in?(%w[kartoj kartaro]) && turbo_frame_request_id != "native-calendar" %>
       <%= display_events_by_style %>
     </div>
 

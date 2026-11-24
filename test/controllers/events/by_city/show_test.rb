@@ -185,6 +185,7 @@ class Events::ByCityController::ShowTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "p", text: "1 en Kopenhago · 1 ene de 50 km ĉirkaŭe (kaŝi)"
+    assert_select "a[href='#{nearby_toggle_path(state: "off")}'][data-turbo-prefetch='false']"
   end
 
   test "breakdown line is localized according to current locale for authenticated admin" do

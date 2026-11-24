@@ -14,7 +14,7 @@ module EventsHelper
   #
   # @return [String] rendered HTML partial
   def display_events_by_style
-    if (respond_to?(:turbo_frame_request_id) && turbo_frame_request_id == "native-calendar") ||
+    if (@calendar_date.present? && respond_to?(:turbo_frame_request_id) && turbo_frame_request_id == "native-calendar") ||
         cookies[:vidmaniero] == "kalendaro"
       render partial: "events/events_calendar", locals: {
         date: @calendar_date,

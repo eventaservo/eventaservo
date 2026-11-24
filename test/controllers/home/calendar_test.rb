@@ -110,4 +110,13 @@ class HomeController::CalendarTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "turbo-frame#native-calendar[data-date='2026-06-01']"
   end
+
+  test "renders native-calendar turbo frame without crashing when vidmaniero cookie is kartoj" do
+    get root_url,
+      params: {date: "2026-06-01"},
+      headers: {"Cookie" => "vidmaniero=kartoj", "Turbo-Frame" => "native-calendar"}
+
+    assert_response :success
+    assert_select "turbo-frame#native-calendar[data-date='2026-06-01']"
+  end
 end
