@@ -23,6 +23,7 @@
     "jquery": "^4.0.0",
     "leaflet": "^1.9.4",
     "leaflet.markercluster": "^1.5.3",
+    "regexpu-core": "6.4.0",
     "sass": "^1.97.3",
     "slim-select": "^4.7.0",
     "source-map-js": "^1.2.2",
@@ -41,7 +42,5 @@
     "build:css": "yarn build:css:assets && yarn build:css:app && yarn build:css:tailwind && yarn build:css:mailer",
     "build:css:watch": "yarn build:css:assets && yarn build:css:app --watch"
   },
-  "devDependencies": {
-    "regexpu-core": "6.4.0"
-  }
+  "devDependencies": {}
 }

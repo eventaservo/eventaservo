@@ -7,7 +7,7 @@ const isWatch = process.argv.includes("--watch")
 // Compile the exact expression to an equivalent regex for older engines.
 const legacySlimSelectRegex = {
   name: "legacy-slim-select-regex",
-  setup(build) {
+  setup (build) {
     build.onLoad({ filter: /[/\\]slim-select[/\\]dist[/\\]slimselect\.es\.js$/ }, async ({ path }) => {
       const source = await fs.promises.readFile(path, "utf8")
       const original = String.raw`/[\p{L}\p{N}]/u`
@@ -17,7 +17,7 @@ const legacySlimSelectRegex = {
       const replacement = `/${rewritePattern(String.raw`[\p{L}\p{N}]`, "u", { unicodePropertyEscapes: "transform", unicodeFlag: "transform" })}/`
       return { contents: source.replaceAll(original, replacement), loader: "js", resolveDir: require("path").dirname(path) }
     })
-  },
+  }
 }
 
 const config = {
@@ -29,7 +29,7 @@ const config = {
   minify: isProduction,
   logLevel: "info",
   target: ["es2018"],
-  plugins: [legacySlimSelectRegex],
+  plugins: [legacySlimSelectRegex]
 }
 
 if (isWatch) {
