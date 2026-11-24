@@ -13,17 +13,8 @@ module Admin
     #
     # @return [void]
     def index
-      reports = Event::Report.includes(:event, :user).order(created_at: :desc)
-
-      if params[:title].present?
-        reports = reports.where("event_reports.title ILIKE ?", "%#{sanitize_sql_like(params[:title])}%")
-      end
-
-      if params[:event_title].present?
-        reports = reports.joins(:event).where("events.title ILIKE ?", "%#{sanitize_sql_like(params[:event_title])}%")
-      end
-
-      @pagy, @reports = pagy(reports)
+      filter_params = params.permit(:title, :event_title)
+      @pagy, @reports = pagy(::Event::Reports::SearchQuery.new(filter_params).call)
     end
 
     # Displays details for a single report.
@@ -73,14 +64,6 @@ module Admin
     # @return [ActionController::Parameters]
     def report_params
       params.require(:event_report).permit(:title, :url, :user_id)
-    end
-
-    # Sanitizes a string for use in a LIKE query.
-    #
-    # @param value [String]
-    # @return [String]
-    def sanitize_sql_like(value)
-      ActiveRecord::Base.sanitize_sql_like(value)
     end
   end
 end
