@@ -41,5 +41,7 @@
     "build:css": "yarn build:css:assets && yarn build:css:app && yarn build:css:tailwind && yarn build:css:mailer",
     "build:css:watch": "yarn build:css:assets && yarn build:css:app --watch"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "regexpu-core": "6.4.0"
+  }
 }
