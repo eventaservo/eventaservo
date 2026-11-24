@@ -101,4 +101,22 @@ class HomeController::CalendarTest < ActionDispatch::IntegrationTest
       assert_match(/Bonkora Babilado/, response.body)
     end
   end
+
+  test "renders native-calendar turbo frame even when vidmaniero cookie is mapo" do
+    get root_url,
+      params: {date: "2026-06-01"},
+      headers: {"Cookie" => "vidmaniero=mapo", "Turbo-Frame" => "native-calendar"}
+
+    assert_response :success
+    assert_select "turbo-frame#native-calendar[data-date='2026-06-01']"
+  end
+
+  test "renders native-calendar turbo frame without crashing when vidmaniero cookie is kartoj" do
+    get root_url,
+      params: {date: "2026-06-01"},
+      headers: {"Cookie" => "vidmaniero=kartoj", "Turbo-Frame" => "native-calendar"}
+
+    assert_response :success
+    assert_select "turbo-frame#native-calendar[data-date='2026-06-01']"
+  end
 end

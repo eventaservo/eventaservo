@@ -1,18 +1,21 @@
 # frozen_string_literal: true
 
 module EventsHelper
-  # Renders the appropriate events partial based on the +vidmaniero+ cookie.
+  # Renders the appropriate events partial based on the +vidmaniero+ cookie,
+  # or always renders the calendar when responding to a +native-calendar+
+  # Turbo Frame request.
   #
   # Dispatches to:
-  # - +events/events_calendar+ when cookie is +"kalendaro"+ (requires calendar assigns
-  #   prepared by {CalendarData#prepare_calendar_data}, including +@calendar_month_navigation_options+)
+  # - +events/events_calendar+ when responding to the +native-calendar+ Turbo Frame
+  #   or when the cookie is +"kalendaro"+ (requires calendar assigns prepared by
+  #   {CalendarData#prepare_calendar_data}, including +@calendar_month_navigation_options+)
   # - +events/events_as_map+ when cookie is +"mapo"+
   # - +events/events_as_cards+ for all other values
   #
   # @return [String] rendered HTML partial
   def display_events_by_style
-    case cookies[:vidmaniero]
-    when "kalendaro"
+    if (@calendar_date.present? && respond_to?(:turbo_frame_request_id) && turbo_frame_request_id == "native-calendar") ||
+        cookies[:vidmaniero] == "kalendaro"
       render partial: "events/events_calendar", locals: {
         date: @calendar_date,
         today_path: @calendar_today_path,
@@ -21,7 +24,7 @@ module EventsHelper
         month_navigation_options: @calendar_month_navigation_options,
         events_by_day: @events_by_day
       }
-    when "mapo"
+    elsif cookies[:vidmaniero] == "mapo"
       render partial: "events/events_as_map", locals: {events: @today_events.order(:date_start) + @events.order(:date_start)}
     else
       render partial: "events/events_as_cards", locals: {events: @events}

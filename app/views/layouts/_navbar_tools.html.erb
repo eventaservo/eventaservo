@@ -3,23 +3,23 @@
   <li class="tw:hidden tw:lg:block">
     <%= link_to view_style_url("kalendaro"), class: link_classes,
       aria: { label: t("navbar.tools.close_map") },
-      data: { controller: "hint", hint_text_value: t("navbar.tools.close_map"), hint_placement_value: "bottom" } do %>
+      data: { controller: "hint", hint_text_value: t("navbar.tools.close_map"), hint_placement_value: "bottom", turbo_prefetch: false } do %>
       <i class="fas fa-map-marker-alt tw:text-yellow-300" aria-hidden="true"></i>
     <% end %>
   </li>
   <li class="tw:block tw:lg:hidden">
-    <%= link_to icon("fas", "map-marker-alt", t("navbar.tools.close_map"), class: "tw:text-yellow-300"), view_style_url("kalendaro"), class: link_classes %>
+    <%= link_to icon("fas", "map-marker-alt", t("navbar.tools.close_map"), class: "tw:text-yellow-300"), view_style_url("kalendaro"), class: link_classes, data: { turbo_prefetch: false } %>
   </li>
 <% else %>
   <li class="tw:hidden tw:lg:block">
     <%= link_to view_style_url("mapo"), class: link_classes,
       aria: { label: t("navbar.tools.view_as_map") },
-      data: { controller: "hint", hint_text_value: t("navbar.tools.view_as_map"), hint_placement_value: "bottom" } do %>
+      data: { controller: "hint", hint_text_value: t("navbar.tools.view_as_map"), hint_placement_value: "bottom", turbo_prefetch: false } do %>
       <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
     <% end %>
   </li>
   <li class="tw:block tw:lg:hidden">
-    <%= link_to icon("fas", "map-marker-alt", t("navbar.tools.view_as_map")), view_style_url("mapo"), class: link_classes %>
+    <%= link_to icon("fas", "map-marker-alt", t("navbar.tools.view_as_map")), view_style_url("mapo"), class: link_classes, data: { turbo_prefetch: false } %>
   </li>
 <% end %>
 <li class="tw:hidden tw:lg:block">

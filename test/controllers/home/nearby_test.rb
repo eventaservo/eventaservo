@@ -17,4 +17,14 @@ class HomeController::NearbyTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
     assert_equal "1", response.cookies["nearby"]
   end
+
+  test "ignores prefetch requests without changing the nearby cookie" do
+    get "/nearby/off", headers: {
+      "HTTP_X_FORWARDED_PROTO" => "https",
+      "X-Sec-Purpose" => "prefetch"
+    }
+
+    assert_response :no_content
+    assert_nil response.cookies["nearby"]
+  end
 end
