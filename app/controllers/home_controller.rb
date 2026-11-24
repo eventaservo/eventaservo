@@ -22,7 +22,7 @@ class HomeController < ApplicationController
       Events::ContinentCountsQuery.new(scope: @events.venontaj(current_timezone)).call
     end
 
-    if cookies[:vidmaniero] == "kalendaro"
+    if calendar_view?
       @events = @events.includes(:country, :organizations)
       prepare_calendar_data
     else
@@ -42,7 +42,7 @@ class HomeController < ApplicationController
       )
     end
 
-    return if cookies[:vidmaniero].in? %w[kalendaro mapo]
+    return if cookies[:vidmaniero].in?(%w[kalendaro mapo]) || native_calendar_frame_request?
 
     cookies[:vidmaniero] = {value: "kalendaro", expires: 2.weeks, secure: true}
     redirect_to root_path(params.permit(:date))
@@ -157,7 +157,15 @@ class HomeController < ApplicationController
     end
   end
 
+  # Persists the visitor's preferred view style as a cookie and redirects home.
+  #
+  # Ignores browser/Turbo prefetch requests so hovering over the view-style link
+  # never mutates the +vidmaniero+ cookie in the background.
+  #
+  # @return [void]
   def view_style
+    return head :no_content if prefetch_request?
+
     cookies[:vidmaniero] = {value: params[:view_style], expires: 1.year, secure: true}
     redirect_to root_path
   end
@@ -166,9 +174,12 @@ class HomeController < ApplicationController
   #
   # Writes +cookies[:nearby]+ with a 2-week expiry and redirects back to the
   # referring page. Accepts +/nearby/on+ (show) and +/nearby/off+ (hide).
+  # Ignores browser/Turbo prefetch requests to avoid unintended cookie mutations.
   #
   # @return [void]
   def nearby
+    return head :no_content if prefetch_request?
+
     cookies[:nearby] = {value: (params[:state] == "on") ? "1" : "0", expires: 2.weeks, secure: true}
     redirect_back_or_to root_path
   end
@@ -320,7 +331,7 @@ class HomeController < ApplicationController
     when "p30_tagojn" then Event.in_30days(current_timezone)
     when "estontece" then Event.after_30days(current_timezone)
     else
-      (cookies[:vidmaniero] == "kalendaro") ? Event.not_cancelled : Event.venontaj(current_timezone)
+      calendar_view? ? Event.not_cancelled : Event.venontaj(current_timezone)
     end
 
     Events::FilterQuery.new(
@@ -342,6 +353,30 @@ class HomeController < ApplicationController
     return if cookies[:vidmaniero].in? %w[kartoj kalendaro mapo]
 
     cookies[:vidmaniero] = {value: "kalendaro", expires: 2.weeks, secure: true}
+  end
+
+  # Returns whether the home page should render the native calendar view.
+  #
+  # @return [Boolean]
+  def calendar_view?
+    cookies[:vidmaniero] == "kalendaro" || native_calendar_frame_request?
+  end
+
+  # Returns whether the request explicitly targets the +native-calendar+ Turbo Frame.
+  #
+  # @return [Boolean]
+  def native_calendar_frame_request?
+    turbo_frame_request_id == "native-calendar"
+  end
+
+  # Returns whether the incoming request is a browser or Turbo prefetch.
+  #
+  # @return [Boolean]
+  def prefetch_request?
+    purpose = request.headers["X-Sec-Purpose"] ||
+      request.headers["Sec-Purpose"] ||
+      request.headers["Purpose"]
+    purpose.to_s.downcase.include?("prefetch")
   end
 
   # Returns the fifteen countries with the most registered events.

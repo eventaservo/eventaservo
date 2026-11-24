@@ -8,13 +8,13 @@
 <% if has_events && @nearby_events_count.to_i > 0 %>
   <p class="tw:text-center tw:text-gray-500 tw:text-sm tw:mb-1">
     <%= t("events.nearby_breakdown", city_count: @target_city_events_count, city: @target_city_name, nearby_count: @nearby_events_count, radius: @nearby_radius_km) %>
-    (<%= link_to t("events.hide"), nearby_toggle_link_path(include_nearby: true), class: "tw:text-sm" %>)
+    (<%= link_to t("events.hide"), nearby_toggle_link_path(include_nearby: true), class: "tw:text-sm", data: {turbo_prefetch: false} %>)
   </p>
 <% end %>
 
 <% if past_events_listing_path && @card_view && @has_nearby_events && !@include_nearby %>
   <div class="tw:text-center tw:mb-3">
-    <%= link_to t("events.show_nearby"), nearby_toggle_link_path(include_nearby: false), class: "tw:text-sm" %>
+    <%= link_to t("events.show_nearby"), nearby_toggle_link_path(include_nearby: false), class: "tw:text-sm", data: {turbo_prefetch: false} %>
   </div>
 <% end %>
 
