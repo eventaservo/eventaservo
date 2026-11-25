@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   imagemagick \
   libjemalloc2 \
   libpq5 \
+  librsvg2-bin \
   libvips42 \
   poppler-utils \
   postgresql-client-18 \
