@@ -17,6 +17,10 @@ class Event::HeaderImageUrlTest < ActiveSupport::TestCase
     def image_mock.is_a?(_klass)
       false
     end
+
+    def image_mock.variable?
+      true
+    end
     image_mock.define_singleton_method(:variant) do |args|
       @variant_args = args
       variant_mock
@@ -49,6 +53,28 @@ class Event::HeaderImageUrlTest < ActiveSupport::TestCase
     event.stub :header_image, attachment_mock do
       result = event.header_image_url
       assert_equal "https://example.com/original.jpg", result
+    end
+  end
+
+  test "header_image_url should return original URL when header_image is not variable" do
+    event = events(:valid_event)
+
+    svg_mock = Object.new
+    def svg_mock.is_a?(_klass)
+      false
+    end
+
+    def svg_mock.variable?
+      false
+    end
+
+    def svg_mock.url
+      "https://example.com/logo.svg"
+    end
+
+    event.stub :header_image, svg_mock do
+      result = event.header_image_url
+      assert_equal "https://example.com/logo.svg", result
     end
   end
 end

@@ -539,10 +539,15 @@ class Event < ApplicationRecord # rubocop:disable Metrics/ClassLength
     first_uploaded_image || organization_logo || first_body_image
   end
 
+  # Returns the URL for the event's header image, resizing variable blobs and
+  # falling back to the original URL for ActionText attachments or non-variable
+  # formats such as SVG.
+  #
+  # @return [String, Boolean, nil] the header image URL, false on error, or nil when absent
   def header_image_url
     return unless header_image
 
-    return header_image.url if header_image.is_a? ActionText::Attachment
+    return header_image.url if header_image.is_a?(ActionText::Attachment) || !header_image.variable?
 
     header_image.variant(resize_to_limit: [400, 400]).processed.url
   rescue => e

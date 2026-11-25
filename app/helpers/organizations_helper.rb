@@ -6,22 +6,31 @@ module OrganizationsHelper
 
   # Renders the logo image for an organization if attached.
   #
+  # Uses an ActiveStorage variant for variable (raster) images and falls back
+  # to the original attachment for non-variable formats such as SVG.
+  #
   # @param organization [Organization] the organization whose logo to render
   # @param size [Symbol] image size variant (:small, :medium, :large)
   # @param html_class [String, nil] additional CSS classes for the image tag
   #
   # @return [ActiveSupport::SafeBuffer, nil] the image tag, or nil if logo is not attached
   def organization_logo(organization, size: :small, html_class: nil)
-    return unless organization.persisted? && organization.logo.attached?
+    return unless organization.persisted? && organization.logo.attached? && organization.logo.blob&.persisted?
 
-    size =
+    dimensions =
       case size
       when :large then [128, 128]
       when :medium then [48, 48]
       else [20, 20]
       end
 
-    image_tag organization.logo.variant(resize_to_limit: size), width: size, class: html_class
+    source = if organization.logo.variable?
+      organization.logo.variant(resize_to_limit: dimensions)
+    else
+      organization.logo
+    end
+
+    image_tag source, width: dimensions.first, class: html_class
   end
 
   # Renders the event's organizations as tag links, optionally limiting the
