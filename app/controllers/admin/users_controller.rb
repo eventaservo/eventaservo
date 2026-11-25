@@ -14,12 +14,8 @@ module Admin
     #
     # @return [void]
     def index
-      users = User.unscoped.includes(:country).order(:name)
-
-      users = apply_scope(users)
-      users = apply_filters(users)
-
-      @pagy, @users = pagy(users)
+      filter_params = params.permit(:scope, :name, :email, :username, :country_id)
+      @pagy, @users = pagy(::Users::AdminSearchQuery.new(filter_params).call)
     end
 
     # Displays details for a single user.
@@ -113,55 +109,6 @@ module Admin
     # @return [ActionController::Parameters]
     def user_params
       params.require(:user).permit(:name, :country_id, :city)
-    end
-
-    # Applies scope filtering based on params[:scope].
-    #
-    # @param users [ActiveRecord::Relation]
-    # @return [ActiveRecord::Relation]
-    def apply_scope(users)
-      case params[:scope]
-      when "disabled"
-        users.where(disabled: true)
-      when "abandoned"
-        users.where(disabled: false).where("last_sign_in_at < ?", 2.years.ago)
-      when "not_confirmed"
-        users.where(disabled: false, confirmed_at: nil)
-      else
-        users.where(disabled: false)
-      end
-    end
-
-    # Applies search filters from query params.
-    #
-    # @param users [ActiveRecord::Relation]
-    # @return [ActiveRecord::Relation]
-    def apply_filters(users)
-      if params[:name].present?
-        users = users.where("users.name ILIKE ?", "%#{sanitize_sql_like(params[:name])}%")
-      end
-
-      if params[:email].present?
-        users = users.where("users.email ILIKE ?", "%#{sanitize_sql_like(params[:email])}%")
-      end
-
-      if params[:username].present?
-        users = users.where("users.username ILIKE ?", "%#{sanitize_sql_like(params[:username])}%")
-      end
-
-      if params[:country_id].present?
-        users = users.where(country_id: params[:country_id])
-      end
-
-      users
-    end
-
-    # Sanitizes a string for use in a LIKE query.
-    #
-    # @param value [String]
-    # @return [String]
-    def sanitize_sql_like(value)
-      ActiveRecord::Base.sanitize_sql_like(value)
     end
   end
 end
