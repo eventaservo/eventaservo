@@ -182,4 +182,22 @@ class OrganizationsHelperTest < ActionView::TestCase
 
     assert_nil organization_logo(organization, size: :large)
   end
+
+  test "organization_logo falls back to original blob when logo is not variable" do
+    organization = organizations(:rotterdam_centre)
+    organization.logo.attach(
+      io: File.open(Rails.root.join("test/fixtures/files/jes.png")),
+      filename: "jes.png",
+      content_type: "image/png"
+    )
+
+    organization.logo.stub :variable?, false do
+      result = organization_logo(organization, size: :medium, html_class: "fallback-logo")
+
+      assert_match(/<img/, result)
+      assert_match(/width="48"/, result)
+      assert_match(/class="fallback-logo"/, result)
+      assert_match(/blobs/, result)
+    end
+  end
 end

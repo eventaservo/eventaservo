@@ -63,7 +63,7 @@ FactoryBot.define do
     date_end { date_start + rand(13..20).hours }
     code { SecureRandom.urlsafe_base64(12) }
     time_zone { TZInfo::Timezone.all_identifiers.sample }
-    short_url { "#{Faker::Lorem.word}_#{rand(1000)}" }
+    sequence(:short_url) { |n| "#{Faker::Lorem.word}_#{n}_#{SecureRandom.hex(4)}" }
     uuid { Faker::Internet.uuid }
     specolisto { Constants::TAGS.first.sample }
     international_calendar { rand(0..1) }
