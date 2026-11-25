@@ -133,7 +133,7 @@
             </div>
           <% end %>
           <%= f.file_field :logo,
-            accept: "image/gif,image/jpeg,image/png",
+            accept: Organization::ACCEPTED_LOGO_CONTENT_TYPES.join(","),
             class: "tw:block tw:w-full tw:text-sm tw:text-gray-700 tw:border tw:border-gray-300 tw:rounded tw:bg-white tw:px-2.5 tw:py-1.5 tw:file:mr-3 tw:file:py-1 tw:file:px-2.5 tw:file:rounded tw:file:border tw:file:border-gray-300 tw:file:text-xs tw:file:font-medium tw:file:bg-gray-100 tw:file:text-gray-700 tw:hover:file:bg-gray-200" %>
         </div>
 

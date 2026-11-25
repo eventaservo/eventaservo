@@ -34,12 +34,21 @@ class Organization < ApplicationRecord
   has_many :eventoj, through: :organization_events, source: :event # @deprecated use .events
   belongs_to :country
 
+  ACCEPTED_LOGO_CONTENT_TYPES = %w[
+    image/gif
+    image/jpeg
+    image/png
+    image/svg+xml
+    image/webp
+  ].freeze
+
   before_validation :normalize_short_name
   before_validation :normalize_urls
 
   validates :name, :short_name, presence: true
   validates :short_name, uniqueness: {case_sensitive: false}
   validates :short_name, format: {with: /\A[a-zA-Z0-9_\-ĈĉĴĵĜĝĤĥŜŝŬŭÜüÀàÁáÂâÄäÅåÈèÉéÊêĘęėëÍíÎîìïÇçĆćČčŁłÓóÔôÖöØøòõōŚśŠšßÚúùûÝýŹźŻżŽž]*\z/, message: "enhavas nevalidan signon"}
+  validate :validate_logo_content_type
 
   # Mains organizations are UEA and TEJO
   scope :mains, -> { where(major: true) }
@@ -160,5 +169,17 @@ class Organization < ApplicationRecord
     return false if organization_users.count == 1
 
     OrganizationUser.find_by(user_id: user.id, organization_id: id).destroy
+  end
+
+  private
+
+  # Ensures the attached logo uses an accepted image MIME type (including SVG).
+  #
+  # @return [void]
+  def validate_logo_content_type
+    return unless logo.attached?
+    return if logo.content_type.in?(ACCEPTED_LOGO_CONTENT_TYPES)
+
+    errors.add(:logo, I18n.t("flash.events.invalid_file_format"))
   end
 end

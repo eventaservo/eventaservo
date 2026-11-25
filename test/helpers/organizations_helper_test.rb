@@ -143,4 +143,36 @@ class OrganizationsHelperTest < ActionView::TestCase
     assert_not organization_show_sidebar?({iframe: "true"})
     assert_not organization_show_sidebar?({"iframe" => "1"})
   end
+
+  test "organization_logo renders a variant for raster logos" do
+    organization = organizations(:rotterdam_centre)
+    organization.logo.attach(
+      io: File.open(Rails.root.join("test/fixtures/files/jes.png")),
+      filename: "jes.png",
+      content_type: "image/png"
+    )
+
+    result = organization_logo(organization, size: :large, html_class: "custom-logo")
+
+    assert_match(/<img/, result)
+    assert_match(/width="128"/, result)
+    assert_match(/class="custom-logo"/, result)
+    assert_match(/representations/, result)
+  end
+
+  test "organization_logo renders original blob without error for SVG logos" do
+    organization = organizations(:rotterdam_centre)
+    organization.logo.attach(
+      io: File.open(Rails.root.join("test/fixtures/files/logo.svg")),
+      filename: "logo.svg",
+      content_type: "image/svg+xml"
+    )
+
+    result = organization_logo(organization, size: :large, html_class: "custom-logo")
+
+    assert_match(/<img/, result)
+    assert_match(/width="128"/, result)
+    assert_match(/class="custom-logo"/, result)
+    assert_match(/blobs/, result)
+  end
 end
