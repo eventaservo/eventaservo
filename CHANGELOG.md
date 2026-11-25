@@ -1,5 +1,28 @@
 # Changelog
 
+## [3.1.4](https://github.com/eventaservo/eventaservo/compare/v3.1.3...v3.1.4) (2026-11-25)
+
+
+### Bug Fixes
+
+* **calendar:** guard okazantaj partial and non-calendar routes on native-calendar frame ([fc2c5dc](https://github.com/eventaservo/eventaservo/commit/fc2c5dcf25f8196b18c093a1aea18bdf470a39b7))
+* **calendar:** prevent Turbo prefetch from mutating view style cookie ([db08817](https://github.com/eventaservo/eventaservo/commit/db088173c8b5f5d7cc0f1086a221bf99452d6944))
+* **calendar:** prevent Turbo prefetch from mutating view style cookie ([00c98c5](https://github.com/eventaservo/eventaservo/commit/00c98c573f417d2e97f786e45ac745dff1ff1532))
+* **docker:** install librsvg2-bin for ImageMagick SVG rasterization ([c54fe7d](https://github.com/eventaservo/eventaservo/commit/c54fe7d4b5959df7a541dd5ccaa071896cfb9df5))
+* **docker:** install librsvg2-bin for SVG logo rasterization ([#1631](https://github.com/eventaservo/eventaservo/issues/1631)) ([c54fe7d](https://github.com/eventaservo/eventaservo/commit/c54fe7d4b5959df7a541dd5ccaa071896cfb9df5))
+* **js:** guard direct-upload listeners against missing progress elements ([#1625](https://github.com/eventaservo/eventaservo/issues/1625)) ([7bceea5](https://github.com/eventaservo/eventaservo/commit/7bceea50b26bd1cf8227570e193347fd999ba0e1))
+* **organizations:** support SVG organization logos ([#1630](https://github.com/eventaservo/eventaservo/issues/1630)) ([4a19fc9](https://github.com/eventaservo/eventaservo/commit/4a19fc9610e16845b10c9cedf087ed6481ee777b))
+
+
+### Code Refactoring
+
+* **events:** extract Events::KronologioQuery from EventsController ([#1622](https://github.com/eventaservo/eventaservo/issues/1622)) ([0f08729](https://github.com/eventaservo/eventaservo/commit/0f087296ac3bd3284c843db7883a963ded9f6d46))
+
+
+### Miscellaneous Chores
+
+* remove New Relic integration and deployment workflow ([#1624](https://github.com/eventaservo/eventaservo/issues/1624)) ([c628c30](https://github.com/eventaservo/eventaservo/commit/c628c302182dd8f6ec09a5f590699907cc7a65ff))
+
 ## [3.1.3](https://github.com/eventaservo/eventaservo/compare/v3.1.2...v3.1.3) (2026-11-22)
 
 
