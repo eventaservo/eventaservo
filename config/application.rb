@@ -31,6 +31,7 @@ module Eventaservo
 
     config.active_job.queue_adapter = :solid_queue
     config.active_storage.variant_processor = :mini_magick
+    config.active_storage.variable_content_types << "image/svg+xml"
     config.active_record.yaml_column_permitted_classes = [Symbol, Date, Time, ActiveSupport::TimeWithZone, ActiveSupport::TimeZone]
     config.active_record.schema_format = :sql
 

@@ -181,7 +181,7 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
     assert_nil response.headers["X-Frame-Options"]
   end
 
-  test "should render show page when organization has an SVG logo" do
+  test "should render show page and serve rasterized image when organization has an SVG logo" do
     organization = organizations(:rotterdam_centre)
     organization.logo.attach(
       io: File.open(Rails.root.join("test/fixtures/files/logo.svg")),
@@ -192,6 +192,13 @@ class OrganizationsController::ShowTest < ActionDispatch::IntegrationTest
     get organization_url(short_name: organization.short_name)
 
     assert_response :success
-    assert_select "img[width='128']"
+    logo_img = css_select("img[width='128']").first
+    assert_not_nil logo_img
+
+    get logo_img["src"]
+    follow_redirect! while response.redirect?
+
+    assert_response :success
+    assert_equal "image/png", response.media_type
   end
 end

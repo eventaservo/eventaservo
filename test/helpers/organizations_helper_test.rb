@@ -160,7 +160,7 @@ class OrganizationsHelperTest < ActionView::TestCase
     assert_match(/representations/, result)
   end
 
-  test "organization_logo renders original blob without error for SVG logos" do
+  test "organization_logo renders a variant for SVG logos" do
     organization = organizations(:rotterdam_centre)
     organization.logo.attach(
       io: File.open(Rails.root.join("test/fixtures/files/logo.svg")),
@@ -173,6 +173,13 @@ class OrganizationsHelperTest < ActionView::TestCase
     assert_match(/<img/, result)
     assert_match(/width="128"/, result)
     assert_match(/class="custom-logo"/, result)
-    assert_match(/blobs/, result)
+    assert_match(/representations/, result)
+  end
+
+  test "organization_logo returns nil for unsaved pending logo blobs" do
+    organization = organizations(:rotterdam_centre)
+    organization.logo = fixture_file_upload("jes.png", "image/png")
+
+    assert_nil organization_logo(organization, size: :large)
   end
 end

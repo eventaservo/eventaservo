@@ -15,7 +15,7 @@ module OrganizationsHelper
   #
   # @return [ActiveSupport::SafeBuffer, nil] the image tag, or nil if logo is not attached
   def organization_logo(organization, size: :small, html_class: nil)
-    return unless organization.persisted? && organization.logo.attached?
+    return unless organization.persisted? && organization.logo.attached? && organization.logo.blob&.persisted?
 
     dimensions =
       case size

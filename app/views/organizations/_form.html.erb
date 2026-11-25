@@ -119,7 +119,7 @@
 
         <div class="tw:mb-4">
           <div class="text-divider tw:font-medium tw:text-gray-700 tw:mb-3"><%= t("organizations.form.logo") %></div>
-          <% if @organizo.logo.attached? %>
+          <% if @organizo.logo.attached? && @organizo.logo.blob&.persisted? %>
             <div class="tw:flex tw:flex-col tw:items-center tw:justify-center tw:gap-2 tw:mb-3">
               <%= organization_logo(@organizo, size: :large) %>
               <%= render Ui::CheckboxComponent.new(
