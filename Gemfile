@@ -23,7 +23,7 @@ gem "propshaft"
 gem "bootsnap", require: false
 
 # Kalendaroj
-gem "icalendar", "~> 2.13"
+gem "icalendar", "~> 2.14"
 
 gem "mini_magick", "~> 5.1"
 
@@ -33,7 +33,7 @@ gem "omniauth-google-oauth2", "~> 1.2"
 gem "omniauth-rails_csrf_protection"
 
 gem "devise", "~> 5.0"
-gem "jwt", "~> 3.1"
+gem "jwt", "~> 3.3"
 gem "pg", "~> 1.1", ">= 1.1.3"
 gem "simple_token_authentication", github: "gonzalo-bulnes/simple_token_authentication", branch: "master"
 
@@ -51,7 +51,7 @@ gem "letter_opener_web", "~> 3"
 gem "rack-attack", "~> 6.2"
 gem "rack-cors", "~> 3.0", require: "rack/cors"
 
-gem "aws-sdk-s3", "~> 1.224"
+gem "aws-sdk-s3", "~> 1.245"
 gem "browser", "~> 6"
 gem "chartkick", "~> 5.0"
 gem "diffy", "~> 3.4"
@@ -60,7 +60,7 @@ gem "maxminddb", "~> 0.1"
 gem "groupdate", "~> 6.4"
 gem "highcharts-rails", "~> 6.0"
 gem "image_processing", ">= 1.2"
-gem "pagy", "~> 43.5"
+gem "pagy", "~> 43.8"
 gem "paper_trail", "~> 17.0"
 gem "paper_trail-association_tracking", "~> 2.2"
 gem "postmark-rails"
@@ -69,7 +69,7 @@ gem "redcarpet", "~> 3.5"
 gem "sitemap_generator", "~> 7.0"
 gem "timezone", "~> 1.3"
 # gem 'trix-rails', require: 'trix'
-gem "httparty", "~> 0.24"
+gem "httparty", "~> 0.25"
 gem "nokogiri", ">= 1.10.4"
 gem "yard"
 gem "view_component"
