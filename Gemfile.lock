@@ -85,7 +85,7 @@ GEM
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
       uri (>= 0.13.1)
-    addressable (2.9.2)
+    addressable (2.10.0)
       public_suffix (>= 2.0.2, < 8.0)
     ahoy_matey (5.5.0)
       activesupport (>= 7.2)
@@ -101,8 +101,8 @@ GEM
     auth-sanitizer (0.2.5)
       version_gem (~> 1.1, >= 1.1.16)
     aws-eventstream (1.4.1)
-    aws-partitions (1.1309.0)
-    aws-sdk-core (3.271.0)
+    aws-partitions (1.1312.0)
+    aws-sdk-core (3.272.0)
       aws-eventstream (~> 1, >= 1.4.1)
       aws-partitions (~> 1, >= 1.992.0)
       aws-sigv4 (~> 1.9)
@@ -114,7 +114,7 @@ GEM
     aws-sdk-kms (1.145.0)
       aws-sdk-core (~> 3, >= 3.270.0)
       aws-sigv4 (~> 1.5)
-    aws-sdk-s3 (1.245.0)
+    aws-sdk-s3 (1.245.2)
       aws-sdk-core (~> 3, >= 3.269.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.5)
@@ -132,7 +132,7 @@ GEM
       debug_inspector (>= 1.2.0)
     bootsnap (1.26.2)
       msgpack (~> 1.5)
-    brakeman (8.1.0)
+    brakeman (8.1.1)
       racc
     browser (6.2.0)
     builder (3.3.0)
@@ -204,6 +204,7 @@ GEM
       faraday (>= 1, < 3)
     faraday-net_http (3.5.0)
       net-http (~> 0.5)
+    ffi (1.17.4)
     ffi (1.17.4-aarch64-linux-gnu)
     ffi (1.17.4-arm64-darwin)
     ffi (1.17.4-x86_64-linux-gnu)
@@ -241,9 +242,10 @@ GEM
       signet (>= 0.16, < 2.a)
     groupdate (6.8.0)
       activesupport (>= 7.2)
-    hashdiff (1.2.2)
+    hashdiff (1.3.0)
     hashie (5.2.0)
       logger
+    herb (0.11.2)
     herb (0.11.2-aarch64-linux-gnu)
     herb (0.11.2-arm64-darwin)
     herb (0.11.2-x86_64-linux-gnu)
@@ -262,7 +264,7 @@ GEM
       stimulus-rails (>= 1.2)
       turbo-rails (>= 1.2)
     htmlbeautifier (1.4.3)
-    httparty (0.24.3)
+    httparty (0.25.1)
       csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
@@ -280,12 +282,12 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.8, >= 1.8.1)
       terminal-table (>= 1.5.1)
-    icalendar (2.13.0)
+    icalendar (2.14.0)
       base64
       ice_cube (~> 0.16)
       logger
     ice_cube (0.17.0)
-    image_processing (2.2.0)
+    image_processing (2.2.2)
     importmap-rails (2.2.3)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
@@ -304,8 +306,8 @@ GEM
       activejob (>= 7.1)
     jsbundling-rails (1.3.1)
       railties (>= 6.0.0)
-    json (3.1.0)
-    jwt (3.3.0)
+    json (3.2.0)
+    jwt (3.3.1)
       base64
     language_server-protocol (3.17.0.6)
     launchy (3.1.1)
@@ -360,6 +362,7 @@ GEM
     mini_magick (5.4.0)
       logger
     mini_mime (1.1.5)
+    mini_portile2 (2.8.9)
     minitest (6.1.0)
       drb (~> 2.0)
       prism (>= 1.5, < 3)
@@ -391,6 +394,9 @@ GEM
     net-smtp (0.5.2)
       net-protocol
     nio4r (2.7.5)
+    nokogiri (1.19.7)
+      mini_portile2 (~> 2.8.2)
+      racc (~> 1.4)
     nokogiri (1.19.7-aarch64-linux-gnu)
       racc (~> 1.4)
     nokogiri (1.19.7-arm64-darwin)
@@ -431,7 +437,7 @@ GEM
     orm_adapter (0.5.0)
     os (1.1.4)
     ostruct (0.6.3)
-    pagy (43.8.5)
+    pagy (43.8.7)
       json
       uri
       yaml
@@ -444,6 +450,7 @@ GEM
     parser (3.3.14.0)
       ast (~> 2.4.1)
       racc
+    pg (1.7.0)
     pg (1.7.0-aarch64-linux)
     pg (1.7.0-arm64-darwin)
     pg (1.7.0-x86_64-linux)
@@ -466,6 +473,7 @@ GEM
       net-smtp
       premailer (~> 1.7, >= 1.7.9)
     prettyprint (0.2.1)
+    prism (2.1.0)
     prism (2.1.0-aarch64-linux-gnu)
     prism (2.1.0-arm64-darwin)
     prism (2.1.0-x86_64-linux-gnu)
@@ -482,7 +490,7 @@ GEM
       pry (>= 0.13.0)
     pstore (0.3.0)
     public_suffix (7.0.5)
-    puma (8.1.2)
+    puma (8.1.3)
       nio4r (~> 2.0)
     raabro (1.5.0)
     racc (1.8.1)
@@ -597,7 +605,7 @@ GEM
     seed_dump (3.4.2)
       activerecord (>= 4)
       activesupport (>= 4)
-    selenium-webdriver (4.53.0)
+    selenium-webdriver (4.54.0)
       base64 (~> 0.2)
       logger (~> 1.4)
       rubyzip (>= 1.2.2, < 4.0)
@@ -651,6 +659,7 @@ GEM
     terminal-table (4.0.0)
       unicode-display_width (>= 1.1.1, < 4)
     thor (1.5.0)
+    thruster (0.1.28)
     thruster (0.1.28-aarch64-linux)
     thruster (0.1.28-arm64-darwin)
     thruster (0.1.28-x86_64-linux)
@@ -674,13 +683,13 @@ GEM
     useragent (0.16.11)
     vcr (6.4.1)
     version_gem (1.1.17)
-    view_component (4.24.0)
+    view_component (4.25.0)
       actionview (>= 7.1.0)
       activesupport (>= 7.1.0)
       prism (>= 1.0)
     warden (1.2.9)
       rack (>= 2.0.9)
-    webmock (3.36.0)
+    webmock (3.41.0)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
@@ -704,7 +713,7 @@ PLATFORMS
 DEPENDENCIES
   ahoy_matey (~> 5)
   annotaterb
-  aws-sdk-s3 (~> 1.224)
+  aws-sdk-s3 (~> 1.245)
   benchmark
   better_errors
   binding_of_caller
@@ -729,13 +738,13 @@ DEPENDENCIES
   hotwire-spark
   hotwire_combobox (~> 0.4.1)
   htmlbeautifier (~> 1.4)
-  httparty (~> 0.24)
+  httparty (~> 0.25)
   i18n-tasks (~> 1.0)
-  icalendar (~> 2.13)
+  icalendar (~> 2.14)
   image_processing (>= 1.2)
   jbuilder (~> 2.14)
   jsbundling-rails (~> 1.1)
-  jwt (~> 3.1)
+  jwt (~> 3.3)
   letter_opener_web (~> 3)
   listen
   lookbook
@@ -749,7 +758,7 @@ DEPENDENCIES
   omniauth-facebook (~> 11.0)
   omniauth-google-oauth2 (~> 1.2)
   omniauth-rails_csrf_protection
-  pagy (~> 43.5)
+  pagy (~> 43.8)
   paper_trail (~> 17.0)
   paper_trail-association_tracking (~> 2.2)
   pg (~> 1.1, >= 1.1.3)
